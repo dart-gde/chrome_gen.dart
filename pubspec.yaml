@@ -1,0 +1,7 @@
+name: gen_tools
+version: 0.0.1-dev
+author: devoncarew@google.com
+description: tools to generate Chrome App APIs
+dependencies:
+  unittest: any
+  petitparser: any
