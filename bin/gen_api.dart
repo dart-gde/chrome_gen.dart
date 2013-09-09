@@ -32,9 +32,7 @@ class GenApiFile {
   File outFile;
 
   Generator generator;
-  String libraryComments;
-  List<IDLFunction> functions = [];
-  List<IDLEvent> events = [];
+  IDLNamespace namespace;
 
   GenApiFile(this.inFile, this.outFile, [this.libName]) {
     print("parsing ${inFile.path}...");
@@ -49,6 +47,7 @@ class GenApiFile {
 
       _parseJson(JSON.decode(newLines.join('\n')));
     } else if (inFile.path.endsWith(".idl")) {
+      namespace = new IDLNamespace();
       // TODO:
       print("*idl not yet supported*");
     } else {
@@ -63,15 +62,19 @@ class GenApiFile {
     generator.writeln();
 
     if (libName != null) {
-      if (libraryComments != null) {
-        generator.writeDocs(libraryComments, preferSingle: true);
+      if (namespace.description != null) {
+        generator.writeDocs(namespace.description, preferSingle: true);
       }
 
-      generator.writeln("library chrome_${libName};");
+      if (libName != null) {
+        generator.writeln("library chrome_${libName};");
+      } else {
+        generator.writeln("library chrome_${namespace.name};");
+      }
       generator.writeln();
     }
 
-    if (!events.isEmpty) {
+    if (!namespace.events.isEmpty) {
       generator.writeln("import 'dart:async';");
       generator.writeln();
     }
@@ -90,11 +93,17 @@ class GenApiFile {
     generator.writeln("class ${className} {");
     generator.writeln("${className}._();");
 
-    functions.forEach((e) => _printFunction(e));
-
-    events.forEach((e) => _printEvent(e));
+    namespace.properties.forEach((p) => _printProperty(p));
+    namespace.functions.forEach((f) => _printFunction(f));
+    namespace.events.forEach((e) => _printEvent(e));
 
     generator.writeln("}");
+  }
+
+  void _printProperty(IDLProperty property) {
+    generator.writeln();
+    generator.writeDocs(property.description);
+    generator.writeln("dynamic get ${property.name} => null;");
   }
 
   void _printFunction(IDLFunction function) {
@@ -118,13 +127,10 @@ class GenApiFile {
   void _parseJson(dynamic json) {
     Map m = json[0];
 
-    if (libName == null) {
-      libName = m['namespace'];
-    }
+    namespace = new IDLNamespace();
 
-    if (m.containsKey('description')) {
-      libraryComments = convertHtmlToDartdoc(m['description']);
-    }
+    namespace.name = m['namespace'];
+    namespace.description = convertHtmlToDartdoc(m['description']);
 
     if (m.containsKey('functions')) {
       for (var f in m['functions']) {
@@ -162,7 +168,7 @@ class GenApiFile {
           function.returnType = IDLType.VOID;
         }
 
-        functions.add(function);
+        namespace.functions.add(function);
       }
     }
 
@@ -173,10 +179,32 @@ class GenApiFile {
       for (var e in m['events']) {
         IDLEvent event = new IDLEvent(e['name']);
         event.description = convertHtmlToDartdoc(e['description']);
-        events.add(event);
+        namespace.events.add(event);
+      }
+    }
+
+    // TODO: properties
+    if (m.containsKey('properties')) {
+      Map properties = m['properties'];
+      for (var key in properties.keys) {
+        IDLProperty property = new IDLProperty(key);
+        Map map = properties[key];
+        property.description = convertHtmlToDartdoc(map['description']);
+        // "nodoc": true
+        if (true != map['nodoc']) {
+          namespace.properties.add(property);
+        }
       }
     }
   }
+}
+
+class IDLNamespace {
+  String name;
+  String description;
+  List<IDLFunction> functions = [];
+  List<IDLEvent> events = [];
+  List<IDLProperty> properties = [];
 }
 
 class IDLFunction {
@@ -222,6 +250,13 @@ class IDLParameter {
   IDLParameter(this.name);
 
   String toString() => "${type.dartName} ${name}";
+}
+
+class IDLProperty {
+  String name;
+  String description;
+
+  IDLProperty(this.name);
 }
 
 class IDLType {
