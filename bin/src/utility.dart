@@ -24,39 +24,6 @@ String titleCase(String str) {
   return str.substring(0, 1).toUpperCase() + str.substring(1);
 }
 
-String wrap(String str, [int col = 80]) {
-  List<String> lines = [];
-
-  while (str.length > col) {
-    int index = col;
-
-    while (index > 0 && str.codeUnitAt(index) != 32) {
-      index--;
-    }
-
-    if (index == 0) {
-      index = str.indexOf(' ');
-
-      if (index == -1) {
-        lines.add(str);
-        str = '';
-      } else {
-        lines.add(str.substring(0, index).trim());
-        str = str.substring(index).trim();
-      }
-    } else {
-      lines.add(str.substring(0, index).trim());
-      str = str.substring(index).trim();
-    }
-  }
-
-  if (str.length > 0) {
-    lines.add(str);
-  }
-
-  return lines.join('\n');
-}
-
 String convertHtmlToDartdoc(String str) {
   if (str == null) {
     return null;
@@ -76,10 +43,15 @@ String convertHtmlToDartdoc(String str) {
 
   str = str.replaceAll('&mdash;', '-');
 
-  // TODO: $ref:runtime.onConnect ==> [runtime.onConnect]
+  // $ref:runtime.onConnect ==> [runtime.onConnect]
+  str = str.replaceAllMapped(
+      new RegExp(r"\$ref:([\.\w]*)"),
+      (Match m) => "[${m.group(1)}]");
 
-  // TODO: <a href='content_scripts.html#pi'>programmatic injection</a>
-  // ==> [foo](url)
+  // <a href='content_scripts.html#pi'>programmatic injection</a> ==> [foo](url)
+  str = str.replaceAllMapped(
+      new RegExp(r"""<a href=['"]([\w\.-:#]*)['"]>([\w ]*)</a>"""),
+      (Match m) => "[${m.group(2)}](${m.group(1)})");
 
   return str;
 }

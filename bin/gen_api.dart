@@ -84,14 +84,9 @@ class GenApiFile {
 
     outFile.directory.createSync();
     outFile.writeAsStringSync(generator.toString());
-    //print('wrote ${outFile.path}');
   }
 
   void _printClass() {
-    //class ChromeI18N {
-    // ChromeI18N._();
-    //}
-
     generator.writeln("class ${className} {");
     generator.writeln("${className}._();");
 
@@ -184,14 +179,31 @@ class GenApiFile {
   }
 }
 
-
 class IDLFunction {
   String name;
-  String description;
+  String _description;
   List<IDLParameter> parameters = [];
   IDLType returnType;
 
-  IDLFunction(this.name, this.description);
+  IDLFunction(this.name, this._description);
+
+  String get description {
+    if (_description == null) {
+      return _description;
+    }
+
+    StringBuffer buf = new StringBuffer(_description);
+    buf.write('\n');
+
+    parameters.forEach((p) {
+      if (p.description != null) {
+        buf.write('\n');
+        buf.write("[${p.name}] ${p.description}\n");
+      }
+    });
+
+    return buf.toString();
+  }
 }
 
 class IDLEvent {
