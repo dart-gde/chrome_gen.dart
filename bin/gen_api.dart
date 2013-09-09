@@ -67,9 +67,9 @@ class GenApiFile {
       }
 
       if (libName != null) {
-        generator.writeln("library chrome_${libName};");
+        generator.writeln("library chrome.${libName};");
       } else {
-        generator.writeln("library chrome_${namespace.name};");
+        generator.writeln("library chrome.${namespace.name};");
       }
       generator.writeln();
     }

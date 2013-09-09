@@ -50,7 +50,7 @@ String convertHtmlToDartdoc(String str) {
 
   // <a href='content_scripts.html#pi'>programmatic injection</a> ==> [foo](url)
   str = str.replaceAllMapped(
-      new RegExp(r"""<a href=['"]([\w\.-:#]*)['"]>([\w ]*)</a>"""),
+      new RegExp(r"""<a href=['"](\S*)['"]>([\w ]*)</a>"""),
       (Match m) => "[${m.group(2)}](${m.group(1)})");
 
   return str;

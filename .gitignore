@@ -7,3 +7,4 @@ dist/
 .buildlog
 *.js.map
 *.js.deps
+docs/
