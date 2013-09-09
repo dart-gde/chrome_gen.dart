@@ -1,0 +1,12 @@
+-have a script shich can parse and diff meta.apis.json and this page:
+http://developer.chrome.com/apps/api_index.html
+
+-write model
+-convert json to model
+-convert idl to model
+-parse idl
+-support side-car source code, and generator overrides
+-library to generate dart source
+-framework to drive everything
+-analyze the generated api
+-test the generated api
