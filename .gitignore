@@ -1,6 +1,6 @@
 pubspec.lock
 *.pem
-/packages/
+packages
 dist/
 .svn
 .DS_Store
