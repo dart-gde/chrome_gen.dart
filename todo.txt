@@ -1,12 +1,14 @@
--have a script shich can parse and diff meta.apis.json and this page:
+-have a script which can parse and diff meta.apis.json and this page:
 http://developer.chrome.com/apps/api_index.html
+-or find the metadata the chrome team uses to build the API documentation?
 
++framework to drive everything
++convert json to model
 -write model
--convert json to model
+-library to generate dart source
++analyze the generated api
+
 -convert idl to model
 -parse idl
 -support side-car source code, and generator overrides
--library to generate dart source
--framework to drive everything
--analyze the generated api
 -test the generated api

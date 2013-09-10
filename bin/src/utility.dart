@@ -1,5 +1,10 @@
+// Copyright (c) 2013, the gen_tools.dart project authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be found
+// in the LICENSE file.
 
 library utility;
+
+import 'dart:io';
 
 String convertJSLibNameToFileName(String jsLibName) {
   jsLibName = jsLibName.replaceAll('devtools.', 'devtools_');
@@ -54,4 +59,13 @@ String convertHtmlToDartdoc(String str) {
       (Match m) => "[${m.group(2)}](${m.group(1)})");
 
   return str;
+}
+
+String getName(FileSystemEntity entity) {
+  String name = entity.path;
+  int index = name.lastIndexOf(Platform.pathSeparator);
+  if (index != -1) {
+    name = name.substring(index + 1);
+  }
+  return name;
 }

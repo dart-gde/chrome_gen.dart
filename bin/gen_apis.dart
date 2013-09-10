@@ -1,3 +1,6 @@
+// Copyright (c) 2013, the gen_tools.dart project authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be found
+// in the LICENSE file.
 
 library gen_apis;
 
@@ -43,6 +46,8 @@ class GenApis {
 
     generator.writeln(LICENSE);
     generator.writeln();
+    generator.writeln("/* This file has been generated - do not edit */");
+    generator.writeln();
 
     generator.writeDocs(
         'A library to expose the Chrome ${name} APIs.',
@@ -52,7 +57,7 @@ class GenApis {
 
     for (String libName in libraryNames) {
       generator.writeln(
-          "export 'src/${convertJSLibNameToFileName(libName)}.dart';");
+          "export 'gen/${convertJSLibNameToFileName(libName)}.dart';");
     }
 
     libFile.writeAsStringSync(generator.toString());
@@ -75,7 +80,7 @@ class GenApis {
     File jsonFile = new File("${idlDir.path}/${locateName}.json");
     File idlFile = new File("${idlDir.path}/${locateName}.idl");
 
-    File outFile = new File("${outDir.path}/src/${fileName}.dart");
+    File outFile = new File("${outDir.path}/gen/${fileName}.dart");
 
     if (jsonFile.existsSync()) {
       GenApiFile apiGen = new GenApiFile(jsonFile, outFile, fileName);

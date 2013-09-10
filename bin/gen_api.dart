@@ -1,3 +1,6 @@
+// Copyright (c) 2013, the gen_tools.dart project authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be found
+// in the LICENSE file.
 
 import 'dart:io';
 import 'dart:convert';
@@ -60,6 +63,8 @@ class GenApiFile {
 
     generator.writeln(LICENSE);
     generator.writeln();
+    generator.writeln("/* This file has been generated from ${getName(inFile)} - do not edit */");
+    generator.writeln();
 
     if (libName != null) {
       if (namespace.description != null) {
@@ -74,12 +79,11 @@ class GenApiFile {
       generator.writeln();
     }
 
-    if (!namespace.events.isEmpty) {
-      generator.writeln("import 'dart:async';");
-      generator.writeln();
-    }
+    generator.writeln("import '../src/common.dart';");
+    generator.writeln();
 
     // final ChromeI18N i18n = new ChromeI18N._();
+    generator.writeDocs("Accessor for the `chrome.${libName}` namespace.", preferSingle: true);
     generator.writeln("final ${className} ${libName} = new ${className}._();");
     generator.writeln();
 
@@ -103,16 +107,38 @@ class GenApiFile {
   void _printProperty(IDLProperty property) {
     generator.writeln();
     generator.writeDocs(property.description);
-    generator.writeln("dynamic get ${property.name} => null;");
+    generator.writeln(
+        "${property.calculateReturnType()} get ${property.name} => chrome['${libName}']['${property.name}'];");
   }
 
   void _printFunction(IDLFunction function) {
     generator.writeln();
     generator.writeDocs(function.description);
-    generator.write("${function.returnType.dartName} ${function.name}(");
-    generator.write(function.parameters.join(', '));
+    generator.write("${function.calculateReturnType()} ${function.name}(");
+    generator.write(function.parameters.where((p) => !p.isCallback).join(', '));
     generator.writeln(") {");
-    generator.writeln();
+    if (function.usesCallback) {
+      generator.writeln("ChromeCompleter completer = new ChromeCompleter.noArgs();");
+    }
+    if (function.returns){
+      generator.write("return ");
+    }
+    generator.write("chrome['${libName}'].callMethod('${function.name}'");
+    if (!function.parameters.isEmpty) {
+      generator.write(", [");
+      generator.write(function.parameters.map((IDLParameter p) {
+        if (p.isCallback) {
+          return 'completer.callback';
+        } else {
+          return p.name;
+        }
+      }).join(", "));
+      generator.write("]");
+    }
+    generator.writeln(");");
+    if (function.usesCallback) {
+      generator.writeln("return completer.future;");
+    }
     generator.writeln("}");
   }
 
@@ -190,6 +216,18 @@ class GenApiFile {
         IDLProperty property = new IDLProperty(key);
         Map map = properties[key];
         property.description = convertHtmlToDartdoc(map['description']);
+
+        // value
+        if (map.containsKey('value')) {
+          if (map['value'] is int) {
+            property.returnType = new IDLType.fromDartName('int');
+          }
+        }
+
+        if (map.containsKey('type')) {
+          property.returnType = new IDLType(map['type']);
+        }
+
         // "nodoc": true
         if (true != map['nodoc']) {
           namespace.properties.add(property);
@@ -232,6 +270,23 @@ class IDLFunction {
 
     return buf.toString();
   }
+
+  bool get usesCallback => !parameters.isEmpty && parameters.last.isCallback;
+
+  bool get returns {
+    if (usesCallback) {
+      return false;
+    }
+    return calculateReturnType() != 'void';
+  }
+
+  String calculateReturnType() {
+    if (usesCallback) {
+      return 'Future';
+    } else {
+      return returnType.dartName;
+    }
+  }
 }
 
 class IDLEvent {
@@ -249,14 +304,21 @@ class IDLParameter {
 
   IDLParameter(this.name);
 
+  bool get isCallback => name == 'callback';
+
   String toString() => "${type.dartName} ${name}";
 }
 
 class IDLProperty {
   String name;
   String description;
+  IDLType returnType;
 
   IDLProperty(this.name);
+
+  String calculateReturnType() {
+    return returnType != null ? returnType.dartName : "dynamic";
+  }
 }
 
 class IDLType {
