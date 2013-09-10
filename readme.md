@@ -6,4 +6,4 @@ Exploring options for code generation for the chrome apps APIs.
 
 Documentation
 ----------
-Sample API documentation for generated code is available [here](http://devoncarew.github.io/gen_tools.dart/chrome_app.html).
+Sample API documentation for generated code is available [here](http://devoncarew.github.io/gen_tools.dart/docs/chrome_app.html).
