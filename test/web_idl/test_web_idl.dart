@@ -60,7 +60,7 @@ class WebIdlParser extends LanguageParsers {
 
   get start => spaces > (stmts() < eof);
   stmts() => stmt().endBy(semi);
-  stmt() => definition();
+  stmt() => definitions();
 /*
   definition() =>
          callbackOrInterface()
