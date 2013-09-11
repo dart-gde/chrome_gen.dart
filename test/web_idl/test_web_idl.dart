@@ -115,60 +115,191 @@ class WebIdlParser extends LanguageParsers {
   typedefStmt() => null;
   implementsStatement() => null;
   constStmt() => null;
-  constValue() => null;
-  booleanLiteral() => null;
-  floatLiteralWebIdl() => null;
-  attributeOrOperation() => null;
-  stringifierAttributeOrOperation() => null;
-  attribute() => null;
+
+  constValue() => booleanLiteral()
+                | floatLiteralWebIdl()
+                | intLiteral
+                | reserved["null"];
+
+  booleanLiteral() => reserved["true"]
+                    | reserved["false"];
+
+  floatLiteralWebIdl() => floatLiteral
+                        | (reserved["-"] + reserved["Infinity"]).list
+                        | reserved["Infinity"]
+                        | reserved["NaN"];
+
+
+  attributeOrOperation() => (reserved["stringifier"]
+                            + stringifierAttributeOrOperation()).list
+                            | attribute()
+                            | operation();
+
+  stringifierAttributeOrOperation() => attribute() | operationRest() | semi;
+
+  attribute() => (inherit()
+                  + readOnly()
+                  + reserved["attribute"]
+                  + type()
+                  + identifier
+                  + reserved[";"]).list;
+
   inherit() => null;
   readOnly() => null;
-  operation() => null;
-  qualifiers() => null;
+
+  operation() => (qualifiers() + operationRest()).list;
+
+  qualifiers() => reserved["static"] | specials();
+
   specials() => null;
-  special() => null;
-  operationRest() => null;
+
+  special() => reserved["getter"]
+             | reserved["setter"]
+             | reserved["creator"]
+             | reserved["deleter"]
+             | reserved["legacycaller"];
+
+  operationRest() => (returnType()
+                      + optionalIdentifier()
+                      + parens(argumentList())
+                      + reserved[";"]).list;
+
   optionalIdentifier() => null;
   argumentList() => null;
   arguments() => null;
-  argument() => null;
-  optionalOrRequiredArgument() => null;
-  argumentName() => null;
+
+  argument() => (extendedAttributeList() + optionalOrRequiredArgument()).list;
+
+  optionalOrRequiredArgument() => (reserved["optional"] + type()
+                                  + argumentName() + defaultStmt()).list
+                                  | (type() + ellipsis() + argumentName()).list;
+
+  argumentName() => argumentNameKeyword() | identifier;
+
   ellipsis() => null;
-  exceptionMember() => null;
-  exceptionField() => null;
+
+  exceptionMember() => constStmt() | exceptionField();
+
+  exceptionField() => (type() + identifier + semi).list;
+
   extendedAttributeList() => null;
   extendedAttributes() => null;
   extendedAttribute() => null;
   extendedAttributeRest() => null;
   extendedAttributeInner() => null;
-  other() => null;
-  argumentNameKeyword() => null;
-  otherOrComma() => null;
-  type() => null;
-  singleType() => null;
+
+  other() => intLiteral
+            | floatLiteral
+            | identifier
+            | stringLiteral
+            // | other TODO: this refers to some other regex
+            | reserved["-"]
+            | reserved["."]
+            | reserved["..."]
+            | reserved[":"]
+            | reserved[";"]
+            | reserved["<"]
+            | reserved["="]
+            | reserved[">"]
+            | reserved["?"]
+            | reserved["Date"]
+            | reserved["DOMString"]
+            | reserved["Infinity"]
+            | reserved["NaN"]
+            | reserved["any"]
+            | reserved["boolean"]
+            | reserved["byte"]
+            | reserved["double"]
+            | reserved["false"]
+            | reserved["float"]
+            | reserved["long"]
+            | reserved["null"]
+            | reserved["object"]
+            | reserved["octet"]
+            | reserved["or"]
+            | reserved["optional"]
+            | reserved["sequence"]
+            | reserved["short"]
+            | reserved["true"]
+            | reserved["unsigned"]
+            | reserved["void"]
+            | argumentNameKeyword();
+
+  argumentNameKeyword() =>  reserved["attribute"]
+                          | reserved["callback"]
+                          | reserved["const"]
+                          | reserved["creator"]
+                          | reserved["deleter"]
+                          | reserved["dictionary"]
+                          | reserved["enum"]
+                          | reserved["exception"]
+                          | reserved["getter"]
+                          | reserved["implements"]
+                          | reserved["inherit"]
+                          | reserved["interface"]
+                          | reserved["legacycaller"]
+                          | reserved["partial"]
+                          | reserved["setter"]
+                          | reserved["static"]
+                          | reserved["stringifier"]
+                          | reserved["typedef"]
+                          | reserved["unrestricted"];
+
+  otherOrComma() => other() | reserved[","];
+
+  type() => singleType() | (unionType() + typeSuffix()).list;
+
+  singleType() =>   nonAnyType()
+                  | (reserved["any"] + typeSuffixStartingWithArray()).list;
+
   unionType() => null;
   unionMemberType() => null;
   unionMemberTypes() => null;
-  nonAnyType() => null;
-  constType() => null;
-  primitiveType() => null;
-  unrestrictedFloatType() => null;
-  floatType() => null;
-  unsignedIntegerType() => null;
-  integerType() => null;
+
+  nonAnyType() => (primitiveType() + typeSuffix()).list
+                | (reserved["DOMString"] + typeSuffix()).list
+                | (identifier + typeSuffix()).list
+                | (reserved["sequence"] + reserved["<"] + type() + reserved[">"] + nullStmt()).list
+                | (reserved["object"] + typeSuffix()).list
+                | (reserved["Date"] + typeSuffix()).list;
+
+  constType() => (primitiveType() + nullStmt()).list
+               | (identifier + nullStmt()).list;
+
+  primitiveType() =>  unsignedIntegerType()
+                    | unrestrictedFloatType()
+                    | reserved["boolean"]
+                    | reserved["byte"]
+                    | reserved["octet"];
+
+  unrestrictedFloatType() => (reserved["unrestricted"] + floatType()).list
+      | floatType();
+
+  floatType() => reserved["float"] | reserved["double"];
+
+  unsignedIntegerType() =>  (reserved["unsigned"] + integerType()).list
+                          | integerType();
+
+  integerType() =>  reserved["short"]
+                  | (reserved["long"] + optionalLong()).list;
+
   optionalLong() => null;
   typeSuffix() => null;
   typeSuffixStartingWithArray() => null;
   nullStmt() => null;
-//  returnType() => type() | identifier;
-//  extendedAttributeNoArgs() => identifier;
-//  extendedAttributeArgList() => (identifier + parens(argumentList)).list;
-  returnType() => null;
-  extendedAttributeNoArgs() => null;
-  extendedAttributeArgList() => null;
-  extendedAttributeIdent() => null;
-  extendedAttributeNamedArgList() => null;
+
+  returnType() =>  type()
+                 | reserved["void"];
+
+  extendedAttributeNoArgs() => identifier;
+
+  extendedAttributeArgList() => (identifier + symbol('=')
+                                + parens(argumentList())).list;
+
+  extendedAttributeIdent() => (identifier + symbol('=') + identifier).list;
+
+  extendedAttributeNamedArgList() => (identifier + symbol('=')
+                                    + identifier + parens(argumentList())).list;
 
 }
 
