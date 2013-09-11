@@ -60,11 +60,29 @@ class WebIdlParser extends LanguageParsers {
 
   get start => spaces > (stmts() < eof);
   stmts() => stmt().endBy(semi);
-  stmt() => null;
+  stmt() => definition();
+
+  definition() =>
+        partialStmt();
+//      | dictionaryStmt()
+//      | exceptionStmt()
+//      | enumStmt()
+//      | typedefStmt()
+//      | implementsStmt();
+
+  partialStmt() => (reserved['partial'] + partialDefinition()).list;
+  partialDefinition() =>
+        partialInterface();
+//      | partialDictionary();
+  partialInterface() => (reserved['interface']
+                        + identifier
+                        + braces(rec(stmts))).list;
+
+
 }
 
 final test = """
-interface testInterface1 {
+partial interface testInterface1 {
 };
 """;
 
