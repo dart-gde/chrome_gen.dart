@@ -61,14 +61,24 @@ class WebIdlParser extends LanguageParsers {
   get start => spaces > (stmts() < eof);
   stmts() => stmt().endBy(semi);
   stmt() => definition();
-
+/*
   definition() =>
-        partialStmt();
+         callbackOrInterface()
+        | partialStmt();
 //      | dictionaryStmt()
 //      | exceptionStmt()
 //      | enumStmt()
 //      | typedefStmt()
 //      | implementsStmt();
+
+  callbackOrInterface() => (reserved['callback'] +
+      (callbackRestOrInterface() | interfaceStmt())).list;
+
+  callbackRestOrInterface() => callbackRest() | interfaceStmt();
+  callbackRest() => (identifier
+      + symbol('=')
+      + returnType()
+      + parens(argumentList())).list;
 
   partialStmt() => (reserved['partial'] + partialDefinition()).list;
   partialDefinition() =>
@@ -77,7 +87,88 @@ class WebIdlParser extends LanguageParsers {
   partialInterface() => (reserved['interface']
                         + identifier
                         + braces(rec(stmts))).list;
+*/
 
+  definitions() => null;
+  definition() => null;
+  callbackOrInterface() => null;
+  callbackRestOrInterface() => null;
+  interfaceStmt() => null;
+  partial() => null;
+  partialDefinition() => null;
+  partialInterface() => null;
+  interfaceMembers() => null;
+  interfaceMember() => null;
+  dictionary() => null;
+  dictionaryMembers() => null;
+  dictionaryMember() => null;
+  partialDictionary() => null;
+  defaultStmt() => null;
+  defaultValue() => null;
+  exception() => null;
+  exceptionMembers() => null;
+  inheritance() => null;
+  enumStmt() => null;
+  enumValueList() => null;
+  enumValues() => null;
+  callbackRest() => null;
+  typedefStmt() => null;
+  implementsStatement() => null;
+  constStmt() => null;
+  constValue() => null;
+  booleanLiteral() => null;
+  floatLiteralWebIdl() => null;
+  attributeOrOperation() => null;
+  stringifierAttributeOrOperation() => null;
+  attribute() => null;
+  inherit() => null;
+  readOnly() => null;
+  operation() => null;
+  qualifiers() => null;
+  specials() => null;
+  special() => null;
+  operationRest() => null;
+  optionalIdentifier() => null;
+  argumentList() => null;
+  arguments() => null;
+  argument() => null;
+  optionalOrRequiredArgument() => null;
+  argumentName() => null;
+  ellipsis() => null;
+  exceptionMember() => null;
+  exceptionField() => null;
+  extendedAttributeList() => null;
+  extendedAttributes() => null;
+  extendedAttribute() => null;
+  extendedAttributeRest() => null;
+  extendedAttributeInner() => null;
+  other() => null;
+  argumentNameKeyword() => null;
+  otherOrComma() => null;
+  type() => null;
+  singleType() => null;
+  unionType() => null;
+  unionMemberType() => null;
+  unionMemberTypes() => null;
+  nonAnyType() => null;
+  constType() => null;
+  primitiveType() => null;
+  unrestrictedFloatType() => null;
+  floatType() => null;
+  unsignedIntegerType() => null;
+  integerType() => null;
+  optionalLong() => null;
+  typeSuffix() => null;
+  typeSuffixStartingWithArray() => null;
+  nullStmt() => null;
+//  returnType() => type() | identifier;
+//  extendedAttributeNoArgs() => identifier;
+//  extendedAttributeArgList() => (identifier + parens(argumentList)).list;
+  returnType() => null;
+  extendedAttributeNoArgs() => null;
+  extendedAttributeArgList() => null;
+  extendedAttributeIdent() => null;
+  extendedAttributeNamedArgList() => null;
 
 }
 
