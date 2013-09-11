@@ -4,5 +4,5 @@ author: devoncarew@google.com
 description: Tools to generate Chrome App APIs
 dependencies:
   args: any
-  petitparser: any
+  parsers: any
   unittest: any
