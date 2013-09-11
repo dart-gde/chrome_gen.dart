@@ -54,6 +54,7 @@ final reservedNames = [ "readonly",
                         "unsigned",
                         "void" ];
 
+// http://www.w3.org/TR/WebIDL/#idl-grammar
 class WebIdlParser extends LanguageParsers {
   WebIdlParser() : super(reservedNames: reservedNames);
 
