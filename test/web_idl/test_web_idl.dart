@@ -89,7 +89,10 @@ class WebIdlParser extends LanguageParsers {
                         + braces(rec(stmts))).list;
 */
 
-  definitions() => null;
+  definitions() => (extendedAttributeList()
+                    + definition()
+                    + definitions()).list
+                    | spaces;
 
   definition() => callbackOrInterface()
                   | partial()
@@ -100,8 +103,8 @@ class WebIdlParser extends LanguageParsers {
                   | implementsStatement();
 
   callbackOrInterface() => (reserved["callback"]
-                            + callbackRestOrInterface()).list
-                            | interfaceStmt();
+                           + callbackRestOrInterface()).list
+                           | interfaceStmt();
 
   callbackRestOrInterface() => callbackRest() | interfaceStmt();
 
@@ -120,7 +123,10 @@ class WebIdlParser extends LanguageParsers {
                         + braces(interfaceMembers())
                         + semi).list;
 
-  interfaceMembers() => null;
+  interfaceMembers() => (extendedAttributeList()
+                        + interfaceMember()
+                        + interfaceMembers()).list
+                        | spaces;
 
   interfaceMember() => constStmt() | attributeOrOperation();
 
@@ -130,7 +136,10 @@ class WebIdlParser extends LanguageParsers {
                   + braces(dictionaryMembers())
                   + semi).list;
 
-  dictionaryMembers() => null;
+  dictionaryMembers() => (extendedAttributeList()
+                          + dictionaryMember()
+                          + dictionaryMembers()).list
+                          | spaces;
 
   dictionaryMember() => (type() + identifier + defaultStmt() + semi).list;
 
@@ -139,7 +148,8 @@ class WebIdlParser extends LanguageParsers {
                          + braces(dictionaryMembers())
                          + semi).list;
 
-  defaultStmt() => null;
+  defaultStmt() => (symbol("=") + defaultValue()).list
+                    | spaces;
 
   defaultValue() => constValue() | stringLiteral;
 
@@ -149,15 +159,45 @@ class WebIdlParser extends LanguageParsers {
                 + braces(exceptionMembers())
                 + semi).list;
 
-  exceptionMembers() => null;
-  inheritance() => null;
-  enumStmt() => null;
-  enumValueList() => null;
-  enumValues() => null;
-  callbackRest() => null;
-  typedefStmt() => null;
-  implementsStatement() => null;
-  constStmt() => null;
+  exceptionMembers() => (extendedAttributeList()
+                        + exceptionMember()
+                        + exceptionMembers()).list
+                        | spaces;
+
+  inheritance() => (reserved[":"] + identifier).list | spaces;
+
+  enumStmt() => (reserved["enum"]
+                + identifier
+                + braces(enumValueList())
+                + semi).list;
+
+  enumValueList() => (stringLiteral + enumValues()).list;
+
+  enumValues() => (reserved[","] + stringLiteral + enumValues()).list | spaces;
+
+  callbackRest() => (identifier
+                    + symbol('=')
+                    + returnType()
+                    + parens(argumentList())
+                    + semi).list;
+
+  typedefStmt() => (reserved["typedef"]
+                    + extendedAttributeList()
+                    + type()
+                    + identifier
+                    + semi).list;
+
+  implementsStatement() => (identifier
+                            + reserved["implements"]
+                            + identifier
+                            + semi).list;
+
+  constStmt() => (reserved["const"]
+                  + constType()
+                  + identifier
+                  + symbol("=")
+                  + constValue()
+                  + semi).list;
 
   constValue() => booleanLiteral()
                 | floatLiteralWebIdl()
@@ -187,14 +227,15 @@ class WebIdlParser extends LanguageParsers {
                   + identifier
                   + reserved[";"]).list;
 
-  inherit() => null;
-  readOnly() => null;
+  inherit() => reserved["inherit"] | spaces;
+
+  readOnly() => reserved["readonly"] | spaces;
 
   operation() => (qualifiers() + operationRest()).list;
 
   qualifiers() => reserved["static"] | specials();
 
-  specials() => null;
+  specials() => (special() + specials()).list | spaces;
 
   special() => reserved["getter"]
              | reserved["setter"]
@@ -207,9 +248,14 @@ class WebIdlParser extends LanguageParsers {
                       + parens(argumentList())
                       + reserved[";"]).list;
 
-  optionalIdentifier() => null;
-  argumentList() => null;
-  arguments() => null;
+  optionalIdentifier() => identifier | spaces;
+
+  argumentList() => (argument() + arguments()).list | spaces;
+
+  arguments() => (reserved[","]
+                  + argument()
+                  + arguments()).list
+                  | spaces;
 
   argument() => (extendedAttributeList() + optionalOrRequiredArgument()).list;
 
@@ -219,17 +265,35 @@ class WebIdlParser extends LanguageParsers {
 
   argumentName() => argumentNameKeyword() | identifier;
 
-  ellipsis() => null;
+  ellipsis() => reserved["..."] | spaces;
 
   exceptionMember() => constStmt() | exceptionField();
 
   exceptionField() => (type() + identifier + semi).list;
 
-  extendedAttributeList() => null;
-  extendedAttributes() => null;
-  extendedAttribute() => null;
-  extendedAttributeRest() => null;
-  extendedAttributeInner() => null;
+  extendedAttributeList() => brackets((extendedAttribute()
+                              + extendedAttributes()).list)
+                              | spaces;
+
+  extendedAttributes() => (reserved[","]
+                          + extendedAttribute()
+                          + extendedAttributes()).list
+                          | spaces;
+
+  extendedAttribute() =>
+      (parens(extendedAttributeInner()) + extendedAttributeRest()).list
+      | (brackets(extendedAttributeInner()) + extendedAttributeRest()).list
+      | (braces(extendedAttributeInner()) + extendedAttributeRest()).list
+      | (other() + extendedAttributeRest()).list;
+
+  extendedAttributeRest() => extendedAttribute() | spaces;
+
+  extendedAttributeInner() =>
+      (parens(extendedAttributeInner()) + extendedAttributeInner()).list
+      | (brackets(extendedAttributeInner()) + extendedAttributeInner()).list
+      | (braces(extendedAttributeInner()) + extendedAttributeInner()).list
+      | (otherOrComma() + extendedAttributeInner()).list
+      | spaces;
 
   other() => intLiteral
             | floatLiteral
@@ -295,9 +359,22 @@ class WebIdlParser extends LanguageParsers {
   singleType() =>   nonAnyType()
                   | (reserved["any"] + typeSuffixStartingWithArray()).list;
 
-  unionType() => null;
-  unionMemberType() => null;
-  unionMemberTypes() => null;
+  unionType() => parens((unionMemberType()
+                          + reserved["or"]
+                          + unionMemberType()
+                          + unionMemberTypes()).list);
+
+  unionMemberType() => nonAnyType()
+                      | (unionType() + typeSuffix()).list
+                      | (reserved["any"]
+                      + symbol("[")
+                      + symbol("]")
+                      + typeSuffix()).list;
+
+  unionMemberTypes() => (reserved["or"]
+                        + unionMemberType()
+                        + unionMemberTypes()).list
+                        | spaces;
 
   nonAnyType() => (primitiveType() + typeSuffix()).list
                 | (reserved["DOMString"] + typeSuffix()).list
@@ -326,10 +403,18 @@ class WebIdlParser extends LanguageParsers {
   integerType() =>  reserved["short"]
                   | (reserved["long"] + optionalLong()).list;
 
-  optionalLong() => null;
-  typeSuffix() => null;
-  typeSuffixStartingWithArray() => null;
-  nullStmt() => null;
+  optionalLong() => reserved["long"] | spaces;
+
+  typeSuffix() => (symbol("[") + symbol("]") + typeSuffix()).list
+                  | (reserved["?"] + typeSuffixStartingWithArray()).list
+                  | spaces;
+
+  typeSuffixStartingWithArray() => (reserved["["]
+                                    + reserved["]"]
+                                    + typeSuffix()).list
+                                    | spaces;
+
+  nullStmt() => reserved["?"] | spaces;
 
   returnType() =>  type()
                  | reserved["void"];
