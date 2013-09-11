@@ -90,22 +90,65 @@ class WebIdlParser extends LanguageParsers {
 */
 
   definitions() => null;
-  definition() => null;
-  callbackOrInterface() => null;
-  callbackRestOrInterface() => null;
-  interfaceStmt() => null;
-  partial() => null;
-  partialDefinition() => null;
-  partialInterface() => null;
+
+  definition() => callbackOrInterface()
+                  | partial()
+                  | dictionary()
+                  | exception()
+                  | enumStmt()
+                  | typedefStmt()
+                  | implementsStatement();
+
+  callbackOrInterface() => (reserved["callback"]
+                            + callbackRestOrInterface()).list
+                            | interfaceStmt();
+
+  callbackRestOrInterface() => callbackRest() | interfaceStmt();
+
+  interfaceStmt() => (reserved["interface"]
+                      + identifier
+                      + inheritance()
+                      + braces(interfaceMembers())
+                      + semi).list;
+
+  partial() => (reserved["partial"] + partialDefinition()).list;
+
+  partialDefinition() => partialInterface() | partialDictionary();
+
+  partialInterface() => (reserved["interface"]
+                        + identifier
+                        + braces(interfaceMembers())
+                        + semi).list;
+
   interfaceMembers() => null;
-  interfaceMember() => null;
-  dictionary() => null;
+
+  interfaceMember() => constStmt() | attributeOrOperation();
+
+  dictionary() => (reserved["dictionary"]
+                  + identifier
+                  + inheritance()
+                  + braces(dictionaryMembers())
+                  + semi).list;
+
   dictionaryMembers() => null;
-  dictionaryMember() => null;
-  partialDictionary() => null;
+
+  dictionaryMember() => (type() + identifier + defaultStmt() + semi).list;
+
+  partialDictionary() => (reserved["dictionary"]
+                         + identifier
+                         + braces(dictionaryMembers())
+                         + semi).list;
+
   defaultStmt() => null;
-  defaultValue() => null;
-  exception() => null;
+
+  defaultValue() => constValue() | stringLiteral;
+
+  exception() => (reserved["exception"]
+                + identifier
+                + inheritance()
+                + braces(exceptionMembers())
+                + semi).list;
+
   exceptionMembers() => null;
   inheritance() => null;
   enumStmt() => null;
