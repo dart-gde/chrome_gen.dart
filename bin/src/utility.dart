@@ -40,8 +40,8 @@ String convertHtmlToDartdoc(String str) {
   str = str.replaceAll('<em>', '_');
   str = str.replaceAll('</em>', '_');
 
-  str = str.replaceAll('<strong>', '**');
-  str = str.replaceAll('</strong>', '**');
+  str = str.replaceAll('<strong>', '*');
+  str = str.replaceAll('</strong>', '*');
 
   str = str.replaceAll('<var>', '[');
   str = str.replaceAll('</var>', ']');

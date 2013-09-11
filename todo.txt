@@ -1,14 +1,13 @@
++framework to drive everything
++convert json to model
++analyze the generated api
++library to generate dart source (bin/generate_dart.dart)
+-parse idl
+-write model
+-convert idl to model
+-support side-car source code, and generator overrides
+-test the generated api
+
 -have a script which can parse and diff meta.apis.json and this page:
 http://developer.chrome.com/apps/api_index.html
 -or find the metadata the chrome team uses to build the API documentation?
-
-+framework to drive everything
-+convert json to model
--write model
--library to generate dart source
-+analyze the generated api
-
--convert idl to model
--parse idl
--support side-car source code, and generator overrides
--test the generated api

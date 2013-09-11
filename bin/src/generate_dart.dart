@@ -3,14 +3,14 @@
 // in the LICENSE file.
 
 /// A library to generate Dart source code.
-library dart_gen;
+library generate_dart;
 
 final int RUNE_SPACE = 32;
 final int RUNE_EOL = 10;
 final int RUNE_LEFT_CURLY = 123;
 final int RUNE_RIGHT_CURLY = 125;
 
-class Generator {
+class DartGenerator {
   String libraryName;
 
   String _indent = "";
@@ -18,14 +18,14 @@ class Generator {
 
   bool _previousWasEol = false;
 
-  Generator();
+  DartGenerator();
 
   void writeDocs(String docs, {bool preferSingle: false}) {
     if (docs == null) {
       return;
     }
 
-    docs = _wrapLines(docs.trim(), 80 - _indent.length - 3);
+    docs = wrap(docs.trim(), 80 - _indent.length - 3);
 
     if (!docs.contains('\n') && preferSingle) {
       _writeln("/// ${docs}", true);
@@ -68,14 +68,17 @@ class Generator {
   String toString() => _buf.toString();
 }
 
-/// Wrap a string that could contain newlines.
-String _wrapLines(String str, [int col = 80]) {
+/// Wrap a string on column boundaries.
+String wrap(String str, [int col = 80]) {
+  // The given string could contain newlines.
+  // TODO: this need to do a better job of not wrapping things like
+  // [foo bar](index.html).
   List lines = str.split('\n');
-  return lines.map((l) => _wrap(l, col)).join('\n');
+  return lines.map((l) => _simpleWrap(l, col)).join('\n');
 }
 
 /// Wrap a string without newlines.
-String _wrap(String str, [int col = 80]) {
+String _simpleWrap(String str, [int col = 80]) {
   List<String> lines = [];
 
   while (str.length > col) {

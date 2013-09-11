@@ -42,7 +42,7 @@ class GenApis {
   void _generateApi(String name, List<String> libraryNames, [List<String> alreadyWritten]) {
     File libFile = new File("${outDir.path}/chrome_${name}.dart");
 
-    Generator generator = new Generator();
+    DartGenerator generator = new DartGenerator();
 
     generator.writeln(LICENSE);
     generator.writeln();

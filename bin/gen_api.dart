@@ -34,7 +34,7 @@ class GenApiFile {
   File inFile;
   File outFile;
 
-  Generator generator;
+  DartGenerator generator;
   IDLNamespace namespace;
 
   GenApiFile(this.inFile, this.outFile, [this.libName]) {
@@ -59,7 +59,7 @@ class GenApiFile {
   }
 
   void generate() {
-    generator = new Generator();
+    generator = new DartGenerator();
 
     generator.writeln(LICENSE);
     generator.writeln();
