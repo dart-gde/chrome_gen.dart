@@ -61,7 +61,6 @@ class GenApis {
     }
 
     libFile.writeAsStringSync(generator.toString());
-    print('');
     print('wrote ${libFile.path}');
 
     if (alreadyWritten != null) {

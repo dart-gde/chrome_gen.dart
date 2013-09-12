@@ -52,9 +52,20 @@ class GenApiFile {
 
       _parseJson(JSON.decode(newLines.join('\n')));
     } else if (inFile.path.endsWith(".idl")) {
-      namespace = new IDLNamespace();
+      WebIdlParser webIdlParser = new WebIdlParser();
+
+      try {
+        webIdlParser.start.parse(inFile.readAsStringSync());
+        // TODO: this parse will produce a model...
+        namespace = new IDLNamespace();
+      } catch (e) {
+        // TODO: check this to allow the throw to kill generation
+        print("  ${e}");
+        namespace = new IDLNamespace();
+      }
+
       // TODO:
-      print("*idl not yet supported*");
+      //print("*idl not yet supported*");
     } else {
       throw new Exception('format not understood: ${inFile.path}');
     }
