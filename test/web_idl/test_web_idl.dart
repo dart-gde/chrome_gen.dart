@@ -61,35 +61,10 @@ class WebIdlParser extends LanguageParsers {
   WebIdlParser() : super(reservedNames: reservedNames);
 
   get start => spaces > (stmts() < eof);
+
   stmts() => stmt().endBy(semi);
+
   stmt() => definitions();
-/*
-  definition() =>
-         callbackOrInterface()
-        | partialStmt();
-//      | dictionaryStmt()
-//      | exceptionStmt()
-//      | enumStmt()
-//      | typedefStmt()
-//      | implementsStmt();
-
-  callbackOrInterface() => (reserved['callback'] +
-      (callbackRestOrInterface() | interfaceStmt())).list;
-
-  callbackRestOrInterface() => callbackRest() | interfaceStmt();
-  callbackRest() => (identifier
-      + symbol('=')
-      + returnType()
-      + parens(argumentList())).list;
-
-  partialStmt() => (reserved['partial'] + partialDefinition()).list;
-  partialDefinition() =>
-        partialInterface();
-//      | partialDictionary();
-  partialInterface() => (reserved['interface']
-                        + identifier
-                        + braces(rec(stmts))).list;
-*/
 
   definitions() => (extendedAttributeList()
                     + definition()
@@ -432,17 +407,6 @@ class WebIdlParser extends LanguageParsers {
                                     + identifier + parens(argumentList())).list;
 
 }
-
-//final test = """
-//partial interface testInterface1 {
-//};
-//""";
-
-//main() {
-//  WebIdlParser miniLang = new WebIdlParser();
-//  var parsed = miniLang.start.parse(test);
-//  print(parsed);
-//}
 
 void main() {
   group('web_idl.dart', () {
