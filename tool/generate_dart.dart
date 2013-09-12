@@ -10,6 +10,11 @@ final int RUNE_EOL = 10;
 final int RUNE_LEFT_CURLY = 123;
 final int RUNE_RIGHT_CURLY = 125;
 
+/**
+ * A class used to generate Dart source code. This class facilitates writing out
+ * dartdoc comments, automatically manages indent by counting curly braces, and
+ * automatically wraps doc comments on 80 char column boundaries.
+ */
 class DartGenerator {
   String libraryName;
 
@@ -61,8 +66,6 @@ class DartGenerator {
 
       _previousWasEol = rune == RUNE_EOL;
     }
-
-    //_buf.write(str.replaceAll("\n", "\n${_indent}"));
   }
 
   String toString() => _buf.toString();
@@ -77,7 +80,7 @@ String wrap(String str, [int col = 80]) {
   return lines.map((l) => _simpleWrap(l, col)).join('\n');
 }
 
-/// Wrap a string without newlines.
+/// Wrap a string ignoring newlines.
 String _simpleWrap(String str, [int col = 80]) {
   List<String> lines = [];
 

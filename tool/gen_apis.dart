@@ -97,10 +97,9 @@ class GenApis {
     print(Directory.current);
 
     outDir = new Directory('lib');
-
-    apisFile = new File('meta/apis.json');
-
+    apisFile = new File('apis.json');
     idlDir = new Directory('idl');
+
     if (!idlDir.existsSync()) {
       throw new Exception('${idlDir.path} not found');
     }
