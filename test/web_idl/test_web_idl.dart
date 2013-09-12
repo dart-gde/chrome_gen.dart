@@ -4,6 +4,7 @@ import 'package:parsers/parsers.dart';
 
 final reservedNames = [ "readonly",
                         // ArgumentNameKeyword
+                        "attribute",
                         "callback",
                         "const",
                         "creator",
@@ -173,7 +174,7 @@ class WebIdlParser extends LanguageParsers {
 
   enumValueList() => (stringLiteral + enumValues()).list;
 
-  enumValues() => (reserved[","] + stringLiteral + enumValues()).list | spaces;
+  enumValues() => (symbol(",") + stringLiteral + enumValues()).list | spaces;
 
   callbackRest() => (identifier
                     + symbol('=')
@@ -252,7 +253,7 @@ class WebIdlParser extends LanguageParsers {
 
   argumentList() => (argument() + arguments()).list | spaces;
 
-  arguments() => (reserved[","]
+  arguments() => (symbol(",")
                   + argument()
                   + arguments()).list
                   | spaces;
@@ -275,7 +276,7 @@ class WebIdlParser extends LanguageParsers {
                               + extendedAttributes()).list)
                               | spaces;
 
-  extendedAttributes() => (reserved[","]
+  extendedAttributes() => (symbol(",")
                           + extendedAttribute()
                           + extendedAttributes()).list
                           | spaces;
@@ -352,7 +353,7 @@ class WebIdlParser extends LanguageParsers {
                           | reserved["typedef"]
                           | reserved["unrestricted"];
 
-  otherOrComma() => other() | reserved[","];
+  otherOrComma() => other() | symbol(",");
 
   type() => singleType() | (unionType() + typeSuffix()).list;
 
@@ -409,8 +410,8 @@ class WebIdlParser extends LanguageParsers {
                   | (reserved["?"] + typeSuffixStartingWithArray()).list
                   | spaces;
 
-  typeSuffixStartingWithArray() => (reserved["["]
-                                    + reserved["]"]
+  typeSuffixStartingWithArray() => (symbol("[")
+                                    + symbol("]")
                                     + typeSuffix()).list
                                     | spaces;
 
