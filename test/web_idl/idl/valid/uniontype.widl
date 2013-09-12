@@ -1,0 +1,3 @@
+interface Union {
+ attribute (any[] or (Date or Event) or (Node or DOMString)?) test;
+};
