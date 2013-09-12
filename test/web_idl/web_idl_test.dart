@@ -1,9 +1,20 @@
 library test_web_idl;
 
 import 'package:unittest/unittest.dart';
-import 'package:parsers/parsers.dart';
 import 'web_idl_parser.dart';
 
+/*
+ * test cases can be found at
+ * https://github.com/w3c/web-platform-tests/tree/master/WebIDL/tests/submissions/W3C
+ * https://github.com/dontcallmedom/widlproc/tree/master/test
+ * https://github.com/darobin/webidl.js/tree/master/t
+ *
+ * Refernce documentation
+ * http://www.w3.org/TR/WebIDL
+ * http://dev.w3.org/2009/dap/ReSpec.js/test-spec/webidl.html
+ * http://www.chromium.org/blink/webidl
+ * http://trac.webkit.org/wiki/WebKitIDL
+ */
 
 void main() {
   group('web_idl.dart', () {
@@ -230,7 +241,174 @@ void main() {
       var p = webIdlParser.start;
       var sp = p.parse(example);
       print(sp);
-      expect(sp, equals("not failing"));
+      expect(sp, equals(
+          [
+           null,
+           [
+            'dictionary',
+            'Alarm',
+            null,
+            [
+             null,
+             [['DOMString', null], 'name', null, ';'],
+             [
+              null,
+              [['double', null], 'scheduledTime', null, ';'],
+              [null, [['double', ['?', null]], 'periodInMinutes', null, ';'], null]
+              ]
+             ],
+             ';'
+             ],
+             [
+              null,
+              [
+               'dictionary',
+               'AlarmCreateInfo',
+               null,
+               [
+                null,
+                [['double', ['?', null]], 'when', null, ';'],
+                [
+                 null,
+                 [['double', ['?', null]], 'delayInMinutes', null, ';'],
+                 [null, [['double', ['?', null]], 'periodInMinutes', null, ';'], null]
+                 ]
+                ],
+                ';'
+                ],
+                [
+                 null,
+                 [
+                  'callback',
+                  [
+                   'AlarmCallback',
+                   '=',
+                   'void',
+                   [[null, [['Alarm', null], null, 'alarm']], null],
+                   ';'
+                   ]
+                  ],
+                  [
+                   null,
+                   [
+                    'callback',
+                    [
+                     'AlarmListCallback',
+                     '=',
+                     'void',
+                     [[null, [['Alarm', ['[', ']', null]], null, 'alarms']], null],
+                     ';'
+                     ]
+                    ],
+                    [
+                     null,
+                     [
+                      'interface',
+                      'Functions',
+                      null,
+                      [
+                       null,
+                       [
+                        'static',
+                        [
+                         'void',
+                         'create',
+                         [
+                          [null, ['optional', ['DOMString', null], 'name', null]],
+                          [
+                           ',',
+                           [null, [['AlarmCreateInfo', null], null, 'alarmInfo']],
+                           null
+                           ]
+                          ],
+                          ';'
+                          ]
+                        ],
+                        [
+                         null,
+                         [
+                          'static',
+                          [
+                           'void',
+                           'get',
+                           [
+                            [null, ['optional', ['DOMString', null], 'name', null]],
+                            [
+                             ',',
+                             [null, [['AlarmCallback', null], null, 'callback']],
+                             null
+                             ]
+                            ],
+                            ';'
+                            ]
+                          ],
+                          [
+                           null,
+                           [
+                            'static',
+                            [
+                             'void',
+                             'getAll',
+                             [
+                              [null, [['AlarmListCallback', null], null, 'callback']],
+                              null
+                              ],
+                              ';'
+                              ]
+                            ],
+                            [
+                             null,
+                             [
+                              'static',
+                              [
+                               'void',
+                               'clear',
+                               [
+                                [
+                                 null,
+                                 ['optional', ['DOMString', null], 'name', null]
+                                 ],
+                                 null
+                                 ],
+                                 ';'
+                                 ]
+                              ],
+                              [null, ['static', ['void', 'clearAll', null, ';']], null]
+                             ]
+                           ]
+                         ]
+                       ],
+                       ';'
+                       ],
+                       [
+                        null,
+                        [
+                         'interface',
+                         'Events',
+                         null,
+                         [
+                          null,
+                          [
+                           'static',
+                           [
+                            'void',
+                            'onAlarm',
+                            [[null, [['Alarm', null], null, 'alarm']], null],
+                            ';'
+                            ]
+                           ],
+                           null
+                           ],
+                           ';'
+                           ],
+                           null
+                           ]
+                     ]
+                   ]
+                 ]
+              ]
+           ]
+      ));
     });
   });
 }
