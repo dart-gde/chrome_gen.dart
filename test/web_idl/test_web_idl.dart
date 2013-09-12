@@ -62,105 +62,105 @@ class WebIdlParser extends LanguageParsers {
 
   get start => spaces > (stmts() < eof);
 
-  stmts() => stmt().endBy(semi);
+  stmts() => stmt();
 
-  stmt() => definitions();
+  stmt() => rec(definitions);
 
-  definitions() => (extendedAttributeList()
-                    + definition()
-                    + definitions()).list
+  definitions() => (rec(extendedAttributeList)
+                    + rec(definition)
+                    + rec(definitions)).list
                     | spaces;
 
-  definition() => callbackOrInterface()
-                  | partial()
-                  | dictionary()
-                  | exception()
-                  | enumStmt()
-                  | typedefStmt()
-                  | implementsStatement();
+  definition() => rec(callbackOrInterface)
+                  | rec(partial)
+                  | rec(dictionary)
+                  | rec(exception)
+                  | rec(enumStmt)
+                  | rec(typedefStmt)
+                  | rec(implementsStatement);
 
   callbackOrInterface() => (reserved["callback"]
-                           + callbackRestOrInterface()).list
-                           | interfaceStmt();
+                           + rec(callbackRestOrInterface)).list
+                           | rec(interfaceStmt);
 
-  callbackRestOrInterface() => callbackRest() | interfaceStmt();
+  callbackRestOrInterface() => rec(callbackRest) | rec(interfaceStmt);
 
   interfaceStmt() => (reserved["interface"]
                       + identifier
                       + inheritance()
-                      + braces(interfaceMembers())
+                      + braces(rec(interfaceMembers))
                       + semi).list;
 
-  partial() => (reserved["partial"] + partialDefinition()).list;
+  partial() => (reserved["partial"] + rec(partialDefinition)).list;
 
-  partialDefinition() => partialInterface() | partialDictionary();
+  partialDefinition() => rec(partialInterface) | rec(partialDictionary);
 
   partialInterface() => (reserved["interface"]
                         + identifier
-                        + braces(interfaceMembers())
+                        + braces(rec(interfaceMembers))
                         + semi).list;
 
-  interfaceMembers() => (extendedAttributeList()
-                        + interfaceMember()
-                        + interfaceMembers()).list
+  interfaceMembers() => (rec(extendedAttributeList)
+                        + rec(interfaceMember)
+                        + rec(interfaceMembers)).list
                         | spaces;
 
-  interfaceMember() => constStmt() | attributeOrOperation();
+  interfaceMember() => rec(constStmt) | rec(attributeOrOperation);
 
   dictionary() => (reserved["dictionary"]
                   + identifier
                   + inheritance()
-                  + braces(dictionaryMembers())
+                  + braces(rec(dictionaryMembers))
                   + semi).list;
 
-  dictionaryMembers() => (extendedAttributeList()
-                          + dictionaryMember()
-                          + dictionaryMembers()).list
+  dictionaryMembers() => (rec(extendedAttributeList)
+                          + rec(dictionaryMember)
+                          + rec(dictionaryMembers)).list
                           | spaces;
 
-  dictionaryMember() => (type() + identifier + defaultStmt() + semi).list;
+  dictionaryMember() => (rec(type) + identifier + rec(defaultStmt) + semi).list;
 
   partialDictionary() => (reserved["dictionary"]
                          + identifier
-                         + braces(dictionaryMembers())
+                         + braces(rec(dictionaryMembers))
                          + semi).list;
 
-  defaultStmt() => (symbol("=") + defaultValue()).list
+  defaultStmt() => (symbol("=") + rec(defaultValue)).list
                     | spaces;
 
-  defaultValue() => constValue() | stringLiteral;
+  defaultValue() => rec(constValue) | stringLiteral;
 
   exception() => (reserved["exception"]
                 + identifier
                 + inheritance()
-                + braces(exceptionMembers())
+                + braces(rec(exceptionMembers))
                 + semi).list;
 
-  exceptionMembers() => (extendedAttributeList()
-                        + exceptionMember()
-                        + exceptionMembers()).list
+  exceptionMembers() => (rec(extendedAttributeList)
+                        + rec(exceptionMember)
+                        + rec(exceptionMembers)).list
                         | spaces;
 
   inheritance() => (reserved[":"] + identifier).list | spaces;
 
   enumStmt() => (reserved["enum"]
                 + identifier
-                + braces(enumValueList())
+                + braces(rec(enumValueList))
                 + semi).list;
 
-  enumValueList() => (stringLiteral + enumValues()).list;
+  enumValueList() => (stringLiteral + rec(enumValues)).list;
 
-  enumValues() => (symbol(",") + stringLiteral + enumValues()).list | spaces;
+  enumValues() => (symbol(",") + stringLiteral + rec(enumValues)).list | spaces;
 
   callbackRest() => (identifier
                     + symbol('=')
-                    + returnType()
-                    + parens(argumentList())
+                    + rec(returnType)
+                    + parens(rec(argumentList))
                     + semi).list;
 
   typedefStmt() => (reserved["typedef"]
-                    + extendedAttributeList()
-                    + type()
+                    + rec(extendedAttributeList)
+                    + rec(type)
                     + identifier
                     + semi).list;
 
@@ -170,10 +170,10 @@ class WebIdlParser extends LanguageParsers {
                             + semi).list;
 
   constStmt() => (reserved["const"]
-                  + constType()
+                  + rec(constType)
                   + identifier
                   + symbol("=")
-                  + constValue()
+                  + rec(constValue)
                   + semi).list;
 
   constValue() => booleanLiteral()
@@ -191,16 +191,16 @@ class WebIdlParser extends LanguageParsers {
 
 
   attributeOrOperation() => (reserved["stringifier"]
-                            + stringifierAttributeOrOperation()).list
-                            | attribute()
-                            | operation();
+                            + rec(stringifierAttributeOrOperation)).list
+                            | rec(attribute)
+                            | rec(operation);
 
-  stringifierAttributeOrOperation() => attribute() | operationRest() | semi;
+  stringifierAttributeOrOperation() => rec(attribute) | rec(operationRest) | semi;
 
   attribute() => (inherit()
                   + readOnly()
                   + reserved["attribute"]
-                  + type()
+                  + rec(type)
                   + identifier
                   + reserved[";"]).list;
 
@@ -208,11 +208,11 @@ class WebIdlParser extends LanguageParsers {
 
   readOnly() => reserved["readonly"] | spaces;
 
-  operation() => (qualifiers() + operationRest()).list;
+  operation() => (rec(qualifiers) + rec(operationRest)).list;
 
-  qualifiers() => reserved["static"] | specials();
+  qualifiers() => reserved["static"] | rec(specials);
 
-  specials() => (special() + specials()).list | spaces;
+  specials() => (special() + rec(specials)).list | spaces;
 
   special() => reserved["getter"]
              | reserved["setter"]
@@ -220,33 +220,33 @@ class WebIdlParser extends LanguageParsers {
              | reserved["deleter"]
              | reserved["legacycaller"];
 
-  operationRest() => (returnType()
+  operationRest() => (rec(returnType)
                       + optionalIdentifier()
-                      + parens(argumentList())
+                      + parens(rec(argumentList))
                       + reserved[";"]).list;
 
   optionalIdentifier() => identifier | spaces;
 
-  argumentList() => (argument() + arguments()).list | spaces;
+  argumentList() => (rec(argument) + rec(arguments)).list | spaces;
 
   arguments() => (symbol(",")
-                  + argument()
-                  + arguments()).list
+                  + rec(argument)
+                  + rec(arguments)).list
                   | spaces;
 
-  argument() => (extendedAttributeList() + optionalOrRequiredArgument()).list;
+  argument() => (rec(extendedAttributeList) + rec(optionalOrRequiredArgument)).list;
 
-  optionalOrRequiredArgument() => (reserved["optional"] + type()
-                                  + argumentName() + defaultStmt()).list
-                                  | (type() + ellipsis() + argumentName()).list;
+  optionalOrRequiredArgument() => (reserved["optional"] + rec(type)
+                                  + argumentName() + rec(defaultStmt)).list
+                                  | (rec(type) + ellipsis() + argumentName()).list;
 
   argumentName() => argumentNameKeyword() | identifier;
 
   ellipsis() => reserved["..."] | spaces;
 
-  exceptionMember() => constStmt() | exceptionField();
+  exceptionMember() => rec(constStmt) | rec(exceptionField);
 
-  exceptionField() => (type() + identifier + semi).list;
+  exceptionField() => (rec(type) + identifier + semi).list;
 
   extendedAttributeList() => brackets((rec(extendedAttribute)
                               + rec(extendedAttributes)).list)
@@ -331,80 +331,84 @@ class WebIdlParser extends LanguageParsers {
 
   otherOrComma() => other() | symbol(",");
 
-  type() => singleType() | (unionType() + typeSuffix()).list;
+  type() => rec(singleType) | (rec(unionType) + rec(typeSuffix)).list;
 
-  singleType() =>   nonAnyType()
-                  | (reserved["any"] + typeSuffixStartingWithArray()).list;
+  singleType() =>   rec(nonAnyType)
+                  | (reserved["any"] + rec(typeSuffixStartingWithArray)).list;
 
-  unionType() => parens((unionMemberType()
+  unionType() => parens((rec(unionMemberType)
                           + reserved["or"]
-                          + unionMemberType()
-                          + unionMemberTypes()).list);
+                          + rec(unionMemberType)
+                          + rec(unionMemberTypes)).list);
 
   unionMemberType() => nonAnyType()
-                      | (unionType() + typeSuffix()).list
+                      | (rec(unionType) + rec(typeSuffix)).list
                       | (reserved["any"]
                       + symbol("[")
                       + symbol("]")
-                      + typeSuffix()).list;
+                      + rec(typeSuffix)).list;
 
   unionMemberTypes() => (reserved["or"]
-                        + unionMemberType()
-                        + unionMemberTypes()).list
+                        + rec(unionMemberType)
+                        + rec(unionMemberTypes)).list
                         | spaces;
 
-  nonAnyType() => (primitiveType() + typeSuffix()).list
-                | (reserved["DOMString"] + typeSuffix()).list
-                | (identifier + typeSuffix()).list
-                | (reserved["sequence"] + reserved["<"] + type() + reserved[">"] + nullStmt()).list
-                | (reserved["object"] + typeSuffix()).list
-                | (reserved["Date"] + typeSuffix()).list;
+  nonAnyType() => (rec(primitiveType) + rec(typeSuffix)).list
+                | (reserved["DOMString"] + rec(typeSuffix)).list
+                | (identifier + rec(typeSuffix)).list
+                | (reserved["sequence"]
+                + reserved["<"]
+                + rec(type)
+                + reserved[">"]
+                + rec(nullStmt)).list
+                | (reserved["object"] + rec(typeSuffix)).list
+                | (reserved["Date"] + rec(typeSuffix)).list;
 
-  constType() => (primitiveType() + nullStmt()).list
-               | (identifier + nullStmt()).list;
+  constType() => (rec(primitiveType) + rec(nullStmt)).list
+               | (identifier + rec(nullStmt)).list;
 
-  primitiveType() =>  unsignedIntegerType()
-                    | unrestrictedFloatType()
+  primitiveType() =>  rec(unsignedIntegerType)
+                    | rec(unrestrictedFloatType)
                     | reserved["boolean"]
                     | reserved["byte"]
                     | reserved["octet"];
 
-  unrestrictedFloatType() => (reserved["unrestricted"] + floatType()).list
-      | floatType();
+  unrestrictedFloatType() => (reserved["unrestricted"] + rec(floatType)).list
+      | rec(floatType);
 
   floatType() => reserved["float"] | reserved["double"];
 
-  unsignedIntegerType() =>  (reserved["unsigned"] + integerType()).list
-                          | integerType();
+  unsignedIntegerType() =>  (reserved["unsigned"] + rec(integerType)).list
+                          | rec(integerType);
 
   integerType() =>  reserved["short"]
-                  | (reserved["long"] + optionalLong()).list;
+                  | (reserved["long"] + rec(optionalLong)).list;
 
   optionalLong() => reserved["long"] | spaces;
 
-  typeSuffix() => (symbol("[") + symbol("]") + typeSuffix()).list
-                  | (reserved["?"] + typeSuffixStartingWithArray()).list
+  typeSuffix() => (symbol("[") + symbol("]") + rec(typeSuffix)).list
+                  | (reserved["?"] + rec(typeSuffixStartingWithArray)).list
                   | spaces;
 
   typeSuffixStartingWithArray() => (symbol("[")
                                     + symbol("]")
-                                    + typeSuffix()).list
+                                    + rec(typeSuffix)).list
                                     | spaces;
 
   nullStmt() => reserved["?"] | spaces;
 
-  returnType() =>  type()
+  returnType() =>  rec(type)
                  | reserved["void"];
 
   extendedAttributeNoArgs() => identifier;
 
   extendedAttributeArgList() => (identifier + symbol('=')
-                                + parens(argumentList())).list;
+                                + parens(rec(argumentList))).list;
 
   extendedAttributeIdent() => (identifier + symbol('=') + identifier).list;
 
   extendedAttributeNamedArgList() => (identifier + symbol('=')
-                                    + identifier + parens(argumentList())).list;
+                                    + identifier + parens(rec(argumentList))).list;
 
 }
 
