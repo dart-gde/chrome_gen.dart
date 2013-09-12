@@ -248,22 +248,22 @@ class WebIdlParser extends LanguageParsers {
 
   exceptionField() => (type() + identifier + semi).list;
 
-  extendedAttributeList() => brackets((extendedAttribute()
-                              + extendedAttributes()).list)
+  extendedAttributeList() => brackets((rec(extendedAttribute)
+                              + rec(extendedAttributes)).list)
                               | spaces;
 
   extendedAttributes() => (symbol(",")
-                          + extendedAttribute()
-                          + extendedAttributes()).list
+                          + rec(extendedAttribute)
+                          + rec(extendedAttributes)).list
                           | spaces;
 
   extendedAttribute() =>
-      (parens(extendedAttributeInner()) + extendedAttributeRest()).list
-      | (brackets(extendedAttributeInner()) + extendedAttributeRest()).list
-      | (braces(extendedAttributeInner()) + extendedAttributeRest()).list
-      | (other() + extendedAttributeRest()).list;
+      (parens(rec(extendedAttributeInner)) + rec(extendedAttributeRest)).list
+      | (brackets(rec(extendedAttributeInner)) + rec(extendedAttributeRest)).list
+      | (braces(rec(extendedAttributeInner)) + rec(extendedAttributeRest)).list
+      | (other() + rec(extendedAttributeRest)).list;
 
-  extendedAttributeRest() => extendedAttribute() | spaces;
+  extendedAttributeRest() => rec(extendedAttribute) | spaces;
 
   extendedAttributeInner() =>
       (parens(rec(extendedAttributeInner)) + rec(extendedAttributeInner)).list
