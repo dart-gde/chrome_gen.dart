@@ -1,5 +1,6 @@
 library test_web_idl;
 
+import 'package:unittest/unittest.dart';
 import 'package:parsers/parsers.dart';
 
 final reservedNames = [ "readonly",
@@ -432,13 +433,41 @@ class WebIdlParser extends LanguageParsers {
 
 }
 
-final test = """
-partial interface testInterface1 {
-};
-""";
+//final test = """
+//partial interface testInterface1 {
+//};
+//""";
 
-main() {
-  WebIdlParser miniLang = new WebIdlParser();
-  var parsed = miniLang.start.parse(test);
-  print(parsed);
+//main() {
+//  WebIdlParser miniLang = new WebIdlParser();
+//  var parsed = miniLang.start.parse(test);
+//  print(parsed);
+//}
+
+void main() {
+  group('web_idl.dart', () {
+    WebIdlParser webIdlParser;
+    setUp(() {
+      webIdlParser = new WebIdlParser();
+    });
+
+    test('extendedAttributeNoArgs', () {
+      var id = webIdlParser.extendedAttributeNoArgs().parse("id");
+      expect(id, equals("id"));
+    });
+
+    test('extendedAttributeIdent', () {
+      var id = webIdlParser.extendedAttributeIdent().parse("id = di");
+      expect(id, equals(["id", "=", "di"]));
+    });
+
+    test('extendedAttributeNamedArgList', () {
+      // Test failed: Caught Stack Overflow
+      var id = webIdlParser.extendedAttributeNamedArgList().parse("id = di(1,2,3)");
+      //expect(id, equals(["id", "=", "di"]));
+    });
+
+    //test('', () {});
+  });
+
 }
