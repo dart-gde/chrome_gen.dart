@@ -1,0 +1,9 @@
+enum MealType { "rice", "noodles", "other" , "with line
+return"};
+
+interface Meal {
+  attribute MealType type;
+  attribute float size;     // in grams
+
+  void initialize(MealType type, float size);
+};
