@@ -436,5 +436,109 @@ void main() {
       var sp = p.parse("(1, 2, 3)");
       expect(sp, equals([[1, [',', [2, [',', [3, null]]]]], null]));
     });
+
+    // http://www.w3.org/TR/WebIDL/#proddef-ExtendedAttributeRest
+
+    test('extendedAttributeRest empty', () {
+      var p = webIdlParser.extendedAttributeRest();
+      var sp = p.parse("");
+      expect(sp, equals(null));
+    });
+
+    test('extendedAttributeRest takes no arguments', () {
+      var p = webIdlParser.extendedAttributeRest();
+      var sp = p.parse("[Replaceable]");
+      expect(sp, equals([['Replaceable', null], null]));
+    });
+
+    test('extendedAttributeRest takes an argument list', () {
+      var p = webIdlParser.extendedAttributeRest();
+      var sp = p.parse("[Constructor(float x, float y)]");
+      expect(sp, equals([['Constructor', [['float', ['x', [',', ['float', ['y', null]]]]], null]], null]));
+    });
+
+    test('extendedAttributeRest takes a named argument list', () {
+      var p = webIdlParser.extendedAttributeRest();
+      var sp = p.parse("[NamedConstructor=Image(DOMString src)]");
+      expect(sp, equals("THIS TEST IS FAILING"));
+    });
+
+    test('extendedAttributeRest takes an identifier', () {
+      var p = webIdlParser.extendedAttributeRest();
+      var sp = p.parse("[PutForwards=name]");
+      expect(sp, equals("THIS TEST IS FAILING"));
+    });
+
+    // http://www.w3.org/TR/WebIDL/#proddef-ExtendedAttribute
+    test('extendedAttribute empty', () {
+      var p = webIdlParser.extendedAttribute();
+      var sp = p.parse("");
+      expect(sp, equals(null));
+    });
+
+    test('extendedAttribute takes no arguments', () {
+      var p = webIdlParser.extendedAttribute();
+      var sp = p.parse("[Replaceable]");
+      expect(sp, equals([['Replaceable', null], null]));
+    });
+
+    test('extendedAttribute takes an argument list', () {
+      var p = webIdlParser.extendedAttribute();
+      var sp = p.parse("[Constructor(float x, float y)]");
+      expect(sp, equals([['Constructor', [['float', ['x', [',', ['float', ['y', null]]]]], null]], null]));
+    });
+
+    test('extendedAttribute takes a named argument list', () {
+      var p = webIdlParser.extendedAttribute();
+      var sp = p.parse("[NamedConstructor=Image(DOMString src)]");
+      expect(sp, equals("THIS TEST IS FAILING"));
+    });
+
+    test('extendedAttribute takes an identifier', () {
+      var p = webIdlParser.extendedAttribute();
+      var sp = p.parse("[PutForwards=name]");
+      expect(sp, equals("THIS TEST IS FAILING"));
+    });
+
+    // http://www.w3.org/TR/WebIDL/#proddef-ExtendedAttributes
+    test('extendedAttributes empty', () {
+      var p = webIdlParser.extendedAttributes();
+      var sp = p.parse("");
+      expect(sp, equals(null));
+    });
+
+    test('extendedAttributes', () {
+      var p = webIdlParser.extendedAttributes();
+      var sp = p.parse(", [Constructor(float x, float y)]");
+      expect(sp, equals([',',[['Constructor', [['float', ['x', [',', ['float', ['y', null]]]]], null]],null],null]));
+    });
+
+    // http://www.w3.org/TR/WebIDL/#proddef-ExtendedAttributes
+    test('extendedAttributeList empty', () {
+      var p = webIdlParser.extendedAttributeList();
+      var sp = p.parse("");
+      expect(sp, equals(null));
+    });
+
+    test('extendedAttributeList list', () {
+      var p = webIdlParser.extendedAttributeList();
+      var sp = p.parse("[[Constructor1(float x, float y)], [Constructor2(float x, float y)]]");
+      expect(sp, equals([
+                         [
+                          ['Constructor1', [['float', ['x', [',', ['float', ['y', null]]]]], null]],
+                          null
+                          ],
+                          [
+                           ',',
+                           [
+                            ['Constructor2', [['float', ['x', [',', ['float', ['y', null]]]]], null]],
+                            null
+                            ],
+                            null
+                            ]
+                         ]));
+    });
+
+
   });
 }
