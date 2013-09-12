@@ -1,7 +1,7 @@
 library test_web_idl;
 
 import 'package:unittest/unittest.dart';
-import 'web_idl_parser.dart';
+import '../tool/web_idl_parser.dart';
 
 /*
  * test cases can be found at

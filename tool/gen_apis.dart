@@ -8,8 +8,8 @@ import 'dart:io';
 import 'dart:convert';
 
 import 'gen_api.dart';
-import 'src/generate_dart.dart';
-import 'src/utility.dart';
+import 'generate_dart.dart';
+import 'utility.dart';
 
 void main() {
   DateTime startTime = new DateTime.now();

@@ -75,7 +75,7 @@ class ChromeCompleter<T> {
   Function get callback => _callback;
 }
 
-// TODO: check this over to _event using a String? 'window.onClose'?
+// TODO: change this over to _event using a String? 'window.onClose'?
 // Or can we pass a JsObject in an ctor time?
 class ChromeStreamController<T> {
   final Function _event;

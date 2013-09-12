@@ -1,19 +1,21 @@
-library test_web_idl;
+library test_web_idl_files;
 
 import 'dart:io';
 import 'package:unittest/unittest.dart';
-import 'web_idl_parser.dart';
+import '../tool/web_idl_parser.dart';
 
 // Tests taken from
 // [widlproc](https://github.com/dontcallmedom/widlproc/tree/master/test)
 
 void main() {
+  Directory testDir = new Directory(
+      Platform.script.substring(0, Platform.script.lastIndexOf('/')));
 
-  List<FileSystemEntity> validFileEntities = new Directory('idl/valid')
-  .listSync(recursive: false, followLinks: false);
+  List<FileSystemEntity> validFileEntities = new Directory(
+      '${testDir.path}/idl/valid').listSync(recursive: false, followLinks: false);
 
-  List<FileSystemEntity> invalidFileEntities = new Directory('idl/invalid')
-  .listSync(recursive: false, followLinks: false);
+  List<FileSystemEntity> invalidFileEntities = new Directory(
+      '${testDir.path}/idl/invalid').listSync(recursive: false, followLinks: false);
 
   group('Test valid web idl files', () {
     // TODO: make async
