@@ -50,19 +50,19 @@ void main() {
     test('extendedAttributeRest empty', () {
       var p = webIdlParser.extendedAttributeRest();
       var sp = p.parse("");
-      expect(sp, equals(null));
+      expect(sp, equals(EMPTY));
     });
 
     test('extendedAttributeRest takes no arguments', () {
       var p = webIdlParser.extendedAttributeRest();
       var sp = p.parse("[Replaceable]");
-      expect(sp, equals([['Replaceable', null], null]));
+      expect(sp, equals([['Replaceable', EMPTY], EMPTY]));
     });
 
     test('extendedAttributeRest takes an argument list', () {
       var p = webIdlParser.extendedAttributeRest();
       var sp = p.parse("[Constructor(float x, float y)]");
-      expect(sp, equals([['Constructor', [['float', ['x', [',', ['float', ['y', null]]]]], null]], null]));
+      expect(sp, equals([['Constructor', [['float', ['x', [',', ['float', ['y', EMPTY]]]]], EMPTY]], EMPTY]));
     });
 
     test('extendedAttributeRest takes a named argument list', () {
@@ -81,19 +81,19 @@ void main() {
     test('extendedAttribute empty', () {
       var p = webIdlParser.extendedAttribute();
       var sp = p.parse("");
-      expect(sp, equals(null));
+      expect(sp, equals(EMPTY));
     });
 
     test('extendedAttribute takes no arguments', () {
       var p = webIdlParser.extendedAttribute();
       var sp = p.parse("[Replaceable]");
-      expect(sp, equals([['Replaceable', null], null]));
+      expect(sp, equals([['Replaceable', EMPTY], EMPTY]));
     });
 
     test('extendedAttribute takes an argument list', () {
       var p = webIdlParser.extendedAttribute();
       var sp = p.parse("[Constructor(float x, float y)]");
-      expect(sp, equals([['Constructor', [['float', ['x', [',', ['float', ['y', null]]]]], null]], null]));
+      expect(sp, equals([['Constructor', [['float', ['x', [',', ['float', ['y', EMPTY]]]]], EMPTY]], EMPTY]));
     });
 
     test('extendedAttribute takes a named argument list', () {
@@ -112,20 +112,20 @@ void main() {
     test('extendedAttributes empty', () {
       var p = webIdlParser.extendedAttributes();
       var sp = p.parse("");
-      expect(sp, equals(null));
+      expect(sp, equals(EMPTY));
     });
 
     test('extendedAttributes', () {
       var p = webIdlParser.extendedAttributes();
       var sp = p.parse(", [Constructor(float x, float y)]");
-      expect(sp, equals([',',[['Constructor', [['float', ['x', [',', ['float', ['y', null]]]]], null]],null],null]));
+      expect(sp, equals([',',[['Constructor', [['float', ['x', [',', ['float', ['y', EMPTY]]]]], EMPTY]],EMPTY],EMPTY]));
     });
 
     // http://www.w3.org/TR/WebIDL/#proddef-ExtendedAttributes
     test('extendedAttributeList empty', () {
       var p = webIdlParser.extendedAttributeList();
       var sp = p.parse("");
-      expect(sp, equals(null));
+      expect(sp, equals(EMPTY));
     });
 
     test('extendedAttributeList list', () {
@@ -133,16 +133,16 @@ void main() {
       var sp = p.parse("[[Constructor1(float x, float y)], [Constructor2(float x, float y)]]");
       expect(sp, equals([
                          [
-                          ['Constructor1', [['float', ['x', [',', ['float', ['y', null]]]]], null]],
-                          null
+                          ['Constructor1', [['float', ['x', [',', ['float', ['y', EMPTY]]]]], EMPTY]],
+                          EMPTY
                           ],
                           [
                            ',',
                            [
-                            ['Constructor2', [['float', ['x', [',', ['float', ['y', null]]]]], null]],
-                            null
+                            ['Constructor2', [['float', ['x', [',', ['float', ['y', EMPTY]]]]], EMPTY]],
+                            EMPTY
                             ],
-                            null
+                            EMPTY
                             ]
                          ]));
     });
@@ -150,7 +150,14 @@ void main() {
 
 
     test('general example test', () {
-      var example = """dictionary Alarm {
+      var example = """// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// Use the <code>chrome.alarms</code> API to schedule code to run
+// periodically or at a specified time in the future.
+namespace alarms {
+  dictionary Alarm {
     // Name of this alarm.
     DOMString name;
 
@@ -237,177 +244,224 @@ void main() {
     // |alarm|: The alarm that has elapsed.
     static void onAlarm(Alarm alarm);
   };
-""";
+};""";
       var p = webIdlParser.start;
       var sp = p.parse(example);
       print(sp);
       expect(sp, equals(
           [
-           null,
+           'namespace',
+           'alarms',
            [
-            'dictionary',
-            'Alarm',
-            null,
-            [
-             null,
-             [['DOMString', null], 'name', null, ';'],
-             [
-              null,
-              [['double', null], 'scheduledTime', null, ';'],
-              [null, [['double', ['?', null]], 'periodInMinutes', null, ';'], null]
-              ]
-             ],
-             ';'
-             ],
-             [
-              null,
-              [
-               'dictionary',
-               'AlarmCreateInfo',
-               null,
-               [
-                null,
-                [['double', ['?', null]], 'when', null, ';'],
+            EMPTY,
                 [
-                 null,
-                 [['double', ['?', null]], 'delayInMinutes', null, ';'],
-                 [null, [['double', ['?', null]], 'periodInMinutes', null, ';'], null]
-                 ]
-                ],
-                ';'
-                ],
-                [
-                 null,
-                 [
-                  'callback',
-                  [
-                   'AlarmCallback',
-                   '=',
-                   'void',
-                   [[null, [['Alarm', null], null, 'alarm']], null],
-                   ';'
-                   ]
-                  ],
-                  [
-                   null,
-                   [
-                    'callback',
-                    [
-                     'AlarmListCallback',
-                     '=',
-                     'void',
-                     [[null, [['Alarm', ['[', ']', null]], null, 'alarms']], null],
-                     ';'
-                     ]
-                    ],
-                    [
-                     null,
+                 'dictionary',
+                 'Alarm',
+                 EMPTY,
                      [
-                      'interface',
-                      'Functions',
-                      null,
-                      [
-                       null,
-                       [
-                        'static',
-                        [
-                         'void',
-                         'create',
-                         [
-                          [null, ['optional', ['DOMString', null], 'name', null]],
+                      EMPTY,
+                          [['DOMString', EMPTY], 'name', EMPTY, ';'],
                           [
-                           ',',
-                           [null, [['AlarmCreateInfo', null], null, 'alarmInfo']],
-                           null
-                           ]
-                          ],
-                          ';'
-                          ]
-                        ],
-                        [
-                         null,
-                         [
-                          'static',
-                          [
-                           'void',
-                           'get',
-                           [
-                            [null, ['optional', ['DOMString', null], 'name', null]],
-                            [
-                             ',',
-                             [null, [['AlarmCallback', null], null, 'callback']],
-                             null
-                             ]
-                            ],
-                            ';'
-                            ]
-                          ],
-                          [
-                           null,
-                           [
-                            'static',
-                            [
-                             'void',
-                             'getAll',
-                             [
-                              [null, [['AlarmListCallback', null], null, 'callback']],
-                              null
-                              ],
-                              ';'
-                              ]
-                            ],
-                            [
-                             null,
-                             [
-                              'static',
-                              [
-                               'void',
-                               'clear',
+                           EMPTY,
+                               [['double', EMPTY], 'scheduledTime', EMPTY, ';'],
                                [
+                                EMPTY,
+                                    [['double', ['?', EMPTY]], 'periodInMinutes', EMPTY, ';'],
+                                    EMPTY
+                                        ]
+                           ]
+                      ],
+                      ';'
+                      ],
+                      [
+                       EMPTY,
+                           [
+                            'dictionary',
+                            'AlarmCreateInfo',
+                            EMPTY,
                                 [
-                                 null,
-                                 ['optional', ['DOMString', null], 'name', null]
-                                 ],
-                                 null
+                                 EMPTY,
+                                     [['double', ['?', EMPTY]], 'when', EMPTY, ';'],
+                                     [
+                                      EMPTY,
+                                          [['double', ['?', EMPTY]], 'delayInMinutes', EMPTY, ';'],
+                                          [
+                                           EMPTY,
+                                               [['double', ['?', EMPTY]], 'periodInMinutes', EMPTY, ';'],
+                                               EMPTY
+                                                   ]
+                                      ]
                                  ],
                                  ';'
-                                 ]
-                              ],
-                              [null, ['static', ['void', 'clearAll', null, ';']], null]
-                             ]
-                           ]
-                         ]
-                       ],
-                       ';'
-                       ],
-                       [
-                        null,
-                        [
-                         'interface',
-                         'Events',
-                         null,
-                         [
-                          null,
-                          [
-                           'static',
-                           [
-                            'void',
-                            'onAlarm',
-                            [[null, [['Alarm', null], null, 'alarm']], null],
-                            ';'
-                            ]
-                           ],
-                           null
-                           ],
-                           ';'
-                           ],
-                           null
-                           ]
-                     ]
-                   ]
-                 ]
-              ]
-           ]
+                                 ],
+                                 [
+                                  EMPTY,
+                                      [
+                                       'callback',
+                                       [
+                                        'AlarmCallback',
+                                        '=',
+                                        'void',
+                                        [[EMPTY, [['Alarm', EMPTY], EMPTY, 'alarm']], EMPTY],
+                                        ';'
+                                        ]
+                                       ],
+                                       [
+                                        EMPTY,
+                                            [
+                                             'callback',
+                                             [
+                                              'AlarmListCallback',
+                                              '=',
+                                              'void',
+                                              [
+                                               [EMPTY, [['Alarm', ['[', ']', EMPTY]], EMPTY, 'alarms']],
+                                               EMPTY
+                                                   ],
+                                                   ';'
+                                                   ]
+                                             ],
+                                             [
+                                              EMPTY,
+                                                  [
+                                                   'interface',
+                                                   'Functions',
+                                                   EMPTY,
+                                                       [
+                                                        EMPTY,
+                                                            [
+                                                             'static',
+                                                             [
+                                                              'void',
+                                                              'create',
+                                                              [
+                                                               [
+                                                                EMPTY,
+                                                                    ['optional', ['DOMString', EMPTY], 'name', EMPTY]
+                                                                ],
+                                                                [
+                                                                 ',',
+                                                                 [
+                                                                  EMPTY,
+                                                                      [['AlarmCreateInfo', EMPTY], EMPTY, 'alarmInfo']
+                                                                  ],
+                                                                  EMPTY
+                                                                      ]
+                                                               ],
+                                                               ';'
+                                                               ]
+                                                             ],
+                                                             [
+                                                              EMPTY,
+                                                                  [
+                                                                   'static',
+                                                                   [
+                                                                    'void',
+                                                                    'get',
+                                                                    [
+                                                                     [
+                                                                      EMPTY,
+                                                                          ['optional', ['DOMString', EMPTY], 'name', EMPTY]
+                                                                      ],
+                                                                      [
+                                                                       ',',
+                                                                       [
+                                                                        EMPTY,
+                                                                            [['AlarmCallback', EMPTY], EMPTY, 'callback']
+                                                                        ],
+                                                                        EMPTY
+                                                                            ]
+                                                                     ],
+                                                                     ';'
+                                                                     ]
+                                                                   ],
+                                                                   [
+                                                                    EMPTY,
+                                                                        [
+                                                                         'static',
+                                                                         [
+                                                                          'void',
+                                                                          'getAll',
+                                                                          [
+                                                                           [
+                                                                            EMPTY,
+                                                                                [
+                                                                                 ['AlarmListCallback', EMPTY],
+                                                                                 EMPTY,
+                                                                                     'callback'
+                                                                                     ]
+                                                                            ],
+                                                                            EMPTY
+                                                                                ],
+                                                                                ';'
+                                                                                ]
+                                                                         ],
+                                                                         [
+                                                                          EMPTY,
+                                                                              [
+                                                                               'static',
+                                                                               [
+                                                                                'void',
+                                                                                'clear',
+                                                                                [
+                                                                                 [
+                                                                                  EMPTY,
+                                                                                      [
+                                                                                       'optional',
+                                                                                       ['DOMString', EMPTY],
+                                                                                       'name',
+                                                                                       EMPTY
+                                                                                           ]
+                                                                                  ],
+                                                                                  EMPTY
+                                                                                      ],
+                                                                                      ';'
+                                                                                      ]
+                                                                               ],
+                                                                               [
+                                                                                EMPTY,
+                                                                                    ['static', ['void', 'clearAll', EMPTY, ';']],
+                                                                                    EMPTY
+                                                                                        ]
+                                                                          ]
+                                                                    ]
+                                                              ]
+                                                        ],
+                                                        ';'
+                                                        ],
+                                                        [
+                                                         EMPTY,
+                                                             [
+                                                              'interface',
+                                                              'Events',
+                                                              EMPTY,
+                                                                  [
+                                                                   EMPTY,
+                                                                       [
+                                                                        'static',
+                                                                        [
+                                                                         'void',
+                                                                         'onAlarm',
+                                                                         [
+                                                                          [EMPTY, [['Alarm', EMPTY], EMPTY, 'alarm']],
+                                                                          EMPTY
+                                                                              ],
+                                                                              ';'
+                                                                              ]
+                                                                        ],
+                                                                        EMPTY
+                                                                            ],
+                                                                            ';'
+                                                                            ],
+                                                                            EMPTY
+                                                                                ]
+                                              ]
+                                        ]
+                                  ]
+                       ]
+            ],
+            ';'
+            ]
       ));
     });
   });
