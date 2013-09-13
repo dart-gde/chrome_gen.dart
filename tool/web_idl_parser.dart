@@ -74,10 +74,15 @@ class WebIdlParser extends LanguageParsers {
 
   stmt() => namespace() | rec(definitions);
 
-  namespace() => (reserved["namespace"]
-                + identifier
+  // Custom Google WebIDL grammar
+  namespace() => (rec(extendedAttributeList)
+                + reserved["namespace"]
+                + namespaceIdentifier()
                 + braces(rec(definitions))
                 + semi).list;
+
+  // Custom Google WebIDL grammar
+  namespaceIdentifier() => identifier.sepBy(dot) | identifier;
 
   definitions() => (rec(extendedAttributeList)
                     + rec(definition)
