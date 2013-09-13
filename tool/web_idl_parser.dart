@@ -60,7 +60,9 @@ final reservedNames = [ "readonly",
                         "short",
                         "true",
                         "unsigned",
-                        "void" ];
+                        "void",
+                        // Custom google reserved word
+                        "namespace"];
 
 // http://www.w3.org/TR/WebIDL/#idl-grammar
 class WebIdlParser extends LanguageParsers {
@@ -70,7 +72,12 @@ class WebIdlParser extends LanguageParsers {
 
   stmts() => stmt();
 
-  stmt() => rec(definitions);
+  stmt() => namespace() | rec(definitions);
+
+  namespace() => (reserved["namespace"]
+                + identifier
+                + braces(rec(definitions))
+                + semi).list;
 
   definitions() => (rec(extendedAttributeList)
                     + rec(definition)
