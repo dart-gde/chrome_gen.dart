@@ -42,7 +42,7 @@ void main() {
     test('extendedAttributeInner', () {
       var p = webIdlParser.extendedAttributeInner();
       var sp = p.parse("(1, 2, 3)");
-      expect(sp, equals([[1, [',', [2, [',', [3, null]]]]], null]));
+      expect(sp, equals([[1, [',', [2, [',', [3, EMPTY]]]]], EMPTY]));
     });
 
     // http://www.w3.org/TR/WebIDL/#proddef-ExtendedAttributeRest
@@ -67,14 +67,32 @@ void main() {
 
     test('extendedAttributeRest takes a named argument list', () {
       var p = webIdlParser.extendedAttributeRest();
-      var sp = p.parse("[NamedConstructor=Image(DOMString src)]");
-      expect(sp, equals("THIS TEST IS FAILING"));
+      var sp = p.parse("[NamedConstructor = Image(DOMString src)]");
+      expect(sp, equals([['NamedConstructor',['=', ['Image', [['DOMString', ['src', EMPTY]], EMPTY]]]],EMPTY]));
     });
 
     test('extendedAttributeRest takes an identifier', () {
       var p = webIdlParser.extendedAttributeRest();
-      var sp = p.parse("[PutForwards=name]");
+      var sp = p.parse("[PutForwards = name]");
       expect(sp, equals("THIS TEST IS FAILING"));
+    });
+
+    test('extendedAttributeRest takes an identifier no spaces between "="', () {
+      var p = webIdlParser.extendedAttributeRest();
+      var sp = p.parse("[instanceOf =FileEntry] object entry;");
+      expect(sp, equals("THIS TEST IS FAILING"));
+    });
+
+    test('extendedAttributeRest takes an identifier no spaces between "="', () {
+      var p = webIdlParser.extendedAttributeRest();
+      var sp = p.parse("[instanceOf=FileEntry] object entry;");
+      expect(sp, equals("THIS TEST IS NOT FAILING"));
+    });
+
+    test('extendedAttributeRest takes an identifier no spaces between "="', () {
+      var p = webIdlParser.extendedAttributeRest();
+      var sp = p.parse("[instanceOf= FileEntry] object entry;");
+      expect(sp, equals([["instanceOf", ["=", ["FileEntry", EMPTY]]], ["object", ["entry", [";", EMPTY]]]]));
     });
 
     // http://www.w3.org/TR/WebIDL/#proddef-ExtendedAttribute
@@ -146,8 +164,6 @@ void main() {
                             ]
                          ]));
     });
-
-
 
     test('general example test', () {
       var example = """// Copyright (c) 2012 The Chromium Authors. All rights reserved.
