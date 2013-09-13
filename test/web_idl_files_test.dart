@@ -14,6 +14,10 @@ void main() {
   bool packagesRemoveTest(FileSystemEntity fileSystemEntity) =>
       fileSystemEntity.path.endsWith("packages");
 
+  bool chromeNonIdlFilesRemoveTest(FileSystemEntity fileSystemEntity) =>
+      fileSystemEntity.path.endsWith(".json") ||
+      fileSystemEntity.path.endsWith("devtools");
+
   List<FileSystemEntity> validFileEntities = new Directory(
       '${testDir.path}/idl/valid').listSync(recursive: false, followLinks: false);
   validFileEntities.removeWhere(packagesRemoveTest);
@@ -21,6 +25,11 @@ void main() {
   List<FileSystemEntity> invalidFileEntities = new Directory(
       '${testDir.path}/idl/invalid').listSync(recursive: false, followLinks: false);
   invalidFileEntities.removeWhere(packagesRemoveTest);
+
+  List<FileSystemEntity> chromeIdlFileEntities = new Directory(
+      '${testDir.path}/../idl').listSync(recursive: false, followLinks: false);
+  chromeIdlFileEntities.removeWhere(packagesRemoveTest);
+  chromeIdlFileEntities.removeWhere(chromeNonIdlFilesRemoveTest);
 
   group('Test valid web idl files', () {
     // TODO: make async
@@ -42,6 +51,18 @@ void main() {
         String webIdl = file.readAsStringSync();
         WebIdlParser webIdlParser = new WebIdlParser();
         expect(()=> webIdlParser.start.parse(webIdl), throws);
+      });
+    });
+  });
+
+  group('Test chrome idl files', () {
+    // TODO: make async
+    chromeIdlFileEntities.forEach((FileSystemEntity fileEntity) {
+      test('Testing ${fileEntity.path}', () {
+        File file = new File(fileEntity.path);
+        String webIdl = file.readAsStringSync();
+        WebIdlParser webIdlParser = new WebIdlParser();
+        webIdlParser.start.parse(webIdl);
       });
     });
   });
