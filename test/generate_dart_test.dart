@@ -41,5 +41,18 @@ main() {
 
       expect(generator.toString(), "/// My foo bar.\nclass {}\nbar();\n");
     });
+
+    test('generate.writeStatement1', () {
+      generator.writeStatement("corn.muffins();");
+
+      expect(generator.toString(), "corn.muffins();\n");
+    });
+
+    test('generate.writeStatement2', () {
+      generator = new DartGenerator(colBoundary: 40);
+      generator.writeStatement("corn.muffins(param1, param2, param3, param4);");
+
+      expect(generator.toString(), "corn.muffins(\n    param1, param2, param3, param4);\n");
+    });
   });
 }

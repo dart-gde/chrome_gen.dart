@@ -15,10 +15,10 @@ library chrome.tts;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.tts` namespace.
-final ChromeTts tts = new ChromeTts._();
+final ChromeTTS tts = new ChromeTTS._();
 
-class ChromeTts {
-  ChromeTts._();
+class ChromeTTS {
+  ChromeTTS._();
 
   /**
    * Speaks text using a text-to-speech engine.

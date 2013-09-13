@@ -4,7 +4,7 @@ library json.parser;
 import 'dart:convert';
 
 import 'idl_model.dart';
-import 'utility.dart';
+import 'utils.dart';
 
 /**
  * A class to parse web JSON API definitions into an [IDLNamespace] object.
@@ -21,8 +21,18 @@ class JsonParser {
     // pre-filter to remove line comments -
     List<String> lines = new LineSplitter().convert(jsonText);
     Iterable newLines = lines.map((String line) {
-      int index = line.indexOf('// ');
-      return index == -1 ? line : line.substring(0, line.indexOf('// '));
+      int index = line.indexOf('//');
+
+      // If we find // foo, we remove it from the line, unless it looks like
+      // :// foo (as in, http://cheese.com).
+
+      if (index == -1) {
+        return line;
+      } else if (index == 0 || line.codeUnitAt(index - 1) != 58) { // 58 == ':'
+        return line.substring(0, index);
+      } else {
+        return line;
+      }
     });
 
     _parseJson(JSON.decode(newLines.join('\n')));
@@ -36,6 +46,9 @@ class JsonParser {
     namespace = new IDLNamespace();
 
     namespace.name = m['namespace'];
+    namespace.name = namespace.name.replaceAllMapped(
+        new RegExp(r"\.([a-z])"),
+        (Match m) => "${m.group(1).toUpperCase()}");
     namespace.description = convertHtmlToDartdoc(m['description']);
 
     if (m.containsKey('functions')) {

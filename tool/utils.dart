@@ -18,10 +18,16 @@ String convertJSLibNameToFileName(String jsLibName) {
 }
 
 /// foo_bar ==> fooBar
-String camelCase(String str) {
+String toCamelCase(String str) {
   return str.replaceAllMapped(
       new RegExp(r"_([a-z])"),
       (Match m) => "${m.group(1).toUpperCase()}");
+}
+
+String fromCamelCase(String str) {
+  return str.replaceAllMapped(
+      new RegExp(r"[A-Z]"),
+      (Match m) => "_${m.group(0).toLowerCase()}");
 }
 
 /// foo ==> Foo
@@ -61,7 +67,7 @@ String convertHtmlToDartdoc(String str) {
   return str;
 }
 
-String getName(FileSystemEntity entity) {
+String getFileName(FileSystemEntity entity) {
   String name = entity.path;
   int index = name.lastIndexOf(Platform.pathSeparator);
   if (index != -1) {

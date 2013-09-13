@@ -3,12 +3,16 @@ library utility_test;
 
 import 'package:unittest/unittest.dart';
 
-import '../tool/utility.dart';
+import '../tool/utils.dart';
 
 main() {
   group('utility.dart', () {
-    test('camelCase', () {
-      expect(camelCase('foo_bar'), 'fooBar');
+    test('toCamelCase', () {
+      expect(toCamelCase('foo_bar'), 'fooBar');
+    });
+
+    test('fromCamelCase', () {
+      expect(fromCamelCase('fooBar'), 'foo_bar');
     });
 
     test('titleCase', () {

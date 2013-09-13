@@ -16,21 +16,29 @@ final int RUNE_RIGHT_CURLY = 125;
  * automatically wraps doc comments on 80 char column boundaries.
  */
 class DartGenerator {
+  static const DEFAULT_COLUMN_BOUNDARY = 80;
+
   String libraryName;
+  final int colBoundary;
 
   String _indent = "";
   StringBuffer _buf = new StringBuffer();
 
   bool _previousWasEol = false;
 
-  DartGenerator();
+  DartGenerator({this.colBoundary: DEFAULT_COLUMN_BOUNDARY});
 
+  /**
+   * Write out the given dartdoc text, wrapping lines as necessary to flow
+   * along the column boundary. If [preferSingle] is true, and the docs would
+   * fit on a single line, use `///` dartdoc style.
+   */
   void writeDocs(String docs, {bool preferSingle: false}) {
     if (docs == null) {
       return;
     }
 
-    docs = wrap(docs.trim(), 80 - _indent.length - 3);
+    docs = wrap(docs.trim(), colBoundary - _indent.length - 3);
 
     if (!docs.contains('\n') && preferSingle) {
       _writeln("/// ${docs}", true);
@@ -38,6 +46,28 @@ class DartGenerator {
       _writeln("/**", true);
       _writeln(" * ${docs.replaceAll("\n", "\n * ")}", true);
       _writeln(" */", true);
+    }
+  }
+
+  /**
+   * Write out the given Dart statement and terminate it with an eol. If the
+   * statement will overflow the column boundary, attemp to wrap it at
+   * reasonable places.
+   */
+  void writeStatement(String str) {
+    if (_indent.length + str.length > colBoundary) {
+      // Split the line on the first '('. Currently, we don't do anything
+      // fancier then that. This takes the edge off the long lines.
+      int index = str.indexOf('(');
+
+      if (index == -1) {
+        writeln(str);
+      } else {
+        writeln(str.substring(0, index + 1));
+        writeln("    ${str.substring(index + 1)}");
+      }
+    } else {
+      writeln(str);
     }
   }
 

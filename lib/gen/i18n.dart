@@ -13,10 +13,10 @@ library chrome.i18n;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.i18n` namespace.
-final ChromeI18n i18n = new ChromeI18n._();
+final ChromeI18N i18n = new ChromeI18N._();
 
-class ChromeI18n {
-  ChromeI18n._();
+class ChromeI18N {
+  ChromeI18N._();
 
   /**
    * Gets the accept-languages of the browser. This is different from the locale

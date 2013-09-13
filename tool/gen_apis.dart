@@ -9,13 +9,13 @@ import 'dart:convert';
 
 import 'gen_api.dart';
 import 'generate_dart.dart';
-import 'utility.dart';
+import 'translation.dart';
+import 'utils.dart';
 
 void main() {
   DateTime startTime = new DateTime.now();
 
-  GenApis gen = new GenApis();
-  gen.generate();
+  new GenApis().generate();
 
   Duration elapsed = new DateTime.now().difference(startTime);
   print("generated in ${elapsed.inMilliseconds}ms.");
@@ -25,6 +25,7 @@ class GenApis {
   Directory outDir;
   Directory idlDir;
   File apisFile;
+  File overridesFile;
 
   GenApis() {
     _init();
@@ -37,6 +38,19 @@ class GenApis {
 
     _generateApi('app', apisInfo['packaged_app']);
     _generateApi('ext', apisInfo['extension'], apisInfo['packaged_app']);
+  }
+
+  void _init() {
+    print(Directory.current);
+
+    outDir = new Directory('lib');
+    apisFile = new File('meta/apis.json');
+    overridesFile = new File('meta/overrides.json');
+    idlDir = new Directory('idl');
+
+    if (!idlDir.existsSync()) {
+      throw new Exception('${idlDir.path} not found');
+    }
   }
 
   void _generateApi(String name, List<String> libraryNames, [List<String> alreadyWritten]) {
@@ -67,12 +81,15 @@ class GenApis {
       libraryNames.removeWhere((e) => alreadyWritten.contains(e));
     }
 
+    TranslationContext context = new TranslationContext.fromOverrides(
+        JSON.decode(overridesFile.readAsStringSync()));
+
     for (String libName in libraryNames) {
-      _generateFile(libName);
+      _generateFile(context, libName);
     }
   }
 
-  void _generateFile(String jsLibName) {
+  void _generateFile(TranslationContext context, String jsLibName) {
     String fileName = convertJSLibNameToFileName(jsLibName);
     String locateName = fileName.replaceFirst("devtools_", "devtools/");
 
@@ -82,26 +99,14 @@ class GenApis {
     File outFile = new File("${outDir.path}/gen/${fileName}.dart");
 
     if (jsonFile.existsSync()) {
-      GenApiFile apiGen = new GenApiFile(jsonFile, outFile, fileName);
+      GenApiFile apiGen = new GenApiFile(jsonFile, outFile, fileName, context);
       apiGen.generate();
     } else if (idlFile.existsSync()) {
-      GenApiFile apiGen = new GenApiFile(idlFile, outFile, fileName);
+      GenApiFile apiGen = new GenApiFile(idlFile, outFile, fileName, context);
       apiGen.generate();
     } else {
       print("Unable to locate idl or json file for '${jsLibName}'.");
       exit(1);
-    }
-  }
-
-  void _init() {
-    print(Directory.current);
-
-    outDir = new Directory('lib');
-    apisFile = new File('apis.json');
-    idlDir = new Directory('idl');
-
-    if (!idlDir.existsSync()) {
-      throw new Exception('${idlDir.path} not found');
     }
   }
 }
