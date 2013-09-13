@@ -2,6 +2,13 @@ library web_idl_parser;
 
 import 'package:parsers/parsers.dart';
 
+class EMPTY {
+  // EPSILON
+  const EMPTY();
+}
+
+final Parser spaces = (space.many > success(EMPTY)) % 'spaces';
+
 final reservedNames = [ "readonly",
                         // ArgumentNameKeyword
                         "attribute",
