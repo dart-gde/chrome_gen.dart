@@ -59,7 +59,7 @@ final reservedNames = [ "readonly",
 class WebIdlParser extends LanguageParsers {
   WebIdlParser() : super(reservedNames: reservedNames);
 
-  get start => spaces > (stmts() < eof);
+  get start =>  whiteSpace > (stmts() < eof);
 
   stmts() => stmt();
 
