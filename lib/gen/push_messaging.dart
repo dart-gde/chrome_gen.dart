@@ -9,8 +9,8 @@ library chrome.push_messaging;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.push_messaging` namespace.
-final ChromePushMessaging push_messaging = new ChromePushMessaging._();
+final ChromePush_messaging push_messaging = new ChromePush_messaging._();
 
-class ChromePushMessaging {
-  ChromePushMessaging._();
+class ChromePush_messaging {
+  ChromePush_messaging._();
 }

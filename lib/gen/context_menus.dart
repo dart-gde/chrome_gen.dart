@@ -9,12 +9,12 @@
  * menu. You can choose what types of objects your context menu additions apply
  * to, such as images, hyperlinks, and pages.
  */
-library chrome.context_menus;
+library chrome.contextMenus;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.context_menus` namespace.
-final ChromeContextMenus context_menus = new ChromeContextMenus._();
+/// Accessor for the `chrome.contextMenus` namespace.
+final ChromeContextMenus contextMenus = new ChromeContextMenus._();
 
 class ChromeContextMenus {
   ChromeContextMenus._();
@@ -30,7 +30,7 @@ class ChromeContextMenus {
    */
   Future create(var createProperties) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['context_menus'].callMethod('create', [createProperties, completer.callback]);
+    chrome['contextMenus'].callMethod('create', [createProperties, completer.callback]);
     return completer.future;
   }
 
@@ -46,7 +46,7 @@ class ChromeContextMenus {
    */
   Future update(var id, var updateProperties) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['context_menus'].callMethod('update', [id, updateProperties, completer.callback]);
+    chrome['contextMenus'].callMethod('update', [id, updateProperties, completer.callback]);
     return completer.future;
   }
 
@@ -59,7 +59,7 @@ class ChromeContextMenus {
    */
   Future remove(var menuItemId) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['context_menus'].callMethod('remove', [menuItemId, completer.callback]);
+    chrome['contextMenus'].callMethod('remove', [menuItemId, completer.callback]);
     return completer.future;
   }
 
@@ -70,7 +70,7 @@ class ChromeContextMenus {
    */
   Future removeAll() {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['context_menus'].callMethod('removeAll', [completer.callback]);
+    chrome['contextMenus'].callMethod('removeAll', [completer.callback]);
     return completer.future;
   }
 

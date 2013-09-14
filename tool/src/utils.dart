@@ -17,10 +17,10 @@ String convertJSLibNameToFileName(String jsLibName) {
   return jsLibName;
 }
 
-/// foo_bar ==> fooBar
+/// foo.bar ==> fooBar
 String toCamelCase(String str) {
   return str.replaceAllMapped(
-      new RegExp(r"_([a-z])"),
+      new RegExp(r"\.([a-z])"),
       (Match m) => "${m.group(1).toUpperCase()}");
 }
 

@@ -13,12 +13,12 @@
  * synthesize and output the speech, and send events back to the calling
  * function to report the status.
  */
-library chrome.tts_engine;
+library chrome.ttsEngine;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.tts_engine` namespace.
-final ChromeTtsEngine tts_engine = new ChromeTtsEngine._();
+/// Accessor for the `chrome.ttsEngine` namespace.
+final ChromeTtsEngine ttsEngine = new ChromeTtsEngine._();
 
 class ChromeTtsEngine {
   ChromeTtsEngine._();
@@ -30,7 +30,7 @@ class ChromeTtsEngine {
    * status of this utterance.
    */
   void sendTtsEvent(int requestId, var event) {
-    chrome['tts_engine'].callMethod('sendTtsEvent', [requestId, event]);
+    chrome['ttsEngine'].callMethod('sendTtsEvent', [requestId, event]);
   }
 
   final ChromeStreamController _onSpeak = null;

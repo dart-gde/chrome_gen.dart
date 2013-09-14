@@ -9,8 +9,8 @@ library chrome.desktop_capture;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.desktop_capture` namespace.
-final ChromeDesktopCapture desktop_capture = new ChromeDesktopCapture._();
+final ChromeDesktop_capture desktop_capture = new ChromeDesktop_capture._();
 
-class ChromeDesktopCapture {
-  ChromeDesktopCapture._();
+class ChromeDesktop_capture {
+  ChromeDesktop_capture._();
 }

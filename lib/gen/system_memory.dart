@@ -9,8 +9,8 @@ library chrome.system_memory;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.system_memory` namespace.
-final ChromeSystemMemory system_memory = new ChromeSystemMemory._();
+final ChromeSystem_memory system_memory = new ChromeSystem_memory._();
 
-class ChromeSystemMemory {
-  ChromeSystemMemory._();
+class ChromeSystem_memory {
+  ChromeSystem_memory._();
 }

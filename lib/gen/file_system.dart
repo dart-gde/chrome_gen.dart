@@ -9,8 +9,8 @@ library chrome.file_system;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.file_system` namespace.
-final ChromeFileSystem file_system = new ChromeFileSystem._();
+final ChromeFile_system file_system = new ChromeFile_system._();
 
-class ChromeFileSystem {
-  ChromeFileSystem._();
+class ChromeFile_system {
+  ChromeFile_system._();
 }

@@ -8,12 +8,12 @@
  * Use the `chrome.webNavigation` API to receive notifications about the status
  * of navigation requests in-flight.
  */
-library chrome.web_navigation;
+library chrome.webNavigation;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.web_navigation` namespace.
-final ChromeWebNavigation web_navigation = new ChromeWebNavigation._();
+/// Accessor for the `chrome.webNavigation` namespace.
+final ChromeWebNavigation webNavigation = new ChromeWebNavigation._();
 
 class ChromeWebNavigation {
   ChromeWebNavigation._();
@@ -29,7 +29,7 @@ class ChromeWebNavigation {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['web_navigation'].callMethod('getFrame', [details, completer.callback]);
+    chrome['webNavigation'].callMethod('getFrame', [details, completer.callback]);
     return completer.future;
   }
 
@@ -42,7 +42,7 @@ class ChromeWebNavigation {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['web_navigation'].callMethod('getAllFrames', [details, completer.callback]);
+    chrome['webNavigation'].callMethod('getAllFrames', [details, completer.callback]);
     return completer.future;
   }
 

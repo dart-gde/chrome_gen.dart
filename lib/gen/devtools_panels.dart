@@ -22,7 +22,7 @@ class ChromeDevtoolsPanels {
   /**
    * Elements panel.
    */
-  dynamic get elements => chrome['devtools_panels']['elements'];
+  dynamic get elements => chrome['devtools']['panels']['elements'];
 
   /**
    * Creates an extension panel.
@@ -41,7 +41,7 @@ class ChromeDevtoolsPanels {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['devtools_panels'].callMethod('create', [title, iconPath, pagePath, completer.callback]);
+    chrome['devtools']['panels'].callMethod('create', [title, iconPath, pagePath, completer.callback]);
     return completer.future;
   }
 
@@ -58,7 +58,7 @@ class ChromeDevtoolsPanels {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['devtools_panels'].callMethod('setOpenResourceHandler', [completer.callback]);
+    chrome['devtools']['panels'].callMethod('setOpenResourceHandler', [completer.callback]);
     return completer.future;
   }
 }

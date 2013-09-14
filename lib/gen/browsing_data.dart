@@ -8,12 +8,12 @@
  * Use the `chrome.browsingData` API to remove browsing data from a user's local
  * profile.
  */
-library chrome.browsing_data;
+library chrome.browsingData;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.browsing_data` namespace.
-final ChromeBrowsingData browsing_data = new ChromeBrowsingData._();
+/// Accessor for the `chrome.browsingData` namespace.
+final ChromeBrowsingData browsingData = new ChromeBrowsingData._();
 
 class ChromeBrowsingData {
   ChromeBrowsingData._();
@@ -28,7 +28,7 @@ class ChromeBrowsingData {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['browsing_data'].callMethod('settings', [completer.callback]);
+    chrome['browsingData'].callMethod('settings', [completer.callback]);
     return completer.future;
   }
 
@@ -41,7 +41,7 @@ class ChromeBrowsingData {
    */
   Future remove(var options, var dataToRemove) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('remove', [options, dataToRemove, completer.callback]);
+    chrome['browsingData'].callMethod('remove', [options, dataToRemove, completer.callback]);
     return completer.future;
   }
 
@@ -52,7 +52,7 @@ class ChromeBrowsingData {
    */
   Future removeAppcache(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removeAppcache', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removeAppcache', [options, completer.callback]);
     return completer.future;
   }
 
@@ -63,7 +63,7 @@ class ChromeBrowsingData {
    */
   Future removeCache(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removeCache', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removeCache', [options, completer.callback]);
     return completer.future;
   }
 
@@ -76,7 +76,7 @@ class ChromeBrowsingData {
    */
   Future removeCookies(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removeCookies', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removeCookies', [options, completer.callback]);
     return completer.future;
   }
 
@@ -89,7 +89,7 @@ class ChromeBrowsingData {
    */
   Future removeDownloads(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removeDownloads', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removeDownloads', [options, completer.callback]);
     return completer.future;
   }
 
@@ -100,7 +100,7 @@ class ChromeBrowsingData {
    */
   Future removeFileSystems(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removeFileSystems', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removeFileSystems', [options, completer.callback]);
     return completer.future;
   }
 
@@ -111,7 +111,7 @@ class ChromeBrowsingData {
    */
   Future removeFormData(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removeFormData', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removeFormData', [options, completer.callback]);
     return completer.future;
   }
 
@@ -122,7 +122,7 @@ class ChromeBrowsingData {
    */
   Future removeHistory(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removeHistory', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removeHistory', [options, completer.callback]);
     return completer.future;
   }
 
@@ -133,7 +133,7 @@ class ChromeBrowsingData {
    */
   Future removeIndexedDB(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removeIndexedDB', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removeIndexedDB', [options, completer.callback]);
     return completer.future;
   }
 
@@ -144,7 +144,7 @@ class ChromeBrowsingData {
    */
   Future removeLocalStorage(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removeLocalStorage', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removeLocalStorage', [options, completer.callback]);
     return completer.future;
   }
 
@@ -155,7 +155,7 @@ class ChromeBrowsingData {
    */
   Future removePluginData(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removePluginData', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removePluginData', [options, completer.callback]);
     return completer.future;
   }
 
@@ -166,7 +166,7 @@ class ChromeBrowsingData {
    */
   Future removePasswords(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removePasswords', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removePasswords', [options, completer.callback]);
     return completer.future;
   }
 
@@ -177,7 +177,7 @@ class ChromeBrowsingData {
    */
   Future removeWebSQL(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browsing_data'].callMethod('removeWebSQL', [options, completer.callback]);
+    chrome['browsingData'].callMethod('removeWebSQL', [options, completer.callback]);
     return completer.future;
   }
 }

@@ -10,12 +10,12 @@
  * context of the inspected window, reload the page, or obtain the list of
  * resources within the page.
  */
-library chrome.devtools_inspected_window;
+library chrome.devtools_inspectedWindow;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.devtools_inspected_window` namespace.
-final ChromeDevtoolsInspectedWindow devtools_inspected_window = new ChromeDevtoolsInspectedWindow._();
+/// Accessor for the `chrome.devtools_inspectedWindow` namespace.
+final ChromeDevtoolsInspectedWindow devtools_inspectedWindow = new ChromeDevtoolsInspectedWindow._();
 
 class ChromeDevtoolsInspectedWindow {
   ChromeDevtoolsInspectedWindow._();
@@ -24,7 +24,7 @@ class ChromeDevtoolsInspectedWindow {
    * The ID of the tab being inspected. This ID may be used with chrome.tabs.*
    * API.
    */
-  int get tabId => chrome['devtools_inspected_window']['tabId'];
+  int get tabId => chrome['devtools']['inspectedWindow']['tabId'];
 
   /**
    * Evaluates a JavaScript expression in the context of the main frame of the
@@ -39,7 +39,7 @@ class ChromeDevtoolsInspectedWindow {
     ChromeCompleter completer = new ChromeCompleter.twoArgs((arg1, arg2) {
       return null;
     });
-    chrome['devtools_inspected_window'].callMethod('eval', [expression, completer.callback]);
+    chrome['devtools']['inspectedWindow'].callMethod('eval', [expression, completer.callback]);
     return completer.future;
   }
 
@@ -47,7 +47,7 @@ class ChromeDevtoolsInspectedWindow {
    * Reloads the inspected page.
    */
   void reload(var reloadOptions) {
-    chrome['devtools_inspected_window'].callMethod('reload', [reloadOptions]);
+    chrome['devtools']['inspectedWindow'].callMethod('reload', [reloadOptions]);
   }
 
   /**
@@ -60,7 +60,7 @@ class ChromeDevtoolsInspectedWindow {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['devtools_inspected_window'].callMethod('getResources', [completer.callback]);
+    chrome['devtools']['inspectedWindow'].callMethod('getResources', [completer.callback]);
     return completer.future;
   }
 

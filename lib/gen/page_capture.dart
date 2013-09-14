@@ -5,12 +5,12 @@
 /* This file has been generated from page_capture.json - do not edit */
 
 /// Use the `chrome.pageCapture` API to save a tab as MHTML.
-library chrome.page_capture;
+library chrome.pageCapture;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.page_capture` namespace.
-final ChromePageCapture page_capture = new ChromePageCapture._();
+/// Accessor for the `chrome.pageCapture` namespace.
+final ChromePageCapture pageCapture = new ChromePageCapture._();
 
 class ChromePageCapture {
   ChromePageCapture._();
@@ -24,7 +24,7 @@ class ChromePageCapture {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['page_capture'].callMethod('saveAsMHTML', [details, completer.callback]);
+    chrome['pageCapture'].callMethod('saveAsMHTML', [details, completer.callback]);
     return completer.future;
   }
 }

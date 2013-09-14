@@ -8,12 +8,12 @@
  * Use the `chrome.scriptBadge` API to control the behaviour of the script
  * badge.
  */
-library chrome.script_badge;
+library chrome.scriptBadge;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.script_badge` namespace.
-final ChromeScriptBadge script_badge = new ChromeScriptBadge._();
+/// Accessor for the `chrome.scriptBadge` namespace.
+final ChromeScriptBadge scriptBadge = new ChromeScriptBadge._();
 
 class ChromeScriptBadge {
   ChromeScriptBadge._();
@@ -23,7 +23,7 @@ class ChromeScriptBadge {
    * script badge's icon.
    */
   void setPopup(var details) {
-    chrome['script_badge'].callMethod('setPopup', [details]);
+    chrome['scriptBadge'].callMethod('setPopup', [details]);
   }
 
   /**
@@ -31,7 +31,7 @@ class ChromeScriptBadge {
    */
   Future<String> getPopup(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['script_badge'].callMethod('getPopup', [details, completer.callback]);
+    chrome['scriptBadge'].callMethod('getPopup', [details, completer.callback]);
     return completer.future;
   }
 
@@ -43,7 +43,7 @@ class ChromeScriptBadge {
    * has already run on this tab, this call does nothing.
    */
   void getAttention(var details) {
-    chrome['script_badge'].callMethod('getAttention', [details]);
+    chrome['scriptBadge'].callMethod('getAttention', [details]);
   }
 
   final ChromeStreamController _onClicked = null;

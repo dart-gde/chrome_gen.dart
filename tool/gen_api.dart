@@ -33,12 +33,11 @@ final String LICENSE =
 "// in the LICENSE file.";
 
 class GenApiFile {
-  String libName;
   File inFile;
   File outFile;
   TranslationContext context;
 
-  GenApiFile(this.inFile, this.outFile, [this.libName, this.context]) {
+  GenApiFile(this.inFile, this.outFile, [this.context]) {
     if (context == null) {
       context = new TranslationContext();
     }
@@ -51,15 +50,18 @@ class GenApiFile {
   void generate() {
     print("parsing ${inFile.path}...");
 
-    IDLNamespace namespace = new IDLNamespace();
-    // TODO:
-    namespace.name = libName;
+    IDLNamespace namespace;
 
     if (inFile.path.endsWith(".json")) {
       JsonParser parser = new JsonParser();
       namespace = parser.parse(inFile.readAsStringSync());
     } else if (inFile.path.endsWith(".idl")) {
       WebIdlParser webIdlParser = new WebIdlParser();
+
+      String fileName = getFileName(inFile);
+
+      namespace = new IDLNamespace();
+      namespace.name = fileName.substring(0, fileName.indexOf('.'));
 
       try {
         webIdlParser.start.parse(inFile.readAsStringSync());

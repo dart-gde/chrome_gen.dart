@@ -27,6 +27,12 @@ class TranslationContext {
     return type.name == 'integer' || type.name == 'boolean' || type.name == 'string';
   }
 
+  String getJSContext(IDLNamespace namespace) {
+    // split up along the dots -
+    List sections = namespace.name.split('.');
+    return "chrome['${sections.join('\'][\'')}']";
+  }
+
   String getReturnType(IDLType type) {
     if (type == null) {
       return 'void';
@@ -62,7 +68,7 @@ class TranslationContext {
    * something like 'system_storage'.
    */
   String getLibraryName(IDLNamespace namespace) {
-    return fromCamelCase(namespace.name);
+    return namespace.name.replaceAll('.', '_');
   }
 
   /**

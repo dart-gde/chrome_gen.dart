@@ -8,12 +8,12 @@
  * Use the `chrome.topSites` API to access the top sites that are displayed on
  * the new tab page.
  */
-library chrome.top_sites;
+library chrome.topSites;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.top_sites` namespace.
-final ChromeTopSites top_sites = new ChromeTopSites._();
+/// Accessor for the `chrome.topSites` namespace.
+final ChromeTopSites topSites = new ChromeTopSites._();
 
 class ChromeTopSites {
   ChromeTopSites._();
@@ -25,7 +25,7 @@ class ChromeTopSites {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['top_sites'].callMethod('get', [completer.callback]);
+    chrome['topSites'].callMethod('get', [completer.callback]);
     return completer.future;
   }
 }

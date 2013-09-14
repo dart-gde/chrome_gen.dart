@@ -46,9 +46,9 @@ class JsonParser {
     namespace = new IDLNamespace();
 
     namespace.name = m['namespace'];
-    namespace.name = namespace.name.replaceAllMapped(
-        new RegExp(r"\.([a-z])"),
-        (Match m) => "${m.group(1).toUpperCase()}");
+//    namespace.name = namespace.name.replaceAllMapped(
+//        new RegExp(r"\.([a-z])"),
+//        (Match m) => "${m.group(1).toUpperCase()}");
     namespace.description = convertHtmlToDartdoc(m['description']);
 
     // functions

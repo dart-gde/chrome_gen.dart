@@ -10,12 +10,12 @@
  * generally speaking, content settings allow you to customize Chrome's behavior
  * on a per-site basis instead of globally.
  */
-library chrome.content_settings;
+library chrome.contentSettings;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.content_settings` namespace.
-final ChromeContentSettings content_settings = new ChromeContentSettings._();
+/// Accessor for the `chrome.contentSettings` namespace.
+final ChromeContentSettings contentSettings = new ChromeContentSettings._();
 
 class ChromeContentSettings {
   ChromeContentSettings._();
@@ -27,21 +27,21 @@ class ChromeContentSettings {
    * <br>Default is [allow].<br>The primary URL is the URL representing the
    * cookie origin. The secondary URL is the URL of the top-level frame.
    */
-  dynamic get cookies => chrome['content_settings']['cookies'];
+  dynamic get cookies => chrome['contentSettings']['cookies'];
 
   /**
    * Whether to show images. One of<br>[allow]: Show images,<br>[block]: Don't
    * show images. <br>Default is [allow].<br>The primary URL is the main-frame
    * URL. The secondary URL is the URL of the image.
    */
-  dynamic get images => chrome['content_settings']['images'];
+  dynamic get images => chrome['contentSettings']['images'];
 
   /**
    * Whether to run JavaScript. One of<br>[allow]: Run JavaScript,<br>[block]:
    * Don't run JavaScript. <br>Default is [allow].<br>The primary URL is the
    * main-frame URL. The secondary URL is not used.
    */
-  dynamic get javascript => chrome['content_settings']['javascript'];
+  dynamic get javascript => chrome['contentSettings']['javascript'];
 
   /**
    * Whether to run plug-ins. One of<br>[allow]: Run plug-ins
@@ -49,7 +49,7 @@ class ChromeContentSettings {
    * [allow].<br>The primary URL is the main-frame URL. The secondary URL is not
    * used.
    */
-  dynamic get plugins => chrome['content_settings']['plugins'];
+  dynamic get plugins => chrome['contentSettings']['plugins'];
 
   /**
    * Whether to allow sites to show pop-ups. One of<br>[allow]: Allow sites to
@@ -57,7 +57,7 @@ class ChromeContentSettings {
    * [block].<br>The primary URL is the main-frame URL. The secondary URL is not
    * used.
    */
-  dynamic get popups => chrome['content_settings']['popups'];
+  dynamic get popups => chrome['contentSettings']['popups'];
 
   /**
    * Whether to allow sites to show desktop notifications. One of<br>[allow]:
@@ -66,5 +66,5 @@ class ChromeContentSettings {
    * notifications. <br>Default is [ask].<br>The primary URL is the main-frame
    * URL. The secondary URL is not used.
    */
-  dynamic get notifications => chrome['content_settings']['notifications'];
+  dynamic get notifications => chrome['contentSettings']['notifications'];
 }

@@ -35,18 +35,12 @@ class DartJSTranslator extends Translator {
     }
     generator.writeln();
 
-    if (libName != null) {
-      if (namespace.description != null) {
-        generator.writeDocs(namespace.description, preferSingle: true);
-      }
-
-      if (libName != null) {
-        generator.writeln("library chrome.${libName};");
-      } else {
-        generator.writeln("library chrome.${namespace.name};");
-      }
-      generator.writeln();
+    if (namespace.description != null) {
+      generator.writeDocs(namespace.description, preferSingle: true);
     }
+
+    generator.writeln("library chrome.${libName};");
+    generator.writeln();
 
     generator.writeln("import '../src/common.dart';");
     generator.writeln();
@@ -75,8 +69,9 @@ class DartJSTranslator extends Translator {
   void _printProperty(IDLProperty property) {
     generator.writeln();
     generator.writeDocs(property.description);
-    generator.writeln(
-        "${ctx.getReturnType(property.returnType)} get ${property.name} => chrome['${libName}']['${property.name}'];");
+    generator.write("${ctx.getReturnType(property.returnType)} ");
+    generator.write("get ${property.name} => ");
+    generator.writeln("${ctx.getJSContext(namespace)}['${property.name}'];");
   }
 
   void _printFunction(IDLFunction function) {
@@ -114,7 +109,7 @@ class DartJSTranslator extends Translator {
     if (function.returns){
       generator.write("return ");
     }
-    generator.write("chrome['${libName}'].callMethod('${function.name}'");
+    generator.write("${ctx.getJSContext(namespace)}.callMethod('${function.name}'");
     if (!function.parameters.isEmpty) {
       generator.write(", [");
       generator.write(function.parameters.map((IDLParameter p) {

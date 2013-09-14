@@ -9,12 +9,12 @@
  * actions represent actions that can be taken on the current page, but that
  * aren't applicable to all pages.
  */
-library chrome.page_action;
+library chrome.pageAction;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.page_action` namespace.
-final ChromePageAction page_action = new ChromePageAction._();
+/// Accessor for the `chrome.pageAction` namespace.
+final ChromePageAction pageAction = new ChromePageAction._();
 
 class ChromePageAction {
   ChromePageAction._();
@@ -26,7 +26,7 @@ class ChromePageAction {
    * [tabId] The id of the tab for which you want to modify the page action.
    */
   void show(int tabId) {
-    chrome['page_action'].callMethod('show', [tabId]);
+    chrome['pageAction'].callMethod('show', [tabId]);
   }
 
   /**
@@ -35,7 +35,7 @@ class ChromePageAction {
    * [tabId] The id of the tab for which you want to modify the page action.
    */
   void hide(int tabId) {
-    chrome['page_action'].callMethod('hide', [tabId]);
+    chrome['pageAction'].callMethod('hide', [tabId]);
   }
 
   /**
@@ -43,7 +43,7 @@ class ChromePageAction {
    * page action.
    */
   void setTitle(var details) {
-    chrome['page_action'].callMethod('setTitle', [details]);
+    chrome['pageAction'].callMethod('setTitle', [details]);
   }
 
   /**
@@ -51,7 +51,7 @@ class ChromePageAction {
    */
   Future<String> getTitle(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['page_action'].callMethod('getTitle', [details, completer.callback]);
+    chrome['pageAction'].callMethod('getTitle', [details, completer.callback]);
     return completer.future;
   }
 
@@ -63,7 +63,7 @@ class ChromePageAction {
    */
   Future setIcon(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['page_action'].callMethod('setIcon', [details, completer.callback]);
+    chrome['pageAction'].callMethod('setIcon', [details, completer.callback]);
     return completer.future;
   }
 
@@ -72,7 +72,7 @@ class ChromePageAction {
    * page action's icon.
    */
   void setPopup(var details) {
-    chrome['page_action'].callMethod('setPopup', [details]);
+    chrome['pageAction'].callMethod('setPopup', [details]);
   }
 
   /**
@@ -80,7 +80,7 @@ class ChromePageAction {
    */
   Future<String> getPopup(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['page_action'].callMethod('getPopup', [details, completer.callback]);
+    chrome['pageAction'].callMethod('getPopup', [details, completer.callback]);
     return completer.future;
   }
 

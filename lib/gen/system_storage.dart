@@ -9,8 +9,8 @@ library chrome.system_storage;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.system_storage` namespace.
-final ChromeSystemStorage system_storage = new ChromeSystemStorage._();
+final ChromeSystem_storage system_storage = new ChromeSystem_storage._();
 
-class ChromeSystemStorage {
-  ChromeSystemStorage._();
+class ChromeSystem_storage {
+  ChromeSystem_storage._();
 }

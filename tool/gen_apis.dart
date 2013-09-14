@@ -99,10 +99,10 @@ class GenApis {
     File outFile = new File("${outDir.path}/gen/${fileName}.dart");
 
     if (jsonFile.existsSync()) {
-      GenApiFile apiGen = new GenApiFile(jsonFile, outFile, fileName, context);
+      GenApiFile apiGen = new GenApiFile(jsonFile, outFile, context);
       apiGen.generate();
     } else if (idlFile.existsSync()) {
-      GenApiFile apiGen = new GenApiFile(idlFile, outFile, fileName, context);
+      GenApiFile apiGen = new GenApiFile(idlFile, outFile, context);
       apiGen.generate();
     } else {
       print("Unable to locate idl or json file for '${jsLibName}'.");

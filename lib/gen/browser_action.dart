@@ -10,12 +10,12 @@
  * can also have a [tooltip](#tooltip), a [badge](#badge), and a <a href =
  * '#popups'>popup</a>.
  */
-library chrome.browser_action;
+library chrome.browserAction;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.browser_action` namespace.
-final ChromeBrowserAction browser_action = new ChromeBrowserAction._();
+/// Accessor for the `chrome.browserAction` namespace.
+final ChromeBrowserAction browserAction = new ChromeBrowserAction._();
 
 class ChromeBrowserAction {
   ChromeBrowserAction._();
@@ -24,7 +24,7 @@ class ChromeBrowserAction {
    * Sets the title of the browser action. This shows up in the tooltip.
    */
   void setTitle(var details) {
-    chrome['browser_action'].callMethod('setTitle', [details]);
+    chrome['browserAction'].callMethod('setTitle', [details]);
   }
 
   /**
@@ -32,7 +32,7 @@ class ChromeBrowserAction {
    */
   Future<String> getTitle(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['browser_action'].callMethod('getTitle', [details, completer.callback]);
+    chrome['browserAction'].callMethod('getTitle', [details, completer.callback]);
     return completer.future;
   }
 
@@ -44,7 +44,7 @@ class ChromeBrowserAction {
    */
   Future setIcon(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['browser_action'].callMethod('setIcon', [details, completer.callback]);
+    chrome['browserAction'].callMethod('setIcon', [details, completer.callback]);
     return completer.future;
   }
 
@@ -53,7 +53,7 @@ class ChromeBrowserAction {
    * browser action's icon.
    */
   void setPopup(var details) {
-    chrome['browser_action'].callMethod('setPopup', [details]);
+    chrome['browserAction'].callMethod('setPopup', [details]);
   }
 
   /**
@@ -61,7 +61,7 @@ class ChromeBrowserAction {
    */
   Future<String> getPopup(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['browser_action'].callMethod('getPopup', [details, completer.callback]);
+    chrome['browserAction'].callMethod('getPopup', [details, completer.callback]);
     return completer.future;
   }
 
@@ -70,7 +70,7 @@ class ChromeBrowserAction {
    * of the icon.
    */
   void setBadgeText(var details) {
-    chrome['browser_action'].callMethod('setBadgeText', [details]);
+    chrome['browserAction'].callMethod('setBadgeText', [details]);
   }
 
   /**
@@ -79,7 +79,7 @@ class ChromeBrowserAction {
    */
   Future<String> getBadgeText(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['browser_action'].callMethod('getBadgeText', [details, completer.callback]);
+    chrome['browserAction'].callMethod('getBadgeText', [details, completer.callback]);
     return completer.future;
   }
 
@@ -87,7 +87,7 @@ class ChromeBrowserAction {
    * Sets the background color for the badge.
    */
   void setBadgeBackgroundColor(var details) {
-    chrome['browser_action'].callMethod('setBadgeBackgroundColor', [details]);
+    chrome['browserAction'].callMethod('setBadgeBackgroundColor', [details]);
   }
 
   /**
@@ -97,7 +97,7 @@ class ChromeBrowserAction {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['browser_action'].callMethod('getBadgeBackgroundColor', [details, completer.callback]);
+    chrome['browserAction'].callMethod('getBadgeBackgroundColor', [details, completer.callback]);
     return completer.future;
   }
 
@@ -108,7 +108,7 @@ class ChromeBrowserAction {
    * [tabId] The id of the tab for which you want to modify the browser action.
    */
   void enable(int tabId) {
-    chrome['browser_action'].callMethod('enable', [tabId]);
+    chrome['browserAction'].callMethod('enable', [tabId]);
   }
 
   /**
@@ -117,7 +117,7 @@ class ChromeBrowserAction {
    * [tabId] The id of the tab for which you want to modify the browser action.
    */
   void disable(int tabId) {
-    chrome['browser_action'].callMethod('disable', [tabId]);
+    chrome['browserAction'].callMethod('disable', [tabId]);
   }
 
   final ChromeStreamController _onClicked = null;

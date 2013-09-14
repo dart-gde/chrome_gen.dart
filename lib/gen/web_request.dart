@@ -8,12 +8,12 @@
  * Use the `chrome.webRequest` API to observe and analyze traffic and to
  * intercept, block, or modify requests in-flight.
  */
-library chrome.web_request;
+library chrome.webRequest;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.web_request` namespace.
-final ChromeWebRequest web_request = new ChromeWebRequest._();
+/// Accessor for the `chrome.webRequest` namespace.
+final ChromeWebRequest webRequest = new ChromeWebRequest._();
 
 class ChromeWebRequest {
   ChromeWebRequest._();
@@ -23,7 +23,7 @@ class ChromeWebRequest {
    * 10 minute sustained interval. `handlerBehaviorChanged` is an expensive
    * function call that shouldn't be called often.
    */
-  int get MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES => chrome['web_request']['MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES'];
+  int get MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES => chrome['webRequest']['MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES'];
 
   /**
    * Needs to be called when the behavior of the webRequest handlers has changed
@@ -32,7 +32,7 @@ class ChromeWebRequest {
    */
   Future handlerBehaviorChanged() {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['web_request'].callMethod('handlerBehaviorChanged', [completer.callback]);
+    chrome['webRequest'].callMethod('handlerBehaviorChanged', [completer.callback]);
     return completer.future;
   }
 

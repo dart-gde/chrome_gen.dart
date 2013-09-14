@@ -8,7 +8,7 @@ import '../tool/src/utils.dart';
 main() {
   group('utility.dart', () {
     test('toCamelCase', () {
-      expect(toCamelCase('foo_bar'), 'fooBar');
+      expect(toCamelCase('foo.bar'), 'fooBar');
     });
 
     test('fromCamelCase', () {

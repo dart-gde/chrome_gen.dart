@@ -27,7 +27,7 @@ class ChromeDevtoolsNetwork {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['devtools_network'].callMethod('getHAR', [completer.callback]);
+    chrome['devtools']['network'].callMethod('getHAR', [completer.callback]);
     return completer.future;
   }
 

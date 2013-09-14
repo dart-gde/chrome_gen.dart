@@ -9,12 +9,12 @@
  * For example, you can use this API to enable users to upload files to your
  * website.
  */
-library chrome.file_browser_handler;
+library chrome.fileBrowserHandler;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.file_browser_handler` namespace.
-final ChromeFileBrowserHandler file_browser_handler = new ChromeFileBrowserHandler._();
+/// Accessor for the `chrome.fileBrowserHandler` namespace.
+final ChromeFileBrowserHandler fileBrowserHandler = new ChromeFileBrowserHandler._();
 
 class ChromeFileBrowserHandler {
   ChromeFileBrowserHandler._();
@@ -35,7 +35,7 @@ class ChromeFileBrowserHandler {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['file_browser_handler'].callMethod('selectFile', [selectionParams, completer.callback]);
+    chrome['fileBrowserHandler'].callMethod('selectFile', [selectionParams, completer.callback]);
     return completer.future;
   }
 

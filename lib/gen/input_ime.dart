@@ -28,7 +28,7 @@ class ChromeInputIme {
    */
   Future<bool> setComposition(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['input_ime'].callMethod('setComposition', [parameters, completer.callback]);
+    chrome['input']['ime'].callMethod('setComposition', [parameters, completer.callback]);
     return completer.future;
   }
 
@@ -41,7 +41,7 @@ class ChromeInputIme {
    */
   Future<bool> clearComposition(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['input_ime'].callMethod('clearComposition', [parameters, completer.callback]);
+    chrome['input']['ime'].callMethod('clearComposition', [parameters, completer.callback]);
     return completer.future;
   }
 
@@ -53,7 +53,7 @@ class ChromeInputIme {
    */
   Future<bool> commitText(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['input_ime'].callMethod('commitText', [parameters, completer.callback]);
+    chrome['input']['ime'].callMethod('commitText', [parameters, completer.callback]);
     return completer.future;
   }
 
@@ -65,7 +65,7 @@ class ChromeInputIme {
    */
   Future<bool> setCandidateWindowProperties(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['input_ime'].callMethod('setCandidateWindowProperties', [parameters, completer.callback]);
+    chrome['input']['ime'].callMethod('setCandidateWindowProperties', [parameters, completer.callback]);
     return completer.future;
   }
 
@@ -77,7 +77,7 @@ class ChromeInputIme {
    */
   Future<bool> setCandidates(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['input_ime'].callMethod('setCandidates', [parameters, completer.callback]);
+    chrome['input']['ime'].callMethod('setCandidates', [parameters, completer.callback]);
     return completer.future;
   }
 
@@ -89,7 +89,7 @@ class ChromeInputIme {
    */
   Future<bool> setCursorPosition(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['input_ime'].callMethod('setCursorPosition', [parameters, completer.callback]);
+    chrome['input']['ime'].callMethod('setCursorPosition', [parameters, completer.callback]);
     return completer.future;
   }
 
@@ -100,7 +100,7 @@ class ChromeInputIme {
    */
   Future setMenuItems(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['input_ime'].callMethod('setMenuItems', [parameters, completer.callback]);
+    chrome['input']['ime'].callMethod('setMenuItems', [parameters, completer.callback]);
     return completer.future;
   }
 
@@ -111,7 +111,7 @@ class ChromeInputIme {
    */
   Future updateMenuItems(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['input_ime'].callMethod('updateMenuItems', [parameters, completer.callback]);
+    chrome['input']['ime'].callMethod('updateMenuItems', [parameters, completer.callback]);
     return completer.future;
   }
 
@@ -122,7 +122,7 @@ class ChromeInputIme {
    */
   Future deleteSurroundingText(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['input_ime'].callMethod('deleteSurroundingText', [parameters, completer.callback]);
+    chrome['input']['ime'].callMethod('deleteSurroundingText', [parameters, completer.callback]);
     return completer.future;
   }
 
@@ -136,7 +136,7 @@ class ChromeInputIme {
    * [response] True if the keystroke was handled, false if not
    */
   void keyEventHandled(String requestId, bool response) {
-    chrome['input_ime'].callMethod('keyEventHandled', [requestId, response]);
+    chrome['input']['ime'].callMethod('keyEventHandled', [requestId, response]);
   }
 
   final ChromeStreamController _onActivate = null;

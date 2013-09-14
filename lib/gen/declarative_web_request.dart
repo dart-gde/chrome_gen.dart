@@ -11,12 +11,12 @@
  * rules that are evaluated in the browser rather than the JavaScript engine
  * with reduces roundtrip latencies and allows higher efficiency.
  */
-library chrome.declarative_web_request;
+library chrome.declarativeWebRequest;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.declarative_web_request` namespace.
-final ChromeDeclarativeWebRequest declarative_web_request = new ChromeDeclarativeWebRequest._();
+/// Accessor for the `chrome.declarativeWebRequest` namespace.
+final ChromeDeclarativeWebRequest declarativeWebRequest = new ChromeDeclarativeWebRequest._();
 
 class ChromeDeclarativeWebRequest {
   ChromeDeclarativeWebRequest._();

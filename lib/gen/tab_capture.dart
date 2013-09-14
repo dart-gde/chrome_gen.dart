@@ -9,8 +9,8 @@ library chrome.tab_capture;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.tab_capture` namespace.
-final ChromeTabCapture tab_capture = new ChromeTabCapture._();
+final ChromeTab_capture tab_capture = new ChromeTab_capture._();
 
-class ChromeTabCapture {
-  ChromeTabCapture._();
+class ChromeTab_capture {
+  ChromeTab_capture._();
 }
