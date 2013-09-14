@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromeBluetooth bluetooth = new ChromeBluetooth._();
 
 class ChromeBluetooth {
-  ChromeBluetooth._();
+  JsObject _bluetooth;
+
+  ChromeBluetooth._() {
+    _bluetooth = context['chrome']['bluetooth'];
+  }
 }

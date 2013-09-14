@@ -16,12 +16,16 @@ import '../src/common.dart';
 final ChromeSessions sessions = new ChromeSessions._();
 
 class ChromeSessions {
-  ChromeSessions._();
+  JsObject _sessions;
+
+  ChromeSessions._() {
+    _sessions = context['chrome']['sessions'];
+  }
 
   /**
    * The maximum number of [Session] that will be included in a requested list.
    */
-  int get MAX_SESSION_RESULTS => chrome['sessions']['MAX_SESSION_RESULTS'];
+  int get MAX_SESSION_RESULTS => _sessions['MAX_SESSION_RESULTS'];
 
   /**
    * Gets the list of recently closed tabs and/or windows.
@@ -30,7 +34,7 @@ class ChromeSessions {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['sessions'].callMethod('getRecentlyClosed', [filter, completer.callback]);
+    _sessions.callMethod('getRecentlyClosed', [filter, completer.callback]);
     return completer.future;
   }
 
@@ -41,7 +45,7 @@ class ChromeSessions {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['sessions'].callMethod('getDevices', [filter, completer.callback]);
+    _sessions.callMethod('getDevices', [filter, completer.callback]);
     return completer.future;
   }
 
@@ -56,7 +60,7 @@ class ChromeSessions {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['sessions'].callMethod('restore', [sessionId, completer.callback]);
+    _sessions.callMethod('restore', [sessionId, completer.callback]);
     return completer.future;
   }
 }

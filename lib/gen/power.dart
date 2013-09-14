@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromePower power = new ChromePower._();
 
 class ChromePower {
-  ChromePower._();
+  JsObject _power;
+
+  ChromePower._() {
+    _power = context['chrome']['power'];
+  }
 }

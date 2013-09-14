@@ -14,17 +14,21 @@ library chrome.devtools_inspectedWindow;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.devtools_inspectedWindow` namespace.
+/// Accessor for the `chrome.devtools.inspectedWindow` namespace.
 final ChromeDevtoolsInspectedWindow devtools_inspectedWindow = new ChromeDevtoolsInspectedWindow._();
 
 class ChromeDevtoolsInspectedWindow {
-  ChromeDevtoolsInspectedWindow._();
+  JsObject _devtools_inspectedWindow;
+
+  ChromeDevtoolsInspectedWindow._() {
+    _devtools_inspectedWindow = context['chrome']['devtools']['inspectedWindow'];
+  }
 
   /**
    * The ID of the tab being inspected. This ID may be used with chrome.tabs.*
    * API.
    */
-  int get tabId => chrome['devtools']['inspectedWindow']['tabId'];
+  int get tabId => _devtools_inspectedWindow['tabId'];
 
   /**
    * Evaluates a JavaScript expression in the context of the main frame of the
@@ -39,7 +43,7 @@ class ChromeDevtoolsInspectedWindow {
     ChromeCompleter completer = new ChromeCompleter.twoArgs((arg1, arg2) {
       return null;
     });
-    chrome['devtools']['inspectedWindow'].callMethod('eval', [expression, completer.callback]);
+    _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
     return completer.future;
   }
 
@@ -47,7 +51,7 @@ class ChromeDevtoolsInspectedWindow {
    * Reloads the inspected page.
    */
   void reload(var reloadOptions) {
-    chrome['devtools']['inspectedWindow'].callMethod('reload', [reloadOptions]);
+    _devtools_inspectedWindow.callMethod('reload', [reloadOptions]);
   }
 
   /**
@@ -60,22 +64,22 @@ class ChromeDevtoolsInspectedWindow {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['devtools']['inspectedWindow'].callMethod('getResources', [completer.callback]);
+    _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onResourceAdded = null;
 
   /**
    * Fired when a new resource is added to the inspected page.
    */
   Stream get onResourceAdded => _onResourceAdded.stream;
 
-  final ChromeStreamController _onResourceContentCommitted = null;
+  final ChromeStreamController _onResourceAdded = null;
 
   /**
    * Fired when a new revision of the resource is committed (e.g. user saves an
    * edited version of the resource in the Developer Tools).
    */
   Stream get onResourceContentCommitted => _onResourceContentCommitted.stream;
+
+  final ChromeStreamController _onResourceContentCommitted = null;
 }

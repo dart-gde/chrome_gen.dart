@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromeSerial serial = new ChromeSerial._();
 
 class ChromeSerial {
-  ChromeSerial._();
+  JsObject _serial;
+
+  ChromeSerial._() {
+    _serial = context['chrome']['serial'];
+  }
 }

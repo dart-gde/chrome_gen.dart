@@ -18,7 +18,11 @@ import '../src/common.dart';
 final ChromeTts tts = new ChromeTts._();
 
 class ChromeTts {
-  ChromeTts._();
+  JsObject _tts;
+
+  ChromeTts._() {
+    _tts = context['chrome']['tts'];
+  }
 
   /**
    * Speaks text using a text-to-speech engine.
@@ -36,7 +40,7 @@ class ChromeTts {
    */
   Future speak(String utterance, var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['tts'].callMethod('speak', [utterance, options, completer.callback]);
+    _tts.callMethod('speak', [utterance, options, completer.callback]);
     return completer.future;
   }
 
@@ -46,7 +50,7 @@ class ChromeTts {
    * call to speak.
    */
   void stop() {
-    chrome['tts'].callMethod('stop');
+    _tts.callMethod('stop');
   }
 
   /**
@@ -54,14 +58,14 @@ class ChromeTts {
    * to resume or stop will un-pause speech.
    */
   void pause() {
-    chrome['tts'].callMethod('pause');
+    _tts.callMethod('pause');
   }
 
   /**
    * If speech was paused, resumes speaking where it left off.
    */
   void resume() {
-    chrome['tts'].callMethod('resume');
+    _tts.callMethod('resume');
   }
 
   /**
@@ -71,7 +75,7 @@ class ChromeTts {
    */
   Future<bool> isSpeaking() {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['tts'].callMethod('isSpeaking', [completer.callback]);
+    _tts.callMethod('isSpeaking', [completer.callback]);
     return completer.future;
   }
 
@@ -82,14 +86,14 @@ class ChromeTts {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['tts'].callMethod('getVoices', [completer.callback]);
+    _tts.callMethod('getVoices', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onEvent = null;
 
   /**
    * Used to pass events back to the function calling speak().
    */
   Stream get onEvent => _onEvent.stream;
+
+  final ChromeStreamController _onEvent = null;
 }

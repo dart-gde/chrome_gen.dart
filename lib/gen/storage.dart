@@ -16,22 +16,26 @@ import '../src/common.dart';
 final ChromeStorage storage = new ChromeStorage._();
 
 class ChromeStorage {
-  ChromeStorage._();
+  JsObject _storage;
+
+  ChromeStorage._() {
+    _storage = context['chrome']['storage'];
+  }
 
   /**
    * Items in the `sync` storage area are synced using Chrome Sync.
    */
-  dynamic get sync => chrome['storage']['sync'];
+  dynamic get sync => _storage['sync'];
 
   /**
    * Items in the `local` storage area are local to each machine.
    */
-  dynamic get local => chrome['storage']['local'];
-
-  final ChromeStreamController _onChanged = null;
+  dynamic get local => _storage['local'];
 
   /**
    * Fired when one or more items change.
    */
   Stream get onChanged => _onChanged.stream;
+
+  final ChromeStreamController _onChanged = null;
 }

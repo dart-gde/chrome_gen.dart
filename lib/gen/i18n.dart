@@ -16,7 +16,11 @@ import '../src/common.dart';
 final ChromeI18N i18n = new ChromeI18N._();
 
 class ChromeI18N {
-  ChromeI18N._();
+  JsObject _i18n;
+
+  ChromeI18N._() {
+    _i18n = context['chrome']['i18n'];
+  }
 
   /**
    * Gets the accept-languages of the browser. This is different from the locale
@@ -26,7 +30,7 @@ class ChromeI18N {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['i18n'].callMethod('getAcceptLanguages', [completer.callback]);
+    _i18n.callMethod('getAcceptLanguages', [completer.callback]);
     return completer.future;
   }
 
@@ -43,6 +47,6 @@ class ChromeI18N {
    * [substitutions] Up to 9 substitution strings, if the message requires any.
    */
   String getMessage(String messageName, var substitutions) {
-    return chrome['i18n'].callMethod('getMessage', [messageName, substitutions]);
+    return _i18n.callMethod('getMessage', [messageName, substitutions]);
   }
 }

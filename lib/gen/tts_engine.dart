@@ -21,7 +21,11 @@ import '../src/common.dart';
 final ChromeTtsEngine ttsEngine = new ChromeTtsEngine._();
 
 class ChromeTtsEngine {
-  ChromeTtsEngine._();
+  JsObject _ttsEngine;
+
+  ChromeTtsEngine._() {
+    _ttsEngine = context['chrome']['ttsEngine'];
+  }
 
   /**
    * Routes a TTS event from a speech engine to a client.
@@ -30,10 +34,8 @@ class ChromeTtsEngine {
    * status of this utterance.
    */
   void sendTtsEvent(int requestId, var event) {
-    chrome['ttsEngine'].callMethod('sendTtsEvent', [requestId, event]);
+    _ttsEngine.callMethod('sendTtsEvent', [requestId, event]);
   }
-
-  final ChromeStreamController _onSpeak = null;
 
   /**
    * Called when the user makes a call to tts.speak() and one of the voices from
@@ -41,7 +43,7 @@ class ChromeTtsEngine {
    */
   Stream get onSpeak => _onSpeak.stream;
 
-  final ChromeStreamController _onStop = null;
+  final ChromeStreamController _onSpeak = null;
 
   /**
    * Fired when a call is made to tts.stop and this extension may be in the
@@ -51,7 +53,7 @@ class ChromeTtsEngine {
    */
   Stream get onStop => _onStop.stream;
 
-  final ChromeStreamController _onPause = null;
+  final ChromeStreamController _onStop = null;
 
   /**
    * Optional: if an engine supports the pause event, it should pause the
@@ -60,7 +62,7 @@ class ChromeTtsEngine {
    */
   Stream get onPause => _onPause.stream;
 
-  final ChromeStreamController _onResume = null;
+  final ChromeStreamController _onPause = null;
 
   /**
    * Optional: if an engine supports the pause event, it should also support the
@@ -68,4 +70,6 @@ class ChromeTtsEngine {
    * a stop event should also clear the paused state.
    */
   Stream get onResume => _onResume.stream;
+
+  final ChromeStreamController _onResume = null;
 }

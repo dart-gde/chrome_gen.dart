@@ -17,7 +17,11 @@ import '../src/common.dart';
 final ChromeContextMenus contextMenus = new ChromeContextMenus._();
 
 class ChromeContextMenus {
-  ChromeContextMenus._();
+  JsObject _contextMenus;
+
+  ChromeContextMenus._() {
+    _contextMenus = context['chrome']['contextMenus'];
+  }
 
   /**
    * Creates a new context menu item. Note that if an error occurs during
@@ -30,7 +34,7 @@ class ChromeContextMenus {
    */
   Future create(var createProperties) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['contextMenus'].callMethod('create', [createProperties, completer.callback]);
+    _contextMenus.callMethod('create', [createProperties, completer.callback]);
     return completer.future;
   }
 
@@ -46,7 +50,7 @@ class ChromeContextMenus {
    */
   Future update(var id, var updateProperties) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['contextMenus'].callMethod('update', [id, updateProperties, completer.callback]);
+    _contextMenus.callMethod('update', [id, updateProperties, completer.callback]);
     return completer.future;
   }
 
@@ -59,7 +63,7 @@ class ChromeContextMenus {
    */
   Future remove(var menuItemId) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['contextMenus'].callMethod('remove', [menuItemId, completer.callback]);
+    _contextMenus.callMethod('remove', [menuItemId, completer.callback]);
     return completer.future;
   }
 
@@ -70,14 +74,14 @@ class ChromeContextMenus {
    */
   Future removeAll() {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['contextMenus'].callMethod('removeAll', [completer.callback]);
+    _contextMenus.callMethod('removeAll', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onClicked = null;
 
   /**
    * Fired when a context menu item is clicked.
    */
   Stream get onClicked => _onClicked.stream;
+
+  final ChromeStreamController _onClicked = null;
 }

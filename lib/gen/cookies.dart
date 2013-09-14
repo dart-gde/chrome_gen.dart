@@ -16,7 +16,11 @@ import '../src/common.dart';
 final ChromeCookies cookies = new ChromeCookies._();
 
 class ChromeCookies {
-  ChromeCookies._();
+  JsObject _cookies;
+
+  ChromeCookies._() {
+    _cookies = context['chrome']['cookies'];
+  }
 
   /**
    * Retrieves information about a single cookie. If more than one cookie of the
@@ -30,7 +34,7 @@ class ChromeCookies {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['cookies'].callMethod('get', [details, completer.callback]);
+    _cookies.callMethod('get', [details, completer.callback]);
     return completer.future;
   }
 
@@ -46,7 +50,7 @@ class ChromeCookies {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['cookies'].callMethod('getAll', [details, completer.callback]);
+    _cookies.callMethod('getAll', [details, completer.callback]);
     return completer.future;
   }
 
@@ -60,7 +64,7 @@ class ChromeCookies {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['cookies'].callMethod('set', [details, completer.callback]);
+    _cookies.callMethod('set', [details, completer.callback]);
     return completer.future;
   }
 
@@ -73,7 +77,7 @@ class ChromeCookies {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['cookies'].callMethod('remove', [details, completer.callback]);
+    _cookies.callMethod('remove', [details, completer.callback]);
     return completer.future;
   }
 
@@ -84,11 +88,9 @@ class ChromeCookies {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['cookies'].callMethod('getAllCookieStores', [completer.callback]);
+    _cookies.callMethod('getAllCookieStores', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onChanged = null;
 
   /**
    * Fired when a cookie is set or removed. As a special case, note that
@@ -98,4 +100,6 @@ class ChromeCookies {
    * updated values, generating a second notification with "cause" "explicit".
    */
   Stream get onChanged => _onChanged.stream;
+
+  final ChromeStreamController _onChanged = null;
 }

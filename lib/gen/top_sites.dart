@@ -16,7 +16,11 @@ import '../src/common.dart';
 final ChromeTopSites topSites = new ChromeTopSites._();
 
 class ChromeTopSites {
-  ChromeTopSites._();
+  JsObject _topSites;
+
+  ChromeTopSites._() {
+    _topSites = context['chrome']['topSites'];
+  }
 
   /**
    * Gets a list of top sites.
@@ -25,7 +29,7 @@ class ChromeTopSites {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['topSites'].callMethod('get', [completer.callback]);
+    _topSites.callMethod('get', [completer.callback]);
     return completer.future;
   }
 }

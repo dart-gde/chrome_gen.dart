@@ -17,21 +17,25 @@ import '../src/common.dart';
 final ChromeBookmarks bookmarks = new ChromeBookmarks._();
 
 class ChromeBookmarks {
-  ChromeBookmarks._();
+  JsObject _bookmarks;
+
+  ChromeBookmarks._() {
+    _bookmarks = context['chrome']['bookmarks'];
+  }
 
   /**
    * The maximum number of `move`, `update`, `create`, or `remove` operations
    * that can be performed each hour. Updates that would cause this limit to be
    * exceeded fail.
    */
-  int get MAX_WRITE_OPERATIONS_PER_HOUR => chrome['bookmarks']['MAX_WRITE_OPERATIONS_PER_HOUR'];
+  int get MAX_WRITE_OPERATIONS_PER_HOUR => _bookmarks['MAX_WRITE_OPERATIONS_PER_HOUR'];
 
   /**
    * The maximum number of `move`, `update`, `create`, or `remove` operations
    * that can be performed each minute, sustained over 10 minutes. Updates that
    * would cause this limit to be exceeded fail.
    */
-  int get MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE => chrome['bookmarks']['MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE'];
+  int get MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE => _bookmarks['MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE'];
 
   /**
    * Retrieves the specified BookmarkTreeNode(s).
@@ -42,7 +46,7 @@ class ChromeBookmarks {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['bookmarks'].callMethod('get', [idOrIdList, completer.callback]);
+    _bookmarks.callMethod('get', [idOrIdList, completer.callback]);
     return completer.future;
   }
 
@@ -53,7 +57,7 @@ class ChromeBookmarks {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['bookmarks'].callMethod('getChildren', [id, completer.callback]);
+    _bookmarks.callMethod('getChildren', [id, completer.callback]);
     return completer.future;
   }
 
@@ -66,7 +70,7 @@ class ChromeBookmarks {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['bookmarks'].callMethod('getRecent', [numberOfItems, completer.callback]);
+    _bookmarks.callMethod('getRecent', [numberOfItems, completer.callback]);
     return completer.future;
   }
 
@@ -77,7 +81,7 @@ class ChromeBookmarks {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['bookmarks'].callMethod('getTree', [completer.callback]);
+    _bookmarks.callMethod('getTree', [completer.callback]);
     return completer.future;
   }
 
@@ -90,7 +94,7 @@ class ChromeBookmarks {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['bookmarks'].callMethod('getSubTree', [id, completer.callback]);
+    _bookmarks.callMethod('getSubTree', [id, completer.callback]);
     return completer.future;
   }
 
@@ -101,7 +105,7 @@ class ChromeBookmarks {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['bookmarks'].callMethod('search', [query, completer.callback]);
+    _bookmarks.callMethod('search', [query, completer.callback]);
     return completer.future;
   }
 
@@ -113,7 +117,7 @@ class ChromeBookmarks {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['bookmarks'].callMethod('create', [bookmark, completer.callback]);
+    _bookmarks.callMethod('create', [bookmark, completer.callback]);
     return completer.future;
   }
 
@@ -124,7 +128,7 @@ class ChromeBookmarks {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['bookmarks'].callMethod('move', [id, destination, completer.callback]);
+    _bookmarks.callMethod('move', [id, destination, completer.callback]);
     return completer.future;
   }
 
@@ -137,7 +141,7 @@ class ChromeBookmarks {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['bookmarks'].callMethod('update', [id, changes, completer.callback]);
+    _bookmarks.callMethod('update', [id, changes, completer.callback]);
     return completer.future;
   }
 
@@ -146,7 +150,7 @@ class ChromeBookmarks {
    */
   Future remove(String id) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['bookmarks'].callMethod('remove', [id, completer.callback]);
+    _bookmarks.callMethod('remove', [id, completer.callback]);
     return completer.future;
   }
 
@@ -155,7 +159,7 @@ class ChromeBookmarks {
    */
   Future removeTree(String id) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['bookmarks'].callMethod('removeTree', [id, completer.callback]);
+    _bookmarks.callMethod('removeTree', [id, completer.callback]);
     return completer.future;
   }
 
@@ -164,7 +168,7 @@ class ChromeBookmarks {
    */
   Future import() {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['bookmarks'].callMethod('import', [completer.callback]);
+    _bookmarks.callMethod('import', [completer.callback]);
     return completer.future;
   }
 
@@ -173,18 +177,16 @@ class ChromeBookmarks {
    */
   Future export() {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['bookmarks'].callMethod('export', [completer.callback]);
+    _bookmarks.callMethod('export', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onCreated = null;
 
   /**
    * Fired when a bookmark or folder is created.
    */
   Stream get onCreated => _onCreated.stream;
 
-  final ChromeStreamController _onRemoved = null;
+  final ChromeStreamController _onCreated = null;
 
   /**
    * Fired when a bookmark or folder is removed.  When a folder is removed
@@ -193,7 +195,7 @@ class ChromeBookmarks {
    */
   Stream get onRemoved => _onRemoved.stream;
 
-  final ChromeStreamController _onChanged = null;
+  final ChromeStreamController _onRemoved = null;
 
   /**
    * Fired when a bookmark or folder changes.  <b>Note:</b> Currently, only
@@ -201,14 +203,14 @@ class ChromeBookmarks {
    */
   Stream get onChanged => _onChanged.stream;
 
-  final ChromeStreamController _onMoved = null;
+  final ChromeStreamController _onChanged = null;
 
   /**
    * Fired when a bookmark or folder is moved to a different parent folder.
    */
   Stream get onMoved => _onMoved.stream;
 
-  final ChromeStreamController _onChildrenReordered = null;
+  final ChromeStreamController _onMoved = null;
 
   /**
    * Fired when the children of a folder have changed their order due to the
@@ -216,7 +218,7 @@ class ChromeBookmarks {
    */
   Stream get onChildrenReordered => _onChildrenReordered.stream;
 
-  final ChromeStreamController _onImportBegan = null;
+  final ChromeStreamController _onChildrenReordered = null;
 
   /**
    * Fired when a bookmark import session is begun.  Expensive observers should
@@ -225,10 +227,12 @@ class ChromeBookmarks {
    */
   Stream get onImportBegan => _onImportBegan.stream;
 
-  final ChromeStreamController _onImportEnded = null;
+  final ChromeStreamController _onImportBegan = null;
 
   /**
    * Fired when a bookmark import session is ended.
    */
   Stream get onImportEnded => _onImportEnded.stream;
+
+  final ChromeStreamController _onImportEnded = null;
 }

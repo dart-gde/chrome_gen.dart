@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromeIdentity identity = new ChromeIdentity._();
 
 class ChromeIdentity {
-  ChromeIdentity._();
+  JsObject _identity;
+
+  ChromeIdentity._() {
+    _identity = context['chrome']['identity'];
+  }
 }

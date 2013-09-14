@@ -18,7 +18,11 @@ import '../src/common.dart';
 final ChromeContentSettings contentSettings = new ChromeContentSettings._();
 
 class ChromeContentSettings {
-  ChromeContentSettings._();
+  JsObject _contentSettings;
+
+  ChromeContentSettings._() {
+    _contentSettings = context['chrome']['contentSettings'];
+  }
 
   /**
    * Whether to allow cookies and other local data to be set by websites. One
@@ -27,21 +31,21 @@ class ChromeContentSettings {
    * <br>Default is [allow].<br>The primary URL is the URL representing the
    * cookie origin. The secondary URL is the URL of the top-level frame.
    */
-  dynamic get cookies => chrome['contentSettings']['cookies'];
+  dynamic get cookies => _contentSettings['cookies'];
 
   /**
    * Whether to show images. One of<br>[allow]: Show images,<br>[block]: Don't
    * show images. <br>Default is [allow].<br>The primary URL is the main-frame
    * URL. The secondary URL is the URL of the image.
    */
-  dynamic get images => chrome['contentSettings']['images'];
+  dynamic get images => _contentSettings['images'];
 
   /**
    * Whether to run JavaScript. One of<br>[allow]: Run JavaScript,<br>[block]:
    * Don't run JavaScript. <br>Default is [allow].<br>The primary URL is the
    * main-frame URL. The secondary URL is not used.
    */
-  dynamic get javascript => chrome['contentSettings']['javascript'];
+  dynamic get javascript => _contentSettings['javascript'];
 
   /**
    * Whether to run plug-ins. One of<br>[allow]: Run plug-ins
@@ -49,7 +53,7 @@ class ChromeContentSettings {
    * [allow].<br>The primary URL is the main-frame URL. The secondary URL is not
    * used.
    */
-  dynamic get plugins => chrome['contentSettings']['plugins'];
+  dynamic get plugins => _contentSettings['plugins'];
 
   /**
    * Whether to allow sites to show pop-ups. One of<br>[allow]: Allow sites to
@@ -57,7 +61,7 @@ class ChromeContentSettings {
    * [block].<br>The primary URL is the main-frame URL. The secondary URL is not
    * used.
    */
-  dynamic get popups => chrome['contentSettings']['popups'];
+  dynamic get popups => _contentSettings['popups'];
 
   /**
    * Whether to allow sites to show desktop notifications. One of<br>[allow]:
@@ -66,5 +70,5 @@ class ChromeContentSettings {
    * notifications. <br>Default is [ask].<br>The primary URL is the main-frame
    * URL. The secondary URL is not used.
    */
-  dynamic get notifications => chrome['contentSettings']['notifications'];
+  dynamic get notifications => _contentSettings['notifications'];
 }

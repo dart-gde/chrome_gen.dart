@@ -13,7 +13,11 @@ import '../src/common.dart';
 final ChromeIdle idle = new ChromeIdle._();
 
 class ChromeIdle {
-  ChromeIdle._();
+  JsObject _idle;
+
+  ChromeIdle._() {
+    _idle = context['chrome']['idle'];
+  }
 
   /**
    * Returns "locked" if the system is locked, "idle" if the user has not
@@ -26,7 +30,7 @@ class ChromeIdle {
    */
   Future<String> queryState(int detectionIntervalInSeconds) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['idle'].callMethod('queryState', [detectionIntervalInSeconds, completer.callback]);
+    _idle.callMethod('queryState', [detectionIntervalInSeconds, completer.callback]);
     return completer.future;
   }
 
@@ -38,10 +42,8 @@ class ChromeIdle {
    * system is in an idle state.
    */
   void setDetectionInterval(int intervalInSeconds) {
-    chrome['idle'].callMethod('setDetectionInterval', [intervalInSeconds]);
+    _idle.callMethod('setDetectionInterval', [intervalInSeconds]);
   }
-
-  final ChromeStreamController _onStateChanged = null;
 
   /**
    * Fired when the system changes to an active, idle or locked state. The event
@@ -51,4 +53,6 @@ class ChromeIdle {
    * input on an idle system.
    */
   Stream get onStateChanged => _onStateChanged.stream;
+
+  final ChromeStreamController _onStateChanged = null;
 }

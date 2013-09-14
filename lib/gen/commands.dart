@@ -17,7 +17,11 @@ import '../src/common.dart';
 final ChromeCommands commands = new ChromeCommands._();
 
 class ChromeCommands {
-  ChromeCommands._();
+  JsObject _commands;
+
+  ChromeCommands._() {
+    _commands = context['chrome']['commands'];
+  }
 
   /**
    * Returns all the registered extension commands for this extension and their
@@ -29,14 +33,14 @@ class ChromeCommands {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['commands'].callMethod('getAll', [completer.callback]);
+    _commands.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onCommand = null;
 
   /**
    * Fired when a registered command is activated using a keyboard shortcut.
    */
   Stream get onCommand => _onCommand.stream;
+
+  final ChromeStreamController _onCommand = null;
 }

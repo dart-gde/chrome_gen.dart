@@ -12,11 +12,15 @@ library chrome.devtools_network;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.devtools_network` namespace.
+/// Accessor for the `chrome.devtools.network` namespace.
 final ChromeDevtoolsNetwork devtools_network = new ChromeDevtoolsNetwork._();
 
 class ChromeDevtoolsNetwork {
-  ChromeDevtoolsNetwork._();
+  JsObject _devtools_network;
+
+  ChromeDevtoolsNetwork._() {
+    _devtools_network = context['chrome']['devtools']['network'];
+  }
 
   /**
    * Returns HAR log that contains all known network requests.
@@ -27,11 +31,9 @@ class ChromeDevtoolsNetwork {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['devtools']['network'].callMethod('getHAR', [completer.callback]);
+    _devtools_network.callMethod('getHAR', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onRequestFinished = null;
 
   /**
    * Fired when a network request is finished and all request data are
@@ -39,10 +41,12 @@ class ChromeDevtoolsNetwork {
    */
   Stream get onRequestFinished => _onRequestFinished.stream;
 
-  final ChromeStreamController _onNavigated = null;
+  final ChromeStreamController _onRequestFinished = null;
 
   /**
    * Fired when the inspected window navigates to a new page.
    */
   Stream get onNavigated => _onNavigated.stream;
+
+  final ChromeStreamController _onNavigated = null;
 }

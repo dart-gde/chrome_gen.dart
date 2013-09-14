@@ -17,18 +17,22 @@ import '../src/common.dart';
 final ChromeProxy proxy = new ChromeProxy._();
 
 class ChromeProxy {
-  ChromeProxy._();
+  JsObject _proxy;
+
+  ChromeProxy._() {
+    _proxy = context['chrome']['proxy'];
+  }
 
   /**
    * Proxy settings to be used. The value of this setting is a ProxyConfig
    * object.
    */
-  dynamic get settings => chrome['proxy']['settings'];
-
-  final ChromeStreamController _onProxyError = null;
+  dynamic get settings => _proxy['settings'];
 
   /**
    * Notifies about proxy errors.
    */
   Stream get onProxyError => _onProxyError.stream;
+
+  final ChromeStreamController _onProxyError = null;
 }

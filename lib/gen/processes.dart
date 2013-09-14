@@ -13,7 +13,11 @@ import '../src/common.dart';
 final ChromeProcesses processes = new ChromeProcesses._();
 
 class ChromeProcesses {
-  ChromeProcesses._();
+  JsObject _processes;
+
+  ChromeProcesses._() {
+    _processes = context['chrome']['processes'];
+  }
 
   /**
    * Terminates the specified renderer process. Equivalent to visiting
@@ -23,7 +27,7 @@ class ChromeProcesses {
    */
   Future<bool> terminate(int processId) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['processes'].callMethod('terminate', [processId, completer.callback]);
+    _processes.callMethod('terminate', [processId, completer.callback]);
     return completer.future;
   }
 
@@ -35,7 +39,7 @@ class ChromeProcesses {
    */
   Future<int> getProcessIdForTab(int tabId) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['processes'].callMethod('getProcessIdForTab', [tabId, completer.callback]);
+    _processes.callMethod('getProcessIdForTab', [tabId, completer.callback]);
     return completer.future;
   }
 
@@ -56,11 +60,9 @@ class ChromeProcesses {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['processes'].callMethod('getProcessInfo', [processIds, includeMemory, completer.callback]);
+    _processes.callMethod('getProcessInfo', [processIds, includeMemory, completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onUpdated = null;
 
   /**
    * Fired each time the Task Manager updates its process statistics, providing
@@ -68,7 +70,7 @@ class ChromeProcesses {
    */
   Stream get onUpdated => _onUpdated.stream;
 
-  final ChromeStreamController _onUpdatedWithMemory = null;
+  final ChromeStreamController _onUpdated = null;
 
   /**
    * Fired each time the Task Manager updates its process statistics, providing
@@ -79,7 +81,7 @@ class ChromeProcesses {
    */
   Stream get onUpdatedWithMemory => _onUpdatedWithMemory.stream;
 
-  final ChromeStreamController _onCreated = null;
+  final ChromeStreamController _onUpdatedWithMemory = null;
 
   /**
    * Fired each time a process is created, providing the corrseponding Process
@@ -87,7 +89,7 @@ class ChromeProcesses {
    */
   Stream get onCreated => _onCreated.stream;
 
-  final ChromeStreamController _onUnresponsive = null;
+  final ChromeStreamController _onCreated = null;
 
   /**
    * Fired each time a process becomes unresponsive, providing the corrseponding
@@ -95,10 +97,12 @@ class ChromeProcesses {
    */
   Stream get onUnresponsive => _onUnresponsive.stream;
 
-  final ChromeStreamController _onExited = null;
+  final ChromeStreamController _onUnresponsive = null;
 
   /**
    * Fired each time a process is terminated, providing the type of exit.
    */
   Stream get onExited => _onExited.stream;
+
+  final ChromeStreamController _onExited = null;
 }

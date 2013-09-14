@@ -8,9 +8,13 @@ library chrome.media_galleries;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.media_galleries` namespace.
-final ChromeMedia_galleries media_galleries = new ChromeMedia_galleries._();
+/// Accessor for the `chrome.media.galleries` namespace.
+final ChromeMediaGalleries media_galleries = new ChromeMediaGalleries._();
 
-class ChromeMedia_galleries {
-  ChromeMedia_galleries._();
+class ChromeMediaGalleries {
+  JsObject _media_galleries;
+
+  ChromeMediaGalleries._() {
+    _media_galleries = context['chrome']['media']['galleries'];
+  }
 }

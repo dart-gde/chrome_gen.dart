@@ -17,7 +17,11 @@ import '../src/common.dart';
 final ChromeManagement management = new ChromeManagement._();
 
 class ChromeManagement {
-  ChromeManagement._();
+  JsObject _management;
+
+  ChromeManagement._() {
+    _management = context['chrome']['management'];
+  }
 
   /**
    * Returns a list of information about installed extensions and apps.
@@ -26,7 +30,7 @@ class ChromeManagement {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['management'].callMethod('getAll', [completer.callback]);
+    _management.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
 
@@ -40,7 +44,7 @@ class ChromeManagement {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['management'].callMethod('get', [id, completer.callback]);
+    _management.callMethod('get', [id, completer.callback]);
     return completer.future;
   }
 
@@ -54,7 +58,7 @@ class ChromeManagement {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['management'].callMethod('getPermissionWarningsById', [id, completer.callback]);
+    _management.callMethod('getPermissionWarningsById', [id, completer.callback]);
     return completer.future;
   }
 
@@ -69,7 +73,7 @@ class ChromeManagement {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['management'].callMethod('getPermissionWarningsByManifest', [manifestStr, completer.callback]);
+    _management.callMethod('getPermissionWarningsByManifest', [manifestStr, completer.callback]);
     return completer.future;
   }
 
@@ -82,7 +86,7 @@ class ChromeManagement {
    */
   Future setEnabled(String id, bool enabled) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['management'].callMethod('setEnabled', [id, enabled, completer.callback]);
+    _management.callMethod('setEnabled', [id, enabled, completer.callback]);
     return completer.future;
   }
 
@@ -93,7 +97,7 @@ class ChromeManagement {
    */
   Future uninstall(String id, var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['management'].callMethod('uninstall', [id, options, completer.callback]);
+    _management.callMethod('uninstall', [id, options, completer.callback]);
     return completer.future;
   }
 
@@ -103,7 +107,7 @@ class ChromeManagement {
    */
   Future uninstallSelf(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['management'].callMethod('uninstallSelf', [options, completer.callback]);
+    _management.callMethod('uninstallSelf', [options, completer.callback]);
     return completer.future;
   }
 
@@ -114,35 +118,35 @@ class ChromeManagement {
    */
   Future launchApp(String id) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['management'].callMethod('launchApp', [id, completer.callback]);
+    _management.callMethod('launchApp', [id, completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onInstalled = null;
 
   /**
    * Fired when an app or extension has been installed.
    */
   Stream get onInstalled => _onInstalled.stream;
 
-  final ChromeStreamController _onUninstalled = null;
+  final ChromeStreamController _onInstalled = null;
 
   /**
    * Fired when an app or extension has been uninstalled.
    */
   Stream get onUninstalled => _onUninstalled.stream;
 
-  final ChromeStreamController _onEnabled = null;
+  final ChromeStreamController _onUninstalled = null;
 
   /**
    * Fired when an app or extension has been enabled.
    */
   Stream get onEnabled => _onEnabled.stream;
 
-  final ChromeStreamController _onDisabled = null;
+  final ChromeStreamController _onEnabled = null;
 
   /**
    * Fired when an app or extension has been disabled.
    */
   Stream get onDisabled => _onDisabled.stream;
+
+  final ChromeStreamController _onDisabled = null;
 }

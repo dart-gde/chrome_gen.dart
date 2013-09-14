@@ -18,7 +18,11 @@ import '../src/common.dart';
 final ChromePermissions permissions = new ChromePermissions._();
 
 class ChromePermissions {
-  ChromePermissions._();
+  JsObject _permissions;
+
+  ChromePermissions._() {
+    _permissions = context['chrome']['permissions'];
+  }
 
   /**
    * Gets the extension's current set of permissions.
@@ -27,7 +31,7 @@ class ChromePermissions {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['permissions'].callMethod('getAll', [completer.callback]);
+    _permissions.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
 
@@ -36,7 +40,7 @@ class ChromePermissions {
    */
   Future<bool> contains(var permissions) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['permissions'].callMethod('contains', [permissions, completer.callback]);
+    _permissions.callMethod('contains', [permissions, completer.callback]);
     return completer.future;
   }
 
@@ -47,7 +51,7 @@ class ChromePermissions {
    */
   Future<bool> request(var permissions) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['permissions'].callMethod('request', [permissions, completer.callback]);
+    _permissions.callMethod('request', [permissions, completer.callback]);
     return completer.future;
   }
 
@@ -57,21 +61,21 @@ class ChromePermissions {
    */
   Future<bool> remove(var permissions) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['permissions'].callMethod('remove', [permissions, completer.callback]);
+    _permissions.callMethod('remove', [permissions, completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onAdded = null;
 
   /**
    * Fired when the extension acquires new permissions.
    */
   Stream get onAdded => _onAdded.stream;
 
-  final ChromeStreamController _onRemoved = null;
+  final ChromeStreamController _onAdded = null;
 
   /**
    * Fired when access to permissions has been removed from the extension.
    */
   Stream get onRemoved => _onRemoved.stream;
+
+  final ChromeStreamController _onRemoved = null;
 }

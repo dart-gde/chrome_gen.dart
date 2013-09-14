@@ -21,7 +21,11 @@ import '../src/common.dart';
 final ChromeDebugger debugger = new ChromeDebugger._();
 
 class ChromeDebugger {
-  ChromeDebugger._();
+  JsObject _debugger;
+
+  ChromeDebugger._() {
+    _debugger = context['chrome']['debugger'];
+  }
 
   /**
    * Attaches debugger to the given target.
@@ -39,7 +43,7 @@ class ChromeDebugger {
    */
   Future attach(var target, String requiredVersion) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['debugger'].callMethod('attach', [target, requiredVersion, completer.callback]);
+    _debugger.callMethod('attach', [target, requiredVersion, completer.callback]);
     return completer.future;
   }
 
@@ -54,7 +58,7 @@ class ChromeDebugger {
    */
   Future detach(var target) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['debugger'].callMethod('detach', [target, completer.callback]);
+    _debugger.callMethod('detach', [target, completer.callback]);
     return completer.future;
   }
 
@@ -78,7 +82,7 @@ class ChromeDebugger {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['debugger'].callMethod('sendCommand', [target, method, commandParams, completer.callback]);
+    _debugger.callMethod('sendCommand', [target, method, commandParams, completer.callback]);
     return completer.future;
   }
 
@@ -89,18 +93,16 @@ class ChromeDebugger {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['debugger'].callMethod('getTargets', [completer.callback]);
+    _debugger.callMethod('getTargets', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onEvent = null;
 
   /**
    * Fired whenever debugging target issues instrumentation event.
    */
   Stream get onEvent => _onEvent.stream;
 
-  final ChromeStreamController _onDetach = null;
+  final ChromeStreamController _onEvent = null;
 
   /**
    * Fired when browser terminates debugging session for the tab. This happens
@@ -108,4 +110,6 @@ class ChromeDebugger {
    * the attached tab.
    */
   Stream get onDetach => _onDetach.stream;
+
+  final ChromeStreamController _onDetach = null;
 }

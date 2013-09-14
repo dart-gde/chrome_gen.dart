@@ -8,9 +8,13 @@ library chrome.app_runtime;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.app_runtime` namespace.
-final ChromeApp_runtime app_runtime = new ChromeApp_runtime._();
+/// Accessor for the `chrome.app.runtime` namespace.
+final ChromeAppRuntime app_runtime = new ChromeAppRuntime._();
 
-class ChromeApp_runtime {
-  ChromeApp_runtime._();
+class ChromeAppRuntime {
+  JsObject _app_runtime;
+
+  ChromeAppRuntime._() {
+    _app_runtime = context['chrome']['app']['runtime'];
+  }
 }

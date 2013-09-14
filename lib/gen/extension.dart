@@ -18,21 +18,25 @@ import '../src/common.dart';
 final ChromeExtension extension = new ChromeExtension._();
 
 class ChromeExtension {
-  ChromeExtension._();
+  JsObject _extension;
+
+  ChromeExtension._() {
+    _extension = context['chrome']['extension'];
+  }
 
   /**
    * Set for the lifetime of a callback if an ansychronous extension api has
    * resulted in an error. If no error has occured lastError will be
    * [undefined].
    */
-  dynamic get lastError => chrome['extension']['lastError'];
+  dynamic get lastError => _extension['lastError'];
 
   /**
    * True for content scripts running inside incognito tabs, and for extension
    * pages running inside an incognito process. The latter only applies to
    * extensions with 'split' incognito_behavior.
    */
-  bool get inIncognitoContext => chrome['extension']['inIncognitoContext'];
+  bool get inIncognitoContext => _extension['inIncognitoContext'];
 
   /**
    * Deprecated: Please use sendMessage.
@@ -44,7 +48,7 @@ class ChromeExtension {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['extension'].callMethod('sendRequest', [extensionId, request, completer.callback]);
+    _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
     return completer.future;
   }
 
@@ -56,7 +60,7 @@ class ChromeExtension {
    * install directory.
    */
   String getURL(String path) {
-    return chrome['extension'].callMethod('getURL', [path]);
+    return _extension.callMethod('getURL', [path]);
   }
 
   /**
@@ -64,7 +68,7 @@ class ChromeExtension {
    * running inside the current extension.
    */
   dynamic getViews(var fetchProperties) {
-    return chrome['extension'].callMethod('getViews', [fetchProperties]);
+    return _extension.callMethod('getViews', [fetchProperties]);
   }
 
   /**
@@ -73,7 +77,7 @@ class ChromeExtension {
    * background page.
    */
   dynamic getBackgroundPage() {
-    return chrome['extension'].callMethod('getBackgroundPage');
+    return _extension.callMethod('getBackgroundPage');
   }
 
   /**
@@ -83,7 +87,7 @@ class ChromeExtension {
    * tabs attached to the specified window.
    */
   dynamic getExtensionTabs(int windowId) {
-    return chrome['extension'].callMethod('getExtensionTabs', [windowId]);
+    return _extension.callMethod('getExtensionTabs', [windowId]);
   }
 
   /**
@@ -92,7 +96,7 @@ class ChromeExtension {
    */
   Future<bool> isAllowedIncognitoAccess() {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['extension'].callMethod('isAllowedIncognitoAccess', [completer.callback]);
+    _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
     return completer.future;
   }
 
@@ -102,7 +106,7 @@ class ChromeExtension {
    */
   Future<bool> isAllowedFileSchemeAccess() {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['extension'].callMethod('isAllowedFileSchemeAccess', [completer.callback]);
+    _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
     return completer.future;
   }
 
@@ -112,20 +116,20 @@ class ChromeExtension {
    * Extension Gallery.
    */
   void setUpdateUrlData(String data) {
-    chrome['extension'].callMethod('setUpdateUrlData', [data]);
+    _extension.callMethod('setUpdateUrlData', [data]);
   }
-
-  final ChromeStreamController _onRequest = null;
 
   /**
    * Deprecated: please use onMessage.
    */
   Stream get onRequest => _onRequest.stream;
 
-  final ChromeStreamController _onRequestExternal = null;
+  final ChromeStreamController _onRequest = null;
 
   /**
    * Deprecated: please use onMessageExternal.
    */
   Stream get onRequestExternal => _onRequestExternal.stream;
+
+  final ChromeStreamController _onRequestExternal = null;
 }

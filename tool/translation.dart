@@ -27,10 +27,8 @@ class TranslationContext {
     return type.name == 'integer' || type.name == 'boolean' || type.name == 'string';
   }
 
-  String getJSContext(IDLNamespace namespace) {
-    // split up along the dots -
-    List sections = namespace.name.split('.');
-    return "chrome['${sections.join('\'][\'')}']";
+  String getContextReference(IDLNamespace namespace) {
+    return "_${namespace.name.replaceAll('.', '_')}";
   }
 
   String getReturnType(IDLType type) {

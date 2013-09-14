@@ -13,5 +13,9 @@ import '../src/common.dart';
 final ChromeEvents events = new ChromeEvents._();
 
 class ChromeEvents {
-  ChromeEvents._();
+  JsObject _events;
+
+  ChromeEvents._() {
+    _events = context['chrome']['events'];
+  }
 }

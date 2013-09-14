@@ -17,7 +17,11 @@ import '../src/common.dart';
 final ChromeFileBrowserHandler fileBrowserHandler = new ChromeFileBrowserHandler._();
 
 class ChromeFileBrowserHandler {
-  ChromeFileBrowserHandler._();
+  JsObject _fileBrowserHandler;
+
+  ChromeFileBrowserHandler._() {
+    _fileBrowserHandler = context['chrome']['fileBrowserHandler'];
+  }
 
   /**
    * Prompts user to select file path under which file should be saved. When the
@@ -35,14 +39,14 @@ class ChromeFileBrowserHandler {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['fileBrowserHandler'].callMethod('selectFile', [selectionParams, completer.callback]);
+    _fileBrowserHandler.callMethod('selectFile', [selectionParams, completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onExecute = null;
 
   /**
    * Fired when file system action is executed from ChromeOS file browser.
    */
   Stream get onExecute => _onExecute.stream;
+
+  final ChromeStreamController _onExecute = null;
 }

@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromeNotifications notifications = new ChromeNotifications._();
 
 class ChromeNotifications {
-  ChromeNotifications._();
+  JsObject _notifications;
+
+  ChromeNotifications._() {
+    _notifications = context['chrome']['notifications'];
+  }
 }

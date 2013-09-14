@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromeLocation location = new ChromeLocation._();
 
 class ChromeLocation {
-  ChromeLocation._();
+  JsObject _location;
+
+  ChromeLocation._() {
+    _location = context['chrome']['location'];
+  }
 }

@@ -16,14 +16,18 @@ import '../src/common.dart';
 final ChromeWebRequest webRequest = new ChromeWebRequest._();
 
 class ChromeWebRequest {
-  ChromeWebRequest._();
+  JsObject _webRequest;
+
+  ChromeWebRequest._() {
+    _webRequest = context['chrome']['webRequest'];
+  }
 
   /**
    * The maximum number of times that `handlerBehaviorChanged` can be called per
    * 10 minute sustained interval. `handlerBehaviorChanged` is an expensive
    * function call that shouldn't be called often.
    */
-  int get MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES => chrome['webRequest']['MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES'];
+  int get MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES => _webRequest['MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES'];
 
   /**
    * Needs to be called when the behavior of the webRequest handlers has changed
@@ -32,18 +36,16 @@ class ChromeWebRequest {
    */
   Future handlerBehaviorChanged() {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['webRequest'].callMethod('handlerBehaviorChanged', [completer.callback]);
+    _webRequest.callMethod('handlerBehaviorChanged', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onBeforeRequest = null;
 
   /**
    * Fired when a request is about to occur.
    */
   Stream get onBeforeRequest => _onBeforeRequest.stream;
 
-  final ChromeStreamController _onBeforeSendHeaders = null;
+  final ChromeStreamController _onBeforeRequest = null;
 
   /**
    * Fired before sending an HTTP request, once the request headers are
@@ -52,7 +54,7 @@ class ChromeWebRequest {
    */
   Stream get onBeforeSendHeaders => _onBeforeSendHeaders.stream;
 
-  final ChromeStreamController _onSendHeaders = null;
+  final ChromeStreamController _onBeforeSendHeaders = null;
 
   /**
    * Fired just before a request is going to be sent to the server
@@ -61,14 +63,14 @@ class ChromeWebRequest {
    */
   Stream get onSendHeaders => _onSendHeaders.stream;
 
-  final ChromeStreamController _onHeadersReceived = null;
+  final ChromeStreamController _onSendHeaders = null;
 
   /**
    * Fired when HTTP response headers of a request have been received.
    */
   Stream get onHeadersReceived => _onHeadersReceived.stream;
 
-  final ChromeStreamController _onAuthRequired = null;
+  final ChromeStreamController _onHeadersReceived = null;
 
   /**
    * Fired when an authentication failure is received. The listener has three
@@ -79,7 +81,7 @@ class ChromeWebRequest {
    */
   Stream get onAuthRequired => _onAuthRequired.stream;
 
-  final ChromeStreamController _onResponseStarted = null;
+  final ChromeStreamController _onAuthRequired = null;
 
   /**
    * Fired when the first byte of the response body is received. For HTTP
@@ -88,24 +90,26 @@ class ChromeWebRequest {
    */
   Stream get onResponseStarted => _onResponseStarted.stream;
 
-  final ChromeStreamController _onBeforeRedirect = null;
+  final ChromeStreamController _onResponseStarted = null;
 
   /**
    * Fired when a server-initiated redirect is about to occur.
    */
   Stream get onBeforeRedirect => _onBeforeRedirect.stream;
 
-  final ChromeStreamController _onCompleted = null;
+  final ChromeStreamController _onBeforeRedirect = null;
 
   /**
    * Fired when a request is completed.
    */
   Stream get onCompleted => _onCompleted.stream;
 
-  final ChromeStreamController _onErrorOccurred = null;
+  final ChromeStreamController _onCompleted = null;
 
   /**
    * Fired when an error occurs.
    */
   Stream get onErrorOccurred => _onErrorOccurred.stream;
+
+  final ChromeStreamController _onErrorOccurred = null;
 }

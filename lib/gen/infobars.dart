@@ -16,7 +16,11 @@ import '../src/common.dart';
 final ChromeInfobars infobars = new ChromeInfobars._();
 
 class ChromeInfobars {
-  ChromeInfobars._();
+  JsObject _infobars;
+
+  ChromeInfobars._() {
+    _infobars = context['chrome']['infobars'];
+  }
 
   /**
    * Shows an infobar in the specified tab. The infobar will be closed
@@ -27,7 +31,7 @@ class ChromeInfobars {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['infobars'].callMethod('show', [details, completer.callback]);
+    _infobars.callMethod('show', [details, completer.callback]);
     return completer.future;
   }
 }

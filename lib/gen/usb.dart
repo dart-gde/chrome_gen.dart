@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromeUsb usb = new ChromeUsb._();
 
 class ChromeUsb {
-  ChromeUsb._();
+  JsObject _usb;
+
+  ChromeUsb._() {
+    _usb = context['chrome']['usb'];
+  }
 }

@@ -16,7 +16,11 @@ import '../src/common.dart';
 final ChromeWebNavigation webNavigation = new ChromeWebNavigation._();
 
 class ChromeWebNavigation {
-  ChromeWebNavigation._();
+  JsObject _webNavigation;
+
+  ChromeWebNavigation._() {
+    _webNavigation = context['chrome']['webNavigation'];
+  }
 
   /**
    * Retrieves information about the given frame. A frame refers to an
@@ -29,7 +33,7 @@ class ChromeWebNavigation {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['webNavigation'].callMethod('getFrame', [details, completer.callback]);
+    _webNavigation.callMethod('getFrame', [details, completer.callback]);
     return completer.future;
   }
 
@@ -42,18 +46,16 @@ class ChromeWebNavigation {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['webNavigation'].callMethod('getAllFrames', [details, completer.callback]);
+    _webNavigation.callMethod('getAllFrames', [details, completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onBeforeNavigate = null;
 
   /**
    * Fired when a navigation is about to occur.
    */
   Stream get onBeforeNavigate => _onBeforeNavigate.stream;
 
-  final ChromeStreamController _onCommitted = null;
+  final ChromeStreamController _onBeforeNavigate = null;
 
   /**
    * Fired when a navigation is committed. The document (and the resources it
@@ -63,7 +65,7 @@ class ChromeWebNavigation {
    */
   Stream get onCommitted => _onCommitted.stream;
 
-  final ChromeStreamController _onDOMContentLoaded = null;
+  final ChromeStreamController _onCommitted = null;
 
   /**
    * Fired when the page's DOM is fully constructed, but the referenced
@@ -71,7 +73,7 @@ class ChromeWebNavigation {
    */
   Stream get onDOMContentLoaded => _onDOMContentLoaded.stream;
 
-  final ChromeStreamController _onCompleted = null;
+  final ChromeStreamController _onDOMContentLoaded = null;
 
   /**
    * Fired when a document, including the resources it refers to, is completely
@@ -79,7 +81,7 @@ class ChromeWebNavigation {
    */
   Stream get onCompleted => _onCompleted.stream;
 
-  final ChromeStreamController _onErrorOccurred = null;
+  final ChromeStreamController _onCompleted = null;
 
   /**
    * Fired when an error occurs and the navigation is aborted. This can happen
@@ -87,7 +89,7 @@ class ChromeWebNavigation {
    */
   Stream get onErrorOccurred => _onErrorOccurred.stream;
 
-  final ChromeStreamController _onCreatedNavigationTarget = null;
+  final ChromeStreamController _onErrorOccurred = null;
 
   /**
    * Fired when a new window, or a new tab in an existing window, is created to
@@ -95,7 +97,7 @@ class ChromeWebNavigation {
    */
   Stream get onCreatedNavigationTarget => _onCreatedNavigationTarget.stream;
 
-  final ChromeStreamController _onReferenceFragmentUpdated = null;
+  final ChromeStreamController _onCreatedNavigationTarget = null;
 
   /**
    * Fired when the reference fragment of a frame was updated. All future events
@@ -103,7 +105,7 @@ class ChromeWebNavigation {
    */
   Stream get onReferenceFragmentUpdated => _onReferenceFragmentUpdated.stream;
 
-  final ChromeStreamController _onTabReplaced = null;
+  final ChromeStreamController _onReferenceFragmentUpdated = null;
 
   /**
    * Fired when the contents of the tab is replaced by a different (usually
@@ -111,11 +113,13 @@ class ChromeWebNavigation {
    */
   Stream get onTabReplaced => _onTabReplaced.stream;
 
-  final ChromeStreamController _onHistoryStateUpdated = null;
+  final ChromeStreamController _onTabReplaced = null;
 
   /**
    * Fired when the frame's history was updated to a new URL. All future events
    * for that frame will use the updated URL.
    */
   Stream get onHistoryStateUpdated => _onHistoryStateUpdated.stream;
+
+  final ChromeStreamController _onHistoryStateUpdated = null;
 }

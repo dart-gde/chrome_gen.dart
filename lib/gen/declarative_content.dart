@@ -16,9 +16,13 @@ import '../src/common.dart';
 final ChromeDeclarativeContent declarativeContent = new ChromeDeclarativeContent._();
 
 class ChromeDeclarativeContent {
-  ChromeDeclarativeContent._();
+  JsObject _declarativeContent;
 
-  final ChromeStreamController _onPageChanged = null;
+  ChromeDeclarativeContent._() {
+    _declarativeContent = context['chrome']['declarativeContent'];
+  }
 
   Stream get onPageChanged => _onPageChanged.stream;
+
+  final ChromeStreamController _onPageChanged = null;
 }

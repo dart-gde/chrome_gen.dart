@@ -13,16 +13,20 @@ library chrome.devtools_panels;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.devtools_panels` namespace.
+/// Accessor for the `chrome.devtools.panels` namespace.
 final ChromeDevtoolsPanels devtools_panels = new ChromeDevtoolsPanels._();
 
 class ChromeDevtoolsPanels {
-  ChromeDevtoolsPanels._();
+  JsObject _devtools_panels;
+
+  ChromeDevtoolsPanels._() {
+    _devtools_panels = context['chrome']['devtools']['panels'];
+  }
 
   /**
    * Elements panel.
    */
-  dynamic get elements => chrome['devtools']['panels']['elements'];
+  dynamic get elements => _devtools_panels['elements'];
 
   /**
    * Creates an extension panel.
@@ -41,7 +45,7 @@ class ChromeDevtoolsPanels {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['devtools']['panels'].callMethod('create', [title, iconPath, pagePath, completer.callback]);
+    _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
     return completer.future;
   }
 
@@ -58,7 +62,7 @@ class ChromeDevtoolsPanels {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['devtools']['panels'].callMethod('setOpenResourceHandler', [completer.callback]);
+    _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
     return completer.future;
   }
 }

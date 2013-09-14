@@ -19,13 +19,15 @@ import '../src/common.dart';
 final ChromeDeclarativeWebRequest declarativeWebRequest = new ChromeDeclarativeWebRequest._();
 
 class ChromeDeclarativeWebRequest {
-  ChromeDeclarativeWebRequest._();
+  JsObject _declarativeWebRequest;
 
-  final ChromeStreamController _onRequest = null;
+  ChromeDeclarativeWebRequest._() {
+    _declarativeWebRequest = context['chrome']['declarativeWebRequest'];
+  }
 
   Stream get onRequest => _onRequest.stream;
 
-  final ChromeStreamController _onMessage = null;
+  final ChromeStreamController _onRequest = null;
 
   /**
    * Fired when a message is sent via
@@ -33,4 +35,6 @@ class ChromeDeclarativeWebRequest {
    * declarative web request API.
    */
   Stream get onMessage => _onMessage.stream;
+
+  final ChromeStreamController _onMessage = null;
 }

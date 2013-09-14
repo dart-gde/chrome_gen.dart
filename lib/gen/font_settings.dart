@@ -13,14 +13,18 @@ import '../src/common.dart';
 final ChromeFontSettings fontSettings = new ChromeFontSettings._();
 
 class ChromeFontSettings {
-  ChromeFontSettings._();
+  JsObject _fontSettings;
+
+  ChromeFontSettings._() {
+    _fontSettings = context['chrome']['fontSettings'];
+  }
 
   /**
    * Clears the font set by this extension, if any.
    */
   Future clearFont(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['fontSettings'].callMethod('clearFont', [details, completer.callback]);
+    _fontSettings.callMethod('clearFont', [details, completer.callback]);
     return completer.future;
   }
 
@@ -31,7 +35,7 @@ class ChromeFontSettings {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['fontSettings'].callMethod('getFont', [details, completer.callback]);
+    _fontSettings.callMethod('getFont', [details, completer.callback]);
     return completer.future;
   }
 
@@ -40,7 +44,7 @@ class ChromeFontSettings {
    */
   Future setFont(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['fontSettings'].callMethod('setFont', [details, completer.callback]);
+    _fontSettings.callMethod('setFont', [details, completer.callback]);
     return completer.future;
   }
 
@@ -51,7 +55,7 @@ class ChromeFontSettings {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['fontSettings'].callMethod('getFontList', [completer.callback]);
+    _fontSettings.callMethod('getFontList', [completer.callback]);
     return completer.future;
   }
 
@@ -62,7 +66,7 @@ class ChromeFontSettings {
    */
   Future clearDefaultFontSize(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['fontSettings'].callMethod('clearDefaultFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('clearDefaultFontSize', [details, completer.callback]);
     return completer.future;
   }
 
@@ -75,7 +79,7 @@ class ChromeFontSettings {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['fontSettings'].callMethod('getDefaultFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('getDefaultFontSize', [details, completer.callback]);
     return completer.future;
   }
 
@@ -84,7 +88,7 @@ class ChromeFontSettings {
    */
   Future setDefaultFontSize(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['fontSettings'].callMethod('setDefaultFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('setDefaultFontSize', [details, completer.callback]);
     return completer.future;
   }
 
@@ -95,7 +99,7 @@ class ChromeFontSettings {
    */
   Future clearDefaultFixedFontSize(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['fontSettings'].callMethod('clearDefaultFixedFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('clearDefaultFixedFontSize', [details, completer.callback]);
     return completer.future;
   }
 
@@ -108,7 +112,7 @@ class ChromeFontSettings {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['fontSettings'].callMethod('getDefaultFixedFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('getDefaultFixedFontSize', [details, completer.callback]);
     return completer.future;
   }
 
@@ -117,7 +121,7 @@ class ChromeFontSettings {
    */
   Future setDefaultFixedFontSize(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['fontSettings'].callMethod('setDefaultFixedFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('setDefaultFixedFontSize', [details, completer.callback]);
     return completer.future;
   }
 
@@ -128,7 +132,7 @@ class ChromeFontSettings {
    */
   Future clearMinimumFontSize(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['fontSettings'].callMethod('clearMinimumFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('clearMinimumFontSize', [details, completer.callback]);
     return completer.future;
   }
 
@@ -141,7 +145,7 @@ class ChromeFontSettings {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['fontSettings'].callMethod('getMinimumFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('getMinimumFontSize', [details, completer.callback]);
     return completer.future;
   }
 
@@ -150,35 +154,35 @@ class ChromeFontSettings {
    */
   Future setMinimumFontSize(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['fontSettings'].callMethod('setMinimumFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('setMinimumFontSize', [details, completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onFontChanged = null;
 
   /**
    * Fired when a font setting changes.
    */
   Stream get onFontChanged => _onFontChanged.stream;
 
-  final ChromeStreamController _onDefaultFontSizeChanged = null;
+  final ChromeStreamController _onFontChanged = null;
 
   /**
    * Fired when the default font size setting changes.
    */
   Stream get onDefaultFontSizeChanged => _onDefaultFontSizeChanged.stream;
 
-  final ChromeStreamController _onDefaultFixedFontSizeChanged = null;
+  final ChromeStreamController _onDefaultFontSizeChanged = null;
 
   /**
    * Fired when the default fixed font size setting changes.
    */
   Stream get onDefaultFixedFontSizeChanged => _onDefaultFixedFontSizeChanged.stream;
 
-  final ChromeStreamController _onMinimumFontSizeChanged = null;
+  final ChromeStreamController _onDefaultFixedFontSizeChanged = null;
 
   /**
    * Fired when the minimum font size setting changes.
    */
   Stream get onMinimumFontSizeChanged => _onMinimumFontSizeChanged.stream;
+
+  final ChromeStreamController _onMinimumFontSizeChanged = null;
 }

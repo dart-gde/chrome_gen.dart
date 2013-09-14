@@ -16,7 +16,11 @@ import '../src/common.dart';
 final ChromeOmnibox omnibox = new ChromeOmnibox._();
 
 class ChromeOmnibox {
-  ChromeOmnibox._();
+  JsObject _omnibox;
+
+  ChromeOmnibox._() {
+    _omnibox = context['chrome']['omnibox'];
+  }
 
   /**
    * A callback passed to the onInputChanged event used for sending suggestions
@@ -25,7 +29,7 @@ class ChromeOmnibox {
    * [suggestResults] An array of suggest results
    */
   void sendSuggestions(int requestId, var suggestResults) {
-    chrome['omnibox'].callMethod('sendSuggestions', [requestId, suggestResults]);
+    _omnibox.callMethod('sendSuggestions', [requestId, suggestResults]);
   }
 
   /**
@@ -37,10 +41,8 @@ class ChromeOmnibox {
    * parameter.
    */
   void setDefaultSuggestion(var suggestion) {
-    chrome['omnibox'].callMethod('setDefaultSuggestion', [suggestion]);
+    _omnibox.callMethod('setDefaultSuggestion', [suggestion]);
   }
-
-  final ChromeStreamController _onInputStarted = null;
 
   /**
    * User has started a keyword input session by typing the extension's keyword.
@@ -49,24 +51,26 @@ class ChromeOmnibox {
    */
   Stream get onInputStarted => _onInputStarted.stream;
 
-  final ChromeStreamController _onInputChanged = null;
+  final ChromeStreamController _onInputStarted = null;
 
   /**
    * User has changed what is typed into the omnibox.
    */
   Stream get onInputChanged => _onInputChanged.stream;
 
-  final ChromeStreamController _onInputEntered = null;
+  final ChromeStreamController _onInputChanged = null;
 
   /**
    * User has accepted what is typed into the omnibox.
    */
   Stream get onInputEntered => _onInputEntered.stream;
 
-  final ChromeStreamController _onInputCancelled = null;
+  final ChromeStreamController _onInputEntered = null;
 
   /**
    * User has ended the keyword input session without accepting the input.
    */
   Stream get onInputCancelled => _onInputCancelled.stream;
+
+  final ChromeStreamController _onInputCancelled = null;
 }

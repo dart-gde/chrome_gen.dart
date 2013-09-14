@@ -18,17 +18,21 @@ import '../src/common.dart';
 final ChromeRuntime runtime = new ChromeRuntime._();
 
 class ChromeRuntime {
-  ChromeRuntime._();
+  JsObject _runtime;
+
+  ChromeRuntime._() {
+    _runtime = context['chrome']['runtime'];
+  }
 
   /**
    * This will be defined during an API method callback if there was an error
    */
-  dynamic get lastError => chrome['runtime']['lastError'];
+  dynamic get lastError => _runtime['lastError'];
 
   /**
    * The ID of the extension/app.
    */
-  String get id => chrome['runtime']['id'];
+  String get id => _runtime['id'];
 
   /**
    * Retrieves the JavaScript 'window' object for the background page running
@@ -40,7 +44,7 @@ class ChromeRuntime {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['runtime'].callMethod('getBackgroundPage', [completer.callback]);
+    _runtime.callMethod('getBackgroundPage', [completer.callback]);
     return completer.future;
   }
 
@@ -49,7 +53,7 @@ class ChromeRuntime {
    * returned is a serialization of the full [manifest file](manifest.html).
    */
   dynamic getManifest() {
-    return chrome['runtime'].callMethod('getManifest');
+    return _runtime.callMethod('getManifest');
   }
 
   /**
@@ -60,7 +64,7 @@ class ChromeRuntime {
    * its install directory.
    */
   String getURL(String path) {
-    return chrome['runtime'].callMethod('getURL', [path]);
+    return _runtime.callMethod('getURL', [path]);
   }
 
   /**
@@ -69,14 +73,14 @@ class ChromeRuntime {
    * characters.
    */
   void setUninstallUrl(String url) {
-    chrome['runtime'].callMethod('setUninstallUrl', [url]);
+    _runtime.callMethod('setUninstallUrl', [url]);
   }
 
   /**
    * Reloads the app or extension.
    */
   void reload() {
-    chrome['runtime'].callMethod('reload');
+    _runtime.callMethod('reload');
   }
 
   /**
@@ -86,7 +90,7 @@ class ChromeRuntime {
     ChromeCompleter completer = new ChromeCompleter.twoArgs((arg1, arg2) {
       return null;
     });
-    chrome['runtime'].callMethod('requestUpdateCheck', [completer.callback]);
+    _runtime.callMethod('requestUpdateCheck', [completer.callback]);
     return completer.future;
   }
 
@@ -101,7 +105,7 @@ class ChromeRuntime {
    * omitted, default is your own extension.
    */
   dynamic connect(String extensionId, var connectInfo) {
-    return chrome['runtime'].callMethod('connect', [extensionId, connectInfo]);
+    return _runtime.callMethod('connect', [extensionId, connectInfo]);
   }
 
   /**
@@ -110,7 +114,7 @@ class ChromeRuntime {
    * [application] The name of the registered application to connect to.
    */
   dynamic connectNative(String application) {
-    return chrome['runtime'].callMethod('connectNative', [application]);
+    return _runtime.callMethod('connectNative', [application]);
   }
 
   /**
@@ -128,7 +132,7 @@ class ChromeRuntime {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['runtime'].callMethod('sendMessage', [extensionId, message, completer.callback]);
+    _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
     return completer.future;
   }
 
@@ -143,7 +147,7 @@ class ChromeRuntime {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['runtime'].callMethod('sendNativeMessage', [application, message, completer.callback]);
+    _runtime.callMethod('sendNativeMessage', [application, message, completer.callback]);
     return completer.future;
   }
 
@@ -156,7 +160,7 @@ class ChromeRuntime {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['runtime'].callMethod('getPlatformInfo', [completer.callback]);
+    _runtime.callMethod('getPlatformInfo', [completer.callback]);
     return completer.future;
   }
 
@@ -167,11 +171,9 @@ class ChromeRuntime {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['runtime'].callMethod('getPackageDirectoryEntry', [completer.callback]);
+    _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onStartup = null;
 
   /**
    * Fired when a profile that has this extension installed first starts up.
@@ -180,7 +182,7 @@ class ChromeRuntime {
    */
   Stream get onStartup => _onStartup.stream;
 
-  final ChromeStreamController _onInstalled = null;
+  final ChromeStreamController _onStartup = null;
 
   /**
    * Fired when the extension is first installed, when the extension is updated
@@ -188,7 +190,7 @@ class ChromeRuntime {
    */
   Stream get onInstalled => _onInstalled.stream;
 
-  final ChromeStreamController _onSuspend = null;
+  final ChromeStreamController _onInstalled = null;
 
   /**
    * Sent to the event page just before it is unloaded. This gives the extension
@@ -200,14 +202,14 @@ class ChromeRuntime {
    */
   Stream get onSuspend => _onSuspend.stream;
 
-  final ChromeStreamController _onSuspendCanceled = null;
+  final ChromeStreamController _onSuspend = null;
 
   /**
    * Sent after onSuspend to indicate that the app won't be unloaded after all.
    */
   Stream get onSuspendCanceled => _onSuspendCanceled.stream;
 
-  final ChromeStreamController _onUpdateAvailable = null;
+  final ChromeStreamController _onSuspendCanceled = null;
 
   /**
    * Fired when an update is available, but isn't installed immediately because
@@ -217,7 +219,7 @@ class ChromeRuntime {
    */
   Stream get onUpdateAvailable => _onUpdateAvailable.stream;
 
-  final ChromeStreamController _onBrowserUpdateAvailable = null;
+  final ChromeStreamController _onUpdateAvailable = null;
 
   /**
    * Fired when a Chrome update is available, but isn't installed immediately
@@ -225,7 +227,7 @@ class ChromeRuntime {
    */
   Stream get onBrowserUpdateAvailable => _onBrowserUpdateAvailable.stream;
 
-  final ChromeStreamController _onConnect = null;
+  final ChromeStreamController _onBrowserUpdateAvailable = null;
 
   /**
    * Fired when a connection is made from either an extension process or a
@@ -233,14 +235,14 @@ class ChromeRuntime {
    */
   Stream get onConnect => _onConnect.stream;
 
-  final ChromeStreamController _onConnectExternal = null;
+  final ChromeStreamController _onConnect = null;
 
   /**
    * Fired when a connection is made from another extension.
    */
   Stream get onConnectExternal => _onConnectExternal.stream;
 
-  final ChromeStreamController _onMessage = null;
+  final ChromeStreamController _onConnectExternal = null;
 
   /**
    * Fired when a message is sent from either an extension process or a content
@@ -248,7 +250,7 @@ class ChromeRuntime {
    */
   Stream get onMessage => _onMessage.stream;
 
-  final ChromeStreamController _onMessageExternal = null;
+  final ChromeStreamController _onMessage = null;
 
   /**
    * Fired when a message is sent from another extension/app. Cannot be used in
@@ -256,7 +258,7 @@ class ChromeRuntime {
    */
   Stream get onMessageExternal => _onMessageExternal.stream;
 
-  final ChromeStreamController _onRestartRequired = null;
+  final ChromeStreamController _onMessageExternal = null;
 
   /**
    * Fired when an app or the device that it runs on needs to be restarted. The
@@ -266,4 +268,6 @@ class ChromeRuntime {
    * fired for Chrome OS kiosk apps.
    */
   Stream get onRestartRequired => _onRestartRequired.stream;
+
+  final ChromeStreamController _onRestartRequired = null;
 }

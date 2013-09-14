@@ -8,9 +8,13 @@ library chrome.system_display;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.system_display` namespace.
-final ChromeSystem_display system_display = new ChromeSystem_display._();
+/// Accessor for the `chrome.system.display` namespace.
+final ChromeSystemDisplay system_display = new ChromeSystemDisplay._();
 
-class ChromeSystem_display {
-  ChromeSystem_display._();
+class ChromeSystemDisplay {
+  JsObject _system_display;
+
+  ChromeSystemDisplay._() {
+    _system_display = context['chrome']['system']['display'];
+  }
 }

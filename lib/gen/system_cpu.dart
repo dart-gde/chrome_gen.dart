@@ -8,9 +8,13 @@ library chrome.system_cpu;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.system_cpu` namespace.
-final ChromeSystem_cpu system_cpu = new ChromeSystem_cpu._();
+/// Accessor for the `chrome.system.cpu` namespace.
+final ChromeSystemCpu system_cpu = new ChromeSystemCpu._();
 
-class ChromeSystem_cpu {
-  ChromeSystem_cpu._();
+class ChromeSystemCpu {
+  JsObject _system_cpu;
+
+  ChromeSystemCpu._() {
+    _system_cpu = context['chrome']['system']['cpu'];
+  }
 }

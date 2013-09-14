@@ -18,7 +18,11 @@ import '../src/common.dart';
 final ChromeHistory history = new ChromeHistory._();
 
 class ChromeHistory {
-  ChromeHistory._();
+  JsObject _history;
+
+  ChromeHistory._() {
+    _history = context['chrome']['history'];
+  }
 
   /**
    * Searches the history for the last visit time of each page matching the
@@ -28,7 +32,7 @@ class ChromeHistory {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['history'].callMethod('search', [query, completer.callback]);
+    _history.callMethod('search', [query, completer.callback]);
     return completer.future;
   }
 
@@ -39,7 +43,7 @@ class ChromeHistory {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['history'].callMethod('getVisits', [details, completer.callback]);
+    _history.callMethod('getVisits', [details, completer.callback]);
     return completer.future;
   }
 
@@ -49,7 +53,7 @@ class ChromeHistory {
    */
   Future addUrl(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['history'].callMethod('addUrl', [details, completer.callback]);
+    _history.callMethod('addUrl', [details, completer.callback]);
     return completer.future;
   }
 
@@ -58,7 +62,7 @@ class ChromeHistory {
    */
   Future deleteUrl(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['history'].callMethod('deleteUrl', [details, completer.callback]);
+    _history.callMethod('deleteUrl', [details, completer.callback]);
     return completer.future;
   }
 
@@ -69,7 +73,7 @@ class ChromeHistory {
    */
   Future deleteRange(var range) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['history'].callMethod('deleteRange', [range, completer.callback]);
+    _history.callMethod('deleteRange', [range, completer.callback]);
     return completer.future;
   }
 
@@ -78,11 +82,9 @@ class ChromeHistory {
    */
   Future deleteAll() {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['history'].callMethod('deleteAll', [completer.callback]);
+    _history.callMethod('deleteAll', [completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onVisited = null;
 
   /**
    * Fired when a URL is visited, providing the HistoryItem data for that URL.
@@ -90,11 +92,13 @@ class ChromeHistory {
    */
   Stream get onVisited => _onVisited.stream;
 
-  final ChromeStreamController _onVisitRemoved = null;
+  final ChromeStreamController _onVisited = null;
 
   /**
    * Fired when one or more URLs are removed from the history service.  When all
    * visits have been removed the URL is purged from history.
    */
   Stream get onVisitRemoved => _onVisitRemoved.stream;
+
+  final ChromeStreamController _onVisitRemoved = null;
 }

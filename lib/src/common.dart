@@ -5,22 +5,23 @@
 library common;
 
 export 'dart:async';
+export 'dart:js';
 
 import 'dart:async';
-import 'dart:js' as jsx;
+import 'dart:js';
 
-jsx.JsObject _proxy;
+JsObject _proxy;
 
-jsx.JsObject get chrome {
+JsObject get chrome {
   if (_proxy == null) {
-    _proxy = jsx.context['chrome'];
+    _proxy = context['chrome'];
   }
 
   return _proxy;
 }
 
 String get lastError {
-  jsx.JsObject error = chrome['runtime']['lastError'];
+  JsObject error = chrome['runtime']['lastError'];
 
   return error != null ? error['message'] : null;
 }
@@ -29,7 +30,7 @@ String get lastError {
  * The abstract superclass of objects that can hold [JsObject] proxies.
  */
 abstract class ChromeObject {
-  jsx.JsObject proxy;
+  JsObject proxy;
 
   ChromeObject(this.proxy);
 }

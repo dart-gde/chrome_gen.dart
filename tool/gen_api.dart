@@ -62,7 +62,7 @@ class GenApiFile {
 
       namespace = new IDLNamespace();
       namespace.name = fileName.substring(0, fileName.indexOf('.'));
-
+      namespace.name = namespace.name.replaceAll('_', '.');
       try {
         webIdlParser.start.parse(inFile.readAsStringSync());
         // TODO: this parse will produce a model...

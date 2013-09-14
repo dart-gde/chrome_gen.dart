@@ -5,4 +5,7 @@ description: Tools to generate Chrome App APIs
 dependencies:
   args: any
   parsers: any
+dev_dependencies:
+  papyrus:
+    git: https://github.com/devoncarew/papyrus.dart.git
   unittest: any

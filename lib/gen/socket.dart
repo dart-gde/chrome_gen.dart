@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromeSocket socket = new ChromeSocket._();
 
 class ChromeSocket {
-  ChromeSocket._();
+  JsObject _socket;
+
+  ChromeSocket._() {
+    _socket = context['chrome']['socket'];
+  }
 }

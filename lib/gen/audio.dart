@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromeAudio audio = new ChromeAudio._();
 
 class ChromeAudio {
-  ChromeAudio._();
+  JsObject _audio;
+
+  ChromeAudio._() {
+    _audio = context['chrome']['audio'];
+  }
 }

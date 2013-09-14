@@ -13,7 +13,11 @@ import '../src/common.dart';
 final ChromePageCapture pageCapture = new ChromePageCapture._();
 
 class ChromePageCapture {
-  ChromePageCapture._();
+  JsObject _pageCapture;
+
+  ChromePageCapture._() {
+    _pageCapture = context['chrome']['pageCapture'];
+  }
 
   /**
    * Saves the content of the tab with given id as MHTML.
@@ -24,7 +28,7 @@ class ChromePageCapture {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['pageCapture'].callMethod('saveAsMHTML', [details, completer.callback]);
+    _pageCapture.callMethod('saveAsMHTML', [details, completer.callback]);
     return completer.future;
   }
 }

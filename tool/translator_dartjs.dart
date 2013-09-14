@@ -46,7 +46,7 @@ class DartJSTranslator extends Translator {
     generator.writeln();
 
     // final ChromeI18N i18n = new ChromeI18N._();
-    generator.writeDocs("Accessor for the `chrome.${libName}` namespace.", preferSingle: true);
+    generator.writeDocs("Accessor for the `chrome.${namespace.name}` namespace.", preferSingle: true);
     generator.writeln("final ${className} ${libName} = new ${className}._();");
     generator.writeln();
 
@@ -57,7 +57,14 @@ class DartJSTranslator extends Translator {
 
   void _printClass() {
     generator.writeln("class ${className} {");
-    generator.writeln("${className}._();");
+    generator.writeln("JsObject ${ctx.getContextReference(namespace)};");
+    generator.writeln();
+    generator.writeln("${className}._() {");
+
+    List sections = namespace.name.split('.');
+    generator.writeln("${ctx.getContextReference(namespace)} = "
+        "context['chrome']['${sections.join('\'][\'')}'];");
+    generator.writeln("}");
 
     namespace.properties.forEach((p) => _printProperty(p));
     namespace.functions.forEach((f) => _printFunction(f));
@@ -71,7 +78,7 @@ class DartJSTranslator extends Translator {
     generator.writeDocs(property.description);
     generator.write("${ctx.getReturnType(property.returnType)} ");
     generator.write("get ${property.name} => ");
-    generator.writeln("${ctx.getJSContext(namespace)}['${property.name}'];");
+    generator.writeln("${ctx.getContextReference(namespace)}['${property.name}'];");
   }
 
   void _printFunction(IDLFunction function) {
@@ -109,7 +116,7 @@ class DartJSTranslator extends Translator {
     if (function.returns){
       generator.write("return ");
     }
-    generator.write("${ctx.getJSContext(namespace)}.callMethod('${function.name}'");
+    generator.write("${ctx.getContextReference(namespace)}.callMethod('${function.name}'");
     if (!function.parameters.isEmpty) {
       generator.write(", [");
       generator.write(function.parameters.map((IDLParameter p) {
@@ -129,12 +136,13 @@ class DartJSTranslator extends Translator {
   }
 
   void _printEvent(IDLEvent event) {
-    // TODO: we need to type the stream controller
-    generator.writeln();
-    generator.writeln("final ChromeStreamController _${event.name} = null;");
     generator.writeln();
     generator.writeDocs(event.description);
     generator.writeln("Stream get ${event.name} => _${event.name}.stream;");
+
+    // TODO: we need to type the stream controller
+    generator.writeln();
+    generator.writeln("final ChromeStreamController _${event.name} = null;");
   }
 
   String get libName => ctx.getLibraryName(namespace);

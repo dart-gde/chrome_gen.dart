@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromeDownloads downloads = new ChromeDownloads._();
 
 class ChromeDownloads {
-  ChromeDownloads._();
+  JsObject _downloads;
+
+  ChromeDownloads._() {
+    _downloads = context['chrome']['downloads'];
+  }
 }

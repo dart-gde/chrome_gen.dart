@@ -18,23 +18,27 @@ import '../src/common.dart';
 final ChromePrivacy privacy = new ChromePrivacy._();
 
 class ChromePrivacy {
-  ChromePrivacy._();
+  JsObject _privacy;
+
+  ChromePrivacy._() {
+    _privacy = context['chrome']['privacy'];
+  }
 
   /**
    * Settings that influence Chrome's handling of network connections in
    * general.
    */
-  dynamic get network => chrome['privacy']['network'];
+  dynamic get network => _privacy['network'];
 
   /**
    * Settings that enable or disable features that require third-party network
    * services provided by Google and your default search provider.
    */
-  dynamic get services => chrome['privacy']['services'];
+  dynamic get services => _privacy['services'];
 
   /**
    * Settings that determine what information Chrome makes available to
    * websites.
    */
-  dynamic get websites => chrome['privacy']['websites'];
+  dynamic get websites => _privacy['websites'];
 }

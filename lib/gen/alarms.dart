@@ -12,5 +12,9 @@ import '../src/common.dart';
 final ChromeAlarms alarms = new ChromeAlarms._();
 
 class ChromeAlarms {
-  ChromeAlarms._();
+  JsObject _alarms;
+
+  ChromeAlarms._() {
+    _alarms = context['chrome']['alarms'];
+  }
 }

@@ -16,18 +16,22 @@ import '../src/common.dart';
 final ChromeWindows windows = new ChromeWindows._();
 
 class ChromeWindows {
-  ChromeWindows._();
+  JsObject _windows;
+
+  ChromeWindows._() {
+    _windows = context['chrome']['windows'];
+  }
 
   /**
    * The windowId value that represents the absence of a chrome browser window.
    */
-  int get WINDOW_ID_NONE => chrome['windows']['WINDOW_ID_NONE'];
+  int get WINDOW_ID_NONE => _windows['WINDOW_ID_NONE'];
 
   /**
    * The windowId value that represents the [current
    * window](windows.html#current-window).
    */
-  int get WINDOW_ID_CURRENT => chrome['windows']['WINDOW_ID_CURRENT'];
+  int get WINDOW_ID_CURRENT => _windows['WINDOW_ID_CURRENT'];
 
   /**
    * Gets details about a window.
@@ -38,7 +42,7 @@ class ChromeWindows {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['windows'].callMethod('get', [windowId, getInfo, completer.callback]);
+    _windows.callMethod('get', [windowId, getInfo, completer.callback]);
     return completer.future;
   }
 
@@ -51,7 +55,7 @@ class ChromeWindows {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['windows'].callMethod('getCurrent', [getInfo, completer.callback]);
+    _windows.callMethod('getCurrent', [getInfo, completer.callback]);
     return completer.future;
   }
 
@@ -65,7 +69,7 @@ class ChromeWindows {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['windows'].callMethod('getLastFocused', [getInfo, completer.callback]);
+    _windows.callMethod('getLastFocused', [getInfo, completer.callback]);
     return completer.future;
   }
 
@@ -78,7 +82,7 @@ class ChromeWindows {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['windows'].callMethod('getAll', [getInfo, completer.callback]);
+    _windows.callMethod('getAll', [getInfo, completer.callback]);
     return completer.future;
   }
 
@@ -90,7 +94,7 @@ class ChromeWindows {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['windows'].callMethod('create', [createData, completer.callback]);
+    _windows.callMethod('create', [createData, completer.callback]);
     return completer.future;
   }
 
@@ -102,7 +106,7 @@ class ChromeWindows {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
       return arg;
     });
-    chrome['windows'].callMethod('update', [windowId, updateInfo, completer.callback]);
+    _windows.callMethod('update', [windowId, updateInfo, completer.callback]);
     return completer.future;
   }
 
@@ -111,25 +115,23 @@ class ChromeWindows {
    */
   Future remove(int windowId) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    chrome['windows'].callMethod('remove', [windowId, completer.callback]);
+    _windows.callMethod('remove', [windowId, completer.callback]);
     return completer.future;
   }
-
-  final ChromeStreamController _onCreated = null;
 
   /**
    * Fired when a window is created.
    */
   Stream get onCreated => _onCreated.stream;
 
-  final ChromeStreamController _onRemoved = null;
+  final ChromeStreamController _onCreated = null;
 
   /**
    * Fired when a window is removed (closed).
    */
   Stream get onRemoved => _onRemoved.stream;
 
-  final ChromeStreamController _onFocusChanged = null;
+  final ChromeStreamController _onRemoved = null;
 
   /**
    * Fired when the currently focused window changes. Will be
@@ -138,4 +140,6 @@ class ChromeWindows {
    * immediately preceding a switch from one chrome window to another.
    */
   Stream get onFocusChanged => _onFocusChanged.stream;
+
+  final ChromeStreamController _onFocusChanged = null;
 }

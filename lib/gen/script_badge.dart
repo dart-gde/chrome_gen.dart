@@ -16,14 +16,18 @@ import '../src/common.dart';
 final ChromeScriptBadge scriptBadge = new ChromeScriptBadge._();
 
 class ChromeScriptBadge {
-  ChromeScriptBadge._();
+  JsObject _scriptBadge;
+
+  ChromeScriptBadge._() {
+    _scriptBadge = context['chrome']['scriptBadge'];
+  }
 
   /**
    * Sets the html document to be opened as a popup when the user clicks on the
    * script badge's icon.
    */
   void setPopup(var details) {
-    chrome['scriptBadge'].callMethod('setPopup', [details]);
+    _scriptBadge.callMethod('setPopup', [details]);
   }
 
   /**
@@ -31,7 +35,7 @@ class ChromeScriptBadge {
    */
   Future<String> getPopup(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    chrome['scriptBadge'].callMethod('getPopup', [details, completer.callback]);
+    _scriptBadge.callMethod('getPopup', [details, completer.callback]);
     return completer.future;
   }
 
@@ -43,14 +47,14 @@ class ChromeScriptBadge {
    * has already run on this tab, this call does nothing.
    */
   void getAttention(var details) {
-    chrome['scriptBadge'].callMethod('getAttention', [details]);
+    _scriptBadge.callMethod('getAttention', [details]);
   }
-
-  final ChromeStreamController _onClicked = null;
 
   /**
    * Fired when a script badge icon is clicked.  This event will not fire if the
    * script badge has a popup.
    */
   Stream get onClicked => _onClicked.stream;
+
+  final ChromeStreamController _onClicked = null;
 }
