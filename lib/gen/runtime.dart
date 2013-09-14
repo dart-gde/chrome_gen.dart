@@ -36,8 +36,10 @@ class ChromeRuntime {
    * the system will ensure it is loaded before calling the callback. If there
    * is no background page, an error is set.
    */
-  Future getBackgroundPage() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getBackgroundPage() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['runtime'].callMethod('getBackgroundPage', [completer.callback]);
     return completer.future;
   }
@@ -80,8 +82,10 @@ class ChromeRuntime {
   /**
    * Requests an update check for this app/extension.
    */
-  Future requestUpdateCheck() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> requestUpdateCheck() {
+    ChromeCompleter completer = new ChromeCompleter.twoArgs((arg1, arg2) {
+      return null;
+    });
     chrome['runtime'].callMethod('requestUpdateCheck', [completer.callback]);
     return completer.future;
   }
@@ -96,7 +100,7 @@ class ChromeRuntime {
    * [extensionId] The ID of the extension/app you want to connect to. If
    * omitted, default is your own extension.
    */
-  dynamic connect(String extensionId, dynamic connectInfo) {
+  dynamic connect(String extensionId, var connectInfo) {
     return chrome['runtime'].callMethod('connect', [extensionId, connectInfo]);
   }
 
@@ -120,8 +124,12 @@ class ChromeRuntime {
    * [extensionId] The extension ID of the extension you want to connect to. If
    * omitted, default is your own extension.
    */
-  void sendMessage(String extensionId, dynamic message, dynamic responseCallback) {
-    chrome['runtime'].callMethod('sendMessage', [extensionId, message, responseCallback]);
+  Future<dynamic> sendMessage(String extensionId, var message) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
+    chrome['runtime'].callMethod('sendMessage', [extensionId, message, completer.callback]);
+    return completer.future;
   }
 
   /**
@@ -131,8 +139,12 @@ class ChromeRuntime {
    * 
    * [message] The message that will be passed to the native messaging host.
    */
-  void sendNativeMessage(String application, dynamic message, dynamic responseCallback) {
-    chrome['runtime'].callMethod('sendNativeMessage', [application, message, responseCallback]);
+  Future<dynamic> sendNativeMessage(String application, var message) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
+    chrome['runtime'].callMethod('sendNativeMessage', [application, message, completer.callback]);
+    return completer.future;
   }
 
   /**
@@ -140,8 +152,10 @@ class ChromeRuntime {
    * 
    * [callback] Called with results
    */
-  Future getPlatformInfo() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getPlatformInfo() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['runtime'].callMethod('getPlatformInfo', [completer.callback]);
     return completer.future;
   }
@@ -149,24 +163,32 @@ class ChromeRuntime {
   /**
    * Returns a DirectoryEntry for the package directory.
    */
-  Future getPackageDirectoryEntry() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getPackageDirectoryEntry() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['runtime'].callMethod('getPackageDirectoryEntry', [completer.callback]);
     return completer.future;
   }
+
+  final ChromeStreamController _onStartup = null;
 
   /**
    * Fired when a profile that has this extension installed first starts up.
    * This event is not fired when an incognito profile is started, even if this
    * extension is operating in 'split' incognito mode.
    */
-  Stream get onStartup => null;
+  Stream get onStartup => _onStartup.stream;
+
+  final ChromeStreamController _onInstalled = null;
 
   /**
    * Fired when the extension is first installed, when the extension is updated
    * to a new version, and when Chrome is updated to a new version.
    */
-  Stream get onInstalled => null;
+  Stream get onInstalled => _onInstalled.stream;
+
+  final ChromeStreamController _onSuspend = null;
 
   /**
    * Sent to the event page just before it is unloaded. This gives the extension
@@ -176,12 +198,16 @@ class ChromeRuntime {
    * it gets unloaded the onSuspendCanceled event will be sent and the page
    * won't be unloaded.
    */
-  Stream get onSuspend => null;
+  Stream get onSuspend => _onSuspend.stream;
+
+  final ChromeStreamController _onSuspendCanceled = null;
 
   /**
    * Sent after onSuspend to indicate that the app won't be unloaded after all.
    */
-  Stream get onSuspendCanceled => null;
+  Stream get onSuspendCanceled => _onSuspendCanceled.stream;
+
+  final ChromeStreamController _onUpdateAvailable = null;
 
   /**
    * Fired when an update is available, but isn't installed immediately because
@@ -189,36 +215,48 @@ class ChromeRuntime {
    * installed the next time the background page gets unloaded, if you want it
    * to be installed sooner you can explicitly call chrome.runtime.reload().
    */
-  Stream get onUpdateAvailable => null;
+  Stream get onUpdateAvailable => _onUpdateAvailable.stream;
+
+  final ChromeStreamController _onBrowserUpdateAvailable = null;
 
   /**
    * Fired when a Chrome update is available, but isn't installed immediately
    * because a browser restart is required.
    */
-  Stream get onBrowserUpdateAvailable => null;
+  Stream get onBrowserUpdateAvailable => _onBrowserUpdateAvailable.stream;
+
+  final ChromeStreamController _onConnect = null;
 
   /**
    * Fired when a connection is made from either an extension process or a
    * content script.
    */
-  Stream get onConnect => null;
+  Stream get onConnect => _onConnect.stream;
+
+  final ChromeStreamController _onConnectExternal = null;
 
   /**
    * Fired when a connection is made from another extension.
    */
-  Stream get onConnectExternal => null;
+  Stream get onConnectExternal => _onConnectExternal.stream;
+
+  final ChromeStreamController _onMessage = null;
 
   /**
    * Fired when a message is sent from either an extension process or a content
    * script.
    */
-  Stream get onMessage => null;
+  Stream get onMessage => _onMessage.stream;
+
+  final ChromeStreamController _onMessageExternal = null;
 
   /**
    * Fired when a message is sent from another extension/app. Cannot be used in
    * a content script.
    */
-  Stream get onMessageExternal => null;
+  Stream get onMessageExternal => _onMessageExternal.stream;
+
+  final ChromeStreamController _onRestartRequired = null;
 
   /**
    * Fired when an app or the device that it runs on needs to be restarted. The
@@ -227,5 +265,5 @@ class ChromeRuntime {
    * after a 24-hour grace period has passed. Currently, this event is only
    * fired for Chrome OS kiosk apps.
    */
-  Stream get onRestartRequired => null;
+  Stream get onRestartRequired => _onRestartRequired.stream;
 }

@@ -23,8 +23,10 @@ class ChromeInfobars {
    * automatically when the tab navigates. Use window.close() to close the
    * infobar before then.
    */
-  Future show(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> show(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['infobars'].callMethod('show', [details, completer.callback]);
     return completer.future;
   }

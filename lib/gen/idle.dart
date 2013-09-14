@@ -24,8 +24,8 @@ class ChromeIdle {
    * detectionIntervalInSeconds seconds have elapsed since the last user input
    * detected.
    */
-  Future queryState(int detectionIntervalInSeconds) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> queryState(int detectionIntervalInSeconds) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['idle'].callMethod('queryState', [detectionIntervalInSeconds, completer.callback]);
     return completer.future;
   }
@@ -41,6 +41,8 @@ class ChromeIdle {
     chrome['idle'].callMethod('setDetectionInterval', [intervalInSeconds]);
   }
 
+  final ChromeStreamController _onStateChanged = null;
+
   /**
    * Fired when the system changes to an active, idle or locked state. The event
    * fires with "locked" if the screen is locked or the screensaver activates,
@@ -48,5 +50,5 @@ class ChromeIdle {
    * for a specified number of seconds, and "active" when the user generates
    * input on an idle system.
    */
-  Stream get onStateChanged => null;
+  Stream get onStateChanged => _onStateChanged.stream;
 }

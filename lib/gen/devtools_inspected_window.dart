@@ -35,8 +35,10 @@ class ChromeDevtoolsInspectedWindow {
    * 
    * [callback] A function called when evaluation completes.
    */
-  Future eval(String expression) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> eval(String expression) {
+    ChromeCompleter completer = new ChromeCompleter.twoArgs((arg1, arg2) {
+      return null;
+    });
     chrome['devtools_inspected_window'].callMethod('eval', [expression, completer.callback]);
     return completer.future;
   }
@@ -44,7 +46,7 @@ class ChromeDevtoolsInspectedWindow {
   /**
    * Reloads the inspected page.
    */
-  void reload(dynamic reloadOptions) {
+  void reload(var reloadOptions) {
     chrome['devtools_inspected_window'].callMethod('reload', [reloadOptions]);
   }
 
@@ -54,20 +56,26 @@ class ChromeDevtoolsInspectedWindow {
    * [callback] A function that receives the list of resources when the request
    * completes.
    */
-  Future getResources() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getResources() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['devtools_inspected_window'].callMethod('getResources', [completer.callback]);
     return completer.future;
   }
 
+  final ChromeStreamController _onResourceAdded = null;
+
   /**
    * Fired when a new resource is added to the inspected page.
    */
-  Stream get onResourceAdded => null;
+  Stream get onResourceAdded => _onResourceAdded.stream;
+
+  final ChromeStreamController _onResourceContentCommitted = null;
 
   /**
    * Fired when a new revision of the resource is committed (e.g. user saves an
    * edited version of the resource in the Developer Tools).
    */
-  Stream get onResourceContentCommitted => null;
+  Stream get onResourceContentCommitted => _onResourceContentCommitted.stream;
 }

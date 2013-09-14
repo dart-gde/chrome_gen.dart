@@ -3,7 +3,7 @@ library generate_dart_test;
 
 import 'package:unittest/unittest.dart';
 
-import '../tool/generate_dart.dart';
+import '../tool/src/generate_dart.dart';
 
 main() {
   group('generate_dart', () {

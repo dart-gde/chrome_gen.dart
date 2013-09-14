@@ -42,15 +42,15 @@ class ChromePageAction {
    * Sets the title of the page action. This is displayed in a tooltip over the
    * page action.
    */
-  void setTitle(dynamic details) {
+  void setTitle(var details) {
     chrome['page_action'].callMethod('setTitle', [details]);
   }
 
   /**
    * Gets the title of the page action.
    */
-  Future getTitle(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> getTitle(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['page_action'].callMethod('getTitle', [details, completer.callback]);
     return completer.future;
   }
@@ -61,7 +61,7 @@ class ChromePageAction {
    * dictionary of either one of those. Either the <b>path</b> or the
    * <b>imageData</b> property must be specified.
    */
-  Future setIcon(dynamic details) {
+  Future setIcon(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['page_action'].callMethod('setIcon', [details, completer.callback]);
     return completer.future;
@@ -71,22 +71,24 @@ class ChromePageAction {
    * Sets the html document to be opened as a popup when the user clicks on the
    * page action's icon.
    */
-  void setPopup(dynamic details) {
+  void setPopup(var details) {
     chrome['page_action'].callMethod('setPopup', [details]);
   }
 
   /**
    * Gets the html document set as the popup for this page action.
    */
-  Future getPopup(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> getPopup(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['page_action'].callMethod('getPopup', [details, completer.callback]);
     return completer.future;
   }
+
+  final ChromeStreamController _onClicked = null;
 
   /**
    * Fired when a page action icon is clicked.  This event will not fire if the
    * page action has a popup.
    */
-  Stream get onClicked => null;
+  Stream get onClicked => _onClicked.stream;
 }

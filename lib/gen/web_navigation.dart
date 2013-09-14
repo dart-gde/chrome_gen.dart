@@ -25,8 +25,10 @@ class ChromeWebNavigation {
    * 
    * [details] Information about the frame to retrieve information about.
    */
-  Future getFrame(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getFrame(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['web_navigation'].callMethod('getFrame', [details, completer.callback]);
     return completer.future;
   }
@@ -36,16 +38,22 @@ class ChromeWebNavigation {
    * 
    * [details] Information about the tab to retrieve all frames from.
    */
-  Future getAllFrames(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getAllFrames(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['web_navigation'].callMethod('getAllFrames', [details, completer.callback]);
     return completer.future;
   }
 
+  final ChromeStreamController _onBeforeNavigate = null;
+
   /**
    * Fired when a navigation is about to occur.
    */
-  Stream get onBeforeNavigate => null;
+  Stream get onBeforeNavigate => _onBeforeNavigate.stream;
+
+  final ChromeStreamController _onCommitted = null;
 
   /**
    * Fired when a navigation is committed. The document (and the resources it
@@ -53,47 +61,61 @@ class ChromeWebNavigation {
    * least part of the document has been received from the server and the
    * browser has decided to switch to the new document.
    */
-  Stream get onCommitted => null;
+  Stream get onCommitted => _onCommitted.stream;
+
+  final ChromeStreamController _onDOMContentLoaded = null;
 
   /**
    * Fired when the page's DOM is fully constructed, but the referenced
    * resources may not finish loading.
    */
-  Stream get onDOMContentLoaded => null;
+  Stream get onDOMContentLoaded => _onDOMContentLoaded.stream;
+
+  final ChromeStreamController _onCompleted = null;
 
   /**
    * Fired when a document, including the resources it refers to, is completely
    * loaded and initialized.
    */
-  Stream get onCompleted => null;
+  Stream get onCompleted => _onCompleted.stream;
+
+  final ChromeStreamController _onErrorOccurred = null;
 
   /**
    * Fired when an error occurs and the navigation is aborted. This can happen
    * if either a network error occurred, or the user aborted the navigation.
    */
-  Stream get onErrorOccurred => null;
+  Stream get onErrorOccurred => _onErrorOccurred.stream;
+
+  final ChromeStreamController _onCreatedNavigationTarget = null;
 
   /**
    * Fired when a new window, or a new tab in an existing window, is created to
    * host a navigation.
    */
-  Stream get onCreatedNavigationTarget => null;
+  Stream get onCreatedNavigationTarget => _onCreatedNavigationTarget.stream;
+
+  final ChromeStreamController _onReferenceFragmentUpdated = null;
 
   /**
    * Fired when the reference fragment of a frame was updated. All future events
    * for that frame will use the updated URL.
    */
-  Stream get onReferenceFragmentUpdated => null;
+  Stream get onReferenceFragmentUpdated => _onReferenceFragmentUpdated.stream;
+
+  final ChromeStreamController _onTabReplaced = null;
 
   /**
    * Fired when the contents of the tab is replaced by a different (usually
    * previously pre-rendered) tab.
    */
-  Stream get onTabReplaced => null;
+  Stream get onTabReplaced => _onTabReplaced.stream;
+
+  final ChromeStreamController _onHistoryStateUpdated = null;
 
   /**
    * Fired when the frame's history was updated to a new URL. All future events
    * for that frame will use the updated URL.
    */
-  Stream get onHistoryStateUpdated => null;
+  Stream get onHistoryStateUpdated => _onHistoryStateUpdated.stream;
 }

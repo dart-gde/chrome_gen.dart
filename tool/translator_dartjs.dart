@@ -4,13 +4,13 @@
 
 library translator_dartjs;
 
-import 'generate_dart.dart';
 import 'idl_model.dart';
 import 'translation.dart';
-import 'utils.dart';
+import 'src/generate_dart.dart';
 
 /**
- * A [Translator] which generates code which uses the dart:js library.
+ * A [Translator] to create Dart code. The generated source accesses the
+ * referenced IDL APIs using the dart:js library.
  */
 class DartJSTranslator extends Translator {
   DartGenerator generator;
@@ -31,7 +31,7 @@ class DartJSTranslator extends Translator {
     if (sourceFilePath != null) {
       generator.writeln("/* This file has been generated from ${sourceFilePath} - do not edit */");
     } else {
-      generator.writeln("/* This file has been generated - do not edit */");
+      generator.writeln("/* This is a generated file - do not edit */");
     }
     generator.writeln();
 
@@ -76,17 +76,40 @@ class DartJSTranslator extends Translator {
     generator.writeln();
     generator.writeDocs(property.description);
     generator.writeln(
-        "${property.calculateReturnType()} get ${property.name} => chrome['${libName}']['${property.name}'];");
+        "${ctx.getReturnType(property.returnType)} get ${property.name} => chrome['${libName}']['${property.name}'];");
   }
 
   void _printFunction(IDLFunction function) {
     generator.writeln();
     generator.writeDocs(function.description);
-    generator.write("${function.calculateReturnType()} ${function.name}(");
-    generator.write(function.parameters.where((p) => !p.isCallback).join(', '));
+    generator.write("${calculateReturnType(function)} ${function.name}(");
+    generator.write(function.parameters.where((p) => !p.isCallback).
+        map((p) => "${ctx.getParamType(p.type)} ${p.name}").join(', '));
     generator.writeln(") {");
     if (function.usesCallback) {
-      generator.writeln("ChromeCompleter completer = new ChromeCompleter.noArgs();");
+      generator.write("ChromeCompleter completer = new ChromeCompleter.");
+      IDLParameter callback = function.callbackParamType;
+      if (callback.params.length == 0) {
+        generator.writeln("noArgs();");
+      } else if (callback.params.length == 1) {
+        IDLType type = callback.params.first.type;
+
+        if (ctx.isAutoTransformType(type)) {
+          generator.writeln("oneArg();");
+        } else {
+          generator.writeln("oneArg((arg) {");
+          // TODO:
+          generator.writeln("return arg;");
+          generator.writeln("});");
+        }
+      } else if (callback.params.length == 2) {
+        generator.writeln("twoArgs((arg1, arg2) {");
+        // TODO:
+        generator.writeln("return null;");
+        generator.writeln("});");
+      } else {
+        throw new StateError('unsupported number of params(${callback.params.length})');
+      }
     }
     if (function.returns){
       generator.write("return ");
@@ -111,13 +134,30 @@ class DartJSTranslator extends Translator {
   }
 
   void _printEvent(IDLEvent event) {
+    // TODO: we need to type the stream controller
+    generator.writeln();
+    generator.writeln("final ChromeStreamController _${event.name} = null;");
     generator.writeln();
     generator.writeDocs(event.description);
-    generator.writeln("Stream get ${event.name} => null;");
+    generator.writeln("Stream get ${event.name} => _${event.name}.stream;");
   }
 
   String get libName => ctx.getLibraryName(namespace);
 
   String get className => ctx.getClassName(namespace);
+
+  String calculateReturnType(IDLFunction function) {
+    if (function.usesCallback) {
+      IDLParameter callback = function.callbackParamType;
+      if (callback.params.isEmpty) {
+        return 'Future';
+      } else {
+        // TODO: we need to figure out the type system
+        return 'Future<${ctx.getReturnType(callback.params.first.type)}>';
+      }
+    } else {
+      return ctx.getReturnType(function.returnType);
+    }
+  }
 
 }

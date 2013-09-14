@@ -20,8 +20,10 @@ class ChromePageCapture {
    * 
    * [callback] Called when the MHTML has been generated.
    */
-  Future saveAsMHTML(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> saveAsMHTML(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['page_capture'].callMethod('saveAsMHTML', [details, completer.callback]);
     return completer.future;
   }

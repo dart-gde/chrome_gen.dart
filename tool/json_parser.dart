@@ -4,7 +4,7 @@ library json.parser;
 import 'dart:convert';
 
 import 'idl_model.dart';
-import 'utils.dart';
+import 'src/utils.dart';
 
 /**
  * A class to parse web JSON API definitions into an [IDLNamespace] object.
@@ -51,82 +51,119 @@ class JsonParser {
         (Match m) => "${m.group(1).toUpperCase()}");
     namespace.description = convertHtmlToDartdoc(m['description']);
 
+    // functions
     if (m.containsKey('functions')) {
       for (var f in m['functions']) {
-        IDLFunction function = new IDLFunction(f['name'],
-            convertHtmlToDartdoc(f['description']));
-
-        if (f.containsKey('parameters')) {
-          for (var p in f['parameters']) {
-            IDLParameter param = new IDLParameter(p['name']);
-
-            if (p.containsKey('type')) {
-              param.type = new IDLType(p['type']);
-            }
-
-            if (p.containsKey('optional')) {
-              // Look for "true", and "false", as well as boolean
-              if (p['optional'] is bool) {
-                param.optional = p['optional'];
-              } else {
-                param.optional = "true" == p['optional'];
-              }
-            }
-
-            param.description = convertHtmlToDartdoc(p['description']);
-
-            function.parameters.add(param);
-          }
-        }
-
-        if (f.containsKey('returns')) {
-          var r = f['returns'];
-
-          function.returnType = new IDLType(r['type']);
-        } else {
-          function.returnType = IDLType.VOID;
-        }
-
-        namespace.functions.add(function);
+        namespace.functions.add(_parseFunction(f));
       }
     }
 
     // TODO: types
 
-    // TODO: events
+
+    // events
     if (m.containsKey('events')) {
       for (var e in m['events']) {
-        IDLEvent event = new IDLEvent(e['name']);
-        event.description = convertHtmlToDartdoc(e['description']);
-        namespace.events.add(event);
+        namespace.events.add(_parseEvent(e));
       }
     }
 
-    // TODO: properties
+    // properties
     if (m.containsKey('properties')) {
       Map properties = m['properties'];
-      for (var key in properties.keys) {
-        IDLProperty property = new IDLProperty(key);
-        Map map = properties[key];
-        property.description = convertHtmlToDartdoc(map['description']);
 
-        // value
-        if (map.containsKey('value')) {
-          if (map['value'] is int) {
-            property.returnType = new IDLType.fromDartName('int');
-          }
-        }
-
-        if (map.containsKey('type')) {
-          property.returnType = new IDLType(map['type']);
-        }
+      for (String key in properties.keys) {
+        Map p = properties[key];
 
         // "nodoc": true
-        if (true != map['nodoc']) {
-          namespace.properties.add(property);
+        if (true != p['nodoc']) {
+          namespace.properties.add(_parseProperty(key, p));
         }
       }
     }
+  }
+
+  IDLFunction _parseFunction(f) {
+    IDLFunction function = new IDLFunction(f['name'],
+        convertHtmlToDartdoc(f['description']));
+
+    if (f.containsKey('parameters')) {
+      function.parameters = _parseParameters(f['parameters']);
+    }
+
+    if (f.containsKey('returns')) {
+      var r = f['returns'];
+
+      function.returnType = new IDLType.fromMap(r);
+    }
+
+    return function;
+  }
+
+  IDLEvent _parseEvent(e) {
+    IDLEvent event = new IDLEvent(e['name']);
+
+    event.description = convertHtmlToDartdoc(e['description']);
+
+    if (e.containsKey('parameters')) {
+      event.params = _parseParameters(e['parameters']);
+    }
+
+    return event;
+  }
+
+  List<IDLParameter> _parseParameters(List params) {
+    List<IDLParameter> result = [];
+
+    for (Map p in params) {
+      IDLParameter param = new IDLParameter(p['name']);
+
+      param.type = new IDLType.fromMap(p);
+      if (param.type == null) {
+        param.type = IDLType.VAR;
+      }
+
+      if (p.containsKey('optional')) {
+        // Look for "true", and "false", as well as boolean
+        if (p['optional'] is bool) {
+          param.optional = p['optional'];
+        } else {
+          param.optional = "true" == p['optional'];
+        }
+      }
+
+      param.description = convertHtmlToDartdoc(p['description']);
+
+      if (p.containsKey('parameters')) {
+        param.params = _parseParameters(p['parameters']);
+      }
+
+      result.add(param);
+    }
+
+    return result;
+  }
+
+  IDLProperty _parseProperty(String name, Map p) {
+    IDLProperty property = new IDLProperty(name);
+    property.description = convertHtmlToDartdoc(p['description']);
+
+    // value
+    if (p.containsKey('value')) {
+      if (p['value'] is num) {
+        num val = p['value'];
+
+        if (val.toInt().toDouble() == val.toDouble()) {
+          property.returnType = new IDLType('integer');
+        }
+      }
+    }
+
+    if (property.returnType == null) {
+      property.returnType = new IDLType.fromMap(p);
+    }
+
+    return property;
   }
 
 }

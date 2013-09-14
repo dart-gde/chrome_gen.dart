@@ -23,8 +23,10 @@ class ChromePermissions {
   /**
    * Gets the extension's current set of permissions.
    */
-  Future getAll() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getAll() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['permissions'].callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -32,8 +34,8 @@ class ChromePermissions {
   /**
    * Checks if the extension has the specified permissions.
    */
-  Future contains(var permissions) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> contains(var permissions) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['permissions'].callMethod('contains', [permissions, completer.callback]);
     return completer.future;
   }
@@ -43,8 +45,8 @@ class ChromePermissions {
    * defined in the optional_permissions field of the manifest. If there are any
    * problems requesting the permissions, [runtime.lastError] will be set.
    */
-  Future request(var permissions) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> request(var permissions) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['permissions'].callMethod('request', [permissions, completer.callback]);
     return completer.future;
   }
@@ -53,19 +55,23 @@ class ChromePermissions {
    * Removes access to the specified permissions. If there are any problems
    * removing the permissions, [runtime.lastError] will be set.
    */
-  Future remove(var permissions) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> remove(var permissions) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['permissions'].callMethod('remove', [permissions, completer.callback]);
     return completer.future;
   }
 
+  final ChromeStreamController _onAdded = null;
+
   /**
    * Fired when the extension acquires new permissions.
    */
-  Stream get onAdded => null;
+  Stream get onAdded => _onAdded.stream;
+
+  final ChromeStreamController _onRemoved = null;
 
   /**
    * Fired when access to permissions has been removed from the extension.
    */
-  Stream get onRemoved => null;
+  Stream get onRemoved => _onRemoved.stream;
 }

@@ -25,8 +25,10 @@ class ChromeProxy {
    */
   dynamic get settings => chrome['proxy']['settings'];
 
+  final ChromeStreamController _onProxyError = null;
+
   /**
    * Notifies about proxy errors.
    */
-  Stream get onProxyError => null;
+  Stream get onProxyError => _onProxyError.stream;
 }

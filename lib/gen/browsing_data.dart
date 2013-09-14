@@ -24,8 +24,10 @@ class ChromeBrowsingData {
    * not available in the settings UI, and some UI settings control more than
    * one data type listed here.
    */
-  Future settings() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> settings() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['browsing_data'].callMethod('settings', [completer.callback]);
     return completer.future;
   }

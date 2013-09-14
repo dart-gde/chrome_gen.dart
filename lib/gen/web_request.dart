@@ -36,29 +36,39 @@ class ChromeWebRequest {
     return completer.future;
   }
 
+  final ChromeStreamController _onBeforeRequest = null;
+
   /**
    * Fired when a request is about to occur.
    */
-  Stream get onBeforeRequest => null;
+  Stream get onBeforeRequest => _onBeforeRequest.stream;
+
+  final ChromeStreamController _onBeforeSendHeaders = null;
 
   /**
    * Fired before sending an HTTP request, once the request headers are
    * available. This may occur after a TCP connection is made to the server, but
    * before any HTTP data is sent.
    */
-  Stream get onBeforeSendHeaders => null;
+  Stream get onBeforeSendHeaders => _onBeforeSendHeaders.stream;
+
+  final ChromeStreamController _onSendHeaders = null;
 
   /**
    * Fired just before a request is going to be sent to the server
    * (modifications of previous onBeforeSendHeaders callbacks are visible by the
    * time onSendHeaders is fired).
    */
-  Stream get onSendHeaders => null;
+  Stream get onSendHeaders => _onSendHeaders.stream;
+
+  final ChromeStreamController _onHeadersReceived = null;
 
   /**
    * Fired when HTTP response headers of a request have been received.
    */
-  Stream get onHeadersReceived => null;
+  Stream get onHeadersReceived => _onHeadersReceived.stream;
+
+  final ChromeStreamController _onAuthRequired = null;
 
   /**
    * Fired when an authentication failure is received. The listener has three
@@ -67,27 +77,35 @@ class ChromeWebRequest {
    * challenge. If bad user credentials are provided, this may be called
    * multiple times for the same request.
    */
-  Stream get onAuthRequired => null;
+  Stream get onAuthRequired => _onAuthRequired.stream;
+
+  final ChromeStreamController _onResponseStarted = null;
 
   /**
    * Fired when the first byte of the response body is received. For HTTP
    * requests, this means that the status line and response headers are
    * available.
    */
-  Stream get onResponseStarted => null;
+  Stream get onResponseStarted => _onResponseStarted.stream;
+
+  final ChromeStreamController _onBeforeRedirect = null;
 
   /**
    * Fired when a server-initiated redirect is about to occur.
    */
-  Stream get onBeforeRedirect => null;
+  Stream get onBeforeRedirect => _onBeforeRedirect.stream;
+
+  final ChromeStreamController _onCompleted = null;
 
   /**
    * Fired when a request is completed.
    */
-  Stream get onCompleted => null;
+  Stream get onCompleted => _onCompleted.stream;
+
+  final ChromeStreamController _onErrorOccurred = null;
 
   /**
    * Fired when an error occurs.
    */
-  Stream get onErrorOccurred => null;
+  Stream get onErrorOccurred => _onErrorOccurred.stream;
 }

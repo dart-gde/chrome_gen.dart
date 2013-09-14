@@ -21,12 +21,16 @@ final ChromeDeclarativeWebRequest declarative_web_request = new ChromeDeclarativ
 class ChromeDeclarativeWebRequest {
   ChromeDeclarativeWebRequest._();
 
-  Stream get onRequest => null;
+  final ChromeStreamController _onRequest = null;
+
+  Stream get onRequest => _onRequest.stream;
+
+  final ChromeStreamController _onMessage = null;
 
   /**
    * Fired when a message is sent via
    * [declarativeWebRequest.SendMessageToExtension] from an action of the
    * declarative web request API.
    */
-  Stream get onMessage => null;
+  Stream get onMessage => _onMessage.stream;
 }

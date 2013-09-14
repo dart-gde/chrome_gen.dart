@@ -8,9 +8,9 @@ import 'dart:io';
 import 'dart:convert';
 
 import 'gen_api.dart';
-import 'generate_dart.dart';
 import 'translation.dart';
-import 'utils.dart';
+import 'src/generate_dart.dart';
+import 'src/utils.dart';
 
 void main() {
   DateTime startTime = new DateTime.now();

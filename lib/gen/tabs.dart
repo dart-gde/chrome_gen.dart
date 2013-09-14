@@ -21,8 +21,10 @@ class ChromeTabs {
   /**
    * Retrieves details about the specified tab.
    */
-  Future get(int tabId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> get(int tabId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('get', [tabId, completer.callback]);
     return completer.future;
   }
@@ -32,8 +34,10 @@ class ChromeTabs {
    * called from a non-tab context (for example: a background page or popup
    * view).
    */
-  Future getCurrent() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getCurrent() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('getCurrent', [completer.callback]);
     return completer.future;
   }
@@ -44,15 +48,19 @@ class ChromeTabs {
    * specified tab for the current extension. For more details, see [Content
    * Script Messaging](messaging.html).
    */
-  dynamic connect(int tabId, dynamic connectInfo) {
+  dynamic connect(int tabId, var connectInfo) {
     return chrome['tabs'].callMethod('connect', [tabId, connectInfo]);
   }
 
   /**
    * Deprecated: Please use sendMessage.
    */
-  void sendRequest(int tabId, dynamic request, dynamic responseCallback) {
-    chrome['tabs'].callMethod('sendRequest', [tabId, request, responseCallback]);
+  Future<dynamic> sendRequest(int tabId, var request) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
+    chrome['tabs'].callMethod('sendRequest', [tabId, request, completer.callback]);
+    return completer.future;
   }
 
   /**
@@ -61,8 +69,12 @@ class ChromeTabs {
    * [runtime.onMessage] event is fired in each content script running in the
    * specified tab for the current extension.
    */
-  void sendMessage(int tabId, dynamic message, dynamic responseCallback) {
-    chrome['tabs'].callMethod('sendMessage', [tabId, message, responseCallback]);
+  Future<dynamic> sendMessage(int tabId, var message) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
+    chrome['tabs'].callMethod('sendMessage', [tabId, message, completer.callback]);
+    return completer.future;
   }
 
   /**
@@ -71,8 +83,10 @@ class ChromeTabs {
    * 
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
-  Future getSelected(int windowId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getSelected(int windowId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('getSelected', [windowId, completer.callback]);
     return completer.future;
   }
@@ -83,8 +97,10 @@ class ChromeTabs {
    * 
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
-  Future getAllInWindow(int windowId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getAllInWindow(int windowId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('getAllInWindow', [windowId, completer.callback]);
     return completer.future;
   }
@@ -92,8 +108,10 @@ class ChromeTabs {
   /**
    * Creates a new tab.
    */
-  Future create(dynamic createProperties) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> create(var createProperties) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('create', [createProperties, completer.callback]);
     return completer.future;
   }
@@ -103,8 +121,10 @@ class ChromeTabs {
    * 
    * [tabId] The ID of the tab which is to be duplicated.
    */
-  Future duplicate(int tabId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> duplicate(int tabId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('duplicate', [tabId, completer.callback]);
     return completer.future;
   }
@@ -113,8 +133,10 @@ class ChromeTabs {
    * Gets all tabs that have the specified properties, or all tabs if no
    * properties are specified.
    */
-  Future query(dynamic queryInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> query(var queryInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('query', [queryInfo, completer.callback]);
     return completer.future;
   }
@@ -122,8 +144,10 @@ class ChromeTabs {
   /**
    * Highlights the given tabs.
    */
-  Future highlight(dynamic highlightInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> highlight(var highlightInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('highlight', [highlightInfo, completer.callback]);
     return completer.future;
   }
@@ -135,8 +159,10 @@ class ChromeTabs {
    * [tabId] Defaults to the selected tab of the [current
    * window](windows.html#current-window).
    */
-  Future update(int tabId, dynamic updateProperties) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> update(int tabId, var updateProperties) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('update', [tabId, updateProperties, completer.callback]);
     return completer.future;
   }
@@ -148,8 +174,10 @@ class ChromeTabs {
    * 
    * [tabIds] The tab or list of tabs to move.
    */
-  Future move(var tabIds, dynamic moveProperties) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> move(var tabIds, var moveProperties) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('move', [tabIds, moveProperties, completer.callback]);
     return completer.future;
   }
@@ -160,7 +188,7 @@ class ChromeTabs {
    * [tabId] The ID of the tab to reload; defaults to the selected tab of the
    * current window.
    */
-  Future reload(int tabId, dynamic reloadProperties) {
+  Future reload(int tabId, var reloadProperties) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['tabs'].callMethod('reload', [tabId, reloadProperties, completer.callback]);
     return completer.future;
@@ -183,8 +211,8 @@ class ChromeTabs {
    * [tabId] Defaults to the active tab of the [current
    * window](windows.html#current-window).
    */
-  Future detectLanguage(int tabId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> detectLanguage(int tabId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['tabs'].callMethod('detectLanguage', [tabId, completer.callback]);
     return completer.future;
   }
@@ -200,8 +228,8 @@ class ChromeTabs {
    * [options] Set parameters of image capture, such as the format of the
    * resulting image.
    */
-  Future captureVisibleTab(int windowId, dynamic options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> captureVisibleTab(int windowId, var options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['tabs'].callMethod('captureVisibleTab', [windowId, options, completer.callback]);
     return completer.future;
   }
@@ -217,8 +245,10 @@ class ChromeTabs {
    * 
    * [callback] Called after all the JavaScript has been executed.
    */
-  Future executeScript(int tabId, var details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> executeScript(int tabId, var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tabs'].callMethod('executeScript', [tabId, details, completer.callback]);
     return completer.future;
   }
@@ -240,17 +270,23 @@ class ChromeTabs {
     return completer.future;
   }
 
+  final ChromeStreamController _onCreated = null;
+
   /**
    * Fired when a tab is created. Note that the tab's URL may not be set at the
    * time this event fired, but you can listen to onUpdated events to be
    * notified when a URL is set.
    */
-  Stream get onCreated => null;
+  Stream get onCreated => _onCreated.stream;
+
+  final ChromeStreamController _onUpdated = null;
 
   /**
    * Fired when a tab is updated.
    */
-  Stream get onUpdated => null;
+  Stream get onUpdated => _onUpdated.stream;
+
+  final ChromeStreamController _onMoved = null;
 
   /**
    * Fired when a tab is moved within a window. Only one move event is fired,
@@ -258,55 +294,73 @@ class ChromeTabs {
    * the other tabs that must move in response. This event is not fired when a
    * tab is moved between windows. For that, see [onDetached.]
    */
-  Stream get onMoved => null;
+  Stream get onMoved => _onMoved.stream;
+
+  final ChromeStreamController _onSelectionChanged = null;
 
   /**
    * Deprecated. Please use onActivated.
    */
-  Stream get onSelectionChanged => null;
+  Stream get onSelectionChanged => _onSelectionChanged.stream;
+
+  final ChromeStreamController _onActiveChanged = null;
 
   /**
    * Deprecated. Please use onActivated.
    */
-  Stream get onActiveChanged => null;
+  Stream get onActiveChanged => _onActiveChanged.stream;
+
+  final ChromeStreamController _onActivated = null;
 
   /**
    * Fires when the active tab in a window changes. Note that the tab's URL may
    * not be set at the time this event fired, but you can listen to onUpdated
    * events to be notified when a URL is set.
    */
-  Stream get onActivated => null;
+  Stream get onActivated => _onActivated.stream;
+
+  final ChromeStreamController _onHighlightChanged = null;
 
   /**
    * Deprecated. Please use onHighlighted.
    */
-  Stream get onHighlightChanged => null;
+  Stream get onHighlightChanged => _onHighlightChanged.stream;
+
+  final ChromeStreamController _onHighlighted = null;
 
   /**
    * Fired when the highlighted or selected tabs in a window changes.
    */
-  Stream get onHighlighted => null;
+  Stream get onHighlighted => _onHighlighted.stream;
+
+  final ChromeStreamController _onDetached = null;
 
   /**
    * Fired when a tab is detached from a window, for example because it is being
    * moved between windows.
    */
-  Stream get onDetached => null;
+  Stream get onDetached => _onDetached.stream;
+
+  final ChromeStreamController _onAttached = null;
 
   /**
    * Fired when a tab is attached to a window, for example because it was moved
    * between windows.
    */
-  Stream get onAttached => null;
+  Stream get onAttached => _onAttached.stream;
+
+  final ChromeStreamController _onRemoved = null;
 
   /**
    * Fired when a tab is closed.
    */
-  Stream get onRemoved => null;
+  Stream get onRemoved => _onRemoved.stream;
+
+  final ChromeStreamController _onReplaced = null;
 
   /**
    * Fired when a tab is replaced with another tab due to prerendering or
    * instant.
    */
-  Stream get onReplaced => null;
+  Stream get onReplaced => _onReplaced.stream;
 }

@@ -25,6 +25,15 @@ String get lastError {
   return error != null ? error['message'] : null;
 }
 
+/**
+ * The abstract superclass of objects that can hold [JsObject] proxies.
+ */
+abstract class ChromeObject {
+  jsx.JsObject proxy;
+
+  ChromeObject(this.proxy);
+}
+
 // TODO: some chrome APIs use lastError, and some don't
 /**
  * An object for handling completion callbacks that are common in the chrome.*

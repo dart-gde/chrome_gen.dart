@@ -21,8 +21,8 @@ class ChromeProcesses {
    * 
    * [processId] The ID of the process to be terminated.
    */
-  Future terminate(int processId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> terminate(int processId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['processes'].callMethod('terminate', [processId, completer.callback]);
     return completer.future;
   }
@@ -33,8 +33,8 @@ class ChromeProcesses {
    * [tabId] The ID of the tab for which the renderer process ID is to be
    * returned.
    */
-  Future getProcessIdForTab(int tabId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<int> getProcessIdForTab(int tabId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['processes'].callMethod('getProcessIdForTab', [tabId, completer.callback]);
     return completer.future;
   }
@@ -52,17 +52,23 @@ class ChromeProcesses {
    * 
    * [callback] Called when the processes information is collected.
    */
-  Future getProcessInfo(var processIds, bool includeMemory) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getProcessInfo(var processIds, bool includeMemory) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['processes'].callMethod('getProcessInfo', [processIds, includeMemory, completer.callback]);
     return completer.future;
   }
+
+  final ChromeStreamController _onUpdated = null;
 
   /**
    * Fired each time the Task Manager updates its process statistics, providing
    * the dictionary of updated Process objects, indexed by process ID.
    */
-  Stream get onUpdated => null;
+  Stream get onUpdated => _onUpdated.stream;
+
+  final ChromeStreamController _onUpdatedWithMemory = null;
 
   /**
    * Fired each time the Task Manager updates its process statistics, providing
@@ -71,22 +77,28 @@ class ChromeProcesses {
    * Process object. Note, collecting memory usage information incurs extra CPU
    * usage and should only be listened for when needed.
    */
-  Stream get onUpdatedWithMemory => null;
+  Stream get onUpdatedWithMemory => _onUpdatedWithMemory.stream;
+
+  final ChromeStreamController _onCreated = null;
 
   /**
    * Fired each time a process is created, providing the corrseponding Process
    * object.
    */
-  Stream get onCreated => null;
+  Stream get onCreated => _onCreated.stream;
+
+  final ChromeStreamController _onUnresponsive = null;
 
   /**
    * Fired each time a process becomes unresponsive, providing the corrseponding
    * Process object.
    */
-  Stream get onUnresponsive => null;
+  Stream get onUnresponsive => _onUnresponsive.stream;
+
+  final ChromeStreamController _onExited = null;
 
   /**
    * Fired each time a process is terminated, providing the type of exit.
    */
-  Stream get onExited => null;
+  Stream get onExited => _onExited.stream;
 }

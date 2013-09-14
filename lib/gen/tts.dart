@@ -15,10 +15,10 @@ library chrome.tts;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.tts` namespace.
-final ChromeTTS tts = new ChromeTTS._();
+final ChromeTts tts = new ChromeTts._();
 
-class ChromeTTS {
-  ChromeTTS._();
+class ChromeTts {
+  ChromeTts._();
 
   /**
    * Speaks text using a text-to-speech engine.
@@ -34,7 +34,7 @@ class ChromeTTS {
    * chrome.runtime.lastError to make sure there were no errors. Use
    * options.onEvent to get more detailed feedback.
    */
-  Future speak(String utterance, dynamic options) {
+  Future speak(String utterance, var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['tts'].callMethod('speak', [utterance, options, completer.callback]);
     return completer.future;
@@ -69,8 +69,8 @@ class ChromeTTS {
    * true whenever the system speech engine is speaking, even if the speech
    * wasn't initiated by Chrome.
    */
-  Future isSpeaking() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> isSpeaking() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['tts'].callMethod('isSpeaking', [completer.callback]);
     return completer.future;
   }
@@ -78,14 +78,18 @@ class ChromeTTS {
   /**
    * Gets an array of all available voices.
    */
-  Future getVoices() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getVoices() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['tts'].callMethod('getVoices', [completer.callback]);
     return completer.future;
   }
 
+  final ChromeStreamController _onEvent = null;
+
   /**
    * Used to pass events back to the function calling speak().
    */
-  Stream get onEvent => null;
+  Stream get onEvent => _onEvent.stream;
 }

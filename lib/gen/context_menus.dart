@@ -28,7 +28,7 @@ class ChromeContextMenus {
    * were any problems creating the item, details will be available in
    * chrome.runtime.lastError.
    */
-  Future create(dynamic createProperties) {
+  Future create(var createProperties) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['context_menus'].callMethod('create', [createProperties, completer.callback]);
     return completer.future;
@@ -44,7 +44,7 @@ class ChromeContextMenus {
    * 
    * [callback] Called when the context menu has been updated.
    */
-  Future update(var id, dynamic updateProperties) {
+  Future update(var id, var updateProperties) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['context_menus'].callMethod('update', [id, updateProperties, completer.callback]);
     return completer.future;
@@ -74,8 +74,10 @@ class ChromeContextMenus {
     return completer.future;
   }
 
+  final ChromeStreamController _onClicked = null;
+
   /**
    * Fired when a context menu item is clicked.
    */
-  Stream get onClicked => null;
+  Stream get onClicked => _onClicked.stream;
 }

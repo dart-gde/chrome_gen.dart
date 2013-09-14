@@ -24,7 +24,7 @@ class ChromeOmnibox {
    * 
    * [suggestResults] An array of suggest results
    */
-  void sendSuggestions(int requestId, dynamic suggestResults) {
+  void sendSuggestions(int requestId, var suggestResults) {
     chrome['omnibox'].callMethod('sendSuggestions', [requestId, suggestResults]);
   }
 
@@ -40,25 +40,33 @@ class ChromeOmnibox {
     chrome['omnibox'].callMethod('setDefaultSuggestion', [suggestion]);
   }
 
+  final ChromeStreamController _onInputStarted = null;
+
   /**
    * User has started a keyword input session by typing the extension's keyword.
    * This is guaranteed to be sent exactly once per input session, and before
    * any onInputChanged events.
    */
-  Stream get onInputStarted => null;
+  Stream get onInputStarted => _onInputStarted.stream;
+
+  final ChromeStreamController _onInputChanged = null;
 
   /**
    * User has changed what is typed into the omnibox.
    */
-  Stream get onInputChanged => null;
+  Stream get onInputChanged => _onInputChanged.stream;
+
+  final ChromeStreamController _onInputEntered = null;
 
   /**
    * User has accepted what is typed into the omnibox.
    */
-  Stream get onInputEntered => null;
+  Stream get onInputEntered => _onInputEntered.stream;
+
+  final ChromeStreamController _onInputCancelled = null;
 
   /**
    * User has ended the keyword input session without accepting the input.
    */
-  Stream get onInputCancelled => null;
+  Stream get onInputCancelled => _onInputCancelled.stream;
 }

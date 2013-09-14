@@ -21,8 +21,10 @@ class ChromeTopSites {
   /**
    * Gets a list of top sites.
    */
-  Future get() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> get() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['top_sites'].callMethod('get', [completer.callback]);
     return completer.future;
   }

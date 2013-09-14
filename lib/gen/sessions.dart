@@ -26,8 +26,10 @@ class ChromeSessions {
   /**
    * Gets the list of recently closed tabs and/or windows.
    */
-  Future getRecentlyClosed(var filter) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getRecentlyClosed(var filter) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['sessions'].callMethod('getRecentlyClosed', [filter, completer.callback]);
     return completer.future;
   }
@@ -35,8 +37,10 @@ class ChromeSessions {
   /**
    * Retrieves all devices with synced sessions.
    */
-  Future getDevices(var filter) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getDevices(var filter) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['sessions'].callMethod('getDevices', [filter, completer.callback]);
     return completer.future;
   }
@@ -48,8 +52,10 @@ class ChromeSessions {
    * [sessionId] The [windows.Window.sessionId], or [tabs.Tab.sessionId] to
    * restore.
    */
-  Future restore(String sessionId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> restore(String sessionId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['sessions'].callMethod('restore', [sessionId, completer.callback]);
     return completer.future;
   }

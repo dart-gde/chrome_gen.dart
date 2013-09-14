@@ -31,14 +31,18 @@ class ChromeFileBrowserHandler {
    * 
    * [callback] Function called upon completion.
    */
-  Future selectFile(dynamic selectionParams) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> selectFile(var selectionParams) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['file_browser_handler'].callMethod('selectFile', [selectionParams, completer.callback]);
     return completer.future;
   }
 
+  final ChromeStreamController _onExecute = null;
+
   /**
    * Fired when file system action is executed from ChromeOS file browser.
    */
-  Stream get onExecute => null;
+  Stream get onExecute => _onExecute.stream;
 }

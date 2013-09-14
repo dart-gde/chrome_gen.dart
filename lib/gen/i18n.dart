@@ -22,8 +22,10 @@ class ChromeI18N {
    * Gets the accept-languages of the browser. This is different from the locale
    * used by the browser; to get the locale, use `window.navigator.language`.
    */
-  Future getAcceptLanguages() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getAcceptLanguages() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['i18n'].callMethod('getAcceptLanguages', [completer.callback]);
     return completer.future;
   }
@@ -40,7 +42,7 @@ class ChromeI18N {
    * 
    * [substitutions] Up to 9 substitution strings, if the message requires any.
    */
-  String getMessage(String messageName, dynamic substitutions) {
+  String getMessage(String messageName, var substitutions) {
     return chrome['i18n'].callMethod('getMessage', [messageName, substitutions]);
   }
 }

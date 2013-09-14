@@ -34,8 +34,10 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future get(int windowId, dynamic getInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> get(int windowId, var getInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['windows'].callMethod('get', [windowId, getInfo, completer.callback]);
     return completer.future;
   }
@@ -45,8 +47,10 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future getCurrent(dynamic getInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getCurrent(var getInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['windows'].callMethod('getCurrent', [getInfo, completer.callback]);
     return completer.future;
   }
@@ -57,8 +61,10 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future getLastFocused(dynamic getInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getLastFocused(var getInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['windows'].callMethod('getLastFocused', [getInfo, completer.callback]);
     return completer.future;
   }
@@ -68,8 +74,10 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future getAll(dynamic getInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getAll(var getInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['windows'].callMethod('getAll', [getInfo, completer.callback]);
     return completer.future;
   }
@@ -78,8 +86,10 @@ class ChromeWindows {
    * Creates (opens) a new browser with any optional sizing, position or default
    * URL provided.
    */
-  Future create(dynamic createData) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> create(var createData) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['windows'].callMethod('create', [createData, completer.callback]);
     return completer.future;
   }
@@ -88,8 +98,10 @@ class ChromeWindows {
    * Updates the properties of a window. Specify only the properties that you
    * want to change; unspecified properties will be left unchanged.
    */
-  Future update(int windowId, dynamic updateInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> update(int windowId, var updateInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['windows'].callMethod('update', [windowId, updateInfo, completer.callback]);
     return completer.future;
   }
@@ -103,15 +115,21 @@ class ChromeWindows {
     return completer.future;
   }
 
+  final ChromeStreamController _onCreated = null;
+
   /**
    * Fired when a window is created.
    */
-  Stream get onCreated => null;
+  Stream get onCreated => _onCreated.stream;
+
+  final ChromeStreamController _onRemoved = null;
 
   /**
    * Fired when a window is removed (closed).
    */
-  Stream get onRemoved => null;
+  Stream get onRemoved => _onRemoved.stream;
+
+  final ChromeStreamController _onFocusChanged = null;
 
   /**
    * Fired when the currently focused window changes. Will be
@@ -119,5 +137,5 @@ class ChromeWindows {
    * On some Linux window managers, WINDOW_ID_NONE will always be sent
    * immediately preceding a switch from one chrome window to another.
    */
-  Stream get onFocusChanged => null;
+  Stream get onFocusChanged => _onFocusChanged.stream;
 }

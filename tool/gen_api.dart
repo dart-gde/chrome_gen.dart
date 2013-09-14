@@ -10,8 +10,8 @@ import 'json_parser.dart';
 import 'idl_model.dart';
 import 'translation.dart';
 import 'translator_dartjs.dart';
-import 'utils.dart';
 import 'web_idl_parser.dart';
+import 'src/utils.dart';
 
 void main() {
   ArgParser parser = _createArgsParser();

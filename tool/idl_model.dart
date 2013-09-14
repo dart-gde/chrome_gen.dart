@@ -2,11 +2,16 @@
 library idl_model;
 
 class IDLNamespace {
+  /// The IDL namespace name, generally something like 'commandLinePrivate'.
   String name;
+
   String description;
+
   List<IDLFunction> functions = [];
   List<IDLEvent> events = [];
   List<IDLProperty> properties = [];
+
+  String toString() => name;
 }
 
 class IDLFunction {
@@ -37,27 +42,27 @@ class IDLFunction {
 
   bool get usesCallback => !parameters.isEmpty && parameters.last.isCallback;
 
+  IDLParameter get callbackParamType => parameters.last;
+
   bool get returns {
     if (usesCallback) {
       return false;
     }
-    return calculateReturnType() != 'void';
+
+    return returnType != null;
   }
 
-  String calculateReturnType() {
-    if (usesCallback) {
-      return 'Future';
-    } else {
-      return returnType.dartName;
-    }
-  }
+  String toString() => "${name}()";
 }
 
 class IDLEvent {
   String name;
   String description;
+  List<IDLParameter> params = [];
 
   IDLEvent(this.name);
+
+  String toString() => name;
 }
 
 class IDLParameter {
@@ -66,11 +71,13 @@ class IDLParameter {
   String description;
   bool optional;
 
+  List<IDLParameter> params = [];
+
   IDLParameter(this.name);
 
-  bool get isCallback => name == 'callback';
+  bool get isCallback => name == 'callback' || name == 'responseCallback';
 
-  String toString() => "${type.dartName} ${name}";
+  String toString() => "${type} ${name}";
 }
 
 class IDLProperty {
@@ -80,36 +87,45 @@ class IDLProperty {
 
   IDLProperty(this.name);
 
-  String calculateReturnType() {
-    return returnType != null ? returnType.dartName : "dynamic";
-  }
+  String toString() => name;
 }
 
 class IDLType {
-  static IDLType VOID = new IDLType.fromDartName('void');
-  static IDLType VAR = new IDLType.fromDartName('var');
+  static IDLType VAR = new IDLType('any');
 
-  String dartName;
+  /// The type name, i.e. string, integer, boolean, object, ...
+  String name;
 
-  IDLType(String idlTypeName) {
-    dartName = _calcDartName(idlTypeName);
+  /// Additional type info, from the $ref field. e.g. 'runtime.Port'
+  String refName;
+
+  factory IDLType(String name) {
+    if (name == null) {
+      return null;
+    } else {
+      return new IDLType._(name);
+    }
   }
 
-  IDLType.fromDartName(this.dartName);
-
-  String _calcDartName(String idlTypeName) {
-    if (idlTypeName == 'string') {
-      return 'String';
+  factory IDLType.fromMap(Map m) {
+    if (!m.containsKey('type') && !m.containsKey(r'$ref')) {
+      return null;
+    } else if (m.containsKey(r'$ref')) {
+      return new IDLType.fromRef(m[r'$ref']);
+    } else {
+      return new IDLType._(m['type']);
     }
-
-    if (idlTypeName == 'integer') {
-      return 'int';
-    }
-
-    if (idlTypeName == 'boolean') {
-      return 'bool';
-    }
-
-    return 'dynamic';
   }
+
+  IDLType.fromRef(this.refName) {
+    name = 'object';
+  }
+
+  IDLType._(this.name);
+
+  bool get isFunction => name == 'function';
+  bool get isObject => name == 'object';
+  bool get isArray => name == 'array';
+
+  String toString() => name;
 }

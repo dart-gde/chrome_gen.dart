@@ -22,8 +22,10 @@ class ChromeManagement {
   /**
    * Returns a list of information about installed extensions and apps.
    */
-  Future getAll() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getAll() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['management'].callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -34,8 +36,10 @@ class ChromeManagement {
    * 
    * [id] The ID from an item of [ExtensionInfo.]
    */
-  Future get(String id) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> get(String id) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['management'].callMethod('get', [id, completer.callback]);
     return completer.future;
   }
@@ -46,8 +50,10 @@ class ChromeManagement {
    * 
    * [id] The ID of an already installed extension.
    */
-  Future getPermissionWarningsById(String id) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getPermissionWarningsById(String id) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['management'].callMethod('getPermissionWarningsById', [id, completer.callback]);
     return completer.future;
   }
@@ -59,8 +65,10 @@ class ChromeManagement {
    * 
    * [manifestStr] Extension manifest JSON string.
    */
-  Future getPermissionWarningsByManifest(String manifestStr) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getPermissionWarningsByManifest(String manifestStr) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['management'].callMethod('getPermissionWarningsByManifest', [manifestStr, completer.callback]);
     return completer.future;
   }
@@ -83,7 +91,7 @@ class ChromeManagement {
    * 
    * [id] This should be the id from an item of [ExtensionInfo.]
    */
-  Future uninstall(String id, dynamic options) {
+  Future uninstall(String id, var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['management'].callMethod('uninstall', [id, options, completer.callback]);
     return completer.future;
@@ -93,7 +101,7 @@ class ChromeManagement {
    * Uninstalls the calling extension. Note: This function can be used without
    * requesting the 'management' permission in the manifest.
    */
-  Future uninstallSelf(dynamic options) {
+  Future uninstallSelf(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['management'].callMethod('uninstallSelf', [options, completer.callback]);
     return completer.future;
@@ -110,23 +118,31 @@ class ChromeManagement {
     return completer.future;
   }
 
+  final ChromeStreamController _onInstalled = null;
+
   /**
    * Fired when an app or extension has been installed.
    */
-  Stream get onInstalled => null;
+  Stream get onInstalled => _onInstalled.stream;
+
+  final ChromeStreamController _onUninstalled = null;
 
   /**
    * Fired when an app or extension has been uninstalled.
    */
-  Stream get onUninstalled => null;
+  Stream get onUninstalled => _onUninstalled.stream;
+
+  final ChromeStreamController _onEnabled = null;
 
   /**
    * Fired when an app or extension has been enabled.
    */
-  Stream get onEnabled => null;
+  Stream get onEnabled => _onEnabled.stream;
+
+  final ChromeStreamController _onDisabled = null;
 
   /**
    * Fired when an app or extension has been disabled.
    */
-  Stream get onDisabled => null;
+  Stream get onDisabled => _onDisabled.stream;
 }

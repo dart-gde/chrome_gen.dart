@@ -38,8 +38,10 @@ class ChromeBookmarks {
    * 
    * [idOrIdList] A single string-valued id, or an array of string-valued ids
    */
-  Future get(var idOrIdList) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> get(var idOrIdList) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['bookmarks'].callMethod('get', [idOrIdList, completer.callback]);
     return completer.future;
   }
@@ -47,8 +49,10 @@ class ChromeBookmarks {
   /**
    * Retrieves the children of the specified BookmarkTreeNode id.
    */
-  Future getChildren(String id) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getChildren(String id) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['bookmarks'].callMethod('getChildren', [id, completer.callback]);
     return completer.future;
   }
@@ -58,8 +62,10 @@ class ChromeBookmarks {
    * 
    * [numberOfItems] The maximum number of items to return.
    */
-  Future getRecent(int numberOfItems) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getRecent(int numberOfItems) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['bookmarks'].callMethod('getRecent', [numberOfItems, completer.callback]);
     return completer.future;
   }
@@ -67,8 +73,10 @@ class ChromeBookmarks {
   /**
    * Retrieves the entire Bookmarks hierarchy.
    */
-  Future getTree() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getTree() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['bookmarks'].callMethod('getTree', [completer.callback]);
     return completer.future;
   }
@@ -78,8 +86,10 @@ class ChromeBookmarks {
    * 
    * [id] The ID of the root of the subtree to retrieve.
    */
-  Future getSubTree(String id) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getSubTree(String id) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['bookmarks'].callMethod('getSubTree', [id, completer.callback]);
     return completer.future;
   }
@@ -87,8 +97,10 @@ class ChromeBookmarks {
   /**
    * Searches for BookmarkTreeNodes matching the given query.
    */
-  Future search(String query) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> search(String query) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['bookmarks'].callMethod('search', [query, completer.callback]);
     return completer.future;
   }
@@ -97,8 +109,10 @@ class ChromeBookmarks {
    * Creates a bookmark or folder under the specified parentId.  If url is NULL
    * or missing, it will be a folder.
    */
-  Future create(dynamic bookmark) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> create(var bookmark) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['bookmarks'].callMethod('create', [bookmark, completer.callback]);
     return completer.future;
   }
@@ -106,8 +120,10 @@ class ChromeBookmarks {
   /**
    * Moves the specified BookmarkTreeNode to the provided location.
    */
-  Future move(String id, dynamic destination) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> move(String id, var destination) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['bookmarks'].callMethod('move', [id, destination, completer.callback]);
     return completer.future;
   }
@@ -117,8 +133,10 @@ class ChromeBookmarks {
    * that you want to change; unspecified properties will be left unchanged.
    * <b>Note:</b> Currently, only 'title' and 'url' are supported.
    */
-  Future update(String id, dynamic changes) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> update(String id, var changes) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['bookmarks'].callMethod('update', [id, changes, completer.callback]);
     return completer.future;
   }
@@ -159,44 +177,58 @@ class ChromeBookmarks {
     return completer.future;
   }
 
+  final ChromeStreamController _onCreated = null;
+
   /**
    * Fired when a bookmark or folder is created.
    */
-  Stream get onCreated => null;
+  Stream get onCreated => _onCreated.stream;
+
+  final ChromeStreamController _onRemoved = null;
 
   /**
    * Fired when a bookmark or folder is removed.  When a folder is removed
    * recursively, a single notification is fired for the folder, and none for
    * its contents.
    */
-  Stream get onRemoved => null;
+  Stream get onRemoved => _onRemoved.stream;
+
+  final ChromeStreamController _onChanged = null;
 
   /**
    * Fired when a bookmark or folder changes.  <b>Note:</b> Currently, only
    * title and url changes trigger this.
    */
-  Stream get onChanged => null;
+  Stream get onChanged => _onChanged.stream;
+
+  final ChromeStreamController _onMoved = null;
 
   /**
    * Fired when a bookmark or folder is moved to a different parent folder.
    */
-  Stream get onMoved => null;
+  Stream get onMoved => _onMoved.stream;
+
+  final ChromeStreamController _onChildrenReordered = null;
 
   /**
    * Fired when the children of a folder have changed their order due to the
    * order being sorted in the UI.  This is not called as a result of a move().
    */
-  Stream get onChildrenReordered => null;
+  Stream get onChildrenReordered => _onChildrenReordered.stream;
+
+  final ChromeStreamController _onImportBegan = null;
 
   /**
    * Fired when a bookmark import session is begun.  Expensive observers should
    * ignore onCreated updates until onImportEnded is fired.  Observers should
    * still handle other notifications immediately.
    */
-  Stream get onImportBegan => null;
+  Stream get onImportBegan => _onImportBegan.stream;
+
+  final ChromeStreamController _onImportEnded = null;
 
   /**
    * Fired when a bookmark import session is ended.
    */
-  Stream get onImportEnded => null;
+  Stream get onImportEnded => _onImportEnded.stream;
 }

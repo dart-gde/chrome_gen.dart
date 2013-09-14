@@ -1,10 +1,6 @@
 {
   "classNames" : {
-    "i18n" : "I18N",
-    "ime": "IME",
-    "input_ime": "InputIME",
-    "tts": "TTS",
-    "tts_engine": "TTSEngine"
+    "i18n" : "I18N"
   }
 
 }

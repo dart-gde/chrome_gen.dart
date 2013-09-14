@@ -40,8 +40,12 @@ class ChromeExtension {
    * [extensionId] The extension ID of the extension you want to connect to. If
    * omitted, default is your own extension.
    */
-  void sendRequest(String extensionId, dynamic request, dynamic responseCallback) {
-    chrome['extension'].callMethod('sendRequest', [extensionId, request, responseCallback]);
+  Future<dynamic> sendRequest(String extensionId, var request) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
+    chrome['extension'].callMethod('sendRequest', [extensionId, request, completer.callback]);
+    return completer.future;
   }
 
   /**
@@ -59,7 +63,7 @@ class ChromeExtension {
    * Returns an array of the JavaScript 'window' objects for each of the pages
    * running inside the current extension.
    */
-  dynamic getViews(dynamic fetchProperties) {
+  dynamic getViews(var fetchProperties) {
     return chrome['extension'].callMethod('getViews', [fetchProperties]);
   }
 
@@ -86,8 +90,8 @@ class ChromeExtension {
    * Retrieves the state of the extension's access to Incognito-mode (as
    * determined by the user-controlled 'Allowed in Incognito' checkbox.
    */
-  Future isAllowedIncognitoAccess() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> isAllowedIncognitoAccess() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['extension'].callMethod('isAllowedIncognitoAccess', [completer.callback]);
     return completer.future;
   }
@@ -96,8 +100,8 @@ class ChromeExtension {
    * Retrieves the state of the extension's access to the 'file://' scheme (as
    * determined by the user-controlled 'Allow access to File URLs' checkbox.
    */
-  Future isAllowedFileSchemeAccess() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> isAllowedFileSchemeAccess() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['extension'].callMethod('isAllowedFileSchemeAccess', [completer.callback]);
     return completer.future;
   }
@@ -111,13 +115,17 @@ class ChromeExtension {
     chrome['extension'].callMethod('setUpdateUrlData', [data]);
   }
 
+  final ChromeStreamController _onRequest = null;
+
   /**
    * Deprecated: please use onMessage.
    */
-  Stream get onRequest => null;
+  Stream get onRequest => _onRequest.stream;
+
+  final ChromeStreamController _onRequestExternal = null;
 
   /**
    * Deprecated: please use onMessageExternal.
    */
-  Stream get onRequestExternal => null;
+  Stream get onRequestExternal => _onRequestExternal.stream;
 }

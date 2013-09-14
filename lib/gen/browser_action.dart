@@ -23,15 +23,15 @@ class ChromeBrowserAction {
   /**
    * Sets the title of the browser action. This shows up in the tooltip.
    */
-  void setTitle(dynamic details) {
+  void setTitle(var details) {
     chrome['browser_action'].callMethod('setTitle', [details]);
   }
 
   /**
    * Gets the title of the browser action.
    */
-  Future getTitle(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> getTitle(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['browser_action'].callMethod('getTitle', [details, completer.callback]);
     return completer.future;
   }
@@ -42,7 +42,7 @@ class ChromeBrowserAction {
    * dictionary of either one of those. Either the <b>path</b> or the
    * <b>imageData</b> property must be specified.
    */
-  Future setIcon(dynamic details) {
+  Future setIcon(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['browser_action'].callMethod('setIcon', [details, completer.callback]);
     return completer.future;
@@ -52,15 +52,15 @@ class ChromeBrowserAction {
    * Sets the html document to be opened as a popup when the user clicks on the
    * browser action's icon.
    */
-  void setPopup(dynamic details) {
+  void setPopup(var details) {
     chrome['browser_action'].callMethod('setPopup', [details]);
   }
 
   /**
    * Gets the html document set as the popup for this browser action.
    */
-  Future getPopup(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> getPopup(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['browser_action'].callMethod('getPopup', [details, completer.callback]);
     return completer.future;
   }
@@ -69,7 +69,7 @@ class ChromeBrowserAction {
    * Sets the badge text for the browser action. The badge is displayed on top
    * of the icon.
    */
-  void setBadgeText(dynamic details) {
+  void setBadgeText(var details) {
     chrome['browser_action'].callMethod('setBadgeText', [details]);
   }
 
@@ -77,8 +77,8 @@ class ChromeBrowserAction {
    * Gets the badge text of the browser action. If no tab is specified, the
    * non-tab-specific badge text is returned.
    */
-  Future getBadgeText(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> getBadgeText(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['browser_action'].callMethod('getBadgeText', [details, completer.callback]);
     return completer.future;
   }
@@ -86,15 +86,17 @@ class ChromeBrowserAction {
   /**
    * Sets the background color for the badge.
    */
-  void setBadgeBackgroundColor(dynamic details) {
+  void setBadgeBackgroundColor(var details) {
     chrome['browser_action'].callMethod('setBadgeBackgroundColor', [details]);
   }
 
   /**
    * Gets the background color of the browser action.
    */
-  Future getBadgeBackgroundColor(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getBadgeBackgroundColor(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['browser_action'].callMethod('getBadgeBackgroundColor', [details, completer.callback]);
     return completer.future;
   }
@@ -118,9 +120,11 @@ class ChromeBrowserAction {
     chrome['browser_action'].callMethod('disable', [tabId]);
   }
 
+  final ChromeStreamController _onClicked = null;
+
   /**
    * Fired when a browser action icon is clicked.  This event will not fire if
    * the browser action has a popup.
    */
-  Stream get onClicked => null;
+  Stream get onClicked => _onClicked.stream;
 }

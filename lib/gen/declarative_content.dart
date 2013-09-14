@@ -18,5 +18,7 @@ final ChromeDeclarativeContent declarative_content = new ChromeDeclarativeConten
 class ChromeDeclarativeContent {
   ChromeDeclarativeContent._();
 
-  Stream get onPageChanged => null;
+  final ChromeStreamController _onPageChanged = null;
+
+  Stream get onPageChanged => _onPageChanged.stream;
 }

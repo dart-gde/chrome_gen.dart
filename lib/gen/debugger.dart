@@ -74,8 +74,10 @@ class ChromeDebugger {
    * callback will be called with no arguments and [runtime.lastError] will be
    * set to the error message.
    */
-  Future sendCommand(var target, String method, dynamic commandParams) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> sendCommand(var target, String method, var commandParams) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['debugger'].callMethod('sendCommand', [target, method, commandParams, completer.callback]);
     return completer.future;
   }
@@ -83,21 +85,27 @@ class ChromeDebugger {
   /**
    * Returns the list of available debug targets.
    */
-  Future getTargets() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getTargets() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['debugger'].callMethod('getTargets', [completer.callback]);
     return completer.future;
   }
 
+  final ChromeStreamController _onEvent = null;
+
   /**
    * Fired whenever debugging target issues instrumentation event.
    */
-  Stream get onEvent => null;
+  Stream get onEvent => _onEvent.stream;
+
+  final ChromeStreamController _onDetach = null;
 
   /**
    * Fired when browser terminates debugging session for the tab. This happens
    * when either the tab is being closed or Chrome DevTools is being invoked for
    * the attached tab.
    */
-  Stream get onDetach => null;
+  Stream get onDetach => _onDetach.stream;
 }

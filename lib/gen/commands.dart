@@ -25,14 +25,18 @@ class ChromeCommands {
    * 
    * [callback] Called to return the registered commands.
    */
-  Future getAll() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getAll() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['commands'].callMethod('getAll', [completer.callback]);
     return completer.future;
   }
 
+  final ChromeStreamController _onCommand = null;
+
   /**
    * Fired when a registered command is activated using a keyboard shortcut.
    */
-  Stream get onCommand => null;
+  Stream get onCommand => _onCommand.stream;
 }

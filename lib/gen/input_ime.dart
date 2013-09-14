@@ -26,8 +26,8 @@ class ChromeInputIme {
    * [callback] Called when the operation completes with a boolean indicating if
    * the text was accepted or not. On failure, chrome.runtime.lastError is set.
    */
-  Future setComposition(dynamic parameters) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> setComposition(var parameters) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['input_ime'].callMethod('setComposition', [parameters, completer.callback]);
     return completer.future;
   }
@@ -39,8 +39,8 @@ class ChromeInputIme {
    * [callback] Called when the operation completes with a boolean indicating if
    * the text was accepted or not. On failure, chrome.runtime.lastError is set.
    */
-  Future clearComposition(dynamic parameters) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> clearComposition(var parameters) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['input_ime'].callMethod('clearComposition', [parameters, completer.callback]);
     return completer.future;
   }
@@ -51,8 +51,8 @@ class ChromeInputIme {
    * [callback] Called when the operation completes with a boolean indicating if
    * the text was accepted or not. On failure, chrome.runtime.lastError is set.
    */
-  Future commitText(dynamic parameters) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> commitText(var parameters) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['input_ime'].callMethod('commitText', [parameters, completer.callback]);
     return completer.future;
   }
@@ -63,8 +63,8 @@ class ChromeInputIme {
    * 
    * [callback] Called when the operation completes.
    */
-  Future setCandidateWindowProperties(dynamic parameters) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> setCandidateWindowProperties(var parameters) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['input_ime'].callMethod('setCandidateWindowProperties', [parameters, completer.callback]);
     return completer.future;
   }
@@ -75,8 +75,8 @@ class ChromeInputIme {
    * 
    * [callback] Called when the operation completes.
    */
-  Future setCandidates(dynamic parameters) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> setCandidates(var parameters) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['input_ime'].callMethod('setCandidates', [parameters, completer.callback]);
     return completer.future;
   }
@@ -87,8 +87,8 @@ class ChromeInputIme {
    * 
    * [callback] Called when the operation completes
    */
-  Future setCursorPosition(dynamic parameters) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> setCursorPosition(var parameters) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     chrome['input_ime'].callMethod('setCursorPosition', [parameters, completer.callback]);
     return completer.future;
   }
@@ -98,7 +98,7 @@ class ChromeInputIme {
    * 
    * [callback]
    */
-  Future setMenuItems(dynamic parameters) {
+  Future setMenuItems(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['input_ime'].callMethod('setMenuItems', [parameters, completer.callback]);
     return completer.future;
@@ -109,7 +109,7 @@ class ChromeInputIme {
    * 
    * [callback] Called when the operation completes
    */
-  Future updateMenuItems(dynamic parameters) {
+  Future updateMenuItems(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['input_ime'].callMethod('updateMenuItems', [parameters, completer.callback]);
     return completer.future;
@@ -120,7 +120,7 @@ class ChromeInputIme {
    * 
    * [callback] Called when the operation completes.
    */
-  Future deleteSurroundingText(dynamic parameters) {
+  Future deleteSurroundingText(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['input_ime'].callMethod('deleteSurroundingText', [parameters, completer.callback]);
     return completer.future;
@@ -139,61 +139,81 @@ class ChromeInputIme {
     chrome['input_ime'].callMethod('keyEventHandled', [requestId, response]);
   }
 
+  final ChromeStreamController _onActivate = null;
+
   /**
    * This event is sent when an IME is activated. It signals that the IME will
    * be receiving onKeyPress events.
    */
-  Stream get onActivate => null;
+  Stream get onActivate => _onActivate.stream;
+
+  final ChromeStreamController _onDeactivated = null;
 
   /**
    * This event is sent when an IME is deactivated. It signals that the IME will
    * no longer be receiving onKeyPress events.
    */
-  Stream get onDeactivated => null;
+  Stream get onDeactivated => _onDeactivated.stream;
+
+  final ChromeStreamController _onFocus = null;
 
   /**
    * This event is sent when focus enters a text box. It is sent to all
    * extensions that are listening to this event, and enabled by the user.
    */
-  Stream get onFocus => null;
+  Stream get onFocus => _onFocus.stream;
+
+  final ChromeStreamController _onBlur = null;
 
   /**
    * This event is sent when focus leaves a text box. It is sent to all
    * extensions that are listening to this event, and enabled by the user.
    */
-  Stream get onBlur => null;
+  Stream get onBlur => _onBlur.stream;
+
+  final ChromeStreamController _onInputContextUpdate = null;
 
   /**
    * This event is sent when the properties of the current InputContext change,
    * such as the the type. It is sent to all extensions that are listening to
    * this event, and enabled by the user.
    */
-  Stream get onInputContextUpdate => null;
+  Stream get onInputContextUpdate => _onInputContextUpdate.stream;
+
+  final ChromeStreamController _onKeyEvent = null;
 
   /**
    * This event is sent if this extension owns the active IME.
    */
-  Stream get onKeyEvent => null;
+  Stream get onKeyEvent => _onKeyEvent.stream;
+
+  final ChromeStreamController _onCandidateClicked = null;
 
   /**
    * This event is sent if this extension owns the active IME.
    */
-  Stream get onCandidateClicked => null;
+  Stream get onCandidateClicked => _onCandidateClicked.stream;
+
+  final ChromeStreamController _onMenuItemActivated = null;
 
   /**
    * Called when the user selects a menu item
    */
-  Stream get onMenuItemActivated => null;
+  Stream get onMenuItemActivated => _onMenuItemActivated.stream;
+
+  final ChromeStreamController _onSurroundingTextChanged = null;
 
   /**
    * Called when the editable string around caret is changed or when the caret
    * position is moved. The text length is limited to 100 characters for each
    * back and forth direction.
    */
-  Stream get onSurroundingTextChanged => null;
+  Stream get onSurroundingTextChanged => _onSurroundingTextChanged.stream;
+
+  final ChromeStreamController _onReset = null;
 
   /**
    * This event is sent when chrome terminates ongoing text input session.
    */
-  Stream get onReset => null;
+  Stream get onReset => _onReset.stream;
 }

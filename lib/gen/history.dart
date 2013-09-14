@@ -24,8 +24,10 @@ class ChromeHistory {
    * Searches the history for the last visit time of each page matching the
    * query.
    */
-  Future search(dynamic query) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> search(var query) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['history'].callMethod('search', [query, completer.callback]);
     return completer.future;
   }
@@ -33,8 +35,10 @@ class ChromeHistory {
   /**
    * Retrieves information about visits to a URL.
    */
-  Future getVisits(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getVisits(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['history'].callMethod('getVisits', [details, completer.callback]);
     return completer.future;
   }
@@ -43,7 +47,7 @@ class ChromeHistory {
    * Adds a URL to the history at the current time with a [transition
    * type](#transition_types) of "link".
    */
-  Future addUrl(dynamic details) {
+  Future addUrl(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['history'].callMethod('addUrl', [details, completer.callback]);
     return completer.future;
@@ -52,7 +56,7 @@ class ChromeHistory {
   /**
    * Removes all occurrences of the given URL from the history.
    */
-  Future deleteUrl(dynamic details) {
+  Future deleteUrl(var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['history'].callMethod('deleteUrl', [details, completer.callback]);
     return completer.future;
@@ -63,7 +67,7 @@ class ChromeHistory {
    * will not be removed from the history unless all visits fall within the
    * range.
    */
-  Future deleteRange(dynamic range) {
+  Future deleteRange(var range) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     chrome['history'].callMethod('deleteRange', [range, completer.callback]);
     return completer.future;
@@ -78,15 +82,19 @@ class ChromeHistory {
     return completer.future;
   }
 
+  final ChromeStreamController _onVisited = null;
+
   /**
    * Fired when a URL is visited, providing the HistoryItem data for that URL.
    * This event fires before the page has loaded.
    */
-  Stream get onVisited => null;
+  Stream get onVisited => _onVisited.stream;
+
+  final ChromeStreamController _onVisitRemoved = null;
 
   /**
    * Fired when one or more URLs are removed from the history service.  When all
    * visits have been removed the URL is purged from history.
    */
-  Stream get onVisitRemoved => null;
+  Stream get onVisitRemoved => _onVisitRemoved.stream;
 }

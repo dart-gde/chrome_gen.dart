@@ -37,8 +37,10 @@ class ChromeDevtoolsPanels {
    * 
    * [callback] A function that is called when the panel is created.
    */
-  Future create(String title, String iconPath, String pagePath) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> create(String title, String iconPath, String pagePath) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['devtools_panels'].callMethod('create', [title, iconPath, pagePath, completer.callback]);
     return completer.future;
   }
@@ -52,8 +54,10 @@ class ChromeDevtoolsPanels {
    * resource link in Developer Tools window. Note that if the user clicks an
    * invalid URL or an XHR, this function is not called.
    */
-  Future setOpenResourceHandler() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> setOpenResourceHandler() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['devtools_panels'].callMethod('setOpenResourceHandler', [completer.callback]);
     return completer.future;
   }

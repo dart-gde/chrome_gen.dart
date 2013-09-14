@@ -23,20 +23,26 @@ class ChromeDevtoolsNetwork {
    * 
    * [callback] A function that receives the HAR log when the request completes.
    */
-  Future getHAR() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getHAR() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['devtools_network'].callMethod('getHAR', [completer.callback]);
     return completer.future;
   }
+
+  final ChromeStreamController _onRequestFinished = null;
 
   /**
    * Fired when a network request is finished and all request data are
    * available.
    */
-  Stream get onRequestFinished => null;
+  Stream get onRequestFinished => _onRequestFinished.stream;
+
+  final ChromeStreamController _onNavigated = null;
 
   /**
    * Fired when the inspected window navigates to a new page.
    */
-  Stream get onNavigated => null;
+  Stream get onNavigated => _onNavigated.stream;
 }

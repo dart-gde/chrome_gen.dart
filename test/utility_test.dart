@@ -3,7 +3,7 @@ library utility_test;
 
 import 'package:unittest/unittest.dart';
 
-import '../tool/utils.dart';
+import '../tool/src/utils.dart';
 
 main() {
   group('utility.dart', () {

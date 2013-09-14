@@ -28,8 +28,10 @@ class ChromeStorage {
    */
   dynamic get local => chrome['storage']['local'];
 
+  final ChromeStreamController _onChanged = null;
+
   /**
    * Fired when one or more items change.
    */
-  Stream get onChanged => null;
+  Stream get onChanged => _onChanged.stream;
 }

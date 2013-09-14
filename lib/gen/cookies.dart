@@ -26,8 +26,10 @@ class ChromeCookies {
    * 
    * [details] Details to identify the cookie being retrieved.
    */
-  Future get(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> get(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['cookies'].callMethod('get', [details, completer.callback]);
     return completer.future;
   }
@@ -40,8 +42,10 @@ class ChromeCookies {
    * 
    * [details] Information to filter the cookies being retrieved.
    */
-  Future getAll(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getAll(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['cookies'].callMethod('getAll', [details, completer.callback]);
     return completer.future;
   }
@@ -52,8 +56,10 @@ class ChromeCookies {
    * 
    * [details] Details about the cookie being set.
    */
-  Future set(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> set(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['cookies'].callMethod('set', [details, completer.callback]);
     return completer.future;
   }
@@ -63,8 +69,10 @@ class ChromeCookies {
    * 
    * [details] Information to identify the cookie to remove.
    */
-  Future remove(dynamic details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> remove(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['cookies'].callMethod('remove', [details, completer.callback]);
     return completer.future;
   }
@@ -72,11 +80,15 @@ class ChromeCookies {
   /**
    * Lists all existing cookie stores.
    */
-  Future getAllCookieStores() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getAllCookieStores() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     chrome['cookies'].callMethod('getAllCookieStores', [completer.callback]);
     return completer.future;
   }
+
+  final ChromeStreamController _onChanged = null;
 
   /**
    * Fired when a cookie is set or removed. As a special case, note that
@@ -85,5 +97,5 @@ class ChromeCookies {
    * with "cause" of "overwrite" .  Afterwards, a new cookie is written with the
    * updated values, generating a second notification with "cause" "explicit".
    */
-  Stream get onChanged => null;
+  Stream get onChanged => _onChanged.stream;
 }
