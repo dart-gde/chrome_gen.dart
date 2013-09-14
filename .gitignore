@@ -8,3 +8,5 @@ dist/
 *.js.map
 *.js.deps
 docs/
+docs/app/
+docs/ext/

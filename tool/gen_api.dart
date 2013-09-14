@@ -79,7 +79,6 @@ class GenApiFile {
     outFile.writeAsStringSync(
         translator.translate(namespace, license: LICENSE, sourceFilePath: getFileName(inFile)));
   }
-
 }
 
 // args handling
