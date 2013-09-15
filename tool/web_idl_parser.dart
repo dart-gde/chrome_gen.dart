@@ -378,9 +378,9 @@ class WebIdlParser extends LanguageParsers {
                 | (reserved["DOMString"] + rec(typeSuffix)).list
                 | (identifier + rec(typeSuffix)).list
                 | (reserved["sequence"]
-                + reserved["<"]
+                + symbol("<")
                 + rec(type)
-                + reserved[">"]
+                + symbol(">")
                 + rec(nullStmt)).list
                 | (reserved["object"] + rec(typeSuffix)).list
                 | (reserved["Date"] + rec(typeSuffix)).list;
