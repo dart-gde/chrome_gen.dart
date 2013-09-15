@@ -8,6 +8,11 @@ import '../tool/web_idl_parser.dart';
 // [widlproc](https://github.com/dontcallmedom/widlproc/tree/master/test)
 
 void main() {
+  defineTests();
+}
+
+// TODO: remove this includeWebIdl flag
+void defineTests({bool includeWebIdl: true}) {
   Directory testDir = new Directory(
       Platform.script.substring(0, Platform.script.lastIndexOf('/')));
 
@@ -31,17 +36,19 @@ void main() {
   chromeIdlFileEntities.removeWhere(packagesRemoveTest);
   chromeIdlFileEntities.removeWhere(chromeNonIdlFilesRemoveTest);
 
-  group('Test valid web idl files', () {
-    // TODO: make async
-    validFileEntities.forEach((FileSystemEntity fileEntity) {
-      test('Testing ${fileEntity.path}', () {
-        File file = new File(fileEntity.path);
-        String webIdl = file.readAsStringSync();
-        WebIdlParser webIdlParser = new WebIdlParser();
-        webIdlParser.start.parse(webIdl);
+  if (includeWebIdl) {
+    group('Test valid web idl files', () {
+      // TODO: make async
+      validFileEntities.forEach((FileSystemEntity fileEntity) {
+        test('Testing ${fileEntity.path}', () {
+          File file = new File(fileEntity.path);
+          String webIdl = file.readAsStringSync();
+          WebIdlParser webIdlParser = new WebIdlParser();
+          webIdlParser.start.parse(webIdl);
+        });
       });
     });
-  });
+  }
 
   group('Test invalid web idl files', () {
     // TODO: make async
