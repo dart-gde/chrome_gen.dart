@@ -160,14 +160,24 @@ class WebIdlParser extends LanguageParsers {
 
   inheritance() => (reserved[":"] + identifier).list | spaces;
 
+  // chrome idl does not follow the WebIDL spec, enums should be string literal.
   enumStmt() => (reserved["enum"]
                 + identifier
                 + braces(rec(enumValueList))
+                + semi).list
+                | (reserved["enum"]
+                + identifier
+                + braces(rec(enumIdentifierList))
                 + semi).list;
 
   enumValueList() => (stringLiteral + rec(enumValues)).list;
 
   enumValues() => (symbol(",") + stringLiteral + rec(enumValues)).list | spaces;
+
+  // chrome idl does not follow the WebIDL spec, enums should be string literal.
+  enumIdentifierList() => (identifier + rec(enumIdentifiers)).list;
+
+  enumIdentifiers() => (symbol(",") + identifier + rec(enumIdentifiers)).list | spaces;
 
   callbackRest() => (identifier
                     + symbol('=')
@@ -378,9 +388,9 @@ class WebIdlParser extends LanguageParsers {
                 | (reserved["DOMString"] + rec(typeSuffix)).list
                 | (identifier + rec(typeSuffix)).list
                 | (reserved["sequence"]
-                + reserved["<"]
+                + symbol("<")
                 + rec(type)
-                + reserved[">"]
+                + symbol(">")
                 + rec(nullStmt)).list
                 | (reserved["object"] + rec(typeSuffix)).list
                 | (reserved["Date"] + rec(typeSuffix)).list;

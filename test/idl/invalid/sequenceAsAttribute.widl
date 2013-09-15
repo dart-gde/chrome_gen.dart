@@ -1,3 +1,9 @@
-interface sequenceAsAttribute {
-  attribute sequence<short> invalid;
-};
+// Disabled this idl cause its
+// syntax is correct but not 
+// valid in terms of generation 
+// from the webidl spec. 
+//interface sequenceAsAttribute {
+//  attribute sequence<short> invalid;
+//};
+
+XXXX;
