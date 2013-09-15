@@ -235,6 +235,12 @@ class WebIdlParser extends LanguageParsers {
                   + reserved["attribute"]
                   + rec(type)
                   + identifier
+                  + reserved[";"]).list
+                  | (qualifiers()
+                  + readOnly()
+                  + reserved["attribute"]
+                  + rec(type)
+                  + identifier
                   + reserved[";"]).list;
 
   inherit() => reserved["inherit"] | spaces;
