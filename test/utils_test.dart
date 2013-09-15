@@ -1,5 +1,5 @@
 
-library utility_test;
+library utils_test;
 
 import 'package:unittest/unittest.dart';
 

@@ -6,10 +6,9 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 
-import 'json_parser.dart';
-import 'idl_model.dart';
+import 'parser_json.dart';
+import 'model_idl.dart';
 import 'translation.dart';
-import 'translator_dartjs.dart';
 import 'web_idl_parser.dart';
 import 'src/utils.dart';
 

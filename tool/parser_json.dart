@@ -1,9 +1,9 @@
 /// A library to parse web json API definitions into IDL model objects.
-library json.parser;
+library parser_json;
 
 import 'dart:convert';
 
-import 'idl_model.dart';
+import 'model_idl.dart';
 import 'src/utils.dart';
 
 /**

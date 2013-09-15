@@ -1,5 +1,5 @@
 
-library idl_model;
+library model_idl;
 
 class IDLNamespace {
   /// The IDL namespace name, generally something like 'commandLinePrivate'.

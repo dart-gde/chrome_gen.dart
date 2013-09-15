@@ -3,7 +3,7 @@ library translation_test;
 
 import 'package:unittest/unittest.dart';
 
-import '../tool/idl_model.dart';
+import '../tool/model_idl.dart';
 import '../tool/translation.dart';
 
 main() {

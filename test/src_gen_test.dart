@@ -1,9 +1,9 @@
 
-library generate_dart_test;
+library src_gen_test;
 
 import 'package:unittest/unittest.dart';
 
-import '../tool/src/generate_dart.dart';
+import '../tool/src/src_gen.dart';
 
 main() {
   group('generate_dart', () {

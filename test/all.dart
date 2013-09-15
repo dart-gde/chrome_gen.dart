@@ -1,18 +1,18 @@
 
 library all_test;
 
-import 'generate_dart_test.dart' as generate_dart_test;
-import 'json_parser_test.dart' as json_parser_test;
+import 'parser_json_test.dart' as parser_json_test;
+import 'src_gen_test.dart' as src_gen_test;
 import 'translation_test.dart' as translation_test;
-import 'utility_test.dart' as utility_test;
-import 'web_idl_files_test.dart' as test_web_idl_files;
-import 'web_idl_test.dart' as test_web_idl;
+import 'utils_test.dart' as utils_test;
+//import 'web_idl_files_test.dart' as test_web_idl_files;
+//import 'web_idl_test.dart' as test_web_idl;
 
 main() {
-  generate_dart_test.main();
-  json_parser_test.main();
+  parser_json_test.main();
+  src_gen_test.main();
   translation_test.main();
-  utility_test.main();
+  utils_test.main();
   // TODO: reenable these tests
   //test_web_idl_files.main();
   //test_web_idl.main();

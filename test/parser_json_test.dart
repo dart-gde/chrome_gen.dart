@@ -1,12 +1,12 @@
 
-library json_parser_test;
+library parser_json_test;
 
 import 'dart:io';
 
 import 'package:unittest/unittest.dart';
 
-import '../tool/idl_model.dart';
-import '../tool/json_parser.dart';
+import '../tool/model_idl.dart';
+import '../tool/parser_json.dart';
 
 main() {
   group('json_parser', () {

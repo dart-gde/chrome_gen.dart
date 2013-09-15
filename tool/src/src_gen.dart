@@ -3,7 +3,7 @@
 // in the LICENSE file.
 
 /// A library to generate Dart source code.
-library generate_dart;
+library src_gen;
 
 final int RUNE_SPACE = 32;
 final int RUNE_EOL = 10;

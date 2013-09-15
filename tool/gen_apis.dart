@@ -9,7 +9,7 @@ import 'dart:convert';
 
 import 'gen_api.dart';
 import 'translation.dart';
-import 'src/generate_dart.dart';
+import 'src/src_gen.dart';
 import 'src/utils.dart';
 
 void main() {
