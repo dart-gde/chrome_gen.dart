@@ -216,7 +216,7 @@ class WebIdlParser extends LanguageParsers {
                     | reserved["false"];
 
   floatLiteralWebIdl() => floatLiteral
-                        | (reserved["-"] + reserved["Infinity"]).list
+                        | (symbol("-") + reserved["Infinity"]).list
                         | reserved["Infinity"]
                         | reserved["NaN"];
 
