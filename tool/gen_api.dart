@@ -62,13 +62,9 @@ class GenApiFile {
       namespace = new IDLNamespace();
       namespace.name = fileName.substring(0, fileName.indexOf('.'));
       namespace.name = namespace.name.replaceAll('_', '.');
-      try {
-        webIdlParser.start.parse(inFile.readAsStringSync());
-        // TODO: this parse will produce a model...
-
-      } catch (e) {
-        // TODO: change this to allow the throw to kill generation
-        print("  ${e}");
+      List tokens = webIdlParser.start.parse(inFile.readAsStringSync());
+      if (_parseNamespace(tokens) != null) {
+        namespace.name = _parseNamespace(tokens);
       }
     }
 
@@ -77,6 +73,17 @@ class GenApiFile {
     Translator translator = new DartJSTranslator(context);
     outFile.writeAsStringSync(
         translator.translate(namespace, license: LICENSE, sourceFilePath: getFileName(inFile)));
+  }
+
+  String _parseNamespace(List tokens) {
+    for (int i = 0; i < tokens.length; i++) {
+      if (tokens[i] == 'namespace' && i + 1 < tokens.length) {
+        List ns = tokens[i + 1];
+        return ns.join('.');
+      }
+    }
+
+    return null;
   }
 }
 

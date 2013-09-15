@@ -4,17 +4,17 @@
 
 /* This file has been generated from desktop_capture.idl - do not edit */
 
-library chrome.desktop_capture;
+library chrome.desktopCapture;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.desktop.capture` namespace.
-final ChromeDesktopCapture desktop_capture = new ChromeDesktopCapture._();
+/// Accessor for the `chrome.desktopCapture` namespace.
+final ChromeDesktopCapture desktopCapture = new ChromeDesktopCapture._();
 
 class ChromeDesktopCapture {
-  JsObject _desktop_capture;
+  JsObject _desktopCapture;
 
   ChromeDesktopCapture._() {
-    _desktop_capture = context['chrome']['desktop']['capture'];
+    _desktopCapture = context['chrome']['desktopCapture'];
   }
 }

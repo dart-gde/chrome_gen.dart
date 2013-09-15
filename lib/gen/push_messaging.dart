@@ -4,17 +4,17 @@
 
 /* This file has been generated from push_messaging.idl - do not edit */
 
-library chrome.push_messaging;
+library chrome.pushMessaging;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.push.messaging` namespace.
-final ChromePushMessaging push_messaging = new ChromePushMessaging._();
+/// Accessor for the `chrome.pushMessaging` namespace.
+final ChromePushMessaging pushMessaging = new ChromePushMessaging._();
 
 class ChromePushMessaging {
-  JsObject _push_messaging;
+  JsObject _pushMessaging;
 
   ChromePushMessaging._() {
-    _push_messaging = context['chrome']['push']['messaging'];
+    _pushMessaging = context['chrome']['pushMessaging'];
   }
 }

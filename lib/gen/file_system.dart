@@ -4,17 +4,17 @@
 
 /* This file has been generated from file_system.idl - do not edit */
 
-library chrome.file_system;
+library chrome.fileSystem;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.file.system` namespace.
-final ChromeFileSystem file_system = new ChromeFileSystem._();
+/// Accessor for the `chrome.fileSystem` namespace.
+final ChromeFileSystem fileSystem = new ChromeFileSystem._();
 
 class ChromeFileSystem {
-  JsObject _file_system;
+  JsObject _fileSystem;
 
   ChromeFileSystem._() {
-    _file_system = context['chrome']['file']['system'];
+    _fileSystem = context['chrome']['fileSystem'];
   }
 }

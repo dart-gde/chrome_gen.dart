@@ -4,17 +4,17 @@
 
 /* This file has been generated from sync_file_system.idl - do not edit */
 
-library chrome.sync_file_system;
+library chrome.syncFileSystem;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.sync.file.system` namespace.
-final ChromeSyncFileSystem sync_file_system = new ChromeSyncFileSystem._();
+/// Accessor for the `chrome.syncFileSystem` namespace.
+final ChromeSyncFileSystem syncFileSystem = new ChromeSyncFileSystem._();
 
 class ChromeSyncFileSystem {
-  JsObject _sync_file_system;
+  JsObject _syncFileSystem;
 
   ChromeSyncFileSystem._() {
-    _sync_file_system = context['chrome']['sync']['file']['system'];
+    _syncFileSystem = context['chrome']['syncFileSystem'];
   }
 }

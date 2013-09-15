@@ -4,17 +4,17 @@
 
 /* This file has been generated from media_galleries.idl - do not edit */
 
-library chrome.media_galleries;
+library chrome.mediaGalleries;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.media.galleries` namespace.
-final ChromeMediaGalleries media_galleries = new ChromeMediaGalleries._();
+/// Accessor for the `chrome.mediaGalleries` namespace.
+final ChromeMediaGalleries mediaGalleries = new ChromeMediaGalleries._();
 
 class ChromeMediaGalleries {
-  JsObject _media_galleries;
+  JsObject _mediaGalleries;
 
   ChromeMediaGalleries._() {
-    _media_galleries = context['chrome']['media']['galleries'];
+    _mediaGalleries = context['chrome']['mediaGalleries'];
   }
 }

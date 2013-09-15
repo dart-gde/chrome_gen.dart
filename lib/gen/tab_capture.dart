@@ -4,17 +4,17 @@
 
 /* This file has been generated from tab_capture.idl - do not edit */
 
-library chrome.tab_capture;
+library chrome.tabCapture;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.tab.capture` namespace.
-final ChromeTabCapture tab_capture = new ChromeTabCapture._();
+/// Accessor for the `chrome.tabCapture` namespace.
+final ChromeTabCapture tabCapture = new ChromeTabCapture._();
 
 class ChromeTabCapture {
-  JsObject _tab_capture;
+  JsObject _tabCapture;
 
   ChromeTabCapture._() {
-    _tab_capture = context['chrome']['tab']['capture'];
+    _tabCapture = context['chrome']['tabCapture'];
   }
 }
