@@ -210,6 +210,7 @@ class WebIdlParser extends LanguageParsers {
   constValue() => booleanLiteral()
                 | floatLiteralWebIdl()
                 | intLiteral
+                | stringLiteral
                 | reserved["null"];
 
   booleanLiteral() => reserved["true"]
@@ -415,7 +416,8 @@ class WebIdlParser extends LanguageParsers {
                     | rec(unrestrictedFloatType)
                     | reserved["boolean"]
                     | reserved["byte"]
-                    | reserved["octet"];
+                    | reserved["octet"]
+                    | reserved["DOMString"];
 
   unrestrictedFloatType() => (reserved["unrestricted"] + rec(floatType)).list
       | rec(floatType);

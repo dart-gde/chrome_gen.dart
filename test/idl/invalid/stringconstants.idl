@@ -1,3 +1,6 @@
-interface Util {
-  const DOMString hello = "world";
-};
+// Disabling test cause future WebIDL spec will support strings 
+// for constants.
+// interface Util {
+//   const DOMString hello = "world";
+// };
+XXX
