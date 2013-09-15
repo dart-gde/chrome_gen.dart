@@ -136,7 +136,10 @@ class WebIdlParser extends LanguageParsers {
                           + rec(dictionaryMembers)).list
                           | spaces;
 
-  dictionaryMember() => (rec(type) + identifier + rec(defaultStmt) + semi).list;
+  dictionaryMember() => (rec(type) + identifier + rec(defaultStmt) + semi).list
+                        // Non standard WebIDL in Chrome IDL operations as
+                        // dictionary members
+                        | rec(operation);
 
   partialDictionary() => (reserved["dictionary"]
                          + identifier
