@@ -44,6 +44,7 @@ final reservedNames = [ "readonly",
                         "Infinity",
                         "NaN",
                         "any",
+                        "any?",
                         "boolean",
                         "byte",
                         "double",
@@ -364,8 +365,11 @@ class WebIdlParser extends LanguageParsers {
 
   type() => rec(singleType) | (rec(unionType) + rec(typeSuffix)).list;
 
+  // Patch around non-standard "any?" support
   singleType() =>   rec(nonAnyType)
-                  | (reserved["any"] + rec(typeSuffixStartingWithArray)).list;
+                    | reserved["any?"]
+                    | (reserved["any"] + rec(typeSuffixStartingWithArray)).list;
+
 
   unionType() => parens((rec(unionMemberType)
                           + reserved["or"]
