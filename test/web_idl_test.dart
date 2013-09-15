@@ -77,17 +77,17 @@ void main() {
       expect(sp, equals([['PutForwards', ['=', ['name', EMPTY]]], EMPTY]));
     });
 
-//    test('extendedAttributeRest takes an identifier no spaces between "="', () {
-//      var p = webIdlParser.extendedAttributeRest();
-//      var sp = p.parse("[instanceOf =FileEntry] object entry;");
-//      expect(sp, equals("THIS TEST IS FAILING"));
-//    });
+    test('extendedAttributeRest takes an identifier no spaces between "="', () {
+      var p = webIdlParser.extendedAttributeRest();
+      var sp = p.parse("[instanceOf =FileEntry] object entry;");
+      expect(sp, equals([["instanceOf", ["=", ["FileEntry", EMPTY]]], ["object", ["entry", [";", EMPTY]]]]));
+    });
 
-//    test('extendedAttributeRest takes an identifier no spaces between "="', () {
-//      var p = webIdlParser.extendedAttributeRest();
-//      var sp = p.parse("[instanceOf=FileEntry] object entry;");
-//      expect(sp, equals("THIS TEST IS NOT FAILING"));
-//    });
+    test('extendedAttributeRest takes an identifier no spaces between "="', () {
+      var p = webIdlParser.extendedAttributeRest();
+      var sp = p.parse("[instanceOf=FileEntry] object entry;");
+      expect(sp, equals([["instanceOf", ["=", ["FileEntry", EMPTY]]], ["object", ["entry", [";", EMPTY]]]]));
+    });
 
     test('extendedAttributeRest takes an identifier no spaces between "="', () {
       var p = webIdlParser.extendedAttributeRest();
@@ -113,17 +113,17 @@ void main() {
       expect(sp, equals([['Constructor', [['float', ['x', [',', ['float', ['y', EMPTY]]]]], EMPTY]], EMPTY]));
     });
 
-//    test('extendedAttribute takes a named argument list', () {
-//      var p = webIdlParser.extendedAttribute();
-//      var sp = p.parse("[NamedConstructor=Image(DOMString src)]");
-//      expect(sp, equals("THIS TEST IS FAILING"));
-//    });
+    test('extendedAttribute takes a named argument list', () {
+      var p = webIdlParser.extendedAttribute();
+      var sp = p.parse("[NamedConstructor=Image(DOMString src)]");
+      expect(sp, equals([["NamedConstructor", ["=", ["Image", [["DOMString", ["src", EMPTY]], EMPTY]]]], EMPTY]));
+    });
 
-//    test('extendedAttribute takes an identifier', () {
-//      var p = webIdlParser.extendedAttribute();
-//      var sp = p.parse("[PutForwards=name]");
-//      expect(sp, equals("THIS TEST IS FAILING"));
-//    });
+    test('extendedAttribute takes an identifier', () {
+      var p = webIdlParser.extendedAttribute();
+      var sp = p.parse("[PutForwards=name]");
+      expect(sp, equals([["PutForwards", ["=", ["name", EMPTY]]], EMPTY]));
+    });
 
     // http://www.w3.org/TR/WebIDL/#proddef-ExtendedAttributes
     test('extendedAttributes empty', () {

@@ -37,7 +37,6 @@ final reservedNames = [ "readonly",
                         ":",
                         ";",
                         "<",
-                        "=",
                         ">",
                         "?",
                         "Date",
@@ -303,7 +302,9 @@ class WebIdlParser extends LanguageParsers {
             | reserved[":"]
             | reserved[";"]
             | reserved["<"]
-            | reserved["="]
+            // '=' is specified in the spec as `other` but we parse it as
+            // symbol for better results
+            | symbol('=')
             | reserved[">"]
             | reserved["?"]
             | reserved["Date"]
