@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Library chrome.debugger</title>
+	<title>Library chrome.pushMessaging</title>
 	<link href="bootstrap.css" rel="stylesheet" media="screen">
 </head>
 
@@ -25,7 +25,7 @@
 		<li><a href="chrome.contentSettings.html"><i class="chevron-nav icon-chevron-right"></i> chrome.contentSettings</a></li>
 		<li><a href="chrome.contextMenus.html"><i class="chevron-nav icon-chevron-right"></i> chrome.contextMenus</a></li>
 		<li><a href="chrome.cookies.html"><i class="chevron-nav icon-chevron-right"></i> chrome.cookies</a></li>
-		<li class="active"><a href="chrome.debugger.html"><i class="chevron-nav icon-white icon-chevron-right"></i> chrome.debugger</a></li>
+		<li><a href="chrome.debugger.html"><i class="chevron-nav icon-chevron-right"></i> chrome.debugger</a></li>
 		<li><a href="chrome.declarativeContent.html"><i class="chevron-nav icon-chevron-right"></i> chrome.declarativeContent</a></li>
 		<li><a href="chrome.declarativeWebRequest.html"><i class="chevron-nav icon-chevron-right"></i> chrome.declarativeWebRequest</a></li>
 		<li><a href="chrome.desktopCapture.html"><i class="chevron-nav icon-chevron-right"></i> chrome.desktopCapture</a></li>
@@ -54,7 +54,7 @@
 		<li><a href="chrome.privacy.html"><i class="chevron-nav icon-chevron-right"></i> chrome.privacy</a></li>
 		<li><a href="chrome.processes.html"><i class="chevron-nav icon-chevron-right"></i> chrome.processes</a></li>
 		<li><a href="chrome.proxy.html"><i class="chevron-nav icon-chevron-right"></i> chrome.proxy</a></li>
-		<li><a href="chrome.pushMessaging.html"><i class="chevron-nav icon-chevron-right"></i> chrome.pushMessaging</a></li>
+		<li class="active"><a href="chrome.pushMessaging.html"><i class="chevron-nav icon-white icon-chevron-right"></i> chrome.pushMessaging</a></li>
 		<li><a href="chrome.runtime.html"><i class="chevron-nav icon-chevron-right"></i> chrome.runtime</a></li>
 		<li><a href="chrome.scriptBadge.html"><i class="chevron-nav icon-chevron-right"></i> chrome.scriptBadge</a></li>
 		<li><a href="chrome.sessions.html"><i class="chevron-nav icon-chevron-right"></i> chrome.sessions</a></li>
@@ -76,91 +76,32 @@
 	</ul>
 </div>
 <div class='span9'>
-	<h1>chrome.debugger</h1>
+	<h1>chrome.pushMessaging</h1>
 	<hr>
 	<dl class=dl-horizontal>
 		<dt>Top-Level Variables</dt>
 		<dd>
-			<i class=icon-minus-sign></i> <a href=chrome.debugger.html#debugger>debugger</a>: <a href=chrome.debugger.html#ChromeDebugger>ChromeDebugger</a><br>
+			<i class=icon-minus-sign></i> <a href=chrome.pushMessaging.html#pushMessaging>pushMessaging</a>: <a href=chrome.pushMessaging.html#ChromePushMessaging>ChromePushMessaging</a><br>
 		</dd>
 		<dt>Classes</dt>
 		<dd>
-			<i class=icon-leaf></i> <a href=chrome.debugger.html#ChromeDebugger>ChromeDebugger</a><br>
+			<i class=icon-leaf></i> <a href=chrome.pushMessaging.html#ChromePushMessaging>ChromePushMessaging</a><br>
 		</dd>
 	</dl>
-	<div class=indent>
-		<p>The <code>chrome.debugger</code> API serves as an alternate transport for Chrome's [remote debugging protocol](http://code.google.com/chrome/devtools/docs/remote-debugging.html). Use <code>chrome.debugger</code> to attach to one or more tabs to instrument network interaction, debug JavaScript, mutate the DOM and CSS, etc. Use the Debuggee <code>tabId</code> to target tabs with sendCommand and route events by <code>tabId</code> from onEvent callbacks.</p>
-	</div>
+	<div class=indent></div>
 	<h4>Top-Level Variables</h4>
 	<div class=indent>
-		<b><a id=debugger></a><i class=icon-minus-sign></i> static final <a href=chrome.debugger.html#ChromeDebugger>ChromeDebugger</a> debugger</b>
+		<b><a id=pushMessaging></a><i class=icon-minus-sign></i> static final <a href=chrome.pushMessaging.html#ChromePushMessaging>ChromePushMessaging</a> pushMessaging</b>
 		<div class=indent>
-			<p>Accessor for the <code>chrome.debugger</code> namespace.</p>
+			<p>Accessor for the <code>chrome.pushMessaging</code> namespace.</p>
 		</div>
 	</div>
-	<a id=ChromeDebugger></a><hr>
+	<a id=ChromePushMessaging></a><hr>
 	<h4>
-		<i class=icon-leaf></i> Class ChromeDebugger</h4>
+		<i class=icon-leaf></i> Class ChromePushMessaging</h4>
 	<dl class=dl-horizontal>
-		<dt>Fields</dt>
-		<dd>
-			<i class=icon-minus-sign></i> <a href=chrome.debugger.html#ChromeDebugger.onDetach>onDetach</a>: Stream<br>
-			<i class=icon-minus-sign></i> <a href=chrome.debugger.html#ChromeDebugger.onEvent>onEvent</a>: Stream<br>
-		</dd>
-		<dt>Getters and Setters</dt>
-		<dd>
-			<i class=icon-circle-arrow-right></i> <a href=chrome.debugger.html#onDetach>onDetach</a>: Stream&lt;dynamic&gt;<br>
-			<i class=icon-circle-arrow-right></i> <a href=chrome.debugger.html#onEvent>onEvent</a>: Stream&lt;dynamic&gt;<br>
-		</dd>
-		<dt>Methods</dt>
-		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.debugger.html#ChromeDebugger.attach>attach</a>(dynamic target, String requiredVersion): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.debugger.html#ChromeDebugger.detach>detach</a>(dynamic target): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.debugger.html#ChromeDebugger.getTargets>getTargets</a>(): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.debugger.html#ChromeDebugger.sendCommand>sendCommand</a>(dynamic target, String method, dynamic commandParams): Future&lt;dynamic&gt;<br>
-		</dd>
 	</dl>
 	<div class=indent></div>
-	<h4>Fields</h4>
-	<b><a id=ChromeDebugger.onDetach></a><i class=icon-minus-sign></i> final Stream onDetach</b>
-	<div class=indent></div>
-	<b><a id=ChromeDebugger.onEvent></a><i class=icon-minus-sign></i> final Stream onEvent</b>
-	<div class=indent></div>
-	<h4>Getters and Setters</h4>
-	<b><a id=onDetach></a><i class=icon-circle-arrow-right></i> Stream&lt;dynamic&gt; get onDetach</b>
-	<div class=indent>
-		<p>Fired when browser terminates debugging session for the tab. This happens when either the tab is being closed or Chrome DevTools is being invoked for the attached tab.</p>
-	</div>
-	<b><a id=onEvent></a><i class=icon-circle-arrow-right></i> Stream&lt;dynamic&gt; get onEvent</b>
-	<div class=indent>
-		<p>Fired whenever debugging target issues instrumentation event.</p>
-	</div>
-	<h4>Methods</h4>
-	<b><a id=ChromeDebugger.attach></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; attach(dynamic target, String requiredVersion)</b>
-	<div class=indent>
-		<p>Attaches debugger to the given target. </p>
-<p><code>target</code> Debugging target to which you want to attach. </p>
-<p><code>requiredVersion</code> Required debugging protocol version ("0.1"). One can only attach to the debuggee with matching major version and greater or equal minor version. List of the protocol versions can be obtained <code>here</code>(http://code.google.com/chrome/devtools/docs/remote-debugging.html). </p>
-<p><code>callback</code> Called once the attach operation succeeds or fails. Callback receives no arguments. If the attach fails, <code>runtime.lastError</code> will be set to the error message.</p>
-	</div>
-	<b><a id=ChromeDebugger.detach></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; detach(dynamic target)</b>
-	<div class=indent>
-		<p>Detaches debugger from the given target. </p>
-<p><code>target</code> Debugging target from which you want to detach. </p>
-<p><code>callback</code> Called once the detach operation succeeds or fails. Callback receives no arguments. If the detach fails, <code>runtime.lastError</code> will be set to the error message.</p>
-	</div>
-	<b><a id=ChromeDebugger.getTargets></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getTargets()</b>
-	<div class=indent>
-		<p>Returns the list of available debug targets.</p>
-	</div>
-	<b><a id=ChromeDebugger.sendCommand></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; sendCommand(dynamic target, String method, dynamic commandParams)</b>
-	<div class=indent>
-		<p>Sends given command to the debugging target. </p>
-<p><code>target</code> Debugging target to which you want to send the command. </p>
-<p><code>method</code> Method name. Should be one of the methods defined by the [remote debugging protocol](http://code.google.com/chrome/devtools/docs/remote-debugging.html). </p>
-<p><code>commandParams</code> JSON object with request parameters. This object must conform to the remote debugging params scheme for given method. </p>
-<p><code>callback</code> Response body. If an error occurs while posting the message, the callback will be called with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
-	</div>
 	<hr>
 </div>
 </div>
