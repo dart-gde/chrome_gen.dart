@@ -235,13 +235,13 @@ class WebIdlParser extends LanguageParsers {
                   + reserved["attribute"]
                   + rec(type)
                   + identifier
-                  + reserved[";"]).list
+                  + semi).list
                   | (qualifiers()
                   + readOnly()
                   + reserved["attribute"]
                   + rec(type)
                   + identifier
-                  + reserved[";"]).list;
+                  + semi).list;
 
   inherit() => reserved["inherit"] | spaces;
 
@@ -262,7 +262,7 @@ class WebIdlParser extends LanguageParsers {
   operationRest() => (rec(returnType)
                       + optionalIdentifier()
                       + parens(rec(argumentList))
-                      + reserved[";"]).list;
+                      + semi).list;
 
   optionalIdentifier() => identifier | spaces;
 
