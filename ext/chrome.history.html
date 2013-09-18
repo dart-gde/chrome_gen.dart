@@ -120,8 +120,8 @@
 			<i class=icon-ok-sign></i> <a href=chrome.history.html#ChromeHistory.deleteAll>deleteAll</a>(): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.history.html#ChromeHistory.deleteRange>deleteRange</a>(dynamic range): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.history.html#ChromeHistory.deleteUrl>deleteUrl</a>(dynamic details): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.history.html#ChromeHistory.getVisits>getVisits</a>(dynamic details): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.history.html#ChromeHistory.search>search</a>(dynamic query): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.history.html#ChromeHistory.getVisits>getVisits</a>(dynamic details): Future&lt;List&lt;dynamic&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.history.html#ChromeHistory.search>search</a>(dynamic query): Future&lt;List&lt;dynamic&gt;&gt;<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -156,11 +156,11 @@
 	<div class=indent>
 		<p>Removes all occurrences of the given URL from the history.</p>
 	</div>
-	<b><a id=ChromeHistory.getVisits></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getVisits(dynamic details)</b>
+	<b><a id=ChromeHistory.getVisits></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getVisits(dynamic details)</b>
 	<div class=indent>
 		<p>Retrieves information about visits to a URL.</p>
 	</div>
-	<b><a id=ChromeHistory.search></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; search(dynamic query)</b>
+	<b><a id=ChromeHistory.search></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; search(dynamic query)</b>
 	<div class=indent>
 		<p>Searches the history for the last visit time of each page matching the query.</p>
 	</div>

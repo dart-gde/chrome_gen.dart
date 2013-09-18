@@ -118,7 +118,7 @@
 		<dd>
 			<i class=icon-ok-sign></i> <a href=chrome.debugger.html#ChromeDebugger.attach>attach</a>(dynamic target, String requiredVersion): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.debugger.html#ChromeDebugger.detach>detach</a>(dynamic target): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.debugger.html#ChromeDebugger.getTargets>getTargets</a>(): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.debugger.html#ChromeDebugger.getTargets>getTargets</a>(): Future&lt;List&lt;dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.debugger.html#ChromeDebugger.sendCommand>sendCommand</a>(dynamic target, String method, dynamic commandParams): Future&lt;dynamic&gt;<br>
 		</dd>
 	</dl>
@@ -149,7 +149,7 @@
 		<p>Detaches debugger from the given target. </p>
 <p><code>target</code> Debugging target from which you want to detach.</p>
 	</div>
-	<b><a id=ChromeDebugger.getTargets></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getTargets()</b>
+	<b><a id=ChromeDebugger.getTargets></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getTargets()</b>
 	<div class=indent>
 		<p>Returns the list of available debug targets. </p>
 <p>Returns: Array of TargetInfo objects corresponding to the available debug targets.</p>

@@ -121,9 +121,9 @@
 		<dt>Methods</dt>
 		<dd>
 			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.get>get</a>(String id): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.getAll>getAll</a>(): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.getPermissionWarningsById>getPermissionWarningsById</a>(String id): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.getPermissionWarningsByManifest>getPermissionWarningsByManifest</a>(String manifestStr): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.getAll>getAll</a>(): Future&lt;List&lt;dynamic&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.getPermissionWarningsById>getPermissionWarningsById</a>(String id): Future&lt;List&lt;String&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.getPermissionWarningsByManifest>getPermissionWarningsByManifest</a>(String manifestStr): Future&lt;List&lt;String&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.launchApp>launchApp</a>(String id): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.setEnabled>setEnabled</a>(String id, bool enabled): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.uninstall>uninstall</a>(String id, dynamic options): Future&lt;dynamic&gt;<br>
@@ -163,16 +163,16 @@
 		<p>Returns information about the installed extension, app, or theme that has the given ID. </p>
 <p><code>id</code> The ID from an item of <code>ExtensionInfo.</code></p>
 	</div>
-	<b><a id=ChromeManagement.getAll></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getAll()</b>
+	<b><a id=ChromeManagement.getAll></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getAll()</b>
 	<div class=indent>
 		<p>Returns a list of information about installed extensions and apps.</p>
 	</div>
-	<b><a id=ChromeManagement.getPermissionWarningsById></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getPermissionWarningsById(String id)</b>
+	<b><a id=ChromeManagement.getPermissionWarningsById></a><i class=icon-ok-sign></i> Future&lt;List&lt;String&gt;&gt; getPermissionWarningsById(String id)</b>
 	<div class=indent>
 		<p>Returns a list of <code>permission warnings</code>(permission_warnings.html) for the given extension id. </p>
 <p><code>id</code> The ID of an already installed extension.</p>
 	</div>
-	<b><a id=ChromeManagement.getPermissionWarningsByManifest></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getPermissionWarningsByManifest(String manifestStr)</b>
+	<b><a id=ChromeManagement.getPermissionWarningsByManifest></a><i class=icon-ok-sign></i> Future&lt;List&lt;String&gt;&gt; getPermissionWarningsByManifest(String manifestStr)</b>
 	<div class=indent>
 		<p>Returns a list of <code>permission warnings</code>(permission_warnings.html) for the given extension manifest string. Note: This function can be used without requesting the 'management' permission in the manifest. </p>
 <p><code>manifestStr</code> Extension manifest JSON string.</p>

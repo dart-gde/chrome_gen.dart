@@ -147,7 +147,7 @@
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.getURL>getURL</a>(String path): String<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.reload>reload</a>(): void<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.requestUpdateCheck>requestUpdateCheck</a>(): Future&lt;JsObject&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.sendMessage>sendMessage</a>(String extensionId, dynamic message): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.sendMessage>sendMessage</a>(dynamic message, String extensionId): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.sendNativeMessage>sendNativeMessage</a>(String application, dynamic message): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.setUninstallUrl>setUninstallUrl</a>(String url): void<br>
 		</dd>
@@ -279,7 +279,7 @@
 		<p>Requests an update check for this app/extension. </p>
 <p>Returns: <code>status</code> Result of the update check. <code>details</code> If an update is available, this contains more information about the available update.</p>
 	</div>
-	<b><a id=ChromeRuntime.sendMessage></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; sendMessage(String extensionId, dynamic message)</b>
+	<b><a id=ChromeRuntime.sendMessage></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; sendMessage(dynamic message, String extensionId)</b>
 	<div class=indent>
 		<p>Sends a single message to onMessage event listeners within the extension (or another extension/app). Similar to chrome.runtime.connect, but only sends a single message with an optional response. The <code>runtime.onMessage</code> event is fired in each extension page of the extension. Note that extensions cannot send messages to content scripts using this method. To send messages to content scripts, use <code>tabs.sendMessage.</code> </p>
 <p><code>extensionId</code> The extension ID of the extension you want to connect to. If omitted, default is your own extension. </p>

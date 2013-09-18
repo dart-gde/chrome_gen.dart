@@ -115,8 +115,8 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.sessions.html#ChromeSessions.getDevices>getDevices</a>(dynamic filter): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.sessions.html#ChromeSessions.getRecentlyClosed>getRecentlyClosed</a>(dynamic filter): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.sessions.html#ChromeSessions.getDevices>getDevices</a>(dynamic filter): Future&lt;List&lt;dynamic&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.sessions.html#ChromeSessions.getRecentlyClosed>getRecentlyClosed</a>(dynamic filter): Future&lt;List&lt;dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.sessions.html#ChromeSessions.restore>restore</a>(String sessionId): Future&lt;dynamic&gt;<br>
 		</dd>
 	</dl>
@@ -130,12 +130,12 @@
 		<p>The maximum number of <code>Session</code> that will be included in a requested list.</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeSessions.getDevices></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getDevices(dynamic filter)</b>
+	<b><a id=ChromeSessions.getDevices></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getDevices(dynamic filter)</b>
 	<div class=indent>
 		<p>Retrieves all devices with synced sessions. </p>
 <p>Returns: The list of <code>Device</code> objects for each synced session, sorted in order from device with most recently modified session to device with least recently modified session. <code>tabs.Tab</code> objects are sorted by recency in the <code>windows.Window</code> of the <code>Session</code> objects.</p>
 	</div>
-	<b><a id=ChromeSessions.getRecentlyClosed></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getRecentlyClosed(dynamic filter)</b>
+	<b><a id=ChromeSessions.getRecentlyClosed></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getRecentlyClosed(dynamic filter)</b>
 	<div class=indent>
 		<p>Gets the list of recently closed tabs and/or windows. </p>
 <p>Returns: The list of closed entries in reverse order that they were closed (the most recently closed tab or window will be at index <code>0</code>).The entries may contain either tabs or windows.</p>

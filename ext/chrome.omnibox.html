@@ -120,7 +120,7 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.omnibox.html#ChromeOmnibox.sendSuggestions>sendSuggestions</a>(int requestId, dynamic suggestResults): void<br>
+			<i class=icon-ok-sign></i> <a href=chrome.omnibox.html#ChromeOmnibox.sendSuggestions>sendSuggestions</a>(int requestId, List&lt;dynamic&gt; suggestResults): void<br>
 			<i class=icon-ok-sign></i> <a href=chrome.omnibox.html#ChromeOmnibox.setDefaultSuggestion>setDefaultSuggestion</a>(dynamic suggestion): void<br>
 		</dd>
 	</dl>
@@ -152,7 +152,7 @@
 		<p>User has started a keyword input session by typing the extension's keyword. This is guaranteed to be sent exactly once per input session, and before any onInputChanged events.</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeOmnibox.sendSuggestions></a><i class=icon-ok-sign></i> void sendSuggestions(int requestId, dynamic suggestResults)</b>
+	<b><a id=ChromeOmnibox.sendSuggestions></a><i class=icon-ok-sign></i> void sendSuggestions(int requestId, List&lt;dynamic&gt; suggestResults)</b>
 	<div class=indent>
 		<p>A callback passed to the onInputChanged event used for sending suggestions back to the browser. </p>
 <p><code>suggestResults</code> An array of suggest results</p>

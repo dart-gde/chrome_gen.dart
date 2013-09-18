@@ -115,8 +115,8 @@
 		<dt>Methods</dt>
 		<dd>
 			<i class=icon-ok-sign></i> <a href=chrome.cookies.html#ChromeCookies.get>get</a>(dynamic details): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.cookies.html#ChromeCookies.getAll>getAll</a>(dynamic details): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.cookies.html#ChromeCookies.getAllCookieStores>getAllCookieStores</a>(): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.cookies.html#ChromeCookies.getAll>getAll</a>(dynamic details): Future&lt;List&lt;dynamic&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.cookies.html#ChromeCookies.getAllCookieStores>getAllCookieStores</a>(): Future&lt;List&lt;dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.cookies.html#ChromeCookies.remove>remove</a>(dynamic details): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.cookies.html#ChromeCookies.set>set</a>(dynamic details): Future&lt;dynamic&gt;<br>
 		</dd>
@@ -137,13 +137,13 @@
 <p><code>details</code> Details to identify the cookie being retrieved. </p>
 <p>Returns: Contains details about the cookie. This parameter is null if no such cookie was found.</p>
 	</div>
-	<b><a id=ChromeCookies.getAll></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getAll(dynamic details)</b>
+	<b><a id=ChromeCookies.getAll></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getAll(dynamic details)</b>
 	<div class=indent>
 		<p>Retrieves all cookies from a single cookie store that match the given information.  The cookies returned will be sorted, with those with the longest path first.  If multiple cookies have the same path length, those with the earliest creation time will be first. </p>
 <p><code>details</code> Information to filter the cookies being retrieved. </p>
 <p>Returns: All the existing, unexpired cookies that match the given cookie info.</p>
 	</div>
-	<b><a id=ChromeCookies.getAllCookieStores></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getAllCookieStores()</b>
+	<b><a id=ChromeCookies.getAllCookieStores></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getAllCookieStores()</b>
 	<div class=indent>
 		<p>Lists all existing cookie stores. </p>
 <p>Returns: All the existing cookie stores.</p>

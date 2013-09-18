@@ -118,7 +118,7 @@
 		<dt>Methods</dt>
 		<dd>
 			<i class=icon-ok-sign></i> <a href=chrome.devtools_inspectedWindow.html#ChromeDevtoolsInspectedWindow.eval>eval</a>(String expression): Future&lt;JsObject&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.devtools_inspectedWindow.html#ChromeDevtoolsInspectedWindow.getResources>getResources</a>(): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.devtools_inspectedWindow.html#ChromeDevtoolsInspectedWindow.getResources>getResources</a>(): Future&lt;List&lt;dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.devtools_inspectedWindow.html#ChromeDevtoolsInspectedWindow.reload>reload</a>(dynamic reloadOptions): void<br>
 		</dd>
 	</dl>
@@ -150,7 +150,7 @@
 <p><code>expression</code> An expression to evaluate. </p>
 <p>Returns: <code>result</code> The result of evaluation. <code>isException</code> Set if an exception was caught while evaluating the expression.</p>
 	</div>
-	<b><a id=ChromeDevtoolsInspectedWindow.getResources></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getResources()</b>
+	<b><a id=ChromeDevtoolsInspectedWindow.getResources></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getResources()</b>
 	<div class=indent>
 		<p>Retrieves the list of resources from the inspected page. </p>
 <p>Returns: The resources within the page.</p>

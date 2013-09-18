@@ -104,13 +104,13 @@
 	<dl class=dl-horizontal>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.i18n.html#ChromeI18N.getAcceptLanguages>getAcceptLanguages</a>(): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.i18n.html#ChromeI18N.getAcceptLanguages>getAcceptLanguages</a>(): Future&lt;List&lt;String&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.i18n.html#ChromeI18N.getMessage>getMessage</a>(String messageName, dynamic substitutions): String<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
 	<h4>Methods</h4>
-	<b><a id=ChromeI18N.getAcceptLanguages></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getAcceptLanguages()</b>
+	<b><a id=ChromeI18N.getAcceptLanguages></a><i class=icon-ok-sign></i> Future&lt;List&lt;String&gt;&gt; getAcceptLanguages()</b>
 	<div class=indent>
 		<p>Gets the accept-languages of the browser. This is different from the locale used by the browser; to get the locale, use <code>window.navigator.language</code>. </p>
 <p>Returns: Array of the accept languages of the browser, such as en-US,en,zh-CN</p>

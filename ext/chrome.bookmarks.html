@@ -146,16 +146,16 @@
 		<dd>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.create>create</a>(dynamic bookmark): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.export>export</a>(): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.get>get</a>(dynamic idOrIdList): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getChildren>getChildren</a>(String id): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getRecent>getRecent</a>(int numberOfItems): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getSubTree>getSubTree</a>(String id): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getTree>getTree</a>(): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.get>get</a>(dynamic idOrIdList): Future&lt;List&lt;dynamic&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getChildren>getChildren</a>(String id): Future&lt;List&lt;dynamic&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getRecent>getRecent</a>(int numberOfItems): Future&lt;List&lt;dynamic&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getSubTree>getSubTree</a>(String id): Future&lt;List&lt;dynamic&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getTree>getTree</a>(): Future&lt;List&lt;dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.import>import</a>(): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.move>move</a>(String id, dynamic destination): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.remove>remove</a>(String id): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.removeTree>removeTree</a>(String id): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.search>search</a>(String query): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.search>search</a>(String query): Future&lt;List&lt;dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.update>update</a>(String id, dynamic changes): Future&lt;dynamic&gt;<br>
 		</dd>
 	</dl>
@@ -225,26 +225,26 @@
 	<div class=indent>
 		<p>Exports bookmarks to a chrome html bookmark file</p>
 	</div>
-	<b><a id=ChromeBookmarks.get></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; get(dynamic idOrIdList)</b>
+	<b><a id=ChromeBookmarks.get></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; get(dynamic idOrIdList)</b>
 	<div class=indent>
 		<p>Retrieves the specified BookmarkTreeNode(s). </p>
 <p><code>idOrIdList</code> A single string-valued id, or an array of string-valued ids</p>
 	</div>
-	<b><a id=ChromeBookmarks.getChildren></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getChildren(String id)</b>
+	<b><a id=ChromeBookmarks.getChildren></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getChildren(String id)</b>
 	<div class=indent>
 		<p>Retrieves the children of the specified BookmarkTreeNode id.</p>
 	</div>
-	<b><a id=ChromeBookmarks.getRecent></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getRecent(int numberOfItems)</b>
+	<b><a id=ChromeBookmarks.getRecent></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getRecent(int numberOfItems)</b>
 	<div class=indent>
 		<p>Retrieves the recently added bookmarks. </p>
 <p><code>numberOfItems</code> The maximum number of items to return.</p>
 	</div>
-	<b><a id=ChromeBookmarks.getSubTree></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getSubTree(String id)</b>
+	<b><a id=ChromeBookmarks.getSubTree></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getSubTree(String id)</b>
 	<div class=indent>
 		<p>Retrieves part of the Bookmarks hierarchy, starting at the specified node. </p>
 <p><code>id</code> The ID of the root of the subtree to retrieve.</p>
 	</div>
-	<b><a id=ChromeBookmarks.getTree></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getTree()</b>
+	<b><a id=ChromeBookmarks.getTree></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getTree()</b>
 	<div class=indent>
 		<p>Retrieves the entire Bookmarks hierarchy.</p>
 	</div>
@@ -264,7 +264,7 @@
 	<div class=indent>
 		<p>Recursively removes a bookmark folder.</p>
 	</div>
-	<b><a id=ChromeBookmarks.search></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; search(String query)</b>
+	<b><a id=ChromeBookmarks.search></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; search(String query)</b>
 	<div class=indent>
 		<p>Searches for BookmarkTreeNodes matching the given query.</p>
 	</div>
