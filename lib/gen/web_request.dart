@@ -43,34 +43,38 @@ class ChromeWebRequest {
   /**
    * Fired when a request is about to occur.
    */
-  Stream get onBeforeRequest => _onBeforeRequest.stream;
+  Stream<dynamic> get onBeforeRequest => _onBeforeRequest.stream;
 
-  final ChromeStreamController _onBeforeRequest = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onBeforeRequest = null;
 
   /**
    * Fired before sending an HTTP request, once the request headers are
    * available. This may occur after a TCP connection is made to the server, but
    * before any HTTP data is sent.
    */
-  Stream get onBeforeSendHeaders => _onBeforeSendHeaders.stream;
+  Stream<dynamic> get onBeforeSendHeaders => _onBeforeSendHeaders.stream;
 
-  final ChromeStreamController _onBeforeSendHeaders = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onBeforeSendHeaders = null;
 
   /**
    * Fired just before a request is going to be sent to the server
    * (modifications of previous onBeforeSendHeaders callbacks are visible by the
    * time onSendHeaders is fired).
    */
-  Stream get onSendHeaders => _onSendHeaders.stream;
+  Stream<dynamic> get onSendHeaders => _onSendHeaders.stream;
 
-  final ChromeStreamController _onSendHeaders = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onSendHeaders = null;
 
   /**
    * Fired when HTTP response headers of a request have been received.
    */
-  Stream get onHeadersReceived => _onHeadersReceived.stream;
+  Stream<dynamic> get onHeadersReceived => _onHeadersReceived.stream;
 
-  final ChromeStreamController _onHeadersReceived = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onHeadersReceived = null;
 
   /**
    * Fired when an authentication failure is received. The listener has three
@@ -79,37 +83,76 @@ class ChromeWebRequest {
    * challenge. If bad user credentials are provided, this may be called
    * multiple times for the same request.
    */
-  Stream get onAuthRequired => _onAuthRequired.stream;
+  Stream<dynamic> get onAuthRequired => _onAuthRequired.stream;
 
-  final ChromeStreamController _onAuthRequired = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onAuthRequired = null;
 
   /**
    * Fired when the first byte of the response body is received. For HTTP
    * requests, this means that the status line and response headers are
    * available.
    */
-  Stream get onResponseStarted => _onResponseStarted.stream;
+  Stream<dynamic> get onResponseStarted => _onResponseStarted.stream;
 
-  final ChromeStreamController _onResponseStarted = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onResponseStarted = null;
 
   /**
    * Fired when a server-initiated redirect is about to occur.
    */
-  Stream get onBeforeRedirect => _onBeforeRedirect.stream;
+  Stream<dynamic> get onBeforeRedirect => _onBeforeRedirect.stream;
 
-  final ChromeStreamController _onBeforeRedirect = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onBeforeRedirect = null;
 
   /**
    * Fired when a request is completed.
    */
-  Stream get onCompleted => _onCompleted.stream;
+  Stream<dynamic> get onCompleted => _onCompleted.stream;
 
-  final ChromeStreamController _onCompleted = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onCompleted = null;
 
   /**
    * Fired when an error occurs.
    */
-  Stream get onErrorOccurred => _onErrorOccurred.stream;
+  Stream<dynamic> get onErrorOccurred => _onErrorOccurred.stream;
 
-  final ChromeStreamController _onErrorOccurred = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onErrorOccurred = null;
+}
+
+/**
+ * An object describing filters to apply to webRequest events.
+ */
+class RequestFilter extends ChromeObject {
+  RequestFilter(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * An array of HTTP headers. Each header is represented as a dictionary
+ * containing the keys `name` and either `value` or `binaryValue`.
+ */
+class HttpHeaders extends ChromeObject {
+  HttpHeaders(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * Returns value for event handlers that have the 'blocking' extraInfoSpec
+ * applied. Allows the event handler to modify network requests.
+ */
+class BlockingResponse extends ChromeObject {
+  BlockingResponse(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * Contains data uploaded in a URL request.
+ */
+class UploadData extends ChromeObject {
+  UploadData(JsObject proxy): super(proxy);
+  // TODO:
 }

@@ -22,7 +22,28 @@ class ChromeDeclarativeContent {
     _declarativeContent = context['chrome']['declarativeContent'];
   }
 
-  Stream get onPageChanged => _onPageChanged.stream;
+  Stream<dynamic> get onPageChanged => _onPageChanged.stream;
 
-  final ChromeStreamController _onPageChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onPageChanged = null;
+}
+
+/**
+ * Matches the state of a web page by various criteria.
+ */
+class PageStateMatcher extends ChromeObject {
+  PageStateMatcher(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * Declarative event action that shows the extension's [][pageAction page
+ * action] while the corresponding conditions are met.  This action can be used
+ * without [host permissions](declare_permissions.html#host-permission).  If the
+ * extension takes the [activeTab](activeTab.html) permission, a click on the
+ * page action will grant access to the active tab.
+ */
+class ShowPageAction extends ChromeObject {
+  ShowPageAction(JsObject proxy): super(proxy);
+  // TODO:
 }

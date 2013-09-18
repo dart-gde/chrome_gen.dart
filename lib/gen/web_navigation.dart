@@ -28,6 +28,10 @@ class ChromeWebNavigation {
    * ID and a frame ID.
    * 
    * [details] Information about the frame to retrieve information about.
+   * 
+   * Returns:
+   * Information about the requested frame, null if the specified frame ID
+   * and/or tab ID are invalid.
    */
   Future<dynamic> getFrame(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -41,6 +45,9 @@ class ChromeWebNavigation {
    * Retrieves information about all frames of a given tab.
    * 
    * [details] Information about the tab to retrieve all frames from.
+   * 
+   * Returns:
+   * A list of frames in the given tab, null if the specified tab ID is invalid.
    */
   Future<dynamic> getAllFrames(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -53,9 +60,10 @@ class ChromeWebNavigation {
   /**
    * Fired when a navigation is about to occur.
    */
-  Stream get onBeforeNavigate => _onBeforeNavigate.stream;
+  Stream<dynamic> get onBeforeNavigate => _onBeforeNavigate.stream;
 
-  final ChromeStreamController _onBeforeNavigate = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onBeforeNavigate = null;
 
   /**
    * Fired when a navigation is committed. The document (and the resources it
@@ -63,63 +71,71 @@ class ChromeWebNavigation {
    * least part of the document has been received from the server and the
    * browser has decided to switch to the new document.
    */
-  Stream get onCommitted => _onCommitted.stream;
+  Stream<dynamic> get onCommitted => _onCommitted.stream;
 
-  final ChromeStreamController _onCommitted = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onCommitted = null;
 
   /**
    * Fired when the page's DOM is fully constructed, but the referenced
    * resources may not finish loading.
    */
-  Stream get onDOMContentLoaded => _onDOMContentLoaded.stream;
+  Stream<dynamic> get onDOMContentLoaded => _onDOMContentLoaded.stream;
 
-  final ChromeStreamController _onDOMContentLoaded = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onDOMContentLoaded = null;
 
   /**
    * Fired when a document, including the resources it refers to, is completely
    * loaded and initialized.
    */
-  Stream get onCompleted => _onCompleted.stream;
+  Stream<dynamic> get onCompleted => _onCompleted.stream;
 
-  final ChromeStreamController _onCompleted = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onCompleted = null;
 
   /**
    * Fired when an error occurs and the navigation is aborted. This can happen
    * if either a network error occurred, or the user aborted the navigation.
    */
-  Stream get onErrorOccurred => _onErrorOccurred.stream;
+  Stream<dynamic> get onErrorOccurred => _onErrorOccurred.stream;
 
-  final ChromeStreamController _onErrorOccurred = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onErrorOccurred = null;
 
   /**
    * Fired when a new window, or a new tab in an existing window, is created to
    * host a navigation.
    */
-  Stream get onCreatedNavigationTarget => _onCreatedNavigationTarget.stream;
+  Stream<dynamic> get onCreatedNavigationTarget => _onCreatedNavigationTarget.stream;
 
-  final ChromeStreamController _onCreatedNavigationTarget = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onCreatedNavigationTarget = null;
 
   /**
    * Fired when the reference fragment of a frame was updated. All future events
    * for that frame will use the updated URL.
    */
-  Stream get onReferenceFragmentUpdated => _onReferenceFragmentUpdated.stream;
+  Stream<dynamic> get onReferenceFragmentUpdated => _onReferenceFragmentUpdated.stream;
 
-  final ChromeStreamController _onReferenceFragmentUpdated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onReferenceFragmentUpdated = null;
 
   /**
    * Fired when the contents of the tab is replaced by a different (usually
    * previously pre-rendered) tab.
    */
-  Stream get onTabReplaced => _onTabReplaced.stream;
+  Stream<dynamic> get onTabReplaced => _onTabReplaced.stream;
 
-  final ChromeStreamController _onTabReplaced = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onTabReplaced = null;
 
   /**
    * Fired when the frame's history was updated to a new URL. All future events
    * for that frame will use the updated URL.
    */
-  Stream get onHistoryStateUpdated => _onHistoryStateUpdated.stream;
+  Stream<dynamic> get onHistoryStateUpdated => _onHistoryStateUpdated.stream;
 
-  final ChromeStreamController _onHistoryStateUpdated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onHistoryStateUpdated = null;
 }

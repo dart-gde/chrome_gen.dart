@@ -54,7 +54,9 @@ class ChromePageAction {
    * Gets the title of the page action.
    */
   Future<String> getTitle(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _pageAction.callMethod('getTitle', [details, completer.callback]);
     return completer.future;
   }
@@ -83,7 +85,9 @@ class ChromePageAction {
    * Gets the html document set as the popup for this page action.
    */
   Future<String> getPopup(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _pageAction.callMethod('getPopup', [details, completer.callback]);
     return completer.future;
   }
@@ -92,7 +96,8 @@ class ChromePageAction {
    * Fired when a page action icon is clicked.  This event will not fire if the
    * page action has a popup.
    */
-  Stream get onClicked => _onClicked.stream;
+  Stream<dynamic> get onClicked => _onClicked.stream;
 
-  final ChromeStreamController _onClicked = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onClicked = null;
 }

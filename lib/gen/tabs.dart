@@ -51,6 +51,11 @@ class ChromeTabs {
    * [runtime.onConnect] event is fired in each content script running in the
    * specified tab for the current extension. For more details, see [Content
    * Script Messaging](messaging.html).
+   * 
+   * Returns:
+   * A port that can be used to communicate with the content scripts running in
+   * the specified tab. The port's [runtime.Port] event is fired if the tab
+   * closes or does not exist.
    */
   dynamic connect(int tabId, var connectInfo) {
     return _tabs.callMethod('connect', [tabId, connectInfo]);
@@ -58,6 +63,11 @@ class ChromeTabs {
 
   /**
    * Deprecated: Please use sendMessage.
+   * 
+   * Returns:
+   * The JSON response object sent by the handler of the request. If an error
+   * occurs while connecting to the specified tab, the callback will be called
+   * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendRequest(int tabId, var request) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -72,6 +82,11 @@ class ChromeTabs {
    * an optional callback to run when a response is sent back.  The
    * [runtime.onMessage] event is fired in each content script running in the
    * specified tab for the current extension.
+   * 
+   * Returns:
+   * The JSON response object sent by the handler of the message. If an error
+   * occurs while connecting to the specified tab, the callback will be called
+   * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendMessage(int tabId, var message) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -111,6 +126,9 @@ class ChromeTabs {
 
   /**
    * Creates a new tab.
+   * 
+   * Returns:
+   * Details about the created tab. Will contain the ID of the new tab.
    */
   Future<dynamic> create(var createProperties) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -124,6 +142,11 @@ class ChromeTabs {
    * Duplicates a tab.
    * 
    * [tabId] The ID of the tab which is to be duplicated.
+   * 
+   * Returns:
+   * Details about the duplicated tab. The [tabs.Tab] object doesn't contain
+   * `url`, `title` and `favIconUrl` if the `"tabs"` permission has not been
+   * requested.
    */
   Future<dynamic> duplicate(int tabId) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -147,6 +170,9 @@ class ChromeTabs {
 
   /**
    * Highlights the given tabs.
+   * 
+   * Returns:
+   * Contains details about the window whose tabs were highlighted.
    */
   Future<dynamic> highlight(var highlightInfo) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -162,6 +188,10 @@ class ChromeTabs {
    * 
    * [tabId] Defaults to the selected tab of the [current
    * window](windows.html#current-window).
+   * 
+   * Returns:
+   * Details about the updated tab. The [tabs.Tab] object doesn't contain `url`,
+   * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
    */
   Future<dynamic> update(int tabId, var updateProperties) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -177,6 +207,9 @@ class ChromeTabs {
    * === "normal") windows.
    * 
    * [tabIds] The tab or list of tabs to move.
+   * 
+   * Returns:
+   * Details about the moved tabs.
    */
   Future<dynamic> move(var tabIds, var moveProperties) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -214,9 +247,19 @@ class ChromeTabs {
    * 
    * [tabId] Defaults to the active tab of the [current
    * window](windows.html#current-window).
+   * 
+   * Returns:
+   * An ISO language code such as `en` or `fr`. For a complete list of languages
+   * supported by this method, see
+   * [kLanguageInfoTable](http://src.chromium.org/viewvc/chrome/trunk/src/third_party/cld/languages/internal/languages.cc).
+   * The 2nd to 4th columns will be checked and the first non-NULL value will be
+   * returned except for Simplified Chinese for which zh-CN will be returned.
+   * For an unknown language, `und` will be returned.
    */
   Future<String> detectLanguage(int tabId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _tabs.callMethod('detectLanguage', [tabId, completer.callback]);
     return completer.future;
   }
@@ -231,9 +274,15 @@ class ChromeTabs {
    * 
    * [options] Set parameters of image capture, such as the format of the
    * resulting image.
+   * 
+   * Returns:
+   * A data URL which encodes an image of the visible area of the captured tab.
+   * May be assigned to the 'src' property of an HTML Image element for display.
    */
   Future<String> captureVisibleTab(int windowId, var options) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _tabs.callMethod('captureVisibleTab', [windowId, options, completer.callback]);
     return completer.future;
   }
@@ -247,7 +296,8 @@ class ChromeTabs {
    * 
    * [details] Details of the script to run.
    * 
-   * [callback] Called after all the JavaScript has been executed.
+   * Returns:
+   * The result of the script in every injected frame.
    */
   Future<dynamic> executeScript(int tabId, var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -265,8 +315,6 @@ class ChromeTabs {
    * active tab of the current window.
    * 
    * [details] Details of the CSS text to insert.
-   * 
-   * [callback] Called when all the CSS has been inserted.
    */
   Future insertCSS(int tabId, var details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -279,16 +327,18 @@ class ChromeTabs {
    * time this event fired, but you can listen to onUpdated events to be
    * notified when a URL is set.
    */
-  Stream get onCreated => _onCreated.stream;
+  Stream<dynamic> get onCreated => _onCreated.stream;
 
-  final ChromeStreamController _onCreated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onCreated = null;
 
   /**
    * Fired when a tab is updated.
    */
-  Stream get onUpdated => _onUpdated.stream;
+  Stream<dynamic> get onUpdated => _onUpdated.stream;
 
-  final ChromeStreamController _onUpdated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onUpdated = null;
 
   /**
    * Fired when a tab is moved within a window. Only one move event is fired,
@@ -296,75 +346,99 @@ class ChromeTabs {
    * the other tabs that must move in response. This event is not fired when a
    * tab is moved between windows. For that, see [onDetached.]
    */
-  Stream get onMoved => _onMoved.stream;
+  Stream<dynamic> get onMoved => _onMoved.stream;
 
-  final ChromeStreamController _onMoved = null;
-
-  /**
-   * Deprecated. Please use onActivated.
-   */
-  Stream get onSelectionChanged => _onSelectionChanged.stream;
-
-  final ChromeStreamController _onSelectionChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onMoved = null;
 
   /**
    * Deprecated. Please use onActivated.
    */
-  Stream get onActiveChanged => _onActiveChanged.stream;
+  Stream<dynamic> get onSelectionChanged => _onSelectionChanged.stream;
 
-  final ChromeStreamController _onActiveChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onSelectionChanged = null;
+
+  /**
+   * Deprecated. Please use onActivated.
+   */
+  Stream<dynamic> get onActiveChanged => _onActiveChanged.stream;
+
+  // TODO:
+  final ChromeStreamController<dynamic> _onActiveChanged = null;
 
   /**
    * Fires when the active tab in a window changes. Note that the tab's URL may
    * not be set at the time this event fired, but you can listen to onUpdated
    * events to be notified when a URL is set.
    */
-  Stream get onActivated => _onActivated.stream;
+  Stream<dynamic> get onActivated => _onActivated.stream;
 
-  final ChromeStreamController _onActivated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onActivated = null;
 
   /**
    * Deprecated. Please use onHighlighted.
    */
-  Stream get onHighlightChanged => _onHighlightChanged.stream;
+  Stream<dynamic> get onHighlightChanged => _onHighlightChanged.stream;
 
-  final ChromeStreamController _onHighlightChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onHighlightChanged = null;
 
   /**
    * Fired when the highlighted or selected tabs in a window changes.
    */
-  Stream get onHighlighted => _onHighlighted.stream;
+  Stream<dynamic> get onHighlighted => _onHighlighted.stream;
 
-  final ChromeStreamController _onHighlighted = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onHighlighted = null;
 
   /**
    * Fired when a tab is detached from a window, for example because it is being
    * moved between windows.
    */
-  Stream get onDetached => _onDetached.stream;
+  Stream<dynamic> get onDetached => _onDetached.stream;
 
-  final ChromeStreamController _onDetached = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onDetached = null;
 
   /**
    * Fired when a tab is attached to a window, for example because it was moved
    * between windows.
    */
-  Stream get onAttached => _onAttached.stream;
+  Stream<dynamic> get onAttached => _onAttached.stream;
 
-  final ChromeStreamController _onAttached = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onAttached = null;
 
   /**
    * Fired when a tab is closed.
    */
-  Stream get onRemoved => _onRemoved.stream;
+  Stream<dynamic> get onRemoved => _onRemoved.stream;
 
-  final ChromeStreamController _onRemoved = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onRemoved = null;
 
   /**
    * Fired when a tab is replaced with another tab due to prerendering or
    * instant.
    */
-  Stream get onReplaced => _onReplaced.stream;
+  Stream<dynamic> get onReplaced => _onReplaced.stream;
 
-  final ChromeStreamController _onReplaced = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onReplaced = null;
+}
+
+class Tab extends ChromeObject {
+  Tab(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * Details of the script or CSS to inject. Either the code or the file property
+ * must be set, but both may not be set at the same time.
+ */
+class InjectDetails extends ChromeObject {
+  InjectDetails(JsObject proxy): super(proxy);
+  // TODO:
 }

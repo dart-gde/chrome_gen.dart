@@ -37,11 +37,14 @@ class ChromeDevtoolsInspectedWindow {
    * 
    * [expression] An expression to evaluate.
    * 
-   * [callback] A function called when evaluation completes.
+   * Returns:
+   * [result] The result of evaluation.
+   * [isException] Set if an exception was caught while evaluating the
+   * expression.
    */
-  Future<dynamic> eval(String expression) {
-    ChromeCompleter completer = new ChromeCompleter.twoArgs((arg1, arg2) {
-      return null;
+  Future<JsObject> eval(String expression) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
     });
     _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
     return completer.future;
@@ -57,8 +60,8 @@ class ChromeDevtoolsInspectedWindow {
   /**
    * Retrieves the list of resources from the inspected page.
    * 
-   * [callback] A function that receives the list of resources when the request
-   * completes.
+   * Returns:
+   * The resources within the page.
    */
   Future<dynamic> getResources() {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -71,15 +74,26 @@ class ChromeDevtoolsInspectedWindow {
   /**
    * Fired when a new resource is added to the inspected page.
    */
-  Stream get onResourceAdded => _onResourceAdded.stream;
+  Stream<dynamic> get onResourceAdded => _onResourceAdded.stream;
 
-  final ChromeStreamController _onResourceAdded = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onResourceAdded = null;
 
   /**
    * Fired when a new revision of the resource is committed (e.g. user saves an
    * edited version of the resource in the Developer Tools).
    */
-  Stream get onResourceContentCommitted => _onResourceContentCommitted.stream;
+  Stream<dynamic> get onResourceContentCommitted => _onResourceContentCommitted.stream;
 
-  final ChromeStreamController _onResourceContentCommitted = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onResourceContentCommitted = null;
+}
+
+/**
+ * A resource within the inspected page, such as a document, a script, or an
+ * image.
+ */
+class Resource extends ChromeObject {
+  Resource(JsObject proxy): super(proxy);
+  // TODO:
 }

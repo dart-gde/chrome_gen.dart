@@ -43,6 +43,11 @@ class ChromeExtension {
    * 
    * [extensionId] The extension ID of the extension you want to connect to. If
    * omitted, default is your own extension.
+   * 
+   * Returns:
+   * The JSON response object sent by the handler of the request. If an error
+   * occurs while connecting to the extension, the callback will be called with
+   * no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendRequest(String extensionId, var request) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -58,6 +63,9 @@ class ChromeExtension {
    * 
    * [path] A path to a resource within an extension expressed relative to its
    * install directory.
+   * 
+   * Returns:
+   * The fully-qualified URL to the resource.
    */
   String getURL(String path) {
     return _extension.callMethod('getURL', [path]);
@@ -66,6 +74,9 @@ class ChromeExtension {
   /**
    * Returns an array of the JavaScript 'window' objects for each of the pages
    * running inside the current extension.
+   * 
+   * Returns:
+   * Array of global objects
    */
   dynamic getViews(var fetchProperties) {
     return _extension.callMethod('getViews', [fetchProperties]);
@@ -85,6 +96,9 @@ class ChromeExtension {
    * JavaScript 'window' objects for each of the tabs running inside the current
    * extension. If windowId is specified, returns only the 'window' objects of
    * tabs attached to the specified window.
+   * 
+   * Returns:
+   * Array of global window objects
    */
   dynamic getExtensionTabs(int windowId) {
     return _extension.callMethod('getExtensionTabs', [windowId]);
@@ -93,9 +107,14 @@ class ChromeExtension {
   /**
    * Retrieves the state of the extension's access to Incognito-mode (as
    * determined by the user-controlled 'Allowed in Incognito' checkbox.
+   * 
+   * Returns:
+   * True if the extension has access to Incognito mode, false otherwise.
    */
   Future<bool> isAllowedIncognitoAccess() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
     return completer.future;
   }
@@ -103,9 +122,14 @@ class ChromeExtension {
   /**
    * Retrieves the state of the extension's access to the 'file://' scheme (as
    * determined by the user-controlled 'Allow access to File URLs' checkbox.
+   * 
+   * Returns:
+   * True if the extension can access the 'file://' scheme, false otherwise.
    */
   Future<bool> isAllowedFileSchemeAccess() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
     return completer.future;
   }
@@ -122,14 +146,16 @@ class ChromeExtension {
   /**
    * Deprecated: please use onMessage.
    */
-  Stream get onRequest => _onRequest.stream;
+  Stream<dynamic> get onRequest => _onRequest.stream;
 
-  final ChromeStreamController _onRequest = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onRequest = null;
 
   /**
    * Deprecated: please use onMessageExternal.
    */
-  Stream get onRequestExternal => _onRequestExternal.stream;
+  Stream<dynamic> get onRequestExternal => _onRequestExternal.stream;
 
-  final ChromeStreamController _onRequestExternal = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onRequestExternal = null;
 }

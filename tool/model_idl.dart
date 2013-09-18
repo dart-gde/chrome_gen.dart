@@ -1,6 +1,8 @@
 
 library model_idl;
 
+// TODO: this model needs to be re-written in-line with the needs of the web_idl_parser.
+
 class IDLNamespace {
   /// The IDL namespace name, generally something like 'commandLinePrivate'.
   String name;

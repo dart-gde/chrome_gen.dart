@@ -72,3 +72,18 @@ class ChromeContentSettings {
    */
   dynamic get notifications => _contentSettings['notifications'];
 }
+
+/**
+ * The only content type using resource identifiers is
+ * [contentSettings.plugins.] For more information, see [Resource
+ * Identifiers](contentSettings.html#resource-identifiers).
+ */
+class ResourceIdentifier extends ChromeObject {
+  ResourceIdentifier(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+class ContentSetting extends ChromeObject {
+  ContentSetting(JsObject proxy): super(proxy);
+  // TODO:
+}

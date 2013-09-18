@@ -36,10 +36,6 @@ class ChromeDebugger {
    * attach to the debuggee with matching major version and greater or equal
    * minor version. List of the protocol versions can be obtained
    * [here](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
-   * 
-   * [callback] Called once the attach operation succeeds or fails. Callback
-   * receives no arguments. If the attach fails, [runtime.lastError] will be set
-   * to the error message.
    */
   Future attach(var target, String requiredVersion) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -51,10 +47,6 @@ class ChromeDebugger {
    * Detaches debugger from the given target.
    * 
    * [target] Debugging target from which you want to detach.
-   * 
-   * [callback] Called once the detach operation succeeds or fails. Callback
-   * receives no arguments. If the detach fails, [runtime.lastError] will be set
-   * to the error message.
    */
   Future detach(var target) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -74,9 +66,9 @@ class ChromeDebugger {
    * [commandParams] JSON object with request parameters. This object must
    * conform to the remote debugging params scheme for given method.
    * 
-   * [callback] Response body. If an error occurs while posting the message, the
-   * callback will be called with no arguments and [runtime.lastError] will be
-   * set to the error message.
+   * Returns:
+   * JSON object with the response. Structure of the response varies depending
+   * on the method and is defined by the remote debugging protocol.
    */
   Future<dynamic> sendCommand(var target, String method, var commandParams) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -88,6 +80,9 @@ class ChromeDebugger {
 
   /**
    * Returns the list of available debug targets.
+   * 
+   * Returns:
+   * Array of TargetInfo objects corresponding to the available debug targets.
    */
   Future<dynamic> getTargets() {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -100,16 +95,34 @@ class ChromeDebugger {
   /**
    * Fired whenever debugging target issues instrumentation event.
    */
-  Stream get onEvent => _onEvent.stream;
+  Stream<dynamic> get onEvent => _onEvent.stream;
 
-  final ChromeStreamController _onEvent = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onEvent = null;
 
   /**
    * Fired when browser terminates debugging session for the tab. This happens
    * when either the tab is being closed or Chrome DevTools is being invoked for
    * the attached tab.
    */
-  Stream get onDetach => _onDetach.stream;
+  Stream<dynamic> get onDetach => _onDetach.stream;
 
-  final ChromeStreamController _onDetach = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onDetach = null;
+}
+
+/**
+ * Debuggee identifier. Either tabId or extensionId must be specified
+ */
+class Debuggee extends ChromeObject {
+  Debuggee(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * Debug target information
+ */
+class TargetInfo extends ChromeObject {
+  TargetInfo(JsObject proxy): super(proxy);
+  // TODO:
 }

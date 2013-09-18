@@ -4,7 +4,9 @@
 
 /* This file has been generated from types.json - do not edit */
 
-/// The `chrome.types` API contains type declarations for Chrome.
+/**
+ * The `chrome.types` API contains type declarations for Chrome.
+ */
 library chrome.types;
 
 import '../src/common.dart';
@@ -18,4 +20,13 @@ class ChromeTypes {
   ChromeTypes._() {
     _types = context['chrome']['types'];
   }
+}
+
+/**
+ * An interface that allows access to a Chrome browser setting. See
+ * [proxy.settings] for an example.
+ */
+class ChromeSetting extends ChromeObject {
+  ChromeSetting(JsObject proxy): super(proxy);
+  // TODO:
 }

@@ -184,55 +184,71 @@ class ChromeBookmarks {
   /**
    * Fired when a bookmark or folder is created.
    */
-  Stream get onCreated => _onCreated.stream;
+  Stream<dynamic> get onCreated => _onCreated.stream;
 
-  final ChromeStreamController _onCreated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onCreated = null;
 
   /**
    * Fired when a bookmark or folder is removed.  When a folder is removed
    * recursively, a single notification is fired for the folder, and none for
    * its contents.
    */
-  Stream get onRemoved => _onRemoved.stream;
+  Stream<dynamic> get onRemoved => _onRemoved.stream;
 
-  final ChromeStreamController _onRemoved = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onRemoved = null;
 
   /**
    * Fired when a bookmark or folder changes.  <b>Note:</b> Currently, only
    * title and url changes trigger this.
    */
-  Stream get onChanged => _onChanged.stream;
+  Stream<dynamic> get onChanged => _onChanged.stream;
 
-  final ChromeStreamController _onChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onChanged = null;
 
   /**
    * Fired when a bookmark or folder is moved to a different parent folder.
    */
-  Stream get onMoved => _onMoved.stream;
+  Stream<dynamic> get onMoved => _onMoved.stream;
 
-  final ChromeStreamController _onMoved = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onMoved = null;
 
   /**
    * Fired when the children of a folder have changed their order due to the
    * order being sorted in the UI.  This is not called as a result of a move().
    */
-  Stream get onChildrenReordered => _onChildrenReordered.stream;
+  Stream<dynamic> get onChildrenReordered => _onChildrenReordered.stream;
 
-  final ChromeStreamController _onChildrenReordered = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onChildrenReordered = null;
 
   /**
    * Fired when a bookmark import session is begun.  Expensive observers should
    * ignore onCreated updates until onImportEnded is fired.  Observers should
    * still handle other notifications immediately.
    */
-  Stream get onImportBegan => _onImportBegan.stream;
+  Stream<dynamic> get onImportBegan => _onImportBegan.stream;
 
-  final ChromeStreamController _onImportBegan = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onImportBegan = null;
 
   /**
    * Fired when a bookmark import session is ended.
    */
-  Stream get onImportEnded => _onImportEnded.stream;
+  Stream<dynamic> get onImportEnded => _onImportEnded.stream;
 
-  final ChromeStreamController _onImportEnded = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onImportEnded = null;
+}
+
+/**
+ * A node (either a bookmark or a folder) in the bookmark tree.  Child nodes are
+ * ordered within their parent folder.
+ */
+class BookmarkTreeNode extends ChromeObject {
+  BookmarkTreeNode(JsObject proxy): super(proxy);
+  // TODO:
 }

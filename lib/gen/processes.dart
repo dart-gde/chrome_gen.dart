@@ -4,7 +4,9 @@
 
 /* This file has been generated from processes.json - do not edit */
 
-/// Use the `chrome.processes` API to interact with the browser's processes.
+/**
+ * Use the `chrome.processes` API to interact with the browser's processes.
+ */
 library chrome.processes;
 
 import '../src/common.dart';
@@ -24,9 +26,14 @@ class ChromeProcesses {
    * about:crash, but without changing the tab's URL.
    * 
    * [processId] The ID of the process to be terminated.
+   * 
+   * Returns:
+   * True if terminating the process was successful, otherwise false.
    */
   Future<bool> terminate(int processId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _processes.callMethod('terminate', [processId, completer.callback]);
     return completer.future;
   }
@@ -36,9 +43,14 @@ class ChromeProcesses {
    * 
    * [tabId] The ID of the tab for which the renderer process ID is to be
    * returned.
+   * 
+   * Returns:
+   * Process ID of the tab's renderer process.
    */
   Future<int> getProcessIdForTab(int tabId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _processes.callMethod('getProcessIdForTab', [tabId, completer.callback]);
     return completer.future;
   }
@@ -54,7 +66,11 @@ class ChromeProcesses {
    * memory usage information incurs extra CPU usage and should only be queried
    * for when needed.
    * 
-   * [callback] Called when the processes information is collected.
+   * Returns:
+   * A dictionary of Process objects for each requested process that is a live
+   * child process of the current browser process, indexed by process ID.
+   * Metrics requiring aggregation over time will not be populated in each
+   * Process object.
    */
   Future<dynamic> getProcessInfo(var processIds, bool includeMemory) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -68,9 +84,10 @@ class ChromeProcesses {
    * Fired each time the Task Manager updates its process statistics, providing
    * the dictionary of updated Process objects, indexed by process ID.
    */
-  Stream get onUpdated => _onUpdated.stream;
+  Stream<dynamic> get onUpdated => _onUpdated.stream;
 
-  final ChromeStreamController _onUpdated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onUpdated = null;
 
   /**
    * Fired each time the Task Manager updates its process statistics, providing
@@ -79,30 +96,51 @@ class ChromeProcesses {
    * Process object. Note, collecting memory usage information incurs extra CPU
    * usage and should only be listened for when needed.
    */
-  Stream get onUpdatedWithMemory => _onUpdatedWithMemory.stream;
+  Stream<dynamic> get onUpdatedWithMemory => _onUpdatedWithMemory.stream;
 
-  final ChromeStreamController _onUpdatedWithMemory = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onUpdatedWithMemory = null;
 
   /**
    * Fired each time a process is created, providing the corrseponding Process
    * object.
    */
-  Stream get onCreated => _onCreated.stream;
+  Stream<dynamic> get onCreated => _onCreated.stream;
 
-  final ChromeStreamController _onCreated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onCreated = null;
 
   /**
    * Fired each time a process becomes unresponsive, providing the corrseponding
    * Process object.
    */
-  Stream get onUnresponsive => _onUnresponsive.stream;
+  Stream<dynamic> get onUnresponsive => _onUnresponsive.stream;
 
-  final ChromeStreamController _onUnresponsive = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onUnresponsive = null;
 
   /**
    * Fired each time a process is terminated, providing the type of exit.
    */
-  Stream get onExited => _onExited.stream;
+  Stream<dynamic> get onExited => _onExited.stream;
 
-  final ChromeStreamController _onExited = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onExited = null;
+}
+
+/**
+ * An object containing information about one of the browser's processes.
+ */
+class Process extends ChromeObject {
+  Process(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * The Cache object contains information about the size and utilization of a
+ * cache used by the browser.
+ */
+class Cache extends ChromeObject {
+  Cache(JsObject proxy): super(proxy);
+  // TODO:
 }

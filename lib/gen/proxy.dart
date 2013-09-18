@@ -32,7 +32,43 @@ class ChromeProxy {
   /**
    * Notifies about proxy errors.
    */
-  Stream get onProxyError => _onProxyError.stream;
+  Stream<dynamic> get onProxyError => _onProxyError.stream;
 
-  final ChromeStreamController _onProxyError = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onProxyError = null;
+}
+
+/**
+ * An object encapsulating a single proxy server's specification.
+ */
+class ProxyServer extends ChromeObject {
+  ProxyServer(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * An object encapsulating the set of proxy rules for all protocols. Use either
+ * 'singleProxy' or (a subset of) 'proxyForHttp', 'proxyForHttps', 'proxyForFtp'
+ * and 'fallbackProxy'.
+ */
+class ProxyRules extends ChromeObject {
+  ProxyRules(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * An object holding proxy auto-config information. Exactly one of the fields
+ * should be non-empty.
+ */
+class PacScript extends ChromeObject {
+  PacScript(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * An object encapsulating a complete proxy configuration.
+ */
+class ProxyConfig extends ChromeObject {
+  ProxyConfig(JsObject proxy): super(proxy);
+  // TODO:
 }

@@ -26,6 +26,9 @@ class ChromeInfobars {
    * Shows an infobar in the specified tab. The infobar will be closed
    * automatically when the tab navigates. Use window.close() to close the
    * infobar before then.
+   * 
+   * Returns:
+   * Contains details about the window in which the infobar was created.
    */
   Future<dynamic> show(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {

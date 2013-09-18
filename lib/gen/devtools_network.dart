@@ -25,7 +25,8 @@ class ChromeDevtoolsNetwork {
   /**
    * Returns HAR log that contains all known network requests.
    * 
-   * [callback] A function that receives the HAR log when the request completes.
+   * Returns:
+   * A HAR log. See HAR specification for details.
    */
   Future<dynamic> getHAR() {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -39,14 +40,25 @@ class ChromeDevtoolsNetwork {
    * Fired when a network request is finished and all request data are
    * available.
    */
-  Stream get onRequestFinished => _onRequestFinished.stream;
+  Stream<dynamic> get onRequestFinished => _onRequestFinished.stream;
 
-  final ChromeStreamController _onRequestFinished = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onRequestFinished = null;
 
   /**
    * Fired when the inspected window navigates to a new page.
    */
-  Stream get onNavigated => _onNavigated.stream;
+  Stream<dynamic> get onNavigated => _onNavigated.stream;
 
-  final ChromeStreamController _onNavigated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onNavigated = null;
+}
+
+/**
+ * Represents a network request for a document resource (script, image and so
+ * on). See HAR Specification for reference.
+ */
+class Request extends ChromeObject {
+  Request(JsObject proxy): super(proxy);
+  // TODO:
 }

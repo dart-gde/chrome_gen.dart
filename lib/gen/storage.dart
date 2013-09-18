@@ -33,9 +33,27 @@ class ChromeStorage {
   dynamic get local => _storage['local'];
 
   /**
+   * Items in the `managed` storage area are set by the domain administrator,
+   * and are read-only by the extension; trying to modify this namespace results
+   * in an error.
+   */
+  dynamic get managed => _storage['managed'];
+
+  /**
    * Fired when one or more items change.
    */
-  Stream get onChanged => _onChanged.stream;
+  Stream<dynamic> get onChanged => _onChanged.stream;
 
-  final ChromeStreamController _onChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onChanged = null;
+}
+
+class StorageChange extends ChromeObject {
+  StorageChange(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+class StorageArea extends ChromeObject {
+  StorageArea(JsObject proxy): super(proxy);
+  // TODO:
 }

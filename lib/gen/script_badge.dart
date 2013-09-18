@@ -34,7 +34,9 @@ class ChromeScriptBadge {
    * Gets the html document set as the popup for this script badge.
    */
   Future<String> getPopup(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _scriptBadge.callMethod('getPopup', [details, completer.callback]);
     return completer.future;
   }
@@ -54,7 +56,8 @@ class ChromeScriptBadge {
    * Fired when a script badge icon is clicked.  This event will not fire if the
    * script badge has a popup.
    */
-  Stream get onClicked => _onClicked.stream;
+  Stream<dynamic> get onClicked => _onClicked.stream;
 
-  final ChromeStreamController _onClicked = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onClicked = null;
 }

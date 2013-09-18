@@ -26,8 +26,6 @@ class ChromeCommands {
   /**
    * Returns all the registered extension commands for this extension and their
    * shortcut (if active).
-   * 
-   * [callback] Called to return the registered commands.
    */
   Future<dynamic> getAll() {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -40,7 +38,13 @@ class ChromeCommands {
   /**
    * Fired when a registered command is activated using a keyboard shortcut.
    */
-  Stream get onCommand => _onCommand.stream;
+  Stream<dynamic> get onCommand => _onCommand.stream;
 
-  final ChromeStreamController _onCommand = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onCommand = null;
+}
+
+class Command extends ChromeObject {
+  Command(JsObject proxy): super(proxy);
+  // TODO:
 }

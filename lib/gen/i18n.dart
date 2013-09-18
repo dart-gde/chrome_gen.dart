@@ -25,6 +25,9 @@ class ChromeI18N {
   /**
    * Gets the accept-languages of the browser. This is different from the locale
    * used by the browser; to get the locale, use `window.navigator.language`.
+   * 
+   * Returns:
+   * Array of the accept languages of the browser, such as en-US,en,zh-CN
    */
   Future<dynamic> getAcceptLanguages() {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -45,6 +48,9 @@ class ChromeI18N {
    * href='i18n-messages.html'>`messages.json`</a> file.
    * 
    * [substitutions] Up to 9 substitution strings, if the message requires any.
+   * 
+   * Returns:
+   * Message localized for current locale.
    */
   String getMessage(String messageName, var substitutions) {
     return _i18n.callMethod('getMessage', [messageName, substitutions]);

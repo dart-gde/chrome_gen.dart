@@ -90,15 +90,33 @@ class ChromeHistory {
    * Fired when a URL is visited, providing the HistoryItem data for that URL.
    * This event fires before the page has loaded.
    */
-  Stream get onVisited => _onVisited.stream;
+  Stream<dynamic> get onVisited => _onVisited.stream;
 
-  final ChromeStreamController _onVisited = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onVisited = null;
 
   /**
    * Fired when one or more URLs are removed from the history service.  When all
    * visits have been removed the URL is purged from history.
    */
-  Stream get onVisitRemoved => _onVisitRemoved.stream;
+  Stream<dynamic> get onVisitRemoved => _onVisitRemoved.stream;
 
-  final ChromeStreamController _onVisitRemoved = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onVisitRemoved = null;
+}
+
+/**
+ * An object encapsulating one result of a history query.
+ */
+class HistoryItem extends ChromeObject {
+  HistoryItem(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * An object encapsulating one visit to a URL.
+ */
+class VisitItem extends ChromeObject {
+  VisitItem(JsObject proxy): super(proxy);
+  // TODO:
 }

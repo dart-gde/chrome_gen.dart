@@ -35,7 +35,9 @@ class ChromeBrowserAction {
    * Gets the title of the browser action.
    */
   Future<String> getTitle(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _browserAction.callMethod('getTitle', [details, completer.callback]);
     return completer.future;
   }
@@ -64,7 +66,9 @@ class ChromeBrowserAction {
    * Gets the html document set as the popup for this browser action.
    */
   Future<String> getPopup(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _browserAction.callMethod('getPopup', [details, completer.callback]);
     return completer.future;
   }
@@ -82,7 +86,9 @@ class ChromeBrowserAction {
    * non-tab-specific badge text is returned.
    */
   Future<String> getBadgeText(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _browserAction.callMethod('getBadgeText', [details, completer.callback]);
     return completer.future;
   }
@@ -128,7 +134,22 @@ class ChromeBrowserAction {
    * Fired when a browser action icon is clicked.  This event will not fire if
    * the browser action has a popup.
    */
-  Stream get onClicked => _onClicked.stream;
+  Stream<dynamic> get onClicked => _onClicked.stream;
 
-  final ChromeStreamController _onClicked = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onClicked = null;
+}
+
+class ColorArray extends ChromeObject {
+  ColorArray(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * Pixel data for an image. Must be an ImageData object (for example, from a
+ * `canvas` element).
+ */
+class ImageDataType extends ChromeObject {
+  ImageDataType(JsObject proxy): super(proxy);
+  // TODO:
 }

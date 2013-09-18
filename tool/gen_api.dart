@@ -6,9 +6,10 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 
-import 'parser_json.dart';
-import 'model_idl.dart';
-import 'translation.dart';
+import 'backend.dart';
+import 'model_chrome.dart';
+import 'model_json.dart' as model_json;
+import 'overrides.dart';
 import 'web_idl_parser.dart';
 import 'src/utils.dart';
 
@@ -34,11 +35,11 @@ final String LICENSE =
 class GenApiFile {
   File inFile;
   File outFile;
-  TranslationContext context;
+  Overrides overrides;
 
-  GenApiFile(this.inFile, this.outFile, [this.context]) {
-    if (context == null) {
-      context = new TranslationContext();
+  GenApiFile(this.inFile, this.outFile, [this.overrides]) {
+    if (overrides == null) {
+      overrides = new Overrides();
     }
 
     if (!inFile.path.endsWith(".json") && !inFile.path.endsWith(".idl")) {
@@ -49,30 +50,31 @@ class GenApiFile {
   void generate() {
     print("parsing ${inFile.path}...");
 
-    IDLNamespace namespace;
+    ChromeLibrary chromeLib;
+
+    String fileName = getFileName(inFile);
 
     if (inFile.path.endsWith(".json")) {
-      JsonParser parser = new JsonParser();
-      namespace = parser.parse(inFile.readAsStringSync());
+      model_json.JsonNamespace namespace = model_json.parse(
+          inFile.readAsStringSync());
+      chromeLib = model_json.convert(namespace);
     } else if (inFile.path.endsWith(".idl")) {
       WebIdlParser webIdlParser = new WebIdlParser();
 
-      String fileName = getFileName(inFile);
-
-      namespace = new IDLNamespace();
-      namespace.name = fileName.substring(0, fileName.indexOf('.'));
-      namespace.name = namespace.name.replaceAll('_', '.');
+      chromeLib = new ChromeLibrary();
+      chromeLib.name = fileName.substring(0, fileName.indexOf('.'));
+      chromeLib.name = chromeLib.name.replaceAll('_', '.');
       List tokens = webIdlParser.start.parse(inFile.readAsStringSync());
       if (_parseNamespace(tokens) != null) {
-        namespace.name = _parseNamespace(tokens);
+        chromeLib.name = _parseNamespace(tokens);
       }
     }
 
     outFile.directory.createSync();
 
-    Translator translator = new DartJSTranslator(context);
+    Backend backend = new Backend.createDefault(overrides);
     outFile.writeAsStringSync(
-        translator.translate(namespace, license: LICENSE, sourceFilePath: getFileName(inFile)));
+        backend.generate(chromeLib, license: LICENSE, sourceFileName: fileName));
   }
 
   String _parseNamespace(List tokens) {

@@ -4,7 +4,9 @@
 
 /* This file has been generated from page_capture.json - do not edit */
 
-/// Use the `chrome.pageCapture` API to save a tab as MHTML.
+/**
+ * Use the `chrome.pageCapture` API to save a tab as MHTML.
+ */
 library chrome.pageCapture;
 
 import '../src/common.dart';
@@ -22,7 +24,8 @@ class ChromePageCapture {
   /**
    * Saves the content of the tab with given id as MHTML.
    * 
-   * [callback] Called when the MHTML has been generated.
+   * Returns:
+   * The MHTML data as a Blob.
    */
   Future<dynamic> saveAsMHTML(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {

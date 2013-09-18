@@ -33,3 +33,12 @@ class ChromeTopSites {
     return completer.future;
   }
 }
+
+/**
+ * An object encapsulating a most visited URL, such as the URLs on the new tab
+ * page.
+ */
+class MostVisitedURL extends ChromeObject {
+  MostVisitedURL(JsObject proxy): super(proxy);
+  // TODO:
+}

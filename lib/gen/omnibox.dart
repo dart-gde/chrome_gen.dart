@@ -49,28 +49,48 @@ class ChromeOmnibox {
    * This is guaranteed to be sent exactly once per input session, and before
    * any onInputChanged events.
    */
-  Stream get onInputStarted => _onInputStarted.stream;
+  Stream<dynamic> get onInputStarted => _onInputStarted.stream;
 
-  final ChromeStreamController _onInputStarted = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onInputStarted = null;
 
   /**
    * User has changed what is typed into the omnibox.
    */
-  Stream get onInputChanged => _onInputChanged.stream;
+  Stream<dynamic> get onInputChanged => _onInputChanged.stream;
 
-  final ChromeStreamController _onInputChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onInputChanged = null;
 
   /**
    * User has accepted what is typed into the omnibox.
    */
-  Stream get onInputEntered => _onInputEntered.stream;
+  Stream<dynamic> get onInputEntered => _onInputEntered.stream;
 
-  final ChromeStreamController _onInputEntered = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onInputEntered = null;
 
   /**
    * User has ended the keyword input session without accepting the input.
    */
-  Stream get onInputCancelled => _onInputCancelled.stream;
+  Stream<dynamic> get onInputCancelled => _onInputCancelled.stream;
 
-  final ChromeStreamController _onInputCancelled = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onInputCancelled = null;
+}
+
+/**
+ * A suggest result.
+ */
+class SuggestResult extends ChromeObject {
+  SuggestResult(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * A suggest result.
+ */
+class DefaultSuggestResult extends ChromeObject {
+  DefaultSuggestResult(JsObject proxy): super(proxy);
+  // TODO:
 }

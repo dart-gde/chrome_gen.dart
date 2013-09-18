@@ -4,7 +4,9 @@
 
 /* This file has been generated from font_settings.json - do not edit */
 
-/// Use the `chrome.fontSettings` API to manage Chrome's font settings.
+/**
+ * Use the `chrome.fontSettings` API to manage Chrome's font settings.
+ */
 library chrome.fontSettings;
 
 import '../src/common.dart';
@@ -161,28 +163,69 @@ class ChromeFontSettings {
   /**
    * Fired when a font setting changes.
    */
-  Stream get onFontChanged => _onFontChanged.stream;
+  Stream<dynamic> get onFontChanged => _onFontChanged.stream;
 
-  final ChromeStreamController _onFontChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onFontChanged = null;
 
   /**
    * Fired when the default font size setting changes.
    */
-  Stream get onDefaultFontSizeChanged => _onDefaultFontSizeChanged.stream;
+  Stream<dynamic> get onDefaultFontSizeChanged => _onDefaultFontSizeChanged.stream;
 
-  final ChromeStreamController _onDefaultFontSizeChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onDefaultFontSizeChanged = null;
 
   /**
    * Fired when the default fixed font size setting changes.
    */
-  Stream get onDefaultFixedFontSizeChanged => _onDefaultFixedFontSizeChanged.stream;
+  Stream<dynamic> get onDefaultFixedFontSizeChanged => _onDefaultFixedFontSizeChanged.stream;
 
-  final ChromeStreamController _onDefaultFixedFontSizeChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onDefaultFixedFontSizeChanged = null;
 
   /**
    * Fired when the minimum font size setting changes.
    */
-  Stream get onMinimumFontSizeChanged => _onMinimumFontSizeChanged.stream;
+  Stream<dynamic> get onMinimumFontSizeChanged => _onMinimumFontSizeChanged.stream;
 
-  final ChromeStreamController _onMinimumFontSizeChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onMinimumFontSizeChanged = null;
+}
+
+/**
+ * Represents a font name.
+ */
+class FontName extends ChromeObject {
+  FontName(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * An ISO 15924 script code. The default, or global, script is represented by
+ * script code "Zyyy".
+ */
+class ScriptCode extends ChromeObject {
+  ScriptCode(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * A CSS generic font family.
+ */
+class GenericFamily extends ChromeObject {
+  GenericFamily(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * One of<br>[not_controllable]: cannot be controlled by any
+ * extension<br>[controlled_by_other_extensions]: controlled by extensions with
+ * higher precedence<br>[controllable_by_this_extension]: can be controlled by
+ * this extension<br>[controlled_by_this_extension]: controlled by this
+ * extension
+ */
+class LevelOfControl extends ChromeObject {
+  LevelOfControl(JsObject proxy): super(proxy);
+  // TODO:
 }

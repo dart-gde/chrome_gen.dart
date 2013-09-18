@@ -33,10 +33,6 @@ class ChromeTts {
    * characters.
    * 
    * [options] The speech options.
-   * 
-   * [callback] Called right away, before speech finishes. Check
-   * chrome.runtime.lastError to make sure there were no errors. Use
-   * options.onEvent to get more detailed feedback.
    */
   Future speak(String utterance, var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -72,15 +68,24 @@ class ChromeTts {
    * Checks whether the engine is currently speaking. On Mac OS X, the result is
    * true whenever the system speech engine is speaking, even if the speech
    * wasn't initiated by Chrome.
+   * 
+   * Returns:
+   * True if speaking, false otherwise.
    */
   Future<bool> isSpeaking() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _tts.callMethod('isSpeaking', [completer.callback]);
     return completer.future;
   }
 
   /**
    * Gets an array of all available voices.
+   * 
+   * Returns:
+   * Array of [TtsVoice] objects representing the available voices for speech
+   * synthesis.
    */
   Future<dynamic> getVoices() {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -93,7 +98,24 @@ class ChromeTts {
   /**
    * Used to pass events back to the function calling speak().
    */
-  Stream get onEvent => _onEvent.stream;
+  Stream<dynamic> get onEvent => _onEvent.stream;
 
-  final ChromeStreamController _onEvent = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onEvent = null;
+}
+
+/**
+ * An event from the TTS engine to communicate the status of an utterance.
+ */
+class TtsEvent extends ChromeObject {
+  TtsEvent(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * A description of a voice available for speech synthesis.
+ */
+class TtsVoice extends ChromeObject {
+  TtsVoice(JsObject proxy): super(proxy);
+  // TODO:
 }

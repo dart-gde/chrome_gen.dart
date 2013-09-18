@@ -39,7 +39,8 @@ class ChromeDevtoolsPanels {
    * [pagePath] Path of the panel's HTML page relative to the extension
    * directory.
    * 
-   * [callback] A function that is called when the panel is created.
+   * Returns:
+   * An ExtensionPanel object representing the created panel.
    */
   Future<dynamic> create(String title, String iconPath, String pagePath) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -54,9 +55,9 @@ class ChromeDevtoolsPanels {
    * the Developer Tools window. To unset the handler, either call the method
    * with no parameters or pass null as the parameter.
    * 
-   * [callback] A function that is called when the user clicks on a valid
-   * resource link in Developer Tools window. Note that if the user clicks an
-   * invalid URL or an XHR, this function is not called.
+   * Returns:
+   * A [devtools.inspectedWindow.Resource] object for the resource that was
+   * clicked.
    */
   Future<dynamic> setOpenResourceHandler() {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -65,4 +66,36 @@ class ChromeDevtoolsPanels {
     _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
     return completer.future;
   }
+}
+
+/**
+ * Represents the Elements panel.
+ */
+class ElementsPanel extends ChromeObject {
+  ElementsPanel(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * Represents a panel created by extension.
+ */
+class ExtensionPanel extends ChromeObject {
+  ExtensionPanel(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * A sidebar created by the extension.
+ */
+class ExtensionSidebarPane extends ChromeObject {
+  ExtensionSidebarPane(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * A button created by the extension.
+ */
+class Button extends ChromeObject {
+  Button(JsObject proxy): super(proxy);
+  // TODO:
 }

@@ -31,11 +31,12 @@ class ChromeContextMenus {
    * [callback] Called when the item has been created in the browser. If there
    * were any problems creating the item, details will be available in
    * chrome.runtime.lastError.
+   * 
+   * Returns:
+   * The ID of the newly created item.
    */
-  Future create(var createProperties) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _contextMenus.callMethod('create', [createProperties, completer.callback]);
-    return completer.future;
+  dynamic create(var createProperties, var callback) {
+    return _contextMenus.callMethod('create', [createProperties, callback]);
   }
 
   /**
@@ -45,8 +46,6 @@ class ChromeContextMenus {
    * 
    * [updateProperties] The properties to update. Accepts the same values as the
    * create function.
-   * 
-   * [callback] Called when the context menu has been updated.
    */
   Future update(var id, var updateProperties) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -58,8 +57,6 @@ class ChromeContextMenus {
    * Removes a context menu item.
    * 
    * [menuItemId] The ID of the context menu item to remove.
-   * 
-   * [callback] Called when the context menu has been removed.
    */
   Future remove(var menuItemId) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -69,8 +66,6 @@ class ChromeContextMenus {
 
   /**
    * Removes all context menu items added by this extension.
-   * 
-   * [callback] Called when removal is complete.
    */
   Future removeAll() {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -81,7 +76,16 @@ class ChromeContextMenus {
   /**
    * Fired when a context menu item is clicked.
    */
-  Stream get onClicked => _onClicked.stream;
+  Stream<dynamic> get onClicked => _onClicked.stream;
 
-  final ChromeStreamController _onClicked = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onClicked = null;
+}
+
+/**
+ * Information sent when a context menu item is clicked.
+ */
+class OnClickData extends ChromeObject {
+  OnClickData(JsObject proxy): super(proxy);
+  // TODO:
 }

@@ -40,8 +40,6 @@ class ChromeBrowsingData {
    * Clears various types of browsing data stored in a user's profile.
    * 
    * [dataToRemove] The set of data types to remove.
-   * 
-   * [callback] Called when deletion has completed.
    */
   Future remove(var options, var dataToRemove) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -51,8 +49,6 @@ class ChromeBrowsingData {
 
   /**
    * Clears websites' appcache data.
-   * 
-   * [callback] Called when websites' appcache data has been cleared.
    */
   Future removeAppcache(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -62,8 +58,6 @@ class ChromeBrowsingData {
 
   /**
    * Clears the browser's cache.
-   * 
-   * [callback] Called when the browser's cache has been cleared.
    */
   Future removeCache(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -74,9 +68,6 @@ class ChromeBrowsingData {
   /**
    * Clears the browser's cookies and server-bound certificates modified within
    * a particular timeframe.
-   * 
-   * [callback] Called when the browser's cookies and server-bound certificates
-   * have been cleared.
    */
   Future removeCookies(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -87,9 +78,6 @@ class ChromeBrowsingData {
   /**
    * Clears the browser's list of downloaded files (_not_ the downloaded files
    * themselves).
-   * 
-   * [callback] Called when the browser's list of downloaded files has been
-   * cleared.
    */
   Future removeDownloads(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -99,8 +87,6 @@ class ChromeBrowsingData {
 
   /**
    * Clears websites' file system data.
-   * 
-   * [callback] Called when websites' file systems have been cleared.
    */
   Future removeFileSystems(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -110,8 +96,6 @@ class ChromeBrowsingData {
 
   /**
    * Clears the browser's stored form data (autofill).
-   * 
-   * [callback] Called when the browser's form data has been cleared.
    */
   Future removeFormData(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -121,8 +105,6 @@ class ChromeBrowsingData {
 
   /**
    * Clears the browser's history.
-   * 
-   * [callback] Called when the browser's history has cleared.
    */
   Future removeHistory(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -132,8 +114,6 @@ class ChromeBrowsingData {
 
   /**
    * Clears websites' IndexedDB data.
-   * 
-   * [callback] Called when websites' IndexedDB data has been cleared.
    */
   Future removeIndexedDB(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -143,8 +123,6 @@ class ChromeBrowsingData {
 
   /**
    * Clears websites' local storage data.
-   * 
-   * [callback] Called when websites' local storage has been cleared.
    */
   Future removeLocalStorage(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -154,8 +132,6 @@ class ChromeBrowsingData {
 
   /**
    * Clears plugins' data.
-   * 
-   * [callback] Called when plugins' data has been cleared.
    */
   Future removePluginData(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -165,8 +141,6 @@ class ChromeBrowsingData {
 
   /**
    * Clears the browser's stored passwords.
-   * 
-   * [callback] Called when the browser's passwords have been cleared.
    */
   Future removePasswords(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -176,12 +150,26 @@ class ChromeBrowsingData {
 
   /**
    * Clears websites' WebSQL data.
-   * 
-   * [callback] Called when websites' WebSQL databases have been cleared.
    */
   Future removeWebSQL(var options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeWebSQL', [options, completer.callback]);
     return completer.future;
   }
+}
+
+/**
+ * Options that determine exactly what data will be removed.
+ */
+class RemovalOptions extends ChromeObject {
+  RemovalOptions(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * A set of data types. Missing data types are interpreted as `false`.
+ */
+class DataTypeSet extends ChromeObject {
+  DataTypeSet(JsObject proxy): super(proxy);
+  // TODO:
 }

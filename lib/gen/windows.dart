@@ -89,6 +89,9 @@ class ChromeWindows {
   /**
    * Creates (opens) a new browser with any optional sizing, position or default
    * URL provided.
+   * 
+   * Returns:
+   * Contains details about the created window.
    */
   Future<dynamic> create(var createData) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -122,16 +125,18 @@ class ChromeWindows {
   /**
    * Fired when a window is created.
    */
-  Stream get onCreated => _onCreated.stream;
+  Stream<dynamic> get onCreated => _onCreated.stream;
 
-  final ChromeStreamController _onCreated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onCreated = null;
 
   /**
    * Fired when a window is removed (closed).
    */
-  Stream get onRemoved => _onRemoved.stream;
+  Stream<dynamic> get onRemoved => _onRemoved.stream;
 
-  final ChromeStreamController _onRemoved = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onRemoved = null;
 
   /**
    * Fired when the currently focused window changes. Will be
@@ -139,7 +144,13 @@ class ChromeWindows {
    * On some Linux window managers, WINDOW_ID_NONE will always be sent
    * immediately preceding a switch from one chrome window to another.
    */
-  Stream get onFocusChanged => _onFocusChanged.stream;
+  Stream<dynamic> get onFocusChanged => _onFocusChanged.stream;
 
-  final ChromeStreamController _onFocusChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onFocusChanged = null;
+}
+
+class Window extends ChromeObject {
+  Window(JsObject proxy): super(proxy);
+  // TODO:
 }

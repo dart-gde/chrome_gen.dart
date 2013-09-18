@@ -26,6 +26,9 @@ class ChromePermissions {
 
   /**
    * Gets the extension's current set of permissions.
+   * 
+   * Returns:
+   * The extension's active permissions.
    */
   Future<dynamic> getAll() {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -37,9 +40,14 @@ class ChromePermissions {
 
   /**
    * Checks if the extension has the specified permissions.
+   * 
+   * Returns:
+   * True if the extension has the specified permissions.
    */
   Future<bool> contains(var permissions) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _permissions.callMethod('contains', [permissions, completer.callback]);
     return completer.future;
   }
@@ -48,9 +56,14 @@ class ChromePermissions {
    * Requests access to the specified permissions. These permissions must be
    * defined in the optional_permissions field of the manifest. If there are any
    * problems requesting the permissions, [runtime.lastError] will be set.
+   * 
+   * Returns:
+   * True if the user granted the specified permissions.
    */
   Future<bool> request(var permissions) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _permissions.callMethod('request', [permissions, completer.callback]);
     return completer.future;
   }
@@ -58,9 +71,14 @@ class ChromePermissions {
   /**
    * Removes access to the specified permissions. If there are any problems
    * removing the permissions, [runtime.lastError] will be set.
+   * 
+   * Returns:
+   * True if the permissions were removed.
    */
   Future<bool> remove(var permissions) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _permissions.callMethod('remove', [permissions, completer.callback]);
     return completer.future;
   }
@@ -68,14 +86,21 @@ class ChromePermissions {
   /**
    * Fired when the extension acquires new permissions.
    */
-  Stream get onAdded => _onAdded.stream;
+  Stream<dynamic> get onAdded => _onAdded.stream;
 
-  final ChromeStreamController _onAdded = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onAdded = null;
 
   /**
    * Fired when access to permissions has been removed from the extension.
    */
-  Stream get onRemoved => _onRemoved.stream;
+  Stream<dynamic> get onRemoved => _onRemoved.stream;
 
-  final ChromeStreamController _onRemoved = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onRemoved = null;
+}
+
+class Permissions extends ChromeObject {
+  Permissions(JsObject proxy): super(proxy);
+  // TODO:
 }

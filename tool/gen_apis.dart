@@ -8,7 +8,7 @@ import 'dart:io';
 import 'dart:convert';
 
 import 'gen_api.dart';
-import 'translation.dart';
+import 'overrides.dart';
 import 'src/src_gen.dart';
 import 'src/utils.dart';
 
@@ -81,15 +81,14 @@ class GenApis {
       libraryNames.removeWhere((e) => alreadyWritten.contains(e));
     }
 
-    TranslationContext context = new TranslationContext.fromOverrides(
-        JSON.decode(overridesFile.readAsStringSync()));
+    Overrides overrides = new Overrides.fromFile(overridesFile);
 
     for (String libName in libraryNames) {
-      _generateFile(context, libName);
+      _generateFile(overrides, libName);
     }
   }
 
-  void _generateFile(TranslationContext context, String jsLibName) {
+  void _generateFile(Overrides overrides, String jsLibName) {
     String fileName = convertJSLibNameToFileName(jsLibName);
     String locateName = fileName.replaceFirst("devtools_", "devtools/");
 
@@ -99,10 +98,10 @@ class GenApis {
     File outFile = new File("${outDir.path}/gen/${fileName}.dart");
 
     if (jsonFile.existsSync()) {
-      GenApiFile apiGen = new GenApiFile(jsonFile, outFile, context);
+      GenApiFile apiGen = new GenApiFile(jsonFile, outFile, overrides);
       apiGen.generate();
     } else if (idlFile.existsSync()) {
-      GenApiFile apiGen = new GenApiFile(idlFile, outFile, context);
+      GenApiFile apiGen = new GenApiFile(idlFile, outFile, overrides);
       apiGen.generate();
     } else {
       print("Unable to locate idl or json file for '${jsLibName}'.");

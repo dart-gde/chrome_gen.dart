@@ -125,28 +125,48 @@ class ChromeManagement {
   /**
    * Fired when an app or extension has been installed.
    */
-  Stream get onInstalled => _onInstalled.stream;
+  Stream<dynamic> get onInstalled => _onInstalled.stream;
 
-  final ChromeStreamController _onInstalled = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onInstalled = null;
 
   /**
    * Fired when an app or extension has been uninstalled.
    */
-  Stream get onUninstalled => _onUninstalled.stream;
+  Stream<dynamic> get onUninstalled => _onUninstalled.stream;
 
-  final ChromeStreamController _onUninstalled = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onUninstalled = null;
 
   /**
    * Fired when an app or extension has been enabled.
    */
-  Stream get onEnabled => _onEnabled.stream;
+  Stream<dynamic> get onEnabled => _onEnabled.stream;
 
-  final ChromeStreamController _onEnabled = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onEnabled = null;
 
   /**
    * Fired when an app or extension has been disabled.
    */
-  Stream get onDisabled => _onDisabled.stream;
+  Stream<dynamic> get onDisabled => _onDisabled.stream;
 
-  final ChromeStreamController _onDisabled = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onDisabled = null;
+}
+
+/**
+ * Information about an icon belonging to an extension, app, or theme.
+ */
+class IconInfo extends ChromeObject {
+  IconInfo(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * Information about an installed extension, app, or theme.
+ */
+class ExtensionInfo extends ChromeObject {
+  ExtensionInfo(JsObject proxy): super(proxy);
+  // TODO:
 }

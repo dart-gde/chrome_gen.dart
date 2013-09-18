@@ -41,9 +41,10 @@ class ChromeTtsEngine {
    * Called when the user makes a call to tts.speak() and one of the voices from
    * this extension's manifest is the first to match the options object.
    */
-  Stream get onSpeak => _onSpeak.stream;
+  Stream<dynamic> get onSpeak => _onSpeak.stream;
 
-  final ChromeStreamController _onSpeak = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onSpeak = null;
 
   /**
    * Fired when a call is made to tts.stop and this extension may be in the
@@ -51,25 +52,28 @@ class ChromeTtsEngine {
    * already stopped, it should do nothing (not raise an error). If speech is in
    * the paused state, this should cancel the paused state.
    */
-  Stream get onStop => _onStop.stream;
+  Stream<dynamic> get onStop => _onStop.stream;
 
-  final ChromeStreamController _onStop = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onStop = null;
 
   /**
    * Optional: if an engine supports the pause event, it should pause the
    * current utterance being spoken, if any, until it receives a resume event or
    * stop event. Note that a stop event should also clear the paused state.
    */
-  Stream get onPause => _onPause.stream;
+  Stream<dynamic> get onPause => _onPause.stream;
 
-  final ChromeStreamController _onPause = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onPause = null;
 
   /**
    * Optional: if an engine supports the pause event, it should also support the
    * resume event, to continue speaking the current utterance, if any. Note that
    * a stop event should also clear the paused state.
    */
-  Stream get onResume => _onResume.stream;
+  Stream<dynamic> get onResume => _onResume.stream;
 
-  final ChromeStreamController _onResume = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onResume = null;
 }

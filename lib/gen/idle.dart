@@ -4,7 +4,9 @@
 
 /* This file has been generated from idle.json - do not edit */
 
-/// Use the `chrome.idle` API to detect when the machine's idle state changes.
+/**
+ * Use the `chrome.idle` API to detect when the machine's idle state changes.
+ */
 library chrome.idle;
 
 import '../src/common.dart';
@@ -29,7 +31,9 @@ class ChromeIdle {
    * detected.
    */
   Future<String> queryState(int detectionIntervalInSeconds) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _idle.callMethod('queryState', [detectionIntervalInSeconds, completer.callback]);
     return completer.future;
   }
@@ -52,7 +56,8 @@ class ChromeIdle {
    * for a specified number of seconds, and "active" when the user generates
    * input on an idle system.
    */
-  Stream get onStateChanged => _onStateChanged.stream;
+  Stream<dynamic> get onStateChanged => _onStateChanged.stream;
 
-  final ChromeStreamController _onStateChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onStateChanged = null;
 }

@@ -1,6 +1,10 @@
 {
   "classNames" : {
     "i18n" : "I18N"
+  },
+
+  "suppress" : {
+    "pageAction" : [ "ImageDataType" ]
   }
 
 }

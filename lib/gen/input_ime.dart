@@ -26,12 +26,11 @@ class ChromeInputIme {
   /**
    * Set the current composition. If this extension does not own the active IME,
    * this fails.
-   * 
-   * [callback] Called when the operation completes with a boolean indicating if
-   * the text was accepted or not. On failure, chrome.runtime.lastError is set.
    */
   Future<bool> setComposition(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _input_ime.callMethod('setComposition', [parameters, completer.callback]);
     return completer.future;
   }
@@ -39,24 +38,22 @@ class ChromeInputIme {
   /**
    * Clear the current composition. If this extension does not own the active
    * IME, this fails.
-   * 
-   * [callback] Called when the operation completes with a boolean indicating if
-   * the text was accepted or not. On failure, chrome.runtime.lastError is set.
    */
   Future<bool> clearComposition(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _input_ime.callMethod('clearComposition', [parameters, completer.callback]);
     return completer.future;
   }
 
   /**
    * Commits the provided text to the current input.
-   * 
-   * [callback] Called when the operation completes with a boolean indicating if
-   * the text was accepted or not. On failure, chrome.runtime.lastError is set.
    */
   Future<bool> commitText(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _input_ime.callMethod('commitText', [parameters, completer.callback]);
     return completer.future;
   }
@@ -64,11 +61,11 @@ class ChromeInputIme {
   /**
    * Sets the properties of the candidate window. This fails if the extension
    * doesn’t own the active IME
-   * 
-   * [callback] Called when the operation completes.
    */
   Future<bool> setCandidateWindowProperties(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _input_ime.callMethod('setCandidateWindowProperties', [parameters, completer.callback]);
     return completer.future;
   }
@@ -76,11 +73,11 @@ class ChromeInputIme {
   /**
    * Sets the current candidate list. This fails if this extension doesn’t own
    * the active IME
-   * 
-   * [callback] Called when the operation completes.
    */
   Future<bool> setCandidates(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _input_ime.callMethod('setCandidates', [parameters, completer.callback]);
     return completer.future;
   }
@@ -88,19 +85,17 @@ class ChromeInputIme {
   /**
    * Set the position of the cursor in the candidate window. This is a no-op if
    * this extension does not own the active IME.
-   * 
-   * [callback] Called when the operation completes
    */
   Future<bool> setCursorPosition(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
+      return arg;
+    });
     _input_ime.callMethod('setCursorPosition', [parameters, completer.callback]);
     return completer.future;
   }
 
   /**
    * Adds the provided menu items to the language menu when this IME is active.
-   * 
-   * [callback]
    */
   Future setMenuItems(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -110,8 +105,6 @@ class ChromeInputIme {
 
   /**
    * Updates the state of the MenuItems specified
-   * 
-   * [callback] Called when the operation completes
    */
   Future updateMenuItems(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -121,8 +114,6 @@ class ChromeInputIme {
 
   /**
    * Deletes the text around the caret.
-   * 
-   * [callback] Called when the operation completes.
    */
   Future deleteSurroundingText(var parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -147,77 +138,112 @@ class ChromeInputIme {
    * This event is sent when an IME is activated. It signals that the IME will
    * be receiving onKeyPress events.
    */
-  Stream get onActivate => _onActivate.stream;
+  Stream<dynamic> get onActivate => _onActivate.stream;
 
-  final ChromeStreamController _onActivate = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onActivate = null;
 
   /**
    * This event is sent when an IME is deactivated. It signals that the IME will
    * no longer be receiving onKeyPress events.
    */
-  Stream get onDeactivated => _onDeactivated.stream;
+  Stream<dynamic> get onDeactivated => _onDeactivated.stream;
 
-  final ChromeStreamController _onDeactivated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onDeactivated = null;
 
   /**
    * This event is sent when focus enters a text box. It is sent to all
    * extensions that are listening to this event, and enabled by the user.
    */
-  Stream get onFocus => _onFocus.stream;
+  Stream<dynamic> get onFocus => _onFocus.stream;
 
-  final ChromeStreamController _onFocus = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onFocus = null;
 
   /**
    * This event is sent when focus leaves a text box. It is sent to all
    * extensions that are listening to this event, and enabled by the user.
    */
-  Stream get onBlur => _onBlur.stream;
+  Stream<dynamic> get onBlur => _onBlur.stream;
 
-  final ChromeStreamController _onBlur = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onBlur = null;
 
   /**
    * This event is sent when the properties of the current InputContext change,
    * such as the the type. It is sent to all extensions that are listening to
    * this event, and enabled by the user.
    */
-  Stream get onInputContextUpdate => _onInputContextUpdate.stream;
+  Stream<dynamic> get onInputContextUpdate => _onInputContextUpdate.stream;
 
-  final ChromeStreamController _onInputContextUpdate = null;
-
-  /**
-   * This event is sent if this extension owns the active IME.
-   */
-  Stream get onKeyEvent => _onKeyEvent.stream;
-
-  final ChromeStreamController _onKeyEvent = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onInputContextUpdate = null;
 
   /**
    * This event is sent if this extension owns the active IME.
    */
-  Stream get onCandidateClicked => _onCandidateClicked.stream;
+  Stream<dynamic> get onKeyEvent => _onKeyEvent.stream;
 
-  final ChromeStreamController _onCandidateClicked = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onKeyEvent = null;
+
+  /**
+   * This event is sent if this extension owns the active IME.
+   */
+  Stream<dynamic> get onCandidateClicked => _onCandidateClicked.stream;
+
+  // TODO:
+  final ChromeStreamController<dynamic> _onCandidateClicked = null;
 
   /**
    * Called when the user selects a menu item
    */
-  Stream get onMenuItemActivated => _onMenuItemActivated.stream;
+  Stream<dynamic> get onMenuItemActivated => _onMenuItemActivated.stream;
 
-  final ChromeStreamController _onMenuItemActivated = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onMenuItemActivated = null;
 
   /**
    * Called when the editable string around caret is changed or when the caret
    * position is moved. The text length is limited to 100 characters for each
    * back and forth direction.
    */
-  Stream get onSurroundingTextChanged => _onSurroundingTextChanged.stream;
+  Stream<dynamic> get onSurroundingTextChanged => _onSurroundingTextChanged.stream;
 
-  final ChromeStreamController _onSurroundingTextChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onSurroundingTextChanged = null;
 
   /**
    * This event is sent when chrome terminates ongoing text input session.
    */
-  Stream get onReset => _onReset.stream;
+  Stream<dynamic> get onReset => _onReset.stream;
 
-  final ChromeStreamController _onReset = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onReset = null;
+}
+
+/**
+ * See http://www.w3.org/TR/DOM-Level-3-Events/#events-KeyboardEvent
+ */
+class KeyboardEvent extends ChromeObject {
+  KeyboardEvent(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * Describes an input Context
+ */
+class InputContext extends ChromeObject {
+  InputContext(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * A menu item used by an input method to interact with the user from the
+ * language menu.
+ */
+class MenuItem extends ChromeObject {
+  MenuItem(JsObject proxy): super(proxy);
+  // TODO:
 }

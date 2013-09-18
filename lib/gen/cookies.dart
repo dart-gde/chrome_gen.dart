@@ -29,6 +29,10 @@ class ChromeCookies {
    * earliest creation time will be returned.
    * 
    * [details] Details to identify the cookie being retrieved.
+   * 
+   * Returns:
+   * Contains details about the cookie. This parameter is null if no such cookie
+   * was found.
    */
   Future<dynamic> get(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -45,6 +49,9 @@ class ChromeCookies {
    * with the earliest creation time will be first.
    * 
    * [details] Information to filter the cookies being retrieved.
+   * 
+   * Returns:
+   * All the existing, unexpired cookies that match the given cookie info.
    */
   Future<dynamic> getAll(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -59,6 +66,11 @@ class ChromeCookies {
    * if they exist.
    * 
    * [details] Details about the cookie being set.
+   * 
+   * Returns:
+   * Contains details about the cookie that's been set.  If setting failed for
+   * any reason, this will be "null", and "chrome.runtime.lastError" will be
+   * set.
    */
   Future<dynamic> set(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -72,6 +84,11 @@ class ChromeCookies {
    * Deletes a cookie by name.
    * 
    * [details] Information to identify the cookie to remove.
+   * 
+   * Returns:
+   * Contains details about the cookie that's been removed.  If removal failed
+   * for any reason, this will be "null", and "chrome.runtime.lastError" will be
+   * set.
    */
   Future<dynamic> remove(var details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -83,6 +100,9 @@ class ChromeCookies {
 
   /**
    * Lists all existing cookie stores.
+   * 
+   * Returns:
+   * All the existing cookie stores.
    */
   Future<dynamic> getAllCookieStores() {
     ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
@@ -99,7 +119,25 @@ class ChromeCookies {
    * with "cause" of "overwrite" .  Afterwards, a new cookie is written with the
    * updated values, generating a second notification with "cause" "explicit".
    */
-  Stream get onChanged => _onChanged.stream;
+  Stream<dynamic> get onChanged => _onChanged.stream;
 
-  final ChromeStreamController _onChanged = null;
+  // TODO:
+  final ChromeStreamController<dynamic> _onChanged = null;
+}
+
+/**
+ * Represents information about an HTTP cookie.
+ */
+class Cookie extends ChromeObject {
+  Cookie(JsObject proxy): super(proxy);
+  // TODO:
+}
+
+/**
+ * Represents a cookie store in the browser. An incognito mode window, for
+ * instance, uses a separate cookie store from a non-incognito window.
+ */
+class CookieStore extends ChromeObject {
+  CookieStore(JsObject proxy): super(proxy);
+  // TODO:
 }
