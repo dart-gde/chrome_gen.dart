@@ -162,29 +162,35 @@
 	</div>
 	<b><a id=ChromeExtension.getExtensionTabs></a><i class=icon-ok-sign></i> dynamic getExtensionTabs(int windowId)</b>
 	<div class=indent>
-		<p>Deprecated. Please use getViews({type: 'TAB'}). Returns an array of the JavaScript 'window' objects for each of the tabs running inside the current extension. If windowId is specified, returns only the 'window' objects of tabs attached to the specified window.</p>
+		<p>Deprecated. Please use getViews({type: 'TAB'}). Returns an array of the JavaScript 'window' objects for each of the tabs running inside the current extension. If windowId is specified, returns only the 'window' objects of tabs attached to the specified window. </p>
+<p>Returns: Array of global window objects</p>
 	</div>
 	<b><a id=ChromeExtension.getURL></a><i class=icon-ok-sign></i> String getURL(String path)</b>
 	<div class=indent>
 		<p>Converts a relative path within an extension install directory to a fully-qualified URL. </p>
-<p><code>path</code> A path to a resource within an extension expressed relative to its install directory.</p>
+<p><code>path</code> A path to a resource within an extension expressed relative to its install directory. </p>
+<p>Returns: The fully-qualified URL to the resource.</p>
 	</div>
 	<b><a id=ChromeExtension.getViews></a><i class=icon-ok-sign></i> dynamic getViews(dynamic fetchProperties)</b>
 	<div class=indent>
-		<p>Returns an array of the JavaScript 'window' objects for each of the pages running inside the current extension.</p>
+		<p>Returns an array of the JavaScript 'window' objects for each of the pages running inside the current extension. </p>
+<p>Returns: Array of global objects</p>
 	</div>
 	<b><a id=ChromeExtension.isAllowedFileSchemeAccess></a><i class=icon-ok-sign></i> Future&lt;bool&gt; isAllowedFileSchemeAccess()</b>
 	<div class=indent>
-		<p>Retrieves the state of the extension's access to the 'file://' scheme (as determined by the user-controlled 'Allow access to File URLs' checkbox.</p>
+		<p>Retrieves the state of the extension's access to the 'file://' scheme (as determined by the user-controlled 'Allow access to File URLs' checkbox. </p>
+<p>Returns: True if the extension can access the 'file://' scheme, false otherwise.</p>
 	</div>
 	<b><a id=ChromeExtension.isAllowedIncognitoAccess></a><i class=icon-ok-sign></i> Future&lt;bool&gt; isAllowedIncognitoAccess()</b>
 	<div class=indent>
-		<p>Retrieves the state of the extension's access to Incognito-mode (as determined by the user-controlled 'Allowed in Incognito' checkbox.</p>
+		<p>Retrieves the state of the extension's access to Incognito-mode (as determined by the user-controlled 'Allowed in Incognito' checkbox. </p>
+<p>Returns: True if the extension has access to Incognito mode, false otherwise.</p>
 	</div>
 	<b><a id=ChromeExtension.sendRequest></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; sendRequest(String extensionId, dynamic request)</b>
 	<div class=indent>
 		<p>Deprecated: Please use sendMessage. </p>
-<p><code>extensionId</code> The extension ID of the extension you want to connect to. If omitted, default is your own extension.</p>
+<p><code>extensionId</code> The extension ID of the extension you want to connect to. If omitted, default is your own extension. </p>
+<p>Returns: The JSON response object sent by the handler of the request. If an error occurs while connecting to the extension, the callback will be called with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 	</div>
 	<b><a id=ChromeExtension.setUpdateUrlData></a><i class=icon-ok-sign></i> void setUpdateUrlData(String data)</b>
 	<div class=indent>

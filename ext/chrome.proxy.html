@@ -86,6 +86,10 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.proxy.html#ChromeProxy>ChromeProxy</a><br>
+			<i class=icon-leaf></i> <a href=chrome.proxy.html#PacScript>PacScript</a><br>
+			<i class=icon-leaf></i> <a href=chrome.proxy.html#ProxyConfig>ProxyConfig</a><br>
+			<i class=icon-leaf></i> <a href=chrome.proxy.html#ProxyRules>ProxyRules</a><br>
+			<i class=icon-leaf></i> <a href=chrome.proxy.html#ProxyServer>ProxyServer</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -128,6 +132,66 @@
 	<div class=indent>
 		<p>Proxy settings to be used. The value of this setting is a ProxyConfig object.</p>
 	</div>
+	<a id=PacScript></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class PacScript extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.proxy.html#PacScript.>PacScript</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>An object holding proxy auto-config information. Exactly one of the fields should be non-empty.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=PacScript.></a><i class=icon-plus-sign></i> PacScript(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=ProxyConfig></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class ProxyConfig extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.proxy.html#ProxyConfig.>ProxyConfig</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>An object encapsulating a complete proxy configuration.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=ProxyConfig.></a><i class=icon-plus-sign></i> ProxyConfig(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=ProxyRules></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class ProxyRules extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.proxy.html#ProxyRules.>ProxyRules</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>An object encapsulating the set of proxy rules for all protocols. Use either 'singleProxy' or (a subset of) 'proxyForHttp', 'proxyForHttps', 'proxyForFtp' and 'fallbackProxy'.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=ProxyRules.></a><i class=icon-plus-sign></i> ProxyRules(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=ProxyServer></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class ProxyServer extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.proxy.html#ProxyServer.>ProxyServer</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>An object encapsulating a single proxy server's specification.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=ProxyServer.></a><i class=icon-plus-sign></i> ProxyServer(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

@@ -86,6 +86,9 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.sessions.html#ChromeSessions>ChromeSessions</a><br>
+			<i class=icon-leaf></i> <a href=chrome.sessions.html#Device>Device</a><br>
+			<i class=icon-leaf></i> <a href=chrome.sessions.html#Filter>Filter</a><br>
+			<i class=icon-leaf></i> <a href=chrome.sessions.html#Session>Session</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -129,17 +132,59 @@
 	<h4>Methods</h4>
 	<b><a id=ChromeSessions.getDevices></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getDevices(dynamic filter)</b>
 	<div class=indent>
-		<p>Retrieves all devices with synced sessions.</p>
+		<p>Retrieves all devices with synced sessions. </p>
+<p>Returns: The list of <code>Device</code> objects for each synced session, sorted in order from device with most recently modified session to device with least recently modified session. <code>tabs.Tab</code> objects are sorted by recency in the <code>windows.Window</code> of the <code>Session</code> objects.</p>
 	</div>
 	<b><a id=ChromeSessions.getRecentlyClosed></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getRecentlyClosed(dynamic filter)</b>
 	<div class=indent>
-		<p>Gets the list of recently closed tabs and/or windows.</p>
+		<p>Gets the list of recently closed tabs and/or windows. </p>
+<p>Returns: The list of closed entries in reverse order that they were closed (the most recently closed tab or window will be at index <code>0</code>).The entries may contain either tabs or windows.</p>
 	</div>
 	<b><a id=ChromeSessions.restore></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; restore(String sessionId)</b>
 	<div class=indent>
 		<p>Reopens a <code>windows.Window</code> or <code>tabs.Tab</code>, with an optional callback to run when the entry has been restored. </p>
-<p><code>sessionId</code> The <code>windows.Window.sessionId</code>, or <code>tabs.Tab.sessionId</code> to restore.</p>
+<p><code>sessionId</code> The <code>windows.Window.sessionId</code>, or <code>tabs.Tab.sessionId</code> to restore. </p>
+<p>Returns: A <code>Session</code> containing the restored <code>windows.Window</code> or <code>tabs.Tab</code> object.</p>
 	</div>
+	<a id=Device></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Device extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.sessions.html#Device.>Device</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent></div>
+	<h4>Constructors</h4>
+	<b><a id=Device.></a><i class=icon-plus-sign></i> Device(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=Filter></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Filter extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.sessions.html#Filter.>Filter</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent></div>
+	<h4>Constructors</h4>
+	<b><a id=Filter.></a><i class=icon-plus-sign></i> Filter(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=Session></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Session extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.sessions.html#Session.>Session</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent></div>
+	<h4>Constructors</h4>
+	<b><a id=Session.></a><i class=icon-plus-sign></i> Session(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

@@ -86,6 +86,7 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.fileBrowserHandler.html#ChromeFileBrowserHandler>ChromeFileBrowserHandler</a><br>
+			<i class=icon-leaf></i> <a href=chrome.fileBrowserHandler.html#FileHandlerExecuteEventDetails>FileHandlerExecuteEventDetails</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -129,8 +130,23 @@
 	<div class=indent>
 		<p>Prompts user to select file path under which file should be saved. When the file is selected, file access permission required to use the file (read, write and create) are granted to the caller. The file will not actually get created during the function call, so function caller must ensure its existence before using it. The function has to be invoked with a user gesture. </p>
 <p><code>selectionParams</code> Parameters that will be used while selecting the file. </p>
-<p><code>callback</code> Function called upon completion.</p>
+<p>Returns: Result of the method.</p>
 	</div>
+	<a id=FileHandlerExecuteEventDetails></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class FileHandlerExecuteEventDetails extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.fileBrowserHandler.html#FileHandlerExecuteEventDetails.>FileHandlerExecuteEventDetails</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Event details payload for fileBrowserHandler.onExecute event.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=FileHandlerExecuteEventDetails.></a><i class=icon-plus-sign></i> FileHandlerExecuteEventDetails(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

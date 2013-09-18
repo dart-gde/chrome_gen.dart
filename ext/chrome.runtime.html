@@ -86,6 +86,8 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.runtime.html#ChromeRuntime>ChromeRuntime</a><br>
+			<i class=icon-leaf></i> <a href=chrome.runtime.html#MessageSender>MessageSender</a><br>
+			<i class=icon-leaf></i> <a href=chrome.runtime.html#Port>Port</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -144,7 +146,7 @@
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.getPlatformInfo>getPlatformInfo</a>(): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.getURL>getURL</a>(String path): String<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.reload>reload</a>(): void<br>
-			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.requestUpdateCheck>requestUpdateCheck</a>(): Future&lt;String&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.requestUpdateCheck>requestUpdateCheck</a>(): Future&lt;JsObject&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.sendMessage>sendMessage</a>(String extensionId, dynamic message): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.sendNativeMessage>sendNativeMessage</a>(String application, dynamic message): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.setUninstallUrl>setUninstallUrl</a>(String url): void<br>
@@ -235,20 +237,24 @@
 	<b><a id=ChromeRuntime.connect></a><i class=icon-ok-sign></i> dynamic connect(String extensionId, dynamic connectInfo)</b>
 	<div class=indent>
 		<p>Attempts to connect to other listeners within the extension/app (such as the background page), or other extensions/apps. This is useful for content scripts connecting to their extension processes. Note that this does not connect to any listeners in a content script. Extensions may connect to content scripts embedded in tabs via <code>tabs.connect.</code> </p>
-<p><code>extensionId</code> The ID of the extension/app you want to connect to. If omitted, default is your own extension.</p>
+<p><code>extensionId</code> The ID of the extension/app you want to connect to. If omitted, default is your own extension. </p>
+<p>Returns: Port through which messages can be sent and received. The port's <code></code><code>runtime.Port onDisconnect</code> event is fired if the extension/app does not exist.</p>
 	</div>
 	<b><a id=ChromeRuntime.connectNative></a><i class=icon-ok-sign></i> dynamic connectNative(String application)</b>
 	<div class=indent>
 		<p>Connects to a native application in the host machine. </p>
-<p><code>application</code> The name of the registered application to connect to.</p>
+<p><code>application</code> The name of the registered application to connect to. </p>
+<p>Returns: Port through which messages can be sent and received with the application</p>
 	</div>
 	<b><a id=ChromeRuntime.getBackgroundPage></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getBackgroundPage()</b>
 	<div class=indent>
-		<p>Retrieves the JavaScript 'window' object for the background page running inside the current extension/app. If the background page is an event page, the system will ensure it is loaded before calling the callback. If there is no background page, an error is set.</p>
+		<p>Retrieves the JavaScript 'window' object for the background page running inside the current extension/app. If the background page is an event page, the system will ensure it is loaded before calling the callback. If there is no background page, an error is set. </p>
+<p>Returns: The JavaScript 'window' object for the background page.</p>
 	</div>
 	<b><a id=ChromeRuntime.getManifest></a><i class=icon-ok-sign></i> dynamic getManifest()</b>
 	<div class=indent>
-		<p>Returns details about the app or extension from the manifest. The object returned is a serialization of the full <code>manifest file</code>(manifest.html).</p>
+		<p>Returns details about the app or extension from the manifest. The object returned is a serialization of the full <code>manifest file</code>(manifest.html). </p>
+<p>Returns: The manifest details.</p>
 	</div>
 	<b><a id=ChromeRuntime.getPackageDirectoryEntry></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getPackageDirectoryEntry()</b>
 	<div class=indent>
@@ -256,37 +262,70 @@
 	</div>
 	<b><a id=ChromeRuntime.getPlatformInfo></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getPlatformInfo()</b>
 	<div class=indent>
-		<p>Returns information about the current platform. </p>
-<p><code>callback</code> Called with results</p>
+		<p>Returns information about the current platform.</p>
 	</div>
 	<b><a id=ChromeRuntime.getURL></a><i class=icon-ok-sign></i> String getURL(String path)</b>
 	<div class=indent>
 		<p>Converts a relative path within an app/extension install directory to a fully-qualified URL. </p>
-<p><code>path</code> A path to a resource within an app/extension expressed relative to its install directory.</p>
+<p><code>path</code> A path to a resource within an app/extension expressed relative to its install directory. </p>
+<p>Returns: The fully-qualified URL to the resource.</p>
 	</div>
 	<b><a id=ChromeRuntime.reload></a><i class=icon-ok-sign></i> void reload()</b>
 	<div class=indent>
 		<p>Reloads the app or extension.</p>
 	</div>
-	<b><a id=ChromeRuntime.requestUpdateCheck></a><i class=icon-ok-sign></i> Future&lt;String&gt; requestUpdateCheck()</b>
+	<b><a id=ChromeRuntime.requestUpdateCheck></a><i class=icon-ok-sign></i> Future&lt;JsObject&gt; requestUpdateCheck()</b>
 	<div class=indent>
-		<p>Requests an update check for this app/extension.</p>
+		<p>Requests an update check for this app/extension. </p>
+<p>Returns: <code>status</code> Result of the update check. <code>details</code> If an update is available, this contains more information about the available update.</p>
 	</div>
 	<b><a id=ChromeRuntime.sendMessage></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; sendMessage(String extensionId, dynamic message)</b>
 	<div class=indent>
 		<p>Sends a single message to onMessage event listeners within the extension (or another extension/app). Similar to chrome.runtime.connect, but only sends a single message with an optional response. The <code>runtime.onMessage</code> event is fired in each extension page of the extension. Note that extensions cannot send messages to content scripts using this method. To send messages to content scripts, use <code>tabs.sendMessage.</code> </p>
-<p><code>extensionId</code> The extension ID of the extension you want to connect to. If omitted, default is your own extension.</p>
+<p><code>extensionId</code> The extension ID of the extension you want to connect to. If omitted, default is your own extension. </p>
+<p>Returns: The JSON response object sent by the handler of the message. If an error occurs while connecting to the extension, the callback will be called with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 	</div>
 	<b><a id=ChromeRuntime.sendNativeMessage></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; sendNativeMessage(String application, dynamic message)</b>
 	<div class=indent>
 		<p>Send a single message to a native application. </p>
 <p><code>application</code> The name of the native messaging host. </p>
-<p><code>message</code> The message that will be passed to the native messaging host.</p>
+<p><code>message</code> The message that will be passed to the native messaging host. </p>
+<p>Returns: The response message send by the native messaging host. If an error occurs while connecting to the native messaging host, the callback will be called with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 	</div>
 	<b><a id=ChromeRuntime.setUninstallUrl></a><i class=icon-ok-sign></i> void setUninstallUrl(String url)</b>
 	<div class=indent>
 		<p>Sets the URL to be visited upon uninstallation. This may be used to clean up server-side data, do analytics, and implement surveys. Maximum 255 characters.</p>
 	</div>
+	<a id=MessageSender></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class MessageSender extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.runtime.html#MessageSender.>MessageSender</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>An object containing information about the script context that sent a message or request.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=MessageSender.></a><i class=icon-plus-sign></i> MessageSender(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=Port></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Port extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.runtime.html#Port.>Port</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>An object which allows two way communication with other pages.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=Port.></a><i class=icon-plus-sign></i> Port(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

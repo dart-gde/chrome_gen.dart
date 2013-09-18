@@ -112,13 +112,15 @@
 	<h4>Methods</h4>
 	<b><a id=ChromeI18N.getAcceptLanguages></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getAcceptLanguages()</b>
 	<div class=indent>
-		<p>Gets the accept-languages of the browser. This is different from the locale used by the browser; to get the locale, use <code>window.navigator.language</code>.</p>
+		<p>Gets the accept-languages of the browser. This is different from the locale used by the browser; to get the locale, use <code>window.navigator.language</code>. </p>
+<p>Returns: Array of the accept languages of the browser, such as en-US,en,zh-CN</p>
 	</div>
 	<b><a id=ChromeI18N.getMessage></a><i class=icon-ok-sign></i> String getMessage(String messageName, dynamic substitutions)</b>
 	<div class=indent>
 		<p>Gets the localized string for the specified message. If the message is missing, this method returns an empty string (''). If the format of the <code>getMessage()</code> call is wrong - for example, _messageName_ is not a string or the _substitutions_ array has more than 9 elements - this method returns <code>undefined</code>. </p>
 <p><code>messageName</code> The name of the message, as specified in the &lt;a href='i18n-messages.html'&gt;<code>messages.json</code>&lt;/a&gt; file. </p>
-<p><code>substitutions</code> Up to 9 substitution strings, if the message requires any.</p>
+<p><code>substitutions</code> Up to 9 substitution strings, if the message requires any. </p>
+<p>Returns: Message localized for current locale.</p>
 	</div>
 	<hr>
 </div>

@@ -86,6 +86,8 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.cookies.html#ChromeCookies>ChromeCookies</a><br>
+			<i class=icon-leaf></i> <a href=chrome.cookies.html#Cookie>Cookie</a><br>
+			<i class=icon-leaf></i> <a href=chrome.cookies.html#CookieStore>CookieStore</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -132,27 +134,62 @@
 	<b><a id=ChromeCookies.get></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; get(dynamic details)</b>
 	<div class=indent>
 		<p>Retrieves information about a single cookie. If more than one cookie of the same name exists for the given URL, the one with the longest path will be returned. For cookies with the same path length, the cookie with the earliest creation time will be returned. </p>
-<p><code>details</code> Details to identify the cookie being retrieved.</p>
+<p><code>details</code> Details to identify the cookie being retrieved. </p>
+<p>Returns: Contains details about the cookie. This parameter is null if no such cookie was found.</p>
 	</div>
 	<b><a id=ChromeCookies.getAll></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getAll(dynamic details)</b>
 	<div class=indent>
 		<p>Retrieves all cookies from a single cookie store that match the given information.  The cookies returned will be sorted, with those with the longest path first.  If multiple cookies have the same path length, those with the earliest creation time will be first. </p>
-<p><code>details</code> Information to filter the cookies being retrieved.</p>
+<p><code>details</code> Information to filter the cookies being retrieved. </p>
+<p>Returns: All the existing, unexpired cookies that match the given cookie info.</p>
 	</div>
 	<b><a id=ChromeCookies.getAllCookieStores></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getAllCookieStores()</b>
 	<div class=indent>
-		<p>Lists all existing cookie stores.</p>
+		<p>Lists all existing cookie stores. </p>
+<p>Returns: All the existing cookie stores.</p>
 	</div>
 	<b><a id=ChromeCookies.remove></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; remove(dynamic details)</b>
 	<div class=indent>
 		<p>Deletes a cookie by name. </p>
-<p><code>details</code> Information to identify the cookie to remove.</p>
+<p><code>details</code> Information to identify the cookie to remove. </p>
+<p>Returns: Contains details about the cookie that's been removed.  If removal failed for any reason, this will be "null", and "chrome.runtime.lastError" will be set.</p>
 	</div>
 	<b><a id=ChromeCookies.set></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; set(dynamic details)</b>
 	<div class=indent>
 		<p>Sets a cookie with the given cookie data; may overwrite equivalent cookies if they exist. </p>
-<p><code>details</code> Details about the cookie being set.</p>
+<p><code>details</code> Details about the cookie being set. </p>
+<p>Returns: Contains details about the cookie that's been set.  If setting failed for any reason, this will be "null", and "chrome.runtime.lastError" will be set.</p>
 	</div>
+	<a id=Cookie></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Cookie extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.cookies.html#Cookie.>Cookie</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Represents information about an HTTP cookie.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=Cookie.></a><i class=icon-plus-sign></i> Cookie(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=CookieStore></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class CookieStore extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.cookies.html#CookieStore.>CookieStore</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Represents a cookie store in the browser. An incognito mode window, for instance, uses a separate cookie store from a non-incognito window.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=CookieStore.></a><i class=icon-plus-sign></i> CookieStore(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

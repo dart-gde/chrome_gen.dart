@@ -86,6 +86,8 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.declarativeContent.html#ChromeDeclarativeContent>ChromeDeclarativeContent</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeContent.html#PageStateMatcher>PageStateMatcher</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeContent.html#ShowPageAction>ShowPageAction</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -117,6 +119,36 @@
 	<div class=indent></div>
 	<h4>Getters and Setters</h4>
 	<b><a id=onPageChanged></a><i class=icon-circle-arrow-right></i> Stream&lt;dynamic&gt; get onPageChanged</b>
+	<div class=indent></div>
+	<a id=PageStateMatcher></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class PageStateMatcher extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeContent.html#PageStateMatcher.>PageStateMatcher</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Matches the state of a web page by various criteria.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=PageStateMatcher.></a><i class=icon-plus-sign></i> PageStateMatcher(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=ShowPageAction></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class ShowPageAction extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeContent.html#ShowPageAction.>ShowPageAction</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Declarative event action that shows the extension's <a href=chrome.declarativeContent.html#ShowPageAction.>ShowPageAction()</a>[pageAction page action] while the corresponding conditions are met.  This action can be used without <code>host permissions</code>(declare_permissions.html#host-permission).  If the extension takes the <code>activeTab</code>(activeTab.html) permission, a click on the page action will grant access to the active tab.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=ShowPageAction.></a><i class=icon-plus-sign></i> ShowPageAction(JsObject proxy)</b>
 	<div class=indent></div>
 	<hr>
 </div>

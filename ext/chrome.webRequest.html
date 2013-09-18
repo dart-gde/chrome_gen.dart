@@ -85,7 +85,11 @@
 		</dd>
 		<dt>Classes</dt>
 		<dd>
+			<i class=icon-leaf></i> <a href=chrome.webRequest.html#BlockingResponse>BlockingResponse</a><br>
 			<i class=icon-leaf></i> <a href=chrome.webRequest.html#ChromeWebRequest>ChromeWebRequest</a><br>
+			<i class=icon-leaf></i> <a href=chrome.webRequest.html#HttpHeaders>HttpHeaders</a><br>
+			<i class=icon-leaf></i> <a href=chrome.webRequest.html#RequestFilter>RequestFilter</a><br>
+			<i class=icon-leaf></i> <a href=chrome.webRequest.html#UploadData>UploadData</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -98,6 +102,21 @@
 			<p>Accessor for the <code>chrome.webRequest</code> namespace.</p>
 		</div>
 	</div>
+	<a id=BlockingResponse></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class BlockingResponse extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.webRequest.html#BlockingResponse.>BlockingResponse</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Returns value for event handlers that have the 'blocking' extraInfoSpec applied. Allows the event handler to modify network requests.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=BlockingResponse.></a><i class=icon-plus-sign></i> BlockingResponse(JsObject proxy)</b>
+	<div class=indent></div>
 	<a id=ChromeWebRequest></a><hr>
 	<h4>
 		<i class=icon-leaf></i> Class ChromeWebRequest</h4>
@@ -201,6 +220,51 @@
 	<div class=indent>
 		<p>Needs to be called when the behavior of the webRequest handlers has changed to prevent incorrect handling due to caching. This function call is expensive. Don't call it often.</p>
 	</div>
+	<a id=HttpHeaders></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class HttpHeaders extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.webRequest.html#HttpHeaders.>HttpHeaders</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>An array of HTTP headers. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=HttpHeaders.></a><i class=icon-plus-sign></i> HttpHeaders(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RequestFilter></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RequestFilter extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.webRequest.html#RequestFilter.>RequestFilter</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>An object describing filters to apply to webRequest events.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RequestFilter.></a><i class=icon-plus-sign></i> RequestFilter(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=UploadData></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class UploadData extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.webRequest.html#UploadData.>UploadData</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Contains data uploaded in a URL request.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=UploadData.></a><i class=icon-plus-sign></i> UploadData(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

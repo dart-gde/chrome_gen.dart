@@ -86,6 +86,7 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.windows.html#ChromeWindows>ChromeWindows</a><br>
+			<i class=icon-leaf></i> <a href=chrome.windows.html#Window>Window</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -165,7 +166,8 @@
 	<h4>Methods</h4>
 	<b><a id=ChromeWindows.create></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; create(dynamic createData)</b>
 	<div class=indent>
-		<p>Creates (opens) a new browser with any optional sizing, position or default URL provided.</p>
+		<p>Creates (opens) a new browser with any optional sizing, position or default URL provided. </p>
+<p>Returns: Contains details about the created window.</p>
 	</div>
 	<b><a id=ChromeWindows.get></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; get(int windowId, dynamic getInfo)</b>
 	<div class=indent>
@@ -195,6 +197,19 @@
 	<div class=indent>
 		<p>Updates the properties of a window. Specify only the properties that you want to change; unspecified properties will be left unchanged.</p>
 	</div>
+	<a id=Window></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Window extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.windows.html#Window.>Window</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent></div>
+	<h4>Constructors</h4>
+	<b><a id=Window.></a><i class=icon-plus-sign></i> Window(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

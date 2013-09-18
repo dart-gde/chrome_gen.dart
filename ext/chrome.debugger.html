@@ -86,6 +86,8 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.debugger.html#ChromeDebugger>ChromeDebugger</a><br>
+			<i class=icon-leaf></i> <a href=chrome.debugger.html#Debuggee>Debuggee</a><br>
+			<i class=icon-leaf></i> <a href=chrome.debugger.html#TargetInfo>TargetInfo</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -140,18 +142,17 @@
 	<div class=indent>
 		<p>Attaches debugger to the given target. </p>
 <p><code>target</code> Debugging target to which you want to attach. </p>
-<p><code>requiredVersion</code> Required debugging protocol version ("0.1"). One can only attach to the debuggee with matching major version and greater or equal minor version. List of the protocol versions can be obtained <code>here</code>(http://code.google.com/chrome/devtools/docs/remote-debugging.html). </p>
-<p><code>callback</code> Called once the attach operation succeeds or fails. Callback receives no arguments. If the attach fails, <code>runtime.lastError</code> will be set to the error message.</p>
+<p><code>requiredVersion</code> Required debugging protocol version ("0.1"). One can only attach to the debuggee with matching major version and greater or equal minor version. List of the protocol versions can be obtained <code>here</code>(http://code.google.com/chrome/devtools/docs/remote-debugging.html).</p>
 	</div>
 	<b><a id=ChromeDebugger.detach></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; detach(dynamic target)</b>
 	<div class=indent>
 		<p>Detaches debugger from the given target. </p>
-<p><code>target</code> Debugging target from which you want to detach. </p>
-<p><code>callback</code> Called once the detach operation succeeds or fails. Callback receives no arguments. If the detach fails, <code>runtime.lastError</code> will be set to the error message.</p>
+<p><code>target</code> Debugging target from which you want to detach.</p>
 	</div>
 	<b><a id=ChromeDebugger.getTargets></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getTargets()</b>
 	<div class=indent>
-		<p>Returns the list of available debug targets.</p>
+		<p>Returns the list of available debug targets. </p>
+<p>Returns: Array of TargetInfo objects corresponding to the available debug targets.</p>
 	</div>
 	<b><a id=ChromeDebugger.sendCommand></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; sendCommand(dynamic target, String method, dynamic commandParams)</b>
 	<div class=indent>
@@ -159,8 +160,38 @@
 <p><code>target</code> Debugging target to which you want to send the command. </p>
 <p><code>method</code> Method name. Should be one of the methods defined by the [remote debugging protocol](http://code.google.com/chrome/devtools/docs/remote-debugging.html). </p>
 <p><code>commandParams</code> JSON object with request parameters. This object must conform to the remote debugging params scheme for given method. </p>
-<p><code>callback</code> Response body. If an error occurs while posting the message, the callback will be called with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
+<p>Returns: JSON object with the response. Structure of the response varies depending on the method and is defined by the remote debugging protocol.</p>
 	</div>
+	<a id=Debuggee></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Debuggee extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.debugger.html#Debuggee.>Debuggee</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Debuggee identifier. Either tabId or extensionId must be specified</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=Debuggee.></a><i class=icon-plus-sign></i> Debuggee(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=TargetInfo></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class TargetInfo extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.debugger.html#TargetInfo.>TargetInfo</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Debug target information</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=TargetInfo.></a><i class=icon-plus-sign></i> TargetInfo(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

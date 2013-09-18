@@ -86,6 +86,8 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.contentSettings.html#ChromeContentSettings>ChromeContentSettings</a><br>
+			<i class=icon-leaf></i> <a href=chrome.contentSettings.html#ContentSetting>ContentSetting</a><br>
+			<i class=icon-leaf></i> <a href=chrome.contentSettings.html#ResourceIdentifier>ResourceIdentifier</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -160,6 +162,34 @@
 	<div class=indent>
 		<p>Whether to allow sites to show pop-ups. One of&lt;br&gt;<code>allow</code>: Allow sites to show pop-ups,&lt;br&gt;<code>block</code>: Don't allow sites to show pop-ups. &lt;br&gt;Default is <code>block</code>.&lt;br&gt;The primary URL is the main-frame URL. The secondary URL is not used.</p>
 	</div>
+	<a id=ContentSetting></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class ContentSetting extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.contentSettings.html#ContentSetting.>ContentSetting</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent></div>
+	<h4>Constructors</h4>
+	<b><a id=ContentSetting.></a><i class=icon-plus-sign></i> ContentSetting(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=ResourceIdentifier></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class ResourceIdentifier extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.contentSettings.html#ResourceIdentifier.>ResourceIdentifier</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>The only content type using resource identifiers is <code>contentSettings.plugins.</code> For more information, see [Resource Identifiers](contentSettings.html#resource-identifiers).</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=ResourceIdentifier.></a><i class=icon-plus-sign></i> ResourceIdentifier(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

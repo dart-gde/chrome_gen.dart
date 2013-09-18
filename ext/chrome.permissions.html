@@ -86,6 +86,7 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.permissions.html#ChromePermissions>ChromePermissions</a><br>
+			<i class=icon-leaf></i> <a href=chrome.permissions.html#Permissions>Permissions</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -138,20 +139,37 @@
 	<h4>Methods</h4>
 	<b><a id=ChromePermissions.contains></a><i class=icon-ok-sign></i> Future&lt;bool&gt; contains(dynamic permissions)</b>
 	<div class=indent>
-		<p>Checks if the extension has the specified permissions.</p>
+		<p>Checks if the extension has the specified permissions. </p>
+<p>Returns: True if the extension has the specified permissions.</p>
 	</div>
 	<b><a id=ChromePermissions.getAll></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getAll()</b>
 	<div class=indent>
-		<p>Gets the extension's current set of permissions.</p>
+		<p>Gets the extension's current set of permissions. </p>
+<p>Returns: The extension's active permissions.</p>
 	</div>
 	<b><a id=ChromePermissions.remove></a><i class=icon-ok-sign></i> Future&lt;bool&gt; remove(dynamic permissions)</b>
 	<div class=indent>
-		<p>Removes access to the specified permissions. If there are any problems removing the permissions, <code>runtime.lastError</code> will be set.</p>
+		<p>Removes access to the specified permissions. If there are any problems removing the permissions, <code>runtime.lastError</code> will be set. </p>
+<p>Returns: True if the permissions were removed.</p>
 	</div>
 	<b><a id=ChromePermissions.request></a><i class=icon-ok-sign></i> Future&lt;bool&gt; request(dynamic permissions)</b>
 	<div class=indent>
-		<p>Requests access to the specified permissions. These permissions must be defined in the optional_permissions field of the manifest. If there are any problems requesting the permissions, <code>runtime.lastError</code> will be set.</p>
+		<p>Requests access to the specified permissions. These permissions must be defined in the optional_permissions field of the manifest. If there are any problems requesting the permissions, <code>runtime.lastError</code> will be set. </p>
+<p>Returns: True if the user granted the specified permissions.</p>
 	</div>
+	<a id=Permissions></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Permissions extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.permissions.html#Permissions.>Permissions</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent></div>
+	<h4>Constructors</h4>
+	<b><a id=Permissions.></a><i class=icon-plus-sign></i> Permissions(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

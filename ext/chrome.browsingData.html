@@ -86,6 +86,8 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.browsingData.html#ChromeBrowsingData>ChromeBrowsingData</a><br>
+			<i class=icon-leaf></i> <a href=chrome.browsingData.html#DataTypeSet>DataTypeSet</a><br>
+			<i class=icon-leaf></i> <a href=chrome.browsingData.html#RemovalOptions>RemovalOptions</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -125,73 +127,90 @@
 	<b><a id=ChromeBrowsingData.remove></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; remove(dynamic options, dynamic dataToRemove)</b>
 	<div class=indent>
 		<p>Clears various types of browsing data stored in a user's profile. </p>
-<p><code>dataToRemove</code> The set of data types to remove. </p>
-<p><code>callback</code> Called when deletion has completed.</p>
+<p><code>dataToRemove</code> The set of data types to remove.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removeAppcache></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removeAppcache(dynamic options)</b>
 	<div class=indent>
-		<p>Clears websites' appcache data. </p>
-<p><code>callback</code> Called when websites' appcache data has been cleared.</p>
+		<p>Clears websites' appcache data.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removeCache></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removeCache(dynamic options)</b>
 	<div class=indent>
-		<p>Clears the browser's cache. </p>
-<p><code>callback</code> Called when the browser's cache has been cleared.</p>
+		<p>Clears the browser's cache.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removeCookies></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removeCookies(dynamic options)</b>
 	<div class=indent>
-		<p>Clears the browser's cookies and server-bound certificates modified within a particular timeframe. </p>
-<p><code>callback</code> Called when the browser's cookies and server-bound certificates have been cleared.</p>
+		<p>Clears the browser's cookies and server-bound certificates modified within a particular timeframe.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removeDownloads></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removeDownloads(dynamic options)</b>
 	<div class=indent>
-		<p>Clears the browser's list of downloaded files (_not_ the downloaded files themselves). </p>
-<p><code>callback</code> Called when the browser's list of downloaded files has been cleared.</p>
+		<p>Clears the browser's list of downloaded files (_not_ the downloaded files themselves).</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removeFileSystems></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removeFileSystems(dynamic options)</b>
 	<div class=indent>
-		<p>Clears websites' file system data. </p>
-<p><code>callback</code> Called when websites' file systems have been cleared.</p>
+		<p>Clears websites' file system data.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removeFormData></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removeFormData(dynamic options)</b>
 	<div class=indent>
-		<p>Clears the browser's stored form data (autofill). </p>
-<p><code>callback</code> Called when the browser's form data has been cleared.</p>
+		<p>Clears the browser's stored form data (autofill).</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removeHistory></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removeHistory(dynamic options)</b>
 	<div class=indent>
-		<p>Clears the browser's history. </p>
-<p><code>callback</code> Called when the browser's history has cleared.</p>
+		<p>Clears the browser's history.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removeIndexedDB></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removeIndexedDB(dynamic options)</b>
 	<div class=indent>
-		<p>Clears websites' IndexedDB data. </p>
-<p><code>callback</code> Called when websites' IndexedDB data has been cleared.</p>
+		<p>Clears websites' IndexedDB data.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removeLocalStorage></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removeLocalStorage(dynamic options)</b>
 	<div class=indent>
-		<p>Clears websites' local storage data. </p>
-<p><code>callback</code> Called when websites' local storage has been cleared.</p>
+		<p>Clears websites' local storage data.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removePasswords></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removePasswords(dynamic options)</b>
 	<div class=indent>
-		<p>Clears the browser's stored passwords. </p>
-<p><code>callback</code> Called when the browser's passwords have been cleared.</p>
+		<p>Clears the browser's stored passwords.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removePluginData></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removePluginData(dynamic options)</b>
 	<div class=indent>
-		<p>Clears plugins' data. </p>
-<p><code>callback</code> Called when plugins' data has been cleared.</p>
+		<p>Clears plugins' data.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.removeWebSQL></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; removeWebSQL(dynamic options)</b>
 	<div class=indent>
-		<p>Clears websites' WebSQL data. </p>
-<p><code>callback</code> Called when websites' WebSQL databases have been cleared.</p>
+		<p>Clears websites' WebSQL data.</p>
 	</div>
 	<b><a id=ChromeBrowsingData.settings></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; settings()</b>
 	<div class=indent>
 		<p>Reports which types of data are currently selected in the 'Clear browsing data' settings UI.  Note: some of the data types included in this API are not available in the settings UI, and some UI settings control more than one data type listed here.</p>
 	</div>
+	<a id=DataTypeSet></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class DataTypeSet extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.browsingData.html#DataTypeSet.>DataTypeSet</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>A set of data types. Missing data types are interpreted as <code>false</code>.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=DataTypeSet.></a><i class=icon-plus-sign></i> DataTypeSet(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RemovalOptions></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RemovalOptions extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.browsingData.html#RemovalOptions.>RemovalOptions</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Options that determine exactly what data will be removed.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RemovalOptions.></a><i class=icon-plus-sign></i> RemovalOptions(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

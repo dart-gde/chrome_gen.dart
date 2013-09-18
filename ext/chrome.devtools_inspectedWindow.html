@@ -86,6 +86,7 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.devtools_inspectedWindow.html#ChromeDevtoolsInspectedWindow>ChromeDevtoolsInspectedWindow</a><br>
+			<i class=icon-leaf></i> <a href=chrome.devtools_inspectedWindow.html#Resource>Resource</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -116,7 +117,7 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.devtools_inspectedWindow.html#ChromeDevtoolsInspectedWindow.eval>eval</a>(String expression): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.devtools_inspectedWindow.html#ChromeDevtoolsInspectedWindow.eval>eval</a>(String expression): Future&lt;JsObject&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.devtools_inspectedWindow.html#ChromeDevtoolsInspectedWindow.getResources>getResources</a>(): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.devtools_inspectedWindow.html#ChromeDevtoolsInspectedWindow.reload>reload</a>(dynamic reloadOptions): void<br>
 		</dd>
@@ -143,21 +144,36 @@
 		<p>The ID of the tab being inspected. This ID may be used with chrome.tabs.* API.</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeDevtoolsInspectedWindow.eval></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; eval(String expression)</b>
+	<b><a id=ChromeDevtoolsInspectedWindow.eval></a><i class=icon-ok-sign></i> Future&lt;JsObject&gt; eval(String expression)</b>
 	<div class=indent>
 		<p>Evaluates a JavaScript expression in the context of the main frame of the inspected page. The expression must evaluate to a JSON-compliant object, otherwise an exception is thrown. </p>
 <p><code>expression</code> An expression to evaluate. </p>
-<p><code>callback</code> A function called when evaluation completes.</p>
+<p>Returns: <code>result</code> The result of evaluation. <code>isException</code> Set if an exception was caught while evaluating the expression.</p>
 	</div>
 	<b><a id=ChromeDevtoolsInspectedWindow.getResources></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getResources()</b>
 	<div class=indent>
 		<p>Retrieves the list of resources from the inspected page. </p>
-<p><code>callback</code> A function that receives the list of resources when the request completes.</p>
+<p>Returns: The resources within the page.</p>
 	</div>
 	<b><a id=ChromeDevtoolsInspectedWindow.reload></a><i class=icon-ok-sign></i> void reload(dynamic reloadOptions)</b>
 	<div class=indent>
 		<p>Reloads the inspected page.</p>
 	</div>
+	<a id=Resource></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Resource extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.devtools_inspectedWindow.html#Resource.>Resource</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>A resource within the inspected page, such as a document, a script, or an image.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=Resource.></a><i class=icon-plus-sign></i> Resource(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

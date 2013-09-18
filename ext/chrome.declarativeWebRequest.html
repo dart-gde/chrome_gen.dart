@@ -85,7 +85,29 @@
 		</dd>
 		<dt>Classes</dt>
 		<dd>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#AddRequestCookie>AddRequestCookie</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#AddResponseCookie>AddResponseCookie</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#AddResponseHeader>AddResponseHeader</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#CancelRequest>CancelRequest</a><br>
 			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#ChromeDeclarativeWebRequest>ChromeDeclarativeWebRequest</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#EditRequestCookie>EditRequestCookie</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#EditResponseCookie>EditResponseCookie</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#FilterResponseCookie>FilterResponseCookie</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#HeaderFilter>HeaderFilter</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#IgnoreRules>IgnoreRules</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#RedirectByRegEx>RedirectByRegEx</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#RedirectRequest>RedirectRequest</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#RedirectToEmptyDocument>RedirectToEmptyDocument</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#RedirectToTransparentImage>RedirectToTransparentImage</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#RemoveRequestCookie>RemoveRequestCookie</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#RemoveRequestHeader>RemoveRequestHeader</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#RemoveResponseCookie>RemoveResponseCookie</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#RemoveResponseHeader>RemoveResponseHeader</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#RequestCookie>RequestCookie</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#RequestMatcher>RequestMatcher</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#ResponseCookie>ResponseCookie</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#SendMessageToExtension>SendMessageToExtension</a><br>
+			<i class=icon-leaf></i> <a href=chrome.declarativeWebRequest.html#SetRequestHeader>SetRequestHeader</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -98,6 +120,66 @@
 			<p>Accessor for the <code>chrome.declarativeWebRequest</code> namespace.</p>
 		</div>
 	</div>
+	<a id=AddRequestCookie></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class AddRequestCookie extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#AddRequestCookie.>AddRequestCookie</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Adds a cookie to the request or overrides a cookie, in case another cookie of the same name exists already. Note that it is preferred to use the Cookies API because this is computationally less expensive.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=AddRequestCookie.></a><i class=icon-plus-sign></i> AddRequestCookie(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=AddResponseCookie></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class AddResponseCookie extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#AddResponseCookie.>AddResponseCookie</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Adds a cookie to the response or overrides a cookie, in case another cookie of the same name exists already. Note that it is preferred to use the Cookies API because this is computationally less expensive.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=AddResponseCookie.></a><i class=icon-plus-sign></i> AddResponseCookie(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=AddResponseHeader></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class AddResponseHeader extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#AddResponseHeader.>AddResponseHeader</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Adds the response header to the response of this web request. As multiple response headers may share the same name, you need to first remove and then add a new response header in order to replace one.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=AddResponseHeader.></a><i class=icon-plus-sign></i> AddResponseHeader(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=CancelRequest></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class CancelRequest extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#CancelRequest.>CancelRequest</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Declarative event action that cancels a network request.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=CancelRequest.></a><i class=icon-plus-sign></i> CancelRequest(JsObject proxy)</b>
+	<div class=indent></div>
 	<a id=ChromeDeclarativeWebRequest></a><hr>
 	<h4>
 		<i class=icon-leaf></i> Class ChromeDeclarativeWebRequest</h4>
@@ -125,6 +207,276 @@
 		<p>Fired when a message is sent via <code>declarativeWebRequest.SendMessageToExtension</code> from an action of the declarative web request API.</p>
 	</div>
 	<b><a id=onRequest></a><i class=icon-circle-arrow-right></i> Stream&lt;dynamic&gt; get onRequest</b>
+	<div class=indent></div>
+	<a id=EditRequestCookie></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class EditRequestCookie extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#EditRequestCookie.>EditRequestCookie</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Edits one or more cookies of request. Note that it is preferred to use the Cookies API because this is computationally less expensive.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=EditRequestCookie.></a><i class=icon-plus-sign></i> EditRequestCookie(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=EditResponseCookie></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class EditResponseCookie extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#EditResponseCookie.>EditResponseCookie</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Edits one or more cookies of response. Note that it is preferred to use the Cookies API because this is computationally less expensive.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=EditResponseCookie.></a><i class=icon-plus-sign></i> EditResponseCookie(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=FilterResponseCookie></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class FilterResponseCookie extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#FilterResponseCookie.>FilterResponseCookie</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>A filter of a cookie in HTTP Responses.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=FilterResponseCookie.></a><i class=icon-plus-sign></i> FilterResponseCookie(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=HeaderFilter></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class HeaderFilter extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#HeaderFilter.>HeaderFilter</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Filters request headers for various criteria. Multiple criteria are evaluated as a conjunction.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=HeaderFilter.></a><i class=icon-plus-sign></i> HeaderFilter(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=IgnoreRules></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class IgnoreRules extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#IgnoreRules.>IgnoreRules</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Masks all rules that match the specified criteria.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=IgnoreRules.></a><i class=icon-plus-sign></i> IgnoreRules(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RedirectByRegEx></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RedirectByRegEx extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#RedirectByRegEx.>RedirectByRegEx</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Redirects a request by applying a regular expression on the URL. The regular expressions use the <code>RE2 syntax</code>(http://code.google.com/p/re2/wiki/Syntax).</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RedirectByRegEx.></a><i class=icon-plus-sign></i> RedirectByRegEx(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RedirectRequest></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RedirectRequest extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#RedirectRequest.>RedirectRequest</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Declarative event action that redirects a network request.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RedirectRequest.></a><i class=icon-plus-sign></i> RedirectRequest(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RedirectToEmptyDocument></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RedirectToEmptyDocument extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#RedirectToEmptyDocument.>RedirectToEmptyDocument</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Declarative event action that redirects a network request to an empty document.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RedirectToEmptyDocument.></a><i class=icon-plus-sign></i> RedirectToEmptyDocument(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RedirectToTransparentImage></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RedirectToTransparentImage extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#RedirectToTransparentImage.>RedirectToTransparentImage</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Declarative event action that redirects a network request to a transparent image.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RedirectToTransparentImage.></a><i class=icon-plus-sign></i> RedirectToTransparentImage(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RemoveRequestCookie></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RemoveRequestCookie extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#RemoveRequestCookie.>RemoveRequestCookie</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Removes one or more cookies of request. Note that it is preferred to use the Cookies API because this is computationally less expensive.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RemoveRequestCookie.></a><i class=icon-plus-sign></i> RemoveRequestCookie(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RemoveRequestHeader></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RemoveRequestHeader extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#RemoveRequestHeader.>RemoveRequestHeader</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Removes the request header of the specified name. Do not use SetRequestHeader and RemoveRequestHeader with the same header name on the same request. Each request header name occurs only once in each request.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RemoveRequestHeader.></a><i class=icon-plus-sign></i> RemoveRequestHeader(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RemoveResponseCookie></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RemoveResponseCookie extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#RemoveResponseCookie.>RemoveResponseCookie</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Removes one or more cookies of response. Note that it is preferred to use the Cookies API because this is computationally less expensive.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RemoveResponseCookie.></a><i class=icon-plus-sign></i> RemoveResponseCookie(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RemoveResponseHeader></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RemoveResponseHeader extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#RemoveResponseHeader.>RemoveResponseHeader</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Removes all response headers of the specified names and values.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RemoveResponseHeader.></a><i class=icon-plus-sign></i> RemoveResponseHeader(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RequestCookie></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RequestCookie extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#RequestCookie.>RequestCookie</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>A filter or specification of a cookie in HTTP Requests.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RequestCookie.></a><i class=icon-plus-sign></i> RequestCookie(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=RequestMatcher></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class RequestMatcher extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#RequestMatcher.>RequestMatcher</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Matches network events by various criteria.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=RequestMatcher.></a><i class=icon-plus-sign></i> RequestMatcher(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=ResponseCookie></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class ResponseCookie extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#ResponseCookie.>ResponseCookie</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>A specification of a cookie in HTTP Responses.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=ResponseCookie.></a><i class=icon-plus-sign></i> ResponseCookie(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=SendMessageToExtension></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class SendMessageToExtension extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#SendMessageToExtension.>SendMessageToExtension</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Triggers the <code>declarativeWebRequest.onMessage</code> event.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=SendMessageToExtension.></a><i class=icon-plus-sign></i> SendMessageToExtension(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=SetRequestHeader></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class SetRequestHeader extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.declarativeWebRequest.html#SetRequestHeader.>SetRequestHeader</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Sets the request header of the specified name to the specified value. If a header with the specified name did not exist before, a new one is created. Header name comparison is always case-insensitive. Each request header name occurs only once in each request.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=SetRequestHeader.></a><i class=icon-plus-sign></i> SetRequestHeader(JsObject proxy)</b>
 	<div class=indent></div>
 	<hr>
 </div>

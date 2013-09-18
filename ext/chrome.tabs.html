@@ -86,6 +86,8 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.tabs.html#ChromeTabs>ChromeTabs</a><br>
+			<i class=icon-leaf></i> <a href=chrome.tabs.html#InjectDetails>InjectDetails</a><br>
+			<i class=icon-leaf></i> <a href=chrome.tabs.html#Tab>Tab</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -235,32 +237,37 @@
 	<div class=indent>
 		<p>Captures the visible area of the currently active tab in the specified window. You must have <code>host permission</code>(declare_permissions.html) for the URL displayed by the tab. </p>
 <p><code>windowId</code> The target window. Defaults to the [current window](windows.html#current-window). </p>
-<p><code>options</code> Set parameters of image capture, such as the format of the resulting image.</p>
+<p><code>options</code> Set parameters of image capture, such as the format of the resulting image. </p>
+<p>Returns: A data URL which encodes an image of the visible area of the captured tab. May be assigned to the 'src' property of an HTML Image element for display.</p>
 	</div>
 	<b><a id=ChromeTabs.connect></a><i class=icon-ok-sign></i> dynamic connect(int tabId, dynamic connectInfo)</b>
 	<div class=indent>
-		<p>Connects to the content script(s) in the specified tab. The <code>runtime.onConnect</code> event is fired in each content script running in the specified tab for the current extension. For more details, see [Content Script Messaging](messaging.html).</p>
+		<p>Connects to the content script(s) in the specified tab. The <code>runtime.onConnect</code> event is fired in each content script running in the specified tab for the current extension. For more details, see [Content Script Messaging](messaging.html). </p>
+<p>Returns: A port that can be used to communicate with the content scripts running in the specified tab. The port's <code>runtime.Port</code> event is fired if the tab closes or does not exist.</p>
 	</div>
 	<b><a id=ChromeTabs.create></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; create(dynamic createProperties)</b>
 	<div class=indent>
-		<p>Creates a new tab.</p>
+		<p>Creates a new tab. </p>
+<p>Returns: Details about the created tab. Will contain the ID of the new tab.</p>
 	</div>
 	<b><a id=ChromeTabs.detectLanguage></a><i class=icon-ok-sign></i> Future&lt;String&gt; detectLanguage(int tabId)</b>
 	<div class=indent>
 		<p>Detects the primary language of the content in a tab. </p>
-<p><code>tabId</code> Defaults to the active tab of the [current window](windows.html#current-window).</p>
+<p><code>tabId</code> Defaults to the active tab of the [current window](windows.html#current-window). </p>
+<p>Returns: An ISO language code such as <code>en</code> or <code>fr</code>. For a complete list of languages supported by this method, see <code>kLanguageInfoTable</code>(http://src.chromium.org/viewvc/chrome/trunk/src/third_party/cld/languages/internal/languages.cc). The 2nd to 4th columns will be checked and the first non-NULL value will be returned except for Simplified Chinese for which zh-CN will be returned. For an unknown language, <code>und</code> will be returned.</p>
 	</div>
 	<b><a id=ChromeTabs.duplicate></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; duplicate(int tabId)</b>
 	<div class=indent>
 		<p>Duplicates a tab. </p>
-<p><code>tabId</code> The ID of the tab which is to be duplicated.</p>
+<p><code>tabId</code> The ID of the tab which is to be duplicated. </p>
+<p>Returns: Details about the duplicated tab. The <code>tabs.Tab</code> object doesn't contain <code>url</code>, <code>title</code> and <code>favIconUrl</code> if the <code>"tabs"</code> permission has not been requested.</p>
 	</div>
 	<b><a id=ChromeTabs.executeScript></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; executeScript(int tabId, dynamic details)</b>
 	<div class=indent>
 		<p>Injects JavaScript code into a page. For details, see the [programmatic injection](content_scripts.html#pi) section of the content scripts doc. </p>
 <p><code>tabId</code> The ID of the tab in which to run the script; defaults to the active tab of the current window. </p>
 <p><code>details</code> Details of the script to run. </p>
-<p><code>callback</code> Called after all the JavaScript has been executed.</p>
+<p>Returns: The result of the script in every injected frame.</p>
 	</div>
 	<b><a id=ChromeTabs.get></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; get(int tabId)</b>
 	<div class=indent>
@@ -282,19 +289,20 @@
 	</div>
 	<b><a id=ChromeTabs.highlight></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; highlight(dynamic highlightInfo)</b>
 	<div class=indent>
-		<p>Highlights the given tabs.</p>
+		<p>Highlights the given tabs. </p>
+<p>Returns: Contains details about the window whose tabs were highlighted.</p>
 	</div>
 	<b><a id=ChromeTabs.insertCSS></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; insertCSS(int tabId, dynamic details)</b>
 	<div class=indent>
 		<p>Injects CSS into a page. For details, see the [programmatic injection](content_scripts.html#pi) section of the content scripts doc. </p>
 <p><code>tabId</code> The ID of the tab in which to insert the CSS; defaults to the active tab of the current window. </p>
-<p><code>details</code> Details of the CSS text to insert. </p>
-<p><code>callback</code> Called when all the CSS has been inserted.</p>
+<p><code>details</code> Details of the CSS text to insert.</p>
 	</div>
 	<b><a id=ChromeTabs.move></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; move(dynamic tabIds, dynamic moveProperties)</b>
 	<div class=indent>
 		<p>Moves one or more tabs to a new position within its window, or to a new window. Note that tabs can only be moved to and from normal (window.type === "normal") windows. </p>
-<p><code>tabIds</code> The tab or list of tabs to move.</p>
+<p><code>tabIds</code> The tab or list of tabs to move. </p>
+<p>Returns: Details about the moved tabs.</p>
 	</div>
 	<b><a id=ChromeTabs.query></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; query(dynamic queryInfo)</b>
 	<div class=indent>
@@ -312,17 +320,48 @@
 	</div>
 	<b><a id=ChromeTabs.sendMessage></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; sendMessage(int tabId, dynamic message)</b>
 	<div class=indent>
-		<p>Sends a single message to the content script(s) in the specified tab, with an optional callback to run when a response is sent back.  The <code>runtime.onMessage</code> event is fired in each content script running in the specified tab for the current extension.</p>
+		<p>Sends a single message to the content script(s) in the specified tab, with an optional callback to run when a response is sent back.  The <code>runtime.onMessage</code> event is fired in each content script running in the specified tab for the current extension. </p>
+<p>Returns: The JSON response object sent by the handler of the message. If an error occurs while connecting to the specified tab, the callback will be called with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 	</div>
 	<b><a id=ChromeTabs.sendRequest></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; sendRequest(int tabId, dynamic request)</b>
 	<div class=indent>
-		<p>Deprecated: Please use sendMessage.</p>
+		<p>Deprecated: Please use sendMessage. </p>
+<p>Returns: The JSON response object sent by the handler of the request. If an error occurs while connecting to the specified tab, the callback will be called with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 	</div>
 	<b><a id=ChromeTabs.update></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; update(int tabId, dynamic updateProperties)</b>
 	<div class=indent>
 		<p>Modifies the properties of a tab. Properties that are not specified in <code>updateProperties</code> are not modified. </p>
-<p><code>tabId</code> Defaults to the selected tab of the [current window](windows.html#current-window).</p>
+<p><code>tabId</code> Defaults to the selected tab of the [current window](windows.html#current-window). </p>
+<p>Returns: Details about the updated tab. The <code>tabs.Tab</code> object doesn't contain <code>url</code>, <code>title</code> and <code>favIconUrl</code> if the <code>"tabs"</code> permission has not been requested.</p>
 	</div>
+	<a id=InjectDetails></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class InjectDetails extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.tabs.html#InjectDetails.>InjectDetails</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Details of the script or CSS to inject. Either the code or the file property must be set, but both may not be set at the same time.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=InjectDetails.></a><i class=icon-plus-sign></i> InjectDetails(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=Tab></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Tab extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.tabs.html#Tab.>Tab</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent></div>
+	<h4>Constructors</h4>
+	<b><a id=Tab.></a><i class=icon-plus-sign></i> Tab(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

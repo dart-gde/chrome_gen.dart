@@ -85,7 +85,9 @@
 		</dd>
 		<dt>Classes</dt>
 		<dd>
+			<i class=icon-leaf></i> <a href=chrome.processes.html#Cache>Cache</a><br>
 			<i class=icon-leaf></i> <a href=chrome.processes.html#ChromeProcesses>ChromeProcesses</a><br>
+			<i class=icon-leaf></i> <a href=chrome.processes.html#Process>Process</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -98,6 +100,21 @@
 			<p>Accessor for the <code>chrome.processes</code> namespace.</p>
 		</div>
 	</div>
+	<a id=Cache></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Cache extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.processes.html#Cache.>Cache</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>The Cache object contains information about the size and utilization of a cache used by the browser.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=Cache.></a><i class=icon-plus-sign></i> Cache(JsObject proxy)</b>
+	<div class=indent></div>
 	<a id=ChromeProcesses></a><hr>
 	<h4>
 		<i class=icon-leaf></i> Class ChromeProcesses</h4>
@@ -162,20 +179,37 @@
 	<b><a id=ChromeProcesses.getProcessIdForTab></a><i class=icon-ok-sign></i> Future&lt;int&gt; getProcessIdForTab(int tabId)</b>
 	<div class=indent>
 		<p>Returns the ID of the renderer process for the specified tab. </p>
-<p><code>tabId</code> The ID of the tab for which the renderer process ID is to be returned.</p>
+<p><code>tabId</code> The ID of the tab for which the renderer process ID is to be returned. </p>
+<p>Returns: Process ID of the tab's renderer process.</p>
 	</div>
 	<b><a id=ChromeProcesses.getProcessInfo></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getProcessInfo(dynamic processIds, bool includeMemory)</b>
 	<div class=indent>
 		<p>Retrieves the process information for each process ID specified. </p>
 <p><code>processIds</code> The list of process IDs or single process ID for which to return the process information. An empty list indicates all processes are requested. </p>
 <p><code>includeMemory</code> True if detailed memory usage is required. Note, collecting memory usage information incurs extra CPU usage and should only be queried for when needed. </p>
-<p><code>callback</code> Called when the processes information is collected.</p>
+<p>Returns: A dictionary of Process objects for each requested process that is a live child process of the current browser process, indexed by process ID. Metrics requiring aggregation over time will not be populated in each Process object.</p>
 	</div>
 	<b><a id=ChromeProcesses.terminate></a><i class=icon-ok-sign></i> Future&lt;bool&gt; terminate(int processId)</b>
 	<div class=indent>
 		<p>Terminates the specified renderer process. Equivalent to visiting about:crash, but without changing the tab's URL. </p>
-<p><code>processId</code> The ID of the process to be terminated.</p>
+<p><code>processId</code> The ID of the process to be terminated. </p>
+<p>Returns: True if terminating the process was successful, otherwise false.</p>
 	</div>
+	<a id=Process></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Process extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.processes.html#Process.>Process</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>An object containing information about one of the browser's processes.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=Process.></a><i class=icon-plus-sign></i> Process(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

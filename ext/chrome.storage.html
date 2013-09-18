@@ -86,6 +86,8 @@
 		<dt>Classes</dt>
 		<dd>
 			<i class=icon-leaf></i> <a href=chrome.storage.html#ChromeStorage>ChromeStorage</a><br>
+			<i class=icon-leaf></i> <a href=chrome.storage.html#StorageArea>StorageArea</a><br>
+			<i class=icon-leaf></i> <a href=chrome.storage.html#StorageChange>StorageChange</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -105,12 +107,14 @@
 		<dt>Fields</dt>
 		<dd>
 			<i class=icon-minus-sign></i> <a href=chrome.storage.html#ChromeStorage.local>local</a>: dynamic<br>
+			<i class=icon-minus-sign></i> <a href=chrome.storage.html#ChromeStorage.managed>managed</a>: dynamic<br>
 			<i class=icon-minus-sign></i> <a href=chrome.storage.html#ChromeStorage.onChanged>onChanged</a>: Stream<br>
 			<i class=icon-minus-sign></i> <a href=chrome.storage.html#ChromeStorage.sync>sync</a>: dynamic<br>
 		</dd>
 		<dt>Getters and Setters</dt>
 		<dd>
 			<i class=icon-circle-arrow-right></i> <a href=chrome.storage.html#local>local</a>: dynamic<br>
+			<i class=icon-circle-arrow-right></i> <a href=chrome.storage.html#managed>managed</a>: dynamic<br>
 			<i class=icon-circle-arrow-right></i> <a href=chrome.storage.html#onChanged>onChanged</a>: Stream&lt;dynamic&gt;<br>
 			<i class=icon-circle-arrow-right></i> <a href=chrome.storage.html#sync>sync</a>: dynamic<br>
 		</dd>
@@ -118,6 +122,8 @@
 	<div class=indent></div>
 	<h4>Fields</h4>
 	<b><a id=ChromeStorage.local></a><i class=icon-minus-sign></i> final dynamic local</b>
+	<div class=indent></div>
+	<b><a id=ChromeStorage.managed></a><i class=icon-minus-sign></i> final dynamic managed</b>
 	<div class=indent></div>
 	<b><a id=ChromeStorage.onChanged></a><i class=icon-minus-sign></i> final Stream onChanged</b>
 	<div class=indent></div>
@@ -128,6 +134,10 @@
 	<div class=indent>
 		<p>Items in the <code>local</code> storage area are local to each machine.</p>
 	</div>
+	<b><a id=managed></a><i class=icon-circle-arrow-right></i> dynamic get managed</b>
+	<div class=indent>
+		<p>Items in the <code>managed</code> storage area are set by the domain administrator, and are read-only by the extension; trying to modify this namespace results in an error.</p>
+	</div>
 	<b><a id=onChanged></a><i class=icon-circle-arrow-right></i> Stream&lt;dynamic&gt; get onChanged</b>
 	<div class=indent>
 		<p>Fired when one or more items change.</p>
@@ -136,6 +146,32 @@
 	<div class=indent>
 		<p>Items in the <code>sync</code> storage area are synced using Chrome Sync.</p>
 	</div>
+	<a id=StorageArea></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class StorageArea extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.storage.html#StorageArea.>StorageArea</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent></div>
+	<h4>Constructors</h4>
+	<b><a id=StorageArea.></a><i class=icon-plus-sign></i> StorageArea(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=StorageChange></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class StorageChange extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.storage.html#StorageChange.>StorageChange</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent></div>
+	<h4>Constructors</h4>
+	<b><a id=StorageChange.></a><i class=icon-plus-sign></i> StorageChange(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>

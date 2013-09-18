@@ -193,12 +193,14 @@
 	<b><a id=ChromeWebNavigation.getAllFrames></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getAllFrames(dynamic details)</b>
 	<div class=indent>
 		<p>Retrieves information about all frames of a given tab. </p>
-<p><code>details</code> Information about the tab to retrieve all frames from.</p>
+<p><code>details</code> Information about the tab to retrieve all frames from. </p>
+<p>Returns: A list of frames in the given tab, null if the specified tab ID is invalid.</p>
 	</div>
 	<b><a id=ChromeWebNavigation.getFrame></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getFrame(dynamic details)</b>
 	<div class=indent>
 		<p>Retrieves information about the given frame. A frame refers to an &amp;lt;iframe&amp;gt; or a &amp;lt;frame&amp;gt; of a web page and is identified by a tab ID and a frame ID. </p>
-<p><code>details</code> Information about the frame to retrieve information about.</p>
+<p><code>details</code> Information about the frame to retrieve information about. </p>
+<p>Returns: Information about the requested frame, null if the specified frame ID and/or tab ID are invalid.</p>
 	</div>
 	<hr>
 </div>

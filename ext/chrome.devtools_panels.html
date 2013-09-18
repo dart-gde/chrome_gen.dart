@@ -85,7 +85,11 @@
 		</dd>
 		<dt>Classes</dt>
 		<dd>
+			<i class=icon-leaf></i> <a href=chrome.devtools_panels.html#Button>Button</a><br>
 			<i class=icon-leaf></i> <a href=chrome.devtools_panels.html#ChromeDevtoolsPanels>ChromeDevtoolsPanels</a><br>
+			<i class=icon-leaf></i> <a href=chrome.devtools_panels.html#ElementsPanel>ElementsPanel</a><br>
+			<i class=icon-leaf></i> <a href=chrome.devtools_panels.html#ExtensionPanel>ExtensionPanel</a><br>
+			<i class=icon-leaf></i> <a href=chrome.devtools_panels.html#ExtensionSidebarPane>ExtensionSidebarPane</a><br>
 		</dd>
 	</dl>
 	<div class=indent>
@@ -98,6 +102,21 @@
 			<p>Accessor for the <code>chrome.devtools.panels</code> namespace.</p>
 		</div>
 	</div>
+	<a id=Button></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class Button extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.devtools_panels.html#Button.>Button</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>A button created by the extension.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=Button.></a><i class=icon-plus-sign></i> Button(JsObject proxy)</b>
+	<div class=indent></div>
 	<a id=ChromeDevtoolsPanels></a><hr>
 	<h4>
 		<i class=icon-leaf></i> Class ChromeDevtoolsPanels</h4>
@@ -132,13 +151,58 @@
 <p><code>title</code> Title that is displayed next to the extension icon in the Developer Tools toolbar. </p>
 <p><code>iconPath</code> Path of the panel's icon relative to the extension directory. </p>
 <p><code>pagePath</code> Path of the panel's HTML page relative to the extension directory. </p>
-<p><code>callback</code> A function that is called when the panel is created.</p>
+<p>Returns: An ExtensionPanel object representing the created panel.</p>
 	</div>
 	<b><a id=ChromeDevtoolsPanels.setOpenResourceHandler></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; setOpenResourceHandler()</b>
 	<div class=indent>
 		<p>Specifies the function to be called when the user clicks a resource link in the Developer Tools window. To unset the handler, either call the method with no parameters or pass null as the parameter. </p>
-<p><code>callback</code> A function that is called when the user clicks on a valid resource link in Developer Tools window. Note that if the user clicks an invalid URL or an XHR, this function is not called.</p>
+<p>Returns: A <code>devtools.inspectedWindow.Resource</code> object for the resource that was clicked.</p>
 	</div>
+	<a id=ElementsPanel></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class ElementsPanel extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.devtools_panels.html#ElementsPanel.>ElementsPanel</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Represents the Elements panel.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=ElementsPanel.></a><i class=icon-plus-sign></i> ElementsPanel(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=ExtensionPanel></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class ExtensionPanel extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.devtools_panels.html#ExtensionPanel.>ExtensionPanel</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>Represents a panel created by extension.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=ExtensionPanel.></a><i class=icon-plus-sign></i> ExtensionPanel(JsObject proxy)</b>
+	<div class=indent></div>
+	<a id=ExtensionSidebarPane></a><hr>
+	<h4>
+		<i class=icon-leaf></i> Class ExtensionSidebarPane extends ChromeObject</h4>
+	<dl class=dl-horizontal>
+		<dt>Constructors</dt>
+		<dd>
+			<i class=icon-plus-sign></i> <a href=chrome.devtools_panels.html#ExtensionSidebarPane.>ExtensionSidebarPane</a>(JsObject proxy)<br>
+		</dd>
+	</dl>
+	<div class=indent>
+		<p>A sidebar created by the extension.</p>
+	</div>
+	<h4>Constructors</h4>
+	<b><a id=ExtensionSidebarPane.></a><i class=icon-plus-sign></i> ExtensionSidebarPane(JsObject proxy)</b>
+	<div class=indent></div>
 	<hr>
 </div>
 </div>
