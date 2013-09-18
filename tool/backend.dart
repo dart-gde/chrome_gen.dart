@@ -114,7 +114,15 @@ class DefaultBackend extends Backend {
     generator.writeln();
     generator.writeDocs(method.description);
     generator.write("${method.returns.toReturnString()} ${method.name}(");
-    generator.write(method.params.map((p) => "${p.type} ${p.name}").join(', '));
+    generator.write(method.requiredParams.map((p) => "${p.type} ${p.name}").join(', '));
+    if (method.optionalParams.isNotEmpty) {
+      if (method.requiredParams.isNotEmpty) {
+        generator.write(', ');
+      }
+      generator.write('[');
+      generator.write(method.optionalParams.map((p) => "${p.type} ${p.name}").join(', '));
+      generator.write(']');
+    }
     generator.writeln(") {");
     if (method.usesCallback) {
       ChromeType future = method.returns;
@@ -122,19 +130,16 @@ class DefaultBackend extends Backend {
       if (future.parameters.length == 0) {
         generator.writeln("noArgs();");
       } else if (future.parameters.length == 1) {
-//        IDLType type = callback.params.first.type;
-//
-//        if (ctx.isAutoTransformType(type)) {
-//          generator.writeln("oneArg();");
-//        } else {
-          generator.writeln("oneArg((arg) {");
-          // TODO:
-          generator.writeln("return arg;");
-          generator.writeln("});");
-//        }
+        ChromeType param = future.parameters.first;
+        if (getReturnConverter(param) == null) {
+          generator.writeln("oneArg();");
+        } else {
+          generator.writeln("oneArg(${getReturnConverter(param)});");
+        }
       } else if (future.parameters.length == 2) {
+        // TODO: currently, the json convert is changing 2 arg calls to 1 arg.
+        throw 'not yet supported';
         generator.writeln("twoArgs((arg1, arg2) {");
-        // TODO:
         generator.writeln("return null;");
         generator.writeln("});");
       } else {
@@ -188,4 +193,19 @@ class DefaultBackend extends Backend {
     generator.writeln("}");
   }
 
+  // TODO: this is actually a return type converter -
+  String getReturnConverter(ChromeType param) {
+    if (param.isString || param.isInt) {
+      return null;
+    }
+
+    // If it's a list and the elements are identity converters
+    if (param.isList && getReturnConverter(param.parameters.first) == null) {
+      return "listify";
+    }
+
+    // TODO: more converters -
+
+    return "selfConverter";
+  }
 }

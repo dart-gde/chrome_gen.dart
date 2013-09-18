@@ -43,9 +43,7 @@ class ChromeDevtoolsPanels {
    * An ExtensionPanel object representing the created panel.
    */
   Future<dynamic> create(String title, String iconPath, String pagePath) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
     return completer.future;
   }
@@ -60,9 +58,7 @@ class ChromeDevtoolsPanels {
    * clicked.
    */
   Future<dynamic> setOpenResourceHandler() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
     return completer.future;
   }

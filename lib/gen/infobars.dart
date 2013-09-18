@@ -31,9 +31,7 @@ class ChromeInfobars {
    * Contains details about the window in which the infobar was created.
    */
   Future<dynamic> show(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _infobars.callMethod('show', [details, completer.callback]);
     return completer.future;
   }

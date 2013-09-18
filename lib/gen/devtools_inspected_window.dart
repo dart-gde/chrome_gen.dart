@@ -43,9 +43,7 @@ class ChromeDevtoolsInspectedWindow {
    * expression.
    */
   Future<JsObject> eval(String expression) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
     return completer.future;
   }
@@ -53,7 +51,7 @@ class ChromeDevtoolsInspectedWindow {
   /**
    * Reloads the inspected page.
    */
-  void reload(var reloadOptions) {
+  void reload([var reloadOptions]) {
     _devtools_inspectedWindow.callMethod('reload', [reloadOptions]);
   }
 
@@ -63,10 +61,8 @@ class ChromeDevtoolsInspectedWindow {
    * Returns:
    * The resources within the page.
    */
-  Future<dynamic> getResources() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getResources() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
     return completer.future;
   }

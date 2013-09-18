@@ -28,10 +28,8 @@ class ChromeHistory {
    * Searches the history for the last visit time of each page matching the
    * query.
    */
-  Future<dynamic> search(var query) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> search(var query) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _history.callMethod('search', [query, completer.callback]);
     return completer.future;
   }
@@ -39,10 +37,8 @@ class ChromeHistory {
   /**
    * Retrieves information about visits to a URL.
    */
-  Future<dynamic> getVisits(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getVisits(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _history.callMethod('getVisits', [details, completer.callback]);
     return completer.future;
   }

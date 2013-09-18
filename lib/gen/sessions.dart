@@ -35,10 +35,8 @@ class ChromeSessions {
    * recently closed tab or window will be at index `0`).The entries may contain
    * either tabs or windows.
    */
-  Future<dynamic> getRecentlyClosed(var filter) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getRecentlyClosed([var filter]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _sessions.callMethod('getRecentlyClosed', [filter, completer.callback]);
     return completer.future;
   }
@@ -52,10 +50,8 @@ class ChromeSessions {
    * modified session. [tabs.Tab] objects are sorted by recency in the
    * [windows.Window] of the [Session] objects.
    */
-  Future<dynamic> getDevices(var filter) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getDevices([var filter]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _sessions.callMethod('getDevices', [filter, completer.callback]);
     return completer.future;
   }
@@ -70,10 +66,8 @@ class ChromeSessions {
    * Returns:
    * A [Session] containing the restored [windows.Window] or [tabs.Tab] object.
    */
-  Future<dynamic> restore(String sessionId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> restore([String sessionId]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _sessions.callMethod('restore', [sessionId, completer.callback]);
     return completer.future;
   }

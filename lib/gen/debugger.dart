@@ -70,10 +70,8 @@ class ChromeDebugger {
    * JSON object with the response. Structure of the response varies depending
    * on the method and is defined by the remote debugging protocol.
    */
-  Future<dynamic> sendCommand(var target, String method, var commandParams) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> sendCommand(var target, String method, [var commandParams]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _debugger.callMethod('sendCommand', [target, method, commandParams, completer.callback]);
     return completer.future;
   }
@@ -84,10 +82,8 @@ class ChromeDebugger {
    * Returns:
    * Array of TargetInfo objects corresponding to the available debug targets.
    */
-  Future<dynamic> getTargets() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getTargets() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _debugger.callMethod('getTargets', [completer.callback]);
     return completer.future;
   }

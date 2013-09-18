@@ -35,7 +35,7 @@ class ChromeContextMenus {
    * Returns:
    * The ID of the newly created item.
    */
-  dynamic create(var createProperties, var callback) {
+  dynamic create(var createProperties, [var callback]) {
     return _contextMenus.callMethod('create', [createProperties, callback]);
   }
 

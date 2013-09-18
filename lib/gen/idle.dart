@@ -31,9 +31,7 @@ class ChromeIdle {
    * detected.
    */
   Future<String> queryState(int detectionIntervalInSeconds) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _idle.callMethod('queryState', [detectionIntervalInSeconds, completer.callback]);
     return completer.future;
   }

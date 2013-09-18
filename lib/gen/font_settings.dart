@@ -34,9 +34,7 @@ class ChromeFontSettings {
    * Gets the font for a given script and generic font family.
    */
   Future<dynamic> getFont(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _fontSettings.callMethod('getFont', [details, completer.callback]);
     return completer.future;
   }
@@ -53,10 +51,8 @@ class ChromeFontSettings {
   /**
    * Gets a list of fonts on the system.
    */
-  Future<dynamic> getFontList() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getFontList() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _fontSettings.callMethod('getFontList', [completer.callback]);
     return completer.future;
   }
@@ -66,7 +62,7 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearDefaultFontSize(var details) {
+  Future clearDefaultFontSize([var details]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('clearDefaultFontSize', [details, completer.callback]);
     return completer.future;
@@ -77,10 +73,8 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<dynamic> getDefaultFontSize(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> getDefaultFontSize([var details]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _fontSettings.callMethod('getDefaultFontSize', [details, completer.callback]);
     return completer.future;
   }
@@ -99,7 +93,7 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearDefaultFixedFontSize(var details) {
+  Future clearDefaultFixedFontSize([var details]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('clearDefaultFixedFontSize', [details, completer.callback]);
     return completer.future;
@@ -110,10 +104,8 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<dynamic> getDefaultFixedFontSize(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> getDefaultFixedFontSize([var details]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _fontSettings.callMethod('getDefaultFixedFontSize', [details, completer.callback]);
     return completer.future;
   }
@@ -132,7 +124,7 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearMinimumFontSize(var details) {
+  Future clearMinimumFontSize([var details]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('clearMinimumFontSize', [details, completer.callback]);
     return completer.future;
@@ -143,10 +135,8 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<dynamic> getMinimumFontSize(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> getMinimumFontSize([var details]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _fontSettings.callMethod('getMinimumFontSize', [details, completer.callback]);
     return completer.future;
   }

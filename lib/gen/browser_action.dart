@@ -35,9 +35,7 @@ class ChromeBrowserAction {
    * Gets the title of the browser action.
    */
   Future<String> getTitle(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _browserAction.callMethod('getTitle', [details, completer.callback]);
     return completer.future;
   }
@@ -66,9 +64,7 @@ class ChromeBrowserAction {
    * Gets the html document set as the popup for this browser action.
    */
   Future<String> getPopup(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _browserAction.callMethod('getPopup', [details, completer.callback]);
     return completer.future;
   }
@@ -86,9 +82,7 @@ class ChromeBrowserAction {
    * non-tab-specific badge text is returned.
    */
   Future<String> getBadgeText(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _browserAction.callMethod('getBadgeText', [details, completer.callback]);
     return completer.future;
   }
@@ -104,9 +98,7 @@ class ChromeBrowserAction {
    * Gets the background color of the browser action.
    */
   Future<dynamic> getBadgeBackgroundColor(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _browserAction.callMethod('getBadgeBackgroundColor', [details, completer.callback]);
     return completer.future;
   }
@@ -117,7 +109,7 @@ class ChromeBrowserAction {
    * 
    * [tabId] The id of the tab for which you want to modify the browser action.
    */
-  void enable(int tabId) {
+  void enable([int tabId]) {
     _browserAction.callMethod('enable', [tabId]);
   }
 
@@ -126,7 +118,7 @@ class ChromeBrowserAction {
    * 
    * [tabId] The id of the tab for which you want to modify the browser action.
    */
-  void disable(int tabId) {
+  void disable([int tabId]) {
     _browserAction.callMethod('disable', [tabId]);
   }
 

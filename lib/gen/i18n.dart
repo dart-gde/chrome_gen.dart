@@ -29,10 +29,8 @@ class ChromeI18N {
    * Returns:
    * Array of the accept languages of the browser, such as en-US,en,zh-CN
    */
-  Future<dynamic> getAcceptLanguages() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<String>> getAcceptLanguages() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
     _i18n.callMethod('getAcceptLanguages', [completer.callback]);
     return completer.future;
   }
@@ -52,7 +50,7 @@ class ChromeI18N {
    * Returns:
    * Message localized for current locale.
    */
-  String getMessage(String messageName, var substitutions) {
+  String getMessage(String messageName, [var substitutions]) {
     return _i18n.callMethod('getMessage', [messageName, substitutions]);
   }
 }

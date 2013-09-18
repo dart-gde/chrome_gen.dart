@@ -42,10 +42,8 @@ class ChromeBookmarks {
    * 
    * [idOrIdList] A single string-valued id, or an array of string-valued ids
    */
-  Future<dynamic> get(var idOrIdList) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> get(var idOrIdList) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _bookmarks.callMethod('get', [idOrIdList, completer.callback]);
     return completer.future;
   }
@@ -53,10 +51,8 @@ class ChromeBookmarks {
   /**
    * Retrieves the children of the specified BookmarkTreeNode id.
    */
-  Future<dynamic> getChildren(String id) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getChildren(String id) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _bookmarks.callMethod('getChildren', [id, completer.callback]);
     return completer.future;
   }
@@ -66,10 +62,8 @@ class ChromeBookmarks {
    * 
    * [numberOfItems] The maximum number of items to return.
    */
-  Future<dynamic> getRecent(int numberOfItems) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getRecent(int numberOfItems) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _bookmarks.callMethod('getRecent', [numberOfItems, completer.callback]);
     return completer.future;
   }
@@ -77,10 +71,8 @@ class ChromeBookmarks {
   /**
    * Retrieves the entire Bookmarks hierarchy.
    */
-  Future<dynamic> getTree() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getTree() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _bookmarks.callMethod('getTree', [completer.callback]);
     return completer.future;
   }
@@ -90,10 +82,8 @@ class ChromeBookmarks {
    * 
    * [id] The ID of the root of the subtree to retrieve.
    */
-  Future<dynamic> getSubTree(String id) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getSubTree(String id) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _bookmarks.callMethod('getSubTree', [id, completer.callback]);
     return completer.future;
   }
@@ -101,10 +91,8 @@ class ChromeBookmarks {
   /**
    * Searches for BookmarkTreeNodes matching the given query.
    */
-  Future<dynamic> search(String query) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> search(String query) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _bookmarks.callMethod('search', [query, completer.callback]);
     return completer.future;
   }
@@ -114,9 +102,7 @@ class ChromeBookmarks {
    * or missing, it will be a folder.
    */
   Future<dynamic> create(var bookmark) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _bookmarks.callMethod('create', [bookmark, completer.callback]);
     return completer.future;
   }
@@ -125,9 +111,7 @@ class ChromeBookmarks {
    * Moves the specified BookmarkTreeNode to the provided location.
    */
   Future<dynamic> move(String id, var destination) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _bookmarks.callMethod('move', [id, destination, completer.callback]);
     return completer.future;
   }
@@ -138,9 +122,7 @@ class ChromeBookmarks {
    * <b>Note:</b> Currently, only 'title' and 'url' are supported.
    */
   Future<dynamic> update(String id, var changes) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _bookmarks.callMethod('update', [id, changes, completer.callback]);
     return completer.future;
   }

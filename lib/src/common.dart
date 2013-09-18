@@ -26,6 +26,24 @@ String get lastError {
   return error != null ? error['message'] : null;
 }
 
+// TODO: is this necessary?
+// TODO: optionally take a converter
+List listify(JsObject obj) {
+  if (obj == null) {
+    return null;
+  }
+
+  List l = new List(obj['length']);
+
+  for (int i = 0; i < l.length; i++) {
+    l[i] = obj[i];
+  }
+
+  return l;
+}
+
+dynamic selfConverter(var obj) => obj;
+
 /**
  * The abstract superclass of objects that can hold [JsObject] proxies.
  */

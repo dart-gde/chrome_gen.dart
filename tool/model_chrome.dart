@@ -35,6 +35,10 @@ class ChromeMethod extends ChromeElement {
 
   bool get usesCallback => returns.isFuture;
 
+  // TODO: we depend on all required params being defined before any optional ones
+  Iterable<ChromeType> get requiredParams => params.where((p) => !p.optional);
+  Iterable<ChromeType> get optionalParams => params.where((p) => p.optional);
+
   String get description {
     if (documentation == null) {
       return documentation;
@@ -77,6 +81,7 @@ class ChromeType extends ChromeElement {
 
   String name;
   String type;
+  bool optional;
   List<ChromeType> parameters = [];
 
   ChromeType({this.type});
@@ -84,6 +89,9 @@ class ChromeType extends ChromeElement {
   bool get isAny => type == 'var';
   bool get isVoid => type == 'void';
   bool get isFuture => type == 'Future';
+  bool get isList => type == 'List';
+  bool get isString => type == 'String';
+  bool get isInt => type == 'int';
 
   String toParamString() {
     if (parameters.isEmpty) {

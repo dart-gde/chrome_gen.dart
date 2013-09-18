@@ -7,7 +7,7 @@ import 'dart:io';
 class Overrides {
   Map _m;
 
-  Overrides();
+  Overrides(): _m = {};
 
   Overrides.fromFile(File file) {
     _m = JSON.decode(file.readAsStringSync());

@@ -28,9 +28,7 @@ class ChromeInputIme {
    * this fails.
    */
   Future<bool> setComposition(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _input_ime.callMethod('setComposition', [parameters, completer.callback]);
     return completer.future;
   }
@@ -40,9 +38,7 @@ class ChromeInputIme {
    * IME, this fails.
    */
   Future<bool> clearComposition(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _input_ime.callMethod('clearComposition', [parameters, completer.callback]);
     return completer.future;
   }
@@ -51,9 +47,7 @@ class ChromeInputIme {
    * Commits the provided text to the current input.
    */
   Future<bool> commitText(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _input_ime.callMethod('commitText', [parameters, completer.callback]);
     return completer.future;
   }
@@ -63,9 +57,7 @@ class ChromeInputIme {
    * doesn’t own the active IME
    */
   Future<bool> setCandidateWindowProperties(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _input_ime.callMethod('setCandidateWindowProperties', [parameters, completer.callback]);
     return completer.future;
   }
@@ -75,9 +67,7 @@ class ChromeInputIme {
    * the active IME
    */
   Future<bool> setCandidates(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _input_ime.callMethod('setCandidates', [parameters, completer.callback]);
     return completer.future;
   }
@@ -87,9 +77,7 @@ class ChromeInputIme {
    * this extension does not own the active IME.
    */
   Future<bool> setCursorPosition(var parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _input_ime.callMethod('setCursorPosition', [parameters, completer.callback]);
     return completer.future;
   }

@@ -35,9 +35,7 @@ class ChromeCookies {
    * was found.
    */
   Future<dynamic> get(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _cookies.callMethod('get', [details, completer.callback]);
     return completer.future;
   }
@@ -53,10 +51,8 @@ class ChromeCookies {
    * Returns:
    * All the existing, unexpired cookies that match the given cookie info.
    */
-  Future<dynamic> getAll(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getAll(var details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _cookies.callMethod('getAll', [details, completer.callback]);
     return completer.future;
   }
@@ -73,9 +69,7 @@ class ChromeCookies {
    * set.
    */
   Future<dynamic> set(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _cookies.callMethod('set', [details, completer.callback]);
     return completer.future;
   }
@@ -91,9 +85,7 @@ class ChromeCookies {
    * set.
    */
   Future<dynamic> remove(var details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _cookies.callMethod('remove', [details, completer.callback]);
     return completer.future;
   }
@@ -104,10 +96,8 @@ class ChromeCookies {
    * Returns:
    * All the existing cookie stores.
    */
-  Future<dynamic> getAllCookieStores() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getAllCookieStores() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _cookies.callMethod('getAllCookieStores', [completer.callback]);
     return completer.future;
   }

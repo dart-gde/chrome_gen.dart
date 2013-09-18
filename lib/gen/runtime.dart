@@ -44,9 +44,7 @@ class ChromeRuntime {
    * The JavaScript 'window' object for the background page.
    */
   Future<dynamic> getBackgroundPage() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _runtime.callMethod('getBackgroundPage', [completer.callback]);
     return completer.future;
   }
@@ -101,9 +99,7 @@ class ChromeRuntime {
    * the available update.
    */
   Future<JsObject> requestUpdateCheck() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _runtime.callMethod('requestUpdateCheck', [completer.callback]);
     return completer.future;
   }
@@ -123,7 +119,7 @@ class ChromeRuntime {
    * [][runtime.Port onDisconnect] event is fired if the extension/app does not
    * exist.
    */
-  dynamic connect(String extensionId, var connectInfo) {
+  dynamic connect([String extensionId, var connectInfo]) {
     return _runtime.callMethod('connect', [extensionId, connectInfo]);
   }
 
@@ -155,10 +151,8 @@ class ChromeRuntime {
    * occurs while connecting to the extension, the callback will be called with
    * no arguments and [runtime.lastError] will be set to the error message.
    */
-  Future<dynamic> sendMessage(String extensionId, var message) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> sendMessage(var message, [String extensionId]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
     return completer.future;
   }
@@ -176,9 +170,7 @@ class ChromeRuntime {
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendNativeMessage(String application, var message) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _runtime.callMethod('sendNativeMessage', [application, message, completer.callback]);
     return completer.future;
   }
@@ -187,9 +179,7 @@ class ChromeRuntime {
    * Returns information about the current platform.
    */
   Future<dynamic> getPlatformInfo() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _runtime.callMethod('getPlatformInfo', [completer.callback]);
     return completer.future;
   }
@@ -198,9 +188,7 @@ class ChromeRuntime {
    * Returns a DirectoryEntry for the package directory.
    */
   Future<dynamic> getPackageDirectoryEntry() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
     return completer.future;
   }

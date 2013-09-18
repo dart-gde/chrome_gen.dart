@@ -49,10 +49,8 @@ class ChromeExtension {
    * occurs while connecting to the extension, the callback will be called with
    * no arguments and [runtime.lastError] will be set to the error message.
    */
-  Future<dynamic> sendRequest(String extensionId, var request) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> sendRequest(var request, [String extensionId]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
     return completer.future;
   }
@@ -78,7 +76,7 @@ class ChromeExtension {
    * Returns:
    * Array of global objects
    */
-  dynamic getViews(var fetchProperties) {
+  List<dynamic> getViews([var fetchProperties]) {
     return _extension.callMethod('getViews', [fetchProperties]);
   }
 
@@ -100,7 +98,7 @@ class ChromeExtension {
    * Returns:
    * Array of global window objects
    */
-  dynamic getExtensionTabs(int windowId) {
+  List<dynamic> getExtensionTabs([int windowId]) {
     return _extension.callMethod('getExtensionTabs', [windowId]);
   }
 
@@ -112,9 +110,7 @@ class ChromeExtension {
    * True if the extension has access to Incognito mode, false otherwise.
    */
   Future<bool> isAllowedIncognitoAccess() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
     return completer.future;
   }
@@ -127,9 +123,7 @@ class ChromeExtension {
    * True if the extension can access the 'file://' scheme, false otherwise.
    */
   Future<bool> isAllowedFileSchemeAccess() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
     return completer.future;
   }

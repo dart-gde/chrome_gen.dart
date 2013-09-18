@@ -22,7 +22,7 @@ class ChromeWebstore {
     _webstore = context['chrome']['webstore'];
   }
 
-  void install(String url, var successCallback, var failureCallback) {
+  void install([String url, var successCallback, var failureCallback]) {
     _webstore.callMethod('install', [url, successCallback, failureCallback]);
   }
 }

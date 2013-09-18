@@ -38,10 +38,8 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future<dynamic> get(int windowId, var getInfo) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> get(int windowId, [var getInfo]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _windows.callMethod('get', [windowId, getInfo, completer.callback]);
     return completer.future;
   }
@@ -51,10 +49,8 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future<dynamic> getCurrent(var getInfo) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> getCurrent([var getInfo]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _windows.callMethod('getCurrent', [getInfo, completer.callback]);
     return completer.future;
   }
@@ -65,10 +61,8 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future<dynamic> getLastFocused(var getInfo) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> getLastFocused([var getInfo]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _windows.callMethod('getLastFocused', [getInfo, completer.callback]);
     return completer.future;
   }
@@ -78,10 +72,8 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future<dynamic> getAll(var getInfo) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getAll([var getInfo]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _windows.callMethod('getAll', [getInfo, completer.callback]);
     return completer.future;
   }
@@ -93,10 +85,8 @@ class ChromeWindows {
    * Returns:
    * Contains details about the created window.
    */
-  Future<dynamic> create(var createData) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<dynamic> create([var createData]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _windows.callMethod('create', [createData, completer.callback]);
     return completer.future;
   }
@@ -106,9 +96,7 @@ class ChromeWindows {
    * want to change; unspecified properties will be left unchanged.
    */
   Future<dynamic> update(int windowId, var updateInfo) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _windows.callMethod('update', [windowId, updateInfo, completer.callback]);
     return completer.future;
   }

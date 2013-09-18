@@ -29,9 +29,7 @@ class ChromeDevtoolsNetwork {
    * A HAR log. See HAR specification for details.
    */
   Future<dynamic> getHAR() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _devtools_network.callMethod('getHAR', [completer.callback]);
     return completer.future;
   }

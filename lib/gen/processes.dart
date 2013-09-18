@@ -31,9 +31,7 @@ class ChromeProcesses {
    * True if terminating the process was successful, otherwise false.
    */
   Future<bool> terminate(int processId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _processes.callMethod('terminate', [processId, completer.callback]);
     return completer.future;
   }
@@ -48,9 +46,7 @@ class ChromeProcesses {
    * Process ID of the tab's renderer process.
    */
   Future<int> getProcessIdForTab(int tabId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _processes.callMethod('getProcessIdForTab', [tabId, completer.callback]);
     return completer.future;
   }
@@ -73,9 +69,7 @@ class ChromeProcesses {
    * Process object.
    */
   Future<dynamic> getProcessInfo(var processIds, bool includeMemory) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _processes.callMethod('getProcessInfo', [processIds, includeMemory, completer.callback]);
     return completer.future;
   }

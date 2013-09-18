@@ -27,10 +27,8 @@ class ChromeCommands {
    * Returns all the registered extension commands for this extension and their
    * shortcut (if active).
    */
-  Future<dynamic> getAll() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+  Future<List<dynamic>> getAll() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _commands.callMethod('getAll', [completer.callback]);
     return completer.future;
   }

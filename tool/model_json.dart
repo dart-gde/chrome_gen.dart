@@ -121,6 +121,10 @@ class JsonType extends JsonObject {
   JsonType(json): super(json) {
     parameters = JsonParamType.parse(json['parameters']);
     properties = JsonProperty.parse(json['properties']);
+
+    if (parameters.isEmpty && json.containsKey('items')) {
+      parameters.add(new JsonType(json['items']));
+    }
   }
 
   String get name => null;
@@ -262,6 +266,11 @@ ChromeType _convertToFuture(ChromeType type) {
     future.parameters.add(type.parameters.first);
     future.documentation = future.parameters.first.documentation;
   } else if (type.parameters.length >= 2) {
+    // TODO: we need to correctly handle mapping multiple parameters to a single
+    // return
+    // runtime.requestUpdateCheck()
+    // devtools.inspectedWindow.eval()
+
     future.parameters.add(ChromeType.JS_OBJECT);
     future.documentation = type.parameters.map(
         (p) => "[${p.name}] ${p.documentation}").join('\n');
@@ -282,6 +291,9 @@ ChromeType _convertType_(JsonType t, ChromeType type) {
     type.type = "bool";
   } else if (_isImplicitInt(t)) {
     type.type = 'int';
+  } else if (t.type == 'array') {
+    // {type: array, items: {type: string}
+    type.type = 'List';
   } else {
     // TODO:
     type.type = "var";
@@ -289,6 +301,7 @@ ChromeType _convertType_(JsonType t, ChromeType type) {
 
   // TODO: properties
 
+  type.optional = t.optional;
   type.parameters = t.parameters.map(_convertType).toList();
 
   return type;

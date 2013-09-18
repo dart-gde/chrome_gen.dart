@@ -37,9 +37,7 @@ class ChromeFileBrowserHandler {
    * Result of the method.
    */
   Future<dynamic> selectFile(var selectionParams) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((arg) {
-      return arg;
-    });
+    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _fileBrowserHandler.callMethod('selectFile', [selectionParams, completer.callback]);
     return completer.future;
   }
