@@ -101,18 +101,18 @@ class ChromeBookmarks {
    * Creates a bookmark or folder under the specified parentId.  If url is NULL
    * or missing, it will be a folder.
    */
-  Future<dynamic> create(var bookmark) {
+  Future<dynamic> create(Map bookmark) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _bookmarks.callMethod('create', [bookmark, completer.callback]);
+    _bookmarks.callMethod('create', [jsify(bookmark), completer.callback]);
     return completer.future;
   }
 
   /**
    * Moves the specified BookmarkTreeNode to the provided location.
    */
-  Future<dynamic> move(String id, var destination) {
+  Future<dynamic> move(String id, Map destination) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _bookmarks.callMethod('move', [id, destination, completer.callback]);
+    _bookmarks.callMethod('move', [id, jsify(destination), completer.callback]);
     return completer.future;
   }
 
@@ -121,9 +121,9 @@ class ChromeBookmarks {
    * that you want to change; unspecified properties will be left unchanged.
    * <b>Note:</b> Currently, only 'title' and 'url' are supported.
    */
-  Future<dynamic> update(String id, var changes) {
+  Future<dynamic> update(String id, Map changes) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _bookmarks.callMethod('update', [id, changes, completer.callback]);
+    _bookmarks.callMethod('update', [id, jsify(changes), completer.callback]);
     return completer.future;
   }
 

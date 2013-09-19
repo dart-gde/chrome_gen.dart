@@ -53,8 +53,8 @@ class ChromeTabs {
    * the specified tab. The port's [runtime.Port] event is fired if the tab
    * closes or does not exist.
    */
-  dynamic connect(int tabId, [var connectInfo]) {
-    return _tabs.callMethod('connect', [tabId, connectInfo]);
+  dynamic connect(int tabId, [Map connectInfo]) {
+    return _tabs.callMethod('connect', [tabId, jsify(connectInfo)]);
   }
 
   /**
@@ -118,9 +118,9 @@ class ChromeTabs {
    * Returns:
    * Details about the created tab. Will contain the ID of the new tab.
    */
-  Future<dynamic> create(var createProperties) {
+  Future<dynamic> create(Map createProperties) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _tabs.callMethod('create', [createProperties, completer.callback]);
+    _tabs.callMethod('create', [jsify(createProperties), completer.callback]);
     return completer.future;
   }
 
@@ -144,9 +144,9 @@ class ChromeTabs {
    * Gets all tabs that have the specified properties, or all tabs if no
    * properties are specified.
    */
-  Future<List<dynamic>> query(var queryInfo) {
+  Future<List<dynamic>> query(Map queryInfo) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _tabs.callMethod('query', [queryInfo, completer.callback]);
+    _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
     return completer.future;
   }
 
@@ -156,9 +156,9 @@ class ChromeTabs {
    * Returns:
    * Contains details about the window whose tabs were highlighted.
    */
-  Future<dynamic> highlight(var highlightInfo) {
+  Future<dynamic> highlight(Map highlightInfo) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _tabs.callMethod('highlight', [highlightInfo, completer.callback]);
+    _tabs.callMethod('highlight', [jsify(highlightInfo), completer.callback]);
     return completer.future;
   }
 
@@ -173,9 +173,9 @@ class ChromeTabs {
    * Details about the updated tab. The [tabs.Tab] object doesn't contain `url`,
    * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
    */
-  Future<dynamic> update(var updateProperties, [int tabId]) {
+  Future<dynamic> update(Map updateProperties, [int tabId]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _tabs.callMethod('update', [tabId, updateProperties, completer.callback]);
+    _tabs.callMethod('update', [tabId, jsify(updateProperties), completer.callback]);
     return completer.future;
   }
 
@@ -189,9 +189,9 @@ class ChromeTabs {
    * Returns:
    * Details about the moved tabs.
    */
-  Future<dynamic> move(var tabIds, var moveProperties) {
+  Future<dynamic> move(var tabIds, Map moveProperties) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _tabs.callMethod('move', [tabIds, moveProperties, completer.callback]);
+    _tabs.callMethod('move', [tabIds, jsify(moveProperties), completer.callback]);
     return completer.future;
   }
 
@@ -201,9 +201,9 @@ class ChromeTabs {
    * [tabId] The ID of the tab to reload; defaults to the selected tab of the
    * current window.
    */
-  Future reload([int tabId, var reloadProperties]) {
+  Future reload([int tabId, Map reloadProperties]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _tabs.callMethod('reload', [tabId, reloadProperties, completer.callback]);
+    _tabs.callMethod('reload', [tabId, jsify(reloadProperties), completer.callback]);
     return completer.future;
   }
 
@@ -253,9 +253,9 @@ class ChromeTabs {
    * A data URL which encodes an image of the visible area of the captured tab.
    * May be assigned to the 'src' property of an HTML Image element for display.
    */
-  Future<String> captureVisibleTab([int windowId, var options]) {
+  Future<String> captureVisibleTab([int windowId, Map options]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    _tabs.callMethod('captureVisibleTab', [windowId, options, completer.callback]);
+    _tabs.callMethod('captureVisibleTab', [windowId, jsify(options), completer.callback]);
     return completer.future;
   }
 

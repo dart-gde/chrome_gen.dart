@@ -28,18 +28,18 @@ class ChromeHistory {
    * Searches the history for the last visit time of each page matching the
    * query.
    */
-  Future<List<dynamic>> search(var query) {
+  Future<List<dynamic>> search(Map query) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _history.callMethod('search', [query, completer.callback]);
+    _history.callMethod('search', [jsify(query), completer.callback]);
     return completer.future;
   }
 
   /**
    * Retrieves information about visits to a URL.
    */
-  Future<List<dynamic>> getVisits(var details) {
+  Future<List<dynamic>> getVisits(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _history.callMethod('getVisits', [details, completer.callback]);
+    _history.callMethod('getVisits', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -47,18 +47,18 @@ class ChromeHistory {
    * Adds a URL to the history at the current time with a [transition
    * type](#transition_types) of "link".
    */
-  Future addUrl(var details) {
+  Future addUrl(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _history.callMethod('addUrl', [details, completer.callback]);
+    _history.callMethod('addUrl', [jsify(details), completer.callback]);
     return completer.future;
   }
 
   /**
    * Removes all occurrences of the given URL from the history.
    */
-  Future deleteUrl(var details) {
+  Future deleteUrl(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _history.callMethod('deleteUrl', [details, completer.callback]);
+    _history.callMethod('deleteUrl', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -67,9 +67,9 @@ class ChromeHistory {
    * will not be removed from the history unless all visits fall within the
    * range.
    */
-  Future deleteRange(var range) {
+  Future deleteRange(Map range) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _history.callMethod('deleteRange', [range, completer.callback]);
+    _history.callMethod('deleteRange', [jsify(range), completer.callback]);
     return completer.future;
   }
 

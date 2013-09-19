@@ -29,7 +29,7 @@ class ChromeExtension {
    * resulted in an error. If no error has occured lastError will be
    * [undefined].
    */
-  dynamic get lastError => _extension['lastError'];
+  Map get lastError => _extension['lastError'];
 
   /**
    * True for content scripts running inside incognito tabs, and for extension
@@ -76,8 +76,8 @@ class ChromeExtension {
    * Returns:
    * Array of global objects
    */
-  List<dynamic> getViews([var fetchProperties]) {
-    return _extension.callMethod('getViews', [fetchProperties]);
+  List<dynamic> getViews([Map fetchProperties]) {
+    return _extension.callMethod('getViews', [jsify(fetchProperties)]);
   }
 
   /**

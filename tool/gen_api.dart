@@ -64,9 +64,14 @@ class GenApiFile {
       chromeLib = new ChromeLibrary();
       chromeLib.name = fileName.substring(0, fileName.indexOf('.'));
       chromeLib.name = chromeLib.name.replaceAll('_', '.');
-      List tokens = webIdlParser.start.parse(inFile.readAsStringSync());
-      if (_parseNamespace(tokens) != null) {
-        chromeLib.name = _parseNamespace(tokens);
+      try {
+        List tokens = webIdlParser.start.parse(inFile.readAsStringSync());
+        if (_parseNamespace(tokens) != null) {
+          chromeLib.name = _parseNamespace(tokens);
+        }
+      } catch(e) {
+        // TODO:
+        print(e);
       }
     }
 

@@ -34,9 +34,9 @@ class ChromeTts {
    * 
    * [options] The speech options.
    */
-  Future speak(String utterance, [var options]) {
+  Future speak(String utterance, [Map options]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _tts.callMethod('speak', [utterance, options, completer.callback]);
+    _tts.callMethod('speak', [utterance, jsify(options), completer.callback]);
     return completer.future;
   }
 

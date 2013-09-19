@@ -27,16 +27,16 @@ class ChromeBrowserAction {
   /**
    * Sets the title of the browser action. This shows up in the tooltip.
    */
-  void setTitle(var details) {
-    _browserAction.callMethod('setTitle', [details]);
+  void setTitle(Map details) {
+    _browserAction.callMethod('setTitle', [jsify(details)]);
   }
 
   /**
    * Gets the title of the browser action.
    */
-  Future<String> getTitle(var details) {
+  Future<String> getTitle(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    _browserAction.callMethod('getTitle', [details, completer.callback]);
+    _browserAction.callMethod('getTitle', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -46,9 +46,9 @@ class ChromeBrowserAction {
    * dictionary of either one of those. Either the <b>path</b> or the
    * <b>imageData</b> property must be specified.
    */
-  Future setIcon(var details) {
+  Future setIcon(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _browserAction.callMethod('setIcon', [details, completer.callback]);
+    _browserAction.callMethod('setIcon', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -56,16 +56,16 @@ class ChromeBrowserAction {
    * Sets the html document to be opened as a popup when the user clicks on the
    * browser action's icon.
    */
-  void setPopup(var details) {
-    _browserAction.callMethod('setPopup', [details]);
+  void setPopup(Map details) {
+    _browserAction.callMethod('setPopup', [jsify(details)]);
   }
 
   /**
    * Gets the html document set as the popup for this browser action.
    */
-  Future<String> getPopup(var details) {
+  Future<String> getPopup(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    _browserAction.callMethod('getPopup', [details, completer.callback]);
+    _browserAction.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -73,33 +73,33 @@ class ChromeBrowserAction {
    * Sets the badge text for the browser action. The badge is displayed on top
    * of the icon.
    */
-  void setBadgeText(var details) {
-    _browserAction.callMethod('setBadgeText', [details]);
+  void setBadgeText(Map details) {
+    _browserAction.callMethod('setBadgeText', [jsify(details)]);
   }
 
   /**
    * Gets the badge text of the browser action. If no tab is specified, the
    * non-tab-specific badge text is returned.
    */
-  Future<String> getBadgeText(var details) {
+  Future<String> getBadgeText(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    _browserAction.callMethod('getBadgeText', [details, completer.callback]);
+    _browserAction.callMethod('getBadgeText', [jsify(details), completer.callback]);
     return completer.future;
   }
 
   /**
    * Sets the background color for the badge.
    */
-  void setBadgeBackgroundColor(var details) {
-    _browserAction.callMethod('setBadgeBackgroundColor', [details]);
+  void setBadgeBackgroundColor(Map details) {
+    _browserAction.callMethod('setBadgeBackgroundColor', [jsify(details)]);
   }
 
   /**
    * Gets the background color of the browser action.
    */
-  Future<dynamic> getBadgeBackgroundColor(var details) {
+  Future<dynamic> getBadgeBackgroundColor(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _browserAction.callMethod('getBadgeBackgroundColor', [details, completer.callback]);
+    _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
     return completer.future;
   }
 

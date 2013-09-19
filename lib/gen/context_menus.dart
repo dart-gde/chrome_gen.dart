@@ -35,8 +35,8 @@ class ChromeContextMenus {
    * Returns:
    * The ID of the newly created item.
    */
-  dynamic create(var createProperties, [var callback]) {
-    return _contextMenus.callMethod('create', [createProperties, callback]);
+  dynamic create(Map createProperties, [var callback]) {
+    return _contextMenus.callMethod('create', [jsify(createProperties), callback]);
   }
 
   /**
@@ -47,9 +47,9 @@ class ChromeContextMenus {
    * [updateProperties] The properties to update. Accepts the same values as the
    * create function.
    */
-  Future update(var id, var updateProperties) {
+  Future update(var id, Map updateProperties) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _contextMenus.callMethod('update', [id, updateProperties, completer.callback]);
+    _contextMenus.callMethod('update', [id, jsify(updateProperties), completer.callback]);
     return completer.future;
   }
 

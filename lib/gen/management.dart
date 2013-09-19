@@ -87,9 +87,9 @@ class ChromeManagement {
    * 
    * [id] This should be the id from an item of [ExtensionInfo.]
    */
-  Future uninstall(String id, [var options]) {
+  Future uninstall(String id, [Map options]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _management.callMethod('uninstall', [id, options, completer.callback]);
+    _management.callMethod('uninstall', [id, jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -97,9 +97,9 @@ class ChromeManagement {
    * Uninstalls the calling extension. Note: This function can be used without
    * requesting the 'management' permission in the manifest.
    */
-  Future uninstallSelf([var options]) {
+  Future uninstallSelf([Map options]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _management.callMethod('uninstallSelf', [options, completer.callback]);
+    _management.callMethod('uninstallSelf', [jsify(options), completer.callback]);
     return completer.future;
   }
 

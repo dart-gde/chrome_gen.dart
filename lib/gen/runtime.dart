@@ -27,7 +27,7 @@ class ChromeRuntime {
   /**
    * This will be defined during an API method callback if there was an error
    */
-  dynamic get lastError => _runtime['lastError'];
+  Map get lastError => _runtime['lastError'];
 
   /**
    * The ID of the extension/app.
@@ -119,8 +119,8 @@ class ChromeRuntime {
    * [][runtime.Port onDisconnect] event is fired if the extension/app does not
    * exist.
    */
-  dynamic connect([String extensionId, var connectInfo]) {
-    return _runtime.callMethod('connect', [extensionId, connectInfo]);
+  dynamic connect([String extensionId, Map connectInfo]) {
+    return _runtime.callMethod('connect', [extensionId, jsify(connectInfo)]);
   }
 
   /**
@@ -178,7 +178,7 @@ class ChromeRuntime {
   /**
    * Returns information about the current platform.
    */
-  Future<dynamic> getPlatformInfo() {
+  Future<Map> getPlatformInfo() {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
     _runtime.callMethod('getPlatformInfo', [completer.callback]);
     return completer.future;

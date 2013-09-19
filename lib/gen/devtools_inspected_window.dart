@@ -51,8 +51,8 @@ class ChromeDevtoolsInspectedWindow {
   /**
    * Reloads the inspected page.
    */
-  void reload([var reloadOptions]) {
-    _devtools_inspectedWindow.callMethod('reload', [reloadOptions]);
+  void reload([Map reloadOptions]) {
+    _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
   }
 
   /**

@@ -152,7 +152,7 @@ class DefaultBackend extends Backend {
     generator.write("${contextReference}.callMethod('${method.name}'");
     if (method.params.length > 0 || method.usesCallback) {
       generator.write(", [");
-      List strParams = method.params.map((p) => p.name).toList();
+      List strParams = method.params.map(getParamConverter).toList();
       if (method.usesCallback) {
         strParams.add('completer.callback');
       }
@@ -208,4 +208,13 @@ class DefaultBackend extends Backend {
 
     return "selfConverter";
   }
+
+  String getParamConverter(ChromeType param) {
+    if (param.isMap || param.isList) {
+      return "jsify(${param.name})";
+    } else {
+      return param.name;
+    }
+  }
+
 }

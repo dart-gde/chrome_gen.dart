@@ -27,9 +27,9 @@ class ChromeInputIme {
    * Set the current composition. If this extension does not own the active IME,
    * this fails.
    */
-  Future<bool> setComposition(var parameters) {
+  Future<bool> setComposition(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _input_ime.callMethod('setComposition', [parameters, completer.callback]);
+    _input_ime.callMethod('setComposition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -37,18 +37,18 @@ class ChromeInputIme {
    * Clear the current composition. If this extension does not own the active
    * IME, this fails.
    */
-  Future<bool> clearComposition(var parameters) {
+  Future<bool> clearComposition(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _input_ime.callMethod('clearComposition', [parameters, completer.callback]);
+    _input_ime.callMethod('clearComposition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
   /**
    * Commits the provided text to the current input.
    */
-  Future<bool> commitText(var parameters) {
+  Future<bool> commitText(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _input_ime.callMethod('commitText', [parameters, completer.callback]);
+    _input_ime.callMethod('commitText', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -56,9 +56,9 @@ class ChromeInputIme {
    * Sets the properties of the candidate window. This fails if the extension
    * doesn’t own the active IME
    */
-  Future<bool> setCandidateWindowProperties(var parameters) {
+  Future<bool> setCandidateWindowProperties(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _input_ime.callMethod('setCandidateWindowProperties', [parameters, completer.callback]);
+    _input_ime.callMethod('setCandidateWindowProperties', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -66,9 +66,9 @@ class ChromeInputIme {
    * Sets the current candidate list. This fails if this extension doesn’t own
    * the active IME
    */
-  Future<bool> setCandidates(var parameters) {
+  Future<bool> setCandidates(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _input_ime.callMethod('setCandidates', [parameters, completer.callback]);
+    _input_ime.callMethod('setCandidates', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -76,36 +76,36 @@ class ChromeInputIme {
    * Set the position of the cursor in the candidate window. This is a no-op if
    * this extension does not own the active IME.
    */
-  Future<bool> setCursorPosition(var parameters) {
+  Future<bool> setCursorPosition(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _input_ime.callMethod('setCursorPosition', [parameters, completer.callback]);
+    _input_ime.callMethod('setCursorPosition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
   /**
    * Adds the provided menu items to the language menu when this IME is active.
    */
-  Future setMenuItems(var parameters) {
+  Future setMenuItems(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _input_ime.callMethod('setMenuItems', [parameters, completer.callback]);
+    _input_ime.callMethod('setMenuItems', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
   /**
    * Updates the state of the MenuItems specified
    */
-  Future updateMenuItems(var parameters) {
+  Future updateMenuItems(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _input_ime.callMethod('updateMenuItems', [parameters, completer.callback]);
+    _input_ime.callMethod('updateMenuItems', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
   /**
    * Deletes the text around the caret.
    */
-  Future deleteSurroundingText(var parameters) {
+  Future deleteSurroundingText(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _input_ime.callMethod('deleteSurroundingText', [parameters, completer.callback]);
+    _input_ime.callMethod('deleteSurroundingText', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 

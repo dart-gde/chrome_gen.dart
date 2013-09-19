@@ -34,9 +34,9 @@ class ChromeCookies {
    * Contains details about the cookie. This parameter is null if no such cookie
    * was found.
    */
-  Future<dynamic> get(var details) {
+  Future<dynamic> get(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _cookies.callMethod('get', [details, completer.callback]);
+    _cookies.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -51,9 +51,9 @@ class ChromeCookies {
    * Returns:
    * All the existing, unexpired cookies that match the given cookie info.
    */
-  Future<List<dynamic>> getAll(var details) {
+  Future<List<dynamic>> getAll(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _cookies.callMethod('getAll', [details, completer.callback]);
+    _cookies.callMethod('getAll', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -68,9 +68,9 @@ class ChromeCookies {
    * any reason, this will be "null", and "chrome.runtime.lastError" will be
    * set.
    */
-  Future<dynamic> set(var details) {
+  Future<dynamic> set(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _cookies.callMethod('set', [details, completer.callback]);
+    _cookies.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -84,9 +84,9 @@ class ChromeCookies {
    * for any reason, this will be "null", and "chrome.runtime.lastError" will be
    * set.
    */
-  Future<dynamic> remove(var details) {
+  Future<Map> remove(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _cookies.callMethod('remove', [details, completer.callback]);
+    _cookies.callMethod('remove', [jsify(details), completer.callback]);
     return completer.future;
   }
 

@@ -26,16 +26,16 @@ class ChromeScriptBadge {
    * Sets the html document to be opened as a popup when the user clicks on the
    * script badge's icon.
    */
-  void setPopup(var details) {
-    _scriptBadge.callMethod('setPopup', [details]);
+  void setPopup(Map details) {
+    _scriptBadge.callMethod('setPopup', [jsify(details)]);
   }
 
   /**
    * Gets the html document set as the popup for this script badge.
    */
-  Future<String> getPopup(var details) {
+  Future<String> getPopup(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    _scriptBadge.callMethod('getPopup', [details, completer.callback]);
+    _scriptBadge.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -46,8 +46,8 @@ class ChromeScriptBadge {
    * clicks on the badge, the activeTab APIs become available. If the extension
    * has already run on this tab, this call does nothing.
    */
-  void getAttention(var details) {
-    _scriptBadge.callMethod('getAttention', [details]);
+  void getAttention(Map details) {
+    _scriptBadge.callMethod('getAttention', [jsify(details)]);
   }
 
   /**

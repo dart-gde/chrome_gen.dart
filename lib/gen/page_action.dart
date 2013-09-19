@@ -46,16 +46,16 @@ class ChromePageAction {
    * Sets the title of the page action. This is displayed in a tooltip over the
    * page action.
    */
-  void setTitle(var details) {
-    _pageAction.callMethod('setTitle', [details]);
+  void setTitle(Map details) {
+    _pageAction.callMethod('setTitle', [jsify(details)]);
   }
 
   /**
    * Gets the title of the page action.
    */
-  Future<String> getTitle(var details) {
+  Future<String> getTitle(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    _pageAction.callMethod('getTitle', [details, completer.callback]);
+    _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -65,9 +65,9 @@ class ChromePageAction {
    * dictionary of either one of those. Either the <b>path</b> or the
    * <b>imageData</b> property must be specified.
    */
-  Future setIcon(var details) {
+  Future setIcon(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _pageAction.callMethod('setIcon', [details, completer.callback]);
+    _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -75,16 +75,16 @@ class ChromePageAction {
    * Sets the html document to be opened as a popup when the user clicks on the
    * page action's icon.
    */
-  void setPopup(var details) {
-    _pageAction.callMethod('setPopup', [details]);
+  void setPopup(Map details) {
+    _pageAction.callMethod('setPopup', [jsify(details)]);
   }
 
   /**
    * Gets the html document set as the popup for this page action.
    */
-  Future<String> getPopup(var details) {
+  Future<String> getPopup(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    _pageAction.callMethod('getPopup', [details, completer.callback]);
+    _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
   }
 

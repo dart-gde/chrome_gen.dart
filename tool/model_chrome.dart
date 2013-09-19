@@ -90,6 +90,7 @@ class ChromeType extends ChromeElement {
   bool get isVoid => type == 'void';
   bool get isFuture => type == 'Future';
   bool get isList => type == 'List';
+  bool get isMap => type == 'Map';
   bool get isString => type == 'String';
   bool get isInt => type == 'int';
 

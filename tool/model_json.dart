@@ -294,12 +294,16 @@ ChromeType _convertType_(JsonType t, ChromeType type) {
   } else if (t.type == 'array') {
     // {type: array, items: {type: string}
     type.type = 'List';
+  } else if (t.type == 'object' && t.properties.isNotEmpty) {
+    // TODO: do we need the isNotEmpty check?
+    type.type = "Map";
+
+    // TODO: create documentation from the type's properties
+
   } else {
     // TODO:
     type.type = "var";
   }
-
-  // TODO: properties
 
   type.optional = t.optional;
   type.parameters = t.parameters.map(_convertType).toList();

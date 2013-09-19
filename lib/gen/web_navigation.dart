@@ -33,9 +33,9 @@ class ChromeWebNavigation {
    * Information about the requested frame, null if the specified frame ID
    * and/or tab ID are invalid.
    */
-  Future<dynamic> getFrame(var details) {
+  Future<Map> getFrame(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _webNavigation.callMethod('getFrame', [details, completer.callback]);
+    _webNavigation.callMethod('getFrame', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -47,9 +47,9 @@ class ChromeWebNavigation {
    * Returns:
    * A list of frames in the given tab, null if the specified tab ID is invalid.
    */
-  Future<List<dynamic>> getAllFrames(var details) {
+  Future<List<Map>> getAllFrames(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
-    _webNavigation.callMethod('getAllFrames', [details, completer.callback]);
+    _webNavigation.callMethod('getAllFrames', [jsify(details), completer.callback]);
     return completer.future;
   }
 
