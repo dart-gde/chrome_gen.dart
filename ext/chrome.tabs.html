@@ -136,9 +136,9 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.captureVisibleTab>captureVisibleTab</a>(int windowId, dynamic options): Future&lt;String&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.connect>connect</a>(int tabId, dynamic connectInfo): dynamic<br>
-			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.create>create</a>(dynamic createProperties): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.captureVisibleTab>captureVisibleTab</a>(int windowId, Map&lt;dynamic, dynamic&gt; options): Future&lt;String&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.connect>connect</a>(int tabId, Map&lt;dynamic, dynamic&gt; connectInfo): dynamic<br>
+			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.create>create</a>(Map&lt;dynamic, dynamic&gt; createProperties): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.detectLanguage>detectLanguage</a>(int tabId): Future&lt;String&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.duplicate>duplicate</a>(int tabId): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.executeScript>executeScript</a>(dynamic details, int tabId): Future&lt;List&lt;dynamic&gt;&gt;<br>
@@ -146,15 +146,15 @@
 			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.getAllInWindow>getAllInWindow</a>(int windowId): Future&lt;List&lt;dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.getCurrent>getCurrent</a>(): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.getSelected>getSelected</a>(int windowId): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.highlight>highlight</a>(dynamic highlightInfo): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.highlight>highlight</a>(Map&lt;dynamic, dynamic&gt; highlightInfo): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.insertCSS>insertCSS</a>(dynamic details, int tabId): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.move>move</a>(dynamic tabIds, dynamic moveProperties): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.query>query</a>(dynamic queryInfo): Future&lt;List&lt;dynamic&gt;&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.reload>reload</a>(int tabId, dynamic reloadProperties): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.move>move</a>(dynamic tabIds, Map&lt;dynamic, dynamic&gt; moveProperties): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.query>query</a>(Map&lt;dynamic, dynamic&gt; queryInfo): Future&lt;List&lt;dynamic&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.reload>reload</a>(int tabId, Map&lt;dynamic, dynamic&gt; reloadProperties): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.remove>remove</a>(dynamic tabIds): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.sendMessage>sendMessage</a>(int tabId, dynamic message): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.sendRequest>sendRequest</a>(int tabId, dynamic request): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.update>update</a>(dynamic updateProperties, int tabId): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.tabs.html#ChromeTabs.update>update</a>(Map&lt;dynamic, dynamic&gt; updateProperties, int tabId): Future&lt;dynamic&gt;<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -233,19 +233,19 @@
 		<p>Fired when a tab is updated.</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeTabs.captureVisibleTab></a><i class=icon-ok-sign></i> Future&lt;String&gt; captureVisibleTab(int windowId, dynamic options)</b>
+	<b><a id=ChromeTabs.captureVisibleTab></a><i class=icon-ok-sign></i> Future&lt;String&gt; captureVisibleTab(int windowId, Map&lt;dynamic, dynamic&gt; options)</b>
 	<div class=indent>
 		<p>Captures the visible area of the currently active tab in the specified window. You must have <code>host permission</code>(declare_permissions.html) for the URL displayed by the tab. </p>
 <p><code>windowId</code> The target window. Defaults to the [current window](windows.html#current-window). </p>
 <p><code>options</code> Set parameters of image capture, such as the format of the resulting image. </p>
 <p>Returns: A data URL which encodes an image of the visible area of the captured tab. May be assigned to the 'src' property of an HTML Image element for display.</p>
 	</div>
-	<b><a id=ChromeTabs.connect></a><i class=icon-ok-sign></i> dynamic connect(int tabId, dynamic connectInfo)</b>
+	<b><a id=ChromeTabs.connect></a><i class=icon-ok-sign></i> dynamic connect(int tabId, Map&lt;dynamic, dynamic&gt; connectInfo)</b>
 	<div class=indent>
 		<p>Connects to the content script(s) in the specified tab. The <code>runtime.onConnect</code> event is fired in each content script running in the specified tab for the current extension. For more details, see [Content Script Messaging](messaging.html). </p>
 <p>Returns: A port that can be used to communicate with the content scripts running in the specified tab. The port's <code>runtime.Port</code> event is fired if the tab closes or does not exist.</p>
 	</div>
-	<b><a id=ChromeTabs.create></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; create(dynamic createProperties)</b>
+	<b><a id=ChromeTabs.create></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; create(Map&lt;dynamic, dynamic&gt; createProperties)</b>
 	<div class=indent>
 		<p>Creates a new tab. </p>
 <p>Returns: Details about the created tab. Will contain the ID of the new tab.</p>
@@ -287,7 +287,7 @@
 		<p>Deprecated. Please use query({'active': true}). Gets the tab that is selected in the specified window. </p>
 <p><code>windowId</code> Defaults to the <code>current window</code>(windows.html#current-window).</p>
 	</div>
-	<b><a id=ChromeTabs.highlight></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; highlight(dynamic highlightInfo)</b>
+	<b><a id=ChromeTabs.highlight></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; highlight(Map&lt;dynamic, dynamic&gt; highlightInfo)</b>
 	<div class=indent>
 		<p>Highlights the given tabs. </p>
 <p>Returns: Contains details about the window whose tabs were highlighted.</p>
@@ -298,17 +298,17 @@
 <p><code>tabId</code> The ID of the tab in which to insert the CSS; defaults to the active tab of the current window. </p>
 <p><code>details</code> Details of the CSS text to insert.</p>
 	</div>
-	<b><a id=ChromeTabs.move></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; move(dynamic tabIds, dynamic moveProperties)</b>
+	<b><a id=ChromeTabs.move></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; move(dynamic tabIds, Map&lt;dynamic, dynamic&gt; moveProperties)</b>
 	<div class=indent>
 		<p>Moves one or more tabs to a new position within its window, or to a new window. Note that tabs can only be moved to and from normal (window.type === "normal") windows. </p>
 <p><code>tabIds</code> The tab or list of tabs to move. </p>
 <p>Returns: Details about the moved tabs.</p>
 	</div>
-	<b><a id=ChromeTabs.query></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; query(dynamic queryInfo)</b>
+	<b><a id=ChromeTabs.query></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; query(Map&lt;dynamic, dynamic&gt; queryInfo)</b>
 	<div class=indent>
 		<p>Gets all tabs that have the specified properties, or all tabs if no properties are specified.</p>
 	</div>
-	<b><a id=ChromeTabs.reload></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; reload(int tabId, dynamic reloadProperties)</b>
+	<b><a id=ChromeTabs.reload></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; reload(int tabId, Map&lt;dynamic, dynamic&gt; reloadProperties)</b>
 	<div class=indent>
 		<p>Reload a tab. </p>
 <p><code>tabId</code> The ID of the tab to reload; defaults to the selected tab of the current window.</p>
@@ -328,7 +328,7 @@
 		<p>Deprecated: Please use sendMessage. </p>
 <p>Returns: The JSON response object sent by the handler of the request. If an error occurs while connecting to the specified tab, the callback will be called with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 	</div>
-	<b><a id=ChromeTabs.update></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; update(dynamic updateProperties, int tabId)</b>
+	<b><a id=ChromeTabs.update></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; update(Map&lt;dynamic, dynamic&gt; updateProperties, int tabId)</b>
 	<div class=indent>
 		<p>Modifies the properties of a tab. Properties that are not specified in <code>updateProperties</code> are not modified. </p>
 <p><code>tabId</code> Defaults to the selected tab of the [current window](windows.html#current-window). </p>

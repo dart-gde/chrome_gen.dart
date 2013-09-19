@@ -107,7 +107,7 @@
 		<dt>Fields</dt>
 		<dd>
 			<i class=icon-minus-sign></i> <a href=chrome.runtime.html#ChromeRuntime.id>id</a>: String<br>
-			<i class=icon-minus-sign></i> <a href=chrome.runtime.html#ChromeRuntime.lastError>lastError</a>: dynamic<br>
+			<i class=icon-minus-sign></i> <a href=chrome.runtime.html#ChromeRuntime.lastError>lastError</a>: Map<br>
 			<i class=icon-minus-sign></i> <a href=chrome.runtime.html#ChromeRuntime.onBrowserUpdateAvailable>onBrowserUpdateAvailable</a>: Stream<br>
 			<i class=icon-minus-sign></i> <a href=chrome.runtime.html#ChromeRuntime.onConnect>onConnect</a>: Stream<br>
 			<i class=icon-minus-sign></i> <a href=chrome.runtime.html#ChromeRuntime.onConnectExternal>onConnectExternal</a>: Stream<br>
@@ -123,7 +123,7 @@
 		<dt>Getters and Setters</dt>
 		<dd>
 			<i class=icon-circle-arrow-right></i> <a href=chrome.runtime.html#id>id</a>: String<br>
-			<i class=icon-circle-arrow-right></i> <a href=chrome.runtime.html#lastError>lastError</a>: dynamic<br>
+			<i class=icon-circle-arrow-right></i> <a href=chrome.runtime.html#lastError>lastError</a>: Map&lt;dynamic, dynamic&gt;<br>
 			<i class=icon-circle-arrow-right></i> <a href=chrome.runtime.html#onBrowserUpdateAvailable>onBrowserUpdateAvailable</a>: Stream&lt;dynamic&gt;<br>
 			<i class=icon-circle-arrow-right></i> <a href=chrome.runtime.html#onConnect>onConnect</a>: Stream&lt;dynamic&gt;<br>
 			<i class=icon-circle-arrow-right></i> <a href=chrome.runtime.html#onConnectExternal>onConnectExternal</a>: Stream&lt;dynamic&gt;<br>
@@ -138,12 +138,12 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.connect>connect</a>(String extensionId, dynamic connectInfo): dynamic<br>
+			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.connect>connect</a>(String extensionId, Map&lt;dynamic, dynamic&gt; connectInfo): dynamic<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.connectNative>connectNative</a>(String application): dynamic<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.getBackgroundPage>getBackgroundPage</a>(): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.getManifest>getManifest</a>(): dynamic<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.getPackageDirectoryEntry>getPackageDirectoryEntry</a>(): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.getPlatformInfo>getPlatformInfo</a>(): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.getPlatformInfo>getPlatformInfo</a>(): Future&lt;Map&lt;dynamic, dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.getURL>getURL</a>(String path): String<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.reload>reload</a>(): void<br>
 			<i class=icon-ok-sign></i> <a href=chrome.runtime.html#ChromeRuntime.requestUpdateCheck>requestUpdateCheck</a>(): Future&lt;JsObject&gt;<br>
@@ -156,7 +156,7 @@
 	<h4>Fields</h4>
 	<b><a id=ChromeRuntime.id></a><i class=icon-minus-sign></i> final String id</b>
 	<div class=indent></div>
-	<b><a id=ChromeRuntime.lastError></a><i class=icon-minus-sign></i> final dynamic lastError</b>
+	<b><a id=ChromeRuntime.lastError></a><i class=icon-minus-sign></i> final Map lastError</b>
 	<div class=indent></div>
 	<b><a id=ChromeRuntime.onBrowserUpdateAvailable></a><i class=icon-minus-sign></i> final Stream onBrowserUpdateAvailable</b>
 	<div class=indent></div>
@@ -185,7 +185,7 @@
 	<div class=indent>
 		<p>The ID of the extension/app.</p>
 	</div>
-	<b><a id=lastError></a><i class=icon-circle-arrow-right></i> dynamic get lastError</b>
+	<b><a id=lastError></a><i class=icon-circle-arrow-right></i> Map&lt;dynamic, dynamic&gt; get lastError</b>
 	<div class=indent>
 		<p>This will be defined during an API method callback if there was an error</p>
 	</div>
@@ -234,7 +234,7 @@
 		<p>Fired when an update is available, but isn't installed immediately because the app is currently running. If you do nothing, the update will be installed the next time the background page gets unloaded, if you want it to be installed sooner you can explicitly call chrome.runtime.reload().</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeRuntime.connect></a><i class=icon-ok-sign></i> dynamic connect(String extensionId, dynamic connectInfo)</b>
+	<b><a id=ChromeRuntime.connect></a><i class=icon-ok-sign></i> dynamic connect(String extensionId, Map&lt;dynamic, dynamic&gt; connectInfo)</b>
 	<div class=indent>
 		<p>Attempts to connect to other listeners within the extension/app (such as the background page), or other extensions/apps. This is useful for content scripts connecting to their extension processes. Note that this does not connect to any listeners in a content script. Extensions may connect to content scripts embedded in tabs via <code>tabs.connect.</code> </p>
 <p><code>extensionId</code> The ID of the extension/app you want to connect to. If omitted, default is your own extension. </p>
@@ -260,7 +260,7 @@
 	<div class=indent>
 		<p>Returns a DirectoryEntry for the package directory.</p>
 	</div>
-	<b><a id=ChromeRuntime.getPlatformInfo></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getPlatformInfo()</b>
+	<b><a id=ChromeRuntime.getPlatformInfo></a><i class=icon-ok-sign></i> Future&lt;Map&lt;dynamic, dynamic&gt;&gt; getPlatformInfo()</b>
 	<div class=indent>
 		<p>Returns information about the current platform.</p>
 	</div>

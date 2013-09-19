@@ -116,15 +116,15 @@
 		<dd>
 			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.disable>disable</a>(int tabId): void<br>
 			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.enable>enable</a>(int tabId): void<br>
-			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.getBadgeBackgroundColor>getBadgeBackgroundColor</a>(dynamic details): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.getBadgeText>getBadgeText</a>(dynamic details): Future&lt;String&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.getPopup>getPopup</a>(dynamic details): Future&lt;String&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.getTitle>getTitle</a>(dynamic details): Future&lt;String&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.setBadgeBackgroundColor>setBadgeBackgroundColor</a>(dynamic details): void<br>
-			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.setBadgeText>setBadgeText</a>(dynamic details): void<br>
-			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.setIcon>setIcon</a>(dynamic details): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.setPopup>setPopup</a>(dynamic details): void<br>
-			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.setTitle>setTitle</a>(dynamic details): void<br>
+			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.getBadgeBackgroundColor>getBadgeBackgroundColor</a>(Map&lt;dynamic, dynamic&gt; details): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.getBadgeText>getBadgeText</a>(Map&lt;dynamic, dynamic&gt; details): Future&lt;String&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.getPopup>getPopup</a>(Map&lt;dynamic, dynamic&gt; details): Future&lt;String&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.getTitle>getTitle</a>(Map&lt;dynamic, dynamic&gt; details): Future&lt;String&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.setBadgeBackgroundColor>setBadgeBackgroundColor</a>(Map&lt;dynamic, dynamic&gt; details): void<br>
+			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.setBadgeText>setBadgeText</a>(Map&lt;dynamic, dynamic&gt; details): void<br>
+			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.setIcon>setIcon</a>(Map&lt;dynamic, dynamic&gt; details): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.setPopup>setPopup</a>(Map&lt;dynamic, dynamic&gt; details): void<br>
+			<i class=icon-ok-sign></i> <a href=chrome.browserAction.html#ChromeBrowserAction.setTitle>setTitle</a>(Map&lt;dynamic, dynamic&gt; details): void<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -147,39 +147,39 @@
 		<p>Enables the browser action for a tab. By default, browser actions are enabled. </p>
 <p><code>tabId</code> The id of the tab for which you want to modify the browser action.</p>
 	</div>
-	<b><a id=ChromeBrowserAction.getBadgeBackgroundColor></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getBadgeBackgroundColor(dynamic details)</b>
+	<b><a id=ChromeBrowserAction.getBadgeBackgroundColor></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getBadgeBackgroundColor(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Gets the background color of the browser action.</p>
 	</div>
-	<b><a id=ChromeBrowserAction.getBadgeText></a><i class=icon-ok-sign></i> Future&lt;String&gt; getBadgeText(dynamic details)</b>
+	<b><a id=ChromeBrowserAction.getBadgeText></a><i class=icon-ok-sign></i> Future&lt;String&gt; getBadgeText(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Gets the badge text of the browser action. If no tab is specified, the non-tab-specific badge text is returned.</p>
 	</div>
-	<b><a id=ChromeBrowserAction.getPopup></a><i class=icon-ok-sign></i> Future&lt;String&gt; getPopup(dynamic details)</b>
+	<b><a id=ChromeBrowserAction.getPopup></a><i class=icon-ok-sign></i> Future&lt;String&gt; getPopup(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Gets the html document set as the popup for this browser action.</p>
 	</div>
-	<b><a id=ChromeBrowserAction.getTitle></a><i class=icon-ok-sign></i> Future&lt;String&gt; getTitle(dynamic details)</b>
+	<b><a id=ChromeBrowserAction.getTitle></a><i class=icon-ok-sign></i> Future&lt;String&gt; getTitle(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Gets the title of the browser action.</p>
 	</div>
-	<b><a id=ChromeBrowserAction.setBadgeBackgroundColor></a><i class=icon-ok-sign></i> void setBadgeBackgroundColor(dynamic details)</b>
+	<b><a id=ChromeBrowserAction.setBadgeBackgroundColor></a><i class=icon-ok-sign></i> void setBadgeBackgroundColor(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Sets the background color for the badge.</p>
 	</div>
-	<b><a id=ChromeBrowserAction.setBadgeText></a><i class=icon-ok-sign></i> void setBadgeText(dynamic details)</b>
+	<b><a id=ChromeBrowserAction.setBadgeText></a><i class=icon-ok-sign></i> void setBadgeText(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Sets the badge text for the browser action. The badge is displayed on top of the icon.</p>
 	</div>
-	<b><a id=ChromeBrowserAction.setIcon></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; setIcon(dynamic details)</b>
+	<b><a id=ChromeBrowserAction.setIcon></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; setIcon(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Sets the icon for the browser action. The icon can be specified either as the path to an image file or as the pixel data from a canvas element, or as dictionary of either one of those. Either the &lt;b&gt;path&lt;/b&gt; or the &lt;b&gt;imageData&lt;/b&gt; property must be specified.</p>
 	</div>
-	<b><a id=ChromeBrowserAction.setPopup></a><i class=icon-ok-sign></i> void setPopup(dynamic details)</b>
+	<b><a id=ChromeBrowserAction.setPopup></a><i class=icon-ok-sign></i> void setPopup(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Sets the html document to be opened as a popup when the user clicks on the browser action's icon.</p>
 	</div>
-	<b><a id=ChromeBrowserAction.setTitle></a><i class=icon-ok-sign></i> void setTitle(dynamic details)</b>
+	<b><a id=ChromeBrowserAction.setTitle></a><i class=icon-ok-sign></i> void setTitle(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Sets the title of the browser action. This shows up in the tooltip.</p>
 	</div>

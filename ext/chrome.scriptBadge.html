@@ -112,9 +112,9 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.scriptBadge.html#ChromeScriptBadge.getAttention>getAttention</a>(dynamic details): void<br>
-			<i class=icon-ok-sign></i> <a href=chrome.scriptBadge.html#ChromeScriptBadge.getPopup>getPopup</a>(dynamic details): Future&lt;String&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.scriptBadge.html#ChromeScriptBadge.setPopup>setPopup</a>(dynamic details): void<br>
+			<i class=icon-ok-sign></i> <a href=chrome.scriptBadge.html#ChromeScriptBadge.getAttention>getAttention</a>(Map&lt;dynamic, dynamic&gt; details): void<br>
+			<i class=icon-ok-sign></i> <a href=chrome.scriptBadge.html#ChromeScriptBadge.getPopup>getPopup</a>(Map&lt;dynamic, dynamic&gt; details): Future&lt;String&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.scriptBadge.html#ChromeScriptBadge.setPopup>setPopup</a>(Map&lt;dynamic, dynamic&gt; details): void<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -127,15 +127,15 @@
 		<p>Fired when a script badge icon is clicked.  This event will not fire if the script badge has a popup.</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeScriptBadge.getAttention></a><i class=icon-ok-sign></i> void getAttention(dynamic details)</b>
+	<b><a id=ChromeScriptBadge.getAttention></a><i class=icon-ok-sign></i> void getAttention(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Brings the script badge to the attention of the user, imploring her to click.  You should call this when you detect that you can do something to a particular tab.  Do not call this for every tab. That's tacky.  If the user clicks on the badge, the activeTab APIs become available. If the extension has already run on this tab, this call does nothing.</p>
 	</div>
-	<b><a id=ChromeScriptBadge.getPopup></a><i class=icon-ok-sign></i> Future&lt;String&gt; getPopup(dynamic details)</b>
+	<b><a id=ChromeScriptBadge.getPopup></a><i class=icon-ok-sign></i> Future&lt;String&gt; getPopup(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Gets the html document set as the popup for this script badge.</p>
 	</div>
-	<b><a id=ChromeScriptBadge.setPopup></a><i class=icon-ok-sign></i> void setPopup(dynamic details)</b>
+	<b><a id=ChromeScriptBadge.setPopup></a><i class=icon-ok-sign></i> void setPopup(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Sets the html document to be opened as a popup when the user clicks on the script badge's icon.</p>
 	</div>

@@ -133,16 +133,16 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.clearComposition>clearComposition</a>(dynamic parameters): Future&lt;bool&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.commitText>commitText</a>(dynamic parameters): Future&lt;bool&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.deleteSurroundingText>deleteSurroundingText</a>(dynamic parameters): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.clearComposition>clearComposition</a>(Map&lt;dynamic, dynamic&gt; parameters): Future&lt;bool&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.commitText>commitText</a>(Map&lt;dynamic, dynamic&gt; parameters): Future&lt;bool&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.deleteSurroundingText>deleteSurroundingText</a>(Map&lt;dynamic, dynamic&gt; parameters): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.keyEventHandled>keyEventHandled</a>(String requestId, bool response): void<br>
-			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.setCandidateWindowProperties>setCandidateWindowProperties</a>(dynamic parameters): Future&lt;bool&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.setCandidates>setCandidates</a>(dynamic parameters): Future&lt;bool&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.setComposition>setComposition</a>(dynamic parameters): Future&lt;bool&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.setCursorPosition>setCursorPosition</a>(dynamic parameters): Future&lt;bool&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.setMenuItems>setMenuItems</a>(dynamic parameters): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.updateMenuItems>updateMenuItems</a>(dynamic parameters): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.setCandidateWindowProperties>setCandidateWindowProperties</a>(Map&lt;dynamic, dynamic&gt; parameters): Future&lt;bool&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.setCandidates>setCandidates</a>(Map&lt;dynamic, dynamic&gt; parameters): Future&lt;bool&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.setComposition>setComposition</a>(Map&lt;dynamic, dynamic&gt; parameters): Future&lt;bool&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.setCursorPosition>setCursorPosition</a>(Map&lt;dynamic, dynamic&gt; parameters): Future&lt;bool&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.setMenuItems>setMenuItems</a>(Map&lt;dynamic, dynamic&gt; parameters): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.input_ime.html#ChromeInputIme.updateMenuItems>updateMenuItems</a>(Map&lt;dynamic, dynamic&gt; parameters): Future&lt;dynamic&gt;<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -209,15 +209,15 @@
 		<p>Called when the editable string around caret is changed or when the caret position is moved. The text length is limited to 100 characters for each back and forth direction.</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeInputIme.clearComposition></a><i class=icon-ok-sign></i> Future&lt;bool&gt; clearComposition(dynamic parameters)</b>
+	<b><a id=ChromeInputIme.clearComposition></a><i class=icon-ok-sign></i> Future&lt;bool&gt; clearComposition(Map&lt;dynamic, dynamic&gt; parameters)</b>
 	<div class=indent>
 		<p>Clear the current composition. If this extension does not own the active IME, this fails.</p>
 	</div>
-	<b><a id=ChromeInputIme.commitText></a><i class=icon-ok-sign></i> Future&lt;bool&gt; commitText(dynamic parameters)</b>
+	<b><a id=ChromeInputIme.commitText></a><i class=icon-ok-sign></i> Future&lt;bool&gt; commitText(Map&lt;dynamic, dynamic&gt; parameters)</b>
 	<div class=indent>
 		<p>Commits the provided text to the current input.</p>
 	</div>
-	<b><a id=ChromeInputIme.deleteSurroundingText></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; deleteSurroundingText(dynamic parameters)</b>
+	<b><a id=ChromeInputIme.deleteSurroundingText></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; deleteSurroundingText(Map&lt;dynamic, dynamic&gt; parameters)</b>
 	<div class=indent>
 		<p>Deletes the text around the caret.</p>
 	</div>
@@ -227,27 +227,27 @@
 <p><code>requestId</code> Request id of the event that was handled.  This should come from keyEvent.requestId </p>
 <p><code>response</code> True if the keystroke was handled, false if not</p>
 	</div>
-	<b><a id=ChromeInputIme.setCandidateWindowProperties></a><i class=icon-ok-sign></i> Future&lt;bool&gt; setCandidateWindowProperties(dynamic parameters)</b>
+	<b><a id=ChromeInputIme.setCandidateWindowProperties></a><i class=icon-ok-sign></i> Future&lt;bool&gt; setCandidateWindowProperties(Map&lt;dynamic, dynamic&gt; parameters)</b>
 	<div class=indent>
 		<p>Sets the properties of the candidate window. This fails if the extension doesn’t own the active IME</p>
 	</div>
-	<b><a id=ChromeInputIme.setCandidates></a><i class=icon-ok-sign></i> Future&lt;bool&gt; setCandidates(dynamic parameters)</b>
+	<b><a id=ChromeInputIme.setCandidates></a><i class=icon-ok-sign></i> Future&lt;bool&gt; setCandidates(Map&lt;dynamic, dynamic&gt; parameters)</b>
 	<div class=indent>
 		<p>Sets the current candidate list. This fails if this extension doesn’t own the active IME</p>
 	</div>
-	<b><a id=ChromeInputIme.setComposition></a><i class=icon-ok-sign></i> Future&lt;bool&gt; setComposition(dynamic parameters)</b>
+	<b><a id=ChromeInputIme.setComposition></a><i class=icon-ok-sign></i> Future&lt;bool&gt; setComposition(Map&lt;dynamic, dynamic&gt; parameters)</b>
 	<div class=indent>
 		<p>Set the current composition. If this extension does not own the active IME, this fails.</p>
 	</div>
-	<b><a id=ChromeInputIme.setCursorPosition></a><i class=icon-ok-sign></i> Future&lt;bool&gt; setCursorPosition(dynamic parameters)</b>
+	<b><a id=ChromeInputIme.setCursorPosition></a><i class=icon-ok-sign></i> Future&lt;bool&gt; setCursorPosition(Map&lt;dynamic, dynamic&gt; parameters)</b>
 	<div class=indent>
 		<p>Set the position of the cursor in the candidate window. This is a no-op if this extension does not own the active IME.</p>
 	</div>
-	<b><a id=ChromeInputIme.setMenuItems></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; setMenuItems(dynamic parameters)</b>
+	<b><a id=ChromeInputIme.setMenuItems></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; setMenuItems(Map&lt;dynamic, dynamic&gt; parameters)</b>
 	<div class=indent>
 		<p>Adds the provided menu items to the language menu when this IME is active.</p>
 	</div>
-	<b><a id=ChromeInputIme.updateMenuItems></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; updateMenuItems(dynamic parameters)</b>
+	<b><a id=ChromeInputIme.updateMenuItems></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; updateMenuItems(Map&lt;dynamic, dynamic&gt; parameters)</b>
 	<div class=indent>
 		<p>Updates the state of the MenuItems specified</p>
 	</div>

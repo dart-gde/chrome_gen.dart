@@ -144,7 +144,7 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.create>create</a>(dynamic bookmark): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.create>create</a>(Map&lt;dynamic, dynamic&gt; bookmark): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.export>export</a>(): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.get>get</a>(dynamic idOrIdList): Future&lt;List&lt;dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getChildren>getChildren</a>(String id): Future&lt;List&lt;dynamic&gt;&gt;<br>
@@ -152,11 +152,11 @@
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getSubTree>getSubTree</a>(String id): Future&lt;List&lt;dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.getTree>getTree</a>(): Future&lt;List&lt;dynamic&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.import>import</a>(): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.move>move</a>(String id, dynamic destination): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.move>move</a>(String id, Map&lt;dynamic, dynamic&gt; destination): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.remove>remove</a>(String id): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.removeTree>removeTree</a>(String id): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.search>search</a>(String query): Future&lt;List&lt;dynamic&gt;&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.update>update</a>(String id, dynamic changes): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.bookmarks.html#ChromeBookmarks.update>update</a>(String id, Map&lt;dynamic, dynamic&gt; changes): Future&lt;dynamic&gt;<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -217,7 +217,7 @@
 		<p>Fired when a bookmark or folder is removed.  When a folder is removed recursively, a single notification is fired for the folder, and none for its contents.</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeBookmarks.create></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; create(dynamic bookmark)</b>
+	<b><a id=ChromeBookmarks.create></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; create(Map&lt;dynamic, dynamic&gt; bookmark)</b>
 	<div class=indent>
 		<p>Creates a bookmark or folder under the specified parentId.  If url is NULL or missing, it will be a folder.</p>
 	</div>
@@ -252,7 +252,7 @@
 	<div class=indent>
 		<p>Imports bookmarks from a chrome html bookmark file</p>
 	</div>
-	<b><a id=ChromeBookmarks.move></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; move(String id, dynamic destination)</b>
+	<b><a id=ChromeBookmarks.move></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; move(String id, Map&lt;dynamic, dynamic&gt; destination)</b>
 	<div class=indent>
 		<p>Moves the specified BookmarkTreeNode to the provided location.</p>
 	</div>
@@ -268,7 +268,7 @@
 	<div class=indent>
 		<p>Searches for BookmarkTreeNodes matching the given query.</p>
 	</div>
-	<b><a id=ChromeBookmarks.update></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; update(String id, dynamic changes)</b>
+	<b><a id=ChromeBookmarks.update></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; update(String id, Map&lt;dynamic, dynamic&gt; changes)</b>
 	<div class=indent>
 		<p>Updates the properties of a bookmark or folder. Specify only the properties that you want to change; unspecified properties will be left unchanged. &lt;b&gt;Note:&lt;/b&gt; Currently, only 'title' and 'url' are supported.</p>
 	</div>

@@ -126,8 +126,8 @@
 			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.getPermissionWarningsByManifest>getPermissionWarningsByManifest</a>(String manifestStr): Future&lt;List&lt;String&gt;&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.launchApp>launchApp</a>(String id): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.setEnabled>setEnabled</a>(String id, bool enabled): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.uninstall>uninstall</a>(String id, dynamic options): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.uninstallSelf>uninstallSelf</a>(dynamic options): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.uninstall>uninstall</a>(String id, Map&lt;dynamic, dynamic&gt; options): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.management.html#ChromeManagement.uninstallSelf>uninstallSelf</a>(Map&lt;dynamic, dynamic&gt; options): Future&lt;dynamic&gt;<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -188,12 +188,12 @@
 <p><code>id</code> This should be the id from an item of <code>ExtensionInfo.</code> </p>
 <p><code>enabled</code> Whether this item should be enabled or disabled.</p>
 	</div>
-	<b><a id=ChromeManagement.uninstall></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; uninstall(String id, dynamic options)</b>
+	<b><a id=ChromeManagement.uninstall></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; uninstall(String id, Map&lt;dynamic, dynamic&gt; options)</b>
 	<div class=indent>
 		<p>Uninstalls a currently installed app or extension. </p>
 <p><code>id</code> This should be the id from an item of <code>ExtensionInfo.</code></p>
 	</div>
-	<b><a id=ChromeManagement.uninstallSelf></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; uninstallSelf(dynamic options)</b>
+	<b><a id=ChromeManagement.uninstallSelf></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; uninstallSelf(Map&lt;dynamic, dynamic&gt; options)</b>
 	<div class=indent>
 		<p>Uninstalls the calling extension. Note: This function can be used without requesting the 'management' permission in the manifest.</p>
 	</div>

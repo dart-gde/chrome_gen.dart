@@ -113,10 +113,10 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.contextMenus.html#ChromeContextMenus.create>create</a>(dynamic createProperties, dynamic callback): dynamic<br>
+			<i class=icon-ok-sign></i> <a href=chrome.contextMenus.html#ChromeContextMenus.create>create</a>(Map&lt;dynamic, dynamic&gt; createProperties, dynamic callback): dynamic<br>
 			<i class=icon-ok-sign></i> <a href=chrome.contextMenus.html#ChromeContextMenus.remove>remove</a>(dynamic menuItemId): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.contextMenus.html#ChromeContextMenus.removeAll>removeAll</a>(): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.contextMenus.html#ChromeContextMenus.update>update</a>(dynamic id, dynamic updateProperties): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.contextMenus.html#ChromeContextMenus.update>update</a>(dynamic id, Map&lt;dynamic, dynamic&gt; updateProperties): Future&lt;dynamic&gt;<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -129,7 +129,7 @@
 		<p>Fired when a context menu item is clicked.</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeContextMenus.create></a><i class=icon-ok-sign></i> dynamic create(dynamic createProperties, dynamic callback)</b>
+	<b><a id=ChromeContextMenus.create></a><i class=icon-ok-sign></i> dynamic create(Map&lt;dynamic, dynamic&gt; createProperties, dynamic callback)</b>
 	<div class=indent>
 		<p>Creates a new context menu item. Note that if an error occurs during creation, you may not find out until the creation callback fires (the details will be in chrome.runtime.lastError). </p>
 <p><code>callback</code> Called when the item has been created in the browser. If there were any problems creating the item, details will be available in chrome.runtime.lastError. </p>
@@ -144,7 +144,7 @@
 	<div class=indent>
 		<p>Removes all context menu items added by this extension.</p>
 	</div>
-	<b><a id=ChromeContextMenus.update></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; update(dynamic id, dynamic updateProperties)</b>
+	<b><a id=ChromeContextMenus.update></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; update(dynamic id, Map&lt;dynamic, dynamic&gt; updateProperties)</b>
 	<div class=indent>
 		<p>Updates a previously created context menu item. </p>
 <p><code>id</code> The ID of the item to update. </p>

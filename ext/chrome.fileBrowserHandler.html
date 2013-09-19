@@ -113,7 +113,7 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.fileBrowserHandler.html#ChromeFileBrowserHandler.selectFile>selectFile</a>(dynamic selectionParams): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.fileBrowserHandler.html#ChromeFileBrowserHandler.selectFile>selectFile</a>(Map&lt;dynamic, dynamic&gt; selectionParams): Future&lt;Map&lt;dynamic, dynamic&gt;&gt;<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -126,7 +126,7 @@
 		<p>Fired when file system action is executed from ChromeOS file browser.</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeFileBrowserHandler.selectFile></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; selectFile(dynamic selectionParams)</b>
+	<b><a id=ChromeFileBrowserHandler.selectFile></a><i class=icon-ok-sign></i> Future&lt;Map&lt;dynamic, dynamic&gt;&gt; selectFile(Map&lt;dynamic, dynamic&gt; selectionParams)</b>
 	<div class=indent>
 		<p>Prompts user to select file path under which file should be saved. When the file is selected, file access permission required to use the file (read, write and create) are granted to the caller. The file will not actually get created during the function call, so function caller must ensure its existence before using it. The function has to be invoked with a user gesture. </p>
 <p><code>selectionParams</code> Parameters that will be used while selecting the file. </p>

@@ -105,14 +105,14 @@
 		<dt>Fields</dt>
 		<dd>
 			<i class=icon-minus-sign></i> <a href=chrome.extension.html#ChromeExtension.inIncognitoContext>inIncognitoContext</a>: bool<br>
-			<i class=icon-minus-sign></i> <a href=chrome.extension.html#ChromeExtension.lastError>lastError</a>: dynamic<br>
+			<i class=icon-minus-sign></i> <a href=chrome.extension.html#ChromeExtension.lastError>lastError</a>: Map<br>
 			<i class=icon-minus-sign></i> <a href=chrome.extension.html#ChromeExtension.onRequest>onRequest</a>: Stream<br>
 			<i class=icon-minus-sign></i> <a href=chrome.extension.html#ChromeExtension.onRequestExternal>onRequestExternal</a>: Stream<br>
 		</dd>
 		<dt>Getters and Setters</dt>
 		<dd>
 			<i class=icon-circle-arrow-right></i> <a href=chrome.extension.html#inIncognitoContext>inIncognitoContext</a>: bool<br>
-			<i class=icon-circle-arrow-right></i> <a href=chrome.extension.html#lastError>lastError</a>: dynamic<br>
+			<i class=icon-circle-arrow-right></i> <a href=chrome.extension.html#lastError>lastError</a>: Map&lt;dynamic, dynamic&gt;<br>
 			<i class=icon-circle-arrow-right></i> <a href=chrome.extension.html#onRequest>onRequest</a>: Stream&lt;dynamic&gt;<br>
 			<i class=icon-circle-arrow-right></i> <a href=chrome.extension.html#onRequestExternal>onRequestExternal</a>: Stream&lt;dynamic&gt;<br>
 		</dd>
@@ -121,7 +121,7 @@
 			<i class=icon-ok-sign></i> <a href=chrome.extension.html#ChromeExtension.getBackgroundPage>getBackgroundPage</a>(): dynamic<br>
 			<i class=icon-ok-sign></i> <a href=chrome.extension.html#ChromeExtension.getExtensionTabs>getExtensionTabs</a>(int windowId): List&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.extension.html#ChromeExtension.getURL>getURL</a>(String path): String<br>
-			<i class=icon-ok-sign></i> <a href=chrome.extension.html#ChromeExtension.getViews>getViews</a>(dynamic fetchProperties): List&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.extension.html#ChromeExtension.getViews>getViews</a>(Map&lt;dynamic, dynamic&gt; fetchProperties): List&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.extension.html#ChromeExtension.isAllowedFileSchemeAccess>isAllowedFileSchemeAccess</a>(): Future&lt;bool&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.extension.html#ChromeExtension.isAllowedIncognitoAccess>isAllowedIncognitoAccess</a>(): Future&lt;bool&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.extension.html#ChromeExtension.sendRequest>sendRequest</a>(dynamic request, String extensionId): Future&lt;dynamic&gt;<br>
@@ -132,7 +132,7 @@
 	<h4>Fields</h4>
 	<b><a id=ChromeExtension.inIncognitoContext></a><i class=icon-minus-sign></i> final bool inIncognitoContext</b>
 	<div class=indent></div>
-	<b><a id=ChromeExtension.lastError></a><i class=icon-minus-sign></i> final dynamic lastError</b>
+	<b><a id=ChromeExtension.lastError></a><i class=icon-minus-sign></i> final Map lastError</b>
 	<div class=indent></div>
 	<b><a id=ChromeExtension.onRequest></a><i class=icon-minus-sign></i> final Stream onRequest</b>
 	<div class=indent></div>
@@ -143,7 +143,7 @@
 	<div class=indent>
 		<p>True for content scripts running inside incognito tabs, and for extension pages running inside an incognito process. The latter only applies to extensions with 'split' incognito_behavior.</p>
 	</div>
-	<b><a id=lastError></a><i class=icon-circle-arrow-right></i> dynamic get lastError</b>
+	<b><a id=lastError></a><i class=icon-circle-arrow-right></i> Map&lt;dynamic, dynamic&gt; get lastError</b>
 	<div class=indent>
 		<p>Set for the lifetime of a callback if an ansychronous extension api has resulted in an error. If no error has occured lastError will be <code>undefined</code>.</p>
 	</div>
@@ -171,7 +171,7 @@
 <p><code>path</code> A path to a resource within an extension expressed relative to its install directory. </p>
 <p>Returns: The fully-qualified URL to the resource.</p>
 	</div>
-	<b><a id=ChromeExtension.getViews></a><i class=icon-ok-sign></i> List&lt;dynamic&gt; getViews(dynamic fetchProperties)</b>
+	<b><a id=ChromeExtension.getViews></a><i class=icon-ok-sign></i> List&lt;dynamic&gt; getViews(Map&lt;dynamic, dynamic&gt; fetchProperties)</b>
 	<div class=indent>
 		<p>Returns an array of the JavaScript 'window' objects for each of the pages running inside the current extension. </p>
 <p>Returns: Array of global objects</p>

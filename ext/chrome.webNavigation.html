@@ -128,8 +128,8 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.webNavigation.html#ChromeWebNavigation.getAllFrames>getAllFrames</a>(dynamic details): Future&lt;List&lt;dynamic&gt;&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.webNavigation.html#ChromeWebNavigation.getFrame>getFrame</a>(dynamic details): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.webNavigation.html#ChromeWebNavigation.getAllFrames>getAllFrames</a>(Map&lt;dynamic, dynamic&gt; details): Future&lt;List&lt;Map&lt;dynamic, dynamic&gt;&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.webNavigation.html#ChromeWebNavigation.getFrame>getFrame</a>(Map&lt;dynamic, dynamic&gt; details): Future&lt;Map&lt;dynamic, dynamic&gt;&gt;<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -190,13 +190,13 @@
 		<p>Fired when the contents of the tab is replaced by a different (usually previously pre-rendered) tab.</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeWebNavigation.getAllFrames></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getAllFrames(dynamic details)</b>
+	<b><a id=ChromeWebNavigation.getAllFrames></a><i class=icon-ok-sign></i> Future&lt;List&lt;Map&lt;dynamic, dynamic&gt;&gt;&gt; getAllFrames(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Retrieves information about all frames of a given tab. </p>
 <p><code>details</code> Information about the tab to retrieve all frames from. </p>
 <p>Returns: A list of frames in the given tab, null if the specified tab ID is invalid.</p>
 	</div>
-	<b><a id=ChromeWebNavigation.getFrame></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getFrame(dynamic details)</b>
+	<b><a id=ChromeWebNavigation.getFrame></a><i class=icon-ok-sign></i> Future&lt;Map&lt;dynamic, dynamic&gt;&gt; getFrame(Map&lt;dynamic, dynamic&gt; details)</b>
 	<div class=indent>
 		<p>Retrieves information about the given frame. A frame refers to an &amp;lt;iframe&amp;gt; or a &amp;lt;frame&amp;gt; of a web page and is identified by a tab ID and a frame ID. </p>
 <p><code>details</code> Information about the frame to retrieve information about. </p>

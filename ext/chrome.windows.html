@@ -121,13 +121,13 @@
 		</dd>
 		<dt>Methods</dt>
 		<dd>
-			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.create>create</a>(dynamic createData): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.get>get</a>(int windowId, dynamic getInfo): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.getAll>getAll</a>(dynamic getInfo): Future&lt;List&lt;dynamic&gt;&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.getCurrent>getCurrent</a>(dynamic getInfo): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.getLastFocused>getLastFocused</a>(dynamic getInfo): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.create>create</a>(Map&lt;dynamic, dynamic&gt; createData): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.get>get</a>(int windowId, Map&lt;dynamic, dynamic&gt; getInfo): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.getAll>getAll</a>(Map&lt;dynamic, dynamic&gt; getInfo): Future&lt;List&lt;dynamic&gt;&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.getCurrent>getCurrent</a>(Map&lt;dynamic, dynamic&gt; getInfo): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.getLastFocused>getLastFocused</a>(Map&lt;dynamic, dynamic&gt; getInfo): Future&lt;dynamic&gt;<br>
 			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.remove>remove</a>(int windowId): Future&lt;dynamic&gt;<br>
-			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.update>update</a>(int windowId, dynamic updateInfo): Future&lt;dynamic&gt;<br>
+			<i class=icon-ok-sign></i> <a href=chrome.windows.html#ChromeWindows.update>update</a>(int windowId, Map&lt;dynamic, dynamic&gt; updateInfo): Future&lt;dynamic&gt;<br>
 		</dd>
 	</dl>
 	<div class=indent></div>
@@ -164,27 +164,27 @@
 		<p>Fired when a window is removed (closed).</p>
 	</div>
 	<h4>Methods</h4>
-	<b><a id=ChromeWindows.create></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; create(dynamic createData)</b>
+	<b><a id=ChromeWindows.create></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; create(Map&lt;dynamic, dynamic&gt; createData)</b>
 	<div class=indent>
 		<p>Creates (opens) a new browser with any optional sizing, position or default URL provided. </p>
 <p>Returns: Contains details about the created window.</p>
 	</div>
-	<b><a id=ChromeWindows.get></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; get(int windowId, dynamic getInfo)</b>
+	<b><a id=ChromeWindows.get></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; get(int windowId, Map&lt;dynamic, dynamic&gt; getInfo)</b>
 	<div class=indent>
 		<p>Gets details about a window. </p>
 <p><code>getInfo</code></p>
 	</div>
-	<b><a id=ChromeWindows.getAll></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getAll(dynamic getInfo)</b>
+	<b><a id=ChromeWindows.getAll></a><i class=icon-ok-sign></i> Future&lt;List&lt;dynamic&gt;&gt; getAll(Map&lt;dynamic, dynamic&gt; getInfo)</b>
 	<div class=indent>
 		<p>Gets all windows. </p>
 <p><code>getInfo</code></p>
 	</div>
-	<b><a id=ChromeWindows.getCurrent></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getCurrent(dynamic getInfo)</b>
+	<b><a id=ChromeWindows.getCurrent></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getCurrent(Map&lt;dynamic, dynamic&gt; getInfo)</b>
 	<div class=indent>
 		<p>Gets the <code>current window</code>(#current-window). </p>
 <p><code>getInfo</code></p>
 	</div>
-	<b><a id=ChromeWindows.getLastFocused></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getLastFocused(dynamic getInfo)</b>
+	<b><a id=ChromeWindows.getLastFocused></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; getLastFocused(Map&lt;dynamic, dynamic&gt; getInfo)</b>
 	<div class=indent>
 		<p>Gets the window that was most recently focused - typically the window 'on top'. </p>
 <p><code>getInfo</code></p>
@@ -193,7 +193,7 @@
 	<div class=indent>
 		<p>Removes (closes) a window, and all the tabs inside it.</p>
 	</div>
-	<b><a id=ChromeWindows.update></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; update(int windowId, dynamic updateInfo)</b>
+	<b><a id=ChromeWindows.update></a><i class=icon-ok-sign></i> Future&lt;dynamic&gt; update(int windowId, Map&lt;dynamic, dynamic&gt; updateInfo)</b>
 	<div class=indent>
 		<p>Updates the properties of a window. Specify only the properties that you want to change; unspecified properties will be left unchanged.</p>
 	</div>
