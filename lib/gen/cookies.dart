@@ -34,8 +34,8 @@ class ChromeCookies {
    * Contains details about the cookie. This parameter is null if no such cookie
    * was found.
    */
-  Future<dynamic> get(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Cookie> get(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Cookie.create);
     _cookies.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -51,8 +51,8 @@ class ChromeCookies {
    * Returns:
    * All the existing, unexpired cookies that match the given cookie info.
    */
-  Future<List<dynamic>> getAll(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<Cookie>> getAll(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _cookies.callMethod('getAll', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -68,8 +68,8 @@ class ChromeCookies {
    * any reason, this will be "null", and "chrome.runtime.lastError" will be
    * set.
    */
-  Future<dynamic> set(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Cookie> set(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Cookie.create);
     _cookies.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -85,7 +85,7 @@ class ChromeCookies {
    * set.
    */
   Future<Map> remove(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _cookies.callMethod('remove', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -96,8 +96,8 @@ class ChromeCookies {
    * Returns:
    * All the existing cookie stores.
    */
-  Future<List<dynamic>> getAllCookieStores() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<CookieStore>> getAllCookieStores() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _cookies.callMethod('getAllCookieStores', [completer.callback]);
     return completer.future;
   }
@@ -119,8 +119,65 @@ class ChromeCookies {
  * Represents information about an HTTP cookie.
  */
 class Cookie extends ChromeObject {
+  static Cookie create(JsObject proxy) => new Cookie(proxy);
+
   Cookie(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The name of the cookie.
+   */
+  String get name => this.proxy['name'];
+
+  /**
+   * The value of the cookie.
+   */
+  String get value => this.proxy['value'];
+
+  /**
+   * The domain of the cookie (e.g. "www.google.com", "example.com").
+   */
+  String get domain => this.proxy['domain'];
+
+  /**
+   * True if the cookie is a host-only cookie (i.e. a request's host must
+   * exactly match the domain of the cookie).
+   */
+  bool get hostOnly => this.proxy['hostOnly'];
+
+  /**
+   * The path of the cookie.
+   */
+  String get path => this.proxy['path'];
+
+  /**
+   * True if the cookie is marked as Secure (i.e. its scope is limited to secure
+   * channels, typically HTTPS).
+   */
+  bool get secure => this.proxy['secure'];
+
+  /**
+   * True if the cookie is marked as HttpOnly (i.e. the cookie is inaccessible
+   * to client-side scripts).
+   */
+  bool get httpOnly => this.proxy['httpOnly'];
+
+  /**
+   * True if the cookie is a session cookie, as opposed to a persistent cookie
+   * with an expiration date.
+   */
+  bool get session => this.proxy['session'];
+
+  /**
+   * The expiration date of the cookie as the number of seconds since the UNIX
+   * epoch. Not provided for session cookies.
+   */
+  dynamic get expirationDate => this.proxy['expirationDate'];
+
+  /**
+   * The ID of the cookie store containing this cookie, as provided in
+   * getAllCookieStores().
+   */
+  String get storeId => this.proxy['storeId'];
 }
 
 /**
@@ -128,6 +185,17 @@ class Cookie extends ChromeObject {
  * instance, uses a separate cookie store from a non-incognito window.
  */
 class CookieStore extends ChromeObject {
+  static CookieStore create(JsObject proxy) => new CookieStore(proxy);
+
   CookieStore(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The unique identifier for the cookie store.
+   */
+  String get id => this.proxy['id'];
+
+  /**
+   * Identifiers of all the browser tabs that share this cookie store.
+   */
+  List<int> get tabIds => listify(this.proxy['tabIds']);
 }

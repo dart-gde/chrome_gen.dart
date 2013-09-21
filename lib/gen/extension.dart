@@ -12,6 +12,7 @@
  */
 library chrome.extension;
 
+import 'runtime.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.extension` namespace.
@@ -29,7 +30,7 @@ class ChromeExtension {
    * resulted in an error. If no error has occured lastError will be
    * [undefined].
    */
-  Map get lastError => _extension['lastError'];
+  Map get lastError => mapify(_extension['lastError']);
 
   /**
    * True for content scripts running inside incognito tabs, and for extension
@@ -50,7 +51,7 @@ class ChromeExtension {
    * no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendRequest(var request, [String extensionId]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
     return completer.future;
   }
@@ -110,7 +111,7 @@ class ChromeExtension {
    * True if the extension has access to Incognito mode, false otherwise.
    */
   Future<bool> isAllowedIncognitoAccess() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
     return completer.future;
   }
@@ -123,7 +124,7 @@ class ChromeExtension {
    * True if the extension can access the 'file://' scheme, false otherwise.
    */
   Future<bool> isAllowedFileSchemeAccess() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
     return completer.future;
   }

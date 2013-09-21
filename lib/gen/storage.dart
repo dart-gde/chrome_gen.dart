@@ -25,19 +25,12 @@ class ChromeStorage {
   /**
    * Items in the `sync` storage area are synced using Chrome Sync.
    */
-  dynamic get sync => _storage['sync'];
+  StorageArea get sync => new StorageArea(_storage['sync']);
 
   /**
    * Items in the `local` storage area are local to each machine.
    */
-  dynamic get local => _storage['local'];
-
-  /**
-   * Items in the `managed` storage area are set by the domain administrator,
-   * and are read-only by the extension; trying to modify this namespace results
-   * in an error.
-   */
-  dynamic get managed => _storage['managed'];
+  StorageArea get local => new StorageArea(_storage['local']);
 
   /**
    * Fired when one or more items change.
@@ -49,11 +42,23 @@ class ChromeStorage {
 }
 
 class StorageChange extends ChromeObject {
+  static StorageChange create(JsObject proxy) => new StorageChange(proxy);
+
   StorageChange(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The old value of the item, if there was an old value.
+   */
+  dynamic get oldValue => this.proxy['oldValue'];
+
+  /**
+   * The new value of the item, if there is a new value.
+   */
+  dynamic get newValue => this.proxy['newValue'];
 }
 
 class StorageArea extends ChromeObject {
+  static StorageArea create(JsObject proxy) => new StorageArea(proxy);
+
   StorageArea(JsObject proxy): super(proxy);
-  // TODO:
 }

@@ -73,7 +73,7 @@ class ChromeTts {
    * True if speaking, false otherwise.
    */
   Future<bool> isSpeaking() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _tts.callMethod('isSpeaking', [completer.callback]);
     return completer.future;
   }
@@ -85,8 +85,8 @@ class ChromeTts {
    * Array of [TtsVoice] objects representing the available voices for speech
    * synthesis.
    */
-  Future<List<dynamic>> getVoices() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<TtsVoice>> getVoices() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _tts.callMethod('getVoices', [completer.callback]);
     return completer.future;
   }
@@ -104,14 +104,66 @@ class ChromeTts {
  * An event from the TTS engine to communicate the status of an utterance.
  */
 class TtsEvent extends ChromeObject {
+  static TtsEvent create(JsObject proxy) => new TtsEvent(proxy);
+
   TtsEvent(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The type can be 'start' as soon as speech has started, 'word' when a word
+   * boundary is reached, 'sentence' when a sentence boundary is reached,
+   * 'marker' when an SSML mark element is reached, 'end' when the end of the
+   * utterance is reached, 'interrupted' when the utterance is stopped or
+   * interrupted before reaching the end, 'cancelled' when it's removed from the
+   * queue before ever being synthesized, or 'error' when any other error
+   * occurs. When pausing speech, a 'pause' event is fired if a particular
+   * utterance is paused in the middle, and 'resume' if an utterance resumes
+   * speech. Note that pause and resume events may not fire if speech is paused
+   * in-between utterances.
+   */
+  String get type => this.proxy['type'];
+
+  /**
+   * The index of the current character in the utterance.
+   */
+  dynamic get charIndex => this.proxy['charIndex'];
+
+  /**
+   * The error description, if the event type is 'error'.
+   */
+  String get errorMessage => this.proxy['errorMessage'];
 }
 
 /**
  * A description of a voice available for speech synthesis.
  */
 class TtsVoice extends ChromeObject {
+  static TtsVoice create(JsObject proxy) => new TtsVoice(proxy);
+
   TtsVoice(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The name of the voice.
+   */
+  String get voiceName => this.proxy['voiceName'];
+
+  /**
+   * The language that this voice supports, in the form _language_-_region_.
+   * Examples: 'en', 'en-US', 'en-GB', 'zh-CN'.
+   */
+  String get lang => this.proxy['lang'];
+
+  /**
+   * This voice's gender.
+   */
+  String get gender => this.proxy['gender'];
+
+  /**
+   * The ID of the extension providing this voice.
+   */
+  String get extensionId => this.proxy['extensionId'];
+
+  /**
+   * All of the callback event types that this voice is capable of sending.
+   */
+  List<String> get eventTypes => listify(this.proxy['eventTypes']);
 }

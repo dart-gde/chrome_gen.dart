@@ -12,6 +12,8 @@
  */
 library chrome.runtime;
 
+import 'events.dart';
+import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.runtime` namespace.
@@ -27,7 +29,7 @@ class ChromeRuntime {
   /**
    * This will be defined during an API method callback if there was an error
    */
-  Map get lastError => _runtime['lastError'];
+  Map get lastError => mapify(_runtime['lastError']);
 
   /**
    * The ID of the extension/app.
@@ -44,7 +46,7 @@ class ChromeRuntime {
    * The JavaScript 'window' object for the background page.
    */
   Future<dynamic> getBackgroundPage() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _runtime.callMethod('getBackgroundPage', [completer.callback]);
     return completer.future;
   }
@@ -99,7 +101,7 @@ class ChromeRuntime {
    * the available update.
    */
   Future<JsObject> requestUpdateCheck() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _runtime.callMethod('requestUpdateCheck', [completer.callback]);
     return completer.future;
   }
@@ -119,7 +121,7 @@ class ChromeRuntime {
    * [][runtime.Port onDisconnect] event is fired if the extension/app does not
    * exist.
    */
-  dynamic connect([String extensionId, Map connectInfo]) {
+  Port connect([String extensionId, Map connectInfo]) {
     return _runtime.callMethod('connect', [extensionId, jsify(connectInfo)]);
   }
 
@@ -131,7 +133,7 @@ class ChromeRuntime {
    * Returns:
    * Port through which messages can be sent and received with the application
    */
-  dynamic connectNative(String application) {
+  Port connectNative(String application) {
     return _runtime.callMethod('connectNative', [application]);
   }
 
@@ -152,7 +154,7 @@ class ChromeRuntime {
    * no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendMessage(var message, [String extensionId]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
     return completer.future;
   }
@@ -170,7 +172,7 @@ class ChromeRuntime {
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendNativeMessage(String application, var message) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _runtime.callMethod('sendNativeMessage', [application, message, completer.callback]);
     return completer.future;
   }
@@ -179,7 +181,7 @@ class ChromeRuntime {
    * Returns information about the current platform.
    */
   Future<Map> getPlatformInfo() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _runtime.callMethod('getPlatformInfo', [completer.callback]);
     return completer.future;
   }
@@ -188,7 +190,7 @@ class ChromeRuntime {
    * Returns a DirectoryEntry for the package directory.
    */
   Future<dynamic> getPackageDirectoryEntry() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
     return completer.future;
   }
@@ -305,8 +307,25 @@ class ChromeRuntime {
  * An object which allows two way communication with other pages.
  */
 class Port extends ChromeObject {
+  static Port create(JsObject proxy) => new Port(proxy);
+
   Port(JsObject proxy): super(proxy);
-  // TODO:
+
+  String get name => this.proxy['name'];
+
+  dynamic get disconnect => this.proxy['disconnect'];
+
+  Event get onDisconnect => new Event(this.proxy['onDisconnect']);
+
+  Event get onMessage => new Event(this.proxy['onMessage']);
+
+  dynamic get postMessage => this.proxy['postMessage'];
+
+  /**
+   * This property will <b>only</b> be present on ports passed to
+   * onConnect/onConnectExternal listeners.
+   */
+  MessageSender get sender => new MessageSender(this.proxy['sender']);
 }
 
 /**
@@ -314,6 +333,26 @@ class Port extends ChromeObject {
  * or request.
  */
 class MessageSender extends ChromeObject {
+  static MessageSender create(JsObject proxy) => new MessageSender(proxy);
+
   MessageSender(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The [tabs.Tab] which opened the connection, if any. This property will
+   * *only* be present when the connection was opened from a tab (including
+   * content scripts), and *only* if the receiver is an extension, not an app.
+   */
+  Tab get tab => new Tab(this.proxy['tab']);
+
+  /**
+   * The ID of the extension or app that opened the connection, if any.
+   */
+  String get id => this.proxy['id'];
+
+  /**
+   * The URL of the page or frame that opened the connection, if any. This
+   * property will *only* be present when the connection was opened from a tab
+   * or content script.
+   */
+  String get url => this.proxy['url'];
 }

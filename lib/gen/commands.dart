@@ -27,8 +27,8 @@ class ChromeCommands {
    * Returns all the registered extension commands for this extension and their
    * shortcut (if active).
    */
-  Future<List<dynamic>> getAll() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<Command>> getAll() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _commands.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -43,6 +43,22 @@ class ChromeCommands {
 }
 
 class Command extends ChromeObject {
+  static Command create(JsObject proxy) => new Command(proxy);
+
   Command(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The name of the Extension Command
+   */
+  String get name => this.proxy['name'];
+
+  /**
+   * The Extension Command description
+   */
+  String get description => this.proxy['description'];
+
+  /**
+   * The shortcut active for this command, or blank if not active.
+   */
+  String get shortcut => this.proxy['shortcut'];
 }

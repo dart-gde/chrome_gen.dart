@@ -88,6 +88,7 @@ class JsonProperty extends JsonObject {
   JsonProperty(this.name, this.type): super(null);
 
   String get description => type.description;
+  bool get nodoc => type.nodoc;
 
   String toString() => "${runtimeType.toString()} ${name}";
 }
@@ -135,7 +136,7 @@ class JsonType extends JsonObject {
   List<String> get enumOptions => json['enum'];
   bool get optional => _bool('optional');
   bool get nocompile => _bool('nocompile');
-
+  bool get nodoc => _bool('nodoc');
   bool get isCallback => type == 'function' && (name == 'callback' || name == 'responseCallback');
 
   String toString() => "${runtimeType.toString()} ${type} (${ref})";
@@ -187,128 +188,143 @@ class JsonDeclaredType extends JsonType {
   String toString() => "${runtimeType.toString()} ${id}";
 }
 
-ChromeLibrary convert(JsonNamespace namespace) {
-  ChromeLibrary library = new ChromeLibrary();
-  library.name = namespace.namespace;
-  library.documentation = convertHtmlToDartdoc(namespace.description);
+class JsonConverter {
+  ChromeLibrary library;
 
-  library.properties = namespace.properties.map(_convertProperty).toList();
-  library.types = namespace.types.map(_convertDeclaredType).toList();
-  library.methods = namespace.functions.map(_convertMethod).toList();
-  library.events = namespace.events.map(_convertEvent).toList();
+  ChromeLibrary convert(JsonNamespace namespace) {
+    library = new ChromeLibrary();
+    library.name = namespace.namespace;
+    library.documentation = convertHtmlToDartdoc(namespace.description);
 
-  return library;
-}
+    library.properties = namespace.properties.map(_convertProperty).toList();
+    library.types = namespace.types.map(_convertDeclaredType).toList();
+    library.methods = namespace.functions.map(_convertMethod).toList();
+    library.events = namespace.events.map(_convertEvent).toList();
 
-ChromeProperty _convertProperty(JsonProperty p) {
-  ChromeProperty property = new ChromeProperty();
+    return library;
+  }
 
-  property.name = p.name;
-  property.documentation = convertHtmlToDartdoc(p.description);
-  property.type = _convertType(p.type);
+  ChromeProperty _convertProperty(JsonProperty p) {
+    ChromeProperty property = new ChromeProperty();
 
+    property.name = p.name;
+    property.documentation = convertHtmlToDartdoc(p.description);
+    property.type = _convertType(p.type);
+    property.nodoc = p.nodoc;
 
-  return property;
-}
+    return property;
+  }
 
-ChromeMethod _convertMethod(JsonFunction f) {
-  ChromeMethod method = new ChromeMethod();
+  ChromeMethod _convertMethod(JsonFunction f) {
+    ChromeMethod method = new ChromeMethod();
 
-  method.name = f.name;
-  method.documentation = convertHtmlToDartdoc(f.description);
-  method.returns = _convertType(f.returns);
-  method.params = f.parameters.map(_convertType).toList();
+    method.name = f.name;
+    method.documentation = convertHtmlToDartdoc(f.description);
+    method.returns = _convertType(f.returns);
+    method.params = f.parameters.map(_convertType).toList();
 
-  if (method.returns == null) {
-    if (!f.parameters.isEmpty && f.parameters.last.isCallback) {
-      ChromeType type = method.params.removeLast();
+    if (method.returns == null) {
+      if (!f.parameters.isEmpty && f.parameters.last.isCallback) {
+        ChromeType type = method.params.removeLast();
 
-      method.returns = _convertToFuture(type);
+        method.returns = _convertToFuture(type);
+      } else {
+        method.returns = ChromeType.VOID;
+      }
+    }
+
+    return method;
+  }
+
+  ChromeDeclaredType _convertDeclaredType(JsonDeclaredType t) {
+    ChromeDeclaredType type = _convertType_(t, new ChromeDeclaredType());
+
+    int index = type.name.lastIndexOf('.');
+
+    if (index != -1) {
+      type.qualifier = type.name.substring(0, index);
+      type.name = type.name.substring(index + 1);
+    }
+
+    return type;
+  }
+
+  ChromeEvent _convertEvent(JsonEvent e) {
+    return _convertType_(e, new ChromeEvent());
+  }
+
+  ChromeType _convertType(JsonType t) {
+    if (t == null) {
+      return null;
     } else {
-      method.returns = ChromeType.VOID;
+      return _convertType_(t, new ChromeType());
     }
   }
 
-  return method;
-}
+  ChromeType _convertToFuture(ChromeType type) {
+    ChromeType future = new ChromeType();
 
-ChromeDeclaredType _convertDeclaredType(JsonDeclaredType t) {
-  ChromeDeclaredType type = _convertType_(t, new ChromeDeclaredType());
+    future.type = "Future";
 
-  int index = type.name.lastIndexOf('.');
+    if (type.parameters.length == 1) {
+      future.parameters.add(type.parameters.first);
+      future.documentation = future.parameters.first.documentation;
+    } else if (type.parameters.length >= 2) {
+      // TODO: we need to correctly handle mapping multiple parameters to a single
+      // return
+      // runtime.requestUpdateCheck()
+      // devtools.inspectedWindow.eval()
 
-  if (index != -1) {
-    type.qualifier = type.name.substring(0, index);
-    type.name = type.name.substring(index + 1);
+      future.parameters.add(ChromeType.JS_OBJECT);
+      future.documentation = type.parameters.map(
+          (p) => "[${p.name}] ${p.documentation}").join('\n');
+    }
+
+    return future;
   }
 
-  return type;
-}
+  ChromeType _convertType_(JsonType t, ChromeType type) {
+    type.name = t.name;
+    type.documentation = convertHtmlToDartdoc(t.description);
 
-ChromeEvent _convertEvent(JsonEvent e) {
-  return _convertType_(e, new ChromeEvent());
-}
+    if (t.type == 'string') {
+      type.type = "String";
+    } else if (t.type == 'integer') {
+      type.type = "int";
+    } else if (t.type == 'boolean') {
+      type.type = "bool";
+    } else if (_isImplicitInt(t)) {
+      type.type = 'int';
+    } else if (t.type == 'array') {
+      // {type: array, items: {type: string}
+      type.type = 'List';
+    } else if (t.type == 'object' && t.properties.isNotEmpty) {
+      // TODO: do we need the isNotEmpty check?
+      type.type = "Map";
 
-ChromeType _convertType(JsonType t) {
-  if (t == null) {
-    return null;
-  } else {
-    return _convertType_(t, new ChromeType());
+      // TODO: create documentation from the type's properties
+
+    } else if (t.ref != null) {
+      // TODO: ensure that we are pulling out the correct type
+      type.type = "var";
+
+      List<String> names = parseQualifiedName(t.ref);
+
+      if (names[0] != null) {
+        library.addImport(names[0]);
+      }
+
+      type.refName = names[1];
+    } else {
+      type.type = "var";
+    }
+
+    type.optional = t.optional;
+    type.parameters = t.parameters.map(_convertType).toList();
+    type.properties = t.properties.map(_convertProperty).toList();
+
+    return type;
   }
-}
-
-ChromeType _convertToFuture(ChromeType type) {
-  ChromeType future = new ChromeType();
-
-  future.type = "Future";
-
-  if (type.parameters.length == 1) {
-    future.parameters.add(type.parameters.first);
-    future.documentation = future.parameters.first.documentation;
-  } else if (type.parameters.length >= 2) {
-    // TODO: we need to correctly handle mapping multiple parameters to a single
-    // return
-    // runtime.requestUpdateCheck()
-    // devtools.inspectedWindow.eval()
-
-    future.parameters.add(ChromeType.JS_OBJECT);
-    future.documentation = type.parameters.map(
-        (p) => "[${p.name}] ${p.documentation}").join('\n');
-  }
-
-  return future;
-}
-
-ChromeType _convertType_(JsonType t, ChromeType type) {
-  type.name = t.name;
-  type.documentation = convertHtmlToDartdoc(t.description);
-
-  if (t.type == 'string') {
-    type.type = "String";
-  } else if (t.type == 'integer') {
-    type.type = "int";
-  } else if (t.type == 'boolean') {
-    type.type = "bool";
-  } else if (_isImplicitInt(t)) {
-    type.type = 'int';
-  } else if (t.type == 'array') {
-    // {type: array, items: {type: string}
-    type.type = 'List';
-  } else if (t.type == 'object' && t.properties.isNotEmpty) {
-    // TODO: do we need the isNotEmpty check?
-    type.type = "Map";
-
-    // TODO: create documentation from the type's properties
-
-  } else {
-    // TODO:
-    type.type = "var";
-  }
-
-  type.optional = t.optional;
-  type.parameters = t.parameters.map(_convertType).toList();
-
-  return type;
 }
 
 bool _isImplicitInt(JsonType t) {
@@ -332,3 +348,18 @@ bool _isInt(var val) {
 
   return false;
 }
+
+List<String> parseQualifiedName(String str) {
+  int index = str.lastIndexOf('.');
+
+  if (index != -1) {
+    // devtools.inspectedWindow.Resource
+    String qualifier = str.substring(0, index);
+    String name = str.substring(index + 1);
+
+    return [qualifier, name];
+  } else {
+    return [null, str];
+  }
+}
+

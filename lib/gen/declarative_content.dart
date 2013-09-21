@@ -10,6 +10,7 @@
  */
 library chrome.declarativeContent;
 
+import 'events.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.declarativeContent` namespace.
@@ -32,8 +33,22 @@ class ChromeDeclarativeContent {
  * Matches the state of a web page by various criteria.
  */
 class PageStateMatcher extends ChromeObject {
+  static PageStateMatcher create(JsObject proxy) => new PageStateMatcher(proxy);
+
   PageStateMatcher(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * Matches if the condition of the UrlFilter are fulfilled for the top-level
+   * URL of the page.
+   */
+  UrlFilter get pageUrl => new UrlFilter(this.proxy['pageUrl']);
+
+  /**
+   * Matches if all of the CSS selectors in the array match in a frame with the
+   * same origin as the page's main frame.  Note that listing hundreds of CSS
+   * selectors here can slow down web sites.
+   */
+  List<String> get css => listify(this.proxy['css']);
 }
 
 /**
@@ -44,6 +59,7 @@ class PageStateMatcher extends ChromeObject {
  * page action will grant access to the active tab.
  */
 class ShowPageAction extends ChromeObject {
+  static ShowPageAction create(JsObject proxy) => new ShowPageAction(proxy);
+
   ShowPageAction(JsObject proxy): super(proxy);
-  // TODO:
 }

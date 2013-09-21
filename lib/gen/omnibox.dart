@@ -83,14 +83,40 @@ class ChromeOmnibox {
  * A suggest result.
  */
 class SuggestResult extends ChromeObject {
+  static SuggestResult create(JsObject proxy) => new SuggestResult(proxy);
+
   SuggestResult(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The text that is put into the URL bar, and that is sent to the extension
+   * when the user chooses this entry.
+   */
+  String get content => this.proxy['content'];
+
+  /**
+   * The text that is displayed in the URL dropdown. Can contain XML-style
+   * markup for styling. The supported tags are 'url' (for a literal URL),
+   * 'match' (for highlighting text that matched what the user's query), and
+   * 'dim' (for dim helper text). The styles can be nested, eg.
+   * <dim><match>dimmed match</match></dim>.
+   */
+  String get description => this.proxy['description'];
 }
 
 /**
  * A suggest result.
  */
 class DefaultSuggestResult extends ChromeObject {
+  static DefaultSuggestResult create(JsObject proxy) => new DefaultSuggestResult(proxy);
+
   DefaultSuggestResult(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The text that is displayed in the URL dropdown. Can contain XML-style
+   * markup for styling. The supported tags are 'url' (for a literal URL),
+   * 'match' (for highlighting text that matched what the user's query), and
+   * 'dim' (for dim helper text). The styles can be nested, eg.
+   * <dim><match>dimmed match</match></dim>.
+   */
+  String get description => this.proxy['description'];
 }

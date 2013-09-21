@@ -24,6 +24,7 @@ String toCamelCase(String str) {
       (Match m) => "${m.group(1).toUpperCase()}");
 }
 
+/// fooBar ==> foo_bar
 String fromCamelCase(String str) {
   return str.replaceAllMapped(
       new RegExp(r"[A-Z]"),

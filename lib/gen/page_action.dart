@@ -11,6 +11,7 @@
  */
 library chrome.pageAction;
 
+import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.pageAction` namespace.

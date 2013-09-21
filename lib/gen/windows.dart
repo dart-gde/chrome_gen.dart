@@ -10,6 +10,7 @@
  */
 library chrome.windows;
 
+import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.windows` namespace.
@@ -38,8 +39,8 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future<dynamic> get(int windowId, [Map getInfo]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Window> get(int windowId, [Map getInfo]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
     _windows.callMethod('get', [windowId, jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -49,8 +50,8 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future<dynamic> getCurrent([Map getInfo]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Window> getCurrent([Map getInfo]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
     _windows.callMethod('getCurrent', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -61,8 +62,8 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future<dynamic> getLastFocused([Map getInfo]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Window> getLastFocused([Map getInfo]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
     _windows.callMethod('getLastFocused', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -72,8 +73,8 @@ class ChromeWindows {
    * 
    * [getInfo]
    */
-  Future<List<dynamic>> getAll([Map getInfo]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<Window>> getAll([Map getInfo]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _windows.callMethod('getAll', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -85,8 +86,8 @@ class ChromeWindows {
    * Returns:
    * Contains details about the created window.
    */
-  Future<dynamic> create([Map createData]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Window> create([Map createData]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
     _windows.callMethod('create', [jsify(createData), completer.callback]);
     return completer.future;
   }
@@ -95,8 +96,8 @@ class ChromeWindows {
    * Updates the properties of a window. Specify only the properties that you
    * want to change; unspecified properties will be left unchanged.
    */
-  Future<dynamic> update(int windowId, Map updateInfo) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Window> update(int windowId, Map updateInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
     _windows.callMethod('update', [windowId, jsify(updateInfo), completer.callback]);
     return completer.future;
   }
@@ -139,6 +140,83 @@ class ChromeWindows {
 }
 
 class Window extends ChromeObject {
+  static Window create(JsObject proxy) => new Window(proxy);
+
   Window(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The ID of the window. Window IDs are unique within a browser session. Under
+   * some circumstances a Window may not be assigned an ID, for example when
+   * querying windows using the [sessions] API, in which case a session ID may
+   * be present.
+   */
+  int get id => this.proxy['id'];
+
+  /**
+   * Whether the window is currently the focused window.
+   */
+  bool get focused => this.proxy['focused'];
+
+  /**
+   * The offset of the window from the top edge of the screen in pixels. Under
+   * some circumstances a Window may not be assigned top property, for example
+   * when querying closed windows from the [sessions] API.
+   */
+  int get top => this.proxy['top'];
+
+  /**
+   * The offset of the window from the left edge of the screen in pixels. Under
+   * some circumstances a Window may not be assigned left property, for example
+   * when querying closed windows from the [sessions] API.
+   */
+  int get left => this.proxy['left'];
+
+  /**
+   * The width of the window, including the frame, in pixels. Under some
+   * circumstances a Window may not be assigned width property, for example when
+   * querying closed windows from the [sessions] API.
+   */
+  int get width => this.proxy['width'];
+
+  /**
+   * The height of the window, including the frame, in pixels. Under some
+   * circumstances a Window may not be assigned height property, for example
+   * when querying closed windows from the [sessions] API.
+   */
+  int get height => this.proxy['height'];
+
+  /**
+   * Array of [tabs.Tab] objects representing the current tabs in the window.
+   */
+  List<Tab> get tabs => this.proxy['tabs'];
+
+  /**
+   * Whether the window is incognito.
+   */
+  bool get incognito => this.proxy['incognito'];
+
+  /**
+   * The type of browser window this is. Under some circumstances a Window may
+   * not be assigned type property, for example when querying closed windows
+   * from the [sessions] API.
+   */
+  String get type => this.proxy['type'];
+
+  /**
+   * The state of this browser window. Under some circumstances a Window may not
+   * be assigned state property, for example when querying closed windows from
+   * the [sessions] API.
+   */
+  String get state => this.proxy['state'];
+
+  /**
+   * Whether the window is set to be always on top.
+   */
+  bool get alwaysOnTop => this.proxy['alwaysOnTop'];
+
+  /**
+   * The session ID used to uniquely identify a Window obtained from the
+   * [sessions] API.
+   */
+  String get sessionId => this.proxy['sessionId'];
 }

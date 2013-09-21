@@ -34,7 +34,7 @@ class ChromeFontSettings {
    * Gets the font for a given script and generic font family.
    */
   Future<Map> getFont(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _fontSettings.callMethod('getFont', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -51,8 +51,8 @@ class ChromeFontSettings {
   /**
    * Gets a list of fonts on the system.
    */
-  Future<List<dynamic>> getFontList() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<FontName>> getFontList() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _fontSettings.callMethod('getFontList', [completer.callback]);
     return completer.future;
   }
@@ -74,7 +74,7 @@ class ChromeFontSettings {
    * [details] This parameter is currently unused.
    */
   Future<Map> getDefaultFontSize([var details]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _fontSettings.callMethod('getDefaultFontSize', [details, completer.callback]);
     return completer.future;
   }
@@ -105,7 +105,7 @@ class ChromeFontSettings {
    * [details] This parameter is currently unused.
    */
   Future<Map> getDefaultFixedFontSize([var details]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _fontSettings.callMethod('getDefaultFixedFontSize', [details, completer.callback]);
     return completer.future;
   }
@@ -136,7 +136,7 @@ class ChromeFontSettings {
    * [details] This parameter is currently unused.
    */
   Future<Map> getMinimumFontSize([var details]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _fontSettings.callMethod('getMinimumFontSize', [details, completer.callback]);
     return completer.future;
   }
@@ -187,8 +187,19 @@ class ChromeFontSettings {
  * Represents a font name.
  */
 class FontName extends ChromeObject {
+  static FontName create(JsObject proxy) => new FontName(proxy);
+
   FontName(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The font ID.
+   */
+  String get fontId => this.proxy['fontId'];
+
+  /**
+   * The display name of the font.
+   */
+  String get displayName => this.proxy['displayName'];
 }
 
 /**
@@ -196,16 +207,18 @@ class FontName extends ChromeObject {
  * script code "Zyyy".
  */
 class ScriptCode extends ChromeObject {
+  static ScriptCode create(JsObject proxy) => new ScriptCode(proxy);
+
   ScriptCode(JsObject proxy): super(proxy);
-  // TODO:
 }
 
 /**
  * A CSS generic font family.
  */
 class GenericFamily extends ChromeObject {
+  static GenericFamily create(JsObject proxy) => new GenericFamily(proxy);
+
   GenericFamily(JsObject proxy): super(proxy);
-  // TODO:
 }
 
 /**
@@ -216,6 +229,7 @@ class GenericFamily extends ChromeObject {
  * extension
  */
 class LevelOfControl extends ChromeObject {
+  static LevelOfControl create(JsObject proxy) => new LevelOfControl(proxy);
+
   LevelOfControl(JsObject proxy): super(proxy);
-  // TODO:
 }

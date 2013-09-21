@@ -15,6 +15,7 @@
  */
 library chrome.ttsEngine;
 
+import 'tts.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.ttsEngine` namespace.

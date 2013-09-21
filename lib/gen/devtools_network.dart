@@ -29,7 +29,7 @@ class ChromeDevtoolsNetwork {
    * A HAR log. See HAR specification for details.
    */
   Future<dynamic> getHAR() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _devtools_network.callMethod('getHAR', [completer.callback]);
     return completer.future;
   }
@@ -57,6 +57,7 @@ class ChromeDevtoolsNetwork {
  * on). See HAR Specification for reference.
  */
 class Request extends ChromeObject {
+  static Request create(JsObject proxy) => new Request(proxy);
+
   Request(JsObject proxy): super(proxy);
-  // TODO:
 }

@@ -10,6 +10,8 @@
  */
 library chrome.tabs;
 
+import 'runtime.dart';
+import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.tabs` namespace.
@@ -25,8 +27,8 @@ class ChromeTabs {
   /**
    * Retrieves details about the specified tab.
    */
-  Future<dynamic> get(int tabId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Tab> get(int tabId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
     _tabs.callMethod('get', [tabId, completer.callback]);
     return completer.future;
   }
@@ -36,8 +38,8 @@ class ChromeTabs {
    * called from a non-tab context (for example: a background page or popup
    * view).
    */
-  Future<dynamic> getCurrent() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Tab> getCurrent() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
     _tabs.callMethod('getCurrent', [completer.callback]);
     return completer.future;
   }
@@ -53,7 +55,7 @@ class ChromeTabs {
    * the specified tab. The port's [runtime.Port] event is fired if the tab
    * closes or does not exist.
    */
-  dynamic connect(int tabId, [Map connectInfo]) {
+  Port connect(int tabId, [Map connectInfo]) {
     return _tabs.callMethod('connect', [tabId, jsify(connectInfo)]);
   }
 
@@ -66,7 +68,7 @@ class ChromeTabs {
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendRequest(int tabId, var request) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _tabs.callMethod('sendRequest', [tabId, request, completer.callback]);
     return completer.future;
   }
@@ -83,7 +85,7 @@ class ChromeTabs {
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendMessage(int tabId, var message) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _tabs.callMethod('sendMessage', [tabId, message, completer.callback]);
     return completer.future;
   }
@@ -94,8 +96,8 @@ class ChromeTabs {
    * 
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
-  Future<dynamic> getSelected([int windowId]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Tab> getSelected([int windowId]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
     _tabs.callMethod('getSelected', [windowId, completer.callback]);
     return completer.future;
   }
@@ -106,8 +108,8 @@ class ChromeTabs {
    * 
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
-  Future<List<dynamic>> getAllInWindow([int windowId]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<Tab>> getAllInWindow([int windowId]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _tabs.callMethod('getAllInWindow', [windowId, completer.callback]);
     return completer.future;
   }
@@ -118,8 +120,8 @@ class ChromeTabs {
    * Returns:
    * Details about the created tab. Will contain the ID of the new tab.
    */
-  Future<dynamic> create(Map createProperties) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Tab> create(Map createProperties) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
     _tabs.callMethod('create', [jsify(createProperties), completer.callback]);
     return completer.future;
   }
@@ -134,8 +136,8 @@ class ChromeTabs {
    * `url`, `title` and `favIconUrl` if the `"tabs"` permission has not been
    * requested.
    */
-  Future<dynamic> duplicate(int tabId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Tab> duplicate(int tabId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
     _tabs.callMethod('duplicate', [tabId, completer.callback]);
     return completer.future;
   }
@@ -144,8 +146,8 @@ class ChromeTabs {
    * Gets all tabs that have the specified properties, or all tabs if no
    * properties are specified.
    */
-  Future<List<dynamic>> query(Map queryInfo) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<Tab>> query(Map queryInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
     return completer.future;
   }
@@ -156,8 +158,8 @@ class ChromeTabs {
    * Returns:
    * Contains details about the window whose tabs were highlighted.
    */
-  Future<dynamic> highlight(Map highlightInfo) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Window> highlight(Map highlightInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
     _tabs.callMethod('highlight', [jsify(highlightInfo), completer.callback]);
     return completer.future;
   }
@@ -173,8 +175,8 @@ class ChromeTabs {
    * Details about the updated tab. The [tabs.Tab] object doesn't contain `url`,
    * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
    */
-  Future<dynamic> update(Map updateProperties, [int tabId]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Tab> update(Map updateProperties, [int tabId]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
     _tabs.callMethod('update', [tabId, jsify(updateProperties), completer.callback]);
     return completer.future;
   }
@@ -190,7 +192,7 @@ class ChromeTabs {
    * Details about the moved tabs.
    */
   Future<dynamic> move(var tabIds, Map moveProperties) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _tabs.callMethod('move', [tabIds, jsify(moveProperties), completer.callback]);
     return completer.future;
   }
@@ -272,7 +274,7 @@ class ChromeTabs {
    * The result of the script in every injected frame.
    */
   Future<List<dynamic>> executeScript(var details, [int tabId]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
     _tabs.callMethod('executeScript', [tabId, details, completer.callback]);
     return completer.future;
   }
@@ -400,8 +402,94 @@ class ChromeTabs {
 }
 
 class Tab extends ChromeObject {
+  static Tab create(JsObject proxy) => new Tab(proxy);
+
   Tab(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The ID of the tab. Tab IDs are unique within a browser session. Under some
+   * circumstances a Tab may not be assigned an ID, for example when querying
+   * foreign tabs using the [sessions] API, in which case a session ID may be
+   * present.
+   */
+  int get id => this.proxy['id'];
+
+  /**
+   * The zero-based index of the tab within its window.
+   */
+  int get index => this.proxy['index'];
+
+  /**
+   * The ID of the window the tab is contained within.
+   */
+  int get windowId => this.proxy['windowId'];
+
+  /**
+   * The ID of the tab that opened this tab, if any. This property is only
+   * present if the opener tab still exists.
+   */
+  int get openerTabId => this.proxy['openerTabId'];
+
+  /**
+   * Whether the tab is highlighted.
+   */
+  bool get highlighted => this.proxy['highlighted'];
+
+  /**
+   * Whether the tab is active in its window. (Does not necessarily mean the
+   * window is focused.)
+   */
+  bool get active => this.proxy['active'];
+
+  /**
+   * Whether the tab is pinned.
+   */
+  bool get pinned => this.proxy['pinned'];
+
+  /**
+   * The URL the tab is displaying. This property is only present if the
+   * extension's manifest includes the `"tabs"` permission.
+   */
+  String get url => this.proxy['url'];
+
+  /**
+   * The title of the tab. This property is only present if the extension's
+   * manifest includes the `"tabs"` permission.
+   */
+  String get title => this.proxy['title'];
+
+  /**
+   * The URL of the tab's favicon. This property is only present if the
+   * extension's manifest includes the `"tabs"` permission. It may also be an
+   * empty string if the tab is loading.
+   */
+  String get favIconUrl => this.proxy['favIconUrl'];
+
+  /**
+   * Either _loading_ or _complete_.
+   */
+  String get status => this.proxy['status'];
+
+  /**
+   * Whether the tab is in an incognito window.
+   */
+  bool get incognito => this.proxy['incognito'];
+
+  /**
+   * The width of the tab in pixels.
+   */
+  int get width => this.proxy['width'];
+
+  /**
+   * The height of the tab in pixels.
+   */
+  int get height => this.proxy['height'];
+
+  /**
+   * The session ID used to uniquely identify a Tab obtained from the [sessions]
+   * API.
+   */
+  String get sessionId => this.proxy['sessionId'];
 }
 
 /**
@@ -409,6 +497,30 @@ class Tab extends ChromeObject {
  * must be set, but both may not be set at the same time.
  */
 class InjectDetails extends ChromeObject {
+  static InjectDetails create(JsObject proxy) => new InjectDetails(proxy);
+
   InjectDetails(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * JavaScript or CSS code to inject.
+   */
+  String get code => this.proxy['code'];
+
+  /**
+   * JavaScript or CSS file to inject.
+   */
+  String get file => this.proxy['file'];
+
+  /**
+   * If allFrames is `true`, implies that the JavaScript or CSS should be
+   * injected into all frames of current page. By default, it's `false` and is
+   * only injected into the top frame.
+   */
+  bool get allFrames => this.proxy['allFrames'];
+
+  /**
+   * The soonest that the JavaScript or CSS will be injected into the tab.
+   * Defaults to "document_idle".
+   */
+  String get runAt => this.proxy['runAt'];
 }

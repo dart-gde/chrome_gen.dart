@@ -127,8 +127,25 @@ class ChromeWebRequest {
  * An object describing filters to apply to webRequest events.
  */
 class RequestFilter extends ChromeObject {
+  static RequestFilter create(JsObject proxy) => new RequestFilter(proxy);
+
   RequestFilter(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * A list of URLs or URL patterns. Requests that cannot match any of the URLs
+   * will be filtered out.
+   */
+  List<String> get urls => listify(this.proxy['urls']);
+
+  /**
+   * A list of request types. Requests that cannot match any of the types will
+   * be filtered out.
+   */
+  List<String> get types => listify(this.proxy['types']);
+
+  int get tabId => this.proxy['tabId'];
+
+  int get windowId => this.proxy['windowId'];
 }
 
 /**
@@ -136,8 +153,9 @@ class RequestFilter extends ChromeObject {
  * containing the keys `name` and either `value` or `binaryValue`.
  */
 class HttpHeaders extends ChromeObject {
+  static HttpHeaders create(JsObject proxy) => new HttpHeaders(proxy);
+
   HttpHeaders(JsObject proxy): super(proxy);
-  // TODO:
 }
 
 /**
@@ -145,14 +163,60 @@ class HttpHeaders extends ChromeObject {
  * applied. Allows the event handler to modify network requests.
  */
 class BlockingResponse extends ChromeObject {
+  static BlockingResponse create(JsObject proxy) => new BlockingResponse(proxy);
+
   BlockingResponse(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * If true, the request is cancelled. Used in onBeforeRequest, this prevents
+   * the request from being sent.
+   */
+  bool get cancel => this.proxy['cancel'];
+
+  /**
+   * Only used as a response to the onBeforeRequest event. If set, the original
+   * request is prevented from being sent and is instead redirected to the given
+   * URL.
+   */
+  String get redirectUrl => this.proxy['redirectUrl'];
+
+  /**
+   * Only used as a response to the onBeforeSendHeaders event. If set, the
+   * request is made with these request headers instead.
+   */
+  HttpHeaders get requestHeaders => new HttpHeaders(this.proxy['requestHeaders']);
+
+  /**
+   * Only used as a response to the onHeadersReceived event. If set, the server
+   * is assumed to have responded with these response headers instead. Only
+   * return `responseHeaders` if you really want to modify the headers in order
+   * to limit the number of conflicts (only one extension may modify
+   * `responseHeaders` for each request).
+   */
+  HttpHeaders get responseHeaders => new HttpHeaders(this.proxy['responseHeaders']);
+
+  /**
+   * Only used as a response to the onAuthRequired event. If set, the request is
+   * made using the supplied credentials.
+   */
+  Map get authCredentials => mapify(this.proxy['authCredentials']);
 }
 
 /**
  * Contains data uploaded in a URL request.
  */
 class UploadData extends ChromeObject {
+  static UploadData create(JsObject proxy) => new UploadData(proxy);
+
   UploadData(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * An ArrayBuffer with a copy of the data.
+   */
+  dynamic get bytes => this.proxy['bytes'];
+
+  /**
+   * A string with the file's path and name.
+   */
+  String get file => this.proxy['file'];
 }

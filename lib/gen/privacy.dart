@@ -12,6 +12,7 @@
  */
 library chrome.privacy;
 
+import 'types.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.privacy` namespace.
@@ -28,17 +29,17 @@ class ChromePrivacy {
    * Settings that influence Chrome's handling of network connections in
    * general.
    */
-  Map get network => _privacy['network'];
+  Map get network => mapify(_privacy['network']);
 
   /**
    * Settings that enable or disable features that require third-party network
    * services provided by Google and your default search provider.
    */
-  Map get services => _privacy['services'];
+  Map get services => mapify(_privacy['services']);
 
   /**
    * Settings that determine what information Chrome makes available to
    * websites.
    */
-  Map get websites => _privacy['websites'];
+  Map get websites => mapify(_privacy['websites']);
 }

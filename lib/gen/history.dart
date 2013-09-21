@@ -28,8 +28,8 @@ class ChromeHistory {
    * Searches the history for the last visit time of each page matching the
    * query.
    */
-  Future<List<dynamic>> search(Map query) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<HistoryItem>> search(Map query) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _history.callMethod('search', [jsify(query), completer.callback]);
     return completer.future;
   }
@@ -37,8 +37,8 @@ class ChromeHistory {
   /**
    * Retrieves information about visits to a URL.
    */
-  Future<List<dynamic>> getVisits(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<VisitItem>> getVisits(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _history.callMethod('getVisits', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -105,14 +105,73 @@ class ChromeHistory {
  * An object encapsulating one result of a history query.
  */
 class HistoryItem extends ChromeObject {
+  static HistoryItem create(JsObject proxy) => new HistoryItem(proxy);
+
   HistoryItem(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The unique identifier for the item.
+   */
+  String get id => this.proxy['id'];
+
+  /**
+   * The URL navigated to by a user.
+   */
+  String get url => this.proxy['url'];
+
+  /**
+   * The title of the page when it was last loaded.
+   */
+  String get title => this.proxy['title'];
+
+  /**
+   * When this page was last loaded, represented in milliseconds since the
+   * epoch.
+   */
+  dynamic get lastVisitTime => this.proxy['lastVisitTime'];
+
+  /**
+   * The number of times the user has navigated to this page.
+   */
+  int get visitCount => this.proxy['visitCount'];
+
+  /**
+   * The number of times the user has navigated to this page by typing in the
+   * address.
+   */
+  int get typedCount => this.proxy['typedCount'];
 }
 
 /**
  * An object encapsulating one visit to a URL.
  */
 class VisitItem extends ChromeObject {
+  static VisitItem create(JsObject proxy) => new VisitItem(proxy);
+
   VisitItem(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The unique identifier for the item.
+   */
+  String get id => this.proxy['id'];
+
+  /**
+   * The unique identifier for this visit.
+   */
+  String get visitId => this.proxy['visitId'];
+
+  /**
+   * When this visit occurred, represented in milliseconds since the epoch.
+   */
+  dynamic get visitTime => this.proxy['visitTime'];
+
+  /**
+   * The visit ID of the referrer.
+   */
+  String get referringVisitId => this.proxy['referringVisitId'];
+
+  /**
+   * The [transition type](#transition_types) for this visit from its referrer.
+   */
+  String get transition => this.proxy['transition'];
 }

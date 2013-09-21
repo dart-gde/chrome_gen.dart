@@ -43,7 +43,7 @@ class ChromeDevtoolsInspectedWindow {
    * expression.
    */
   Future<JsObject> eval(String expression) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
     return completer.future;
   }
@@ -61,8 +61,8 @@ class ChromeDevtoolsInspectedWindow {
    * Returns:
    * The resources within the page.
    */
-  Future<List<dynamic>> getResources() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<Resource>> getResources() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
     return completer.future;
   }
@@ -90,6 +90,12 @@ class ChromeDevtoolsInspectedWindow {
  * image.
  */
 class Resource extends ChromeObject {
+  static Resource create(JsObject proxy) => new Resource(proxy);
+
   Resource(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The URL of the resource.
+   */
+  String get url => this.proxy['url'];
 }

@@ -29,7 +29,7 @@ class ChromeBrowsingData {
    * one data type listed here.
    */
   Future<Map> settings() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _browsingData.callMethod('settings', [completer.callback]);
     return completer.future;
   }
@@ -160,14 +160,98 @@ class ChromeBrowsingData {
  * Options that determine exactly what data will be removed.
  */
 class RemovalOptions extends ChromeObject {
+  static RemovalOptions create(JsObject proxy) => new RemovalOptions(proxy);
+
   RemovalOptions(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * Remove data accumulated on or after this date, represented in milliseconds
+   * since the epoch (accessible via the `getTime` method of the JavaScript
+   * `Date` object). If absent, defaults to 0 (which would remove all browsing
+   * data).
+   */
+  dynamic get since => this.proxy['since'];
+
+  /**
+   * An object whose properties specify which origin types ought to be cleared.
+   * If this object isn't specified, it defaults to clearing only "unprotected"
+   * origins. Please ensure that you _really_ want to remove application data
+   * before adding 'protectedWeb' or 'extensions'.
+   */
+  Map get originTypes => mapify(this.proxy['originTypes']);
 }
 
 /**
  * A set of data types. Missing data types are interpreted as `false`.
  */
 class DataTypeSet extends ChromeObject {
+  static DataTypeSet create(JsObject proxy) => new DataTypeSet(proxy);
+
   DataTypeSet(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * Websites' appcaches.
+   */
+  bool get appcache => this.proxy['appcache'];
+
+  /**
+   * The browser's cache. Note: when removing data, this clears the _entire_
+   * cache: it is not limited to the range you specify.
+   */
+  bool get cache => this.proxy['cache'];
+
+  /**
+   * The browser's cookies.
+   */
+  bool get cookies => this.proxy['cookies'];
+
+  /**
+   * The browser's download list.
+   */
+  bool get downloads => this.proxy['downloads'];
+
+  /**
+   * Websites' file systems.
+   */
+  bool get fileSystems => this.proxy['fileSystems'];
+
+  /**
+   * The browser's stored form data.
+   */
+  bool get formData => this.proxy['formData'];
+
+  /**
+   * The browser's history.
+   */
+  bool get history => this.proxy['history'];
+
+  /**
+   * Websites' IndexedDB data.
+   */
+  bool get indexedDB => this.proxy['indexedDB'];
+
+  /**
+   * Websites' local storage data.
+   */
+  bool get localStorage => this.proxy['localStorage'];
+
+  /**
+   * Server-bound certificates.
+   */
+  bool get serverBoundCertificates => this.proxy['serverBoundCertificates'];
+
+  /**
+   * Plugins' data.
+   */
+  bool get pluginData => this.proxy['pluginData'];
+
+  /**
+   * Stored passwords.
+   */
+  bool get passwords => this.proxy['passwords'];
+
+  /**
+   * Websites' WebSQL data.
+   */
+  bool get webSQL => this.proxy['webSQL'];
 }

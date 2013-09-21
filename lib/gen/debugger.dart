@@ -71,7 +71,7 @@ class ChromeDebugger {
    * on the method and is defined by the remote debugging protocol.
    */
   Future<dynamic> sendCommand(var target, String method, [var commandParams]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _debugger.callMethod('sendCommand', [target, method, commandParams, completer.callback]);
     return completer.future;
   }
@@ -82,8 +82,8 @@ class ChromeDebugger {
    * Returns:
    * Array of TargetInfo objects corresponding to the available debug targets.
    */
-  Future<List<dynamic>> getTargets() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<TargetInfo>> getTargets() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _debugger.callMethod('getTargets', [completer.callback]);
     return completer.future;
   }
@@ -111,14 +111,73 @@ class ChromeDebugger {
  * Debuggee identifier. Either tabId or extensionId must be specified
  */
 class Debuggee extends ChromeObject {
+  static Debuggee create(JsObject proxy) => new Debuggee(proxy);
+
   Debuggee(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The id of the tab which you intend to debug.
+   */
+  int get tabId => this.proxy['tabId'];
+
+  /**
+   * The id of the extension which you intend to debug. Attaching to an
+   * extension background page is only possible when 'enable-silent-debugging'
+   * flag is enabled on the target browser.
+   */
+  String get extensionId => this.proxy['extensionId'];
+
+  /**
+   * The opaque id of the debug target.
+   */
+  String get targetId => this.proxy['targetId'];
 }
 
 /**
  * Debug target information
  */
 class TargetInfo extends ChromeObject {
+  static TargetInfo create(JsObject proxy) => new TargetInfo(proxy);
+
   TargetInfo(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * Target type.
+   */
+  String get type => this.proxy['type'];
+
+  /**
+   * Target id.
+   */
+  String get id => this.proxy['id'];
+
+  /**
+   * The tab id, defined if type == 'page'.
+   */
+  int get tabId => this.proxy['tabId'];
+
+  /**
+   * The extension id, defined if type = 'background_page'.
+   */
+  String get extensionId => this.proxy['extensionId'];
+
+  /**
+   * True if debugger is already attached.
+   */
+  bool get attached => this.proxy['attached'];
+
+  /**
+   * Target page title.
+   */
+  String get title => this.proxy['title'];
+
+  /**
+   * Target URL.
+   */
+  String get url => this.proxy['url'];
+
+  /**
+   * Target favicon URL.
+   */
+  String get faviconUrl => this.proxy['faviconUrl'];
 }

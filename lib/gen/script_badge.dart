@@ -10,6 +10,7 @@
  */
 library chrome.scriptBadge;
 
+import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.scriptBadge` namespace.

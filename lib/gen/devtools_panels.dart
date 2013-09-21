@@ -11,6 +11,7 @@
  */
 library chrome.devtools_panels;
 
+import 'devtools_inspected_window.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.devtools.panels` namespace.
@@ -26,7 +27,7 @@ class ChromeDevtoolsPanels {
   /**
    * Elements panel.
    */
-  dynamic get elements => _devtools_panels['elements'];
+  ElementsPanel get elements => new ElementsPanel(_devtools_panels['elements']);
 
   /**
    * Creates an extension panel.
@@ -42,8 +43,8 @@ class ChromeDevtoolsPanels {
    * Returns:
    * An ExtensionPanel object representing the created panel.
    */
-  Future<dynamic> create(String title, String iconPath, String pagePath) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<ExtensionPanel> create(String title, String iconPath, String pagePath) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionPanel.create);
     _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
     return completer.future;
   }
@@ -57,8 +58,8 @@ class ChromeDevtoolsPanels {
    * A [devtools.inspectedWindow.Resource] object for the resource that was
    * clicked.
    */
-  Future<dynamic> setOpenResourceHandler() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Resource> setOpenResourceHandler() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Resource.create);
     _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
     return completer.future;
   }
@@ -68,30 +69,34 @@ class ChromeDevtoolsPanels {
  * Represents the Elements panel.
  */
 class ElementsPanel extends ChromeObject {
+  static ElementsPanel create(JsObject proxy) => new ElementsPanel(proxy);
+
   ElementsPanel(JsObject proxy): super(proxy);
-  // TODO:
 }
 
 /**
  * Represents a panel created by extension.
  */
 class ExtensionPanel extends ChromeObject {
+  static ExtensionPanel create(JsObject proxy) => new ExtensionPanel(proxy);
+
   ExtensionPanel(JsObject proxy): super(proxy);
-  // TODO:
 }
 
 /**
  * A sidebar created by the extension.
  */
 class ExtensionSidebarPane extends ChromeObject {
+  static ExtensionSidebarPane create(JsObject proxy) => new ExtensionSidebarPane(proxy);
+
   ExtensionSidebarPane(JsObject proxy): super(proxy);
-  // TODO:
 }
 
 /**
  * A button created by the extension.
  */
 class Button extends ChromeObject {
+  static Button create(JsObject proxy) => new Button(proxy);
+
   Button(JsObject proxy): super(proxy);
-  // TODO:
 }

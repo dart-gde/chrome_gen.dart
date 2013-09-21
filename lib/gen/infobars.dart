@@ -10,6 +10,7 @@
  */
 library chrome.infobars;
 
+import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.infobars` namespace.
@@ -30,8 +31,8 @@ class ChromeInfobars {
    * Returns:
    * Contains details about the window in which the infobar was created.
    */
-  Future<dynamic> show(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Window> show(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
     _infobars.callMethod('show', [jsify(details), completer.callback]);
     return completer.future;
   }

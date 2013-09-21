@@ -11,6 +11,7 @@
  */
 library chrome.proxy;
 
+import 'types.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.proxy` namespace.
@@ -27,7 +28,7 @@ class ChromeProxy {
    * Proxy settings to be used. The value of this setting is a ProxyConfig
    * object.
    */
-  dynamic get settings => _proxy['settings'];
+  ChromeSetting get settings => new ChromeSetting(_proxy['settings']);
 
   /**
    * Notifies about proxy errors.
@@ -42,8 +43,26 @@ class ChromeProxy {
  * An object encapsulating a single proxy server's specification.
  */
 class ProxyServer extends ChromeObject {
+  static ProxyServer create(JsObject proxy) => new ProxyServer(proxy);
+
   ProxyServer(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The scheme (protocol) of the proxy server itself. Defaults to 'http'.
+   */
+  String get scheme => this.proxy['scheme'];
+
+  /**
+   * The URI of the proxy server. This must be an ASCII hostname (in Punycode
+   * format). IDNA is not supported, yet.
+   */
+  String get host => this.proxy['host'];
+
+  /**
+   * The port of the proxy server. Defaults to a port that depends on the
+   * scheme.
+   */
+  int get port => this.proxy['port'];
 }
 
 /**
@@ -52,8 +71,41 @@ class ProxyServer extends ChromeObject {
  * and 'fallbackProxy'.
  */
 class ProxyRules extends ChromeObject {
+  static ProxyRules create(JsObject proxy) => new ProxyRules(proxy);
+
   ProxyRules(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The proxy server to be used for all per-URL requests (that is http, https,
+   * and ftp).
+   */
+  ProxyServer get singleProxy => new ProxyServer(this.proxy['singleProxy']);
+
+  /**
+   * The proxy server to be used for HTTP requests.
+   */
+  ProxyServer get proxyForHttp => new ProxyServer(this.proxy['proxyForHttp']);
+
+  /**
+   * The proxy server to be used for HTTPS requests.
+   */
+  ProxyServer get proxyForHttps => new ProxyServer(this.proxy['proxyForHttps']);
+
+  /**
+   * The proxy server to be used for FTP requests.
+   */
+  ProxyServer get proxyForFtp => new ProxyServer(this.proxy['proxyForFtp']);
+
+  /**
+   * The proxy server to be used for everthing else or if any of the specific
+   * proxyFor... is not specified.
+   */
+  ProxyServer get fallbackProxy => new ProxyServer(this.proxy['fallbackProxy']);
+
+  /**
+   * List of servers to connect to without a proxy server.
+   */
+  List<String> get bypassList => listify(this.proxy['bypassList']);
 }
 
 /**
@@ -61,14 +113,51 @@ class ProxyRules extends ChromeObject {
  * should be non-empty.
  */
 class PacScript extends ChromeObject {
+  static PacScript create(JsObject proxy) => new PacScript(proxy);
+
   PacScript(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * URL of the PAC file to be used.
+   */
+  String get url => this.proxy['url'];
+
+  /**
+   * A PAC script.
+   */
+  String get data => this.proxy['data'];
+
+  /**
+   * If true, an invalid PAC script will prevent the network stack from falling
+   * back to direct connections. Defaults to false.
+   */
+  bool get mandatory => this.proxy['mandatory'];
 }
 
 /**
  * An object encapsulating a complete proxy configuration.
  */
 class ProxyConfig extends ChromeObject {
+  static ProxyConfig create(JsObject proxy) => new ProxyConfig(proxy);
+
   ProxyConfig(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The proxy rules describing this configuration. Use this for 'fixed_servers'
+   * mode.
+   */
+  ProxyRules get rules => new ProxyRules(this.proxy['rules']);
+
+  /**
+   * The proxy auto-config (PAC) script for this configuration. Use this for
+   * 'pac_script' mode.
+   */
+  PacScript get pacScript => new PacScript(this.proxy['pacScript']);
+
+  /**
+   * 'direct' = Never use a proxy<br>'auto_detect' = Auto detect proxy
+   * settings<br>'pac_script' = Use specified PAC script<br>'fixed_servers' =
+   * Manually specify proxy servers<br>'system' = Use system proxy settings
+   */
+  String get mode => this.proxy['mode'];
 }

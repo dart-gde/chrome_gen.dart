@@ -25,8 +25,8 @@ class ChromeTopSites {
   /**
    * Gets a list of top sites.
    */
-  Future<List<dynamic>> get() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<MostVisitedURL>> get() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _topSites.callMethod('get', [completer.callback]);
     return completer.future;
   }
@@ -37,6 +37,17 @@ class ChromeTopSites {
  * page.
  */
 class MostVisitedURL extends ChromeObject {
+  static MostVisitedURL create(JsObject proxy) => new MostVisitedURL(proxy);
+
   MostVisitedURL(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The most visited URL.
+   */
+  String get url => this.proxy['url'];
+
+  /**
+   * The title of the page
+   */
+  String get title => this.proxy['title'];
 }

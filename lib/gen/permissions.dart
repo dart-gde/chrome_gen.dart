@@ -30,8 +30,8 @@ class ChromePermissions {
    * Returns:
    * The extension's active permissions.
    */
-  Future<dynamic> getAll() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<Permissions> getAll() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Permissions.create);
     _permissions.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -43,7 +43,7 @@ class ChromePermissions {
    * True if the extension has the specified permissions.
    */
   Future<bool> contains(var permissions) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _permissions.callMethod('contains', [permissions, completer.callback]);
     return completer.future;
   }
@@ -57,7 +57,7 @@ class ChromePermissions {
    * True if the user granted the specified permissions.
    */
   Future<bool> request(var permissions) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _permissions.callMethod('request', [permissions, completer.callback]);
     return completer.future;
   }
@@ -70,7 +70,7 @@ class ChromePermissions {
    * True if the permissions were removed.
    */
   Future<bool> remove(var permissions) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _permissions.callMethod('remove', [permissions, completer.callback]);
     return completer.future;
   }
@@ -93,6 +93,17 @@ class ChromePermissions {
 }
 
 class Permissions extends ChromeObject {
+  static Permissions create(JsObject proxy) => new Permissions(proxy);
+
   Permissions(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * List of named permissions (does not include hosts or origins).
+   */
+  List<String> get permissions => listify(this.proxy['permissions']);
+
+  /**
+   * List of origin permissions.
+   */
+  List<String> get origins => listify(this.proxy['origins']);
 }

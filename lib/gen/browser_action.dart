@@ -12,6 +12,7 @@
  */
 library chrome.browserAction;
 
+import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.browserAction` namespace.
@@ -97,8 +98,8 @@ class ChromeBrowserAction {
   /**
    * Gets the background color of the browser action.
    */
-  Future<dynamic> getBadgeBackgroundColor(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<ColorArray> getBadgeBackgroundColor(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ColorArray.create);
     _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -133,8 +134,9 @@ class ChromeBrowserAction {
 }
 
 class ColorArray extends ChromeObject {
+  static ColorArray create(JsObject proxy) => new ColorArray(proxy);
+
   ColorArray(JsObject proxy): super(proxy);
-  // TODO:
 }
 
 /**
@@ -142,6 +144,7 @@ class ColorArray extends ChromeObject {
  * `canvas` element).
  */
 class ImageDataType extends ChromeObject {
+  static ImageDataType create(JsObject proxy) => new ImageDataType(proxy);
+
   ImageDataType(JsObject proxy): super(proxy);
-  // TODO:
 }

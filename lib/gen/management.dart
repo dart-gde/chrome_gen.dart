@@ -26,8 +26,8 @@ class ChromeManagement {
   /**
    * Returns a list of information about installed extensions and apps.
    */
-  Future<List<dynamic>> getAll() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<List<ExtensionInfo>> getAll() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _management.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -38,8 +38,8 @@ class ChromeManagement {
    * 
    * [id] The ID from an item of [ExtensionInfo.]
    */
-  Future<dynamic> get(String id) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+  Future<ExtensionInfo> get(String id) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionInfo.create);
     _management.callMethod('get', [id, completer.callback]);
     return completer.future;
   }
@@ -151,14 +151,123 @@ class ChromeManagement {
  * Information about an icon belonging to an extension, app, or theme.
  */
 class IconInfo extends ChromeObject {
+  static IconInfo create(JsObject proxy) => new IconInfo(proxy);
+
   IconInfo(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * A number representing the width and height of the icon. Likely values
+   * include (but are not limited to) 128, 48, 24, and 16.
+   */
+  int get size => this.proxy['size'];
+
+  /**
+   * The URL for this icon image. To display a grayscale version of the icon (to
+   * indicate that an extension is disabled, for example), append
+   * `?grayscale=true` to the URL.
+   */
+  String get url => this.proxy['url'];
 }
 
 /**
  * Information about an installed extension, app, or theme.
  */
 class ExtensionInfo extends ChromeObject {
+  static ExtensionInfo create(JsObject proxy) => new ExtensionInfo(proxy);
+
   ExtensionInfo(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * The extension's unique identifier.
+   */
+  String get id => this.proxy['id'];
+
+  /**
+   * The name of this extension, app, or theme.
+   */
+  String get name => this.proxy['name'];
+
+  /**
+   * The description of this extension, app, or theme.
+   */
+  String get description => this.proxy['description'];
+
+  /**
+   * The [version](manifest/version.html) of this extension, app, or theme.
+   */
+  String get version => this.proxy['version'];
+
+  /**
+   * Whether this extension can be disabled or uninstalled by the user.
+   */
+  bool get mayDisable => this.proxy['mayDisable'];
+
+  /**
+   * Whether it is currently enabled or disabled.
+   */
+  bool get enabled => this.proxy['enabled'];
+
+  /**
+   * A reason the item is disabled.
+   */
+  String get disabledReason => this.proxy['disabledReason'];
+
+  /**
+   * The type of this extension, app, or theme.
+   */
+  String get type => this.proxy['type'];
+
+  /**
+   * The launch url (only present for apps).
+   */
+  String get appLaunchUrl => this.proxy['appLaunchUrl'];
+
+  /**
+   * The URL of the homepage of this extension, app, or theme.
+   */
+  String get homepageUrl => this.proxy['homepageUrl'];
+
+  /**
+   * The update URL of this extension, app, or theme.
+   */
+  String get updateUrl => this.proxy['updateUrl'];
+
+  /**
+   * Whether the extension, app, or theme declares that it supports offline.
+   */
+  bool get offlineEnabled => this.proxy['offlineEnabled'];
+
+  /**
+   * The url for the item's options page, if it has one.
+   */
+  String get optionsUrl => this.proxy['optionsUrl'];
+
+  /**
+   * A list of icon information. Note that this just reflects what was declared
+   * in the manifest, and the actual image at that url may be larger or smaller
+   * than what was declared, so you might consider using explicit width and
+   * height attributes on img tags referencing these images. See the [manifest
+   * documentation on icons](manifest/icons.html) for more details.
+   */
+  List<IconInfo> get icons => this.proxy['icons'];
+
+  /**
+   * Returns a list of API based permissions.
+   */
+  List<String> get permissions => listify(this.proxy['permissions']);
+
+  /**
+   * Returns a list of host based permissions.
+   */
+  List<String> get hostPermissions => listify(this.proxy['hostPermissions']);
+
+  /**
+   * How the extension was installed. One of<br>[admin]: The extension was
+   * installed because of an administrative policy,<br>[development]: The
+   * extension was loaded unpacked in developer mode,<br>[normal]: The extension
+   * was installed normally via a .crx file,<br>[sideload]: The extension was
+   * installed by other software on the machine,<br>[other]: The extension was
+   * installed by other means.
+   */
+  String get installType => this.proxy['installType'];
 }

@@ -48,6 +48,10 @@ class DefaultBackend extends Backend {
     generator.writeln("library chrome.${libraryName};");
     generator.writeln();
 
+    library.imports.forEach((String str) {
+      str = fromCamelCase(str.replaceAll('.', '_'));
+      generator.writeln("import '${str}.dart';");
+    });
     generator.writeln("import '../src/common.dart';");
     generator.writeln();
 
@@ -95,19 +99,32 @@ class DefaultBackend extends Backend {
         "context['chrome']['${sections.join('\'][\'')}'];");
     generator.writeln("}");
 
-    library.properties.forEach((p) => _printProperty(p));
-    library.methods.forEach((m) => _printMethod(m));
-    library.events.forEach((e) => _printEvent(e));
+    library.properties.forEach((p) => _printProperty(p, contextReference));
+    library.methods.forEach(_printMethod);
+    library.events.forEach(_printEvent);
 
     generator.writeln("}");
   }
 
-  void _printProperty(ChromeProperty property) {
+  void _printProperty(ChromeProperty property, String refString) {
+    if (property.nodoc) {
+      return;
+    }
+
+    String converter = getReturnConverter(property.type, preferCtor: true);
+
     generator.writeln();
     generator.writeDocs(property.documentation);
     generator.write("${property.type.toReturnString()} ");
     generator.write("get ${property.name} => ");
-    generator.writeln("${contextReference}['${property.name}'];");
+    if (converter != null) {
+      generator.write('${converter}(');
+    }
+    generator.write("${refString}['${property.name}']");
+    if (converter != null) {
+      generator.write(')');
+    }
+    generator.writeln(';');
   }
 
   void _printMethod(ChromeMethod method) {
@@ -184,29 +201,48 @@ class DefaultBackend extends Backend {
     generator.writeln();
     generator.writeDocs(type.documentation);
     generator.writeln("class ${type.name} extends ChromeObject {");
+    generator.writeln("static ${type.name} create(JsObject proxy) => new ${type.name}(proxy);");
+    generator.writeln();
     generator.writeln("${type.name}(JsObject proxy): super(proxy);");
 
-    // TODO: duplicated class definitions (e.g. ImageDataType)
+    if (library.name == 'chrome.proxy') {
+      type.properties.forEach((p) => _printProperty(p, 'proxy'));
+    } else {
+      type.properties.forEach((p) => _printProperty(p, 'this.proxy'));
+    }
 
-    // TODO: finish
-    generator.writeln("// TODO:");
     generator.writeln("}");
   }
 
   // TODO: this is actually a return type converter -
-  String getReturnConverter(ChromeType param) {
-    if (param.isString || param.isInt) {
+  String getReturnConverter(ChromeType param, {bool preferCtor : false}) {
+    if (param.isString || param.isInt || param.isBool) {
       return null;
     }
 
     // If it's a list and the elements are identity converters
-    if (param.isList && getReturnConverter(param.parameters.first) == null) {
-      return "listify";
+    if (param.isList) {
+      if (getReturnConverter(param.parameters.first) == null) {
+        return "listify";
+      } else {
+        // TODO: we need to call listify with a map() param
+        return null;
+      }
     }
 
-    // TODO: more converters -
+    if (param.isMap) {
+      return 'mapify';
+    }
 
-    return "selfConverter";
+    if (param.isReferencedType) {
+      if (preferCtor) {
+        return 'new ${param.refName}';
+      } else {
+        return '${param.refName}.create';
+      }
+    }
+
+    return null;
   }
 
   String getParamConverter(ChromeType param) {
@@ -216,5 +252,5 @@ class DefaultBackend extends Backend {
       return param.name;
     }
   }
-
 }
+

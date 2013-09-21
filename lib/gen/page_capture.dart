@@ -28,7 +28,7 @@ class ChromePageCapture {
    * The MHTML data as a Blob.
    */
   Future<dynamic> saveAsMHTML(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _pageCapture.callMethod('saveAsMHTML', [jsify(details), completer.callback]);
     return completer.future;
   }

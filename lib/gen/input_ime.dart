@@ -28,7 +28,7 @@ class ChromeInputIme {
    * this fails.
    */
   Future<bool> setComposition(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _input_ime.callMethod('setComposition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -38,7 +38,7 @@ class ChromeInputIme {
    * IME, this fails.
    */
   Future<bool> clearComposition(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _input_ime.callMethod('clearComposition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -47,7 +47,7 @@ class ChromeInputIme {
    * Commits the provided text to the current input.
    */
   Future<bool> commitText(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _input_ime.callMethod('commitText', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -57,7 +57,7 @@ class ChromeInputIme {
    * doesn’t own the active IME
    */
   Future<bool> setCandidateWindowProperties(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _input_ime.callMethod('setCandidateWindowProperties', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -67,7 +67,7 @@ class ChromeInputIme {
    * the active IME
    */
   Future<bool> setCandidates(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _input_ime.callMethod('setCandidates', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -77,7 +77,7 @@ class ChromeInputIme {
    * this extension does not own the active IME.
    */
   Future<bool> setCursorPosition(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _input_ime.callMethod('setCursorPosition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -215,16 +215,70 @@ class ChromeInputIme {
  * See http://www.w3.org/TR/DOM-Level-3-Events/#events-KeyboardEvent
  */
 class KeyboardEvent extends ChromeObject {
+  static KeyboardEvent create(JsObject proxy) => new KeyboardEvent(proxy);
+
   KeyboardEvent(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * One of keyup or keydown.
+   */
+  String get type => this.proxy['type'];
+
+  /**
+   * The ID of the request.
+   */
+  String get requestId => this.proxy['requestId'];
+
+  /**
+   * Value of the key being pressed
+   */
+  String get key => this.proxy['key'];
+
+  /**
+   * Value of the physical key being pressed. The value is not affected by
+   * current keyboard layout or modifier state.
+   */
+  String get code => this.proxy['code'];
+
+  /**
+   * Whether or not the ALT key is pressed.
+   */
+  bool get altKey => this.proxy['altKey'];
+
+  /**
+   * Whether or not the CTRL key is pressed.
+   */
+  bool get ctrlKey => this.proxy['ctrlKey'];
+
+  /**
+   * Whether or not the SHIFT key is pressed.
+   */
+  bool get shiftKey => this.proxy['shiftKey'];
+
+  /**
+   * Whether or not the CAPS_LOCK is enabled.
+   */
+  bool get capsLock => this.proxy['capsLock'];
 }
 
 /**
  * Describes an input Context
  */
 class InputContext extends ChromeObject {
+  static InputContext create(JsObject proxy) => new InputContext(proxy);
+
   InputContext(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * This is used to specify targets of text field operations.  This ID becomes
+   * invalid as soon as onBlur is called.
+   */
+  int get contextID => this.proxy['contextID'];
+
+  /**
+   * Type of value this text field edits, (Text, Number, Password, etc)
+   */
+  String get type => this.proxy['type'];
 }
 
 /**
@@ -232,6 +286,38 @@ class InputContext extends ChromeObject {
  * language menu.
  */
 class MenuItem extends ChromeObject {
+  static MenuItem create(JsObject proxy) => new MenuItem(proxy);
+
   MenuItem(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * String that will be passed to callbacks referencing this MenuItem.
+   */
+  String get id => this.proxy['id'];
+
+  /**
+   * Text displayed in the menu for this item.
+   */
+  String get label => this.proxy['label'];
+
+  /**
+   * Enum representing if this item is: check, radio, or a separator.  Radio
+   * buttons between separators are considered grouped.
+   */
+  String get style => this.proxy['style'];
+
+  /**
+   * Indicates this item is visible.
+   */
+  bool get visible => this.proxy['visible'];
+
+  /**
+   * Indicates this item should be drawn with a check.
+   */
+  bool get checked => this.proxy['checked'];
+
+  /**
+   * Indicates this item is enabled.
+   */
+  bool get enabled => this.proxy['enabled'];
 }

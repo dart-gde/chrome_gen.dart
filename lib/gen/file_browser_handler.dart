@@ -37,7 +37,7 @@ class ChromeFileBrowserHandler {
    * Result of the method.
    */
   Future<Map> selectFile(Map selectionParams) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _fileBrowserHandler.callMethod('selectFile', [jsify(selectionParams), completer.callback]);
     return completer.future;
   }
@@ -55,6 +55,19 @@ class ChromeFileBrowserHandler {
  * Event details payload for fileBrowserHandler.onExecute event.
  */
 class FileHandlerExecuteEventDetails extends ChromeObject {
+  static FileHandlerExecuteEventDetails create(JsObject proxy) => new FileHandlerExecuteEventDetails(proxy);
+
   FileHandlerExecuteEventDetails(JsObject proxy): super(proxy);
-  // TODO:
+
+  /**
+   * Array of Entry instances representing files that are targets of this action
+   * (selected in ChromeOS file browser).
+   */
+  List<dynamic> get entries => listify(this.proxy['entries']);
+
+  /**
+   * The ID of the tab that raised this event. Tab IDs are unique within a
+   * browser session.
+   */
+  int get tab_id => this.proxy['tab_id'];
 }

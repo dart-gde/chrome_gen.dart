@@ -34,7 +34,7 @@ class ChromeWebNavigation {
    * and/or tab ID are invalid.
    */
   Future<Map> getFrame(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _webNavigation.callMethod('getFrame', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -48,7 +48,7 @@ class ChromeWebNavigation {
    * A list of frames in the given tab, null if the specified tab ID is invalid.
    */
   Future<List<Map>> getAllFrames(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(selfConverter);
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _webNavigation.callMethod('getAllFrames', [jsify(details), completer.callback]);
     return completer.future;
   }

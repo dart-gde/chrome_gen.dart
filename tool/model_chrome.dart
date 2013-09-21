@@ -5,11 +5,8 @@
  */
 library model_chrome;
 
-// TODO:
-
 class ChromeElement {
   String documentation;
-
 }
 
 class ChromeLibrary extends ChromeElement {
@@ -21,11 +18,21 @@ class ChromeLibrary extends ChromeElement {
   List<ChromeProperty> properties = [];
   List<ChromeDeclaredType> types = [];
   List<ChromeEvent> events = [];
+
+  List<String> imports = [];
+
+  void addImport(String str) {
+    if (str != name && !imports.contains(str)) {
+      imports.add(str);
+      imports.sort();
+    }
+  }
 }
 
 class ChromeProperty extends ChromeElement {
   ChromeType type;
   String name;
+  bool nodoc;
 }
 
 class ChromeMethod extends ChromeElement {
@@ -81,18 +88,22 @@ class ChromeType extends ChromeElement {
 
   String name;
   String type;
+  String refName;
   bool optional;
   List<ChromeType> parameters = [];
+  List<ChromeProperty> properties = [];
 
   ChromeType({this.type});
 
   bool get isAny => type == 'var';
+  bool get isReferencedType => isAny && refName != null;
   bool get isVoid => type == 'void';
   bool get isFuture => type == 'Future';
   bool get isList => type == 'List';
   bool get isMap => type == 'Map';
   bool get isString => type == 'String';
   bool get isInt => type == 'int';
+  bool get isBool => type == 'bool';
 
   String toParamString() {
     if (parameters.isEmpty) {
@@ -103,7 +114,9 @@ class ChromeType extends ChromeElement {
   }
 
   String toReturnString() {
-    if (isAny) {
+    if (isReferencedType) {
+      return refName;
+    } else if (isAny) {
       return 'dynamic';
     } else if (parameters.isEmpty) {
        return type;

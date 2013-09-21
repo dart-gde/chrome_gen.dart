@@ -8,9 +8,11 @@ export 'dart:async';
 export 'dart:js';
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:js';
 
 JsObject _proxy;
+JsObject _jsJSON = context['JSON'];
 
 JsObject get chrome {
   if (_proxy == null) {
@@ -40,6 +42,10 @@ List listify(JsObject obj) {
   }
 
   return l;
+}
+
+Map mapify(JsObject obj) {
+  return JSON.decode(_jsJSON.callMethod('stringify', [obj]));
 }
 
 dynamic selfConverter(var obj) => obj;
