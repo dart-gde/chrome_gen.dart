@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sample app</title>
+    <link rel="stylesheet" href="demo.css">
+  </head>
+  <body>
+    <h1>Chrome APIs demo app</h1>
+
+    <p>Hello world from Dart!</p>
+
+    <div id="container_id">
+
+    </div>
+
+    <footer>
+      <p id="summary"> </p>
+      <p id="notes"> </p>
+    </footer>
+
+    <!-- Currently, when deploying your Chrome app, you'll need to compile -->
+    <!-- the Dart code to Javascript, remove the 'type' attribute below, and -->
+    <!-- change the 'src' reference to the .dart.js file. -->
+    <script src="demo.dart" type="application/dart"></script>
+
+    <script src="packages/browser/dart.js"></script>
+    <script src="packages/browser/interop.js"></script>
+  </body>
+</html>
