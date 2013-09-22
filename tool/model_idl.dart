@@ -33,7 +33,7 @@ class IDLCollectorChrome implements IDLCollector {
   List _dictionaryMembers = [];
 
   namespace(l) {
-    idlNamespace.name = l[2][0];
+    idlNamespace.name = l[2].join('.');
 
     // Must return type passed for parser to continue.
     return l;
