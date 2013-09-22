@@ -11,6 +11,7 @@ import 'model_chrome.dart';
 class EMPTY {
   // EPSILON
   const EMPTY();
+  toString() => "EMPTY";
 }
 
 /**
