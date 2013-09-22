@@ -154,7 +154,8 @@ class WebIdlParser extends LanguageParsers {
                           | spaces;
 
   dictionaryMember() => (rec(type) + identifier + rec(defaultStmt) + semi).list
-                        ^ (l) => collector.dictionaryMember(l)
+                        // Wrapped in braces not to get caught by the next pipe.
+                        ^ (l) { return collector.dictionaryMember(l); }
                         // Non standard WebIDL in Chrome IDL operations as
                         // dictionary members
                         | rec(operation);
