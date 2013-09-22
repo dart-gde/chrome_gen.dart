@@ -4,6 +4,8 @@
 
 library model_idl;
 
+import 'model_chrome.dart';
+
 // TODO: this model needs to be re-written in-line with the needs of the web_idl_parser.
 
 class IDLNamespace {
@@ -14,7 +16,10 @@ class IDLNamespace {
 
   List<IDLFunction> functions = [];
   List<IDLEvent> events = [];
-  List<IDLProperty> properties = [];
+  List<IDLDeclaredType> declaredTypes = [];
+  // Dont know what the use of properties is vs declaredTypes in terms of
+  // WebIDL.
+  //List<IDLProperty> properties = [];
 
   String toString() => name;
 }
@@ -66,6 +71,19 @@ class IDLEvent {
   List<IDLParameter> params = [];
 
   IDLEvent(this.name);
+
+  String toString() => name;
+}
+
+/**
+ * Declared type is a type that is defined by a WebIDL dictionary.
+ */
+class IDLDeclaredType {
+  String name;
+  String description;
+  List<IDLProperty> members = [];
+
+  IDLDeclaredType(this.name);
 
   String toString() => name;
 }
@@ -133,4 +151,23 @@ class IDLType {
   bool get isArray => name == 'array';
 
   String toString() => name;
+}
+
+/**
+ * Convert idl -> chrome library
+ */
+ChromeLibrary convert(IDLNamespace namespace) {
+  throw "Not Implemented";
+}
+
+_convertDeclaredType() {
+  throw "Not Implemented";
+}
+
+_convertMethod() {
+  throw "Not Implemented";
+}
+
+_convertEvent() {
+  throw "Not Implemented";
 }
