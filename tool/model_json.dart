@@ -304,10 +304,10 @@ class JsonConverter {
 
       // TODO: create documentation from the type's properties
 
-    } else if (t.type == 'object' && t.isInstanceOf != null) {
-      type.type = "var";
-      type.refName = t.isInstanceOf;
-      library.addImport(getImportForClass(type.refName));
+//    } else if (t.type == 'object' && t.isInstanceOf != null) {
+//      type.type = "var";
+//      type.refName = t.isInstanceOf;
+//      library.addImport(getImportForClass(type.refName));
     } else if (t.ref != null) {
       // TODO: ensure that we are pulling out the correct type
       type.type = "var";

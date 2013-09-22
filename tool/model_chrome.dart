@@ -27,12 +27,16 @@ class ChromeLibrary extends ChromeElement {
       imports.sort();
     }
   }
+
+  String toString() => name;
 }
 
 class ChromeProperty extends ChromeElement {
   ChromeType type;
   String name;
   bool nodoc;
+
+  String toString() => name;
 }
 
 class ChromeMethod extends ChromeElement {

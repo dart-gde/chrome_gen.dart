@@ -78,14 +78,16 @@ class GenApiFile {
         // TODO:
         print(e);
       }
-
     }
 
-    outFile.directory.createSync();
+    // TODO: this check is temporary
+    if (chromeLib != null) {
+      outFile.directory.createSync();
 
-    Backend backend = new Backend.createDefault(overrides);
-    outFile.writeAsStringSync(
-        backend.generate(chromeLib, license: LICENSE, sourceFileName: fileName));
+      Backend backend = new Backend.createDefault(overrides);
+      outFile.writeAsStringSync(
+          backend.generate(chromeLib, license: LICENSE, sourceFileName: fileName));
+    }
   }
 
   String _parseNamespace(List tokens) {

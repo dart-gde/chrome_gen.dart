@@ -29,6 +29,7 @@ void main() {
   action("id", handleRuntimeId);
   action("path", handleRuntimeURL);
   action("reload", handleRuntimeReload);
+  action('getManifest', handleRuntimeGetManifest);
   action('getPlatformInfo', handleGetPlatformInfo);
   action('getPackageDirectoryEntry', handleGetPackageDirectoryEntry);
   br();
@@ -106,10 +107,14 @@ void handlePermissionsOrigins() {
   });
 }
 
+void handleRuntimeGetManifest() {
+  summary(chrome.runtime.getManifest().toString());
+}
+
 void handleGetVoices() {
-  // TODO: the list JsObject conversion still needs to be implemented
   chrome.tts.getVoices().then((List<chrome.TtsVoice> voices) {
-    summary(voices.map((v) => "${v.voiceName} ${v.lang}").toString());
+    String desc = voices.map((v) => "${v.voiceName} ${v.lang}").join(', ');
+    summary(desc);
   });
 }
 

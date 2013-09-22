@@ -115,20 +115,14 @@ class DefaultBackend extends Backend {
       return;
     }
 
-    String converter = getReturnConverter(property.type, preferCtor: true);
+    String converter = getReturnConverter(property.type);
+    String getterBody = "${refString}['${property.name}']";
 
     generator.writeln();
     generator.writeDocs(property.documentation);
     generator.write("${property.type.toReturnString()} ");
     generator.write("get ${property.name} => ");
-    if (converter != null) {
-      generator.write('${converter}(');
-    }
-    generator.write("${refString}['${property.name}']");
-    if (converter != null) {
-      generator.write(')');
-    }
-    generator.writeln(';');
+    generator.writeln("${converter.replaceFirst('%s', getterBody)};");
   }
 
   void _printMethod(ChromeMethod method) {
@@ -152,10 +146,10 @@ class DefaultBackend extends Backend {
         generator.writeln("noArgs();");
       } else if (future.parameters.length == 1) {
         ChromeType param = future.parameters.first;
-        if (getReturnConverter(param) == null) {
+        if (getCallbackConverter(param) == null) {
           generator.writeln("oneArg();");
         } else {
-          generator.writeln("oneArg(${getReturnConverter(param)});");
+          generator.writeln("oneArg(${getCallbackConverter(param)});");
         }
       } else if (future.parameters.length == 2) {
         // TODO: currently, the json convert is changing 2 arg calls to 1 arg.
@@ -167,19 +161,33 @@ class DefaultBackend extends Backend {
         throw new StateError('unsupported number of params(${future.parameters.length})');
       }
     }
-    if (!method.returns.isVoid && !method.usesCallback) {
-      generator.write("return ");
-    }
-    generator.write("${contextReference}.callMethod('${method.name}'");
+
+    StringBuffer methodCall = new StringBuffer();
+    methodCall.write("${contextReference}.callMethod('${method.name}'");
     if (method.params.length > 0 || method.usesCallback) {
-      generator.write(", [");
+      methodCall.write(", [");
       List strParams = method.params.map(getParamConverter).toList();
       if (method.usesCallback) {
         strParams.add('completer.callback');
       }
-      generator.write("${strParams.join(', ')}]");
+      methodCall.write("${strParams.join(', ')}]");
     }
-    generator.writeln(");");
+    methodCall.write(")");
+
+    if (method.usesCallback || method.returns.isVoid) {
+      generator.writeln("${methodCall};");
+    } else {
+      String returnConverter = getReturnConverter(method.returns);
+
+      if (returnConverter.contains(',')) {
+        generator.writeln("var ret = ${methodCall};");
+        generator.writeln("return ret;");
+      } else {
+        String text = returnConverter.replaceFirst('%s', methodCall.toString());
+        generator.writeln("return ${text};");
+      }
+    }
+
     if (method.usesCallback) {
       generator.writeln("return completer.future;");
     }
@@ -209,7 +217,7 @@ class DefaultBackend extends Backend {
     generator.writeln();
     generator.writeln("${type.name}(JsObject proxy): super(proxy);");
 
-    if (library.name == 'chrome.proxy') {
+    if (library.name != 'proxy') {
       type.properties.forEach((p) => _printProperty(p, 'proxy'));
     } else {
       type.properties.forEach((p) => _printProperty(p, 'this.proxy'));
@@ -218,35 +226,44 @@ class DefaultBackend extends Backend {
     generator.writeln("}");
   }
 
-  // TODO: this is actually a return type converter -
-  String getReturnConverter(ChromeType param, {bool preferCtor : false}) {
+  String getCallbackConverter(ChromeType param) {
     if (param.isString || param.isInt || param.isBool) {
       return null;
-    }
-
-    // If it's a list and the elements are identity converters
-    if (param.isList) {
-      if (getReturnConverter(param.parameters.first) == null) {
+    } else if (param.isList) {
+      if (getCallbackConverter(param.parameters.first) == null) {
+        // if the elements are identity converters
         return "listify";
       } else {
-        // TODO: we need to call listify with a map() param
-        return null;
+        // we need to call listify with a map() param
+        return "(e) => listify(e, ${getCallbackConverter(param.parameters.first)})";
       }
-    }
-
-    if (param.isMap) {
+    } else if (param.isMap) {
       return 'mapify';
+    } else if (param.isReferencedType) {
+      return '${param.refName}.create';
+    } else {
+      return null;
     }
+  }
 
-    if (param.isReferencedType) {
-      if (preferCtor) {
-        return 'new ${param.refName}';
+  String getReturnConverter(ChromeType param) {
+    if (param.isString || param.isInt || param.isBool) {
+      return '%s';
+    } else if (param.isList) {
+      if (getCallbackConverter(param.parameters.first) == null) {
+        // if the elements are identity converters
+        return "listify(%s)";
       } else {
-        return '${param.refName}.create';
+        // else, call listify with a map() param
+        return "listify(%s, ${getCallbackConverter(param.parameters.first)})";
       }
+    } else if (param.isMap) {
+      return 'mapify(%s)';
+    } else if (param.isReferencedType) {
+      return 'new ${param.refName}(%s)';
+    } else {
+      return '%s';
     }
-
-    return null;
   }
 
   String getParamConverter(ChromeType param) {

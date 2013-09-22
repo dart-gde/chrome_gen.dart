@@ -7,6 +7,8 @@ library common;
 export 'dart:async';
 export 'dart:js';
 
+export 'common_exp.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:js';
@@ -28,20 +30,22 @@ String get lastError {
   return error != null ? error['message'] : null;
 }
 
-// TODO: is this necessary?
-// TODO: optionally take a converter
-List listify(JsObject obj) {
+List listify(JsObject obj, [Function transformer = null]) {
   if (obj == null) {
     return null;
+  } else {
+    List l = new List(obj['length']);
+
+    for (int i = 0; i < l.length; i++) {
+      if (transformer != null) {
+        l[i] = transformer(obj[i]);
+      } else {
+        l[i] = obj[i];
+      }
+    }
+
+    return l;
   }
-
-  List l = new List(obj['length']);
-
-  for (int i = 0; i < l.length; i++) {
-    l[i] = obj[i];
-  }
-
-  return l;
 }
 
 Map mapify(JsObject obj) {
@@ -50,24 +54,8 @@ Map mapify(JsObject obj) {
 
 dynamic selfConverter(var obj) => obj;
 
-/**
- * The abstract superclass of objects that can hold [JsObject] proxies.
- */
-abstract class ChromeObject implements Serializable<JsObject> {
-  JsObject proxy;
-
-  /**
-   * Create a new instance of a `ChromeObject`, which delegates to the given
-   * JsObject proxy.
-   */
-  ChromeObject(this.proxy);
-
-  JsObject toJs() => proxy;
-
-  String toString() => proxy.toString();
-}
-
 // TODO: some chrome APIs use lastError, and some don't
+
 /**
  * An object for handling completion callbacks that are common in the chrome.*
  * APIs.
