@@ -110,7 +110,7 @@ class ChromeDeclaredType extends ChromeType {
 }
 
 class ChromeType extends ChromeElement {
-  static final ChromeType ANY = new ChromeType(type: 'any');
+  static final ChromeType VAR = new ChromeType(type: 'var');
   static final ChromeType VOID = new ChromeType(type: 'void');
   static final ChromeType JS_OBJECT = new ChromeType(type: 'JsObject');
 

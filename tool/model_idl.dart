@@ -408,6 +408,7 @@ ChromeType _convertToFuture(ChromeType chromeType) {
 ChromeEvent _convertEvent(IDLEvent idlEvent) {
   ChromeEvent chromeEvent = new ChromeEvent();
   chromeEvent.name = idlEvent.name;
+  chromeEvent.type = ChromeType.VAR.type;
   chromeEvent.parameters = idlEvent.params.map(_convertParameter).toList();
   return chromeEvent;
 }
@@ -415,7 +416,7 @@ ChromeEvent _convertEvent(IDLEvent idlEvent) {
 ChromeType _convertParameter(IDLParameter parameter) {
   ChromeType param = new ChromeType();
   param.name = parameter.name;
-  param.type = parameter.type.name;
+  param.type = idlToDartType(parameter.type.name);
   param.optional = (parameter.optional == null) ? false : parameter.optional;
   return param;
 }
@@ -427,5 +428,20 @@ ChromeType _convertType(IDLType idlType) {
     ChromeType chromeType = new ChromeType();
     chromeType.name = idlType.name;
     return chromeType;
+  }
+}
+
+final TYPE_MAP = {
+  'DOMString': 'String',
+  'object': 'var',
+  'boolean': 'bool',
+  'long': 'int'
+};
+
+String idlToDartType(String type) {
+  if (TYPE_MAP.containsKey(type)) {
+    return TYPE_MAP[type];
+  } else {
+    return type;
   }
 }
