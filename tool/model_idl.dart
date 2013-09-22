@@ -157,6 +157,7 @@ class IDLCollectorChrome implements IDLCollector {
     IDLDeclaredType declaredType = new IDLDeclaredType(name);
     declaredType.members.addAll(_dictionaryMembers);
     _dictionaryMembers = [];
+    idlNamespace.declaredTypes.add(declaredType);
 
     // Must return type passed for parser to continue.
     return l;
