@@ -60,7 +60,8 @@ class GenApiFile {
           inFile.readAsStringSync());
       chromeLib = new model_json.JsonConverter().convert(namespace);
     } else if (inFile.path.endsWith(".idl")) {
-      WebIdlParser webIdlParser = new WebIdlParser();
+      WebIdlParser webIdlParser =
+          new WebIdlParser.withCollector(new model_idl.IDLCollectorChrome());
 
 //      chromeLib = new ChromeLibrary();
 //      chromeLib.name = fileName.substring(0, fileName.indexOf('.'));
