@@ -16,11 +16,9 @@ import '../src/common.dart';
 final ChromeOmnibox omnibox = new ChromeOmnibox._();
 
 class ChromeOmnibox {
-  JsObject _omnibox;
+  static final JsObject _omnibox = context['chrome']['omnibox'];
 
-  ChromeOmnibox._() {
-    _omnibox = context['chrome']['omnibox'];
-  }
+  ChromeOmnibox._();
 
   /**
    * A callback passed to the onInputChanged event used for sending suggestions
@@ -49,38 +47,53 @@ class ChromeOmnibox {
    * This is guaranteed to be sent exactly once per input session, and before
    * any onInputChanged events.
    */
-  Stream<dynamic> get onInputStarted => _onInputStarted.stream;
+  Stream get onInputStarted => _onInputStarted.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onInputStarted = null;
+  final ChromeStreamController _onInputStarted =
+      new ChromeStreamController.noArgs(_omnibox['onInputStarted']);
 
   /**
    * User has changed what is typed into the omnibox.
    */
   Stream<dynamic> get onInputChanged => _onInputChanged.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onInputChanged = null;
+  final ChromeStreamController<dynamic> _onInputChanged =
+      new ChromeStreamController<dynamic>.oneArg(_omnibox['onInputChanged'], selfConverter);
 
   /**
    * User has accepted what is typed into the omnibox.
    */
   Stream<dynamic> get onInputEntered => _onInputEntered.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onInputEntered = null;
+  final ChromeStreamController<dynamic> _onInputEntered =
+      new ChromeStreamController<dynamic>.oneArg(_omnibox['onInputEntered'], selfConverter);
 
   /**
    * User has ended the keyword input session without accepting the input.
    */
-  Stream<dynamic> get onInputCancelled => _onInputCancelled.stream;
+  Stream get onInputCancelled => _onInputCancelled.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onInputCancelled = null;
+  final ChromeStreamController _onInputCancelled =
+      new ChromeStreamController.noArgs(_omnibox['onInputCancelled']);
 }
 
 /**
  * A suggest result.
+ * 
+ * `content` The text that is put into the URL bar, and that is sent to the
+ * extension when the user chooses this entry.
+ * 
+ * `description` The text that is displayed in the URL dropdown. Can contain
+ * XML-style markup for styling. The supported tags are 'url' (for a literal
+ * URL), 'match' (for highlighting text that matched what the user's query), and
+ * 'dim' (for dim helper text). The styles can be nested, eg. <dim><match>dimmed
+ * match</match></dim>.
+ * 
+ * `descriptionStyles` An array of style ranges for the description, as provided
+ * by the extension.
+ * 
+ * `descriptionStylesRaw` An array of style ranges for the description, as
+ * provided by ToValue().
  */
 class SuggestResult extends ChromeObject {
   static SuggestResult create(JsObject proxy) => new SuggestResult(proxy);
@@ -91,7 +104,7 @@ class SuggestResult extends ChromeObject {
    * The text that is put into the URL bar, and that is sent to the extension
    * when the user chooses this entry.
    */
-  String get content => this.proxy['content'];
+  String get content => proxy['content'];
 
   /**
    * The text that is displayed in the URL dropdown. Can contain XML-style
@@ -100,11 +113,23 @@ class SuggestResult extends ChromeObject {
    * 'dim' (for dim helper text). The styles can be nested, eg.
    * <dim><match>dimmed match</match></dim>.
    */
-  String get description => this.proxy['description'];
+  String get description => proxy['description'];
 }
 
 /**
  * A suggest result.
+ * 
+ * `description` The text that is displayed in the URL dropdown. Can contain
+ * XML-style markup for styling. The supported tags are 'url' (for a literal
+ * URL), 'match' (for highlighting text that matched what the user's query), and
+ * 'dim' (for dim helper text). The styles can be nested, eg. <dim><match>dimmed
+ * match</match></dim>.
+ * 
+ * `descriptionStyles` An array of style ranges for the description, as provided
+ * by the extension.
+ * 
+ * `descriptionStylesRaw` An array of style ranges for the description, as
+ * provided by ToValue().
  */
 class DefaultSuggestResult extends ChromeObject {
   static DefaultSuggestResult create(JsObject proxy) => new DefaultSuggestResult(proxy);
@@ -118,5 +143,5 @@ class DefaultSuggestResult extends ChromeObject {
    * 'dim' (for dim helper text). The styles can be nested, eg.
    * <dim><match>dimmed match</match></dim>.
    */
-  String get description => this.proxy['description'];
+  String get description => proxy['description'];
 }

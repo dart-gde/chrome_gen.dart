@@ -16,11 +16,9 @@ import '../src/common.dart';
 final ChromeStorage storage = new ChromeStorage._();
 
 class ChromeStorage {
-  JsObject _storage;
+  static final JsObject _storage = context['chrome']['storage'];
 
-  ChromeStorage._() {
-    _storage = context['chrome']['storage'];
-  }
+  ChromeStorage._();
 
   /**
    * Items in the `sync` storage area are synced using Chrome Sync.
@@ -37,10 +35,15 @@ class ChromeStorage {
    */
   Stream<dynamic> get onChanged => _onChanged.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onChanged = null;
+  final ChromeStreamController<dynamic> _onChanged =
+      new ChromeStreamController<dynamic>.oneArg(_storage['onChanged'], selfConverter);
 }
 
+/**
+ * `oldValue` The old value of the item, if there was an old value.
+ * 
+ * `newValue` The new value of the item, if there is a new value.
+ */
 class StorageChange extends ChromeObject {
   static StorageChange create(JsObject proxy) => new StorageChange(proxy);
 
@@ -49,12 +52,12 @@ class StorageChange extends ChromeObject {
   /**
    * The old value of the item, if there was an old value.
    */
-  dynamic get oldValue => this.proxy['oldValue'];
+  dynamic get oldValue => proxy['oldValue'];
 
   /**
    * The new value of the item, if there is a new value.
    */
-  dynamic get newValue => this.proxy['newValue'];
+  dynamic get newValue => proxy['newValue'];
 }
 
 class StorageArea extends ChromeObject {

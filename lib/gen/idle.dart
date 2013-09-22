@@ -15,11 +15,9 @@ import '../src/common.dart';
 final ChromeIdle idle = new ChromeIdle._();
 
 class ChromeIdle {
-  JsObject _idle;
+  static final JsObject _idle = context['chrome']['idle'];
 
-  ChromeIdle._() {
-    _idle = context['chrome']['idle'];
-  }
+  ChromeIdle._();
 
   /**
    * Returns "locked" if the system is locked, "idle" if the user has not
@@ -54,8 +52,8 @@ class ChromeIdle {
    * for a specified number of seconds, and "active" when the user generates
    * input on an idle system.
    */
-  Stream<dynamic> get onStateChanged => _onStateChanged.stream;
+  Stream<String> get onStateChanged => _onStateChanged.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onStateChanged = null;
+  final ChromeStreamController<String> _onStateChanged =
+      new ChromeStreamController<String>.oneArg(_idle['onStateChanged'], selfConverter);
 }

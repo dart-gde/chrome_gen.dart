@@ -18,11 +18,9 @@ import '../src/common.dart';
 final ChromeContentSettings contentSettings = new ChromeContentSettings._();
 
 class ChromeContentSettings {
-  JsObject _contentSettings;
+  static final JsObject _contentSettings = context['chrome']['contentSettings'];
 
-  ChromeContentSettings._() {
-    _contentSettings = context['chrome']['contentSettings'];
-  }
+  ChromeContentSettings._();
 
   /**
    * Whether to allow cookies and other local data to be set by websites. One
@@ -77,6 +75,10 @@ class ChromeContentSettings {
  * The only content type using resource identifiers is
  * [contentSettings.plugins.] For more information, see [Resource
  * Identifiers](contentSettings.html#resource-identifiers).
+ * 
+ * `id` The resource identifier for the given content type.
+ * 
+ * `description` A human readable description of the resource.
  */
 class ResourceIdentifier extends ChromeObject {
   static ResourceIdentifier create(JsObject proxy) => new ResourceIdentifier(proxy);
@@ -86,12 +88,12 @@ class ResourceIdentifier extends ChromeObject {
   /**
    * The resource identifier for the given content type.
    */
-  String get id => this.proxy['id'];
+  String get id => proxy['id'];
 
   /**
    * A human readable description of the resource.
    */
-  String get description => this.proxy['description'];
+  String get description => proxy['description'];
 }
 
 class ContentSetting extends ChromeObject {

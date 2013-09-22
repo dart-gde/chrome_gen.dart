@@ -18,11 +18,9 @@ import '../src/common.dart';
 final ChromePermissions permissions = new ChromePermissions._();
 
 class ChromePermissions {
-  JsObject _permissions;
+  static final JsObject _permissions = context['chrome']['permissions'];
 
-  ChromePermissions._() {
-    _permissions = context['chrome']['permissions'];
-  }
+  ChromePermissions._();
 
   /**
    * Gets the extension's current set of permissions.
@@ -78,20 +76,25 @@ class ChromePermissions {
   /**
    * Fired when the extension acquires new permissions.
    */
-  Stream<dynamic> get onAdded => _onAdded.stream;
+  Stream<Permissions> get onAdded => _onAdded.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onAdded = null;
+  final ChromeStreamController<Permissions> _onAdded =
+      new ChromeStreamController<Permissions>.oneArg(_permissions['onAdded'], Permissions.create);
 
   /**
    * Fired when access to permissions has been removed from the extension.
    */
-  Stream<dynamic> get onRemoved => _onRemoved.stream;
+  Stream<Permissions> get onRemoved => _onRemoved.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onRemoved = null;
+  final ChromeStreamController<Permissions> _onRemoved =
+      new ChromeStreamController<Permissions>.oneArg(_permissions['onRemoved'], Permissions.create);
 }
 
+/**
+ * `permissions` List of named permissions (does not include hosts or origins).
+ * 
+ * `origins` List of origin permissions.
+ */
 class Permissions extends ChromeObject {
   static Permissions create(JsObject proxy) => new Permissions(proxy);
 
@@ -100,10 +103,10 @@ class Permissions extends ChromeObject {
   /**
    * List of named permissions (does not include hosts or origins).
    */
-  List<String> get permissions => listify(this.proxy['permissions']);
+  List<String> get permissions => listify(proxy['permissions']);
 
   /**
    * List of origin permissions.
    */
-  List<String> get origins => listify(this.proxy['origins']);
+  List<String> get origins => listify(proxy['origins']);
 }

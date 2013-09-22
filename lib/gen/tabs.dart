@@ -18,11 +18,9 @@ import '../src/common.dart';
 final ChromeTabs tabs = new ChromeTabs._();
 
 class ChromeTabs {
-  JsObject _tabs;
+  static final JsObject _tabs = context['chrome']['tabs'];
 
-  ChromeTabs._() {
-    _tabs = context['chrome']['tabs'];
-  }
+  ChromeTabs._();
 
   /**
    * Retrieves details about the specified tab.
@@ -50,13 +48,16 @@ class ChromeTabs {
    * specified tab for the current extension. For more details, see [Content
    * Script Messaging](messaging.html).
    * 
+   * [connectInfo] `name` Will be passed into onConnect for content scripts that
+   * are listening for the connection event.
+   * 
    * Returns:
    * A port that can be used to communicate with the content scripts running in
    * the specified tab. The port's [runtime.Port] event is fired if the tab
    * closes or does not exist.
    */
   Port connect(int tabId, [Map connectInfo]) {
-    return _tabs.callMethod('connect', [tabId, jsify(connectInfo)]);
+    return new Port(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
   }
 
   /**
@@ -109,13 +110,36 @@ class ChromeTabs {
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
   Future<List<Tab>> getAllInWindow([int windowId]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Tab.create));
     _tabs.callMethod('getAllInWindow', [windowId, completer.callback]);
     return completer.future;
   }
 
   /**
    * Creates a new tab.
+   * 
+   * [createProperties] `windowId` The window to create the new tab in. Defaults
+   * to the [current window](windows.html#current-window).
+   * 
+   * `index` The position the tab should take in the window. The provided value
+   * will be clamped to between zero and the number of tabs in the window.
+   * 
+   * `url` The URL to navigate the tab to initially. Fully-qualified URLs must
+   * include a scheme (i.e. 'http://www.google.com', not 'www.google.com').
+   * Relative URLs will be relative to the current page within the extension.
+   * Defaults to the New Tab Page.
+   * 
+   * `active` Whether the tab should become the active tab in the window. Does
+   * not affect whether the window is focused (see [windows.update]). Defaults
+   * to [true].
+   * 
+   * `selected` Whether the tab should become the selected tab in the window.
+   * Defaults to [true]
+   * 
+   * `pinned` Whether the tab should be pinned. Defaults to [false]
+   * 
+   * `openerTabId` The ID of the tab that opened this tab. If specified, the
+   * opener tab must be in the same window as the newly created tab.
    * 
    * Returns:
    * Details about the created tab. Will contain the ID of the new tab.
@@ -145,15 +169,44 @@ class ChromeTabs {
   /**
    * Gets all tabs that have the specified properties, or all tabs if no
    * properties are specified.
+   * 
+   * [queryInfo] `active` Whether the tabs are active in their windows.
+   * 
+   * `pinned` Whether the tabs are pinned.
+   * 
+   * `highlighted` Whether the tabs are highlighted.
+   * 
+   * `currentWindow` Whether the tabs are in the [current
+   * window](windows.html#current-window).
+   * 
+   * `lastFocusedWindow` Whether the tabs are in the last focused window.
+   * 
+   * `status` Whether the tabs have completed loading.
+   * 
+   * `title` Match page titles against a pattern.
+   * 
+   * `url` Match tabs against a [URL pattern](match_patterns.html). Note that
+   * fragment identifiers are not matched.
+   * 
+   * `windowId` The ID of the parent window, or [windows.WINDOW_ID_CURRENT] for
+   * the [current window](windows.html#current-window).
+   * 
+   * `windowType` The type of window the tabs are in.
+   * 
+   * `index` The position of the tabs within their windows.
    */
   Future<List<Tab>> query(Map queryInfo) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Tab.create));
     _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
     return completer.future;
   }
 
   /**
    * Highlights the given tabs.
+   * 
+   * [highlightInfo] `windowId` The window that contains the tabs.
+   * 
+   * `tabs` One or more tab indices to highlight.
    * 
    * Returns:
    * Contains details about the window whose tabs were highlighted.
@@ -170,6 +223,20 @@ class ChromeTabs {
    * 
    * [tabId] Defaults to the selected tab of the [current
    * window](windows.html#current-window).
+   * 
+   * [updateProperties] `url` A URL to navigate the tab to.
+   * 
+   * `active` Whether the tab should be active. Does not affect whether the
+   * window is focused (see [windows.update]).
+   * 
+   * `highlighted` Adds or removes the tab from the current selection.
+   * 
+   * `selected` Whether the tab should be selected.
+   * 
+   * `pinned` Whether the tab should be pinned.
+   * 
+   * `openerTabId` The ID of the tab that opened this tab. If specified, the
+   * opener tab must be in the same window as this tab.
    * 
    * Returns:
    * Details about the updated tab. The [tabs.Tab] object doesn't contain `url`,
@@ -188,6 +255,11 @@ class ChromeTabs {
    * 
    * [tabIds] The tab or list of tabs to move.
    * 
+   * [moveProperties] `windowId` Defaults to the window the tab is currently in.
+   * 
+   * `index` The position to move the window to. -1 will place the tab at the
+   * end of the window.
+   * 
    * Returns:
    * Details about the moved tabs.
    */
@@ -202,6 +274,9 @@ class ChromeTabs {
    * 
    * [tabId] The ID of the tab to reload; defaults to the selected tab of the
    * current window.
+   * 
+   * [reloadProperties] `bypassCache` Whether using any local cache. Default is
+   * false.
    */
   Future reload([int tabId, Map reloadProperties]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -251,6 +326,13 @@ class ChromeTabs {
    * [options] Set parameters of image capture, such as the format of the
    * resulting image.
    * 
+   * `format` The format of the resulting image.  Default is jpeg.
+   * 
+   * `quality` When format is 'jpeg', controls the quality of the resulting
+   * image.  This value is ignored for PNG images.  As quality is decreased, the
+   * resulting image will have more visual artifacts, and the number of bytes
+   * needed to store it will decrease.
+   * 
    * Returns:
    * A data URL which encodes an image of the visible area of the captured tab.
    * May be assigned to the 'src' property of an HTML Image element for display.
@@ -299,18 +381,18 @@ class ChromeTabs {
    * time this event fired, but you can listen to onUpdated events to be
    * notified when a URL is set.
    */
-  Stream<dynamic> get onCreated => _onCreated.stream;
+  Stream<Tab> get onCreated => _onCreated.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onCreated = null;
+  final ChromeStreamController<Tab> _onCreated =
+      new ChromeStreamController<Tab>.oneArg(_tabs['onCreated'], Tab.create);
 
   /**
    * Fired when a tab is updated.
    */
   Stream<dynamic> get onUpdated => _onUpdated.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onUpdated = null;
+  final ChromeStreamController<dynamic> _onUpdated =
+      new ChromeStreamController<dynamic>.oneArg(_tabs['onUpdated'], selfConverter);
 
   /**
    * Fired when a tab is moved within a window. Only one move event is fired,
@@ -320,50 +402,50 @@ class ChromeTabs {
    */
   Stream<dynamic> get onMoved => _onMoved.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onMoved = null;
+  final ChromeStreamController<dynamic> _onMoved =
+      new ChromeStreamController<dynamic>.oneArg(_tabs['onMoved'], selfConverter);
 
   /**
    * Deprecated. Please use onActivated.
    */
   Stream<dynamic> get onSelectionChanged => _onSelectionChanged.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onSelectionChanged = null;
+  final ChromeStreamController<dynamic> _onSelectionChanged =
+      new ChromeStreamController<dynamic>.oneArg(_tabs['onSelectionChanged'], selfConverter);
 
   /**
    * Deprecated. Please use onActivated.
    */
   Stream<dynamic> get onActiveChanged => _onActiveChanged.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onActiveChanged = null;
+  final ChromeStreamController<dynamic> _onActiveChanged =
+      new ChromeStreamController<dynamic>.oneArg(_tabs['onActiveChanged'], selfConverter);
 
   /**
    * Fires when the active tab in a window changes. Note that the tab's URL may
    * not be set at the time this event fired, but you can listen to onUpdated
    * events to be notified when a URL is set.
    */
-  Stream<dynamic> get onActivated => _onActivated.stream;
+  Stream<Map> get onActivated => _onActivated.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onActivated = null;
+  final ChromeStreamController<Map> _onActivated =
+      new ChromeStreamController<Map>.oneArg(_tabs['onActivated'], mapify);
 
   /**
    * Deprecated. Please use onHighlighted.
    */
-  Stream<dynamic> get onHighlightChanged => _onHighlightChanged.stream;
+  Stream<Map> get onHighlightChanged => _onHighlightChanged.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onHighlightChanged = null;
+  final ChromeStreamController<Map> _onHighlightChanged =
+      new ChromeStreamController<Map>.oneArg(_tabs['onHighlightChanged'], mapify);
 
   /**
    * Fired when the highlighted or selected tabs in a window changes.
    */
-  Stream<dynamic> get onHighlighted => _onHighlighted.stream;
+  Stream<Map> get onHighlighted => _onHighlighted.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onHighlighted = null;
+  final ChromeStreamController<Map> _onHighlighted =
+      new ChromeStreamController<Map>.oneArg(_tabs['onHighlighted'], mapify);
 
   /**
    * Fired when a tab is detached from a window, for example because it is being
@@ -371,8 +453,8 @@ class ChromeTabs {
    */
   Stream<dynamic> get onDetached => _onDetached.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onDetached = null;
+  final ChromeStreamController<dynamic> _onDetached =
+      new ChromeStreamController<dynamic>.oneArg(_tabs['onDetached'], selfConverter);
 
   /**
    * Fired when a tab is attached to a window, for example because it was moved
@@ -380,16 +462,16 @@ class ChromeTabs {
    */
   Stream<dynamic> get onAttached => _onAttached.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onAttached = null;
+  final ChromeStreamController<dynamic> _onAttached =
+      new ChromeStreamController<dynamic>.oneArg(_tabs['onAttached'], selfConverter);
 
   /**
    * Fired when a tab is closed.
    */
   Stream<dynamic> get onRemoved => _onRemoved.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onRemoved = null;
+  final ChromeStreamController<dynamic> _onRemoved =
+      new ChromeStreamController<dynamic>.oneArg(_tabs['onRemoved'], selfConverter);
 
   /**
    * Fired when a tab is replaced with another tab due to prerendering or
@@ -397,10 +479,53 @@ class ChromeTabs {
    */
   Stream<dynamic> get onReplaced => _onReplaced.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onReplaced = null;
+  final ChromeStreamController<dynamic> _onReplaced =
+      new ChromeStreamController<dynamic>.oneArg(_tabs['onReplaced'], selfConverter);
 }
 
+/**
+ * `id` The ID of the tab. Tab IDs are unique within a browser session. Under
+ * some circumstances a Tab may not be assigned an ID, for example when querying
+ * foreign tabs using the [sessions] API, in which case a session ID may be
+ * present.
+ * 
+ * `index` The zero-based index of the tab within its window.
+ * 
+ * `windowId` The ID of the window the tab is contained within.
+ * 
+ * `openerTabId` The ID of the tab that opened this tab, if any. This property
+ * is only present if the opener tab still exists.
+ * 
+ * `selected` Whether the tab is selected.
+ * 
+ * `highlighted` Whether the tab is highlighted.
+ * 
+ * `active` Whether the tab is active in its window. (Does not necessarily mean
+ * the window is focused.)
+ * 
+ * `pinned` Whether the tab is pinned.
+ * 
+ * `url` The URL the tab is displaying. This property is only present if the
+ * extension's manifest includes the `"tabs"` permission.
+ * 
+ * `title` The title of the tab. This property is only present if the
+ * extension's manifest includes the `"tabs"` permission.
+ * 
+ * `favIconUrl` The URL of the tab's favicon. This property is only present if
+ * the extension's manifest includes the `"tabs"` permission. It may also be an
+ * empty string if the tab is loading.
+ * 
+ * `status` Either _loading_ or _complete_.
+ * 
+ * `incognito` Whether the tab is in an incognito window.
+ * 
+ * `width` The width of the tab in pixels.
+ * 
+ * `height` The height of the tab in pixels.
+ * 
+ * `sessionId` The session ID used to uniquely identify a Tab obtained from the
+ * [sessions] API.
+ */
 class Tab extends ChromeObject {
   static Tab create(JsObject proxy) => new Tab(proxy);
 
@@ -412,89 +537,100 @@ class Tab extends ChromeObject {
    * foreign tabs using the [sessions] API, in which case a session ID may be
    * present.
    */
-  int get id => this.proxy['id'];
+  int get id => proxy['id'];
 
   /**
    * The zero-based index of the tab within its window.
    */
-  int get index => this.proxy['index'];
+  int get index => proxy['index'];
 
   /**
    * The ID of the window the tab is contained within.
    */
-  int get windowId => this.proxy['windowId'];
+  int get windowId => proxy['windowId'];
 
   /**
    * The ID of the tab that opened this tab, if any. This property is only
    * present if the opener tab still exists.
    */
-  int get openerTabId => this.proxy['openerTabId'];
+  int get openerTabId => proxy['openerTabId'];
 
   /**
    * Whether the tab is highlighted.
    */
-  bool get highlighted => this.proxy['highlighted'];
+  bool get highlighted => proxy['highlighted'];
 
   /**
    * Whether the tab is active in its window. (Does not necessarily mean the
    * window is focused.)
    */
-  bool get active => this.proxy['active'];
+  bool get active => proxy['active'];
 
   /**
    * Whether the tab is pinned.
    */
-  bool get pinned => this.proxy['pinned'];
+  bool get pinned => proxy['pinned'];
 
   /**
    * The URL the tab is displaying. This property is only present if the
    * extension's manifest includes the `"tabs"` permission.
    */
-  String get url => this.proxy['url'];
+  String get url => proxy['url'];
 
   /**
    * The title of the tab. This property is only present if the extension's
    * manifest includes the `"tabs"` permission.
    */
-  String get title => this.proxy['title'];
+  String get title => proxy['title'];
 
   /**
    * The URL of the tab's favicon. This property is only present if the
    * extension's manifest includes the `"tabs"` permission. It may also be an
    * empty string if the tab is loading.
    */
-  String get favIconUrl => this.proxy['favIconUrl'];
+  String get favIconUrl => proxy['favIconUrl'];
 
   /**
    * Either _loading_ or _complete_.
    */
-  String get status => this.proxy['status'];
+  String get status => proxy['status'];
 
   /**
    * Whether the tab is in an incognito window.
    */
-  bool get incognito => this.proxy['incognito'];
+  bool get incognito => proxy['incognito'];
 
   /**
    * The width of the tab in pixels.
    */
-  int get width => this.proxy['width'];
+  int get width => proxy['width'];
 
   /**
    * The height of the tab in pixels.
    */
-  int get height => this.proxy['height'];
+  int get height => proxy['height'];
 
   /**
    * The session ID used to uniquely identify a Tab obtained from the [sessions]
    * API.
    */
-  String get sessionId => this.proxy['sessionId'];
+  String get sessionId => proxy['sessionId'];
 }
 
 /**
  * Details of the script or CSS to inject. Either the code or the file property
  * must be set, but both may not be set at the same time.
+ * 
+ * `code` JavaScript or CSS code to inject.
+ * 
+ * `file` JavaScript or CSS file to inject.
+ * 
+ * `allFrames` If allFrames is `true`, implies that the JavaScript or CSS should
+ * be injected into all frames of current page. By default, it's `false` and is
+ * only injected into the top frame.
+ * 
+ * `runAt` The soonest that the JavaScript or CSS will be injected into the tab.
+ * Defaults to "document_idle".
  */
 class InjectDetails extends ChromeObject {
   static InjectDetails create(JsObject proxy) => new InjectDetails(proxy);
@@ -504,23 +640,23 @@ class InjectDetails extends ChromeObject {
   /**
    * JavaScript or CSS code to inject.
    */
-  String get code => this.proxy['code'];
+  String get code => proxy['code'];
 
   /**
    * JavaScript or CSS file to inject.
    */
-  String get file => this.proxy['file'];
+  String get file => proxy['file'];
 
   /**
    * If allFrames is `true`, implies that the JavaScript or CSS should be
    * injected into all frames of current page. By default, it's `false` and is
    * only injected into the top frame.
    */
-  bool get allFrames => this.proxy['allFrames'];
+  bool get allFrames => proxy['allFrames'];
 
   /**
    * The soonest that the JavaScript or CSS will be injected into the tab.
    * Defaults to "document_idle".
    */
-  String get runAt => this.proxy['runAt'];
+  String get runAt => proxy['runAt'];
 }

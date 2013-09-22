@@ -18,11 +18,9 @@ import '../src/common.dart';
 final ChromeDevtoolsPanels devtools_panels = new ChromeDevtoolsPanels._();
 
 class ChromeDevtoolsPanels {
-  JsObject _devtools_panels;
+  static final JsObject _devtools_panels = context['chrome']['devtools']['panels'];
 
-  ChromeDevtoolsPanels._() {
-    _devtools_panels = context['chrome']['devtools']['panels'];
-  }
+  ChromeDevtoolsPanels._();
 
   /**
    * Elements panel.

@@ -15,11 +15,9 @@ import '../src/common.dart';
 final ChromeTypes types = new ChromeTypes._();
 
 class ChromeTypes {
-  JsObject _types;
+  static final JsObject _types = context['chrome']['types'];
 
-  ChromeTypes._() {
-    _types = context['chrome']['types'];
-  }
+  ChromeTypes._();
 }
 
 /**

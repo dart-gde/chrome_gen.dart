@@ -16,11 +16,9 @@ import '../src/common.dart';
 final ChromeDevtoolsNetwork devtools_network = new ChromeDevtoolsNetwork._();
 
 class ChromeDevtoolsNetwork {
-  JsObject _devtools_network;
+  static final JsObject _devtools_network = context['chrome']['devtools']['network'];
 
-  ChromeDevtoolsNetwork._() {
-    _devtools_network = context['chrome']['devtools']['network'];
-  }
+  ChromeDevtoolsNetwork._();
 
   /**
    * Returns HAR log that contains all known network requests.
@@ -38,18 +36,18 @@ class ChromeDevtoolsNetwork {
    * Fired when a network request is finished and all request data are
    * available.
    */
-  Stream<dynamic> get onRequestFinished => _onRequestFinished.stream;
+  Stream<Request> get onRequestFinished => _onRequestFinished.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onRequestFinished = null;
+  final ChromeStreamController<Request> _onRequestFinished =
+      new ChromeStreamController<Request>.oneArg(_devtools_network['onRequestFinished'], Request.create);
 
   /**
    * Fired when the inspected window navigates to a new page.
    */
-  Stream<dynamic> get onNavigated => _onNavigated.stream;
+  Stream<String> get onNavigated => _onNavigated.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onNavigated = null;
+  final ChromeStreamController<String> _onNavigated =
+      new ChromeStreamController<String>.oneArg(_devtools_network['onNavigated'], selfConverter);
 }
 
 /**

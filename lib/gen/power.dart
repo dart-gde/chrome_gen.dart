@@ -4,6 +4,9 @@
 
 /* This file has been generated from power.idl - do not edit */
 
+/**
+ * 
+ */
 library chrome.power;
 
 import '../src/common.dart';
@@ -12,9 +15,15 @@ import '../src/common.dart';
 final ChromePower power = new ChromePower._();
 
 class ChromePower {
-  JsObject _power;
+  static final JsObject _power = context['chrome']['power'];
 
-  ChromePower._() {
-    _power = context['chrome']['power'];
+  ChromePower._();
+
+  void requestKeepAwake(Level level) {
+    _power.callMethod('requestKeepAwake', [level]);
+  }
+
+  void releaseKeepAwake() {
+    _power.callMethod('releaseKeepAwake');
   }
 }

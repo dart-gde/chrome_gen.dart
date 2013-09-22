@@ -17,15 +17,19 @@ import '../src/common.dart';
 final ChromeScriptBadge scriptBadge = new ChromeScriptBadge._();
 
 class ChromeScriptBadge {
-  JsObject _scriptBadge;
+  static final JsObject _scriptBadge = context['chrome']['scriptBadge'];
 
-  ChromeScriptBadge._() {
-    _scriptBadge = context['chrome']['scriptBadge'];
-  }
+  ChromeScriptBadge._();
 
   /**
    * Sets the html document to be opened as a popup when the user clicks on the
    * script badge's icon.
+   * 
+   * [details] `tabId` The id of the tab for which you want to modify the script
+   * badge.
+   * 
+   * `popup` The html file to show in a popup.  If set to the empty string (''),
+   * no popup is shown.
    */
   void setPopup(Map details) {
     _scriptBadge.callMethod('setPopup', [jsify(details)]);
@@ -33,6 +37,8 @@ class ChromeScriptBadge {
 
   /**
    * Gets the html document set as the popup for this script badge.
+   * 
+   * [details] `tabId` Specify the tab to get the popup from.
    */
   Future<String> getPopup(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -46,6 +52,8 @@ class ChromeScriptBadge {
    * particular tab.  Do not call this for every tab. That's tacky.  If the user
    * clicks on the badge, the activeTab APIs become available. If the extension
    * has already run on this tab, this call does nothing.
+   * 
+   * [details] `tabId` Specify the tab to request to act on.
    */
   void getAttention(Map details) {
     _scriptBadge.callMethod('getAttention', [jsify(details)]);
@@ -55,8 +63,8 @@ class ChromeScriptBadge {
    * Fired when a script badge icon is clicked.  This event will not fire if the
    * script badge has a popup.
    */
-  Stream<dynamic> get onClicked => _onClicked.stream;
+  Stream<Tab> get onClicked => _onClicked.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onClicked = null;
+  final ChromeStreamController<Tab> _onClicked =
+      new ChromeStreamController<Tab>.oneArg(_scriptBadge['onClicked'], Tab.create);
 }

@@ -4,6 +4,9 @@
 
 /* This file has been generated from system_cpu.idl - do not edit */
 
+/**
+ * 
+ */
 library chrome.system_cpu;
 
 import '../src/common.dart';
@@ -12,9 +15,13 @@ import '../src/common.dart';
 final ChromeSystemCpu system_cpu = new ChromeSystemCpu._();
 
 class ChromeSystemCpu {
-  JsObject _system_cpu;
+  static final JsObject _system_cpu = context['chrome']['system']['cpu'];
 
-  ChromeSystemCpu._() {
-    _system_cpu = context['chrome']['system']['cpu'];
+  ChromeSystemCpu._();
+
+  Future getInfo() {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _system_cpu.callMethod('getInfo', [completer.callback]);
+    return completer.future;
   }
 }

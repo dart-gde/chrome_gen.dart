@@ -18,11 +18,9 @@ import '../src/common.dart';
 final ChromeSessions sessions = new ChromeSessions._();
 
 class ChromeSessions {
-  JsObject _sessions;
+  static final JsObject _sessions = context['chrome']['sessions'];
 
-  ChromeSessions._() {
-    _sessions = context['chrome']['sessions'];
-  }
+  ChromeSessions._();
 
   /**
    * The maximum number of [Session] that will be included in a requested list.
@@ -38,7 +36,7 @@ class ChromeSessions {
    * either tabs or windows.
    */
   Future<List<Session>> getRecentlyClosed([Filter filter]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Session.create));
     _sessions.callMethod('getRecentlyClosed', [filter, completer.callback]);
     return completer.future;
   }
@@ -53,7 +51,7 @@ class ChromeSessions {
    * [windows.Window] of the [Session] objects.
    */
   Future<List<Device>> getDevices([Filter filter]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Device.create));
     _sessions.callMethod('getDevices', [filter, completer.callback]);
     return completer.future;
   }
@@ -75,6 +73,11 @@ class ChromeSessions {
   }
 }
 
+/**
+ * `maxResults` The maximum number of entries to be fetched in the requested
+ * list. Omit this parameter to fetch the maximum number of entries
+ * ([MAX_SESSION_RESULTS]).
+ */
 class Filter extends ChromeObject {
   static Filter create(JsObject proxy) => new Filter(proxy);
 
@@ -85,9 +88,19 @@ class Filter extends ChromeObject {
    * this parameter to fetch the maximum number of entries
    * ([MAX_SESSION_RESULTS]).
    */
-  int get maxResults => this.proxy['maxResults'];
+  int get maxResults => proxy['maxResults'];
 }
 
+/**
+ * `lastModified` The time when the window or tab was closed or modified,
+ * represented in milliseconds since the epoch.
+ * 
+ * `tab` The [tabs.Tab], if this entry describes a tab. Either this or
+ * [Session.window] will be set.
+ * 
+ * `window` The [windows.Window], if this entry describes a window. Either this
+ * or [Session.tab] will be set.
+ */
 class Session extends ChromeObject {
   static Session create(JsObject proxy) => new Session(proxy);
 
@@ -97,21 +110,27 @@ class Session extends ChromeObject {
    * The time when the window or tab was closed or modified, represented in
    * milliseconds since the epoch.
    */
-  int get lastModified => this.proxy['lastModified'];
+  int get lastModified => proxy['lastModified'];
 
   /**
    * The [tabs.Tab], if this entry describes a tab. Either this or
    * [Session.window] will be set.
    */
-  Tab get tab => new Tab(this.proxy['tab']);
+  Tab get tab => new Tab(proxy['tab']);
 
   /**
    * The [windows.Window], if this entry describes a window. Either this or
    * [Session.tab] will be set.
    */
-  Window get window => new Window(this.proxy['window']);
+  Window get window => new Window(proxy['window']);
 }
 
+/**
+ * `info` Represents all information about a foreign device.
+ * 
+ * `sessions` A list of open window sessions for the foreign device, sorted from
+ * most recently to least recently modified session.
+ */
 class Device extends ChromeObject {
   static Device create(JsObject proxy) => new Device(proxy);
 
@@ -120,11 +139,11 @@ class Device extends ChromeObject {
   /**
    * Represents all information about a foreign device.
    */
-  String get info => this.proxy['info'];
+  String get info => proxy['info'];
 
   /**
    * A list of open window sessions for the foreign device, sorted from most
    * recently to least recently modified session.
    */
-  List<Session> get sessions => this.proxy['sessions'];
+  List<Session> get sessions => listify(proxy['sessions'], Session.create);
 }

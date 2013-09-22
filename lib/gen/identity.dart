@@ -4,6 +4,9 @@
 
 /* This file has been generated from identity.idl - do not edit */
 
+/**
+ * 
+ */
 library chrome.identity;
 
 import '../src/common.dart';
@@ -12,9 +15,25 @@ import '../src/common.dart';
 final ChromeIdentity identity = new ChromeIdentity._();
 
 class ChromeIdentity {
-  JsObject _identity;
+  static final JsObject _identity = context['chrome']['identity'];
 
-  ChromeIdentity._() {
-    _identity = context['chrome']['identity'];
+  ChromeIdentity._();
+
+  Future getAuthToken([TokenDetails details]) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _identity.callMethod('getAuthToken', [details, completer.callback]);
+    return completer.future;
+  }
+
+  Future removeCachedAuthToken(InvalidTokenDetails details) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _identity.callMethod('removeCachedAuthToken', [details, completer.callback]);
+    return completer.future;
+  }
+
+  Future launchWebAuthFlow(WebAuthFlowDetails details) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _identity.callMethod('launchWebAuthFlow', [details, completer.callback]);
+    return completer.future;
   }
 }

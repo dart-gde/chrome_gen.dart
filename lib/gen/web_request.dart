@@ -16,11 +16,9 @@ import '../src/common.dart';
 final ChromeWebRequest webRequest = new ChromeWebRequest._();
 
 class ChromeWebRequest {
-  JsObject _webRequest;
+  static final JsObject _webRequest = context['chrome']['webRequest'];
 
-  ChromeWebRequest._() {
-    _webRequest = context['chrome']['webRequest'];
-  }
+  ChromeWebRequest._();
 
   /**
    * The maximum number of times that `handlerBehaviorChanged` can be called per
@@ -43,38 +41,38 @@ class ChromeWebRequest {
   /**
    * Fired when a request is about to occur.
    */
-  Stream<dynamic> get onBeforeRequest => _onBeforeRequest.stream;
+  Stream<Map> get onBeforeRequest => _onBeforeRequest.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onBeforeRequest = null;
+  final ChromeStreamController<Map> _onBeforeRequest =
+      new ChromeStreamController<Map>.oneArg(_webRequest['onBeforeRequest'], mapify);
 
   /**
    * Fired before sending an HTTP request, once the request headers are
    * available. This may occur after a TCP connection is made to the server, but
    * before any HTTP data is sent.
    */
-  Stream<dynamic> get onBeforeSendHeaders => _onBeforeSendHeaders.stream;
+  Stream<Map> get onBeforeSendHeaders => _onBeforeSendHeaders.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onBeforeSendHeaders = null;
+  final ChromeStreamController<Map> _onBeforeSendHeaders =
+      new ChromeStreamController<Map>.oneArg(_webRequest['onBeforeSendHeaders'], mapify);
 
   /**
    * Fired just before a request is going to be sent to the server
    * (modifications of previous onBeforeSendHeaders callbacks are visible by the
    * time onSendHeaders is fired).
    */
-  Stream<dynamic> get onSendHeaders => _onSendHeaders.stream;
+  Stream<Map> get onSendHeaders => _onSendHeaders.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onSendHeaders = null;
+  final ChromeStreamController<Map> _onSendHeaders =
+      new ChromeStreamController<Map>.oneArg(_webRequest['onSendHeaders'], mapify);
 
   /**
    * Fired when HTTP response headers of a request have been received.
    */
-  Stream<dynamic> get onHeadersReceived => _onHeadersReceived.stream;
+  Stream<Map> get onHeadersReceived => _onHeadersReceived.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onHeadersReceived = null;
+  final ChromeStreamController<Map> _onHeadersReceived =
+      new ChromeStreamController<Map>.oneArg(_webRequest['onHeadersReceived'], mapify);
 
   /**
    * Fired when an authentication failure is received. The listener has three
@@ -85,46 +83,56 @@ class ChromeWebRequest {
    */
   Stream<dynamic> get onAuthRequired => _onAuthRequired.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onAuthRequired = null;
+  final ChromeStreamController<dynamic> _onAuthRequired =
+      new ChromeStreamController<dynamic>.oneArg(_webRequest['onAuthRequired'], selfConverter);
 
   /**
    * Fired when the first byte of the response body is received. For HTTP
    * requests, this means that the status line and response headers are
    * available.
    */
-  Stream<dynamic> get onResponseStarted => _onResponseStarted.stream;
+  Stream<Map> get onResponseStarted => _onResponseStarted.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onResponseStarted = null;
+  final ChromeStreamController<Map> _onResponseStarted =
+      new ChromeStreamController<Map>.oneArg(_webRequest['onResponseStarted'], mapify);
 
   /**
    * Fired when a server-initiated redirect is about to occur.
    */
-  Stream<dynamic> get onBeforeRedirect => _onBeforeRedirect.stream;
+  Stream<Map> get onBeforeRedirect => _onBeforeRedirect.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onBeforeRedirect = null;
+  final ChromeStreamController<Map> _onBeforeRedirect =
+      new ChromeStreamController<Map>.oneArg(_webRequest['onBeforeRedirect'], mapify);
 
   /**
    * Fired when a request is completed.
    */
-  Stream<dynamic> get onCompleted => _onCompleted.stream;
+  Stream<Map> get onCompleted => _onCompleted.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onCompleted = null;
+  final ChromeStreamController<Map> _onCompleted =
+      new ChromeStreamController<Map>.oneArg(_webRequest['onCompleted'], mapify);
 
   /**
    * Fired when an error occurs.
    */
-  Stream<dynamic> get onErrorOccurred => _onErrorOccurred.stream;
+  Stream<Map> get onErrorOccurred => _onErrorOccurred.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onErrorOccurred = null;
+  final ChromeStreamController<Map> _onErrorOccurred =
+      new ChromeStreamController<Map>.oneArg(_webRequest['onErrorOccurred'], mapify);
 }
 
 /**
  * An object describing filters to apply to webRequest events.
+ * 
+ * `urls` A list of URLs or URL patterns. Requests that cannot match any of the
+ * URLs will be filtered out.
+ * 
+ * `types` A list of request types. Requests that cannot match any of the types
+ * will be filtered out.
+ * 
+ * `tabId`
+ * 
+ * `windowId`
  */
 class RequestFilter extends ChromeObject {
   static RequestFilter create(JsObject proxy) => new RequestFilter(proxy);
@@ -135,17 +143,17 @@ class RequestFilter extends ChromeObject {
    * A list of URLs or URL patterns. Requests that cannot match any of the URLs
    * will be filtered out.
    */
-  List<String> get urls => listify(this.proxy['urls']);
+  List<String> get urls => listify(proxy['urls']);
 
   /**
    * A list of request types. Requests that cannot match any of the types will
    * be filtered out.
    */
-  List<String> get types => listify(this.proxy['types']);
+  List<String> get types => listify(proxy['types']);
 
-  int get tabId => this.proxy['tabId'];
+  int get tabId => proxy['tabId'];
 
-  int get windowId => this.proxy['windowId'];
+  int get windowId => proxy['windowId'];
 }
 
 /**
@@ -161,6 +169,25 @@ class HttpHeaders extends ChromeObject {
 /**
  * Returns value for event handlers that have the 'blocking' extraInfoSpec
  * applied. Allows the event handler to modify network requests.
+ * 
+ * `cancel` If true, the request is cancelled. Used in onBeforeRequest, this
+ * prevents the request from being sent.
+ * 
+ * `redirectUrl` Only used as a response to the onBeforeRequest event. If set,
+ * the original request is prevented from being sent and is instead redirected
+ * to the given URL.
+ * 
+ * `requestHeaders` Only used as a response to the onBeforeSendHeaders event. If
+ * set, the request is made with these request headers instead.
+ * 
+ * `responseHeaders` Only used as a response to the onHeadersReceived event. If
+ * set, the server is assumed to have responded with these response headers
+ * instead. Only return `responseHeaders` if you really want to modify the
+ * headers in order to limit the number of conflicts (only one extension may
+ * modify `responseHeaders` for each request).
+ * 
+ * `authCredentials` Only used as a response to the onAuthRequired event. If
+ * set, the request is made using the supplied credentials.
  */
 class BlockingResponse extends ChromeObject {
   static BlockingResponse create(JsObject proxy) => new BlockingResponse(proxy);
@@ -171,20 +198,20 @@ class BlockingResponse extends ChromeObject {
    * If true, the request is cancelled. Used in onBeforeRequest, this prevents
    * the request from being sent.
    */
-  bool get cancel => this.proxy['cancel'];
+  bool get cancel => proxy['cancel'];
 
   /**
    * Only used as a response to the onBeforeRequest event. If set, the original
    * request is prevented from being sent and is instead redirected to the given
    * URL.
    */
-  String get redirectUrl => this.proxy['redirectUrl'];
+  String get redirectUrl => proxy['redirectUrl'];
 
   /**
    * Only used as a response to the onBeforeSendHeaders event. If set, the
    * request is made with these request headers instead.
    */
-  HttpHeaders get requestHeaders => new HttpHeaders(this.proxy['requestHeaders']);
+  HttpHeaders get requestHeaders => new HttpHeaders(proxy['requestHeaders']);
 
   /**
    * Only used as a response to the onHeadersReceived event. If set, the server
@@ -193,17 +220,25 @@ class BlockingResponse extends ChromeObject {
    * to limit the number of conflicts (only one extension may modify
    * `responseHeaders` for each request).
    */
-  HttpHeaders get responseHeaders => new HttpHeaders(this.proxy['responseHeaders']);
+  HttpHeaders get responseHeaders => new HttpHeaders(proxy['responseHeaders']);
 
   /**
    * Only used as a response to the onAuthRequired event. If set, the request is
    * made using the supplied credentials.
+   * 
+   * `username`
+   * 
+   * `password`
    */
-  Map get authCredentials => mapify(this.proxy['authCredentials']);
+  Map get authCredentials => mapify(proxy['authCredentials']);
 }
 
 /**
  * Contains data uploaded in a URL request.
+ * 
+ * `bytes` An ArrayBuffer with a copy of the data.
+ * 
+ * `file` A string with the file's path and name.
  */
 class UploadData extends ChromeObject {
   static UploadData create(JsObject proxy) => new UploadData(proxy);
@@ -213,10 +248,10 @@ class UploadData extends ChromeObject {
   /**
    * An ArrayBuffer with a copy of the data.
    */
-  dynamic get bytes => this.proxy['bytes'];
+  dynamic get bytes => proxy['bytes'];
 
   /**
    * A string with the file's path and name.
    */
-  String get file => this.proxy['file'];
+  String get file => proxy['file'];
 }

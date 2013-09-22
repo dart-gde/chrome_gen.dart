@@ -17,18 +17,16 @@ import '../src/common.dart';
 final ChromeCommands commands = new ChromeCommands._();
 
 class ChromeCommands {
-  JsObject _commands;
+  static final JsObject _commands = context['chrome']['commands'];
 
-  ChromeCommands._() {
-    _commands = context['chrome']['commands'];
-  }
+  ChromeCommands._();
 
   /**
    * Returns all the registered extension commands for this extension and their
    * shortcut (if active).
    */
   Future<List<Command>> getAll() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Command.create));
     _commands.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -36,12 +34,19 @@ class ChromeCommands {
   /**
    * Fired when a registered command is activated using a keyboard shortcut.
    */
-  Stream<dynamic> get onCommand => _onCommand.stream;
+  Stream<String> get onCommand => _onCommand.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onCommand = null;
+  final ChromeStreamController<String> _onCommand =
+      new ChromeStreamController<String>.oneArg(_commands['onCommand'], selfConverter);
 }
 
+/**
+ * `name` The name of the Extension Command
+ * 
+ * `description` The Extension Command description
+ * 
+ * `shortcut` The shortcut active for this command, or blank if not active.
+ */
 class Command extends ChromeObject {
   static Command create(JsObject proxy) => new Command(proxy);
 
@@ -50,15 +55,15 @@ class Command extends ChromeObject {
   /**
    * The name of the Extension Command
    */
-  String get name => this.proxy['name'];
+  String get name => proxy['name'];
 
   /**
    * The Extension Command description
    */
-  String get description => this.proxy['description'];
+  String get description => proxy['description'];
 
   /**
    * The shortcut active for this command, or blank if not active.
    */
-  String get shortcut => this.proxy['shortcut'];
+  String get shortcut => proxy['shortcut'];
 }

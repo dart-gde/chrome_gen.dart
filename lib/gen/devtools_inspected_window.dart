@@ -18,11 +18,9 @@ import '../src/common.dart';
 final ChromeDevtoolsInspectedWindow devtools_inspectedWindow = new ChromeDevtoolsInspectedWindow._();
 
 class ChromeDevtoolsInspectedWindow {
-  JsObject _devtools_inspectedWindow;
+  static final JsObject _devtools_inspectedWindow = context['chrome']['devtools']['inspectedWindow'];
 
-  ChromeDevtoolsInspectedWindow._() {
-    _devtools_inspectedWindow = context['chrome']['devtools']['inspectedWindow'];
-  }
+  ChromeDevtoolsInspectedWindow._();
 
   /**
    * The ID of the tab being inspected. This ID may be used with chrome.tabs.*
@@ -50,6 +48,22 @@ class ChromeDevtoolsInspectedWindow {
 
   /**
    * Reloads the inspected page.
+   * 
+   * [reloadOptions] `ignoreCache` When true, the loader will ignore the cache
+   * for all inspected page resources loaded before the `load` event is fired.
+   * The effect is similar to pressing Ctrl+Shift+R in the inspected window or
+   * within the Developer Tools window.
+   * 
+   * `userAgent` If specified, the string will override the value of the
+   * `User-Agent` HTTP header that's sent while loading the resources of the
+   * inspected page. The string will also override the value of the
+   * `navigator.userAgent` property that's returned to any scripts that are
+   * running within the inspected page.
+   * 
+   * `injectedScript` If specified, the script will be injected into every frame
+   * of the inspected page immediately upon load, before any of the frame's
+   * scripts. The script will not be injected after subsequent reloads-for
+   * example, if the user presses Ctrl+R.
    */
   void reload([Map reloadOptions]) {
     _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
@@ -62,7 +76,7 @@ class ChromeDevtoolsInspectedWindow {
    * The resources within the page.
    */
   Future<List<Resource>> getResources() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Resource.create));
     _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
     return completer.future;
   }
@@ -70,10 +84,10 @@ class ChromeDevtoolsInspectedWindow {
   /**
    * Fired when a new resource is added to the inspected page.
    */
-  Stream<dynamic> get onResourceAdded => _onResourceAdded.stream;
+  Stream<Resource> get onResourceAdded => _onResourceAdded.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onResourceAdded = null;
+  final ChromeStreamController<Resource> _onResourceAdded =
+      new ChromeStreamController<Resource>.oneArg(_devtools_inspectedWindow['onResourceAdded'], Resource.create);
 
   /**
    * Fired when a new revision of the resource is committed (e.g. user saves an
@@ -81,13 +95,15 @@ class ChromeDevtoolsInspectedWindow {
    */
   Stream<dynamic> get onResourceContentCommitted => _onResourceContentCommitted.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onResourceContentCommitted = null;
+  final ChromeStreamController<dynamic> _onResourceContentCommitted =
+      new ChromeStreamController<dynamic>.oneArg(_devtools_inspectedWindow['onResourceContentCommitted'], selfConverter);
 }
 
 /**
  * A resource within the inspected page, such as a document, a script, or an
  * image.
+ * 
+ * `url` The URL of the resource.
  */
 class Resource extends ChromeObject {
   static Resource create(JsObject proxy) => new Resource(proxy);
@@ -97,5 +113,5 @@ class Resource extends ChromeObject {
   /**
    * The URL of the resource.
    */
-  String get url => this.proxy['url'];
+  String get url => proxy['url'];
 }

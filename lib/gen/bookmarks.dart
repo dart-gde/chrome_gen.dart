@@ -17,11 +17,9 @@ import '../src/common.dart';
 final ChromeBookmarks bookmarks = new ChromeBookmarks._();
 
 class ChromeBookmarks {
-  JsObject _bookmarks;
+  static final JsObject _bookmarks = context['chrome']['bookmarks'];
 
-  ChromeBookmarks._() {
-    _bookmarks = context['chrome']['bookmarks'];
-  }
+  ChromeBookmarks._();
 
   /**
    * The maximum number of `move`, `update`, `create`, or `remove` operations
@@ -43,7 +41,7 @@ class ChromeBookmarks {
    * [idOrIdList] A single string-valued id, or an array of string-valued ids
    */
   Future<List<BookmarkTreeNode>> get(var idOrIdList) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('get', [idOrIdList, completer.callback]);
     return completer.future;
   }
@@ -52,7 +50,7 @@ class ChromeBookmarks {
    * Retrieves the children of the specified BookmarkTreeNode id.
    */
   Future<List<BookmarkTreeNode>> getChildren(String id) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('getChildren', [id, completer.callback]);
     return completer.future;
   }
@@ -63,7 +61,7 @@ class ChromeBookmarks {
    * [numberOfItems] The maximum number of items to return.
    */
   Future<List<BookmarkTreeNode>> getRecent(int numberOfItems) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('getRecent', [numberOfItems, completer.callback]);
     return completer.future;
   }
@@ -72,7 +70,7 @@ class ChromeBookmarks {
    * Retrieves the entire Bookmarks hierarchy.
    */
   Future<List<BookmarkTreeNode>> getTree() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('getTree', [completer.callback]);
     return completer.future;
   }
@@ -83,7 +81,7 @@ class ChromeBookmarks {
    * [id] The ID of the root of the subtree to retrieve.
    */
   Future<List<BookmarkTreeNode>> getSubTree(String id) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('getSubTree', [id, completer.callback]);
     return completer.future;
   }
@@ -92,7 +90,7 @@ class ChromeBookmarks {
    * Searches for BookmarkTreeNodes matching the given query.
    */
   Future<List<BookmarkTreeNode>> search(String query) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('search', [query, completer.callback]);
     return completer.future;
   }
@@ -100,6 +98,14 @@ class ChromeBookmarks {
   /**
    * Creates a bookmark or folder under the specified parentId.  If url is NULL
    * or missing, it will be a folder.
+   * 
+   * [bookmark] `parentId` Defaults to the Other Bookmarks folder.
+   * 
+   * `index`
+   * 
+   * `title`
+   * 
+   * `url`
    */
   Future<BookmarkTreeNode> create(Map bookmark) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(BookmarkTreeNode.create);
@@ -109,6 +115,10 @@ class ChromeBookmarks {
 
   /**
    * Moves the specified BookmarkTreeNode to the provided location.
+   * 
+   * [destination] `parentId`
+   * 
+   * `index`
    */
   Future<BookmarkTreeNode> move(String id, Map destination) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(BookmarkTreeNode.create);
@@ -120,6 +130,10 @@ class ChromeBookmarks {
    * Updates the properties of a bookmark or folder. Specify only the properties
    * that you want to change; unspecified properties will be left unchanged.
    * <b>Note:</b> Currently, only 'title' and 'url' are supported.
+   * 
+   * [changes] `title`
+   * 
+   * `url`
    */
   Future<BookmarkTreeNode> update(String id, Map changes) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(BookmarkTreeNode.create);
@@ -168,8 +182,8 @@ class ChromeBookmarks {
    */
   Stream<dynamic> get onCreated => _onCreated.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onCreated = null;
+  final ChromeStreamController<dynamic> _onCreated =
+      new ChromeStreamController<dynamic>.oneArg(_bookmarks['onCreated'], selfConverter);
 
   /**
    * Fired when a bookmark or folder is removed.  When a folder is removed
@@ -178,8 +192,8 @@ class ChromeBookmarks {
    */
   Stream<dynamic> get onRemoved => _onRemoved.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onRemoved = null;
+  final ChromeStreamController<dynamic> _onRemoved =
+      new ChromeStreamController<dynamic>.oneArg(_bookmarks['onRemoved'], selfConverter);
 
   /**
    * Fired when a bookmark or folder changes.  <b>Note:</b> Currently, only
@@ -187,16 +201,16 @@ class ChromeBookmarks {
    */
   Stream<dynamic> get onChanged => _onChanged.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onChanged = null;
+  final ChromeStreamController<dynamic> _onChanged =
+      new ChromeStreamController<dynamic>.oneArg(_bookmarks['onChanged'], selfConverter);
 
   /**
    * Fired when a bookmark or folder is moved to a different parent folder.
    */
   Stream<dynamic> get onMoved => _onMoved.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onMoved = null;
+  final ChromeStreamController<dynamic> _onMoved =
+      new ChromeStreamController<dynamic>.oneArg(_bookmarks['onMoved'], selfConverter);
 
   /**
    * Fired when the children of a folder have changed their order due to the
@@ -204,31 +218,51 @@ class ChromeBookmarks {
    */
   Stream<dynamic> get onChildrenReordered => _onChildrenReordered.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onChildrenReordered = null;
+  final ChromeStreamController<dynamic> _onChildrenReordered =
+      new ChromeStreamController<dynamic>.oneArg(_bookmarks['onChildrenReordered'], selfConverter);
 
   /**
    * Fired when a bookmark import session is begun.  Expensive observers should
    * ignore onCreated updates until onImportEnded is fired.  Observers should
    * still handle other notifications immediately.
    */
-  Stream<dynamic> get onImportBegan => _onImportBegan.stream;
+  Stream get onImportBegan => _onImportBegan.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onImportBegan = null;
+  final ChromeStreamController _onImportBegan =
+      new ChromeStreamController.noArgs(_bookmarks['onImportBegan']);
 
   /**
    * Fired when a bookmark import session is ended.
    */
-  Stream<dynamic> get onImportEnded => _onImportEnded.stream;
+  Stream get onImportEnded => _onImportEnded.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onImportEnded = null;
+  final ChromeStreamController _onImportEnded =
+      new ChromeStreamController.noArgs(_bookmarks['onImportEnded']);
 }
 
 /**
  * A node (either a bookmark or a folder) in the bookmark tree.  Child nodes are
  * ordered within their parent folder.
+ * 
+ * `id` The unique identifier for the node. IDs are unique within the current
+ * profile, and they remain valid even after the browser is restarted.
+ * 
+ * `parentId` The `id` of the parent folder.  Omitted for the root node.
+ * 
+ * `index` The 0-based position of this node within its parent folder.
+ * 
+ * `url` The URL navigated to when a user clicks the bookmark. Omitted for
+ * folders.
+ * 
+ * `title` The text displayed for the node.
+ * 
+ * `dateAdded` When this node was created, in milliseconds since the epoch (`new
+ * Date(dateAdded)`).
+ * 
+ * `dateGroupModified` When the contents of this folder last changed, in
+ * milliseconds since the epoch.
+ * 
+ * `children` An ordered list of children of this node.
  */
 class BookmarkTreeNode extends ChromeObject {
   static BookmarkTreeNode create(JsObject proxy) => new BookmarkTreeNode(proxy);
@@ -239,42 +273,42 @@ class BookmarkTreeNode extends ChromeObject {
    * The unique identifier for the node. IDs are unique within the current
    * profile, and they remain valid even after the browser is restarted.
    */
-  String get id => this.proxy['id'];
+  String get id => proxy['id'];
 
   /**
    * The `id` of the parent folder.  Omitted for the root node.
    */
-  String get parentId => this.proxy['parentId'];
+  String get parentId => proxy['parentId'];
 
   /**
    * The 0-based position of this node within its parent folder.
    */
-  int get index => this.proxy['index'];
+  int get index => proxy['index'];
 
   /**
    * The URL navigated to when a user clicks the bookmark. Omitted for folders.
    */
-  String get url => this.proxy['url'];
+  String get url => proxy['url'];
 
   /**
    * The text displayed for the node.
    */
-  String get title => this.proxy['title'];
+  String get title => proxy['title'];
 
   /**
    * When this node was created, in milliseconds since the epoch (`new
    * Date(dateAdded)`).
    */
-  dynamic get dateAdded => this.proxy['dateAdded'];
+  dynamic get dateAdded => proxy['dateAdded'];
 
   /**
    * When the contents of this folder last changed, in milliseconds since the
    * epoch.
    */
-  dynamic get dateGroupModified => this.proxy['dateGroupModified'];
+  dynamic get dateGroupModified => proxy['dateGroupModified'];
 
   /**
    * An ordered list of children of this node.
    */
-  List<BookmarkTreeNode> get children => this.proxy['children'];
+  List<BookmarkTreeNode> get children => listify(proxy['children'], BookmarkTreeNode.create);
 }

@@ -16,17 +16,15 @@ import '../src/common.dart';
 final ChromeTopSites topSites = new ChromeTopSites._();
 
 class ChromeTopSites {
-  JsObject _topSites;
+  static final JsObject _topSites = context['chrome']['topSites'];
 
-  ChromeTopSites._() {
-    _topSites = context['chrome']['topSites'];
-  }
+  ChromeTopSites._();
 
   /**
    * Gets a list of top sites.
    */
   Future<List<MostVisitedURL>> get() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, MostVisitedURL.create));
     _topSites.callMethod('get', [completer.callback]);
     return completer.future;
   }
@@ -35,6 +33,10 @@ class ChromeTopSites {
 /**
  * An object encapsulating a most visited URL, such as the URLs on the new tab
  * page.
+ * 
+ * `url` The most visited URL.
+ * 
+ * `title` The title of the page
  */
 class MostVisitedURL extends ChromeObject {
   static MostVisitedURL create(JsObject proxy) => new MostVisitedURL(proxy);
@@ -44,10 +46,10 @@ class MostVisitedURL extends ChromeObject {
   /**
    * The most visited URL.
    */
-  String get url => this.proxy['url'];
+  String get url => proxy['url'];
 
   /**
    * The title of the page
    */
-  String get title => this.proxy['title'];
+  String get title => proxy['title'];
 }

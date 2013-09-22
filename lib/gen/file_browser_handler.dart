@@ -17,11 +17,9 @@ import '../src/common.dart';
 final ChromeFileBrowserHandler fileBrowserHandler = new ChromeFileBrowserHandler._();
 
 class ChromeFileBrowserHandler {
-  JsObject _fileBrowserHandler;
+  static final JsObject _fileBrowserHandler = context['chrome']['fileBrowserHandler'];
 
-  ChromeFileBrowserHandler._() {
-    _fileBrowserHandler = context['chrome']['fileBrowserHandler'];
-  }
+  ChromeFileBrowserHandler._();
 
   /**
    * Prompts user to select file path under which file should be saved. When the
@@ -33,8 +31,20 @@ class ChromeFileBrowserHandler {
    * 
    * [selectionParams] Parameters that will be used while selecting the file.
    * 
+   * `suggestedName` Suggested name for the file.
+   * 
+   * `allowedFileExtensions` List of file extensions that the selected file can
+   * have. The list is also used to specify what files to be shown in the select
+   * file dialog. Files with the listed extensions are only shown in the dialog.
+   * Extensions should not include the leading '.'. Example: ['jpg', 'png']
+   * 
    * Returns:
    * Result of the method.
+   * 
+   * `success` Whether the file has been selected.
+   * 
+   * `entry` Selected file entry. It will be null if a file hasn't been
+   * selected.
    */
   Future<Map> selectFile(Map selectionParams) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
@@ -47,12 +57,18 @@ class ChromeFileBrowserHandler {
    */
   Stream<dynamic> get onExecute => _onExecute.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onExecute = null;
+  final ChromeStreamController<dynamic> _onExecute =
+      new ChromeStreamController<dynamic>.oneArg(_fileBrowserHandler['onExecute'], selfConverter);
 }
 
 /**
  * Event details payload for fileBrowserHandler.onExecute event.
+ * 
+ * `entries` Array of Entry instances representing files that are targets of
+ * this action (selected in ChromeOS file browser).
+ * 
+ * `tab_id` The ID of the tab that raised this event. Tab IDs are unique within
+ * a browser session.
  */
 class FileHandlerExecuteEventDetails extends ChromeObject {
   static FileHandlerExecuteEventDetails create(JsObject proxy) => new FileHandlerExecuteEventDetails(proxy);
@@ -63,11 +79,11 @@ class FileHandlerExecuteEventDetails extends ChromeObject {
    * Array of Entry instances representing files that are targets of this action
    * (selected in ChromeOS file browser).
    */
-  List<dynamic> get entries => listify(this.proxy['entries']);
+  List<dynamic> get entries => listify(proxy['entries']);
 
   /**
    * The ID of the tab that raised this event. Tab IDs are unique within a
    * browser session.
    */
-  int get tab_id => this.proxy['tab_id'];
+  int get tab_id => proxy['tab_id'];
 }

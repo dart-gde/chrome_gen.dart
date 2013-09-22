@@ -16,11 +16,9 @@ import '../src/common.dart';
 final ChromeI18N i18n = new ChromeI18N._();
 
 class ChromeI18N {
-  JsObject _i18n;
+  static final JsObject _i18n = context['chrome']['i18n'];
 
-  ChromeI18N._() {
-    _i18n = context['chrome']['i18n'];
-  }
+  ChromeI18N._();
 
   /**
    * Gets the accept-languages of the browser. This is different from the locale

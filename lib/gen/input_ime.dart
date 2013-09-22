@@ -17,15 +17,26 @@ import '../src/common.dart';
 final ChromeInputIme input_ime = new ChromeInputIme._();
 
 class ChromeInputIme {
-  JsObject _input_ime;
+  static final JsObject _input_ime = context['chrome']['input']['ime'];
 
-  ChromeInputIme._() {
-    _input_ime = context['chrome']['input']['ime'];
-  }
+  ChromeInputIme._();
 
   /**
    * Set the current composition. If this extension does not own the active IME,
    * this fails.
+   * 
+   * [parameters] `contextID` ID of the context where the composition text will
+   * be set
+   * 
+   * `text` Text to set
+   * 
+   * `selectionStart` Position in the text that the selection starts at.
+   * 
+   * `selectionEnd` Position in the text that the selection ends at.
+   * 
+   * `cursor` Position in the text of the cursor.
+   * 
+   * `segments` List of segments and their associated types.
    */
   Future<bool> setComposition(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -36,6 +47,9 @@ class ChromeInputIme {
   /**
    * Clear the current composition. If this extension does not own the active
    * IME, this fails.
+   * 
+   * [parameters] `contextID` ID of the context where the composition will be
+   * cleared
    */
   Future<bool> clearComposition(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -45,6 +59,10 @@ class ChromeInputIme {
 
   /**
    * Commits the provided text to the current input.
+   * 
+   * [parameters] `contextID` ID of the context where the text will be committed
+   * 
+   * `text` The text to commit
    */
   Future<bool> commitText(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -55,6 +73,10 @@ class ChromeInputIme {
   /**
    * Sets the properties of the candidate window. This fails if the extension
    * doesn’t own the active IME
+   * 
+   * [parameters] `engineID` ID of the engine to set properties on.
+   * 
+   * `properties`
    */
   Future<bool> setCandidateWindowProperties(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -65,6 +87,10 @@ class ChromeInputIme {
   /**
    * Sets the current candidate list. This fails if this extension doesn’t own
    * the active IME
+   * 
+   * [parameters] `contextID` ID of the context that owns the candidate window.
+   * 
+   * `candidates` List of candidates to show in the candidate window
    */
   Future<bool> setCandidates(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -75,6 +101,10 @@ class ChromeInputIme {
   /**
    * Set the position of the cursor in the candidate window. This is a no-op if
    * this extension does not own the active IME.
+   * 
+   * [parameters] `contextID` ID of the context that owns the candidate window.
+   * 
+   * `candidateID` ID of the candidate to select.
    */
   Future<bool> setCursorPosition(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -84,6 +114,11 @@ class ChromeInputIme {
 
   /**
    * Adds the provided menu items to the language menu when this IME is active.
+   * 
+   * [parameters] `engineID` ID of the engine to use
+   * 
+   * `items` MenuItems to add. They will be added in the order they exist in the
+   * array.
    */
   Future setMenuItems(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -93,6 +128,10 @@ class ChromeInputIme {
 
   /**
    * Updates the state of the MenuItems specified
+   * 
+   * [parameters] `engineID` ID of the engine to use
+   * 
+   * `items` Array of MenuItems to update
    */
   Future updateMenuItems(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -102,6 +141,15 @@ class ChromeInputIme {
 
   /**
    * Deletes the text around the caret.
+   * 
+   * [parameters] `engineID` ID of the engine receiving the event.
+   * 
+   * `contextID` ID of the context where the surrounding text will be deleted.
+   * 
+   * `offset` The offset from the caret position where deletion will start. This
+   * value can be negative.
+   * 
+   * `length` The number of characters to be deleted
    */
   Future deleteSurroundingText(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -126,71 +174,71 @@ class ChromeInputIme {
    * This event is sent when an IME is activated. It signals that the IME will
    * be receiving onKeyPress events.
    */
-  Stream<dynamic> get onActivate => _onActivate.stream;
+  Stream<String> get onActivate => _onActivate.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onActivate = null;
+  final ChromeStreamController<String> _onActivate =
+      new ChromeStreamController<String>.oneArg(_input_ime['onActivate'], selfConverter);
 
   /**
    * This event is sent when an IME is deactivated. It signals that the IME will
    * no longer be receiving onKeyPress events.
    */
-  Stream<dynamic> get onDeactivated => _onDeactivated.stream;
+  Stream<String> get onDeactivated => _onDeactivated.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onDeactivated = null;
+  final ChromeStreamController<String> _onDeactivated =
+      new ChromeStreamController<String>.oneArg(_input_ime['onDeactivated'], selfConverter);
 
   /**
    * This event is sent when focus enters a text box. It is sent to all
    * extensions that are listening to this event, and enabled by the user.
    */
-  Stream<dynamic> get onFocus => _onFocus.stream;
+  Stream<InputContext> get onFocus => _onFocus.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onFocus = null;
+  final ChromeStreamController<InputContext> _onFocus =
+      new ChromeStreamController<InputContext>.oneArg(_input_ime['onFocus'], InputContext.create);
 
   /**
    * This event is sent when focus leaves a text box. It is sent to all
    * extensions that are listening to this event, and enabled by the user.
    */
-  Stream<dynamic> get onBlur => _onBlur.stream;
+  Stream<int> get onBlur => _onBlur.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onBlur = null;
+  final ChromeStreamController<int> _onBlur =
+      new ChromeStreamController<int>.oneArg(_input_ime['onBlur'], selfConverter);
 
   /**
    * This event is sent when the properties of the current InputContext change,
    * such as the the type. It is sent to all extensions that are listening to
    * this event, and enabled by the user.
    */
-  Stream<dynamic> get onInputContextUpdate => _onInputContextUpdate.stream;
+  Stream<InputContext> get onInputContextUpdate => _onInputContextUpdate.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onInputContextUpdate = null;
+  final ChromeStreamController<InputContext> _onInputContextUpdate =
+      new ChromeStreamController<InputContext>.oneArg(_input_ime['onInputContextUpdate'], InputContext.create);
 
   /**
    * This event is sent if this extension owns the active IME.
    */
   Stream<dynamic> get onKeyEvent => _onKeyEvent.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onKeyEvent = null;
+  final ChromeStreamController<dynamic> _onKeyEvent =
+      new ChromeStreamController<dynamic>.oneArg(_input_ime['onKeyEvent'], selfConverter);
 
   /**
    * This event is sent if this extension owns the active IME.
    */
   Stream<dynamic> get onCandidateClicked => _onCandidateClicked.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onCandidateClicked = null;
+  final ChromeStreamController<dynamic> _onCandidateClicked =
+      new ChromeStreamController<dynamic>.oneArg(_input_ime['onCandidateClicked'], selfConverter);
 
   /**
    * Called when the user selects a menu item
    */
   Stream<dynamic> get onMenuItemActivated => _onMenuItemActivated.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onMenuItemActivated = null;
+  final ChromeStreamController<dynamic> _onMenuItemActivated =
+      new ChromeStreamController<dynamic>.oneArg(_input_ime['onMenuItemActivated'], selfConverter);
 
   /**
    * Called when the editable string around caret is changed or when the caret
@@ -199,20 +247,37 @@ class ChromeInputIme {
    */
   Stream<dynamic> get onSurroundingTextChanged => _onSurroundingTextChanged.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onSurroundingTextChanged = null;
+  final ChromeStreamController<dynamic> _onSurroundingTextChanged =
+      new ChromeStreamController<dynamic>.oneArg(_input_ime['onSurroundingTextChanged'], selfConverter);
 
   /**
    * This event is sent when chrome terminates ongoing text input session.
    */
-  Stream<dynamic> get onReset => _onReset.stream;
+  Stream<String> get onReset => _onReset.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onReset = null;
+  final ChromeStreamController<String> _onReset =
+      new ChromeStreamController<String>.oneArg(_input_ime['onReset'], selfConverter);
 }
 
 /**
  * See http://www.w3.org/TR/DOM-Level-3-Events/#events-KeyboardEvent
+ * 
+ * `type` One of keyup or keydown.
+ * 
+ * `requestId` The ID of the request.
+ * 
+ * `key` Value of the key being pressed
+ * 
+ * `code` Value of the physical key being pressed. The value is not affected by
+ * current keyboard layout or modifier state.
+ * 
+ * `altKey` Whether or not the ALT key is pressed.
+ * 
+ * `ctrlKey` Whether or not the CTRL key is pressed.
+ * 
+ * `shiftKey` Whether or not the SHIFT key is pressed.
+ * 
+ * `capsLock` Whether or not the CAPS_LOCK is enabled.
  */
 class KeyboardEvent extends ChromeObject {
   static KeyboardEvent create(JsObject proxy) => new KeyboardEvent(proxy);
@@ -222,47 +287,52 @@ class KeyboardEvent extends ChromeObject {
   /**
    * One of keyup or keydown.
    */
-  String get type => this.proxy['type'];
+  String get type => proxy['type'];
 
   /**
    * The ID of the request.
    */
-  String get requestId => this.proxy['requestId'];
+  String get requestId => proxy['requestId'];
 
   /**
    * Value of the key being pressed
    */
-  String get key => this.proxy['key'];
+  String get key => proxy['key'];
 
   /**
    * Value of the physical key being pressed. The value is not affected by
    * current keyboard layout or modifier state.
    */
-  String get code => this.proxy['code'];
+  String get code => proxy['code'];
 
   /**
    * Whether or not the ALT key is pressed.
    */
-  bool get altKey => this.proxy['altKey'];
+  bool get altKey => proxy['altKey'];
 
   /**
    * Whether or not the CTRL key is pressed.
    */
-  bool get ctrlKey => this.proxy['ctrlKey'];
+  bool get ctrlKey => proxy['ctrlKey'];
 
   /**
    * Whether or not the SHIFT key is pressed.
    */
-  bool get shiftKey => this.proxy['shiftKey'];
+  bool get shiftKey => proxy['shiftKey'];
 
   /**
    * Whether or not the CAPS_LOCK is enabled.
    */
-  bool get capsLock => this.proxy['capsLock'];
+  bool get capsLock => proxy['capsLock'];
 }
 
 /**
  * Describes an input Context
+ * 
+ * `contextID` This is used to specify targets of text field operations.  This
+ * ID becomes invalid as soon as onBlur is called.
+ * 
+ * `type` Type of value this text field edits, (Text, Number, Password, etc)
  */
 class InputContext extends ChromeObject {
   static InputContext create(JsObject proxy) => new InputContext(proxy);
@@ -273,17 +343,30 @@ class InputContext extends ChromeObject {
    * This is used to specify targets of text field operations.  This ID becomes
    * invalid as soon as onBlur is called.
    */
-  int get contextID => this.proxy['contextID'];
+  int get contextID => proxy['contextID'];
 
   /**
    * Type of value this text field edits, (Text, Number, Password, etc)
    */
-  String get type => this.proxy['type'];
+  String get type => proxy['type'];
 }
 
 /**
  * A menu item used by an input method to interact with the user from the
  * language menu.
+ * 
+ * `id` String that will be passed to callbacks referencing this MenuItem.
+ * 
+ * `label` Text displayed in the menu for this item.
+ * 
+ * `style` Enum representing if this item is: check, radio, or a separator.
+ * Radio buttons between separators are considered grouped.
+ * 
+ * `visible` Indicates this item is visible.
+ * 
+ * `checked` Indicates this item should be drawn with a check.
+ * 
+ * `enabled` Indicates this item is enabled.
  */
 class MenuItem extends ChromeObject {
   static MenuItem create(JsObject proxy) => new MenuItem(proxy);
@@ -293,31 +376,31 @@ class MenuItem extends ChromeObject {
   /**
    * String that will be passed to callbacks referencing this MenuItem.
    */
-  String get id => this.proxy['id'];
+  String get id => proxy['id'];
 
   /**
    * Text displayed in the menu for this item.
    */
-  String get label => this.proxy['label'];
+  String get label => proxy['label'];
 
   /**
    * Enum representing if this item is: check, radio, or a separator.  Radio
    * buttons between separators are considered grouped.
    */
-  String get style => this.proxy['style'];
+  String get style => proxy['style'];
 
   /**
    * Indicates this item is visible.
    */
-  bool get visible => this.proxy['visible'];
+  bool get visible => proxy['visible'];
 
   /**
    * Indicates this item should be drawn with a check.
    */
-  bool get checked => this.proxy['checked'];
+  bool get checked => proxy['checked'];
 
   /**
    * Indicates this item is enabled.
    */
-  bool get enabled => this.proxy['enabled'];
+  bool get enabled => proxy['enabled'];
 }

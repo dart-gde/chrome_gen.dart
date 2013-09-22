@@ -17,17 +17,15 @@ import '../src/common.dart';
 final ChromeManagement management = new ChromeManagement._();
 
 class ChromeManagement {
-  JsObject _management;
+  static final JsObject _management = context['chrome']['management'];
 
-  ChromeManagement._() {
-    _management = context['chrome']['management'];
-  }
+  ChromeManagement._();
 
   /**
    * Returns a list of information about installed extensions and apps.
    */
   Future<List<ExtensionInfo>> getAll() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, ExtensionInfo.create));
     _management.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -86,6 +84,9 @@ class ChromeManagement {
    * Uninstalls a currently installed app or extension.
    * 
    * [id] This should be the id from an item of [ExtensionInfo.]
+   * 
+   * [options] `showConfirmDialog` Whether or not a confirm-uninstall dialog
+   * should prompt the user. Defaults to false.
    */
   Future uninstall(String id, [Map options]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -96,6 +97,9 @@ class ChromeManagement {
   /**
    * Uninstalls the calling extension. Note: This function can be used without
    * requesting the 'management' permission in the manifest.
+   * 
+   * [options] `showConfirmDialog` Whether or not a confirm-uninstall dialog
+   * should prompt the user. Defaults to false.
    */
   Future uninstallSelf([Map options]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -117,38 +121,45 @@ class ChromeManagement {
   /**
    * Fired when an app or extension has been installed.
    */
-  Stream<dynamic> get onInstalled => _onInstalled.stream;
+  Stream<ExtensionInfo> get onInstalled => _onInstalled.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onInstalled = null;
+  final ChromeStreamController<ExtensionInfo> _onInstalled =
+      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onInstalled'], ExtensionInfo.create);
 
   /**
    * Fired when an app or extension has been uninstalled.
    */
-  Stream<dynamic> get onUninstalled => _onUninstalled.stream;
+  Stream<String> get onUninstalled => _onUninstalled.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onUninstalled = null;
+  final ChromeStreamController<String> _onUninstalled =
+      new ChromeStreamController<String>.oneArg(_management['onUninstalled'], selfConverter);
 
   /**
    * Fired when an app or extension has been enabled.
    */
-  Stream<dynamic> get onEnabled => _onEnabled.stream;
+  Stream<ExtensionInfo> get onEnabled => _onEnabled.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onEnabled = null;
+  final ChromeStreamController<ExtensionInfo> _onEnabled =
+      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onEnabled'], ExtensionInfo.create);
 
   /**
    * Fired when an app or extension has been disabled.
    */
-  Stream<dynamic> get onDisabled => _onDisabled.stream;
+  Stream<ExtensionInfo> get onDisabled => _onDisabled.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onDisabled = null;
+  final ChromeStreamController<ExtensionInfo> _onDisabled =
+      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onDisabled'], ExtensionInfo.create);
 }
 
 /**
  * Information about an icon belonging to an extension, app, or theme.
+ * 
+ * `size` A number representing the width and height of the icon. Likely values
+ * include (but are not limited to) 128, 48, 24, and 16.
+ * 
+ * `url` The URL for this icon image. To display a grayscale version of the icon
+ * (to indicate that an extension is disabled, for example), append
+ * `?grayscale=true` to the URL.
  */
 class IconInfo extends ChromeObject {
   static IconInfo create(JsObject proxy) => new IconInfo(proxy);
@@ -159,18 +170,66 @@ class IconInfo extends ChromeObject {
    * A number representing the width and height of the icon. Likely values
    * include (but are not limited to) 128, 48, 24, and 16.
    */
-  int get size => this.proxy['size'];
+  int get size => proxy['size'];
 
   /**
    * The URL for this icon image. To display a grayscale version of the icon (to
    * indicate that an extension is disabled, for example), append
    * `?grayscale=true` to the URL.
    */
-  String get url => this.proxy['url'];
+  String get url => proxy['url'];
 }
 
 /**
  * Information about an installed extension, app, or theme.
+ * 
+ * `id` The extension's unique identifier.
+ * 
+ * `name` The name of this extension, app, or theme.
+ * 
+ * `description` The description of this extension, app, or theme.
+ * 
+ * `version` The [version](manifest/version.html) of this extension, app, or
+ * theme.
+ * 
+ * `mayDisable` Whether this extension can be disabled or uninstalled by the
+ * user.
+ * 
+ * `enabled` Whether it is currently enabled or disabled.
+ * 
+ * `disabledReason` A reason the item is disabled.
+ * 
+ * `isApp` True if this is an app.
+ * 
+ * `type` The type of this extension, app, or theme.
+ * 
+ * `appLaunchUrl` The launch url (only present for apps).
+ * 
+ * `homepageUrl` The URL of the homepage of this extension, app, or theme.
+ * 
+ * `updateUrl` The update URL of this extension, app, or theme.
+ * 
+ * `offlineEnabled` Whether the extension, app, or theme declares that it
+ * supports offline.
+ * 
+ * `optionsUrl` The url for the item's options page, if it has one.
+ * 
+ * `icons` A list of icon information. Note that this just reflects what was
+ * declared in the manifest, and the actual image at that url may be larger or
+ * smaller than what was declared, so you might consider using explicit width
+ * and height attributes on img tags referencing these images. See the [manifest
+ * documentation on icons](manifest/icons.html) for more details.
+ * 
+ * `permissions` Returns a list of API based permissions.
+ * 
+ * `hostPermissions` Returns a list of host based permissions.
+ * 
+ * `installType` How the extension was installed. One of<br>[admin]: The
+ * extension was installed because of an administrative
+ * policy,<br>[development]: The extension was loaded unpacked in developer
+ * mode,<br>[normal]: The extension was installed normally via a .crx
+ * file,<br>[sideload]: The extension was installed by other software on the
+ * machine,<br>[other]: The extension was installed by other means.
  */
 class ExtensionInfo extends ChromeObject {
   static ExtensionInfo create(JsObject proxy) => new ExtensionInfo(proxy);
@@ -180,67 +239,67 @@ class ExtensionInfo extends ChromeObject {
   /**
    * The extension's unique identifier.
    */
-  String get id => this.proxy['id'];
+  String get id => proxy['id'];
 
   /**
    * The name of this extension, app, or theme.
    */
-  String get name => this.proxy['name'];
+  String get name => proxy['name'];
 
   /**
    * The description of this extension, app, or theme.
    */
-  String get description => this.proxy['description'];
+  String get description => proxy['description'];
 
   /**
    * The [version](manifest/version.html) of this extension, app, or theme.
    */
-  String get version => this.proxy['version'];
+  String get version => proxy['version'];
 
   /**
    * Whether this extension can be disabled or uninstalled by the user.
    */
-  bool get mayDisable => this.proxy['mayDisable'];
+  bool get mayDisable => proxy['mayDisable'];
 
   /**
    * Whether it is currently enabled or disabled.
    */
-  bool get enabled => this.proxy['enabled'];
+  bool get enabled => proxy['enabled'];
 
   /**
    * A reason the item is disabled.
    */
-  String get disabledReason => this.proxy['disabledReason'];
+  String get disabledReason => proxy['disabledReason'];
 
   /**
    * The type of this extension, app, or theme.
    */
-  String get type => this.proxy['type'];
+  String get type => proxy['type'];
 
   /**
    * The launch url (only present for apps).
    */
-  String get appLaunchUrl => this.proxy['appLaunchUrl'];
+  String get appLaunchUrl => proxy['appLaunchUrl'];
 
   /**
    * The URL of the homepage of this extension, app, or theme.
    */
-  String get homepageUrl => this.proxy['homepageUrl'];
+  String get homepageUrl => proxy['homepageUrl'];
 
   /**
    * The update URL of this extension, app, or theme.
    */
-  String get updateUrl => this.proxy['updateUrl'];
+  String get updateUrl => proxy['updateUrl'];
 
   /**
    * Whether the extension, app, or theme declares that it supports offline.
    */
-  bool get offlineEnabled => this.proxy['offlineEnabled'];
+  bool get offlineEnabled => proxy['offlineEnabled'];
 
   /**
    * The url for the item's options page, if it has one.
    */
-  String get optionsUrl => this.proxy['optionsUrl'];
+  String get optionsUrl => proxy['optionsUrl'];
 
   /**
    * A list of icon information. Note that this just reflects what was declared
@@ -249,17 +308,17 @@ class ExtensionInfo extends ChromeObject {
    * height attributes on img tags referencing these images. See the [manifest
    * documentation on icons](manifest/icons.html) for more details.
    */
-  List<IconInfo> get icons => this.proxy['icons'];
+  List<IconInfo> get icons => listify(proxy['icons'], IconInfo.create);
 
   /**
    * Returns a list of API based permissions.
    */
-  List<String> get permissions => listify(this.proxy['permissions']);
+  List<String> get permissions => listify(proxy['permissions']);
 
   /**
    * Returns a list of host based permissions.
    */
-  List<String> get hostPermissions => listify(this.proxy['hostPermissions']);
+  List<String> get hostPermissions => listify(proxy['hostPermissions']);
 
   /**
    * How the extension was installed. One of<br>[admin]: The extension was
@@ -269,5 +328,5 @@ class ExtensionInfo extends ChromeObject {
    * installed by other software on the machine,<br>[other]: The extension was
    * installed by other means.
    */
-  String get installType => this.proxy['installType'];
+  String get installType => proxy['installType'];
 }

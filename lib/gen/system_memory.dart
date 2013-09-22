@@ -4,6 +4,9 @@
 
 /* This file has been generated from system_memory.idl - do not edit */
 
+/**
+ * 
+ */
 library chrome.system_memory;
 
 import '../src/common.dart';
@@ -12,9 +15,13 @@ import '../src/common.dart';
 final ChromeSystemMemory system_memory = new ChromeSystemMemory._();
 
 class ChromeSystemMemory {
-  JsObject _system_memory;
+  static final JsObject _system_memory = context['chrome']['system']['memory'];
 
-  ChromeSystemMemory._() {
-    _system_memory = context['chrome']['system']['memory'];
+  ChromeSystemMemory._();
+
+  Future getInfo() {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _system_memory.callMethod('getInfo', [completer.callback]);
+    return completer.future;
   }
 }

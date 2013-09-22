@@ -13,23 +13,22 @@
 library chrome.extension;
 
 import 'runtime.dart';
-import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.extension` namespace.
 final ChromeExtension extension = new ChromeExtension._();
 
 class ChromeExtension {
-  JsObject _extension;
+  static final JsObject _extension = context['chrome']['extension'];
 
-  ChromeExtension._() {
-    _extension = context['chrome']['extension'];
-  }
+  ChromeExtension._();
 
   /**
    * Set for the lifetime of a callback if an ansychronous extension api has
    * resulted in an error. If no error has occured lastError will be
    * [undefined].
+   * 
+   * `message` Description of the error that has taken place.
    */
   Map get lastError => mapify(_extension['lastError']);
 
@@ -75,11 +74,18 @@ class ChromeExtension {
    * Returns an array of the JavaScript 'window' objects for each of the pages
    * running inside the current extension.
    * 
+   * [fetchProperties] `type` The type of view to get. If omitted, returns all
+   * views (including background pages and tabs). Valid values: 'tab',
+   * 'infobar', 'notification', 'popup'.
+   * 
+   * `windowId` The window to restrict the search to. If omitted, returns all
+   * views.
+   * 
    * Returns:
    * Array of global objects
    */
-  List<Window> getViews([Map fetchProperties]) {
-    return _extension.callMethod('getViews', [jsify(fetchProperties)]);
+  List<dynamic> getViews([Map fetchProperties]) {
+    return listify(_extension.callMethod('getViews', [jsify(fetchProperties)]));
   }
 
   /**
@@ -87,7 +93,7 @@ class ChromeExtension {
    * inside the current extension. Returns null if the extension has no
    * background page.
    */
-  Window getBackgroundPage() {
+  dynamic getBackgroundPage() {
     return _extension.callMethod('getBackgroundPage');
   }
 
@@ -100,8 +106,8 @@ class ChromeExtension {
    * Returns:
    * Array of global window objects
    */
-  List<Window> getExtensionTabs([int windowId]) {
-    return _extension.callMethod('getExtensionTabs', [windowId]);
+  List<dynamic> getExtensionTabs([int windowId]) {
+    return listify(_extension.callMethod('getExtensionTabs', [windowId]));
   }
 
   /**
@@ -144,14 +150,14 @@ class ChromeExtension {
    */
   Stream<dynamic> get onRequest => _onRequest.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onRequest = null;
+  final ChromeStreamController<dynamic> _onRequest =
+      new ChromeStreamController<dynamic>.oneArg(_extension['onRequest'], selfConverter);
 
   /**
    * Deprecated: please use onMessageExternal.
    */
   Stream<dynamic> get onRequestExternal => _onRequestExternal.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onRequestExternal = null;
+  final ChromeStreamController<dynamic> _onRequestExternal =
+      new ChromeStreamController<dynamic>.oneArg(_extension['onRequestExternal'], selfConverter);
 }

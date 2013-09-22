@@ -21,11 +21,9 @@ import '../src/common.dart';
 final ChromeDebugger debugger = new ChromeDebugger._();
 
 class ChromeDebugger {
-  JsObject _debugger;
+  static final JsObject _debugger = context['chrome']['debugger'];
 
-  ChromeDebugger._() {
-    _debugger = context['chrome']['debugger'];
-  }
+  ChromeDebugger._();
 
   /**
    * Attaches debugger to the given target.
@@ -83,7 +81,7 @@ class ChromeDebugger {
    * Array of TargetInfo objects corresponding to the available debug targets.
    */
   Future<List<TargetInfo>> getTargets() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, TargetInfo.create));
     _debugger.callMethod('getTargets', [completer.callback]);
     return completer.future;
   }
@@ -93,8 +91,8 @@ class ChromeDebugger {
    */
   Stream<dynamic> get onEvent => _onEvent.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onEvent = null;
+  final ChromeStreamController<dynamic> _onEvent =
+      new ChromeStreamController<dynamic>.oneArg(_debugger['onEvent'], selfConverter);
 
   /**
    * Fired when browser terminates debugging session for the tab. This happens
@@ -103,12 +101,20 @@ class ChromeDebugger {
    */
   Stream<dynamic> get onDetach => _onDetach.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onDetach = null;
+  final ChromeStreamController<dynamic> _onDetach =
+      new ChromeStreamController<dynamic>.oneArg(_debugger['onDetach'], selfConverter);
 }
 
 /**
  * Debuggee identifier. Either tabId or extensionId must be specified
+ * 
+ * `tabId` The id of the tab which you intend to debug.
+ * 
+ * `extensionId` The id of the extension which you intend to debug. Attaching to
+ * an extension background page is only possible when 'enable-silent-debugging'
+ * flag is enabled on the target browser.
+ * 
+ * `targetId` The opaque id of the debug target.
  */
 class Debuggee extends ChromeObject {
   static Debuggee create(JsObject proxy) => new Debuggee(proxy);
@@ -118,23 +124,39 @@ class Debuggee extends ChromeObject {
   /**
    * The id of the tab which you intend to debug.
    */
-  int get tabId => this.proxy['tabId'];
+  int get tabId => proxy['tabId'];
 
   /**
    * The id of the extension which you intend to debug. Attaching to an
    * extension background page is only possible when 'enable-silent-debugging'
    * flag is enabled on the target browser.
    */
-  String get extensionId => this.proxy['extensionId'];
+  String get extensionId => proxy['extensionId'];
 
   /**
    * The opaque id of the debug target.
    */
-  String get targetId => this.proxy['targetId'];
+  String get targetId => proxy['targetId'];
 }
 
 /**
  * Debug target information
+ * 
+ * `type` Target type.
+ * 
+ * `id` Target id.
+ * 
+ * `tabId` The tab id, defined if type == 'page'.
+ * 
+ * `extensionId` The extension id, defined if type = 'background_page'.
+ * 
+ * `attached` True if debugger is already attached.
+ * 
+ * `title` Target page title.
+ * 
+ * `url` Target URL.
+ * 
+ * `faviconUrl` Target favicon URL.
  */
 class TargetInfo extends ChromeObject {
   static TargetInfo create(JsObject proxy) => new TargetInfo(proxy);
@@ -144,40 +166,40 @@ class TargetInfo extends ChromeObject {
   /**
    * Target type.
    */
-  String get type => this.proxy['type'];
+  String get type => proxy['type'];
 
   /**
    * Target id.
    */
-  String get id => this.proxy['id'];
+  String get id => proxy['id'];
 
   /**
    * The tab id, defined if type == 'page'.
    */
-  int get tabId => this.proxy['tabId'];
+  int get tabId => proxy['tabId'];
 
   /**
    * The extension id, defined if type = 'background_page'.
    */
-  String get extensionId => this.proxy['extensionId'];
+  String get extensionId => proxy['extensionId'];
 
   /**
    * True if debugger is already attached.
    */
-  bool get attached => this.proxy['attached'];
+  bool get attached => proxy['attached'];
 
   /**
    * Target page title.
    */
-  String get title => this.proxy['title'];
+  String get title => proxy['title'];
 
   /**
    * Target URL.
    */
-  String get url => this.proxy['url'];
+  String get url => proxy['url'];
 
   /**
    * Target favicon URL.
    */
-  String get faviconUrl => this.proxy['faviconUrl'];
+  String get faviconUrl => proxy['faviconUrl'];
 }

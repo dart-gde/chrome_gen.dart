@@ -4,6 +4,9 @@
 
 /* This file has been generated from sync_file_system.idl - do not edit */
 
+/**
+ * 
+ */
 library chrome.syncFileSystem;
 
 import '../src/common.dart';
@@ -12,9 +15,59 @@ import '../src/common.dart';
 final ChromeSyncFileSystem syncFileSystem = new ChromeSyncFileSystem._();
 
 class ChromeSyncFileSystem {
-  JsObject _syncFileSystem;
+  static final JsObject _syncFileSystem = context['chrome']['syncFileSystem'];
 
-  ChromeSyncFileSystem._() {
-    _syncFileSystem = context['chrome']['syncFileSystem'];
+  ChromeSyncFileSystem._();
+
+  Future requestFileSystem() {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
+    return completer.future;
   }
+
+  Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
+    return completer.future;
+  }
+
+  Future getConflictResolutionPolicy() {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
+    return completer.future;
+  }
+
+  Future getUsageAndQuota(var fileSystem) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
+    return completer.future;
+  }
+
+  Future getFileStatus(var fileEntry) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
+    return completer.future;
+  }
+
+  Future getFileStatuses(var fileEntries) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
+    return completer.future;
+  }
+
+  Future getServiceStatus() {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
+    return completer.future;
+  }
+
+  Stream<ServiceInfo> get onServiceStatusChanged => _onServiceStatusChanged.stream;
+
+  final ChromeStreamController<ServiceInfo> _onServiceStatusChanged =
+      new ChromeStreamController<ServiceInfo>.oneArg(_syncFileSystem['onServiceStatusChanged'], selfConverter);
+
+  Stream<FileInfo> get onFileStatusChanged => _onFileStatusChanged.stream;
+
+  final ChromeStreamController<FileInfo> _onFileStatusChanged =
+      new ChromeStreamController<FileInfo>.oneArg(_syncFileSystem['onFileStatusChanged'], selfConverter);
 }

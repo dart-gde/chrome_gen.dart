@@ -4,6 +4,9 @@
 
 /* This file has been generated from alarms.idl - do not edit */
 
+/**
+ * 
+ */
 library chrome.alarms;
 
 import '../src/common.dart';
@@ -12,9 +15,36 @@ import '../src/common.dart';
 final ChromeAlarms alarms = new ChromeAlarms._();
 
 class ChromeAlarms {
-  JsObject _alarms;
+  static final JsObject _alarms = context['chrome']['alarms'];
 
-  ChromeAlarms._() {
-    _alarms = context['chrome']['alarms'];
+  ChromeAlarms._();
+
+  void create(AlarmCreateInfo alarmInfo, [String name]) {
+    _alarms.callMethod('create', [name, alarmInfo]);
   }
+
+  Future get([String name]) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _alarms.callMethod('get', [name, completer.callback]);
+    return completer.future;
+  }
+
+  Future getAll() {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _alarms.callMethod('getAll', [completer.callback]);
+    return completer.future;
+  }
+
+  void clear([String name]) {
+    _alarms.callMethod('clear', [name]);
+  }
+
+  void clearAll() {
+    _alarms.callMethod('clearAll');
+  }
+
+  Stream<Alarm> get onAlarm => _onAlarm.stream;
+
+  final ChromeStreamController<Alarm> _onAlarm =
+      new ChromeStreamController<Alarm>.oneArg(_alarms['onAlarm'], selfConverter);
 }

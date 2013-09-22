@@ -4,6 +4,9 @@
 
 /* This file has been generated from location.idl - do not edit */
 
+/**
+ * 
+ */
 library chrome.location;
 
 import '../src/common.dart';
@@ -12,9 +15,25 @@ import '../src/common.dart';
 final ChromeLocation location = new ChromeLocation._();
 
 class ChromeLocation {
-  JsObject _location;
+  static final JsObject _location = context['chrome']['location'];
 
-  ChromeLocation._() {
-    _location = context['chrome']['location'];
+  ChromeLocation._();
+
+  void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
+    _location.callMethod('watchLocation', [name, requestInfo]);
   }
+
+  void clearWatch(String name) {
+    _location.callMethod('clearWatch', [name]);
+  }
+
+  Stream<Location> get onLocationUpdate => _onLocationUpdate.stream;
+
+  final ChromeStreamController<Location> _onLocationUpdate =
+      new ChromeStreamController<Location>.oneArg(_location['onLocationUpdate'], selfConverter);
+
+  Stream<String> get onLocationError => _onLocationError.stream;
+
+  final ChromeStreamController<String> _onLocationError =
+      new ChromeStreamController<String>.oneArg(_location['onLocationError'], selfConverter);
 }

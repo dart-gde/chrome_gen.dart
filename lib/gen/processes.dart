@@ -15,11 +15,9 @@ import '../src/common.dart';
 final ChromeProcesses processes = new ChromeProcesses._();
 
 class ChromeProcesses {
-  JsObject _processes;
+  static final JsObject _processes = context['chrome']['processes'];
 
-  ChromeProcesses._() {
-    _processes = context['chrome']['processes'];
-  }
+  ChromeProcesses._();
 
   /**
    * Terminates the specified renderer process. Equivalent to visiting
@@ -78,10 +76,10 @@ class ChromeProcesses {
    * Fired each time the Task Manager updates its process statistics, providing
    * the dictionary of updated Process objects, indexed by process ID.
    */
-  Stream<dynamic> get onUpdated => _onUpdated.stream;
+  Stream<Map> get onUpdated => _onUpdated.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onUpdated = null;
+  final ChromeStreamController<Map> _onUpdated =
+      new ChromeStreamController<Map>.oneArg(_processes['onUpdated'], mapify);
 
   /**
    * Fired each time the Task Manager updates its process statistics, providing
@@ -90,40 +88,92 @@ class ChromeProcesses {
    * Process object. Note, collecting memory usage information incurs extra CPU
    * usage and should only be listened for when needed.
    */
-  Stream<dynamic> get onUpdatedWithMemory => _onUpdatedWithMemory.stream;
+  Stream<Map> get onUpdatedWithMemory => _onUpdatedWithMemory.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onUpdatedWithMemory = null;
+  final ChromeStreamController<Map> _onUpdatedWithMemory =
+      new ChromeStreamController<Map>.oneArg(_processes['onUpdatedWithMemory'], mapify);
 
   /**
    * Fired each time a process is created, providing the corrseponding Process
    * object.
    */
-  Stream<dynamic> get onCreated => _onCreated.stream;
+  Stream<Process> get onCreated => _onCreated.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onCreated = null;
+  final ChromeStreamController<Process> _onCreated =
+      new ChromeStreamController<Process>.oneArg(_processes['onCreated'], Process.create);
 
   /**
    * Fired each time a process becomes unresponsive, providing the corrseponding
    * Process object.
    */
-  Stream<dynamic> get onUnresponsive => _onUnresponsive.stream;
+  Stream<Process> get onUnresponsive => _onUnresponsive.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onUnresponsive = null;
+  final ChromeStreamController<Process> _onUnresponsive =
+      new ChromeStreamController<Process>.oneArg(_processes['onUnresponsive'], Process.create);
 
   /**
    * Fired each time a process is terminated, providing the type of exit.
    */
   Stream<dynamic> get onExited => _onExited.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onExited = null;
+  final ChromeStreamController<dynamic> _onExited =
+      new ChromeStreamController<dynamic>.oneArg(_processes['onExited'], selfConverter);
 }
 
 /**
  * An object containing information about one of the browser's processes.
+ * 
+ * `id` Unique ID of the process provided by the browser.
+ * 
+ * `osProcessId` The ID of the process, as provided by the OS.
+ * 
+ * `type` The type of process.
+ * 
+ * `profile` The profile which the process is associated with.
+ * 
+ * `tabs` Array of Tab IDs that have a page rendered by this process. The list
+ * will be non-empty for renderer processes only.
+ * 
+ * `cpu` The most recent measurement of the process CPU usage, between 0 and
+ * 100%. Only available when receiving the object as part of a callback from
+ * onUpdated or onUpdatedWithMemory.
+ * 
+ * `network` The most recent measurement of the process network usage, in bytes
+ * per second. Only available when receiving the object as part of a callback
+ * from onUpdated or onUpdatedWithMemory.
+ * 
+ * `privateMemory` The most recent measurement of the process private memory
+ * usage, in bytes. Only available when receiving the object as part of a
+ * callback from onUpdatedWithMemory or getProcessInfo with the includeMemory
+ * flag.
+ * 
+ * `jsMemoryAllocated` The most recent measurement of the process JavaScript
+ * allocated memory, in bytes. Only available when receiving the object as part
+ * of a callback from onUpdated or onUpdatedWithMemory.
+ * 
+ * `jsMemoryUsed` The most recent measurement of the process JavaScript memory
+ * used, in bytes. Only available when receiving the object as part of a
+ * callback from onUpdated or onUpdatedWithMemory.
+ * 
+ * `sqliteMemory` The most recent measurement of the process’s SQLite memory
+ * usage, in bytes. Only available when receiving the object as part of a
+ * callback from onUpdated or onUpdatedWithMemory.
+ * 
+ * `fps` The most recent measurement of the process frames per second. Only
+ * available when receiving the object as part of a callback from onUpdated or
+ * onUpdatedWithMemory.
+ * 
+ * `imageCache` The most recent information about the image cache for the
+ * process. Only available when receiving the object as part of a callback from
+ * onUpdated or onUpdatedWithMemory.
+ * 
+ * `scriptCache` The most recent information about the script cache for the
+ * process. Only available when receiving the object as part of a callback from
+ * onUpdated or onUpdatedWithMemory.
+ * 
+ * `cssCache` The most recent information about the CSS cache for the process.
+ * Only available when receiving the object as part of a callback from onUpdated
+ * or onUpdatedWithMemory.
  */
 class Process extends ChromeObject {
   static Process create(JsObject proxy) => new Process(proxy);
@@ -133,103 +183,107 @@ class Process extends ChromeObject {
   /**
    * Unique ID of the process provided by the browser.
    */
-  int get id => this.proxy['id'];
+  int get id => proxy['id'];
 
   /**
    * The ID of the process, as provided by the OS.
    */
-  int get osProcessId => this.proxy['osProcessId'];
+  int get osProcessId => proxy['osProcessId'];
 
   /**
    * The type of process.
    */
-  String get type => this.proxy['type'];
+  String get type => proxy['type'];
 
   /**
    * The profile which the process is associated with.
    */
-  String get profile => this.proxy['profile'];
+  String get profile => proxy['profile'];
 
   /**
    * Array of Tab IDs that have a page rendered by this process. The list will
    * be non-empty for renderer processes only.
    */
-  List<int> get tabs => listify(this.proxy['tabs']);
+  List<int> get tabs => listify(proxy['tabs']);
 
   /**
    * The most recent measurement of the process CPU usage, between 0 and 100%.
    * Only available when receiving the object as part of a callback from
    * onUpdated or onUpdatedWithMemory.
    */
-  dynamic get cpu => this.proxy['cpu'];
+  dynamic get cpu => proxy['cpu'];
 
   /**
    * The most recent measurement of the process network usage, in bytes per
    * second. Only available when receiving the object as part of a callback from
    * onUpdated or onUpdatedWithMemory.
    */
-  dynamic get network => this.proxy['network'];
+  dynamic get network => proxy['network'];
 
   /**
    * The most recent measurement of the process private memory usage, in bytes.
    * Only available when receiving the object as part of a callback from
    * onUpdatedWithMemory or getProcessInfo with the includeMemory flag.
    */
-  dynamic get privateMemory => this.proxy['privateMemory'];
+  dynamic get privateMemory => proxy['privateMemory'];
 
   /**
    * The most recent measurement of the process JavaScript allocated memory, in
    * bytes. Only available when receiving the object as part of a callback from
    * onUpdated or onUpdatedWithMemory.
    */
-  dynamic get jsMemoryAllocated => this.proxy['jsMemoryAllocated'];
+  dynamic get jsMemoryAllocated => proxy['jsMemoryAllocated'];
 
   /**
    * The most recent measurement of the process JavaScript memory used, in
    * bytes. Only available when receiving the object as part of a callback from
    * onUpdated or onUpdatedWithMemory.
    */
-  dynamic get jsMemoryUsed => this.proxy['jsMemoryUsed'];
+  dynamic get jsMemoryUsed => proxy['jsMemoryUsed'];
 
   /**
    * The most recent measurement of the process’s SQLite memory usage, in bytes.
    * Only available when receiving the object as part of a callback from
    * onUpdated or onUpdatedWithMemory.
    */
-  dynamic get sqliteMemory => this.proxy['sqliteMemory'];
+  dynamic get sqliteMemory => proxy['sqliteMemory'];
 
   /**
    * The most recent measurement of the process frames per second. Only
    * available when receiving the object as part of a callback from onUpdated or
    * onUpdatedWithMemory.
    */
-  dynamic get fps => this.proxy['fps'];
+  dynamic get fps => proxy['fps'];
 
   /**
    * The most recent information about the image cache for the process. Only
    * available when receiving the object as part of a callback from onUpdated or
    * onUpdatedWithMemory.
    */
-  Cache get imageCache => new Cache(this.proxy['imageCache']);
+  Cache get imageCache => new Cache(proxy['imageCache']);
 
   /**
    * The most recent information about the script cache for the process. Only
    * available when receiving the object as part of a callback from onUpdated or
    * onUpdatedWithMemory.
    */
-  Cache get scriptCache => new Cache(this.proxy['scriptCache']);
+  Cache get scriptCache => new Cache(proxy['scriptCache']);
 
   /**
    * The most recent information about the CSS cache for the process. Only
    * available when receiving the object as part of a callback from onUpdated or
    * onUpdatedWithMemory.
    */
-  Cache get cssCache => new Cache(this.proxy['cssCache']);
+  Cache get cssCache => new Cache(proxy['cssCache']);
 }
 
 /**
  * The Cache object contains information about the size and utilization of a
  * cache used by the browser.
+ * 
+ * `size` The size of the cache, in bytes.
+ * 
+ * `liveSize` The part of the cache that is utilized, in bytes.
  */
 class Cache extends ChromeObject {
   static Cache create(JsObject proxy) => new Cache(proxy);
@@ -239,10 +293,10 @@ class Cache extends ChromeObject {
   /**
    * The size of the cache, in bytes.
    */
-  dynamic get size => this.proxy['size'];
+  dynamic get size => proxy['size'];
 
   /**
    * The part of the cache that is utilized, in bytes.
    */
-  dynamic get liveSize => this.proxy['liveSize'];
+  dynamic get liveSize => proxy['liveSize'];
 }

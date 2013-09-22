@@ -4,6 +4,9 @@
 
 /* This file has been generated from media_galleries.idl - do not edit */
 
+/**
+ * 
+ */
 library chrome.mediaGalleries;
 
 import '../src/common.dart';
@@ -12,9 +15,17 @@ import '../src/common.dart';
 final ChromeMediaGalleries mediaGalleries = new ChromeMediaGalleries._();
 
 class ChromeMediaGalleries {
-  JsObject _mediaGalleries;
+  static final JsObject _mediaGalleries = context['chrome']['mediaGalleries'];
 
-  ChromeMediaGalleries._() {
-    _mediaGalleries = context['chrome']['mediaGalleries'];
+  ChromeMediaGalleries._();
+
+  Future getMediaFileSystems([MediaFileSystemsDetails details]) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
+    return completer.future;
+  }
+
+  void getMediaFileSystemMetadata(var mediaFileSystem) {
+    _mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]);
   }
 }

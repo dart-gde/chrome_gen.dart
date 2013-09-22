@@ -22,11 +22,9 @@ import '../src/common.dart';
 final ChromeTtsEngine ttsEngine = new ChromeTtsEngine._();
 
 class ChromeTtsEngine {
-  JsObject _ttsEngine;
+  static final JsObject _ttsEngine = context['chrome']['ttsEngine'];
 
-  ChromeTtsEngine._() {
-    _ttsEngine = context['chrome']['ttsEngine'];
-  }
+  ChromeTtsEngine._();
 
   /**
    * Routes a TTS event from a speech engine to a client.
@@ -44,8 +42,8 @@ class ChromeTtsEngine {
    */
   Stream<dynamic> get onSpeak => _onSpeak.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onSpeak = null;
+  final ChromeStreamController<dynamic> _onSpeak =
+      new ChromeStreamController<dynamic>.oneArg(_ttsEngine['onSpeak'], selfConverter);
 
   /**
    * Fired when a call is made to tts.stop and this extension may be in the
@@ -53,28 +51,28 @@ class ChromeTtsEngine {
    * already stopped, it should do nothing (not raise an error). If speech is in
    * the paused state, this should cancel the paused state.
    */
-  Stream<dynamic> get onStop => _onStop.stream;
+  Stream get onStop => _onStop.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onStop = null;
+  final ChromeStreamController _onStop =
+      new ChromeStreamController.noArgs(_ttsEngine['onStop']);
 
   /**
    * Optional: if an engine supports the pause event, it should pause the
    * current utterance being spoken, if any, until it receives a resume event or
    * stop event. Note that a stop event should also clear the paused state.
    */
-  Stream<dynamic> get onPause => _onPause.stream;
+  Stream get onPause => _onPause.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onPause = null;
+  final ChromeStreamController _onPause =
+      new ChromeStreamController.noArgs(_ttsEngine['onPause']);
 
   /**
    * Optional: if an engine supports the pause event, it should also support the
    * resume event, to continue speaking the current utterance, if any. Note that
    * a stop event should also clear the paused state.
    */
-  Stream<dynamic> get onResume => _onResume.stream;
+  Stream get onResume => _onResume.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onResume = null;
+  final ChromeStreamController _onResume =
+      new ChromeStreamController.noArgs(_ttsEngine['onResume']);
 }

@@ -17,20 +17,27 @@ import '../src/common.dart';
 final ChromeDeclarativeContent declarativeContent = new ChromeDeclarativeContent._();
 
 class ChromeDeclarativeContent {
-  JsObject _declarativeContent;
+  static final JsObject _declarativeContent = context['chrome']['declarativeContent'];
 
-  ChromeDeclarativeContent._() {
-    _declarativeContent = context['chrome']['declarativeContent'];
-  }
+  ChromeDeclarativeContent._();
 
-  Stream<dynamic> get onPageChanged => _onPageChanged.stream;
+  Stream get onPageChanged => _onPageChanged.stream;
 
-  // TODO:
-  final ChromeStreamController<dynamic> _onPageChanged = null;
+  final ChromeStreamController _onPageChanged =
+      new ChromeStreamController.noArgs(_declarativeContent['onPageChanged']);
 }
 
 /**
  * Matches the state of a web page by various criteria.
+ * 
+ * `pageUrl` Matches if the condition of the UrlFilter are fulfilled for the
+ * top-level URL of the page.
+ * 
+ * `css` Matches if all of the CSS selectors in the array match in a frame with
+ * the same origin as the page's main frame.  Note that listing hundreds of CSS
+ * selectors here can slow down web sites.
+ * 
+ * `instanceType`
  */
 class PageStateMatcher extends ChromeObject {
   static PageStateMatcher create(JsObject proxy) => new PageStateMatcher(proxy);
@@ -41,14 +48,14 @@ class PageStateMatcher extends ChromeObject {
    * Matches if the condition of the UrlFilter are fulfilled for the top-level
    * URL of the page.
    */
-  UrlFilter get pageUrl => new UrlFilter(this.proxy['pageUrl']);
+  UrlFilter get pageUrl => new UrlFilter(proxy['pageUrl']);
 
   /**
    * Matches if all of the CSS selectors in the array match in a frame with the
    * same origin as the page's main frame.  Note that listing hundreds of CSS
    * selectors here can slow down web sites.
    */
-  List<String> get css => listify(this.proxy['css']);
+  List<String> get css => listify(proxy['css']);
 }
 
 /**
@@ -57,6 +64,8 @@ class PageStateMatcher extends ChromeObject {
  * without [host permissions](declare_permissions.html#host-permission).  If the
  * extension takes the [activeTab](activeTab.html) permission, a click on the
  * page action will grant access to the active tab.
+ * 
+ * `instanceType`
  */
 class ShowPageAction extends ChromeObject {
   static ShowPageAction create(JsObject proxy) => new ShowPageAction(proxy);

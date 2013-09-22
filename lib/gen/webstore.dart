@@ -16,11 +16,9 @@ import '../src/common.dart';
 final ChromeWebstore webstore = new ChromeWebstore._();
 
 class ChromeWebstore {
-  JsObject _webstore;
+  static final JsObject _webstore = context['chrome']['webstore'];
 
-  ChromeWebstore._() {
-    _webstore = context['chrome']['webstore'];
-  }
+  ChromeWebstore._();
 
   void install([String url, var successCallback, var failureCallback]) {
     _webstore.callMethod('install', [url, successCallback, failureCallback]);

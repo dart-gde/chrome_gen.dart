@@ -15,15 +15,25 @@ import '../src/common.dart';
 final ChromeEvents events = new ChromeEvents._();
 
 class ChromeEvents {
-  JsObject _events;
+  static final JsObject _events = context['chrome']['events'];
 
-  ChromeEvents._() {
-    _events = context['chrome']['events'];
-  }
+  ChromeEvents._();
 }
 
 /**
  * Description of a declarative rule for handling events.
+ * 
+ * `id` Optional identifier that allows referencing this rule.
+ * 
+ * `tags` Tags can be used to annotate rules and perform operations on sets of
+ * rules.
+ * 
+ * `conditions` List of conditions that can trigger the actions.
+ * 
+ * `actions` List of actions that are triggered if one of the condtions is
+ * fulfilled.
+ * 
+ * `priority` Optional priority of this rule. Defaults to 100.
  */
 class Rule extends ChromeObject {
   static Rule create(JsObject proxy) => new Rule(proxy);
@@ -33,27 +43,27 @@ class Rule extends ChromeObject {
   /**
    * Optional identifier that allows referencing this rule.
    */
-  String get id => this.proxy['id'];
+  String get id => proxy['id'];
 
   /**
    * Tags can be used to annotate rules and perform operations on sets of rules.
    */
-  List<String> get tags => listify(this.proxy['tags']);
+  List<String> get tags => listify(proxy['tags']);
 
   /**
    * List of conditions that can trigger the actions.
    */
-  List<dynamic> get conditions => listify(this.proxy['conditions']);
+  List<dynamic> get conditions => listify(proxy['conditions']);
 
   /**
    * List of actions that are triggered if one of the condtions is fulfilled.
    */
-  List<dynamic> get actions => listify(this.proxy['actions']);
+  List<dynamic> get actions => listify(proxy['actions']);
 
   /**
    * Optional priority of this rule. Defaults to 100.
    */
-  int get priority => this.proxy['priority'];
+  int get priority => proxy['priority'];
 }
 
 /**
@@ -69,6 +79,81 @@ class Event extends ChromeObject {
 /**
  * Filters URLs for various criteria. See [event filtering](#filtered). All
  * criteria are case sensitive.
+ * 
+ * `hostContains` Matches if the host name of the URL contains a specified
+ * string. To test whether a host name component has a prefix 'foo', use
+ * hostContains: '.foo'. This matches 'www.foobar.com' and 'foo.com', because an
+ * implicit dot is added at the beginning of the host name. Similarly,
+ * hostContains can be used to match against component suffix ('foo.') and to
+ * exactly match against components ('.foo.'). Suffix- and exact-matching for
+ * the last components need to be done separately using hostSuffix, because no
+ * implicit dot is added at the end of the host name.
+ * 
+ * `hostEquals` Matches if the host name of the URL is equal to a specified
+ * string.
+ * 
+ * `hostPrefix` Matches if the host name of the URL starts with a specified
+ * string.
+ * 
+ * `hostSuffix` Matches if the host name of the URL ends with a specified
+ * string.
+ * 
+ * `pathContains` Matches if the path segment of the URL contains a specified
+ * string.
+ * 
+ * `pathEquals` Matches if the path segment of the URL is equal to a specified
+ * string.
+ * 
+ * `pathPrefix` Matches if the path segment of the URL starts with a specified
+ * string.
+ * 
+ * `pathSuffix` Matches if the path segment of the URL ends with a specified
+ * string.
+ * 
+ * `queryContains` Matches if the query segment of the URL contains a specified
+ * string.
+ * 
+ * `queryEquals` Matches if the query segment of the URL is equal to a specified
+ * string.
+ * 
+ * `queryPrefix` Matches if the query segment of the URL starts with a specified
+ * string.
+ * 
+ * `querySuffix` Matches if the query segment of the URL ends with a specified
+ * string.
+ * 
+ * `urlContains` Matches if the URL (without fragment identifier) contains a
+ * specified string. Port numbers are stripped from the URL if they match the
+ * default port number.
+ * 
+ * `urlEquals` Matches if the URL (without fragment identifier) is equal to a
+ * specified string. Port numbers are stripped from the URL if they match the
+ * default port number.
+ * 
+ * `urlMatches` Matches if the URL (without fragment identifier) matches a
+ * specified regular expression. Port numbers are stripped from the URL if they
+ * match the default port number. The regular expressions use the [RE2
+ * syntax](http://code.google.com/p/re2/wiki/Syntax).
+ * 
+ * `originAndPathMatches` Matches if the URL without query segment and fragment
+ * identifier matches a specified regular expression. Port numbers are stripped
+ * from the URL if they match the default port number. The regular expressions
+ * use the [RE2 syntax](http://code.google.com/p/re2/wiki/Syntax).
+ * 
+ * `urlPrefix` Matches if the URL (without fragment identifier) starts with a
+ * specified string. Port numbers are stripped from the URL if they match the
+ * default port number.
+ * 
+ * `urlSuffix` Matches if the URL (without fragment identifier) ends with a
+ * specified string. Port numbers are stripped from the URL if they match the
+ * default port number.
+ * 
+ * `schemes` Matches if the scheme of the URL is equal to any of the schemes
+ * specified in the array.
+ * 
+ * `ports` Matches if the port of the URL is contained in any of the specified
+ * port lists. For example `[80, 443, [1000, 1200]]` matches all requests on
+ * port 80, 443 and in the range 1000-1200.
  */
 class UrlFilter extends ChromeObject {
   static UrlFilter create(JsObject proxy) => new UrlFilter(proxy);
@@ -85,76 +170,76 @@ class UrlFilter extends ChromeObject {
    * components need to be done separately using hostSuffix, because no implicit
    * dot is added at the end of the host name.
    */
-  String get hostContains => this.proxy['hostContains'];
+  String get hostContains => proxy['hostContains'];
 
   /**
    * Matches if the host name of the URL is equal to a specified string.
    */
-  String get hostEquals => this.proxy['hostEquals'];
+  String get hostEquals => proxy['hostEquals'];
 
   /**
    * Matches if the host name of the URL starts with a specified string.
    */
-  String get hostPrefix => this.proxy['hostPrefix'];
+  String get hostPrefix => proxy['hostPrefix'];
 
   /**
    * Matches if the host name of the URL ends with a specified string.
    */
-  String get hostSuffix => this.proxy['hostSuffix'];
+  String get hostSuffix => proxy['hostSuffix'];
 
   /**
    * Matches if the path segment of the URL contains a specified string.
    */
-  String get pathContains => this.proxy['pathContains'];
+  String get pathContains => proxy['pathContains'];
 
   /**
    * Matches if the path segment of the URL is equal to a specified string.
    */
-  String get pathEquals => this.proxy['pathEquals'];
+  String get pathEquals => proxy['pathEquals'];
 
   /**
    * Matches if the path segment of the URL starts with a specified string.
    */
-  String get pathPrefix => this.proxy['pathPrefix'];
+  String get pathPrefix => proxy['pathPrefix'];
 
   /**
    * Matches if the path segment of the URL ends with a specified string.
    */
-  String get pathSuffix => this.proxy['pathSuffix'];
+  String get pathSuffix => proxy['pathSuffix'];
 
   /**
    * Matches if the query segment of the URL contains a specified string.
    */
-  String get queryContains => this.proxy['queryContains'];
+  String get queryContains => proxy['queryContains'];
 
   /**
    * Matches if the query segment of the URL is equal to a specified string.
    */
-  String get queryEquals => this.proxy['queryEquals'];
+  String get queryEquals => proxy['queryEquals'];
 
   /**
    * Matches if the query segment of the URL starts with a specified string.
    */
-  String get queryPrefix => this.proxy['queryPrefix'];
+  String get queryPrefix => proxy['queryPrefix'];
 
   /**
    * Matches if the query segment of the URL ends with a specified string.
    */
-  String get querySuffix => this.proxy['querySuffix'];
+  String get querySuffix => proxy['querySuffix'];
 
   /**
    * Matches if the URL (without fragment identifier) contains a specified
    * string. Port numbers are stripped from the URL if they match the default
    * port number.
    */
-  String get urlContains => this.proxy['urlContains'];
+  String get urlContains => proxy['urlContains'];
 
   /**
    * Matches if the URL (without fragment identifier) is equal to a specified
    * string. Port numbers are stripped from the URL if they match the default
    * port number.
    */
-  String get urlEquals => this.proxy['urlEquals'];
+  String get urlEquals => proxy['urlEquals'];
 
   /**
    * Matches if the URL (without fragment identifier) matches a specified
@@ -162,7 +247,7 @@ class UrlFilter extends ChromeObject {
    * the default port number. The regular expressions use the [RE2
    * syntax](http://code.google.com/p/re2/wiki/Syntax).
    */
-  String get urlMatches => this.proxy['urlMatches'];
+  String get urlMatches => proxy['urlMatches'];
 
   /**
    * Matches if the URL without query segment and fragment identifier matches a
@@ -170,32 +255,32 @@ class UrlFilter extends ChromeObject {
    * they match the default port number. The regular expressions use the [RE2
    * syntax](http://code.google.com/p/re2/wiki/Syntax).
    */
-  String get originAndPathMatches => this.proxy['originAndPathMatches'];
+  String get originAndPathMatches => proxy['originAndPathMatches'];
 
   /**
    * Matches if the URL (without fragment identifier) starts with a specified
    * string. Port numbers are stripped from the URL if they match the default
    * port number.
    */
-  String get urlPrefix => this.proxy['urlPrefix'];
+  String get urlPrefix => proxy['urlPrefix'];
 
   /**
    * Matches if the URL (without fragment identifier) ends with a specified
    * string. Port numbers are stripped from the URL if they match the default
    * port number.
    */
-  String get urlSuffix => this.proxy['urlSuffix'];
+  String get urlSuffix => proxy['urlSuffix'];
 
   /**
    * Matches if the scheme of the URL is equal to any of the schemes specified
    * in the array.
    */
-  List<String> get schemes => listify(this.proxy['schemes']);
+  List<String> get schemes => listify(proxy['schemes']);
 
   /**
    * Matches if the port of the URL is contained in any of the specified port
    * lists. For example `[80, 443, [1000, 1200]]` matches all requests on port
    * 80, 443 and in the range 1000-1200.
    */
-  List<dynamic> get ports => listify(this.proxy['ports']);
+  List<dynamic> get ports => listify(proxy['ports']);
 }

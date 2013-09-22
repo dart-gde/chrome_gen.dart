@@ -4,6 +4,9 @@
 
 /* This file has been generated from app_window.idl - do not edit */
 
+/**
+ * 
+ */
 library chrome.app_window;
 
 import '../src/common.dart';
@@ -12,9 +15,51 @@ import '../src/common.dart';
 final ChromeAppWindow app_window = new ChromeAppWindow._();
 
 class ChromeAppWindow {
-  JsObject _app_window;
+  static final JsObject _app_window = context['chrome']['app']['window'];
 
-  ChromeAppWindow._() {
-    _app_window = context['chrome']['app']['window'];
+  ChromeAppWindow._();
+
+  Future create(String url, [CreateWindowOptions options]) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    _app_window.callMethod('create', [url, options, completer.callback]);
+    return completer.future;
   }
+
+  void current() {
+    _app_window.callMethod('current');
+  }
+
+  void initializeAppWindow(var state) {
+    _app_window.callMethod('initializeAppWindow', [state]);
+  }
+
+  Stream get onBoundsChanged => _onBoundsChanged.stream;
+
+  final ChromeStreamController _onBoundsChanged =
+      new ChromeStreamController.noArgs(_app_window['onBoundsChanged']);
+
+  Stream get onClosed => _onClosed.stream;
+
+  final ChromeStreamController _onClosed =
+      new ChromeStreamController.noArgs(_app_window['onClosed']);
+
+  Stream get onFullscreened => _onFullscreened.stream;
+
+  final ChromeStreamController _onFullscreened =
+      new ChromeStreamController.noArgs(_app_window['onFullscreened']);
+
+  Stream get onMaximized => _onMaximized.stream;
+
+  final ChromeStreamController _onMaximized =
+      new ChromeStreamController.noArgs(_app_window['onMaximized']);
+
+  Stream get onMinimized => _onMinimized.stream;
+
+  final ChromeStreamController _onMinimized =
+      new ChromeStreamController.noArgs(_app_window['onMinimized']);
+
+  Stream get onRestored => _onRestored.stream;
+
+  final ChromeStreamController _onRestored =
+      new ChromeStreamController.noArgs(_app_window['onRestored']);
 }

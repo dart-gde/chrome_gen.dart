@@ -15,14 +15,14 @@ import '../src/common.dart';
 final ChromePageCapture pageCapture = new ChromePageCapture._();
 
 class ChromePageCapture {
-  JsObject _pageCapture;
+  static final JsObject _pageCapture = context['chrome']['pageCapture'];
 
-  ChromePageCapture._() {
-    _pageCapture = context['chrome']['pageCapture'];
-  }
+  ChromePageCapture._();
 
   /**
    * Saves the content of the tab with given id as MHTML.
+   * 
+   * [details] `tabId` The id of the tab to save as MHTML.
    * 
    * Returns:
    * The MHTML data as a Blob.
