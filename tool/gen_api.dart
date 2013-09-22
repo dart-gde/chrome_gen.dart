@@ -70,8 +70,14 @@ class GenApiFile {
 //        chromeLib.name = _parseNamespace(tokens);
 //      }
 
-      webIdlParser.start.parse(inFile.readAsStringSync());
-      chromeLib = model_idl.convert(webIdlParser.model);
+      try {
+        webIdlParser.start.parse(inFile.readAsStringSync());
+        chromeLib = model_idl.convert(webIdlParser.collector);
+      } catch (e) {
+        // TODO:
+        print(e);
+      }
+
     }
 
     outFile.directory.createSync();

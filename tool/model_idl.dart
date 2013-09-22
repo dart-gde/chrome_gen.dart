@@ -12,6 +12,7 @@ import 'model_chrome.dart';
  * Collects the definitions for the WebIDL parser.
  */
 class IDLCollector {
+  IDLNamespace idlNamespace;
   namespace(l) => l; // Must return type passed for parser to continue.
   interface(l) => l; // Must return type passed for parser to continue.
   interfaceMember(l) => l; // Must return type passed for parser to continue.
@@ -21,6 +22,7 @@ class IDLCollector {
 }
 
 class IDLCollectorChrome implements IDLCollector {
+  IDLNamespace idlNamespace;
   namespace(l) => l; // Must return type passed for parser to continue.
   interface(l) => l; // Must return type passed for parser to continue.
   interfaceMember(l) => l; // Must return type passed for parser to continue.
@@ -177,7 +179,7 @@ class IDLType {
 /**
  * Convert idl -> chrome library
  */
-ChromeLibrary convert(IDLNamespace namespace) {
+ChromeLibrary convert(IDLCollector collector) {
   return new ChromeLibrary()..name = "notImplemented";
 }
 
