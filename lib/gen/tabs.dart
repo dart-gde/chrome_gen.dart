@@ -273,7 +273,7 @@ class ChromeTabs {
    * Returns:
    * The result of the script in every injected frame.
    */
-  Future<List<dynamic>> executeScript(var details, [int tabId]) {
+  Future<List<dynamic>> executeScript(InjectDetails details, [int tabId]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
     _tabs.callMethod('executeScript', [tabId, details, completer.callback]);
     return completer.future;
@@ -288,7 +288,7 @@ class ChromeTabs {
    * 
    * [details] Details of the CSS text to insert.
    */
-  Future insertCSS(var details, [int tabId]) {
+  Future insertCSS(InjectDetails details, [int tabId]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     _tabs.callMethod('insertCSS', [tabId, details, completer.callback]);
     return completer.future;

@@ -34,7 +34,7 @@ class ChromeTtsEngine {
    * [event] The update event from the text-to-speech engine indicating the
    * status of this utterance.
    */
-  void sendTtsEvent(int requestId, var event) {
+  void sendTtsEvent(int requestId, TtsEvent event) {
     _ttsEngine.callMethod('sendTtsEvent', [requestId, event]);
   }
 

@@ -37,7 +37,7 @@ class ChromeDebugger {
    * minor version. List of the protocol versions can be obtained
    * [here](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
    */
-  Future attach(var target, String requiredVersion) {
+  Future attach(Debuggee target, String requiredVersion) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     _debugger.callMethod('attach', [target, requiredVersion, completer.callback]);
     return completer.future;
@@ -48,7 +48,7 @@ class ChromeDebugger {
    * 
    * [target] Debugging target from which you want to detach.
    */
-  Future detach(var target) {
+  Future detach(Debuggee target) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     _debugger.callMethod('detach', [target, completer.callback]);
     return completer.future;
@@ -70,7 +70,7 @@ class ChromeDebugger {
    * JSON object with the response. Structure of the response varies depending
    * on the method and is defined by the remote debugging protocol.
    */
-  Future<dynamic> sendCommand(var target, String method, [var commandParams]) {
+  Future<dynamic> sendCommand(Debuggee target, String method, [var commandParams]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
     _debugger.callMethod('sendCommand', [target, method, commandParams, completer.callback]);
     return completer.future;

@@ -28,7 +28,7 @@ class ChromeOmnibox {
    * 
    * [suggestResults] An array of suggest results
    */
-  void sendSuggestions(int requestId, List suggestResults) {
+  void sendSuggestions(int requestId, List<SuggestResult> suggestResults) {
     _omnibox.callMethod('sendSuggestions', [requestId, jsify(suggestResults)]);
   }
 
@@ -40,7 +40,7 @@ class ChromeOmnibox {
    * [suggestion] A partial SuggestResult object, without the 'content'
    * parameter.
    */
-  void setDefaultSuggestion(var suggestion) {
+  void setDefaultSuggestion(DefaultSuggestResult suggestion) {
     _omnibox.callMethod('setDefaultSuggestion', [suggestion]);
   }
 

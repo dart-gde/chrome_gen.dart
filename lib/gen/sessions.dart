@@ -37,7 +37,7 @@ class ChromeSessions {
    * recently closed tab or window will be at index `0`).The entries may contain
    * either tabs or windows.
    */
-  Future<List<Session>> getRecentlyClosed([var filter]) {
+  Future<List<Session>> getRecentlyClosed([Filter filter]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
     _sessions.callMethod('getRecentlyClosed', [filter, completer.callback]);
     return completer.future;
@@ -52,7 +52,7 @@ class ChromeSessions {
    * modified session. [tabs.Tab] objects are sorted by recency in the
    * [windows.Window] of the [Session] objects.
    */
-  Future<List<Device>> getDevices([var filter]) {
+  Future<List<Device>> getDevices([Filter filter]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
     _sessions.callMethod('getDevices', [filter, completer.callback]);
     return completer.future;
