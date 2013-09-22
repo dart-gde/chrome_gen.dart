@@ -5,6 +5,7 @@
 library web_idl_parser;
 
 import 'package:parsers/parsers.dart';
+import 'model_idl.dart';
 
 class EMPTY {
   // EPSILON
@@ -70,9 +71,17 @@ final reservedNames = [ "readonly",
 
 // http://www.w3.org/TR/WebIDL/#idl-grammar
 class WebIdlParser extends LanguageParsers {
-  var model;
+  IDLCollector collector;
 
-  WebIdlParser() : super(reservedNames: reservedNames);
+  WebIdlParser()
+  : super(reservedNames: reservedNames) {
+    collector = new IDLCollector();
+  }
+
+  WebIdlParser.withCollector(IDLCollector collector)
+  : super(reservedNames: reservedNames) {
+    this.collector = collector;
+  }
 
   get start =>  whiteSpace > (stmts() < eof);
 
@@ -85,7 +94,7 @@ class WebIdlParser extends LanguageParsers {
                 + reserved["namespace"]
                 + namespaceIdentifier()
                 + braces(rec(definitions))
-                + semi).list;
+                + semi).list ^ (l) => collector.namespace(l);
 
   // Custom Google WebIDL grammar
   namespaceIdentifier() => identifier.sepBy(dot) | identifier;
@@ -113,7 +122,7 @@ class WebIdlParser extends LanguageParsers {
                       + identifier
                       + inheritance()
                       + braces(rec(interfaceMembers))
-                      + semi).list;
+                      + semi).list ^ (l) => collector.interface(l);
 
   partial() => (reserved["partial"] + rec(partialDefinition)).list;
 
@@ -129,13 +138,15 @@ class WebIdlParser extends LanguageParsers {
                         + rec(interfaceMembers)).list
                         | spaces;
 
-  interfaceMember() => rec(constStmt) | rec(attributeOrOperation);
+  interfaceMember() => rec(constStmt)
+                     | rec(attributeOrOperation)
+                     ^ (l) => collector.interfaceMember(l);
 
   dictionary() => (reserved["dictionary"]
                   + identifier
                   + inheritance()
                   + braces(rec(dictionaryMembers))
-                  + semi).list;
+                  + semi).list ^ (l) => collector.dictionary(l);
 
   dictionaryMembers() => (rec(extendedAttributeList)
                           + rec(dictionaryMember)
@@ -143,6 +154,7 @@ class WebIdlParser extends LanguageParsers {
                           | spaces;
 
   dictionaryMember() => (rec(type) + identifier + rec(defaultStmt) + semi).list
+                        ^ (l) => collector.dictionaryMember(l)
                         // Non standard WebIDL in Chrome IDL operations as
                         // dictionary members
                         | rec(operation);
@@ -178,7 +190,8 @@ class WebIdlParser extends LanguageParsers {
                 | (reserved["enum"]
                 + identifier
                 + braces(rec(enumIdentifierList))
-                + semi).list;
+                + semi).list
+                ^ (l) => collector.enumStatement(l);
 
   enumValueList() => (stringLiteral + rec(enumValues)).list;
 

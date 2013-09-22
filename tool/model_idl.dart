@@ -8,6 +8,27 @@ import 'model_chrome.dart';
 
 // TODO: this model needs to be re-written in-line with the needs of the web_idl_parser.
 
+/**
+ * Collects the definitions for the WebIDL parser.
+ */
+class IDLCollector {
+  namespace(l) => l; // Must return type passed for parser to continue.
+  interface(l) => l; // Must return type passed for parser to continue.
+  interfaceMember(l) => l; // Must return type passed for parser to continue.
+  dictionary(l) => l; // Must return type passed for parser to continue.
+  dictionaryMember(l) => l; // Must return type passed for parser to continue.
+  enumStatement(l) => l; // Must return type passed for parser to continue.
+}
+
+class IDLCollectorChrome implements IDLCollector {
+  namespace(l) => l; // Must return type passed for parser to continue.
+  interface(l) => l; // Must return type passed for parser to continue.
+  interfaceMember(l) => l; // Must return type passed for parser to continue.
+  dictionary(l) => l; // Must return type passed for parser to continue.
+  dictionaryMember(l) => l; // Must return type passed for parser to continue.
+  enumStatement(l) => l; // Must return type passed for parser to continue.
+}
+
 class IDLNamespace {
   /// The IDL namespace name, generally something like 'commandLinePrivate'.
   String name;
