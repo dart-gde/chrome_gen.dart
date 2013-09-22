@@ -22,13 +22,158 @@ class IDLCollector {
 }
 
 class IDLCollectorChrome implements IDLCollector {
-  IDLNamespace idlNamespace;
-  namespace(l) => l; // Must return type passed for parser to continue.
-  interface(l) => l; // Must return type passed for parser to continue.
-  interfaceMember(l) => l; // Must return type passed for parser to continue.
-  dictionary(l) => l; // Must return type passed for parser to continue.
-  dictionaryMember(l) => l; // Must return type passed for parser to continue.
-  enumStatement(l) => l; // Must return type passed for parser to continue.
+  IDLNamespace idlNamespace = new IDLNamespace();
+  List _functions = [];
+  List _dictionaryMembers = [];
+
+  namespace(l) {
+    idlNamespace.name = l[2][0];
+
+    // Must return type passed for parser to continue.
+    return l;
+  }
+
+  interface(l) {
+    if (l[1] == "Functions") {
+      idlNamespace.functions.addAll(_functions);
+      _functions = [];
+    } else if (l[1] == "Events") {
+      _toEvent(IDLFunction f) {
+        IDLEvent event = new IDLEvent(f.name);
+        event.params.addAll(f.parameters);
+      };
+      idlNamespace.events.addAll(_functions.map(_toEvent).toList());
+      _functions = [];
+    }
+
+    // Must return type passed for parser to continue.
+    return l;
+  }
+
+  interfaceMember(l) {
+    var name = l[1][1];
+    var arg = l[1][2];
+    IDLFunction function = new IDLFunction(name, "");
+
+    List recursiveParams = [];
+
+    IDLParameter reduceParameter(a) {
+      var func = a;
+
+      if (func[1] is List) {
+        var type = func[1][0];
+        var name;
+        if (func[1][2].runtimeType.toString() != "EMPTY") {
+          name = func[1][2];
+        } else if (func[1][3].runtimeType.toString() != "EMPTY") {
+          name = func[1][3];
+        } else {
+          // throw does not know how to parse.
+        }
+
+        IDLParameter param = new IDLParameter(name);
+
+        if (type is List) {
+          type = type[0];
+          if (type is List) {
+            type = type[0];
+          }
+
+          param.type = new IDLType(type);
+          param.optional = false;
+        } else if (type is String) {
+          if (type == "optional") {
+            param.optional = true;
+          } else {
+            param.optional = false;
+          }
+
+          if (func[1][1] is List) {
+            var type = func[1][1][0];
+            if (type is List) {
+              type = type[0];
+            }
+            param.type = new IDLType(type);
+          }
+        }
+
+        return param;
+      }
+    };
+
+    void parameterParser(a) {
+      var func;
+
+      if (a.runtimeType.toString() == "EMPTY") return;
+
+      if (a.length == 3) {
+        // recursive
+        func = a[1];
+        IDLParameter param = reduceParameter(func);
+        recursiveParams.add(param);
+
+        if (a[2].runtimeType.toString() != "EMPTY") {
+          parameterParser(a[2]);
+          return;
+        } else {
+          return;
+        }
+      }
+
+      if (a.length == 2) {
+        func = a[1];
+      }
+    };
+
+    if (arg.runtimeType.toString() != "EMPTY") {
+      var func = arg[0];
+      IDLParameter param = reduceParameter(func);
+      function.parameters.add(param);
+
+      if (arg.length > 1) {
+        parameterParser(arg[1]);
+      }
+    }
+
+    if (!recursiveParams.isEmpty) {
+      function.parameters.addAll(recursiveParams);
+    }
+
+    _functions.add(function);
+
+    // Must return type passed for parser to continue.
+    return l;
+  }
+
+  dictionary(l) {
+    String name = l[1];
+    IDLDeclaredType declaredType = new IDLDeclaredType(name);
+    declaredType.members.addAll(_dictionaryMembers);
+    _dictionaryMembers = [];
+
+    // Must return type passed for parser to continue.
+    return l;
+  }
+
+  dictionaryMember(l) {
+    String name = l[1];
+    IDLProperty member = new IDLProperty(name);
+    var type = l[0][0];
+
+    if (type is List) {
+      type = type[0];
+    }
+
+    member.returnType = new IDLType(type);
+    _dictionaryMembers.add(member);
+    // Must return type passed for parser to continue.
+    return l;
+  }
+
+  enumStatement(l) {
+    // Must return type passed for parser to continue.
+    return l;
+  }
 }
 
 class IDLNamespace {
