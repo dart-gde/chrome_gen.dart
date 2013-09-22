@@ -12,6 +12,9 @@ import 'overrides.dart';
 import 'src/src_gen.dart';
 import 'src/utils.dart';
 
+// TODO: parse _api_features.json and add permissions info to the dartdoc for
+// the libraries
+
 void main() {
   DateTime startTime = new DateTime.now();
 
@@ -36,8 +39,8 @@ class GenApis {
 
     var apisInfo = JSON.decode(apisFile.readAsStringSync());
 
-    _generateApi('app', apisInfo['packaged_app']);
-    _generateApi('ext', apisInfo['extension'], apisInfo['packaged_app']);
+    _generateApi('app', apisInfo['packaged_app'], includeFiles: true);
+    _generateApi('ext', apisInfo['extension'], alreadyWritten: apisInfo['packaged_app']);
   }
 
   void _init() {
@@ -53,7 +56,8 @@ class GenApis {
     }
   }
 
-  void _generateApi(String name, List<String> libraryNames, [List<String> alreadyWritten]) {
+  void _generateApi(String name, List<String> libraryNames,
+                    {List<String> alreadyWritten, bool includeFiles: false}) {
     File libFile = new File("${outDir.path}/chrome_${name}.dart");
 
     DartGenerator generator = new DartGenerator();
@@ -72,6 +76,11 @@ class GenApis {
     for (String libName in libraryNames) {
       generator.writeln(
           "export 'gen/${convertJSLibNameToFileName(libName)}.dart';");
+    }
+
+    if (includeFiles) {
+      generator.writeln();
+      generator.writeln("export 'src/files.dart';");
     }
 
     libFile.writeAsStringSync(generator.toString());

@@ -22,7 +22,7 @@ class ChromeLibrary extends ChromeElement {
   List<String> imports = [];
 
   void addImport(String str) {
-    if (str != name && !imports.contains(str)) {
+    if (str != null && str != name && !imports.contains(str)) {
       imports.add(str);
       imports.sort();
     }
@@ -106,8 +106,10 @@ class ChromeType extends ChromeElement {
   bool get isBool => type == 'bool';
 
   String toParamString() {
-    if (parameters.isEmpty) {
+    if (isAny && !isReferencedType) {
       return type;
+    } else if (parameters.isEmpty) {
+      return refName != null ? refName : type;
     } else {
       return "${type}<${parameters.map((t) => t.toParamString()).join(', ')}>";
     }

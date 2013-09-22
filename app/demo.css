@@ -16,6 +16,8 @@ h1, p {
   position: relative;
   border: 1px solid #ccc;
   background-color: #fff;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 #summary {

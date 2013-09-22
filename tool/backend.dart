@@ -49,8 +49,12 @@ class DefaultBackend extends Backend {
     generator.writeln();
 
     library.imports.forEach((String str) {
-      str = fromCamelCase(str.replaceAll('.', '_'));
-      generator.writeln("import '${str}.dart';");
+      if (str.endsWith('.dart')) {
+        generator.writeln("import '${str}';");
+      } else {
+        str = fromCamelCase(str.replaceAll('.', '_'));
+        generator.writeln("import '${str}.dart';");
+      }
     });
     generator.writeln("import '../src/common.dart';");
     generator.writeln();
@@ -131,13 +135,13 @@ class DefaultBackend extends Backend {
     generator.writeln();
     generator.writeDocs(method.description);
     generator.write("${method.returns.toReturnString()} ${method.name}(");
-    generator.write(method.requiredParams.map((p) => "${p.type} ${p.name}").join(', '));
+    generator.write(method.requiredParams.map((p) => "${p} ${p.name}").join(', '));
     if (method.optionalParams.isNotEmpty) {
       if (method.requiredParams.isNotEmpty) {
         generator.write(', ');
       }
       generator.write('[');
-      generator.write(method.optionalParams.map((p) => "${p.type} ${p.name}").join(', '));
+      generator.write(method.optionalParams.map((p) => "${p} ${p.name}").join(', '));
       generator.write(']');
     }
     generator.writeln(") {");

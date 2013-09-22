@@ -37,3 +37,5 @@ export 'gen/tts.dart';
 export 'gen/types.dart';
 export 'gen/usb.dart';
 export 'gen/webstore.dart';
+
+export 'src/files.dart';

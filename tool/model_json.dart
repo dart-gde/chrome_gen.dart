@@ -298,12 +298,16 @@ class JsonConverter {
     } else if (t.type == 'array') {
       // {type: array, items: {type: string}
       type.type = 'List';
-    } else if (t.type == 'object' && t.properties.isNotEmpty) {
+    } else if (t.type == 'object' && t.isInstanceOf == null) {
       // TODO: do we need the isNotEmpty check?
       type.type = "Map";
 
       // TODO: create documentation from the type's properties
 
+    } else if (t.type == 'object' && t.isInstanceOf != null) {
+      type.type = "var";
+      type.refName = t.isInstanceOf;
+      library.addImport(getImportForClass(type.refName));
     } else if (t.ref != null) {
       // TODO: ensure that we are pulling out the correct type
       type.type = "var";
@@ -363,3 +367,11 @@ List<String> parseQualifiedName(String str) {
   }
 }
 
+Map _importMap = const {
+  'DirectoryEntry': '../src/files.dart',
+  'Window': 'windows'
+};
+
+String getImportForClass(String name) {
+  return _importMap[name];
+}

@@ -12,8 +12,10 @@
  */
 library chrome.runtime;
 
+import '../src/files.dart';
 import 'events.dart';
 import 'tabs.dart';
+import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.runtime` namespace.
@@ -45,8 +47,8 @@ class ChromeRuntime {
    * Returns:
    * The JavaScript 'window' object for the background page.
    */
-  Future<dynamic> getBackgroundPage() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+  Future<Window> getBackgroundPage() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
     _runtime.callMethod('getBackgroundPage', [completer.callback]);
     return completer.future;
   }
@@ -58,7 +60,7 @@ class ChromeRuntime {
    * Returns:
    * The manifest details.
    */
-  dynamic getManifest() {
+  Map getManifest() {
     return _runtime.callMethod('getManifest');
   }
 
@@ -171,9 +173,9 @@ class ChromeRuntime {
    * while connecting to the native messaging host, the callback will be called
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
-  Future<dynamic> sendNativeMessage(String application, var message) {
+  Future<dynamic> sendNativeMessage(String application, Map message) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
-    _runtime.callMethod('sendNativeMessage', [application, message, completer.callback]);
+    _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
     return completer.future;
   }
 
@@ -189,8 +191,8 @@ class ChromeRuntime {
   /**
    * Returns a DirectoryEntry for the package directory.
    */
-  Future<dynamic> getPackageDirectoryEntry() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+  Future<DirectoryEntry> getPackageDirectoryEntry() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(DirectoryEntry.create);
     _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
     return completer.future;
   }

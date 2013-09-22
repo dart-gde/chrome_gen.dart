@@ -63,6 +63,8 @@ abstract class ChromeObject implements Serializable<JsObject> {
   ChromeObject(this.proxy);
 
   JsObject toJs() => proxy;
+
+  String toString() => proxy.toString();
 }
 
 // TODO: some chrome APIs use lastError, and some don't

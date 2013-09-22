@@ -70,9 +70,9 @@ class ChromeDebugger {
    * JSON object with the response. Structure of the response varies depending
    * on the method and is defined by the remote debugging protocol.
    */
-  Future<dynamic> sendCommand(Debuggee target, String method, [var commandParams]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
-    _debugger.callMethod('sendCommand', [target, method, commandParams, completer.callback]);
+  Future<Map> sendCommand(Debuggee target, String method, [Map commandParams]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    _debugger.callMethod('sendCommand', [target, method, jsify(commandParams), completer.callback]);
     return completer.future;
   }
 

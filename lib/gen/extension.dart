@@ -13,6 +13,7 @@
 library chrome.extension;
 
 import 'runtime.dart';
+import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.extension` namespace.
@@ -77,7 +78,7 @@ class ChromeExtension {
    * Returns:
    * Array of global objects
    */
-  List<dynamic> getViews([Map fetchProperties]) {
+  List<Window> getViews([Map fetchProperties]) {
     return _extension.callMethod('getViews', [jsify(fetchProperties)]);
   }
 
@@ -86,7 +87,7 @@ class ChromeExtension {
    * inside the current extension. Returns null if the extension has no
    * background page.
    */
-  dynamic getBackgroundPage() {
+  Window getBackgroundPage() {
     return _extension.callMethod('getBackgroundPage');
   }
 
@@ -99,7 +100,7 @@ class ChromeExtension {
    * Returns:
    * Array of global window objects
    */
-  List<dynamic> getExtensionTabs([int windowId]) {
+  List<Window> getExtensionTabs([int windowId]) {
     return _extension.callMethod('getExtensionTabs', [windowId]);
   }
 

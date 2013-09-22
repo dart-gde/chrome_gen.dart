@@ -62,9 +62,9 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearDefaultFontSize([var details]) {
+  Future clearDefaultFontSize([Map details]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('clearDefaultFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('clearDefaultFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -73,9 +73,9 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<Map> getDefaultFontSize([var details]) {
+  Future<Map> getDefaultFontSize([Map details]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
-    _fontSettings.callMethod('getDefaultFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('getDefaultFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -93,9 +93,9 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearDefaultFixedFontSize([var details]) {
+  Future clearDefaultFixedFontSize([Map details]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('clearDefaultFixedFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('clearDefaultFixedFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -104,9 +104,9 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<Map> getDefaultFixedFontSize([var details]) {
+  Future<Map> getDefaultFixedFontSize([Map details]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
-    _fontSettings.callMethod('getDefaultFixedFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('getDefaultFixedFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -124,9 +124,9 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearMinimumFontSize([var details]) {
+  Future clearMinimumFontSize([Map details]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('clearMinimumFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('clearMinimumFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -135,9 +135,9 @@ class ChromeFontSettings {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<Map> getMinimumFontSize([var details]) {
+  Future<Map> getMinimumFontSize([Map details]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
-    _fontSettings.callMethod('getMinimumFontSize', [details, completer.callback]);
+    _fontSettings.callMethod('getMinimumFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 

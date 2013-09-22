@@ -14,13 +14,28 @@ void main() {
   label('i18n');
   action("message", handleI18NMessage);
   action("languages", handleI18NLanguages);
+  br();
 
+  label('idle');
+  action('queryState', handleIdleQueryState);
+  br();
+
+  label('permissions');
+  action('getAll', handlePermissionsGetAll);
+  action('getAll().origins', handlePermissionsOrigins);
   br();
 
   label('runtime');
   action("id", handleRuntimeId);
   action("path", handleRuntimeURL);
   action("reload", handleRuntimeReload);
+  action('getPlatformInfo', handleGetPlatformInfo);
+  action('getPackageDirectoryEntry', handleGetPackageDirectoryEntry);
+  br();
+
+  label('tts');
+  action('getVoices', handleGetVoices);
+  br();
 }
 
 void label(String str) {
@@ -71,4 +86,41 @@ void handleRuntimeURL() {
 
 void handleRuntimeReload() {
   chrome.runtime.reload();
+}
+
+void handleIdleQueryState() {
+  chrome.idle.queryState(15).then((String state) {
+    summary(state);
+  });
+}
+
+void handlePermissionsGetAll() {
+  chrome.permissions.getAll().then((chrome.Permissions perms) {
+    summary(perms.permissions.toString());
+  });
+}
+
+void handlePermissionsOrigins() {
+  chrome.permissions.getAll().then((chrome.Permissions perms) {
+    summary(perms.origins.toString());
+  });
+}
+
+void handleGetVoices() {
+  // TODO: the list JsObject conversion still needs to be implemented
+  chrome.tts.getVoices().then((List<chrome.TtsVoice> voices) {
+    summary(voices.map((v) => "${v.voiceName} ${v.lang}").toString());
+  });
+}
+
+void handleGetPlatformInfo() {
+  chrome.runtime.getPlatformInfo().then((Map m) {
+    summary(m.toString());
+  });
+}
+
+void handleGetPackageDirectoryEntry() {
+  chrome.runtime.getPackageDirectoryEntry().then((chrome.DirectoryEntry dir) {
+    summary(dir.toString());
+  });
 }
