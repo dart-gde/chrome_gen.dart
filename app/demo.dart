@@ -1,5 +1,6 @@
 
 import 'dart:html';
+import 'dart:js';
 
 import 'package:gen_tools/chrome_app.dart' as chrome;
 
@@ -11,6 +12,10 @@ import 'package:gen_tools/chrome_app.dart' as chrome;
  * http://developer.chrome.com/apps/api_index.html
  */
 void main() {
+  label('alarms');
+  action("create", handleAlarmsCreate);
+  br();
+
   label('i18n');
   action("message", handleI18NMessage);
   action("languages", handleI18NLanguages);
@@ -37,6 +42,14 @@ void main() {
   label('tts');
   action('getVoices', handleGetVoices);
   br();
+
+  chrome.runtime.onStartup.listen((e) {
+    notes('onStartup');
+  });
+
+  chrome.alarms.onAlarm.listen((e) {
+    notes('onAlarm: ${e}');
+  });
 }
 
 void label(String str) {
@@ -128,4 +141,10 @@ void handleGetPackageDirectoryEntry() {
   chrome.runtime.getPackageDirectoryEntry().then((chrome.DirectoryEntry dir) {
     summary(dir.toString());
   });
+}
+
+void handleAlarmsCreate() {
+  Map m = {"periodInMinutes": 1.0};
+  chrome.alarms.create(jsify(m), 'myNewAlarm');
+  summary('alarms.create: 1 minute');
 }

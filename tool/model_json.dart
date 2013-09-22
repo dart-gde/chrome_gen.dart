@@ -299,10 +299,24 @@ class JsonConverter {
       // {type: array, items: {type: string}
       type.type = 'List';
     } else if (t.type == 'object' && t.isInstanceOf == null) {
-      // TODO: do we need the isNotEmpty check?
       type.type = "Map";
 
-      // TODO: create documentation from the type's properties
+      // create documentation from the type's properties
+      if (t.properties.isNotEmpty) {
+        String propertyDocs = t.properties.map((p) {
+          if (p.description != null) {
+            return "`${p.name}` ${convertHtmlToDartdoc(p.description)}";
+          } else {
+            return "`${p.name}`";
+          }
+        }).join("\n\n");
+
+        if (type.documentation != null) {
+          type.documentation = "${type.documentation}\n\n${propertyDocs}";
+        } else {
+          type.documentation = propertyDocs;
+        }
+      }
 
 //    } else if (t.type == 'object' && t.isInstanceOf != null) {
 //      type.type = "var";

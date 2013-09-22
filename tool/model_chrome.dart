@@ -36,6 +36,20 @@ class ChromeProperty extends ChromeElement {
   String name;
   bool nodoc;
 
+  String getDescription() {
+    if (documentation == null) {
+      return type.documentation;
+    } else if (type.documentation == null) {
+      return documentation;
+    } else {
+      if (type.documentation.startsWith(documentation)) {
+        return type.documentation;
+      } else {
+        return "${documentation}\n\n${type.documentation}";
+      }
+    }
+  }
+
   String toString() => name;
 }
 
@@ -46,11 +60,11 @@ class ChromeMethod extends ChromeElement {
 
   bool get usesCallback => returns.isFuture;
 
-  // TODO: we depend on all required params being defined before any optional ones
+  // We depend on all required params being defined before any optional ones.
   Iterable<ChromeType> get requiredParams => params.where((p) => !p.optional);
   Iterable<ChromeType> get optionalParams => params.where((p) => p.optional);
 
-  String get description {
+  String getDescription() {
     if (documentation == null) {
       return documentation;
     }
@@ -77,6 +91,16 @@ class ChromeMethod extends ChromeElement {
 
 class ChromeEvent extends ChromeType {
 
+  ChromeType calculateType() {
+    if (parameters.length == 1) {
+      return parameters[0];
+    } else if (parameters.length > 1) {
+      // TODO:
+      return this;
+    } else {
+      return null;
+    }
+  }
 }
 
 class ChromeDeclaredType extends ChromeType {

@@ -105,25 +105,17 @@ class ChromeCompleter<T> {
   Function get callback => _callback;
 }
 
-/**
- * Used to define a method that returns a [JsObject].
- */
-typedef JsObject JsObjectFunction();
-
-// TODO: change this over to _event using a String? 'window.onClose'?
-// Or can we pass a JsObject in an ctor time?
 class ChromeStreamController<T> {
-  final JsObjectFunction _event;
+  final JsObject _event;
   StreamController<T> _controller = new StreamController<T>.broadcast();
   bool _handlerAdded = false;
   Function _listener;
 
-  ChromeStreamController.zeroArgs(this._event, Function transformer, [returnVal]) {
+  ChromeStreamController.noArgs(this._event) {
     _controller = new StreamController<T>.broadcast(
         onListen: _ensureHandlerAdded, onCancel: _removeHandler);
     _listener = () {
-      _controller.add(transformer());
-      return returnVal;
+      _controller.add(null);
     };
   }
 
@@ -162,14 +154,14 @@ class ChromeStreamController<T> {
 
   void _ensureHandlerAdded() {
     if (!_handlerAdded) {
-      _event().callMethod('addListener', [_listener]);
+      _event.callMethod('addListener', [_listener]);
       _handlerAdded = true;
     }
   }
 
   void _removeHandler() {
     if (_handlerAdded) {
-      _event().callMethod('removeListener', [_listener]);
+      _event.callMethod('removeListener', [_listener]);
       _handlerAdded = false;
     }
   }

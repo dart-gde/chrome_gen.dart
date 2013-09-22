@@ -93,15 +93,13 @@ class DefaultBackend extends Backend {
   }
 
   void _printClass() {
-    generator.writeln("class ${className} {");
-    generator.writeln("JsObject ${contextReference};");
-    generator.writeln();
-    generator.writeln("${className}._() {");
-
     List sections = library.name.split('.');
-    generator.writeln("${contextReference} = "
-        "context['chrome']['${sections.join('\'][\'')}'];");
-    generator.writeln("}");
+
+    generator.writeln("class ${className} {");
+    generator.write("static final JsObject ${contextReference} = ");
+    generator.writeln("context['chrome']['${sections.join('\'][\'')}'];");
+    generator.writeln();
+    generator.writeln("${className}._();");
 
     library.properties.forEach((p) => _printProperty(p, contextReference));
     library.methods.forEach(_printMethod);
@@ -119,7 +117,7 @@ class DefaultBackend extends Backend {
     String getterBody = "${refString}['${property.name}']";
 
     generator.writeln();
-    generator.writeDocs(property.documentation);
+    generator.writeDocs(property.getDescription());
     generator.write("${property.type.toReturnString()} ");
     generator.write("get ${property.name} => ");
     generator.writeln("${converter.replaceFirst('%s', getterBody)};");
@@ -127,7 +125,7 @@ class DefaultBackend extends Backend {
 
   void _printMethod(ChromeMethod method) {
     generator.writeln();
-    generator.writeDocs(method.description);
+    generator.writeDocs(method.getDescription());
     generator.write("${method.returns.toReturnString()} ${method.name}(");
     generator.write(method.requiredParams.map((p) => "${p} ${p.name}").join(', '));
     if (method.optionalParams.isNotEmpty) {
@@ -195,14 +193,34 @@ class DefaultBackend extends Backend {
   }
 
   void _printEvent(ChromeEvent event) {
+    ChromeType type = event.calculateType();
+
     generator.writeln();
     generator.writeDocs(event.documentation);
-    generator.writeln("Stream<${event.toReturnString()}> get ${event.name} => _${event.name}.stream;");
 
-    // TODO: we need to type the stream controller
+    String typeName = type == null ? null : type.toReturnString();
+
+    if (type != null) {
+      generator.writeln("Stream<${typeName}> get ${event.name} => _${event.name}.stream;");
+    } else {
+      generator.writeln("Stream get ${event.name} => _${event.name}.stream;");
+    }
+
     generator.writeln();
-    generator.writeln("// TODO:");
-    generator.writeln("final ChromeStreamController<${event.toReturnString()}> _${event.name} = null;");
+
+    if (type != null) {
+      generator.writeln("final ChromeStreamController<${typeName}> _${event.name} =");
+      String converter = getCallbackConverter(type);
+      if (converter == null) {
+        converter = 'selfConverter';
+      }
+      generator.writeln("    new ChromeStreamController<${typeName}>.oneArg("
+          "${contextReference}['${event.name}'], ${converter});");
+    } else {
+      generator.writeln("final ChromeStreamController _${event.name} =");
+      generator.writeln("    new ChromeStreamController.noArgs("
+          "${contextReference}['${event.name}']);");
+    }
   }
 
   void _printDeclaredType(ChromeDeclaredType type) {

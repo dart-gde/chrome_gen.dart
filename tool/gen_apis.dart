@@ -78,7 +78,6 @@ class GenApis {
           "export 'gen/${convertJSLibNameToFileName(libName)}.dart';");
     }
 
-    generator.writeln();
     generator.writeln("export 'src/common_exp.dart';");
 
     if (includeFiles) {
