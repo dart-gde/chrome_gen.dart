@@ -4,7 +4,32 @@
 
 library model_idl;
 
+import 'model_chrome.dart';
+
 // TODO: this model needs to be re-written in-line with the needs of the web_idl_parser.
+
+/**
+ * Collects the definitions for the WebIDL parser.
+ */
+class IDLCollector {
+  IDLNamespace idlNamespace;
+  namespace(l) => l; // Must return type passed for parser to continue.
+  interface(l) => l; // Must return type passed for parser to continue.
+  interfaceMember(l) => l; // Must return type passed for parser to continue.
+  dictionary(l) => l; // Must return type passed for parser to continue.
+  dictionaryMember(l) => l; // Must return type passed for parser to continue.
+  enumStatement(l) => l; // Must return type passed for parser to continue.
+}
+
+class IDLCollectorChrome implements IDLCollector {
+  IDLNamespace idlNamespace;
+  namespace(l) => l; // Must return type passed for parser to continue.
+  interface(l) => l; // Must return type passed for parser to continue.
+  interfaceMember(l) => l; // Must return type passed for parser to continue.
+  dictionary(l) => l; // Must return type passed for parser to continue.
+  dictionaryMember(l) => l; // Must return type passed for parser to continue.
+  enumStatement(l) => l; // Must return type passed for parser to continue.
+}
 
 class IDLNamespace {
   /// The IDL namespace name, generally something like 'commandLinePrivate'.
@@ -14,7 +39,10 @@ class IDLNamespace {
 
   List<IDLFunction> functions = [];
   List<IDLEvent> events = [];
-  List<IDLProperty> properties = [];
+  List<IDLDeclaredType> declaredTypes = [];
+  // Dont know what the use of properties is vs declaredTypes in terms of
+  // WebIDL.
+  //List<IDLProperty> properties = [];
 
   String toString() => name;
 }
@@ -66,6 +94,19 @@ class IDLEvent {
   List<IDLParameter> params = [];
 
   IDLEvent(this.name);
+
+  String toString() => name;
+}
+
+/**
+ * Declared type is a type that is defined by a WebIDL dictionary.
+ */
+class IDLDeclaredType {
+  String name;
+  String description;
+  List<IDLProperty> members = [];
+
+  IDLDeclaredType(this.name);
 
   String toString() => name;
 }
@@ -133,4 +174,23 @@ class IDLType {
   bool get isArray => name == 'array';
 
   String toString() => name;
+}
+
+/**
+ * Convert idl -> chrome library
+ */
+ChromeLibrary convert(IDLCollector collector) {
+  return new ChromeLibrary()..name = "notImplemented";
+}
+
+_convertDeclaredType() {
+  throw "Not Implemented";
+}
+
+_convertMethod() {
+  throw "Not Implemented";
+}
+
+_convertEvent() {
+  throw "Not Implemented";
 }
