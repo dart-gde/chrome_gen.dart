@@ -325,17 +325,26 @@ class IDLType {
  * Convert idl -> chrome library
  */
 ChromeLibrary convert(IDLCollector collector) {
-  return new ChromeLibrary()..name = "notImplemented";
+  ChromeLibrary chromeLibrary =  new ChromeLibrary();
+  chromeLibrary.name = collector.idlNamespace.name;
+  chromeLibrary.documentation = "";
+
+  chromeLibrary.types =
+      collector.idlNamespace.declaredTypes.map(_convertDeclaredType).toList();
+  chromeLibrary.methods =
+      collector.idlNamespace.functions.map(_convertMethod).toList();
+  chromeLibrary.events =
+      collector.idlNamespace.events.map(_convertEvent).toList();
 }
 
-_convertDeclaredType() {
+_convertDeclaredType(IDLDeclaredType idlDeclaredType) {
   throw "Not Implemented";
 }
 
-_convertMethod() {
+_convertMethod(IDLFunction idlMethod) {
   throw "Not Implemented";
 }
 
-_convertEvent() {
+_convertEvent(IDLEvent idlEvent) {
   throw "Not Implemented";
 }
