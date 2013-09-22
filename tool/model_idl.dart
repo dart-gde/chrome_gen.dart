@@ -157,7 +157,7 @@ class IDLType {
  * Convert idl -> chrome library
  */
 ChromeLibrary convert(IDLNamespace namespace) {
-  throw "Not Implemented";
+  return new ChromeLibrary()..name = "notImplemented";
 }
 
 _convertDeclaredType() {

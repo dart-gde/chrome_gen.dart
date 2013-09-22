@@ -70,6 +70,8 @@ final reservedNames = [ "readonly",
 
 // http://www.w3.org/TR/WebIDL/#idl-grammar
 class WebIdlParser extends LanguageParsers {
+  var model;
+
   WebIdlParser() : super(reservedNames: reservedNames);
 
   get start =>  whiteSpace > (stmts() < eof);
