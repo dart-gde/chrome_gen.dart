@@ -29,10 +29,10 @@ class ChromeStorage {
   /**
    * Fired when one or more items change.
    */
-  Stream<OnChangedEvent> get onChanged => _onChanged.stream;
+  Stream<StorageOnChangedEvent> get onChanged => _onChanged.stream;
 
-  final ChromeStreamController<OnChangedEvent> _onChanged =
-      new ChromeStreamController<OnChangedEvent>.twoArgs(_storage['onChanged'], OnChangedEvent.create);
+  final ChromeStreamController<StorageOnChangedEvent> _onChanged =
+      new ChromeStreamController<StorageOnChangedEvent>.twoArgs(_storage['onChanged'], StorageOnChangedEvent.create);
 }
 
 /**

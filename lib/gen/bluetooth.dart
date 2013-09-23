@@ -30,9 +30,9 @@ class ChromeBluetooth {
     return completer.future;
   }
 
-  Future getDevices(GetDevicesOptions options) {
+  Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
-    _bluetooth.callMethod('getDevices', [options, completer.callback]);
+    _bluetooth.callMethod('getBluetoothDevices', [options, completer.callback]);
     return completer.future;
   }
 
@@ -113,10 +113,10 @@ class AdapterState extends ChromeObject {
   AdapterState(JsObject proxy): super(proxy);
 }
 
-class BluetoothDevice extends ChromeObject {
-  static BluetoothDevice create(JsObject proxy) => proxy == null ? null : new BluetoothDevice(proxy);
+class BluetoothBluetoothDevice extends ChromeObject {
+  static BluetoothBluetoothDevice create(JsObject proxy) => proxy == null ? null : new BluetoothBluetoothDevice(proxy);
 
-  BluetoothDevice(JsObject proxy): super(proxy);
+  BluetoothBluetoothDevice(JsObject proxy): super(proxy);
 }
 
 class Profile extends ChromeObject {
@@ -143,10 +143,10 @@ class OutOfBandPairingData extends ChromeObject {
   OutOfBandPairingData(JsObject proxy): super(proxy);
 }
 
-class GetDevicesOptions extends ChromeObject {
-  static GetDevicesOptions create(JsObject proxy) => proxy == null ? null : new GetDevicesOptions(proxy);
+class GetBluetoothDevicesOptions extends ChromeObject {
+  static GetBluetoothDevicesOptions create(JsObject proxy) => proxy == null ? null : new GetBluetoothDevicesOptions(proxy);
 
-  GetDevicesOptions(JsObject proxy): super(proxy);
+  GetBluetoothDevicesOptions(JsObject proxy): super(proxy);
 }
 
 class GetProfilesOptions extends ChromeObject {

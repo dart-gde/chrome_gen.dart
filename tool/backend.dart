@@ -72,6 +72,10 @@ class DefaultBackend extends Backend {
 
     library.types.forEach((t) => _printDeclaredType(t));
 
+    overrides.classRenamesFor(library.name).forEach((List<String> renamePair) {
+      generator.renameSymbol(renamePair[0], renamePair[1]);
+    });
+
     return generator.toString();
   }
 
@@ -229,7 +233,8 @@ class DefaultBackend extends Backend {
   }
 
   void _printEventType(ChromeType type) {
-    String className = overrides.className(library.name, type.name);
+    // We do class renames in a lexical basis for the entire compilation unit.
+    String className = type.name; //overrides.className(library.name, type.name);
 
     generator.writeln();
     generator.writeDocs(type.documentation);

@@ -4,15 +4,6 @@ library overrides;
 import 'dart:convert';
 import 'dart:io';
 
-// TODO: we need to handle declared class renames, to avoid conflicts where
-// libraries share the same names of classes, and those classes are semantically
-// different.
-
-// serial, socket both define a slightly different ReadInfo
-// bluetooth and usb define a different Device
-
-// TODO: rename one class, both, or use a do something with qualified references?
-
 class Overrides {
   Map renameNamespaceMap;
 
@@ -57,4 +48,20 @@ class Overrides {
     String qualifiedName = '${libraryName}.${name}';
     return renameClassMap[qualifiedName] != null ? renameClassMap[qualifiedName] : name;
   }
+
+  /**
+   * Given a library name, return a list of strig pairs. The first element
+   * represents the original name, and the second element represents the new
+   * name.
+   */
+  List<List<String>> classRenamesFor(String libraryName) {
+    Iterable<String> keys = renameClassMap.keys.where((String str) => str.startsWith('${libraryName}.'));
+
+    return keys.map((key) {
+      String newName = renameClassMap[key];
+      String oldName = key.substring(key.lastIndexOf('.') + 1);
+      return [oldName, newName];
+    }).toList();
+  }
+
 }

@@ -72,6 +72,17 @@ class DartGenerator {
 
   void write(String str) => _write(str);
 
+  /**
+   * This very specialized method will replace all instances of the string
+   * [oldName] with [newName]. This is useful for class rename operations.
+   */
+  void renameSymbol(String oldName, String newName) {
+    String str = _buf.toString();
+    str = str.replaceAll(oldName, newName);
+    _buf.clear();
+    _buf.write(str);
+  }
+
   void _writeln([String str = "", bool ignoreCurlies = false]) =>
       _write("${str}\n", ignoreCurlies);
 

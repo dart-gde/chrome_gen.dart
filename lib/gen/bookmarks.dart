@@ -170,27 +170,27 @@ class ChromeBookmarks {
    * recursively, a single notification is fired for the folder, and none for
    * its contents.
    */
-  Stream<OnRemovedEvent> get onRemoved => _onRemoved.stream;
+  Stream<BookmarksOnRemovedEvent> get onRemoved => _onRemoved.stream;
 
-  final ChromeStreamController<OnRemovedEvent> _onRemoved =
-      new ChromeStreamController<OnRemovedEvent>.twoArgs(_bookmarks['onRemoved'], OnRemovedEvent.create);
+  final ChromeStreamController<BookmarksOnRemovedEvent> _onRemoved =
+      new ChromeStreamController<BookmarksOnRemovedEvent>.twoArgs(_bookmarks['onRemoved'], BookmarksOnRemovedEvent.create);
 
   /**
    * Fired when a bookmark or folder changes.  <b>Note:</b> Currently, only
    * title and url changes trigger this.
    */
-  Stream<OnChangedEvent> get onChanged => _onChanged.stream;
+  Stream<BookmarksOnChangedEvent> get onChanged => _onChanged.stream;
 
-  final ChromeStreamController<OnChangedEvent> _onChanged =
-      new ChromeStreamController<OnChangedEvent>.twoArgs(_bookmarks['onChanged'], OnChangedEvent.create);
+  final ChromeStreamController<BookmarksOnChangedEvent> _onChanged =
+      new ChromeStreamController<BookmarksOnChangedEvent>.twoArgs(_bookmarks['onChanged'], BookmarksOnChangedEvent.create);
 
   /**
    * Fired when a bookmark or folder is moved to a different parent folder.
    */
-  Stream<OnMovedEvent> get onMoved => _onMoved.stream;
+  Stream<BookmarksOnMovedEvent> get onMoved => _onMoved.stream;
 
-  final ChromeStreamController<OnMovedEvent> _onMoved =
-      new ChromeStreamController<OnMovedEvent>.twoArgs(_bookmarks['onMoved'], OnMovedEvent.create);
+  final ChromeStreamController<BookmarksOnMovedEvent> _onMoved =
+      new ChromeStreamController<BookmarksOnMovedEvent>.twoArgs(_bookmarks['onMoved'], BookmarksOnMovedEvent.create);
 
   /**
    * Fired when the children of a folder have changed their order due to the

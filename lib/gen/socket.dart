@@ -147,16 +147,16 @@ class AcceptInfo extends ChromeObject {
   AcceptInfo(JsObject proxy): super(proxy);
 }
 
-class SocketReadInfo extends ChromeObject {
-  static SocketReadInfo create(JsObject proxy) => proxy == null ? null : new SocketReadInfo(proxy);
+class SocketSocketReadInfo extends ChromeObject {
+  static SocketSocketReadInfo create(JsObject proxy) => proxy == null ? null : new SocketSocketReadInfo(proxy);
 
-  SocketReadInfo(JsObject proxy): super(proxy);
+  SocketSocketReadInfo(JsObject proxy): super(proxy);
 }
 
-class SocketWriteInfo extends ChromeObject {
-  static SocketWriteInfo create(JsObject proxy) => proxy == null ? null : new SocketWriteInfo(proxy);
+class SocketSocketWriteInfo extends ChromeObject {
+  static SocketSocketWriteInfo create(JsObject proxy) => proxy == null ? null : new SocketSocketWriteInfo(proxy);
 
-  SocketWriteInfo(JsObject proxy): super(proxy);
+  SocketSocketWriteInfo(JsObject proxy): super(proxy);
 }
 
 class RecvFromInfo extends ChromeObject {

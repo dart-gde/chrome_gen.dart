@@ -312,10 +312,10 @@ class ChromeTabs {
    * the other tabs that must move in response. This event is not fired when a
    * tab is moved between windows. For that, see [onDetached.]
    */
-  Stream<OnMovedEvent> get onMoved => _onMoved.stream;
+  Stream<TabsOnMovedEvent> get onMoved => _onMoved.stream;
 
-  final ChromeStreamController<OnMovedEvent> _onMoved =
-      new ChromeStreamController<OnMovedEvent>.twoArgs(_tabs['onMoved'], OnMovedEvent.create);
+  final ChromeStreamController<TabsOnMovedEvent> _onMoved =
+      new ChromeStreamController<TabsOnMovedEvent>.twoArgs(_tabs['onMoved'], TabsOnMovedEvent.create);
 
   /**
    * Deprecated. Please use onActivated.
@@ -380,10 +380,10 @@ class ChromeTabs {
   /**
    * Fired when a tab is closed.
    */
-  Stream<OnRemovedEvent> get onRemoved => _onRemoved.stream;
+  Stream<TabsOnRemovedEvent> get onRemoved => _onRemoved.stream;
 
-  final ChromeStreamController<OnRemovedEvent> _onRemoved =
-      new ChromeStreamController<OnRemovedEvent>.twoArgs(_tabs['onRemoved'], OnRemovedEvent.create);
+  final ChromeStreamController<TabsOnRemovedEvent> _onRemoved =
+      new ChromeStreamController<TabsOnRemovedEvent>.twoArgs(_tabs['onRemoved'], TabsOnRemovedEvent.create);
 
   /**
    * Fired when a tab is replaced with another tab due to prerendering or
