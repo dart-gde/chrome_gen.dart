@@ -23,26 +23,9 @@ class ChromeWebNavigation {
    * 
    * [details] Information about the frame to retrieve information about.
    * 
-   * `tabId` The ID of the tab in which the frame is.
-   * 
-   * `processId` The ID of the process runs the renderer for this tab.
-   * 
-   * `frameId` The ID of the frame in the given tab.
-   * 
    * Returns:
    * Information about the requested frame, null if the specified frame ID
    * and/or tab ID are invalid.
-   * 
-   * `errorOccurred` True if the last navigation in this frame was interrupted
-   * by an error, i.e. the onErrorOccurred event fired.
-   * 
-   * `url` The URL currently associated with this frame, if the frame identified
-   * by the frameId existed at one point in the given tab. The fact that an URL
-   * is associated with a given frameId does not imply that the corresponding
-   * frame still exists.
-   * 
-   * `parentFrameId` ID of frame that wraps the frame. Set to -1 of no parent
-   * frame exists.
    */
   Future<Map> getFrame(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
@@ -54,8 +37,6 @@ class ChromeWebNavigation {
    * Retrieves information about all frames of a given tab.
    * 
    * [details] Information about the tab to retrieve all frames from.
-   * 
-   * `tabId` The ID of the tab.
    * 
    * Returns:
    * A list of frames in the given tab, null if the specified tab ID is invalid.

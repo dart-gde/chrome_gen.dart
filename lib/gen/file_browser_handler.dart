@@ -27,20 +27,8 @@ class ChromeFileBrowserHandler {
    * 
    * [selectionParams] Parameters that will be used while selecting the file.
    * 
-   * `suggestedName` Suggested name for the file.
-   * 
-   * `allowedFileExtensions` List of file extensions that the selected file can
-   * have. The list is also used to specify what files to be shown in the select
-   * file dialog. Files with the listed extensions are only shown in the dialog.
-   * Extensions should not include the leading '.'. Example: ['jpg', 'png']
-   * 
    * Returns:
    * Result of the method.
-   * 
-   * `success` Whether the file has been selected.
-   * 
-   * `entry` Selected file entry. It will be null if a file hasn't been
-   * selected.
    */
   Future<Map> selectFile(Map selectionParams) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
@@ -51,23 +39,37 @@ class ChromeFileBrowserHandler {
   /**
    * Fired when file system action is executed from ChromeOS file browser.
    */
-  Stream<dynamic> get onExecute => _onExecute.stream;
+  Stream<OnExecuteEvent> get onExecute => _onExecute.stream;
 
-  final ChromeStreamController<dynamic> _onExecute =
-      new ChromeStreamController<dynamic>.oneArg(_fileBrowserHandler['onExecute'], selfConverter);
+  final ChromeStreamController<OnExecuteEvent> _onExecute =
+      new ChromeStreamController<OnExecuteEvent>.twoArgs(_fileBrowserHandler['onExecute'], OnExecuteEvent.create);
+}
+
+/**
+ * Fired when file system action is executed from ChromeOS file browser.
+ */
+class OnExecuteEvent {
+  static OnExecuteEvent create(String id, JsObject details) =>
+      new OnExecuteEvent(id, FileHandlerExecuteEventDetails.create(details));
+
+  /**
+   * File browser action id as specified in the listener component's manifest.
+   */
+  String id;
+
+  /**
+   * File handler execute event details.
+   */
+  FileHandlerExecuteEventDetails details;
+
+  OnExecuteEvent(this.id, this.details);
 }
 
 /**
  * Event details payload for fileBrowserHandler.onExecute event.
- * 
- * `entries` Array of Entry instances representing files that are targets of
- * this action (selected in ChromeOS file browser).
- * 
- * `tab_id` The ID of the tab that raised this event. Tab IDs are unique within
- * a browser session.
  */
 class FileHandlerExecuteEventDetails extends ChromeObject {
-  static FileHandlerExecuteEventDetails create(JsObject proxy) => new FileHandlerExecuteEventDetails(proxy);
+  static FileHandlerExecuteEventDetails create(JsObject proxy) => proxy == null ? null : new FileHandlerExecuteEventDetails(proxy);
 
   FileHandlerExecuteEventDetails(JsObject proxy): super(proxy);
 

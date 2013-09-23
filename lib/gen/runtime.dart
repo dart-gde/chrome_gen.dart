@@ -22,8 +22,6 @@ class ChromeRuntime {
 
   /**
    * This will be defined during an API method callback if there was an error
-   * 
-   * `message` Details about the error which occurred.
    */
   Map get lastError => mapify(_runtime['lastError']);
 
@@ -95,8 +93,6 @@ class ChromeRuntime {
    * [status] Result of the update check.
    * [details] If an update is available, this contains more information about
    * the available update.
-   * 
-   * `version` The version of the available update.
    */
   Future<JsObject> requestUpdateCheck() {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -113,9 +109,6 @@ class ChromeRuntime {
    * 
    * [extensionId] The ID of the extension/app you want to connect to. If
    * omitted, default is your own extension.
-   * 
-   * [connectInfo] `name` Will be passed into onConnect for processes that are
-   * listening for the connection event.
    * 
    * Returns:
    * Port through which messages can be sent and received. The port's
@@ -180,14 +173,6 @@ class ChromeRuntime {
 
   /**
    * Returns information about the current platform.
-   * 
-   * Returns:
-   * `os` The operating system chrome is running on.
-   * 
-   * `arch` The machine's processor architecture.
-   * 
-   * `nacl_arch` The native client architecture. This may be different from arch
-   * on some platforms.
    */
   Future<Map> getPlatformInfo() {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
@@ -285,19 +270,19 @@ class ChromeRuntime {
    * Fired when a message is sent from either an extension process or a content
    * script.
    */
-  Stream<dynamic> get onMessage => _onMessage.stream;
+  Stream<OnMessageEvent> get onMessage => _onMessage.stream;
 
-  final ChromeStreamController<dynamic> _onMessage =
-      new ChromeStreamController<dynamic>.oneArg(_runtime['onMessage'], selfConverter);
+  final ChromeStreamController<OnMessageEvent> _onMessage =
+      new ChromeStreamController<OnMessageEvent>.threeArgs(_runtime['onMessage'], OnMessageEvent.create);
 
   /**
    * Fired when a message is sent from another extension/app. Cannot be used in
    * a content script.
    */
-  Stream<dynamic> get onMessageExternal => _onMessageExternal.stream;
+  Stream<OnMessageExternalEvent> get onMessageExternal => _onMessageExternal.stream;
 
-  final ChromeStreamController<dynamic> _onMessageExternal =
-      new ChromeStreamController<dynamic>.oneArg(_runtime['onMessageExternal'], selfConverter);
+  final ChromeStreamController<OnMessageExternalEvent> _onMessageExternal =
+      new ChromeStreamController<OnMessageExternalEvent>.threeArgs(_runtime['onMessageExternal'], OnMessageExternalEvent.create);
 
   /**
    * Fired when an app or the device that it runs on needs to be restarted. The
@@ -313,23 +298,74 @@ class ChromeRuntime {
 }
 
 /**
+ * Fired when a message is sent from either an extension process or a content
+ * script.
+ */
+class OnMessageEvent {
+  static OnMessageEvent create(JsObject message, JsObject sender, JsObject sendResponse) =>
+      new OnMessageEvent(message, MessageSender.create(sender), sendResponse);
+
+  /**
+   * The message sent by the calling script.
+   * `optional`
+   * 
+   * The message sent by the calling script.
+   */
+  dynamic message;
+
+  MessageSender sender;
+
+  /**
+   * Function to call (at most once) when you have a response. The argument
+   * should be any JSON-ifiable object. If you have more than one `onMessage`
+   * listener in the same document, then only one may send a response. This
+   * function becomes invalid when the event listener returns, unless you return
+   * true from the event listener to indicate you wish to send a response
+   * asynchronously (this will keep the message channel open to the other end
+   * until `sendResponse` is called).
+   */
+  dynamic sendResponse;
+
+  OnMessageEvent(this.message, this.sender, this.sendResponse);
+}
+
+/**
+ * Fired when a message is sent from another extension/app. Cannot be used in a
+ * content script.
+ */
+class OnMessageExternalEvent {
+  static OnMessageExternalEvent create(JsObject message, JsObject sender, JsObject sendResponse) =>
+      new OnMessageExternalEvent(message, MessageSender.create(sender), sendResponse);
+
+  /**
+   * The message sent by the calling script.
+   * `optional`
+   * 
+   * The message sent by the calling script.
+   */
+  dynamic message;
+
+  MessageSender sender;
+
+  /**
+   * Function to call (at most once) when you have a response. The argument
+   * should be any JSON-ifiable object. If you have more than one `onMessage`
+   * listener in the same document, then only one may send a response. This
+   * function becomes invalid when the event listener returns, unless you return
+   * true from the event listener to indicate you wish to send a response
+   * asynchronously (this will keep the message channel open to the other end
+   * until `sendResponse` is called).
+   */
+  dynamic sendResponse;
+
+  OnMessageExternalEvent(this.message, this.sender, this.sendResponse);
+}
+
+/**
  * An object which allows two way communication with other pages.
- * 
- * `name`
- * 
- * `disconnect`
- * 
- * `onDisconnect`
- * 
- * `onMessage`
- * 
- * `postMessage`
- * 
- * `sender` This property will <b>only</b> be present on ports passed to
- * onConnect/onConnectExternal listeners.
  */
 class Port extends ChromeObject {
-  static Port create(JsObject proxy) => new Port(proxy);
+  static Port create(JsObject proxy) => proxy == null ? null : new Port(proxy);
 
   Port(JsObject proxy): super(proxy);
 
@@ -353,19 +389,9 @@ class Port extends ChromeObject {
 /**
  * An object containing information about the script context that sent a message
  * or request.
- * 
- * `tab` The [tabs.Tab] which opened the connection, if any. This property will
- * *only* be present when the connection was opened from a tab (including
- * content scripts), and *only* if the receiver is an extension, not an app.
- * 
- * `id` The ID of the extension or app that opened the connection, if any.
- * 
- * `url` The URL of the page or frame that opened the connection, if any. This
- * property will *only* be present when the connection was opened from a tab or
- * content script.
  */
 class MessageSender extends ChromeObject {
-  static MessageSender create(JsObject proxy) => new MessageSender(proxy);
+  static MessageSender create(JsObject proxy) => proxy == null ? null : new MessageSender(proxy);
 
   MessageSender(JsObject proxy): super(proxy);
 

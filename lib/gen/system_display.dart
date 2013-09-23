@@ -1,8 +1,5 @@
 /* This file has been generated from system_display.idl - do not edit */
 
-/**
- * 
- */
 library chrome.system_display;
 
 import '../src/common.dart';
@@ -34,19 +31,19 @@ class ChromeSystemDisplay {
 }
 
 class Insets extends ChromeObject {
-  static Insets create(JsObject proxy) => new Insets(proxy);
+  static Insets create(JsObject proxy) => proxy == null ? null : new Insets(proxy);
 
   Insets(JsObject proxy): super(proxy);
 }
 
 class DisplayUnitInfo extends ChromeObject {
-  static DisplayUnitInfo create(JsObject proxy) => new DisplayUnitInfo(proxy);
+  static DisplayUnitInfo create(JsObject proxy) => proxy == null ? null : new DisplayUnitInfo(proxy);
 
   DisplayUnitInfo(JsObject proxy): super(proxy);
 }
 
 class DisplayProperties extends ChromeObject {
-  static DisplayProperties create(JsObject proxy) => new DisplayProperties(proxy);
+  static DisplayProperties create(JsObject proxy) => proxy == null ? null : new DisplayProperties(proxy);
 
   DisplayProperties(JsObject proxy): super(proxy);
 }

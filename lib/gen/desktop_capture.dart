@@ -1,8 +1,5 @@
 /* This file has been generated from desktop_capture.idl - do not edit */
 
-/**
- * 
- */
 library chrome.desktopCapture;
 
 import '../src/common.dart';

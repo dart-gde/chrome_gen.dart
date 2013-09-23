@@ -1,8 +1,5 @@
 /* This file has been generated from serial.idl - do not edit */
 
-/**
- * 
- */
 library chrome.serial;
 
 import '../src/common.dart';
@@ -65,25 +62,25 @@ class ChromeSerial {
 }
 
 class OpenOptions extends ChromeObject {
-  static OpenOptions create(JsObject proxy) => new OpenOptions(proxy);
+  static OpenOptions create(JsObject proxy) => proxy == null ? null : new OpenOptions(proxy);
 
   OpenOptions(JsObject proxy): super(proxy);
 }
 
 class OpenInfo extends ChromeObject {
-  static OpenInfo create(JsObject proxy) => new OpenInfo(proxy);
+  static OpenInfo create(JsObject proxy) => proxy == null ? null : new OpenInfo(proxy);
 
   OpenInfo(JsObject proxy): super(proxy);
 }
 
 class ReadInfo extends ChromeObject {
-  static ReadInfo create(JsObject proxy) => new ReadInfo(proxy);
+  static ReadInfo create(JsObject proxy) => proxy == null ? null : new ReadInfo(proxy);
 
   ReadInfo(JsObject proxy): super(proxy);
 }
 
 class ControlSignalOptions extends ChromeObject {
-  static ControlSignalOptions create(JsObject proxy) => new ControlSignalOptions(proxy);
+  static ControlSignalOptions create(JsObject proxy) => proxy == null ? null : new ControlSignalOptions(proxy);
 
   ControlSignalOptions(JsObject proxy): super(proxy);
 }

@@ -1,8 +1,5 @@
 /* This file has been generated from location.idl - do not edit */
 
-/**
- * 
- */
 library chrome.location;
 
 import '../src/common.dart';
@@ -35,19 +32,19 @@ class ChromeLocation {
 }
 
 class Coordinates extends ChromeObject {
-  static Coordinates create(JsObject proxy) => new Coordinates(proxy);
+  static Coordinates create(JsObject proxy) => proxy == null ? null : new Coordinates(proxy);
 
   Coordinates(JsObject proxy): super(proxy);
 }
 
 class Location extends ChromeObject {
-  static Location create(JsObject proxy) => new Location(proxy);
+  static Location create(JsObject proxy) => proxy == null ? null : new Location(proxy);
 
   Location(JsObject proxy): super(proxy);
 }
 
 class WatchLocationRequestInfo extends ChromeObject {
-  static WatchLocationRequestInfo create(JsObject proxy) => new WatchLocationRequestInfo(proxy);
+  static WatchLocationRequestInfo create(JsObject proxy) => proxy == null ? null : new WatchLocationRequestInfo(proxy);
 
   WatchLocationRequestInfo(JsObject proxy): super(proxy);
 }

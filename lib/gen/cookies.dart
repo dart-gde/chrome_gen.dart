@@ -24,16 +24,6 @@ class ChromeCookies {
    * 
    * [details] Details to identify the cookie being retrieved.
    * 
-   * `url` The URL with which the cookie to retrieve is associated. This
-   * argument may be a full URL, in which case any data following the URL path
-   * (e.g. the query string) is simply ignored. If host permissions for this URL
-   * are not specified in the manifest file, the API call will fail.
-   * 
-   * `name` The name of the cookie to retrieve.
-   * 
-   * `storeId` The ID of the cookie store in which to look for the cookie. By
-   * default, the current execution context's cookie store will be used.
-   * 
    * Returns:
    * Contains details about the cookie. This parameter is null if no such cookie
    * was found.
@@ -52,24 +42,6 @@ class ChromeCookies {
    * 
    * [details] Information to filter the cookies being retrieved.
    * 
-   * `url` Restricts the retrieved cookies to those that would match the given
-   * URL.
-   * 
-   * `name` Filters the cookies by name.
-   * 
-   * `domain` Restricts the retrieved cookies to those whose domains match or
-   * are subdomains of this one.
-   * 
-   * `path` Restricts the retrieved cookies to those whose path exactly matches
-   * this string.
-   * 
-   * `secure` Filters the cookies by their Secure property.
-   * 
-   * `session` Filters out session vs. persistent cookies.
-   * 
-   * `storeId` The cookie store to retrieve cookies from. If omitted, the
-   * current execution context's cookie store will be used.
-   * 
    * Returns:
    * All the existing, unexpired cookies that match the given cookie info.
    */
@@ -84,32 +56,6 @@ class ChromeCookies {
    * if they exist.
    * 
    * [details] Details about the cookie being set.
-   * 
-   * `url` The request-URI to associate with the setting of the cookie. This
-   * value can affect the default domain and path values of the created cookie.
-   * If host permissions for this URL are not specified in the manifest file,
-   * the API call will fail.
-   * 
-   * `name` The name of the cookie. Empty by default if omitted.
-   * 
-   * `value` The value of the cookie. Empty by default if omitted.
-   * 
-   * `domain` The domain of the cookie. If omitted, the cookie becomes a
-   * host-only cookie.
-   * 
-   * `path` The path of the cookie. Defaults to the path portion of the url
-   * parameter.
-   * 
-   * `secure` Whether the cookie should be marked as Secure. Defaults to false.
-   * 
-   * `httpOnly` Whether the cookie should be marked as HttpOnly. Defaults to
-   * false.
-   * 
-   * `expirationDate` The expiration date of the cookie as the number of seconds
-   * since the UNIX epoch. If omitted, the cookie becomes a session cookie.
-   * 
-   * `storeId` The ID of the cookie store in which to set the cookie. By
-   * default, the cookie is set in the current execution context's cookie store.
    * 
    * Returns:
    * Contains details about the cookie that's been set.  If setting failed for
@@ -127,25 +73,10 @@ class ChromeCookies {
    * 
    * [details] Information to identify the cookie to remove.
    * 
-   * `url` The URL associated with the cookie. If host permissions for this URL
-   * are not specified in the manifest file, the API call will fail.
-   * 
-   * `name` The name of the cookie to remove.
-   * 
-   * `storeId` The ID of the cookie store to look in for the cookie. If
-   * unspecified, the cookie is looked for by default in the current execution
-   * context's cookie store.
-   * 
    * Returns:
    * Contains details about the cookie that's been removed.  If removal failed
    * for any reason, this will be "null", and "chrome.runtime.lastError" will be
    * set.
-   * 
-   * `url` The URL associated with the cookie that's been removed.
-   * 
-   * `name` The name of the cookie that's been removed.
-   * 
-   * `storeId` The ID of the cookie store from which the cookie was removed.
    */
   Future<Map> remove(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
@@ -180,35 +111,9 @@ class ChromeCookies {
 
 /**
  * Represents information about an HTTP cookie.
- * 
- * `name` The name of the cookie.
- * 
- * `value` The value of the cookie.
- * 
- * `domain` The domain of the cookie (e.g. "www.google.com", "example.com").
- * 
- * `hostOnly` True if the cookie is a host-only cookie (i.e. a request's host
- * must exactly match the domain of the cookie).
- * 
- * `path` The path of the cookie.
- * 
- * `secure` True if the cookie is marked as Secure (i.e. its scope is limited to
- * secure channels, typically HTTPS).
- * 
- * `httpOnly` True if the cookie is marked as HttpOnly (i.e. the cookie is
- * inaccessible to client-side scripts).
- * 
- * `session` True if the cookie is a session cookie, as opposed to a persistent
- * cookie with an expiration date.
- * 
- * `expirationDate` The expiration date of the cookie as the number of seconds
- * since the UNIX epoch. Not provided for session cookies.
- * 
- * `storeId` The ID of the cookie store containing this cookie, as provided in
- * getAllCookieStores().
  */
 class Cookie extends ChromeObject {
-  static Cookie create(JsObject proxy) => new Cookie(proxy);
+  static Cookie create(JsObject proxy) => proxy == null ? null : new Cookie(proxy);
 
   Cookie(JsObject proxy): super(proxy);
 
@@ -272,13 +177,9 @@ class Cookie extends ChromeObject {
 /**
  * Represents a cookie store in the browser. An incognito mode window, for
  * instance, uses a separate cookie store from a non-incognito window.
- * 
- * `id` The unique identifier for the cookie store.
- * 
- * `tabIds` Identifiers of all the browser tabs that share this cookie store.
  */
 class CookieStore extends ChromeObject {
-  static CookieStore create(JsObject proxy) => new CookieStore(proxy);
+  static CookieStore create(JsObject proxy) => proxy == null ? null : new CookieStore(proxy);
 
   CookieStore(JsObject proxy): super(proxy);
 

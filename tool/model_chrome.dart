@@ -5,6 +5,8 @@
  */
 library model_chrome;
 
+import 'src/utils.dart';
+
 class ChromeElement {
   String documentation;
 }
@@ -14,10 +16,12 @@ class ChromeLibrary extends ChromeElement {
   /// system.display, terminalPrivate, devtools.inspectedWindow.
   String name;
 
-  List<ChromeMethod> methods = [];
   List<ChromeProperty> properties = [];
-  List<ChromeDeclaredType> types = [];
+  List<ChromeMethod> methods = [];
   List<ChromeEvent> events = [];
+  /// Synthetic classes used to represent multi-return stream events.
+  List<ChromeType> eventTypes = [];
+  List<ChromeDeclaredType> types = [];
 
   List<String> imports = [];
 
@@ -28,13 +32,19 @@ class ChromeLibrary extends ChromeElement {
     }
   }
 
+  void addEventType(ChromeType type) {
+    if (!eventTypes.any((e) => type.name == e.name)) {
+      eventTypes.add(type);
+    }
+  }
+
   String toString() => name;
 }
 
 class ChromeProperty extends ChromeElement {
   ChromeType type;
   String name;
-  bool nodoc;
+  bool nodoc = false;
 
   String getDescription() {
     if (documentation == null) {
@@ -91,16 +101,37 @@ class ChromeMethod extends ChromeElement {
 
 class ChromeEvent extends ChromeType {
 
-  ChromeType calculateType() {
+  ChromeType calculateType(ChromeLibrary library) {
     if (parameters.length == 1) {
       return parameters[0];
     } else if (parameters.length > 1) {
-      // TODO:
-      return this;
+      String typeName = /*titleCase(library.name) +*/ titleCase(name) + 'Event';
+
+      ChromeType newType = new ChromeType(type: ChromeType.VAR.type);
+      newType.name = typeName;
+      newType.refName = typeName;
+      newType.documentation = documentation;
+      newType.properties = parameters.map((ChromeType t) {
+        ChromeProperty p = new ChromeProperty();
+        p.name = t.name;
+        p.type = t;
+        p.documentation = t.documentation;
+        if (t.optional) {
+          p.documentation = _appendDocs(p.documentation, '`optional`');
+        }
+        return p;
+      }).toList();
+      newType.arity = parameters.length;
+
+      library.addEventType(newType);
+
+      return newType;
     } else {
       return null;
     }
   }
+
+  String toString() => name;
 }
 
 class ChromeDeclaredType extends ChromeType {
@@ -118,6 +149,9 @@ class ChromeType extends ChromeElement {
   String type;
   String refName;
   bool optional;
+  /// Only used when this type represents a stream event type. This is the
+  /// number of JS callback parameters.
+  int arity = 1;
   List<ChromeType> parameters = [];
   List<ChromeProperty> properties = [];
 
@@ -132,6 +166,7 @@ class ChromeType extends ChromeElement {
   bool get isString => type == 'String';
   bool get isInt => type == 'int';
   bool get isBool => type == 'bool';
+  bool get isPrimitive => isString || isBool || isInt;
 
   String toParamString() {
     if (isAny && !isReferencedType) {
@@ -156,4 +191,12 @@ class ChromeType extends ChromeElement {
   }
 
   String toString() => toParamString();
+}
+
+String _appendDocs(String docs, String append) {
+  if (docs == null) {
+    return append;
+  }
+
+  return "${docs}\n${append}";
 }

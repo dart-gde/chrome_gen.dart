@@ -1,8 +1,5 @@
 /* This file has been generated from push_messaging.idl - do not edit */
 
-/**
- * 
- */
 library chrome.pushMessaging;
 
 import '../src/common.dart';
@@ -28,13 +25,13 @@ class ChromePushMessaging {
 }
 
 class Message extends ChromeObject {
-  static Message create(JsObject proxy) => new Message(proxy);
+  static Message create(JsObject proxy) => proxy == null ? null : new Message(proxy);
 
   Message(JsObject proxy): super(proxy);
 }
 
 class ChannelIdResult extends ChromeObject {
-  static ChannelIdResult create(JsObject proxy) => new ChannelIdResult(proxy);
+  static ChannelIdResult create(JsObject proxy) => proxy == null ? null : new ChannelIdResult(proxy);
 
   ChannelIdResult(JsObject proxy): super(proxy);
 }

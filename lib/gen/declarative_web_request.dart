@@ -39,27 +39,9 @@ class ChromeDeclarativeWebRequest {
 /**
  * Filters request headers for various criteria. Multiple criteria are evaluated
  * as a conjunction.
- * 
- * `namePrefix` Matches if the header name starts with the specified string.
- * 
- * `nameSuffix` Matches if the header name ends with the specified string.
- * 
- * `nameContains` Matches if the header name contains all of the specified
- * strings.
- * 
- * `nameEquals` Matches if the header name is equal to the specified string.
- * 
- * `valuePrefix` Matches if the header value starts with the specified string.
- * 
- * `valueSuffix` Matches if the header value ends with the specified string.
- * 
- * `valueContains` Matches if the header value contains all of the specified
- * strings.
- * 
- * `valueEquals` Matches if the header value is equal to the specified string.
  */
 class HeaderFilter extends ChromeObject {
-  static HeaderFilter create(JsObject proxy) => new HeaderFilter(proxy);
+  static HeaderFilter create(JsObject proxy) => proxy == null ? null : new HeaderFilter(proxy);
 
   HeaderFilter(JsObject proxy): super(proxy);
 
@@ -106,50 +88,9 @@ class HeaderFilter extends ChromeObject {
 
 /**
  * Matches network events by various criteria.
- * 
- * `url` Matches if the conditions of the UrlFilter are fulfilled for the URL of
- * the request.
- * 
- * `firstPartyForCookiesUrl` Matches if the conditions of the UrlFilter are
- * fulfilled for the 'first party' URL of the request. The 'first party' URL of
- * a request, when present, can be different from the request's target URL, and
- * describes what is considered 'first party' for the sake of third-party checks
- * for cookies.
- * 
- * `resourceType` Matches if the request type of a request is contained in the
- * list. Requests that cannot match any of the types will be filtered out.
- * 
- * `contentType` Matches if the MIME media type of a response (from the HTTP
- * Content-Type header) is contained in the list.
- * 
- * `excludeContentType` Matches if the MIME media type of a response (from the
- * HTTP Content-Type header) is _not_ contained in the list.
- * 
- * `requestHeaders` Matches if some of the request headers is matched by one of
- * the HeaderFilters.
- * 
- * `excludeRequestHeaders` Matches if none of the request headers is matched by
- * any of the HeaderFilters.
- * 
- * `responseHeaders` Matches if some of the response headers is matched by one
- * of the HeaderFilters.
- * 
- * `excludeResponseHeaders` Matches if none of the response headers is matched
- * by any of the HeaderFilters.
- * 
- * `thirdPartyForCookies` If set to true, matches requests that are subject to
- * third-party cookie policies. If set to false, matches all other requests.
- * 
- * `stages` Contains a list of strings describing stages. Allowed values are
- * 'onBeforeRequest', 'onBeforeSendHeaders', 'onHeadersReceived',
- * 'onAuthRequired'. If this attribute is present, then it limits the applicable
- * stages to those listed. Note that the whole condition is only applicable in
- * stages compatible with all attributes.
- * 
- * `instanceType`
  */
 class RequestMatcher extends ChromeObject {
-  static RequestMatcher create(JsObject proxy) => new RequestMatcher(proxy);
+  static RequestMatcher create(JsObject proxy) => proxy == null ? null : new RequestMatcher(proxy);
 
   RequestMatcher(JsObject proxy): super(proxy);
 
@@ -227,24 +168,18 @@ class RequestMatcher extends ChromeObject {
 
 /**
  * Declarative event action that cancels a network request.
- * 
- * `instanceType`
  */
 class CancelRequest extends ChromeObject {
-  static CancelRequest create(JsObject proxy) => new CancelRequest(proxy);
+  static CancelRequest create(JsObject proxy) => proxy == null ? null : new CancelRequest(proxy);
 
   CancelRequest(JsObject proxy): super(proxy);
 }
 
 /**
  * Declarative event action that redirects a network request.
- * 
- * `instanceType`
- * 
- * `redirectUrl` Destination to where the request is redirected.
  */
 class RedirectRequest extends ChromeObject {
-  static RedirectRequest create(JsObject proxy) => new RedirectRequest(proxy);
+  static RedirectRequest create(JsObject proxy) => proxy == null ? null : new RedirectRequest(proxy);
 
   RedirectRequest(JsObject proxy): super(proxy);
 
@@ -257,11 +192,9 @@ class RedirectRequest extends ChromeObject {
 /**
  * Declarative event action that redirects a network request to a transparent
  * image.
- * 
- * `instanceType`
  */
 class RedirectToTransparentImage extends ChromeObject {
-  static RedirectToTransparentImage create(JsObject proxy) => new RedirectToTransparentImage(proxy);
+  static RedirectToTransparentImage create(JsObject proxy) => proxy == null ? null : new RedirectToTransparentImage(proxy);
 
   RedirectToTransparentImage(JsObject proxy): super(proxy);
 }
@@ -269,11 +202,9 @@ class RedirectToTransparentImage extends ChromeObject {
 /**
  * Declarative event action that redirects a network request to an empty
  * document.
- * 
- * `instanceType`
  */
 class RedirectToEmptyDocument extends ChromeObject {
-  static RedirectToEmptyDocument create(JsObject proxy) => new RedirectToEmptyDocument(proxy);
+  static RedirectToEmptyDocument create(JsObject proxy) => proxy == null ? null : new RedirectToEmptyDocument(proxy);
 
   RedirectToEmptyDocument(JsObject proxy): super(proxy);
 }
@@ -281,17 +212,9 @@ class RedirectToEmptyDocument extends ChromeObject {
 /**
  * Redirects a request by applying a regular expression on the URL. The regular
  * expressions use the [RE2 syntax](http://code.google.com/p/re2/wiki/Syntax).
- * 
- * `instanceType`
- * 
- * `from` A match pattern that may contain capture groups. Capture groups are
- * referenced in the Perl syntax ($1, $2, ...) instead of the RE2 syntax (\1,
- * \2, ...) in order to be closer to JavaScript Regular Expressions.
- * 
- * `to` Destination pattern.
  */
 class RedirectByRegEx extends ChromeObject {
-  static RedirectByRegEx create(JsObject proxy) => new RedirectByRegEx(proxy);
+  static RedirectByRegEx create(JsObject proxy) => proxy == null ? null : new RedirectByRegEx(proxy);
 
   RedirectByRegEx(JsObject proxy): super(proxy);
 
@@ -313,15 +236,9 @@ class RedirectByRegEx extends ChromeObject {
  * header with the specified name did not exist before, a new one is created.
  * Header name comparison is always case-insensitive. Each request header name
  * occurs only once in each request.
- * 
- * `instanceType`
- * 
- * `name` HTTP request header name.
- * 
- * `value` HTTP request header value.
  */
 class SetRequestHeader extends ChromeObject {
-  static SetRequestHeader create(JsObject proxy) => new SetRequestHeader(proxy);
+  static SetRequestHeader create(JsObject proxy) => proxy == null ? null : new SetRequestHeader(proxy);
 
   SetRequestHeader(JsObject proxy): super(proxy);
 
@@ -340,13 +257,9 @@ class SetRequestHeader extends ChromeObject {
  * Removes the request header of the specified name. Do not use SetRequestHeader
  * and RemoveRequestHeader with the same header name on the same request. Each
  * request header name occurs only once in each request.
- * 
- * `instanceType`
- * 
- * `name` HTTP request header name (case-insensitive).
  */
 class RemoveRequestHeader extends ChromeObject {
-  static RemoveRequestHeader create(JsObject proxy) => new RemoveRequestHeader(proxy);
+  static RemoveRequestHeader create(JsObject proxy) => proxy == null ? null : new RemoveRequestHeader(proxy);
 
   RemoveRequestHeader(JsObject proxy): super(proxy);
 
@@ -360,15 +273,9 @@ class RemoveRequestHeader extends ChromeObject {
  * Adds the response header to the response of this web request. As multiple
  * response headers may share the same name, you need to first remove and then
  * add a new response header in order to replace one.
- * 
- * `instanceType`
- * 
- * `name` HTTP response header name.
- * 
- * `value` HTTP response header value.
  */
 class AddResponseHeader extends ChromeObject {
-  static AddResponseHeader create(JsObject proxy) => new AddResponseHeader(proxy);
+  static AddResponseHeader create(JsObject proxy) => proxy == null ? null : new AddResponseHeader(proxy);
 
   AddResponseHeader(JsObject proxy): super(proxy);
 
@@ -385,15 +292,9 @@ class AddResponseHeader extends ChromeObject {
 
 /**
  * Removes all response headers of the specified names and values.
- * 
- * `instanceType`
- * 
- * `name` HTTP request header name (case-insensitive).
- * 
- * `value` HTTP request header value (case-insensitive).
  */
 class RemoveResponseHeader extends ChromeObject {
-  static RemoveResponseHeader create(JsObject proxy) => new RemoveResponseHeader(proxy);
+  static RemoveResponseHeader create(JsObject proxy) => proxy == null ? null : new RemoveResponseHeader(proxy);
 
   RemoveResponseHeader(JsObject proxy): super(proxy);
 
@@ -410,21 +311,9 @@ class RemoveResponseHeader extends ChromeObject {
 
 /**
  * Masks all rules that match the specified criteria.
- * 
- * `instanceType`
- * 
- * `lowerPriorityThan` If set, rules with a lower priority than the specified
- * value are ignored. This boundary is not persisted, it affects only rules and
- * their actions of the same network request stage.
- * 
- * `hasTag` If set, rules with the specified tag are ignored. This ignoring is
- * not persisted, it affects only rules and their actions of the same network
- * request stage. Note that rules are executed in descending order of their
- * priorities. This action affects rules of lower priority than the current
- * rule. Rules with the same priority may or may not be ignored.
  */
 class IgnoreRules extends ChromeObject {
-  static IgnoreRules create(JsObject proxy) => new IgnoreRules(proxy);
+  static IgnoreRules create(JsObject proxy) => proxy == null ? null : new IgnoreRules(proxy);
 
   IgnoreRules(JsObject proxy): super(proxy);
 
@@ -447,14 +336,9 @@ class IgnoreRules extends ChromeObject {
 
 /**
  * Triggers the [declarativeWebRequest.onMessage] event.
- * 
- * `instanceType`
- * 
- * `message` The value that will be passed in the `message` attribute of the
- * dictionary that is passed to the event handler.
  */
 class SendMessageToExtension extends ChromeObject {
-  static SendMessageToExtension create(JsObject proxy) => new SendMessageToExtension(proxy);
+  static SendMessageToExtension create(JsObject proxy) => proxy == null ? null : new SendMessageToExtension(proxy);
 
   SendMessageToExtension(JsObject proxy): super(proxy);
 
@@ -467,13 +351,9 @@ class SendMessageToExtension extends ChromeObject {
 
 /**
  * A filter or specification of a cookie in HTTP Requests.
- * 
- * `name` Name of a cookie.
- * 
- * `value` Value of a cookie, may be padded in double-quotes.
  */
 class RequestCookie extends ChromeObject {
-  static RequestCookie create(JsObject proxy) => new RequestCookie(proxy);
+  static RequestCookie create(JsObject proxy) => proxy == null ? null : new RequestCookie(proxy);
 
   RequestCookie(JsObject proxy): super(proxy);
 
@@ -490,25 +370,9 @@ class RequestCookie extends ChromeObject {
 
 /**
  * A specification of a cookie in HTTP Responses.
- * 
- * `name` Name of a cookie.
- * 
- * `value` Value of a cookie, may be padded in double-quotes.
- * 
- * `expires` Value of the Expires cookie attribute.
- * 
- * `maxAge` Value of the Max-Age cookie attribute
- * 
- * `domain` Value of the Domain cookie attribute.
- * 
- * `path` Value of the Path cookie attribute.
- * 
- * `secure` Existence of the Secure cookie attribute.
- * 
- * `httpOnly` Existence of the HttpOnly cookie attribute.
  */
 class ResponseCookie extends ChromeObject {
-  static ResponseCookie create(JsObject proxy) => new ResponseCookie(proxy);
+  static ResponseCookie create(JsObject proxy) => proxy == null ? null : new ResponseCookie(proxy);
 
   ResponseCookie(JsObject proxy): super(proxy);
 
@@ -555,43 +419,9 @@ class ResponseCookie extends ChromeObject {
 
 /**
  * A filter of a cookie in HTTP Responses.
- * 
- * `name` Name of a cookie.
- * 
- * `value` Value of a cookie, may be padded in double-quotes.
- * 
- * `expires` Value of the Expires cookie attribute.
- * 
- * `maxAge` Value of the Max-Age cookie attribute
- * 
- * `domain` Value of the Domain cookie attribute.
- * 
- * `path` Value of the Path cookie attribute.
- * 
- * `secure` Existence of the Secure cookie attribute.
- * 
- * `httpOnly` Existence of the HttpOnly cookie attribute.
- * 
- * `ageUpperBound` Inclusive upper bound on the cookie lifetime (specified in
- * seconds after current time). Only cookies whose expiration date-time is in
- * the interval [now, now + ageUpperBound] fulfill this criterion. Session
- * cookies and cookies whose expiration date-time is in the past do not meet the
- * criterion of this filter. The cookie lifetime is calculated from either
- * 'max-age' or 'expires' cookie attributes. If both are specified, 'max-age' is
- * used to calculate the cookie lifetime.
- * 
- * `ageLowerBound` Inclusive lower bound on the cookie lifetime (specified in
- * seconds after current time). Only cookies whose expiration date-time is set
- * to 'now + ageLowerBound' or later fulfill this criterion. Session cookies do
- * not meet the criterion of this filter. The cookie lifetime is calculated from
- * either 'max-age' or 'expires' cookie attributes. If both are specified,
- * 'max-age' is used to calculate the cookie lifetime.
- * 
- * `sessionCookie` Filters session cookies. Session cookies have no lifetime
- * specified in any of 'max-age' or 'expires' attributes.
  */
 class FilterResponseCookie extends ChromeObject {
-  static FilterResponseCookie create(JsObject proxy) => new FilterResponseCookie(proxy);
+  static FilterResponseCookie create(JsObject proxy) => proxy == null ? null : new FilterResponseCookie(proxy);
 
   FilterResponseCookie(JsObject proxy): super(proxy);
 
@@ -667,13 +497,9 @@ class FilterResponseCookie extends ChromeObject {
  * Adds a cookie to the request or overrides a cookie, in case another cookie of
  * the same name exists already. Note that it is preferred to use the Cookies
  * API because this is computationally less expensive.
- * 
- * `instanceType`
- * 
- * `cookie` Cookie to be added to the request. No field may be undefined.
  */
 class AddRequestCookie extends ChromeObject {
-  static AddRequestCookie create(JsObject proxy) => new AddRequestCookie(proxy);
+  static AddRequestCookie create(JsObject proxy) => proxy == null ? null : new AddRequestCookie(proxy);
 
   AddRequestCookie(JsObject proxy): super(proxy);
 
@@ -687,14 +513,9 @@ class AddRequestCookie extends ChromeObject {
  * Adds a cookie to the response or overrides a cookie, in case another cookie
  * of the same name exists already. Note that it is preferred to use the Cookies
  * API because this is computationally less expensive.
- * 
- * `instanceType`
- * 
- * `cookie` Cookie to be added to the response. The name and value need to be
- * specified.
  */
 class AddResponseCookie extends ChromeObject {
-  static AddResponseCookie create(JsObject proxy) => new AddResponseCookie(proxy);
+  static AddResponseCookie create(JsObject proxy) => proxy == null ? null : new AddResponseCookie(proxy);
 
   AddResponseCookie(JsObject proxy): super(proxy);
 
@@ -708,17 +529,9 @@ class AddResponseCookie extends ChromeObject {
 /**
  * Edits one or more cookies of request. Note that it is preferred to use the
  * Cookies API because this is computationally less expensive.
- * 
- * `instanceType`
- * 
- * `filter` Filter for cookies that will be modified. All empty entries are
- * ignored.
- * 
- * `modification` Attributes that shall be overridden in cookies that machted
- * the filter. Attributes that are set to an empty string are removed.
  */
 class EditRequestCookie extends ChromeObject {
-  static EditRequestCookie create(JsObject proxy) => new EditRequestCookie(proxy);
+  static EditRequestCookie create(JsObject proxy) => proxy == null ? null : new EditRequestCookie(proxy);
 
   EditRequestCookie(JsObject proxy): super(proxy);
 
@@ -737,17 +550,9 @@ class EditRequestCookie extends ChromeObject {
 /**
  * Edits one or more cookies of response. Note that it is preferred to use the
  * Cookies API because this is computationally less expensive.
- * 
- * `instanceType`
- * 
- * `filter` Filter for cookies that will be modified. All empty entries are
- * ignored.
- * 
- * `modification` Attributes that shall be overridden in cookies that machted
- * the filter. Attributes that are set to an empty string are removed.
  */
 class EditResponseCookie extends ChromeObject {
-  static EditResponseCookie create(JsObject proxy) => new EditResponseCookie(proxy);
+  static EditResponseCookie create(JsObject proxy) => proxy == null ? null : new EditResponseCookie(proxy);
 
   EditResponseCookie(JsObject proxy): super(proxy);
 
@@ -766,14 +571,9 @@ class EditResponseCookie extends ChromeObject {
 /**
  * Removes one or more cookies of request. Note that it is preferred to use the
  * Cookies API because this is computationally less expensive.
- * 
- * `instanceType`
- * 
- * `filter` Filter for cookies that will be removed. All empty entries are
- * ignored.
  */
 class RemoveRequestCookie extends ChromeObject {
-  static RemoveRequestCookie create(JsObject proxy) => new RemoveRequestCookie(proxy);
+  static RemoveRequestCookie create(JsObject proxy) => proxy == null ? null : new RemoveRequestCookie(proxy);
 
   RemoveRequestCookie(JsObject proxy): super(proxy);
 
@@ -786,14 +586,9 @@ class RemoveRequestCookie extends ChromeObject {
 /**
  * Removes one or more cookies of response. Note that it is preferred to use the
  * Cookies API because this is computationally less expensive.
- * 
- * `instanceType`
- * 
- * `filter` Filter for cookies that will be removed. All empty entries are
- * ignored.
  */
 class RemoveResponseCookie extends ChromeObject {
-  static RemoveResponseCookie create(JsObject proxy) => new RemoveResponseCookie(proxy);
+  static RemoveResponseCookie create(JsObject proxy) => proxy == null ? null : new RemoveResponseCookie(proxy);
 
   RemoveResponseCookie(JsObject proxy): super(proxy);
 

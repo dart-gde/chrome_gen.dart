@@ -77,10 +77,10 @@ class ChromeWebRequest {
    * challenge. If bad user credentials are provided, this may be called
    * multiple times for the same request.
    */
-  Stream<dynamic> get onAuthRequired => _onAuthRequired.stream;
+  Stream<OnAuthRequiredEvent> get onAuthRequired => _onAuthRequired.stream;
 
-  final ChromeStreamController<dynamic> _onAuthRequired =
-      new ChromeStreamController<dynamic>.oneArg(_webRequest['onAuthRequired'], selfConverter);
+  final ChromeStreamController<OnAuthRequiredEvent> _onAuthRequired =
+      new ChromeStreamController<OnAuthRequiredEvent>.twoArgs(_webRequest['onAuthRequired'], OnAuthRequiredEvent.create);
 
   /**
    * Fired when the first byte of the response body is received. For HTTP
@@ -118,20 +118,31 @@ class ChromeWebRequest {
 }
 
 /**
+ * Fired when an authentication failure is received. The listener has three
+ * options: it can provide authentication credentials, it can cancel the request
+ * and display the error page, or it can take no action on the challenge. If bad
+ * user credentials are provided, this may be called multiple times for the same
+ * request.
+ */
+class OnAuthRequiredEvent {
+  static OnAuthRequiredEvent create(JsObject details, JsObject callback) =>
+      new OnAuthRequiredEvent(mapify(details), callback);
+
+  Map details;
+
+  /**
+   * `optional`
+   */
+  dynamic callback;
+
+  OnAuthRequiredEvent(this.details, this.callback);
+}
+
+/**
  * An object describing filters to apply to webRequest events.
- * 
- * `urls` A list of URLs or URL patterns. Requests that cannot match any of the
- * URLs will be filtered out.
- * 
- * `types` A list of request types. Requests that cannot match any of the types
- * will be filtered out.
- * 
- * `tabId`
- * 
- * `windowId`
  */
 class RequestFilter extends ChromeObject {
-  static RequestFilter create(JsObject proxy) => new RequestFilter(proxy);
+  static RequestFilter create(JsObject proxy) => proxy == null ? null : new RequestFilter(proxy);
 
   RequestFilter(JsObject proxy): super(proxy);
 
@@ -157,7 +168,7 @@ class RequestFilter extends ChromeObject {
  * containing the keys `name` and either `value` or `binaryValue`.
  */
 class HttpHeaders extends ChromeObject {
-  static HttpHeaders create(JsObject proxy) => new HttpHeaders(proxy);
+  static HttpHeaders create(JsObject proxy) => proxy == null ? null : new HttpHeaders(proxy);
 
   HttpHeaders(JsObject proxy): super(proxy);
 }
@@ -165,28 +176,9 @@ class HttpHeaders extends ChromeObject {
 /**
  * Returns value for event handlers that have the 'blocking' extraInfoSpec
  * applied. Allows the event handler to modify network requests.
- * 
- * `cancel` If true, the request is cancelled. Used in onBeforeRequest, this
- * prevents the request from being sent.
- * 
- * `redirectUrl` Only used as a response to the onBeforeRequest event. If set,
- * the original request is prevented from being sent and is instead redirected
- * to the given URL.
- * 
- * `requestHeaders` Only used as a response to the onBeforeSendHeaders event. If
- * set, the request is made with these request headers instead.
- * 
- * `responseHeaders` Only used as a response to the onHeadersReceived event. If
- * set, the server is assumed to have responded with these response headers
- * instead. Only return `responseHeaders` if you really want to modify the
- * headers in order to limit the number of conflicts (only one extension may
- * modify `responseHeaders` for each request).
- * 
- * `authCredentials` Only used as a response to the onAuthRequired event. If
- * set, the request is made using the supplied credentials.
  */
 class BlockingResponse extends ChromeObject {
-  static BlockingResponse create(JsObject proxy) => new BlockingResponse(proxy);
+  static BlockingResponse create(JsObject proxy) => proxy == null ? null : new BlockingResponse(proxy);
 
   BlockingResponse(JsObject proxy): super(proxy);
 
@@ -221,23 +213,15 @@ class BlockingResponse extends ChromeObject {
   /**
    * Only used as a response to the onAuthRequired event. If set, the request is
    * made using the supplied credentials.
-   * 
-   * `username`
-   * 
-   * `password`
    */
   Map get authCredentials => mapify(proxy['authCredentials']);
 }
 
 /**
  * Contains data uploaded in a URL request.
- * 
- * `bytes` An ArrayBuffer with a copy of the data.
- * 
- * `file` A string with the file's path and name.
  */
 class UploadData extends ChromeObject {
-  static UploadData create(JsObject proxy) => new UploadData(proxy);
+  static UploadData create(JsObject proxy) => proxy == null ? null : new UploadData(proxy);
 
   UploadData(JsObject proxy): super(proxy);
 

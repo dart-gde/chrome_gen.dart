@@ -1,8 +1,5 @@
 /* This file has been generated from notifications.idl - do not edit */
 
-/**
- * 
- */
 library chrome.notifications;
 
 import '../src/common.dart';
@@ -39,42 +36,64 @@ class ChromeNotifications {
     return completer.future;
   }
 
-  Stream<dynamic> get onClosed => _onClosed.stream;
+  Stream<OnClosedEvent> get onClosed => _onClosed.stream;
 
-  final ChromeStreamController<dynamic> _onClosed =
-      new ChromeStreamController<dynamic>.oneArg(_notifications['onClosed'], selfConverter);
+  final ChromeStreamController<OnClosedEvent> _onClosed =
+      new ChromeStreamController<OnClosedEvent>.twoArgs(_notifications['onClosed'], OnClosedEvent.create);
 
   Stream<String> get onClicked => _onClicked.stream;
 
   final ChromeStreamController<String> _onClicked =
       new ChromeStreamController<String>.oneArg(_notifications['onClicked'], selfConverter);
 
-  Stream<dynamic> get onButtonClicked => _onButtonClicked.stream;
+  Stream<OnButtonClickedEvent> get onButtonClicked => _onButtonClicked.stream;
 
-  final ChromeStreamController<dynamic> _onButtonClicked =
-      new ChromeStreamController<dynamic>.oneArg(_notifications['onButtonClicked'], selfConverter);
+  final ChromeStreamController<OnButtonClickedEvent> _onButtonClicked =
+      new ChromeStreamController<OnButtonClickedEvent>.twoArgs(_notifications['onButtonClicked'], OnButtonClickedEvent.create);
+}
+
+class OnClosedEvent {
+  static OnClosedEvent create(String notificationId, bool byUser) =>
+      new OnClosedEvent(notificationId, byUser);
+
+  String notificationId;
+
+  bool byUser;
+
+  OnClosedEvent(this.notificationId, this.byUser);
+}
+
+class OnButtonClickedEvent {
+  static OnButtonClickedEvent create(String notificationId, int buttonIndex) =>
+      new OnButtonClickedEvent(notificationId, buttonIndex);
+
+  String notificationId;
+
+  int buttonIndex;
+
+  OnButtonClickedEvent(this.notificationId, this.buttonIndex);
 }
 
 class NotificationItem extends ChromeObject {
-  static NotificationItem create(JsObject proxy) => new NotificationItem(proxy);
+  static NotificationItem create(JsObject proxy) => proxy == null ? null : new NotificationItem(proxy);
 
   NotificationItem(JsObject proxy): super(proxy);
 }
 
 class NotificationBitmap extends ChromeObject {
-  static NotificationBitmap create(JsObject proxy) => new NotificationBitmap(proxy);
+  static NotificationBitmap create(JsObject proxy) => proxy == null ? null : new NotificationBitmap(proxy);
 
   NotificationBitmap(JsObject proxy): super(proxy);
 }
 
 class NotificationButton extends ChromeObject {
-  static NotificationButton create(JsObject proxy) => new NotificationButton(proxy);
+  static NotificationButton create(JsObject proxy) => proxy == null ? null : new NotificationButton(proxy);
 
   NotificationButton(JsObject proxy): super(proxy);
 }
 
 class NotificationOptions extends ChromeObject {
-  static NotificationOptions create(JsObject proxy) => new NotificationOptions(proxy);
+  static NotificationOptions create(JsObject proxy) => proxy == null ? null : new NotificationOptions(proxy);
 
   NotificationOptions(JsObject proxy): super(proxy);
 }

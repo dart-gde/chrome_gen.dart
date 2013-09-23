@@ -23,8 +23,6 @@ class ChromeExtension {
    * Set for the lifetime of a callback if an ansychronous extension api has
    * resulted in an error. If no error has occured lastError will be
    * [undefined].
-   * 
-   * `message` Description of the error that has taken place.
    */
   Map get lastError => mapify(_extension['lastError']);
 
@@ -69,13 +67,6 @@ class ChromeExtension {
   /**
    * Returns an array of the JavaScript 'window' objects for each of the pages
    * running inside the current extension.
-   * 
-   * [fetchProperties] `type` The type of view to get. If omitted, returns all
-   * views (including background pages and tabs). Valid values: 'tab',
-   * 'infobar', 'notification', 'popup'.
-   * 
-   * `windowId` The window to restrict the search to. If omitted, returns all
-   * views.
    * 
    * Returns:
    * Array of global objects
@@ -144,16 +135,70 @@ class ChromeExtension {
   /**
    * Deprecated: please use onMessage.
    */
-  Stream<dynamic> get onRequest => _onRequest.stream;
+  Stream<OnRequestEvent> get onRequest => _onRequest.stream;
 
-  final ChromeStreamController<dynamic> _onRequest =
-      new ChromeStreamController<dynamic>.oneArg(_extension['onRequest'], selfConverter);
+  final ChromeStreamController<OnRequestEvent> _onRequest =
+      new ChromeStreamController<OnRequestEvent>.threeArgs(_extension['onRequest'], OnRequestEvent.create);
 
   /**
    * Deprecated: please use onMessageExternal.
    */
-  Stream<dynamic> get onRequestExternal => _onRequestExternal.stream;
+  Stream<OnRequestExternalEvent> get onRequestExternal => _onRequestExternal.stream;
 
-  final ChromeStreamController<dynamic> _onRequestExternal =
-      new ChromeStreamController<dynamic>.oneArg(_extension['onRequestExternal'], selfConverter);
+  final ChromeStreamController<OnRequestExternalEvent> _onRequestExternal =
+      new ChromeStreamController<OnRequestExternalEvent>.threeArgs(_extension['onRequestExternal'], OnRequestExternalEvent.create);
+}
+
+/**
+ * Deprecated: please use onMessage.
+ */
+class OnRequestEvent {
+  static OnRequestEvent create(JsObject request, JsObject sender, JsObject sendResponse) =>
+      new OnRequestEvent(request, MessageSender.create(sender), sendResponse);
+
+  /**
+   * The request sent by the calling script.
+   * `optional`
+   * 
+   * The request sent by the calling script.
+   */
+  dynamic request;
+
+  MessageSender sender;
+
+  /**
+   * Function to call (at most once) when you have a response. The argument
+   * should be any JSON-ifiable object, or undefined if there is no response. If
+   * you have more than one `onRequest` listener in the same document, then only
+   * one may send a response.
+   */
+  dynamic sendResponse;
+
+  OnRequestEvent(this.request, this.sender, this.sendResponse);
+}
+
+/**
+ * Deprecated: please use onMessageExternal.
+ */
+class OnRequestExternalEvent {
+  static OnRequestExternalEvent create(JsObject request, JsObject sender, JsObject sendResponse) =>
+      new OnRequestExternalEvent(request, MessageSender.create(sender), sendResponse);
+
+  /**
+   * The request sent by the calling script.
+   * `optional`
+   * 
+   * The request sent by the calling script.
+   */
+  dynamic request;
+
+  MessageSender sender;
+
+  /**
+   * Function to call when you have a response. The argument should be any
+   * JSON-ifiable object, or undefined if there is no response.
+   */
+  dynamic sendResponse;
+
+  OnRequestExternalEvent(this.request, this.sender, this.sendResponse);
 }

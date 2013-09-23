@@ -29,13 +29,9 @@ class ChromeTopSites {
 /**
  * An object encapsulating a most visited URL, such as the URLs on the new tab
  * page.
- * 
- * `url` The most visited URL.
- * 
- * `title` The title of the page
  */
 class MostVisitedURL extends ChromeObject {
-  static MostVisitedURL create(JsObject proxy) => new MostVisitedURL(proxy);
+  static MostVisitedURL create(JsObject proxy) => proxy == null ? null : new MostVisitedURL(proxy);
 
   MostVisitedURL(JsObject proxy): super(proxy);
 

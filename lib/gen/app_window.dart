@@ -1,8 +1,5 @@
 /* This file has been generated from app_window.idl - do not edit */
 
-/**
- * 
- */
 library chrome.app_window;
 
 import '../src/common.dart';
@@ -61,19 +58,19 @@ class ChromeAppWindow {
 }
 
 class Bounds extends ChromeObject {
-  static Bounds create(JsObject proxy) => new Bounds(proxy);
+  static Bounds create(JsObject proxy) => proxy == null ? null : new Bounds(proxy);
 
   Bounds(JsObject proxy): super(proxy);
 }
 
 class CreateWindowOptions extends ChromeObject {
-  static CreateWindowOptions create(JsObject proxy) => new CreateWindowOptions(proxy);
+  static CreateWindowOptions create(JsObject proxy) => proxy == null ? null : new CreateWindowOptions(proxy);
 
   CreateWindowOptions(JsObject proxy): super(proxy);
 }
 
 class AppWindow extends ChromeObject {
-  static AppWindow create(JsObject proxy) => new AppWindow(proxy);
+  static AppWindow create(JsObject proxy) => proxy == null ? null : new AppWindow(proxy);
 
   AppWindow(JsObject proxy): super(proxy);
 }

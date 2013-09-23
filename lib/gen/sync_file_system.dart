@@ -1,8 +1,5 @@
 /* This file has been generated from sync_file_system.idl - do not edit */
 
-/**
- * 
- */
 library chrome.syncFileSystem;
 
 import '../src/common.dart';
@@ -69,25 +66,25 @@ class ChromeSyncFileSystem {
 }
 
 class FileInfo extends ChromeObject {
-  static FileInfo create(JsObject proxy) => new FileInfo(proxy);
+  static FileInfo create(JsObject proxy) => proxy == null ? null : new FileInfo(proxy);
 
   FileInfo(JsObject proxy): super(proxy);
 }
 
 class FileStatusInfo extends ChromeObject {
-  static FileStatusInfo create(JsObject proxy) => new FileStatusInfo(proxy);
+  static FileStatusInfo create(JsObject proxy) => proxy == null ? null : new FileStatusInfo(proxy);
 
   FileStatusInfo(JsObject proxy): super(proxy);
 }
 
 class StorageInfo extends ChromeObject {
-  static StorageInfo create(JsObject proxy) => new StorageInfo(proxy);
+  static StorageInfo create(JsObject proxy) => proxy == null ? null : new StorageInfo(proxy);
 
   StorageInfo(JsObject proxy): super(proxy);
 }
 
 class ServiceInfo extends ChromeObject {
-  static ServiceInfo create(JsObject proxy) => new ServiceInfo(proxy);
+  static ServiceInfo create(JsObject proxy) => proxy == null ? null : new ServiceInfo(proxy);
 
   ServiceInfo(JsObject proxy): super(proxy);
 }

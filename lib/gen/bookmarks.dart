@@ -94,14 +94,6 @@ class ChromeBookmarks {
   /**
    * Creates a bookmark or folder under the specified parentId.  If url is NULL
    * or missing, it will be a folder.
-   * 
-   * [bookmark] `parentId` Defaults to the Other Bookmarks folder.
-   * 
-   * `index`
-   * 
-   * `title`
-   * 
-   * `url`
    */
   Future<BookmarkTreeNode> create(Map bookmark) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(BookmarkTreeNode.create);
@@ -111,10 +103,6 @@ class ChromeBookmarks {
 
   /**
    * Moves the specified BookmarkTreeNode to the provided location.
-   * 
-   * [destination] `parentId`
-   * 
-   * `index`
    */
   Future<BookmarkTreeNode> move(String id, Map destination) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(BookmarkTreeNode.create);
@@ -126,10 +114,6 @@ class ChromeBookmarks {
    * Updates the properties of a bookmark or folder. Specify only the properties
    * that you want to change; unspecified properties will be left unchanged.
    * <b>Note:</b> Currently, only 'title' and 'url' are supported.
-   * 
-   * [changes] `title`
-   * 
-   * `url`
    */
   Future<BookmarkTreeNode> update(String id, Map changes) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(BookmarkTreeNode.create);
@@ -176,46 +160,46 @@ class ChromeBookmarks {
   /**
    * Fired when a bookmark or folder is created.
    */
-  Stream<dynamic> get onCreated => _onCreated.stream;
+  Stream<OnCreatedEvent> get onCreated => _onCreated.stream;
 
-  final ChromeStreamController<dynamic> _onCreated =
-      new ChromeStreamController<dynamic>.oneArg(_bookmarks['onCreated'], selfConverter);
+  final ChromeStreamController<OnCreatedEvent> _onCreated =
+      new ChromeStreamController<OnCreatedEvent>.twoArgs(_bookmarks['onCreated'], OnCreatedEvent.create);
 
   /**
    * Fired when a bookmark or folder is removed.  When a folder is removed
    * recursively, a single notification is fired for the folder, and none for
    * its contents.
    */
-  Stream<dynamic> get onRemoved => _onRemoved.stream;
+  Stream<OnRemovedEvent> get onRemoved => _onRemoved.stream;
 
-  final ChromeStreamController<dynamic> _onRemoved =
-      new ChromeStreamController<dynamic>.oneArg(_bookmarks['onRemoved'], selfConverter);
+  final ChromeStreamController<OnRemovedEvent> _onRemoved =
+      new ChromeStreamController<OnRemovedEvent>.twoArgs(_bookmarks['onRemoved'], OnRemovedEvent.create);
 
   /**
    * Fired when a bookmark or folder changes.  <b>Note:</b> Currently, only
    * title and url changes trigger this.
    */
-  Stream<dynamic> get onChanged => _onChanged.stream;
+  Stream<OnChangedEvent> get onChanged => _onChanged.stream;
 
-  final ChromeStreamController<dynamic> _onChanged =
-      new ChromeStreamController<dynamic>.oneArg(_bookmarks['onChanged'], selfConverter);
+  final ChromeStreamController<OnChangedEvent> _onChanged =
+      new ChromeStreamController<OnChangedEvent>.twoArgs(_bookmarks['onChanged'], OnChangedEvent.create);
 
   /**
    * Fired when a bookmark or folder is moved to a different parent folder.
    */
-  Stream<dynamic> get onMoved => _onMoved.stream;
+  Stream<OnMovedEvent> get onMoved => _onMoved.stream;
 
-  final ChromeStreamController<dynamic> _onMoved =
-      new ChromeStreamController<dynamic>.oneArg(_bookmarks['onMoved'], selfConverter);
+  final ChromeStreamController<OnMovedEvent> _onMoved =
+      new ChromeStreamController<OnMovedEvent>.twoArgs(_bookmarks['onMoved'], OnMovedEvent.create);
 
   /**
    * Fired when the children of a folder have changed their order due to the
    * order being sorted in the UI.  This is not called as a result of a move().
    */
-  Stream<dynamic> get onChildrenReordered => _onChildrenReordered.stream;
+  Stream<OnChildrenReorderedEvent> get onChildrenReordered => _onChildrenReordered.stream;
 
-  final ChromeStreamController<dynamic> _onChildrenReordered =
-      new ChromeStreamController<dynamic>.oneArg(_bookmarks['onChildrenReordered'], selfConverter);
+  final ChromeStreamController<OnChildrenReorderedEvent> _onChildrenReordered =
+      new ChromeStreamController<OnChildrenReorderedEvent>.twoArgs(_bookmarks['onChildrenReordered'], OnChildrenReorderedEvent.create);
 
   /**
    * Fired when a bookmark import session is begun.  Expensive observers should
@@ -237,31 +221,85 @@ class ChromeBookmarks {
 }
 
 /**
+ * Fired when a bookmark or folder is created.
+ */
+class OnCreatedEvent {
+  static OnCreatedEvent create(String id, JsObject bookmark) =>
+      new OnCreatedEvent(id, BookmarkTreeNode.create(bookmark));
+
+  String id;
+
+  BookmarkTreeNode bookmark;
+
+  OnCreatedEvent(this.id, this.bookmark);
+}
+
+/**
+ * Fired when a bookmark or folder is removed.  When a folder is removed
+ * recursively, a single notification is fired for the folder, and none for its
+ * contents.
+ */
+class OnRemovedEvent {
+  static OnRemovedEvent create(String id, JsObject removeInfo) =>
+      new OnRemovedEvent(id, mapify(removeInfo));
+
+  String id;
+
+  Map removeInfo;
+
+  OnRemovedEvent(this.id, this.removeInfo);
+}
+
+/**
+ * Fired when a bookmark or folder changes.  <b>Note:</b> Currently, only title
+ * and url changes trigger this.
+ */
+class OnChangedEvent {
+  static OnChangedEvent create(String id, JsObject changeInfo) =>
+      new OnChangedEvent(id, mapify(changeInfo));
+
+  String id;
+
+  Map changeInfo;
+
+  OnChangedEvent(this.id, this.changeInfo);
+}
+
+/**
+ * Fired when a bookmark or folder is moved to a different parent folder.
+ */
+class OnMovedEvent {
+  static OnMovedEvent create(String id, JsObject moveInfo) =>
+      new OnMovedEvent(id, mapify(moveInfo));
+
+  String id;
+
+  Map moveInfo;
+
+  OnMovedEvent(this.id, this.moveInfo);
+}
+
+/**
+ * Fired when the children of a folder have changed their order due to the order
+ * being sorted in the UI.  This is not called as a result of a move().
+ */
+class OnChildrenReorderedEvent {
+  static OnChildrenReorderedEvent create(String id, JsObject reorderInfo) =>
+      new OnChildrenReorderedEvent(id, mapify(reorderInfo));
+
+  String id;
+
+  Map reorderInfo;
+
+  OnChildrenReorderedEvent(this.id, this.reorderInfo);
+}
+
+/**
  * A node (either a bookmark or a folder) in the bookmark tree.  Child nodes are
  * ordered within their parent folder.
- * 
- * `id` The unique identifier for the node. IDs are unique within the current
- * profile, and they remain valid even after the browser is restarted.
- * 
- * `parentId` The `id` of the parent folder.  Omitted for the root node.
- * 
- * `index` The 0-based position of this node within its parent folder.
- * 
- * `url` The URL navigated to when a user clicks the bookmark. Omitted for
- * folders.
- * 
- * `title` The text displayed for the node.
- * 
- * `dateAdded` When this node was created, in milliseconds since the epoch (`new
- * Date(dateAdded)`).
- * 
- * `dateGroupModified` When the contents of this folder last changed, in
- * milliseconds since the epoch.
- * 
- * `children` An ordered list of children of this node.
  */
 class BookmarkTreeNode extends ChromeObject {
-  static BookmarkTreeNode create(JsObject proxy) => new BookmarkTreeNode(proxy);
+  static BookmarkTreeNode create(JsObject proxy) => proxy == null ? null : new BookmarkTreeNode(proxy);
 
   BookmarkTreeNode(JsObject proxy): super(proxy);
 

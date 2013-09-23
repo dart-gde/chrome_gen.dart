@@ -31,12 +31,7 @@ class ChromeWindows {
   /**
    * Gets details about a window.
    * 
-   * [getInfo] 
-   * 
-   * `populate` If true, the [windows.Window] object will have a [tabs] property
-   * that contains a list of the [tabs.Tab] objects. The `Tab` objects only
-   * contain the `url`, `title` and `favIconUrl` properties if the extension's
-   * manifest file includes the `"tabs"` permission.
+   * [getInfo]
    */
   Future<Window> get(int windowId, [Map getInfo]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
@@ -47,12 +42,7 @@ class ChromeWindows {
   /**
    * Gets the [current window](#current-window).
    * 
-   * [getInfo] 
-   * 
-   * `populate` If true, the [windows.Window] object will have a [tabs] property
-   * that contains a list of the [tabs.Tab] objects. The `Tab` objects only
-   * contain the `url`, `title` and `favIconUrl` properties if the extension's
-   * manifest file includes the `"tabs"` permission.
+   * [getInfo]
    */
   Future<Window> getCurrent([Map getInfo]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
@@ -64,12 +54,7 @@ class ChromeWindows {
    * Gets the window that was most recently focused - typically the window 'on
    * top'.
    * 
-   * [getInfo] 
-   * 
-   * `populate` If true, the [windows.Window] object will have a [tabs] property
-   * that contains a list of the [tabs.Tab] objects. The `Tab` objects only
-   * contain the `url`, `title` and `favIconUrl` properties if the extension's
-   * manifest file includes the `"tabs"` permission.
+   * [getInfo]
    */
   Future<Window> getLastFocused([Map getInfo]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
@@ -80,13 +65,7 @@ class ChromeWindows {
   /**
    * Gets all windows.
    * 
-   * [getInfo] 
-   * 
-   * `populate` If true, each [windows.Window] object will have a [tabs]
-   * property that contains a list of the [tabs.Tab] objects for that window.
-   * The `Tab` objects only contain the `url`, `title` and `favIconUrl`
-   * properties if the extension's manifest file includes the `"tabs"`
-   * permission.
+   * [getInfo]
    */
   Future<List<Window>> getAll([Map getInfo]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Window.create));
@@ -97,36 +76,6 @@ class ChromeWindows {
   /**
    * Creates (opens) a new browser with any optional sizing, position or default
    * URL provided.
-   * 
-   * [createData] `url` A URL or array of URLs to open as tabs in the window.
-   * Fully-qualified URLs must include a scheme (i.e. 'http://www.google.com',
-   * not 'www.google.com'). Relative URLs will be relative to the current page
-   * within the extension. Defaults to the New Tab Page.
-   * 
-   * `tabId` The id of the tab for which you want to adopt to the new window.
-   * 
-   * `left` The number of pixels to position the new window from the left edge
-   * of the screen. If not specified, the new window is offset naturally from
-   * the last focused window. This value is ignored for panels.
-   * 
-   * `top` The number of pixels to position the new window from the top edge of
-   * the screen. If not specified, the new window is offset naturally from the
-   * last focused window. This value is ignored for panels.
-   * 
-   * `width` The width in pixels of the new window, including the frame. If not
-   * specified defaults to a natural width.
-   * 
-   * `height` The height in pixels of the new window, including the frame. If
-   * not specified defaults to a natural height.
-   * 
-   * `focused` If true, opens an active window. If false, opens an inactive
-   * window.
-   * 
-   * `incognito` Whether the new window should be an incognito window.
-   * 
-   * `type` Specifies what type of browser window to create. The 'panel' and
-   * 'detached_panel' types create a popup unless the '--enable-panels' flag is
-   * set.
    * 
    * Returns:
    * Contains details about the created window.
@@ -140,31 +89,6 @@ class ChromeWindows {
   /**
    * Updates the properties of a window. Specify only the properties that you
    * want to change; unspecified properties will be left unchanged.
-   * 
-   * [updateInfo] `left` The offset from the left edge of the screen to move the
-   * window to in pixels. This value is ignored for panels.
-   * 
-   * `top` The offset from the top edge of the screen to move the window to in
-   * pixels. This value is ignored for panels.
-   * 
-   * `width` The width to resize the window to in pixels. This value is ignored
-   * for panels.
-   * 
-   * `height` The height to resize the window to in pixels. This value is
-   * ignored for panels.
-   * 
-   * `focused` If true, brings the window to the front. If false, brings the
-   * next window in the z-order to the front.
-   * 
-   * `drawAttention` If true, causes the window to be displayed in a manner that
-   * draws the user's attention to the window, without changing the focused
-   * window. The effect lasts until the user changes focus to the window. This
-   * option has no effect if the window already has focus. Set to false to
-   * cancel a previous draw attention request.
-   * 
-   * `state` The new state of the window. The 'minimized', 'maximized' and
-   * 'fullscreen' states cannot be combined with 'left', 'top', 'width' or
-   * 'height'.
    */
   Future<Window> update(int windowId, Map updateInfo) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
@@ -209,50 +133,8 @@ class ChromeWindows {
       new ChromeStreamController<int>.oneArg(_windows['onFocusChanged'], selfConverter);
 }
 
-/**
- * `id` The ID of the window. Window IDs are unique within a browser session.
- * Under some circumstances a Window may not be assigned an ID, for example when
- * querying windows using the [sessions] API, in which case a session ID may be
- * present.
- * 
- * `focused` Whether the window is currently the focused window.
- * 
- * `top` The offset of the window from the top edge of the screen in pixels.
- * Under some circumstances a Window may not be assigned top property, for
- * example when querying closed windows from the [sessions] API.
- * 
- * `left` The offset of the window from the left edge of the screen in pixels.
- * Under some circumstances a Window may not be assigned left property, for
- * example when querying closed windows from the [sessions] API.
- * 
- * `width` The width of the window, including the frame, in pixels. Under some
- * circumstances a Window may not be assigned width property, for example when
- * querying closed windows from the [sessions] API.
- * 
- * `height` The height of the window, including the frame, in pixels. Under some
- * circumstances a Window may not be assigned height property, for example when
- * querying closed windows from the [sessions] API.
- * 
- * `tabs` Array of [tabs.Tab] objects representing the current tabs in the
- * window.
- * 
- * `incognito` Whether the window is incognito.
- * 
- * `type` The type of browser window this is. Under some circumstances a Window
- * may not be assigned type property, for example when querying closed windows
- * from the [sessions] API.
- * 
- * `state` The state of this browser window. Under some circumstances a Window
- * may not be assigned state property, for example when querying closed windows
- * from the [sessions] API.
- * 
- * `alwaysOnTop` Whether the window is set to be always on top.
- * 
- * `sessionId` The session ID used to uniquely identify a Window obtained from
- * the [sessions] API.
- */
 class Window extends ChromeObject {
-  static Window create(JsObject proxy) => new Window(proxy);
+  static Window create(JsObject proxy) => proxy == null ? null : new Window(proxy);
 
   Window(JsObject proxy): super(proxy);
 

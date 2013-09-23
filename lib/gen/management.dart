@@ -80,9 +80,6 @@ class ChromeManagement {
    * Uninstalls a currently installed app or extension.
    * 
    * [id] This should be the id from an item of [ExtensionInfo.]
-   * 
-   * [options] `showConfirmDialog` Whether or not a confirm-uninstall dialog
-   * should prompt the user. Defaults to false.
    */
   Future uninstall(String id, [Map options]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -93,9 +90,6 @@ class ChromeManagement {
   /**
    * Uninstalls the calling extension. Note: This function can be used without
    * requesting the 'management' permission in the manifest.
-   * 
-   * [options] `showConfirmDialog` Whether or not a confirm-uninstall dialog
-   * should prompt the user. Defaults to false.
    */
   Future uninstallSelf([Map options]) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -149,16 +143,9 @@ class ChromeManagement {
 
 /**
  * Information about an icon belonging to an extension, app, or theme.
- * 
- * `size` A number representing the width and height of the icon. Likely values
- * include (but are not limited to) 128, 48, 24, and 16.
- * 
- * `url` The URL for this icon image. To display a grayscale version of the icon
- * (to indicate that an extension is disabled, for example), append
- * `?grayscale=true` to the URL.
  */
 class IconInfo extends ChromeObject {
-  static IconInfo create(JsObject proxy) => new IconInfo(proxy);
+  static IconInfo create(JsObject proxy) => proxy == null ? null : new IconInfo(proxy);
 
   IconInfo(JsObject proxy): super(proxy);
 
@@ -178,57 +165,9 @@ class IconInfo extends ChromeObject {
 
 /**
  * Information about an installed extension, app, or theme.
- * 
- * `id` The extension's unique identifier.
- * 
- * `name` The name of this extension, app, or theme.
- * 
- * `description` The description of this extension, app, or theme.
- * 
- * `version` The [version](manifest/version.html) of this extension, app, or
- * theme.
- * 
- * `mayDisable` Whether this extension can be disabled or uninstalled by the
- * user.
- * 
- * `enabled` Whether it is currently enabled or disabled.
- * 
- * `disabledReason` A reason the item is disabled.
- * 
- * `isApp` True if this is an app.
- * 
- * `type` The type of this extension, app, or theme.
- * 
- * `appLaunchUrl` The launch url (only present for apps).
- * 
- * `homepageUrl` The URL of the homepage of this extension, app, or theme.
- * 
- * `updateUrl` The update URL of this extension, app, or theme.
- * 
- * `offlineEnabled` Whether the extension, app, or theme declares that it
- * supports offline.
- * 
- * `optionsUrl` The url for the item's options page, if it has one.
- * 
- * `icons` A list of icon information. Note that this just reflects what was
- * declared in the manifest, and the actual image at that url may be larger or
- * smaller than what was declared, so you might consider using explicit width
- * and height attributes on img tags referencing these images. See the [manifest
- * documentation on icons](manifest/icons.html) for more details.
- * 
- * `permissions` Returns a list of API based permissions.
- * 
- * `hostPermissions` Returns a list of host based permissions.
- * 
- * `installType` How the extension was installed. One of<br>[admin]: The
- * extension was installed because of an administrative
- * policy,<br>[development]: The extension was loaded unpacked in developer
- * mode,<br>[normal]: The extension was installed normally via a .crx
- * file,<br>[sideload]: The extension was installed by other software on the
- * machine,<br>[other]: The extension was installed by other means.
  */
 class ExtensionInfo extends ChromeObject {
-  static ExtensionInfo create(JsObject proxy) => new ExtensionInfo(proxy);
+  static ExtensionInfo create(JsObject proxy) => proxy == null ? null : new ExtensionInfo(proxy);
 
   ExtensionInfo(JsObject proxy): super(proxy);
 

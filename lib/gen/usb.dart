@@ -1,8 +1,5 @@
 /* This file has been generated from usb.idl - do not edit */
 
-/**
- * 
- */
 library chrome.usb;
 
 import '../src/common.dart';
@@ -101,61 +98,61 @@ class ChromeUsb {
 }
 
 class Device extends ChromeObject {
-  static Device create(JsObject proxy) => new Device(proxy);
+  static Device create(JsObject proxy) => proxy == null ? null : new Device(proxy);
 
   Device(JsObject proxy): super(proxy);
 }
 
 class ConnectionHandle extends ChromeObject {
-  static ConnectionHandle create(JsObject proxy) => new ConnectionHandle(proxy);
+  static ConnectionHandle create(JsObject proxy) => proxy == null ? null : new ConnectionHandle(proxy);
 
   ConnectionHandle(JsObject proxy): super(proxy);
 }
 
 class EndpointDescriptor extends ChromeObject {
-  static EndpointDescriptor create(JsObject proxy) => new EndpointDescriptor(proxy);
+  static EndpointDescriptor create(JsObject proxy) => proxy == null ? null : new EndpointDescriptor(proxy);
 
   EndpointDescriptor(JsObject proxy): super(proxy);
 }
 
 class InterfaceDescriptor extends ChromeObject {
-  static InterfaceDescriptor create(JsObject proxy) => new InterfaceDescriptor(proxy);
+  static InterfaceDescriptor create(JsObject proxy) => proxy == null ? null : new InterfaceDescriptor(proxy);
 
   InterfaceDescriptor(JsObject proxy): super(proxy);
 }
 
 class ControlTransferInfo extends ChromeObject {
-  static ControlTransferInfo create(JsObject proxy) => new ControlTransferInfo(proxy);
+  static ControlTransferInfo create(JsObject proxy) => proxy == null ? null : new ControlTransferInfo(proxy);
 
   ControlTransferInfo(JsObject proxy): super(proxy);
 }
 
 class GenericTransferInfo extends ChromeObject {
-  static GenericTransferInfo create(JsObject proxy) => new GenericTransferInfo(proxy);
+  static GenericTransferInfo create(JsObject proxy) => proxy == null ? null : new GenericTransferInfo(proxy);
 
   GenericTransferInfo(JsObject proxy): super(proxy);
 }
 
 class IsochronousTransferInfo extends ChromeObject {
-  static IsochronousTransferInfo create(JsObject proxy) => new IsochronousTransferInfo(proxy);
+  static IsochronousTransferInfo create(JsObject proxy) => proxy == null ? null : new IsochronousTransferInfo(proxy);
 
   IsochronousTransferInfo(JsObject proxy): super(proxy);
 }
 
 class TransferResultInfo extends ChromeObject {
-  static TransferResultInfo create(JsObject proxy) => new TransferResultInfo(proxy);
+  static TransferResultInfo create(JsObject proxy) => proxy == null ? null : new TransferResultInfo(proxy);
 
   TransferResultInfo(JsObject proxy): super(proxy);
 }
 
 class EnumerateDevicesOptions extends ChromeObject {
-  static EnumerateDevicesOptions create(JsObject proxy) => new EnumerateDevicesOptions(proxy);
+  static EnumerateDevicesOptions create(JsObject proxy) => proxy == null ? null : new EnumerateDevicesOptions(proxy);
 
   EnumerateDevicesOptions(JsObject proxy): super(proxy);
 }
 
 class EnumerateDevicesAndRequestAccessOptions extends ChromeObject {
-  static EnumerateDevicesAndRequestAccessOptions create(JsObject proxy) => new EnumerateDevicesAndRequestAccessOptions(proxy);
+  static EnumerateDevicesAndRequestAccessOptions create(JsObject proxy) => proxy == null ? null : new EnumerateDevicesAndRequestAccessOptions(proxy);
 
   EnumerateDevicesAndRequestAccessOptions(JsObject proxy): super(proxy);
 }

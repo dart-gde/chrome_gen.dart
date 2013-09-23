@@ -20,19 +20,6 @@ class ChromeInputIme {
   /**
    * Set the current composition. If this extension does not own the active IME,
    * this fails.
-   * 
-   * [parameters] `contextID` ID of the context where the composition text will
-   * be set
-   * 
-   * `text` Text to set
-   * 
-   * `selectionStart` Position in the text that the selection starts at.
-   * 
-   * `selectionEnd` Position in the text that the selection ends at.
-   * 
-   * `cursor` Position in the text of the cursor.
-   * 
-   * `segments` List of segments and their associated types.
    */
   Future<bool> setComposition(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -43,9 +30,6 @@ class ChromeInputIme {
   /**
    * Clear the current composition. If this extension does not own the active
    * IME, this fails.
-   * 
-   * [parameters] `contextID` ID of the context where the composition will be
-   * cleared
    */
   Future<bool> clearComposition(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -55,10 +39,6 @@ class ChromeInputIme {
 
   /**
    * Commits the provided text to the current input.
-   * 
-   * [parameters] `contextID` ID of the context where the text will be committed
-   * 
-   * `text` The text to commit
    */
   Future<bool> commitText(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -69,10 +49,6 @@ class ChromeInputIme {
   /**
    * Sets the properties of the candidate window. This fails if the extension
    * doesn’t own the active IME
-   * 
-   * [parameters] `engineID` ID of the engine to set properties on.
-   * 
-   * `properties`
    */
   Future<bool> setCandidateWindowProperties(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -83,10 +59,6 @@ class ChromeInputIme {
   /**
    * Sets the current candidate list. This fails if this extension doesn’t own
    * the active IME
-   * 
-   * [parameters] `contextID` ID of the context that owns the candidate window.
-   * 
-   * `candidates` List of candidates to show in the candidate window
    */
   Future<bool> setCandidates(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -97,10 +69,6 @@ class ChromeInputIme {
   /**
    * Set the position of the cursor in the candidate window. This is a no-op if
    * this extension does not own the active IME.
-   * 
-   * [parameters] `contextID` ID of the context that owns the candidate window.
-   * 
-   * `candidateID` ID of the candidate to select.
    */
   Future<bool> setCursorPosition(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
@@ -110,11 +78,6 @@ class ChromeInputIme {
 
   /**
    * Adds the provided menu items to the language menu when this IME is active.
-   * 
-   * [parameters] `engineID` ID of the engine to use
-   * 
-   * `items` MenuItems to add. They will be added in the order they exist in the
-   * array.
    */
   Future setMenuItems(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -124,10 +87,6 @@ class ChromeInputIme {
 
   /**
    * Updates the state of the MenuItems specified
-   * 
-   * [parameters] `engineID` ID of the engine to use
-   * 
-   * `items` Array of MenuItems to update
    */
   Future updateMenuItems(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -137,15 +96,6 @@ class ChromeInputIme {
 
   /**
    * Deletes the text around the caret.
-   * 
-   * [parameters] `engineID` ID of the engine receiving the event.
-   * 
-   * `contextID` ID of the context where the surrounding text will be deleted.
-   * 
-   * `offset` The offset from the caret position where deletion will start. This
-   * value can be negative.
-   * 
-   * `length` The number of characters to be deleted
    */
   Future deleteSurroundingText(Map parameters) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -215,36 +165,36 @@ class ChromeInputIme {
   /**
    * This event is sent if this extension owns the active IME.
    */
-  Stream<dynamic> get onKeyEvent => _onKeyEvent.stream;
+  Stream<OnKeyEventEvent> get onKeyEvent => _onKeyEvent.stream;
 
-  final ChromeStreamController<dynamic> _onKeyEvent =
-      new ChromeStreamController<dynamic>.oneArg(_input_ime['onKeyEvent'], selfConverter);
+  final ChromeStreamController<OnKeyEventEvent> _onKeyEvent =
+      new ChromeStreamController<OnKeyEventEvent>.twoArgs(_input_ime['onKeyEvent'], OnKeyEventEvent.create);
 
   /**
    * This event is sent if this extension owns the active IME.
    */
-  Stream<dynamic> get onCandidateClicked => _onCandidateClicked.stream;
+  Stream<OnCandidateClickedEvent> get onCandidateClicked => _onCandidateClicked.stream;
 
-  final ChromeStreamController<dynamic> _onCandidateClicked =
-      new ChromeStreamController<dynamic>.oneArg(_input_ime['onCandidateClicked'], selfConverter);
+  final ChromeStreamController<OnCandidateClickedEvent> _onCandidateClicked =
+      new ChromeStreamController<OnCandidateClickedEvent>.threeArgs(_input_ime['onCandidateClicked'], OnCandidateClickedEvent.create);
 
   /**
    * Called when the user selects a menu item
    */
-  Stream<dynamic> get onMenuItemActivated => _onMenuItemActivated.stream;
+  Stream<OnMenuItemActivatedEvent> get onMenuItemActivated => _onMenuItemActivated.stream;
 
-  final ChromeStreamController<dynamic> _onMenuItemActivated =
-      new ChromeStreamController<dynamic>.oneArg(_input_ime['onMenuItemActivated'], selfConverter);
+  final ChromeStreamController<OnMenuItemActivatedEvent> _onMenuItemActivated =
+      new ChromeStreamController<OnMenuItemActivatedEvent>.twoArgs(_input_ime['onMenuItemActivated'], OnMenuItemActivatedEvent.create);
 
   /**
    * Called when the editable string around caret is changed or when the caret
    * position is moved. The text length is limited to 100 characters for each
    * back and forth direction.
    */
-  Stream<dynamic> get onSurroundingTextChanged => _onSurroundingTextChanged.stream;
+  Stream<OnSurroundingTextChangedEvent> get onSurroundingTextChanged => _onSurroundingTextChanged.stream;
 
-  final ChromeStreamController<dynamic> _onSurroundingTextChanged =
-      new ChromeStreamController<dynamic>.oneArg(_input_ime['onSurroundingTextChanged'], selfConverter);
+  final ChromeStreamController<OnSurroundingTextChangedEvent> _onSurroundingTextChanged =
+      new ChromeStreamController<OnSurroundingTextChangedEvent>.twoArgs(_input_ime['onSurroundingTextChanged'], OnSurroundingTextChangedEvent.create);
 
   /**
    * This event is sent when chrome terminates ongoing text input session.
@@ -256,27 +206,97 @@ class ChromeInputIme {
 }
 
 /**
+ * This event is sent if this extension owns the active IME.
+ */
+class OnKeyEventEvent {
+  static OnKeyEventEvent create(String engineID, JsObject keyData) =>
+      new OnKeyEventEvent(engineID, KeyboardEvent.create(keyData));
+
+  /**
+   * ID of the engine receiving the event
+   */
+  String engineID;
+
+  /**
+   * Data on the key event
+   */
+  KeyboardEvent keyData;
+
+  OnKeyEventEvent(this.engineID, this.keyData);
+}
+
+/**
+ * This event is sent if this extension owns the active IME.
+ */
+class OnCandidateClickedEvent {
+  static OnCandidateClickedEvent create(String engineID, int candidateID, String button) =>
+      new OnCandidateClickedEvent(engineID, candidateID, button);
+
+  /**
+   * ID of the engine receiving the event
+   */
+  String engineID;
+
+  /**
+   * ID of the candidate that was clicked.
+   */
+  int candidateID;
+
+  /**
+   * Which mouse buttons was clicked.
+   */
+  String button;
+
+  OnCandidateClickedEvent(this.engineID, this.candidateID, this.button);
+}
+
+/**
+ * Called when the user selects a menu item
+ */
+class OnMenuItemActivatedEvent {
+  static OnMenuItemActivatedEvent create(String engineID, String name) =>
+      new OnMenuItemActivatedEvent(engineID, name);
+
+  /**
+   * ID of the engine receiving the event
+   */
+  String engineID;
+
+  /**
+   * Name of the MenuItem which was activated
+   */
+  String name;
+
+  OnMenuItemActivatedEvent(this.engineID, this.name);
+}
+
+/**
+ * Called when the editable string around caret is changed or when the caret
+ * position is moved. The text length is limited to 100 characters for each back
+ * and forth direction.
+ */
+class OnSurroundingTextChangedEvent {
+  static OnSurroundingTextChangedEvent create(String engineID, JsObject surroundingInfo) =>
+      new OnSurroundingTextChangedEvent(engineID, mapify(surroundingInfo));
+
+  /**
+   * ID of the engine receiving the event
+   */
+  String engineID;
+
+  /**
+   * The surrounding information.
+   */
+  Map surroundingInfo;
+
+  OnSurroundingTextChangedEvent(this.engineID, this.surroundingInfo);
+}
+
+/**
  * See http://www.w3.org/TR/DOM-Level-3-Events/#events-KeyboardEvent
- * 
- * `type` One of keyup or keydown.
- * 
- * `requestId` The ID of the request.
- * 
- * `key` Value of the key being pressed
- * 
- * `code` Value of the physical key being pressed. The value is not affected by
- * current keyboard layout or modifier state.
- * 
- * `altKey` Whether or not the ALT key is pressed.
- * 
- * `ctrlKey` Whether or not the CTRL key is pressed.
- * 
- * `shiftKey` Whether or not the SHIFT key is pressed.
- * 
- * `capsLock` Whether or not the CAPS_LOCK is enabled.
  */
 class KeyboardEvent extends ChromeObject {
-  static KeyboardEvent create(JsObject proxy) => new KeyboardEvent(proxy);
+  static KeyboardEvent create(JsObject proxy) => proxy == null ? null : new KeyboardEvent(proxy);
 
   KeyboardEvent(JsObject proxy): super(proxy);
 
@@ -324,14 +344,9 @@ class KeyboardEvent extends ChromeObject {
 
 /**
  * Describes an input Context
- * 
- * `contextID` This is used to specify targets of text field operations.  This
- * ID becomes invalid as soon as onBlur is called.
- * 
- * `type` Type of value this text field edits, (Text, Number, Password, etc)
  */
 class InputContext extends ChromeObject {
-  static InputContext create(JsObject proxy) => new InputContext(proxy);
+  static InputContext create(JsObject proxy) => proxy == null ? null : new InputContext(proxy);
 
   InputContext(JsObject proxy): super(proxy);
 
@@ -350,22 +365,9 @@ class InputContext extends ChromeObject {
 /**
  * A menu item used by an input method to interact with the user from the
  * language menu.
- * 
- * `id` String that will be passed to callbacks referencing this MenuItem.
- * 
- * `label` Text displayed in the menu for this item.
- * 
- * `style` Enum representing if this item is: check, radio, or a separator.
- * Radio buttons between separators are considered grouped.
- * 
- * `visible` Indicates this item is visible.
- * 
- * `checked` Indicates this item should be drawn with a check.
- * 
- * `enabled` Indicates this item is enabled.
  */
 class MenuItem extends ChromeObject {
-  static MenuItem create(JsObject proxy) => new MenuItem(proxy);
+  static MenuItem create(JsObject proxy) => proxy == null ? null : new MenuItem(proxy);
 
   MenuItem(JsObject proxy): super(proxy);
 

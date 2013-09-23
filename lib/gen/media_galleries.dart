@@ -1,8 +1,5 @@
 /* This file has been generated from media_galleries.idl - do not edit */
 
-/**
- * 
- */
 library chrome.mediaGalleries;
 
 import '../src/common.dart';
@@ -27,13 +24,13 @@ class ChromeMediaGalleries {
 }
 
 class MediaFileSystemsDetails extends ChromeObject {
-  static MediaFileSystemsDetails create(JsObject proxy) => new MediaFileSystemsDetails(proxy);
+  static MediaFileSystemsDetails create(JsObject proxy) => proxy == null ? null : new MediaFileSystemsDetails(proxy);
 
   MediaFileSystemsDetails(JsObject proxy): super(proxy);
 }
 
 class MediaFileSystemMetadata extends ChromeObject {
-  static MediaFileSystemMetadata create(JsObject proxy) => new MediaFileSystemMetadata(proxy);
+  static MediaFileSystemMetadata create(JsObject proxy) => proxy == null ? null : new MediaFileSystemMetadata(proxy);
 
   MediaFileSystemMetadata(JsObject proxy): super(proxy);
 }

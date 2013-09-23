@@ -1,8 +1,5 @@
 /* This file has been generated from tab_capture.idl - do not edit */
 
-/**
- * 
- */
 library chrome.tabCapture;
 
 import '../src/common.dart';
@@ -34,19 +31,19 @@ class ChromeTabCapture {
 }
 
 class CaptureInfo extends ChromeObject {
-  static CaptureInfo create(JsObject proxy) => new CaptureInfo(proxy);
+  static CaptureInfo create(JsObject proxy) => proxy == null ? null : new CaptureInfo(proxy);
 
   CaptureInfo(JsObject proxy): super(proxy);
 }
 
 class MediaStreamConstraint extends ChromeObject {
-  static MediaStreamConstraint create(JsObject proxy) => new MediaStreamConstraint(proxy);
+  static MediaStreamConstraint create(JsObject proxy) => proxy == null ? null : new MediaStreamConstraint(proxy);
 
   MediaStreamConstraint(JsObject proxy): super(proxy);
 }
 
 class CaptureOptions extends ChromeObject {
-  static CaptureOptions create(JsObject proxy) => new CaptureOptions(proxy);
+  static CaptureOptions create(JsObject proxy) => proxy == null ? null : new CaptureOptions(proxy);
 
   CaptureOptions(JsObject proxy): super(proxy);
 }

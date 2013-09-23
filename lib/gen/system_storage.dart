@@ -1,8 +1,5 @@
 /* This file has been generated from system_storage.idl - do not edit */
 
-/**
- * 
- */
 library chrome.system_storage;
 
 import '../src/common.dart';
@@ -39,7 +36,7 @@ class ChromeSystemStorage {
 }
 
 class StorageUnitInfo extends ChromeObject {
-  static StorageUnitInfo create(JsObject proxy) => new StorageUnitInfo(proxy);
+  static StorageUnitInfo create(JsObject proxy) => proxy == null ? null : new StorageUnitInfo(proxy);
 
   StorageUnitInfo(JsObject proxy): super(proxy);
 }

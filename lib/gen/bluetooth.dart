@@ -1,8 +1,5 @@
 /* This file has been generated from bluetooth.idl - do not edit */
 
-/**
- * 
- */
 library chrome.bluetooth;
 
 import '../src/common.dart';
@@ -111,91 +108,91 @@ class ChromeBluetooth {
 }
 
 class AdapterState extends ChromeObject {
-  static AdapterState create(JsObject proxy) => new AdapterState(proxy);
+  static AdapterState create(JsObject proxy) => proxy == null ? null : new AdapterState(proxy);
 
   AdapterState(JsObject proxy): super(proxy);
 }
 
 class Device extends ChromeObject {
-  static Device create(JsObject proxy) => new Device(proxy);
+  static Device create(JsObject proxy) => proxy == null ? null : new Device(proxy);
 
   Device(JsObject proxy): super(proxy);
 }
 
 class Profile extends ChromeObject {
-  static Profile create(JsObject proxy) => new Profile(proxy);
+  static Profile create(JsObject proxy) => proxy == null ? null : new Profile(proxy);
 
   Profile(JsObject proxy): super(proxy);
 }
 
 class ServiceRecord extends ChromeObject {
-  static ServiceRecord create(JsObject proxy) => new ServiceRecord(proxy);
+  static ServiceRecord create(JsObject proxy) => proxy == null ? null : new ServiceRecord(proxy);
 
   ServiceRecord(JsObject proxy): super(proxy);
 }
 
 class Socket extends ChromeObject {
-  static Socket create(JsObject proxy) => new Socket(proxy);
+  static Socket create(JsObject proxy) => proxy == null ? null : new Socket(proxy);
 
   Socket(JsObject proxy): super(proxy);
 }
 
 class OutOfBandPairingData extends ChromeObject {
-  static OutOfBandPairingData create(JsObject proxy) => new OutOfBandPairingData(proxy);
+  static OutOfBandPairingData create(JsObject proxy) => proxy == null ? null : new OutOfBandPairingData(proxy);
 
   OutOfBandPairingData(JsObject proxy): super(proxy);
 }
 
 class GetDevicesOptions extends ChromeObject {
-  static GetDevicesOptions create(JsObject proxy) => new GetDevicesOptions(proxy);
+  static GetDevicesOptions create(JsObject proxy) => proxy == null ? null : new GetDevicesOptions(proxy);
 
   GetDevicesOptions(JsObject proxy): super(proxy);
 }
 
 class GetProfilesOptions extends ChromeObject {
-  static GetProfilesOptions create(JsObject proxy) => new GetProfilesOptions(proxy);
+  static GetProfilesOptions create(JsObject proxy) => proxy == null ? null : new GetProfilesOptions(proxy);
 
   GetProfilesOptions(JsObject proxy): super(proxy);
 }
 
 class GetServicesOptions extends ChromeObject {
-  static GetServicesOptions create(JsObject proxy) => new GetServicesOptions(proxy);
+  static GetServicesOptions create(JsObject proxy) => proxy == null ? null : new GetServicesOptions(proxy);
 
   GetServicesOptions(JsObject proxy): super(proxy);
 }
 
 class ConnectOptions extends ChromeObject {
-  static ConnectOptions create(JsObject proxy) => new ConnectOptions(proxy);
+  static ConnectOptions create(JsObject proxy) => proxy == null ? null : new ConnectOptions(proxy);
 
   ConnectOptions(JsObject proxy): super(proxy);
 }
 
 class DisconnectOptions extends ChromeObject {
-  static DisconnectOptions create(JsObject proxy) => new DisconnectOptions(proxy);
+  static DisconnectOptions create(JsObject proxy) => proxy == null ? null : new DisconnectOptions(proxy);
 
   DisconnectOptions(JsObject proxy): super(proxy);
 }
 
 class ReadOptions extends ChromeObject {
-  static ReadOptions create(JsObject proxy) => new ReadOptions(proxy);
+  static ReadOptions create(JsObject proxy) => proxy == null ? null : new ReadOptions(proxy);
 
   ReadOptions(JsObject proxy): super(proxy);
 }
 
 class WriteOptions extends ChromeObject {
-  static WriteOptions create(JsObject proxy) => new WriteOptions(proxy);
+  static WriteOptions create(JsObject proxy) => proxy == null ? null : new WriteOptions(proxy);
 
   WriteOptions(JsObject proxy): super(proxy);
 }
 
 class SetOutOfBandPairingDataOptions extends ChromeObject {
-  static SetOutOfBandPairingDataOptions create(JsObject proxy) => new SetOutOfBandPairingDataOptions(proxy);
+  static SetOutOfBandPairingDataOptions create(JsObject proxy) => proxy == null ? null : new SetOutOfBandPairingDataOptions(proxy);
 
   SetOutOfBandPairingDataOptions(JsObject proxy): super(proxy);
 }
 
 class StartDiscoveryOptions extends ChromeObject {
-  static StartDiscoveryOptions create(JsObject proxy) => new StartDiscoveryOptions(proxy);
+  static StartDiscoveryOptions create(JsObject proxy) => proxy == null ? null : new StartDiscoveryOptions(proxy);
 
   StartDiscoveryOptions(JsObject proxy): super(proxy);
 }

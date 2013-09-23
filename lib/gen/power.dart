@@ -1,8 +1,5 @@
 /* This file has been generated from power.idl - do not edit */
 
-/**
- * 
- */
 library chrome.power;
 
 import '../src/common.dart';

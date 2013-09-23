@@ -1,8 +1,5 @@
 /* This file has been generated from alarms.idl - do not edit */
 
-/**
- * 
- */
 library chrome.alarms;
 
 import '../src/common.dart';
@@ -46,13 +43,13 @@ class ChromeAlarms {
 }
 
 class Alarm extends ChromeObject {
-  static Alarm create(JsObject proxy) => new Alarm(proxy);
+  static Alarm create(JsObject proxy) => proxy == null ? null : new Alarm(proxy);
 
   Alarm(JsObject proxy): super(proxy);
 }
 
 class AlarmCreateInfo extends ChromeObject {
-  static AlarmCreateInfo create(JsObject proxy) => new AlarmCreateInfo(proxy);
+  static AlarmCreateInfo create(JsObject proxy) => proxy == null ? null : new AlarmCreateInfo(proxy);
 
   AlarmCreateInfo(JsObject proxy): super(proxy);
 }

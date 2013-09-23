@@ -301,29 +301,28 @@ class JsonConverter {
     } else if (t.type == 'object' && t.isInstanceOf == null) {
       type.type = "Map";
 
-      // create documentation from the type's properties
-      if (t.properties.isNotEmpty) {
-        String propertyDocs = t.properties.map((p) {
-          if (p.description != null) {
-            return "`${p.name}` ${convertHtmlToDartdoc(p.description)}";
-          } else {
-            return "`${p.name}`";
-          }
-        }).join("\n\n");
-
-        if (type.documentation != null) {
-          type.documentation = "${type.documentation}\n\n${propertyDocs}";
-        } else {
-          type.documentation = propertyDocs;
-        }
-      }
+//      // create documentation from the type's properties
+//      if (t.properties.isNotEmpty) {
+//        String propertyDocs = t.properties.map((p) {
+//          if (p.description != null) {
+//            return "`${p.name}` ${convertHtmlToDartdoc(p.description)}";
+//          } else {
+//            return "`${p.name}`";
+//          }
+//        }).join("\n\n");
+//
+//        if (type.documentation != null) {
+//          type.documentation = "${type.documentation}\n\n${propertyDocs}";
+//        } else {
+//          type.documentation = propertyDocs;
+//        }
+//      }
 
 //    } else if (t.type == 'object' && t.isInstanceOf != null) {
 //      type.type = "var";
 //      type.refName = t.isInstanceOf;
 //      library.addImport(getImportForClass(type.refName));
     } else if (t.ref != null) {
-      // TODO: ensure that we are pulling out the correct type
       type.type = "var";
 
       List<String> names = parseQualifiedName(t.ref);

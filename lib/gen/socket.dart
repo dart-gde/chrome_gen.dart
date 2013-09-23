@@ -1,8 +1,5 @@
 /* This file has been generated from socket.idl - do not edit */
 
-/**
- * 
- */
 library chrome.socket;
 
 import '../src/common.dart';
@@ -133,49 +130,49 @@ class ChromeSocket {
 }
 
 class CreateOptions extends ChromeObject {
-  static CreateOptions create(JsObject proxy) => new CreateOptions(proxy);
+  static CreateOptions create(JsObject proxy) => proxy == null ? null : new CreateOptions(proxy);
 
   CreateOptions(JsObject proxy): super(proxy);
 }
 
 class CreateInfo extends ChromeObject {
-  static CreateInfo create(JsObject proxy) => new CreateInfo(proxy);
+  static CreateInfo create(JsObject proxy) => proxy == null ? null : new CreateInfo(proxy);
 
   CreateInfo(JsObject proxy): super(proxy);
 }
 
 class AcceptInfo extends ChromeObject {
-  static AcceptInfo create(JsObject proxy) => new AcceptInfo(proxy);
+  static AcceptInfo create(JsObject proxy) => proxy == null ? null : new AcceptInfo(proxy);
 
   AcceptInfo(JsObject proxy): super(proxy);
 }
 
 class ReadInfo extends ChromeObject {
-  static ReadInfo create(JsObject proxy) => new ReadInfo(proxy);
+  static ReadInfo create(JsObject proxy) => proxy == null ? null : new ReadInfo(proxy);
 
   ReadInfo(JsObject proxy): super(proxy);
 }
 
 class WriteInfo extends ChromeObject {
-  static WriteInfo create(JsObject proxy) => new WriteInfo(proxy);
+  static WriteInfo create(JsObject proxy) => proxy == null ? null : new WriteInfo(proxy);
 
   WriteInfo(JsObject proxy): super(proxy);
 }
 
 class RecvFromInfo extends ChromeObject {
-  static RecvFromInfo create(JsObject proxy) => new RecvFromInfo(proxy);
+  static RecvFromInfo create(JsObject proxy) => proxy == null ? null : new RecvFromInfo(proxy);
 
   RecvFromInfo(JsObject proxy): super(proxy);
 }
 
 class SocketInfo extends ChromeObject {
-  static SocketInfo create(JsObject proxy) => new SocketInfo(proxy);
+  static SocketInfo create(JsObject proxy) => proxy == null ? null : new SocketInfo(proxy);
 
   SocketInfo(JsObject proxy): super(proxy);
 }
 
 class NetworkInterface extends ChromeObject {
-  static NetworkInterface create(JsObject proxy) => new NetworkInterface(proxy);
+  static NetworkInterface create(JsObject proxy) => proxy == null ? null : new NetworkInterface(proxy);
 
   NetworkInterface(JsObject proxy): super(proxy);
 }

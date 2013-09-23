@@ -21,17 +21,6 @@ class ChromeHistory {
   /**
    * Searches the history for the last visit time of each page matching the
    * query.
-   * 
-   * [query] `text` A free-text query to the history service.  Leave empty to
-   * retrieve all pages.
-   * 
-   * `startTime` Limit results to those visited after this date, represented in
-   * milliseconds since the epoch.
-   * 
-   * `endTime` Limit results to those visited before this date, represented in
-   * milliseconds since the epoch.
-   * 
-   * `maxResults` The maximum number of results to retrieve.  Defaults to 100.
    */
   Future<List<HistoryItem>> search(Map query) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, HistoryItem.create));
@@ -41,9 +30,6 @@ class ChromeHistory {
 
   /**
    * Retrieves information about visits to a URL.
-   * 
-   * [details] `url` The URL for which to retrieve visit information.  It must
-   * be in the format as returned from a call to history.search.
    */
   Future<List<VisitItem>> getVisits(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, VisitItem.create));
@@ -54,8 +40,6 @@ class ChromeHistory {
   /**
    * Adds a URL to the history at the current time with a [transition
    * type](#transition_types) of "link".
-   * 
-   * [details] `url` The URL to add.
    */
   Future addUrl(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -65,8 +49,6 @@ class ChromeHistory {
 
   /**
    * Removes all occurrences of the given URL from the history.
-   * 
-   * [details] `url` The URL to remove.
    */
   Future deleteUrl(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -78,12 +60,6 @@ class ChromeHistory {
    * Removes all items within the specified date range from the history.  Pages
    * will not be removed from the history unless all visits fall within the
    * range.
-   * 
-   * [range] `startTime` Items added to history after this date, represented in
-   * milliseconds since the epoch.
-   * 
-   * `endTime` Items added to history before this date, represented in
-   * milliseconds since the epoch.
    */
   Future deleteRange(Map range) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -121,23 +97,9 @@ class ChromeHistory {
 
 /**
  * An object encapsulating one result of a history query.
- * 
- * `id` The unique identifier for the item.
- * 
- * `url` The URL navigated to by a user.
- * 
- * `title` The title of the page when it was last loaded.
- * 
- * `lastVisitTime` When this page was last loaded, represented in milliseconds
- * since the epoch.
- * 
- * `visitCount` The number of times the user has navigated to this page.
- * 
- * `typedCount` The number of times the user has navigated to this page by
- * typing in the address.
  */
 class HistoryItem extends ChromeObject {
-  static HistoryItem create(JsObject proxy) => new HistoryItem(proxy);
+  static HistoryItem create(JsObject proxy) => proxy == null ? null : new HistoryItem(proxy);
 
   HistoryItem(JsObject proxy): super(proxy);
 
@@ -176,21 +138,9 @@ class HistoryItem extends ChromeObject {
 
 /**
  * An object encapsulating one visit to a URL.
- * 
- * `id` The unique identifier for the item.
- * 
- * `visitId` The unique identifier for this visit.
- * 
- * `visitTime` When this visit occurred, represented in milliseconds since the
- * epoch.
- * 
- * `referringVisitId` The visit ID of the referrer.
- * 
- * `transition` The [transition type](#transition_types) for this visit from its
- * referrer.
  */
 class VisitItem extends ChromeObject {
-  static VisitItem create(JsObject proxy) => new VisitItem(proxy);
+  static VisitItem create(JsObject proxy) => proxy == null ? null : new VisitItem(proxy);
 
   VisitItem(JsObject proxy): super(proxy);
 

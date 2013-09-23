@@ -36,15 +36,8 @@ class ChromeCommands {
       new ChromeStreamController<String>.oneArg(_commands['onCommand'], selfConverter);
 }
 
-/**
- * `name` The name of the Extension Command
- * 
- * `description` The Extension Command description
- * 
- * `shortcut` The shortcut active for this command, or blank if not active.
- */
 class Command extends ChromeObject {
-  static Command create(JsObject proxy) => new Command(proxy);
+  static Command create(JsObject proxy) => proxy == null ? null : new Command(proxy);
 
   Command(JsObject proxy): super(proxy);
 

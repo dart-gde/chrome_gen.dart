@@ -86,13 +86,8 @@ class ChromePermissions {
       new ChromeStreamController<Permissions>.oneArg(_permissions['onRemoved'], Permissions.create);
 }
 
-/**
- * `permissions` List of named permissions (does not include hosts or origins).
- * 
- * `origins` List of origin permissions.
- */
 class Permissions extends ChromeObject {
-  static Permissions create(JsObject proxy) => new Permissions(proxy);
+  static Permissions create(JsObject proxy) => proxy == null ? null : new Permissions(proxy);
 
   Permissions(JsObject proxy): super(proxy);
 

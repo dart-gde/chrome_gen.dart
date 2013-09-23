@@ -51,18 +51,18 @@ class ChromeOmnibox {
   /**
    * User has changed what is typed into the omnibox.
    */
-  Stream<dynamic> get onInputChanged => _onInputChanged.stream;
+  Stream<OnInputChangedEvent> get onInputChanged => _onInputChanged.stream;
 
-  final ChromeStreamController<dynamic> _onInputChanged =
-      new ChromeStreamController<dynamic>.oneArg(_omnibox['onInputChanged'], selfConverter);
+  final ChromeStreamController<OnInputChangedEvent> _onInputChanged =
+      new ChromeStreamController<OnInputChangedEvent>.twoArgs(_omnibox['onInputChanged'], OnInputChangedEvent.create);
 
   /**
    * User has accepted what is typed into the omnibox.
    */
-  Stream<dynamic> get onInputEntered => _onInputEntered.stream;
+  Stream<OnInputEnteredEvent> get onInputEntered => _onInputEntered.stream;
 
-  final ChromeStreamController<dynamic> _onInputEntered =
-      new ChromeStreamController<dynamic>.oneArg(_omnibox['onInputEntered'], selfConverter);
+  final ChromeStreamController<OnInputEnteredEvent> _onInputEntered =
+      new ChromeStreamController<OnInputEnteredEvent>.twoArgs(_omnibox['onInputEntered'], OnInputEnteredEvent.create);
 
   /**
    * User has ended the keyword input session without accepting the input.
@@ -74,25 +74,48 @@ class ChromeOmnibox {
 }
 
 /**
+ * User has changed what is typed into the omnibox.
+ */
+class OnInputChangedEvent {
+  static OnInputChangedEvent create(String text, JsObject suggest) =>
+      new OnInputChangedEvent(text, suggest);
+
+  String text;
+
+  /**
+   * A callback passed to the onInputChanged event used for sending suggestions
+   * back to the browser.
+   */
+  dynamic suggest;
+
+  OnInputChangedEvent(this.text, this.suggest);
+}
+
+/**
+ * User has accepted what is typed into the omnibox.
+ */
+class OnInputEnteredEvent {
+  static OnInputEnteredEvent create(String text, String disposition) =>
+      new OnInputEnteredEvent(text, disposition);
+
+  String text;
+
+  /**
+   * The window disposition for the omnibox query. This is the recommended
+   * context to display results. For example, if the omnibox command is to
+   * navigate to a certain URL, a disposition of 'newForegroundTab' means the
+   * navigation should take place in a new selected tab.
+   */
+  String disposition;
+
+  OnInputEnteredEvent(this.text, this.disposition);
+}
+
+/**
  * A suggest result.
- * 
- * `content` The text that is put into the URL bar, and that is sent to the
- * extension when the user chooses this entry.
- * 
- * `description` The text that is displayed in the URL dropdown. Can contain
- * XML-style markup for styling. The supported tags are 'url' (for a literal
- * URL), 'match' (for highlighting text that matched what the user's query), and
- * 'dim' (for dim helper text). The styles can be nested, eg. <dim><match>dimmed
- * match</match></dim>.
- * 
- * `descriptionStyles` An array of style ranges for the description, as provided
- * by the extension.
- * 
- * `descriptionStylesRaw` An array of style ranges for the description, as
- * provided by ToValue().
  */
 class SuggestResult extends ChromeObject {
-  static SuggestResult create(JsObject proxy) => new SuggestResult(proxy);
+  static SuggestResult create(JsObject proxy) => proxy == null ? null : new SuggestResult(proxy);
 
   SuggestResult(JsObject proxy): super(proxy);
 
@@ -114,21 +137,9 @@ class SuggestResult extends ChromeObject {
 
 /**
  * A suggest result.
- * 
- * `description` The text that is displayed in the URL dropdown. Can contain
- * XML-style markup for styling. The supported tags are 'url' (for a literal
- * URL), 'match' (for highlighting text that matched what the user's query), and
- * 'dim' (for dim helper text). The styles can be nested, eg. <dim><match>dimmed
- * match</match></dim>.
- * 
- * `descriptionStyles` An array of style ranges for the description, as provided
- * by the extension.
- * 
- * `descriptionStylesRaw` An array of style ranges for the description, as
- * provided by ToValue().
  */
 class DefaultSuggestResult extends ChromeObject {
-  static DefaultSuggestResult create(JsObject proxy) => new DefaultSuggestResult(proxy);
+  static DefaultSuggestResult create(JsObject proxy) => proxy == null ? null : new DefaultSuggestResult(proxy);
 
   DefaultSuggestResult(JsObject proxy): super(proxy);
 

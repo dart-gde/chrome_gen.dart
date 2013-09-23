@@ -21,17 +21,6 @@ class ChromeBrowsingData {
    * data' settings UI.  Note: some of the data types included in this API are
    * not available in the settings UI, and some UI settings control more than
    * one data type listed here.
-   * 
-   * Returns:
-   * `options`
-   * 
-   * `dataToRemove` All of the types will be present in the result, with values
-   * of `true` if they are both selected to be removed and permitted to be
-   * removed, otherwise `false`.
-   * 
-   * `dataRemovalPermitted` All of the types will be present in the result, with
-   * values of `true` if they are permitted to be removed (e.g., by enterprise
-   * policy) and `false` if not.
    */
   Future<Map> settings() {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
@@ -163,19 +152,9 @@ class ChromeBrowsingData {
 
 /**
  * Options that determine exactly what data will be removed.
- * 
- * `since` Remove data accumulated on or after this date, represented in
- * milliseconds since the epoch (accessible via the `getTime` method of the
- * JavaScript `Date` object). If absent, defaults to 0 (which would remove all
- * browsing data).
- * 
- * `originTypes` An object whose properties specify which origin types ought to
- * be cleared. If this object isn't specified, it defaults to clearing only
- * "unprotected" origins. Please ensure that you _really_ want to remove
- * application data before adding 'protectedWeb' or 'extensions'.
  */
 class RemovalOptions extends ChromeObject {
-  static RemovalOptions create(JsObject proxy) => new RemovalOptions(proxy);
+  static RemovalOptions create(JsObject proxy) => proxy == null ? null : new RemovalOptions(proxy);
 
   RemovalOptions(JsObject proxy): super(proxy);
 
@@ -192,50 +171,15 @@ class RemovalOptions extends ChromeObject {
    * If this object isn't specified, it defaults to clearing only "unprotected"
    * origins. Please ensure that you _really_ want to remove application data
    * before adding 'protectedWeb' or 'extensions'.
-   * 
-   * `unprotectedWeb` Normal websites.
-   * 
-   * `protectedWeb` Websites that have been installed as hosted applications (be
-   * careful!).
-   * 
-   * `extension` Extensions and packaged applications a user has installed (be
-   * _really_ careful!).
    */
   Map get originTypes => mapify(proxy['originTypes']);
 }
 
 /**
  * A set of data types. Missing data types are interpreted as `false`.
- * 
- * `appcache` Websites' appcaches.
- * 
- * `cache` The browser's cache. Note: when removing data, this clears the
- * _entire_ cache: it is not limited to the range you specify.
- * 
- * `cookies` The browser's cookies.
- * 
- * `downloads` The browser's download list.
- * 
- * `fileSystems` Websites' file systems.
- * 
- * `formData` The browser's stored form data.
- * 
- * `history` The browser's history.
- * 
- * `indexedDB` Websites' IndexedDB data.
- * 
- * `localStorage` Websites' local storage data.
- * 
- * `serverBoundCertificates` Server-bound certificates.
- * 
- * `pluginData` Plugins' data.
- * 
- * `passwords` Stored passwords.
- * 
- * `webSQL` Websites' WebSQL data.
  */
 class DataTypeSet extends ChromeObject {
-  static DataTypeSet create(JsObject proxy) => new DataTypeSet(proxy);
+  static DataTypeSet create(JsObject proxy) => proxy == null ? null : new DataTypeSet(proxy);
 
   DataTypeSet(JsObject proxy): super(proxy);
 

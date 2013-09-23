@@ -1,8 +1,5 @@
 /* This file has been generated from system_cpu.idl - do not edit */
 
-/**
- * 
- */
 library chrome.system_cpu;
 
 import '../src/common.dart';
@@ -23,7 +20,7 @@ class ChromeSystemCpu {
 }
 
 class CpuInfo extends ChromeObject {
-  static CpuInfo create(JsObject proxy) => new CpuInfo(proxy);
+  static CpuInfo create(JsObject proxy) => proxy == null ? null : new CpuInfo(proxy);
 
   CpuInfo(JsObject proxy): super(proxy);
 }

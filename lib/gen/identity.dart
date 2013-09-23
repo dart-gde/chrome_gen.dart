@@ -1,8 +1,5 @@
 /* This file has been generated from identity.idl - do not edit */
 
-/**
- * 
- */
 library chrome.identity;
 
 import '../src/common.dart';
@@ -35,19 +32,19 @@ class ChromeIdentity {
 }
 
 class TokenDetails extends ChromeObject {
-  static TokenDetails create(JsObject proxy) => new TokenDetails(proxy);
+  static TokenDetails create(JsObject proxy) => proxy == null ? null : new TokenDetails(proxy);
 
   TokenDetails(JsObject proxy): super(proxy);
 }
 
 class InvalidTokenDetails extends ChromeObject {
-  static InvalidTokenDetails create(JsObject proxy) => new InvalidTokenDetails(proxy);
+  static InvalidTokenDetails create(JsObject proxy) => proxy == null ? null : new InvalidTokenDetails(proxy);
 
   InvalidTokenDetails(JsObject proxy): super(proxy);
 }
 
 class WebAuthFlowDetails extends ChromeObject {
-  static WebAuthFlowDetails create(JsObject proxy) => new WebAuthFlowDetails(proxy);
+  static WebAuthFlowDetails create(JsObject proxy) => proxy == null ? null : new WebAuthFlowDetails(proxy);
 
   WebAuthFlowDetails(JsObject proxy): super(proxy);
 }

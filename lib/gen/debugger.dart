@@ -85,35 +85,81 @@ class ChromeDebugger {
   /**
    * Fired whenever debugging target issues instrumentation event.
    */
-  Stream<dynamic> get onEvent => _onEvent.stream;
+  Stream<OnEventEvent> get onEvent => _onEvent.stream;
 
-  final ChromeStreamController<dynamic> _onEvent =
-      new ChromeStreamController<dynamic>.oneArg(_debugger['onEvent'], selfConverter);
+  final ChromeStreamController<OnEventEvent> _onEvent =
+      new ChromeStreamController<OnEventEvent>.threeArgs(_debugger['onEvent'], OnEventEvent.create);
 
   /**
    * Fired when browser terminates debugging session for the tab. This happens
    * when either the tab is being closed or Chrome DevTools is being invoked for
    * the attached tab.
    */
-  Stream<dynamic> get onDetach => _onDetach.stream;
+  Stream<OnDetachEvent> get onDetach => _onDetach.stream;
 
-  final ChromeStreamController<dynamic> _onDetach =
-      new ChromeStreamController<dynamic>.oneArg(_debugger['onDetach'], selfConverter);
+  final ChromeStreamController<OnDetachEvent> _onDetach =
+      new ChromeStreamController<OnDetachEvent>.twoArgs(_debugger['onDetach'], OnDetachEvent.create);
+}
+
+/**
+ * Fired whenever debugging target issues instrumentation event.
+ */
+class OnEventEvent {
+  static OnEventEvent create(JsObject source, String method, JsObject params) =>
+      new OnEventEvent(Debuggee.create(source), method, mapify(params));
+
+  /**
+   * The debuggee that generated this event.
+   */
+  Debuggee source;
+
+  /**
+   * Method name. Should be one of the notifications defined by the [remote
+   * debugging
+   * protocol](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
+   */
+  String method;
+
+  /**
+   * JSON object with the response. Structure of the response varies depending
+   * on the method and is defined by the remote debugging protocol.
+   * `optional`
+   * 
+   * JSON object with the response. Structure of the response varies depending
+   * on the method and is defined by the remote debugging protocol.
+   */
+  Map params;
+
+  OnEventEvent(this.source, this.method, this.params);
+}
+
+/**
+ * Fired when browser terminates debugging session for the tab. This happens
+ * when either the tab is being closed or Chrome DevTools is being invoked for
+ * the attached tab.
+ */
+class OnDetachEvent {
+  static OnDetachEvent create(JsObject source, String reason) =>
+      new OnDetachEvent(Debuggee.create(source), reason);
+
+  /**
+   * The debuggee that was detached.
+   */
+  Debuggee source;
+
+  /**
+   * Connection termination reason.
+   */
+  String reason;
+
+  OnDetachEvent(this.source, this.reason);
 }
 
 /**
  * Debuggee identifier. Either tabId or extensionId must be specified
- * 
- * `tabId` The id of the tab which you intend to debug.
- * 
- * `extensionId` The id of the extension which you intend to debug. Attaching to
- * an extension background page is only possible when 'enable-silent-debugging'
- * flag is enabled on the target browser.
- * 
- * `targetId` The opaque id of the debug target.
  */
 class Debuggee extends ChromeObject {
-  static Debuggee create(JsObject proxy) => new Debuggee(proxy);
+  static Debuggee create(JsObject proxy) => proxy == null ? null : new Debuggee(proxy);
 
   Debuggee(JsObject proxy): super(proxy);
 
@@ -137,25 +183,9 @@ class Debuggee extends ChromeObject {
 
 /**
  * Debug target information
- * 
- * `type` Target type.
- * 
- * `id` Target id.
- * 
- * `tabId` The tab id, defined if type == 'page'.
- * 
- * `extensionId` The extension id, defined if type = 'background_page'.
- * 
- * `attached` True if debugger is already attached.
- * 
- * `title` Target page title.
- * 
- * `url` Target URL.
- * 
- * `faviconUrl` Target favicon URL.
  */
 class TargetInfo extends ChromeObject {
-  static TargetInfo create(JsObject proxy) => new TargetInfo(proxy);
+  static TargetInfo create(JsObject proxy) => proxy == null ? null : new TargetInfo(proxy);
 
   TargetInfo(JsObject proxy): super(proxy);
 

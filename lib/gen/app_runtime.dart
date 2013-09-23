@@ -1,8 +1,5 @@
 /* This file has been generated from app_runtime.idl - do not edit */
 
-/**
- * 
- */
 library chrome.app_runtime;
 
 import '../src/common.dart';
@@ -27,13 +24,13 @@ class ChromeAppRuntime {
 }
 
 class LaunchItem extends ChromeObject {
-  static LaunchItem create(JsObject proxy) => new LaunchItem(proxy);
+  static LaunchItem create(JsObject proxy) => proxy == null ? null : new LaunchItem(proxy);
 
   LaunchItem(JsObject proxy): super(proxy);
 }
 
 class LaunchData extends ChromeObject {
-  static LaunchData create(JsObject proxy) => new LaunchData(proxy);
+  static LaunchData create(JsObject proxy) => proxy == null ? null : new LaunchData(proxy);
 
   LaunchData(JsObject proxy): super(proxy);
 }

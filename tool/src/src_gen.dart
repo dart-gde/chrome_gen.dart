@@ -101,7 +101,7 @@ class DartGenerator {
 /// Wrap a string on column boundaries.
 String wrap(String str, [int col = 80]) {
   // The given string could contain newlines.
-  // TODO: this need to do a better job of not wrapping things like
+  // TODO: this needs to do a better job of not line wrapping things like:
   // [foo bar](index.html).
   List lines = str.split('\n');
   return lines.map((l) => _simpleWrap(l, col)).join('\n');

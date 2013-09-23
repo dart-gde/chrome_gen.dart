@@ -17,12 +17,6 @@ class ChromeFontSettings {
 
   /**
    * Clears the font set by this extension, if any.
-   * 
-   * [details] `script` The script for which the font should be cleared. If
-   * omitted, the global script font setting is cleared.
-   * 
-   * `genericFamily` The generic font family for which the font should be
-   * cleared.
    */
   Future clearFont(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -32,22 +26,6 @@ class ChromeFontSettings {
 
   /**
    * Gets the font for a given script and generic font family.
-   * 
-   * [details] `script` The script for which the font should be retrieved. If
-   * omitted, the font setting for the global script (script code "Zyyy") is
-   * retrieved.
-   * 
-   * `genericFamily` The generic font family for which the font should be
-   * retrieved.
-   * 
-   * Returns:
-   * `fontId` The font ID. Rather than the literal font ID preference value,
-   * this may be the ID of the font that the system resolves the preference
-   * value to. So, [fontId] can differ from the font passed to `setFont`, if,
-   * for example, the font is not available on the system. The empty string
-   * signifies fallback to the global script font setting.
-   * 
-   * `levelOfControl` The level of control this extension has over the setting.
    */
   Future<Map> getFont(Map details) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
@@ -57,15 +35,6 @@ class ChromeFontSettings {
 
   /**
    * Sets the font for a given script and generic font family.
-   * 
-   * [details] `script` The script code which the font should be set. If
-   * omitted, the font setting for the global script (script code "Zyyy") is
-   * set.
-   * 
-   * `genericFamily` The generic font family for which the font should be set.
-   * 
-   * `fontId` The font ID. The empty string means to fallback to the global
-   * script font setting.
    */
   Future setFont(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -97,11 +66,6 @@ class ChromeFontSettings {
    * Gets the default font size.
    * 
    * [details] This parameter is currently unused.
-   * 
-   * Returns:
-   * `pixelSize` The font size in pixels.
-   * 
-   * `levelOfControl` The level of control this extension has over the setting.
    */
   Future<Map> getDefaultFontSize([Map details]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
@@ -111,8 +75,6 @@ class ChromeFontSettings {
 
   /**
    * Sets the default font size.
-   * 
-   * [details] `pixelSize` The font size in pixels.
    */
   Future setDefaultFontSize(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -135,11 +97,6 @@ class ChromeFontSettings {
    * Gets the default size for fixed width fonts.
    * 
    * [details] This parameter is currently unused.
-   * 
-   * Returns:
-   * `pixelSize` The font size in pixels.
-   * 
-   * `levelOfControl` The level of control this extension has over the setting.
    */
   Future<Map> getDefaultFixedFontSize([Map details]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
@@ -149,8 +106,6 @@ class ChromeFontSettings {
 
   /**
    * Sets the default size for fixed width fonts.
-   * 
-   * [details] `pixelSize` The font size in pixels.
    */
   Future setDefaultFixedFontSize(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -173,11 +128,6 @@ class ChromeFontSettings {
    * Gets the minimum font size.
    * 
    * [details] This parameter is currently unused.
-   * 
-   * Returns:
-   * `pixelSize` The font size in pixels.
-   * 
-   * `levelOfControl` The level of control this extension has over the setting.
    */
   Future<Map> getMinimumFontSize([Map details]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
@@ -187,8 +137,6 @@ class ChromeFontSettings {
 
   /**
    * Sets the minimum font size.
-   * 
-   * [details] `pixelSize` The font size in pixels.
    */
   Future setMinimumFontSize(Map details) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
@@ -231,13 +179,9 @@ class ChromeFontSettings {
 
 /**
  * Represents a font name.
- * 
- * `fontId` The font ID.
- * 
- * `displayName` The display name of the font.
  */
 class FontName extends ChromeObject {
-  static FontName create(JsObject proxy) => new FontName(proxy);
+  static FontName create(JsObject proxy) => proxy == null ? null : new FontName(proxy);
 
   FontName(JsObject proxy): super(proxy);
 
@@ -257,7 +201,7 @@ class FontName extends ChromeObject {
  * script code "Zyyy".
  */
 class ScriptCode extends ChromeObject {
-  static ScriptCode create(JsObject proxy) => new ScriptCode(proxy);
+  static ScriptCode create(JsObject proxy) => proxy == null ? null : new ScriptCode(proxy);
 
   ScriptCode(JsObject proxy): super(proxy);
 }
@@ -266,7 +210,7 @@ class ScriptCode extends ChromeObject {
  * A CSS generic font family.
  */
 class GenericFamily extends ChromeObject {
-  static GenericFamily create(JsObject proxy) => new GenericFamily(proxy);
+  static GenericFamily create(JsObject proxy) => proxy == null ? null : new GenericFamily(proxy);
 
   GenericFamily(JsObject proxy): super(proxy);
 }
@@ -279,7 +223,7 @@ class GenericFamily extends ChromeObject {
  * extension
  */
 class LevelOfControl extends ChromeObject {
-  static LevelOfControl create(JsObject proxy) => new LevelOfControl(proxy);
+  static LevelOfControl create(JsObject proxy) => proxy == null ? null : new LevelOfControl(proxy);
 
   LevelOfControl(JsObject proxy): super(proxy);
 }

@@ -51,7 +51,7 @@ class ChromeDevtoolsNetwork {
  * on). See HAR Specification for reference.
  */
 class Request extends ChromeObject {
-  static Request create(JsObject proxy) => new Request(proxy);
+  static Request create(JsObject proxy) => proxy == null ? null : new Request(proxy);
 
   Request(JsObject proxy): super(proxy);
 }

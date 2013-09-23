@@ -44,22 +44,6 @@ class ChromeDevtoolsInspectedWindow {
 
   /**
    * Reloads the inspected page.
-   * 
-   * [reloadOptions] `ignoreCache` When true, the loader will ignore the cache
-   * for all inspected page resources loaded before the `load` event is fired.
-   * The effect is similar to pressing Ctrl+Shift+R in the inspected window or
-   * within the Developer Tools window.
-   * 
-   * `userAgent` If specified, the string will override the value of the
-   * `User-Agent` HTTP header that's sent while loading the resources of the
-   * inspected page. The string will also override the value of the
-   * `navigator.userAgent` property that's returned to any scripts that are
-   * running within the inspected page.
-   * 
-   * `injectedScript` If specified, the script will be injected into every frame
-   * of the inspected page immediately upon load, before any of the frame's
-   * scripts. The script will not be injected after subsequent reloads-for
-   * example, if the user presses Ctrl+R.
    */
   void reload([Map reloadOptions]) {
     _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
@@ -89,20 +73,36 @@ class ChromeDevtoolsInspectedWindow {
    * Fired when a new revision of the resource is committed (e.g. user saves an
    * edited version of the resource in the Developer Tools).
    */
-  Stream<dynamic> get onResourceContentCommitted => _onResourceContentCommitted.stream;
+  Stream<OnResourceContentCommittedEvent> get onResourceContentCommitted => _onResourceContentCommitted.stream;
 
-  final ChromeStreamController<dynamic> _onResourceContentCommitted =
-      new ChromeStreamController<dynamic>.oneArg(_devtools_inspectedWindow['onResourceContentCommitted'], selfConverter);
+  final ChromeStreamController<OnResourceContentCommittedEvent> _onResourceContentCommitted =
+      new ChromeStreamController<OnResourceContentCommittedEvent>.twoArgs(_devtools_inspectedWindow['onResourceContentCommitted'], OnResourceContentCommittedEvent.create);
+}
+
+/**
+ * Fired when a new revision of the resource is committed (e.g. user saves an
+ * edited version of the resource in the Developer Tools).
+ */
+class OnResourceContentCommittedEvent {
+  static OnResourceContentCommittedEvent create(JsObject resource, String content) =>
+      new OnResourceContentCommittedEvent(Resource.create(resource), content);
+
+  Resource resource;
+
+  /**
+   * New content of the resource.
+   */
+  String content;
+
+  OnResourceContentCommittedEvent(this.resource, this.content);
 }
 
 /**
  * A resource within the inspected page, such as a document, a script, or an
  * image.
- * 
- * `url` The URL of the resource.
  */
 class Resource extends ChromeObject {
-  static Resource create(JsObject proxy) => new Resource(proxy);
+  static Resource create(JsObject proxy) => proxy == null ? null : new Resource(proxy);
 
   Resource(JsObject proxy): super(proxy);
 

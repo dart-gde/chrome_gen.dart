@@ -1,8 +1,5 @@
 /* This file has been generated from file_system.idl - do not edit */
 
-/**
- * 
- */
 library chrome.fileSystem;
 
 import '../src/common.dart';
@@ -57,13 +54,13 @@ class ChromeFileSystem {
 }
 
 class AcceptOption extends ChromeObject {
-  static AcceptOption create(JsObject proxy) => new AcceptOption(proxy);
+  static AcceptOption create(JsObject proxy) => proxy == null ? null : new AcceptOption(proxy);
 
   AcceptOption(JsObject proxy): super(proxy);
 }
 
 class ChooseEntryOptions extends ChromeObject {
-  static ChooseEntryOptions create(JsObject proxy) => new ChooseEntryOptions(proxy);
+  static ChooseEntryOptions create(JsObject proxy) => proxy == null ? null : new ChooseEntryOptions(proxy);
 
   ChooseEntryOptions(JsObject proxy): super(proxy);
 }

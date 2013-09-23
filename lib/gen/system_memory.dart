@@ -1,8 +1,5 @@
 /* This file has been generated from system_memory.idl - do not edit */
 
-/**
- * 
- */
 library chrome.system_memory;
 
 import '../src/common.dart';
@@ -23,7 +20,7 @@ class ChromeSystemMemory {
 }
 
 class MemoryInfo extends ChromeObject {
-  static MemoryInfo create(JsObject proxy) => new MemoryInfo(proxy);
+  static MemoryInfo create(JsObject proxy) => proxy == null ? null : new MemoryInfo(proxy);
 
   MemoryInfo(JsObject proxy): super(proxy);
 }

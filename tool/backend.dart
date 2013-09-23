@@ -68,6 +68,8 @@ class DefaultBackend extends Backend {
 
     _printClass();
 
+    library.eventTypes.forEach((t) => _printEventType(t));
+
     library.types.forEach((t) => _printDeclaredType(t));
 
     return generator.toString();
@@ -193,7 +195,7 @@ class DefaultBackend extends Backend {
   }
 
   void _printEvent(ChromeEvent event) {
-    ChromeType type = event.calculateType();
+    ChromeType type = event.calculateType(library);
 
     generator.writeln();
     generator.writeDocs(event.documentation);
@@ -214,7 +216,9 @@ class DefaultBackend extends Backend {
       if (converter == null) {
         converter = 'selfConverter';
       }
-      generator.writeln("    new ChromeStreamController<${typeName}>.oneArg("
+
+      String argCallArity = ['noArgs', 'oneArg', 'twoArgs', 'threeArgs'][type.arity];
+      generator.writeln("    new ChromeStreamController<${typeName}>.${argCallArity}("
           "${contextReference}['${event.name}'], ${converter});");
     } else {
       generator.writeln("final ChromeStreamController _${event.name} =");
@@ -223,7 +227,33 @@ class DefaultBackend extends Backend {
     }
   }
 
-  void _printDeclaredType(ChromeDeclaredType type) {
+  void _printEventType(ChromeType type) {
+    generator.writeln();
+    generator.writeDocs(type.documentation);
+    generator.writeln("class ${type.name} {");
+    String createParams = type.properties.map((p) => '${getJSType(p.type)} ${p.name}').join(', ');
+    generator.writeln("static ${type.name} create(${createParams}) =>");
+    String cvtParams = type.properties.map((ChromeProperty p) {
+      String cvt = getCallbackConverter(p.type);
+      if (cvt == null) {
+        return p.name;
+      } else {
+        return "${cvt}(${p.name})";
+      }
+    }).join(', ');
+    generator.writeln("    new ${type.name}(${cvtParams});");
+    type.properties.forEach((ChromeProperty property) {
+      generator.writeln();
+      generator.writeDocs(property.getDescription());
+      generator.writeln("${property.type.toReturnString()} ${property.name};");
+    });
+    generator.writeln();
+    String params = type.properties.map((p) => 'this.${p.name}').join(', ');
+    generator.writeln("${type.name}(${params});");
+    generator.writeln("}");
+  }
+
+  void _printDeclaredType(ChromeType type) {
     if (overrides.ignoreDeclaredType(library.name, type.name)) {
       return;
     }
@@ -231,7 +261,8 @@ class DefaultBackend extends Backend {
     generator.writeln();
     generator.writeDocs(type.documentation);
     generator.writeln("class ${type.name} extends ChromeObject {");
-    generator.writeln("static ${type.name} create(JsObject proxy) => new ${type.name}(proxy);");
+    generator.writeln("static ${type.name} create(JsObject proxy) => "
+        "proxy == null ? null : new ${type.name}(proxy);");
     generator.writeln();
     generator.writeln("${type.name}(JsObject proxy): super(proxy);");
 
@@ -242,6 +273,17 @@ class DefaultBackend extends Backend {
     }
 
     generator.writeln("}");
+  }
+
+  /**
+   * Return the name of the incoming JS type.
+   */
+  String getJSType(ChromeType type) {
+    if (type.isPrimitive) {
+      return type.type;
+    } else {
+      return 'JsObject';
+    }
   }
 
   String getCallbackConverter(ChromeType param) {

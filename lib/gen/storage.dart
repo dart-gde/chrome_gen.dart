@@ -29,19 +29,35 @@ class ChromeStorage {
   /**
    * Fired when one or more items change.
    */
-  Stream<dynamic> get onChanged => _onChanged.stream;
+  Stream<OnChangedEvent> get onChanged => _onChanged.stream;
 
-  final ChromeStreamController<dynamic> _onChanged =
-      new ChromeStreamController<dynamic>.oneArg(_storage['onChanged'], selfConverter);
+  final ChromeStreamController<OnChangedEvent> _onChanged =
+      new ChromeStreamController<OnChangedEvent>.twoArgs(_storage['onChanged'], OnChangedEvent.create);
 }
 
 /**
- * `oldValue` The old value of the item, if there was an old value.
- * 
- * `newValue` The new value of the item, if there is a new value.
+ * Fired when one or more items change.
  */
+class OnChangedEvent {
+  static OnChangedEvent create(JsObject changes, String areaName) =>
+      new OnChangedEvent(mapify(changes), areaName);
+
+  /**
+   * Object mapping each key that changed to its corresponding [StorageChange]
+   * for that item.
+   */
+  Map changes;
+
+  /**
+   * The name of the storage area (`sync` or `local`) the changes are for.
+   */
+  String areaName;
+
+  OnChangedEvent(this.changes, this.areaName);
+}
+
 class StorageChange extends ChromeObject {
-  static StorageChange create(JsObject proxy) => new StorageChange(proxy);
+  static StorageChange create(JsObject proxy) => proxy == null ? null : new StorageChange(proxy);
 
   StorageChange(JsObject proxy): super(proxy);
 
@@ -57,7 +73,7 @@ class StorageChange extends ChromeObject {
 }
 
 class StorageArea extends ChromeObject {
-  static StorageArea create(JsObject proxy) => new StorageArea(proxy);
+  static StorageArea create(JsObject proxy) => proxy == null ? null : new StorageArea(proxy);
 
   StorageArea(JsObject proxy): super(proxy);
 }

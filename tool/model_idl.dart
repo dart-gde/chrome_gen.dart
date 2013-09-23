@@ -3,8 +3,6 @@ library model_idl;
 
 import 'model_chrome.dart';
 
-// TODO: this model needs to be re-written in-line with the needs of the web_idl_parser.
-
 class EMPTY {
   // EPSILON
   const EMPTY();
@@ -332,7 +330,7 @@ class IDLType {
 ChromeLibrary convert(IDLCollector collector) {
   ChromeLibrary chromeLibrary =  new ChromeLibrary();
   chromeLibrary.name = collector.idlNamespace.name;
-  chromeLibrary.documentation = "";
+  //chromeLibrary.documentation = "";
 
   chromeLibrary.types =
       collector.idlNamespace.declaredTypes.map(_convertDeclaredType).toList();

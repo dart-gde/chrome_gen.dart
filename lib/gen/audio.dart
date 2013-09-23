@@ -1,8 +1,5 @@
 /* This file has been generated from audio.idl - do not edit */
 
-/**
- * 
- */
 library chrome.audio;
 
 import '../src/common.dart';
@@ -40,19 +37,19 @@ class ChromeAudio {
 }
 
 class OutputDeviceInfo extends ChromeObject {
-  static OutputDeviceInfo create(JsObject proxy) => new OutputDeviceInfo(proxy);
+  static OutputDeviceInfo create(JsObject proxy) => proxy == null ? null : new OutputDeviceInfo(proxy);
 
   OutputDeviceInfo(JsObject proxy): super(proxy);
 }
 
 class InputDeviceInfo extends ChromeObject {
-  static InputDeviceInfo create(JsObject proxy) => new InputDeviceInfo(proxy);
+  static InputDeviceInfo create(JsObject proxy) => proxy == null ? null : new InputDeviceInfo(proxy);
 
   InputDeviceInfo(JsObject proxy): super(proxy);
 }
 
 class DeviceProperties extends ChromeObject {
-  static DeviceProperties create(JsObject proxy) => new DeviceProperties(proxy);
+  static DeviceProperties create(JsObject proxy) => proxy == null ? null : new DeviceProperties(proxy);
 
   DeviceProperties(JsObject proxy): super(proxy);
 }

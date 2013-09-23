@@ -69,13 +69,8 @@ class ChromeSessions {
   }
 }
 
-/**
- * `maxResults` The maximum number of entries to be fetched in the requested
- * list. Omit this parameter to fetch the maximum number of entries
- * ([MAX_SESSION_RESULTS]).
- */
 class Filter extends ChromeObject {
-  static Filter create(JsObject proxy) => new Filter(proxy);
+  static Filter create(JsObject proxy) => proxy == null ? null : new Filter(proxy);
 
   Filter(JsObject proxy): super(proxy);
 
@@ -87,18 +82,8 @@ class Filter extends ChromeObject {
   int get maxResults => proxy['maxResults'];
 }
 
-/**
- * `lastModified` The time when the window or tab was closed or modified,
- * represented in milliseconds since the epoch.
- * 
- * `tab` The [tabs.Tab], if this entry describes a tab. Either this or
- * [Session.window] will be set.
- * 
- * `window` The [windows.Window], if this entry describes a window. Either this
- * or [Session.tab] will be set.
- */
 class Session extends ChromeObject {
-  static Session create(JsObject proxy) => new Session(proxy);
+  static Session create(JsObject proxy) => proxy == null ? null : new Session(proxy);
 
   Session(JsObject proxy): super(proxy);
 
@@ -121,14 +106,8 @@ class Session extends ChromeObject {
   Window get window => new Window(proxy['window']);
 }
 
-/**
- * `info` Represents all information about a foreign device.
- * 
- * `sessions` A list of open window sessions for the foreign device, sorted from
- * most recently to least recently modified session.
- */
 class Device extends ChromeObject {
-  static Device create(JsObject proxy) => new Device(proxy);
+  static Device create(JsObject proxy) => proxy == null ? null : new Device(proxy);
 
   Device(JsObject proxy): super(proxy);
 

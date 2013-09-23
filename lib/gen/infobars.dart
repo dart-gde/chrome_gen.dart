@@ -22,13 +22,6 @@ class ChromeInfobars {
    * automatically when the tab navigates. Use window.close() to close the
    * infobar before then.
    * 
-   * [details] `tabId` The tab id for the tab to display the infobar in.
-   * 
-   * `path` The html file that contains the infobar.
-   * 
-   * `height` The height (in pixels) of the infobar to show. If omitted, the
-   * default infobar height will be used.
-   * 
    * Returns:
    * Contains details about the window in which the infobar was created.
    */

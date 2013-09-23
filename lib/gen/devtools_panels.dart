@@ -63,7 +63,7 @@ class ChromeDevtoolsPanels {
  * Represents the Elements panel.
  */
 class ElementsPanel extends ChromeObject {
-  static ElementsPanel create(JsObject proxy) => new ElementsPanel(proxy);
+  static ElementsPanel create(JsObject proxy) => proxy == null ? null : new ElementsPanel(proxy);
 
   ElementsPanel(JsObject proxy): super(proxy);
 }
@@ -72,7 +72,7 @@ class ElementsPanel extends ChromeObject {
  * Represents a panel created by extension.
  */
 class ExtensionPanel extends ChromeObject {
-  static ExtensionPanel create(JsObject proxy) => new ExtensionPanel(proxy);
+  static ExtensionPanel create(JsObject proxy) => proxy == null ? null : new ExtensionPanel(proxy);
 
   ExtensionPanel(JsObject proxy): super(proxy);
 }
@@ -81,7 +81,7 @@ class ExtensionPanel extends ChromeObject {
  * A sidebar created by the extension.
  */
 class ExtensionSidebarPane extends ChromeObject {
-  static ExtensionSidebarPane create(JsObject proxy) => new ExtensionSidebarPane(proxy);
+  static ExtensionSidebarPane create(JsObject proxy) => proxy == null ? null : new ExtensionSidebarPane(proxy);
 
   ExtensionSidebarPane(JsObject proxy): super(proxy);
 }
@@ -90,7 +90,7 @@ class ExtensionSidebarPane extends ChromeObject {
  * A button created by the extension.
  */
 class Button extends ChromeObject {
-  static Button create(JsObject proxy) => new Button(proxy);
+  static Button create(JsObject proxy) => proxy == null ? null : new Button(proxy);
 
   Button(JsObject proxy): super(proxy);
 }

@@ -71,13 +71,9 @@ class ChromeContentSettings {
  * The only content type using resource identifiers is
  * [contentSettings.plugins.] For more information, see [Resource
  * Identifiers](contentSettings.html#resource-identifiers).
- * 
- * `id` The resource identifier for the given content type.
- * 
- * `description` A human readable description of the resource.
  */
 class ResourceIdentifier extends ChromeObject {
-  static ResourceIdentifier create(JsObject proxy) => new ResourceIdentifier(proxy);
+  static ResourceIdentifier create(JsObject proxy) => proxy == null ? null : new ResourceIdentifier(proxy);
 
   ResourceIdentifier(JsObject proxy): super(proxy);
 
@@ -93,7 +89,7 @@ class ResourceIdentifier extends ChromeObject {
 }
 
 class ContentSetting extends ChromeObject {
-  static ContentSetting create(JsObject proxy) => new ContentSetting(proxy);
+  static ContentSetting create(JsObject proxy) => proxy == null ? null : new ContentSetting(proxy);
 
   ContentSetting(JsObject proxy): super(proxy);
 }

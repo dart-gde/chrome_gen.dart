@@ -36,10 +36,10 @@ class ChromeTtsEngine {
    * Called when the user makes a call to tts.speak() and one of the voices from
    * this extension's manifest is the first to match the options object.
    */
-  Stream<dynamic> get onSpeak => _onSpeak.stream;
+  Stream<OnSpeakEvent> get onSpeak => _onSpeak.stream;
 
-  final ChromeStreamController<dynamic> _onSpeak =
-      new ChromeStreamController<dynamic>.oneArg(_ttsEngine['onSpeak'], selfConverter);
+  final ChromeStreamController<OnSpeakEvent> _onSpeak =
+      new ChromeStreamController<OnSpeakEvent>.threeArgs(_ttsEngine['onSpeak'], OnSpeakEvent.create);
 
   /**
    * Fired when a call is made to tts.stop and this extension may be in the
@@ -71,4 +71,36 @@ class ChromeTtsEngine {
 
   final ChromeStreamController _onResume =
       new ChromeStreamController.noArgs(_ttsEngine['onResume']);
+}
+
+/**
+ * Called when the user makes a call to tts.speak() and one of the voices from
+ * this extension's manifest is the first to match the options object.
+ */
+class OnSpeakEvent {
+  static OnSpeakEvent create(String utterance, JsObject options, JsObject sendTtsEvent) =>
+      new OnSpeakEvent(utterance, mapify(options), sendTtsEvent);
+
+  /**
+   * The text to speak, specified as either plain text or an SSML document. If
+   * your engine does not support SSML, you should strip out all XML markup and
+   * synthesize only the underlying text content. The value of this parameter is
+   * guaranteed to be no more than 32,768 characters. If this engine does not
+   * support speaking that many characters at a time, the utterance should be
+   * split into smaller chunks and queued internally without returning an error.
+   */
+  String utterance;
+
+  /**
+   * Options specified to the tts.speak() method.
+   */
+  Map options;
+
+  /**
+   * Call this function with events that occur in the process of speaking the
+   * utterance.
+   */
+  dynamic sendTtsEvent;
+
+  OnSpeakEvent(this.utterance, this.options, this.sendTtsEvent);
 }

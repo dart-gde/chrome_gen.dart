@@ -18,8 +18,6 @@ class ChromePageCapture {
   /**
    * Saves the content of the tab with given id as MHTML.
    * 
-   * [details] `tabId` The id of the tab to save as MHTML.
-   * 
    * Returns:
    * The MHTML data as a Blob.
    */

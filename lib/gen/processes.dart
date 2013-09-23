@@ -110,69 +110,44 @@ class ChromeProcesses {
   /**
    * Fired each time a process is terminated, providing the type of exit.
    */
-  Stream<dynamic> get onExited => _onExited.stream;
+  Stream<OnExitedEvent> get onExited => _onExited.stream;
 
-  final ChromeStreamController<dynamic> _onExited =
-      new ChromeStreamController<dynamic>.oneArg(_processes['onExited'], selfConverter);
+  final ChromeStreamController<OnExitedEvent> _onExited =
+      new ChromeStreamController<OnExitedEvent>.threeArgs(_processes['onExited'], OnExitedEvent.create);
+}
+
+/**
+ * Fired each time a process is terminated, providing the type of exit.
+ */
+class OnExitedEvent {
+  static OnExitedEvent create(int processId, int exitType, int exitCode) =>
+      new OnExitedEvent(processId, exitType, exitCode);
+
+  /**
+   * The ID of the process that exited.
+   */
+  int processId;
+
+  /**
+   * The type of exit that occurred for the process - normal, abnormal, killed,
+   * crashed. Only available for renderer processes.
+   */
+  int exitType;
+
+  /**
+   * The exit code if the process exited abnormally. Only available for renderer
+   * processes.
+   */
+  int exitCode;
+
+  OnExitedEvent(this.processId, this.exitType, this.exitCode);
 }
 
 /**
  * An object containing information about one of the browser's processes.
- * 
- * `id` Unique ID of the process provided by the browser.
- * 
- * `osProcessId` The ID of the process, as provided by the OS.
- * 
- * `type` The type of process.
- * 
- * `profile` The profile which the process is associated with.
- * 
- * `tabs` Array of Tab IDs that have a page rendered by this process. The list
- * will be non-empty for renderer processes only.
- * 
- * `cpu` The most recent measurement of the process CPU usage, between 0 and
- * 100%. Only available when receiving the object as part of a callback from
- * onUpdated or onUpdatedWithMemory.
- * 
- * `network` The most recent measurement of the process network usage, in bytes
- * per second. Only available when receiving the object as part of a callback
- * from onUpdated or onUpdatedWithMemory.
- * 
- * `privateMemory` The most recent measurement of the process private memory
- * usage, in bytes. Only available when receiving the object as part of a
- * callback from onUpdatedWithMemory or getProcessInfo with the includeMemory
- * flag.
- * 
- * `jsMemoryAllocated` The most recent measurement of the process JavaScript
- * allocated memory, in bytes. Only available when receiving the object as part
- * of a callback from onUpdated or onUpdatedWithMemory.
- * 
- * `jsMemoryUsed` The most recent measurement of the process JavaScript memory
- * used, in bytes. Only available when receiving the object as part of a
- * callback from onUpdated or onUpdatedWithMemory.
- * 
- * `sqliteMemory` The most recent measurement of the process’s SQLite memory
- * usage, in bytes. Only available when receiving the object as part of a
- * callback from onUpdated or onUpdatedWithMemory.
- * 
- * `fps` The most recent measurement of the process frames per second. Only
- * available when receiving the object as part of a callback from onUpdated or
- * onUpdatedWithMemory.
- * 
- * `imageCache` The most recent information about the image cache for the
- * process. Only available when receiving the object as part of a callback from
- * onUpdated or onUpdatedWithMemory.
- * 
- * `scriptCache` The most recent information about the script cache for the
- * process. Only available when receiving the object as part of a callback from
- * onUpdated or onUpdatedWithMemory.
- * 
- * `cssCache` The most recent information about the CSS cache for the process.
- * Only available when receiving the object as part of a callback from onUpdated
- * or onUpdatedWithMemory.
  */
 class Process extends ChromeObject {
-  static Process create(JsObject proxy) => new Process(proxy);
+  static Process create(JsObject proxy) => proxy == null ? null : new Process(proxy);
 
   Process(JsObject proxy): super(proxy);
 
@@ -276,13 +251,9 @@ class Process extends ChromeObject {
 /**
  * The Cache object contains information about the size and utilization of a
  * cache used by the browser.
- * 
- * `size` The size of the cache, in bytes.
- * 
- * `liveSize` The part of the cache that is utilized, in bytes.
  */
 class Cache extends ChromeObject {
-  static Cache create(JsObject proxy) => new Cache(proxy);
+  static Cache create(JsObject proxy) => proxy == null ? null : new Cache(proxy);
 
   Cache(JsObject proxy): super(proxy);
 
