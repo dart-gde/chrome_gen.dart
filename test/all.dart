@@ -5,6 +5,7 @@
 library all_test;
 
 import 'model_json_test.dart' as model_json_test;
+import 'model_idl_test.dart' as model_idl_test;
 import 'src_gen_test.dart' as src_gen_test;
 import 'utils_test.dart' as utils_test;
 import 'web_idl_files_test.dart' as test_web_idl_files;
@@ -26,6 +27,7 @@ import 'web_idl_typedefs_test.dart' as test_web_idl_typedefs;
 
 main() {
   model_json_test.main();
+  model_idl_test.main();
   src_gen_test.main();
   utils_test.main();
   test_web_idl_files.defineTests(includeWebIdl: false);
