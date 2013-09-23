@@ -29,3 +29,15 @@ class ChromeMediaGalleries {
     _mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]);
   }
 }
+
+class MediaFileSystemsDetails extends ChromeObject {
+  static MediaFileSystemsDetails create(JsObject proxy) => new MediaFileSystemsDetails(proxy);
+
+  MediaFileSystemsDetails(JsObject proxy): super(proxy);
+}
+
+class MediaFileSystemMetadata extends ChromeObject {
+  static MediaFileSystemMetadata create(JsObject proxy) => new MediaFileSystemMetadata(proxy);
+
+  MediaFileSystemMetadata(JsObject proxy): super(proxy);
+}

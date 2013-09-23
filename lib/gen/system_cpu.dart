@@ -25,3 +25,9 @@ class ChromeSystemCpu {
     return completer.future;
   }
 }
+
+class CpuInfo extends ChromeObject {
+  static CpuInfo create(JsObject proxy) => new CpuInfo(proxy);
+
+  CpuInfo(JsObject proxy): super(proxy);
+}

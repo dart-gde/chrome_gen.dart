@@ -19,3 +19,10 @@ abstract class ChromeObject implements Serializable<JsObject> {
 
   String toString() => proxy.toString();
 }
+
+// TODO:
+class ArrayBuffer extends ChromeObject {
+  static ArrayBuffer create(JsObject proxy) => new ArrayBuffer(proxy);
+
+  ArrayBuffer(JsObject proxy): super(proxy);
+}

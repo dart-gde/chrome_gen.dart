@@ -4,6 +4,15 @@ library overrides;
 import 'dart:convert';
 import 'dart:io';
 
+// TODO: we need to handle declared class renames, to avoid conflicts where
+// libraries share the same names of classes, and those classes are semantically
+// different.
+
+// serial, socket both define a slightly different ReadInfo
+// bluetooth and usb define a different Device
+
+// TODO: rename one class, both, or use a do something with qualified references?
+
 class Overrides {
   Map _m;
 

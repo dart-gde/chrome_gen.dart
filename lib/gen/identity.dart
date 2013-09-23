@@ -37,3 +37,21 @@ class ChromeIdentity {
     return completer.future;
   }
 }
+
+class TokenDetails extends ChromeObject {
+  static TokenDetails create(JsObject proxy) => new TokenDetails(proxy);
+
+  TokenDetails(JsObject proxy): super(proxy);
+}
+
+class InvalidTokenDetails extends ChromeObject {
+  static InvalidTokenDetails create(JsObject proxy) => new InvalidTokenDetails(proxy);
+
+  InvalidTokenDetails(JsObject proxy): super(proxy);
+}
+
+class WebAuthFlowDetails extends ChromeObject {
+  static WebAuthFlowDetails create(JsObject proxy) => new WebAuthFlowDetails(proxy);
+
+  WebAuthFlowDetails(JsObject proxy): super(proxy);
+}

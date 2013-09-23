@@ -25,3 +25,9 @@ class ChromeSystemMemory {
     return completer.future;
   }
 }
+
+class MemoryInfo extends ChromeObject {
+  static MemoryInfo create(JsObject proxy) => new MemoryInfo(proxy);
+
+  MemoryInfo(JsObject proxy): super(proxy);
+}

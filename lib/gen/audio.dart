@@ -42,3 +42,21 @@ class ChromeAudio {
   final ChromeStreamController _onDeviceChanged =
       new ChromeStreamController.noArgs(_audio['onDeviceChanged']);
 }
+
+class OutputDeviceInfo extends ChromeObject {
+  static OutputDeviceInfo create(JsObject proxy) => new OutputDeviceInfo(proxy);
+
+  OutputDeviceInfo(JsObject proxy): super(proxy);
+}
+
+class InputDeviceInfo extends ChromeObject {
+  static InputDeviceInfo create(JsObject proxy) => new InputDeviceInfo(proxy);
+
+  InputDeviceInfo(JsObject proxy): super(proxy);
+}
+
+class DeviceProperties extends ChromeObject {
+  static DeviceProperties create(JsObject proxy) => new DeviceProperties(proxy);
+
+  DeviceProperties(JsObject proxy): super(proxy);
+}

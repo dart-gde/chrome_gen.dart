@@ -36,3 +36,21 @@ class ChromeTabCapture {
   final ChromeStreamController<CaptureInfo> _onStatusChanged =
       new ChromeStreamController<CaptureInfo>.oneArg(_tabCapture['onStatusChanged'], selfConverter);
 }
+
+class CaptureInfo extends ChromeObject {
+  static CaptureInfo create(JsObject proxy) => new CaptureInfo(proxy);
+
+  CaptureInfo(JsObject proxy): super(proxy);
+}
+
+class MediaStreamConstraint extends ChromeObject {
+  static MediaStreamConstraint create(JsObject proxy) => new MediaStreamConstraint(proxy);
+
+  MediaStreamConstraint(JsObject proxy): super(proxy);
+}
+
+class CaptureOptions extends ChromeObject {
+  static CaptureOptions create(JsObject proxy) => new CaptureOptions(proxy);
+
+  CaptureOptions(JsObject proxy): super(proxy);
+}

@@ -4,7 +4,9 @@
   },
 
   "suppress" : {
-    "pageAction" : [ "ImageDataType" ]
+    "pageAction" : [ "ImageDataType" ],
+    "serial" : [ "WriteInfo" ],
+    "system.display" : [ "Bounds" ]
   }
 
 }

@@ -135,3 +135,51 @@ class ChromeSocket {
     return completer.future;
   }
 }
+
+class CreateOptions extends ChromeObject {
+  static CreateOptions create(JsObject proxy) => new CreateOptions(proxy);
+
+  CreateOptions(JsObject proxy): super(proxy);
+}
+
+class CreateInfo extends ChromeObject {
+  static CreateInfo create(JsObject proxy) => new CreateInfo(proxy);
+
+  CreateInfo(JsObject proxy): super(proxy);
+}
+
+class AcceptInfo extends ChromeObject {
+  static AcceptInfo create(JsObject proxy) => new AcceptInfo(proxy);
+
+  AcceptInfo(JsObject proxy): super(proxy);
+}
+
+class ReadInfo extends ChromeObject {
+  static ReadInfo create(JsObject proxy) => new ReadInfo(proxy);
+
+  ReadInfo(JsObject proxy): super(proxy);
+}
+
+class WriteInfo extends ChromeObject {
+  static WriteInfo create(JsObject proxy) => new WriteInfo(proxy);
+
+  WriteInfo(JsObject proxy): super(proxy);
+}
+
+class RecvFromInfo extends ChromeObject {
+  static RecvFromInfo create(JsObject proxy) => new RecvFromInfo(proxy);
+
+  RecvFromInfo(JsObject proxy): super(proxy);
+}
+
+class SocketInfo extends ChromeObject {
+  static SocketInfo create(JsObject proxy) => new SocketInfo(proxy);
+
+  SocketInfo(JsObject proxy): super(proxy);
+}
+
+class NetworkInterface extends ChromeObject {
+  static NetworkInterface create(JsObject proxy) => new NetworkInterface(proxy);
+
+  NetworkInterface(JsObject proxy): super(proxy);
+}

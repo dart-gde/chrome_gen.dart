@@ -63,3 +63,21 @@ class ChromeAppWindow {
   final ChromeStreamController _onRestored =
       new ChromeStreamController.noArgs(_app_window['onRestored']);
 }
+
+class Bounds extends ChromeObject {
+  static Bounds create(JsObject proxy) => new Bounds(proxy);
+
+  Bounds(JsObject proxy): super(proxy);
+}
+
+class CreateWindowOptions extends ChromeObject {
+  static CreateWindowOptions create(JsObject proxy) => new CreateWindowOptions(proxy);
+
+  CreateWindowOptions(JsObject proxy): super(proxy);
+}
+
+class AppWindow extends ChromeObject {
+  static AppWindow create(JsObject proxy) => new AppWindow(proxy);
+
+  AppWindow(JsObject proxy): super(proxy);
+}

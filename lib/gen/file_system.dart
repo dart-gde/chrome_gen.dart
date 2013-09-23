@@ -59,3 +59,15 @@ class ChromeFileSystem {
     _fileSystem.callMethod('retainEntry', [entry]);
   }
 }
+
+class AcceptOption extends ChromeObject {
+  static AcceptOption create(JsObject proxy) => new AcceptOption(proxy);
+
+  AcceptOption(JsObject proxy): super(proxy);
+}
+
+class ChooseEntryOptions extends ChromeObject {
+  static ChooseEntryOptions create(JsObject proxy) => new ChooseEntryOptions(proxy);
+
+  ChooseEntryOptions(JsObject proxy): super(proxy);
+}

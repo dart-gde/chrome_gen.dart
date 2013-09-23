@@ -41,3 +41,9 @@ class ChromeSystemStorage {
   final ChromeStreamController<String> _onDetached =
       new ChromeStreamController<String>.oneArg(_system_storage['onDetached'], selfConverter);
 }
+
+class StorageUnitInfo extends ChromeObject {
+  static StorageUnitInfo create(JsObject proxy) => new StorageUnitInfo(proxy);
+
+  StorageUnitInfo(JsObject proxy): super(proxy);
+}

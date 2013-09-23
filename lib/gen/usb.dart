@@ -103,3 +103,63 @@ class ChromeUsb {
     return completer.future;
   }
 }
+
+class Device extends ChromeObject {
+  static Device create(JsObject proxy) => new Device(proxy);
+
+  Device(JsObject proxy): super(proxy);
+}
+
+class ConnectionHandle extends ChromeObject {
+  static ConnectionHandle create(JsObject proxy) => new ConnectionHandle(proxy);
+
+  ConnectionHandle(JsObject proxy): super(proxy);
+}
+
+class EndpointDescriptor extends ChromeObject {
+  static EndpointDescriptor create(JsObject proxy) => new EndpointDescriptor(proxy);
+
+  EndpointDescriptor(JsObject proxy): super(proxy);
+}
+
+class InterfaceDescriptor extends ChromeObject {
+  static InterfaceDescriptor create(JsObject proxy) => new InterfaceDescriptor(proxy);
+
+  InterfaceDescriptor(JsObject proxy): super(proxy);
+}
+
+class ControlTransferInfo extends ChromeObject {
+  static ControlTransferInfo create(JsObject proxy) => new ControlTransferInfo(proxy);
+
+  ControlTransferInfo(JsObject proxy): super(proxy);
+}
+
+class GenericTransferInfo extends ChromeObject {
+  static GenericTransferInfo create(JsObject proxy) => new GenericTransferInfo(proxy);
+
+  GenericTransferInfo(JsObject proxy): super(proxy);
+}
+
+class IsochronousTransferInfo extends ChromeObject {
+  static IsochronousTransferInfo create(JsObject proxy) => new IsochronousTransferInfo(proxy);
+
+  IsochronousTransferInfo(JsObject proxy): super(proxy);
+}
+
+class TransferResultInfo extends ChromeObject {
+  static TransferResultInfo create(JsObject proxy) => new TransferResultInfo(proxy);
+
+  TransferResultInfo(JsObject proxy): super(proxy);
+}
+
+class EnumerateDevicesOptions extends ChromeObject {
+  static EnumerateDevicesOptions create(JsObject proxy) => new EnumerateDevicesOptions(proxy);
+
+  EnumerateDevicesOptions(JsObject proxy): super(proxy);
+}
+
+class EnumerateDevicesAndRequestAccessOptions extends ChromeObject {
+  static EnumerateDevicesAndRequestAccessOptions create(JsObject proxy) => new EnumerateDevicesAndRequestAccessOptions(proxy);
+
+  EnumerateDevicesAndRequestAccessOptions(JsObject proxy): super(proxy);
+}

@@ -48,3 +48,15 @@ class ChromeAlarms {
   final ChromeStreamController<Alarm> _onAlarm =
       new ChromeStreamController<Alarm>.oneArg(_alarms['onAlarm'], selfConverter);
 }
+
+class Alarm extends ChromeObject {
+  static Alarm create(JsObject proxy) => new Alarm(proxy);
+
+  Alarm(JsObject proxy): super(proxy);
+}
+
+class AlarmCreateInfo extends ChromeObject {
+  static AlarmCreateInfo create(JsObject proxy) => new AlarmCreateInfo(proxy);
+
+  AlarmCreateInfo(JsObject proxy): super(proxy);
+}

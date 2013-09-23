@@ -29,3 +29,15 @@ class ChromeAppRuntime {
   final ChromeStreamController _onRestarted =
       new ChromeStreamController.noArgs(_app_runtime['onRestarted']);
 }
+
+class LaunchItem extends ChromeObject {
+  static LaunchItem create(JsObject proxy) => new LaunchItem(proxy);
+
+  LaunchItem(JsObject proxy): super(proxy);
+}
+
+class LaunchData extends ChromeObject {
+  static LaunchData create(JsObject proxy) => new LaunchData(proxy);
+
+  LaunchData(JsObject proxy): super(proxy);
+}

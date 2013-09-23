@@ -30,3 +30,15 @@ class ChromePushMessaging {
   final ChromeStreamController<Message> _onMessage =
       new ChromeStreamController<Message>.oneArg(_pushMessaging['onMessage'], selfConverter);
 }
+
+class Message extends ChromeObject {
+  static Message create(JsObject proxy) => new Message(proxy);
+
+  Message(JsObject proxy): super(proxy);
+}
+
+class ChannelIdResult extends ChromeObject {
+  static ChannelIdResult create(JsObject proxy) => new ChannelIdResult(proxy);
+
+  ChannelIdResult(JsObject proxy): super(proxy);
+}

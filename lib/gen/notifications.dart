@@ -58,3 +58,27 @@ class ChromeNotifications {
   final ChromeStreamController<dynamic> _onButtonClicked =
       new ChromeStreamController<dynamic>.oneArg(_notifications['onButtonClicked'], selfConverter);
 }
+
+class NotificationItem extends ChromeObject {
+  static NotificationItem create(JsObject proxy) => new NotificationItem(proxy);
+
+  NotificationItem(JsObject proxy): super(proxy);
+}
+
+class NotificationBitmap extends ChromeObject {
+  static NotificationBitmap create(JsObject proxy) => new NotificationBitmap(proxy);
+
+  NotificationBitmap(JsObject proxy): super(proxy);
+}
+
+class NotificationButton extends ChromeObject {
+  static NotificationButton create(JsObject proxy) => new NotificationButton(proxy);
+
+  NotificationButton(JsObject proxy): super(proxy);
+}
+
+class NotificationOptions extends ChromeObject {
+  static NotificationOptions create(JsObject proxy) => new NotificationOptions(proxy);
+
+  NotificationOptions(JsObject proxy): super(proxy);
+}

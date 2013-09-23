@@ -37,3 +37,21 @@ class ChromeLocation {
   final ChromeStreamController<String> _onLocationError =
       new ChromeStreamController<String>.oneArg(_location['onLocationError'], selfConverter);
 }
+
+class Coordinates extends ChromeObject {
+  static Coordinates create(JsObject proxy) => new Coordinates(proxy);
+
+  Coordinates(JsObject proxy): super(proxy);
+}
+
+class Location extends ChromeObject {
+  static Location create(JsObject proxy) => new Location(proxy);
+
+  Location(JsObject proxy): super(proxy);
+}
+
+class WatchLocationRequestInfo extends ChromeObject {
+  static WatchLocationRequestInfo create(JsObject proxy) => new WatchLocationRequestInfo(proxy);
+
+  WatchLocationRequestInfo(JsObject proxy): super(proxy);
+}

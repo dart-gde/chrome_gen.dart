@@ -113,3 +113,93 @@ class ChromeBluetooth {
   final ChromeStreamController<Socket> _onConnection =
       new ChromeStreamController<Socket>.oneArg(_bluetooth['onConnection'], selfConverter);
 }
+
+class AdapterState extends ChromeObject {
+  static AdapterState create(JsObject proxy) => new AdapterState(proxy);
+
+  AdapterState(JsObject proxy): super(proxy);
+}
+
+class Device extends ChromeObject {
+  static Device create(JsObject proxy) => new Device(proxy);
+
+  Device(JsObject proxy): super(proxy);
+}
+
+class Profile extends ChromeObject {
+  static Profile create(JsObject proxy) => new Profile(proxy);
+
+  Profile(JsObject proxy): super(proxy);
+}
+
+class ServiceRecord extends ChromeObject {
+  static ServiceRecord create(JsObject proxy) => new ServiceRecord(proxy);
+
+  ServiceRecord(JsObject proxy): super(proxy);
+}
+
+class Socket extends ChromeObject {
+  static Socket create(JsObject proxy) => new Socket(proxy);
+
+  Socket(JsObject proxy): super(proxy);
+}
+
+class OutOfBandPairingData extends ChromeObject {
+  static OutOfBandPairingData create(JsObject proxy) => new OutOfBandPairingData(proxy);
+
+  OutOfBandPairingData(JsObject proxy): super(proxy);
+}
+
+class GetDevicesOptions extends ChromeObject {
+  static GetDevicesOptions create(JsObject proxy) => new GetDevicesOptions(proxy);
+
+  GetDevicesOptions(JsObject proxy): super(proxy);
+}
+
+class GetProfilesOptions extends ChromeObject {
+  static GetProfilesOptions create(JsObject proxy) => new GetProfilesOptions(proxy);
+
+  GetProfilesOptions(JsObject proxy): super(proxy);
+}
+
+class GetServicesOptions extends ChromeObject {
+  static GetServicesOptions create(JsObject proxy) => new GetServicesOptions(proxy);
+
+  GetServicesOptions(JsObject proxy): super(proxy);
+}
+
+class ConnectOptions extends ChromeObject {
+  static ConnectOptions create(JsObject proxy) => new ConnectOptions(proxy);
+
+  ConnectOptions(JsObject proxy): super(proxy);
+}
+
+class DisconnectOptions extends ChromeObject {
+  static DisconnectOptions create(JsObject proxy) => new DisconnectOptions(proxy);
+
+  DisconnectOptions(JsObject proxy): super(proxy);
+}
+
+class ReadOptions extends ChromeObject {
+  static ReadOptions create(JsObject proxy) => new ReadOptions(proxy);
+
+  ReadOptions(JsObject proxy): super(proxy);
+}
+
+class WriteOptions extends ChromeObject {
+  static WriteOptions create(JsObject proxy) => new WriteOptions(proxy);
+
+  WriteOptions(JsObject proxy): super(proxy);
+}
+
+class SetOutOfBandPairingDataOptions extends ChromeObject {
+  static SetOutOfBandPairingDataOptions create(JsObject proxy) => new SetOutOfBandPairingDataOptions(proxy);
+
+  SetOutOfBandPairingDataOptions(JsObject proxy): super(proxy);
+}
+
+class StartDiscoveryOptions extends ChromeObject {
+  static StartDiscoveryOptions create(JsObject proxy) => new StartDiscoveryOptions(proxy);
+
+  StartDiscoveryOptions(JsObject proxy): super(proxy);
+}

@@ -71,3 +71,27 @@ class ChromeSyncFileSystem {
   final ChromeStreamController<FileInfo> _onFileStatusChanged =
       new ChromeStreamController<FileInfo>.oneArg(_syncFileSystem['onFileStatusChanged'], selfConverter);
 }
+
+class FileInfo extends ChromeObject {
+  static FileInfo create(JsObject proxy) => new FileInfo(proxy);
+
+  FileInfo(JsObject proxy): super(proxy);
+}
+
+class FileStatusInfo extends ChromeObject {
+  static FileStatusInfo create(JsObject proxy) => new FileStatusInfo(proxy);
+
+  FileStatusInfo(JsObject proxy): super(proxy);
+}
+
+class StorageInfo extends ChromeObject {
+  static StorageInfo create(JsObject proxy) => new StorageInfo(proxy);
+
+  StorageInfo(JsObject proxy): super(proxy);
+}
+
+class ServiceInfo extends ChromeObject {
+  static ServiceInfo create(JsObject proxy) => new ServiceInfo(proxy);
+
+  ServiceInfo(JsObject proxy): super(proxy);
+}

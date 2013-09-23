@@ -67,3 +67,27 @@ class ChromeSerial {
     return completer.future;
   }
 }
+
+class OpenOptions extends ChromeObject {
+  static OpenOptions create(JsObject proxy) => new OpenOptions(proxy);
+
+  OpenOptions(JsObject proxy): super(proxy);
+}
+
+class OpenInfo extends ChromeObject {
+  static OpenInfo create(JsObject proxy) => new OpenInfo(proxy);
+
+  OpenInfo(JsObject proxy): super(proxy);
+}
+
+class ReadInfo extends ChromeObject {
+  static ReadInfo create(JsObject proxy) => new ReadInfo(proxy);
+
+  ReadInfo(JsObject proxy): super(proxy);
+}
+
+class ControlSignalOptions extends ChromeObject {
+  static ControlSignalOptions create(JsObject proxy) => new ControlSignalOptions(proxy);
+
+  ControlSignalOptions(JsObject proxy): super(proxy);
+}
