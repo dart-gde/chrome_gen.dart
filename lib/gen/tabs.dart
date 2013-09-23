@@ -423,15 +423,15 @@ class OnUpdatedEvent {
  * the other tabs that must move in response. This event is not fired when a tab
  * is moved between windows. For that, see [onDetached.]
  */
-class OnMovedEvent {
-  static OnMovedEvent create(int tabId, JsObject moveInfo) =>
-      new OnMovedEvent(tabId, mapify(moveInfo));
+class TabsOnMovedEvent {
+  static TabsOnMovedEvent create(int tabId, JsObject moveInfo) =>
+      new TabsOnMovedEvent(tabId, mapify(moveInfo));
 
   int tabId;
 
   Map moveInfo;
 
-  OnMovedEvent(this.tabId, this.moveInfo);
+  TabsOnMovedEvent(this.tabId, this.moveInfo);
 }
 
 /**
@@ -501,15 +501,15 @@ class OnAttachedEvent {
 /**
  * Fired when a tab is closed.
  */
-class OnRemovedEvent {
-  static OnRemovedEvent create(int tabId, JsObject removeInfo) =>
-      new OnRemovedEvent(tabId, mapify(removeInfo));
+class TabsOnRemovedEvent {
+  static TabsOnRemovedEvent create(int tabId, JsObject removeInfo) =>
+      new TabsOnRemovedEvent(tabId, mapify(removeInfo));
 
   int tabId;
 
   Map removeInfo;
 
-  OnRemovedEvent(this.tabId, this.removeInfo);
+  TabsOnRemovedEvent(this.tabId, this.removeInfo);
 }
 
 /**

@@ -38,9 +38,9 @@ class ChromeStorage {
 /**
  * Fired when one or more items change.
  */
-class OnChangedEvent {
-  static OnChangedEvent create(JsObject changes, String areaName) =>
-      new OnChangedEvent(mapify(changes), areaName);
+class StorageOnChangedEvent {
+  static StorageOnChangedEvent create(JsObject changes, String areaName) =>
+      new StorageOnChangedEvent(mapify(changes), areaName);
 
   /**
    * Object mapping each key that changed to its corresponding [StorageChange]
@@ -53,7 +53,7 @@ class OnChangedEvent {
    */
   String areaName;
 
-  OnChangedEvent(this.changes, this.areaName);
+  StorageOnChangedEvent(this.changes, this.areaName);
 }
 
 class StorageChange extends ChromeObject {

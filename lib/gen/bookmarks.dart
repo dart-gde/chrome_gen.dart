@@ -239,44 +239,44 @@ class OnCreatedEvent {
  * recursively, a single notification is fired for the folder, and none for its
  * contents.
  */
-class OnRemovedEvent {
-  static OnRemovedEvent create(String id, JsObject removeInfo) =>
-      new OnRemovedEvent(id, mapify(removeInfo));
+class BookmarksOnRemovedEvent {
+  static BookmarksOnRemovedEvent create(String id, JsObject removeInfo) =>
+      new BookmarksOnRemovedEvent(id, mapify(removeInfo));
 
   String id;
 
   Map removeInfo;
 
-  OnRemovedEvent(this.id, this.removeInfo);
+  BookmarksOnRemovedEvent(this.id, this.removeInfo);
 }
 
 /**
  * Fired when a bookmark or folder changes.  <b>Note:</b> Currently, only title
  * and url changes trigger this.
  */
-class OnChangedEvent {
-  static OnChangedEvent create(String id, JsObject changeInfo) =>
-      new OnChangedEvent(id, mapify(changeInfo));
+class BookmarksOnChangedEvent {
+  static BookmarksOnChangedEvent create(String id, JsObject changeInfo) =>
+      new BookmarksOnChangedEvent(id, mapify(changeInfo));
 
   String id;
 
   Map changeInfo;
 
-  OnChangedEvent(this.id, this.changeInfo);
+  BookmarksOnChangedEvent(this.id, this.changeInfo);
 }
 
 /**
  * Fired when a bookmark or folder is moved to a different parent folder.
  */
-class OnMovedEvent {
-  static OnMovedEvent create(String id, JsObject moveInfo) =>
-      new OnMovedEvent(id, mapify(moveInfo));
+class BookmarksOnMovedEvent {
+  static BookmarksOnMovedEvent create(String id, JsObject moveInfo) =>
+      new BookmarksOnMovedEvent(id, mapify(moveInfo));
 
   String id;
 
   Map moveInfo;
 
-  OnMovedEvent(this.id, this.moveInfo);
+  BookmarksOnMovedEvent(this.id, this.moveInfo);
 }
 
 /**

@@ -113,10 +113,10 @@ class AdapterState extends ChromeObject {
   AdapterState(JsObject proxy): super(proxy);
 }
 
-class Device extends ChromeObject {
-  static Device create(JsObject proxy) => proxy == null ? null : new Device(proxy);
+class BluetoothDevice extends ChromeObject {
+  static BluetoothDevice create(JsObject proxy) => proxy == null ? null : new BluetoothDevice(proxy);
 
-  Device(JsObject proxy): super(proxy);
+  BluetoothDevice(JsObject proxy): super(proxy);
 }
 
 class Profile extends ChromeObject {

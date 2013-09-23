@@ -83,8 +83,8 @@ class DefaultBackend extends Backend {
    * Returns a class name like 'ChromeFooBar'.
    */
   String get className {
-    if (overrides.getClassRename(library.name) != null) {
-       return "Chrome${overrides.getClassRename(library.name)}";
+    if (overrides.namespaceRename(library.name) != null) {
+       return "Chrome${overrides.namespaceRename(library.name)}";
     }
 
     return "Chrome${titleCase(toCamelCase(library.name))}";
@@ -200,6 +200,7 @@ class DefaultBackend extends Backend {
     generator.writeln();
     generator.writeDocs(event.documentation);
 
+    // TODO: when we create this name, we have to use any class renames from the overrides
     String typeName = type == null ? null : type.toReturnString();
 
     if (type != null) {
@@ -228,11 +229,13 @@ class DefaultBackend extends Backend {
   }
 
   void _printEventType(ChromeType type) {
+    String className = overrides.className(library.name, type.name);
+
     generator.writeln();
     generator.writeDocs(type.documentation);
-    generator.writeln("class ${type.name} {");
+    generator.writeln("class ${className} {");
     String createParams = type.properties.map((p) => '${getJSType(p.type)} ${p.name}').join(', ');
-    generator.writeln("static ${type.name} create(${createParams}) =>");
+    generator.writeln("static ${className} create(${createParams}) =>");
     String cvtParams = type.properties.map((ChromeProperty p) {
       String cvt = getCallbackConverter(p.type);
       if (cvt == null) {
@@ -241,7 +244,7 @@ class DefaultBackend extends Backend {
         return "${cvt}(${p.name})";
       }
     }).join(', ');
-    generator.writeln("    new ${type.name}(${cvtParams});");
+    generator.writeln("    new ${className}(${cvtParams});");
     type.properties.forEach((ChromeProperty property) {
       generator.writeln();
       generator.writeDocs(property.getDescription());
@@ -249,22 +252,24 @@ class DefaultBackend extends Backend {
     });
     generator.writeln();
     String params = type.properties.map((p) => 'this.${p.name}').join(', ');
-    generator.writeln("${type.name}(${params});");
+    generator.writeln("${className}(${params});");
     generator.writeln("}");
   }
 
   void _printDeclaredType(ChromeType type) {
-    if (overrides.ignoreDeclaredType(library.name, type.name)) {
+    if (overrides.suppressClass(library.name, type.name)) {
       return;
     }
 
+    String className = overrides.className(library.name, type.name);
+
     generator.writeln();
     generator.writeDocs(type.documentation);
-    generator.writeln("class ${type.name} extends ChromeObject {");
-    generator.writeln("static ${type.name} create(JsObject proxy) => "
-        "proxy == null ? null : new ${type.name}(proxy);");
+    generator.writeln("class ${className} extends ChromeObject {");
+    generator.writeln("static ${className} create(JsObject proxy) => "
+        "proxy == null ? null : new ${className}(proxy);");
     generator.writeln();
-    generator.writeln("${type.name}(JsObject proxy): super(proxy);");
+    generator.writeln("${className}(JsObject proxy): super(proxy);");
 
     if (library.name != 'proxy') {
       type.properties.forEach((p) => _printProperty(p, 'proxy'));

@@ -1,12 +1,29 @@
 {
-  "classNames" : {
+  "renameNamespace" : {
     "i18n" : "I18N"
   },
 
-  "suppress" : {
-    "pageAction" : [ "ImageDataType" ],
-    "serial" : [ "WriteInfo" ],
-    "system.display" : [ "Bounds" ]
+  "suppressClass" : [
+    "pageAction.ImageDataType",
+    "system.display.Bounds"
+  ],
+
+  "renameClass" : {
+    "bluetooth.Device" : "BluetoothDevice",
+    "serial.Device" : "SerialDevice",
+
+    "socket.ReadInfo" : "SocketReadInfo",
+    "socket.WriteInfo" : "SocketWriteInfo",
+    "serial.ReadInfo" : "SerialReadInfo",
+    "serial.WriteInfo" : "SerialWriteInfo",
+
+    "bookmarks.OnChangedEvent" : "BookmarksOnChangedEvent",
+    "storage.OnChangedEvent" : "StorageOnChangedEvent",
+
+    "bookmarks.OnMovedEvent" : "BookmarksOnMovedEvent",
+    "bookmarks.OnRemovedEvent" : "BookmarksOnRemovedEvent",
+    "tabs.OnMovedEvent" : "TabsOnMovedEvent",
+    "tabs.OnRemovedEvent" : "TabsOnRemovedEvent"
   }
 
 }

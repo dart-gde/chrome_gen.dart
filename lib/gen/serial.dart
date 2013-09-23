@@ -73,10 +73,16 @@ class OpenInfo extends ChromeObject {
   OpenInfo(JsObject proxy): super(proxy);
 }
 
-class ReadInfo extends ChromeObject {
-  static ReadInfo create(JsObject proxy) => proxy == null ? null : new ReadInfo(proxy);
+class SerialReadInfo extends ChromeObject {
+  static SerialReadInfo create(JsObject proxy) => proxy == null ? null : new SerialReadInfo(proxy);
 
-  ReadInfo(JsObject proxy): super(proxy);
+  SerialReadInfo(JsObject proxy): super(proxy);
+}
+
+class SerialWriteInfo extends ChromeObject {
+  static SerialWriteInfo create(JsObject proxy) => proxy == null ? null : new SerialWriteInfo(proxy);
+
+  SerialWriteInfo(JsObject proxy): super(proxy);
 }
 
 class ControlSignalOptions extends ChromeObject {

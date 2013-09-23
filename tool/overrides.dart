@@ -14,32 +14,47 @@ import 'dart:io';
 // TODO: rename one class, both, or use a do something with qualified references?
 
 class Overrides {
-  Map _m;
+  Map renameNamespaceMap;
 
-  Overrides(): _m = {};
+  List<String> suppressClassList;
+  Map renameClassMap;
+
+  Overrides() {
+    _init({});
+  }
 
   Overrides.fromFile(File file) {
-    _m = JSON.decode(file.readAsStringSync());
+    _init(JSON.decode(file.readAsStringSync()));
   }
 
-  String getClassRename(String className) {
-    Map renameMap = _m['classNames'];
-
-    return renameMap == null ? null : renameMap[className];
-  }
-
-  bool ignoreDeclaredType(String libraryName, String typeName) {
-    Map suppressMap = _m['suppress'];
-
-    if (suppressMap != null) {
-      List l = suppressMap[libraryName];
-
-      if (l != null) {
-        return l.contains(typeName);
-      }
+  void _init(Map m) {
+    renameNamespaceMap = m['renameNamespace'];
+    if (renameNamespaceMap == null) {
+      renameNamespaceMap = {};
     }
 
-    return false;
+    suppressClassList = m['suppressClass'];
+    if (suppressClassList == null) {
+      suppressClassList = null;
+    }
+
+    renameClassMap = m['renameClass'];
+    if (renameClassMap == null) {
+      renameClassMap = {};
+    }
   }
 
+  String namespaceRename(String name) {
+    return renameNamespaceMap[name] != null ? renameNamespaceMap[name] : null;
+  }
+
+  bool suppressClass(String libraryName, String name) {
+    String qualifiedName = '${libraryName}.${name}';
+    return suppressClassList.contains(qualifiedName);
+  }
+
+  String className(String libraryName, String name) {
+    String qualifiedName = '${libraryName}.${name}';
+    return renameClassMap[qualifiedName] != null ? renameClassMap[qualifiedName] : name;
+  }
 }
