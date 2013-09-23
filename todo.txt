@@ -2,12 +2,12 @@
 +convert json to model
 +analyze the generated api
 +library to generate dart source (bin/generate_dart.dart)
--parse idl
--write model
++parse idl
++write model
 -convert idl to model
 -support side-car source code, and generator overrides
 -test the generated api
--it's likely that we'll have to create a model for the generated dart code. so,
++it's likely that we'll have to create a model for the generated dart code. so,
  idl  ==> idl model ==> dart model ==> dart code
  json ==> idl model ==> dart model ==> dart code
 

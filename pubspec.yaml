@@ -7,6 +7,4 @@ dependencies:
   parsers: any
 dev_dependencies:
   browser: any
-  papyrus:
-    git: https://github.com/devoncarew/papyrus.dart.git
   unittest: any

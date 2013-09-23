@@ -1,6 +1,3 @@
-// Copyright (c) 2013, the gen_tools.dart project authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be found
-// in the LICENSE file.
 
 library gen_apis;
 
@@ -62,8 +59,10 @@ class GenApis {
 
     DartGenerator generator = new DartGenerator();
 
-    generator.writeln(LICENSE);
-    generator.writeln();
+    if (LICENSE != null) {
+      generator.writeln(LICENSE);
+      generator.writeln();
+    }
     generator.writeln("/* This file has been generated - do not edit */");
     generator.writeln();
 

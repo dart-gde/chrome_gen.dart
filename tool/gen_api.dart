@@ -1,6 +1,3 @@
-// Copyright (c) 2013, the gen_tools.dart project authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be found
-// in the LICENSE file.
 
 import 'dart:io';
 
@@ -28,10 +25,7 @@ void main() {
   generator.generate();
 }
 
-final String LICENSE =
-"// Copyright (c) 2013, the gen_tools.dart project authors. All rights reserved.\n"
-"// Use of this source code is governed by a BSD-style license that can be found\n"
-"// in the LICENSE file.";
+final String LICENSE = null;
 
 class GenApiFile {
   File inFile;
