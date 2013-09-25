@@ -11,3 +11,4 @@ docs/
 docs/app/
 docs/ext/
 app/demo.dart.js
+app/demo.dart.precompiled.js

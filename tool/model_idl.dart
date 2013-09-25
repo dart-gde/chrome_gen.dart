@@ -185,7 +185,7 @@ class IDLCollectorChrome implements IDLCollector {
     valueParser(a) {
       var value;
 
-      // Contiune until EMPTY is hit
+      // Continue until EMPTY is hit
       if (a == EMPTY) return;
 
       if (a.length == 3) {
@@ -394,8 +394,8 @@ ChromeLibrary convert(IDLCollector collector) {
       collector.idlNamespace.functions.map(_convertMethod).toList();
   chromeLibrary.events =
       collector.idlNamespace.events.map(_convertEvent).toList();
-  chromeLibrary.properties =
-      collector.idlNamespace.enumTypes.map(_convertEnum).toList();
+//  chromeLibrary.properties =
+//      collector.idlNamespace.enumTypes.map(_convertEnum).toList();
 
   return chromeLibrary;
 }

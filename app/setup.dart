@@ -14,7 +14,7 @@ void main() {
   // build with dart2js
   runProcess(
       'dart2js',
-      ['app/demo.dart', '--out=app/demo.dart.js', '--disallow-unsafe-eval']);
+      ['app/demo.dart', '--out=app/demo.dart.js']);
 
   // clean up some clutter
   runProcess('rm', ['app/demo.dart.js.deps', 'app/demo.dart.js.map']);

@@ -1,4 +1,8 @@
 
+/**
+ * A library to query the declaritive overrides for Chrome API generation. See
+ * the `meta/overrides.json` file.
+ */
 library overrides;
 
 import 'dart:convert';
