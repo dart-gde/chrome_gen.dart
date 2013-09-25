@@ -183,7 +183,21 @@ void modelIdlParseTestTypes() {
   });
 }
 
+void modelIdlParseEnumTest() {
+  test('test enum usb.dart', () {
+    File testFile = new File('idl/usb.idl');
+    WebIdlParser webIdlParser =
+        new WebIdlParser.withCollector(new model_idl.IDLCollectorChrome());
+    webIdlParser.start.parse(testFile.readAsStringSync());
+    model_idl.IDLNamespace idlNamespace = webIdlParser.collector.idlNamespace;
+    expect(idlNamespace.name, isNotNull);
+    expect(idlNamespace.name, "usb");
+    expect(idlNamespace.enumTypes.length, 6);
+  });
+}
+
 void main() {
-  // group('model_idl.IDLCollectorChrome parse', modelIdlParseTests);
+  group('model_idl.IDLCollectorChrome parse', modelIdlParseTests);
   group('model_idl', modelIdlParseTestTypes);
+  group('model_idl', modelIdlParseEnumTest);
 }
