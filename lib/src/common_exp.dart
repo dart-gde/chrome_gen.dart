@@ -26,3 +26,15 @@ class ArrayBuffer extends ChromeObject {
 
   ArrayBuffer(JsObject proxy): super(proxy);
 }
+
+/**
+ * The abstract superclass of Chrome enums.
+ */
+abstract class ChromeEnum {
+  final String _value;
+
+  const ChromeEnum(this._value);
+
+  String get value => _value;
+  String toString() => _value;
+}
