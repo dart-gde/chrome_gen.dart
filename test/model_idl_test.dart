@@ -184,6 +184,6 @@ void modelIdlParseTestTypes() {
 }
 
 void main() {
-  // group('model_idl.IDLCollectorChrome parse', modelIdlParseTests);
+  group('model_idl.IDLCollectorChrome parse', modelIdlParseTests);
   group('model_idl', modelIdlParseTestTypes);
 }
