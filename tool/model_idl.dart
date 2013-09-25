@@ -176,6 +176,52 @@ class IDLCollectorChrome implements IDLCollector {
   }
 
   enumStatement(l) {
+    // Example from usb [enum, Direction, [in, [,, out, EMPTY]], ;]
+    //    print("enumStatement:");
+    //    print(l);
+
+    String enumName = l[1];
+    var arg = l[2];
+    IDLEnum idlEnum = new IDLEnum(enumName);
+
+    valueParser(a) {
+      var value;
+
+      // Contiune until EMPTY is hit
+      if (a == EMPTY) return;
+
+      if (a.length == 3) {
+        // recursive
+        value = a[1];
+        // Create value type and add to list of IDLEnum
+        //idlEnum.enumValues.add(value);
+        IDLProperty idlValue = new IDLProperty(value);
+        idlEnum.members.add(idlValue);
+
+        if (a[2] != EMPTY) {
+          valueParser(a);
+          return;
+        } else {
+          return;
+        }
+      }
+
+      // TODO: do we hit this type of condition or should we
+      // just ignore and/or throw error.
+      if (a.length == 2){
+        value = a[1];
+        IDLProperty idlValue = new IDLProperty(value);
+      }
+    };
+
+    if (arg != EMPTY) {
+      // Parse the first enum value
+      var value = arg[0];
+      IDLProperty idlValue = new IDLProperty(value);
+      idlEnum.members.add(idlValue);
+    }
+
+    idlNamespace.enumTypes.add(idlEnum);
     // Must return type passed for parser to continue.
     return l;
   }
@@ -190,11 +236,21 @@ class IDLNamespace {
   List<IDLFunction> functions = [];
   List<IDLEvent> events = [];
   List<IDLDeclaredType> declaredTypes = [];
+  List<IDLEnum> enumTypes = []; // List of enums declared in IDL
   // Dont know what the use of properties is vs declaredTypes in terms of
   // WebIDL.
   //List<IDLProperty> properties = [];
 
   String toString() => name;
+}
+
+/**
+ * IDL enumeration class.
+ */
+class IDLEnum extends IDLDeclaredType {
+  List<IDLProperty> get enumValues => this.members;
+  void set enumValues(value) => this.members = value;
+  IDLEnum(name) : super(name);
 }
 
 class IDLFunction {
@@ -340,6 +396,8 @@ ChromeLibrary convert(IDLCollector collector) {
       collector.idlNamespace.functions.map(_convertMethod).toList();
   chromeLibrary.events =
       collector.idlNamespace.events.map(_convertEvent).toList();
+  chromeLibrary.properties =
+      collector.idlNamespace.enumTypes.map(_convertEnum).toList();
 
   return chromeLibrary;
 }
@@ -364,6 +422,13 @@ ChromeType _convertProperty(IDLProperty idlProperty) {
   ChromeType chromeType = new ChromeType();
   chromeType.name = idlProperty.name;
   chromeType.type = idlProperty.returnType.name;
+  return chromeType;
+}
+
+ChromeType _convertEnum(IDLEnum idlProperty) {
+  ChromeType chromeType = new ChromeType();
+  chromeType.name = idlProperty.name;
+  //chromeType.type = idlProperty.returnType.name;
   return chromeType;
 }
 
