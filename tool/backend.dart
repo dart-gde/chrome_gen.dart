@@ -107,18 +107,14 @@ class DefaultBackend extends Backend {
     generator.writeln();
     generator.writeln("${className}._();");
 
-    library.properties.forEach((p) => _printProperty(p, contextReference));
+    library.filteredProperties.forEach((p) => _printProperty(p, contextReference));
     library.methods.forEach(_printMethod);
     library.events.forEach(_printEvent);
 
     generator.writeln("}");
   }
 
-  void _printProperty(ChromeProperty property, String refString) {
-    if (property.nodoc) {
-      return;
-    }
-
+  void _printProperty(ChromeProperty property, String refString, [bool printSetter = false]) {
     String converter = getReturnConverter(property.type);
     String getterBody = "${refString}['${property.name}']";
 
@@ -127,6 +123,11 @@ class DefaultBackend extends Backend {
     generator.write("${property.type.toReturnString()} ");
     generator.write("get ${property.name} => ");
     generator.writeln("${converter.replaceFirst('%s', getterBody)};");
+
+    if (printSetter) {
+      // set periodInMinutes(double value) => proxy['periodInMinutes'] = value;
+      generator.writeln("set ${property.name}(${property.type} value) => ${getterBody} = value;");
+    }
   }
 
   void _printMethod(ChromeMethod method) {
@@ -236,12 +237,14 @@ class DefaultBackend extends Backend {
     // We do class renames in a lexical basis for the entire compilation unit.
     String className = type.name; //overrides.className(library.name, type.name);
 
+    Iterable<ChromeProperty> props = type.filteredProperties;
+
     generator.writeln();
     generator.writeDocs(type.documentation);
     generator.writeln("class ${className} {");
-    String createParams = type.properties.map((p) => '${getJSType(p.type)} ${p.name}').join(', ');
+    String createParams = props.map((p) => '${getJSType(p.type)} ${p.name}').join(', ');
     generator.writeln("static ${className} create(${createParams}) =>");
-    String cvtParams = type.properties.map((ChromeProperty p) {
+    String cvtParams = props.map((ChromeProperty p) {
       String cvt = getCallbackConverter(p.type);
       if (cvt == null) {
         return p.name;
@@ -250,13 +253,13 @@ class DefaultBackend extends Backend {
       }
     }).join(', ');
     generator.writeln("    new ${className}(${cvtParams});");
-    type.properties.forEach((ChromeProperty property) {
+    props.forEach((ChromeProperty property) {
       generator.writeln();
       generator.writeDocs(property.getDescription());
       generator.writeln("${property.type.toReturnString()} ${property.name};");
     });
     generator.writeln();
-    String params = type.properties.map((p) => 'this.${p.name}').join(', ');
+    String params = props.map((p) => 'this.${p.name}').join(', ');
     generator.writeln("${className}(${params});");
     generator.writeln("}");
   }
@@ -293,20 +296,33 @@ class DefaultBackend extends Backend {
       return;
     }
 
-    String className = overrides.className(library.name, type.name);
+    String className = type.name;
+    Iterable<ChromeProperty> props = type.filteredProperties;
 
     generator.writeln();
     generator.writeDocs(type.documentation);
     generator.writeln("class ${className} extends ChromeObject {");
     generator.writeln("static ${className} create(JsObject proxy) => "
-        "proxy == null ? null : new ${className}(proxy);");
+        "proxy == null ? null : new ${className}.fromProxy(proxy);");
     generator.writeln();
-    generator.writeln("${className}(JsObject proxy): super(proxy);");
+    if (props.isNotEmpty) {
+      generator.write("${className}({");
+      generator.write(props.map((p) => "${p.type} ${p.name}").join(', '));
+      generator.writeln('}) {');
+      props.forEach((ChromeProperty p) {
+        generator.writeln("if (${p.name} != null) this.${p.name} = ${p.name};");
+      });
+      generator.writeln('}');
+    } else {
+      generator.writeln("${className}();");
+    }
+    generator.writeln();
+    generator.writeln("${className}.fromProxy(JsObject proxy): super.fromProxy(proxy);");
 
     if (library.name != 'proxy') {
-      type.properties.forEach((p) => _printProperty(p, 'proxy'));
+      props.forEach((p) => _printProperty(p, 'proxy', true));
     } else {
-      type.properties.forEach((p) => _printProperty(p, 'this.proxy'));
+      props.forEach((p) => _printProperty(p, 'this.proxy', true));
     }
 
     generator.writeln("}");
@@ -357,7 +373,7 @@ class DefaultBackend extends Backend {
     } else if (param.isMap) {
       return 'mapify(%s)';
     } else if (param.isReferencedType) {
-      return 'new ${param.refName}(%s)';
+      return '${param.refName}.create(%s)';
     } else {
       return '%s';
     }

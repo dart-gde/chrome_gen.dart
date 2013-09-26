@@ -181,38 +181,67 @@ class ChromeFontSettings {
  * Represents a font name.
  */
 class FontName extends ChromeObject {
-  static FontName create(JsObject proxy) => proxy == null ? null : new FontName(proxy);
+  static FontName create(JsObject proxy) => proxy == null ? null : new FontName.fromProxy(proxy);
 
-  FontName(JsObject proxy): super(proxy);
+  FontName({String fontId, String displayName}) {
+    if (fontId != null) this.fontId = fontId;
+    if (displayName != null) this.displayName = displayName;
+  }
+
+  FontName.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The font ID.
    */
   String get fontId => proxy['fontId'];
+  set fontId(String value) => proxy['fontId'] = value;
 
   /**
    * The display name of the font.
    */
   String get displayName => proxy['displayName'];
+  set displayName(String value) => proxy['displayName'] = value;
 }
 
 /**
  * An ISO 15924 script code. The default, or global, script is represented by
  * script code "Zyyy".
+ * enum of `Afak`, `Arab`, `Armi`, `Armn`, `Avst`, `Bali`, `Bamu`, `Bass`,
+ * `Batk`, `Beng`, `Blis`, `Bopo`, `Brah`, `Brai`, `Bugi`, `Buhd`, `Cakm`,
+ * `Cans`, `Cari`, `Cham`, `Cher`, `Cirt`, `Copt`, `Cprt`, `Cyrl`, `Cyrs`,
+ * `Deva`, `Dsrt`, `Dupl`, `Egyd`, `Egyh`, `Egyp`, `Elba`, `Ethi`, `Geor`,
+ * `Geok`, `Glag`, `Goth`, `Gran`, `Grek`, `Gujr`, `Guru`, `Hang`, `Hani`,
+ * `Hano`, `Hans`, `Hant`, `Hebr`, `Hluw`, `Hmng`, `Hung`, `Inds`, `Ital`,
+ * `Java`, `Jpan`, `Jurc`, `Kali`, `Khar`, `Khmr`, `Khoj`, `Knda`, `Kpel`,
+ * `Kthi`, `Lana`, `Laoo`, `Latf`, `Latg`, `Latn`, `Lepc`, `Limb`, `Lina`,
+ * `Linb`, `Lisu`, `Loma`, `Lyci`, `Lydi`, `Mand`, `Mani`, `Maya`, `Mend`,
+ * `Merc`, `Mero`, `Mlym`, `Moon`, `Mong`, `Mroo`, `Mtei`, `Mymr`, `Narb`,
+ * `Nbat`, `Nkgb`, `Nkoo`, `Nshu`, `Ogam`, `Olck`, `Orkh`, `Orya`, `Osma`,
+ * `Palm`, `Perm`, `Phag`, `Phli`, `Phlp`, `Phlv`, `Phnx`, `Plrd`, `Prti`,
+ * `Rjng`, `Roro`, `Runr`, `Samr`, `Sara`, `Sarb`, `Saur`, `Sgnw`, `Shaw`,
+ * `Shrd`, `Sind`, `Sinh`, `Sora`, `Sund`, `Sylo`, `Syrc`, `Syre`, `Syrj`,
+ * `Syrn`, `Tagb`, `Takr`, `Tale`, `Talu`, `Taml`, `Tang`, `Tavt`, `Telu`,
+ * `Teng`, `Tfng`, `Tglg`, `Thaa`, `Thai`, `Tibt`, `Tirh`, `Ugar`, `Vaii`,
+ * `Visp`, `Wara`, `Wole`, `Xpeo`, `Xsux`, `Yiii`, `Zmth`, `Zsym`, `Zyyy`
  */
 class ScriptCode extends ChromeObject {
-  static ScriptCode create(JsObject proxy) => proxy == null ? null : new ScriptCode(proxy);
+  static ScriptCode create(JsObject proxy) => proxy == null ? null : new ScriptCode.fromProxy(proxy);
 
-  ScriptCode(JsObject proxy): super(proxy);
+  ScriptCode();
+
+  ScriptCode.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
 /**
  * A CSS generic font family.
+ * enum of `standard`, `sansserif`, `serif`, `fixed`, `cursive`, `fantasy`
  */
 class GenericFamily extends ChromeObject {
-  static GenericFamily create(JsObject proxy) => proxy == null ? null : new GenericFamily(proxy);
+  static GenericFamily create(JsObject proxy) => proxy == null ? null : new GenericFamily.fromProxy(proxy);
 
-  GenericFamily(JsObject proxy): super(proxy);
+  GenericFamily();
+
+  GenericFamily.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
 /**
@@ -221,9 +250,13 @@ class GenericFamily extends ChromeObject {
  * higher precedence<br>[controllable_by_this_extension]: can be controlled by
  * this extension<br>[controlled_by_this_extension]: controlled by this
  * extension
+ * enum of `not_controllable`, `controlled_by_other_extensions`,
+ * `controllable_by_this_extension`, `controlled_by_this_extension`
  */
 class LevelOfControl extends ChromeObject {
-  static LevelOfControl create(JsObject proxy) => proxy == null ? null : new LevelOfControl(proxy);
+  static LevelOfControl create(JsObject proxy) => proxy == null ? null : new LevelOfControl.fromProxy(proxy);
 
-  LevelOfControl(JsObject proxy): super(proxy);
+  LevelOfControl();
+
+  LevelOfControl.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }

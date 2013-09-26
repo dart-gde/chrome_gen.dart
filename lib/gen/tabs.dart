@@ -50,7 +50,7 @@ class ChromeTabs {
    * closes or does not exist.
    */
   Port connect(int tabId, [Map connectInfo]) {
-    return new Port(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
+    return Port.create(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
   }
 
   /**
@@ -527,9 +527,27 @@ class OnReplacedEvent {
 }
 
 class Tab extends ChromeObject {
-  static Tab create(JsObject proxy) => proxy == null ? null : new Tab(proxy);
+  static Tab create(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
 
-  Tab(JsObject proxy): super(proxy);
+  Tab({int id, int index, int windowId, int openerTabId, bool highlighted, bool active, bool pinned, String url, String title, String favIconUrl, String status, bool incognito, int width, int height, String sessionId}) {
+    if (id != null) this.id = id;
+    if (index != null) this.index = index;
+    if (windowId != null) this.windowId = windowId;
+    if (openerTabId != null) this.openerTabId = openerTabId;
+    if (highlighted != null) this.highlighted = highlighted;
+    if (active != null) this.active = active;
+    if (pinned != null) this.pinned = pinned;
+    if (url != null) this.url = url;
+    if (title != null) this.title = title;
+    if (favIconUrl != null) this.favIconUrl = favIconUrl;
+    if (status != null) this.status = status;
+    if (incognito != null) this.incognito = incognito;
+    if (width != null) this.width = width;
+    if (height != null) this.height = height;
+    if (sessionId != null) this.sessionId = sessionId;
+  }
+
+  Tab.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The ID of the tab. Tab IDs are unique within a browser session. Under some
@@ -538,50 +556,59 @@ class Tab extends ChromeObject {
    * present.
    */
   int get id => proxy['id'];
+  set id(int value) => proxy['id'] = value;
 
   /**
    * The zero-based index of the tab within its window.
    */
   int get index => proxy['index'];
+  set index(int value) => proxy['index'] = value;
 
   /**
    * The ID of the window the tab is contained within.
    */
   int get windowId => proxy['windowId'];
+  set windowId(int value) => proxy['windowId'] = value;
 
   /**
    * The ID of the tab that opened this tab, if any. This property is only
    * present if the opener tab still exists.
    */
   int get openerTabId => proxy['openerTabId'];
+  set openerTabId(int value) => proxy['openerTabId'] = value;
 
   /**
    * Whether the tab is highlighted.
    */
   bool get highlighted => proxy['highlighted'];
+  set highlighted(bool value) => proxy['highlighted'] = value;
 
   /**
    * Whether the tab is active in its window. (Does not necessarily mean the
    * window is focused.)
    */
   bool get active => proxy['active'];
+  set active(bool value) => proxy['active'] = value;
 
   /**
    * Whether the tab is pinned.
    */
   bool get pinned => proxy['pinned'];
+  set pinned(bool value) => proxy['pinned'] = value;
 
   /**
    * The URL the tab is displaying. This property is only present if the
    * extension's manifest includes the `"tabs"` permission.
    */
   String get url => proxy['url'];
+  set url(String value) => proxy['url'] = value;
 
   /**
    * The title of the tab. This property is only present if the extension's
    * manifest includes the `"tabs"` permission.
    */
   String get title => proxy['title'];
+  set title(String value) => proxy['title'] = value;
 
   /**
    * The URL of the tab's favicon. This property is only present if the
@@ -589,32 +616,38 @@ class Tab extends ChromeObject {
    * empty string if the tab is loading.
    */
   String get favIconUrl => proxy['favIconUrl'];
+  set favIconUrl(String value) => proxy['favIconUrl'] = value;
 
   /**
    * Either _loading_ or _complete_.
    */
   String get status => proxy['status'];
+  set status(String value) => proxy['status'] = value;
 
   /**
    * Whether the tab is in an incognito window.
    */
   bool get incognito => proxy['incognito'];
+  set incognito(bool value) => proxy['incognito'] = value;
 
   /**
    * The width of the tab in pixels.
    */
   int get width => proxy['width'];
+  set width(int value) => proxy['width'] = value;
 
   /**
    * The height of the tab in pixels.
    */
   int get height => proxy['height'];
+  set height(int value) => proxy['height'] = value;
 
   /**
    * The session ID used to uniquely identify a Tab obtained from the [sessions]
    * API.
    */
   String get sessionId => proxy['sessionId'];
+  set sessionId(String value) => proxy['sessionId'] = value;
 }
 
 /**
@@ -622,19 +655,28 @@ class Tab extends ChromeObject {
  * must be set, but both may not be set at the same time.
  */
 class InjectDetails extends ChromeObject {
-  static InjectDetails create(JsObject proxy) => proxy == null ? null : new InjectDetails(proxy);
+  static InjectDetails create(JsObject proxy) => proxy == null ? null : new InjectDetails.fromProxy(proxy);
 
-  InjectDetails(JsObject proxy): super(proxy);
+  InjectDetails({String code, String file, bool allFrames, String runAt}) {
+    if (code != null) this.code = code;
+    if (file != null) this.file = file;
+    if (allFrames != null) this.allFrames = allFrames;
+    if (runAt != null) this.runAt = runAt;
+  }
+
+  InjectDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * JavaScript or CSS code to inject.
    */
   String get code => proxy['code'];
+  set code(String value) => proxy['code'] = value;
 
   /**
    * JavaScript or CSS file to inject.
    */
   String get file => proxy['file'];
+  set file(String value) => proxy['file'] = value;
 
   /**
    * If allFrames is `true`, implies that the JavaScript or CSS should be
@@ -642,10 +684,13 @@ class InjectDetails extends ChromeObject {
    * only injected into the top frame.
    */
   bool get allFrames => proxy['allFrames'];
+  set allFrames(bool value) => proxy['allFrames'] = value;
 
   /**
    * The soonest that the JavaScript or CSS will be injected into the tab.
    * Defaults to "document_idle".
+   * enum of `document_start`, `document_end`, `document_idle`
    */
   String get runAt => proxy['runAt'];
+  set runAt(String value) => proxy['runAt'] = value;
 }

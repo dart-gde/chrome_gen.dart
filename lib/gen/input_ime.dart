@@ -244,6 +244,7 @@ class OnCandidateClickedEvent {
 
   /**
    * Which mouse buttons was clicked.
+   * enum of `left`, `middle`, `right`
    */
   String button;
 
@@ -296,70 +297,98 @@ class OnSurroundingTextChangedEvent {
  * See http://www.w3.org/TR/DOM-Level-3-Events/#events-KeyboardEvent
  */
 class KeyboardEvent extends ChromeObject {
-  static KeyboardEvent create(JsObject proxy) => proxy == null ? null : new KeyboardEvent(proxy);
+  static KeyboardEvent create(JsObject proxy) => proxy == null ? null : new KeyboardEvent.fromProxy(proxy);
 
-  KeyboardEvent(JsObject proxy): super(proxy);
+  KeyboardEvent({String type, String requestId, String key, String code, bool altKey, bool ctrlKey, bool shiftKey, bool capsLock}) {
+    if (type != null) this.type = type;
+    if (requestId != null) this.requestId = requestId;
+    if (key != null) this.key = key;
+    if (code != null) this.code = code;
+    if (altKey != null) this.altKey = altKey;
+    if (ctrlKey != null) this.ctrlKey = ctrlKey;
+    if (shiftKey != null) this.shiftKey = shiftKey;
+    if (capsLock != null) this.capsLock = capsLock;
+  }
+
+  KeyboardEvent.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * One of keyup or keydown.
+   * enum of `keyup`, `keydown`
    */
   String get type => proxy['type'];
+  set type(String value) => proxy['type'] = value;
 
   /**
    * The ID of the request.
    */
   String get requestId => proxy['requestId'];
+  set requestId(String value) => proxy['requestId'] = value;
 
   /**
    * Value of the key being pressed
    */
   String get key => proxy['key'];
+  set key(String value) => proxy['key'] = value;
 
   /**
    * Value of the physical key being pressed. The value is not affected by
    * current keyboard layout or modifier state.
    */
   String get code => proxy['code'];
+  set code(String value) => proxy['code'] = value;
 
   /**
    * Whether or not the ALT key is pressed.
    */
   bool get altKey => proxy['altKey'];
+  set altKey(bool value) => proxy['altKey'] = value;
 
   /**
    * Whether or not the CTRL key is pressed.
    */
   bool get ctrlKey => proxy['ctrlKey'];
+  set ctrlKey(bool value) => proxy['ctrlKey'] = value;
 
   /**
    * Whether or not the SHIFT key is pressed.
    */
   bool get shiftKey => proxy['shiftKey'];
+  set shiftKey(bool value) => proxy['shiftKey'] = value;
 
   /**
    * Whether or not the CAPS_LOCK is enabled.
    */
   bool get capsLock => proxy['capsLock'];
+  set capsLock(bool value) => proxy['capsLock'] = value;
 }
 
 /**
  * Describes an input Context
  */
 class InputContext extends ChromeObject {
-  static InputContext create(JsObject proxy) => proxy == null ? null : new InputContext(proxy);
+  static InputContext create(JsObject proxy) => proxy == null ? null : new InputContext.fromProxy(proxy);
 
-  InputContext(JsObject proxy): super(proxy);
+  InputContext({int contextID, String type}) {
+    if (contextID != null) this.contextID = contextID;
+    if (type != null) this.type = type;
+  }
+
+  InputContext.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * This is used to specify targets of text field operations.  This ID becomes
    * invalid as soon as onBlur is called.
    */
   int get contextID => proxy['contextID'];
+  set contextID(int value) => proxy['contextID'] = value;
 
   /**
    * Type of value this text field edits, (Text, Number, Password, etc)
+   * enum of `text`, `number`, `password`
    */
   String get type => proxy['type'];
+  set type(String value) => proxy['type'] = value;
 }
 
 /**
@@ -367,38 +396,54 @@ class InputContext extends ChromeObject {
  * language menu.
  */
 class MenuItem extends ChromeObject {
-  static MenuItem create(JsObject proxy) => proxy == null ? null : new MenuItem(proxy);
+  static MenuItem create(JsObject proxy) => proxy == null ? null : new MenuItem.fromProxy(proxy);
 
-  MenuItem(JsObject proxy): super(proxy);
+  MenuItem({String id, String label, String style, bool visible, bool checked, bool enabled}) {
+    if (id != null) this.id = id;
+    if (label != null) this.label = label;
+    if (style != null) this.style = style;
+    if (visible != null) this.visible = visible;
+    if (checked != null) this.checked = checked;
+    if (enabled != null) this.enabled = enabled;
+  }
+
+  MenuItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * String that will be passed to callbacks referencing this MenuItem.
    */
   String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
 
   /**
    * Text displayed in the menu for this item.
    */
   String get label => proxy['label'];
+  set label(String value) => proxy['label'] = value;
 
   /**
    * Enum representing if this item is: check, radio, or a separator.  Radio
    * buttons between separators are considered grouped.
+   * enum of `check`, `radio`, `separator`
    */
   String get style => proxy['style'];
+  set style(String value) => proxy['style'] = value;
 
   /**
    * Indicates this item is visible.
    */
   bool get visible => proxy['visible'];
+  set visible(bool value) => proxy['visible'] = value;
 
   /**
    * Indicates this item should be drawn with a check.
    */
   bool get checked => proxy['checked'];
+  set checked(bool value) => proxy['checked'] = value;
 
   /**
    * Indicates this item is enabled.
    */
   bool get enabled => proxy['enabled'];
+  set enabled(bool value) => proxy['enabled'] = value;
 }

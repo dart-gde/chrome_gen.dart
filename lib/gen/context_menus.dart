@@ -107,35 +107,54 @@ class OnClickedEvent {
  * Information sent when a context menu item is clicked.
  */
 class OnClickData extends ChromeObject {
-  static OnClickData create(JsObject proxy) => proxy == null ? null : new OnClickData(proxy);
+  static OnClickData create(JsObject proxy) => proxy == null ? null : new OnClickData.fromProxy(proxy);
 
-  OnClickData(JsObject proxy): super(proxy);
+  OnClickData({var menuItemId, var parentMenuItemId, String mediaType, String linkUrl, String srcUrl, String pageUrl, String frameUrl, String selectionText, bool editable, bool wasChecked, bool checked}) {
+    if (menuItemId != null) this.menuItemId = menuItemId;
+    if (parentMenuItemId != null) this.parentMenuItemId = parentMenuItemId;
+    if (mediaType != null) this.mediaType = mediaType;
+    if (linkUrl != null) this.linkUrl = linkUrl;
+    if (srcUrl != null) this.srcUrl = srcUrl;
+    if (pageUrl != null) this.pageUrl = pageUrl;
+    if (frameUrl != null) this.frameUrl = frameUrl;
+    if (selectionText != null) this.selectionText = selectionText;
+    if (editable != null) this.editable = editable;
+    if (wasChecked != null) this.wasChecked = wasChecked;
+    if (checked != null) this.checked = checked;
+  }
+
+  OnClickData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The ID of the menu item that was clicked.
    */
   dynamic get menuItemId => proxy['menuItemId'];
+  set menuItemId(var value) => proxy['menuItemId'] = value;
 
   /**
    * The parent ID, if any, for the item clicked.
    */
   dynamic get parentMenuItemId => proxy['parentMenuItemId'];
+  set parentMenuItemId(var value) => proxy['parentMenuItemId'] = value;
 
   /**
    * One of 'image', 'video', or 'audio' if the context menu was activated on
    * one of these types of elements.
    */
   String get mediaType => proxy['mediaType'];
+  set mediaType(String value) => proxy['mediaType'] = value;
 
   /**
    * If the element is a link, the URL it points to.
    */
   String get linkUrl => proxy['linkUrl'];
+  set linkUrl(String value) => proxy['linkUrl'] = value;
 
   /**
    * Will be present for elements with a 'src' URL.
    */
   String get srcUrl => proxy['srcUrl'];
+  set srcUrl(String value) => proxy['srcUrl'] = value;
 
   /**
    * The URL of the page where the menu item was clicked. This property is not
@@ -143,33 +162,39 @@ class OnClickData extends ChromeObject {
    * as in a launcher context menu.
    */
   String get pageUrl => proxy['pageUrl'];
+  set pageUrl(String value) => proxy['pageUrl'] = value;
 
   /**
    * The URL of the frame of the element where the context menu was clicked, if
    * it was in a frame.
    */
   String get frameUrl => proxy['frameUrl'];
+  set frameUrl(String value) => proxy['frameUrl'] = value;
 
   /**
    * The text for the context selection, if any.
    */
   String get selectionText => proxy['selectionText'];
+  set selectionText(String value) => proxy['selectionText'] = value;
 
   /**
    * A flag indicating whether the element is editable (text input, textarea,
    * etc.).
    */
   bool get editable => proxy['editable'];
+  set editable(bool value) => proxy['editable'] = value;
 
   /**
    * A flag indicating the state of a checkbox or radio item before it was
    * clicked.
    */
   bool get wasChecked => proxy['wasChecked'];
+  set wasChecked(bool value) => proxy['wasChecked'] = value;
 
   /**
    * A flag indicating the state of a checkbox or radio item after it is
    * clicked.
    */
   bool get checked => proxy['checked'];
+  set checked(bool value) => proxy['checked'] = value;
 }

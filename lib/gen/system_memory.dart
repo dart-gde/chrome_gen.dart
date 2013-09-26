@@ -20,7 +20,18 @@ class ChromeSystemMemory {
 }
 
 class MemoryInfo extends ChromeObject {
-  static MemoryInfo create(JsObject proxy) => proxy == null ? null : new MemoryInfo(proxy);
+  static MemoryInfo create(JsObject proxy) => proxy == null ? null : new MemoryInfo.fromProxy(proxy);
 
-  MemoryInfo(JsObject proxy): super(proxy);
+  MemoryInfo({double capacity, double availableCapacity}) {
+    if (capacity != null) this.capacity = capacity;
+    if (availableCapacity != null) this.availableCapacity = availableCapacity;
+  }
+
+  MemoryInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  double get capacity => proxy['capacity'];
+  set capacity(double value) => proxy['capacity'] = value;
+
+  double get availableCapacity => proxy['availableCapacity'];
+  set availableCapacity(double value) => proxy['availableCapacity'] = value;
 }

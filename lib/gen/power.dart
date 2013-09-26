@@ -23,8 +23,9 @@ class ChromePower {
 
 class Level extends ChromeEnum {
   static const Level SYSTEM = const Level._('system');
+  static const Level DISPLAY = const Level._('display');
 
-  static List<Level> _values = [SYSTEM];
+  static List<Level> _values = [SYSTEM, DISPLAY];
 
   static List<Level> get values => _values;
 

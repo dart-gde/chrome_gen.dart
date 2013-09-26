@@ -149,6 +149,7 @@ class OnDetachEvent {
 
   /**
    * Connection termination reason.
+   * enum of `target_closed`, `canceled_by_user`, `replaced_with_devtools`
    */
   String reason;
 
@@ -159,14 +160,21 @@ class OnDetachEvent {
  * Debuggee identifier. Either tabId or extensionId must be specified
  */
 class Debuggee extends ChromeObject {
-  static Debuggee create(JsObject proxy) => proxy == null ? null : new Debuggee(proxy);
+  static Debuggee create(JsObject proxy) => proxy == null ? null : new Debuggee.fromProxy(proxy);
 
-  Debuggee(JsObject proxy): super(proxy);
+  Debuggee({int tabId, String extensionId, String targetId}) {
+    if (tabId != null) this.tabId = tabId;
+    if (extensionId != null) this.extensionId = extensionId;
+    if (targetId != null) this.targetId = targetId;
+  }
+
+  Debuggee.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The id of the tab which you intend to debug.
    */
   int get tabId => proxy['tabId'];
+  set tabId(int value) => proxy['tabId'] = value;
 
   /**
    * The id of the extension which you intend to debug. Attaching to an
@@ -174,58 +182,80 @@ class Debuggee extends ChromeObject {
    * flag is enabled on the target browser.
    */
   String get extensionId => proxy['extensionId'];
+  set extensionId(String value) => proxy['extensionId'] = value;
 
   /**
    * The opaque id of the debug target.
    */
   String get targetId => proxy['targetId'];
+  set targetId(String value) => proxy['targetId'] = value;
 }
 
 /**
  * Debug target information
  */
 class TargetInfo extends ChromeObject {
-  static TargetInfo create(JsObject proxy) => proxy == null ? null : new TargetInfo(proxy);
+  static TargetInfo create(JsObject proxy) => proxy == null ? null : new TargetInfo.fromProxy(proxy);
 
-  TargetInfo(JsObject proxy): super(proxy);
+  TargetInfo({String type, String id, int tabId, String extensionId, bool attached, String title, String url, String faviconUrl}) {
+    if (type != null) this.type = type;
+    if (id != null) this.id = id;
+    if (tabId != null) this.tabId = tabId;
+    if (extensionId != null) this.extensionId = extensionId;
+    if (attached != null) this.attached = attached;
+    if (title != null) this.title = title;
+    if (url != null) this.url = url;
+    if (faviconUrl != null) this.faviconUrl = faviconUrl;
+  }
+
+  TargetInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * Target type.
+   * enum of `page`, `background_page`, `worker`, `other`
    */
   String get type => proxy['type'];
+  set type(String value) => proxy['type'] = value;
 
   /**
    * Target id.
    */
   String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
 
   /**
    * The tab id, defined if type == 'page'.
    */
   int get tabId => proxy['tabId'];
+  set tabId(int value) => proxy['tabId'] = value;
 
   /**
    * The extension id, defined if type = 'background_page'.
    */
   String get extensionId => proxy['extensionId'];
+  set extensionId(String value) => proxy['extensionId'] = value;
 
   /**
    * True if debugger is already attached.
    */
   bool get attached => proxy['attached'];
+  set attached(bool value) => proxy['attached'] = value;
 
   /**
    * Target page title.
    */
   String get title => proxy['title'];
+  set title(String value) => proxy['title'] = value;
 
   /**
    * Target URL.
    */
   String get url => proxy['url'];
+  set url(String value) => proxy['url'] = value;
 
   /**
    * Target favicon URL.
    */
   String get faviconUrl => proxy['faviconUrl'];
+  set faviconUrl(String value) => proxy['faviconUrl'] = value;
 }

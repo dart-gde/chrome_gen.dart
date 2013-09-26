@@ -30,7 +30,7 @@ class Overrides {
 
     suppressClassList = m['suppressClass'];
     if (suppressClassList == null) {
-      suppressClassList = null;
+      suppressClassList = [];
     }
 
     renameClassMap = m['renameClass'];

@@ -5,6 +5,7 @@
 
   "suppressClass" : [
     "pageAction.ImageDataType",
+    "app.window.Bounds",
     "system.display.Bounds"
   ],
 

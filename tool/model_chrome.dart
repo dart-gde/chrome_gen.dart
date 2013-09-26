@@ -9,6 +9,14 @@ import 'src/utils.dart';
 
 class ChromeElement {
   String documentation;
+
+  void appendDocs(String str) {
+    if (documentation != null) {
+      documentation = "${documentation}\n${str}";
+    } else {
+      documentation = str;
+    }
+  }
 }
 
 class ChromeLibrary extends ChromeElement {
@@ -38,6 +46,8 @@ class ChromeLibrary extends ChromeElement {
       eventTypes.add(type);
     }
   }
+
+  Iterable<ChromeProperty> get filteredProperties => properties.where((p) => !p.nodoc);
 
   String toString() => name;
 }
@@ -148,11 +158,12 @@ class ChromeEnumType extends ChromeType {
   String toString() => name;
 }
 
-class ChromeEnumEntry {
+class ChromeEnumEntry extends ChromeElement {
   String name;
-  String documentation;
 
-  ChromeEnumEntry([this.name, this.documentation]);
+  ChromeEnumEntry([this.name, String documentation]) {
+    this.documentation = documentation;
+  }
 
   String toString() => name;
 }
@@ -171,6 +182,7 @@ class ChromeType extends ChromeElement {
   int arity = 1;
   List<ChromeType> parameters = [];
   List<ChromeProperty> properties = [];
+  List<String> enumOptions;
 
   ChromeType({this.type});
 
@@ -184,14 +196,17 @@ class ChromeType extends ChromeElement {
   bool get isInt => type == 'int';
   bool get isBool => type == 'bool';
   bool get isPrimitive => isString || isBool || isInt;
+  bool get hasEnums => enumOptions != null;
 
-  String toParamString() {
+  Iterable<ChromeProperty> get filteredProperties => properties.where((p) => !p.nodoc);
+
+  String toParamString([bool useDynamic = false]) {
     if (isAny && !isReferencedType) {
-      return type;
+      return useDynamic ? 'dynamic' : type;
     } else if (parameters.isEmpty) {
       return refName != null ? refName : type;
     } else {
-      return "${type}<${parameters.map((t) => t.toParamString()).join(', ')}>";
+      return "${type}<${parameters.map((t) => t.toParamString(true)).join(', ')}>";
     }
   }
 

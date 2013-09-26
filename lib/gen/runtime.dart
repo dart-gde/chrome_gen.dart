@@ -91,6 +91,7 @@ class ChromeRuntime {
    * 
    * Returns:
    * [status] Result of the update check.
+   * enum of `throttled`, `no_update`, `update_available`
    * [details] If an update is available, this contains more information about
    * the available update.
    */
@@ -116,7 +117,7 @@ class ChromeRuntime {
    * exist.
    */
   Port connect([String extensionId, Map connectInfo]) {
-    return new Port(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
+    return Port.create(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
   }
 
   /**
@@ -128,7 +129,7 @@ class ChromeRuntime {
    * Port through which messages can be sent and received with the application
    */
   Port connectNative(String application) {
-    return new Port(_runtime.callMethod('connectNative', [application]));
+    return Port.create(_runtime.callMethod('connectNative', [application]));
   }
 
   /**
@@ -365,25 +366,40 @@ class OnMessageExternalEvent {
  * An object which allows two way communication with other pages.
  */
 class Port extends ChromeObject {
-  static Port create(JsObject proxy) => proxy == null ? null : new Port(proxy);
+  static Port create(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);
 
-  Port(JsObject proxy): super(proxy);
+  Port({String name, var disconnect, Event onDisconnect, Event onMessage, var postMessage, MessageSender sender}) {
+    if (name != null) this.name = name;
+    if (disconnect != null) this.disconnect = disconnect;
+    if (onDisconnect != null) this.onDisconnect = onDisconnect;
+    if (onMessage != null) this.onMessage = onMessage;
+    if (postMessage != null) this.postMessage = postMessage;
+    if (sender != null) this.sender = sender;
+  }
+
+  Port.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get name => proxy['name'];
+  set name(String value) => proxy['name'] = value;
 
   dynamic get disconnect => proxy['disconnect'];
+  set disconnect(var value) => proxy['disconnect'] = value;
 
-  Event get onDisconnect => new Event(proxy['onDisconnect']);
+  Event get onDisconnect => Event.create(proxy['onDisconnect']);
+  set onDisconnect(Event value) => proxy['onDisconnect'] = value;
 
-  Event get onMessage => new Event(proxy['onMessage']);
+  Event get onMessage => Event.create(proxy['onMessage']);
+  set onMessage(Event value) => proxy['onMessage'] = value;
 
   dynamic get postMessage => proxy['postMessage'];
+  set postMessage(var value) => proxy['postMessage'] = value;
 
   /**
    * This property will <b>only</b> be present on ports passed to
    * onConnect/onConnectExternal listeners.
    */
-  MessageSender get sender => new MessageSender(proxy['sender']);
+  MessageSender get sender => MessageSender.create(proxy['sender']);
+  set sender(MessageSender value) => proxy['sender'] = value;
 }
 
 /**
@@ -391,21 +407,29 @@ class Port extends ChromeObject {
  * or request.
  */
 class MessageSender extends ChromeObject {
-  static MessageSender create(JsObject proxy) => proxy == null ? null : new MessageSender(proxy);
+  static MessageSender create(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);
 
-  MessageSender(JsObject proxy): super(proxy);
+  MessageSender({Tab tab, String id, String url}) {
+    if (tab != null) this.tab = tab;
+    if (id != null) this.id = id;
+    if (url != null) this.url = url;
+  }
+
+  MessageSender.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The [tabs.Tab] which opened the connection, if any. This property will
    * *only* be present when the connection was opened from a tab (including
    * content scripts), and *only* if the receiver is an extension, not an app.
    */
-  Tab get tab => new Tab(proxy['tab']);
+  Tab get tab => Tab.create(proxy['tab']);
+  set tab(Tab value) => proxy['tab'] = value;
 
   /**
    * The ID of the extension or app that opened the connection, if any.
    */
   String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
 
   /**
    * The URL of the page or frame that opened the connection, if any. This
@@ -413,4 +437,5 @@ class MessageSender extends ChromeObject {
    * or content script.
    */
   String get url => proxy['url'];
+  set url(String value) => proxy['url'] = value;
 }

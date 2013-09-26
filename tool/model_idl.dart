@@ -197,7 +197,7 @@ class IDLCollectorChrome implements IDLCollector {
         idlEnum.members.add(idlValue);
 
         if (a[2] != EMPTY) {
-          valueParser(a);
+          valueParser(a[2]);
           return;
         } else {
           return;
@@ -217,6 +217,7 @@ class IDLCollectorChrome implements IDLCollector {
       var value = arg[0];
       IDLProperty idlValue = new IDLProperty(value);
       idlEnum.members.add(idlValue);
+      valueParser(arg[1]);
     }
 
     idlNamespace.enumTypes.add(idlEnum);
@@ -341,7 +342,7 @@ class IDLProperty {
 }
 
 class IDLType {
-  static IDLType VAR = new IDLType('any');
+  static IDLType VAR = new IDLType('var');
 
   /// The type name, i.e. string, integer, boolean, object, ...
   String name;
@@ -377,7 +378,7 @@ class IDLType {
   bool get isObject => name == 'object';
   bool get isArray => name == 'array';
 
-  String toString() => name;
+  String toString() => refName != null ? "${name}:${refName}" : name;
 }
 
 /**
@@ -403,7 +404,7 @@ ChromeDeclaredType _convertDeclaredType(IDLDeclaredType idlDeclaredType) {
   ChromeDeclaredType chromeDeclaredType = new ChromeDeclaredType();
 
   chromeDeclaredType.name = idlDeclaredType.name;
-  chromeDeclaredType.parameters = idlDeclaredType.members.map(_convertProperty).toList();
+  chromeDeclaredType.properties = idlDeclaredType.members.map(_convertProperty).toList();
 
   int index = chromeDeclaredType.name.lastIndexOf('.');
 
@@ -415,11 +416,11 @@ ChromeDeclaredType _convertDeclaredType(IDLDeclaredType idlDeclaredType) {
   return chromeDeclaredType;
 }
 
-ChromeType _convertProperty(IDLProperty idlProperty) {
-  ChromeType chromeType = new ChromeType();
-  chromeType.name = idlProperty.name;
-  chromeType.type = idlProperty.returnType.name;
-  return chromeType;
+ChromeProperty _convertProperty(IDLProperty idlProperty) {
+  ChromeProperty property = new ChromeProperty();
+  property.name = idlProperty.name;
+  property.type = _convertType(idlProperty.returnType);
+  return property;
 }
 
 ChromeEnumType _convertEnum(IDLEnum idlProperty) {
@@ -481,6 +482,7 @@ ChromeType _convertParameter(IDLParameter parameter) {
   ChromeType param = new ChromeType();
   param.name = parameter.name;
   param.type = idlToDartType(parameter.type.name);
+  param.refName = idlToDartRefName(parameter.type.name, parameter.type.refName);
   param.optional = (parameter.optional == null) ? false : parameter.optional;
   return param;
 }
@@ -490,15 +492,16 @@ ChromeType _convertType(IDLType idlType) {
     return null;
   } else {
     ChromeType chromeType = new ChromeType();
-    chromeType.name = idlType.name;
+    chromeType.type = idlToDartType(idlType.name);
+    chromeType.refName = idlToDartRefName(idlType.name, idlType.refName);
     return chromeType;
   }
 }
 
 final TYPE_MAP = {
   'DOMString': 'String',
-  'object': 'var',
   'boolean': 'bool',
+  'double': 'double',
   'long': 'int'
 };
 
@@ -506,6 +509,18 @@ String idlToDartType(String type) {
   if (TYPE_MAP.containsKey(type)) {
     return TYPE_MAP[type];
   } else {
-    return type;
+    return 'var';
+  }
+}
+
+String idlToDartRefName(String name, String refName) {
+  if (TYPE_MAP.containsKey(name)) {
+    return null;
+  } else if (refName != null) {
+    return refName;
+  } if (name == 'object') {
+    return null;
+  } else {
+    return name;
   }
 }

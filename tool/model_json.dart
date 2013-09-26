@@ -339,6 +339,12 @@ class JsonConverter {
     type.optional = t.optional;
     type.parameters = t.parameters.map(_convertType).toList();
     type.properties = t.properties.map(_convertProperty).toList();
+    type.enumOptions = t.enumOptions;
+
+    if (type.hasEnums) {
+      String enumStr = type.enumOptions.map((e) => "`${e}`").join(', ');
+      type.appendDocs("enum of ${enumStr}");
+    }
 
     return type;
   }

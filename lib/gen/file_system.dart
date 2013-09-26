@@ -55,8 +55,11 @@ class ChromeFileSystem {
 
 class ChooseEntryType extends ChromeEnum {
   static const ChooseEntryType OPENFILE = const ChooseEntryType._('openFile');
+  static const ChooseEntryType OPENWRITABLEFILE = const ChooseEntryType._('openWritableFile');
+  static const ChooseEntryType SAVEFILE = const ChooseEntryType._('saveFile');
+  static const ChooseEntryType OPENDIRECTORY = const ChooseEntryType._('openDirectory');
 
-  static List<ChooseEntryType> _values = [OPENFILE];
+  static List<ChooseEntryType> _values = [OPENFILE, OPENWRITABLEFILE, SAVEFILE, OPENDIRECTORY];
 
   static List<ChooseEntryType> get values => _values;
 
@@ -67,13 +70,51 @@ class ChooseEntryType extends ChromeEnum {
 }
 
 class AcceptOption extends ChromeObject {
-  static AcceptOption create(JsObject proxy) => proxy == null ? null : new AcceptOption(proxy);
+  static AcceptOption create(JsObject proxy) => proxy == null ? null : new AcceptOption.fromProxy(proxy);
 
-  AcceptOption(JsObject proxy): super(proxy);
+  AcceptOption({String description, String mimeTypes, String extensions}) {
+    if (description != null) this.description = description;
+    if (mimeTypes != null) this.mimeTypes = mimeTypes;
+    if (extensions != null) this.extensions = extensions;
+  }
+
+  AcceptOption.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get description => proxy['description'];
+  set description(String value) => proxy['description'] = value;
+
+  String get mimeTypes => proxy['mimeTypes'];
+  set mimeTypes(String value) => proxy['mimeTypes'] = value;
+
+  String get extensions => proxy['extensions'];
+  set extensions(String value) => proxy['extensions'] = value;
 }
 
 class ChooseEntryOptions extends ChromeObject {
-  static ChooseEntryOptions create(JsObject proxy) => proxy == null ? null : new ChooseEntryOptions(proxy);
+  static ChooseEntryOptions create(JsObject proxy) => proxy == null ? null : new ChooseEntryOptions.fromProxy(proxy);
 
-  ChooseEntryOptions(JsObject proxy): super(proxy);
+  ChooseEntryOptions({ChooseEntryType type, String suggestedName, AcceptOption accepts, bool acceptsAllTypes, bool acceptsMultiple}) {
+    if (type != null) this.type = type;
+    if (suggestedName != null) this.suggestedName = suggestedName;
+    if (accepts != null) this.accepts = accepts;
+    if (acceptsAllTypes != null) this.acceptsAllTypes = acceptsAllTypes;
+    if (acceptsMultiple != null) this.acceptsMultiple = acceptsMultiple;
+  }
+
+  ChooseEntryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  ChooseEntryType get type => ChooseEntryType.create(proxy['type']);
+  set type(ChooseEntryType value) => proxy['type'] = value;
+
+  String get suggestedName => proxy['suggestedName'];
+  set suggestedName(String value) => proxy['suggestedName'] = value;
+
+  AcceptOption get accepts => AcceptOption.create(proxy['accepts']);
+  set accepts(AcceptOption value) => proxy['accepts'] = value;
+
+  bool get acceptsAllTypes => proxy['acceptsAllTypes'];
+  set acceptsAllTypes(bool value) => proxy['acceptsAllTypes'] = value;
+
+  bool get acceptsMultiple => proxy['acceptsMultiple'];
+  set acceptsMultiple(bool value) => proxy['acceptsMultiple'] = value;
 }

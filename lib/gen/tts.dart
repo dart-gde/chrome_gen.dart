@@ -98,9 +98,15 @@ class ChromeTts {
  * An event from the TTS engine to communicate the status of an utterance.
  */
 class TtsEvent extends ChromeObject {
-  static TtsEvent create(JsObject proxy) => proxy == null ? null : new TtsEvent(proxy);
+  static TtsEvent create(JsObject proxy) => proxy == null ? null : new TtsEvent.fromProxy(proxy);
 
-  TtsEvent(JsObject proxy): super(proxy);
+  TtsEvent({String type, var charIndex, String errorMessage}) {
+    if (type != null) this.type = type;
+    if (charIndex != null) this.charIndex = charIndex;
+    if (errorMessage != null) this.errorMessage = errorMessage;
+  }
+
+  TtsEvent.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The type can be 'start' as soon as speech has started, 'word' when a word
@@ -113,51 +119,70 @@ class TtsEvent extends ChromeObject {
    * utterance is paused in the middle, and 'resume' if an utterance resumes
    * speech. Note that pause and resume events may not fire if speech is paused
    * in-between utterances.
+   * enum of `start`, `end`, `word`, `sentence`, `marker`, `interrupted`,
+   * `cancelled`, `error`, `pause`, `resume`
    */
   String get type => proxy['type'];
+  set type(String value) => proxy['type'] = value;
 
   /**
    * The index of the current character in the utterance.
    */
   dynamic get charIndex => proxy['charIndex'];
+  set charIndex(var value) => proxy['charIndex'] = value;
 
   /**
    * The error description, if the event type is 'error'.
    */
   String get errorMessage => proxy['errorMessage'];
+  set errorMessage(String value) => proxy['errorMessage'] = value;
 }
 
 /**
  * A description of a voice available for speech synthesis.
  */
 class TtsVoice extends ChromeObject {
-  static TtsVoice create(JsObject proxy) => proxy == null ? null : new TtsVoice(proxy);
+  static TtsVoice create(JsObject proxy) => proxy == null ? null : new TtsVoice.fromProxy(proxy);
 
-  TtsVoice(JsObject proxy): super(proxy);
+  TtsVoice({String voiceName, String lang, String gender, String extensionId, List<String> eventTypes}) {
+    if (voiceName != null) this.voiceName = voiceName;
+    if (lang != null) this.lang = lang;
+    if (gender != null) this.gender = gender;
+    if (extensionId != null) this.extensionId = extensionId;
+    if (eventTypes != null) this.eventTypes = eventTypes;
+  }
+
+  TtsVoice.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The name of the voice.
    */
   String get voiceName => proxy['voiceName'];
+  set voiceName(String value) => proxy['voiceName'] = value;
 
   /**
    * The language that this voice supports, in the form _language_-_region_.
    * Examples: 'en', 'en-US', 'en-GB', 'zh-CN'.
    */
   String get lang => proxy['lang'];
+  set lang(String value) => proxy['lang'] = value;
 
   /**
    * This voice's gender.
+   * enum of `male`, `female`
    */
   String get gender => proxy['gender'];
+  set gender(String value) => proxy['gender'] = value;
 
   /**
    * The ID of the extension providing this voice.
    */
   String get extensionId => proxy['extensionId'];
+  set extensionId(String value) => proxy['extensionId'] = value;
 
   /**
    * All of the callback event types that this voice is capable of sending.
    */
   List<String> get eventTypes => listify(proxy['eventTypes']);
+  set eventTypes(List<String> value) => proxy['eventTypes'] = value;
 }

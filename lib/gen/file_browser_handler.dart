@@ -69,19 +69,26 @@ class OnExecuteEvent {
  * Event details payload for fileBrowserHandler.onExecute event.
  */
 class FileHandlerExecuteEventDetails extends ChromeObject {
-  static FileHandlerExecuteEventDetails create(JsObject proxy) => proxy == null ? null : new FileHandlerExecuteEventDetails(proxy);
+  static FileHandlerExecuteEventDetails create(JsObject proxy) => proxy == null ? null : new FileHandlerExecuteEventDetails.fromProxy(proxy);
 
-  FileHandlerExecuteEventDetails(JsObject proxy): super(proxy);
+  FileHandlerExecuteEventDetails({List<dynamic> entries, int tab_id}) {
+    if (entries != null) this.entries = entries;
+    if (tab_id != null) this.tab_id = tab_id;
+  }
+
+  FileHandlerExecuteEventDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * Array of Entry instances representing files that are targets of this action
    * (selected in ChromeOS file browser).
    */
   List<dynamic> get entries => listify(proxy['entries']);
+  set entries(List<dynamic> value) => proxy['entries'] = value;
 
   /**
    * The ID of the tab that raised this event. Tab IDs are unique within a
    * browser session.
    */
   int get tab_id => proxy['tab_id'];
+  set tab_id(int value) => proxy['tab_id'] = value;
 }

@@ -142,25 +142,36 @@ class OnAuthRequiredEvent {
  * An object describing filters to apply to webRequest events.
  */
 class RequestFilter extends ChromeObject {
-  static RequestFilter create(JsObject proxy) => proxy == null ? null : new RequestFilter(proxy);
+  static RequestFilter create(JsObject proxy) => proxy == null ? null : new RequestFilter.fromProxy(proxy);
 
-  RequestFilter(JsObject proxy): super(proxy);
+  RequestFilter({List<String> urls, List<String> types, int tabId, int windowId}) {
+    if (urls != null) this.urls = urls;
+    if (types != null) this.types = types;
+    if (tabId != null) this.tabId = tabId;
+    if (windowId != null) this.windowId = windowId;
+  }
+
+  RequestFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * A list of URLs or URL patterns. Requests that cannot match any of the URLs
    * will be filtered out.
    */
   List<String> get urls => listify(proxy['urls']);
+  set urls(List<String> value) => proxy['urls'] = value;
 
   /**
    * A list of request types. Requests that cannot match any of the types will
    * be filtered out.
    */
   List<String> get types => listify(proxy['types']);
+  set types(List<String> value) => proxy['types'] = value;
 
   int get tabId => proxy['tabId'];
+  set tabId(int value) => proxy['tabId'] = value;
 
   int get windowId => proxy['windowId'];
+  set windowId(int value) => proxy['windowId'] = value;
 }
 
 /**
@@ -168,9 +179,11 @@ class RequestFilter extends ChromeObject {
  * containing the keys `name` and either `value` or `binaryValue`.
  */
 class HttpHeaders extends ChromeObject {
-  static HttpHeaders create(JsObject proxy) => proxy == null ? null : new HttpHeaders(proxy);
+  static HttpHeaders create(JsObject proxy) => proxy == null ? null : new HttpHeaders.fromProxy(proxy);
 
-  HttpHeaders(JsObject proxy): super(proxy);
+  HttpHeaders();
+
+  HttpHeaders.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
 /**
@@ -178,15 +191,24 @@ class HttpHeaders extends ChromeObject {
  * applied. Allows the event handler to modify network requests.
  */
 class BlockingResponse extends ChromeObject {
-  static BlockingResponse create(JsObject proxy) => proxy == null ? null : new BlockingResponse(proxy);
+  static BlockingResponse create(JsObject proxy) => proxy == null ? null : new BlockingResponse.fromProxy(proxy);
 
-  BlockingResponse(JsObject proxy): super(proxy);
+  BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, HttpHeaders responseHeaders, Map authCredentials}) {
+    if (cancel != null) this.cancel = cancel;
+    if (redirectUrl != null) this.redirectUrl = redirectUrl;
+    if (requestHeaders != null) this.requestHeaders = requestHeaders;
+    if (responseHeaders != null) this.responseHeaders = responseHeaders;
+    if (authCredentials != null) this.authCredentials = authCredentials;
+  }
+
+  BlockingResponse.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * If true, the request is cancelled. Used in onBeforeRequest, this prevents
    * the request from being sent.
    */
   bool get cancel => proxy['cancel'];
+  set cancel(bool value) => proxy['cancel'] = value;
 
   /**
    * Only used as a response to the onBeforeRequest event. If set, the original
@@ -194,12 +216,14 @@ class BlockingResponse extends ChromeObject {
    * URL.
    */
   String get redirectUrl => proxy['redirectUrl'];
+  set redirectUrl(String value) => proxy['redirectUrl'] = value;
 
   /**
    * Only used as a response to the onBeforeSendHeaders event. If set, the
    * request is made with these request headers instead.
    */
-  HttpHeaders get requestHeaders => new HttpHeaders(proxy['requestHeaders']);
+  HttpHeaders get requestHeaders => HttpHeaders.create(proxy['requestHeaders']);
+  set requestHeaders(HttpHeaders value) => proxy['requestHeaders'] = value;
 
   /**
    * Only used as a response to the onHeadersReceived event. If set, the server
@@ -208,30 +232,39 @@ class BlockingResponse extends ChromeObject {
    * to limit the number of conflicts (only one extension may modify
    * `responseHeaders` for each request).
    */
-  HttpHeaders get responseHeaders => new HttpHeaders(proxy['responseHeaders']);
+  HttpHeaders get responseHeaders => HttpHeaders.create(proxy['responseHeaders']);
+  set responseHeaders(HttpHeaders value) => proxy['responseHeaders'] = value;
 
   /**
    * Only used as a response to the onAuthRequired event. If set, the request is
    * made using the supplied credentials.
    */
   Map get authCredentials => mapify(proxy['authCredentials']);
+  set authCredentials(Map value) => proxy['authCredentials'] = value;
 }
 
 /**
  * Contains data uploaded in a URL request.
  */
 class UploadData extends ChromeObject {
-  static UploadData create(JsObject proxy) => proxy == null ? null : new UploadData(proxy);
+  static UploadData create(JsObject proxy) => proxy == null ? null : new UploadData.fromProxy(proxy);
 
-  UploadData(JsObject proxy): super(proxy);
+  UploadData({var bytes, String file}) {
+    if (bytes != null) this.bytes = bytes;
+    if (file != null) this.file = file;
+  }
+
+  UploadData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * An ArrayBuffer with a copy of the data.
    */
   dynamic get bytes => proxy['bytes'];
+  set bytes(var value) => proxy['bytes'] = value;
 
   /**
    * A string with the file's path and name.
    */
   String get file => proxy['file'];
+  set file(String value) => proxy['file'] = value;
 }

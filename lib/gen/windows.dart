@@ -134,9 +134,24 @@ class ChromeWindows {
 }
 
 class Window extends ChromeObject {
-  static Window create(JsObject proxy) => proxy == null ? null : new Window(proxy);
+  static Window create(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
 
-  Window(JsObject proxy): super(proxy);
+  Window({int id, bool focused, int top, int left, int width, int height, List<Tab> tabs, bool incognito, String type, String state, bool alwaysOnTop, String sessionId}) {
+    if (id != null) this.id = id;
+    if (focused != null) this.focused = focused;
+    if (top != null) this.top = top;
+    if (left != null) this.left = left;
+    if (width != null) this.width = width;
+    if (height != null) this.height = height;
+    if (tabs != null) this.tabs = tabs;
+    if (incognito != null) this.incognito = incognito;
+    if (type != null) this.type = type;
+    if (state != null) this.state = state;
+    if (alwaysOnTop != null) this.alwaysOnTop = alwaysOnTop;
+    if (sessionId != null) this.sessionId = sessionId;
+  }
+
+  Window.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The ID of the window. Window IDs are unique within a browser session. Under
@@ -145,11 +160,13 @@ class Window extends ChromeObject {
    * be present.
    */
   int get id => proxy['id'];
+  set id(int value) => proxy['id'] = value;
 
   /**
    * Whether the window is currently the focused window.
    */
   bool get focused => proxy['focused'];
+  set focused(bool value) => proxy['focused'] = value;
 
   /**
    * The offset of the window from the top edge of the screen in pixels. Under
@@ -157,6 +174,7 @@ class Window extends ChromeObject {
    * when querying closed windows from the [sessions] API.
    */
   int get top => proxy['top'];
+  set top(int value) => proxy['top'] = value;
 
   /**
    * The offset of the window from the left edge of the screen in pixels. Under
@@ -164,6 +182,7 @@ class Window extends ChromeObject {
    * when querying closed windows from the [sessions] API.
    */
   int get left => proxy['left'];
+  set left(int value) => proxy['left'] = value;
 
   /**
    * The width of the window, including the frame, in pixels. Under some
@@ -171,6 +190,7 @@ class Window extends ChromeObject {
    * querying closed windows from the [sessions] API.
    */
   int get width => proxy['width'];
+  set width(int value) => proxy['width'] = value;
 
   /**
    * The height of the window, including the frame, in pixels. Under some
@@ -178,39 +198,48 @@ class Window extends ChromeObject {
    * when querying closed windows from the [sessions] API.
    */
   int get height => proxy['height'];
+  set height(int value) => proxy['height'] = value;
 
   /**
    * Array of [tabs.Tab] objects representing the current tabs in the window.
    */
   List<Tab> get tabs => listify(proxy['tabs'], Tab.create);
+  set tabs(List<Tab> value) => proxy['tabs'] = value;
 
   /**
    * Whether the window is incognito.
    */
   bool get incognito => proxy['incognito'];
+  set incognito(bool value) => proxy['incognito'] = value;
 
   /**
    * The type of browser window this is. Under some circumstances a Window may
    * not be assigned type property, for example when querying closed windows
    * from the [sessions] API.
+   * enum of `normal`, `popup`, `panel`, `app`
    */
   String get type => proxy['type'];
+  set type(String value) => proxy['type'] = value;
 
   /**
    * The state of this browser window. Under some circumstances a Window may not
    * be assigned state property, for example when querying closed windows from
    * the [sessions] API.
+   * enum of `normal`, `minimized`, `maximized`, `fullscreen`
    */
   String get state => proxy['state'];
+  set state(String value) => proxy['state'] = value;
 
   /**
    * Whether the window is set to be always on top.
    */
   bool get alwaysOnTop => proxy['alwaysOnTop'];
+  set alwaysOnTop(bool value) => proxy['alwaysOnTop'] = value;
 
   /**
    * The session ID used to uniquely identify a Window obtained from the
    * [sessions] API.
    */
   String get sessionId => proxy['sessionId'];
+  set sessionId(String value) => proxy['sessionId'] = value;
 }

@@ -99,100 +99,297 @@ class ChromeBluetooth {
   Stream<AdapterState> get onAdapterStateChanged => _onAdapterStateChanged.stream;
 
   final ChromeStreamController<AdapterState> _onAdapterStateChanged =
-      new ChromeStreamController<AdapterState>.oneArg(_bluetooth['onAdapterStateChanged'], selfConverter);
+      new ChromeStreamController<AdapterState>.oneArg(_bluetooth['onAdapterStateChanged'], AdapterState.create);
 
   Stream<Socket> get onConnection => _onConnection.stream;
 
   final ChromeStreamController<Socket> _onConnection =
-      new ChromeStreamController<Socket>.oneArg(_bluetooth['onConnection'], selfConverter);
+      new ChromeStreamController<Socket>.oneArg(_bluetooth['onConnection'], Socket.create);
 }
 
 class AdapterState extends ChromeObject {
-  static AdapterState create(JsObject proxy) => proxy == null ? null : new AdapterState(proxy);
+  static AdapterState create(JsObject proxy) => proxy == null ? null : new AdapterState.fromProxy(proxy);
 
-  AdapterState(JsObject proxy): super(proxy);
+  AdapterState({String address, String name, bool powered, bool available, bool discovering}) {
+    if (address != null) this.address = address;
+    if (name != null) this.name = name;
+    if (powered != null) this.powered = powered;
+    if (available != null) this.available = available;
+    if (discovering != null) this.discovering = discovering;
+  }
+
+  AdapterState.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get address => proxy['address'];
+  set address(String value) => proxy['address'] = value;
+
+  String get name => proxy['name'];
+  set name(String value) => proxy['name'] = value;
+
+  bool get powered => proxy['powered'];
+  set powered(bool value) => proxy['powered'] = value;
+
+  bool get available => proxy['available'];
+  set available(bool value) => proxy['available'] = value;
+
+  bool get discovering => proxy['discovering'];
+  set discovering(bool value) => proxy['discovering'] = value;
 }
 
-class BluetoothBluetoothDevice extends ChromeObject {
-  static BluetoothBluetoothDevice create(JsObject proxy) => proxy == null ? null : new BluetoothBluetoothDevice(proxy);
+class BluetoothDevice extends ChromeObject {
+  static BluetoothDevice create(JsObject proxy) => proxy == null ? null : new BluetoothDevice.fromProxy(proxy);
 
-  BluetoothBluetoothDevice(JsObject proxy): super(proxy);
+  BluetoothDevice({String address, String name, bool paired, bool connected}) {
+    if (address != null) this.address = address;
+    if (name != null) this.name = name;
+    if (paired != null) this.paired = paired;
+    if (connected != null) this.connected = connected;
+  }
+
+  BluetoothDevice.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get address => proxy['address'];
+  set address(String value) => proxy['address'] = value;
+
+  String get name => proxy['name'];
+  set name(String value) => proxy['name'] = value;
+
+  bool get paired => proxy['paired'];
+  set paired(bool value) => proxy['paired'] = value;
+
+  bool get connected => proxy['connected'];
+  set connected(bool value) => proxy['connected'] = value;
 }
 
 class Profile extends ChromeObject {
-  static Profile create(JsObject proxy) => proxy == null ? null : new Profile(proxy);
+  static Profile create(JsObject proxy) => proxy == null ? null : new Profile.fromProxy(proxy);
 
-  Profile(JsObject proxy): super(proxy);
+  Profile({String uuid, String name, int channel, int psm, bool requireAuthentication, bool requireAuthorization, bool autoConnect, int version, int features}) {
+    if (uuid != null) this.uuid = uuid;
+    if (name != null) this.name = name;
+    if (channel != null) this.channel = channel;
+    if (psm != null) this.psm = psm;
+    if (requireAuthentication != null) this.requireAuthentication = requireAuthentication;
+    if (requireAuthorization != null) this.requireAuthorization = requireAuthorization;
+    if (autoConnect != null) this.autoConnect = autoConnect;
+    if (version != null) this.version = version;
+    if (features != null) this.features = features;
+  }
+
+  Profile.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get uuid => proxy['uuid'];
+  set uuid(String value) => proxy['uuid'] = value;
+
+  String get name => proxy['name'];
+  set name(String value) => proxy['name'] = value;
+
+  int get channel => proxy['channel'];
+  set channel(int value) => proxy['channel'] = value;
+
+  int get psm => proxy['psm'];
+  set psm(int value) => proxy['psm'] = value;
+
+  bool get requireAuthentication => proxy['requireAuthentication'];
+  set requireAuthentication(bool value) => proxy['requireAuthentication'] = value;
+
+  bool get requireAuthorization => proxy['requireAuthorization'];
+  set requireAuthorization(bool value) => proxy['requireAuthorization'] = value;
+
+  bool get autoConnect => proxy['autoConnect'];
+  set autoConnect(bool value) => proxy['autoConnect'] = value;
+
+  int get version => proxy['version'];
+  set version(int value) => proxy['version'] = value;
+
+  int get features => proxy['features'];
+  set features(int value) => proxy['features'] = value;
 }
 
 class ServiceRecord extends ChromeObject {
-  static ServiceRecord create(JsObject proxy) => proxy == null ? null : new ServiceRecord(proxy);
+  static ServiceRecord create(JsObject proxy) => proxy == null ? null : new ServiceRecord.fromProxy(proxy);
 
-  ServiceRecord(JsObject proxy): super(proxy);
+  ServiceRecord({String name, String uuid}) {
+    if (name != null) this.name = name;
+    if (uuid != null) this.uuid = uuid;
+  }
+
+  ServiceRecord.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get name => proxy['name'];
+  set name(String value) => proxy['name'] = value;
+
+  String get uuid => proxy['uuid'];
+  set uuid(String value) => proxy['uuid'] = value;
 }
 
 class Socket extends ChromeObject {
-  static Socket create(JsObject proxy) => proxy == null ? null : new Socket(proxy);
+  static Socket create(JsObject proxy) => proxy == null ? null : new Socket.fromProxy(proxy);
 
-  Socket(JsObject proxy): super(proxy);
+  Socket({BluetoothDevice device, Profile profile, int id}) {
+    if (device != null) this.device = device;
+    if (profile != null) this.profile = profile;
+    if (id != null) this.id = id;
+  }
+
+  Socket.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  BluetoothDevice get device => BluetoothDevice.create(proxy['device']);
+  set device(BluetoothDevice value) => proxy['device'] = value;
+
+  Profile get profile => Profile.create(proxy['profile']);
+  set profile(Profile value) => proxy['profile'] = value;
+
+  int get id => proxy['id'];
+  set id(int value) => proxy['id'] = value;
 }
 
 class OutOfBandPairingData extends ChromeObject {
-  static OutOfBandPairingData create(JsObject proxy) => proxy == null ? null : new OutOfBandPairingData(proxy);
+  static OutOfBandPairingData create(JsObject proxy) => proxy == null ? null : new OutOfBandPairingData.fromProxy(proxy);
 
-  OutOfBandPairingData(JsObject proxy): super(proxy);
+  OutOfBandPairingData({ArrayBuffer hash, ArrayBuffer randomizer}) {
+    if (hash != null) this.hash = hash;
+    if (randomizer != null) this.randomizer = randomizer;
+  }
+
+  OutOfBandPairingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  ArrayBuffer get hash => ArrayBuffer.create(proxy['hash']);
+  set hash(ArrayBuffer value) => proxy['hash'] = value;
+
+  ArrayBuffer get randomizer => ArrayBuffer.create(proxy['randomizer']);
+  set randomizer(ArrayBuffer value) => proxy['randomizer'] = value;
 }
 
 class GetBluetoothDevicesOptions extends ChromeObject {
-  static GetBluetoothDevicesOptions create(JsObject proxy) => proxy == null ? null : new GetBluetoothDevicesOptions(proxy);
+  static GetBluetoothDevicesOptions create(JsObject proxy) => proxy == null ? null : new GetBluetoothDevicesOptions.fromProxy(proxy);
 
-  GetBluetoothDevicesOptions(JsObject proxy): super(proxy);
+  GetBluetoothDevicesOptions({Profile profile, BluetoothDeviceCallback deviceCallback}) {
+    if (profile != null) this.profile = profile;
+    if (deviceCallback != null) this.deviceCallback = deviceCallback;
+  }
+
+  GetBluetoothDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  Profile get profile => Profile.create(proxy['profile']);
+  set profile(Profile value) => proxy['profile'] = value;
+
+  BluetoothDeviceCallback get deviceCallback => BluetoothDeviceCallback.create(proxy['deviceCallback']);
+  set deviceCallback(BluetoothDeviceCallback value) => proxy['deviceCallback'] = value;
 }
 
 class GetProfilesOptions extends ChromeObject {
-  static GetProfilesOptions create(JsObject proxy) => proxy == null ? null : new GetProfilesOptions(proxy);
+  static GetProfilesOptions create(JsObject proxy) => proxy == null ? null : new GetProfilesOptions.fromProxy(proxy);
 
-  GetProfilesOptions(JsObject proxy): super(proxy);
+  GetProfilesOptions({BluetoothDevice device}) {
+    if (device != null) this.device = device;
+  }
+
+  GetProfilesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  BluetoothDevice get device => BluetoothDevice.create(proxy['device']);
+  set device(BluetoothDevice value) => proxy['device'] = value;
 }
 
 class GetServicesOptions extends ChromeObject {
-  static GetServicesOptions create(JsObject proxy) => proxy == null ? null : new GetServicesOptions(proxy);
+  static GetServicesOptions create(JsObject proxy) => proxy == null ? null : new GetServicesOptions.fromProxy(proxy);
 
-  GetServicesOptions(JsObject proxy): super(proxy);
+  GetServicesOptions({String deviceAddress}) {
+    if (deviceAddress != null) this.deviceAddress = deviceAddress;
+  }
+
+  GetServicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get deviceAddress => proxy['deviceAddress'];
+  set deviceAddress(String value) => proxy['deviceAddress'] = value;
 }
 
 class ConnectOptions extends ChromeObject {
-  static ConnectOptions create(JsObject proxy) => proxy == null ? null : new ConnectOptions(proxy);
+  static ConnectOptions create(JsObject proxy) => proxy == null ? null : new ConnectOptions.fromProxy(proxy);
 
-  ConnectOptions(JsObject proxy): super(proxy);
+  ConnectOptions({BluetoothDevice device, Profile profile}) {
+    if (device != null) this.device = device;
+    if (profile != null) this.profile = profile;
+  }
+
+  ConnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  BluetoothDevice get device => BluetoothDevice.create(proxy['device']);
+  set device(BluetoothDevice value) => proxy['device'] = value;
+
+  Profile get profile => Profile.create(proxy['profile']);
+  set profile(Profile value) => proxy['profile'] = value;
 }
 
 class DisconnectOptions extends ChromeObject {
-  static DisconnectOptions create(JsObject proxy) => proxy == null ? null : new DisconnectOptions(proxy);
+  static DisconnectOptions create(JsObject proxy) => proxy == null ? null : new DisconnectOptions.fromProxy(proxy);
 
-  DisconnectOptions(JsObject proxy): super(proxy);
+  DisconnectOptions({Socket socket}) {
+    if (socket != null) this.socket = socket;
+  }
+
+  DisconnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  Socket get socket => Socket.create(proxy['socket']);
+  set socket(Socket value) => proxy['socket'] = value;
 }
 
 class ReadOptions extends ChromeObject {
-  static ReadOptions create(JsObject proxy) => proxy == null ? null : new ReadOptions(proxy);
+  static ReadOptions create(JsObject proxy) => proxy == null ? null : new ReadOptions.fromProxy(proxy);
 
-  ReadOptions(JsObject proxy): super(proxy);
+  ReadOptions({Socket socket}) {
+    if (socket != null) this.socket = socket;
+  }
+
+  ReadOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  Socket get socket => Socket.create(proxy['socket']);
+  set socket(Socket value) => proxy['socket'] = value;
 }
 
 class WriteOptions extends ChromeObject {
-  static WriteOptions create(JsObject proxy) => proxy == null ? null : new WriteOptions(proxy);
+  static WriteOptions create(JsObject proxy) => proxy == null ? null : new WriteOptions.fromProxy(proxy);
 
-  WriteOptions(JsObject proxy): super(proxy);
+  WriteOptions({Socket socket, ArrayBuffer data}) {
+    if (socket != null) this.socket = socket;
+    if (data != null) this.data = data;
+  }
+
+  WriteOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  Socket get socket => Socket.create(proxy['socket']);
+  set socket(Socket value) => proxy['socket'] = value;
+
+  ArrayBuffer get data => ArrayBuffer.create(proxy['data']);
+  set data(ArrayBuffer value) => proxy['data'] = value;
 }
 
 class SetOutOfBandPairingDataOptions extends ChromeObject {
-  static SetOutOfBandPairingDataOptions create(JsObject proxy) => proxy == null ? null : new SetOutOfBandPairingDataOptions(proxy);
+  static SetOutOfBandPairingDataOptions create(JsObject proxy) => proxy == null ? null : new SetOutOfBandPairingDataOptions.fromProxy(proxy);
 
-  SetOutOfBandPairingDataOptions(JsObject proxy): super(proxy);
+  SetOutOfBandPairingDataOptions({String address, OutOfBandPairingData data}) {
+    if (address != null) this.address = address;
+    if (data != null) this.data = data;
+  }
+
+  SetOutOfBandPairingDataOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get address => proxy['address'];
+  set address(String value) => proxy['address'] = value;
+
+  OutOfBandPairingData get data => OutOfBandPairingData.create(proxy['data']);
+  set data(OutOfBandPairingData value) => proxy['data'] = value;
 }
 
 class StartDiscoveryOptions extends ChromeObject {
-  static StartDiscoveryOptions create(JsObject proxy) => proxy == null ? null : new StartDiscoveryOptions(proxy);
+  static StartDiscoveryOptions create(JsObject proxy) => proxy == null ? null : new StartDiscoveryOptions.fromProxy(proxy);
 
-  StartDiscoveryOptions(JsObject proxy): super(proxy);
+  StartDiscoveryOptions({BluetoothDeviceCallback deviceCallback}) {
+    if (deviceCallback != null) this.deviceCallback = deviceCallback;
+  }
+
+  StartDiscoveryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  BluetoothDeviceCallback get deviceCallback => BluetoothDeviceCallback.create(proxy['deviceCallback']);
+  set deviceCallback(BluetoothDeviceCallback value) => proxy['deviceCallback'] = value;
 }

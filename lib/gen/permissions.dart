@@ -87,17 +87,24 @@ class ChromePermissions {
 }
 
 class Permissions extends ChromeObject {
-  static Permissions create(JsObject proxy) => proxy == null ? null : new Permissions(proxy);
+  static Permissions create(JsObject proxy) => proxy == null ? null : new Permissions.fromProxy(proxy);
 
-  Permissions(JsObject proxy): super(proxy);
+  Permissions({List<String> permissions, List<String> origins}) {
+    if (permissions != null) this.permissions = permissions;
+    if (origins != null) this.origins = origins;
+  }
+
+  Permissions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * List of named permissions (does not include hosts or origins).
    */
   List<String> get permissions => listify(proxy['permissions']);
+  set permissions(List<String> value) => proxy['permissions'] = value;
 
   /**
    * List of origin permissions.
    */
   List<String> get origins => listify(proxy['origins']);
+  set origins(List<String> value) => proxy['origins'] = value;
 }

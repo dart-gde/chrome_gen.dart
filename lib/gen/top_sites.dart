@@ -31,17 +31,24 @@ class ChromeTopSites {
  * page.
  */
 class MostVisitedURL extends ChromeObject {
-  static MostVisitedURL create(JsObject proxy) => proxy == null ? null : new MostVisitedURL(proxy);
+  static MostVisitedURL create(JsObject proxy) => proxy == null ? null : new MostVisitedURL.fromProxy(proxy);
 
-  MostVisitedURL(JsObject proxy): super(proxy);
+  MostVisitedURL({String url, String title}) {
+    if (url != null) this.url = url;
+    if (title != null) this.title = title;
+  }
+
+  MostVisitedURL.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The most visited URL.
    */
   String get url => proxy['url'];
+  set url(String value) => proxy['url'] = value;
 
   /**
    * The title of the page
    */
   String get title => proxy['title'];
+  set title(String value) => proxy['title'] = value;
 }

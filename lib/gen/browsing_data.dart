@@ -154,9 +154,14 @@ class ChromeBrowsingData {
  * Options that determine exactly what data will be removed.
  */
 class RemovalOptions extends ChromeObject {
-  static RemovalOptions create(JsObject proxy) => proxy == null ? null : new RemovalOptions(proxy);
+  static RemovalOptions create(JsObject proxy) => proxy == null ? null : new RemovalOptions.fromProxy(proxy);
 
-  RemovalOptions(JsObject proxy): super(proxy);
+  RemovalOptions({var since, Map originTypes}) {
+    if (since != null) this.since = since;
+    if (originTypes != null) this.originTypes = originTypes;
+  }
+
+  RemovalOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * Remove data accumulated on or after this date, represented in milliseconds
@@ -165,6 +170,7 @@ class RemovalOptions extends ChromeObject {
    * data).
    */
   dynamic get since => proxy['since'];
+  set since(var value) => proxy['since'] = value;
 
   /**
    * An object whose properties specify which origin types ought to be cleared.
@@ -173,79 +179,109 @@ class RemovalOptions extends ChromeObject {
    * before adding 'protectedWeb' or 'extensions'.
    */
   Map get originTypes => mapify(proxy['originTypes']);
+  set originTypes(Map value) => proxy['originTypes'] = value;
 }
 
 /**
  * A set of data types. Missing data types are interpreted as `false`.
  */
 class DataTypeSet extends ChromeObject {
-  static DataTypeSet create(JsObject proxy) => proxy == null ? null : new DataTypeSet(proxy);
+  static DataTypeSet create(JsObject proxy) => proxy == null ? null : new DataTypeSet.fromProxy(proxy);
 
-  DataTypeSet(JsObject proxy): super(proxy);
+  DataTypeSet({bool appcache, bool cache, bool cookies, bool downloads, bool fileSystems, bool formData, bool history, bool indexedDB, bool localStorage, bool serverBoundCertificates, bool pluginData, bool passwords, bool webSQL}) {
+    if (appcache != null) this.appcache = appcache;
+    if (cache != null) this.cache = cache;
+    if (cookies != null) this.cookies = cookies;
+    if (downloads != null) this.downloads = downloads;
+    if (fileSystems != null) this.fileSystems = fileSystems;
+    if (formData != null) this.formData = formData;
+    if (history != null) this.history = history;
+    if (indexedDB != null) this.indexedDB = indexedDB;
+    if (localStorage != null) this.localStorage = localStorage;
+    if (serverBoundCertificates != null) this.serverBoundCertificates = serverBoundCertificates;
+    if (pluginData != null) this.pluginData = pluginData;
+    if (passwords != null) this.passwords = passwords;
+    if (webSQL != null) this.webSQL = webSQL;
+  }
+
+  DataTypeSet.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * Websites' appcaches.
    */
   bool get appcache => proxy['appcache'];
+  set appcache(bool value) => proxy['appcache'] = value;
 
   /**
    * The browser's cache. Note: when removing data, this clears the _entire_
    * cache: it is not limited to the range you specify.
    */
   bool get cache => proxy['cache'];
+  set cache(bool value) => proxy['cache'] = value;
 
   /**
    * The browser's cookies.
    */
   bool get cookies => proxy['cookies'];
+  set cookies(bool value) => proxy['cookies'] = value;
 
   /**
    * The browser's download list.
    */
   bool get downloads => proxy['downloads'];
+  set downloads(bool value) => proxy['downloads'] = value;
 
   /**
    * Websites' file systems.
    */
   bool get fileSystems => proxy['fileSystems'];
+  set fileSystems(bool value) => proxy['fileSystems'] = value;
 
   /**
    * The browser's stored form data.
    */
   bool get formData => proxy['formData'];
+  set formData(bool value) => proxy['formData'] = value;
 
   /**
    * The browser's history.
    */
   bool get history => proxy['history'];
+  set history(bool value) => proxy['history'] = value;
 
   /**
    * Websites' IndexedDB data.
    */
   bool get indexedDB => proxy['indexedDB'];
+  set indexedDB(bool value) => proxy['indexedDB'] = value;
 
   /**
    * Websites' local storage data.
    */
   bool get localStorage => proxy['localStorage'];
+  set localStorage(bool value) => proxy['localStorage'] = value;
 
   /**
    * Server-bound certificates.
    */
   bool get serverBoundCertificates => proxy['serverBoundCertificates'];
+  set serverBoundCertificates(bool value) => proxy['serverBoundCertificates'] = value;
 
   /**
    * Plugins' data.
    */
   bool get pluginData => proxy['pluginData'];
+  set pluginData(bool value) => proxy['pluginData'] = value;
 
   /**
    * Stored passwords.
    */
   bool get passwords => proxy['passwords'];
+  set passwords(bool value) => proxy['passwords'] = value;
 
   /**
    * Websites' WebSQL data.
    */
   bool get webSQL => proxy['webSQL'];
+  set webSQL(bool value) => proxy['webSQL'] = value;
 }

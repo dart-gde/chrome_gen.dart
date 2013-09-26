@@ -105,6 +105,7 @@ class OnInputEnteredEvent {
    * context to display results. For example, if the omnibox command is to
    * navigate to a certain URL, a disposition of 'newForegroundTab' means the
    * navigation should take place in a new selected tab.
+   * enum of `currentTab`, `newForegroundTab`, `newBackgroundTab`
    */
   String disposition;
 
@@ -115,15 +116,21 @@ class OnInputEnteredEvent {
  * A suggest result.
  */
 class SuggestResult extends ChromeObject {
-  static SuggestResult create(JsObject proxy) => proxy == null ? null : new SuggestResult(proxy);
+  static SuggestResult create(JsObject proxy) => proxy == null ? null : new SuggestResult.fromProxy(proxy);
 
-  SuggestResult(JsObject proxy): super(proxy);
+  SuggestResult({String content, String description}) {
+    if (content != null) this.content = content;
+    if (description != null) this.description = description;
+  }
+
+  SuggestResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The text that is put into the URL bar, and that is sent to the extension
    * when the user chooses this entry.
    */
   String get content => proxy['content'];
+  set content(String value) => proxy['content'] = value;
 
   /**
    * The text that is displayed in the URL dropdown. Can contain XML-style
@@ -133,15 +140,20 @@ class SuggestResult extends ChromeObject {
    * <dim><match>dimmed match</match></dim>.
    */
   String get description => proxy['description'];
+  set description(String value) => proxy['description'] = value;
 }
 
 /**
  * A suggest result.
  */
 class DefaultSuggestResult extends ChromeObject {
-  static DefaultSuggestResult create(JsObject proxy) => proxy == null ? null : new DefaultSuggestResult(proxy);
+  static DefaultSuggestResult create(JsObject proxy) => proxy == null ? null : new DefaultSuggestResult.fromProxy(proxy);
 
-  DefaultSuggestResult(JsObject proxy): super(proxy);
+  DefaultSuggestResult({String description}) {
+    if (description != null) this.description = description;
+  }
+
+  DefaultSuggestResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The text that is displayed in the URL dropdown. Can contain XML-style
@@ -151,4 +163,5 @@ class DefaultSuggestResult extends ChromeObject {
    * <dim><match>dimmed match</match></dim>.
    */
   String get description => proxy['description'];
+  set description(String value) => proxy['description'] = value;
 }

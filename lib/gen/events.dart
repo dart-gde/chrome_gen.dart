@@ -20,34 +20,47 @@ class ChromeEvents {
  * Description of a declarative rule for handling events.
  */
 class Rule extends ChromeObject {
-  static Rule create(JsObject proxy) => proxy == null ? null : new Rule(proxy);
+  static Rule create(JsObject proxy) => proxy == null ? null : new Rule.fromProxy(proxy);
 
-  Rule(JsObject proxy): super(proxy);
+  Rule({String id, List<String> tags, List<dynamic> conditions, List<dynamic> actions, int priority}) {
+    if (id != null) this.id = id;
+    if (tags != null) this.tags = tags;
+    if (conditions != null) this.conditions = conditions;
+    if (actions != null) this.actions = actions;
+    if (priority != null) this.priority = priority;
+  }
+
+  Rule.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * Optional identifier that allows referencing this rule.
    */
   String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
 
   /**
    * Tags can be used to annotate rules and perform operations on sets of rules.
    */
   List<String> get tags => listify(proxy['tags']);
+  set tags(List<String> value) => proxy['tags'] = value;
 
   /**
    * List of conditions that can trigger the actions.
    */
   List<dynamic> get conditions => listify(proxy['conditions']);
+  set conditions(List<dynamic> value) => proxy['conditions'] = value;
 
   /**
    * List of actions that are triggered if one of the condtions is fulfilled.
    */
   List<dynamic> get actions => listify(proxy['actions']);
+  set actions(List<dynamic> value) => proxy['actions'] = value;
 
   /**
    * Optional priority of this rule. Defaults to 100.
    */
   int get priority => proxy['priority'];
+  set priority(int value) => proxy['priority'] = value;
 }
 
 /**
@@ -55,9 +68,11 @@ class Rule extends ChromeObject {
  * event.
  */
 class Event extends ChromeObject {
-  static Event create(JsObject proxy) => proxy == null ? null : new Event(proxy);
+  static Event create(JsObject proxy) => proxy == null ? null : new Event.fromProxy(proxy);
 
-  Event(JsObject proxy): super(proxy);
+  Event();
+
+  Event.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
 /**
@@ -65,9 +80,32 @@ class Event extends ChromeObject {
  * criteria are case sensitive.
  */
 class UrlFilter extends ChromeObject {
-  static UrlFilter create(JsObject proxy) => proxy == null ? null : new UrlFilter(proxy);
+  static UrlFilter create(JsObject proxy) => proxy == null ? null : new UrlFilter.fromProxy(proxy);
 
-  UrlFilter(JsObject proxy): super(proxy);
+  UrlFilter({String hostContains, String hostEquals, String hostPrefix, String hostSuffix, String pathContains, String pathEquals, String pathPrefix, String pathSuffix, String queryContains, String queryEquals, String queryPrefix, String querySuffix, String urlContains, String urlEquals, String urlMatches, String originAndPathMatches, String urlPrefix, String urlSuffix, List<String> schemes, List<dynamic> ports}) {
+    if (hostContains != null) this.hostContains = hostContains;
+    if (hostEquals != null) this.hostEquals = hostEquals;
+    if (hostPrefix != null) this.hostPrefix = hostPrefix;
+    if (hostSuffix != null) this.hostSuffix = hostSuffix;
+    if (pathContains != null) this.pathContains = pathContains;
+    if (pathEquals != null) this.pathEquals = pathEquals;
+    if (pathPrefix != null) this.pathPrefix = pathPrefix;
+    if (pathSuffix != null) this.pathSuffix = pathSuffix;
+    if (queryContains != null) this.queryContains = queryContains;
+    if (queryEquals != null) this.queryEquals = queryEquals;
+    if (queryPrefix != null) this.queryPrefix = queryPrefix;
+    if (querySuffix != null) this.querySuffix = querySuffix;
+    if (urlContains != null) this.urlContains = urlContains;
+    if (urlEquals != null) this.urlEquals = urlEquals;
+    if (urlMatches != null) this.urlMatches = urlMatches;
+    if (originAndPathMatches != null) this.originAndPathMatches = originAndPathMatches;
+    if (urlPrefix != null) this.urlPrefix = urlPrefix;
+    if (urlSuffix != null) this.urlSuffix = urlSuffix;
+    if (schemes != null) this.schemes = schemes;
+    if (ports != null) this.ports = ports;
+  }
+
+  UrlFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * Matches if the host name of the URL contains a specified string. To test
@@ -80,61 +118,73 @@ class UrlFilter extends ChromeObject {
    * dot is added at the end of the host name.
    */
   String get hostContains => proxy['hostContains'];
+  set hostContains(String value) => proxy['hostContains'] = value;
 
   /**
    * Matches if the host name of the URL is equal to a specified string.
    */
   String get hostEquals => proxy['hostEquals'];
+  set hostEquals(String value) => proxy['hostEquals'] = value;
 
   /**
    * Matches if the host name of the URL starts with a specified string.
    */
   String get hostPrefix => proxy['hostPrefix'];
+  set hostPrefix(String value) => proxy['hostPrefix'] = value;
 
   /**
    * Matches if the host name of the URL ends with a specified string.
    */
   String get hostSuffix => proxy['hostSuffix'];
+  set hostSuffix(String value) => proxy['hostSuffix'] = value;
 
   /**
    * Matches if the path segment of the URL contains a specified string.
    */
   String get pathContains => proxy['pathContains'];
+  set pathContains(String value) => proxy['pathContains'] = value;
 
   /**
    * Matches if the path segment of the URL is equal to a specified string.
    */
   String get pathEquals => proxy['pathEquals'];
+  set pathEquals(String value) => proxy['pathEquals'] = value;
 
   /**
    * Matches if the path segment of the URL starts with a specified string.
    */
   String get pathPrefix => proxy['pathPrefix'];
+  set pathPrefix(String value) => proxy['pathPrefix'] = value;
 
   /**
    * Matches if the path segment of the URL ends with a specified string.
    */
   String get pathSuffix => proxy['pathSuffix'];
+  set pathSuffix(String value) => proxy['pathSuffix'] = value;
 
   /**
    * Matches if the query segment of the URL contains a specified string.
    */
   String get queryContains => proxy['queryContains'];
+  set queryContains(String value) => proxy['queryContains'] = value;
 
   /**
    * Matches if the query segment of the URL is equal to a specified string.
    */
   String get queryEquals => proxy['queryEquals'];
+  set queryEquals(String value) => proxy['queryEquals'] = value;
 
   /**
    * Matches if the query segment of the URL starts with a specified string.
    */
   String get queryPrefix => proxy['queryPrefix'];
+  set queryPrefix(String value) => proxy['queryPrefix'] = value;
 
   /**
    * Matches if the query segment of the URL ends with a specified string.
    */
   String get querySuffix => proxy['querySuffix'];
+  set querySuffix(String value) => proxy['querySuffix'] = value;
 
   /**
    * Matches if the URL (without fragment identifier) contains a specified
@@ -142,6 +192,7 @@ class UrlFilter extends ChromeObject {
    * port number.
    */
   String get urlContains => proxy['urlContains'];
+  set urlContains(String value) => proxy['urlContains'] = value;
 
   /**
    * Matches if the URL (without fragment identifier) is equal to a specified
@@ -149,6 +200,7 @@ class UrlFilter extends ChromeObject {
    * port number.
    */
   String get urlEquals => proxy['urlEquals'];
+  set urlEquals(String value) => proxy['urlEquals'] = value;
 
   /**
    * Matches if the URL (without fragment identifier) matches a specified
@@ -157,6 +209,7 @@ class UrlFilter extends ChromeObject {
    * syntax](http://code.google.com/p/re2/wiki/Syntax).
    */
   String get urlMatches => proxy['urlMatches'];
+  set urlMatches(String value) => proxy['urlMatches'] = value;
 
   /**
    * Matches if the URL without query segment and fragment identifier matches a
@@ -165,6 +218,7 @@ class UrlFilter extends ChromeObject {
    * syntax](http://code.google.com/p/re2/wiki/Syntax).
    */
   String get originAndPathMatches => proxy['originAndPathMatches'];
+  set originAndPathMatches(String value) => proxy['originAndPathMatches'] = value;
 
   /**
    * Matches if the URL (without fragment identifier) starts with a specified
@@ -172,6 +226,7 @@ class UrlFilter extends ChromeObject {
    * port number.
    */
   String get urlPrefix => proxy['urlPrefix'];
+  set urlPrefix(String value) => proxy['urlPrefix'] = value;
 
   /**
    * Matches if the URL (without fragment identifier) ends with a specified
@@ -179,12 +234,14 @@ class UrlFilter extends ChromeObject {
    * port number.
    */
   String get urlSuffix => proxy['urlSuffix'];
+  set urlSuffix(String value) => proxy['urlSuffix'] = value;
 
   /**
    * Matches if the scheme of the URL is equal to any of the schemes specified
    * in the array.
    */
   List<String> get schemes => listify(proxy['schemes']);
+  set schemes(List<String> value) => proxy['schemes'] = value;
 
   /**
    * Matches if the port of the URL is contained in any of the specified port
@@ -192,4 +249,5 @@ class UrlFilter extends ChromeObject {
    * 80, 443 and in the range 1000-1200.
    */
   List<dynamic> get ports => listify(proxy['ports']);
+  set ports(List<dynamic> value) => proxy['ports'] = value;
 }

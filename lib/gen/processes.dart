@@ -147,35 +147,60 @@ class OnExitedEvent {
  * An object containing information about one of the browser's processes.
  */
 class Process extends ChromeObject {
-  static Process create(JsObject proxy) => proxy == null ? null : new Process(proxy);
+  static Process create(JsObject proxy) => proxy == null ? null : new Process.fromProxy(proxy);
 
-  Process(JsObject proxy): super(proxy);
+  Process({int id, int osProcessId, String type, String profile, List<int> tabs, var cpu, var network, var privateMemory, var jsMemoryAllocated, var jsMemoryUsed, var sqliteMemory, var fps, Cache imageCache, Cache scriptCache, Cache cssCache}) {
+    if (id != null) this.id = id;
+    if (osProcessId != null) this.osProcessId = osProcessId;
+    if (type != null) this.type = type;
+    if (profile != null) this.profile = profile;
+    if (tabs != null) this.tabs = tabs;
+    if (cpu != null) this.cpu = cpu;
+    if (network != null) this.network = network;
+    if (privateMemory != null) this.privateMemory = privateMemory;
+    if (jsMemoryAllocated != null) this.jsMemoryAllocated = jsMemoryAllocated;
+    if (jsMemoryUsed != null) this.jsMemoryUsed = jsMemoryUsed;
+    if (sqliteMemory != null) this.sqliteMemory = sqliteMemory;
+    if (fps != null) this.fps = fps;
+    if (imageCache != null) this.imageCache = imageCache;
+    if (scriptCache != null) this.scriptCache = scriptCache;
+    if (cssCache != null) this.cssCache = cssCache;
+  }
+
+  Process.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * Unique ID of the process provided by the browser.
    */
   int get id => proxy['id'];
+  set id(int value) => proxy['id'] = value;
 
   /**
    * The ID of the process, as provided by the OS.
    */
   int get osProcessId => proxy['osProcessId'];
+  set osProcessId(int value) => proxy['osProcessId'] = value;
 
   /**
    * The type of process.
+   * enum of `browser`, `renderer`, `extension`, `notification`, `plugin`,
+   * `worker`, `nacl`, `utility`, `gpu`, `other`
    */
   String get type => proxy['type'];
+  set type(String value) => proxy['type'] = value;
 
   /**
    * The profile which the process is associated with.
    */
   String get profile => proxy['profile'];
+  set profile(String value) => proxy['profile'] = value;
 
   /**
    * Array of Tab IDs that have a page rendered by this process. The list will
    * be non-empty for renderer processes only.
    */
   List<int> get tabs => listify(proxy['tabs']);
+  set tabs(List<int> value) => proxy['tabs'] = value;
 
   /**
    * The most recent measurement of the process CPU usage, between 0 and 100%.
@@ -183,6 +208,7 @@ class Process extends ChromeObject {
    * onUpdated or onUpdatedWithMemory.
    */
   dynamic get cpu => proxy['cpu'];
+  set cpu(var value) => proxy['cpu'] = value;
 
   /**
    * The most recent measurement of the process network usage, in bytes per
@@ -190,6 +216,7 @@ class Process extends ChromeObject {
    * onUpdated or onUpdatedWithMemory.
    */
   dynamic get network => proxy['network'];
+  set network(var value) => proxy['network'] = value;
 
   /**
    * The most recent measurement of the process private memory usage, in bytes.
@@ -197,6 +224,7 @@ class Process extends ChromeObject {
    * onUpdatedWithMemory or getProcessInfo with the includeMemory flag.
    */
   dynamic get privateMemory => proxy['privateMemory'];
+  set privateMemory(var value) => proxy['privateMemory'] = value;
 
   /**
    * The most recent measurement of the process JavaScript allocated memory, in
@@ -204,6 +232,7 @@ class Process extends ChromeObject {
    * onUpdated or onUpdatedWithMemory.
    */
   dynamic get jsMemoryAllocated => proxy['jsMemoryAllocated'];
+  set jsMemoryAllocated(var value) => proxy['jsMemoryAllocated'] = value;
 
   /**
    * The most recent measurement of the process JavaScript memory used, in
@@ -211,6 +240,7 @@ class Process extends ChromeObject {
    * onUpdated or onUpdatedWithMemory.
    */
   dynamic get jsMemoryUsed => proxy['jsMemoryUsed'];
+  set jsMemoryUsed(var value) => proxy['jsMemoryUsed'] = value;
 
   /**
    * The most recent measurement of the process’s SQLite memory usage, in bytes.
@@ -218,6 +248,7 @@ class Process extends ChromeObject {
    * onUpdated or onUpdatedWithMemory.
    */
   dynamic get sqliteMemory => proxy['sqliteMemory'];
+  set sqliteMemory(var value) => proxy['sqliteMemory'] = value;
 
   /**
    * The most recent measurement of the process frames per second. Only
@@ -225,27 +256,31 @@ class Process extends ChromeObject {
    * onUpdatedWithMemory.
    */
   dynamic get fps => proxy['fps'];
+  set fps(var value) => proxy['fps'] = value;
 
   /**
    * The most recent information about the image cache for the process. Only
    * available when receiving the object as part of a callback from onUpdated or
    * onUpdatedWithMemory.
    */
-  Cache get imageCache => new Cache(proxy['imageCache']);
+  Cache get imageCache => Cache.create(proxy['imageCache']);
+  set imageCache(Cache value) => proxy['imageCache'] = value;
 
   /**
    * The most recent information about the script cache for the process. Only
    * available when receiving the object as part of a callback from onUpdated or
    * onUpdatedWithMemory.
    */
-  Cache get scriptCache => new Cache(proxy['scriptCache']);
+  Cache get scriptCache => Cache.create(proxy['scriptCache']);
+  set scriptCache(Cache value) => proxy['scriptCache'] = value;
 
   /**
    * The most recent information about the CSS cache for the process. Only
    * available when receiving the object as part of a callback from onUpdated or
    * onUpdatedWithMemory.
    */
-  Cache get cssCache => new Cache(proxy['cssCache']);
+  Cache get cssCache => Cache.create(proxy['cssCache']);
+  set cssCache(Cache value) => proxy['cssCache'] = value;
 }
 
 /**
@@ -253,17 +288,24 @@ class Process extends ChromeObject {
  * cache used by the browser.
  */
 class Cache extends ChromeObject {
-  static Cache create(JsObject proxy) => proxy == null ? null : new Cache(proxy);
+  static Cache create(JsObject proxy) => proxy == null ? null : new Cache.fromProxy(proxy);
 
-  Cache(JsObject proxy): super(proxy);
+  Cache({var size, var liveSize}) {
+    if (size != null) this.size = size;
+    if (liveSize != null) this.liveSize = liveSize;
+  }
+
+  Cache.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The size of the cache, in bytes.
    */
   dynamic get size => proxy['size'];
+  set size(var value) => proxy['size'] = value;
 
   /**
    * The part of the cache that is utilized, in bytes.
    */
   dynamic get liveSize => proxy['liveSize'];
+  set liveSize(var value) => proxy['liveSize'] = value;
 }

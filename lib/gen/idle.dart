@@ -23,6 +23,9 @@ class ChromeIdle {
    * [detectionIntervalInSeconds] The system is considered idle if
    * detectionIntervalInSeconds seconds have elapsed since the last user input
    * detected.
+   * 
+   * Returns:
+   * enum of `active`, `idle`, `locked`
    */
   Future<String> queryState(int detectionIntervalInSeconds) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();

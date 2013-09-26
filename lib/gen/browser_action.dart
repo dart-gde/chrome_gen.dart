@@ -128,9 +128,11 @@ class ChromeBrowserAction {
 }
 
 class ColorArray extends ChromeObject {
-  static ColorArray create(JsObject proxy) => proxy == null ? null : new ColorArray(proxy);
+  static ColorArray create(JsObject proxy) => proxy == null ? null : new ColorArray.fromProxy(proxy);
 
-  ColorArray(JsObject proxy): super(proxy);
+  ColorArray();
+
+  ColorArray.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
 /**
@@ -138,7 +140,9 @@ class ColorArray extends ChromeObject {
  * `canvas` element).
  */
 class ImageDataType extends ChromeObject {
-  static ImageDataType create(JsObject proxy) => proxy == null ? null : new ImageDataType(proxy);
+  static ImageDataType create(JsObject proxy) => proxy == null ? null : new ImageDataType.fromProxy(proxy);
 
-  ImageDataType(JsObject proxy): super(proxy);
+  ImageDataType();
+
+  ImageDataType.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }

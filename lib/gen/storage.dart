@@ -19,12 +19,12 @@ class ChromeStorage {
   /**
    * Items in the `sync` storage area are synced using Chrome Sync.
    */
-  StorageArea get sync => new StorageArea(_storage['sync']);
+  StorageArea get sync => StorageArea.create(_storage['sync']);
 
   /**
    * Items in the `local` storage area are local to each machine.
    */
-  StorageArea get local => new StorageArea(_storage['local']);
+  StorageArea get local => StorageArea.create(_storage['local']);
 
   /**
    * Fired when one or more items change.
@@ -57,23 +57,32 @@ class StorageOnChangedEvent {
 }
 
 class StorageChange extends ChromeObject {
-  static StorageChange create(JsObject proxy) => proxy == null ? null : new StorageChange(proxy);
+  static StorageChange create(JsObject proxy) => proxy == null ? null : new StorageChange.fromProxy(proxy);
 
-  StorageChange(JsObject proxy): super(proxy);
+  StorageChange({var oldValue, var newValue}) {
+    if (oldValue != null) this.oldValue = oldValue;
+    if (newValue != null) this.newValue = newValue;
+  }
+
+  StorageChange.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The old value of the item, if there was an old value.
    */
   dynamic get oldValue => proxy['oldValue'];
+  set oldValue(var value) => proxy['oldValue'] = value;
 
   /**
    * The new value of the item, if there is a new value.
    */
   dynamic get newValue => proxy['newValue'];
+  set newValue(var value) => proxy['newValue'] = value;
 }
 
 class StorageArea extends ChromeObject {
-  static StorageArea create(JsObject proxy) => proxy == null ? null : new StorageArea(proxy);
+  static StorageArea create(JsObject proxy) => proxy == null ? null : new StorageArea.fromProxy(proxy);
 
-  StorageArea(JsObject proxy): super(proxy);
+  StorageArea();
+
+  StorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }

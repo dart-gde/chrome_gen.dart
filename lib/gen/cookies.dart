@@ -113,65 +113,88 @@ class ChromeCookies {
  * Represents information about an HTTP cookie.
  */
 class Cookie extends ChromeObject {
-  static Cookie create(JsObject proxy) => proxy == null ? null : new Cookie(proxy);
+  static Cookie create(JsObject proxy) => proxy == null ? null : new Cookie.fromProxy(proxy);
 
-  Cookie(JsObject proxy): super(proxy);
+  Cookie({String name, String value, String domain, bool hostOnly, String path, bool secure, bool httpOnly, bool session, var expirationDate, String storeId}) {
+    if (name != null) this.name = name;
+    if (value != null) this.value = value;
+    if (domain != null) this.domain = domain;
+    if (hostOnly != null) this.hostOnly = hostOnly;
+    if (path != null) this.path = path;
+    if (secure != null) this.secure = secure;
+    if (httpOnly != null) this.httpOnly = httpOnly;
+    if (session != null) this.session = session;
+    if (expirationDate != null) this.expirationDate = expirationDate;
+    if (storeId != null) this.storeId = storeId;
+  }
+
+  Cookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The name of the cookie.
    */
   String get name => proxy['name'];
+  set name(String value) => proxy['name'] = value;
 
   /**
    * The value of the cookie.
    */
   String get value => proxy['value'];
+  set value(String value) => proxy['value'] = value;
 
   /**
    * The domain of the cookie (e.g. "www.google.com", "example.com").
    */
   String get domain => proxy['domain'];
+  set domain(String value) => proxy['domain'] = value;
 
   /**
    * True if the cookie is a host-only cookie (i.e. a request's host must
    * exactly match the domain of the cookie).
    */
   bool get hostOnly => proxy['hostOnly'];
+  set hostOnly(bool value) => proxy['hostOnly'] = value;
 
   /**
    * The path of the cookie.
    */
   String get path => proxy['path'];
+  set path(String value) => proxy['path'] = value;
 
   /**
    * True if the cookie is marked as Secure (i.e. its scope is limited to secure
    * channels, typically HTTPS).
    */
   bool get secure => proxy['secure'];
+  set secure(bool value) => proxy['secure'] = value;
 
   /**
    * True if the cookie is marked as HttpOnly (i.e. the cookie is inaccessible
    * to client-side scripts).
    */
   bool get httpOnly => proxy['httpOnly'];
+  set httpOnly(bool value) => proxy['httpOnly'] = value;
 
   /**
    * True if the cookie is a session cookie, as opposed to a persistent cookie
    * with an expiration date.
    */
   bool get session => proxy['session'];
+  set session(bool value) => proxy['session'] = value;
 
   /**
    * The expiration date of the cookie as the number of seconds since the UNIX
    * epoch. Not provided for session cookies.
    */
   dynamic get expirationDate => proxy['expirationDate'];
+  set expirationDate(var value) => proxy['expirationDate'] = value;
 
   /**
    * The ID of the cookie store containing this cookie, as provided in
    * getAllCookieStores().
    */
   String get storeId => proxy['storeId'];
+  set storeId(String value) => proxy['storeId'] = value;
 }
 
 /**
@@ -179,17 +202,24 @@ class Cookie extends ChromeObject {
  * instance, uses a separate cookie store from a non-incognito window.
  */
 class CookieStore extends ChromeObject {
-  static CookieStore create(JsObject proxy) => proxy == null ? null : new CookieStore(proxy);
+  static CookieStore create(JsObject proxy) => proxy == null ? null : new CookieStore.fromProxy(proxy);
 
-  CookieStore(JsObject proxy): super(proxy);
+  CookieStore({String id, List<int> tabIds}) {
+    if (id != null) this.id = id;
+    if (tabIds != null) this.tabIds = tabIds;
+  }
+
+  CookieStore.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The unique identifier for the cookie store.
    */
   String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
 
   /**
    * Identifiers of all the browser tabs that share this cookie store.
    */
   List<int> get tabIds => listify(proxy['tabIds']);
+  set tabIds(List<int> value) => proxy['tabIds'] = value;
 }

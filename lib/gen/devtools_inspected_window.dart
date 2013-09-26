@@ -102,12 +102,17 @@ class OnResourceContentCommittedEvent {
  * image.
  */
 class Resource extends ChromeObject {
-  static Resource create(JsObject proxy) => proxy == null ? null : new Resource(proxy);
+  static Resource create(JsObject proxy) => proxy == null ? null : new Resource.fromProxy(proxy);
 
-  Resource(JsObject proxy): super(proxy);
+  Resource({String url}) {
+    if (url != null) this.url = url;
+  }
+
+  Resource.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The URL of the resource.
    */
   String get url => proxy['url'];
+  set url(String value) => proxy['url'] = value;
 }

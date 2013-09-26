@@ -27,15 +27,21 @@ class ChromeDeclarativeContent {
  * Matches the state of a web page by various criteria.
  */
 class PageStateMatcher extends ChromeObject {
-  static PageStateMatcher create(JsObject proxy) => proxy == null ? null : new PageStateMatcher(proxy);
+  static PageStateMatcher create(JsObject proxy) => proxy == null ? null : new PageStateMatcher.fromProxy(proxy);
 
-  PageStateMatcher(JsObject proxy): super(proxy);
+  PageStateMatcher({UrlFilter pageUrl, List<String> css}) {
+    if (pageUrl != null) this.pageUrl = pageUrl;
+    if (css != null) this.css = css;
+  }
+
+  PageStateMatcher.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * Matches if the condition of the UrlFilter are fulfilled for the top-level
    * URL of the page.
    */
-  UrlFilter get pageUrl => new UrlFilter(proxy['pageUrl']);
+  UrlFilter get pageUrl => UrlFilter.create(proxy['pageUrl']);
+  set pageUrl(UrlFilter value) => proxy['pageUrl'] = value;
 
   /**
    * Matches if all of the CSS selectors in the array match in a frame with the
@@ -43,6 +49,7 @@ class PageStateMatcher extends ChromeObject {
    * selectors here can slow down web sites.
    */
   List<String> get css => listify(proxy['css']);
+  set css(List<String> value) => proxy['css'] = value;
 }
 
 /**
@@ -53,7 +60,9 @@ class PageStateMatcher extends ChromeObject {
  * page action will grant access to the active tab.
  */
 class ShowPageAction extends ChromeObject {
-  static ShowPageAction create(JsObject proxy) => proxy == null ? null : new ShowPageAction(proxy);
+  static ShowPageAction create(JsObject proxy) => proxy == null ? null : new ShowPageAction.fromProxy(proxy);
 
-  ShowPageAction(JsObject proxy): super(proxy);
+  ShowPageAction();
+
+  ShowPageAction.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }

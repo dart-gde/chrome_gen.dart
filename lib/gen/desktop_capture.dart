@@ -21,8 +21,10 @@ class ChromeDesktopCapture {
 
 class DesktopCaptureSourceType extends ChromeEnum {
   static const DesktopCaptureSourceType SCREEN = const DesktopCaptureSourceType._('screen');
+  static const DesktopCaptureSourceType WINDOW = const DesktopCaptureSourceType._('window');
+  static const DesktopCaptureSourceType TAB = const DesktopCaptureSourceType._('tab');
 
-  static List<DesktopCaptureSourceType> _values = [SCREEN];
+  static List<DesktopCaptureSourceType> _values = [SCREEN, WINDOW, TAB];
 
   static List<DesktopCaptureSourceType> get values => _values;
 

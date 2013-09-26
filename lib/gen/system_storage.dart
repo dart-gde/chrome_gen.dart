@@ -27,7 +27,7 @@ class ChromeSystemStorage {
   Stream<StorageUnitInfo> get onAttached => _onAttached.stream;
 
   final ChromeStreamController<StorageUnitInfo> _onAttached =
-      new ChromeStreamController<StorageUnitInfo>.oneArg(_system_storage['onAttached'], selfConverter);
+      new ChromeStreamController<StorageUnitInfo>.oneArg(_system_storage['onAttached'], StorageUnitInfo.create);
 
   Stream<String> get onDetached => _onDetached.stream;
 
@@ -37,8 +37,10 @@ class ChromeSystemStorage {
 
 class StorageUnitType extends ChromeEnum {
   static const StorageUnitType FIXED = const StorageUnitType._('fixed');
+  static const StorageUnitType REMOVABLE = const StorageUnitType._('removable');
+  static const StorageUnitType UNKNOWN = const StorageUnitType._('unknown');
 
-  static List<StorageUnitType> _values = [FIXED];
+  static List<StorageUnitType> _values = [FIXED, REMOVABLE, UNKNOWN];
 
   static List<StorageUnitType> get values => _values;
 
@@ -50,8 +52,11 @@ class StorageUnitType extends ChromeEnum {
 
 class EjectDeviceResultCode extends ChromeEnum {
   static const EjectDeviceResultCode SUCCESS = const EjectDeviceResultCode._('success');
+  static const EjectDeviceResultCode IN_USE = const EjectDeviceResultCode._('in_use');
+  static const EjectDeviceResultCode NO_SUCH_DEVICE = const EjectDeviceResultCode._('no_such_device');
+  static const EjectDeviceResultCode FAILURE = const EjectDeviceResultCode._('failure');
 
-  static List<EjectDeviceResultCode> _values = [SUCCESS];
+  static List<EjectDeviceResultCode> _values = [SUCCESS, IN_USE, NO_SUCH_DEVICE, FAILURE];
 
   static List<EjectDeviceResultCode> get values => _values;
 
@@ -62,7 +67,26 @@ class EjectDeviceResultCode extends ChromeEnum {
 }
 
 class StorageUnitInfo extends ChromeObject {
-  static StorageUnitInfo create(JsObject proxy) => proxy == null ? null : new StorageUnitInfo(proxy);
+  static StorageUnitInfo create(JsObject proxy) => proxy == null ? null : new StorageUnitInfo.fromProxy(proxy);
 
-  StorageUnitInfo(JsObject proxy): super(proxy);
+  StorageUnitInfo({String id, String name, StorageUnitType type, double capacity}) {
+    if (id != null) this.id = id;
+    if (name != null) this.name = name;
+    if (type != null) this.type = type;
+    if (capacity != null) this.capacity = capacity;
+  }
+
+  StorageUnitInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
+
+  String get name => proxy['name'];
+  set name(String value) => proxy['name'] = value;
+
+  StorageUnitType get type => StorageUnitType.create(proxy['type']);
+  set type(StorageUnitType value) => proxy['type'] = value;
+
+  double get capacity => proxy['capacity'];
+  set capacity(double value) => proxy['capacity'] = value;
 }

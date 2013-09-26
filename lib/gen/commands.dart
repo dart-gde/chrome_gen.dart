@@ -37,22 +37,31 @@ class ChromeCommands {
 }
 
 class Command extends ChromeObject {
-  static Command create(JsObject proxy) => proxy == null ? null : new Command(proxy);
+  static Command create(JsObject proxy) => proxy == null ? null : new Command.fromProxy(proxy);
 
-  Command(JsObject proxy): super(proxy);
+  Command({String name, String description, String shortcut}) {
+    if (name != null) this.name = name;
+    if (description != null) this.description = description;
+    if (shortcut != null) this.shortcut = shortcut;
+  }
+
+  Command.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The name of the Extension Command
    */
   String get name => proxy['name'];
+  set name(String value) => proxy['name'] = value;
 
   /**
    * The Extension Command description
    */
   String get description => proxy['description'];
+  set description(String value) => proxy['description'] = value;
 
   /**
    * The shortcut active for this command, or blank if not active.
    */
   String get shortcut => proxy['shortcut'];
+  set shortcut(String value) => proxy['shortcut'] = value;
 }

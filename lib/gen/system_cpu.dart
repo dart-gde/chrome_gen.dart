@@ -20,7 +20,22 @@ class ChromeSystemCpu {
 }
 
 class CpuInfo extends ChromeObject {
-  static CpuInfo create(JsObject proxy) => proxy == null ? null : new CpuInfo(proxy);
+  static CpuInfo create(JsObject proxy) => proxy == null ? null : new CpuInfo.fromProxy(proxy);
 
-  CpuInfo(JsObject proxy): super(proxy);
+  CpuInfo({int numOfProcessors, String archName, String modelName}) {
+    if (numOfProcessors != null) this.numOfProcessors = numOfProcessors;
+    if (archName != null) this.archName = archName;
+    if (modelName != null) this.modelName = modelName;
+  }
+
+  CpuInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  int get numOfProcessors => proxy['numOfProcessors'];
+  set numOfProcessors(int value) => proxy['numOfProcessors'] = value;
+
+  String get archName => proxy['archName'];
+  set archName(String value) => proxy['archName'] = value;
+
+  String get modelName => proxy['modelName'];
+  set modelName(String value) => proxy['modelName'] = value;
 }

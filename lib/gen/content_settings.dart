@@ -25,21 +25,21 @@ class ChromeContentSettings {
    * <br>Default is [allow].<br>The primary URL is the URL representing the
    * cookie origin. The secondary URL is the URL of the top-level frame.
    */
-  ContentSetting get cookies => new ContentSetting(_contentSettings['cookies']);
+  ContentSetting get cookies => ContentSetting.create(_contentSettings['cookies']);
 
   /**
    * Whether to show images. One of<br>[allow]: Show images,<br>[block]: Don't
    * show images. <br>Default is [allow].<br>The primary URL is the main-frame
    * URL. The secondary URL is the URL of the image.
    */
-  ContentSetting get images => new ContentSetting(_contentSettings['images']);
+  ContentSetting get images => ContentSetting.create(_contentSettings['images']);
 
   /**
    * Whether to run JavaScript. One of<br>[allow]: Run JavaScript,<br>[block]:
    * Don't run JavaScript. <br>Default is [allow].<br>The primary URL is the
    * main-frame URL. The secondary URL is not used.
    */
-  ContentSetting get javascript => new ContentSetting(_contentSettings['javascript']);
+  ContentSetting get javascript => ContentSetting.create(_contentSettings['javascript']);
 
   /**
    * Whether to run plug-ins. One of<br>[allow]: Run plug-ins
@@ -47,7 +47,7 @@ class ChromeContentSettings {
    * [allow].<br>The primary URL is the main-frame URL. The secondary URL is not
    * used.
    */
-  ContentSetting get plugins => new ContentSetting(_contentSettings['plugins']);
+  ContentSetting get plugins => ContentSetting.create(_contentSettings['plugins']);
 
   /**
    * Whether to allow sites to show pop-ups. One of<br>[allow]: Allow sites to
@@ -55,7 +55,7 @@ class ChromeContentSettings {
    * [block].<br>The primary URL is the main-frame URL. The secondary URL is not
    * used.
    */
-  ContentSetting get popups => new ContentSetting(_contentSettings['popups']);
+  ContentSetting get popups => ContentSetting.create(_contentSettings['popups']);
 
   /**
    * Whether to allow sites to show desktop notifications. One of<br>[allow]:
@@ -64,7 +64,7 @@ class ChromeContentSettings {
    * notifications. <br>Default is [ask].<br>The primary URL is the main-frame
    * URL. The secondary URL is not used.
    */
-  ContentSetting get notifications => new ContentSetting(_contentSettings['notifications']);
+  ContentSetting get notifications => ContentSetting.create(_contentSettings['notifications']);
 }
 
 /**
@@ -73,23 +73,32 @@ class ChromeContentSettings {
  * Identifiers](contentSettings.html#resource-identifiers).
  */
 class ResourceIdentifier extends ChromeObject {
-  static ResourceIdentifier create(JsObject proxy) => proxy == null ? null : new ResourceIdentifier(proxy);
+  static ResourceIdentifier create(JsObject proxy) => proxy == null ? null : new ResourceIdentifier.fromProxy(proxy);
 
-  ResourceIdentifier(JsObject proxy): super(proxy);
+  ResourceIdentifier({String id, String description}) {
+    if (id != null) this.id = id;
+    if (description != null) this.description = description;
+  }
+
+  ResourceIdentifier.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The resource identifier for the given content type.
    */
   String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
 
   /**
    * A human readable description of the resource.
    */
   String get description => proxy['description'];
+  set description(String value) => proxy['description'] = value;
 }
 
 class ContentSetting extends ChromeObject {
-  static ContentSetting create(JsObject proxy) => proxy == null ? null : new ContentSetting(proxy);
+  static ContentSetting create(JsObject proxy) => proxy == null ? null : new ContentSetting.fromProxy(proxy);
 
-  ContentSetting(JsObject proxy): super(proxy);
+  ContentSetting();
+
+  ContentSetting.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }

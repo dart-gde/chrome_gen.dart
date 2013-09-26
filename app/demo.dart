@@ -5,34 +5,34 @@ import 'package:gen_tools/chrome_app.dart' as chrome;
 
 void main() {
   label('alarms');
-  action("create", handleAlarmsCreate);
+  action("create()", handleAlarmsCreate);
   br();
 
   label('i18n');
-  action("message", handleI18NMessage);
-  action("languages", handleI18NLanguages);
+  action("message()", handleI18NMessage);
+  action("languages()", handleI18NLanguages);
   br();
 
   label('idle');
-  action('queryState', handleIdleQueryState);
+  action('queryState()', handleIdleQueryState);
   br();
 
   label('permissions');
-  action('getAll', handlePermissionsGetAll);
+  action('getAll()', handlePermissionsGetAll);
   action('getAll().origins', handlePermissionsOrigins);
   br();
 
   label('runtime');
   action("id", handleRuntimeId);
   action("path", handleRuntimeURL);
-  action("reload", handleRuntimeReload);
-  action('getManifest', handleRuntimeGetManifest);
-  action('getPlatformInfo', handleGetPlatformInfo);
-  action('getPackageDirectoryEntry', handleGetPackageDirectoryEntry);
+  action("reload()", handleRuntimeReload);
+  action('getManifest()', handleRuntimeGetManifest);
+  action('getPlatformInfo()', handleGetPlatformInfo);
+  action('getPackageDirectoryEntry()', handleGetPackageDirectoryEntry);
   br();
 
   label('tts');
-  action('getVoices', handleGetVoices);
+  action('getVoices()', handleGetVoices);
   br();
 
   chrome.runtime.onStartup.listen((e) {
@@ -136,8 +136,6 @@ void handleGetPackageDirectoryEntry() {
 }
 
 void handleAlarmsCreate() {
-  //chrome.AlarmCreateInfo info = new chrome.AlarmCreateInfo(); //Map m = {"periodInMinutes": 1.0};
-  // TODO: remove the call to jsify() - it's a temporary workaround
-  //chrome.alarms.create(jsify(m), 'myNewAlarm');
-  summary('TODO: alarms.create: firing event in 1 minute');
+  chrome.alarms.create(new chrome.AlarmCreateInfo(periodInMinutes: 1.0), 'myNewAlarm');
+  summary('alarms.create: firing event in 1 minute');
 }

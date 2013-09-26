@@ -21,17 +21,35 @@ class ChromePushMessaging {
   Stream<Message> get onMessage => _onMessage.stream;
 
   final ChromeStreamController<Message> _onMessage =
-      new ChromeStreamController<Message>.oneArg(_pushMessaging['onMessage'], selfConverter);
+      new ChromeStreamController<Message>.oneArg(_pushMessaging['onMessage'], Message.create);
 }
 
 class Message extends ChromeObject {
-  static Message create(JsObject proxy) => proxy == null ? null : new Message(proxy);
+  static Message create(JsObject proxy) => proxy == null ? null : new Message.fromProxy(proxy);
 
-  Message(JsObject proxy): super(proxy);
+  Message({int subchannelId, String payload}) {
+    if (subchannelId != null) this.subchannelId = subchannelId;
+    if (payload != null) this.payload = payload;
+  }
+
+  Message.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  int get subchannelId => proxy['subchannelId'];
+  set subchannelId(int value) => proxy['subchannelId'] = value;
+
+  String get payload => proxy['payload'];
+  set payload(String value) => proxy['payload'] = value;
 }
 
 class ChannelIdResult extends ChromeObject {
-  static ChannelIdResult create(JsObject proxy) => proxy == null ? null : new ChannelIdResult(proxy);
+  static ChannelIdResult create(JsObject proxy) => proxy == null ? null : new ChannelIdResult.fromProxy(proxy);
 
-  ChannelIdResult(JsObject proxy): super(proxy);
+  ChannelIdResult({String channelId}) {
+    if (channelId != null) this.channelId = channelId;
+  }
+
+  ChannelIdResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get channelId => proxy['channelId'];
+  set channelId(String value) => proxy['channelId'] = value;
 }

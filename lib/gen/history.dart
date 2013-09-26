@@ -99,73 +99,104 @@ class ChromeHistory {
  * An object encapsulating one result of a history query.
  */
 class HistoryItem extends ChromeObject {
-  static HistoryItem create(JsObject proxy) => proxy == null ? null : new HistoryItem(proxy);
+  static HistoryItem create(JsObject proxy) => proxy == null ? null : new HistoryItem.fromProxy(proxy);
 
-  HistoryItem(JsObject proxy): super(proxy);
+  HistoryItem({String id, String url, String title, var lastVisitTime, int visitCount, int typedCount}) {
+    if (id != null) this.id = id;
+    if (url != null) this.url = url;
+    if (title != null) this.title = title;
+    if (lastVisitTime != null) this.lastVisitTime = lastVisitTime;
+    if (visitCount != null) this.visitCount = visitCount;
+    if (typedCount != null) this.typedCount = typedCount;
+  }
+
+  HistoryItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The unique identifier for the item.
    */
   String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
 
   /**
    * The URL navigated to by a user.
    */
   String get url => proxy['url'];
+  set url(String value) => proxy['url'] = value;
 
   /**
    * The title of the page when it was last loaded.
    */
   String get title => proxy['title'];
+  set title(String value) => proxy['title'] = value;
 
   /**
    * When this page was last loaded, represented in milliseconds since the
    * epoch.
    */
   dynamic get lastVisitTime => proxy['lastVisitTime'];
+  set lastVisitTime(var value) => proxy['lastVisitTime'] = value;
 
   /**
    * The number of times the user has navigated to this page.
    */
   int get visitCount => proxy['visitCount'];
+  set visitCount(int value) => proxy['visitCount'] = value;
 
   /**
    * The number of times the user has navigated to this page by typing in the
    * address.
    */
   int get typedCount => proxy['typedCount'];
+  set typedCount(int value) => proxy['typedCount'] = value;
 }
 
 /**
  * An object encapsulating one visit to a URL.
  */
 class VisitItem extends ChromeObject {
-  static VisitItem create(JsObject proxy) => proxy == null ? null : new VisitItem(proxy);
+  static VisitItem create(JsObject proxy) => proxy == null ? null : new VisitItem.fromProxy(proxy);
 
-  VisitItem(JsObject proxy): super(proxy);
+  VisitItem({String id, String visitId, var visitTime, String referringVisitId, String transition}) {
+    if (id != null) this.id = id;
+    if (visitId != null) this.visitId = visitId;
+    if (visitTime != null) this.visitTime = visitTime;
+    if (referringVisitId != null) this.referringVisitId = referringVisitId;
+    if (transition != null) this.transition = transition;
+  }
+
+  VisitItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The unique identifier for the item.
    */
   String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
 
   /**
    * The unique identifier for this visit.
    */
   String get visitId => proxy['visitId'];
+  set visitId(String value) => proxy['visitId'] = value;
 
   /**
    * When this visit occurred, represented in milliseconds since the epoch.
    */
   dynamic get visitTime => proxy['visitTime'];
+  set visitTime(var value) => proxy['visitTime'] = value;
 
   /**
    * The visit ID of the referrer.
    */
   String get referringVisitId => proxy['referringVisitId'];
+  set referringVisitId(String value) => proxy['referringVisitId'] = value;
 
   /**
    * The [transition type](#transition_types) for this visit from its referrer.
+   * enum of `link`, `typed`, `auto_bookmark`, `auto_subframe`,
+   * `manual_subframe`, `generated`, `auto_toplevel`, `form_submit`, `reload`,
+   * `keyword`, `keyword_generated`
    */
   String get transition => proxy['transition'];
+  set transition(String value) => proxy['transition'] = value;
 }

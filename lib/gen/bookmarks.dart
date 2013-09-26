@@ -299,50 +299,69 @@ class OnChildrenReorderedEvent {
  * ordered within their parent folder.
  */
 class BookmarkTreeNode extends ChromeObject {
-  static BookmarkTreeNode create(JsObject proxy) => proxy == null ? null : new BookmarkTreeNode(proxy);
+  static BookmarkTreeNode create(JsObject proxy) => proxy == null ? null : new BookmarkTreeNode.fromProxy(proxy);
 
-  BookmarkTreeNode(JsObject proxy): super(proxy);
+  BookmarkTreeNode({String id, String parentId, int index, String url, String title, var dateAdded, var dateGroupModified, List<BookmarkTreeNode> children}) {
+    if (id != null) this.id = id;
+    if (parentId != null) this.parentId = parentId;
+    if (index != null) this.index = index;
+    if (url != null) this.url = url;
+    if (title != null) this.title = title;
+    if (dateAdded != null) this.dateAdded = dateAdded;
+    if (dateGroupModified != null) this.dateGroupModified = dateGroupModified;
+    if (children != null) this.children = children;
+  }
+
+  BookmarkTreeNode.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * The unique identifier for the node. IDs are unique within the current
    * profile, and they remain valid even after the browser is restarted.
    */
   String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
 
   /**
    * The `id` of the parent folder.  Omitted for the root node.
    */
   String get parentId => proxy['parentId'];
+  set parentId(String value) => proxy['parentId'] = value;
 
   /**
    * The 0-based position of this node within its parent folder.
    */
   int get index => proxy['index'];
+  set index(int value) => proxy['index'] = value;
 
   /**
    * The URL navigated to when a user clicks the bookmark. Omitted for folders.
    */
   String get url => proxy['url'];
+  set url(String value) => proxy['url'] = value;
 
   /**
    * The text displayed for the node.
    */
   String get title => proxy['title'];
+  set title(String value) => proxy['title'] = value;
 
   /**
    * When this node was created, in milliseconds since the epoch (`new
    * Date(dateAdded)`).
    */
   dynamic get dateAdded => proxy['dateAdded'];
+  set dateAdded(var value) => proxy['dateAdded'] = value;
 
   /**
    * When the contents of this folder last changed, in milliseconds since the
    * epoch.
    */
   dynamic get dateGroupModified => proxy['dateGroupModified'];
+  set dateGroupModified(var value) => proxy['dateGroupModified'] = value;
 
   /**
    * An ordered list of children of this node.
    */
   List<BookmarkTreeNode> get children => listify(proxy['children'], BookmarkTreeNode.create);
+  set children(List<BookmarkTreeNode> value) => proxy['children'] = value;
 }

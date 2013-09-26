@@ -21,7 +21,7 @@ class ChromeDevtoolsPanels {
   /**
    * Elements panel.
    */
-  ElementsPanel get elements => new ElementsPanel(_devtools_panels['elements']);
+  ElementsPanel get elements => ElementsPanel.create(_devtools_panels['elements']);
 
   /**
    * Creates an extension panel.
@@ -63,34 +63,42 @@ class ChromeDevtoolsPanels {
  * Represents the Elements panel.
  */
 class ElementsPanel extends ChromeObject {
-  static ElementsPanel create(JsObject proxy) => proxy == null ? null : new ElementsPanel(proxy);
+  static ElementsPanel create(JsObject proxy) => proxy == null ? null : new ElementsPanel.fromProxy(proxy);
 
-  ElementsPanel(JsObject proxy): super(proxy);
+  ElementsPanel();
+
+  ElementsPanel.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
 /**
  * Represents a panel created by extension.
  */
 class ExtensionPanel extends ChromeObject {
-  static ExtensionPanel create(JsObject proxy) => proxy == null ? null : new ExtensionPanel(proxy);
+  static ExtensionPanel create(JsObject proxy) => proxy == null ? null : new ExtensionPanel.fromProxy(proxy);
 
-  ExtensionPanel(JsObject proxy): super(proxy);
+  ExtensionPanel();
+
+  ExtensionPanel.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
 /**
  * A sidebar created by the extension.
  */
 class ExtensionSidebarPane extends ChromeObject {
-  static ExtensionSidebarPane create(JsObject proxy) => proxy == null ? null : new ExtensionSidebarPane(proxy);
+  static ExtensionSidebarPane create(JsObject proxy) => proxy == null ? null : new ExtensionSidebarPane.fromProxy(proxy);
 
-  ExtensionSidebarPane(JsObject proxy): super(proxy);
+  ExtensionSidebarPane();
+
+  ExtensionSidebarPane.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
 /**
  * A button created by the extension.
  */
 class Button extends ChromeObject {
-  static Button create(JsObject proxy) => proxy == null ? null : new Button(proxy);
+  static Button create(JsObject proxy) => proxy == null ? null : new Button.fromProxy(proxy);
 
-  Button(JsObject proxy): super(proxy);
+  Button();
+
+  Button.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
