@@ -262,31 +262,28 @@ class DefaultBackend extends Backend {
   }
 
   void _printEnumType(ChromeEnumType type) {
-//class Level extends ChromeEnum {
-//  /**
-//   * Prevent the system from sleeping in response to user inactivity.
-//   */
-//  static const Level SYSTEM = const Level._('system');
-//
-//  /**
-//   * Prevent the display from being turned off or dimmed or the system from
-//   * sleeping in response to user inactivity.
-//   */
-//  static const Level DISPLAY = const Level._('display');
-//
-//  static List _values = [SYSTEM, DISPLAY];
-//
-//  const Level._(String str): super(str);
-//
-//  static Level create(String str) =>_values.singleWhere((ChromeEnum e) => e.value == str);
-//
-//  static List<Level> get values => _values;
-//}
-
     generator.writeln();
     generator.writeDocs(type.documentation);
-    generator.writeln("class ${type.name} {");
-    // TODO:
+    generator.writeln("class ${type.name} extends ChromeEnum {");
+    type.values.forEach((ChromeEnumEntry entry) {
+      generator.writeDocs(entry.documentation);
+      generator.writeln("static const ${type.name} ${entry.name.toUpperCase()} "
+          "= const ${type.name}._('${entry.name}');");
+    });
+
+    generator.writeln();
+    String str = type.values.map((e) => e.name.toUpperCase()).join(', ');
+    generator.writeln("static List<${type.name}> _values = [${str}];");
+
+    generator.writeln();
+    generator.writeln("static List<${type.name}> get values => _values;");
+
+    generator.writeln();
+    generator.writeln("static ${type.name} create(String str) =>");
+    generator.writeln("    _values.singleWhere((ChromeEnum e) => e.value == str);");
+
+    generator.writeln();
+    generator.writeln("const ${type.name}._(String str): super(str);");
 
     generator.writeln("}");
   }

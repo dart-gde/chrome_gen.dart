@@ -20,21 +20,22 @@ abstract class ChromeObject implements Serializable<JsObject> {
   String toString() => proxy.toString();
 }
 
-// TODO:
-class ArrayBuffer extends ChromeObject {
-  static ArrayBuffer create(JsObject proxy) => new ArrayBuffer(proxy);
-
-  ArrayBuffer(JsObject proxy): super(proxy);
-}
-
 /**
  * The abstract superclass of Chrome enums.
  */
-abstract class ChromeEnum {
+abstract class ChromeEnum implements Serializable<String> {
   final String _value;
 
   const ChromeEnum(this._value);
 
   String get value => _value;
+  String toJs() => _value;
   String toString() => _value;
+}
+
+// TODO:
+class ArrayBuffer extends ChromeObject {
+  static ArrayBuffer create(JsObject proxy) => new ArrayBuffer(proxy);
+
+  ArrayBuffer(JsObject proxy): super(proxy);
 }

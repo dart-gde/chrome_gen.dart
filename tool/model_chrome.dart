@@ -142,7 +142,10 @@ class ChromeDeclaredType extends ChromeType {
 }
 
 class ChromeEnumType extends ChromeType {
+  /// The list of values entries for enum types.
   List<ChromeEnumEntry> values = [];
+
+  String toString() => name;
 }
 
 class ChromeEnumEntry {
@@ -150,6 +153,8 @@ class ChromeEnumEntry {
   String documentation;
 
   ChromeEnumEntry([this.name, this.documentation]);
+
+  String toString() => name;
 }
 
 class ChromeType extends ChromeElement {

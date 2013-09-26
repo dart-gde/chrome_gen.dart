@@ -97,6 +97,84 @@ class ChromeUsb {
   }
 }
 
+class Direction extends ChromeEnum {
+  static const Direction IN = const Direction._('in');
+
+  static List<Direction> _values = [IN];
+
+  static List<Direction> get values => _values;
+
+  static Direction create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const Direction._(String str): super(str);
+}
+
+class Recipient extends ChromeEnum {
+  static const Recipient DEVICE = const Recipient._('device');
+
+  static List<Recipient> _values = [DEVICE];
+
+  static List<Recipient> get values => _values;
+
+  static Recipient create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const Recipient._(String str): super(str);
+}
+
+class RequestType extends ChromeEnum {
+  static const RequestType STANDARD = const RequestType._('standard');
+
+  static List<RequestType> _values = [STANDARD];
+
+  static List<RequestType> get values => _values;
+
+  static RequestType create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const RequestType._(String str): super(str);
+}
+
+class TransferType extends ChromeEnum {
+  static const TransferType CONTROL = const TransferType._('control');
+
+  static List<TransferType> _values = [CONTROL];
+
+  static List<TransferType> get values => _values;
+
+  static TransferType create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const TransferType._(String str): super(str);
+}
+
+class SynchronizationType extends ChromeEnum {
+  static const SynchronizationType ASYNCHRONOUS = const SynchronizationType._('asynchronous');
+
+  static List<SynchronizationType> _values = [ASYNCHRONOUS];
+
+  static List<SynchronizationType> get values => _values;
+
+  static SynchronizationType create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const SynchronizationType._(String str): super(str);
+}
+
+class UsageType extends ChromeEnum {
+  static const UsageType DATA = const UsageType._('data');
+
+  static List<UsageType> _values = [DATA];
+
+  static List<UsageType> get values => _values;
+
+  static UsageType create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const UsageType._(String str): super(str);
+}
+
 class Device extends ChromeObject {
   static Device create(JsObject proxy) => proxy == null ? null : new Device(proxy);
 

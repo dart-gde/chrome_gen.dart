@@ -18,3 +18,16 @@ class ChromeDesktopCapture {
     return completer.future;
   }
 }
+
+class DesktopCaptureSourceType extends ChromeEnum {
+  static const DesktopCaptureSourceType SCREEN = const DesktopCaptureSourceType._('screen');
+
+  static List<DesktopCaptureSourceType> _values = [SCREEN];
+
+  static List<DesktopCaptureSourceType> get values => _values;
+
+  static DesktopCaptureSourceType create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const DesktopCaptureSourceType._(String str): super(str);
+}

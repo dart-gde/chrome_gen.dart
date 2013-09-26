@@ -22,22 +22,14 @@ class ChromePower {
 }
 
 class Level extends ChromeEnum {
-  /**
-   * Prevent the system from sleeping in response to user inactivity.
-   */
   static const Level SYSTEM = const Level._('system');
 
-  /**
-   * Prevent the display from being turned off or dimmed or the system from
-   * sleeping in response to user inactivity.
-   */
-  static const Level DISPLAY = const Level._('display');
-
-  static List _values = [SYSTEM, DISPLAY];
-
-  const Level._(String str): super(str);
-
-  static Level create(String str) =>_values.singleWhere((ChromeEnum e) => e.value == str);
+  static List<Level> _values = [SYSTEM];
 
   static List<Level> get values => _values;
+
+  static Level create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const Level._(String str): super(str);
 }
