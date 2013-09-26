@@ -74,6 +74,19 @@ class OnButtonClickedEvent {
   OnButtonClickedEvent(this.notificationId, this.buttonIndex);
 }
 
+class TemplateType extends ChromeEnum {
+  static const TemplateType BASIC = const TemplateType._('basic');
+
+  static List<TemplateType> _values = [BASIC];
+
+  static List<TemplateType> get values => _values;
+
+  static TemplateType create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const TemplateType._(String str): super(str);
+}
+
 class NotificationItem extends ChromeObject {
   static NotificationItem create(JsObject proxy) => proxy == null ? null : new NotificationItem(proxy);
 

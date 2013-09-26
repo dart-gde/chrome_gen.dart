@@ -1,6 +1,5 @@
 
 import 'dart:html';
-import 'dart:js';
 
 import 'package:gen_tools/chrome_app.dart' as chrome;
 
@@ -137,8 +136,8 @@ void handleGetPackageDirectoryEntry() {
 }
 
 void handleAlarmsCreate() {
-  Map m = {"periodInMinutes": 1.0};
+  //chrome.AlarmCreateInfo info = new chrome.AlarmCreateInfo(); //Map m = {"periodInMinutes": 1.0};
   // TODO: remove the call to jsify() - it's a temporary workaround
-  chrome.alarms.create(jsify(m), 'myNewAlarm');
-  summary('alarms.create: firing event in 1 minute');
+  //chrome.alarms.create(jsify(m), 'myNewAlarm');
+  summary('TODO: alarms.create: firing event in 1 minute');
 }

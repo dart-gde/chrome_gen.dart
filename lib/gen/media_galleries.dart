@@ -23,6 +23,19 @@ class ChromeMediaGalleries {
   }
 }
 
+class GetMediaFileSystemsInteractivity extends ChromeEnum {
+  static const GetMediaFileSystemsInteractivity NO = const GetMediaFileSystemsInteractivity._('no');
+
+  static List<GetMediaFileSystemsInteractivity> _values = [NO];
+
+  static List<GetMediaFileSystemsInteractivity> get values => _values;
+
+  static GetMediaFileSystemsInteractivity create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const GetMediaFileSystemsInteractivity._(String str): super(str);
+}
+
 class MediaFileSystemsDetails extends ChromeObject {
   static MediaFileSystemsDetails create(JsObject proxy) => proxy == null ? null : new MediaFileSystemsDetails(proxy);
 

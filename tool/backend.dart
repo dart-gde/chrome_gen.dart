@@ -69,7 +69,7 @@ class DefaultBackend extends Backend {
     _printClass();
 
     library.eventTypes.forEach((t) => _printEventType(t));
-
+    library.enumTypes.forEach((t) => _printEnumType(t));
     library.types.forEach((t) => _printDeclaredType(t));
 
     overrides.classRenamesFor(library.name).forEach((List<String> renamePair) {
@@ -258,6 +258,33 @@ class DefaultBackend extends Backend {
     generator.writeln();
     String params = type.properties.map((p) => 'this.${p.name}').join(', ');
     generator.writeln("${className}(${params});");
+    generator.writeln("}");
+  }
+
+  void _printEnumType(ChromeEnumType type) {
+    generator.writeln();
+    generator.writeDocs(type.documentation);
+    generator.writeln("class ${type.name} extends ChromeEnum {");
+    type.values.forEach((ChromeEnumEntry entry) {
+      generator.writeDocs(entry.documentation);
+      generator.writeln("static const ${type.name} ${entry.name.toUpperCase()} "
+          "= const ${type.name}._('${entry.name}');");
+    });
+
+    generator.writeln();
+    String str = type.values.map((e) => e.name.toUpperCase()).join(', ');
+    generator.writeln("static List<${type.name}> _values = [${str}];");
+
+    generator.writeln();
+    generator.writeln("static List<${type.name}> get values => _values;");
+
+    generator.writeln();
+    generator.writeln("static ${type.name} create(String str) =>");
+    generator.writeln("    _values.singleWhere((ChromeEnum e) => e.value == str);");
+
+    generator.writeln();
+    generator.writeln("const ${type.name}._(String str): super(str);");
+
     generator.writeln("}");
   }
 
