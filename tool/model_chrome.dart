@@ -21,6 +21,7 @@ class ChromeLibrary extends ChromeElement {
   List<ChromeEvent> events = [];
   /// Synthetic classes used to represent multi-return stream events.
   List<ChromeType> eventTypes = [];
+  List<ChromeEnumType> enumTypes = [];
   List<ChromeDeclaredType> types = [];
 
   List<String> imports = [];
@@ -138,6 +139,22 @@ class ChromeDeclaredType extends ChromeType {
   /// For a class like 'declarativeWebRequest.EditRequestCookie', this
   /// represents the 'declarativeWebRequest' part.
   String qualifier;
+}
+
+class ChromeEnumType extends ChromeType {
+  /// The list of values entries for enum types.
+  List<ChromeEnumEntry> values = [];
+
+  String toString() => name;
+}
+
+class ChromeEnumEntry {
+  String name;
+  String documentation;
+
+  ChromeEnumEntry([this.name, this.documentation]);
+
+  String toString() => name;
 }
 
 class ChromeType extends ChromeElement {

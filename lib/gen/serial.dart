@@ -61,6 +61,45 @@ class ChromeSerial {
   }
 }
 
+class DataBit extends ChromeEnum {
+  static const DataBit SEVENBIT = const DataBit._('sevenbit');
+
+  static List<DataBit> _values = [SEVENBIT];
+
+  static List<DataBit> get values => _values;
+
+  static DataBit create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const DataBit._(String str): super(str);
+}
+
+class ParityBit extends ChromeEnum {
+  static const ParityBit NOPARITY = const ParityBit._('noparity');
+
+  static List<ParityBit> _values = [NOPARITY];
+
+  static List<ParityBit> get values => _values;
+
+  static ParityBit create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const ParityBit._(String str): super(str);
+}
+
+class StopBit extends ChromeEnum {
+  static const StopBit ONESTOPBIT = const StopBit._('onestopbit');
+
+  static List<StopBit> _values = [ONESTOPBIT];
+
+  static List<StopBit> get values => _values;
+
+  static StopBit create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const StopBit._(String str): super(str);
+}
+
 class OpenOptions extends ChromeObject {
   static OpenOptions create(JsObject proxy) => proxy == null ? null : new OpenOptions(proxy);
 

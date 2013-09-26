@@ -20,3 +20,16 @@ class ChromePower {
     _power.callMethod('releaseKeepAwake');
   }
 }
+
+class Level extends ChromeEnum {
+  static const Level SYSTEM = const Level._('system');
+
+  static List<Level> _values = [SYSTEM];
+
+  static List<Level> get values => _values;
+
+  static Level create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const Level._(String str): super(str);
+}

@@ -35,6 +35,32 @@ class ChromeSystemStorage {
       new ChromeStreamController<String>.oneArg(_system_storage['onDetached'], selfConverter);
 }
 
+class StorageUnitType extends ChromeEnum {
+  static const StorageUnitType FIXED = const StorageUnitType._('fixed');
+
+  static List<StorageUnitType> _values = [FIXED];
+
+  static List<StorageUnitType> get values => _values;
+
+  static StorageUnitType create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const StorageUnitType._(String str): super(str);
+}
+
+class EjectDeviceResultCode extends ChromeEnum {
+  static const EjectDeviceResultCode SUCCESS = const EjectDeviceResultCode._('success');
+
+  static List<EjectDeviceResultCode> _values = [SUCCESS];
+
+  static List<EjectDeviceResultCode> get values => _values;
+
+  static EjectDeviceResultCode create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const EjectDeviceResultCode._(String str): super(str);
+}
+
 class StorageUnitInfo extends ChromeObject {
   static StorageUnitInfo create(JsObject proxy) => proxy == null ? null : new StorageUnitInfo(proxy);
 

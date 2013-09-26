@@ -53,6 +53,19 @@ class ChromeFileSystem {
   }
 }
 
+class ChooseEntryType extends ChromeEnum {
+  static const ChooseEntryType OPENFILE = const ChooseEntryType._('openFile');
+
+  static List<ChooseEntryType> _values = [OPENFILE];
+
+  static List<ChooseEntryType> get values => _values;
+
+  static ChooseEntryType create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const ChooseEntryType._(String str): super(str);
+}
+
 class AcceptOption extends ChromeObject {
   static AcceptOption create(JsObject proxy) => proxy == null ? null : new AcceptOption(proxy);
 

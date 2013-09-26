@@ -65,6 +65,71 @@ class ChromeSyncFileSystem {
       new ChromeStreamController<FileInfo>.oneArg(_syncFileSystem['onFileStatusChanged'], selfConverter);
 }
 
+class SyncAction extends ChromeEnum {
+  static const SyncAction ADDED = const SyncAction._('added');
+
+  static List<SyncAction> _values = [ADDED];
+
+  static List<SyncAction> get values => _values;
+
+  static SyncAction create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const SyncAction._(String str): super(str);
+}
+
+class ServiceStatus extends ChromeEnum {
+  static const ServiceStatus INITIALIZING = const ServiceStatus._('initializing');
+
+  static List<ServiceStatus> _values = [INITIALIZING];
+
+  static List<ServiceStatus> get values => _values;
+
+  static ServiceStatus create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const ServiceStatus._(String str): super(str);
+}
+
+class FileStatus extends ChromeEnum {
+  static const FileStatus SYNCED = const FileStatus._('synced');
+
+  static List<FileStatus> _values = [SYNCED];
+
+  static List<FileStatus> get values => _values;
+
+  static FileStatus create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const FileStatus._(String str): super(str);
+}
+
+class SyncDirection extends ChromeEnum {
+  static const SyncDirection LOCAL_TO_REMOTE = const SyncDirection._('local_to_remote');
+
+  static List<SyncDirection> _values = [LOCAL_TO_REMOTE];
+
+  static List<SyncDirection> get values => _values;
+
+  static SyncDirection create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const SyncDirection._(String str): super(str);
+}
+
+class ConflictResolutionPolicy extends ChromeEnum {
+  static const ConflictResolutionPolicy LAST_WRITE_WIN = const ConflictResolutionPolicy._('last_write_win');
+
+  static List<ConflictResolutionPolicy> _values = [LAST_WRITE_WIN];
+
+  static List<ConflictResolutionPolicy> get values => _values;
+
+  static ConflictResolutionPolicy create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const ConflictResolutionPolicy._(String str): super(str);
+}
+
 class FileInfo extends ChromeObject {
   static FileInfo create(JsObject proxy) => proxy == null ? null : new FileInfo(proxy);
 

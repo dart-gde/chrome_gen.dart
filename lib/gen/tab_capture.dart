@@ -30,6 +30,19 @@ class ChromeTabCapture {
       new ChromeStreamController<CaptureInfo>.oneArg(_tabCapture['onStatusChanged'], selfConverter);
 }
 
+class TabCaptureState extends ChromeEnum {
+  static const TabCaptureState PENDING = const TabCaptureState._('pending');
+
+  static List<TabCaptureState> _values = [PENDING];
+
+  static List<TabCaptureState> get values => _values;
+
+  static TabCaptureState create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const TabCaptureState._(String str): super(str);
+}
+
 class CaptureInfo extends ChromeObject {
   static CaptureInfo create(JsObject proxy) => proxy == null ? null : new CaptureInfo(proxy);
 

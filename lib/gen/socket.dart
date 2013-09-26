@@ -129,6 +129,19 @@ class ChromeSocket {
   }
 }
 
+class SocketType extends ChromeEnum {
+  static const SocketType TCP = const SocketType._('tcp');
+
+  static List<SocketType> _values = [TCP];
+
+  static List<SocketType> get values => _values;
+
+  static SocketType create(String str) =>
+      _values.singleWhere((ChromeEnum e) => e.value == str);
+
+  const SocketType._(String str): super(str);
+}
+
 class CreateOptions extends ChromeObject {
   static CreateOptions create(JsObject proxy) => proxy == null ? null : new CreateOptions(proxy);
 
