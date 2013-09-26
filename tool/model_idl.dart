@@ -386,7 +386,6 @@ class IDLType {
 ChromeLibrary convert(IDLCollector collector) {
   ChromeLibrary chromeLibrary =  new ChromeLibrary();
   chromeLibrary.name = collector.idlNamespace.name;
-  //chromeLibrary.documentation = "";
 
   chromeLibrary.types =
       collector.idlNamespace.declaredTypes.map(_convertDeclaredType).toList();
@@ -394,8 +393,8 @@ ChromeLibrary convert(IDLCollector collector) {
       collector.idlNamespace.functions.map(_convertMethod).toList();
   chromeLibrary.events =
       collector.idlNamespace.events.map(_convertEvent).toList();
-//  chromeLibrary.properties =
-//      collector.idlNamespace.enumTypes.map(_convertEnum).toList();
+  chromeLibrary.enumTypes =
+      collector.idlNamespace.enumTypes.map(_convertEnum).toList();
 
   return chromeLibrary;
 }
@@ -423,11 +422,15 @@ ChromeType _convertProperty(IDLProperty idlProperty) {
   return chromeType;
 }
 
-ChromeType _convertEnum(IDLEnum idlProperty) {
-  ChromeType chromeType = new ChromeType();
-  chromeType.name = idlProperty.name;
-  //chromeType.type = idlProperty.returnType.name;
-  return chromeType;
+ChromeEnumType _convertEnum(IDLEnum idlProperty) {
+  ChromeEnumType chromeEnumType = new ChromeEnumType();
+  chromeEnumType.name = idlProperty.name;
+  idlProperty.enumValues.forEach((IDLProperty value) {
+    ChromeEnumEntry chromeEnumEntry = new ChromeEnumEntry();
+    chromeEnumEntry.name = value.name;
+    chromeEnumType.values.add(chromeEnumEntry);
+  });
+  return chromeEnumType;
 }
 
 ChromeMethod _convertMethod(IDLFunction idlMethod) {
