@@ -73,3 +73,8 @@ class ArrayBuffer extends ChromeObject {
 class BluetoothDeviceCallback {
   static BluetoothDeviceCallback create(JsObject proxy) => new BluetoothDeviceCallback();
 }
+
+// TODO: this is a hack, to eliminate analysis warnings. remove as soon as possible
+class SuggestFilenameCallback {
+  static SuggestFilenameCallback create(JsObject proxy) => new SuggestFilenameCallback();
+}
