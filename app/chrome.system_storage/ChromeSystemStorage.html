@@ -1,0 +1,131 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeSystemStorage class / chrome.system_storage Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.system_storage" data-type="ChromeSystemStorage">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.system_storage.html">chrome.system_storage</a> &rsaquo; <a href="../chrome.system_storage/ChromeSystemStorage.html">ChromeSystemStorage</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeSystemStorage</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeSystemStorage {
+ static final JsObject _system_storage = context['chrome']['system']['storage'];
+
+ ChromeSystemStorage._();
+
+ Future getInfo() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _system_storage.callMethod('getInfo', [completer.callback]);
+   return completer.future;
+ }
+
+ Future ejectDevice(String id) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _system_storage.callMethod('ejectDevice', [id, completer.callback]);
+   return completer.future;
+ }
+
+ Stream&lt;StorageUnitInfo&gt; get onAttached =&gt; _onAttached.stream;
+
+ final ChromeStreamController&lt;StorageUnitInfo&gt; _onAttached =
+     new ChromeStreamController&lt;StorageUnitInfo&gt;.oneArg(_system_storage['onAttached'], StorageUnitInfo.create);
+
+ Stream&lt;String&gt; get onDetached =&gt; _onDetached.stream;
+
+ final ChromeStreamController&lt;String&gt; _onDetached =
+     new ChromeStreamController&lt;String&gt;.oneArg(_system_storage['onDetached'], selfConverter);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onAttached">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.system_storage/StorageUnitInfo.html">StorageUnitInfo</a>&gt;         <strong>onAttached</strong> <a class="anchor-link"
+            href="#onAttached"
+            title="Permalink to ChromeSystemStorage.onAttached">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;StorageUnitInfo&gt; get onAttached =&gt; _onAttached.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onDetached">
+<button class="show-code">Code</button>
+final Stream&lt;String&gt;         <strong>onDetached</strong> <a class="anchor-link"
+            href="#onDetached"
+            title="Permalink to ChromeSystemStorage.onDetached">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;String&gt; get onDetached =&gt; _onDetached.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="ejectDevice">
+<button class="show-code">Code</button>
+Future <strong>ejectDevice</strong>(String id) <a class="anchor-link" href="#ejectDevice"
+              title="Permalink to ChromeSystemStorage.ejectDevice">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future ejectDevice(String id) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _system_storage.callMethod('ejectDevice', [id, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getInfo">
+<button class="show-code">Code</button>
+Future <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
+              title="Permalink to ChromeSystemStorage.getInfo">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getInfo() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _system_storage.callMethod('getInfo', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

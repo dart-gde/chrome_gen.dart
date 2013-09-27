@@ -1,0 +1,211 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeDevtoolsInspectedWindow class / chrome.devtools_inspectedWindow Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.devtools_inspectedWindow" data-type="ChromeDevtoolsInspectedWindow">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.devtools_inspectedWindow.html">chrome.devtools_inspectedWindow</a> &rsaquo; <a href="../chrome.devtools_inspectedWindow/ChromeDevtoolsInspectedWindow.html">ChromeDevtoolsInspectedWindow</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeDevtoolsInspectedWindow</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeDevtoolsInspectedWindow {
+ static final JsObject _devtools_inspectedWindow = context['chrome']['devtools']['inspectedWindow'];
+
+ ChromeDevtoolsInspectedWindow._();
+
+ /**
+  * The ID of the tab being inspected. This ID may be used with chrome.tabs.*
+  * API.
+  */
+ int get tabId =&gt; _devtools_inspectedWindow['tabId'];
+
+ /**
+  * Evaluates a JavaScript expression in the context of the main frame of the
+  * inspected page. The expression must evaluate to a JSON-compliant object,
+  * otherwise an exception is thrown.
+  * 
+  * [expression] An expression to evaluate.
+  * 
+  * Returns:
+  * [result] The result of evaluation.
+  * [isException] Set if an exception was caught while evaluating the
+  * expression.
+  */
+ Future&lt;JsObject&gt; eval(String expression) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Reloads the inspected page.
+  */
+ void reload([Map reloadOptions]) {
+   _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
+ }
+
+ /**
+  * Retrieves the list of resources from the inspected page.
+  * 
+  * Returns:
+  * The resources within the page.
+  */
+ Future&lt;List&lt;Resource&gt;&gt; getResources() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Resource.create));
+   _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Fired when a new resource is added to the inspected page.
+  */
+ Stream&lt;Resource&gt; get onResourceAdded =&gt; _onResourceAdded.stream;
+
+ final ChromeStreamController&lt;Resource&gt; _onResourceAdded =
+     new ChromeStreamController&lt;Resource&gt;.oneArg(_devtools_inspectedWindow['onResourceAdded'], Resource.create);
+
+ /**
+  * Fired when a new revision of the resource is committed (e.g. user saves an
+  * edited version of the resource in the Developer Tools).
+  */
+ Stream&lt;OnResourceContentCommittedEvent&gt; get onResourceContentCommitted =&gt; _onResourceContentCommitted.stream;
+
+ final ChromeStreamController&lt;OnResourceContentCommittedEvent&gt; _onResourceContentCommitted =
+     new ChromeStreamController&lt;OnResourceContentCommittedEvent&gt;.twoArgs(_devtools_inspectedWindow['onResourceContentCommitted'], OnResourceContentCommittedEvent.create);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onResourceAdded">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.devtools_inspectedWindow/Resource.html">Resource</a>&gt;         <strong>onResourceAdded</strong> <a class="anchor-link"
+            href="#onResourceAdded"
+            title="Permalink to ChromeDevtoolsInspectedWindow.onResourceAdded">#</a>
+        </h4>
+        <div class="doc">
+<p>Fired when a new resource is added to the inspected page.</p>
+<pre class="source">
+Stream&lt;Resource&gt; get onResourceAdded =&gt; _onResourceAdded.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onResourceContentCommitted">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.devtools_inspectedWindow/OnResourceContentCommittedEvent.html">OnResourceContentCommittedEvent</a>&gt;         <strong>onResourceContentCommitted</strong> <a class="anchor-link"
+            href="#onResourceContentCommitted"
+            title="Permalink to ChromeDevtoolsInspectedWindow.onResourceContentCommitted">#</a>
+        </h4>
+        <div class="doc">
+<p>Fired when a new revision of the resource is committed (e.g. user saves an
+edited version of the resource in the Developer Tools).</p>
+<pre class="source">
+Stream&lt;OnResourceContentCommittedEvent&gt; get onResourceContentCommitted =&gt; _onResourceContentCommitted.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="tabId">
+<button class="show-code">Code</button>
+final int         <strong>tabId</strong> <a class="anchor-link"
+            href="#tabId"
+            title="Permalink to ChromeDevtoolsInspectedWindow.tabId">#</a>
+        </h4>
+        <div class="doc">
+<p>The ID of the tab being inspected. This ID may be used with chrome.tabs.*
+API.</p>
+<pre class="source">
+int get tabId =&gt; _devtools_inspectedWindow['tabId'];
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="eval">
+<button class="show-code">Code</button>
+Future&lt;JsObject&gt; <strong>eval</strong>(String expression) <a class="anchor-link" href="#eval"
+              title="Permalink to ChromeDevtoolsInspectedWindow.eval">#</a></h4>
+<div class="doc">
+<p>Evaluates a JavaScript expression in the context of the main frame of the
+inspected page. The expression must evaluate to a JSON-compliant object,
+otherwise an exception is thrown.</p>
+<p>
+<span class="param">expression</span> An expression to evaluate.</p>
+<p>Returns:
+<code>result</code> The result of evaluation.
+<code>isException</code> Set if an exception was caught while evaluating the
+expression.</p>
+<pre class="source">
+Future&lt;JsObject&gt; eval(String expression) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
+ _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getResources">
+<button class="show-code">Code</button>
+Future&lt;List&lt;<a href="../chrome.devtools_inspectedWindow/Resource.html">Resource</a>&gt;&gt; <strong>getResources</strong>() <a class="anchor-link" href="#getResources"
+              title="Permalink to ChromeDevtoolsInspectedWindow.getResources">#</a></h4>
+<div class="doc">
+<p>Retrieves the list of resources from the inspected page.</p>
+<p>Returns:
+The resources within the page.</p>
+<pre class="source">
+Future&lt;List&lt;Resource&gt;&gt; getResources() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Resource.create));
+ _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="reload">
+<button class="show-code">Code</button>
+void <strong>reload</strong>([Map reloadOptions]) <a class="anchor-link" href="#reload"
+              title="Permalink to ChromeDevtoolsInspectedWindow.reload">#</a></h4>
+<div class="doc">
+<p>Reloads the inspected page.</p>
+<pre class="source">
+void reload([Map reloadOptions]) {
+ _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

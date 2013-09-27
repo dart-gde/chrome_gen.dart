@@ -1,0 +1,211 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeAppWindow class / chrome.app_window Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.app_window" data-type="ChromeAppWindow">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.app_window.html">chrome.app_window</a> &rsaquo; <a href="../chrome.app_window/ChromeAppWindow.html">ChromeAppWindow</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeAppWindow</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeAppWindow {
+ static final JsObject _app_window = context['chrome']['app']['window'];
+
+ ChromeAppWindow._();
+
+ Future create(String url, [CreateWindowOptions options]) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _app_window.callMethod('create', [url, options, completer.callback]);
+   return completer.future;
+ }
+
+ void current() {
+   _app_window.callMethod('current');
+ }
+
+ void initializeAppWindow(var state) {
+   _app_window.callMethod('initializeAppWindow', [state]);
+ }
+
+ Stream get onBoundsChanged =&gt; _onBoundsChanged.stream;
+
+ final ChromeStreamController _onBoundsChanged =
+     new ChromeStreamController.noArgs(_app_window['onBoundsChanged']);
+
+ Stream get onClosed =&gt; _onClosed.stream;
+
+ final ChromeStreamController _onClosed =
+     new ChromeStreamController.noArgs(_app_window['onClosed']);
+
+ Stream get onFullscreened =&gt; _onFullscreened.stream;
+
+ final ChromeStreamController _onFullscreened =
+     new ChromeStreamController.noArgs(_app_window['onFullscreened']);
+
+ Stream get onMaximized =&gt; _onMaximized.stream;
+
+ final ChromeStreamController _onMaximized =
+     new ChromeStreamController.noArgs(_app_window['onMaximized']);
+
+ Stream get onMinimized =&gt; _onMinimized.stream;
+
+ final ChromeStreamController _onMinimized =
+     new ChromeStreamController.noArgs(_app_window['onMinimized']);
+
+ Stream get onRestored =&gt; _onRestored.stream;
+
+ final ChromeStreamController _onRestored =
+     new ChromeStreamController.noArgs(_app_window['onRestored']);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onBoundsChanged">
+<button class="show-code">Code</button>
+final Stream         <strong>onBoundsChanged</strong> <a class="anchor-link"
+            href="#onBoundsChanged"
+            title="Permalink to ChromeAppWindow.onBoundsChanged">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream get onBoundsChanged =&gt; _onBoundsChanged.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onClosed">
+<button class="show-code">Code</button>
+final Stream         <strong>onClosed</strong> <a class="anchor-link"
+            href="#onClosed"
+            title="Permalink to ChromeAppWindow.onClosed">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream get onClosed =&gt; _onClosed.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onFullscreened">
+<button class="show-code">Code</button>
+final Stream         <strong>onFullscreened</strong> <a class="anchor-link"
+            href="#onFullscreened"
+            title="Permalink to ChromeAppWindow.onFullscreened">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream get onFullscreened =&gt; _onFullscreened.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onMaximized">
+<button class="show-code">Code</button>
+final Stream         <strong>onMaximized</strong> <a class="anchor-link"
+            href="#onMaximized"
+            title="Permalink to ChromeAppWindow.onMaximized">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream get onMaximized =&gt; _onMaximized.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onMinimized">
+<button class="show-code">Code</button>
+final Stream         <strong>onMinimized</strong> <a class="anchor-link"
+            href="#onMinimized"
+            title="Permalink to ChromeAppWindow.onMinimized">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream get onMinimized =&gt; _onMinimized.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onRestored">
+<button class="show-code">Code</button>
+final Stream         <strong>onRestored</strong> <a class="anchor-link"
+            href="#onRestored"
+            title="Permalink to ChromeAppWindow.onRestored">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream get onRestored =&gt; _onRestored.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="create">
+<button class="show-code">Code</button>
+Future <strong>create</strong>(String url, [<a href="../chrome.app_window/CreateWindowOptions.html">CreateWindowOptions</a> options]) <a class="anchor-link" href="#create"
+              title="Permalink to ChromeAppWindow.create">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future create(String url, [CreateWindowOptions options]) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _app_window.callMethod('create', [url, options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="current">
+<button class="show-code">Code</button>
+void <strong>current</strong>() <a class="anchor-link" href="#current"
+              title="Permalink to ChromeAppWindow.current">#</a></h4>
+<div class="doc">
+<pre class="source">
+void current() {
+ _app_window.callMethod('current');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="initializeAppWindow">
+<button class="show-code">Code</button>
+void <strong>initializeAppWindow</strong>(state) <a class="anchor-link" href="#initializeAppWindow"
+              title="Permalink to ChromeAppWindow.initializeAppWindow">#</a></h4>
+<div class="doc">
+<pre class="source">
+void initializeAppWindow(var state) {
+ _app_window.callMethod('initializeAppWindow', [state]);
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

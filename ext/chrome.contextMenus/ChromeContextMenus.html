@@ -1,0 +1,201 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeContextMenus class / chrome.contextMenus Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.contextMenus" data-type="ChromeContextMenus">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.contextMenus.html">chrome.contextMenus</a> &rsaquo; <a href="../chrome.contextMenus/ChromeContextMenus.html">ChromeContextMenus</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeContextMenus</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeContextMenus {
+ static final JsObject _contextMenus = context['chrome']['contextMenus'];
+
+ ChromeContextMenus._();
+
+ /**
+  * Creates a new context menu item. Note that if an error occurs during
+  * creation, you may not find out until the creation callback fires (the
+  * details will be in chrome.runtime.lastError).
+  * 
+  * [callback] Called when the item has been created in the browser. If there
+  * were any problems creating the item, details will be available in
+  * chrome.runtime.lastError.
+  * 
+  * Returns:
+  * The ID of the newly created item.
+  */
+ dynamic create(Map createProperties, [var callback]) {
+   return _contextMenus.callMethod('create', [jsify(createProperties), callback]);
+ }
+
+ /**
+  * Updates a previously created context menu item.
+  * 
+  * [id] The ID of the item to update.
+  * 
+  * [updateProperties] The properties to update. Accepts the same values as the
+  * create function.
+  */
+ Future update(var id, Map updateProperties) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _contextMenus.callMethod('update', [id, jsify(updateProperties), completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Removes a context menu item.
+  * 
+  * [menuItemId] The ID of the context menu item to remove.
+  */
+ Future remove(var menuItemId) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _contextMenus.callMethod('remove', [menuItemId, completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Removes all context menu items added by this extension.
+  */
+ Future removeAll() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _contextMenus.callMethod('removeAll', [completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Fired when a context menu item is clicked.
+  */
+ Stream&lt;OnClickedEvent&gt; get onClicked =&gt; _onClicked.stream;
+
+ final ChromeStreamController&lt;OnClickedEvent&gt; _onClicked =
+     new ChromeStreamController&lt;OnClickedEvent&gt;.twoArgs(_contextMenus['onClicked'], OnClickedEvent.create);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onClicked">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.contextMenus/OnClickedEvent.html">OnClickedEvent</a>&gt;         <strong>onClicked</strong> <a class="anchor-link"
+            href="#onClicked"
+            title="Permalink to ChromeContextMenus.onClicked">#</a>
+        </h4>
+        <div class="doc">
+<p>Fired when a context menu item is clicked.</p>
+<pre class="source">
+Stream&lt;OnClickedEvent&gt; get onClicked =&gt; _onClicked.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="create">
+<button class="show-code">Code</button>
+dynamic <strong>create</strong>(Map createProperties, [callback]) <a class="anchor-link" href="#create"
+              title="Permalink to ChromeContextMenus.create">#</a></h4>
+<div class="doc">
+<p>Creates a new context menu item. Note that if an error occurs during
+creation, you may not find out until the creation callback fires (the
+details will be in chrome.runtime.lastError).</p>
+<p>
+<span class="param">callback</span> Called when the item has been created in the browser. If there
+were any problems creating the item, details will be available in
+chrome.runtime.lastError.</p>
+<p>Returns:
+The ID of the newly created item.</p>
+<pre class="source">
+dynamic create(Map createProperties, [var callback]) {
+ return _contextMenus.callMethod('create', [jsify(createProperties), callback]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="remove">
+<button class="show-code">Code</button>
+Future <strong>remove</strong>(menuItemId) <a class="anchor-link" href="#remove"
+              title="Permalink to ChromeContextMenus.remove">#</a></h4>
+<div class="doc">
+<p>Removes a context menu item.</p>
+<p>
+<span class="param">menuItemId</span> The ID of the context menu item to remove.</p>
+<pre class="source">
+Future remove(var menuItemId) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _contextMenus.callMethod('remove', [menuItemId, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="removeAll">
+<button class="show-code">Code</button>
+Future <strong>removeAll</strong>() <a class="anchor-link" href="#removeAll"
+              title="Permalink to ChromeContextMenus.removeAll">#</a></h4>
+<div class="doc">
+<p>Removes all context menu items added by this extension.</p>
+<pre class="source">
+Future removeAll() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _contextMenus.callMethod('removeAll', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="update">
+<button class="show-code">Code</button>
+Future <strong>update</strong>(id, Map updateProperties) <a class="anchor-link" href="#update"
+              title="Permalink to ChromeContextMenus.update">#</a></h4>
+<div class="doc">
+<p>Updates a previously created context menu item.</p>
+<p>
+<span class="param">id</span> The ID of the item to update.</p>
+<p>
+<span class="param">updateProperties</span> The properties to update. Accepts the same values as the
+create function.</p>
+<pre class="source">
+Future update(var id, Map updateProperties) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _contextMenus.callMethod('update', [id, jsify(updateProperties), completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

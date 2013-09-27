@@ -1,0 +1,88 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeAppRuntime class / chrome.app_runtime Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.app_runtime" data-type="ChromeAppRuntime">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.app_runtime.html">chrome.app_runtime</a> &rsaquo; <a href="../chrome.app_runtime/ChromeAppRuntime.html">ChromeAppRuntime</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeAppRuntime</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeAppRuntime {
+ static final JsObject _app_runtime = context['chrome']['app']['runtime'];
+
+ ChromeAppRuntime._();
+
+ Stream&lt;LaunchData&gt; get onLaunched =&gt; _onLaunched.stream;
+
+ final ChromeStreamController&lt;LaunchData&gt; _onLaunched =
+     new ChromeStreamController&lt;LaunchData&gt;.oneArg(_app_runtime['onLaunched'], LaunchData.create);
+
+ Stream get onRestarted =&gt; _onRestarted.stream;
+
+ final ChromeStreamController _onRestarted =
+     new ChromeStreamController.noArgs(_app_runtime['onRestarted']);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onLaunched">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.app_runtime/LaunchData.html">LaunchData</a>&gt;         <strong>onLaunched</strong> <a class="anchor-link"
+            href="#onLaunched"
+            title="Permalink to ChromeAppRuntime.onLaunched">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;LaunchData&gt; get onLaunched =&gt; _onLaunched.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onRestarted">
+<button class="show-code">Code</button>
+final Stream         <strong>onRestarted</strong> <a class="anchor-link"
+            href="#onRestarted"
+            title="Permalink to ChromeAppRuntime.onRestarted">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream get onRestarted =&gt; _onRestarted.stream;
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

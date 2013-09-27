@@ -1,0 +1,162 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeAlarms class / chrome.alarms Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.alarms" data-type="ChromeAlarms">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.alarms.html">chrome.alarms</a> &rsaquo; <a href="../chrome.alarms/ChromeAlarms.html">ChromeAlarms</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeAlarms</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeAlarms {
+ static final JsObject _alarms = context['chrome']['alarms'];
+
+ ChromeAlarms._();
+
+ void create(AlarmCreateInfo alarmInfo, [String name]) {
+   _alarms.callMethod('create', [name, alarmInfo]);
+ }
+
+ Future get([String name]) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _alarms.callMethod('get', [name, completer.callback]);
+   return completer.future;
+ }
+
+ Future getAll() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _alarms.callMethod('getAll', [completer.callback]);
+   return completer.future;
+ }
+
+ void clear([String name]) {
+   _alarms.callMethod('clear', [name]);
+ }
+
+ void clearAll() {
+   _alarms.callMethod('clearAll');
+ }
+
+ Stream&lt;Alarm&gt; get onAlarm =&gt; _onAlarm.stream;
+
+ final ChromeStreamController&lt;Alarm&gt; _onAlarm =
+     new ChromeStreamController&lt;Alarm&gt;.oneArg(_alarms['onAlarm'], Alarm.create);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onAlarm">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.alarms/Alarm.html">Alarm</a>&gt;         <strong>onAlarm</strong> <a class="anchor-link"
+            href="#onAlarm"
+            title="Permalink to ChromeAlarms.onAlarm">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;Alarm&gt; get onAlarm =&gt; _onAlarm.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="clear">
+<button class="show-code">Code</button>
+void <strong>clear</strong>([String name]) <a class="anchor-link" href="#clear"
+              title="Permalink to ChromeAlarms.clear">#</a></h4>
+<div class="doc">
+<pre class="source">
+void clear([String name]) {
+ _alarms.callMethod('clear', [name]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="clearAll">
+<button class="show-code">Code</button>
+void <strong>clearAll</strong>() <a class="anchor-link" href="#clearAll"
+              title="Permalink to ChromeAlarms.clearAll">#</a></h4>
+<div class="doc">
+<pre class="source">
+void clearAll() {
+ _alarms.callMethod('clearAll');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="create">
+<button class="show-code">Code</button>
+void <strong>create</strong>(<a href="../chrome.alarms/AlarmCreateInfo.html">AlarmCreateInfo</a> alarmInfo, [String name]) <a class="anchor-link" href="#create"
+              title="Permalink to ChromeAlarms.create">#</a></h4>
+<div class="doc">
+<pre class="source">
+void create(AlarmCreateInfo alarmInfo, [String name]) {
+ _alarms.callMethod('create', [name, alarmInfo]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="get">
+<button class="show-code">Code</button>
+Future <strong>get</strong>([String name]) <a class="anchor-link" href="#get"
+              title="Permalink to ChromeAlarms.get">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future get([String name]) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _alarms.callMethod('get', [name, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getAll">
+<button class="show-code">Code</button>
+Future <strong>getAll</strong>() <a class="anchor-link" href="#getAll"
+              title="Permalink to ChromeAlarms.getAll">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getAll() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _alarms.callMethod('getAll', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

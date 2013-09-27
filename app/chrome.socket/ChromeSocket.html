@@ -1,0 +1,446 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeSocket class / chrome.socket Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.socket" data-type="ChromeSocket">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.socket.html">chrome.socket</a> &rsaquo; <a href="../chrome.socket/ChromeSocket.html">ChromeSocket</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeSocket</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeSocket {
+ static final JsObject _socket = context['chrome']['socket'];
+
+ ChromeSocket._();
+
+ Future create(SocketType type, [CreateOptions options]) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('create', [type, options, completer.callback]);
+   return completer.future;
+ }
+
+ void destroy(int socketId) {
+   _socket.callMethod('destroy', [socketId]);
+ }
+
+ Future connect(int socketId, String hostname, int port) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('connect', [socketId, hostname, port, completer.callback]);
+   return completer.future;
+ }
+
+ Future bind(int socketId, String address, int port) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('bind', [socketId, address, port, completer.callback]);
+   return completer.future;
+ }
+
+ void disconnect(int socketId) {
+   _socket.callMethod('disconnect', [socketId]);
+ }
+
+ Future read(int socketId, [int bufferSize]) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
+   return completer.future;
+ }
+
+ Future write(int socketId, ArrayBuffer data) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('write', [socketId, data, completer.callback]);
+   return completer.future;
+ }
+
+ Future recvFrom(int socketId, [int bufferSize]) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('recvFrom', [socketId, bufferSize, completer.callback]);
+   return completer.future;
+ }
+
+ Future sendTo(int socketId, ArrayBuffer data, String address, int port) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('sendTo', [socketId, data, address, port, completer.callback]);
+   return completer.future;
+ }
+
+ Future listen(int socketId, String address, int port, [int backlog]) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('listen', [socketId, address, port, backlog, completer.callback]);
+   return completer.future;
+ }
+
+ Future accept(int socketId) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('accept', [socketId, completer.callback]);
+   return completer.future;
+ }
+
+ Future setKeepAlive(int socketId, bool enable, [int delay]) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('setKeepAlive', [socketId, enable, delay, completer.callback]);
+   return completer.future;
+ }
+
+ Future setNoDelay(int socketId, bool noDelay) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('setNoDelay', [socketId, noDelay, completer.callback]);
+   return completer.future;
+ }
+
+ Future getInfo(int socketId) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('getInfo', [socketId, completer.callback]);
+   return completer.future;
+ }
+
+ Future getNetworkList() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('getNetworkList', [completer.callback]);
+   return completer.future;
+ }
+
+ Future joinGroup(int socketId, String address) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('joinGroup', [socketId, address, completer.callback]);
+   return completer.future;
+ }
+
+ Future leaveGroup(int socketId, String address) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('leaveGroup', [socketId, address, completer.callback]);
+   return completer.future;
+ }
+
+ Future setMulticastTimeToLive(int socketId, int ttl) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('setMulticastTimeToLive', [socketId, ttl, completer.callback]);
+   return completer.future;
+ }
+
+ Future setMulticastLoopbackMode(int socketId, bool enabled) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('setMulticastLoopbackMode', [socketId, enabled, completer.callback]);
+   return completer.future;
+ }
+
+ Future getJoinedGroups(int socketId) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _socket.callMethod('getJoinedGroups', [socketId, completer.callback]);
+   return completer.future;
+ }
+}
+</pre>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="accept">
+<button class="show-code">Code</button>
+Future <strong>accept</strong>(int socketId) <a class="anchor-link" href="#accept"
+              title="Permalink to ChromeSocket.accept">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future accept(int socketId) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('accept', [socketId, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="bind">
+<button class="show-code">Code</button>
+Future <strong>bind</strong>(int socketId, String address, int port) <a class="anchor-link" href="#bind"
+              title="Permalink to ChromeSocket.bind">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future bind(int socketId, String address, int port) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('bind', [socketId, address, port, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="connect">
+<button class="show-code">Code</button>
+Future <strong>connect</strong>(int socketId, String hostname, int port) <a class="anchor-link" href="#connect"
+              title="Permalink to ChromeSocket.connect">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future connect(int socketId, String hostname, int port) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('connect', [socketId, hostname, port, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="create">
+<button class="show-code">Code</button>
+Future <strong>create</strong>(<a href="../chrome.socket/SocketType.html">SocketType</a> type, [<a href="../chrome.socket/CreateOptions.html">CreateOptions</a> options]) <a class="anchor-link" href="#create"
+              title="Permalink to ChromeSocket.create">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future create(SocketType type, [CreateOptions options]) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('create', [type, options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="destroy">
+<button class="show-code">Code</button>
+void <strong>destroy</strong>(int socketId) <a class="anchor-link" href="#destroy"
+              title="Permalink to ChromeSocket.destroy">#</a></h4>
+<div class="doc">
+<pre class="source">
+void destroy(int socketId) {
+ _socket.callMethod('destroy', [socketId]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="disconnect">
+<button class="show-code">Code</button>
+void <strong>disconnect</strong>(int socketId) <a class="anchor-link" href="#disconnect"
+              title="Permalink to ChromeSocket.disconnect">#</a></h4>
+<div class="doc">
+<pre class="source">
+void disconnect(int socketId) {
+ _socket.callMethod('disconnect', [socketId]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getInfo">
+<button class="show-code">Code</button>
+Future <strong>getInfo</strong>(int socketId) <a class="anchor-link" href="#getInfo"
+              title="Permalink to ChromeSocket.getInfo">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getInfo(int socketId) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('getInfo', [socketId, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getJoinedGroups">
+<button class="show-code">Code</button>
+Future <strong>getJoinedGroups</strong>(int socketId) <a class="anchor-link" href="#getJoinedGroups"
+              title="Permalink to ChromeSocket.getJoinedGroups">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getJoinedGroups(int socketId) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('getJoinedGroups', [socketId, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getNetworkList">
+<button class="show-code">Code</button>
+Future <strong>getNetworkList</strong>() <a class="anchor-link" href="#getNetworkList"
+              title="Permalink to ChromeSocket.getNetworkList">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getNetworkList() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('getNetworkList', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="joinGroup">
+<button class="show-code">Code</button>
+Future <strong>joinGroup</strong>(int socketId, String address) <a class="anchor-link" href="#joinGroup"
+              title="Permalink to ChromeSocket.joinGroup">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future joinGroup(int socketId, String address) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('joinGroup', [socketId, address, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="leaveGroup">
+<button class="show-code">Code</button>
+Future <strong>leaveGroup</strong>(int socketId, String address) <a class="anchor-link" href="#leaveGroup"
+              title="Permalink to ChromeSocket.leaveGroup">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future leaveGroup(int socketId, String address) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('leaveGroup', [socketId, address, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="listen">
+<button class="show-code">Code</button>
+Future <strong>listen</strong>(int socketId, String address, int port, [int backlog]) <a class="anchor-link" href="#listen"
+              title="Permalink to ChromeSocket.listen">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future listen(int socketId, String address, int port, [int backlog]) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('listen', [socketId, address, port, backlog, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="read">
+<button class="show-code">Code</button>
+Future <strong>read</strong>(int socketId, [int bufferSize]) <a class="anchor-link" href="#read"
+              title="Permalink to ChromeSocket.read">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future read(int socketId, [int bufferSize]) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="recvFrom">
+<button class="show-code">Code</button>
+Future <strong>recvFrom</strong>(int socketId, [int bufferSize]) <a class="anchor-link" href="#recvFrom"
+              title="Permalink to ChromeSocket.recvFrom">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future recvFrom(int socketId, [int bufferSize]) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('recvFrom', [socketId, bufferSize, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="sendTo">
+<button class="show-code">Code</button>
+Future <strong>sendTo</strong>(int socketId, <a href="../common_exp/ArrayBuffer.html">ArrayBuffer</a> data, String address, int port) <a class="anchor-link" href="#sendTo"
+              title="Permalink to ChromeSocket.sendTo">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future sendTo(int socketId, ArrayBuffer data, String address, int port) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('sendTo', [socketId, data, address, port, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setKeepAlive">
+<button class="show-code">Code</button>
+Future <strong>setKeepAlive</strong>(int socketId, bool enable, [int delay]) <a class="anchor-link" href="#setKeepAlive"
+              title="Permalink to ChromeSocket.setKeepAlive">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setKeepAlive(int socketId, bool enable, [int delay]) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('setKeepAlive', [socketId, enable, delay, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setMulticastLoopbackMode">
+<button class="show-code">Code</button>
+Future <strong>setMulticastLoopbackMode</strong>(int socketId, bool enabled) <a class="anchor-link" href="#setMulticastLoopbackMode"
+              title="Permalink to ChromeSocket.setMulticastLoopbackMode">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setMulticastLoopbackMode(int socketId, bool enabled) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('setMulticastLoopbackMode', [socketId, enabled, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setMulticastTimeToLive">
+<button class="show-code">Code</button>
+Future <strong>setMulticastTimeToLive</strong>(int socketId, int ttl) <a class="anchor-link" href="#setMulticastTimeToLive"
+              title="Permalink to ChromeSocket.setMulticastTimeToLive">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setMulticastTimeToLive(int socketId, int ttl) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('setMulticastTimeToLive', [socketId, ttl, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setNoDelay">
+<button class="show-code">Code</button>
+Future <strong>setNoDelay</strong>(int socketId, bool noDelay) <a class="anchor-link" href="#setNoDelay"
+              title="Permalink to ChromeSocket.setNoDelay">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setNoDelay(int socketId, bool noDelay) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('setNoDelay', [socketId, noDelay, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="write">
+<button class="show-code">Code</button>
+Future <strong>write</strong>(int socketId, <a href="../common_exp/ArrayBuffer.html">ArrayBuffer</a> data) <a class="anchor-link" href="#write"
+              title="Permalink to ChromeSocket.write">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future write(int socketId, ArrayBuffer data) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _socket.callMethod('write', [socketId, data, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

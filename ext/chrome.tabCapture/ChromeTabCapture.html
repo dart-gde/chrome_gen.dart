@@ -1,0 +1,114 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeTabCapture class / chrome.tabCapture Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.tabCapture" data-type="ChromeTabCapture">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.tabCapture.html">chrome.tabCapture</a> &rsaquo; <a href="../chrome.tabCapture/ChromeTabCapture.html">ChromeTabCapture</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeTabCapture</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeTabCapture {
+ static final JsObject _tabCapture = context['chrome']['tabCapture'];
+
+ ChromeTabCapture._();
+
+ Future capture(CaptureOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _tabCapture.callMethod('capture', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future getCapturedTabs() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
+   return completer.future;
+ }
+
+ Stream&lt;CaptureInfo&gt; get onStatusChanged =&gt; _onStatusChanged.stream;
+
+ final ChromeStreamController&lt;CaptureInfo&gt; _onStatusChanged =
+     new ChromeStreamController&lt;CaptureInfo&gt;.oneArg(_tabCapture['onStatusChanged'], CaptureInfo.create);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onStatusChanged">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.tabCapture/CaptureInfo.html">CaptureInfo</a>&gt;         <strong>onStatusChanged</strong> <a class="anchor-link"
+            href="#onStatusChanged"
+            title="Permalink to ChromeTabCapture.onStatusChanged">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;CaptureInfo&gt; get onStatusChanged =&gt; _onStatusChanged.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="capture">
+<button class="show-code">Code</button>
+Future <strong>capture</strong>(<a href="../chrome.tabCapture/CaptureOptions.html">CaptureOptions</a> options) <a class="anchor-link" href="#capture"
+              title="Permalink to ChromeTabCapture.capture">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future capture(CaptureOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _tabCapture.callMethod('capture', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getCapturedTabs">
+<button class="show-code">Code</button>
+Future <strong>getCapturedTabs</strong>() <a class="anchor-link" href="#getCapturedTabs"
+              title="Permalink to ChromeTabCapture.getCapturedTabs">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getCapturedTabs() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

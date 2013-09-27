@@ -1,0 +1,383 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeExtension class / chrome.extension Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.extension" data-type="ChromeExtension">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.extension.html">chrome.extension</a> &rsaquo; <a href="../chrome.extension/ChromeExtension.html">ChromeExtension</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeExtension</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeExtension {
+ static final JsObject _extension = context['chrome']['extension'];
+
+ ChromeExtension._();
+
+ /**
+  * Set for the lifetime of a callback if an ansychronous extension api has
+  * resulted in an error. If no error has occured lastError will be
+  * [undefined].
+  */
+ Map get lastError =&gt; mapify(_extension['lastError']);
+
+ /**
+  * True for content scripts running inside incognito tabs, and for extension
+  * pages running inside an incognito process. The latter only applies to
+  * extensions with 'split' incognito_behavior.
+  */
+ bool get inIncognitoContext =&gt; _extension['inIncognitoContext'];
+
+ /**
+  * Deprecated: Please use sendMessage.
+  * 
+  * [extensionId] The extension ID of the extension you want to connect to. If
+  * omitted, default is your own extension.
+  * 
+  * Returns:
+  * The JSON response object sent by the handler of the request. If an error
+  * occurs while connecting to the extension, the callback will be called with
+  * no arguments and [runtime.lastError] will be set to the error message.
+  */
+ Future&lt;dynamic&gt; sendRequest(var request, [String extensionId]) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Converts a relative path within an extension install directory to a
+  * fully-qualified URL.
+  * 
+  * [path] A path to a resource within an extension expressed relative to its
+  * install directory.
+  * 
+  * Returns:
+  * The fully-qualified URL to the resource.
+  */
+ String getURL(String path) {
+   return _extension.callMethod('getURL', [path]);
+ }
+
+ /**
+  * Returns an array of the JavaScript 'window' objects for each of the pages
+  * running inside the current extension.
+  * 
+  * Returns:
+  * Array of global objects
+  */
+ List&lt;dynamic&gt; getViews([Map fetchProperties]) {
+   return listify(_extension.callMethod('getViews', [jsify(fetchProperties)]));
+ }
+
+ /**
+  * Returns the JavaScript 'window' object for the background page running
+  * inside the current extension. Returns null if the extension has no
+  * background page.
+  */
+ dynamic getBackgroundPage() {
+   return _extension.callMethod('getBackgroundPage');
+ }
+
+ /**
+  * Deprecated. Please use getViews({type: 'TAB'}). Returns an array of the
+  * JavaScript 'window' objects for each of the tabs running inside the current
+  * extension. If windowId is specified, returns only the 'window' objects of
+  * tabs attached to the specified window.
+  * 
+  * Returns:
+  * Array of global window objects
+  */
+ List&lt;dynamic&gt; getExtensionTabs([int windowId]) {
+   return listify(_extension.callMethod('getExtensionTabs', [windowId]));
+ }
+
+ /**
+  * Retrieves the state of the extension's access to Incognito-mode (as
+  * determined by the user-controlled 'Allowed in Incognito' checkbox.
+  * 
+  * Returns:
+  * True if the extension has access to Incognito mode, false otherwise.
+  */
+ Future&lt;bool&gt; isAllowedIncognitoAccess() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Retrieves the state of the extension's access to the 'file://' scheme (as
+  * determined by the user-controlled 'Allow access to File URLs' checkbox.
+  * 
+  * Returns:
+  * True if the extension can access the 'file://' scheme, false otherwise.
+  */
+ Future&lt;bool&gt; isAllowedFileSchemeAccess() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Sets the value of the ap CGI parameter used in the extension's update URL.
+  * This value is ignored for extensions that are hosted in the Chrome
+  * Extension Gallery.
+  */
+ void setUpdateUrlData(String data) {
+   _extension.callMethod('setUpdateUrlData', [data]);
+ }
+
+ /**
+  * Deprecated: please use onMessage.
+  */
+ Stream&lt;OnRequestEvent&gt; get onRequest =&gt; _onRequest.stream;
+
+ final ChromeStreamController&lt;OnRequestEvent&gt; _onRequest =
+     new ChromeStreamController&lt;OnRequestEvent&gt;.threeArgs(_extension['onRequest'], OnRequestEvent.create);
+
+ /**
+  * Deprecated: please use onMessageExternal.
+  */
+ Stream&lt;OnRequestExternalEvent&gt; get onRequestExternal =&gt; _onRequestExternal.stream;
+
+ final ChromeStreamController&lt;OnRequestExternalEvent&gt; _onRequestExternal =
+     new ChromeStreamController&lt;OnRequestExternalEvent&gt;.threeArgs(_extension['onRequestExternal'], OnRequestExternalEvent.create);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="inIncognitoContext">
+<button class="show-code">Code</button>
+final bool         <strong>inIncognitoContext</strong> <a class="anchor-link"
+            href="#inIncognitoContext"
+            title="Permalink to ChromeExtension.inIncognitoContext">#</a>
+        </h4>
+        <div class="doc">
+<p>True for content scripts running inside incognito tabs, and for extension
+pages running inside an incognito process. The latter only applies to
+extensions with 'split' incognito_behavior.</p>
+<pre class="source">
+bool get inIncognitoContext =&gt; _extension['inIncognitoContext'];
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="lastError">
+<button class="show-code">Code</button>
+final Map         <strong>lastError</strong> <a class="anchor-link"
+            href="#lastError"
+            title="Permalink to ChromeExtension.lastError">#</a>
+        </h4>
+        <div class="doc">
+<p>Set for the lifetime of a callback if an ansychronous extension api has
+resulted in an error. If no error has occured lastError will be
+<code>undefined</code>.</p>
+<pre class="source">
+Map get lastError =&gt; mapify(_extension['lastError']);
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onRequest">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.extension/OnRequestEvent.html">OnRequestEvent</a>&gt;         <strong>onRequest</strong> <a class="anchor-link"
+            href="#onRequest"
+            title="Permalink to ChromeExtension.onRequest">#</a>
+        </h4>
+        <div class="doc">
+<p>Deprecated: please use onMessage.</p>
+<pre class="source">
+Stream&lt;OnRequestEvent&gt; get onRequest =&gt; _onRequest.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onRequestExternal">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.extension/OnRequestExternalEvent.html">OnRequestExternalEvent</a>&gt;         <strong>onRequestExternal</strong> <a class="anchor-link"
+            href="#onRequestExternal"
+            title="Permalink to ChromeExtension.onRequestExternal">#</a>
+        </h4>
+        <div class="doc">
+<p>Deprecated: please use onMessageExternal.</p>
+<pre class="source">
+Stream&lt;OnRequestExternalEvent&gt; get onRequestExternal =&gt; _onRequestExternal.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="getBackgroundPage">
+<button class="show-code">Code</button>
+dynamic <strong>getBackgroundPage</strong>() <a class="anchor-link" href="#getBackgroundPage"
+              title="Permalink to ChromeExtension.getBackgroundPage">#</a></h4>
+<div class="doc">
+<p>Returns the JavaScript 'window' object for the background page running
+inside the current extension. Returns null if the extension has no
+background page.</p>
+<pre class="source">
+dynamic getBackgroundPage() {
+ return _extension.callMethod('getBackgroundPage');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getExtensionTabs">
+<button class="show-code">Code</button>
+List&lt;dynamic&gt; <strong>getExtensionTabs</strong>([int windowId]) <a class="anchor-link" href="#getExtensionTabs"
+              title="Permalink to ChromeExtension.getExtensionTabs">#</a></h4>
+<div class="doc">
+<p>Deprecated. Please use getViews({type: 'TAB'}). Returns an array of the
+JavaScript 'window' objects for each of the tabs running inside the current
+extension. If windowId is specified, returns only the 'window' objects of
+tabs attached to the specified window.</p>
+<p>Returns:
+Array of global window objects</p>
+<pre class="source">
+List&lt;dynamic&gt; getExtensionTabs([int windowId]) {
+ return listify(_extension.callMethod('getExtensionTabs', [windowId]));
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getURL">
+<button class="show-code">Code</button>
+String <strong>getURL</strong>(String path) <a class="anchor-link" href="#getURL"
+              title="Permalink to ChromeExtension.getURL">#</a></h4>
+<div class="doc">
+<p>Converts a relative path within an extension install directory to a
+fully-qualified URL.</p>
+<p>
+<span class="param">path</span> A path to a resource within an extension expressed relative to its
+install directory.</p>
+<p>Returns:
+The fully-qualified URL to the resource.</p>
+<pre class="source">
+String getURL(String path) {
+ return _extension.callMethod('getURL', [path]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getViews">
+<button class="show-code">Code</button>
+List&lt;dynamic&gt; <strong>getViews</strong>([Map fetchProperties]) <a class="anchor-link" href="#getViews"
+              title="Permalink to ChromeExtension.getViews">#</a></h4>
+<div class="doc">
+<p>Returns an array of the JavaScript 'window' objects for each of the pages
+running inside the current extension.</p>
+<p>Returns:
+Array of global objects</p>
+<pre class="source">
+List&lt;dynamic&gt; getViews([Map fetchProperties]) {
+ return listify(_extension.callMethod('getViews', [jsify(fetchProperties)]));
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isAllowedFileSchemeAccess">
+<button class="show-code">Code</button>
+Future&lt;bool&gt; <strong>isAllowedFileSchemeAccess</strong>() <a class="anchor-link" href="#isAllowedFileSchemeAccess"
+              title="Permalink to ChromeExtension.isAllowedFileSchemeAccess">#</a></h4>
+<div class="doc">
+<p>Retrieves the state of the extension's access to the 'file://' scheme (as
+determined by the user-controlled 'Allow access to File URLs' checkbox.</p>
+<p>Returns:
+True if the extension can access the 'file://' scheme, false otherwise.</p>
+<pre class="source">
+Future&lt;bool&gt; isAllowedFileSchemeAccess() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
+ _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isAllowedIncognitoAccess">
+<button class="show-code">Code</button>
+Future&lt;bool&gt; <strong>isAllowedIncognitoAccess</strong>() <a class="anchor-link" href="#isAllowedIncognitoAccess"
+              title="Permalink to ChromeExtension.isAllowedIncognitoAccess">#</a></h4>
+<div class="doc">
+<p>Retrieves the state of the extension's access to Incognito-mode (as
+determined by the user-controlled 'Allowed in Incognito' checkbox.</p>
+<p>Returns:
+True if the extension has access to Incognito mode, false otherwise.</p>
+<pre class="source">
+Future&lt;bool&gt; isAllowedIncognitoAccess() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
+ _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="sendRequest">
+<button class="show-code">Code</button>
+Future&lt;dynamic&gt; <strong>sendRequest</strong>(request, [String extensionId]) <a class="anchor-link" href="#sendRequest"
+              title="Permalink to ChromeExtension.sendRequest">#</a></h4>
+<div class="doc">
+<p>Deprecated: Please use sendMessage.</p>
+<p>
+<span class="param">extensionId</span> The extension ID of the extension you want to connect to. If
+omitted, default is your own extension.</p>
+<p>Returns:
+The JSON response object sent by the handler of the request. If an error
+occurs while connecting to the extension, the callback will be called with
+no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
+<pre class="source">
+Future&lt;dynamic&gt; sendRequest(var request, [String extensionId]) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
+ _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setUpdateUrlData">
+<button class="show-code">Code</button>
+void <strong>setUpdateUrlData</strong>(String data) <a class="anchor-link" href="#setUpdateUrlData"
+              title="Permalink to ChromeExtension.setUpdateUrlData">#</a></h4>
+<div class="doc">
+<p>Sets the value of the ap CGI parameter used in the extension's update URL.
+This value is ignored for extensions that are hosted in the Chrome
+Extension Gallery.</p>
+<pre class="source">
+void setUpdateUrlData(String data) {
+ _extension.callMethod('setUpdateUrlData', [data]);
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

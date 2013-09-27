@@ -1,0 +1,221 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromePermissions class / chrome.permissions Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.permissions" data-type="ChromePermissions">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.permissions.html">chrome.permissions</a> &rsaquo; <a href="../chrome.permissions/ChromePermissions.html">ChromePermissions</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromePermissions</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromePermissions {
+ static final JsObject _permissions = context['chrome']['permissions'];
+
+ ChromePermissions._();
+
+ /**
+  * Gets the extension's current set of permissions.
+  * 
+  * Returns:
+  * The extension's active permissions.
+  */
+ Future&lt;Permissions&gt; getAll() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(Permissions.create);
+   _permissions.callMethod('getAll', [completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Checks if the extension has the specified permissions.
+  * 
+  * Returns:
+  * True if the extension has the specified permissions.
+  */
+ Future&lt;bool&gt; contains(Permissions permissions) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   _permissions.callMethod('contains', [permissions, completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Requests access to the specified permissions. These permissions must be
+  * defined in the optional_permissions field of the manifest. If there are any
+  * problems requesting the permissions, [runtime.lastError] will be set.
+  * 
+  * Returns:
+  * True if the user granted the specified permissions.
+  */
+ Future&lt;bool&gt; request(Permissions permissions) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   _permissions.callMethod('request', [permissions, completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Removes access to the specified permissions. If there are any problems
+  * removing the permissions, [runtime.lastError] will be set.
+  * 
+  * Returns:
+  * True if the permissions were removed.
+  */
+ Future&lt;bool&gt; remove(Permissions permissions) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   _permissions.callMethod('remove', [permissions, completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Fired when the extension acquires new permissions.
+  */
+ Stream&lt;Permissions&gt; get onAdded =&gt; _onAdded.stream;
+
+ final ChromeStreamController&lt;Permissions&gt; _onAdded =
+     new ChromeStreamController&lt;Permissions&gt;.oneArg(_permissions['onAdded'], Permissions.create);
+
+ /**
+  * Fired when access to permissions has been removed from the extension.
+  */
+ Stream&lt;Permissions&gt; get onRemoved =&gt; _onRemoved.stream;
+
+ final ChromeStreamController&lt;Permissions&gt; _onRemoved =
+     new ChromeStreamController&lt;Permissions&gt;.oneArg(_permissions['onRemoved'], Permissions.create);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onAdded">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.permissions/Permissions.html">Permissions</a>&gt;         <strong>onAdded</strong> <a class="anchor-link"
+            href="#onAdded"
+            title="Permalink to ChromePermissions.onAdded">#</a>
+        </h4>
+        <div class="doc">
+<p>Fired when the extension acquires new permissions.</p>
+<pre class="source">
+Stream&lt;Permissions&gt; get onAdded =&gt; _onAdded.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onRemoved">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.permissions/Permissions.html">Permissions</a>&gt;         <strong>onRemoved</strong> <a class="anchor-link"
+            href="#onRemoved"
+            title="Permalink to ChromePermissions.onRemoved">#</a>
+        </h4>
+        <div class="doc">
+<p>Fired when access to permissions has been removed from the extension.</p>
+<pre class="source">
+Stream&lt;Permissions&gt; get onRemoved =&gt; _onRemoved.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="contains">
+<button class="show-code">Code</button>
+Future&lt;bool&gt; <strong>contains</strong>(<a href="../chrome.permissions/Permissions.html">Permissions</a> permissions) <a class="anchor-link" href="#contains"
+              title="Permalink to ChromePermissions.contains">#</a></h4>
+<div class="doc">
+<p>Checks if the extension has the specified permissions.</p>
+<p>Returns:
+True if the extension has the specified permissions.</p>
+<pre class="source">
+Future&lt;bool&gt; contains(Permissions permissions) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
+ _permissions.callMethod('contains', [permissions, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getAll">
+<button class="show-code">Code</button>
+Future&lt;<a href="../chrome.permissions/Permissions.html">Permissions</a>&gt; <strong>getAll</strong>() <a class="anchor-link" href="#getAll"
+              title="Permalink to ChromePermissions.getAll">#</a></h4>
+<div class="doc">
+<p>Gets the extension's current set of permissions.</p>
+<p>Returns:
+The extension's active permissions.</p>
+<pre class="source">
+Future&lt;Permissions&gt; getAll() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(Permissions.create);
+ _permissions.callMethod('getAll', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="remove">
+<button class="show-code">Code</button>
+Future&lt;bool&gt; <strong>remove</strong>(<a href="../chrome.permissions/Permissions.html">Permissions</a> permissions) <a class="anchor-link" href="#remove"
+              title="Permalink to ChromePermissions.remove">#</a></h4>
+<div class="doc">
+<p>Removes access to the specified permissions. If there are any problems
+removing the permissions, <code>runtime.lastError</code> will be set.</p>
+<p>Returns:
+True if the permissions were removed.</p>
+<pre class="source">
+Future&lt;bool&gt; remove(Permissions permissions) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
+ _permissions.callMethod('remove', [permissions, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="request">
+<button class="show-code">Code</button>
+Future&lt;bool&gt; <strong>request</strong>(<a href="../chrome.permissions/Permissions.html">Permissions</a> permissions) <a class="anchor-link" href="#request"
+              title="Permalink to ChromePermissions.request">#</a></h4>
+<div class="doc">
+<p>Requests access to the specified permissions. These permissions must be
+defined in the optional_permissions field of the manifest. If there are any
+problems requesting the permissions, <code>runtime.lastError</code> will be set.</p>
+<p>Returns:
+True if the user granted the specified permissions.</p>
+<pre class="source">
+Future&lt;bool&gt; request(Permissions permissions) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
+ _permissions.callMethod('request', [permissions, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

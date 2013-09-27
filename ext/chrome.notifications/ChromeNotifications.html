@@ -1,0 +1,188 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeNotifications class / chrome.notifications Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.notifications" data-type="ChromeNotifications">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.notifications.html">chrome.notifications</a> &rsaquo; <a href="../chrome.notifications/ChromeNotifications.html">ChromeNotifications</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeNotifications</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeNotifications {
+ static final JsObject _notifications = context['chrome']['notifications'];
+
+ ChromeNotifications._();
+
+ Future create(String notificationId, NotificationOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _notifications.callMethod('create', [notificationId, options, completer.callback]);
+   return completer.future;
+ }
+
+ Future update(String notificationId, NotificationOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _notifications.callMethod('update', [notificationId, options, completer.callback]);
+   return completer.future;
+ }
+
+ Future clear(String notificationId) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _notifications.callMethod('clear', [notificationId, completer.callback]);
+   return completer.future;
+ }
+
+ Future getAll() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _notifications.callMethod('getAll', [completer.callback]);
+   return completer.future;
+ }
+
+ Stream&lt;OnClosedEvent&gt; get onClosed =&gt; _onClosed.stream;
+
+ final ChromeStreamController&lt;OnClosedEvent&gt; _onClosed =
+     new ChromeStreamController&lt;OnClosedEvent&gt;.twoArgs(_notifications['onClosed'], OnClosedEvent.create);
+
+ Stream&lt;String&gt; get onClicked =&gt; _onClicked.stream;
+
+ final ChromeStreamController&lt;String&gt; _onClicked =
+     new ChromeStreamController&lt;String&gt;.oneArg(_notifications['onClicked'], selfConverter);
+
+ Stream&lt;OnButtonClickedEvent&gt; get onButtonClicked =&gt; _onButtonClicked.stream;
+
+ final ChromeStreamController&lt;OnButtonClickedEvent&gt; _onButtonClicked =
+     new ChromeStreamController&lt;OnButtonClickedEvent&gt;.twoArgs(_notifications['onButtonClicked'], OnButtonClickedEvent.create);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onButtonClicked">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.notifications/OnButtonClickedEvent.html">OnButtonClickedEvent</a>&gt;         <strong>onButtonClicked</strong> <a class="anchor-link"
+            href="#onButtonClicked"
+            title="Permalink to ChromeNotifications.onButtonClicked">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;OnButtonClickedEvent&gt; get onButtonClicked =&gt; _onButtonClicked.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onClicked">
+<button class="show-code">Code</button>
+final Stream&lt;String&gt;         <strong>onClicked</strong> <a class="anchor-link"
+            href="#onClicked"
+            title="Permalink to ChromeNotifications.onClicked">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;String&gt; get onClicked =&gt; _onClicked.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onClosed">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.notifications/OnClosedEvent.html">OnClosedEvent</a>&gt;         <strong>onClosed</strong> <a class="anchor-link"
+            href="#onClosed"
+            title="Permalink to ChromeNotifications.onClosed">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;OnClosedEvent&gt; get onClosed =&gt; _onClosed.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="clear">
+<button class="show-code">Code</button>
+Future <strong>clear</strong>(String notificationId) <a class="anchor-link" href="#clear"
+              title="Permalink to ChromeNotifications.clear">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future clear(String notificationId) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _notifications.callMethod('clear', [notificationId, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="create">
+<button class="show-code">Code</button>
+Future <strong>create</strong>(String notificationId, <a href="../chrome.notifications/NotificationOptions.html">NotificationOptions</a> options) <a class="anchor-link" href="#create"
+              title="Permalink to ChromeNotifications.create">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future create(String notificationId, NotificationOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _notifications.callMethod('create', [notificationId, options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getAll">
+<button class="show-code">Code</button>
+Future <strong>getAll</strong>() <a class="anchor-link" href="#getAll"
+              title="Permalink to ChromeNotifications.getAll">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getAll() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _notifications.callMethod('getAll', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="update">
+<button class="show-code">Code</button>
+Future <strong>update</strong>(String notificationId, <a href="../chrome.notifications/NotificationOptions.html">NotificationOptions</a> options) <a class="anchor-link" href="#update"
+              title="Permalink to ChromeNotifications.update">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future update(String notificationId, NotificationOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _notifications.callMethod('update', [notificationId, options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

@@ -1,0 +1,371 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeBluetooth class / chrome.bluetooth Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.bluetooth" data-type="ChromeBluetooth">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.bluetooth.html">chrome.bluetooth</a> &rsaquo; <a href="../chrome.bluetooth/ChromeBluetooth.html">ChromeBluetooth</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeBluetooth</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeBluetooth {
+ static final JsObject _bluetooth = context['chrome']['bluetooth'];
+
+ ChromeBluetooth._();
+
+ Future addProfile(Profile profile) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('addProfile', [profile, completer.callback]);
+   return completer.future;
+ }
+
+ Future removeProfile(Profile profile) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('removeProfile', [profile, completer.callback]);
+   return completer.future;
+ }
+
+ Future getAdapterState() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('getAdapterState', [completer.callback]);
+   return completer.future;
+ }
+
+ Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('getBluetoothDevices', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future getProfiles(GetProfilesOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('getProfiles', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future getServices(GetServicesOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('getServices', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future connect(ConnectOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('connect', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future disconnect(DisconnectOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('disconnect', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future read(ReadOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('read', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future write(WriteOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('write', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future getLocalOutOfBandPairingData() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('getLocalOutOfBandPairingData', [completer.callback]);
+   return completer.future;
+ }
+
+ Future setOutOfBandPairingData(SetOutOfBandPairingDataOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('setOutOfBandPairingData', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future startDiscovery(StartDiscoveryOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('startDiscovery', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future stopDiscovery() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _bluetooth.callMethod('stopDiscovery', [completer.callback]);
+   return completer.future;
+ }
+
+ Stream&lt;AdapterState&gt; get onAdapterStateChanged =&gt; _onAdapterStateChanged.stream;
+
+ final ChromeStreamController&lt;AdapterState&gt; _onAdapterStateChanged =
+     new ChromeStreamController&lt;AdapterState&gt;.oneArg(_bluetooth['onAdapterStateChanged'], AdapterState.create);
+
+ Stream&lt;Socket&gt; get onConnection =&gt; _onConnection.stream;
+
+ final ChromeStreamController&lt;Socket&gt; _onConnection =
+     new ChromeStreamController&lt;Socket&gt;.oneArg(_bluetooth['onConnection'], Socket.create);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onAdapterStateChanged">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.bluetooth/AdapterState.html">AdapterState</a>&gt;         <strong>onAdapterStateChanged</strong> <a class="anchor-link"
+            href="#onAdapterStateChanged"
+            title="Permalink to ChromeBluetooth.onAdapterStateChanged">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;AdapterState&gt; get onAdapterStateChanged =&gt; _onAdapterStateChanged.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onConnection">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.bluetooth/Socket.html">Socket</a>&gt;         <strong>onConnection</strong> <a class="anchor-link"
+            href="#onConnection"
+            title="Permalink to ChromeBluetooth.onConnection">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;Socket&gt; get onConnection =&gt; _onConnection.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="addProfile">
+<button class="show-code">Code</button>
+Future <strong>addProfile</strong>(<a href="../chrome.bluetooth/Profile.html">Profile</a> profile) <a class="anchor-link" href="#addProfile"
+              title="Permalink to ChromeBluetooth.addProfile">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future addProfile(Profile profile) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('addProfile', [profile, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="connect">
+<button class="show-code">Code</button>
+Future <strong>connect</strong>(<a href="../chrome.bluetooth/ConnectOptions.html">ConnectOptions</a> options) <a class="anchor-link" href="#connect"
+              title="Permalink to ChromeBluetooth.connect">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future connect(ConnectOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('connect', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="disconnect">
+<button class="show-code">Code</button>
+Future <strong>disconnect</strong>(<a href="../chrome.bluetooth/DisconnectOptions.html">DisconnectOptions</a> options) <a class="anchor-link" href="#disconnect"
+              title="Permalink to ChromeBluetooth.disconnect">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future disconnect(DisconnectOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('disconnect', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getAdapterState">
+<button class="show-code">Code</button>
+Future <strong>getAdapterState</strong>() <a class="anchor-link" href="#getAdapterState"
+              title="Permalink to ChromeBluetooth.getAdapterState">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getAdapterState() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('getAdapterState', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getBluetoothDevices">
+<button class="show-code">Code</button>
+Future <strong>getBluetoothDevices</strong>(<a href="../chrome.bluetooth/GetBluetoothDevicesOptions.html">GetBluetoothDevicesOptions</a> options) <a class="anchor-link" href="#getBluetoothDevices"
+              title="Permalink to ChromeBluetooth.getBluetoothDevices">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('getBluetoothDevices', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getLocalOutOfBandPairingData">
+<button class="show-code">Code</button>
+Future <strong>getLocalOutOfBandPairingData</strong>() <a class="anchor-link" href="#getLocalOutOfBandPairingData"
+              title="Permalink to ChromeBluetooth.getLocalOutOfBandPairingData">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getLocalOutOfBandPairingData() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('getLocalOutOfBandPairingData', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getProfiles">
+<button class="show-code">Code</button>
+Future <strong>getProfiles</strong>(<a href="../chrome.bluetooth/GetProfilesOptions.html">GetProfilesOptions</a> options) <a class="anchor-link" href="#getProfiles"
+              title="Permalink to ChromeBluetooth.getProfiles">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getProfiles(GetProfilesOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('getProfiles', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getServices">
+<button class="show-code">Code</button>
+Future <strong>getServices</strong>(<a href="../chrome.bluetooth/GetServicesOptions.html">GetServicesOptions</a> options) <a class="anchor-link" href="#getServices"
+              title="Permalink to ChromeBluetooth.getServices">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getServices(GetServicesOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('getServices', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="read">
+<button class="show-code">Code</button>
+Future <strong>read</strong>(<a href="../chrome.bluetooth/ReadOptions.html">ReadOptions</a> options) <a class="anchor-link" href="#read"
+              title="Permalink to ChromeBluetooth.read">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future read(ReadOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('read', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="removeProfile">
+<button class="show-code">Code</button>
+Future <strong>removeProfile</strong>(<a href="../chrome.bluetooth/Profile.html">Profile</a> profile) <a class="anchor-link" href="#removeProfile"
+              title="Permalink to ChromeBluetooth.removeProfile">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future removeProfile(Profile profile) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('removeProfile', [profile, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setOutOfBandPairingData">
+<button class="show-code">Code</button>
+Future <strong>setOutOfBandPairingData</strong>(<a href="../chrome.bluetooth/SetOutOfBandPairingDataOptions.html">SetOutOfBandPairingDataOptions</a> options) <a class="anchor-link" href="#setOutOfBandPairingData"
+              title="Permalink to ChromeBluetooth.setOutOfBandPairingData">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setOutOfBandPairingData(SetOutOfBandPairingDataOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('setOutOfBandPairingData', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="startDiscovery">
+<button class="show-code">Code</button>
+Future <strong>startDiscovery</strong>(<a href="../chrome.bluetooth/StartDiscoveryOptions.html">StartDiscoveryOptions</a> options) <a class="anchor-link" href="#startDiscovery"
+              title="Permalink to ChromeBluetooth.startDiscovery">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future startDiscovery(StartDiscoveryOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('startDiscovery', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="stopDiscovery">
+<button class="show-code">Code</button>
+Future <strong>stopDiscovery</strong>() <a class="anchor-link" href="#stopDiscovery"
+              title="Permalink to ChromeBluetooth.stopDiscovery">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future stopDiscovery() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('stopDiscovery', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="write">
+<button class="show-code">Code</button>
+Future <strong>write</strong>(<a href="../chrome.bluetooth/WriteOptions.html">WriteOptions</a> options) <a class="anchor-link" href="#write"
+              title="Permalink to ChromeBluetooth.write">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future write(WriteOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _bluetooth.callMethod('write', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

@@ -1,0 +1,70 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeWebstore class / chrome.webstore Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.webstore" data-type="ChromeWebstore">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.webstore.html">chrome.webstore</a> &rsaquo; <a href="../chrome.webstore/ChromeWebstore.html">ChromeWebstore</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeWebstore</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeWebstore {
+ static final JsObject _webstore = context['chrome']['webstore'];
+
+ ChromeWebstore._();
+
+ void install([String url, var successCallback, var failureCallback]) {
+   _webstore.callMethod('install', [url, successCallback, failureCallback]);
+ }
+}
+</pre>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="install">
+<button class="show-code">Code</button>
+void <strong>install</strong>([String url, successCallback, failureCallback]) <a class="anchor-link" href="#install"
+              title="Permalink to ChromeWebstore.install">#</a></h4>
+<div class="doc">
+<pre class="source">
+void install([String url, var successCallback, var failureCallback]) {
+ _webstore.callMethod('install', [url, successCallback, failureCallback]);
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

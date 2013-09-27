@@ -1,0 +1,114 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeSystemDisplay class / chrome.system_display Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.system_display" data-type="ChromeSystemDisplay">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.system_display.html">chrome.system_display</a> &rsaquo; <a href="../chrome.system_display/ChromeSystemDisplay.html">ChromeSystemDisplay</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeSystemDisplay</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeSystemDisplay {
+ static final JsObject _system_display = context['chrome']['system']['display'];
+
+ ChromeSystemDisplay._();
+
+ Future getInfo() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _system_display.callMethod('getInfo', [completer.callback]);
+   return completer.future;
+ }
+
+ Future setDisplayProperties(String id, DisplayProperties info) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _system_display.callMethod('setDisplayProperties', [id, info, completer.callback]);
+   return completer.future;
+ }
+
+ Stream get onDisplayChanged =&gt; _onDisplayChanged.stream;
+
+ final ChromeStreamController _onDisplayChanged =
+     new ChromeStreamController.noArgs(_system_display['onDisplayChanged']);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onDisplayChanged">
+<button class="show-code">Code</button>
+final Stream         <strong>onDisplayChanged</strong> <a class="anchor-link"
+            href="#onDisplayChanged"
+            title="Permalink to ChromeSystemDisplay.onDisplayChanged">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream get onDisplayChanged =&gt; _onDisplayChanged.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="getInfo">
+<button class="show-code">Code</button>
+Future <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
+              title="Permalink to ChromeSystemDisplay.getInfo">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getInfo() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _system_display.callMethod('getInfo', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setDisplayProperties">
+<button class="show-code">Code</button>
+Future <strong>setDisplayProperties</strong>(String id, <a href="../chrome.system_display/DisplayProperties.html">DisplayProperties</a> info) <a class="anchor-link" href="#setDisplayProperties"
+              title="Permalink to ChromeSystemDisplay.setDisplayProperties">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setDisplayProperties(String id, DisplayProperties info) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _system_display.callMethod('setDisplayProperties', [id, info, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

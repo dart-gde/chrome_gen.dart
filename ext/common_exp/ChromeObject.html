@@ -1,0 +1,144 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeObject abstract class / common_exp Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="common_exp" data-type="ChromeObject">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../common_exp.html">common_exp</a> &rsaquo; <a href="../common_exp/ChromeObject.html">ChromeObject</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeObject</strong>
+          abstract class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>The abstract superclass of objects that can hold <a class="crossref" href="../dart_js/JsObject.html">JsObject</a> proxies.</p>
+<pre class="source">
+abstract class ChromeObject implements Serializable&lt;JsObject&gt; {
+ JsObject proxy;
+
+ /**
+  * Create a new instance of a `ChromeObject`, which creates and delegates to
+  * a JsObject proxy.
+  */
+ ChromeObject() {
+   proxy = new JsObject(context['Object']);
+ }
+
+ /**
+  * Create a new instance of a `ChromeObject`, which delegates to the given
+  * JsObject proxy.
+  */
+ ChromeObject.fromProxy(this.proxy);
+
+ JsObject toJs() =&gt; proxy;
+
+ String toString() =&gt; proxy.toString();
+}
+</pre>
+</div>
+<h3>Subclasses</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/AddRequestCookie.html">AddRequestCookie</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/AddResponseCookie.html">AddResponseCookie</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/AddResponseHeader.html">AddResponseHeader</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.alarms/Alarm.html">Alarm</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.alarms/AlarmCreateInfo.html">AlarmCreateInfo</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../common_exp/ArrayBuffer.html">ArrayBuffer</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.webRequest/BlockingResponse.html">BlockingResponse</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/BooleanDelta.html">BooleanDelta</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../common_exp/Bounds.html">Bounds</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.devtools_panels/Button.html">Button</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.processes/Cache.html">Cache</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/CancelRequest.html">CancelRequest</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.tabCapture/CaptureInfo.html">CaptureInfo</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.tabCapture/CaptureOptions.html">CaptureOptions</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.pushMessaging/ChannelIdResult.html">ChannelIdResult</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.types/ChromeSetting.html">ChromeSetting</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.browserAction/ColorArray.html">ColorArray</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.commands/Command.html">Command</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.contentSettings/ContentSetting.html">ContentSetting</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.cookies/Cookie.html">Cookie</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.cookies/CookieStore.html">CookieStore</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.location/Coordinates.html">Coordinates</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.system_cpu/CpuInfo.html">CpuInfo</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.browsingData/DataTypeSet.html">DataTypeSet</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.debugger/Debuggee.html">Debuggee</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.omnibox/DefaultSuggestResult.html">DefaultSuggestResult</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.sessions/Device.html">Device</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/DownloadDelta.html">DownloadDelta</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/DownloadItem.html">DownloadItem</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/DownloadOptions.html">DownloadOptions</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/EditRequestCookie.html">EditRequestCookie</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/EditResponseCookie.html">EditResponseCookie</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.devtools_panels/ElementsPanel.html">ElementsPanel</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.events/Event.html">Event</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.management/ExtensionInfo.html">ExtensionInfo</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.devtools_panels/ExtensionPanel.html">ExtensionPanel</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.devtools_panels/ExtensionSidebarPane.html">ExtensionSidebarPane</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.fileBrowserHandler/FileHandlerExecuteEventDetails.html">FileHandlerExecuteEventDetails</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/FilenameSuggestion.html">FilenameSuggestion</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.sessions/Filter.html">Filter</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/FilterResponseCookie.html">FilterResponseCookie</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.fontSettings/FontName.html">FontName</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.fontSettings/GenericFamily.html">GenericFamily</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/GetFileIconOptions.html">GetFileIconOptions</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/HeaderFilter.html">HeaderFilter</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/HeaderNameValuePair.html">HeaderNameValuePair</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.history/HistoryItem.html">HistoryItem</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.webRequest/HttpHeaders.html">HttpHeaders</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.management/IconInfo.html">IconInfo</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/IgnoreRules.html">IgnoreRules</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.browserAction/ImageDataType.html">ImageDataType</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.tabs/InjectDetails.html">InjectDetails</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.input_ime/InputContext.html">InputContext</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.identity/InvalidTokenDetails.html">InvalidTokenDetails</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.input_ime/KeyboardEvent.html">KeyboardEvent</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.fontSettings/LevelOfControl.html">LevelOfControl</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.location/Location.html">Location</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/LongDelta.html">LongDelta</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.tabCapture/MediaStreamConstraint.html">MediaStreamConstraint</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.system_memory/MemoryInfo.html">MemoryInfo</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.input_ime/MenuItem.html">MenuItem</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.pushMessaging/Message.html">Message</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.runtime/MessageSender.html">MessageSender</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.topSites/MostVisitedURL.html">MostVisitedURL</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.notifications/NotificationButton.html">NotificationButton</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.notifications/NotificationItem.html">NotificationItem</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.notifications/NotificationOptions.html">NotificationOptions</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.contextMenus/OnClickData.html">OnClickData</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.proxy/PacScript.html">PacScript</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeContent/PageStateMatcher.html">PageStateMatcher</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.permissions/Permissions.html">Permissions</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.runtime/Port.html">Port</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.processes/Process.html">Process</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.proxy/ProxyConfig.html">ProxyConfig</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.proxy/ProxyRules.html">ProxyRules</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.proxy/ProxyServer.html">ProxyServer</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/RedirectByRegEx.html">RedirectByRegEx</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/RedirectRequest.html">RedirectRequest</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/RedirectToEmptyDocument.html">RedirectToEmptyDocument</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/RedirectToTransparentImage.html">RedirectToTransparentImage</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.browsingData/RemovalOptions.html">RemovalOptions</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/RemoveRequestCookie.html">RemoveRequestCookie</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/RemoveRequestHeader.html">RemoveRequestHeader</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/RemoveResponseCookie.html">RemoveResponseCookie</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/RemoveResponseHeader.html">RemoveResponseHeader</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.devtools_network/Request.html">Request</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/RequestCookie.html">RequestCookie</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.webRequest/RequestFilter.html">RequestFilter</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/RequestMatcher.html">RequestMatcher</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.devtools_inspectedWindow/Resource.html">Resource</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.contentSettings/ResourceIdentifier.html">ResourceIdentifier</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/ResponseCookie.html">ResponseCookie</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.events/Rule.html">Rule</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.fontSettings/ScriptCode.html">ScriptCode</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/SendMessageToExtension.html">SendMessageToExtension</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.sessions/Session.html">Session</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeWebRequest/SetRequestHeader.html">SetRequestHeader</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.declarativeContent/ShowPageAction.html">ShowPageAction</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.storage/StorageArea.html">StorageArea</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.storage/StorageChange.html">StorageChange</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.system_storage/StorageUnitInfo.html">StorageUnitInfo</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/StringDelta.html">StringDelta</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.omnibox/SuggestResult.html">SuggestResult</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.tabs/Tab.html">Tab</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.debugger/TargetInfo.html">TargetInfo</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.identity/TokenDetails.html">TokenDetails</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.tts/TtsEvent.html">TtsEvent</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.tts/TtsVoice.html">TtsVoice</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.webRequest/UploadData.html">UploadData</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.events/UrlFilter.html">UrlFilter</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.history/VisitItem.html">VisitItem</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.location/WatchLocationRequestInfo.html">WatchLocationRequestInfo</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.identity/WebAuthFlowDetails.html">WebAuthFlowDetails</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.windows/Window.html">Window</a></span></p>
+<h3>Implements</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../dart_js/Serializable.html">Serializable&lt;JsObject&gt;</a></span></p>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="">
+<button class="show-code">Code</button>
+new <strong>ChromeObject</strong>() <a class="anchor-link" href="#"
+              title="Permalink to ChromeObject.ChromeObject">#</a></h4>
+<div class="doc">
+<p>Create a new instance of a <code>ChromeObject</code>, which creates and delegates to
+a JsObject proxy.</p>
+<pre class="source">
+ChromeObject() {
+ proxy = new JsObject(context['Object']);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="fromProxy">
+<button class="show-code">Code</button>
+new <strong>ChromeObject.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+              title="Permalink to ChromeObject.ChromeObject.fromProxy">#</a></h4>
+<div class="doc">
+<p>Create a new instance of a <code>ChromeObject</code>, which delegates to the given
+JsObject proxy.</p>
+<pre class="source">
+ChromeObject.fromProxy(this.proxy);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="proxy">
+<button class="show-code">Code</button>
+JsObject         <strong>proxy</strong> <a class="anchor-link"
+            href="#proxy"
+            title="Permalink to ChromeObject.proxy">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+JsObject proxy
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="toJs">
+<button class="show-code">Code</button>
+JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
+              title="Permalink to ChromeObject.toJs">#</a></h4>
+<div class="doc">
+<pre class="source">
+JsObject toJs() =&gt; proxy;
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="toString">
+<button class="show-code">Code</button>
+String <strong>toString</strong>() <a class="anchor-link" href="#toString"
+              title="Permalink to ChromeObject.toString">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Returns a string representation of this object.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+String toString() =&gt; proxy.toString();
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

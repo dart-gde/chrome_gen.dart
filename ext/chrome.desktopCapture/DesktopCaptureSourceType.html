@@ -1,0 +1,169 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>DesktopCaptureSourceType class / chrome.desktopCapture Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.desktopCapture" data-type="DesktopCaptureSourceType">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.desktopCapture.html">chrome.desktopCapture</a> &rsaquo; <a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>DesktopCaptureSourceType</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class DesktopCaptureSourceType extends ChromeEnum {
+ static const DesktopCaptureSourceType SCREEN = const DesktopCaptureSourceType._('screen');
+ static const DesktopCaptureSourceType WINDOW = const DesktopCaptureSourceType._('window');
+ static const DesktopCaptureSourceType TAB = const DesktopCaptureSourceType._('tab');
+
+ static List&lt;DesktopCaptureSourceType&gt; _values = [SCREEN, WINDOW, TAB];
+
+ static List&lt;DesktopCaptureSourceType&gt; get values =&gt; _values;
+
+ static DesktopCaptureSourceType create(String str) =&gt;
+     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+
+ const DesktopCaptureSourceType._(String str): super(str);
+}
+</pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../common_exp/ChromeEnum.html">ChromeEnum</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>DesktopCaptureSourceType</strong></span></p>
+<div>
+<h3>Static Properties</h3>
+<div class="field"><h4 id="SCREEN">
+<button class="show-code">Code</button>
+const <a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>         <strong>SCREEN</strong> <a class="anchor-link"
+            href="#SCREEN"
+            title="Permalink to DesktopCaptureSourceType.SCREEN">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const DesktopCaptureSourceType SCREEN = const DesktopCaptureSourceType._('screen')
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="TAB">
+<button class="show-code">Code</button>
+const <a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>         <strong>TAB</strong> <a class="anchor-link"
+            href="#TAB"
+            title="Permalink to DesktopCaptureSourceType.TAB">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const DesktopCaptureSourceType TAB = const DesktopCaptureSourceType._('tab')
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="values">
+<button class="show-code">Code</button>
+final List&lt;<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>&gt;         <strong>values</strong> <a class="anchor-link"
+            href="#values"
+            title="Permalink to DesktopCaptureSourceType.values">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static List&lt;DesktopCaptureSourceType&gt; get values =&gt; _values;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="WINDOW">
+<button class="show-code">Code</button>
+const <a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>         <strong>WINDOW</strong> <a class="anchor-link"
+            href="#WINDOW"
+            title="Permalink to DesktopCaptureSourceType.WINDOW">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const DesktopCaptureSourceType WINDOW = const DesktopCaptureSourceType._('window')
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="create">
+<button class="show-code">Code</button>
+<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
+              title="Permalink to DesktopCaptureSourceType.create">#</a></h4>
+<div class="doc">
+<pre class="source">
+static DesktopCaptureSourceType create(String str) =&gt;
+   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+</pre>
+</div>
+</div>
+</div>
+<div class="inherited">
+<h3>Properties</h3>
+<div class="field inherited"><h4 id="value">
+<button class="show-code">Code</button>
+final String         <strong>value</strong> <a class="anchor-link"
+            href="#value"
+            title="Permalink to DesktopCaptureSourceType.value">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../common_exp/ChromeEnum.html">ChromeEnum</a> </div><div class="doc">
+<pre class="source">
+String get value =&gt; _value;
+</pre>
+</div>
+</div>
+</div>
+<div class="inherited">
+<h3>Methods</h3>
+<div class="method inherited"><h4 id="toJs">
+<button class="show-code">Code</button>
+String <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
+              title="Permalink to DesktopCaptureSourceType.toJs">#</a></h4>
+<div class="inherited-from">inherited from <a href="../common_exp/ChromeEnum.html">ChromeEnum</a> </div><div class="doc">
+<pre class="source">
+String toJs() =&gt; _value;
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="toString">
+<button class="show-code">Code</button>
+String <strong>toString</strong>() <a class="anchor-link" href="#toString"
+              title="Permalink to DesktopCaptureSourceType.toString">#</a></h4>
+<div class="inherited-from">inherited from <a href="../common_exp/ChromeEnum.html">ChromeEnum</a> </div><div class="doc">
+<div class="inherited">
+<p>Returns a string representation of this object.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+String toString() =&gt; _value;
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

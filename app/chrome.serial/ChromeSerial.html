@@ -1,0 +1,214 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeSerial class / chrome.serial Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.serial" data-type="ChromeSerial">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.serial.html">chrome.serial</a> &rsaquo; <a href="../chrome.serial/ChromeSerial.html">ChromeSerial</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeSerial</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeSerial {
+ static final JsObject _serial = context['chrome']['serial'];
+
+ ChromeSerial._();
+
+ Future getPorts() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _serial.callMethod('getPorts', [completer.callback]);
+   return completer.future;
+ }
+
+ Future open(String port, [OpenOptions options]) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _serial.callMethod('open', [port, options, completer.callback]);
+   return completer.future;
+ }
+
+ Future close(int connectionId) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _serial.callMethod('close', [connectionId, completer.callback]);
+   return completer.future;
+ }
+
+ Future read(int connectionId, int bytesToRead) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
+   return completer.future;
+ }
+
+ Future write(int connectionId, ArrayBuffer data) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _serial.callMethod('write', [connectionId, data, completer.callback]);
+   return completer.future;
+ }
+
+ Future flush(int connectionId) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _serial.callMethod('flush', [connectionId, completer.callback]);
+   return completer.future;
+ }
+
+ Future getControlSignals(int connectionId) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _serial.callMethod('getControlSignals', [connectionId, completer.callback]);
+   return completer.future;
+ }
+
+ Future setControlSignals(int connectionId, ControlSignalOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _serial.callMethod('setControlSignals', [connectionId, options, completer.callback]);
+   return completer.future;
+ }
+}
+</pre>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="close">
+<button class="show-code">Code</button>
+Future <strong>close</strong>(int connectionId) <a class="anchor-link" href="#close"
+              title="Permalink to ChromeSerial.close">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future close(int connectionId) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _serial.callMethod('close', [connectionId, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="flush">
+<button class="show-code">Code</button>
+Future <strong>flush</strong>(int connectionId) <a class="anchor-link" href="#flush"
+              title="Permalink to ChromeSerial.flush">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future flush(int connectionId) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _serial.callMethod('flush', [connectionId, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getControlSignals">
+<button class="show-code">Code</button>
+Future <strong>getControlSignals</strong>(int connectionId) <a class="anchor-link" href="#getControlSignals"
+              title="Permalink to ChromeSerial.getControlSignals">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getControlSignals(int connectionId) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _serial.callMethod('getControlSignals', [connectionId, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getPorts">
+<button class="show-code">Code</button>
+Future <strong>getPorts</strong>() <a class="anchor-link" href="#getPorts"
+              title="Permalink to ChromeSerial.getPorts">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getPorts() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _serial.callMethod('getPorts', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="open">
+<button class="show-code">Code</button>
+Future <strong>open</strong>(String port, [<a href="../chrome.serial/OpenOptions.html">OpenOptions</a> options]) <a class="anchor-link" href="#open"
+              title="Permalink to ChromeSerial.open">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future open(String port, [OpenOptions options]) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _serial.callMethod('open', [port, options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="read">
+<button class="show-code">Code</button>
+Future <strong>read</strong>(int connectionId, int bytesToRead) <a class="anchor-link" href="#read"
+              title="Permalink to ChromeSerial.read">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future read(int connectionId, int bytesToRead) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setControlSignals">
+<button class="show-code">Code</button>
+Future <strong>setControlSignals</strong>(int connectionId, <a href="../chrome.serial/ControlSignalOptions.html">ControlSignalOptions</a> options) <a class="anchor-link" href="#setControlSignals"
+              title="Permalink to ChromeSerial.setControlSignals">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setControlSignals(int connectionId, ControlSignalOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _serial.callMethod('setControlSignals', [connectionId, options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="write">
+<button class="show-code">Code</button>
+Future <strong>write</strong>(int connectionId, <a href="../common_exp/ArrayBuffer.html">ArrayBuffer</a> data) <a class="anchor-link" href="#write"
+              title="Permalink to ChromeSerial.write">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future write(int connectionId, ArrayBuffer data) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _serial.callMethod('write', [connectionId, data, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

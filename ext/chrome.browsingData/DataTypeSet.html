@@ -1,0 +1,458 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>DataTypeSet class / chrome.browsingData Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.browsingData" data-type="DataTypeSet">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.browsingData.html">chrome.browsingData</a> &rsaquo; <a href="../chrome.browsingData/DataTypeSet.html">DataTypeSet</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>DataTypeSet</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>A set of data types. Missing data types are interpreted as <code>false</code>.</p>
+<pre class="source">
+class DataTypeSet extends ChromeObject {
+ static DataTypeSet create(JsObject proxy) =&gt; proxy == null ? null : new DataTypeSet.fromProxy(proxy);
+
+ DataTypeSet({bool appcache, bool cache, bool cookies, bool downloads, bool fileSystems, bool formData, bool history, bool indexedDB, bool localStorage, bool serverBoundCertificates, bool pluginData, bool passwords, bool webSQL}) {
+   if (appcache != null) this.appcache = appcache;
+   if (cache != null) this.cache = cache;
+   if (cookies != null) this.cookies = cookies;
+   if (downloads != null) this.downloads = downloads;
+   if (fileSystems != null) this.fileSystems = fileSystems;
+   if (formData != null) this.formData = formData;
+   if (history != null) this.history = history;
+   if (indexedDB != null) this.indexedDB = indexedDB;
+   if (localStorage != null) this.localStorage = localStorage;
+   if (serverBoundCertificates != null) this.serverBoundCertificates = serverBoundCertificates;
+   if (pluginData != null) this.pluginData = pluginData;
+   if (passwords != null) this.passwords = passwords;
+   if (webSQL != null) this.webSQL = webSQL;
+ }
+
+ DataTypeSet.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+ /**
+  * Websites' appcaches.
+  */
+ bool get appcache =&gt; proxy['appcache'];
+ set appcache(bool value) =&gt; proxy['appcache'] = value;
+
+ /**
+  * The browser's cache. Note: when removing data, this clears the _entire_
+  * cache: it is not limited to the range you specify.
+  */
+ bool get cache =&gt; proxy['cache'];
+ set cache(bool value) =&gt; proxy['cache'] = value;
+
+ /**
+  * The browser's cookies.
+  */
+ bool get cookies =&gt; proxy['cookies'];
+ set cookies(bool value) =&gt; proxy['cookies'] = value;
+
+ /**
+  * The browser's download list.
+  */
+ bool get downloads =&gt; proxy['downloads'];
+ set downloads(bool value) =&gt; proxy['downloads'] = value;
+
+ /**
+  * Websites' file systems.
+  */
+ bool get fileSystems =&gt; proxy['fileSystems'];
+ set fileSystems(bool value) =&gt; proxy['fileSystems'] = value;
+
+ /**
+  * The browser's stored form data.
+  */
+ bool get formData =&gt; proxy['formData'];
+ set formData(bool value) =&gt; proxy['formData'] = value;
+
+ /**
+  * The browser's history.
+  */
+ bool get history =&gt; proxy['history'];
+ set history(bool value) =&gt; proxy['history'] = value;
+
+ /**
+  * Websites' IndexedDB data.
+  */
+ bool get indexedDB =&gt; proxy['indexedDB'];
+ set indexedDB(bool value) =&gt; proxy['indexedDB'] = value;
+
+ /**
+  * Websites' local storage data.
+  */
+ bool get localStorage =&gt; proxy['localStorage'];
+ set localStorage(bool value) =&gt; proxy['localStorage'] = value;
+
+ /**
+  * Server-bound certificates.
+  */
+ bool get serverBoundCertificates =&gt; proxy['serverBoundCertificates'];
+ set serverBoundCertificates(bool value) =&gt; proxy['serverBoundCertificates'] = value;
+
+ /**
+  * Plugins' data.
+  */
+ bool get pluginData =&gt; proxy['pluginData'];
+ set pluginData(bool value) =&gt; proxy['pluginData'] = value;
+
+ /**
+  * Stored passwords.
+  */
+ bool get passwords =&gt; proxy['passwords'];
+ set passwords(bool value) =&gt; proxy['passwords'] = value;
+
+ /**
+  * Websites' WebSQL data.
+  */
+ bool get webSQL =&gt; proxy['webSQL'];
+ set webSQL(bool value) =&gt; proxy['webSQL'] = value;
+}
+</pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>DataTypeSet</strong></span></p>
+<div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="create">
+<button class="show-code">Code</button>
+<a href="../chrome.browsingData/DataTypeSet.html">DataTypeSet</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
+              title="Permalink to DataTypeSet.create">#</a></h4>
+<div class="doc">
+<pre class="source">
+static DataTypeSet create(JsObject proxy) =&gt; proxy == null ? null : new DataTypeSet.fromProxy(proxy);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="">
+<button class="show-code">Code</button>
+new <strong>DataTypeSet</strong>({bool appcache, bool cache, bool cookies, bool downloads, bool fileSystems, bool formData, bool history, bool indexedDB, bool localStorage, bool serverBoundCertificates, bool pluginData, bool passwords, bool webSQL}) <a class="anchor-link" href="#"
+              title="Permalink to DataTypeSet.DataTypeSet">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Create a new instance of a <code>ChromeObject</code>, which creates and delegates to
+a JsObject proxy.</p>
+<div class="docs-inherited-from">docs inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div></div>
+<pre class="source">
+DataTypeSet({bool appcache, bool cache, bool cookies, bool downloads, bool fileSystems, bool formData, bool history, bool indexedDB, bool localStorage, bool serverBoundCertificates, bool pluginData, bool passwords, bool webSQL}) {
+ if (appcache != null) this.appcache = appcache;
+ if (cache != null) this.cache = cache;
+ if (cookies != null) this.cookies = cookies;
+ if (downloads != null) this.downloads = downloads;
+ if (fileSystems != null) this.fileSystems = fileSystems;
+ if (formData != null) this.formData = formData;
+ if (history != null) this.history = history;
+ if (indexedDB != null) this.indexedDB = indexedDB;
+ if (localStorage != null) this.localStorage = localStorage;
+ if (serverBoundCertificates != null) this.serverBoundCertificates = serverBoundCertificates;
+ if (pluginData != null) this.pluginData = pluginData;
+ if (passwords != null) this.passwords = passwords;
+ if (webSQL != null) this.webSQL = webSQL;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="fromProxy">
+<button class="show-code">Code</button>
+new <strong>DataTypeSet.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+              title="Permalink to DataTypeSet.DataTypeSet.fromProxy">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Create a new instance of a <code>ChromeObject</code>, which delegates to the given
+JsObject proxy.</p>
+<div class="docs-inherited-from">docs inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div></div>
+<pre class="source">
+DataTypeSet.fromProxy(JsObject proxy): super.fromProxy(proxy);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="appcache">
+<button class="show-code">Code</button>
+bool         <strong>appcache</strong> <a class="anchor-link"
+            href="#appcache"
+            title="Permalink to DataTypeSet.appcache">#</a>
+        </h4>
+        <div class="doc">
+<p>Websites' appcaches.</p>
+<pre class="source">
+bool get appcache =&gt; proxy['appcache'];
+</pre>
+<pre class="source">
+set appcache(bool value) =&gt; proxy['appcache'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="cache">
+<button class="show-code">Code</button>
+bool         <strong>cache</strong> <a class="anchor-link"
+            href="#cache"
+            title="Permalink to DataTypeSet.cache">#</a>
+        </h4>
+        <div class="doc">
+<p>The browser's cache. Note: when removing data, this clears the <em>entire</em>
+cache: it is not limited to the range you specify.</p>
+<pre class="source">
+bool get cache =&gt; proxy['cache'];
+</pre>
+<pre class="source">
+set cache(bool value) =&gt; proxy['cache'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="cookies">
+<button class="show-code">Code</button>
+bool         <strong>cookies</strong> <a class="anchor-link"
+            href="#cookies"
+            title="Permalink to DataTypeSet.cookies">#</a>
+        </h4>
+        <div class="doc">
+<p>The browser's cookies.</p>
+<pre class="source">
+bool get cookies =&gt; proxy['cookies'];
+</pre>
+<pre class="source">
+set cookies(bool value) =&gt; proxy['cookies'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="downloads">
+<button class="show-code">Code</button>
+bool         <strong>downloads</strong> <a class="anchor-link"
+            href="#downloads"
+            title="Permalink to DataTypeSet.downloads">#</a>
+        </h4>
+        <div class="doc">
+<p>The browser's download list.</p>
+<pre class="source">
+bool get downloads =&gt; proxy['downloads'];
+</pre>
+<pre class="source">
+set downloads(bool value) =&gt; proxy['downloads'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="fileSystems">
+<button class="show-code">Code</button>
+bool         <strong>fileSystems</strong> <a class="anchor-link"
+            href="#fileSystems"
+            title="Permalink to DataTypeSet.fileSystems">#</a>
+        </h4>
+        <div class="doc">
+<p>Websites' file systems.</p>
+<pre class="source">
+bool get fileSystems =&gt; proxy['fileSystems'];
+</pre>
+<pre class="source">
+set fileSystems(bool value) =&gt; proxy['fileSystems'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="formData">
+<button class="show-code">Code</button>
+bool         <strong>formData</strong> <a class="anchor-link"
+            href="#formData"
+            title="Permalink to DataTypeSet.formData">#</a>
+        </h4>
+        <div class="doc">
+<p>The browser's stored form data.</p>
+<pre class="source">
+bool get formData =&gt; proxy['formData'];
+</pre>
+<pre class="source">
+set formData(bool value) =&gt; proxy['formData'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="history">
+<button class="show-code">Code</button>
+bool         <strong>history</strong> <a class="anchor-link"
+            href="#history"
+            title="Permalink to DataTypeSet.history">#</a>
+        </h4>
+        <div class="doc">
+<p>The browser's history.</p>
+<pre class="source">
+bool get history =&gt; proxy['history'];
+</pre>
+<pre class="source">
+set history(bool value) =&gt; proxy['history'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="indexedDB">
+<button class="show-code">Code</button>
+bool         <strong>indexedDB</strong> <a class="anchor-link"
+            href="#indexedDB"
+            title="Permalink to DataTypeSet.indexedDB">#</a>
+        </h4>
+        <div class="doc">
+<p>Websites' IndexedDB data.</p>
+<pre class="source">
+bool get indexedDB =&gt; proxy['indexedDB'];
+</pre>
+<pre class="source">
+set indexedDB(bool value) =&gt; proxy['indexedDB'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="localStorage">
+<button class="show-code">Code</button>
+bool         <strong>localStorage</strong> <a class="anchor-link"
+            href="#localStorage"
+            title="Permalink to DataTypeSet.localStorage">#</a>
+        </h4>
+        <div class="doc">
+<p>Websites' local storage data.</p>
+<pre class="source">
+bool get localStorage =&gt; proxy['localStorage'];
+</pre>
+<pre class="source">
+set localStorage(bool value) =&gt; proxy['localStorage'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="passwords">
+<button class="show-code">Code</button>
+bool         <strong>passwords</strong> <a class="anchor-link"
+            href="#passwords"
+            title="Permalink to DataTypeSet.passwords">#</a>
+        </h4>
+        <div class="doc">
+<p>Stored passwords.</p>
+<pre class="source">
+bool get passwords =&gt; proxy['passwords'];
+</pre>
+<pre class="source">
+set passwords(bool value) =&gt; proxy['passwords'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="pluginData">
+<button class="show-code">Code</button>
+bool         <strong>pluginData</strong> <a class="anchor-link"
+            href="#pluginData"
+            title="Permalink to DataTypeSet.pluginData">#</a>
+        </h4>
+        <div class="doc">
+<p>Plugins' data.</p>
+<pre class="source">
+bool get pluginData =&gt; proxy['pluginData'];
+</pre>
+<pre class="source">
+set pluginData(bool value) =&gt; proxy['pluginData'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="proxy">
+<button class="show-code">Code</button>
+JsObject         <strong>proxy</strong> <a class="anchor-link"
+            href="#proxy"
+            title="Permalink to DataTypeSet.proxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+JsObject proxy
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="serverBoundCertificates">
+<button class="show-code">Code</button>
+bool         <strong>serverBoundCertificates</strong> <a class="anchor-link"
+            href="#serverBoundCertificates"
+            title="Permalink to DataTypeSet.serverBoundCertificates">#</a>
+        </h4>
+        <div class="doc">
+<p>Server-bound certificates.</p>
+<pre class="source">
+bool get serverBoundCertificates =&gt; proxy['serverBoundCertificates'];
+</pre>
+<pre class="source">
+set serverBoundCertificates(bool value) =&gt; proxy['serverBoundCertificates'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="webSQL">
+<button class="show-code">Code</button>
+bool         <strong>webSQL</strong> <a class="anchor-link"
+            href="#webSQL"
+            title="Permalink to DataTypeSet.webSQL">#</a>
+        </h4>
+        <div class="doc">
+<p>Websites' WebSQL data.</p>
+<pre class="source">
+bool get webSQL =&gt; proxy['webSQL'];
+</pre>
+<pre class="source">
+set webSQL(bool value) =&gt; proxy['webSQL'] = value;
+</pre>
+</div>
+</div>
+</div>
+<div class="inherited">
+<h3>Methods</h3>
+<div class="method inherited"><h4 id="toJs">
+<button class="show-code">Code</button>
+JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
+              title="Permalink to DataTypeSet.toJs">#</a></h4>
+<div class="inherited-from">inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+JsObject toJs() =&gt; proxy;
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="toString">
+<button class="show-code">Code</button>
+String <strong>toString</strong>() <a class="anchor-link" href="#toString"
+              title="Permalink to DataTypeSet.toString">#</a></h4>
+<div class="inherited-from">inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<div class="inherited">
+<p>Returns a string representation of this object.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+String toString() =&gt; proxy.toString();
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

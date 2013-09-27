@@ -1,0 +1,231 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeSyncFileSystem class / chrome.syncFileSystem Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.syncFileSystem" data-type="ChromeSyncFileSystem">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.syncFileSystem.html">chrome.syncFileSystem</a> &rsaquo; <a href="../chrome.syncFileSystem/ChromeSyncFileSystem.html">ChromeSyncFileSystem</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeSyncFileSystem</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeSyncFileSystem {
+ static final JsObject _syncFileSystem = context['chrome']['syncFileSystem'];
+
+ ChromeSyncFileSystem._();
+
+ Future requestFileSystem() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
+   return completer.future;
+ }
+
+ Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
+   return completer.future;
+ }
+
+ Future getConflictResolutionPolicy() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
+   return completer.future;
+ }
+
+ Future getUsageAndQuota(var fileSystem) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
+   return completer.future;
+ }
+
+ Future getFileStatus(var fileEntry) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
+   return completer.future;
+ }
+
+ Future getFileStatuses(var fileEntries) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
+   return completer.future;
+ }
+
+ Future getServiceStatus() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
+   return completer.future;
+ }
+
+ Stream&lt;ServiceInfo&gt; get onServiceStatusChanged =&gt; _onServiceStatusChanged.stream;
+
+ final ChromeStreamController&lt;ServiceInfo&gt; _onServiceStatusChanged =
+     new ChromeStreamController&lt;ServiceInfo&gt;.oneArg(_syncFileSystem['onServiceStatusChanged'], ServiceInfo.create);
+
+ Stream&lt;FileInfo&gt; get onFileStatusChanged =&gt; _onFileStatusChanged.stream;
+
+ final ChromeStreamController&lt;FileInfo&gt; _onFileStatusChanged =
+     new ChromeStreamController&lt;FileInfo&gt;.oneArg(_syncFileSystem['onFileStatusChanged'], FileInfo.create);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onFileStatusChanged">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.syncFileSystem/FileInfo.html">FileInfo</a>&gt;         <strong>onFileStatusChanged</strong> <a class="anchor-link"
+            href="#onFileStatusChanged"
+            title="Permalink to ChromeSyncFileSystem.onFileStatusChanged">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;FileInfo&gt; get onFileStatusChanged =&gt; _onFileStatusChanged.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onServiceStatusChanged">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.syncFileSystem/ServiceInfo.html">ServiceInfo</a>&gt;         <strong>onServiceStatusChanged</strong> <a class="anchor-link"
+            href="#onServiceStatusChanged"
+            title="Permalink to ChromeSyncFileSystem.onServiceStatusChanged">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;ServiceInfo&gt; get onServiceStatusChanged =&gt; _onServiceStatusChanged.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="getConflictResolutionPolicy">
+<button class="show-code">Code</button>
+Future <strong>getConflictResolutionPolicy</strong>() <a class="anchor-link" href="#getConflictResolutionPolicy"
+              title="Permalink to ChromeSyncFileSystem.getConflictResolutionPolicy">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getConflictResolutionPolicy() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getFileStatus">
+<button class="show-code">Code</button>
+Future <strong>getFileStatus</strong>(fileEntry) <a class="anchor-link" href="#getFileStatus"
+              title="Permalink to ChromeSyncFileSystem.getFileStatus">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getFileStatus(var fileEntry) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getFileStatuses">
+<button class="show-code">Code</button>
+Future <strong>getFileStatuses</strong>(fileEntries) <a class="anchor-link" href="#getFileStatuses"
+              title="Permalink to ChromeSyncFileSystem.getFileStatuses">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getFileStatuses(var fileEntries) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getServiceStatus">
+<button class="show-code">Code</button>
+Future <strong>getServiceStatus</strong>() <a class="anchor-link" href="#getServiceStatus"
+              title="Permalink to ChromeSyncFileSystem.getServiceStatus">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getServiceStatus() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getUsageAndQuota">
+<button class="show-code">Code</button>
+Future <strong>getUsageAndQuota</strong>(fileSystem) <a class="anchor-link" href="#getUsageAndQuota"
+              title="Permalink to ChromeSyncFileSystem.getUsageAndQuota">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getUsageAndQuota(var fileSystem) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="requestFileSystem">
+<button class="show-code">Code</button>
+Future <strong>requestFileSystem</strong>() <a class="anchor-link" href="#requestFileSystem"
+              title="Permalink to ChromeSyncFileSystem.requestFileSystem">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future requestFileSystem() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setConflictResolutionPolicy">
+<button class="show-code">Code</button>
+Future <strong>setConflictResolutionPolicy</strong>(<a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">ConflictResolutionPolicy</a> policy) <a class="anchor-link" href="#setConflictResolutionPolicy"
+              title="Permalink to ChromeSyncFileSystem.setConflictResolutionPolicy">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

@@ -1,0 +1,423 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>NotificationOptions class / chrome.notifications Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.notifications" data-type="NotificationOptions">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.notifications.html">chrome.notifications</a> &rsaquo; <a href="../chrome.notifications/NotificationOptions.html">NotificationOptions</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>NotificationOptions</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class NotificationOptions extends ChromeObject {
+ static NotificationOptions create(JsObject proxy) =&gt; proxy == null ? null : new NotificationOptions.fromProxy(proxy);
+
+ NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress}) {
+   if (type != null) this.type = type;
+   if (iconUrl != null) this.iconUrl = iconUrl;
+   if (iconBitmap != null) this.iconBitmap = iconBitmap;
+   if (title != null) this.title = title;
+   if (message != null) this.message = message;
+   if (contextMessage != null) this.contextMessage = contextMessage;
+   if (priority != null) this.priority = priority;
+   if (eventTime != null) this.eventTime = eventTime;
+   if (buttons != null) this.buttons = buttons;
+   if (expandedMessage != null) this.expandedMessage = expandedMessage;
+   if (imageUrl != null) this.imageUrl = imageUrl;
+   if (imageBitmap != null) this.imageBitmap = imageBitmap;
+   if (items != null) this.items = items;
+   if (progress != null) this.progress = progress;
+ }
+
+ NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+ TemplateType get type =&gt; TemplateType.create(proxy['type']);
+ set type(TemplateType value) =&gt; proxy['type'] = value;
+
+ String get iconUrl =&gt; proxy['iconUrl'];
+ set iconUrl(String value) =&gt; proxy['iconUrl'] = value;
+
+ NotificationBitmap get iconBitmap =&gt; NotificationBitmap.create(proxy['iconBitmap']);
+ set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = value;
+
+ String get title =&gt; proxy['title'];
+ set title(String value) =&gt; proxy['title'] = value;
+
+ String get message =&gt; proxy['message'];
+ set message(String value) =&gt; proxy['message'] = value;
+
+ String get contextMessage =&gt; proxy['contextMessage'];
+ set contextMessage(String value) =&gt; proxy['contextMessage'] = value;
+
+ int get priority =&gt; proxy['priority'];
+ set priority(int value) =&gt; proxy['priority'] = value;
+
+ double get eventTime =&gt; proxy['eventTime'];
+ set eventTime(double value) =&gt; proxy['eventTime'] = value;
+
+ NotificationButton get buttons =&gt; NotificationButton.create(proxy['buttons']);
+ set buttons(NotificationButton value) =&gt; proxy['buttons'] = value;
+
+ String get expandedMessage =&gt; proxy['expandedMessage'];
+ set expandedMessage(String value) =&gt; proxy['expandedMessage'] = value;
+
+ String get imageUrl =&gt; proxy['imageUrl'];
+ set imageUrl(String value) =&gt; proxy['imageUrl'] = value;
+
+ NotificationBitmap get imageBitmap =&gt; NotificationBitmap.create(proxy['imageBitmap']);
+ set imageBitmap(NotificationBitmap value) =&gt; proxy['imageBitmap'] = value;
+
+ NotificationItem get items =&gt; NotificationItem.create(proxy['items']);
+ set items(NotificationItem value) =&gt; proxy['items'] = value;
+
+ int get progress =&gt; proxy['progress'];
+ set progress(int value) =&gt; proxy['progress'] = value;
+}
+</pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>NotificationOptions</strong></span></p>
+<div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="create">
+<button class="show-code">Code</button>
+<a href="../chrome.notifications/NotificationOptions.html">NotificationOptions</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
+              title="Permalink to NotificationOptions.create">#</a></h4>
+<div class="doc">
+<pre class="source">
+static NotificationOptions create(JsObject proxy) =&gt; proxy == null ? null : new NotificationOptions.fromProxy(proxy);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="">
+<button class="show-code">Code</button>
+new <strong>NotificationOptions</strong>({<a href="../chrome.notifications/TemplateType.html">TemplateType</a> type, String iconUrl, <a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a> iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, <a href="../chrome.notifications/NotificationButton.html">NotificationButton</a> buttons, String expandedMessage, String imageUrl, <a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a> imageBitmap, <a href="../chrome.notifications/NotificationItem.html">NotificationItem</a> items, int progress}) <a class="anchor-link" href="#"
+              title="Permalink to NotificationOptions.NotificationOptions">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Create a new instance of a <code>ChromeObject</code>, which creates and delegates to
+a JsObject proxy.</p>
+<div class="docs-inherited-from">docs inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div></div>
+<pre class="source">
+NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress}) {
+ if (type != null) this.type = type;
+ if (iconUrl != null) this.iconUrl = iconUrl;
+ if (iconBitmap != null) this.iconBitmap = iconBitmap;
+ if (title != null) this.title = title;
+ if (message != null) this.message = message;
+ if (contextMessage != null) this.contextMessage = contextMessage;
+ if (priority != null) this.priority = priority;
+ if (eventTime != null) this.eventTime = eventTime;
+ if (buttons != null) this.buttons = buttons;
+ if (expandedMessage != null) this.expandedMessage = expandedMessage;
+ if (imageUrl != null) this.imageUrl = imageUrl;
+ if (imageBitmap != null) this.imageBitmap = imageBitmap;
+ if (items != null) this.items = items;
+ if (progress != null) this.progress = progress;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="fromProxy">
+<button class="show-code">Code</button>
+new <strong>NotificationOptions.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+              title="Permalink to NotificationOptions.NotificationOptions.fromProxy">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Create a new instance of a <code>ChromeObject</code>, which delegates to the given
+JsObject proxy.</p>
+<div class="docs-inherited-from">docs inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div></div>
+<pre class="source">
+NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="buttons">
+<button class="show-code">Code</button>
+<a href="../chrome.notifications/NotificationButton.html">NotificationButton</a>         <strong>buttons</strong> <a class="anchor-link"
+            href="#buttons"
+            title="Permalink to NotificationOptions.buttons">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+NotificationButton get buttons =&gt; NotificationButton.create(proxy['buttons']);
+</pre>
+<pre class="source">
+set buttons(NotificationButton value) =&gt; proxy['buttons'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="contextMessage">
+<button class="show-code">Code</button>
+String         <strong>contextMessage</strong> <a class="anchor-link"
+            href="#contextMessage"
+            title="Permalink to NotificationOptions.contextMessage">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get contextMessage =&gt; proxy['contextMessage'];
+</pre>
+<pre class="source">
+set contextMessage(String value) =&gt; proxy['contextMessage'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="eventTime">
+<button class="show-code">Code</button>
+double         <strong>eventTime</strong> <a class="anchor-link"
+            href="#eventTime"
+            title="Permalink to NotificationOptions.eventTime">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+double get eventTime =&gt; proxy['eventTime'];
+</pre>
+<pre class="source">
+set eventTime(double value) =&gt; proxy['eventTime'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="expandedMessage">
+<button class="show-code">Code</button>
+String         <strong>expandedMessage</strong> <a class="anchor-link"
+            href="#expandedMessage"
+            title="Permalink to NotificationOptions.expandedMessage">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get expandedMessage =&gt; proxy['expandedMessage'];
+</pre>
+<pre class="source">
+set expandedMessage(String value) =&gt; proxy['expandedMessage'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="iconBitmap">
+<button class="show-code">Code</button>
+<a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a>         <strong>iconBitmap</strong> <a class="anchor-link"
+            href="#iconBitmap"
+            title="Permalink to NotificationOptions.iconBitmap">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+NotificationBitmap get iconBitmap =&gt; NotificationBitmap.create(proxy['iconBitmap']);
+</pre>
+<pre class="source">
+set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="iconUrl">
+<button class="show-code">Code</button>
+String         <strong>iconUrl</strong> <a class="anchor-link"
+            href="#iconUrl"
+            title="Permalink to NotificationOptions.iconUrl">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get iconUrl =&gt; proxy['iconUrl'];
+</pre>
+<pre class="source">
+set iconUrl(String value) =&gt; proxy['iconUrl'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="imageBitmap">
+<button class="show-code">Code</button>
+<a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a>         <strong>imageBitmap</strong> <a class="anchor-link"
+            href="#imageBitmap"
+            title="Permalink to NotificationOptions.imageBitmap">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+NotificationBitmap get imageBitmap =&gt; NotificationBitmap.create(proxy['imageBitmap']);
+</pre>
+<pre class="source">
+set imageBitmap(NotificationBitmap value) =&gt; proxy['imageBitmap'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="imageUrl">
+<button class="show-code">Code</button>
+String         <strong>imageUrl</strong> <a class="anchor-link"
+            href="#imageUrl"
+            title="Permalink to NotificationOptions.imageUrl">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get imageUrl =&gt; proxy['imageUrl'];
+</pre>
+<pre class="source">
+set imageUrl(String value) =&gt; proxy['imageUrl'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="items">
+<button class="show-code">Code</button>
+<a href="../chrome.notifications/NotificationItem.html">NotificationItem</a>         <strong>items</strong> <a class="anchor-link"
+            href="#items"
+            title="Permalink to NotificationOptions.items">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+NotificationItem get items =&gt; NotificationItem.create(proxy['items']);
+</pre>
+<pre class="source">
+set items(NotificationItem value) =&gt; proxy['items'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="message">
+<button class="show-code">Code</button>
+String         <strong>message</strong> <a class="anchor-link"
+            href="#message"
+            title="Permalink to NotificationOptions.message">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get message =&gt; proxy['message'];
+</pre>
+<pre class="source">
+set message(String value) =&gt; proxy['message'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="priority">
+<button class="show-code">Code</button>
+int         <strong>priority</strong> <a class="anchor-link"
+            href="#priority"
+            title="Permalink to NotificationOptions.priority">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+int get priority =&gt; proxy['priority'];
+</pre>
+<pre class="source">
+set priority(int value) =&gt; proxy['priority'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="progress">
+<button class="show-code">Code</button>
+int         <strong>progress</strong> <a class="anchor-link"
+            href="#progress"
+            title="Permalink to NotificationOptions.progress">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+int get progress =&gt; proxy['progress'];
+</pre>
+<pre class="source">
+set progress(int value) =&gt; proxy['progress'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="proxy">
+<button class="show-code">Code</button>
+JsObject         <strong>proxy</strong> <a class="anchor-link"
+            href="#proxy"
+            title="Permalink to NotificationOptions.proxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+JsObject proxy
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="title">
+<button class="show-code">Code</button>
+String         <strong>title</strong> <a class="anchor-link"
+            href="#title"
+            title="Permalink to NotificationOptions.title">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get title =&gt; proxy['title'];
+</pre>
+<pre class="source">
+set title(String value) =&gt; proxy['title'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="type">
+<button class="show-code">Code</button>
+<a href="../chrome.notifications/TemplateType.html">TemplateType</a>         <strong>type</strong> <a class="anchor-link"
+            href="#type"
+            title="Permalink to NotificationOptions.type">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+TemplateType get type =&gt; TemplateType.create(proxy['type']);
+</pre>
+<pre class="source">
+set type(TemplateType value) =&gt; proxy['type'] = value;
+</pre>
+</div>
+</div>
+</div>
+<div class="inherited">
+<h3>Methods</h3>
+<div class="method inherited"><h4 id="toJs">
+<button class="show-code">Code</button>
+JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
+              title="Permalink to NotificationOptions.toJs">#</a></h4>
+<div class="inherited-from">inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+JsObject toJs() =&gt; proxy;
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="toString">
+<button class="show-code">Code</button>
+String <strong>toString</strong>() <a class="anchor-link" href="#toString"
+              title="Permalink to NotificationOptions.toString">#</a></h4>
+<div class="inherited-from">inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<div class="inherited">
+<p>Returns a string representation of this object.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+String toString() =&gt; proxy.toString();
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

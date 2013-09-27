@@ -1,0 +1,156 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ConflictResolutionPolicy class / chrome.syncFileSystem Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.syncFileSystem" data-type="ConflictResolutionPolicy">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.syncFileSystem.html">chrome.syncFileSystem</a> &rsaquo; <a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">ConflictResolutionPolicy</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ConflictResolutionPolicy</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ConflictResolutionPolicy extends ChromeEnum {
+ static const ConflictResolutionPolicy LAST_WRITE_WIN = const ConflictResolutionPolicy._('last_write_win');
+ static const ConflictResolutionPolicy MANUAL = const ConflictResolutionPolicy._('manual');
+
+ static List&lt;ConflictResolutionPolicy&gt; _values = [LAST_WRITE_WIN, MANUAL];
+
+ static List&lt;ConflictResolutionPolicy&gt; get values =&gt; _values;
+
+ static ConflictResolutionPolicy create(String str) =&gt;
+     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+
+ const ConflictResolutionPolicy._(String str): super(str);
+}
+</pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../common_exp/ChromeEnum.html">ChromeEnum</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ConflictResolutionPolicy</strong></span></p>
+<div>
+<h3>Static Properties</h3>
+<div class="field"><h4 id="LAST_WRITE_WIN">
+<button class="show-code">Code</button>
+const <a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">ConflictResolutionPolicy</a>         <strong>LAST_WRITE_WIN</strong> <a class="anchor-link"
+            href="#LAST_WRITE_WIN"
+            title="Permalink to ConflictResolutionPolicy.LAST_WRITE_WIN">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const ConflictResolutionPolicy LAST_WRITE_WIN = const ConflictResolutionPolicy._('last_write_win')
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="MANUAL">
+<button class="show-code">Code</button>
+const <a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">ConflictResolutionPolicy</a>         <strong>MANUAL</strong> <a class="anchor-link"
+            href="#MANUAL"
+            title="Permalink to ConflictResolutionPolicy.MANUAL">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const ConflictResolutionPolicy MANUAL = const ConflictResolutionPolicy._('manual')
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="values">
+<button class="show-code">Code</button>
+final List&lt;<a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">ConflictResolutionPolicy</a>&gt;         <strong>values</strong> <a class="anchor-link"
+            href="#values"
+            title="Permalink to ConflictResolutionPolicy.values">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static List&lt;ConflictResolutionPolicy&gt; get values =&gt; _values;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="create">
+<button class="show-code">Code</button>
+<a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">ConflictResolutionPolicy</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
+              title="Permalink to ConflictResolutionPolicy.create">#</a></h4>
+<div class="doc">
+<pre class="source">
+static ConflictResolutionPolicy create(String str) =&gt;
+   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+</pre>
+</div>
+</div>
+</div>
+<div class="inherited">
+<h3>Properties</h3>
+<div class="field inherited"><h4 id="value">
+<button class="show-code">Code</button>
+final String         <strong>value</strong> <a class="anchor-link"
+            href="#value"
+            title="Permalink to ConflictResolutionPolicy.value">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../common_exp/ChromeEnum.html">ChromeEnum</a> </div><div class="doc">
+<pre class="source">
+String get value =&gt; _value;
+</pre>
+</div>
+</div>
+</div>
+<div class="inherited">
+<h3>Methods</h3>
+<div class="method inherited"><h4 id="toJs">
+<button class="show-code">Code</button>
+String <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
+              title="Permalink to ConflictResolutionPolicy.toJs">#</a></h4>
+<div class="inherited-from">inherited from <a href="../common_exp/ChromeEnum.html">ChromeEnum</a> </div><div class="doc">
+<pre class="source">
+String toJs() =&gt; _value;
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="toString">
+<button class="show-code">Code</button>
+String <strong>toString</strong>() <a class="anchor-link" href="#toString"
+              title="Permalink to ConflictResolutionPolicy.toString">#</a></h4>
+<div class="inherited-from">inherited from <a href="../common_exp/ChromeEnum.html">ChromeEnum</a> </div><div class="doc">
+<div class="inherited">
+<p>Returns a string representation of this object.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+String toString() =&gt; _value;
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

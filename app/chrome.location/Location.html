@@ -1,0 +1,203 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Location class / chrome.location Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.location" data-type="Location">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.location.html">chrome.location</a> &rsaquo; <a href="../chrome.location/Location.html">Location</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>Location</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class Location extends ChromeObject {
+ static Location create(JsObject proxy) =&gt; proxy == null ? null : new Location.fromProxy(proxy);
+
+ Location({String name, Coordinates coords, double timestamp}) {
+   if (name != null) this.name = name;
+   if (coords != null) this.coords = coords;
+   if (timestamp != null) this.timestamp = timestamp;
+ }
+
+ Location.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+ String get name =&gt; proxy['name'];
+ set name(String value) =&gt; proxy['name'] = value;
+
+ Coordinates get coords =&gt; Coordinates.create(proxy['coords']);
+ set coords(Coordinates value) =&gt; proxy['coords'] = value;
+
+ double get timestamp =&gt; proxy['timestamp'];
+ set timestamp(double value) =&gt; proxy['timestamp'] = value;
+}
+</pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>Location</strong></span></p>
+<div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="create">
+<button class="show-code">Code</button>
+<a href="../chrome.location/Location.html">Location</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
+              title="Permalink to Location.create">#</a></h4>
+<div class="doc">
+<pre class="source">
+static Location create(JsObject proxy) =&gt; proxy == null ? null : new Location.fromProxy(proxy);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="">
+<button class="show-code">Code</button>
+new <strong>Location</strong>({String name, <a href="../chrome.location/Coordinates.html">Coordinates</a> coords, double timestamp}) <a class="anchor-link" href="#"
+              title="Permalink to Location.Location">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Create a new instance of a <code>ChromeObject</code>, which creates and delegates to
+a JsObject proxy.</p>
+<div class="docs-inherited-from">docs inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div></div>
+<pre class="source">
+Location({String name, Coordinates coords, double timestamp}) {
+ if (name != null) this.name = name;
+ if (coords != null) this.coords = coords;
+ if (timestamp != null) this.timestamp = timestamp;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="fromProxy">
+<button class="show-code">Code</button>
+new <strong>Location.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+              title="Permalink to Location.Location.fromProxy">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Create a new instance of a <code>ChromeObject</code>, which delegates to the given
+JsObject proxy.</p>
+<div class="docs-inherited-from">docs inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div></div>
+<pre class="source">
+Location.fromProxy(JsObject proxy): super.fromProxy(proxy);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="coords">
+<button class="show-code">Code</button>
+<a href="../chrome.location/Coordinates.html">Coordinates</a>         <strong>coords</strong> <a class="anchor-link"
+            href="#coords"
+            title="Permalink to Location.coords">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Coordinates get coords =&gt; Coordinates.create(proxy['coords']);
+</pre>
+<pre class="source">
+set coords(Coordinates value) =&gt; proxy['coords'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="name">
+<button class="show-code">Code</button>
+String         <strong>name</strong> <a class="anchor-link"
+            href="#name"
+            title="Permalink to Location.name">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get name =&gt; proxy['name'];
+</pre>
+<pre class="source">
+set name(String value) =&gt; proxy['name'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="proxy">
+<button class="show-code">Code</button>
+JsObject         <strong>proxy</strong> <a class="anchor-link"
+            href="#proxy"
+            title="Permalink to Location.proxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+JsObject proxy
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="timestamp">
+<button class="show-code">Code</button>
+double         <strong>timestamp</strong> <a class="anchor-link"
+            href="#timestamp"
+            title="Permalink to Location.timestamp">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+double get timestamp =&gt; proxy['timestamp'];
+</pre>
+<pre class="source">
+set timestamp(double value) =&gt; proxy['timestamp'] = value;
+</pre>
+</div>
+</div>
+</div>
+<div class="inherited">
+<h3>Methods</h3>
+<div class="method inherited"><h4 id="toJs">
+<button class="show-code">Code</button>
+JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
+              title="Permalink to Location.toJs">#</a></h4>
+<div class="inherited-from">inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+JsObject toJs() =&gt; proxy;
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="toString">
+<button class="show-code">Code</button>
+String <strong>toString</strong>() <a class="anchor-link" href="#toString"
+              title="Permalink to Location.toString">#</a></h4>
+<div class="inherited-from">inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<div class="inherited">
+<p>Returns a string representation of this object.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+String toString() =&gt; proxy.toString();
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

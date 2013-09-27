@@ -1,0 +1,111 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeStorage class / chrome.storage Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.storage" data-type="ChromeStorage">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.storage.html">chrome.storage</a> &rsaquo; <a href="../chrome.storage/ChromeStorage.html">ChromeStorage</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeStorage</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeStorage {
+ static final JsObject _storage = context['chrome']['storage'];
+
+ ChromeStorage._();
+
+ /**
+  * Items in the `sync` storage area are synced using Chrome Sync.
+  */
+ StorageArea get sync =&gt; StorageArea.create(_storage['sync']);
+
+ /**
+  * Items in the `local` storage area are local to each machine.
+  */
+ StorageArea get local =&gt; StorageArea.create(_storage['local']);
+
+ /**
+  * Fired when one or more items change.
+  */
+ Stream&lt;StorageOnChangedEvent&gt; get onChanged =&gt; _onChanged.stream;
+
+ final ChromeStreamController&lt;StorageOnChangedEvent&gt; _onChanged =
+     new ChromeStreamController&lt;StorageOnChangedEvent&gt;.twoArgs(_storage['onChanged'], StorageOnChangedEvent.create);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="local">
+<button class="show-code">Code</button>
+final <a href="../chrome.storage/StorageArea.html">StorageArea</a>         <strong>local</strong> <a class="anchor-link"
+            href="#local"
+            title="Permalink to ChromeStorage.local">#</a>
+        </h4>
+        <div class="doc">
+<p>Items in the <code>local</code> storage area are local to each machine.</p>
+<pre class="source">
+StorageArea get local =&gt; StorageArea.create(_storage['local']);
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onChanged">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.storage/StorageOnChangedEvent.html">StorageOnChangedEvent</a>&gt;         <strong>onChanged</strong> <a class="anchor-link"
+            href="#onChanged"
+            title="Permalink to ChromeStorage.onChanged">#</a>
+        </h4>
+        <div class="doc">
+<p>Fired when one or more items change.</p>
+<pre class="source">
+Stream&lt;StorageOnChangedEvent&gt; get onChanged =&gt; _onChanged.stream;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="sync">
+<button class="show-code">Code</button>
+final <a href="../chrome.storage/StorageArea.html">StorageArea</a>         <strong>sync</strong> <a class="anchor-link"
+            href="#sync"
+            title="Permalink to ChromeStorage.sync">#</a>
+        </h4>
+        <div class="doc">
+<p>Items in the <code>sync</code> storage area are synced using Chrome Sync.</p>
+<pre class="source">
+StorageArea get sync =&gt; StorageArea.create(_storage['sync']);
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

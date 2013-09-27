@@ -1,0 +1,134 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeAudio class / chrome.audio Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.audio" data-type="ChromeAudio">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.audio.html">chrome.audio</a> &rsaquo; <a href="../chrome.audio/ChromeAudio.html">ChromeAudio</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeAudio</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeAudio {
+ static final JsObject _audio = context['chrome']['audio'];
+
+ ChromeAudio._();
+
+ Future getInfo() {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _audio.callMethod('getInfo', [completer.callback]);
+   return completer.future;
+ }
+
+ Future setActiveDevices(String ids) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _audio.callMethod('setActiveDevices', [ids, completer.callback]);
+   return completer.future;
+ }
+
+ Future setProperties(String id, DeviceProperties properties) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _audio.callMethod('setProperties', [id, properties, completer.callback]);
+   return completer.future;
+ }
+
+ Stream get onDeviceChanged =&gt; _onDeviceChanged.stream;
+
+ final ChromeStreamController _onDeviceChanged =
+     new ChromeStreamController.noArgs(_audio['onDeviceChanged']);
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="onDeviceChanged">
+<button class="show-code">Code</button>
+final Stream         <strong>onDeviceChanged</strong> <a class="anchor-link"
+            href="#onDeviceChanged"
+            title="Permalink to ChromeAudio.onDeviceChanged">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream get onDeviceChanged =&gt; _onDeviceChanged.stream;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="getInfo">
+<button class="show-code">Code</button>
+Future <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
+              title="Permalink to ChromeAudio.getInfo">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getInfo() {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _audio.callMethod('getInfo', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setActiveDevices">
+<button class="show-code">Code</button>
+Future <strong>setActiveDevices</strong>(String ids) <a class="anchor-link" href="#setActiveDevices"
+              title="Permalink to ChromeAudio.setActiveDevices">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setActiveDevices(String ids) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _audio.callMethod('setActiveDevices', [ids, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setProperties">
+<button class="show-code">Code</button>
+Future <strong>setProperties</strong>(String id, <a href="../chrome.audio/DeviceProperties.html">DeviceProperties</a> properties) <a class="anchor-link" href="#setProperties"
+              title="Permalink to ChromeAudio.setProperties">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setProperties(String id, DeviceProperties properties) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _audio.callMethod('setProperties', [id, properties, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

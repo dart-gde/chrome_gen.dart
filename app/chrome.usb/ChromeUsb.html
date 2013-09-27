@@ -1,0 +1,334 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromeUsb class / chrome.usb Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.usb" data-type="ChromeUsb">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.usb.html">chrome.usb</a> &rsaquo; <a href="../chrome.usb/ChromeUsb.html">ChromeUsb</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromeUsb</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromeUsb {
+ static final JsObject _usb = context['chrome']['usb'];
+
+ ChromeUsb._();
+
+ Future getDevices(EnumerateDevicesOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('getDevices', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future requestAccess(Device device, int interfaceId) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('requestAccess', [device, interfaceId, completer.callback]);
+   return completer.future;
+ }
+
+ Future openDevice(Device device) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('openDevice', [device, completer.callback]);
+   return completer.future;
+ }
+
+ Future findDevices(EnumerateDevicesAndRequestAccessOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('findDevices', [options, completer.callback]);
+   return completer.future;
+ }
+
+ Future closeDevice(ConnectionHandle handle) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('closeDevice', [handle, completer.callback]);
+   return completer.future;
+ }
+
+ Future listInterfaces(ConnectionHandle handle) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('listInterfaces', [handle, completer.callback]);
+   return completer.future;
+ }
+
+ Future claimInterface(ConnectionHandle handle, int interfaceNumber) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('claimInterface', [handle, interfaceNumber, completer.callback]);
+   return completer.future;
+ }
+
+ Future releaseInterface(ConnectionHandle handle, int interfaceNumber) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('releaseInterface', [handle, interfaceNumber, completer.callback]);
+   return completer.future;
+ }
+
+ Future setInterfaceAlternateSetting(ConnectionHandle handle, int interfaceNumber, int alternateSetting) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('setInterfaceAlternateSetting', [handle, interfaceNumber, alternateSetting, completer.callback]);
+   return completer.future;
+ }
+
+ Future controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('controlTransfer', [handle, transferInfo, completer.callback]);
+   return completer.future;
+ }
+
+ Future bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('bulkTransfer', [handle, transferInfo, completer.callback]);
+   return completer.future;
+ }
+
+ Future interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('interruptTransfer', [handle, transferInfo, completer.callback]);
+   return completer.future;
+ }
+
+ Future isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('isochronousTransfer', [handle, transferInfo, completer.callback]);
+   return completer.future;
+ }
+
+ Future resetDevice(ConnectionHandle handle) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   _usb.callMethod('resetDevice', [handle, completer.callback]);
+   return completer.future;
+ }
+}
+</pre>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="bulkTransfer">
+<button class="show-code">Code</button>
+Future <strong>bulkTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/GenericTransferInfo.html">GenericTransferInfo</a> transferInfo) <a class="anchor-link" href="#bulkTransfer"
+              title="Permalink to ChromeUsb.bulkTransfer">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('bulkTransfer', [handle, transferInfo, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="claimInterface">
+<button class="show-code">Code</button>
+Future <strong>claimInterface</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, int interfaceNumber) <a class="anchor-link" href="#claimInterface"
+              title="Permalink to ChromeUsb.claimInterface">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future claimInterface(ConnectionHandle handle, int interfaceNumber) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('claimInterface', [handle, interfaceNumber, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="closeDevice">
+<button class="show-code">Code</button>
+Future <strong>closeDevice</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle) <a class="anchor-link" href="#closeDevice"
+              title="Permalink to ChromeUsb.closeDevice">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future closeDevice(ConnectionHandle handle) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('closeDevice', [handle, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="controlTransfer">
+<button class="show-code">Code</button>
+Future <strong>controlTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/ControlTransferInfo.html">ControlTransferInfo</a> transferInfo) <a class="anchor-link" href="#controlTransfer"
+              title="Permalink to ChromeUsb.controlTransfer">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('controlTransfer', [handle, transferInfo, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="findDevices">
+<button class="show-code">Code</button>
+Future <strong>findDevices</strong>(<a href="../chrome.usb/EnumerateDevicesAndRequestAccessOptions.html">EnumerateDevicesAndRequestAccessOptions</a> options) <a class="anchor-link" href="#findDevices"
+              title="Permalink to ChromeUsb.findDevices">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future findDevices(EnumerateDevicesAndRequestAccessOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('findDevices', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getDevices">
+<button class="show-code">Code</button>
+Future <strong>getDevices</strong>(<a href="../chrome.usb/EnumerateDevicesOptions.html">EnumerateDevicesOptions</a> options) <a class="anchor-link" href="#getDevices"
+              title="Permalink to ChromeUsb.getDevices">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future getDevices(EnumerateDevicesOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('getDevices', [options, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="interruptTransfer">
+<button class="show-code">Code</button>
+Future <strong>interruptTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/GenericTransferInfo.html">GenericTransferInfo</a> transferInfo) <a class="anchor-link" href="#interruptTransfer"
+              title="Permalink to ChromeUsb.interruptTransfer">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('interruptTransfer', [handle, transferInfo, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isochronousTransfer">
+<button class="show-code">Code</button>
+Future <strong>isochronousTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/IsochronousTransferInfo.html">IsochronousTransferInfo</a> transferInfo) <a class="anchor-link" href="#isochronousTransfer"
+              title="Permalink to ChromeUsb.isochronousTransfer">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('isochronousTransfer', [handle, transferInfo, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="listInterfaces">
+<button class="show-code">Code</button>
+Future <strong>listInterfaces</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle) <a class="anchor-link" href="#listInterfaces"
+              title="Permalink to ChromeUsb.listInterfaces">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future listInterfaces(ConnectionHandle handle) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('listInterfaces', [handle, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="openDevice">
+<button class="show-code">Code</button>
+Future <strong>openDevice</strong>(<a href="../chrome.usb/Device.html">Device</a> device) <a class="anchor-link" href="#openDevice"
+              title="Permalink to ChromeUsb.openDevice">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future openDevice(Device device) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('openDevice', [device, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="releaseInterface">
+<button class="show-code">Code</button>
+Future <strong>releaseInterface</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, int interfaceNumber) <a class="anchor-link" href="#releaseInterface"
+              title="Permalink to ChromeUsb.releaseInterface">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future releaseInterface(ConnectionHandle handle, int interfaceNumber) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('releaseInterface', [handle, interfaceNumber, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="requestAccess">
+<button class="show-code">Code</button>
+Future <strong>requestAccess</strong>(<a href="../chrome.usb/Device.html">Device</a> device, int interfaceId) <a class="anchor-link" href="#requestAccess"
+              title="Permalink to ChromeUsb.requestAccess">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future requestAccess(Device device, int interfaceId) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('requestAccess', [device, interfaceId, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="resetDevice">
+<button class="show-code">Code</button>
+Future <strong>resetDevice</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle) <a class="anchor-link" href="#resetDevice"
+              title="Permalink to ChromeUsb.resetDevice">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future resetDevice(ConnectionHandle handle) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('resetDevice', [handle, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setInterfaceAlternateSetting">
+<button class="show-code">Code</button>
+Future <strong>setInterfaceAlternateSetting</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, int interfaceNumber, int alternateSetting) <a class="anchor-link" href="#setInterfaceAlternateSetting"
+              title="Permalink to ChromeUsb.setInterfaceAlternateSetting">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future setInterfaceAlternateSetting(ConnectionHandle handle, int interfaceNumber, int alternateSetting) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ _usb.callMethod('setInterfaceAlternateSetting', [handle, interfaceNumber, alternateSetting, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

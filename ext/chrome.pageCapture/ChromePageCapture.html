@@ -1,0 +1,83 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ChromePageCapture class / chrome.pageCapture Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="chrome.pageCapture" data-type="ChromePageCapture">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../chrome.pageCapture.html">chrome.pageCapture</a> &rsaquo; <a href="../chrome.pageCapture/ChromePageCapture.html">ChromePageCapture</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ChromePageCapture</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class ChromePageCapture {
+ static final JsObject _pageCapture = context['chrome']['pageCapture'];
+
+ ChromePageCapture._();
+
+ /**
+  * Saves the content of the tab with given id as MHTML.
+  * 
+  * Returns:
+  * The MHTML data as a Blob.
+  */
+ Future&lt;dynamic&gt; saveAsMHTML(Map details) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   _pageCapture.callMethod('saveAsMHTML', [jsify(details), completer.callback]);
+   return completer.future;
+ }
+}
+</pre>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="saveAsMHTML">
+<button class="show-code">Code</button>
+Future&lt;dynamic&gt; <strong>saveAsMHTML</strong>(Map details) <a class="anchor-link" href="#saveAsMHTML"
+              title="Permalink to ChromePageCapture.saveAsMHTML">#</a></h4>
+<div class="doc">
+<p>Saves the content of the tab with given id as MHTML.</p>
+<p>Returns:
+The MHTML data as a Blob.</p>
+<pre class="source">
+Future&lt;dynamic&gt; saveAsMHTML(Map details) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
+ _pageCapture.callMethod('saveAsMHTML', [jsify(details), completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        
