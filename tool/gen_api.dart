@@ -54,34 +54,17 @@ class GenApiFile {
           inFile.readAsStringSync());
       chromeLib = new model_json.JsonConverter().convert(namespace);
     } else if (inFile.path.endsWith(".idl")) {
-      WebIdlParser webIdlParser =
-          new WebIdlParser.withCollector(new model_idl.IDLCollectorChrome());
-
-//      chromeLib = new ChromeLibrary();
-//      chromeLib.name = fileName.substring(0, fileName.indexOf('.'));
-//      chromeLib.name = chromeLib.name.replaceAll('_', '.');
-//      List tokens = webIdlParser.start.parse(inFile.readAsStringSync());
-//      if (_parseNamespace(tokens) != null) {
-//        chromeLib.name = _parseNamespace(tokens);
-//      }
-
-      try {
-        webIdlParser.start.parse(inFile.readAsStringSync());
-        chromeLib = model_idl.convert(webIdlParser.collector);
-      } catch (e) {
-        // TODO:
-        print(e);
-      }
+      WebIdlParser webIdlParser = new WebIdlParser.withCollector(
+          new model_idl.IDLCollectorChrome());
+      webIdlParser.start.parse(inFile.readAsStringSync());
+      chromeLib = model_idl.convert(webIdlParser.collector);
     }
 
-    // TODO: this check is temporary
-    if (chromeLib != null) {
-      outFile.directory.createSync();
+    outFile.directory.createSync();
 
-      Backend backend = new Backend.createDefault(overrides);
-      outFile.writeAsStringSync(
-          backend.generate(chromeLib, license: LICENSE, sourceFileName: fileName));
-    }
+    Backend backend = new Backend.createDefault(overrides);
+    outFile.writeAsStringSync(
+        backend.generate(chromeLib, license: LICENSE, sourceFileName: fileName));
   }
 
   String _parseNamespace(List tokens) {
