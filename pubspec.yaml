@@ -2,9 +2,11 @@ name: gen_tools
 version: 0.0.1-dev
 author: devoncarew@google.com
 description: Tools to generate Chrome App APIs
+environment:
+  sdk: '>=0.7.5'
 dependencies:
   args: any
-  parsers: any
+  parsers: '>=0.13.5' # TODO: revert back to any when parsers updates env constraint
 dev_dependencies:
   browser: any
   unittest: any
