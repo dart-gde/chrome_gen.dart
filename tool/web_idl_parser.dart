@@ -200,7 +200,7 @@ class WebIdlParser extends LanguageParsers {
                     + symbol('=')
                     + rec(returnType)
                     + parens(rec(argumentList))
-                    + semi).list;
+                    + semi).list ^ (l) => collector.callback(l);
 
   typedefStmt() => (reserved["typedef"]
                     + rec(extendedAttributeList)

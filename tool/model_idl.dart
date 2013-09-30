@@ -20,6 +20,7 @@ class IDLCollector {
   dictionary(l) => l; // Must return type passed for parser to continue.
   dictionaryMember(l) => l; // Must return type passed for parser to continue.
   enumStatement(l) => l; // Must return type passed for parser to continue.
+  callback(l) => l; // Must return type passed for parser to continue.
 }
 
 class IDLCollectorChrome implements IDLCollector {
@@ -55,7 +56,7 @@ class IDLCollectorChrome implements IDLCollector {
   interfaceMember(l) {
     var name = l[1][1];
     var arg = l[1][2];
-    IDLFunction function = new IDLFunction(name, "");
+    IDLFunction function = new IDLFunction(name);
 
     List recursiveParams = [];
 
@@ -224,6 +225,23 @@ class IDLCollectorChrome implements IDLCollector {
     // Must return type passed for parser to continue.
     return l;
   }
+
+  callback(l) {
+    IDLFunction function = new IDLFunction(l[0]);
+
+    // TODO: we need to parse the params (l[3]) into the callback function
+    var params = l[3];
+//    // TODO: this is very, very badly wrong
+//    IDLParameter param = new IDLParameter('foo');
+//    param.type = new IDLType(params[0][1][0][0]);
+//    function.parameters.add(param);
+
+
+    idlNamespace.callbacks.add(function);
+
+    // Must return type passed for parser to continue.
+    return l;
+  }
 }
 
 class IDLNamespace {
@@ -236,9 +254,15 @@ class IDLNamespace {
   List<IDLEvent> events = [];
   List<IDLDeclaredType> declaredTypes = [];
   List<IDLEnum> enumTypes = []; // List of enums declared in IDL
+  List<IDLFunction> callbacks = [];
+
   // Dont know what the use of properties is vs declaredTypes in terms of
   // WebIDL.
   //List<IDLProperty> properties = [];
+
+  IDLFunction findCallback(String name) {
+    return callbacks.firstWhere((c) => c.name == name, orElse: () => null);
+  }
 
   String toString() => name;
 }
@@ -258,7 +282,7 @@ class IDLFunction {
   List<IDLParameter> parameters = [];
   IDLType returnType;
 
-  IDLFunction(this.name, this._description);
+  IDLFunction(this.name, [this._description]);
 
   String get description {
     if (_description == null) {
@@ -385,116 +409,130 @@ class IDLType {
  * Convert idl -> chrome library
  */
 ChromeLibrary convert(IDLCollector collector) {
-  ChromeLibrary chromeLibrary =  new ChromeLibrary();
-  chromeLibrary.name = collector.idlNamespace.name;
-
-  chromeLibrary.types =
-      collector.idlNamespace.declaredTypes.map(_convertDeclaredType).toList();
-  chromeLibrary.methods =
-      collector.idlNamespace.functions.map(_convertMethod).toList();
-  chromeLibrary.events =
-      collector.idlNamespace.events.map(_convertEvent).toList();
-  chromeLibrary.enumTypes =
-      collector.idlNamespace.enumTypes.map(_convertEnum).toList();
-
-  return chromeLibrary;
+  return new IDLConverter().convert(collector);
 }
 
-ChromeDeclaredType _convertDeclaredType(IDLDeclaredType idlDeclaredType) {
-  ChromeDeclaredType chromeDeclaredType = new ChromeDeclaredType();
+class IDLConverter {
+  IDLNamespace namespace;
 
-  chromeDeclaredType.name = idlDeclaredType.name;
-  chromeDeclaredType.properties = idlDeclaredType.members.map(_convertProperty).toList();
+  ChromeLibrary convert(IDLCollector collector) {
+    namespace = collector.idlNamespace;
 
-  int index = chromeDeclaredType.name.lastIndexOf('.');
+    ChromeLibrary library =  new ChromeLibrary(namespace.name);
 
-  if (index != -1) {
-    chromeDeclaredType.qualifier = chromeDeclaredType.name.substring(0, index);
-    chromeDeclaredType.name = chromeDeclaredType.name.substring(index + 1);
+    library.types = namespace.declaredTypes.map(_convertDeclaredType).toList();
+    library.methods = namespace.functions.map(_convertMethod).toList();
+    library.events = namespace.events.map(_convertEvent).toList();
+    library.enumTypes = namespace.enumTypes.map(_convertEnum).toList();
+
+    return library;
   }
 
-  return chromeDeclaredType;
-}
+  ChromeDeclaredType _convertDeclaredType(IDLDeclaredType idlDeclaredType) {
+    ChromeDeclaredType chromeDeclaredType = new ChromeDeclaredType();
 
-ChromeProperty _convertProperty(IDLProperty idlProperty) {
-  ChromeProperty property = new ChromeProperty();
-  property.name = idlProperty.name;
-  property.type = _convertType(idlProperty.returnType);
-  return property;
-}
+    chromeDeclaredType.name = idlDeclaredType.name;
+    chromeDeclaredType.properties = idlDeclaredType.members.map(_convertProperty).toList();
 
-ChromeEnumType _convertEnum(IDLEnum idlProperty) {
-  ChromeEnumType chromeEnumType = new ChromeEnumType();
-  chromeEnumType.name = idlProperty.name;
-  idlProperty.enumValues.forEach((IDLProperty value) {
-    ChromeEnumEntry chromeEnumEntry = new ChromeEnumEntry();
-    chromeEnumEntry.name = value.name;
-    chromeEnumType.values.add(chromeEnumEntry);
-  });
-  return chromeEnumType;
-}
+    int index = chromeDeclaredType.name.lastIndexOf('.');
 
-ChromeMethod _convertMethod(IDLFunction idlMethod) {
-  ChromeMethod chromeMethod = new ChromeMethod();
-  chromeMethod.name = idlMethod.name;
-  chromeMethod.returns = _convertType(idlMethod.returnType);
-  chromeMethod.params = idlMethod.parameters.map(_convertParameter).toList();
-
-  if (chromeMethod.returns == null) {
-    if (!idlMethod.parameters.isEmpty && idlMethod.parameters.last.isCallback) {
-      ChromeType chromeType = chromeMethod.params.removeLast();
-      chromeMethod.returns = _convertToFuture(chromeType);
-    } else {
-      chromeMethod.returns = ChromeType.VOID;
+    if (index != -1) {
+      chromeDeclaredType.qualifier = chromeDeclaredType.name.substring(0, index);
+      chromeDeclaredType.name = chromeDeclaredType.name.substring(index + 1);
     }
+
+    return chromeDeclaredType;
   }
 
-  return chromeMethod;
-}
-
-ChromeType _convertToFuture(ChromeType chromeType) {
-  ChromeType future = new ChromeType();
-  future.type = "Future";
-  if (chromeType.parameters.length == 1) {
-    future.parameters.add(chromeType.parameters.first);
-    future.documentation = "";
-  } else if (chromeType.parameters.length >= 2) {
-    // TODO: we need to correctly handle mapping multiple parameters to a single
-    // return
-    // runtime.requestUpdateCheck()
-    // devtools.inspectedWindow.eval()
-    future.parameters.add(ChromeType.JS_OBJECT);
-    future.documentation = chromeType.parameters.map(
-        (p) => "[${p.name}] ${p.documentation}").join('\n');
+  ChromeProperty _convertProperty(IDLProperty idlProperty) {
+    ChromeProperty property = new ChromeProperty();
+    property.name = idlProperty.name;
+    property.type = _convertType(idlProperty.returnType);
+    return property;
   }
-  return future;
-}
 
-ChromeEvent _convertEvent(IDLEvent idlEvent) {
-  ChromeEvent chromeEvent = new ChromeEvent();
-  chromeEvent.name = idlEvent.name;
-  chromeEvent.type = ChromeType.VAR.type;
-  chromeEvent.parameters = idlEvent.params.map(_convertParameter).toList();
-  return chromeEvent;
-}
+  ChromeEnumType _convertEnum(IDLEnum idlProperty) {
+    ChromeEnumType chromeEnumType = new ChromeEnumType();
+    chromeEnumType.name = idlProperty.name;
+    idlProperty.enumValues.forEach((IDLProperty value) {
+      ChromeEnumEntry chromeEnumEntry = new ChromeEnumEntry();
+      chromeEnumEntry.name = value.name;
+      chromeEnumType.values.add(chromeEnumEntry);
+    });
+    return chromeEnumType;
+  }
 
-ChromeType _convertParameter(IDLParameter parameter) {
-  ChromeType param = new ChromeType();
-  param.name = parameter.name;
-  param.type = idlToDartType(parameter.type.name);
-  param.refName = idlToDartRefName(parameter.type.name, parameter.type.refName);
-  param.optional = (parameter.optional == null) ? false : parameter.optional;
-  return param;
-}
+  ChromeMethod _convertMethod(IDLFunction idlMethod) {
+    ChromeMethod chromeMethod = new ChromeMethod();
+    chromeMethod.name = idlMethod.name;
+    chromeMethod.returns = _convertType(idlMethod.returnType);
+    chromeMethod.params = idlMethod.parameters.map(_convertParameter).toList();
 
-ChromeType _convertType(IDLType idlType) {
-  if (idlType == null) {
-    return null;
-  } else {
-    ChromeType chromeType = new ChromeType();
-    chromeType.type = idlToDartType(idlType.name);
-    chromeType.refName = idlToDartRefName(idlType.name, idlType.refName);
-    return chromeType;
+    if (chromeMethod.returns == null) {
+      if (!idlMethod.parameters.isEmpty && idlMethod.parameters.last.isCallback) {
+        ChromeType chromeType = chromeMethod.params.removeLast();
+        chromeMethod.returns = _convertToFuture(chromeType);
+      } else {
+        chromeMethod.returns = ChromeType.VOID;
+      }
+    }
+
+    return chromeMethod;
+  }
+
+  ChromeType _convertToFuture(ChromeType chromeType) {
+    ChromeType future = new ChromeType();
+    future.type = "Future";
+
+    List<ChromeType> params = chromeType.parameters;
+
+    // Convert the named callback type into the actual callback definition.
+    IDLFunction callback = namespace.findCallback(chromeType.refName);
+
+    if (callback != null) {
+      params = callback.parameters.map(_convertParameter).toList();
+    }
+
+    if (params.length == 1) {
+      future.parameters.add(params.first);
+      future.documentation = "";
+    } else if (params.length >= 2) {
+      // TODO: we need to correctly handle mapping multiple parameters to a single
+      // return, ala runtime.requestUpdateCheck() and devtools.inspectedWindow.eval().
+      future.parameters.add(ChromeType.JS_OBJECT);
+      future.documentation = params.map(
+          (p) => "[${p.name}] ${p.documentation}").join('\n');
+    }
+
+    return future;
+  }
+
+  ChromeEvent _convertEvent(IDLEvent idlEvent) {
+    ChromeEvent chromeEvent = new ChromeEvent();
+    chromeEvent.name = idlEvent.name;
+    chromeEvent.type = ChromeType.VAR.type;
+    chromeEvent.parameters = idlEvent.params.map(_convertParameter).toList();
+    return chromeEvent;
+  }
+
+  ChromeType _convertParameter(IDLParameter parameter) {
+    ChromeType param = new ChromeType();
+    param.name = parameter.name;
+    param.type = idlToDartType(parameter.type.name);
+    param.refName = idlToDartRefName(parameter.type.name, parameter.type.refName);
+    param.optional = (parameter.optional == null) ? false : parameter.optional;
+    return param;
+  }
+
+  ChromeType _convertType(IDLType idlType) {
+    if (idlType == null) {
+      return null;
+    } else {
+      ChromeType chromeType = new ChromeType();
+      chromeType.type = idlToDartType(idlType.name);
+      chromeType.refName = idlToDartRefName(idlType.name, idlType.refName);
+      return chromeType;
+    }
   }
 }
 
