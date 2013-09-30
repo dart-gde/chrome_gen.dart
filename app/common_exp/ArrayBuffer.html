@@ -40,7 +40,7 @@ class ArrayBuffer extends ChromeObject {
  ArrayBuffer.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  ArrayBuffer.fromString(String str) {
-   var uint8Array = new JsObject(context['Uint8Array'], str.codeUnits);
+   var uint8Array = new JsObject(context['Uint8Array'], [jsify(str.codeUnits)]);
    proxy = uint8Array['buffer'];
  }
 }
@@ -99,7 +99,7 @@ new <strong>ArrayBuffer.fromString</strong>(String str) <a class="anchor-link" h
 <div class="doc">
 <pre class="source">
 ArrayBuffer.fromString(String str) {
- var uint8Array = new JsObject(context['Uint8Array'], str.codeUnits);
+ var uint8Array = new JsObject(context['Uint8Array'], [jsify(str.codeUnits)]);
  proxy = uint8Array['buffer'];
 }
 </pre>
