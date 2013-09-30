@@ -24,7 +24,7 @@ Add this to your package's pubspec.yaml file:
     }
 
 ### Documentation
-Documentation is available:
+Documentation is available at:
 - [Chrome Apps API](http://dart-gde.github.io/chrome_gen.dart/app/)
 - [Chrome Extensions API](http://dart-gde.github.io/chrome_gen.dart/ext/)
 
