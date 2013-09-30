@@ -12,8 +12,8 @@ class ChromeSystemMemory {
 
   ChromeSystemMemory._();
 
-  Future getInfo() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<MemoryInfo> getInfo() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(MemoryInfo.create);
     _system_memory.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }

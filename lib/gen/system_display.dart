@@ -12,8 +12,8 @@ class ChromeSystemDisplay {
 
   ChromeSystemDisplay._();
 
-  Future getInfo() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<DisplayUnitInfo> getInfo() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(DisplayUnitInfo.create);
     _system_display.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }

@@ -12,14 +12,14 @@ class ChromeSystemStorage {
 
   ChromeSystemStorage._();
 
-  Future getInfo() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<StorageUnitInfo> getInfo() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(StorageUnitInfo.create);
     _system_storage.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }
 
-  Future ejectDevice(String id) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<EjectDeviceResultCode> ejectDevice(String id) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(EjectDeviceResultCode.create);
     _system_storage.callMethod('ejectDevice', [id, completer.callback]);
     return completer.future;
   }

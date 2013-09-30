@@ -12,14 +12,14 @@ class ChromeDownloads {
 
   ChromeDownloads._();
 
-  Future download(DownloadOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<int> download(DownloadOptions options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _downloads.callMethod('download', [options, completer.callback]);
     return completer.future;
   }
 
-  Future search(DownloadQuery query) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<DownloadItem> search(DownloadQuery query) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(DownloadItem.create);
     _downloads.callMethod('search', [query, completer.callback]);
     return completer.future;
   }
@@ -42,8 +42,8 @@ class ChromeDownloads {
     return completer.future;
   }
 
-  Future getFileIcon(int downloadId, [GetFileIconOptions options]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> getFileIcon(int downloadId, [GetFileIconOptions options]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _downloads.callMethod('getFileIcon', [downloadId, options, completer.callback]);
     return completer.future;
   }
@@ -60,8 +60,8 @@ class ChromeDownloads {
     _downloads.callMethod('showDefaultFolder');
   }
 
-  Future erase(DownloadQuery query) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<int> erase(DownloadQuery query) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _downloads.callMethod('erase', [query, completer.callback]);
     return completer.future;
   }

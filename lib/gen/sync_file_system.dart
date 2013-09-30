@@ -12,8 +12,8 @@ class ChromeSyncFileSystem {
 
   ChromeSyncFileSystem._();
 
-  Future requestFileSystem() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> requestFileSystem() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
     return completer.future;
   }
@@ -24,32 +24,32 @@ class ChromeSyncFileSystem {
     return completer.future;
   }
 
-  Future getConflictResolutionPolicy() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<ConflictResolutionPolicy> getConflictResolutionPolicy() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ConflictResolutionPolicy.create);
     _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
     return completer.future;
   }
 
-  Future getUsageAndQuota(var fileSystem) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<StorageInfo> getUsageAndQuota(var fileSystem) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(StorageInfo.create);
     _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
     return completer.future;
   }
 
-  Future getFileStatus(var fileEntry) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<FileStatus> getFileStatus(var fileEntry) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatus.create);
     _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
     return completer.future;
   }
 
-  Future getFileStatuses(var fileEntries) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<FileStatusInfo> getFileStatuses(var fileEntries) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatusInfo.create);
     _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
     return completer.future;
   }
 
-  Future getServiceStatus() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<ServiceStatus> getServiceStatus() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ServiceStatus.create);
     _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
     return completer.future;
   }

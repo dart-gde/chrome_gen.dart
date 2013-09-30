@@ -188,6 +188,10 @@ class JsonDeclaredType extends JsonType {
   String toString() => "${runtimeType.toString()} ${id}";
 }
 
+ChromeLibrary convert(JsonNamespace namespace) {
+  return new JsonConverter().convert(namespace);
+}
+
 class JsonConverter {
   ChromeLibrary library;
 

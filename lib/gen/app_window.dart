@@ -12,8 +12,8 @@ class ChromeAppWindow {
 
   ChromeAppWindow._();
 
-  Future create(String url, [CreateWindowOptions options]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> create(String url, [CreateWindowOptions options]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _app_window.callMethod('create', [url, options, completer.callback]);
     return completer.future;
   }

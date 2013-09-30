@@ -52,7 +52,7 @@ class GenApiFile {
     if (inFile.path.endsWith(".json")) {
       model_json.JsonNamespace namespace = model_json.parse(
           inFile.readAsStringSync());
-      chromeLib = new model_json.JsonConverter().convert(namespace);
+      chromeLib = model_json.convert(namespace);
     } else if (inFile.path.endsWith(".idl")) {
       WebIdlParser webIdlParser = new WebIdlParser.withCollector(
           new model_idl.IDLCollectorChrome());
