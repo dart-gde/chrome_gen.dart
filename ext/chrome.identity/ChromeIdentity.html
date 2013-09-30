@@ -38,8 +38,8 @@ class ChromeIdentity {
 
  ChromeIdentity._();
 
- Future getAuthToken([TokenDetails details]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;String&gt; getAuthToken([TokenDetails details]) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _identity.callMethod('getAuthToken', [details, completer.callback]);
    return completer.future;
  }
@@ -50,8 +50,8 @@ class ChromeIdentity {
    return completer.future;
  }
 
- Future launchWebAuthFlow(WebAuthFlowDetails details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _identity.callMethod('launchWebAuthFlow', [details, completer.callback]);
    return completer.future;
  }
@@ -62,12 +62,12 @@ class ChromeIdentity {
 <h3>Methods</h3>
 <div class="method"><h4 id="getAuthToken">
 <button class="show-code">Code</button>
-Future <strong>getAuthToken</strong>([<a href="../chrome.identity/TokenDetails.html">TokenDetails</a> details]) <a class="anchor-link" href="#getAuthToken"
+Future&lt;String&gt; <strong>getAuthToken</strong>([<a href="../chrome.identity/TokenDetails.html">TokenDetails</a> details]) <a class="anchor-link" href="#getAuthToken"
               title="Permalink to ChromeIdentity.getAuthToken">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getAuthToken([TokenDetails details]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;String&gt; getAuthToken([TokenDetails details]) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _identity.callMethod('getAuthToken', [details, completer.callback]);
  return completer.future;
 }
@@ -76,12 +76,12 @@ Future getAuthToken([TokenDetails details]) {
 </div>
 <div class="method"><h4 id="launchWebAuthFlow">
 <button class="show-code">Code</button>
-Future <strong>launchWebAuthFlow</strong>(<a href="../chrome.identity/WebAuthFlowDetails.html">WebAuthFlowDetails</a> details) <a class="anchor-link" href="#launchWebAuthFlow"
+Future&lt;String&gt; <strong>launchWebAuthFlow</strong>(<a href="../chrome.identity/WebAuthFlowDetails.html">WebAuthFlowDetails</a> details) <a class="anchor-link" href="#launchWebAuthFlow"
               title="Permalink to ChromeIdentity.launchWebAuthFlow">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future launchWebAuthFlow(WebAuthFlowDetails details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _identity.callMethod('launchWebAuthFlow', [details, completer.callback]);
  return completer.future;
 }

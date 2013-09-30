@@ -38,8 +38,8 @@ class ChromeSystemMemory {
 
  ChromeSystemMemory._();
 
- Future getInfo() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;MemoryInfo&gt; getInfo() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(MemoryInfo.create);
    _system_memory.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
@@ -50,12 +50,12 @@ class ChromeSystemMemory {
 <h3>Methods</h3>
 <div class="method"><h4 id="getInfo">
 <button class="show-code">Code</button>
-Future <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
+Future&lt;<a href="../chrome.system_memory/MemoryInfo.html">MemoryInfo</a>&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeSystemMemory.getInfo">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getInfo() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;MemoryInfo&gt; getInfo() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(MemoryInfo.create);
  _system_memory.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }

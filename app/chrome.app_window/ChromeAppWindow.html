@@ -38,8 +38,8 @@ class ChromeAppWindow {
 
  ChromeAppWindow._();
 
- Future create(String url, [CreateWindowOptions options]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;dynamic&gt; create(String url, [CreateWindowOptions options]) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _app_window.callMethod('create', [url, options, completer.callback]);
    return completer.future;
  }
@@ -163,12 +163,12 @@ Stream get onRestored =&gt; _onRestored.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="create">
 <button class="show-code">Code</button>
-Future <strong>create</strong>(String url, [<a href="../chrome.app_window/CreateWindowOptions.html">CreateWindowOptions</a> options]) <a class="anchor-link" href="#create"
+Future&lt;dynamic&gt; <strong>create</strong>(String url, [<a href="../chrome.app_window/CreateWindowOptions.html">CreateWindowOptions</a> options]) <a class="anchor-link" href="#create"
               title="Permalink to ChromeAppWindow.create">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future create(String url, [CreateWindowOptions options]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;dynamic&gt; create(String url, [CreateWindowOptions options]) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _app_window.callMethod('create', [url, options, completer.callback]);
  return completer.future;
 }

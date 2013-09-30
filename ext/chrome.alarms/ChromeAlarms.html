@@ -42,14 +42,14 @@ class ChromeAlarms {
    _alarms.callMethod('create', [name, alarmInfo]);
  }
 
- Future get([String name]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;Alarm&gt; get([String name]) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(Alarm.create);
    _alarms.callMethod('get', [name, completer.callback]);
    return completer.future;
  }
 
- Future getAll() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;Alarm&gt; getAll() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(Alarm.create);
    _alarms.callMethod('getAll', [completer.callback]);
    return completer.future;
  }
@@ -124,12 +124,12 @@ void create(AlarmCreateInfo alarmInfo, [String name]) {
 </div>
 <div class="method"><h4 id="get">
 <button class="show-code">Code</button>
-Future <strong>get</strong>([String name]) <a class="anchor-link" href="#get"
+Future&lt;<a href="../chrome.alarms/Alarm.html">Alarm</a>&gt; <strong>get</strong>([String name]) <a class="anchor-link" href="#get"
               title="Permalink to ChromeAlarms.get">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future get([String name]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;Alarm&gt; get([String name]) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(Alarm.create);
  _alarms.callMethod('get', [name, completer.callback]);
  return completer.future;
 }
@@ -138,12 +138,12 @@ Future get([String name]) {
 </div>
 <div class="method"><h4 id="getAll">
 <button class="show-code">Code</button>
-Future <strong>getAll</strong>() <a class="anchor-link" href="#getAll"
+Future&lt;<a href="../chrome.alarms/Alarm.html">Alarm</a>&gt; <strong>getAll</strong>() <a class="anchor-link" href="#getAll"
               title="Permalink to ChromeAlarms.getAll">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getAll() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;Alarm&gt; getAll() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(Alarm.create);
  _alarms.callMethod('getAll', [completer.callback]);
  return completer.future;
 }

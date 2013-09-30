@@ -38,8 +38,8 @@ class ChromeMediaGalleries {
 
  ChromeMediaGalleries._();
 
- Future getMediaFileSystems([MediaFileSystemsDetails details]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;dynamic&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
    return completer.future;
  }
@@ -66,12 +66,12 @@ void getMediaFileSystemMetadata(var mediaFileSystem) {
 </div>
 <div class="method"><h4 id="getMediaFileSystems">
 <button class="show-code">Code</button>
-Future <strong>getMediaFileSystems</strong>([<a href="../chrome.mediaGalleries/MediaFileSystemsDetails.html">MediaFileSystemsDetails</a> details]) <a class="anchor-link" href="#getMediaFileSystems"
+Future&lt;dynamic&gt; <strong>getMediaFileSystems</strong>([<a href="../chrome.mediaGalleries/MediaFileSystemsDetails.html">MediaFileSystemsDetails</a> details]) <a class="anchor-link" href="#getMediaFileSystems"
               title="Permalink to ChromeMediaGalleries.getMediaFileSystems">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getMediaFileSystems([MediaFileSystemsDetails details]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;dynamic&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
  return completer.future;
 }

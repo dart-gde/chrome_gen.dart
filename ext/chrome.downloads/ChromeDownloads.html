@@ -38,14 +38,14 @@ class ChromeDownloads {
 
  ChromeDownloads._();
 
- Future download(DownloadOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;int&gt; download(DownloadOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _downloads.callMethod('download', [options, completer.callback]);
    return completer.future;
  }
 
- Future search(DownloadQuery query) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;DownloadItem&gt; search(DownloadQuery query) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(DownloadItem.create);
    _downloads.callMethod('search', [query, completer.callback]);
    return completer.future;
  }
@@ -68,8 +68,8 @@ class ChromeDownloads {
    return completer.future;
  }
 
- Future getFileIcon(int downloadId, [GetFileIconOptions options]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;String&gt; getFileIcon(int downloadId, [GetFileIconOptions options]) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _downloads.callMethod('getFileIcon', [downloadId, options, completer.callback]);
    return completer.future;
  }
@@ -86,8 +86,8 @@ class ChromeDownloads {
    _downloads.callMethod('showDefaultFolder');
  }
 
- Future erase(DownloadQuery query) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;int&gt; erase(DownloadQuery query) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _downloads.callMethod('erase', [query, completer.callback]);
    return completer.future;
  }
@@ -217,12 +217,12 @@ Future cancel(int downloadId) {
 </div>
 <div class="method"><h4 id="download">
 <button class="show-code">Code</button>
-Future <strong>download</strong>(<a href="../chrome.downloads/DownloadOptions.html">DownloadOptions</a> options) <a class="anchor-link" href="#download"
+Future&lt;int&gt; <strong>download</strong>(<a href="../chrome.downloads/DownloadOptions.html">DownloadOptions</a> options) <a class="anchor-link" href="#download"
               title="Permalink to ChromeDownloads.download">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future download(DownloadOptions options) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;int&gt; download(DownloadOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _downloads.callMethod('download', [options, completer.callback]);
  return completer.future;
 }
@@ -243,12 +243,12 @@ void drag(int downloadId) {
 </div>
 <div class="method"><h4 id="erase">
 <button class="show-code">Code</button>
-Future <strong>erase</strong>(<a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a> query) <a class="anchor-link" href="#erase"
+Future&lt;int&gt; <strong>erase</strong>(<a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a> query) <a class="anchor-link" href="#erase"
               title="Permalink to ChromeDownloads.erase">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future erase(DownloadQuery query) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;int&gt; erase(DownloadQuery query) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _downloads.callMethod('erase', [query, completer.callback]);
  return completer.future;
 }
@@ -257,12 +257,12 @@ Future erase(DownloadQuery query) {
 </div>
 <div class="method"><h4 id="getFileIcon">
 <button class="show-code">Code</button>
-Future <strong>getFileIcon</strong>(int downloadId, [<a href="../chrome.downloads/GetFileIconOptions.html">GetFileIconOptions</a> options]) <a class="anchor-link" href="#getFileIcon"
+Future&lt;String&gt; <strong>getFileIcon</strong>(int downloadId, [<a href="../chrome.downloads/GetFileIconOptions.html">GetFileIconOptions</a> options]) <a class="anchor-link" href="#getFileIcon"
               title="Permalink to ChromeDownloads.getFileIcon">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getFileIcon(int downloadId, [GetFileIconOptions options]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;String&gt; getFileIcon(int downloadId, [GetFileIconOptions options]) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _downloads.callMethod('getFileIcon', [downloadId, options, completer.callback]);
  return completer.future;
 }
@@ -325,12 +325,12 @@ Future resume(int downloadId) {
 </div>
 <div class="method"><h4 id="search">
 <button class="show-code">Code</button>
-Future <strong>search</strong>(<a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a> query) <a class="anchor-link" href="#search"
+Future&lt;<a href="../chrome.downloads/DownloadItem.html">DownloadItem</a>&gt; <strong>search</strong>(<a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a> query) <a class="anchor-link" href="#search"
               title="Permalink to ChromeDownloads.search">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future search(DownloadQuery query) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;DownloadItem&gt; search(DownloadQuery query) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(DownloadItem.create);
  _downloads.callMethod('search', [query, completer.callback]);
  return completer.future;
 }

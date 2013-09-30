@@ -38,26 +38,26 @@ class ChromeUsb {
 
  ChromeUsb._();
 
- Future getDevices(EnumerateDevicesOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;Device&gt; getDevices(EnumerateDevicesOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(Device.create);
    _usb.callMethod('getDevices', [options, completer.callback]);
    return completer.future;
  }
 
- Future requestAccess(Device device, int interfaceId) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;bool&gt; requestAccess(Device device, int interfaceId) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _usb.callMethod('requestAccess', [device, interfaceId, completer.callback]);
    return completer.future;
  }
 
- Future openDevice(Device device) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;ConnectionHandle&gt; openDevice(Device device) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(ConnectionHandle.create);
    _usb.callMethod('openDevice', [device, completer.callback]);
    return completer.future;
  }
 
- Future findDevices(EnumerateDevicesAndRequestAccessOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;ConnectionHandle&gt; findDevices(EnumerateDevicesAndRequestAccessOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(ConnectionHandle.create);
    _usb.callMethod('findDevices', [options, completer.callback]);
    return completer.future;
  }
@@ -68,8 +68,8 @@ class ChromeUsb {
    return completer.future;
  }
 
- Future listInterfaces(ConnectionHandle handle) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;InterfaceDescriptor&gt; listInterfaces(ConnectionHandle handle) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(InterfaceDescriptor.create);
    _usb.callMethod('listInterfaces', [handle, completer.callback]);
    return completer.future;
  }
@@ -92,32 +92,32 @@ class ChromeUsb {
    return completer.future;
  }
 
- Future controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;TransferResultInfo&gt; controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
    _usb.callMethod('controlTransfer', [handle, transferInfo, completer.callback]);
    return completer.future;
  }
 
- Future bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;TransferResultInfo&gt; bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
    _usb.callMethod('bulkTransfer', [handle, transferInfo, completer.callback]);
    return completer.future;
  }
 
- Future interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;TransferResultInfo&gt; interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
    _usb.callMethod('interruptTransfer', [handle, transferInfo, completer.callback]);
    return completer.future;
  }
 
- Future isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;TransferResultInfo&gt; isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
    _usb.callMethod('isochronousTransfer', [handle, transferInfo, completer.callback]);
    return completer.future;
  }
 
- Future resetDevice(ConnectionHandle handle) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;bool&gt; resetDevice(ConnectionHandle handle) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _usb.callMethod('resetDevice', [handle, completer.callback]);
    return completer.future;
  }
@@ -128,12 +128,12 @@ class ChromeUsb {
 <h3>Methods</h3>
 <div class="method"><h4 id="bulkTransfer">
 <button class="show-code">Code</button>
-Future <strong>bulkTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/GenericTransferInfo.html">GenericTransferInfo</a> transferInfo) <a class="anchor-link" href="#bulkTransfer"
+Future&lt;<a href="../chrome.usb/TransferResultInfo.html">TransferResultInfo</a>&gt; <strong>bulkTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/GenericTransferInfo.html">GenericTransferInfo</a> transferInfo) <a class="anchor-link" href="#bulkTransfer"
               title="Permalink to ChromeUsb.bulkTransfer">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;TransferResultInfo&gt; bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
  _usb.callMethod('bulkTransfer', [handle, transferInfo, completer.callback]);
  return completer.future;
 }
@@ -170,12 +170,12 @@ Future closeDevice(ConnectionHandle handle) {
 </div>
 <div class="method"><h4 id="controlTransfer">
 <button class="show-code">Code</button>
-Future <strong>controlTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/ControlTransferInfo.html">ControlTransferInfo</a> transferInfo) <a class="anchor-link" href="#controlTransfer"
+Future&lt;<a href="../chrome.usb/TransferResultInfo.html">TransferResultInfo</a>&gt; <strong>controlTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/ControlTransferInfo.html">ControlTransferInfo</a> transferInfo) <a class="anchor-link" href="#controlTransfer"
               title="Permalink to ChromeUsb.controlTransfer">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;TransferResultInfo&gt; controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
  _usb.callMethod('controlTransfer', [handle, transferInfo, completer.callback]);
  return completer.future;
 }
@@ -184,12 +184,12 @@ Future controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo
 </div>
 <div class="method"><h4 id="findDevices">
 <button class="show-code">Code</button>
-Future <strong>findDevices</strong>(<a href="../chrome.usb/EnumerateDevicesAndRequestAccessOptions.html">EnumerateDevicesAndRequestAccessOptions</a> options) <a class="anchor-link" href="#findDevices"
+Future&lt;<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a>&gt; <strong>findDevices</strong>(<a href="../chrome.usb/EnumerateDevicesAndRequestAccessOptions.html">EnumerateDevicesAndRequestAccessOptions</a> options) <a class="anchor-link" href="#findDevices"
               title="Permalink to ChromeUsb.findDevices">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future findDevices(EnumerateDevicesAndRequestAccessOptions options) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;ConnectionHandle&gt; findDevices(EnumerateDevicesAndRequestAccessOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(ConnectionHandle.create);
  _usb.callMethod('findDevices', [options, completer.callback]);
  return completer.future;
 }
@@ -198,12 +198,12 @@ Future findDevices(EnumerateDevicesAndRequestAccessOptions options) {
 </div>
 <div class="method"><h4 id="getDevices">
 <button class="show-code">Code</button>
-Future <strong>getDevices</strong>(<a href="../chrome.usb/EnumerateDevicesOptions.html">EnumerateDevicesOptions</a> options) <a class="anchor-link" href="#getDevices"
+Future&lt;<a href="../chrome.usb/Device.html">Device</a>&gt; <strong>getDevices</strong>(<a href="../chrome.usb/EnumerateDevicesOptions.html">EnumerateDevicesOptions</a> options) <a class="anchor-link" href="#getDevices"
               title="Permalink to ChromeUsb.getDevices">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getDevices(EnumerateDevicesOptions options) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;Device&gt; getDevices(EnumerateDevicesOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(Device.create);
  _usb.callMethod('getDevices', [options, completer.callback]);
  return completer.future;
 }
@@ -212,12 +212,12 @@ Future getDevices(EnumerateDevicesOptions options) {
 </div>
 <div class="method"><h4 id="interruptTransfer">
 <button class="show-code">Code</button>
-Future <strong>interruptTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/GenericTransferInfo.html">GenericTransferInfo</a> transferInfo) <a class="anchor-link" href="#interruptTransfer"
+Future&lt;<a href="../chrome.usb/TransferResultInfo.html">TransferResultInfo</a>&gt; <strong>interruptTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/GenericTransferInfo.html">GenericTransferInfo</a> transferInfo) <a class="anchor-link" href="#interruptTransfer"
               title="Permalink to ChromeUsb.interruptTransfer">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;TransferResultInfo&gt; interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
  _usb.callMethod('interruptTransfer', [handle, transferInfo, completer.callback]);
  return completer.future;
 }
@@ -226,12 +226,12 @@ Future interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferIn
 </div>
 <div class="method"><h4 id="isochronousTransfer">
 <button class="show-code">Code</button>
-Future <strong>isochronousTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/IsochronousTransferInfo.html">IsochronousTransferInfo</a> transferInfo) <a class="anchor-link" href="#isochronousTransfer"
+Future&lt;<a href="../chrome.usb/TransferResultInfo.html">TransferResultInfo</a>&gt; <strong>isochronousTransfer</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle, <a href="../chrome.usb/IsochronousTransferInfo.html">IsochronousTransferInfo</a> transferInfo) <a class="anchor-link" href="#isochronousTransfer"
               title="Permalink to ChromeUsb.isochronousTransfer">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;TransferResultInfo&gt; isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
  _usb.callMethod('isochronousTransfer', [handle, transferInfo, completer.callback]);
  return completer.future;
 }
@@ -240,12 +240,12 @@ Future isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo tran
 </div>
 <div class="method"><h4 id="listInterfaces">
 <button class="show-code">Code</button>
-Future <strong>listInterfaces</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle) <a class="anchor-link" href="#listInterfaces"
+Future&lt;<a href="../chrome.usb/InterfaceDescriptor.html">InterfaceDescriptor</a>&gt; <strong>listInterfaces</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle) <a class="anchor-link" href="#listInterfaces"
               title="Permalink to ChromeUsb.listInterfaces">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future listInterfaces(ConnectionHandle handle) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;InterfaceDescriptor&gt; listInterfaces(ConnectionHandle handle) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(InterfaceDescriptor.create);
  _usb.callMethod('listInterfaces', [handle, completer.callback]);
  return completer.future;
 }
@@ -254,12 +254,12 @@ Future listInterfaces(ConnectionHandle handle) {
 </div>
 <div class="method"><h4 id="openDevice">
 <button class="show-code">Code</button>
-Future <strong>openDevice</strong>(<a href="../chrome.usb/Device.html">Device</a> device) <a class="anchor-link" href="#openDevice"
+Future&lt;<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a>&gt; <strong>openDevice</strong>(<a href="../chrome.usb/Device.html">Device</a> device) <a class="anchor-link" href="#openDevice"
               title="Permalink to ChromeUsb.openDevice">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future openDevice(Device device) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;ConnectionHandle&gt; openDevice(Device device) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(ConnectionHandle.create);
  _usb.callMethod('openDevice', [device, completer.callback]);
  return completer.future;
 }
@@ -282,12 +282,12 @@ Future releaseInterface(ConnectionHandle handle, int interfaceNumber) {
 </div>
 <div class="method"><h4 id="requestAccess">
 <button class="show-code">Code</button>
-Future <strong>requestAccess</strong>(<a href="../chrome.usb/Device.html">Device</a> device, int interfaceId) <a class="anchor-link" href="#requestAccess"
+Future&lt;bool&gt; <strong>requestAccess</strong>(<a href="../chrome.usb/Device.html">Device</a> device, int interfaceId) <a class="anchor-link" href="#requestAccess"
               title="Permalink to ChromeUsb.requestAccess">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future requestAccess(Device device, int interfaceId) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;bool&gt; requestAccess(Device device, int interfaceId) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _usb.callMethod('requestAccess', [device, interfaceId, completer.callback]);
  return completer.future;
 }
@@ -296,12 +296,12 @@ Future requestAccess(Device device, int interfaceId) {
 </div>
 <div class="method"><h4 id="resetDevice">
 <button class="show-code">Code</button>
-Future <strong>resetDevice</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle) <a class="anchor-link" href="#resetDevice"
+Future&lt;bool&gt; <strong>resetDevice</strong>(<a href="../chrome.usb/ConnectionHandle.html">ConnectionHandle</a> handle) <a class="anchor-link" href="#resetDevice"
               title="Permalink to ChromeUsb.resetDevice">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future resetDevice(ConnectionHandle handle) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;bool&gt; resetDevice(ConnectionHandle handle) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _usb.callMethod('resetDevice', [handle, completer.callback]);
  return completer.future;
 }

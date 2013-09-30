@@ -38,14 +38,14 @@ class ChromeTabCapture {
 
  ChromeTabCapture._();
 
- Future capture(CaptureOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;dynamic&gt; capture(CaptureOptions options) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _tabCapture.callMethod('capture', [options, completer.callback]);
    return completer.future;
  }
 
- Future getCapturedTabs() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;CaptureInfo&gt; getCapturedTabs() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(CaptureInfo.create);
    _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
    return completer.future;
  }
@@ -76,12 +76,12 @@ Stream&lt;CaptureInfo&gt; get onStatusChanged =&gt; _onStatusChanged.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="capture">
 <button class="show-code">Code</button>
-Future <strong>capture</strong>(<a href="../chrome.tabCapture/CaptureOptions.html">CaptureOptions</a> options) <a class="anchor-link" href="#capture"
+Future&lt;dynamic&gt; <strong>capture</strong>(<a href="../chrome.tabCapture/CaptureOptions.html">CaptureOptions</a> options) <a class="anchor-link" href="#capture"
               title="Permalink to ChromeTabCapture.capture">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future capture(CaptureOptions options) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;dynamic&gt; capture(CaptureOptions options) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _tabCapture.callMethod('capture', [options, completer.callback]);
  return completer.future;
 }
@@ -90,12 +90,12 @@ Future capture(CaptureOptions options) {
 </div>
 <div class="method"><h4 id="getCapturedTabs">
 <button class="show-code">Code</button>
-Future <strong>getCapturedTabs</strong>() <a class="anchor-link" href="#getCapturedTabs"
+Future&lt;<a href="../chrome.tabCapture/CaptureInfo.html">CaptureInfo</a>&gt; <strong>getCapturedTabs</strong>() <a class="anchor-link" href="#getCapturedTabs"
               title="Permalink to ChromeTabCapture.getCapturedTabs">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getCapturedTabs() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;CaptureInfo&gt; getCapturedTabs() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(CaptureInfo.create);
  _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
  return completer.future;
 }

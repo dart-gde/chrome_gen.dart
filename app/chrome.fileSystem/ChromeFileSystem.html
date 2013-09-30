@@ -38,38 +38,38 @@ class ChromeFileSystem {
 
  ChromeFileSystem._();
 
- Future getDisplayPath(var entry) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;String&gt; getDisplayPath(var entry) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
    return completer.future;
  }
 
- Future getWritableEntry(var entry) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;dynamic&gt; getWritableEntry(var entry) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
    return completer.future;
  }
 
- Future isWritableEntry(var entry) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;bool&gt; isWritableEntry(var entry) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
    return completer.future;
  }
 
- Future chooseEntry([ChooseEntryOptions options]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;JsObject&gt; chooseEntry([ChooseEntryOptions options]) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
    return completer.future;
  }
 
- Future restoreEntry(String id) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;dynamic&gt; restoreEntry(String id) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
    return completer.future;
  }
 
- Future isRestorable(String id) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;bool&gt; isRestorable(String id) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _fileSystem.callMethod('isRestorable', [id, completer.callback]);
    return completer.future;
  }
@@ -84,12 +84,12 @@ class ChromeFileSystem {
 <h3>Methods</h3>
 <div class="method"><h4 id="chooseEntry">
 <button class="show-code">Code</button>
-Future <strong>chooseEntry</strong>([<a href="../chrome.fileSystem/ChooseEntryOptions.html">ChooseEntryOptions</a> options]) <a class="anchor-link" href="#chooseEntry"
+Future&lt;JsObject&gt; <strong>chooseEntry</strong>([<a href="../chrome.fileSystem/ChooseEntryOptions.html">ChooseEntryOptions</a> options]) <a class="anchor-link" href="#chooseEntry"
               title="Permalink to ChromeFileSystem.chooseEntry">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future chooseEntry([ChooseEntryOptions options]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;JsObject&gt; chooseEntry([ChooseEntryOptions options]) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
  return completer.future;
 }
@@ -98,12 +98,12 @@ Future chooseEntry([ChooseEntryOptions options]) {
 </div>
 <div class="method"><h4 id="getDisplayPath">
 <button class="show-code">Code</button>
-Future <strong>getDisplayPath</strong>(entry) <a class="anchor-link" href="#getDisplayPath"
+Future&lt;String&gt; <strong>getDisplayPath</strong>(entry) <a class="anchor-link" href="#getDisplayPath"
               title="Permalink to ChromeFileSystem.getDisplayPath">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getDisplayPath(var entry) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;String&gt; getDisplayPath(var entry) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
  return completer.future;
 }
@@ -112,12 +112,12 @@ Future getDisplayPath(var entry) {
 </div>
 <div class="method"><h4 id="getWritableEntry">
 <button class="show-code">Code</button>
-Future <strong>getWritableEntry</strong>(entry) <a class="anchor-link" href="#getWritableEntry"
+Future&lt;dynamic&gt; <strong>getWritableEntry</strong>(entry) <a class="anchor-link" href="#getWritableEntry"
               title="Permalink to ChromeFileSystem.getWritableEntry">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getWritableEntry(var entry) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;dynamic&gt; getWritableEntry(var entry) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
  return completer.future;
 }
@@ -126,12 +126,12 @@ Future getWritableEntry(var entry) {
 </div>
 <div class="method"><h4 id="isRestorable">
 <button class="show-code">Code</button>
-Future <strong>isRestorable</strong>(String id) <a class="anchor-link" href="#isRestorable"
+Future&lt;bool&gt; <strong>isRestorable</strong>(String id) <a class="anchor-link" href="#isRestorable"
               title="Permalink to ChromeFileSystem.isRestorable">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future isRestorable(String id) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;bool&gt; isRestorable(String id) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _fileSystem.callMethod('isRestorable', [id, completer.callback]);
  return completer.future;
 }
@@ -140,12 +140,12 @@ Future isRestorable(String id) {
 </div>
 <div class="method"><h4 id="isWritableEntry">
 <button class="show-code">Code</button>
-Future <strong>isWritableEntry</strong>(entry) <a class="anchor-link" href="#isWritableEntry"
+Future&lt;bool&gt; <strong>isWritableEntry</strong>(entry) <a class="anchor-link" href="#isWritableEntry"
               title="Permalink to ChromeFileSystem.isWritableEntry">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future isWritableEntry(var entry) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;bool&gt; isWritableEntry(var entry) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
  return completer.future;
 }
@@ -154,12 +154,12 @@ Future isWritableEntry(var entry) {
 </div>
 <div class="method"><h4 id="restoreEntry">
 <button class="show-code">Code</button>
-Future <strong>restoreEntry</strong>(String id) <a class="anchor-link" href="#restoreEntry"
+Future&lt;dynamic&gt; <strong>restoreEntry</strong>(String id) <a class="anchor-link" href="#restoreEntry"
               title="Permalink to ChromeFileSystem.restoreEntry">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future restoreEntry(String id) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;dynamic&gt; restoreEntry(String id) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
  return completer.future;
 }

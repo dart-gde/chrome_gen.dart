@@ -38,8 +38,8 @@ class ChromeSystemDisplay {
 
  ChromeSystemDisplay._();
 
- Future getInfo() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;DisplayUnitInfo&gt; getInfo() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(DisplayUnitInfo.create);
    _system_display.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
@@ -76,12 +76,12 @@ Stream get onDisplayChanged =&gt; _onDisplayChanged.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="getInfo">
 <button class="show-code">Code</button>
-Future <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
+Future&lt;<a href="../chrome.system_display/DisplayUnitInfo.html">DisplayUnitInfo</a>&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeSystemDisplay.getInfo">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getInfo() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;DisplayUnitInfo&gt; getInfo() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(DisplayUnitInfo.create);
  _system_display.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }

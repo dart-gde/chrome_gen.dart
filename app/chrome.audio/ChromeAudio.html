@@ -38,8 +38,8 @@ class ChromeAudio {
 
  ChromeAudio._();
 
- Future getInfo() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;JsObject&gt; getInfo() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
    _audio.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
@@ -82,12 +82,12 @@ Stream get onDeviceChanged =&gt; _onDeviceChanged.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="getInfo">
 <button class="show-code">Code</button>
-Future <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
+Future&lt;JsObject&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeAudio.getInfo">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getInfo() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;JsObject&gt; getInfo() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
  _audio.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }

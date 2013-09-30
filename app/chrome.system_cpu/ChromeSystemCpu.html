@@ -38,8 +38,8 @@ class ChromeSystemCpu {
 
  ChromeSystemCpu._();
 
- Future getInfo() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;CpuInfo&gt; getInfo() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(CpuInfo.create);
    _system_cpu.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
@@ -50,12 +50,12 @@ class ChromeSystemCpu {
 <h3>Methods</h3>
 <div class="method"><h4 id="getInfo">
 <button class="show-code">Code</button>
-Future <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
+Future&lt;<a href="../chrome.system_cpu/CpuInfo.html">CpuInfo</a>&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeSystemCpu.getInfo">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getInfo() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;CpuInfo&gt; getInfo() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(CpuInfo.create);
  _system_cpu.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }

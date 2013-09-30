@@ -38,8 +38,8 @@ class ChromePushMessaging {
 
  ChromePushMessaging._();
 
- Future getChannelId([bool interactive]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;ChannelIdResult&gt; getChannelId([bool interactive]) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(ChannelIdResult.create);
    _pushMessaging.callMethod('getChannelId', [interactive, completer.callback]);
    return completer.future;
  }
@@ -70,12 +70,12 @@ Stream&lt;Message&gt; get onMessage =&gt; _onMessage.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="getChannelId">
 <button class="show-code">Code</button>
-Future <strong>getChannelId</strong>([bool interactive]) <a class="anchor-link" href="#getChannelId"
+Future&lt;<a href="../chrome.pushMessaging/ChannelIdResult.html">ChannelIdResult</a>&gt; <strong>getChannelId</strong>([bool interactive]) <a class="anchor-link" href="#getChannelId"
               title="Permalink to ChromePushMessaging.getChannelId">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getChannelId([bool interactive]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;ChannelIdResult&gt; getChannelId([bool interactive]) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(ChannelIdResult.create);
  _pushMessaging.callMethod('getChannelId', [interactive, completer.callback]);
  return completer.future;
 }

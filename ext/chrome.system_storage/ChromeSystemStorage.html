@@ -38,14 +38,14 @@ class ChromeSystemStorage {
 
  ChromeSystemStorage._();
 
- Future getInfo() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;StorageUnitInfo&gt; getInfo() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(StorageUnitInfo.create);
    _system_storage.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
 
- Future ejectDevice(String id) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+ Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(EjectDeviceResultCode.create);
    _system_storage.callMethod('ejectDevice', [id, completer.callback]);
    return completer.future;
  }
@@ -93,12 +93,12 @@ Stream&lt;String&gt; get onDetached =&gt; _onDetached.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="ejectDevice">
 <button class="show-code">Code</button>
-Future <strong>ejectDevice</strong>(String id) <a class="anchor-link" href="#ejectDevice"
+Future&lt;<a href="../chrome.system_storage/EjectDeviceResultCode.html">EjectDeviceResultCode</a>&gt; <strong>ejectDevice</strong>(String id) <a class="anchor-link" href="#ejectDevice"
               title="Permalink to ChromeSystemStorage.ejectDevice">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future ejectDevice(String id) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(EjectDeviceResultCode.create);
  _system_storage.callMethod('ejectDevice', [id, completer.callback]);
  return completer.future;
 }
@@ -107,12 +107,12 @@ Future ejectDevice(String id) {
 </div>
 <div class="method"><h4 id="getInfo">
 <button class="show-code">Code</button>
-Future <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
+Future&lt;<a href="../chrome.system_storage/StorageUnitInfo.html">StorageUnitInfo</a>&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeSystemStorage.getInfo">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future getInfo() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+Future&lt;StorageUnitInfo&gt; getInfo() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(StorageUnitInfo.create);
  _system_storage.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }
