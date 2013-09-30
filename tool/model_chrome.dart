@@ -24,6 +24,8 @@ class ChromeLibrary extends ChromeElement {
   /// system.display, terminalPrivate, devtools.inspectedWindow.
   String name;
 
+  ChromeLibrary([this.name]);
+
   List<ChromeProperty> properties = [];
   List<ChromeMethod> methods = [];
   List<ChromeEvent> events = [];

@@ -12,8 +12,8 @@ class ChromeIdentity {
 
   ChromeIdentity._();
 
-  Future getAuthToken([TokenDetails details]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> getAuthToken([TokenDetails details]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _identity.callMethod('getAuthToken', [details, completer.callback]);
     return completer.future;
   }
@@ -24,8 +24,8 @@ class ChromeIdentity {
     return completer.future;
   }
 
-  Future launchWebAuthFlow(WebAuthFlowDetails details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> launchWebAuthFlow(WebAuthFlowDetails details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _identity.callMethod('launchWebAuthFlow', [details, completer.callback]);
     return completer.future;
   }
