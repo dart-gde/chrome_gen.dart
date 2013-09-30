@@ -1,0 +1,141 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>chrome.src.common Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="favicon.ico">
+        
+        </head>
+        <body data-library="chrome.src.common">
+        <div class="page">
+        <div class="header">
+          <a href="index.html"><div class="logo"></div></a>
+          <a href="index.html">Dart Documentation</a>
+         &rsaquo; <a href="chrome.src.common.html">chrome.src.common</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+<h2><strong>chrome.src.common</strong> library</h2>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="chrome">
+<button class="show-code">Code</button>
+final JsObject         <strong>chrome</strong> <a class="anchor-link"
+            href="#chrome"
+            title="Permalink to chrome">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+JsObject get chrome {
+ if (_proxy == null) {
+   _proxy = context['chrome'];
+ }
+
+ return _proxy;
+}
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="lastError">
+<button class="show-code">Code</button>
+final String         <strong>lastError</strong> <a class="anchor-link"
+            href="#lastError"
+            title="Permalink to lastError">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get lastError {
+ JsObject error = chrome['runtime']['lastError'];
+
+ return error != null ? error['message'] : null;
+}
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Functions</h3>
+<div class="method"><h4 id="selfConverter">
+<button class="show-code">Code</button>
+dynamic <strong>selfConverter</strong>(obj) <a class="anchor-link" href="#selfConverter"
+              title="Permalink to selfConverter">#</a></h4>
+<div class="doc">
+<pre class="source">
+dynamic selfConverter(var obj) =&gt; obj;
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="mapify">
+<button class="show-code">Code</button>
+Map <strong>mapify</strong>(JsObject obj) <a class="anchor-link" href="#mapify"
+              title="Permalink to mapify">#</a></h4>
+<div class="doc">
+<pre class="source">
+Map mapify(JsObject obj) {
+ return JSON.decode(_jsJSON.callMethod('stringify', [obj]));
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="listify">
+<button class="show-code">Code</button>
+List <strong>listify</strong>(JsObject obj, [Function transformer = null]) <a class="anchor-link" href="#listify"
+              title="Permalink to listify">#</a></h4>
+<div class="doc">
+<pre class="source">
+List listify(JsObject obj, [Function transformer = null]) {
+ if (obj == null) {
+   return null;
+ } else {
+   List l = new List(obj['length']);
+
+   for (int i = 0; i &lt; l.length; i++) {
+     if (transformer != null) {
+       l[i] = transformer(obj[i]);
+     } else {
+       l[i] = obj[i];
+     }
+   }
+
+   return l;
+ }
+}
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Classes</h3>
+          <div class="type">
+          <h4>
+            <a href="chrome.src.common/ChromeCompleter.html"><strong>ChromeCompleter&lt;T&gt;</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="chrome.src.common/ChromeStreamController.html"><strong>ChromeStreamController&lt;T&gt;</strong></a>
+          </h4>
+          </div>
+          
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="client-live-nav.js"></script>
+        </body></html>
+        
