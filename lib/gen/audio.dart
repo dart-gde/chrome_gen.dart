@@ -12,8 +12,8 @@ class ChromeAudio {
 
   ChromeAudio._();
 
-  Future getInfo() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<JsObject> getInfo() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _audio.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }

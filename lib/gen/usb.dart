@@ -12,26 +12,26 @@ class ChromeUsb {
 
   ChromeUsb._();
 
-  Future getDevices(EnumerateDevicesOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<Device> getDevices(EnumerateDevicesOptions options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Device.create);
     _usb.callMethod('getDevices', [options, completer.callback]);
     return completer.future;
   }
 
-  Future requestAccess(Device device, int interfaceId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> requestAccess(Device device, int interfaceId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _usb.callMethod('requestAccess', [device, interfaceId, completer.callback]);
     return completer.future;
   }
 
-  Future openDevice(Device device) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<ConnectionHandle> openDevice(Device device) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ConnectionHandle.create);
     _usb.callMethod('openDevice', [device, completer.callback]);
     return completer.future;
   }
 
-  Future findDevices(EnumerateDevicesAndRequestAccessOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<ConnectionHandle> findDevices(EnumerateDevicesAndRequestAccessOptions options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ConnectionHandle.create);
     _usb.callMethod('findDevices', [options, completer.callback]);
     return completer.future;
   }
@@ -42,8 +42,8 @@ class ChromeUsb {
     return completer.future;
   }
 
-  Future listInterfaces(ConnectionHandle handle) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<InterfaceDescriptor> listInterfaces(ConnectionHandle handle) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(InterfaceDescriptor.create);
     _usb.callMethod('listInterfaces', [handle, completer.callback]);
     return completer.future;
   }
@@ -66,32 +66,32 @@ class ChromeUsb {
     return completer.future;
   }
 
-  Future controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<TransferResultInfo> controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
     _usb.callMethod('controlTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
   }
 
-  Future bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<TransferResultInfo> bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
     _usb.callMethod('bulkTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
   }
 
-  Future interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<TransferResultInfo> interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
     _usb.callMethod('interruptTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
   }
 
-  Future isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<TransferResultInfo> isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(TransferResultInfo.create);
     _usb.callMethod('isochronousTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
   }
 
-  Future resetDevice(ConnectionHandle handle) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> resetDevice(ConnectionHandle handle) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _usb.callMethod('resetDevice', [handle, completer.callback]);
     return completer.future;
   }

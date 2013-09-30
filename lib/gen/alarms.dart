@@ -16,14 +16,14 @@ class ChromeAlarms {
     _alarms.callMethod('create', [name, alarmInfo]);
   }
 
-  Future get([String name]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<Alarm> get([String name]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Alarm.create);
     _alarms.callMethod('get', [name, completer.callback]);
     return completer.future;
   }
 
-  Future getAll() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<Alarm> getAll() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Alarm.create);
     _alarms.callMethod('getAll', [completer.callback]);
     return completer.future;
   }

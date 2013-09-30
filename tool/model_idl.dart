@@ -233,22 +233,20 @@ class IDLCollectorChrome implements IDLCollector {
     List recursiveParams = [];
 
     if (arg != EMPTY) {
-      var func = arg[0];
-      IDLParameter param = _reduceParameter(func);
+      IDLParameter param = _reduceParameter(arg[0]);
       function.parameters.add(param);
 
-      // TODO: Situation where a single callback has mutiple parameters.
-      // Should be safe enough to expect that wont happen.
-//      if (arg.length > 1) {
-//        _parameterParser(arg[1], recursiveParams);
-//      }
+      if (arg.length > 1) {
+        _parameterParser(arg[1], recursiveParams);
+      }
     }
 
-    // TODO: Situation where a single callback has mutiple parameters.
-    // Should be safe enough to expect that wont happen.
-//    if (!recursiveParams.isEmpty) {
-//      function.parameters.addAll(recursiveParams);
-//    }
+    // This occurs when a single callback has mutiple parameters, e.g.:
+    //   GetInfoCallback(OutputDeviceInfo outputInfo, InputDeviceInfo inputInfo)
+    //   EntriesCallback(object entry, object fileEntries)
+    if (recursiveParams.isNotEmpty) {
+      function.parameters.addAll(recursiveParams);
+    }
 
     idlNamespace.callbacks.add(function);
 

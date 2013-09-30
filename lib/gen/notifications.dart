@@ -12,26 +12,26 @@ class ChromeNotifications {
 
   ChromeNotifications._();
 
-  Future create(String notificationId, NotificationOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> create(String notificationId, NotificationOptions options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _notifications.callMethod('create', [notificationId, options, completer.callback]);
     return completer.future;
   }
 
-  Future update(String notificationId, NotificationOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> update(String notificationId, NotificationOptions options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _notifications.callMethod('update', [notificationId, options, completer.callback]);
     return completer.future;
   }
 
-  Future clear(String notificationId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> clear(String notificationId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _notifications.callMethod('clear', [notificationId, completer.callback]);
     return completer.future;
   }
 
-  Future getAll() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getAll() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _notifications.callMethod('getAll', [completer.callback]);
     return completer.future;
   }

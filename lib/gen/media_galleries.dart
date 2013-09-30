@@ -12,8 +12,8 @@ class ChromeMediaGalleries {
 
   ChromeMediaGalleries._();
 
-  Future getMediaFileSystems([MediaFileSystemsDetails details]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getMediaFileSystems([MediaFileSystemsDetails details]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
     return completer.future;
   }

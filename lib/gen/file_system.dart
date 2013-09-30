@@ -12,38 +12,38 @@ class ChromeFileSystem {
 
   ChromeFileSystem._();
 
-  Future getDisplayPath(var entry) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> getDisplayPath(var entry) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
     return completer.future;
   }
 
-  Future getWritableEntry(var entry) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> getWritableEntry(var entry) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
     return completer.future;
   }
 
-  Future isWritableEntry(var entry) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> isWritableEntry(var entry) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
     return completer.future;
   }
 
-  Future chooseEntry([ChooseEntryOptions options]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<JsObject> chooseEntry([ChooseEntryOptions options]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
     return completer.future;
   }
 
-  Future restoreEntry(String id) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<dynamic> restoreEntry(String id) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
     return completer.future;
   }
 
-  Future isRestorable(String id) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> isRestorable(String id) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _fileSystem.callMethod('isRestorable', [id, completer.callback]);
     return completer.future;
   }

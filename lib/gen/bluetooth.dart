@@ -24,8 +24,8 @@ class ChromeBluetooth {
     return completer.future;
   }
 
-  Future getAdapterState() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<AdapterState> getAdapterState() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(AdapterState.create);
     _bluetooth.callMethod('getAdapterState', [completer.callback]);
     return completer.future;
   }
@@ -36,14 +36,14 @@ class ChromeBluetooth {
     return completer.future;
   }
 
-  Future getProfiles(GetProfilesOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<Profile> getProfiles(GetProfilesOptions options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(Profile.create);
     _bluetooth.callMethod('getProfiles', [options, completer.callback]);
     return completer.future;
   }
 
-  Future getServices(GetServicesOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<ServiceRecord> getServices(GetServicesOptions options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ServiceRecord.create);
     _bluetooth.callMethod('getServices', [options, completer.callback]);
     return completer.future;
   }
@@ -60,20 +60,20 @@ class ChromeBluetooth {
     return completer.future;
   }
 
-  Future read(ReadOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<ArrayBuffer> read(ReadOptions options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ArrayBuffer.create);
     _bluetooth.callMethod('read', [options, completer.callback]);
     return completer.future;
   }
 
-  Future write(WriteOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<int> write(WriteOptions options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _bluetooth.callMethod('write', [options, completer.callback]);
     return completer.future;
   }
 
-  Future getLocalOutOfBandPairingData() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<OutOfBandPairingData> getLocalOutOfBandPairingData() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(OutOfBandPairingData.create);
     _bluetooth.callMethod('getLocalOutOfBandPairingData', [completer.callback]);
     return completer.future;
   }

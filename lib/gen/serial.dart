@@ -12,50 +12,50 @@ class ChromeSerial {
 
   ChromeSerial._();
 
-  Future getPorts() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<String> getPorts() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _serial.callMethod('getPorts', [completer.callback]);
     return completer.future;
   }
 
-  Future open(String port, [OpenOptions options]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<OpenInfo> open(String port, [OpenOptions options]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(OpenInfo.create);
     _serial.callMethod('open', [port, options, completer.callback]);
     return completer.future;
   }
 
-  Future close(int connectionId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> close(int connectionId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _serial.callMethod('close', [connectionId, completer.callback]);
     return completer.future;
   }
 
-  Future read(int connectionId, int bytesToRead) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<SerialReadInfo> read(int connectionId, int bytesToRead) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(SerialReadInfo.create);
     _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
     return completer.future;
   }
 
-  Future write(int connectionId, ArrayBuffer data) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<SerialWriteInfo> write(int connectionId, ArrayBuffer data) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(SerialWriteInfo.create);
     _serial.callMethod('write', [connectionId, data, completer.callback]);
     return completer.future;
   }
 
-  Future flush(int connectionId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> flush(int connectionId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _serial.callMethod('flush', [connectionId, completer.callback]);
     return completer.future;
   }
 
-  Future getControlSignals(int connectionId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<ControlSignalOptions> getControlSignals(int connectionId) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ControlSignalOptions.create);
     _serial.callMethod('getControlSignals', [connectionId, completer.callback]);
     return completer.future;
   }
 
-  Future setControlSignals(int connectionId, ControlSignalOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<bool> setControlSignals(int connectionId, ControlSignalOptions options) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
     _serial.callMethod('setControlSignals', [connectionId, options, completer.callback]);
     return completer.future;
   }

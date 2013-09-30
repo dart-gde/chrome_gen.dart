@@ -12,8 +12,8 @@ class ChromePushMessaging {
 
   ChromePushMessaging._();
 
-  Future getChannelId([bool interactive]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+  Future<ChannelIdResult> getChannelId([bool interactive]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ChannelIdResult.create);
     _pushMessaging.callMethod('getChannelId', [interactive, completer.callback]);
     return completer.future;
   }
