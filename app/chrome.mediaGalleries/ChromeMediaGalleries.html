@@ -44,8 +44,8 @@ class ChromeMediaGalleries {
    return completer.future;
  }
 
- void getMediaFileSystemMetadata(var mediaFileSystem) {
-   _mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]);
+ MediaFileSystemMetadata getMediaFileSystemMetadata(var mediaFileSystem) {
+   return MediaFileSystemMetadata.create(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
  }
 }
 </pre>
@@ -54,12 +54,12 @@ class ChromeMediaGalleries {
 <h3>Methods</h3>
 <div class="method"><h4 id="getMediaFileSystemMetadata">
 <button class="show-code">Code</button>
-void <strong>getMediaFileSystemMetadata</strong>(mediaFileSystem) <a class="anchor-link" href="#getMediaFileSystemMetadata"
+<a href="../chrome.mediaGalleries/MediaFileSystemMetadata.html">MediaFileSystemMetadata</a> <strong>getMediaFileSystemMetadata</strong>(mediaFileSystem) <a class="anchor-link" href="#getMediaFileSystemMetadata"
               title="Permalink to ChromeMediaGalleries.getMediaFileSystemMetadata">#</a></h4>
 <div class="doc">
 <pre class="source">
-void getMediaFileSystemMetadata(var mediaFileSystem) {
- _mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]);
+MediaFileSystemMetadata getMediaFileSystemMetadata(var mediaFileSystem) {
+ return MediaFileSystemMetadata.create(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
 }
 </pre>
 </div>

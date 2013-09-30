@@ -38,6 +38,11 @@ class ArrayBuffer extends ChromeObject {
 
  ArrayBuffer();
  ArrayBuffer.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+ ArrayBuffer.fromString(String str) {
+   var uint8Array = new JsObject(context['Uint8Array'], str.codeUnits);
+   proxy = uint8Array['buffer'];
+ }
 }
 </pre>
 </div>
@@ -84,6 +89,19 @@ JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
 ArrayBuffer.fromProxy(JsObject proxy): super.fromProxy(proxy);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="fromString">
+<button class="show-code">Code</button>
+new <strong>ArrayBuffer.fromString</strong>(String str) <a class="anchor-link" href="#fromString"
+              title="Permalink to ArrayBuffer.ArrayBuffer.fromString">#</a></h4>
+<div class="doc">
+<pre class="source">
+ArrayBuffer.fromString(String str) {
+ var uint8Array = new JsObject(context['Uint8Array'], str.codeUnits);
+ proxy = uint8Array['buffer'];
+}
 </pre>
 </div>
 </div>

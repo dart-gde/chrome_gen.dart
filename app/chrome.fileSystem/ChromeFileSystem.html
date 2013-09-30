@@ -74,8 +74,8 @@ class ChromeFileSystem {
    return completer.future;
  }
 
- void retainEntry(var entry) {
-   _fileSystem.callMethod('retainEntry', [entry]);
+ String retainEntry(var entry) {
+   return _fileSystem.callMethod('retainEntry', [entry]);
  }
 }
 </pre>
@@ -168,12 +168,12 @@ Future&lt;dynamic&gt; restoreEntry(String id) {
 </div>
 <div class="method"><h4 id="retainEntry">
 <button class="show-code">Code</button>
-void <strong>retainEntry</strong>(entry) <a class="anchor-link" href="#retainEntry"
+String <strong>retainEntry</strong>(entry) <a class="anchor-link" href="#retainEntry"
               title="Permalink to ChromeFileSystem.retainEntry">#</a></h4>
 <div class="doc">
 <pre class="source">
-void retainEntry(var entry) {
- _fileSystem.callMethod('retainEntry', [entry]);
+String retainEntry(var entry) {
+ return _fileSystem.callMethod('retainEntry', [entry]);
 }
 </pre>
 </div>

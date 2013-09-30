@@ -44,8 +44,8 @@ class ChromeAppWindow {
    return completer.future;
  }
 
- void current() {
-   _app_window.callMethod('current');
+ AppWindow current() {
+   return AppWindow.create(_app_window.callMethod('current'));
  }
 
  void initializeAppWindow(var state) {
@@ -177,12 +177,12 @@ Future&lt;dynamic&gt; create(String url, [CreateWindowOptions options]) {
 </div>
 <div class="method"><h4 id="current">
 <button class="show-code">Code</button>
-void <strong>current</strong>() <a class="anchor-link" href="#current"
+<a href="../chrome.app_window/AppWindow.html">AppWindow</a> <strong>current</strong>() <a class="anchor-link" href="#current"
               title="Permalink to ChromeAppWindow.current">#</a></h4>
 <div class="doc">
 <pre class="source">
-void current() {
- _app_window.callMethod('current');
+AppWindow current() {
+ return AppWindow.create(_app_window.callMethod('current'));
 }
 </pre>
 </div>
