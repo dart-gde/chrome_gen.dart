@@ -4,9 +4,10 @@ import 'dart:io';
 import 'package:args/args.dart';
 
 import 'backend.dart';
-import 'model_chrome.dart';
-import 'model_json.dart' as model_json;
-import 'model_idl.dart' as model_idl;
+import 'chrome_model.dart';
+import 'json_model.dart' as json_model;
+import 'json_parser.dart' as json_parser;
+import 'web_idl_model.dart' as model_idl;
 import 'overrides.dart';
 import 'web_idl_parser.dart';
 import 'src/utils.dart';
@@ -50,9 +51,9 @@ class GenApiFile {
     String fileName = getFileName(inFile);
 
     if (inFile.path.endsWith(".json")) {
-      model_json.JsonNamespace namespace = model_json.parse(
+      json_model.JsonNamespace namespace = json_parser.parse(
           inFile.readAsStringSync());
-      chromeLib = model_json.convert(namespace);
+      chromeLib = json_model.convert(namespace);
     } else if (inFile.path.endsWith(".idl")) {
       WebIdlParser webIdlParser = new WebIdlParser.withCollector(
           new model_idl.IDLCollectorChrome());

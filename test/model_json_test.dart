@@ -5,10 +5,11 @@ import 'dart:io';
 
 import 'package:unittest/unittest.dart';
 
-import '../tool/model_json.dart' as model_json;
+import '../tool/json_model.dart' as json_model;
+import '../tool/json_parser.dart' as json_parser;
 
 main() {
-  group('model_json', () {
+  group('json_model', () {
     // Define a test for each .json file in idl/
     File testFile = new File('idl/runtime.json');
 
@@ -22,7 +23,7 @@ main() {
         // skip _api_features.json, _manifest_features.json, _permission_features.json
         if (!file.path.contains('/_')) {
           test(file.path, () {
-            model_json.JsonNamespace namespace = model_json.parse(file.readAsStringSync());
+            json_model.JsonNamespace namespace = json_parser.parse(file.readAsStringSync());
             expect(namespace.namespace, isNotNull);
           });
         }

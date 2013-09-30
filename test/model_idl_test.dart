@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:unittest/unittest.dart';
 
 import '../tool/web_idl_parser.dart';
-import '../tool/model_idl.dart' as model_idl;
+import '../tool/web_idl_model.dart' as model_idl;
 
 void modelIdlParseTests() {
   // Define a test for each .json file in idl/

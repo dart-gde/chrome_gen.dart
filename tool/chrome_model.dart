@@ -3,7 +3,7 @@
  * A set of model classes used to represent Chrome libraries, classes, and
  * methods.
  */
-library model_chrome;
+library chrome_model;
 
 import 'src/utils.dart';
 

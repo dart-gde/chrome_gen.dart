@@ -2,8 +2,8 @@
 library web_idl_parser;
 
 import 'package:parsers/parsers.dart';
-import 'model_idl.dart';
-export 'model_idl.dart' show EMPTY;
+import 'web_idl_model.dart';
+export 'web_idl_model.dart' show EMPTY;
 
 final Parser spaces = (space.many > success(EMPTY)) % 'spaces';
 

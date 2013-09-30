@@ -1,7 +1,7 @@
 
-library model_idl;
+library web_idl_model;
 
-import 'model_chrome.dart';
+import 'chrome_model.dart';
 
 class EMPTY {
   // EPSILON

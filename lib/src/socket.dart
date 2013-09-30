@@ -1,4 +1,8 @@
 
+// The code here has been copied from package:chrome; we should port over the
+// rest of the higher level socket API as well (i.e. the manually written
+// classes on top of the raw Chrome API).
+
 library chrome.src.socket;
 
 import 'package:logging/logging.dart';

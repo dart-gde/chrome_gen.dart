@@ -1,7 +1,7 @@
 
 library backend;
 
-import 'model_chrome.dart';
+import 'chrome_model.dart';
 import 'overrides.dart';
 import 'src/src_gen.dart';
 import 'src/utils.dart';
