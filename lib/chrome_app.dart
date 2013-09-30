@@ -35,3 +35,4 @@ export 'gen/usb.dart';
 export 'gen/webstore.dart';
 export 'src/common_exp.dart';
 export 'src/files.dart';
+export 'src/socket.dart';

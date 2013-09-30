@@ -1,5 +1,5 @@
 
-library files;
+library chrome.src.files;
 
 import 'common.dart';
 

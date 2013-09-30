@@ -67,6 +67,11 @@ class ArrayBuffer extends ChromeObject {
 
   ArrayBuffer();
   ArrayBuffer.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  ArrayBuffer.fromString(String str) {
+    var uint8Array = new JsObject(context['Uint8Array'], str.codeUnits);
+    proxy = uint8Array['buffer'];
+  }
 }
 
 // TODO: this is a hack, to eliminate analysis warnings. remove as soon as possible

@@ -3,9 +3,9 @@ version: 0.0.1-dev
 authors:
 - Devon Carew <devoncarew@gmail.com>
 - Adam Singer <financeCoding@gmail.com>
-description: >
-  An *experimental* library for accessing the Chrome APIs in a packaged app or
-  extension.
+description: An *experimental* library for accessing the Chrome APIs in a packaged app or extension.
+dependencies:
+  logging: any
 dev_dependencies:
   args: any
   browser: any

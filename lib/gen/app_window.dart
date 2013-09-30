@@ -18,8 +18,8 @@ class ChromeAppWindow {
     return completer.future;
   }
 
-  void current() {
-    _app_window.callMethod('current');
+  AppWindow current() {
+    return AppWindow.create(_app_window.callMethod('current'));
   }
 
   void initializeAppWindow(var state) {

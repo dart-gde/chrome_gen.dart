@@ -18,8 +18,8 @@ class ChromeMediaGalleries {
     return completer.future;
   }
 
-  void getMediaFileSystemMetadata(var mediaFileSystem) {
-    _mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]);
+  MediaFileSystemMetadata getMediaFileSystemMetadata(var mediaFileSystem) {
+    return MediaFileSystemMetadata.create(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
   }
 }
 

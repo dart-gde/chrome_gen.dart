@@ -36,7 +36,7 @@ class GenApis {
 
     var apisInfo = JSON.decode(apisFile.readAsStringSync());
 
-    _generateApi('app', apisInfo['packaged_app'], includeFiles: true);
+    _generateApi('app', apisInfo['packaged_app'], includeAppSrc: true);
     _generateApi('ext', apisInfo['extension'], alreadyWritten: apisInfo['packaged_app']);
   }
 
@@ -54,7 +54,7 @@ class GenApis {
   }
 
   void _generateApi(String name, List<String> libraryNames,
-                    {List<String> alreadyWritten, bool includeFiles: false}) {
+                    {List<String> alreadyWritten, bool includeAppSrc: false}) {
     File libFile = new File("${outDir.path}/chrome_${name}.dart");
 
     DartGenerator generator = new DartGenerator();
@@ -79,8 +79,9 @@ class GenApis {
 
     generator.writeln("export 'src/common_exp.dart';");
 
-    if (includeFiles) {
+    if (includeAppSrc) {
       generator.writeln("export 'src/files.dart';");
+      generator.writeln("export 'src/socket.dart';");
     }
 
     libFile.writeAsStringSync(generator.toString());

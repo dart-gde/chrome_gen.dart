@@ -48,8 +48,8 @@ class ChromeFileSystem {
     return completer.future;
   }
 
-  void retainEntry(var entry) {
-    _fileSystem.callMethod('retainEntry', [entry]);
+  String retainEntry(var entry) {
+    return _fileSystem.callMethod('retainEntry', [entry]);
   }
 }
 

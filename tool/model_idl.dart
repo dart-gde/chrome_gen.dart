@@ -54,6 +54,7 @@ class IDLCollectorChrome implements IDLCollector {
   }
 
   interfaceMember(l) {
+    var ret = l[1][0];
     var name = l[1][1];
     var arg = l[1][2];
     IDLFunction function = new IDLFunction(name);
@@ -73,6 +74,8 @@ class IDLCollectorChrome implements IDLCollector {
     if (!recursiveParams.isEmpty) {
       function.parameters.addAll(recursiveParams);
     }
+
+    function.returnType = _reduceParameter([EMPTY, [[ret], null, null]]).type;
 
     _functions.add(function);
 
@@ -386,7 +389,7 @@ class IDLType {
   String refName;
 
   factory IDLType(String name) {
-    if (name == null) {
+    if (name == null || name == 'void') {
       return null;
     } else {
       return new IDLType._(name);
