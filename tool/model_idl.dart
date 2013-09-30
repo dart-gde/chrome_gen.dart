@@ -60,81 +60,13 @@ class IDLCollectorChrome implements IDLCollector {
 
     List recursiveParams = [];
 
-    IDLParameter reduceParameter(a) {
-      var func = a;
-
-      if (func[1] is List) {
-        var type = func[1][0];
-        var name;
-        if (func[1][2] != EMPTY) {
-          name = func[1][2];
-        } else if (func[1][3] != EMPTY) {
-          name = func[1][3];
-        } else {
-          // throw does not know how to parse.
-        }
-
-        IDLParameter param = new IDLParameter(name);
-
-        if (type is List) {
-          type = type[0];
-          if (type is List) {
-            type = type[0];
-          }
-
-          param.type = new IDLType(type);
-          param.optional = false;
-        } else if (type is String) {
-          if (type == "optional") {
-            param.optional = true;
-          } else {
-            param.optional = false;
-          }
-
-          if (func[1][1] is List) {
-            var type = func[1][1][0];
-            if (type is List) {
-              type = type[0];
-            }
-            param.type = new IDLType(type);
-          }
-        }
-
-        return param;
-      }
-    };
-
-    void parameterParser(a) {
-      var func;
-
-      if (a == EMPTY) return;
-
-      if (a.length == 3) {
-        // recursive
-        func = a[1];
-        IDLParameter param = reduceParameter(func);
-        recursiveParams.add(param);
-
-        if (a[2] != EMPTY) {
-          parameterParser(a[2]);
-          return;
-        } else {
-          return;
-        }
-      }
-
-      if (a.length == 2) {
-        func = a[1];
-      }
-    };
-
     if (arg != EMPTY) {
       var func = arg[0];
-      IDLParameter param = reduceParameter(func);
+      IDLParameter param = _reduceParameter(func);
       function.parameters.add(param);
 
       if (arg.length > 1) {
-        parameterParser(arg[1]);
+        _parameterParser(arg[1], recursiveParams);
       }
     }
 
@@ -297,21 +229,26 @@ class IDLCollectorChrome implements IDLCollector {
   callback(l) {
     IDLFunction function = new IDLFunction(l[0]);
 
-    // TODO: we need to parse the params (l[3]) into the callback function
-    //var params = l[3];
     var arg = l[3];
     List recursiveParams = [];
 
-    // ["AlarmCallback", "=", "void", [[EMPTY, [["Alarm", EMPTY], EMPTY, "alarm"]], EMPTY, ...], ";"]
     if (arg != EMPTY) {
       var func = arg[0];
       IDLParameter param = _reduceParameter(func);
       function.parameters.add(param);
 
-      if (arg.length > 1) {
-        _parameterParser(arg[1], recursiveParams);
-      }
+      // TODO: Situation where a single callback has mutiple parameters.
+      // Should be safe enough to expect that wont happen.
+//      if (arg.length > 1) {
+//        _parameterParser(arg[1], recursiveParams);
+//      }
     }
+
+    // TODO: Situation where a single callback has mutiple parameters.
+    // Should be safe enough to expect that wont happen.
+//    if (!recursiveParams.isEmpty) {
+//      function.parameters.addAll(recursiveParams);
+//    }
 
     idlNamespace.callbacks.add(function);
 
