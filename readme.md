@@ -18,7 +18,7 @@ Add this to your package's pubspec.yaml file:
     import 'package:chrome_gen/chrome_app.dart' as chrome_gen;
     
     void main() {
-      chrome.runtime.getPlatformInfo().then((Map m) {
+      chrome_gen.runtime.getPlatformInfo().then((Map m) {
         print(m.toString());
       });
     }
