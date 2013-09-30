@@ -6,13 +6,6 @@ extension.
 
 [![Build Status](https://drone.io/github.com/dart-gde/chrome_gen.dart/status.png)](https://drone.io/github.com/dart-gde/chrome_gen.dart/latest)
 
-<!--
-### Documentation
-Generated documentation is available:
-- [Chrome Apps API](http://devoncarew.github.io/chrome_gen.dart/app/)
-- [Chrome Extensions API](http://devoncarew.github.io/chrome_gen.dart/ext/)
--->
-
 ### Installing
 
 Add this to your package's pubspec.yaml file:
@@ -29,6 +22,11 @@ Add this to your package's pubspec.yaml file:
         print(m.toString());
       });
     }
+
+### Documentation
+Documentation is available:
+- [Chrome Apps API](http://dart-gde.github.io/chrome_gen.dart/app/)
+- [Chrome Extensions API](http://dart-gde.github.io/chrome_gen.dart/ext/)
 
 ### Re-generating the library
 From the project directory, run:
