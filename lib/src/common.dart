@@ -1,5 +1,5 @@
 
-library common;
+library chrome.src.common;
 
 export 'dart:async';
 export 'dart:js';

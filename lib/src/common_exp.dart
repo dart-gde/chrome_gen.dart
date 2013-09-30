@@ -1,5 +1,5 @@
 
-library common_exp;
+library chrome.src.common_exp;
 
 import 'dart:js';
 

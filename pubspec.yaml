@@ -1,5 +1,6 @@
 name: chrome_gen
-version: 0.0.1-dev
+version: 0.0.1
+homepage: https://github.com/dart-gde/chrome_gen.dart
 authors:
 - Devon Carew <devoncarew@gmail.com>
 - Adam Singer <financeCoding@gmail.com>
