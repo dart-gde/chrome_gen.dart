@@ -1,7 +1,7 @@
 chrome_gen.dart
 ==============
 
-An *experimental* library for accessing the Chrome APIs in a packaged app or
+An **experimental** library for accessing the Chrome APIs in a packaged app or
 extension.
 
 <!--
