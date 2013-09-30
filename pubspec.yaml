@@ -1,12 +1,13 @@
-name: gen_tools
+name: chrome_gen
 version: 0.0.1-dev
-author: devoncarew@google.com
-description: Tools to generate Chrome App APIs
-environment:
-  sdk: '>=0.7.5'
-dependencies:
-  args: any
-  parsers: '>=0.13.5' # TODO: revert back to any when parsers updates env constraint
+authors:
+- Devon Carew <devoncarew@gmail.com>
+- Adam Singer <financeCoding@gmail.com>
+description: >
+  An *experimental* library for accessing the Chrome APIs in a packaged app or
+  extension.
 dev_dependencies:
+  args: any
   browser: any
+  parsers: any
   unittest: any

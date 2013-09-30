@@ -1,14 +1,19 @@
-gen_tools.dart
+chrome_gen.dart
 ==============
 
-Exploring options for code generation for the chrome apps APIs.
+An *experimental* library for accessing the Chrome APIs in a packaged app or
+extension.
 
-[![Build Status](https://drone.io/github.com/devoncarew/gen_tools.dart/status.png)](https://drone.io/github.com/devoncarew/gen_tools.dart/latest)
+<!--
+[![Build Status](https://drone.io/github.com/devoncarew/chrome_gen.dart/status.png)](https://drone.io/github.com/devoncarew/chrome_gen.dart/latest)
+-->
 
+<!--
 ### Documentation
 Generated documentation is available:
-- [Chrome Apps API](http://devoncarew.github.io/gen_tools.dart/app/)
-- [Chrome Extensions API](http://devoncarew.github.io/gen_tools.dart/ext/)
+- [Chrome Apps API](http://devoncarew.github.io/chrome_gen.dart/app/)
+- [Chrome Extensions API](http://devoncarew.github.io/chrome_gen.dart/ext/)
+-->
 
 ### Running
 From the project directory, run:

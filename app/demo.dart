@@ -1,7 +1,7 @@
 
 import 'dart:html';
 
-import 'package:gen_tools/chrome_app.dart' as chrome;
+import 'package:chrome_gen/chrome_app.dart' as chrome;
 
 void main() {
   label('alarms');
