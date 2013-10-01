@@ -1,7 +1,7 @@
 chrome_gen.dart
 ==============
 
-An **experimental** library for accessing the Chrome APIs in a packaged app or
+An experimental library for accessing the Chrome APIs in a packaged app or
 extension.
 
 [![Build Status](https://drone.io/github.com/dart-gde/chrome_gen.dart/status.png)](https://drone.io/github.com/dart-gde/chrome_gen.dart/latest)
@@ -25,8 +25,8 @@ Add this to your package's pubspec.yaml file:
 
 ### Documentation
 Documentation is available at:
-- [Chrome Apps API](http://dart-gde.github.io/chrome_gen.dart/app/)
-- [Chrome Extensions API](http://dart-gde.github.io/chrome_gen.dart/ext/)
+* [Chrome Apps API](http://dart-gde.github.io/chrome_gen.dart/app/)
+* [Chrome Extensions API](http://dart-gde.github.io/chrome_gen.dart/ext/)
 
 ### Re-generating the library
 From the project directory, run:
@@ -34,6 +34,7 @@ From the project directory, run:
 `dart tool/gen_apis.dart`
 
 This will:
-- read `meta/apis.json` and `meta/overrides.json`
-- parse the cooresponding `idl/*.json` and `idl/*.idl` files
-- generate `lib/chrome_app.dart`, `lib/chrome_ext.dart`, and `lib/gen/*.dart`.
+* read `meta/apis.json` and `meta/overrides.json`
+* parse the cooresponding `idl/*.json` and `idl/*.idl` files
+* generate `lib/chrome_app.dart`, `lib/chrome_ext.dart`, and `lib/gen/*.dart`.
+* 
