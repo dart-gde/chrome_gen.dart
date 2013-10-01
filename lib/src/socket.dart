@@ -57,9 +57,13 @@ class TcpClient {
       _logger.fine("Socket.create.then = ${createInfo}");
       _createInfo = createInfo;
       socket.connect(_createInfo.socketId, host, port).then((int result) {
-        _isConnected = true;
-        //_setupDataPoll();
-        completer.complete(_isConnected);
+        if (result < 0) {
+          completer.complete(false);
+        } else {
+          _isConnected = true;
+          //_setupDataPoll();
+          completer.complete(_isConnected);
+        }
       });
     });
     return completer.future;
