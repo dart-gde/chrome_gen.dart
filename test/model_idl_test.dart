@@ -196,8 +196,21 @@ void modelIdlParseEnumTest() {
   });
 }
 
+void modelIdlDictionaryTypeTests() {
+  test('Multiple members test', () {
+    File testFile = new File('idl/app_window.idl');
+    WebIdlParser webIdlParser =
+        new WebIdlParser.withCollector(new model_idl.IDLCollectorChrome());
+    webIdlParser.start.parse(testFile.readAsStringSync());
+    print(webIdlParser.collector.idlNamespace);
+    var chromeLibrary = model_idl.convert(webIdlParser.collector);
+    print(chromeLibrary);
+  });
+}
+
 void main() {
-  group('model_idl.IDLCollectorChrome parse', modelIdlParseTests);
-  group('model_idl', modelIdlParseTestTypes);
-  group('model_idl', modelIdlParseEnumTest);
+//  group('model_idl.IDLCollectorChrome parse', modelIdlParseTests);
+//  group('model_idl', modelIdlParseTestTypes);
+//  group('model_idl', modelIdlParseEnumTest);
+  group('model_idl dictionary members', modelIdlDictionaryTypeTests);
 }

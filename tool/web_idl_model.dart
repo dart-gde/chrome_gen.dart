@@ -19,6 +19,7 @@ class IDLCollector {
   interfaceMember(l) => l; // Must return type passed for parser to continue.
   dictionary(l) => l; // Must return type passed for parser to continue.
   dictionaryMember(l) => l; // Must return type passed for parser to continue.
+  dictionaryMethod(l) => l; // Must return type passed for parser to continue.
   enumStatement(l) => l; // Must return type passed for parser to continue.
   callback(l) => l; // Must return type passed for parser to continue.
 }
@@ -27,6 +28,7 @@ class IDLCollectorChrome implements IDLCollector {
   IDLNamespace idlNamespace = new IDLNamespace();
   List _functions = [];
   List _dictionaryMembers = [];
+  List _dictionaryMethods = [];
 
   namespace(l) {
     idlNamespace.name = l[2].join('.');
@@ -53,7 +55,7 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  interfaceMember(l) {
+  _functionParser(l) {
     var ret = l[1][0];
     var name = l[1][1];
     var arg = l[1][2];
@@ -77,6 +79,11 @@ class IDLCollectorChrome implements IDLCollector {
 
     function.returnType = _reduceParameter([EMPTY, [[ret], null, null]]).type;
 
+    return function;
+  }
+
+  interfaceMember(l) {
+    IDLFunction function = _functionParser(l);
     _functions.add(function);
 
     // Must return type passed for parser to continue.
@@ -88,6 +95,10 @@ class IDLCollectorChrome implements IDLCollector {
     IDLDeclaredType declaredType = new IDLDeclaredType(name);
     declaredType.members.addAll(_dictionaryMembers);
     _dictionaryMembers = [];
+
+    declaredType.functions.addAll(_dictionaryMethods);
+    _dictionaryMethods = [];
+
     idlNamespace.declaredTypes.add(declaredType);
 
     // Must return type passed for parser to continue.
@@ -105,6 +116,14 @@ class IDLCollectorChrome implements IDLCollector {
 
     member.returnType = new IDLType(type);
     _dictionaryMembers.add(member);
+    // Must return type passed for parser to continue.
+    return l;
+  }
+
+  dictionaryMethod(l) {
+    IDLFunction function = _functionParser(l);
+    _dictionaryMethods.add(function);
+
     // Must return type passed for parser to continue.
     return l;
   }
@@ -348,6 +367,7 @@ class IDLDeclaredType {
   String name;
   String description;
   List<IDLProperty> members = [];
+  List<IDLFunction> functions = [];
 
   IDLDeclaredType(this.name);
 
@@ -440,6 +460,11 @@ class IDLConverter {
     library.enumTypes = namespace.enumTypes.map(_convertEnum).toList();
 
     return library;
+  }
+
+  List<ChromeMethod> _convertDeclaredTypeMethods(IDLDeclaredType idlDeclaredType) {
+    var methods = idlDeclaredType.functions.map(_convertMethod).toList();
+    return methods;
   }
 
   ChromeDeclaredType _convertDeclaredType(IDLDeclaredType idlDeclaredType) {
