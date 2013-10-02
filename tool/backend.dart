@@ -11,7 +11,7 @@ import 'src/utils.dart';
  * into source code.
  */
 abstract class Backend {
-  Overrides overrides;
+  final Overrides overrides;
 
   Backend(this.overrides);
 
@@ -23,15 +23,24 @@ abstract class Backend {
 }
 
 class DefaultBackend extends Backend {
-  DartGenerator generator;
-  ChromeLibrary library;
-
   DefaultBackend(Overrides overrides): super(overrides);
 
   String generate(ChromeLibrary library, {String license, String sourceFileName}) {
-    this.library = library;
-    generator = new DartGenerator();
+    var context = new _DefaultBackendContext(new DartGenerator(),
+        library, overrides);
 
+    return context.generate(license: license, sourceFileName: sourceFileName);
+  }
+}
+
+class _DefaultBackendContext {
+  final DartGenerator generator;
+  final ChromeLibrary library;
+  final Overrides overrides;
+
+  _DefaultBackendContext(this.generator, this.library, this.overrides);
+
+  String generate({String license, String sourceFileName}) {
     if (license != null) {
       generator.writeln(license);
       generator.writeln();
@@ -305,7 +314,8 @@ class DefaultBackend extends Backend {
     }
 
     String className = type.name;
-    Iterable<ChromeProperty> props = type.filteredProperties;
+    List<ChromeProperty> props =
+        type.filteredProperties.toList(growable: false);
 
     generator.writeln();
     generator.writeDocs(type.documentation);
@@ -342,7 +352,7 @@ class DefaultBackend extends Backend {
   /**
    * Return the name of the incoming JS type.
    */
-  String getJSType(ChromeType type) {
+  static String getJSType(ChromeType type) {
     if (type.isPrimitive) {
       return type.type;
     } else {
@@ -350,7 +360,7 @@ class DefaultBackend extends Backend {
     }
   }
 
-  String getCallbackConverter(ChromeType param) {
+  static String getCallbackConverter(ChromeType param) {
     if (param.isString || param.isInt || param.isBool) {
       return null;
     } else if (param.isList) {
@@ -370,7 +380,7 @@ class DefaultBackend extends Backend {
     }
   }
 
-  String getReturnConverter(ChromeType param) {
+  static String getReturnConverter(ChromeType param) {
     if (param.isString || param.isInt || param.isBool) {
       return '%s';
     } else if (param.isList) {
@@ -390,7 +400,7 @@ class DefaultBackend extends Backend {
     }
   }
 
-  String getParamConverter(ChromeType param) {
+  static String getParamConverter(ChromeType param) {
     if (param.isMap || param.isList) {
       return "jsify(${param.name})";
     } else {
@@ -398,4 +408,3 @@ class DefaultBackend extends Backend {
     }
   }
 }
-
