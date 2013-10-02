@@ -59,7 +59,7 @@ class Resource extends ChromeObject {
   * Currently, only base64 is supported.
   */
  Future&lt;JsObject&gt; getContent() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
    proxy.callMethod('getContent', [completer.callback]);
    return completer.future;
  }
@@ -79,7 +79,7 @@ class Resource extends ChromeObject {
   * error otherwise.
   */
  Future&lt;Map&lt;String, dynamic&gt;&gt; setContent(String content, bool commit) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
    proxy.callMethod('setContent', [content, commit, completer.callback]);
    return completer.future;
  }
@@ -180,7 +180,7 @@ Future&lt;JsObject&gt; <strong>getContent</strong>() <a class="anchor-link" href
 Currently, only base64 is supported.</p>
 <pre class="source">
 Future&lt;JsObject&gt; getContent() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
  proxy.callMethod('getContent', [completer.callback]);
  return completer.future;
 }
@@ -205,7 +205,7 @@ Set to undefined if the resource content was set successfully; describes
 error otherwise.</p>
 <pre class="source">
 Future&lt;Map&lt;String, dynamic&gt;&gt; setContent(String content, bool commit) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
  proxy.callMethod('setContent', [content, commit, completer.callback]);
  return completer.future;
 }

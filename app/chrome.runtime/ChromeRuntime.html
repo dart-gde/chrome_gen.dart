@@ -58,7 +58,7 @@ class ChromeRuntime {
   * The JavaScript 'window' object for the background page.
   */
  Future&lt;dynamic&gt; getBackgroundPage() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _runtime.callMethod('getBackgroundPage', [completer.callback]);
    return completer.future;
  }
@@ -114,7 +114,7 @@ class ChromeRuntime {
   * the available update.
   */
  Future&lt;JsObject&gt; requestUpdateCheck() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
    _runtime.callMethod('requestUpdateCheck', [completer.callback]);
    return completer.future;
  }
@@ -167,7 +167,7 @@ class ChromeRuntime {
   * no arguments and [runtime.lastError] will be set to the error message.
   */
  Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
    return completer.future;
  }
@@ -185,7 +185,7 @@ class ChromeRuntime {
   * with no arguments and [runtime.lastError] will be set to the error message.
   */
  Future&lt;dynamic&gt; sendNativeMessage(String application, Map&lt;String, dynamic&gt; message) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
    return completer.future;
  }
@@ -194,7 +194,7 @@ class ChromeRuntime {
   * Returns information about the current platform.
   */
  Future&lt;Map&gt; getPlatformInfo() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    _runtime.callMethod('getPlatformInfo', [completer.callback]);
    return completer.future;
  }
@@ -203,7 +203,7 @@ class ChromeRuntime {
   * Returns a DirectoryEntry for the package directory.
   */
  Future&lt;dynamic&gt; getPackageDirectoryEntry() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
    return completer.future;
  }
@@ -564,7 +564,7 @@ is no background page, an error is set.</p>
 The JavaScript 'window' object for the background page.</p>
 <pre class="source">
 Future&lt;dynamic&gt; getBackgroundPage() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _runtime.callMethod('getBackgroundPage', [completer.callback]);
  return completer.future;
 }
@@ -595,7 +595,7 @@ Future&lt;dynamic&gt; <strong>getPackageDirectoryEntry</strong>() <a class="anch
 <p>Returns a DirectoryEntry for the package directory.</p>
 <pre class="source">
 Future&lt;dynamic&gt; getPackageDirectoryEntry() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
  return completer.future;
 }
@@ -610,7 +610,7 @@ Future&lt;Map&gt; <strong>getPlatformInfo</strong>() <a class="anchor-link" href
 <p>Returns information about the current platform.</p>
 <pre class="source">
 Future&lt;Map&gt; getPlatformInfo() {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  _runtime.callMethod('getPlatformInfo', [completer.callback]);
  return completer.future;
 }
@@ -662,7 +662,7 @@ enum of <code>throttled</code>, <code>no_update</code>, <code>update_available</
 the available update.</p>
 <pre class="source">
 Future&lt;JsObject&gt; requestUpdateCheck() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
  _runtime.callMethod('requestUpdateCheck', [completer.callback]);
  return completer.future;
 }
@@ -689,7 +689,7 @@ occurs while connecting to the extension, the callback will be called with
 no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
 Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
  return completer.future;
 }
@@ -712,7 +712,7 @@ while connecting to the native messaging host, the callback will be called
 with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
 Future&lt;dynamic&gt; sendNativeMessage(String application, Map&lt;String, dynamic&gt; message) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
  return completer.future;
 }

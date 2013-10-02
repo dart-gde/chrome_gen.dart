@@ -49,7 +49,7 @@ class ChromeBrowserAction {
   * Gets the title of the browser action.
   */
  Future&lt;String&gt; getTitle(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _browserAction.callMethod('getTitle', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -61,7 +61,7 @@ class ChromeBrowserAction {
   * &lt;b&gt;imageData&lt;/b&gt; property must be specified.
   */
  Future setIcon(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _browserAction.callMethod('setIcon', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -78,7 +78,7 @@ class ChromeBrowserAction {
   * Gets the html document set as the popup for this browser action.
   */
  Future&lt;String&gt; getPopup(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _browserAction.callMethod('getPopup', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -96,7 +96,7 @@ class ChromeBrowserAction {
   * non-tab-specific badge text is returned.
   */
  Future&lt;String&gt; getBadgeText(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _browserAction.callMethod('getBadgeText', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -112,7 +112,7 @@ class ChromeBrowserAction {
   * Gets the background color of the browser action.
   */
  Future&lt;ColorArray&gt; getBadgeBackgroundColor(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(ColorArray.create);
+   var completer = new ChromeCompleter&lt;ColorArray&gt;.oneArg(ColorArray.create);
    _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -205,7 +205,7 @@ Future&lt;<a href="../chrome.browserAction/ColorArray.html">ColorArray</a>&gt; <
 <p>Gets the background color of the browser action.</p>
 <pre class="source">
 Future&lt;ColorArray&gt; getBadgeBackgroundColor(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(ColorArray.create);
+ var completer = new ChromeCompleter&lt;ColorArray&gt;.oneArg(ColorArray.create);
  _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -221,7 +221,7 @@ Future&lt;String&gt; <strong>getBadgeText</strong>(Map details) <a class="anchor
 non-tab-specific badge text is returned.</p>
 <pre class="source">
 Future&lt;String&gt; getBadgeText(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _browserAction.callMethod('getBadgeText', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -236,7 +236,7 @@ Future&lt;String&gt; <strong>getPopup</strong>(Map details) <a class="anchor-lin
 <p>Gets the html document set as the popup for this browser action.</p>
 <pre class="source">
 Future&lt;String&gt; getPopup(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _browserAction.callMethod('getPopup', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -251,7 +251,7 @@ Future&lt;String&gt; <strong>getTitle</strong>(Map details) <a class="anchor-lin
 <p>Gets the title of the browser action.</p>
 <pre class="source">
 Future&lt;String&gt; getTitle(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _browserAction.callMethod('getTitle', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -296,7 +296,7 @@ dictionary of either one of those. Either the &lt;b>path&lt;/b> or the
 &lt;b>imageData&lt;/b> property must be specified.</p>
 <pre class="source">
 Future setIcon(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _browserAction.callMethod('setIcon', [jsify(details), completer.callback]);
  return completer.future;
 }

@@ -39,43 +39,43 @@ class ChromeSyncFileSystem {
  ChromeSyncFileSystem._();
 
  Future&lt;dynamic&gt; requestFileSystem() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
    return completer.future;
  }
 
  Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
    return completer.future;
  }
 
  Future&lt;ConflictResolutionPolicy&gt; getConflictResolutionPolicy() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(ConflictResolutionPolicy.create);
+   var completer = new ChromeCompleter&lt;ConflictResolutionPolicy&gt;.oneArg(ConflictResolutionPolicy.create);
    _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
    return completer.future;
  }
 
  Future&lt;StorageInfo&gt; getUsageAndQuota(dynamic fileSystem) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(StorageInfo.create);
+   var completer = new ChromeCompleter&lt;StorageInfo&gt;.oneArg(StorageInfo.create);
    _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
    return completer.future;
  }
 
  Future&lt;FileStatus&gt; getFileStatus(dynamic fileEntry) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatus.create);
+   var completer = new ChromeCompleter&lt;FileStatus&gt;.oneArg(FileStatus.create);
    _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
    return completer.future;
  }
 
  Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatusInfo.create);
+   var completer = new ChromeCompleter&lt;FileStatusInfo&gt;.oneArg(FileStatusInfo.create);
    _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
    return completer.future;
  }
 
  Future&lt;ServiceStatus&gt; getServiceStatus() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(ServiceStatus.create);
+   var completer = new ChromeCompleter&lt;ServiceStatus&gt;.oneArg(ServiceStatus.create);
    _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
    return completer.future;
  }
@@ -128,7 +128,7 @@ Future&lt;<a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">Confl
 <div class="doc">
 <pre class="source">
 Future&lt;ConflictResolutionPolicy&gt; getConflictResolutionPolicy() {
- ChromeCompleter completer = new ChromeCompleter.oneArg(ConflictResolutionPolicy.create);
+ var completer = new ChromeCompleter&lt;ConflictResolutionPolicy&gt;.oneArg(ConflictResolutionPolicy.create);
  _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
  return completer.future;
 }
@@ -142,7 +142,7 @@ Future&lt;<a href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a>&gt; 
 <div class="doc">
 <pre class="source">
 Future&lt;FileStatus&gt; getFileStatus(dynamic fileEntry) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatus.create);
+ var completer = new ChromeCompleter&lt;FileStatus&gt;.oneArg(FileStatus.create);
  _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
  return completer.future;
 }
@@ -156,7 +156,7 @@ Future&lt;<a href="../chrome.syncFileSystem/FileStatusInfo.html">FileStatusInfo<
 <div class="doc">
 <pre class="source">
 Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatusInfo.create);
+ var completer = new ChromeCompleter&lt;FileStatusInfo&gt;.oneArg(FileStatusInfo.create);
  _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
  return completer.future;
 }
@@ -170,7 +170,7 @@ Future&lt;<a href="../chrome.syncFileSystem/ServiceStatus.html">ServiceStatus</a
 <div class="doc">
 <pre class="source">
 Future&lt;ServiceStatus&gt; getServiceStatus() {
- ChromeCompleter completer = new ChromeCompleter.oneArg(ServiceStatus.create);
+ var completer = new ChromeCompleter&lt;ServiceStatus&gt;.oneArg(ServiceStatus.create);
  _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
  return completer.future;
 }
@@ -184,7 +184,7 @@ Future&lt;<a href="../chrome.syncFileSystem/StorageInfo.html">StorageInfo</a>&gt
 <div class="doc">
 <pre class="source">
 Future&lt;StorageInfo&gt; getUsageAndQuota(dynamic fileSystem) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(StorageInfo.create);
+ var completer = new ChromeCompleter&lt;StorageInfo&gt;.oneArg(StorageInfo.create);
  _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
  return completer.future;
 }
@@ -198,7 +198,7 @@ Future&lt;dynamic&gt; <strong>requestFileSystem</strong>() <a class="anchor-link
 <div class="doc">
 <pre class="source">
 Future&lt;dynamic&gt; requestFileSystem() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
  return completer.future;
 }
@@ -212,7 +212,7 @@ Future <strong>setConflictResolutionPolicy</strong>(<a href="../chrome.syncFileS
 <div class="doc">
 <pre class="source">
 Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
  return completer.future;
 }

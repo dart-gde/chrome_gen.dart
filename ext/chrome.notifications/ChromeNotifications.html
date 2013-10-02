@@ -39,25 +39,25 @@ class ChromeNotifications {
  ChromeNotifications._();
 
  Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _notifications.callMethod('create', [notificationId, options, completer.callback]);
    return completer.future;
  }
 
  Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _notifications.callMethod('update', [notificationId, options, completer.callback]);
    return completer.future;
  }
 
  Future&lt;bool&gt; clear(String notificationId) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _notifications.callMethod('clear', [notificationId, completer.callback]);
    return completer.future;
  }
 
  Future&lt;dynamic&gt; getAll() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _notifications.callMethod('getAll', [completer.callback]);
    return completer.future;
  }
@@ -127,7 +127,7 @@ Future&lt;bool&gt; <strong>clear</strong>(String notificationId) <a class="ancho
 <div class="doc">
 <pre class="source">
 Future&lt;bool&gt; clear(String notificationId) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _notifications.callMethod('clear', [notificationId, completer.callback]);
  return completer.future;
 }
@@ -141,7 +141,7 @@ Future&lt;String&gt; <strong>create</strong>(String notificationId, <a href="../
 <div class="doc">
 <pre class="source">
 Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _notifications.callMethod('create', [notificationId, options, completer.callback]);
  return completer.future;
 }
@@ -155,7 +155,7 @@ Future&lt;dynamic&gt; <strong>getAll</strong>() <a class="anchor-link" href="#ge
 <div class="doc">
 <pre class="source">
 Future&lt;dynamic&gt; getAll() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _notifications.callMethod('getAll', [completer.callback]);
  return completer.future;
 }
@@ -169,7 +169,7 @@ Future&lt;bool&gt; <strong>update</strong>(String notificationId, <a href="../ch
 <div class="doc">
 <pre class="source">
 Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _notifications.callMethod('update', [notificationId, options, completer.callback]);
  return completer.future;
 }

@@ -39,7 +39,7 @@ class ChromeMediaGalleries {
  ChromeMediaGalleries._();
 
  Future&lt;dynamic&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
    return completer.future;
  }
@@ -71,7 +71,7 @@ Future&lt;dynamic&gt; <strong>getMediaFileSystems</strong>([<a href="../chrome.m
 <div class="doc">
 <pre class="source">
 Future&lt;dynamic&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
  return completer.future;
 }

@@ -46,7 +46,7 @@ class Event extends ChromeObject {
   * Registers an event listener _callback_ to an event.
   */
  Future addListener() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('addListener', [completer.callback]);
    return completer.future;
  }
@@ -55,7 +55,7 @@ class Event extends ChromeObject {
   * Deregisters an event listener _callback_ from an event.
   */
  Future removeListener() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('removeListener', [completer.callback]);
    return completer.future;
  }
@@ -80,7 +80,7 @@ class Event extends ChromeObject {
   * Rules that were registered, the optional parameters are filled with values.
   */
  Future&lt;List&lt;Rule&gt;&gt; addRules(String eventName, List&lt;Rule&gt; rules) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Rule.create));
+   var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, Rule.create));
    proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
    return completer.future;
  }
@@ -97,7 +97,7 @@ class Event extends ChromeObject {
   * Rules that were registered, the optional parameters are filled with values.
   */
  Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Rule.create));
+   var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, Rule.create));
    proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
    return completer.future;
  }
@@ -111,7 +111,7 @@ class Event extends ChromeObject {
   * contained in this array are unregistered.
   */
  Future removeRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
    return completer.future;
  }
@@ -190,7 +190,7 @@ Future <strong>addListener</strong>() <a class="anchor-link" href="#addListener"
 <p>Registers an event listener <em>callback</em> to an event.</p>
 <pre class="source">
 Future addListener() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('addListener', [completer.callback]);
  return completer.future;
 }
@@ -212,7 +212,7 @@ rules.</p>
 Rules that were registered, the optional parameters are filled with values.</p>
 <pre class="source">
 Future&lt;List&lt;Rule&gt;&gt; addRules(String eventName, List&lt;Rule&gt; rules) {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Rule.create));
+ var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, Rule.create));
  proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
  return completer.future;
 }
@@ -234,7 +234,7 @@ contained in this array are returned.</p>
 Rules that were registered, the optional parameters are filled with values.</p>
 <pre class="source">
 Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Rule.create));
+ var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, Rule.create));
  proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
  return completer.future;
 }
@@ -273,7 +273,7 @@ Future <strong>removeListener</strong>() <a class="anchor-link" href="#removeLis
 <p>Deregisters an event listener <em>callback</em> from an event.</p>
 <pre class="source">
 Future removeListener() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('removeListener', [completer.callback]);
  return completer.future;
 }
@@ -293,7 +293,7 @@ Future <strong>removeRules</strong>(String eventName, [List&lt;String&gt; ruleId
 contained in this array are unregistered.</p>
 <pre class="source">
 Future removeRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
  return completer.future;
 }

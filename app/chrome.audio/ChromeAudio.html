@@ -39,19 +39,19 @@ class ChromeAudio {
  ChromeAudio._();
 
  Future&lt;JsObject&gt; getInfo() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
    _audio.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
 
  Future setActiveDevices(String ids) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _audio.callMethod('setActiveDevices', [ids, completer.callback]);
    return completer.future;
  }
 
  Future setProperties(String id, DeviceProperties properties) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _audio.callMethod('setProperties', [id, properties, completer.callback]);
    return completer.future;
  }
@@ -87,7 +87,7 @@ Future&lt;JsObject&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#
 <div class="doc">
 <pre class="source">
 Future&lt;JsObject&gt; getInfo() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
  _audio.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }
@@ -101,7 +101,7 @@ Future <strong>setActiveDevices</strong>(String ids) <a class="anchor-link" href
 <div class="doc">
 <pre class="source">
 Future setActiveDevices(String ids) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _audio.callMethod('setActiveDevices', [ids, completer.callback]);
  return completer.future;
 }
@@ -115,7 +115,7 @@ Future <strong>setProperties</strong>(String id, <a href="../chrome.audio/Device
 <div class="doc">
 <pre class="source">
 Future setProperties(String id, DeviceProperties properties) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _audio.callMethod('setProperties', [id, properties, completer.callback]);
  return completer.future;
 }

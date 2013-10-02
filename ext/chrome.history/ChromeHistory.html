@@ -43,7 +43,7 @@ class ChromeHistory {
   * query.
   */
  Future&lt;List&lt;HistoryItem&gt;&gt; search(Map query) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, HistoryItem.create));
+   var completer = new ChromeCompleter&lt;List&lt;HistoryItem&gt;&gt;.oneArg((e) =&gt; listify(e, HistoryItem.create));
    _history.callMethod('search', [jsify(query), completer.callback]);
    return completer.future;
  }
@@ -52,7 +52,7 @@ class ChromeHistory {
   * Retrieves information about visits to a URL.
   */
  Future&lt;List&lt;VisitItem&gt;&gt; getVisits(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, VisitItem.create));
+   var completer = new ChromeCompleter&lt;List&lt;VisitItem&gt;&gt;.oneArg((e) =&gt; listify(e, VisitItem.create));
    _history.callMethod('getVisits', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -62,7 +62,7 @@ class ChromeHistory {
   * type](#transition_types) of "link".
   */
  Future addUrl(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _history.callMethod('addUrl', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -71,7 +71,7 @@ class ChromeHistory {
   * Removes all occurrences of the given URL from the history.
   */
  Future deleteUrl(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _history.callMethod('deleteUrl', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -82,7 +82,7 @@ class ChromeHistory {
   * range.
   */
  Future deleteRange(Map range) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _history.callMethod('deleteRange', [jsify(range), completer.callback]);
    return completer.future;
  }
@@ -91,7 +91,7 @@ class ChromeHistory {
   * Deletes all items from the history.
   */
  Future deleteAll() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _history.callMethod('deleteAll', [completer.callback]);
    return completer.future;
  }
@@ -158,7 +158,7 @@ Future <strong>addUrl</strong>(Map details) <a class="anchor-link" href="#addUrl
 type</a> of "link".</p>
 <pre class="source">
 Future addUrl(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _history.callMethod('addUrl', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -173,7 +173,7 @@ Future <strong>deleteAll</strong>() <a class="anchor-link" href="#deleteAll"
 <p>Deletes all items from the history.</p>
 <pre class="source">
 Future deleteAll() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _history.callMethod('deleteAll', [completer.callback]);
  return completer.future;
 }
@@ -190,7 +190,7 @@ will not be removed from the history unless all visits fall within the
 range.</p>
 <pre class="source">
 Future deleteRange(Map range) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _history.callMethod('deleteRange', [jsify(range), completer.callback]);
  return completer.future;
 }
@@ -205,7 +205,7 @@ Future <strong>deleteUrl</strong>(Map details) <a class="anchor-link" href="#del
 <p>Removes all occurrences of the given URL from the history.</p>
 <pre class="source">
 Future deleteUrl(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _history.callMethod('deleteUrl', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -220,7 +220,7 @@ Future&lt;List&lt;<a href="../chrome.history/VisitItem.html">VisitItem</a>&gt;&g
 <p>Retrieves information about visits to a URL.</p>
 <pre class="source">
 Future&lt;List&lt;VisitItem&gt;&gt; getVisits(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, VisitItem.create));
+ var completer = new ChromeCompleter&lt;List&lt;VisitItem&gt;&gt;.oneArg((e) =&gt; listify(e, VisitItem.create));
  _history.callMethod('getVisits', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -236,7 +236,7 @@ Future&lt;List&lt;<a href="../chrome.history/HistoryItem.html">HistoryItem</a>&g
 query.</p>
 <pre class="source">
 Future&lt;List&lt;HistoryItem&gt;&gt; search(Map query) {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, HistoryItem.create));
+ var completer = new ChromeCompleter&lt;List&lt;HistoryItem&gt;&gt;.oneArg((e) =&gt; listify(e, HistoryItem.create));
  _history.callMethod('search', [jsify(query), completer.callback]);
  return completer.future;
 }

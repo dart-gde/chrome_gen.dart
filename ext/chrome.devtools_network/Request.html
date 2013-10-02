@@ -51,7 +51,7 @@ class Request extends ChromeObject {
   * Currently, only base64 is supported.
   */
  Future&lt;JsObject&gt; getContent() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
    proxy.callMethod('getContent', [completer.callback]);
    return completer.future;
  }
@@ -134,7 +134,7 @@ Future&lt;JsObject&gt; <strong>getContent</strong>() <a class="anchor-link" href
 Currently, only base64 is supported.</p>
 <pre class="source">
 Future&lt;JsObject&gt; getContent() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
  proxy.callMethod('getContent', [completer.callback]);
  return completer.future;
 }

@@ -69,7 +69,7 @@ class ChromePageAction {
   * Gets the title of the page action.
   */
  Future&lt;String&gt; getTitle(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -81,7 +81,7 @@ class ChromePageAction {
   * &lt;b&gt;imageData&lt;/b&gt; property must be specified.
   */
  Future setIcon(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -98,7 +98,7 @@ class ChromePageAction {
   * Gets the html document set as the popup for this page action.
   */
  Future&lt;String&gt; getPopup(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -141,7 +141,7 @@ Future&lt;String&gt; <strong>getPopup</strong>(Map details) <a class="anchor-lin
 <p>Gets the html document set as the popup for this page action.</p>
 <pre class="source">
 Future&lt;String&gt; getPopup(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -156,7 +156,7 @@ Future&lt;String&gt; <strong>getTitle</strong>(Map details) <a class="anchor-lin
 <p>Gets the title of the page action.</p>
 <pre class="source">
 Future&lt;String&gt; getTitle(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -189,7 +189,7 @@ dictionary of either one of those. Either the &lt;b>path&lt;/b> or the
 &lt;b>imageData&lt;/b> property must be specified.</p>
 <pre class="source">
 Future setIcon(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
  return completer.future;
 }

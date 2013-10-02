@@ -61,7 +61,7 @@ class ExtensionSidebarPane extends ChromeObject {
   * [rootTitle] An optional title for the root of the expression tree.
   */
  Future setExpression(String expression, [String rootTitle]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
    return completer.future;
  }
@@ -75,7 +75,7 @@ class ExtensionSidebarPane extends ChromeObject {
   * [rootTitle] An optional title for the root of the expression tree.
   */
  Future setObject(String jsonObject, [String rootTitle]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
    return completer.future;
  }
@@ -170,7 +170,7 @@ similar to the console/watch.</p>
 <span class="param">rootTitle</span> An optional title for the root of the expression tree.</p>
 <pre class="source">
 Future setExpression(String expression, [String rootTitle]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
  return completer.future;
 }
@@ -205,7 +205,7 @@ Evaluated in the context of the caller (API client).</p>
 <span class="param">rootTitle</span> An optional title for the root of the expression tree.</p>
 <pre class="source">
 Future setObject(String jsonObject, [String rootTitle]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
  return completer.future;
 }

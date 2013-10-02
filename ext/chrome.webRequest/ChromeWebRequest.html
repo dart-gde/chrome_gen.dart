@@ -51,7 +51,7 @@ class ChromeWebRequest {
   * expensive. Don't call it often.
   */
  Future handlerBehaviorChanged() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _webRequest.callMethod('handlerBehaviorChanged', [completer.callback]);
    return completer.future;
  }
@@ -297,7 +297,7 @@ to prevent incorrect handling due to caching. This function call is
 expensive. Don't call it often.</p>
 <pre class="source">
 Future handlerBehaviorChanged() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _webRequest.callMethod('handlerBehaviorChanged', [completer.callback]);
  return completer.future;
 }

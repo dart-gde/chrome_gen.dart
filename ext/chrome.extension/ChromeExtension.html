@@ -64,7 +64,7 @@ class ChromeExtension {
   * no arguments and [runtime.lastError] will be set to the error message.
   */
  Future&lt;dynamic&gt; sendRequest(dynamic request, [String extensionId]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
    return completer.future;
  }
@@ -124,7 +124,7 @@ class ChromeExtension {
   * True if the extension has access to Incognito mode, false otherwise.
   */
  Future&lt;bool&gt; isAllowedIncognitoAccess() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
    return completer.future;
  }
@@ -137,7 +137,7 @@ class ChromeExtension {
   * True if the extension can access the 'file://' scheme, false otherwise.
   */
  Future&lt;bool&gt; isAllowedFileSchemeAccess() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
    return completer.future;
  }
@@ -309,7 +309,7 @@ determined by the user-controlled 'Allow access to File URLs' checkbox.</p>
 True if the extension can access the 'file://' scheme, false otherwise.</p>
 <pre class="source">
 Future&lt;bool&gt; isAllowedFileSchemeAccess() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
  return completer.future;
 }
@@ -327,7 +327,7 @@ determined by the user-controlled 'Allowed in Incognito' checkbox.</p>
 True if the extension has access to Incognito mode, false otherwise.</p>
 <pre class="source">
 Future&lt;bool&gt; isAllowedIncognitoAccess() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
  return completer.future;
 }
@@ -349,7 +349,7 @@ occurs while connecting to the extension, the callback will be called with
 no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
 Future&lt;dynamic&gt; sendRequest(dynamic request, [String extensionId]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
  return completer.future;
 }

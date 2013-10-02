@@ -46,7 +46,7 @@ class ChromeI18N {
   * Array of the accept languages of the browser, such as en-US,en,zh-CN
   */
  Future&lt;List&lt;String&gt;&gt; getAcceptLanguages() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
+   var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
    _i18n.callMethod('getAcceptLanguages', [completer.callback]);
    return completer.future;
  }
@@ -85,7 +85,7 @@ used by the browser; to get the locale, use <code>window.navigator.language</cod
 Array of the accept languages of the browser, such as en-US,en,zh-CN</p>
 <pre class="source">
 Future&lt;List&lt;String&gt;&gt; getAcceptLanguages() {
- ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
+ var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
  _i18n.callMethod('getAcceptLanguages', [completer.callback]);
  return completer.future;
 }

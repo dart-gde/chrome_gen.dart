@@ -39,85 +39,85 @@ class ChromeBluetooth {
  ChromeBluetooth._();
 
  Future addProfile(Profile profile) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('addProfile', [profile, completer.callback]);
    return completer.future;
  }
 
  Future removeProfile(Profile profile) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('removeProfile', [profile, completer.callback]);
    return completer.future;
  }
 
  Future&lt;AdapterState&gt; getAdapterState() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(AdapterState.create);
+   var completer = new ChromeCompleter&lt;AdapterState&gt;.oneArg(AdapterState.create);
    _bluetooth.callMethod('getAdapterState', [completer.callback]);
    return completer.future;
  }
 
  Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('getBluetoothDevices', [options, completer.callback]);
    return completer.future;
  }
 
  Future&lt;Profile&gt; getProfiles(GetProfilesOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(Profile.create);
+   var completer = new ChromeCompleter&lt;Profile&gt;.oneArg(Profile.create);
    _bluetooth.callMethod('getProfiles', [options, completer.callback]);
    return completer.future;
  }
 
  Future&lt;ServiceRecord&gt; getServices(GetServicesOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(ServiceRecord.create);
+   var completer = new ChromeCompleter&lt;ServiceRecord&gt;.oneArg(ServiceRecord.create);
    _bluetooth.callMethod('getServices', [options, completer.callback]);
    return completer.future;
  }
 
  Future connect(ConnectOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('connect', [options, completer.callback]);
    return completer.future;
  }
 
  Future disconnect(DisconnectOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('disconnect', [options, completer.callback]);
    return completer.future;
  }
 
  Future&lt;ArrayBuffer&gt; read(ReadOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(ArrayBuffer.create);
+   var completer = new ChromeCompleter&lt;ArrayBuffer&gt;.oneArg(ArrayBuffer.create);
    _bluetooth.callMethod('read', [options, completer.callback]);
    return completer.future;
  }
 
  Future&lt;int&gt; write(WriteOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;int&gt;.oneArg();
    _bluetooth.callMethod('write', [options, completer.callback]);
    return completer.future;
  }
 
  Future&lt;OutOfBandPairingData&gt; getLocalOutOfBandPairingData() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(OutOfBandPairingData.create);
+   var completer = new ChromeCompleter&lt;OutOfBandPairingData&gt;.oneArg(OutOfBandPairingData.create);
    _bluetooth.callMethod('getLocalOutOfBandPairingData', [completer.callback]);
    return completer.future;
  }
 
  Future setOutOfBandPairingData(SetOutOfBandPairingDataOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('setOutOfBandPairingData', [options, completer.callback]);
    return completer.future;
  }
 
  Future startDiscovery(StartDiscoveryOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('startDiscovery', [options, completer.callback]);
    return completer.future;
  }
 
  Future stopDiscovery() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('stopDiscovery', [completer.callback]);
    return completer.future;
  }
@@ -170,7 +170,7 @@ Future <strong>addProfile</strong>(<a href="../chrome.bluetooth/Profile.html">Pr
 <div class="doc">
 <pre class="source">
 Future addProfile(Profile profile) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _bluetooth.callMethod('addProfile', [profile, completer.callback]);
  return completer.future;
 }
@@ -184,7 +184,7 @@ Future <strong>connect</strong>(<a href="../chrome.bluetooth/ConnectOptions.html
 <div class="doc">
 <pre class="source">
 Future connect(ConnectOptions options) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _bluetooth.callMethod('connect', [options, completer.callback]);
  return completer.future;
 }
@@ -198,7 +198,7 @@ Future <strong>disconnect</strong>(<a href="../chrome.bluetooth/DisconnectOption
 <div class="doc">
 <pre class="source">
 Future disconnect(DisconnectOptions options) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _bluetooth.callMethod('disconnect', [options, completer.callback]);
  return completer.future;
 }
@@ -212,7 +212,7 @@ Future&lt;<a href="../chrome.bluetooth/AdapterState.html">AdapterState</a>&gt; <
 <div class="doc">
 <pre class="source">
 Future&lt;AdapterState&gt; getAdapterState() {
- ChromeCompleter completer = new ChromeCompleter.oneArg(AdapterState.create);
+ var completer = new ChromeCompleter&lt;AdapterState&gt;.oneArg(AdapterState.create);
  _bluetooth.callMethod('getAdapterState', [completer.callback]);
  return completer.future;
 }
@@ -226,7 +226,7 @@ Future <strong>getBluetoothDevices</strong>(<a href="../chrome.bluetooth/GetBlue
 <div class="doc">
 <pre class="source">
 Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _bluetooth.callMethod('getBluetoothDevices', [options, completer.callback]);
  return completer.future;
 }
@@ -240,7 +240,7 @@ Future&lt;<a href="../chrome.bluetooth/OutOfBandPairingData.html">OutOfBandPairi
 <div class="doc">
 <pre class="source">
 Future&lt;OutOfBandPairingData&gt; getLocalOutOfBandPairingData() {
- ChromeCompleter completer = new ChromeCompleter.oneArg(OutOfBandPairingData.create);
+ var completer = new ChromeCompleter&lt;OutOfBandPairingData&gt;.oneArg(OutOfBandPairingData.create);
  _bluetooth.callMethod('getLocalOutOfBandPairingData', [completer.callback]);
  return completer.future;
 }
@@ -254,7 +254,7 @@ Future&lt;<a href="../chrome.bluetooth/Profile.html">Profile</a>&gt; <strong>get
 <div class="doc">
 <pre class="source">
 Future&lt;Profile&gt; getProfiles(GetProfilesOptions options) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(Profile.create);
+ var completer = new ChromeCompleter&lt;Profile&gt;.oneArg(Profile.create);
  _bluetooth.callMethod('getProfiles', [options, completer.callback]);
  return completer.future;
 }
@@ -268,7 +268,7 @@ Future&lt;<a href="../chrome.bluetooth/ServiceRecord.html">ServiceRecord</a>&gt;
 <div class="doc">
 <pre class="source">
 Future&lt;ServiceRecord&gt; getServices(GetServicesOptions options) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(ServiceRecord.create);
+ var completer = new ChromeCompleter&lt;ServiceRecord&gt;.oneArg(ServiceRecord.create);
  _bluetooth.callMethod('getServices', [options, completer.callback]);
  return completer.future;
 }
@@ -282,7 +282,7 @@ Future&lt;<a href="../chrome.src.common_exp/ArrayBuffer.html">ArrayBuffer</a>&gt
 <div class="doc">
 <pre class="source">
 Future&lt;ArrayBuffer&gt; read(ReadOptions options) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(ArrayBuffer.create);
+ var completer = new ChromeCompleter&lt;ArrayBuffer&gt;.oneArg(ArrayBuffer.create);
  _bluetooth.callMethod('read', [options, completer.callback]);
  return completer.future;
 }
@@ -296,7 +296,7 @@ Future <strong>removeProfile</strong>(<a href="../chrome.bluetooth/Profile.html"
 <div class="doc">
 <pre class="source">
 Future removeProfile(Profile profile) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _bluetooth.callMethod('removeProfile', [profile, completer.callback]);
  return completer.future;
 }
@@ -310,7 +310,7 @@ Future <strong>setOutOfBandPairingData</strong>(<a href="../chrome.bluetooth/Set
 <div class="doc">
 <pre class="source">
 Future setOutOfBandPairingData(SetOutOfBandPairingDataOptions options) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _bluetooth.callMethod('setOutOfBandPairingData', [options, completer.callback]);
  return completer.future;
 }
@@ -324,7 +324,7 @@ Future <strong>startDiscovery</strong>(<a href="../chrome.bluetooth/StartDiscove
 <div class="doc">
 <pre class="source">
 Future startDiscovery(StartDiscoveryOptions options) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _bluetooth.callMethod('startDiscovery', [options, completer.callback]);
  return completer.future;
 }
@@ -338,7 +338,7 @@ Future <strong>stopDiscovery</strong>() <a class="anchor-link" href="#stopDiscov
 <div class="doc">
 <pre class="source">
 Future stopDiscovery() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _bluetooth.callMethod('stopDiscovery', [completer.callback]);
  return completer.future;
 }
@@ -352,7 +352,7 @@ Future&lt;int&gt; <strong>write</strong>(<a href="../chrome.bluetooth/WriteOptio
 <div class="doc">
 <pre class="source">
 Future&lt;int&gt; write(WriteOptions options) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;int&gt;.oneArg();
  _bluetooth.callMethod('write', [options, completer.callback]);
  return completer.future;
 }

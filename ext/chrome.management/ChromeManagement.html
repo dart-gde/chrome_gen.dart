@@ -42,7 +42,7 @@ class ChromeManagement {
   * Returns a list of information about installed extensions and apps.
   */
  Future&lt;List&lt;ExtensionInfo&gt;&gt; getAll() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, ExtensionInfo.create));
+   var completer = new ChromeCompleter&lt;List&lt;ExtensionInfo&gt;&gt;.oneArg((e) =&gt; listify(e, ExtensionInfo.create));
    _management.callMethod('getAll', [completer.callback]);
    return completer.future;
  }
@@ -54,7 +54,7 @@ class ChromeManagement {
   * [id] The ID from an item of [ExtensionInfo.]
   */
  Future&lt;ExtensionInfo&gt; get(String id) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionInfo.create);
+   var completer = new ChromeCompleter&lt;ExtensionInfo&gt;.oneArg(ExtensionInfo.create);
    _management.callMethod('get', [id, completer.callback]);
    return completer.future;
  }
@@ -66,7 +66,7 @@ class ChromeManagement {
   * [id] The ID of an already installed extension.
   */
  Future&lt;List&lt;String&gt;&gt; getPermissionWarningsById(String id) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
+   var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
    _management.callMethod('getPermissionWarningsById', [id, completer.callback]);
    return completer.future;
  }
@@ -79,7 +79,7 @@ class ChromeManagement {
   * [manifestStr] Extension manifest JSON string.
   */
  Future&lt;List&lt;String&gt;&gt; getPermissionWarningsByManifest(String manifestStr) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
+   var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
    _management.callMethod('getPermissionWarningsByManifest', [manifestStr, completer.callback]);
    return completer.future;
  }
@@ -92,7 +92,7 @@ class ChromeManagement {
   * [enabled] Whether this item should be enabled or disabled.
   */
  Future setEnabled(String id, bool enabled) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _management.callMethod('setEnabled', [id, enabled, completer.callback]);
    return completer.future;
  }
@@ -103,7 +103,7 @@ class ChromeManagement {
   * [id] This should be the id from an item of [ExtensionInfo.]
   */
  Future uninstall(String id, [Map options]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _management.callMethod('uninstall', [id, jsify(options), completer.callback]);
    return completer.future;
  }
@@ -113,7 +113,7 @@ class ChromeManagement {
   * requesting the 'management' permission in the manifest.
   */
  Future uninstallSelf([Map options]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _management.callMethod('uninstallSelf', [jsify(options), completer.callback]);
    return completer.future;
  }
@@ -124,7 +124,7 @@ class ChromeManagement {
   * [id] The extension id of the application.
   */
  Future launchApp(String id) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _management.callMethod('launchApp', [id, completer.callback]);
    return completer.future;
  }
@@ -231,7 +231,7 @@ the given ID.</p>
 <span class="param">id</span> The ID from an item of <a class="crossref" href="../chrome.management/ExtensionInfo.html#">ExtensionInfo.</a></p>
 <pre class="source">
 Future&lt;ExtensionInfo&gt; get(String id) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionInfo.create);
+ var completer = new ChromeCompleter&lt;ExtensionInfo&gt;.oneArg(ExtensionInfo.create);
  _management.callMethod('get', [id, completer.callback]);
  return completer.future;
 }
@@ -246,7 +246,7 @@ Future&lt;List&lt;<a href="../chrome.management/ExtensionInfo.html">ExtensionInf
 <p>Returns a list of information about installed extensions and apps.</p>
 <pre class="source">
 Future&lt;List&lt;ExtensionInfo&gt;&gt; getAll() {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, ExtensionInfo.create));
+ var completer = new ChromeCompleter&lt;List&lt;ExtensionInfo&gt;&gt;.oneArg((e) =&gt; listify(e, ExtensionInfo.create));
  _management.callMethod('getAll', [completer.callback]);
  return completer.future;
 }
@@ -264,7 +264,7 @@ given extension id.</p>
 <span class="param">id</span> The ID of an already installed extension.</p>
 <pre class="source">
 Future&lt;List&lt;String&gt;&gt; getPermissionWarningsById(String id) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
+ var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
  _management.callMethod('getPermissionWarningsById', [id, completer.callback]);
  return completer.future;
 }
@@ -283,7 +283,7 @@ requesting the 'management' permission in the manifest.</p>
 <span class="param">manifestStr</span> Extension manifest JSON string.</p>
 <pre class="source">
 Future&lt;List&lt;String&gt;&gt; getPermissionWarningsByManifest(String manifestStr) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
+ var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
  _management.callMethod('getPermissionWarningsByManifest', [manifestStr, completer.callback]);
  return completer.future;
 }
@@ -300,7 +300,7 @@ Future <strong>launchApp</strong>(String id) <a class="anchor-link" href="#launc
 <span class="param">id</span> The extension id of the application.</p>
 <pre class="source">
 Future launchApp(String id) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _management.callMethod('launchApp', [id, completer.callback]);
  return completer.future;
 }
@@ -319,7 +319,7 @@ Future <strong>setEnabled</strong>(String id, bool enabled) <a class="anchor-lin
 <span class="param">enabled</span> Whether this item should be enabled or disabled.</p>
 <pre class="source">
 Future setEnabled(String id, bool enabled) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _management.callMethod('setEnabled', [id, enabled, completer.callback]);
  return completer.future;
 }
@@ -336,7 +336,7 @@ Future <strong>uninstall</strong>(String id, [Map options]) <a class="anchor-lin
 <span class="param">id</span> This should be the id from an item of <a class="crossref" href="../chrome.management/ExtensionInfo.html#">ExtensionInfo.</a></p>
 <pre class="source">
 Future uninstall(String id, [Map options]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _management.callMethod('uninstall', [id, jsify(options), completer.callback]);
  return completer.future;
 }
@@ -352,7 +352,7 @@ Future <strong>uninstallSelf</strong>([Map options]) <a class="anchor-link" href
 requesting the 'management' permission in the manifest.</p>
 <pre class="source">
 Future uninstallSelf([Map options]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _management.callMethod('uninstallSelf', [jsify(options), completer.callback]);
  return completer.future;
 }

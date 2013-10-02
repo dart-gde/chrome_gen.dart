@@ -42,7 +42,7 @@ class ChromeFontSettings {
   * Clears the font set by this extension, if any.
   */
  Future clearFont(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _fontSettings.callMethod('clearFont', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -51,7 +51,7 @@ class ChromeFontSettings {
   * Gets the font for a given script and generic font family.
   */
  Future&lt;Map&gt; getFont(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    _fontSettings.callMethod('getFont', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -60,7 +60,7 @@ class ChromeFontSettings {
   * Sets the font for a given script and generic font family.
   */
  Future setFont(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _fontSettings.callMethod('setFont', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -69,7 +69,7 @@ class ChromeFontSettings {
   * Gets a list of fonts on the system.
   */
  Future&lt;List&lt;FontName&gt;&gt; getFontList() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, FontName.create));
+   var completer = new ChromeCompleter&lt;List&lt;FontName&gt;&gt;.oneArg((e) =&gt; listify(e, FontName.create));
    _fontSettings.callMethod('getFontList', [completer.callback]);
    return completer.future;
  }
@@ -80,7 +80,7 @@ class ChromeFontSettings {
   * [details] This parameter is currently unused.
   */
  Future clearDefaultFontSize([Map details]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _fontSettings.callMethod('clearDefaultFontSize', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -91,7 +91,7 @@ class ChromeFontSettings {
   * [details] This parameter is currently unused.
   */
  Future&lt;Map&gt; getDefaultFontSize([Map details]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    _fontSettings.callMethod('getDefaultFontSize', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -100,7 +100,7 @@ class ChromeFontSettings {
   * Sets the default font size.
   */
  Future setDefaultFontSize(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _fontSettings.callMethod('setDefaultFontSize', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -111,7 +111,7 @@ class ChromeFontSettings {
   * [details] This parameter is currently unused.
   */
  Future clearDefaultFixedFontSize([Map details]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _fontSettings.callMethod('clearDefaultFixedFontSize', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -122,7 +122,7 @@ class ChromeFontSettings {
   * [details] This parameter is currently unused.
   */
  Future&lt;Map&gt; getDefaultFixedFontSize([Map details]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    _fontSettings.callMethod('getDefaultFixedFontSize', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -131,7 +131,7 @@ class ChromeFontSettings {
   * Sets the default size for fixed width fonts.
   */
  Future setDefaultFixedFontSize(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _fontSettings.callMethod('setDefaultFixedFontSize', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -142,7 +142,7 @@ class ChromeFontSettings {
   * [details] This parameter is currently unused.
   */
  Future clearMinimumFontSize([Map details]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _fontSettings.callMethod('clearMinimumFontSize', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -153,7 +153,7 @@ class ChromeFontSettings {
   * [details] This parameter is currently unused.
   */
  Future&lt;Map&gt; getMinimumFontSize([Map details]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    _fontSettings.callMethod('getMinimumFontSize', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -162,7 +162,7 @@ class ChromeFontSettings {
   * Sets the minimum font size.
   */
  Future setMinimumFontSize(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _fontSettings.callMethod('setMinimumFontSize', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -268,7 +268,7 @@ Future <strong>clearDefaultFixedFontSize</strong>([Map details]) <a class="ancho
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
 Future clearDefaultFixedFontSize([Map details]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _fontSettings.callMethod('clearDefaultFixedFontSize', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -285,7 +285,7 @@ Future <strong>clearDefaultFontSize</strong>([Map details]) <a class="anchor-lin
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
 Future clearDefaultFontSize([Map details]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _fontSettings.callMethod('clearDefaultFontSize', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -300,7 +300,7 @@ Future <strong>clearFont</strong>(Map details) <a class="anchor-link" href="#cle
 <p>Clears the font set by this extension, if any.</p>
 <pre class="source">
 Future clearFont(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _fontSettings.callMethod('clearFont', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -317,7 +317,7 @@ Future <strong>clearMinimumFontSize</strong>([Map details]) <a class="anchor-lin
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
 Future clearMinimumFontSize([Map details]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _fontSettings.callMethod('clearMinimumFontSize', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -334,7 +334,7 @@ Future&lt;Map&gt; <strong>getDefaultFixedFontSize</strong>([Map details]) <a cla
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
 Future&lt;Map&gt; getDefaultFixedFontSize([Map details]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  _fontSettings.callMethod('getDefaultFixedFontSize', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -351,7 +351,7 @@ Future&lt;Map&gt; <strong>getDefaultFontSize</strong>([Map details]) <a class="a
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
 Future&lt;Map&gt; getDefaultFontSize([Map details]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  _fontSettings.callMethod('getDefaultFontSize', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -366,7 +366,7 @@ Future&lt;Map&gt; <strong>getFont</strong>(Map details) <a class="anchor-link" h
 <p>Gets the font for a given script and generic font family.</p>
 <pre class="source">
 Future&lt;Map&gt; getFont(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  _fontSettings.callMethod('getFont', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -381,7 +381,7 @@ Future&lt;List&lt;<a href="../chrome.fontSettings/FontName.html">FontName</a>&gt
 <p>Gets a list of fonts on the system.</p>
 <pre class="source">
 Future&lt;List&lt;FontName&gt;&gt; getFontList() {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, FontName.create));
+ var completer = new ChromeCompleter&lt;List&lt;FontName&gt;&gt;.oneArg((e) =&gt; listify(e, FontName.create));
  _fontSettings.callMethod('getFontList', [completer.callback]);
  return completer.future;
 }
@@ -398,7 +398,7 @@ Future&lt;Map&gt; <strong>getMinimumFontSize</strong>([Map details]) <a class="a
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
 Future&lt;Map&gt; getMinimumFontSize([Map details]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  _fontSettings.callMethod('getMinimumFontSize', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -413,7 +413,7 @@ Future <strong>setDefaultFixedFontSize</strong>(Map details) <a class="anchor-li
 <p>Sets the default size for fixed width fonts.</p>
 <pre class="source">
 Future setDefaultFixedFontSize(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _fontSettings.callMethod('setDefaultFixedFontSize', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -428,7 +428,7 @@ Future <strong>setDefaultFontSize</strong>(Map details) <a class="anchor-link" h
 <p>Sets the default font size.</p>
 <pre class="source">
 Future setDefaultFontSize(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _fontSettings.callMethod('setDefaultFontSize', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -443,7 +443,7 @@ Future <strong>setFont</strong>(Map details) <a class="anchor-link" href="#setFo
 <p>Sets the font for a given script and generic font family.</p>
 <pre class="source">
 Future setFont(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _fontSettings.callMethod('setFont', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -458,7 +458,7 @@ Future <strong>setMinimumFontSize</strong>(Map details) <a class="anchor-link" h
 <p>Sets the minimum font size.</p>
 <pre class="source">
 Future setMinimumFontSize(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _fontSettings.callMethod('setMinimumFontSize', [jsify(details), completer.callback]);
  return completer.future;
 }

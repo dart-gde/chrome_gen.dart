@@ -39,7 +39,7 @@ class ChromeAppWindow {
  ChromeAppWindow._();
 
  Future&lt;dynamic&gt; create(String url, [CreateWindowOptions options]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _app_window.callMethod('create', [url, options, completer.callback]);
    return completer.future;
  }
@@ -168,7 +168,7 @@ Future&lt;dynamic&gt; <strong>create</strong>(String url, [<a href="../chrome.ap
 <div class="doc">
 <pre class="source">
 Future&lt;dynamic&gt; create(String url, [CreateWindowOptions options]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _app_window.callMethod('create', [url, options, completer.callback]);
  return completer.future;
 }

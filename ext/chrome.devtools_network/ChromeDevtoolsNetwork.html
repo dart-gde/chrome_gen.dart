@@ -45,7 +45,7 @@ class ChromeDevtoolsNetwork {
   * A HAR log. See HAR specification for details.
   */
  Future&lt;Map&lt;String, dynamic&gt;&gt; getHAR() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
    _devtools_network.callMethod('getHAR', [completer.callback]);
    return completer.future;
  }
@@ -111,7 +111,7 @@ Future&lt;Map&lt;String, dynamic&gt;&gt; <strong>getHAR</strong>() <a class="anc
 A HAR log. See HAR specification for details.</p>
 <pre class="source">
 Future&lt;Map&lt;String, dynamic&gt;&gt; getHAR() {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
  _devtools_network.callMethod('getHAR', [completer.callback]);
  return completer.future;
 }

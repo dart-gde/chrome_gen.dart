@@ -39,19 +39,19 @@ class ChromeIdentity {
  ChromeIdentity._();
 
  Future&lt;String&gt; getAuthToken([TokenDetails details]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _identity.callMethod('getAuthToken', [details, completer.callback]);
    return completer.future;
  }
 
  Future removeCachedAuthToken(InvalidTokenDetails details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _identity.callMethod('removeCachedAuthToken', [details, completer.callback]);
    return completer.future;
  }
 
  Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _identity.callMethod('launchWebAuthFlow', [details, completer.callback]);
    return completer.future;
  }
@@ -67,7 +67,7 @@ Future&lt;String&gt; <strong>getAuthToken</strong>([<a href="../chrome.identity/
 <div class="doc">
 <pre class="source">
 Future&lt;String&gt; getAuthToken([TokenDetails details]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _identity.callMethod('getAuthToken', [details, completer.callback]);
  return completer.future;
 }
@@ -81,7 +81,7 @@ Future&lt;String&gt; <strong>launchWebAuthFlow</strong>(<a href="../chrome.ident
 <div class="doc">
 <pre class="source">
 Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _identity.callMethod('launchWebAuthFlow', [details, completer.callback]);
  return completer.future;
 }
@@ -95,7 +95,7 @@ Future <strong>removeCachedAuthToken</strong>(<a href="../chrome.identity/Invali
 <div class="doc">
 <pre class="source">
 Future removeCachedAuthToken(InvalidTokenDetails details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _identity.callMethod('removeCachedAuthToken', [details, completer.callback]);
  return completer.future;
 }

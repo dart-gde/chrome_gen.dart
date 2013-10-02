@@ -39,49 +39,49 @@ class ChromeSerial {
  ChromeSerial._();
 
  Future&lt;String&gt; getPorts() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _serial.callMethod('getPorts', [completer.callback]);
    return completer.future;
  }
 
  Future&lt;OpenInfo&gt; open(String port, [OpenOptions options]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(OpenInfo.create);
+   var completer = new ChromeCompleter&lt;OpenInfo&gt;.oneArg(OpenInfo.create);
    _serial.callMethod('open', [port, options, completer.callback]);
    return completer.future;
  }
 
  Future&lt;bool&gt; close(int connectionId) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _serial.callMethod('close', [connectionId, completer.callback]);
    return completer.future;
  }
 
  Future&lt;SerialReadInfo&gt; read(int connectionId, int bytesToRead) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(SerialReadInfo.create);
+   var completer = new ChromeCompleter&lt;SerialReadInfo&gt;.oneArg(SerialReadInfo.create);
    _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
    return completer.future;
  }
 
  Future&lt;SerialWriteInfo&gt; write(int connectionId, ArrayBuffer data) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(SerialWriteInfo.create);
+   var completer = new ChromeCompleter&lt;SerialWriteInfo&gt;.oneArg(SerialWriteInfo.create);
    _serial.callMethod('write', [connectionId, data, completer.callback]);
    return completer.future;
  }
 
  Future&lt;bool&gt; flush(int connectionId) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _serial.callMethod('flush', [connectionId, completer.callback]);
    return completer.future;
  }
 
  Future&lt;ControlSignalOptions&gt; getControlSignals(int connectionId) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(ControlSignalOptions.create);
+   var completer = new ChromeCompleter&lt;ControlSignalOptions&gt;.oneArg(ControlSignalOptions.create);
    _serial.callMethod('getControlSignals', [connectionId, completer.callback]);
    return completer.future;
  }
 
  Future&lt;bool&gt; setControlSignals(int connectionId, ControlSignalOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _serial.callMethod('setControlSignals', [connectionId, options, completer.callback]);
    return completer.future;
  }
@@ -97,7 +97,7 @@ Future&lt;bool&gt; <strong>close</strong>(int connectionId) <a class="anchor-lin
 <div class="doc">
 <pre class="source">
 Future&lt;bool&gt; close(int connectionId) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _serial.callMethod('close', [connectionId, completer.callback]);
  return completer.future;
 }
@@ -111,7 +111,7 @@ Future&lt;bool&gt; <strong>flush</strong>(int connectionId) <a class="anchor-lin
 <div class="doc">
 <pre class="source">
 Future&lt;bool&gt; flush(int connectionId) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _serial.callMethod('flush', [connectionId, completer.callback]);
  return completer.future;
 }
@@ -125,7 +125,7 @@ Future&lt;<a href="../chrome.serial/ControlSignalOptions.html">ControlSignalOpti
 <div class="doc">
 <pre class="source">
 Future&lt;ControlSignalOptions&gt; getControlSignals(int connectionId) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(ControlSignalOptions.create);
+ var completer = new ChromeCompleter&lt;ControlSignalOptions&gt;.oneArg(ControlSignalOptions.create);
  _serial.callMethod('getControlSignals', [connectionId, completer.callback]);
  return completer.future;
 }
@@ -139,7 +139,7 @@ Future&lt;String&gt; <strong>getPorts</strong>() <a class="anchor-link" href="#g
 <div class="doc">
 <pre class="source">
 Future&lt;String&gt; getPorts() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _serial.callMethod('getPorts', [completer.callback]);
  return completer.future;
 }
@@ -153,7 +153,7 @@ Future&lt;<a href="../chrome.serial/OpenInfo.html">OpenInfo</a>&gt; <strong>open
 <div class="doc">
 <pre class="source">
 Future&lt;OpenInfo&gt; open(String port, [OpenOptions options]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(OpenInfo.create);
+ var completer = new ChromeCompleter&lt;OpenInfo&gt;.oneArg(OpenInfo.create);
  _serial.callMethod('open', [port, options, completer.callback]);
  return completer.future;
 }
@@ -167,7 +167,7 @@ Future&lt;<a href="../chrome.serial/SerialReadInfo.html">SerialReadInfo</a>&gt; 
 <div class="doc">
 <pre class="source">
 Future&lt;SerialReadInfo&gt; read(int connectionId, int bytesToRead) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(SerialReadInfo.create);
+ var completer = new ChromeCompleter&lt;SerialReadInfo&gt;.oneArg(SerialReadInfo.create);
  _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
  return completer.future;
 }
@@ -181,7 +181,7 @@ Future&lt;bool&gt; <strong>setControlSignals</strong>(int connectionId, <a href=
 <div class="doc">
 <pre class="source">
 Future&lt;bool&gt; setControlSignals(int connectionId, ControlSignalOptions options) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _serial.callMethod('setControlSignals', [connectionId, options, completer.callback]);
  return completer.future;
 }
@@ -195,7 +195,7 @@ Future&lt;<a href="../chrome.serial/SerialWriteInfo.html">SerialWriteInfo</a>&gt
 <div class="doc">
 <pre class="source">
 Future&lt;SerialWriteInfo&gt; write(int connectionId, ArrayBuffer data) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(SerialWriteInfo.create);
+ var completer = new ChromeCompleter&lt;SerialWriteInfo&gt;.oneArg(SerialWriteInfo.create);
  _serial.callMethod('write', [connectionId, data, completer.callback]);
  return completer.future;
 }

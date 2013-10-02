@@ -42,7 +42,7 @@ class ChromeTabs {
   * Retrieves details about the specified tab.
   */
  Future&lt;Tab&gt; get(int tabId) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
    _tabs.callMethod('get', [tabId, completer.callback]);
    return completer.future;
  }
@@ -53,7 +53,7 @@ class ChromeTabs {
   * view).
   */
  Future&lt;Tab&gt; getCurrent() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
    _tabs.callMethod('getCurrent', [completer.callback]);
    return completer.future;
  }
@@ -82,7 +82,7 @@ class ChromeTabs {
   * with no arguments and [runtime.lastError] will be set to the error message.
   */
  Future&lt;dynamic&gt; sendRequest(int tabId, dynamic request) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _tabs.callMethod('sendRequest', [tabId, request, completer.callback]);
    return completer.future;
  }
@@ -99,7 +99,7 @@ class ChromeTabs {
   * with no arguments and [runtime.lastError] will be set to the error message.
   */
  Future&lt;dynamic&gt; sendMessage(int tabId, dynamic message) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _tabs.callMethod('sendMessage', [tabId, message, completer.callback]);
    return completer.future;
  }
@@ -111,7 +111,7 @@ class ChromeTabs {
   * [windowId] Defaults to the [current window](windows.html#current-window).
   */
  Future&lt;Tab&gt; getSelected([int windowId]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
    _tabs.callMethod('getSelected', [windowId, completer.callback]);
    return completer.future;
  }
@@ -123,7 +123,7 @@ class ChromeTabs {
   * [windowId] Defaults to the [current window](windows.html#current-window).
   */
  Future&lt;List&lt;Tab&gt;&gt; getAllInWindow([int windowId]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Tab.create));
+   var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, Tab.create));
    _tabs.callMethod('getAllInWindow', [windowId, completer.callback]);
    return completer.future;
  }
@@ -135,7 +135,7 @@ class ChromeTabs {
   * Details about the created tab. Will contain the ID of the new tab.
   */
  Future&lt;Tab&gt; create(Map createProperties) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
    _tabs.callMethod('create', [jsify(createProperties), completer.callback]);
    return completer.future;
  }
@@ -151,7 +151,7 @@ class ChromeTabs {
   * requested.
   */
  Future&lt;Tab&gt; duplicate(int tabId) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
    _tabs.callMethod('duplicate', [tabId, completer.callback]);
    return completer.future;
  }
@@ -161,7 +161,7 @@ class ChromeTabs {
   * properties are specified.
   */
  Future&lt;List&lt;Tab&gt;&gt; query(Map queryInfo) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Tab.create));
+   var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, Tab.create));
    _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
    return completer.future;
  }
@@ -173,7 +173,7 @@ class ChromeTabs {
   * Contains details about the window whose tabs were highlighted.
   */
  Future&lt;Window&gt; highlight(Map highlightInfo) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
+   var completer = new ChromeCompleter&lt;Window&gt;.oneArg(Window.create);
    _tabs.callMethod('highlight', [jsify(highlightInfo), completer.callback]);
    return completer.future;
  }
@@ -190,7 +190,7 @@ class ChromeTabs {
   * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
   */
  Future&lt;Tab&gt; update(Map updateProperties, [int tabId]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
    _tabs.callMethod('update', [tabId, jsify(updateProperties), completer.callback]);
    return completer.future;
  }
@@ -206,7 +206,7 @@ class ChromeTabs {
   * Details about the moved tabs.
   */
  Future&lt;dynamic&gt; move(dynamic tabIds, Map moveProperties) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _tabs.callMethod('move', [tabIds, jsify(moveProperties), completer.callback]);
    return completer.future;
  }
@@ -218,7 +218,7 @@ class ChromeTabs {
   * current window.
   */
  Future reload([int tabId, Map reloadProperties]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _tabs.callMethod('reload', [tabId, jsify(reloadProperties), completer.callback]);
    return completer.future;
  }
@@ -229,7 +229,7 @@ class ChromeTabs {
   * [tabIds] The tab or list of tabs to close.
   */
  Future remove(dynamic tabIds) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _tabs.callMethod('remove', [tabIds, completer.callback]);
    return completer.future;
  }
@@ -249,7 +249,7 @@ class ChromeTabs {
   * For an unknown language, `und` will be returned.
   */
  Future&lt;String&gt; detectLanguage([int tabId]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _tabs.callMethod('detectLanguage', [tabId, completer.callback]);
    return completer.future;
  }
@@ -270,7 +270,7 @@ class ChromeTabs {
   * May be assigned to the 'src' property of an HTML Image element for display.
   */
  Future&lt;String&gt; captureVisibleTab([int windowId, Map options]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _tabs.callMethod('captureVisibleTab', [windowId, jsify(options), completer.callback]);
    return completer.future;
  }
@@ -288,7 +288,7 @@ class ChromeTabs {
   * The result of the script in every injected frame.
   */
  Future&lt;List&lt;dynamic&gt;&gt; executeScript(InjectDetails details, [int tabId]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
+   var completer = new ChromeCompleter&lt;List&lt;dynamic&gt;&gt;.oneArg(listify);
    _tabs.callMethod('executeScript', [tabId, details, completer.callback]);
    return completer.future;
  }
@@ -303,7 +303,7 @@ class ChromeTabs {
   * [details] Details of the CSS text to insert.
   */
  Future insertCSS(InjectDetails details, [int tabId]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _tabs.callMethod('insertCSS', [tabId, details, completer.callback]);
    return completer.future;
  }
@@ -606,7 +606,7 @@ A data URL which encodes an image of the visible area of the captured tab.
 May be assigned to the 'src' property of an HTML Image element for display.</p>
 <pre class="source">
 Future&lt;String&gt; captureVisibleTab([int windowId, Map options]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _tabs.callMethod('captureVisibleTab', [windowId, jsify(options), completer.callback]);
  return completer.future;
 }
@@ -643,7 +643,7 @@ Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>create</strong>(
 Details about the created tab. Will contain the ID of the new tab.</p>
 <pre class="source">
 Future&lt;Tab&gt; create(Map createProperties) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
  _tabs.callMethod('create', [jsify(createProperties), completer.callback]);
  return completer.future;
 }
@@ -668,7 +668,7 @@ returned except for Simplified Chinese for which zh-CN will be returned.
 For an unknown language, <code>und</code> will be returned.</p>
 <pre class="source">
 Future&lt;String&gt; detectLanguage([int tabId]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _tabs.callMethod('detectLanguage', [tabId, completer.callback]);
  return completer.future;
 }
@@ -689,7 +689,7 @@ Details about the duplicated tab. The <code>tabs.Tab</code> object doesn't conta
 requested.</p>
 <pre class="source">
 Future&lt;Tab&gt; duplicate(int tabId) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
  _tabs.callMethod('duplicate', [tabId, completer.callback]);
  return completer.future;
 }
@@ -712,7 +712,7 @@ active tab of the current window.</p>
 The result of the script in every injected frame.</p>
 <pre class="source">
 Future&lt;List&lt;dynamic&gt;&gt; executeScript(InjectDetails details, [int tabId]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
+ var completer = new ChromeCompleter&lt;List&lt;dynamic&gt;&gt;.oneArg(listify);
  _tabs.callMethod('executeScript', [tabId, details, completer.callback]);
  return completer.future;
 }
@@ -727,7 +727,7 @@ Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>get</strong>(int
 <p>Retrieves details about the specified tab.</p>
 <pre class="source">
 Future&lt;Tab&gt; get(int tabId) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
  _tabs.callMethod('get', [tabId, completer.callback]);
  return completer.future;
 }
@@ -745,7 +745,7 @@ all tabs in the specified window.</p>
 <span class="param">windowId</span> Defaults to the <a href="windows.html#current-window">current window</a>.</p>
 <pre class="source">
 Future&lt;List&lt;Tab&gt;&gt; getAllInWindow([int windowId]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Tab.create));
+ var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, Tab.create));
  _tabs.callMethod('getAllInWindow', [windowId, completer.callback]);
  return completer.future;
 }
@@ -762,7 +762,7 @@ called from a non-tab context (for example: a background page or popup
 view).</p>
 <pre class="source">
 Future&lt;Tab&gt; getCurrent() {
- ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
  _tabs.callMethod('getCurrent', [completer.callback]);
  return completer.future;
 }
@@ -780,7 +780,7 @@ selected in the specified window.</p>
 <span class="param">windowId</span> Defaults to the <a href="windows.html#current-window">current window</a>.</p>
 <pre class="source">
 Future&lt;Tab&gt; getSelected([int windowId]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
  _tabs.callMethod('getSelected', [windowId, completer.callback]);
  return completer.future;
 }
@@ -797,7 +797,7 @@ Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>highlig
 Contains details about the window whose tabs were highlighted.</p>
 <pre class="source">
 Future&lt;Window&gt; highlight(Map highlightInfo) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
+ var completer = new ChromeCompleter&lt;Window&gt;.oneArg(Window.create);
  _tabs.callMethod('highlight', [jsify(highlightInfo), completer.callback]);
  return completer.future;
 }
@@ -818,7 +818,7 @@ active tab of the current window.</p>
 <span class="param">details</span> Details of the CSS text to insert.</p>
 <pre class="source">
 Future insertCSS(InjectDetails details, [int tabId]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _tabs.callMethod('insertCSS', [tabId, details, completer.callback]);
  return completer.future;
 }
@@ -839,7 +839,7 @@ window. Note that tabs can only be moved to and from normal (window.type
 Details about the moved tabs.</p>
 <pre class="source">
 Future&lt;dynamic&gt; move(dynamic tabIds, Map moveProperties) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _tabs.callMethod('move', [tabIds, jsify(moveProperties), completer.callback]);
  return completer.future;
 }
@@ -855,7 +855,7 @@ Future&lt;List&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt;&gt; <strong>quer
 properties are specified.</p>
 <pre class="source">
 Future&lt;List&lt;Tab&gt;&gt; query(Map queryInfo) {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Tab.create));
+ var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, Tab.create));
  _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
  return completer.future;
 }
@@ -873,7 +873,7 @@ Future <strong>reload</strong>([int tabId, Map reloadProperties]) <a class="anch
 current window.</p>
 <pre class="source">
 Future reload([int tabId, Map reloadProperties]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _tabs.callMethod('reload', [tabId, jsify(reloadProperties), completer.callback]);
  return completer.future;
 }
@@ -890,7 +890,7 @@ Future <strong>remove</strong>(tabIds) <a class="anchor-link" href="#remove"
 <span class="param">tabIds</span> The tab or list of tabs to close.</p>
 <pre class="source">
 Future remove(dynamic tabIds) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _tabs.callMethod('remove', [tabIds, completer.callback]);
  return completer.future;
 }
@@ -912,7 +912,7 @@ occurs while connecting to the specified tab, the callback will be called
 with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
 Future&lt;dynamic&gt; sendMessage(int tabId, dynamic message) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _tabs.callMethod('sendMessage', [tabId, message, completer.callback]);
  return completer.future;
 }
@@ -931,7 +931,7 @@ occurs while connecting to the specified tab, the callback will be called
 with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
 Future&lt;dynamic&gt; sendRequest(int tabId, dynamic request) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _tabs.callMethod('sendRequest', [tabId, request, completer.callback]);
  return completer.future;
 }
@@ -954,7 +954,7 @@ Details about the updated tab. The <code>tabs.Tab</code> object doesn't contain 
 <code>title</code> and <code>favIconUrl</code> if the <code>"tabs"</code> permission has not been requested.</p>
 <pre class="source">
 Future&lt;Tab&gt; update(Map updateProperties, [int tabId]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
  _tabs.callMethod('update', [tabId, jsify(updateProperties), completer.callback]);
  return completer.future;
 }

@@ -52,7 +52,7 @@ class StorageArea extends ChromeObject {
   * Object with items in their key-value mappings.
   */
  Future&lt;Map&lt;String, dynamic&gt;&gt; get([dynamic keys]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
    proxy.callMethod('get', [keys, completer.callback]);
    return completer.future;
  }
@@ -68,7 +68,7 @@ class StorageArea extends ChromeObject {
   * Amount of space being used in storage, in bytes.
   */
  Future&lt;int&gt; getBytesInUse([dynamic keys]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;int&gt;.oneArg();
    proxy.callMethod('getBytesInUse', [keys, completer.callback]);
    return completer.future;
  }
@@ -80,7 +80,7 @@ class StorageArea extends ChromeObject {
   * be serialized (functions, etc) will be ignored.
   */
  Future set(Map&lt;String, dynamic&gt; items) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('set', [jsify(items), completer.callback]);
    return completer.future;
  }
@@ -91,7 +91,7 @@ class StorageArea extends ChromeObject {
   * [keys] A single key or a list of keys for items to remove.
   */
  Future remove(dynamic keys) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('remove', [keys, completer.callback]);
    return completer.future;
  }
@@ -100,7 +100,7 @@ class StorageArea extends ChromeObject {
   * Removes all items from storage.
   */
  Future clear() {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('clear', [completer.callback]);
    return completer.future;
  }
@@ -179,7 +179,7 @@ Future <strong>clear</strong>() <a class="anchor-link" href="#clear"
 <p>Removes all items from storage.</p>
 <pre class="source">
 Future clear() {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('clear', [completer.callback]);
  return completer.future;
 }
@@ -201,7 +201,7 @@ contents of storage.</p>
 Object with items in their key-value mappings.</p>
 <pre class="source">
 Future&lt;Map&lt;String, dynamic&gt;&gt; get([dynamic keys]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
  proxy.callMethod('get', [keys, completer.callback]);
  return completer.future;
 }
@@ -222,7 +222,7 @@ storage.</p>
 Amount of space being used in storage, in bytes.</p>
 <pre class="source">
 Future&lt;int&gt; getBytesInUse([dynamic keys]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;int&gt;.oneArg();
  proxy.callMethod('getBytesInUse', [keys, completer.callback]);
  return completer.future;
 }
@@ -239,7 +239,7 @@ Future <strong>remove</strong>(keys) <a class="anchor-link" href="#remove"
 <span class="param">keys</span> A single key or a list of keys for items to remove.</p>
 <pre class="source">
 Future remove(dynamic keys) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('remove', [keys, completer.callback]);
  return completer.future;
 }
@@ -257,7 +257,7 @@ Future <strong>set</strong>(Map&lt;String, dynamic&gt; items) <a class="anchor-l
 be serialized (functions, etc) will be ignored.</p>
 <pre class="source">
 Future set(Map&lt;String, dynamic&gt; items) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('set', [jsify(items), completer.callback]);
  return completer.future;
 }

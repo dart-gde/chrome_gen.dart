@@ -44,7 +44,7 @@ class ContentSetting extends ChromeObject {
   * Clear all content setting rules set by this extension.
   */
  Future clear(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('clear', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -53,7 +53,7 @@ class ContentSetting extends ChromeObject {
   * Gets the current content setting for a given pair of URLs.
   */
  Future&lt;Map&gt; get(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    proxy.callMethod('get', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -62,7 +62,7 @@ class ContentSetting extends ChromeObject {
   * Applies a new content setting rule.
   */
  Future set(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('set', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -73,7 +73,7 @@ class ContentSetting extends ChromeObject {
   * this content type does not use resource identifiers.
   */
  Future&lt;List&lt;ResourceIdentifier&gt;&gt; getResourceIdentifiers() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, ResourceIdentifier.create));
+   var completer = new ChromeCompleter&lt;List&lt;ResourceIdentifier&gt;&gt;.oneArg((e) =&gt; listify(e, ResourceIdentifier.create));
    proxy.callMethod('getResourceIdentifiers', [completer.callback]);
    return completer.future;
  }
@@ -152,7 +152,7 @@ Future <strong>clear</strong>(Map details) <a class="anchor-link" href="#clear"
 <p>Clear all content setting rules set by this extension.</p>
 <pre class="source">
 Future clear(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('clear', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -167,7 +167,7 @@ Future&lt;Map&gt; <strong>get</strong>(Map details) <a class="anchor-link" href=
 <p>Gets the current content setting for a given pair of URLs.</p>
 <pre class="source">
 Future&lt;Map&gt; get(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  proxy.callMethod('get', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -184,7 +184,7 @@ A list of resource identifiers for this content type, or <code>undefined</code> 
 this content type does not use resource identifiers.</p>
 <pre class="source">
 Future&lt;List&lt;ResourceIdentifier&gt;&gt; getResourceIdentifiers() {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, ResourceIdentifier.create));
+ var completer = new ChromeCompleter&lt;List&lt;ResourceIdentifier&gt;&gt;.oneArg((e) =&gt; listify(e, ResourceIdentifier.create));
  proxy.callMethod('getResourceIdentifiers', [completer.callback]);
  return completer.future;
 }
@@ -199,7 +199,7 @@ Future <strong>set</strong>(Map details) <a class="anchor-link" href="#set"
 <p>Applies a new content setting rule.</p>
 <pre class="source">
 Future set(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('set', [jsify(details), completer.callback]);
  return completer.future;
 }

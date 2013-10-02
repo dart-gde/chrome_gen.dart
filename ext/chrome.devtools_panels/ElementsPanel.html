@@ -50,7 +50,7 @@ class ElementsPanel extends ChromeObject {
   * An ExtensionSidebarPane object for created sidebar pane.
   */
  Future&lt;ExtensionSidebarPane&gt; createSidebarPane(String title) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionSidebarPane.create);
+   var completer = new ChromeCompleter&lt;ExtensionSidebarPane&gt;.oneArg(ExtensionSidebarPane.create);
    proxy.callMethod('createSidebarPane', [title, completer.callback]);
    return completer.future;
  }
@@ -133,7 +133,7 @@ Future&lt;<a href="../chrome.devtools_panels/ExtensionSidebarPane.html">Extensio
 An ExtensionSidebarPane object for created sidebar pane.</p>
 <pre class="source">
 Future&lt;ExtensionSidebarPane&gt; createSidebarPane(String title) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionSidebarPane.create);
+ var completer = new ChromeCompleter&lt;ExtensionSidebarPane&gt;.oneArg(ExtensionSidebarPane.create);
  proxy.callMethod('createSidebarPane', [title, completer.callback]);
  return completer.future;
 }

@@ -51,7 +51,7 @@ class ChromeIdle {
   * enum of `active`, `idle`, `locked`
   */
  Future&lt;String&gt; queryState(int detectionIntervalInSeconds) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _idle.callMethod('queryState', [detectionIntervalInSeconds, completer.callback]);
    return completer.future;
  }
@@ -119,7 +119,7 @@ detected.</p>
 enum of <code>active</code>, <code>idle</code>, <code>locked</code></p>
 <pre class="source">
 Future&lt;String&gt; queryState(int detectionIntervalInSeconds) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _idle.callMethod('queryState', [detectionIntervalInSeconds, completer.callback]);
  return completer.future;
 }

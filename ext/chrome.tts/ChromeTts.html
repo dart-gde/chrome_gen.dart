@@ -49,7 +49,7 @@ class ChromeTts {
   * [options] The speech options.
   */
  Future speak(String utterance, [Map options]) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    _tts.callMethod('speak', [utterance, jsify(options), completer.callback]);
    return completer.future;
  }
@@ -87,7 +87,7 @@ class ChromeTts {
   * True if speaking, false otherwise.
   */
  Future&lt;bool&gt; isSpeaking() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _tts.callMethod('isSpeaking', [completer.callback]);
    return completer.future;
  }
@@ -100,7 +100,7 @@ class ChromeTts {
   * synthesis.
   */
  Future&lt;List&lt;TtsVoice&gt;&gt; getVoices() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, TtsVoice.create));
+   var completer = new ChromeCompleter&lt;List&lt;TtsVoice&gt;&gt;.oneArg((e) =&gt; listify(e, TtsVoice.create));
    _tts.callMethod('getVoices', [completer.callback]);
    return completer.future;
  }
@@ -144,7 +144,7 @@ Array of <a class="crossref" href="../chrome.tts/TtsVoice.html">TtsVoice</a> obj
 synthesis.</p>
 <pre class="source">
 Future&lt;List&lt;TtsVoice&gt;&gt; getVoices() {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, TtsVoice.create));
+ var completer = new ChromeCompleter&lt;List&lt;TtsVoice&gt;&gt;.oneArg((e) =&gt; listify(e, TtsVoice.create));
  _tts.callMethod('getVoices', [completer.callback]);
  return completer.future;
 }
@@ -163,7 +163,7 @@ wasn't initiated by Chrome.</p>
 True if speaking, false otherwise.</p>
 <pre class="source">
 Future&lt;bool&gt; isSpeaking() {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _tts.callMethod('isSpeaking', [completer.callback]);
  return completer.future;
 }
@@ -212,7 +212,7 @@ characters.</p>
 <span class="param">options</span> The speech options.</p>
 <pre class="source">
 Future speak(String utterance, [Map options]) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  _tts.callMethod('speak', [utterance, jsify(options), completer.callback]);
  return completer.future;
 }

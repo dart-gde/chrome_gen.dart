@@ -39,37 +39,37 @@ class ChromeFileSystem {
  ChromeFileSystem._();
 
  Future&lt;String&gt; getDisplayPath(dynamic entry) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
    return completer.future;
  }
 
  Future&lt;dynamic&gt; getWritableEntry(dynamic entry) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
    return completer.future;
  }
 
  Future&lt;bool&gt; isWritableEntry(dynamic entry) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
    return completer.future;
  }
 
  Future&lt;JsObject&gt; chooseEntry([ChooseEntryOptions options]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
    _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
    return completer.future;
  }
 
  Future&lt;dynamic&gt; restoreEntry(String id) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
    return completer.future;
  }
 
  Future&lt;bool&gt; isRestorable(String id) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _fileSystem.callMethod('isRestorable', [id, completer.callback]);
    return completer.future;
  }
@@ -89,7 +89,7 @@ Future&lt;JsObject&gt; <strong>chooseEntry</strong>([<a href="../chrome.fileSyst
 <div class="doc">
 <pre class="source">
 Future&lt;JsObject&gt; chooseEntry([ChooseEntryOptions options]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
  _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
  return completer.future;
 }
@@ -103,7 +103,7 @@ Future&lt;String&gt; <strong>getDisplayPath</strong>(entry) <a class="anchor-lin
 <div class="doc">
 <pre class="source">
 Future&lt;String&gt; getDisplayPath(dynamic entry) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
  return completer.future;
 }
@@ -117,7 +117,7 @@ Future&lt;dynamic&gt; <strong>getWritableEntry</strong>(entry) <a class="anchor-
 <div class="doc">
 <pre class="source">
 Future&lt;dynamic&gt; getWritableEntry(dynamic entry) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
  return completer.future;
 }
@@ -131,7 +131,7 @@ Future&lt;bool&gt; <strong>isRestorable</strong>(String id) <a class="anchor-lin
 <div class="doc">
 <pre class="source">
 Future&lt;bool&gt; isRestorable(String id) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _fileSystem.callMethod('isRestorable', [id, completer.callback]);
  return completer.future;
 }
@@ -145,7 +145,7 @@ Future&lt;bool&gt; <strong>isWritableEntry</strong>(entry) <a class="anchor-link
 <div class="doc">
 <pre class="source">
 Future&lt;bool&gt; isWritableEntry(dynamic entry) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
  return completer.future;
 }
@@ -159,7 +159,7 @@ Future&lt;dynamic&gt; <strong>restoreEntry</strong>(String id) <a class="anchor-
 <div class="doc">
 <pre class="source">
 Future&lt;dynamic&gt; restoreEntry(String id) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
  return completer.future;
 }

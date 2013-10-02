@@ -52,7 +52,7 @@ class ChromeSessions {
   * either tabs or windows.
   */
  Future&lt;List&lt;Session&gt;&gt; getRecentlyClosed([Filter filter]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Session.create));
+   var completer = new ChromeCompleter&lt;List&lt;Session&gt;&gt;.oneArg((e) =&gt; listify(e, Session.create));
    _sessions.callMethod('getRecentlyClosed', [filter, completer.callback]);
    return completer.future;
  }
@@ -67,7 +67,7 @@ class ChromeSessions {
   * [windows.Window] of the [Session] objects.
   */
  Future&lt;List&lt;Device&gt;&gt; getDevices([Filter filter]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Device.create));
+   var completer = new ChromeCompleter&lt;List&lt;Device&gt;&gt;.oneArg((e) =&gt; listify(e, Device.create));
    _sessions.callMethod('getDevices', [filter, completer.callback]);
    return completer.future;
  }
@@ -83,7 +83,7 @@ class ChromeSessions {
   * A [Session] containing the restored [windows.Window] or [tabs.Tab] object.
   */
  Future&lt;Session&gt; restore([String sessionId]) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(Session.create);
+   var completer = new ChromeCompleter&lt;Session&gt;.oneArg(Session.create);
    _sessions.callMethod('restore', [sessionId, completer.callback]);
    return completer.future;
  }
@@ -121,7 +121,7 @@ modified session. <code>tabs.Tab</code> objects are sorted by recency in the
 <code>windows.Window</code> of the <a class="crossref" href="../chrome.sessions/Session.html">Session</a> objects.</p>
 <pre class="source">
 Future&lt;List&lt;Device&gt;&gt; getDevices([Filter filter]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Device.create));
+ var completer = new ChromeCompleter&lt;List&lt;Device&gt;&gt;.oneArg((e) =&gt; listify(e, Device.create));
  _sessions.callMethod('getDevices', [filter, completer.callback]);
  return completer.future;
 }
@@ -140,7 +140,7 @@ recently closed tab or window will be at index <code>0</code>).The entries may c
 either tabs or windows.</p>
 <pre class="source">
 Future&lt;List&lt;Session&gt;&gt; getRecentlyClosed([Filter filter]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Session.create));
+ var completer = new ChromeCompleter&lt;List&lt;Session&gt;&gt;.oneArg((e) =&gt; listify(e, Session.create));
  _sessions.callMethod('getRecentlyClosed', [filter, completer.callback]);
  return completer.future;
 }
@@ -161,7 +161,7 @@ restore.</p>
 A <a class="crossref" href="../chrome.sessions/Session.html">Session</a> containing the restored <code>windows.Window</code> or <code>tabs.Tab</code> object.</p>
 <pre class="source">
 Future&lt;Session&gt; restore([String sessionId]) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(Session.create);
+ var completer = new ChromeCompleter&lt;Session&gt;.oneArg(Session.create);
  _sessions.callMethod('restore', [sessionId, completer.callback]);
  return completer.future;
 }

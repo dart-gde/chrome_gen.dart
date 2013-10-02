@@ -50,7 +50,7 @@ class ChromeScriptBadge {
   * Gets the html document set as the popup for this script badge.
   */
  Future&lt;String&gt; getPopup(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _scriptBadge.callMethod('getPopup', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -121,7 +121,7 @@ Future&lt;String&gt; <strong>getPopup</strong>(Map details) <a class="anchor-lin
 <p>Gets the html document set as the popup for this script badge.</p>
 <pre class="source">
 Future&lt;String&gt; getPopup(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _scriptBadge.callMethod('getPopup', [jsify(details), completer.callback]);
  return completer.future;
 }

@@ -39,13 +39,13 @@ class ChromeTabCapture {
  ChromeTabCapture._();
 
  Future&lt;dynamic&gt; capture(CaptureOptions options) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _tabCapture.callMethod('capture', [options, completer.callback]);
    return completer.future;
  }
 
  Future&lt;CaptureInfo&gt; getCapturedTabs() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(CaptureInfo.create);
+   var completer = new ChromeCompleter&lt;CaptureInfo&gt;.oneArg(CaptureInfo.create);
    _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
    return completer.future;
  }
@@ -81,7 +81,7 @@ Future&lt;dynamic&gt; <strong>capture</strong>(<a href="../chrome.tabCapture/Cap
 <div class="doc">
 <pre class="source">
 Future&lt;dynamic&gt; capture(CaptureOptions options) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _tabCapture.callMethod('capture', [options, completer.callback]);
  return completer.future;
 }
@@ -95,7 +95,7 @@ Future&lt;<a href="../chrome.tabCapture/CaptureInfo.html">CaptureInfo</a>&gt; <s
 <div class="doc">
 <pre class="source">
 Future&lt;CaptureInfo&gt; getCapturedTabs() {
- ChromeCompleter completer = new ChromeCompleter.oneArg(CaptureInfo.create);
+ var completer = new ChromeCompleter&lt;CaptureInfo&gt;.oneArg(CaptureInfo.create);
  _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
  return completer.future;
 }

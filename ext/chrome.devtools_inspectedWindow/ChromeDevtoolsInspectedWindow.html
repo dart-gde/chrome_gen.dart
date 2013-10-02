@@ -57,7 +57,7 @@ class ChromeDevtoolsInspectedWindow {
   * expression.
   */
  Future&lt;JsObject&gt; eval(String expression) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
    _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
    return completer.future;
  }
@@ -76,7 +76,7 @@ class ChromeDevtoolsInspectedWindow {
   * The resources within the page.
   */
  Future&lt;List&lt;Resource&gt;&gt; getResources() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Resource.create));
+   var completer = new ChromeCompleter&lt;List&lt;Resource&gt;&gt;.oneArg((e) =&gt; listify(e, Resource.create));
    _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
    return completer.future;
  }
@@ -162,7 +162,7 @@ otherwise an exception is thrown.</p>
 expression.</p>
 <pre class="source">
 Future&lt;JsObject&gt; eval(String expression) {
- ChromeCompleter completer = new ChromeCompleter.oneArg();
+ var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
  _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
  return completer.future;
 }
@@ -179,7 +179,7 @@ Future&lt;List&lt;<a href="../chrome.devtools_inspectedWindow/Resource.html">Res
 The resources within the page.</p>
 <pre class="source">
 Future&lt;List&lt;Resource&gt;&gt; getResources() {
- ChromeCompleter completer = new ChromeCompleter.oneArg((e) =&gt; listify(e, Resource.create));
+ var completer = new ChromeCompleter&lt;List&lt;Resource&gt;&gt;.oneArg((e) =&gt; listify(e, Resource.create));
  _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
  return completer.future;
 }

@@ -52,7 +52,7 @@ class ChromeFileBrowserHandler {
   * Result of the method.
   */
  Future&lt;Map&gt; selectFile(Map selectionParams) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    _fileBrowserHandler.callMethod('selectFile', [jsify(selectionParams), completer.callback]);
    return completer.future;
  }
@@ -102,7 +102,7 @@ gesture.</p>
 Result of the method.</p>
 <pre class="source">
 Future&lt;Map&gt; selectFile(Map selectionParams) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  _fileBrowserHandler.callMethod('selectFile', [jsify(selectionParams), completer.callback]);
  return completer.future;
 }

@@ -39,7 +39,7 @@ class ChromeSystemCpu {
  ChromeSystemCpu._();
 
  Future&lt;CpuInfo&gt; getInfo() {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(CpuInfo.create);
+   var completer = new ChromeCompleter&lt;CpuInfo&gt;.oneArg(CpuInfo.create);
    _system_cpu.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
@@ -55,7 +55,7 @@ Future&lt;<a href="../chrome.system_cpu/CpuInfo.html">CpuInfo</a>&gt; <strong>ge
 <div class="doc">
 <pre class="source">
 Future&lt;CpuInfo&gt; getInfo() {
- ChromeCompleter completer = new ChromeCompleter.oneArg(CpuInfo.create);
+ var completer = new ChromeCompleter&lt;CpuInfo&gt;.oneArg(CpuInfo.create);
  _system_cpu.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }

@@ -51,7 +51,7 @@ class ChromeSetting extends ChromeObject {
   * Details of the currently effective value.
   */
  Future&lt;Map&gt; get(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    proxy.callMethod('get', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -62,7 +62,7 @@ class ChromeSetting extends ChromeObject {
   * [details] Which setting to change.
   */
  Future set(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('set', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -73,7 +73,7 @@ class ChromeSetting extends ChromeObject {
   * [details] Which setting to clear.
   */
  Future clear(Map details) {
-   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   var completer = new ChromeCompleter.noArgs();
    proxy.callMethod('clear', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -154,7 +154,7 @@ Future <strong>clear</strong>(Map details) <a class="anchor-link" href="#clear"
 <span class="param">details</span> Which setting to clear.</p>
 <pre class="source">
 Future clear(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('clear', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -173,7 +173,7 @@ Future&lt;Map&gt; <strong>get</strong>(Map details) <a class="anchor-link" href=
 Details of the currently effective value.</p>
 <pre class="source">
 Future&lt;Map&gt; get(Map details) {
- ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  proxy.callMethod('get', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -190,7 +190,7 @@ Future <strong>set</strong>(Map details) <a class="anchor-link" href="#set"
 <span class="param">details</span> Which setting to change.</p>
 <pre class="source">
 Future set(Map details) {
- ChromeCompleter completer = new ChromeCompleter.noArgs();
+ var completer = new ChromeCompleter.noArgs();
  proxy.callMethod('set', [jsify(details), completer.callback]);
  return completer.future;
 }
