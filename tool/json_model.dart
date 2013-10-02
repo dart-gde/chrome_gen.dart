@@ -5,7 +5,7 @@ import 'chrome_model.dart';
 import 'src/utils.dart';
 
 abstract class JsonObject {
-  dynamic json;
+  final Map<String, dynamic> json;
 
   JsonObject(this.json);
 
@@ -15,17 +15,17 @@ abstract class JsonObject {
 }
 
 class JsonNamespace extends JsonObject {
-  List<JsonProperty> properties;
-  List<JsonFunction> functions;
-  List<JsonEvent> events;
-  List<JsonDeclaredType> types;
+  final List<JsonProperty> properties;
+  final List<JsonFunction> functions;
+  final List<JsonEvent> events;
+  final List<JsonDeclaredType> types;
 
-  JsonNamespace(json): super(json) {
-    properties = JsonProperty.parse(json['properties']);
-    functions = JsonFunction.parse(json['functions']);
-    events = JsonEvent.parse(json['events']);
-    types = JsonDeclaredType.parse(json['types']);
-  }
+  JsonNamespace(json) :
+    properties = JsonProperty.parse(json['properties']),
+    functions = JsonFunction.parse(json['functions']),
+    events = JsonEvent.parse(json['events']),
+    types = JsonDeclaredType.parse(json['types']),
+    super(json);
 
   String get namespace => json['namespace'];
 
@@ -33,8 +33,8 @@ class JsonNamespace extends JsonObject {
 }
 
 class JsonProperty extends JsonObject {
-  String name;
-  JsonReturnType type;
+  final String name;
+  final JsonReturnType type;
 
   static List<JsonProperty> parse(Map m) {
     List<JsonProperty> properties = [];
@@ -57,19 +57,18 @@ class JsonProperty extends JsonObject {
 }
 
 class JsonFunction extends JsonObject {
-  List<JsonParamType> parameters;
-  JsonReturnType returns;
+  final List<JsonParamType> parameters;
+  final JsonReturnType returns;
 
   static List<JsonFunction> parse(List jsons) {
     return (jsons == null ? [] : jsons.map((j) => new JsonFunction(j)).toList());
   }
 
-  JsonFunction(json): super(json) {
-    parameters = JsonParamType.parse(json['parameters']);
-    if (json.containsKey('returns')) {
-      returns = new JsonReturnType(json['returns']);
-    }
-  }
+  JsonFunction(json) :
+    parameters = JsonParamType.parse(json['parameters']),
+    returns = json.containsKey('returns') ?
+        new JsonReturnType(json['returns']) : null,
+    super(json);
 
   String get name => json['name'];
   String get type => json['type'];
@@ -79,12 +78,13 @@ class JsonFunction extends JsonObject {
 }
 
 class JsonType extends JsonObject {
-  List<JsonParamType> parameters;
-  List<JsonProperty> properties;
+  final List<JsonParamType> parameters;
+  final List<JsonProperty> properties;
 
-  JsonType(json): super(json) {
-    parameters = JsonParamType.parse(json['parameters']);
-    properties = JsonProperty.parse(json['properties']);
+  JsonType(json):
+    this.parameters = JsonParamType.parse(json['parameters']),
+    this.properties = JsonProperty.parse(json['properties']),
+    super(json) {
 
     if (parameters.isEmpty && json.containsKey('items')) {
       parameters.add(new JsonType(json['items']));
