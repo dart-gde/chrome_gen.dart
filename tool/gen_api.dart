@@ -21,8 +21,20 @@ void main() {
     return;
   }
 
+  if(results['out'] == null) {
+    print("You must provide a value for 'out'.");
+    _printUsage(parser);
+    return;
+  }
+
+  Overrides overrides = null;
+  if(results['overrides'] != null) {
+    var overridesFile = new File(results['overrides']);
+    overrides = new Overrides.fromFile(overridesFile);
+  }
+
   GenApiFile generator = new GenApiFile(
-      new File(results.rest.first), new File(results['out']));
+      new File(results.rest.first), new File(results['out']), overrides);
   generator.generate();
 }
 
@@ -87,8 +99,12 @@ ArgParser _createArgsParser() {
       help: 'show command help');
   parser.addOption(
       'out',
-      defaultsTo: 'out',
-      help: 'the output directory');
+      abbr: 'o',
+      help: 'Path to the destination file. Required.');
+
+  parser.addOption(
+      'overrides',
+      help: 'Path to on overrides json file.');
   return parser;
 }
 
