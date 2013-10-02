@@ -60,7 +60,7 @@ class Event extends ChromeObject {
    return completer.future;
  }
 
- bool hasListener(var callback) {
+ bool hasListener(dynamic callback) {
    return proxy.callMethod('hasListener', [callback]);
  }
 
@@ -247,7 +247,7 @@ bool <strong>hasListener</strong>(callback) <a class="anchor-link" href="#hasLis
               title="Permalink to Event.hasListener">#</a></h4>
 <div class="doc">
 <pre class="source">
-bool hasListener(var callback) {
+bool hasListener(dynamic callback) {
  return proxy.callMethod('hasListener', [callback]);
 }
 </pre>

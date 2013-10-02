@@ -38,19 +38,19 @@ class ChromeFileSystem {
 
  ChromeFileSystem._();
 
- Future&lt;String&gt; getDisplayPath(var entry) {
+ Future&lt;String&gt; getDisplayPath(dynamic entry) {
    ChromeCompleter completer = new ChromeCompleter.oneArg();
    _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
    return completer.future;
  }
 
- Future&lt;dynamic&gt; getWritableEntry(var entry) {
+ Future&lt;dynamic&gt; getWritableEntry(dynamic entry) {
    ChromeCompleter completer = new ChromeCompleter.oneArg();
    _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
    return completer.future;
  }
 
- Future&lt;bool&gt; isWritableEntry(var entry) {
+ Future&lt;bool&gt; isWritableEntry(dynamic entry) {
    ChromeCompleter completer = new ChromeCompleter.oneArg();
    _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
    return completer.future;
@@ -74,7 +74,7 @@ class ChromeFileSystem {
    return completer.future;
  }
 
- String retainEntry(var entry) {
+ String retainEntry(dynamic entry) {
    return _fileSystem.callMethod('retainEntry', [entry]);
  }
 }
@@ -102,7 +102,7 @@ Future&lt;String&gt; <strong>getDisplayPath</strong>(entry) <a class="anchor-lin
               title="Permalink to ChromeFileSystem.getDisplayPath">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future&lt;String&gt; getDisplayPath(var entry) {
+Future&lt;String&gt; getDisplayPath(dynamic entry) {
  ChromeCompleter completer = new ChromeCompleter.oneArg();
  _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
  return completer.future;
@@ -116,7 +116,7 @@ Future&lt;dynamic&gt; <strong>getWritableEntry</strong>(entry) <a class="anchor-
               title="Permalink to ChromeFileSystem.getWritableEntry">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future&lt;dynamic&gt; getWritableEntry(var entry) {
+Future&lt;dynamic&gt; getWritableEntry(dynamic entry) {
  ChromeCompleter completer = new ChromeCompleter.oneArg();
  _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
  return completer.future;
@@ -144,7 +144,7 @@ Future&lt;bool&gt; <strong>isWritableEntry</strong>(entry) <a class="anchor-link
               title="Permalink to ChromeFileSystem.isWritableEntry">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future&lt;bool&gt; isWritableEntry(var entry) {
+Future&lt;bool&gt; isWritableEntry(dynamic entry) {
  ChromeCompleter completer = new ChromeCompleter.oneArg();
  _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
  return completer.future;
@@ -172,7 +172,7 @@ String <strong>retainEntry</strong>(entry) <a class="anchor-link" href="#retainE
               title="Permalink to ChromeFileSystem.retainEntry">#</a></h4>
 <div class="doc">
 <pre class="source">
-String retainEntry(var entry) {
+String retainEntry(dynamic entry) {
  return _fileSystem.callMethod('retainEntry', [entry]);
 }
 </pre>

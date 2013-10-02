@@ -50,7 +50,7 @@ class ChromeContextMenus {
   * Returns:
   * The ID of the newly created item.
   */
- dynamic create(Map createProperties, [var callback]) {
+ dynamic create(Map createProperties, [dynamic callback]) {
    return _contextMenus.callMethod('create', [jsify(createProperties), callback]);
  }
 
@@ -62,7 +62,7 @@ class ChromeContextMenus {
   * [updateProperties] The properties to update. Accepts the same values as the
   * create function.
   */
- Future update(var id, Map updateProperties) {
+ Future update(dynamic id, Map updateProperties) {
    ChromeCompleter completer = new ChromeCompleter.noArgs();
    _contextMenus.callMethod('update', [id, jsify(updateProperties), completer.callback]);
    return completer.future;
@@ -73,7 +73,7 @@ class ChromeContextMenus {
   * 
   * [menuItemId] The ID of the context menu item to remove.
   */
- Future remove(var menuItemId) {
+ Future remove(dynamic menuItemId) {
    ChromeCompleter completer = new ChromeCompleter.noArgs();
    _contextMenus.callMethod('remove', [menuItemId, completer.callback]);
    return completer.future;
@@ -131,7 +131,7 @@ chrome.runtime.lastError.</p>
 <p>Returns:
 The ID of the newly created item.</p>
 <pre class="source">
-dynamic create(Map createProperties, [var callback]) {
+dynamic create(Map createProperties, [dynamic callback]) {
  return _contextMenus.callMethod('create', [jsify(createProperties), callback]);
 }
 </pre>
@@ -146,7 +146,7 @@ Future <strong>remove</strong>(menuItemId) <a class="anchor-link" href="#remove"
 <p>
 <span class="param">menuItemId</span> The ID of the context menu item to remove.</p>
 <pre class="source">
-Future remove(var menuItemId) {
+Future remove(dynamic menuItemId) {
  ChromeCompleter completer = new ChromeCompleter.noArgs();
  _contextMenus.callMethod('remove', [menuItemId, completer.callback]);
  return completer.future;
@@ -181,7 +181,7 @@ Future <strong>update</strong>(id, Map updateProperties) <a class="anchor-link" 
 <span class="param">updateProperties</span> The properties to update. Accepts the same values as the
 create function.</p>
 <pre class="source">
-Future update(var id, Map updateProperties) {
+Future update(dynamic id, Map updateProperties) {
  ChromeCompleter completer = new ChromeCompleter.noArgs();
  _contextMenus.callMethod('update', [id, jsify(updateProperties), completer.callback]);
  return completer.future;

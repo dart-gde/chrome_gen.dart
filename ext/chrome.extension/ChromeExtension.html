@@ -63,7 +63,7 @@ class ChromeExtension {
   * occurs while connecting to the extension, the callback will be called with
   * no arguments and [runtime.lastError] will be set to the error message.
   */
- Future&lt;dynamic&gt; sendRequest(var request, [String extensionId]) {
+ Future&lt;dynamic&gt; sendRequest(dynamic request, [String extensionId]) {
    ChromeCompleter completer = new ChromeCompleter.oneArg();
    _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
    return completer.future;
@@ -348,7 +348,7 @@ The JSON response object sent by the handler of the request. If an error
 occurs while connecting to the extension, the callback will be called with
 no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
-Future&lt;dynamic&gt; sendRequest(var request, [String extensionId]) {
+Future&lt;dynamic&gt; sendRequest(dynamic request, [String extensionId]) {
  ChromeCompleter completer = new ChromeCompleter.oneArg();
  _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
  return completer.future;

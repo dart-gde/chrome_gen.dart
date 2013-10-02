@@ -58,7 +58,7 @@ class OnEventEvent {
   * JSON object with the response. Structure of the response varies depending
   * on the method and is defined by the remote debugging protocol.
   */
- Map params;
+ Map&lt;String, dynamic&gt; params;
 
  OnEventEvent(this.source, this.method, this.params);
 }
@@ -82,7 +82,7 @@ static OnEventEvent create(JsObject source, String method, JsObject params) =&gt
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>OnEventEvent</strong>(<a href="../chrome.debugger/Debuggee.html">Debuggee</a> source, String method, Map params) <a class="anchor-link" href="#"
+new <strong>OnEventEvent</strong>(<a href="../chrome.debugger/Debuggee.html">Debuggee</a> source, String method, Map&lt;String, dynamic&gt; params) <a class="anchor-link" href="#"
               title="Permalink to OnEventEvent.OnEventEvent">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -116,7 +116,7 @@ String method
 </div>
 <div class="field"><h4 id="params">
 <button class="show-code">Code</button>
-Map         <strong>params</strong> <a class="anchor-link"
+Map&lt;String, dynamic&gt;         <strong>params</strong> <a class="anchor-link"
             href="#params"
             title="Permalink to OnEventEvent.params">#</a>
         </h4>
@@ -127,7 +127,7 @@ on the method and is defined by the remote debugging protocol.
 <p>JSON object with the response. Structure of the response varies depending
 on the method and is defined by the remote debugging protocol.</p>
 <pre class="source">
-Map params
+Map&lt;String, dynamic&gt; params
 </pre>
 </div>
 </div>

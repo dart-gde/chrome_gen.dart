@@ -81,7 +81,7 @@ class ChromeDebugger {
   * JSON object with the response. Structure of the response varies depending
   * on the method and is defined by the remote debugging protocol.
   */
- Future&lt;Map&gt; sendCommand(Debuggee target, String method, [Map commandParams]) {
+ Future&lt;Map&lt;String, dynamic&gt;&gt; sendCommand(Debuggee target, String method, [Map&lt;String, dynamic&gt; commandParams]) {
    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
    _debugger.callMethod('sendCommand', [target, method, jsify(commandParams), completer.callback]);
    return completer.future;
@@ -210,7 +210,7 @@ Future&lt;List&lt;TargetInfo&gt;&gt; getTargets() {
 </div>
 <div class="method"><h4 id="sendCommand">
 <button class="show-code">Code</button>
-Future&lt;Map&gt; <strong>sendCommand</strong>(<a href="../chrome.debugger/Debuggee.html">Debuggee</a> target, String method, [Map commandParams]) <a class="anchor-link" href="#sendCommand"
+Future&lt;Map&lt;String, dynamic&gt;&gt; <strong>sendCommand</strong>(<a href="../chrome.debugger/Debuggee.html">Debuggee</a> target, String method, [Map&lt;String, dynamic&gt; commandParams]) <a class="anchor-link" href="#sendCommand"
               title="Permalink to ChromeDebugger.sendCommand">#</a></h4>
 <div class="doc">
 <p>Sends given command to the debugging target.</p>
@@ -227,7 +227,7 @@ conform to the remote debugging params scheme for given method.</p>
 JSON object with the response. Structure of the response varies depending
 on the method and is defined by the remote debugging protocol.</p>
 <pre class="source">
-Future&lt;Map&gt; sendCommand(Debuggee target, String method, [Map commandParams]) {
+Future&lt;Map&lt;String, dynamic&gt;&gt; sendCommand(Debuggee target, String method, [Map&lt;String, dynamic&gt; commandParams]) {
  ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
  _debugger.callMethod('sendCommand', [target, method, jsify(commandParams), completer.callback]);
  return completer.future;

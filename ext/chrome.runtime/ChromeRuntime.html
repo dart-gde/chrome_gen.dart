@@ -70,7 +70,7 @@ class ChromeRuntime {
   * Returns:
   * The manifest details.
   */
- Map getManifest() {
+ Map&lt;String, dynamic&gt; getManifest() {
    return mapify(_runtime.callMethod('getManifest'));
  }
 
@@ -166,7 +166,7 @@ class ChromeRuntime {
   * occurs while connecting to the extension, the callback will be called with
   * no arguments and [runtime.lastError] will be set to the error message.
   */
- Future&lt;dynamic&gt; sendMessage(var message, [String extensionId]) {
+ Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId]) {
    ChromeCompleter completer = new ChromeCompleter.oneArg();
    _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
    return completer.future;
@@ -184,7 +184,7 @@ class ChromeRuntime {
   * while connecting to the native messaging host, the callback will be called
   * with no arguments and [runtime.lastError] will be set to the error message.
   */
- Future&lt;dynamic&gt; sendNativeMessage(String application, Map message) {
+ Future&lt;dynamic&gt; sendNativeMessage(String application, Map&lt;String, dynamic&gt; message) {
    ChromeCompleter completer = new ChromeCompleter.oneArg();
    _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
    return completer.future;
@@ -254,10 +254,10 @@ class ChromeRuntime {
   * installed the next time the background page gets unloaded, if you want it
   * to be installed sooner you can explicitly call chrome.runtime.reload().
   */
- Stream&lt;Map&gt; get onUpdateAvailable =&gt; _onUpdateAvailable.stream;
+ Stream&lt;Map&lt;String, dynamic&gt;&gt; get onUpdateAvailable =&gt; _onUpdateAvailable.stream;
 
- final ChromeStreamController&lt;Map&gt; _onUpdateAvailable =
-     new ChromeStreamController&lt;Map&gt;.oneArg(_runtime['onUpdateAvailable'], mapify);
+ final ChromeStreamController&lt;Map&lt;String, dynamic&gt;&gt; _onUpdateAvailable =
+     new ChromeStreamController&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(_runtime['onUpdateAvailable'], mapify);
 
  /**
   * Fired when a Chrome update is available, but isn't installed immediately
@@ -493,7 +493,7 @@ Stream get onSuspendCanceled =&gt; _onSuspendCanceled.stream;
 </div>
 <div class="field"><h4 id="onUpdateAvailable">
 <button class="show-code">Code</button>
-final Stream&lt;Map&gt;         <strong>onUpdateAvailable</strong> <a class="anchor-link"
+final Stream&lt;Map&lt;String, dynamic&gt;&gt;         <strong>onUpdateAvailable</strong> <a class="anchor-link"
             href="#onUpdateAvailable"
             title="Permalink to ChromeRuntime.onUpdateAvailable">#</a>
         </h4>
@@ -503,7 +503,7 @@ the app is currently running. If you do nothing, the update will be
 installed the next time the background page gets unloaded, if you want it
 to be installed sooner you can explicitly call chrome.runtime.reload().</p>
 <pre class="source">
-Stream&lt;Map&gt; get onUpdateAvailable =&gt; _onUpdateAvailable.stream;
+Stream&lt;Map&lt;String, dynamic&gt;&gt; get onUpdateAvailable =&gt; _onUpdateAvailable.stream;
 </pre>
 </div>
 </div>
@@ -573,7 +573,7 @@ Future&lt;dynamic&gt; getBackgroundPage() {
 </div>
 <div class="method"><h4 id="getManifest">
 <button class="show-code">Code</button>
-Map <strong>getManifest</strong>() <a class="anchor-link" href="#getManifest"
+Map&lt;String, dynamic&gt; <strong>getManifest</strong>() <a class="anchor-link" href="#getManifest"
               title="Permalink to ChromeRuntime.getManifest">#</a></h4>
 <div class="doc">
 <p>Returns details about the app or extension from the manifest. The object
@@ -581,7 +581,7 @@ returned is a serialization of the full <a href="manifest.html">manifest file</a
 <p>Returns:
 The manifest details.</p>
 <pre class="source">
-Map getManifest() {
+Map&lt;String, dynamic&gt; getManifest() {
  return mapify(_runtime.callMethod('getManifest'));
 }
 </pre>
@@ -688,7 +688,7 @@ The JSON response object sent by the handler of the message. If an error
 occurs while connecting to the extension, the callback will be called with
 no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
-Future&lt;dynamic&gt; sendMessage(var message, [String extensionId]) {
+Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId]) {
  ChromeCompleter completer = new ChromeCompleter.oneArg();
  _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
  return completer.future;
@@ -698,7 +698,7 @@ Future&lt;dynamic&gt; sendMessage(var message, [String extensionId]) {
 </div>
 <div class="method"><h4 id="sendNativeMessage">
 <button class="show-code">Code</button>
-Future&lt;dynamic&gt; <strong>sendNativeMessage</strong>(String application, Map message) <a class="anchor-link" href="#sendNativeMessage"
+Future&lt;dynamic&gt; <strong>sendNativeMessage</strong>(String application, Map&lt;String, dynamic&gt; message) <a class="anchor-link" href="#sendNativeMessage"
               title="Permalink to ChromeRuntime.sendNativeMessage">#</a></h4>
 <div class="doc">
 <p>Send a single message to a native application.</p>
@@ -711,7 +711,7 @@ The response message send by the native messaging host. If an error occurs
 while connecting to the native messaging host, the callback will be called
 with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
-Future&lt;dynamic&gt; sendNativeMessage(String application, Map message) {
+Future&lt;dynamic&gt; sendNativeMessage(String application, Map&lt;String, dynamic&gt; message) {
  ChromeCompleter completer = new ChromeCompleter.oneArg();
  _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
  return completer.future;

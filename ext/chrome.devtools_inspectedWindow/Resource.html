@@ -78,7 +78,7 @@ class Resource extends ChromeObject {
   * Set to undefined if the resource content was set successfully; describes
   * error otherwise.
   */
- Future&lt;Map&gt; setContent(String content, bool commit) {
+ Future&lt;Map&lt;String, dynamic&gt;&gt; setContent(String content, bool commit) {
    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
    proxy.callMethod('setContent', [content, commit, completer.callback]);
    return completer.future;
@@ -189,7 +189,7 @@ Future&lt;JsObject&gt; getContent() {
 </div>
 <div class="method"><h4 id="setContent">
 <button class="show-code">Code</button>
-Future&lt;Map&gt; <strong>setContent</strong>(String content, bool commit) <a class="anchor-link" href="#setContent"
+Future&lt;Map&lt;String, dynamic&gt;&gt; <strong>setContent</strong>(String content, bool commit) <a class="anchor-link" href="#setContent"
               title="Permalink to Resource.setContent">#</a></h4>
 <div class="doc">
 <p>Sets the content of the resource.</p>
@@ -204,7 +204,7 @@ change sent in progress of the user editing the resource.</p>
 Set to undefined if the resource content was set successfully; describes
 error otherwise.</p>
 <pre class="source">
-Future&lt;Map&gt; setContent(String content, bool commit) {
+Future&lt;Map&lt;String, dynamic&gt;&gt; setContent(String content, bool commit) {
  ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
  proxy.callMethod('setContent', [content, commit, completer.callback]);
  return completer.future;

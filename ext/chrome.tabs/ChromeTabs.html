@@ -81,7 +81,7 @@ class ChromeTabs {
   * occurs while connecting to the specified tab, the callback will be called
   * with no arguments and [runtime.lastError] will be set to the error message.
   */
- Future&lt;dynamic&gt; sendRequest(int tabId, var request) {
+ Future&lt;dynamic&gt; sendRequest(int tabId, dynamic request) {
    ChromeCompleter completer = new ChromeCompleter.oneArg();
    _tabs.callMethod('sendRequest', [tabId, request, completer.callback]);
    return completer.future;
@@ -98,7 +98,7 @@ class ChromeTabs {
   * occurs while connecting to the specified tab, the callback will be called
   * with no arguments and [runtime.lastError] will be set to the error message.
   */
- Future&lt;dynamic&gt; sendMessage(int tabId, var message) {
+ Future&lt;dynamic&gt; sendMessage(int tabId, dynamic message) {
    ChromeCompleter completer = new ChromeCompleter.oneArg();
    _tabs.callMethod('sendMessage', [tabId, message, completer.callback]);
    return completer.future;
@@ -205,7 +205,7 @@ class ChromeTabs {
   * Returns:
   * Details about the moved tabs.
   */
- Future&lt;dynamic&gt; move(var tabIds, Map moveProperties) {
+ Future&lt;dynamic&gt; move(dynamic tabIds, Map moveProperties) {
    ChromeCompleter completer = new ChromeCompleter.oneArg();
    _tabs.callMethod('move', [tabIds, jsify(moveProperties), completer.callback]);
    return completer.future;
@@ -228,7 +228,7 @@ class ChromeTabs {
   * 
   * [tabIds] The tab or list of tabs to close.
   */
- Future remove(var tabIds) {
+ Future remove(dynamic tabIds) {
    ChromeCompleter completer = new ChromeCompleter.noArgs();
    _tabs.callMethod('remove', [tabIds, completer.callback]);
    return completer.future;
@@ -838,7 +838,7 @@ window. Note that tabs can only be moved to and from normal (window.type
 <p>Returns:
 Details about the moved tabs.</p>
 <pre class="source">
-Future&lt;dynamic&gt; move(var tabIds, Map moveProperties) {
+Future&lt;dynamic&gt; move(dynamic tabIds, Map moveProperties) {
  ChromeCompleter completer = new ChromeCompleter.oneArg();
  _tabs.callMethod('move', [tabIds, jsify(moveProperties), completer.callback]);
  return completer.future;
@@ -889,7 +889,7 @@ Future <strong>remove</strong>(tabIds) <a class="anchor-link" href="#remove"
 <p>
 <span class="param">tabIds</span> The tab or list of tabs to close.</p>
 <pre class="source">
-Future remove(var tabIds) {
+Future remove(dynamic tabIds) {
  ChromeCompleter completer = new ChromeCompleter.noArgs();
  _tabs.callMethod('remove', [tabIds, completer.callback]);
  return completer.future;
@@ -911,7 +911,7 @@ The JSON response object sent by the handler of the message. If an error
 occurs while connecting to the specified tab, the callback will be called
 with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
-Future&lt;dynamic&gt; sendMessage(int tabId, var message) {
+Future&lt;dynamic&gt; sendMessage(int tabId, dynamic message) {
  ChromeCompleter completer = new ChromeCompleter.oneArg();
  _tabs.callMethod('sendMessage', [tabId, message, completer.callback]);
  return completer.future;
@@ -930,7 +930,7 @@ The JSON response object sent by the handler of the request. If an error
 occurs while connecting to the specified tab, the callback will be called
 with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
-Future&lt;dynamic&gt; sendRequest(int tabId, var request) {
+Future&lt;dynamic&gt; sendRequest(int tabId, dynamic request) {
  ChromeCompleter completer = new ChromeCompleter.oneArg();
  _tabs.callMethod('sendRequest', [tabId, request, completer.callback]);
  return completer.future;

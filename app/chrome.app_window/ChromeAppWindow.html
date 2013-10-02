@@ -48,7 +48,7 @@ class ChromeAppWindow {
    return AppWindow.create(_app_window.callMethod('current'));
  }
 
- void initializeAppWindow(var state) {
+ void initializeAppWindow(dynamic state) {
    _app_window.callMethod('initializeAppWindow', [state]);
  }
 
@@ -193,7 +193,7 @@ void <strong>initializeAppWindow</strong>(state) <a class="anchor-link" href="#i
               title="Permalink to ChromeAppWindow.initializeAppWindow">#</a></h4>
 <div class="doc">
 <pre class="source">
-void initializeAppWindow(var state) {
+void initializeAppWindow(dynamic state) {
  _app_window.callMethod('initializeAppWindow', [state]);
 }
 </pre>

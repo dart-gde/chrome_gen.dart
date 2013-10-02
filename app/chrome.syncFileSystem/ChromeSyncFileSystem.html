@@ -56,19 +56,19 @@ class ChromeSyncFileSystem {
    return completer.future;
  }
 
- Future&lt;StorageInfo&gt; getUsageAndQuota(var fileSystem) {
+ Future&lt;StorageInfo&gt; getUsageAndQuota(dynamic fileSystem) {
    ChromeCompleter completer = new ChromeCompleter.oneArg(StorageInfo.create);
    _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
    return completer.future;
  }
 
- Future&lt;FileStatus&gt; getFileStatus(var fileEntry) {
+ Future&lt;FileStatus&gt; getFileStatus(dynamic fileEntry) {
    ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatus.create);
    _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
    return completer.future;
  }
 
- Future&lt;FileStatusInfo&gt; getFileStatuses(var fileEntries) {
+ Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
    ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatusInfo.create);
    _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
    return completer.future;
@@ -141,7 +141,7 @@ Future&lt;<a href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a>&gt; 
               title="Permalink to ChromeSyncFileSystem.getFileStatus">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future&lt;FileStatus&gt; getFileStatus(var fileEntry) {
+Future&lt;FileStatus&gt; getFileStatus(dynamic fileEntry) {
  ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatus.create);
  _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
  return completer.future;
@@ -155,7 +155,7 @@ Future&lt;<a href="../chrome.syncFileSystem/FileStatusInfo.html">FileStatusInfo<
               title="Permalink to ChromeSyncFileSystem.getFileStatuses">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future&lt;FileStatusInfo&gt; getFileStatuses(var fileEntries) {
+Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
  ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatusInfo.create);
  _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
  return completer.future;
@@ -183,7 +183,7 @@ Future&lt;<a href="../chrome.syncFileSystem/StorageInfo.html">StorageInfo</a>&gt
               title="Permalink to ChromeSyncFileSystem.getUsageAndQuota">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future&lt;StorageInfo&gt; getUsageAndQuota(var fileSystem) {
+Future&lt;StorageInfo&gt; getUsageAndQuota(dynamic fileSystem) {
  ChromeCompleter completer = new ChromeCompleter.oneArg(StorageInfo.create);
  _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
  return completer.future;
