@@ -96,11 +96,12 @@ class _DefaultBackendContext {
    * Returns a class name like 'ChromeFooBar'.
    */
   String get className {
-    if (overrides.namespaceRename(library.name) != null) {
-       return "Chrome${overrides.namespaceRename(library.name)}";
+    var name = overrides.namespaceRename(library.name);
+    if (name == null) {
+      name = titleCase(toCamelCase(library.name));
     }
 
-    return "Chrome${titleCase(toCamelCase(library.name))}";
+    return "Chrome${name}";
   }
 
   String get contextReference {
@@ -170,10 +171,11 @@ class _DefaultBackendContext {
         generator.writeln("noArgs();");
       } else if (future.parameters.length == 1) {
         ChromeType param = future.parameters.first;
-        if (getCallbackConverter(param) == null) {
+        var callbackConverter = getCallbackConverter(param);
+        if (callbackConverter == null) {
           generator.writeln("oneArg();");
         } else {
-          generator.writeln("oneArg(${getCallbackConverter(param)});");
+          generator.writeln("oneArg(${callbackConverter});");
         }
       } else if (future.parameters.length == 2) {
         // TODO: currently, the json convert is changing 2 arg calls to 1 arg.
@@ -369,12 +371,13 @@ class _DefaultBackendContext {
     if (param.isString || param.isInt || param.isBool) {
       return null;
     } else if (param.isList) {
-      if (getCallbackConverter(param.parameters.first) == null) {
+      var firstParamCallbockConverter = getCallbackConverter(param.parameters.first);
+      if (firstParamCallbockConverter == null) {
         // if the elements are identity converters
         return "listify";
       } else {
         // we need to call listify with a map() param
-        return "(e) => listify(e, ${getCallbackConverter(param.parameters.first)})";
+        return "(e) => listify(e, ${firstParamCallbockConverter})";
       }
     } else if (param.isMap) {
       return 'mapify';
@@ -389,12 +392,13 @@ class _DefaultBackendContext {
     if (param.isString || param.isInt || param.isBool) {
       return '%s';
     } else if (param.isList) {
-      if (getCallbackConverter(param.parameters.first) == null) {
+      var firstParamCallbockConverter = getCallbackConverter(param.parameters.first);
+      if (firstParamCallbockConverter == null) {
         // if the elements are identity converters
         return "listify(%s)";
       } else {
         // else, call listify with a map() param
-        return "listify(%s, ${getCallbackConverter(param.parameters.first)})";
+        return "listify(%s, ${firstParamCallbockConverter})";
       }
     } else if (param.isMap) {
       return 'mapify(%s)';
