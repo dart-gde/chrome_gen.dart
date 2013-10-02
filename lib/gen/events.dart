@@ -73,6 +73,80 @@ class Event extends ChromeObject {
   Event();
 
   Event.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Registers an event listener _callback_ to an event.
+   */
+  Future addListener() {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    proxy.callMethod('addListener', [completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Deregisters an event listener _callback_ from an event.
+   */
+  Future removeListener() {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    proxy.callMethod('removeListener', [completer.callback]);
+    return completer.future;
+  }
+
+  bool hasListener(var callback) {
+    return proxy.callMethod('hasListener', [callback]);
+  }
+
+  bool hasListeners() {
+    return proxy.callMethod('hasListeners');
+  }
+
+  /**
+   * Registers rules to handle events.
+   * 
+   * [eventName] Name of the event this function affects.
+   * 
+   * [rules] Rules to be registered. These do not replace previously registered
+   * rules.
+   * 
+   * Returns:
+   * Rules that were registered, the optional parameters are filled with values.
+   */
+  Future<List<Rule>> addRules(String eventName, List<Rule> rules) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Rule.create));
+    proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Returns currently registered rules.
+   * 
+   * [eventName] Name of the event this function affects.
+   * 
+   * [ruleIdentifiers] If an array is passed, only rules with identifiers
+   * contained in this array are returned.
+   * 
+   * Returns:
+   * Rules that were registered, the optional parameters are filled with values.
+   */
+  Future<List<Rule>> getRules(String eventName, [List<String> ruleIdentifiers]) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Rule.create));
+    proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Unregisters currently registered rules.
+   * 
+   * [eventName] Name of the event this function affects.
+   * 
+   * [ruleIdentifiers] If an array is passed, only rules with identifiers
+   * contained in this array are unregistered.
+   */
+  Future removeRules(String eventName, [List<String> ruleIdentifiers]) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    proxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
+    return completer.future;
+  }
 }
 
 /**

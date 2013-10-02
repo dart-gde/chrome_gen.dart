@@ -115,4 +115,38 @@ class Resource extends ChromeObject {
    */
   String get url => proxy['url'];
   set url(String value) => proxy['url'] = value;
+
+  /**
+   * Gets the content of the resource.
+   * 
+   * Returns:
+   * [content] Content of the resource (potentially encoded).
+   * [encoding] Empty if content is not encoded, encoding name otherwise.
+   * Currently, only base64 is supported.
+   */
+  Future<JsObject> getContent() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    proxy.callMethod('getContent', [completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Sets the content of the resource.
+   * 
+   * [content] New content of the resource. Only resources with the text type
+   * are currently supported.
+   * 
+   * [commit] True if the user has finished editing the resource, and the new
+   * content of the resource should be persisted; false if this is a minor
+   * change sent in progress of the user editing the resource.
+   * 
+   * Returns:
+   * Set to undefined if the resource content was set successfully; describes
+   * error otherwise.
+   */
+  Future<Map> setContent(String content, bool commit) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    proxy.callMethod('setContent', [content, commit, completer.callback]);
+    return completer.future;
+  }
 }

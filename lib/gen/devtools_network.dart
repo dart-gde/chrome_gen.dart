@@ -56,4 +56,18 @@ class Request extends ChromeObject {
   Request();
 
   Request.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Returns content of the response body.
+   * 
+   * Returns:
+   * [content] Content of the response body (potentially encoded).
+   * [encoding] Empty if content is not encoded, encoding name otherwise.
+   * Currently, only base64 is supported.
+   */
+  Future<JsObject> getContent() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    proxy.callMethod('getContent', [completer.callback]);
+    return completer.future;
+  }
 }

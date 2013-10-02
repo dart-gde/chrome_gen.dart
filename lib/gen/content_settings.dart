@@ -101,4 +101,42 @@ class ContentSetting extends ChromeObject {
   ContentSetting();
 
   ContentSetting.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Clear all content setting rules set by this extension.
+   */
+  Future clear(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    proxy.callMethod('clear', [jsify(details), completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Gets the current content setting for a given pair of URLs.
+   */
+  Future<Map> get(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    proxy.callMethod('get', [jsify(details), completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Applies a new content setting rule.
+   */
+  Future set(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    proxy.callMethod('set', [jsify(details), completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Returns:
+   * A list of resource identifiers for this content type, or [undefined] if
+   * this content type does not use resource identifiers.
+   */
+  Future<List<ResourceIdentifier>> getResourceIdentifiers() {
+    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, ResourceIdentifier.create));
+    proxy.callMethod('getResourceIdentifiers', [completer.callback]);
+    return completer.future;
+  }
 }
