@@ -272,6 +272,11 @@ class JsonConverter {
       type.type = 'List';
     } else if (t.type == 'object' && t.isInstanceOf == null) {
       type.type = "Map";
+      Map<String, dynamic> additionalProps = t.json['additionalProperties'];
+      if(additionalProps != null && additionalProps['type'] == 'any') {
+        assert(t.parameters.isEmpty);
+        type.parameters = [ChromeType.STRING, ChromeType.VAR];
+      }
 
 //      // create documentation from the type's properties
 //      if (t.properties.isNotEmpty) {
@@ -309,7 +314,10 @@ class JsonConverter {
     }
 
     type.optional = t.optional;
-    type.parameters = t.parameters.map(_convertType).toList();
+
+    if(t.parameters.isNotEmpty) {
+      type.parameters = t.parameters.map(_convertType).toList();
+    }
     type.properties = t.properties.map(_convertProperty).toList();
     type.enumOptions = t.enumOptions;
 
