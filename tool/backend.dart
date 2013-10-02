@@ -314,7 +314,8 @@ class _DefaultBackendContext {
     }
 
     String className = type.name;
-    Iterable<ChromeProperty> props = type.filteredProperties;
+    List<ChromeProperty> props =
+        type.filteredProperties.toList(growable: false);
 
     generator.writeln();
     generator.writeDocs(type.documentation);
