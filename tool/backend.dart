@@ -179,7 +179,7 @@ class _DefaultBackendContext {
         }
       } else if (future.parameters.length == 2) {
         // TODO: currently, the json convert is changing 2 arg calls to 1 arg.
-        throw 'not yet supported';
+        throw new UnimplementedError('not yet supported');
         generator.writeln("twoArgs((arg1, arg2) {");
         generator.writeln("return null;");
         generator.writeln("});");
