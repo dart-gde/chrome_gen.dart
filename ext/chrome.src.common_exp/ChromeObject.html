@@ -35,15 +35,13 @@
 <p>The abstract superclass of objects that can hold <a class="crossref" href="../dart_js/JsObject.html">JsObject</a> proxies.</p>
 <pre class="source">
 abstract class ChromeObject implements Serializable&lt;JsObject&gt; {
- JsObject proxy;
+ final JsObject proxy;
 
  /**
   * Create a new instance of a `ChromeObject`, which creates and delegates to
   * a JsObject proxy.
   */
- ChromeObject() {
-   proxy = new JsObject(context['Object']);
- }
+ ChromeObject() : proxy = new JsObject(context['Object']);
 
  /**
   * Create a new instance of a `ChromeObject`, which delegates to the given
@@ -73,9 +71,7 @@ new <strong>ChromeObject</strong>() <a class="anchor-link" href="#"
 <p>Create a new instance of a <code>ChromeObject</code>, which creates and delegates to
 a JsObject proxy.</p>
 <pre class="source">
-ChromeObject() {
- proxy = new JsObject(context['Object']);
-}
+ChromeObject() : proxy = new JsObject(context['Object']);
 </pre>
 </div>
 </div>
@@ -96,13 +92,13 @@ ChromeObject.fromProxy(this.proxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="proxy">
 <button class="show-code">Code</button>
-JsObject         <strong>proxy</strong> <a class="anchor-link"
+final JsObject         <strong>proxy</strong> <a class="anchor-link"
             href="#proxy"
             title="Permalink to ChromeObject.proxy">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-JsObject proxy
+final JsObject proxy
 </pre>
 </div>
 </div>
