@@ -32,13 +32,12 @@ abstract class ChromeObject implements Serializable<JsObject> {
  * The abstract superclass of Chrome enums.
  */
 abstract class ChromeEnum implements Serializable<String> {
-  final String _value;
+  final String value;
 
-  const ChromeEnum(this._value);
+  const ChromeEnum(this.value);
 
-  String get value => _value;
-  String toJs() => _value;
-  String toString() => _value;
+  String toJs() => value;
+  String toString() => value;
 }
 
 // This is chared in common by app.window and system.display.
