@@ -196,8 +196,28 @@ void modelIdlParseEnumTest() {
   });
 }
 
+void modelIdlDictionaryTypeTests() {
+  test('functions in dictionary', () {
+    File testFile = new File('idl/app_window.idl');
+    WebIdlParser webIdlParser =
+        new WebIdlParser.withCollector(new model_idl.IDLCollectorChrome());
+    webIdlParser.start.parse(testFile.readAsStringSync());
+    model_idl.IDLNamespace idlNamespace = webIdlParser.collector.idlNamespace;
+    expect(idlNamespace, isNotNull);
+    var chromeLibrary = model_idl.convert(webIdlParser.collector);
+    expect(chromeLibrary, isNotNull);
+
+    // Test that AppWindow type has 18 functions. Count could change
+    // if app_window.idl is updated.
+    model_idl.IDLDeclaredType appWindowType =
+        idlNamespace.declaredTypes.singleWhere((e) => e.name == "AppWindow");
+    expect(appWindowType.functions.length, 18);
+  });
+}
+
 void main() {
   group('model_idl.IDLCollectorChrome parse', modelIdlParseTests);
   group('model_idl', modelIdlParseTestTypes);
   group('model_idl', modelIdlParseEnumTest);
+  group('model_idl dictionary', modelIdlDictionaryTypeTests);
 }
