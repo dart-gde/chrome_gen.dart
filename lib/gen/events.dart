@@ -78,7 +78,7 @@ class Event extends ChromeObject {
    * Registers an event listener _callback_ to an event.
    */
   Future addListener() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     proxy.callMethod('addListener', [completer.callback]);
     return completer.future;
   }
@@ -87,7 +87,7 @@ class Event extends ChromeObject {
    * Deregisters an event listener _callback_ from an event.
    */
   Future removeListener() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     proxy.callMethod('removeListener', [completer.callback]);
     return completer.future;
   }
@@ -112,7 +112,7 @@ class Event extends ChromeObject {
    * Rules that were registered, the optional parameters are filled with values.
    */
   Future<List<Rule>> addRules(String eventName, List<Rule> rules) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Rule.create));
+    var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, Rule.create));
     proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
     return completer.future;
   }
@@ -129,7 +129,7 @@ class Event extends ChromeObject {
    * Rules that were registered, the optional parameters are filled with values.
    */
   Future<List<Rule>> getRules(String eventName, [List<String> ruleIdentifiers]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Rule.create));
+    var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, Rule.create));
     proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
     return completer.future;
   }
@@ -143,7 +143,7 @@ class Event extends ChromeObject {
    * contained in this array are unregistered.
    */
   Future removeRules(String eventName, [List<String> ruleIdentifiers]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     proxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
     return completer.future;
   }

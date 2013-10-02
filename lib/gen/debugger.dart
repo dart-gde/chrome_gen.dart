@@ -32,7 +32,7 @@ class ChromeDebugger {
    * [here](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
    */
   Future attach(Debuggee target, String requiredVersion) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _debugger.callMethod('attach', [target, requiredVersion, completer.callback]);
     return completer.future;
   }
@@ -43,7 +43,7 @@ class ChromeDebugger {
    * [target] Debugging target from which you want to detach.
    */
   Future detach(Debuggee target) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _debugger.callMethod('detach', [target, completer.callback]);
     return completer.future;
   }
@@ -65,7 +65,7 @@ class ChromeDebugger {
    * on the method and is defined by the remote debugging protocol.
    */
   Future<Map<String, dynamic>> sendCommand(Debuggee target, String method, [Map<String, dynamic> commandParams]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
     _debugger.callMethod('sendCommand', [target, method, jsify(commandParams), completer.callback]);
     return completer.future;
   }
@@ -77,7 +77,7 @@ class ChromeDebugger {
    * Array of TargetInfo objects corresponding to the available debug targets.
    */
   Future<List<TargetInfo>> getTargets() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, TargetInfo.create));
+    var completer = new ChromeCompleter<List<TargetInfo>>.oneArg((e) => listify(e, TargetInfo.create));
     _debugger.callMethod('getTargets', [completer.callback]);
     return completer.future;
   }

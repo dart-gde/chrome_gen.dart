@@ -13,7 +13,7 @@ class ChromeAppWindow {
   ChromeAppWindow._();
 
   Future<dynamic> create(String url, [CreateWindowOptions options]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<dynamic>.oneArg();
     _app_window.callMethod('create', [url, options, completer.callback]);
     return completer.future;
   }

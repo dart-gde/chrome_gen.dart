@@ -20,7 +20,7 @@ class ChromeTopSites {
    * Gets a list of top sites.
    */
   Future<List<MostVisitedURL>> get() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, MostVisitedURL.create));
+    var completer = new ChromeCompleter<List<MostVisitedURL>>.oneArg((e) => listify(e, MostVisitedURL.create));
     _topSites.callMethod('get', [completer.callback]);
     return completer.future;
   }

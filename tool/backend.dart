@@ -164,7 +164,8 @@ class _DefaultBackendContext {
     generator.writeln(") {");
     if (method.usesCallback) {
       ChromeType future = method.returns;
-      generator.write("ChromeCompleter completer = new ChromeCompleter.");
+      var returnType = future.getReturnStringTypeParams();
+      generator.write("var completer = new ChromeCompleter${returnType}.");
       if (future.parameters.length == 0) {
         generator.writeln("noArgs();");
       } else if (future.parameters.length == 1) {

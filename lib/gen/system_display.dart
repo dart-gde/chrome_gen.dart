@@ -13,13 +13,13 @@ class ChromeSystemDisplay {
   ChromeSystemDisplay._();
 
   Future<DisplayUnitInfo> getInfo() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(DisplayUnitInfo.create);
+    var completer = new ChromeCompleter<DisplayUnitInfo>.oneArg(DisplayUnitInfo.create);
     _system_display.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }
 
   Future setDisplayProperties(String id, DisplayProperties info) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _system_display.callMethod('setDisplayProperties', [id, info, completer.callback]);
     return completer.future;
   }

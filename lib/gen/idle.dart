@@ -28,7 +28,7 @@ class ChromeIdle {
    * enum of `active`, `idle`, `locked`
    */
   Future<String> queryState(int detectionIntervalInSeconds) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _idle.callMethod('queryState', [detectionIntervalInSeconds, completer.callback]);
     return completer.future;
   }

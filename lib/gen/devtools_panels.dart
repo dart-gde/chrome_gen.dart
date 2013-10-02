@@ -38,7 +38,7 @@ class ChromeDevtoolsPanels {
    * An ExtensionPanel object representing the created panel.
    */
   Future<ExtensionPanel> create(String title, String iconPath, String pagePath) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionPanel.create);
+    var completer = new ChromeCompleter<ExtensionPanel>.oneArg(ExtensionPanel.create);
     _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
     return completer.future;
   }
@@ -53,7 +53,7 @@ class ChromeDevtoolsPanels {
    * clicked.
    */
   Future<Resource> setOpenResourceHandler() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Resource.create);
+    var completer = new ChromeCompleter<Resource>.oneArg(Resource.create);
     _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
     return completer.future;
   }
@@ -78,7 +78,7 @@ class ElementsPanel extends ChromeObject {
    * An ExtensionSidebarPane object for created sidebar pane.
    */
   Future<ExtensionSidebarPane> createSidebarPane(String title) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionSidebarPane.create);
+    var completer = new ChromeCompleter<ExtensionSidebarPane>.oneArg(ExtensionSidebarPane.create);
     proxy.callMethod('createSidebarPane', [title, completer.callback]);
     return completer.future;
   }
@@ -142,7 +142,7 @@ class ExtensionSidebarPane extends ChromeObject {
    * [rootTitle] An optional title for the root of the expression tree.
    */
   Future setExpression(String expression, [String rootTitle]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     proxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
     return completer.future;
   }
@@ -156,7 +156,7 @@ class ExtensionSidebarPane extends ChromeObject {
    * [rootTitle] An optional title for the root of the expression tree.
    */
   Future setObject(String jsonObject, [String rootTitle]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     proxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
     return completer.future;
   }

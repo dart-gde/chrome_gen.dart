@@ -29,7 +29,7 @@ class ChromeTts {
    * [options] The speech options.
    */
   Future speak(String utterance, [Map options]) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _tts.callMethod('speak', [utterance, jsify(options), completer.callback]);
     return completer.future;
   }
@@ -67,7 +67,7 @@ class ChromeTts {
    * True if speaking, false otherwise.
    */
   Future<bool> isSpeaking() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _tts.callMethod('isSpeaking', [completer.callback]);
     return completer.future;
   }
@@ -80,7 +80,7 @@ class ChromeTts {
    * synthesis.
    */
   Future<List<TtsVoice>> getVoices() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, TtsVoice.create));
+    var completer = new ChromeCompleter<List<TtsVoice>>.oneArg((e) => listify(e, TtsVoice.create));
     _tts.callMethod('getVoices', [completer.callback]);
     return completer.future;
   }

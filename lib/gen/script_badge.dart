@@ -29,7 +29,7 @@ class ChromeScriptBadge {
    * Gets the html document set as the popup for this script badge.
    */
   Future<String> getPopup(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _scriptBadge.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
   }

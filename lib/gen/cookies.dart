@@ -29,7 +29,7 @@ class ChromeCookies {
    * was found.
    */
   Future<Cookie> get(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Cookie.create);
+    var completer = new ChromeCompleter<Cookie>.oneArg(Cookie.create);
     _cookies.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -46,7 +46,7 @@ class ChromeCookies {
    * All the existing, unexpired cookies that match the given cookie info.
    */
   Future<List<Cookie>> getAll(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Cookie.create));
+    var completer = new ChromeCompleter<List<Cookie>>.oneArg((e) => listify(e, Cookie.create));
     _cookies.callMethod('getAll', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -63,7 +63,7 @@ class ChromeCookies {
    * set.
    */
   Future<Cookie> set(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Cookie.create);
+    var completer = new ChromeCompleter<Cookie>.oneArg(Cookie.create);
     _cookies.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -79,7 +79,7 @@ class ChromeCookies {
    * set.
    */
   Future<Map> remove(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _cookies.callMethod('remove', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -91,7 +91,7 @@ class ChromeCookies {
    * All the existing cookie stores.
    */
   Future<List<CookieStore>> getAllCookieStores() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, CookieStore.create));
+    var completer = new ChromeCompleter<List<CookieStore>>.oneArg((e) => listify(e, CookieStore.create));
     _cookies.callMethod('getAllCookieStores', [completer.callback]);
     return completer.future;
   }

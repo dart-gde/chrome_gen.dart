@@ -24,7 +24,7 @@ class ChromeI18N {
    * Array of the accept languages of the browser, such as en-US,en,zh-CN
    */
   Future<List<String>> getAcceptLanguages() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(listify);
+    var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _i18n.callMethod('getAcceptLanguages', [completer.callback]);
     return completer.future;
   }

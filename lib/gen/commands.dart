@@ -22,7 +22,7 @@ class ChromeCommands {
    * shortcut (if active).
    */
   Future<List<Command>> getAll() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Command.create));
+    var completer = new ChromeCompleter<List<Command>>.oneArg((e) => listify(e, Command.create));
     _commands.callMethod('getAll', [completer.callback]);
     return completer.future;
   }

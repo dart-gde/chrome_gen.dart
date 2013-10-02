@@ -13,37 +13,37 @@ class ChromeDownloads {
   ChromeDownloads._();
 
   Future<int> download(DownloadOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<int>.oneArg();
     _downloads.callMethod('download', [options, completer.callback]);
     return completer.future;
   }
 
   Future<DownloadItem> search(DownloadQuery query) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(DownloadItem.create);
+    var completer = new ChromeCompleter<DownloadItem>.oneArg(DownloadItem.create);
     _downloads.callMethod('search', [query, completer.callback]);
     return completer.future;
   }
 
   Future pause(int downloadId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('pause', [downloadId, completer.callback]);
     return completer.future;
   }
 
   Future resume(int downloadId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('resume', [downloadId, completer.callback]);
     return completer.future;
   }
 
   Future cancel(int downloadId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('cancel', [downloadId, completer.callback]);
     return completer.future;
   }
 
   Future<String> getFileIcon(int downloadId, [GetFileIconOptions options]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _downloads.callMethod('getFileIcon', [downloadId, options, completer.callback]);
     return completer.future;
   }
@@ -61,19 +61,19 @@ class ChromeDownloads {
   }
 
   Future<int> erase(DownloadQuery query) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<int>.oneArg();
     _downloads.callMethod('erase', [query, completer.callback]);
     return completer.future;
   }
 
   Future removeFile(int downloadId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('removeFile', [downloadId, completer.callback]);
     return completer.future;
   }
 
   Future acceptDanger(int downloadId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('acceptDanger', [downloadId, completer.callback]);
     return completer.future;
   }

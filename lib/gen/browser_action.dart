@@ -30,7 +30,7 @@ class ChromeBrowserAction {
    * Gets the title of the browser action.
    */
   Future<String> getTitle(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _browserAction.callMethod('getTitle', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -42,7 +42,7 @@ class ChromeBrowserAction {
    * <b>imageData</b> property must be specified.
    */
   Future setIcon(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _browserAction.callMethod('setIcon', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -59,7 +59,7 @@ class ChromeBrowserAction {
    * Gets the html document set as the popup for this browser action.
    */
   Future<String> getPopup(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _browserAction.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -77,7 +77,7 @@ class ChromeBrowserAction {
    * non-tab-specific badge text is returned.
    */
   Future<String> getBadgeText(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _browserAction.callMethod('getBadgeText', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -93,7 +93,7 @@ class ChromeBrowserAction {
    * Gets the background color of the browser action.
    */
   Future<ColorArray> getBadgeBackgroundColor(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(ColorArray.create);
+    var completer = new ChromeCompleter<ColorArray>.oneArg(ColorArray.create);
     _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
     return completer.future;
   }

@@ -34,7 +34,7 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> get(int windowId, [Map getInfo]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
     _windows.callMethod('get', [windowId, jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -45,7 +45,7 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> getCurrent([Map getInfo]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
     _windows.callMethod('getCurrent', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -57,7 +57,7 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> getLastFocused([Map getInfo]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
     _windows.callMethod('getLastFocused', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -68,7 +68,7 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<List<Window>> getAll([Map getInfo]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Window.create));
+    var completer = new ChromeCompleter<List<Window>>.oneArg((e) => listify(e, Window.create));
     _windows.callMethod('getAll', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -81,7 +81,7 @@ class ChromeWindows {
    * Contains details about the created window.
    */
   Future<Window> create([Map createData]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
     _windows.callMethod('create', [jsify(createData), completer.callback]);
     return completer.future;
   }
@@ -91,7 +91,7 @@ class ChromeWindows {
    * want to change; unspecified properties will be left unchanged.
    */
   Future<Window> update(int windowId, Map updateInfo) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
     _windows.callMethod('update', [windowId, jsify(updateInfo), completer.callback]);
     return completer.future;
   }
@@ -100,7 +100,7 @@ class ChromeWindows {
    * Removes (closes) a window, and all the tabs inside it.
    */
   Future remove(int windowId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _windows.callMethod('remove', [windowId, completer.callback]);
     return completer.future;
   }

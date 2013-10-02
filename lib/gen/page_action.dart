@@ -49,7 +49,7 @@ class ChromePageAction {
    * Gets the title of the page action.
    */
   Future<String> getTitle(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -61,7 +61,7 @@ class ChromePageAction {
    * <b>imageData</b> property must be specified.
    */
   Future setIcon(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -78,7 +78,7 @@ class ChromePageAction {
    * Gets the html document set as the popup for this page action.
    */
   Future<String> getPopup(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
   }

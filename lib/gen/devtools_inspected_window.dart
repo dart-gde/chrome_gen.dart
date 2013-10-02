@@ -37,7 +37,7 @@ class ChromeDevtoolsInspectedWindow {
    * expression.
    */
   Future<JsObject> eval(String expression) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<JsObject>.oneArg();
     _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
     return completer.future;
   }
@@ -56,7 +56,7 @@ class ChromeDevtoolsInspectedWindow {
    * The resources within the page.
    */
   Future<List<Resource>> getResources() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Resource.create));
+    var completer = new ChromeCompleter<List<Resource>>.oneArg((e) => listify(e, Resource.create));
     _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
     return completer.future;
   }
@@ -125,7 +125,7 @@ class Resource extends ChromeObject {
    * Currently, only base64 is supported.
    */
   Future<JsObject> getContent() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<JsObject>.oneArg();
     proxy.callMethod('getContent', [completer.callback]);
     return completer.future;
   }
@@ -145,7 +145,7 @@ class Resource extends ChromeObject {
    * error otherwise.
    */
   Future<Map<String, dynamic>> setContent(String content, bool commit) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
     proxy.callMethod('setContent', [content, commit, completer.callback]);
     return completer.future;
   }

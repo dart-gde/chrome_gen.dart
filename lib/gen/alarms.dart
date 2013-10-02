@@ -17,13 +17,13 @@ class ChromeAlarms {
   }
 
   Future<Alarm> get([String name]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Alarm.create);
+    var completer = new ChromeCompleter<Alarm>.oneArg(Alarm.create);
     _alarms.callMethod('get', [name, completer.callback]);
     return completer.future;
   }
 
   Future<Alarm> getAll() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Alarm.create);
+    var completer = new ChromeCompleter<Alarm>.oneArg(Alarm.create);
     _alarms.callMethod('getAll', [completer.callback]);
     return completer.future;
   }

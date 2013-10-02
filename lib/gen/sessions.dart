@@ -32,7 +32,7 @@ class ChromeSessions {
    * either tabs or windows.
    */
   Future<List<Session>> getRecentlyClosed([Filter filter]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Session.create));
+    var completer = new ChromeCompleter<List<Session>>.oneArg((e) => listify(e, Session.create));
     _sessions.callMethod('getRecentlyClosed', [filter, completer.callback]);
     return completer.future;
   }
@@ -47,7 +47,7 @@ class ChromeSessions {
    * [windows.Window] of the [Session] objects.
    */
   Future<List<Device>> getDevices([Filter filter]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, Device.create));
+    var completer = new ChromeCompleter<List<Device>>.oneArg((e) => listify(e, Device.create));
     _sessions.callMethod('getDevices', [filter, completer.callback]);
     return completer.future;
   }
@@ -63,7 +63,7 @@ class ChromeSessions {
    * A [Session] containing the restored [windows.Window] or [tabs.Tab] object.
    */
   Future<Session> restore([String sessionId]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Session.create);
+    var completer = new ChromeCompleter<Session>.oneArg(Session.create);
     _sessions.callMethod('restore', [sessionId, completer.callback]);
     return completer.future;
   }

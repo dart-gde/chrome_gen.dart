@@ -40,7 +40,7 @@ class ChromeRuntime {
    * The JavaScript 'window' object for the background page.
    */
   Future<dynamic> getBackgroundPage() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<dynamic>.oneArg();
     _runtime.callMethod('getBackgroundPage', [completer.callback]);
     return completer.future;
   }
@@ -96,7 +96,7 @@ class ChromeRuntime {
    * the available update.
    */
   Future<JsObject> requestUpdateCheck() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<JsObject>.oneArg();
     _runtime.callMethod('requestUpdateCheck', [completer.callback]);
     return completer.future;
   }
@@ -149,7 +149,7 @@ class ChromeRuntime {
    * no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendMessage(dynamic message, [String extensionId]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<dynamic>.oneArg();
     _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
     return completer.future;
   }
@@ -167,7 +167,7 @@ class ChromeRuntime {
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendNativeMessage(String application, Map<String, dynamic> message) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<dynamic>.oneArg();
     _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
     return completer.future;
   }
@@ -176,7 +176,7 @@ class ChromeRuntime {
    * Returns information about the current platform.
    */
   Future<Map> getPlatformInfo() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _runtime.callMethod('getPlatformInfo', [completer.callback]);
     return completer.future;
   }
@@ -185,7 +185,7 @@ class ChromeRuntime {
    * Returns a DirectoryEntry for the package directory.
    */
   Future<dynamic> getPackageDirectoryEntry() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<dynamic>.oneArg();
     _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
     return completer.future;
   }
