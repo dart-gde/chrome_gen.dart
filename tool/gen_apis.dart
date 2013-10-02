@@ -54,13 +54,14 @@ class GenApis {
   }
 
   void _generateApi(String name, List<String> libraryNames,
-                    {List<String> alreadyWritten, bool includeAppSrc: false}) {
+                    {List<String> alreadyWritten, bool includeAppSrc: false,
+                     String licence}) {
     File libFile = new File("${outDir.path}/chrome_${name}.dart");
 
     DartGenerator generator = new DartGenerator();
 
-    if (LICENSE != null) {
-      generator.writeln(LICENSE);
+    if (licence != null) {
+      generator.writeln(licence);
       generator.writeln();
     }
     generator.writeln("/* This file has been generated - do not edit */");
