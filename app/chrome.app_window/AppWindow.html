@@ -44,6 +44,78 @@ class AppWindow extends ChromeObject {
 
  dynamic get contentWindow =&gt; proxy['contentWindow'];
  set contentWindow(var value) =&gt; proxy['contentWindow'] = value;
+
+ void focus() {
+   proxy.callMethod('focus');
+ }
+
+ void fullscreen() {
+   proxy.callMethod('fullscreen');
+ }
+
+ bool isFullscreen() {
+   return proxy.callMethod('isFullscreen');
+ }
+
+ void minimize() {
+   proxy.callMethod('minimize');
+ }
+
+ bool isMinimized() {
+   return proxy.callMethod('isMinimized');
+ }
+
+ void maximize() {
+   proxy.callMethod('maximize');
+ }
+
+ bool isMaximized() {
+   return proxy.callMethod('isMaximized');
+ }
+
+ void restore() {
+   proxy.callMethod('restore');
+ }
+
+ void moveTo(int left, int top) {
+   proxy.callMethod('moveTo', [left, top]);
+ }
+
+ void resizeTo(int width, int height) {
+   proxy.callMethod('resizeTo', [width, height]);
+ }
+
+ void drawAttention() {
+   proxy.callMethod('drawAttention');
+ }
+
+ void clearAttention() {
+   proxy.callMethod('clearAttention');
+ }
+
+ void close() {
+   proxy.callMethod('close');
+ }
+
+ void show() {
+   proxy.callMethod('show');
+ }
+
+ void hide() {
+   proxy.callMethod('hide');
+ }
+
+ Bounds getBounds() {
+   return Bounds.create(proxy.callMethod('getBounds'));
+ }
+
+ void setBounds(Bounds bounds) {
+   proxy.callMethod('setBounds', [bounds]);
+ }
+
+ void setIcon(String icon_url) {
+   proxy.callMethod('setIcon', [icon_url]);
+ }
 }
 </pre>
 </div>
@@ -126,8 +198,224 @@ JsObject proxy
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
+<div class="method"><h4 id="clearAttention">
+<button class="show-code">Code</button>
+void <strong>clearAttention</strong>() <a class="anchor-link" href="#clearAttention"
+              title="Permalink to AppWindow.clearAttention">#</a></h4>
+<div class="doc">
+<pre class="source">
+void clearAttention() {
+ proxy.callMethod('clearAttention');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="close">
+<button class="show-code">Code</button>
+void <strong>close</strong>() <a class="anchor-link" href="#close"
+              title="Permalink to AppWindow.close">#</a></h4>
+<div class="doc">
+<pre class="source">
+void close() {
+ proxy.callMethod('close');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="drawAttention">
+<button class="show-code">Code</button>
+void <strong>drawAttention</strong>() <a class="anchor-link" href="#drawAttention"
+              title="Permalink to AppWindow.drawAttention">#</a></h4>
+<div class="doc">
+<pre class="source">
+void drawAttention() {
+ proxy.callMethod('drawAttention');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="focus">
+<button class="show-code">Code</button>
+void <strong>focus</strong>() <a class="anchor-link" href="#focus"
+              title="Permalink to AppWindow.focus">#</a></h4>
+<div class="doc">
+<pre class="source">
+void focus() {
+ proxy.callMethod('focus');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="fullscreen">
+<button class="show-code">Code</button>
+void <strong>fullscreen</strong>() <a class="anchor-link" href="#fullscreen"
+              title="Permalink to AppWindow.fullscreen">#</a></h4>
+<div class="doc">
+<pre class="source">
+void fullscreen() {
+ proxy.callMethod('fullscreen');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getBounds">
+<button class="show-code">Code</button>
+<a href="../chrome.src.common_exp/Bounds.html">Bounds</a> <strong>getBounds</strong>() <a class="anchor-link" href="#getBounds"
+              title="Permalink to AppWindow.getBounds">#</a></h4>
+<div class="doc">
+<pre class="source">
+Bounds getBounds() {
+ return Bounds.create(proxy.callMethod('getBounds'));
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="hide">
+<button class="show-code">Code</button>
+void <strong>hide</strong>() <a class="anchor-link" href="#hide"
+              title="Permalink to AppWindow.hide">#</a></h4>
+<div class="doc">
+<pre class="source">
+void hide() {
+ proxy.callMethod('hide');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isFullscreen">
+<button class="show-code">Code</button>
+bool <strong>isFullscreen</strong>() <a class="anchor-link" href="#isFullscreen"
+              title="Permalink to AppWindow.isFullscreen">#</a></h4>
+<div class="doc">
+<pre class="source">
+bool isFullscreen() {
+ return proxy.callMethod('isFullscreen');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isMaximized">
+<button class="show-code">Code</button>
+bool <strong>isMaximized</strong>() <a class="anchor-link" href="#isMaximized"
+              title="Permalink to AppWindow.isMaximized">#</a></h4>
+<div class="doc">
+<pre class="source">
+bool isMaximized() {
+ return proxy.callMethod('isMaximized');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isMinimized">
+<button class="show-code">Code</button>
+bool <strong>isMinimized</strong>() <a class="anchor-link" href="#isMinimized"
+              title="Permalink to AppWindow.isMinimized">#</a></h4>
+<div class="doc">
+<pre class="source">
+bool isMinimized() {
+ return proxy.callMethod('isMinimized');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="maximize">
+<button class="show-code">Code</button>
+void <strong>maximize</strong>() <a class="anchor-link" href="#maximize"
+              title="Permalink to AppWindow.maximize">#</a></h4>
+<div class="doc">
+<pre class="source">
+void maximize() {
+ proxy.callMethod('maximize');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="minimize">
+<button class="show-code">Code</button>
+void <strong>minimize</strong>() <a class="anchor-link" href="#minimize"
+              title="Permalink to AppWindow.minimize">#</a></h4>
+<div class="doc">
+<pre class="source">
+void minimize() {
+ proxy.callMethod('minimize');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="moveTo">
+<button class="show-code">Code</button>
+void <strong>moveTo</strong>(int left, int top) <a class="anchor-link" href="#moveTo"
+              title="Permalink to AppWindow.moveTo">#</a></h4>
+<div class="doc">
+<pre class="source">
+void moveTo(int left, int top) {
+ proxy.callMethod('moveTo', [left, top]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="resizeTo">
+<button class="show-code">Code</button>
+void <strong>resizeTo</strong>(int width, int height) <a class="anchor-link" href="#resizeTo"
+              title="Permalink to AppWindow.resizeTo">#</a></h4>
+<div class="doc">
+<pre class="source">
+void resizeTo(int width, int height) {
+ proxy.callMethod('resizeTo', [width, height]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="restore">
+<button class="show-code">Code</button>
+void <strong>restore</strong>() <a class="anchor-link" href="#restore"
+              title="Permalink to AppWindow.restore">#</a></h4>
+<div class="doc">
+<pre class="source">
+void restore() {
+ proxy.callMethod('restore');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setBounds">
+<button class="show-code">Code</button>
+void <strong>setBounds</strong>(<a href="../chrome.src.common_exp/Bounds.html">Bounds</a> bounds) <a class="anchor-link" href="#setBounds"
+              title="Permalink to AppWindow.setBounds">#</a></h4>
+<div class="doc">
+<pre class="source">
+void setBounds(Bounds bounds) {
+ proxy.callMethod('setBounds', [bounds]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setIcon">
+<button class="show-code">Code</button>
+void <strong>setIcon</strong>(String icon_url) <a class="anchor-link" href="#setIcon"
+              title="Permalink to AppWindow.setIcon">#</a></h4>
+<div class="doc">
+<pre class="source">
+void setIcon(String icon_url) {
+ proxy.callMethod('setIcon', [icon_url]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="show">
+<button class="show-code">Code</button>
+void <strong>show</strong>() <a class="anchor-link" href="#show"
+              title="Permalink to AppWindow.show">#</a></h4>
+<div class="doc">
+<pre class="source">
+void show() {
+ proxy.callMethod('show');
+}
+</pre>
+</div>
+</div>
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
 JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
