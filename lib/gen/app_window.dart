@@ -63,12 +63,10 @@ class State extends ChromeEnum {
   static const State MAXIMIZED = const State._('maximized');
   static const State MINIMIZED = const State._('minimized');
 
-  static List<State> _values = [NORMAL, FULLSCREEN, MAXIMIZED, MINIMIZED];
-
-  static List<State> get values => _values;
+  static const List<State> VALUES = const[NORMAL, FULLSCREEN, MAXIMIZED, MINIMIZED];
 
   static State create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const State._(String str): super(str);
 }
@@ -77,12 +75,10 @@ class WindowType extends ChromeEnum {
   static const WindowType SHELL = const WindowType._('shell');
   static const WindowType PANEL = const WindowType._('panel');
 
-  static List<WindowType> _values = [SHELL, PANEL];
-
-  static List<WindowType> get values => _values;
+  static const List<WindowType> VALUES = const[SHELL, PANEL];
 
   static WindowType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const WindowType._(String str): super(str);
 }

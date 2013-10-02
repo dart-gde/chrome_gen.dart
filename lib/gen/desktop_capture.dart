@@ -24,12 +24,10 @@ class DesktopCaptureSourceType extends ChromeEnum {
   static const DesktopCaptureSourceType WINDOW = const DesktopCaptureSourceType._('window');
   static const DesktopCaptureSourceType TAB = const DesktopCaptureSourceType._('tab');
 
-  static List<DesktopCaptureSourceType> _values = [SCREEN, WINDOW, TAB];
-
-  static List<DesktopCaptureSourceType> get values => _values;
+  static const List<DesktopCaptureSourceType> VALUES = const[SCREEN, WINDOW, TAB];
 
   static DesktopCaptureSourceType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const DesktopCaptureSourceType._(String str): super(str);
 }

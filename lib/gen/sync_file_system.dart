@@ -70,12 +70,10 @@ class SyncAction extends ChromeEnum {
   static const SyncAction UPDATED = const SyncAction._('updated');
   static const SyncAction DELETED = const SyncAction._('deleted');
 
-  static List<SyncAction> _values = [ADDED, UPDATED, DELETED];
-
-  static List<SyncAction> get values => _values;
+  static const List<SyncAction> VALUES = const[ADDED, UPDATED, DELETED];
 
   static SyncAction create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const SyncAction._(String str): super(str);
 }
@@ -87,12 +85,10 @@ class ServiceStatus extends ChromeEnum {
   static const ServiceStatus TEMPORARY_UNAVAILABLE = const ServiceStatus._('temporary_unavailable');
   static const ServiceStatus DISABLED = const ServiceStatus._('disabled');
 
-  static List<ServiceStatus> _values = [INITIALIZING, RUNNING, AUTHENTICATION_REQUIRED, TEMPORARY_UNAVAILABLE, DISABLED];
-
-  static List<ServiceStatus> get values => _values;
+  static const List<ServiceStatus> VALUES = const[INITIALIZING, RUNNING, AUTHENTICATION_REQUIRED, TEMPORARY_UNAVAILABLE, DISABLED];
 
   static ServiceStatus create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const ServiceStatus._(String str): super(str);
 }
@@ -102,12 +98,10 @@ class FileStatus extends ChromeEnum {
   static const FileStatus PENDING = const FileStatus._('pending');
   static const FileStatus CONFLICTING = const FileStatus._('conflicting');
 
-  static List<FileStatus> _values = [SYNCED, PENDING, CONFLICTING];
-
-  static List<FileStatus> get values => _values;
+  static const List<FileStatus> VALUES = const[SYNCED, PENDING, CONFLICTING];
 
   static FileStatus create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const FileStatus._(String str): super(str);
 }
@@ -116,12 +110,10 @@ class SyncDirection extends ChromeEnum {
   static const SyncDirection LOCAL_TO_REMOTE = const SyncDirection._('local_to_remote');
   static const SyncDirection REMOTE_TO_LOCAL = const SyncDirection._('remote_to_local');
 
-  static List<SyncDirection> _values = [LOCAL_TO_REMOTE, REMOTE_TO_LOCAL];
-
-  static List<SyncDirection> get values => _values;
+  static const List<SyncDirection> VALUES = const[LOCAL_TO_REMOTE, REMOTE_TO_LOCAL];
 
   static SyncDirection create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const SyncDirection._(String str): super(str);
 }
@@ -130,12 +122,10 @@ class ConflictResolutionPolicy extends ChromeEnum {
   static const ConflictResolutionPolicy LAST_WRITE_WIN = const ConflictResolutionPolicy._('last_write_win');
   static const ConflictResolutionPolicy MANUAL = const ConflictResolutionPolicy._('manual');
 
-  static List<ConflictResolutionPolicy> _values = [LAST_WRITE_WIN, MANUAL];
-
-  static List<ConflictResolutionPolicy> get values => _values;
+  static const List<ConflictResolutionPolicy> VALUES = const[LAST_WRITE_WIN, MANUAL];
 
   static ConflictResolutionPolicy create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const ConflictResolutionPolicy._(String str): super(str);
 }

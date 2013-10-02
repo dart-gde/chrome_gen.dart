@@ -28,12 +28,10 @@ class GetMediaFileSystemsInteractivity extends ChromeEnum {
   static const GetMediaFileSystemsInteractivity YES = const GetMediaFileSystemsInteractivity._('yes');
   static const GetMediaFileSystemsInteractivity IF_NEEDED = const GetMediaFileSystemsInteractivity._('if_needed');
 
-  static List<GetMediaFileSystemsInteractivity> _values = [NO, YES, IF_NEEDED];
-
-  static List<GetMediaFileSystemsInteractivity> get values => _values;
+  static const List<GetMediaFileSystemsInteractivity> VALUES = const[NO, YES, IF_NEEDED];
 
   static GetMediaFileSystemsInteractivity create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const GetMediaFileSystemsInteractivity._(String str): super(str);
 }

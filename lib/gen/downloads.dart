@@ -123,12 +123,10 @@ class FilenameConflictAction extends ChromeEnum {
   static const FilenameConflictAction OVERWRITE = const FilenameConflictAction._('overwrite');
   static const FilenameConflictAction PROMPT = const FilenameConflictAction._('prompt');
 
-  static List<FilenameConflictAction> _values = [UNIQUIFY, OVERWRITE, PROMPT];
-
-  static List<FilenameConflictAction> get values => _values;
+  static const List<FilenameConflictAction> VALUES = const[UNIQUIFY, OVERWRITE, PROMPT];
 
   static FilenameConflictAction create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const FilenameConflictAction._(String str): super(str);
 }
@@ -137,12 +135,10 @@ class HttpMethod extends ChromeEnum {
   static const HttpMethod GET = const HttpMethod._('GET');
   static const HttpMethod POST = const HttpMethod._('POST');
 
-  static List<HttpMethod> _values = [GET, POST];
-
-  static List<HttpMethod> get values => _values;
+  static const List<HttpMethod> VALUES = const[GET, POST];
 
   static HttpMethod create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const HttpMethod._(String str): super(str);
 }
@@ -170,12 +166,10 @@ class InterruptReason extends ChromeEnum {
   static const InterruptReason USER_SHUTDOWN = const InterruptReason._('USER_SHUTDOWN');
   static const InterruptReason CRASH = const InterruptReason._('CRASH');
 
-  static List<InterruptReason> _values = [FILE_FAILED, FILE_ACCESS_DENIED, FILE_NO_SPACE, FILE_NAME_TOO_LONG, FILE_TOO_LARGE, FILE_VIRUS_INFECTED, FILE_TRANSIENT_ERROR, FILE_BLOCKED, FILE_SECURITY_CHECK_FAILED, FILE_TOO_SHORT, NETWORK_FAILED, NETWORK_TIMEOUT, NETWORK_DISCONNECTED, NETWORK_SERVER_DOWN, SERVER_FAILED, SERVER_NO_RANGE, SERVER_PRECONDITION, SERVER_BAD_CONTENT, USER_CANCELED, USER_SHUTDOWN, CRASH];
-
-  static List<InterruptReason> get values => _values;
+  static const List<InterruptReason> VALUES = const[FILE_FAILED, FILE_ACCESS_DENIED, FILE_NO_SPACE, FILE_NAME_TOO_LONG, FILE_TOO_LARGE, FILE_VIRUS_INFECTED, FILE_TRANSIENT_ERROR, FILE_BLOCKED, FILE_SECURITY_CHECK_FAILED, FILE_TOO_SHORT, NETWORK_FAILED, NETWORK_TIMEOUT, NETWORK_DISCONNECTED, NETWORK_SERVER_DOWN, SERVER_FAILED, SERVER_NO_RANGE, SERVER_PRECONDITION, SERVER_BAD_CONTENT, USER_CANCELED, USER_SHUTDOWN, CRASH];
 
   static InterruptReason create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const InterruptReason._(String str): super(str);
 }
@@ -190,12 +184,10 @@ class DangerType extends ChromeEnum {
   static const DangerType SAFE = const DangerType._('safe');
   static const DangerType ACCEPTED = const DangerType._('accepted');
 
-  static List<DangerType> _values = [FILE, URL, CONTENT, UNCOMMON, HOST, UNWANTED, SAFE, ACCEPTED];
-
-  static List<DangerType> get values => _values;
+  static const List<DangerType> VALUES = const[FILE, URL, CONTENT, UNCOMMON, HOST, UNWANTED, SAFE, ACCEPTED];
 
   static DangerType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const DangerType._(String str): super(str);
 }
@@ -205,12 +197,10 @@ class State extends ChromeEnum {
   static const State INTERRUPTED = const State._('interrupted');
   static const State COMPLETE = const State._('complete');
 
-  static List<State> _values = [IN_PROGRESS, INTERRUPTED, COMPLETE];
-
-  static List<State> get values => _values;
+  static const List<State> VALUES = const[IN_PROGRESS, INTERRUPTED, COMPLETE];
 
   static State create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const State._(String str): super(str);
 }

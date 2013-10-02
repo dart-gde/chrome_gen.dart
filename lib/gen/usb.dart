@@ -101,12 +101,10 @@ class Direction extends ChromeEnum {
   static const Direction IN = const Direction._('in');
   static const Direction OUT = const Direction._('out');
 
-  static List<Direction> _values = [IN, OUT];
-
-  static List<Direction> get values => _values;
+  static const List<Direction> VALUES = const[IN, OUT];
 
   static Direction create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const Direction._(String str): super(str);
 }
@@ -117,12 +115,10 @@ class Recipient extends ChromeEnum {
   static const Recipient ENDPOINT = const Recipient._('endpoint');
   static const Recipient OTHER = const Recipient._('other');
 
-  static List<Recipient> _values = [DEVICE, _INTERFACE, ENDPOINT, OTHER];
-
-  static List<Recipient> get values => _values;
+  static const List<Recipient> VALUES = const[DEVICE, _INTERFACE, ENDPOINT, OTHER];
 
   static Recipient create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const Recipient._(String str): super(str);
 }
@@ -133,12 +129,10 @@ class RequestType extends ChromeEnum {
   static const RequestType VENDOR = const RequestType._('vendor');
   static const RequestType RESERVED = const RequestType._('reserved');
 
-  static List<RequestType> _values = [STANDARD, CLASS, VENDOR, RESERVED];
-
-  static List<RequestType> get values => _values;
+  static const List<RequestType> VALUES = const[STANDARD, CLASS, VENDOR, RESERVED];
 
   static RequestType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const RequestType._(String str): super(str);
 }
@@ -149,12 +143,10 @@ class TransferType extends ChromeEnum {
   static const TransferType ISOCHRONOUS = const TransferType._('isochronous');
   static const TransferType BULK = const TransferType._('bulk');
 
-  static List<TransferType> _values = [CONTROL, INTERRUPT, ISOCHRONOUS, BULK];
-
-  static List<TransferType> get values => _values;
+  static const List<TransferType> VALUES = const[CONTROL, INTERRUPT, ISOCHRONOUS, BULK];
 
   static TransferType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const TransferType._(String str): super(str);
 }
@@ -164,12 +156,10 @@ class SynchronizationType extends ChromeEnum {
   static const SynchronizationType ADAPTIVE = const SynchronizationType._('adaptive');
   static const SynchronizationType SYNCHRONOUS = const SynchronizationType._('synchronous');
 
-  static List<SynchronizationType> _values = [ASYNCHRONOUS, ADAPTIVE, SYNCHRONOUS];
-
-  static List<SynchronizationType> get values => _values;
+  static const List<SynchronizationType> VALUES = const[ASYNCHRONOUS, ADAPTIVE, SYNCHRONOUS];
 
   static SynchronizationType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const SynchronizationType._(String str): super(str);
 }
@@ -179,12 +169,10 @@ class UsageType extends ChromeEnum {
   static const UsageType FEEDBACK = const UsageType._('feedback');
   static const UsageType EXPLICITFEEDBACK = const UsageType._('explicitFeedback');
 
-  static List<UsageType> _values = [DATA, FEEDBACK, EXPLICITFEEDBACK];
-
-  static List<UsageType> get values => _values;
+  static const List<UsageType> VALUES = const[DATA, FEEDBACK, EXPLICITFEEDBACK];
 
   static UsageType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const UsageType._(String str): super(str);
 }
