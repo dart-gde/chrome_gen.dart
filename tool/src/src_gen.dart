@@ -2,10 +2,10 @@
 /// A library to generate Dart source code.
 library src_gen;
 
-final int RUNE_SPACE = 32;
-final int RUNE_EOL = 10;
-final int RUNE_LEFT_CURLY = 123;
-final int RUNE_RIGHT_CURLY = 125;
+const int RUNE_SPACE = 32;
+const int RUNE_EOL = 10;
+const int RUNE_LEFT_CURLY = 123;
+const int RUNE_RIGHT_CURLY = 125;
 
 /**
  * A class used to generate Dart source code. This class facilitates writing out
@@ -15,11 +15,10 @@ final int RUNE_RIGHT_CURLY = 125;
 class DartGenerator {
   static const DEFAULT_COLUMN_BOUNDARY = 80;
 
-  String libraryName;
   final int colBoundary;
 
   String _indent = "";
-  StringBuffer _buf = new StringBuffer();
+  final StringBuffer _buf = new StringBuffer();
 
   bool _previousWasEol = false;
 

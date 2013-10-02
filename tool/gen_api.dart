@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:args/args.dart';
@@ -21,23 +20,30 @@ void main() {
     return;
   }
 
+  if(results['out'] == null) {
+    print("You must provide a value for 'out'.");
+    _printUsage(parser);
+    return;
+  }
+
+  Overrides overrides = null;
+  if(results['overrides'] != null) {
+    var overridesFile = new File(results['overrides']);
+    overrides = new Overrides.fromFile(overridesFile);
+  }
+
   GenApiFile generator = new GenApiFile(
-      new File(results.rest.first), new File(results['out']));
+      new File(results.rest.first), new File(results['out']), overrides);
   generator.generate();
 }
 
-final String LICENSE = null;
-
 class GenApiFile {
-  File inFile;
-  File outFile;
-  Overrides overrides;
+  final File inFile;
+  final File outFile;
+  final Overrides overrides;
 
-  GenApiFile(this.inFile, this.outFile, [this.overrides]) {
-    if (overrides == null) {
-      overrides = new Overrides();
-    }
-
+  GenApiFile(this.inFile, this.outFile, [Overrides overrides]) :
+    this.overrides = (overrides == null) ? new Overrides() : overrides {
     if (!inFile.path.endsWith(".json") && !inFile.path.endsWith(".idl")) {
       throw new Exception('format not understood: ${inFile.path}');
     }
@@ -65,18 +71,7 @@ class GenApiFile {
 
     Backend backend = new Backend.createDefault(overrides);
     outFile.writeAsStringSync(
-        backend.generate(chromeLib, license: LICENSE, sourceFileName: fileName));
-  }
-
-  String _parseNamespace(List tokens) {
-    for (int i = 0; i < tokens.length; i++) {
-      if (tokens[i] == 'namespace' && i + 1 < tokens.length) {
-        List ns = tokens[i + 1];
-        return ns.join('.');
-      }
-    }
-
-    return null;
+        backend.generate(chromeLib, sourceFileName: fileName));
   }
 }
 
@@ -90,8 +85,12 @@ ArgParser _createArgsParser() {
       help: 'show command help');
   parser.addOption(
       'out',
-      defaultsTo: 'out',
-      help: 'the output directory');
+      abbr: 'o',
+      help: 'Path to the destination file. Required.');
+
+  parser.addOption(
+      'overrides',
+      help: 'Path to on overrides json file.');
   return parser;
 }
 
