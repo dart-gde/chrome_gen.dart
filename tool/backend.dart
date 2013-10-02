@@ -11,7 +11,7 @@ import 'src/utils.dart';
  * into source code.
  */
 abstract class Backend {
-  Overrides overrides;
+  final Overrides overrides;
 
   Backend(this.overrides);
 

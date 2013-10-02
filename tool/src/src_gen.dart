@@ -15,11 +15,10 @@ const int RUNE_RIGHT_CURLY = 125;
 class DartGenerator {
   static const DEFAULT_COLUMN_BOUNDARY = 80;
 
-  String libraryName;
   final int colBoundary;
 
   String _indent = "";
-  StringBuffer _buf = new StringBuffer();
+  final StringBuffer _buf = new StringBuffer();
 
   bool _previousWasEol = false;
 
