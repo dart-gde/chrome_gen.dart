@@ -26,4 +26,40 @@ class ChromeSetting extends ChromeObject {
   ChromeSetting();
 
   ChromeSetting.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Gets the value of a setting.
+   * 
+   * [details] Which setting to consider.
+   * 
+   * Returns:
+   * Details of the currently effective value.
+   */
+  Future<Map> get(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    proxy.callMethod('get', [jsify(details), completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Sets the value of a setting.
+   * 
+   * [details] Which setting to change.
+   */
+  Future set(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    proxy.callMethod('set', [jsify(details), completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Clears the setting, restoring any default value.
+   * 
+   * [details] Which setting to clear.
+   */
+  Future clear(Map details) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    proxy.callMethod('clear', [jsify(details), completer.callback]);
+    return completer.future;
+  }
 }

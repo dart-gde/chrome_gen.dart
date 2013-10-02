@@ -68,6 +68,20 @@ class ElementsPanel extends ChromeObject {
   ElementsPanel();
 
   ElementsPanel.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Creates a pane within panel's sidebar.
+   * 
+   * [title] Text that is displayed in sidebar caption.
+   * 
+   * Returns:
+   * An ExtensionSidebarPane object for created sidebar pane.
+   */
+  Future<ExtensionSidebarPane> createSidebarPane(String title) {
+    ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionSidebarPane.create);
+    proxy.callMethod('createSidebarPane', [title, completer.callback]);
+    return completer.future;
+  }
 }
 
 /**
@@ -79,6 +93,23 @@ class ExtensionPanel extends ChromeObject {
   ExtensionPanel();
 
   ExtensionPanel.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Appends a button to the status bar of the panel.
+   * 
+   * [iconPath] Path to the icon of the button. The file should contain a
+   * 64x24-pixel image composed of two 32x24 icons. The left icon is used when
+   * the button is inactive; the right icon is displayed when the button is
+   * pressed.
+   * 
+   * [tooltipText] Text shown as a tooltip when user hovers the mouse over the
+   * button.
+   * 
+   * [disabled] Whether the button is disabled.
+   */
+  Button createStatusBarButton(String iconPath, String tooltipText, bool disabled) {
+    return Button.create(proxy.callMethod('createStatusBarButton', [iconPath, tooltipText, disabled]));
+  }
 }
 
 /**
@@ -90,6 +121,54 @@ class ExtensionSidebarPane extends ChromeObject {
   ExtensionSidebarPane();
 
   ExtensionSidebarPane.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Sets the height of the sidebar.
+   * 
+   * [height] A CSS-like size specification, such as `'100px'` or `'12ex'`.
+   */
+  void setHeight(String height) {
+    proxy.callMethod('setHeight', [height]);
+  }
+
+  /**
+   * Sets an expression that is evaluated within the inspected page. The result
+   * is displayed in the sidebar pane.
+   * 
+   * [expression] An expression to be evaluated in context of the inspected
+   * page. JavaScript objects and DOM nodes are displayed in an expandable tree
+   * similar to the console/watch.
+   * 
+   * [rootTitle] An optional title for the root of the expression tree.
+   */
+  Future setExpression(String expression, [String rootTitle]) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    proxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Sets a JSON-compliant object to be displayed in the sidebar pane.
+   * 
+   * [jsonObject] An object to be displayed in context of the inspected page.
+   * Evaluated in the context of the caller (API client).
+   * 
+   * [rootTitle] An optional title for the root of the expression tree.
+   */
+  Future setObject(String jsonObject, [String rootTitle]) {
+    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    proxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Sets an HTML page to be displayed in the sidebar pane.
+   * 
+   * [path] Relative path of an extension page to display within the sidebar.
+   */
+  void setPage(String path) {
+    proxy.callMethod('setPage', [path]);
+  }
 }
 
 /**
@@ -101,4 +180,19 @@ class Button extends ChromeObject {
   Button();
 
   Button.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Updates the attributes of the button. If some of the arguments are omitted
+   * or `null`, the corresponding attributes are not updated.
+   * 
+   * [iconPath] Path to the new icon of the button.
+   * 
+   * [tooltipText] Text shown as a tooltip when user hovers the mouse over the
+   * button.
+   * 
+   * [disabled] Whether the button is disabled.
+   */
+  void update([String iconPath, String tooltipText, bool disabled]) {
+    proxy.callMethod('update', [iconPath, tooltipText, disabled]);
+  }
 }
