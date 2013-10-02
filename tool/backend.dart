@@ -333,12 +333,8 @@ class DefaultBackend extends Backend {
       props.forEach((p) => _printProperty(p, 'this.proxy', true));
     }
 
-    if (type.methods.isNotEmpty) {
-      // Currently, this is only for app_window.AppWindow
-
-      // TODO: use the proxy object for 'this'
-      type.methods.forEach((m) => _printMethod(m, 'proxy'));
-    }
+    // Currently, this is only for app_window.AppWindow
+    type.methods.forEach((m) => _printMethod(m, 'proxy'));
 
     generator.writeln("}");
   }
