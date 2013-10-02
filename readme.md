@@ -16,7 +16,7 @@ Add this to your package's pubspec.yaml file:
 ### Using the library
 
     import 'package:chrome_gen/chrome_app.dart' as chrome_gen;
-    
+
     void main() {
       chrome_gen.runtime.getPlatformInfo().then((Map m) {
         print(m.toString());
@@ -37,4 +37,3 @@ This will:
 * read `meta/apis.json` and `meta/overrides.json`
 * parse the cooresponding `idl/*.json` and `idl/*.idl` files
 * generate `lib/chrome_app.dart`, `lib/chrome_ext.dart`, and `lib/gen/*.dart`.
-* 
