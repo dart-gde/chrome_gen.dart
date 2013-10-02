@@ -130,7 +130,16 @@ class DefaultBackend extends Backend {
     }
   }
 
-  void _printMethod(ChromeMethod method) {
+  /**
+   * Print the given [method]. If [thisOverride] is not null, use that text to
+   * represent the `this` object. It wil default to the chrome. namespace
+   * reference (e.g., `_app_window`).
+   */
+  void _printMethod(ChromeMethod method, [String thisOverride]) {
+    if (thisOverride == null) {
+      thisOverride = contextReference;
+    }
+
     generator.writeln();
     generator.writeDocs(method.getDescription());
     generator.write("${method.returns.toReturnString()} ${method.name}(");
@@ -168,7 +177,7 @@ class DefaultBackend extends Backend {
     }
 
     StringBuffer methodCall = new StringBuffer();
-    methodCall.write("${contextReference}.callMethod('${method.name}'");
+    methodCall.write("${thisOverride}.callMethod('${method.name}'");
     if (method.params.length > 0 || method.usesCallback) {
       methodCall.write(", [");
       List strParams = method.params.map(getParamConverter).toList();
@@ -205,7 +214,6 @@ class DefaultBackend extends Backend {
     generator.writeln();
     generator.writeDocs(event.documentation);
 
-    // TODO: when we create this name, we have to use any class renames from the overrides
     String typeName = type == null ? null : type.toReturnString();
 
     if (type != null) {
@@ -291,7 +299,7 @@ class DefaultBackend extends Backend {
     generator.writeln("}");
   }
 
-  void _printDeclaredType(ChromeType type) {
+  void _printDeclaredType(ChromeDeclaredType type) {
     if (overrides.suppressClass(library.name, type.name)) {
       return;
     }
@@ -324,6 +332,9 @@ class DefaultBackend extends Backend {
     } else {
       props.forEach((p) => _printProperty(p, 'this.proxy', true));
     }
+
+    // Currently, this is only for app_window.AppWindow
+    type.methods.forEach((m) => _printMethod(m, 'proxy'));
 
     generator.writeln("}");
   }

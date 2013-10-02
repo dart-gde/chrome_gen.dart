@@ -472,6 +472,7 @@ class IDLConverter {
 
     chromeDeclaredType.name = idlDeclaredType.name;
     chromeDeclaredType.properties = idlDeclaredType.members.map(_convertProperty).toList();
+    chromeDeclaredType.methods = idlDeclaredType.functions.map(_convertMethod).toList();
 
     int index = chromeDeclaredType.name.lastIndexOf('.');
 
