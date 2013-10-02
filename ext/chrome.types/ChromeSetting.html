@@ -41,6 +41,42 @@ class ChromeSetting extends ChromeObject {
  ChromeSetting();
 
  ChromeSetting.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+ /**
+  * Gets the value of a setting.
+  * 
+  * [details] Which setting to consider.
+  * 
+  * Returns:
+  * Details of the currently effective value.
+  */
+ Future&lt;Map&gt; get(Map details) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   proxy.callMethod('get', [jsify(details), completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Sets the value of a setting.
+  * 
+  * [details] Which setting to change.
+  */
+ Future set(Map details) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   proxy.callMethod('set', [jsify(details), completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Clears the setting, restoring any default value.
+  * 
+  * [details] Which setting to clear.
+  */
+ Future clear(Map details) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   proxy.callMethod('clear', [jsify(details), completer.callback]);
+   return completer.future;
+ }
 }
 </pre>
 </div>
@@ -106,8 +142,61 @@ JsObject proxy
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
+<div class="method"><h4 id="clear">
+<button class="show-code">Code</button>
+Future <strong>clear</strong>(Map details) <a class="anchor-link" href="#clear"
+              title="Permalink to ChromeSetting.clear">#</a></h4>
+<div class="doc">
+<p>Clears the setting, restoring any default value.</p>
+<p>
+<span class="param">details</span> Which setting to clear.</p>
+<pre class="source">
+Future clear(Map details) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ proxy.callMethod('clear', [jsify(details), completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="get">
+<button class="show-code">Code</button>
+Future&lt;Map&gt; <strong>get</strong>(Map details) <a class="anchor-link" href="#get"
+              title="Permalink to ChromeSetting.get">#</a></h4>
+<div class="doc">
+<p>Gets the value of a setting.</p>
+<p>
+<span class="param">details</span> Which setting to consider.</p>
+<p>Returns:
+Details of the currently effective value.</p>
+<pre class="source">
+Future&lt;Map&gt; get(Map details) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ proxy.callMethod('get', [jsify(details), completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="set">
+<button class="show-code">Code</button>
+Future <strong>set</strong>(Map details) <a class="anchor-link" href="#set"
+              title="Permalink to ChromeSetting.set">#</a></h4>
+<div class="doc">
+<p>Sets the value of a setting.</p>
+<p>
+<span class="param">details</span> Which setting to change.</p>
+<pre class="source">
+Future set(Map details) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ proxy.callMethod('set', [jsify(details), completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
 JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"

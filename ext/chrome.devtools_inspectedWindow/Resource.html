@@ -49,6 +49,40 @@ class Resource extends ChromeObject {
   */
  String get url =&gt; proxy['url'];
  set url(String value) =&gt; proxy['url'] = value;
+
+ /**
+  * Gets the content of the resource.
+  * 
+  * Returns:
+  * [content] Content of the resource (potentially encoded).
+  * [encoding] Empty if content is not encoded, encoding name otherwise.
+  * Currently, only base64 is supported.
+  */
+ Future&lt;JsObject&gt; getContent() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   proxy.callMethod('getContent', [completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Sets the content of the resource.
+  * 
+  * [content] New content of the resource. Only resources with the text type
+  * are currently supported.
+  * 
+  * [commit] True if the user has finished editing the resource, and the new
+  * content of the resource should be persisted; false if this is a minor
+  * change sent in progress of the user editing the resource.
+  * 
+  * Returns:
+  * Set to undefined if the resource content was set successfully; describes
+  * error otherwise.
+  */
+ Future&lt;Map&gt; setContent(String content, bool commit) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+   proxy.callMethod('setContent', [content, commit, completer.callback]);
+   return completer.future;
+ }
 }
 </pre>
 </div>
@@ -132,8 +166,52 @@ set url(String value) =&gt; proxy['url'] = value;
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
+<div class="method"><h4 id="getContent">
+<button class="show-code">Code</button>
+Future&lt;JsObject&gt; <strong>getContent</strong>() <a class="anchor-link" href="#getContent"
+              title="Permalink to Resource.getContent">#</a></h4>
+<div class="doc">
+<p>Gets the content of the resource.</p>
+<p>Returns:
+<code>content</code> Content of the resource (potentially encoded).
+<code>encoding</code> Empty if content is not encoded, encoding name otherwise.
+Currently, only base64 is supported.</p>
+<pre class="source">
+Future&lt;JsObject&gt; getContent() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
+ proxy.callMethod('getContent', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setContent">
+<button class="show-code">Code</button>
+Future&lt;Map&gt; <strong>setContent</strong>(String content, bool commit) <a class="anchor-link" href="#setContent"
+              title="Permalink to Resource.setContent">#</a></h4>
+<div class="doc">
+<p>Sets the content of the resource.</p>
+<p>
+<span class="param">content</span> New content of the resource. Only resources with the text type
+are currently supported.</p>
+<p>
+<span class="param">commit</span> True if the user has finished editing the resource, and the new
+content of the resource should be persisted; false if this is a minor
+change sent in progress of the user editing the resource.</p>
+<p>Returns:
+Set to undefined if the resource content was set successfully; describes
+error otherwise.</p>
+<pre class="source">
+Future&lt;Map&gt; setContent(String content, bool commit) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+ proxy.callMethod('setContent', [content, commit, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
 JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"

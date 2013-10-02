@@ -40,6 +40,21 @@ class Button extends ChromeObject {
  Button();
 
  Button.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+ /**
+  * Updates the attributes of the button. If some of the arguments are omitted
+  * or `null`, the corresponding attributes are not updated.
+  * 
+  * [iconPath] Path to the new icon of the button.
+  * 
+  * [tooltipText] Text shown as a tooltip when user hovers the mouse over the
+  * button.
+  * 
+  * [disabled] Whether the button is disabled.
+  */
+ void update([String iconPath, String tooltipText, bool disabled]) {
+   proxy.callMethod('update', [iconPath, tooltipText, disabled]);
+ }
 }
 </pre>
 </div>
@@ -105,7 +120,7 @@ JsObject proxy
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
@@ -127,6 +142,27 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
 String toString() =&gt; proxy.toString();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="update">
+<button class="show-code">Code</button>
+void <strong>update</strong>([String iconPath, String tooltipText, bool disabled]) <a class="anchor-link" href="#update"
+              title="Permalink to Button.update">#</a></h4>
+<div class="doc">
+<p>Updates the attributes of the button. If some of the arguments are omitted
+or <code>null</code>, the corresponding attributes are not updated.</p>
+<p>
+<span class="param">iconPath</span> Path to the new icon of the button.</p>
+<p>
+<span class="param">tooltipText</span> Text shown as a tooltip when user hovers the mouse over the
+button.</p>
+<p>
+<span class="param">disabled</span> Whether the button is disabled.</p>
+<pre class="source">
+void update([String iconPath, String tooltipText, bool disabled]) {
+ proxy.callMethod('update', [iconPath, tooltipText, disabled]);
+}
 </pre>
 </div>
 </div>

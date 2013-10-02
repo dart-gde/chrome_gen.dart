@@ -40,6 +40,23 @@ class ExtensionPanel extends ChromeObject {
  ExtensionPanel();
 
  ExtensionPanel.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+ /**
+  * Appends a button to the status bar of the panel.
+  * 
+  * [iconPath] Path to the icon of the button. The file should contain a
+  * 64x24-pixel image composed of two 32x24 icons. The left icon is used when
+  * the button is inactive; the right icon is displayed when the button is
+  * pressed.
+  * 
+  * [tooltipText] Text shown as a tooltip when user hovers the mouse over the
+  * button.
+  * 
+  * [disabled] Whether the button is disabled.
+  */
+ Button createStatusBarButton(String iconPath, String tooltipText, bool disabled) {
+   return Button.create(proxy.callMethod('createStatusBarButton', [iconPath, tooltipText, disabled]));
+ }
 }
 </pre>
 </div>
@@ -105,8 +122,31 @@ JsObject proxy
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
+<div class="method"><h4 id="createStatusBarButton">
+<button class="show-code">Code</button>
+<a href="../chrome.devtools_panels/Button.html">Button</a> <strong>createStatusBarButton</strong>(String iconPath, String tooltipText, bool disabled) <a class="anchor-link" href="#createStatusBarButton"
+              title="Permalink to ExtensionPanel.createStatusBarButton">#</a></h4>
+<div class="doc">
+<p>Appends a button to the status bar of the panel.</p>
+<p>
+<span class="param">iconPath</span> Path to the icon of the button. The file should contain a
+64x24-pixel image composed of two 32x24 icons. The left icon is used when
+the button is inactive; the right icon is displayed when the button is
+pressed.</p>
+<p>
+<span class="param">tooltipText</span> Text shown as a tooltip when user hovers the mouse over the
+button.</p>
+<p>
+<span class="param">disabled</span> Whether the button is disabled.</p>
+<pre class="source">
+Button createStatusBarButton(String iconPath, String tooltipText, bool disabled) {
+ return Button.create(proxy.callMethod('createStatusBarButton', [iconPath, tooltipText, disabled]));
+}
+</pre>
+</div>
+</div>
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
 JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"

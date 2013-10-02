@@ -41,6 +41,20 @@ class Request extends ChromeObject {
  Request();
 
  Request.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+ /**
+  * Returns content of the response body.
+  * 
+  * Returns:
+  * [content] Content of the response body (potentially encoded).
+  * [encoding] Empty if content is not encoded, encoding name otherwise.
+  * Currently, only base64 is supported.
+  */
+ Future&lt;JsObject&gt; getContent() {
+   ChromeCompleter completer = new ChromeCompleter.oneArg();
+   proxy.callMethod('getContent', [completer.callback]);
+   return completer.future;
+ }
 }
 </pre>
 </div>
@@ -106,8 +120,27 @@ JsObject proxy
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
+<div class="method"><h4 id="getContent">
+<button class="show-code">Code</button>
+Future&lt;JsObject&gt; <strong>getContent</strong>() <a class="anchor-link" href="#getContent"
+              title="Permalink to Request.getContent">#</a></h4>
+<div class="doc">
+<p>Returns content of the response body.</p>
+<p>Returns:
+<code>content</code> Content of the response body (potentially encoded).
+<code>encoding</code> Empty if content is not encoded, encoding name otherwise.
+Currently, only base64 is supported.</p>
+<pre class="source">
+Future&lt;JsObject&gt; getContent() {
+ ChromeCompleter completer = new ChromeCompleter.oneArg();
+ proxy.callMethod('getContent', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
 JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"

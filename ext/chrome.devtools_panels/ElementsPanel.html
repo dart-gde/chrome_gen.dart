@@ -40,6 +40,20 @@ class ElementsPanel extends ChromeObject {
  ElementsPanel();
 
  ElementsPanel.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+ /**
+  * Creates a pane within panel's sidebar.
+  * 
+  * [title] Text that is displayed in sidebar caption.
+  * 
+  * Returns:
+  * An ExtensionSidebarPane object for created sidebar pane.
+  */
+ Future&lt;ExtensionSidebarPane&gt; createSidebarPane(String title) {
+   ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionSidebarPane.create);
+   proxy.callMethod('createSidebarPane', [title, completer.callback]);
+   return completer.future;
+ }
 }
 </pre>
 </div>
@@ -105,8 +119,27 @@ JsObject proxy
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
+<div class="method"><h4 id="createSidebarPane">
+<button class="show-code">Code</button>
+Future&lt;<a href="../chrome.devtools_panels/ExtensionSidebarPane.html">ExtensionSidebarPane</a>&gt; <strong>createSidebarPane</strong>(String title) <a class="anchor-link" href="#createSidebarPane"
+              title="Permalink to ElementsPanel.createSidebarPane">#</a></h4>
+<div class="doc">
+<p>Creates a pane within panel's sidebar.</p>
+<p>
+<span class="param">title</span> Text that is displayed in sidebar caption.</p>
+<p>Returns:
+An ExtensionSidebarPane object for created sidebar pane.</p>
+<pre class="source">
+Future&lt;ExtensionSidebarPane&gt; createSidebarPane(String title) {
+ ChromeCompleter completer = new ChromeCompleter.oneArg(ExtensionSidebarPane.create);
+ proxy.callMethod('createSidebarPane', [title, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
 JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"

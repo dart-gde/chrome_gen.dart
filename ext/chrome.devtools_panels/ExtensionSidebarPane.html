@@ -40,6 +40,54 @@ class ExtensionSidebarPane extends ChromeObject {
  ExtensionSidebarPane();
 
  ExtensionSidebarPane.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+ /**
+  * Sets the height of the sidebar.
+  * 
+  * [height] A CSS-like size specification, such as `'100px'` or `'12ex'`.
+  */
+ void setHeight(String height) {
+   proxy.callMethod('setHeight', [height]);
+ }
+
+ /**
+  * Sets an expression that is evaluated within the inspected page. The result
+  * is displayed in the sidebar pane.
+  * 
+  * [expression] An expression to be evaluated in context of the inspected
+  * page. JavaScript objects and DOM nodes are displayed in an expandable tree
+  * similar to the console/watch.
+  * 
+  * [rootTitle] An optional title for the root of the expression tree.
+  */
+ Future setExpression(String expression, [String rootTitle]) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   proxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Sets a JSON-compliant object to be displayed in the sidebar pane.
+  * 
+  * [jsonObject] An object to be displayed in context of the inspected page.
+  * Evaluated in the context of the caller (API client).
+  * 
+  * [rootTitle] An optional title for the root of the expression tree.
+  */
+ Future setObject(String jsonObject, [String rootTitle]) {
+   ChromeCompleter completer = new ChromeCompleter.noArgs();
+   proxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Sets an HTML page to be displayed in the sidebar pane.
+  * 
+  * [path] Relative path of an extension page to display within the sidebar.
+  */
+ void setPage(String path) {
+   proxy.callMethod('setPage', [path]);
+ }
 }
 </pre>
 </div>
@@ -105,8 +153,80 @@ JsObject proxy
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
+<div class="method"><h4 id="setExpression">
+<button class="show-code">Code</button>
+Future <strong>setExpression</strong>(String expression, [String rootTitle]) <a class="anchor-link" href="#setExpression"
+              title="Permalink to ExtensionSidebarPane.setExpression">#</a></h4>
+<div class="doc">
+<p>Sets an expression that is evaluated within the inspected page. The result
+is displayed in the sidebar pane.</p>
+<p>
+<span class="param">expression</span> An expression to be evaluated in context of the inspected
+page. JavaScript objects and DOM nodes are displayed in an expandable tree
+similar to the console/watch.</p>
+<p>
+<span class="param">rootTitle</span> An optional title for the root of the expression tree.</p>
+<pre class="source">
+Future setExpression(String expression, [String rootTitle]) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ proxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setHeight">
+<button class="show-code">Code</button>
+void <strong>setHeight</strong>(String height) <a class="anchor-link" href="#setHeight"
+              title="Permalink to ExtensionSidebarPane.setHeight">#</a></h4>
+<div class="doc">
+<p>Sets the height of the sidebar.</p>
+<p>
+<span class="param">height</span> A CSS-like size specification, such as <code>'100px'</code> or <code>'12ex'</code>.</p>
+<pre class="source">
+void setHeight(String height) {
+ proxy.callMethod('setHeight', [height]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setObject">
+<button class="show-code">Code</button>
+Future <strong>setObject</strong>(String jsonObject, [String rootTitle]) <a class="anchor-link" href="#setObject"
+              title="Permalink to ExtensionSidebarPane.setObject">#</a></h4>
+<div class="doc">
+<p>Sets a JSON-compliant object to be displayed in the sidebar pane.</p>
+<p>
+<span class="param">jsonObject</span> An object to be displayed in context of the inspected page.
+Evaluated in the context of the caller (API client).</p>
+<p>
+<span class="param">rootTitle</span> An optional title for the root of the expression tree.</p>
+<pre class="source">
+Future setObject(String jsonObject, [String rootTitle]) {
+ ChromeCompleter completer = new ChromeCompleter.noArgs();
+ proxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setPage">
+<button class="show-code">Code</button>
+void <strong>setPage</strong>(String path) <a class="anchor-link" href="#setPage"
+              title="Permalink to ExtensionSidebarPane.setPage">#</a></h4>
+<div class="doc">
+<p>Sets an HTML page to be displayed in the sidebar pane.</p>
+<p>
+<span class="param">path</span> Relative path of an extension page to display within the sidebar.</p>
+<pre class="source">
+void setPage(String path) {
+ proxy.callMethod('setPage', [path]);
+}
+</pre>
+</div>
+</div>
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
 JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
