@@ -191,4 +191,76 @@ class AppWindow extends ChromeObject {
 
   dynamic get contentWindow => proxy['contentWindow'];
   set contentWindow(var value) => proxy['contentWindow'] = value;
+
+  void focus() {
+    proxy.callMethod('focus');
+  }
+
+  void fullscreen() {
+    proxy.callMethod('fullscreen');
+  }
+
+  bool isFullscreen() {
+    return proxy.callMethod('isFullscreen');
+  }
+
+  void minimize() {
+    proxy.callMethod('minimize');
+  }
+
+  bool isMinimized() {
+    return proxy.callMethod('isMinimized');
+  }
+
+  void maximize() {
+    proxy.callMethod('maximize');
+  }
+
+  bool isMaximized() {
+    return proxy.callMethod('isMaximized');
+  }
+
+  void restore() {
+    proxy.callMethod('restore');
+  }
+
+  void moveTo(int left, int top) {
+    proxy.callMethod('moveTo', [left, top]);
+  }
+
+  void resizeTo(int width, int height) {
+    proxy.callMethod('resizeTo', [width, height]);
+  }
+
+  void drawAttention() {
+    proxy.callMethod('drawAttention');
+  }
+
+  void clearAttention() {
+    proxy.callMethod('clearAttention');
+  }
+
+  void close() {
+    proxy.callMethod('close');
+  }
+
+  void show() {
+    proxy.callMethod('show');
+  }
+
+  void hide() {
+    proxy.callMethod('hide');
+  }
+
+  Bounds getBounds() {
+    return Bounds.create(proxy.callMethod('getBounds'));
+  }
+
+  void setBounds(Bounds bounds) {
+    proxy.callMethod('setBounds', [bounds]);
+  }
+
+  void setIcon(String icon_url) {
+    proxy.callMethod('setIcon', [icon_url]);
+  }
 }

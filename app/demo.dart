@@ -8,6 +8,13 @@ void main() {
   action("create()", handleAlarmsCreate);
   br();
 
+  label('app_window');
+  action("create()", handleAppWindowCreate);
+  action("create.options()", handleAppWindowCreateOptions);
+  action("close()", () => chrome.app_window.current().close());
+  action("fullscreen()", () => chrome.app_window.current().fullscreen());
+  br();
+
   label('i18n');
   action("message()", handleI18NMessage);
   action("languages()", handleI18NLanguages);
@@ -138,4 +145,13 @@ void handleGetPackageDirectoryEntry() {
 void handleAlarmsCreate() {
   chrome.alarms.create(new chrome.AlarmCreateInfo(periodInMinutes: 1.0), 'myNewAlarm');
   summary('alarms.create: firing event in 1 minute');
+}
+
+void handleAppWindowCreate() {
+  chrome.app_window.create('demo.html');
+}
+
+void handleAppWindowCreateOptions() {
+  chrome.app_window.create('demo.html',
+      new chrome.CreateWindowOptions(width: 1200, height: 200));
 }
