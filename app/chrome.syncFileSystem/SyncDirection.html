@@ -37,12 +37,10 @@ class SyncDirection extends ChromeEnum {
  static const SyncDirection LOCAL_TO_REMOTE = const SyncDirection._('local_to_remote');
  static const SyncDirection REMOTE_TO_LOCAL = const SyncDirection._('remote_to_local');
 
- static List&lt;SyncDirection&gt; _values = [LOCAL_TO_REMOTE, REMOTE_TO_LOCAL];
-
- static List&lt;SyncDirection&gt; get values =&gt; _values;
+ static const List&lt;SyncDirection&gt; VALUES = const[LOCAL_TO_REMOTE, REMOTE_TO_LOCAL];
 
  static SyncDirection create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const SyncDirection._(String str): super(str);
 }
@@ -77,15 +75,15 @@ static const SyncDirection REMOTE_TO_LOCAL = const SyncDirection._('remote_to_lo
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.syncFileSystem/SyncDirection.html">SyncDirection</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to SyncDirection.values">#</a>
+const List&lt;<a href="../chrome.syncFileSystem/SyncDirection.html">SyncDirection</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to SyncDirection.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;SyncDirection&gt; get values =&gt; _values;
+static const List&lt;SyncDirection&gt; VALUES = const[LOCAL_TO_REMOTE, REMOTE_TO_LOCAL]
 </pre>
 </div>
 </div>
@@ -99,7 +97,7 @@ static List&lt;SyncDirection&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static SyncDirection create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

@@ -38,12 +38,10 @@ class SyncAction extends ChromeEnum {
  static const SyncAction UPDATED = const SyncAction._('updated');
  static const SyncAction DELETED = const SyncAction._('deleted');
 
- static List&lt;SyncAction&gt; _values = [ADDED, UPDATED, DELETED];
-
- static List&lt;SyncAction&gt; get values =&gt; _values;
+ static const List&lt;SyncAction&gt; VALUES = const[ADDED, UPDATED, DELETED];
 
  static SyncAction create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const SyncAction._(String str): super(str);
 }
@@ -90,15 +88,15 @@ static const SyncAction UPDATED = const SyncAction._('updated')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.syncFileSystem/SyncAction.html">SyncAction</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to SyncAction.values">#</a>
+const List&lt;<a href="../chrome.syncFileSystem/SyncAction.html">SyncAction</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to SyncAction.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;SyncAction&gt; get values =&gt; _values;
+static const List&lt;SyncAction&gt; VALUES = const[ADDED, UPDATED, DELETED]
 </pre>
 </div>
 </div>
@@ -112,7 +110,7 @@ static List&lt;SyncAction&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static SyncAction create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

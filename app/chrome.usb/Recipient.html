@@ -39,12 +39,10 @@ class Recipient extends ChromeEnum {
  static const Recipient ENDPOINT = const Recipient._('endpoint');
  static const Recipient OTHER = const Recipient._('other');
 
- static List&lt;Recipient&gt; _values = [DEVICE, _INTERFACE, ENDPOINT, OTHER];
-
- static List&lt;Recipient&gt; get values =&gt; _values;
+ static const List&lt;Recipient&gt; VALUES = const[DEVICE, _INTERFACE, ENDPOINT, OTHER];
 
  static Recipient create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const Recipient._(String str): super(str);
 }
@@ -91,15 +89,15 @@ static const Recipient OTHER = const Recipient._('other')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.usb/Recipient.html">Recipient</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to Recipient.values">#</a>
+const List&lt;<a href="../chrome.usb/Recipient.html">Recipient</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to Recipient.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;Recipient&gt; get values =&gt; _values;
+static const List&lt;Recipient&gt; VALUES = const[DEVICE, _INTERFACE, ENDPOINT, OTHER]
 </pre>
 </div>
 </div>
@@ -113,7 +111,7 @@ static List&lt;Recipient&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static Recipient create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

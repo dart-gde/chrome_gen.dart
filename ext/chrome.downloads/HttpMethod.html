@@ -37,12 +37,10 @@ class HttpMethod extends ChromeEnum {
  static const HttpMethod GET = const HttpMethod._('GET');
  static const HttpMethod POST = const HttpMethod._('POST');
 
- static List&lt;HttpMethod&gt; _values = [GET, POST];
-
- static List&lt;HttpMethod&gt; get values =&gt; _values;
+ static const List&lt;HttpMethod&gt; VALUES = const[GET, POST];
 
  static HttpMethod create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const HttpMethod._(String str): super(str);
 }
@@ -77,15 +75,15 @@ static const HttpMethod POST = const HttpMethod._('POST')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.downloads/HttpMethod.html">HttpMethod</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to HttpMethod.values">#</a>
+const List&lt;<a href="../chrome.downloads/HttpMethod.html">HttpMethod</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to HttpMethod.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;HttpMethod&gt; get values =&gt; _values;
+static const List&lt;HttpMethod&gt; VALUES = const[GET, POST]
 </pre>
 </div>
 </div>
@@ -99,7 +97,7 @@ static List&lt;HttpMethod&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static HttpMethod create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

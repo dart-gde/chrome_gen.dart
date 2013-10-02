@@ -40,12 +40,10 @@ class ServiceStatus extends ChromeEnum {
  static const ServiceStatus TEMPORARY_UNAVAILABLE = const ServiceStatus._('temporary_unavailable');
  static const ServiceStatus DISABLED = const ServiceStatus._('disabled');
 
- static List&lt;ServiceStatus&gt; _values = [INITIALIZING, RUNNING, AUTHENTICATION_REQUIRED, TEMPORARY_UNAVAILABLE, DISABLED];
-
- static List&lt;ServiceStatus&gt; get values =&gt; _values;
+ static const List&lt;ServiceStatus&gt; VALUES = const[INITIALIZING, RUNNING, AUTHENTICATION_REQUIRED, TEMPORARY_UNAVAILABLE, DISABLED];
 
  static ServiceStatus create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const ServiceStatus._(String str): super(str);
 }
@@ -116,15 +114,15 @@ static const ServiceStatus TEMPORARY_UNAVAILABLE = const ServiceStatus._('tempor
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.syncFileSystem/ServiceStatus.html">ServiceStatus</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to ServiceStatus.values">#</a>
+const List&lt;<a href="../chrome.syncFileSystem/ServiceStatus.html">ServiceStatus</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to ServiceStatus.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;ServiceStatus&gt; get values =&gt; _values;
+static const List&lt;ServiceStatus&gt; VALUES = const[INITIALIZING, RUNNING, AUTHENTICATION_REQUIRED, TEMPORARY_UNAVAILABLE, DISABLED]
 </pre>
 </div>
 </div>
@@ -138,7 +136,7 @@ static List&lt;ServiceStatus&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static ServiceStatus create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

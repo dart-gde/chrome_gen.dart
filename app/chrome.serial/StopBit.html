@@ -37,12 +37,10 @@ class StopBit extends ChromeEnum {
  static const StopBit ONESTOPBIT = const StopBit._('onestopbit');
  static const StopBit TWOSTOPBIT = const StopBit._('twostopbit');
 
- static List&lt;StopBit&gt; _values = [ONESTOPBIT, TWOSTOPBIT];
-
- static List&lt;StopBit&gt; get values =&gt; _values;
+ static const List&lt;StopBit&gt; VALUES = const[ONESTOPBIT, TWOSTOPBIT];
 
  static StopBit create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const StopBit._(String str): super(str);
 }
@@ -77,15 +75,15 @@ static const StopBit TWOSTOPBIT = const StopBit._('twostopbit')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.serial/StopBit.html">StopBit</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to StopBit.values">#</a>
+const List&lt;<a href="../chrome.serial/StopBit.html">StopBit</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to StopBit.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;StopBit&gt; get values =&gt; _values;
+static const List&lt;StopBit&gt; VALUES = const[ONESTOPBIT, TWOSTOPBIT]
 </pre>
 </div>
 </div>
@@ -99,7 +97,7 @@ static List&lt;StopBit&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static StopBit create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

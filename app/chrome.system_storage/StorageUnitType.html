@@ -38,12 +38,10 @@ class StorageUnitType extends ChromeEnum {
  static const StorageUnitType REMOVABLE = const StorageUnitType._('removable');
  static const StorageUnitType UNKNOWN = const StorageUnitType._('unknown');
 
- static List&lt;StorageUnitType&gt; _values = [FIXED, REMOVABLE, UNKNOWN];
-
- static List&lt;StorageUnitType&gt; get values =&gt; _values;
+ static const List&lt;StorageUnitType&gt; VALUES = const[FIXED, REMOVABLE, UNKNOWN];
 
  static StorageUnitType create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const StorageUnitType._(String str): super(str);
 }
@@ -90,15 +88,15 @@ static const StorageUnitType UNKNOWN = const StorageUnitType._('unknown')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.system_storage/StorageUnitType.html">StorageUnitType</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to StorageUnitType.values">#</a>
+const List&lt;<a href="../chrome.system_storage/StorageUnitType.html">StorageUnitType</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to StorageUnitType.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;StorageUnitType&gt; get values =&gt; _values;
+static const List&lt;StorageUnitType&gt; VALUES = const[FIXED, REMOVABLE, UNKNOWN]
 </pre>
 </div>
 </div>
@@ -112,7 +110,7 @@ static List&lt;StorageUnitType&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static StorageUnitType create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

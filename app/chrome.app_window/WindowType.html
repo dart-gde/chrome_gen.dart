@@ -37,12 +37,10 @@ class WindowType extends ChromeEnum {
  static const WindowType SHELL = const WindowType._('shell');
  static const WindowType PANEL = const WindowType._('panel');
 
- static List&lt;WindowType&gt; _values = [SHELL, PANEL];
-
- static List&lt;WindowType&gt; get values =&gt; _values;
+ static const List&lt;WindowType&gt; VALUES = const[SHELL, PANEL];
 
  static WindowType create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const WindowType._(String str): super(str);
 }
@@ -77,15 +75,15 @@ static const WindowType SHELL = const WindowType._('shell')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.app_window/WindowType.html">WindowType</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to WindowType.values">#</a>
+const List&lt;<a href="../chrome.app_window/WindowType.html">WindowType</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to WindowType.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;WindowType&gt; get values =&gt; _values;
+static const List&lt;WindowType&gt; VALUES = const[SHELL, PANEL]
 </pre>
 </div>
 </div>
@@ -99,7 +97,7 @@ static List&lt;WindowType&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static WindowType create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

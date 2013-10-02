@@ -38,12 +38,10 @@ class SynchronizationType extends ChromeEnum {
  static const SynchronizationType ADAPTIVE = const SynchronizationType._('adaptive');
  static const SynchronizationType SYNCHRONOUS = const SynchronizationType._('synchronous');
 
- static List&lt;SynchronizationType&gt; _values = [ASYNCHRONOUS, ADAPTIVE, SYNCHRONOUS];
-
- static List&lt;SynchronizationType&gt; get values =&gt; _values;
+ static const List&lt;SynchronizationType&gt; VALUES = const[ASYNCHRONOUS, ADAPTIVE, SYNCHRONOUS];
 
  static SynchronizationType create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const SynchronizationType._(String str): super(str);
 }
@@ -90,15 +88,15 @@ static const SynchronizationType SYNCHRONOUS = const SynchronizationType._('sync
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.usb/SynchronizationType.html">SynchronizationType</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to SynchronizationType.values">#</a>
+const List&lt;<a href="../chrome.usb/SynchronizationType.html">SynchronizationType</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to SynchronizationType.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;SynchronizationType&gt; get values =&gt; _values;
+static const List&lt;SynchronizationType&gt; VALUES = const[ASYNCHRONOUS, ADAPTIVE, SYNCHRONOUS]
 </pre>
 </div>
 </div>
@@ -112,7 +110,7 @@ static List&lt;SynchronizationType&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static SynchronizationType create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

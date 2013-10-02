@@ -39,12 +39,10 @@ class TransferType extends ChromeEnum {
  static const TransferType ISOCHRONOUS = const TransferType._('isochronous');
  static const TransferType BULK = const TransferType._('bulk');
 
- static List&lt;TransferType&gt; _values = [CONTROL, INTERRUPT, ISOCHRONOUS, BULK];
-
- static List&lt;TransferType&gt; get values =&gt; _values;
+ static const List&lt;TransferType&gt; VALUES = const[CONTROL, INTERRUPT, ISOCHRONOUS, BULK];
 
  static TransferType create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const TransferType._(String str): super(str);
 }
@@ -103,15 +101,15 @@ static const TransferType ISOCHRONOUS = const TransferType._('isochronous')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.usb/TransferType.html">TransferType</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to TransferType.values">#</a>
+const List&lt;<a href="../chrome.usb/TransferType.html">TransferType</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to TransferType.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;TransferType&gt; get values =&gt; _values;
+static const List&lt;TransferType&gt; VALUES = const[CONTROL, INTERRUPT, ISOCHRONOUS, BULK]
 </pre>
 </div>
 </div>
@@ -125,7 +123,7 @@ static List&lt;TransferType&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static TransferType create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

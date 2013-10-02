@@ -39,12 +39,10 @@ class ChooseEntryType extends ChromeEnum {
  static const ChooseEntryType SAVEFILE = const ChooseEntryType._('saveFile');
  static const ChooseEntryType OPENDIRECTORY = const ChooseEntryType._('openDirectory');
 
- static List&lt;ChooseEntryType&gt; _values = [OPENFILE, OPENWRITABLEFILE, SAVEFILE, OPENDIRECTORY];
-
- static List&lt;ChooseEntryType&gt; get values =&gt; _values;
+ static const List&lt;ChooseEntryType&gt; VALUES = const[OPENFILE, OPENWRITABLEFILE, SAVEFILE, OPENDIRECTORY];
 
  static ChooseEntryType create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const ChooseEntryType._(String str): super(str);
 }
@@ -103,15 +101,15 @@ static const ChooseEntryType SAVEFILE = const ChooseEntryType._('saveFile')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.fileSystem/ChooseEntryType.html">ChooseEntryType</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to ChooseEntryType.values">#</a>
+const List&lt;<a href="../chrome.fileSystem/ChooseEntryType.html">ChooseEntryType</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to ChooseEntryType.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;ChooseEntryType&gt; get values =&gt; _values;
+static const List&lt;ChooseEntryType&gt; VALUES = const[OPENFILE, OPENWRITABLEFILE, SAVEFILE, OPENDIRECTORY]
 </pre>
 </div>
 </div>
@@ -125,7 +123,7 @@ static List&lt;ChooseEntryType&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static ChooseEntryType create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

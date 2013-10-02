@@ -39,12 +39,10 @@ class TabCaptureState extends ChromeEnum {
  static const TabCaptureState STOPPED = const TabCaptureState._('stopped');
  static const TabCaptureState ERROR = const TabCaptureState._('error');
 
- static List&lt;TabCaptureState&gt; _values = [PENDING, ACTIVE, STOPPED, ERROR];
-
- static List&lt;TabCaptureState&gt; get values =&gt; _values;
+ static const List&lt;TabCaptureState&gt; VALUES = const[PENDING, ACTIVE, STOPPED, ERROR];
 
  static TabCaptureState create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const TabCaptureState._(String str): super(str);
 }
@@ -103,15 +101,15 @@ static const TabCaptureState STOPPED = const TabCaptureState._('stopped')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.tabCapture/TabCaptureState.html">TabCaptureState</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to TabCaptureState.values">#</a>
+const List&lt;<a href="../chrome.tabCapture/TabCaptureState.html">TabCaptureState</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to TabCaptureState.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;TabCaptureState&gt; get values =&gt; _values;
+static const List&lt;TabCaptureState&gt; VALUES = const[PENDING, ACTIVE, STOPPED, ERROR]
 </pre>
 </div>
 </div>
@@ -125,7 +123,7 @@ static List&lt;TabCaptureState&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static TabCaptureState create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

@@ -37,12 +37,10 @@ class Direction extends ChromeEnum {
  static const Direction IN = const Direction._('in');
  static const Direction OUT = const Direction._('out');
 
- static List&lt;Direction&gt; _values = [IN, OUT];
-
- static List&lt;Direction&gt; get values =&gt; _values;
+ static const List&lt;Direction&gt; VALUES = const[IN, OUT];
 
  static Direction create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const Direction._(String str): super(str);
 }
@@ -77,15 +75,15 @@ static const Direction OUT = const Direction._('out')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.usb/Direction.html">Direction</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to Direction.values">#</a>
+const List&lt;<a href="../chrome.usb/Direction.html">Direction</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to Direction.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;Direction&gt; get values =&gt; _values;
+static const List&lt;Direction&gt; VALUES = const[IN, OUT]
 </pre>
 </div>
 </div>
@@ -99,7 +97,7 @@ static List&lt;Direction&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static Direction create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

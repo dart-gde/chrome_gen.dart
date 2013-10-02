@@ -56,12 +56,10 @@ class InterruptReason extends ChromeEnum {
  static const InterruptReason USER_SHUTDOWN = const InterruptReason._('USER_SHUTDOWN');
  static const InterruptReason CRASH = const InterruptReason._('CRASH');
 
- static List&lt;InterruptReason&gt; _values = [FILE_FAILED, FILE_ACCESS_DENIED, FILE_NO_SPACE, FILE_NAME_TOO_LONG, FILE_TOO_LARGE, FILE_VIRUS_INFECTED, FILE_TRANSIENT_ERROR, FILE_BLOCKED, FILE_SECURITY_CHECK_FAILED, FILE_TOO_SHORT, NETWORK_FAILED, NETWORK_TIMEOUT, NETWORK_DISCONNECTED, NETWORK_SERVER_DOWN, SERVER_FAILED, SERVER_NO_RANGE, SERVER_PRECONDITION, SERVER_BAD_CONTENT, USER_CANCELED, USER_SHUTDOWN, CRASH];
-
- static List&lt;InterruptReason&gt; get values =&gt; _values;
+ static const List&lt;InterruptReason&gt; VALUES = const[FILE_FAILED, FILE_ACCESS_DENIED, FILE_NO_SPACE, FILE_NAME_TOO_LONG, FILE_TOO_LARGE, FILE_VIRUS_INFECTED, FILE_TRANSIENT_ERROR, FILE_BLOCKED, FILE_SECURITY_CHECK_FAILED, FILE_TOO_SHORT, NETWORK_FAILED, NETWORK_TIMEOUT, NETWORK_DISCONNECTED, NETWORK_SERVER_DOWN, SERVER_FAILED, SERVER_NO_RANGE, SERVER_PRECONDITION, SERVER_BAD_CONTENT, USER_CANCELED, USER_SHUTDOWN, CRASH];
 
  static InterruptReason create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const InterruptReason._(String str): super(str);
 }
@@ -324,15 +322,15 @@ static const InterruptReason USER_SHUTDOWN = const InterruptReason._('USER_SHUTD
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.downloads/InterruptReason.html">InterruptReason</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to InterruptReason.values">#</a>
+const List&lt;<a href="../chrome.downloads/InterruptReason.html">InterruptReason</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to InterruptReason.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;InterruptReason&gt; get values =&gt; _values;
+static const List&lt;InterruptReason&gt; VALUES = const[FILE_FAILED, FILE_ACCESS_DENIED, FILE_NO_SPACE, FILE_NAME_TOO_LONG, FILE_TOO_LARGE, FILE_VIRUS_INFECTED, FILE_TRANSIENT_ERROR, FILE_BLOCKED, FILE_SECURITY_CHECK_FAILED, FILE_TOO_SHORT, NETWORK_FAILED, NETWORK_TIMEOUT, NETWORK_DISCONNECTED, NETWORK_SERVER_DOWN, SERVER_FAILED, SERVER_NO_RANGE, SERVER_PRECONDITION, SERVER_BAD_CONTENT, USER_CANCELED, USER_SHUTDOWN, CRASH]
 </pre>
 </div>
 </div>
@@ -346,7 +344,7 @@ static List&lt;InterruptReason&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static InterruptReason create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

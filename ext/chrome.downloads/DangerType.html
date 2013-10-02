@@ -43,12 +43,10 @@ class DangerType extends ChromeEnum {
  static const DangerType SAFE = const DangerType._('safe');
  static const DangerType ACCEPTED = const DangerType._('accepted');
 
- static List&lt;DangerType&gt; _values = [FILE, URL, CONTENT, UNCOMMON, HOST, UNWANTED, SAFE, ACCEPTED];
-
- static List&lt;DangerType&gt; get values =&gt; _values;
+ static const List&lt;DangerType&gt; VALUES = const[FILE, URL, CONTENT, UNCOMMON, HOST, UNWANTED, SAFE, ACCEPTED];
 
  static DangerType create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const DangerType._(String str): super(str);
 }
@@ -155,15 +153,15 @@ static const DangerType URL = const DangerType._('url')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.downloads/DangerType.html">DangerType</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to DangerType.values">#</a>
+const List&lt;<a href="../chrome.downloads/DangerType.html">DangerType</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to DangerType.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;DangerType&gt; get values =&gt; _values;
+static const List&lt;DangerType&gt; VALUES = const[FILE, URL, CONTENT, UNCOMMON, HOST, UNWANTED, SAFE, ACCEPTED]
 </pre>
 </div>
 </div>
@@ -177,7 +175,7 @@ static List&lt;DangerType&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static DangerType create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

@@ -39,12 +39,10 @@ class RequestType extends ChromeEnum {
  static const RequestType VENDOR = const RequestType._('vendor');
  static const RequestType RESERVED = const RequestType._('reserved');
 
- static List&lt;RequestType&gt; _values = [STANDARD, CLASS, VENDOR, RESERVED];
-
- static List&lt;RequestType&gt; get values =&gt; _values;
+ static const List&lt;RequestType&gt; VALUES = const[STANDARD, CLASS, VENDOR, RESERVED];
 
  static RequestType create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const RequestType._(String str): super(str);
 }
@@ -91,15 +89,15 @@ static const RequestType STANDARD = const RequestType._('standard')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.usb/RequestType.html">RequestType</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to RequestType.values">#</a>
+const List&lt;<a href="../chrome.usb/RequestType.html">RequestType</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to RequestType.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;RequestType&gt; get values =&gt; _values;
+static const List&lt;RequestType&gt; VALUES = const[STANDARD, CLASS, VENDOR, RESERVED]
 </pre>
 </div>
 </div>
@@ -125,7 +123,7 @@ static const RequestType VENDOR = const RequestType._('vendor')
 <div class="doc">
 <pre class="source">
 static RequestType create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

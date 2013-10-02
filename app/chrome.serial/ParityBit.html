@@ -38,12 +38,10 @@ class ParityBit extends ChromeEnum {
  static const ParityBit ODDPARITY = const ParityBit._('oddparity');
  static const ParityBit EVENPARITY = const ParityBit._('evenparity');
 
- static List&lt;ParityBit&gt; _values = [NOPARITY, ODDPARITY, EVENPARITY];
-
- static List&lt;ParityBit&gt; get values =&gt; _values;
+ static const List&lt;ParityBit&gt; VALUES = const[NOPARITY, ODDPARITY, EVENPARITY];
 
  static ParityBit create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const ParityBit._(String str): super(str);
 }
@@ -90,15 +88,15 @@ static const ParityBit ODDPARITY = const ParityBit._('oddparity')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.serial/ParityBit.html">ParityBit</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to ParityBit.values">#</a>
+const List&lt;<a href="../chrome.serial/ParityBit.html">ParityBit</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to ParityBit.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;ParityBit&gt; get values =&gt; _values;
+static const List&lt;ParityBit&gt; VALUES = const[NOPARITY, ODDPARITY, EVENPARITY]
 </pre>
 </div>
 </div>
@@ -112,7 +110,7 @@ static List&lt;ParityBit&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static ParityBit create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

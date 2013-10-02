@@ -38,12 +38,10 @@ class DesktopCaptureSourceType extends ChromeEnum {
  static const DesktopCaptureSourceType WINDOW = const DesktopCaptureSourceType._('window');
  static const DesktopCaptureSourceType TAB = const DesktopCaptureSourceType._('tab');
 
- static List&lt;DesktopCaptureSourceType&gt; _values = [SCREEN, WINDOW, TAB];
-
- static List&lt;DesktopCaptureSourceType&gt; get values =&gt; _values;
+ static const List&lt;DesktopCaptureSourceType&gt; VALUES = const[SCREEN, WINDOW, TAB];
 
  static DesktopCaptureSourceType create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const DesktopCaptureSourceType._(String str): super(str);
 }
@@ -78,15 +76,15 @@ static const DesktopCaptureSourceType TAB = const DesktopCaptureSourceType._('ta
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to DesktopCaptureSourceType.values">#</a>
+const List&lt;<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to DesktopCaptureSourceType.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;DesktopCaptureSourceType&gt; get values =&gt; _values;
+static const List&lt;DesktopCaptureSourceType&gt; VALUES = const[SCREEN, WINDOW, TAB]
 </pre>
 </div>
 </div>
@@ -112,7 +110,7 @@ static const DesktopCaptureSourceType WINDOW = const DesktopCaptureSourceType._(
 <div class="doc">
 <pre class="source">
 static DesktopCaptureSourceType create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

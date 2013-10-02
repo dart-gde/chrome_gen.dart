@@ -37,12 +37,10 @@ class ConflictResolutionPolicy extends ChromeEnum {
  static const ConflictResolutionPolicy LAST_WRITE_WIN = const ConflictResolutionPolicy._('last_write_win');
  static const ConflictResolutionPolicy MANUAL = const ConflictResolutionPolicy._('manual');
 
- static List&lt;ConflictResolutionPolicy&gt; _values = [LAST_WRITE_WIN, MANUAL];
-
- static List&lt;ConflictResolutionPolicy&gt; get values =&gt; _values;
+ static const List&lt;ConflictResolutionPolicy&gt; VALUES = const[LAST_WRITE_WIN, MANUAL];
 
  static ConflictResolutionPolicy create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const ConflictResolutionPolicy._(String str): super(str);
 }
@@ -77,15 +75,15 @@ static const ConflictResolutionPolicy MANUAL = const ConflictResolutionPolicy._(
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">ConflictResolutionPolicy</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to ConflictResolutionPolicy.values">#</a>
+const List&lt;<a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">ConflictResolutionPolicy</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to ConflictResolutionPolicy.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;ConflictResolutionPolicy&gt; get values =&gt; _values;
+static const List&lt;ConflictResolutionPolicy&gt; VALUES = const[LAST_WRITE_WIN, MANUAL]
 </pre>
 </div>
 </div>
@@ -99,7 +97,7 @@ static List&lt;ConflictResolutionPolicy&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static ConflictResolutionPolicy create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

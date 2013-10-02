@@ -38,12 +38,10 @@ class State extends ChromeEnum {
  static const State INTERRUPTED = const State._('interrupted');
  static const State COMPLETE = const State._('complete');
 
- static List&lt;State&gt; _values = [IN_PROGRESS, INTERRUPTED, COMPLETE];
-
- static List&lt;State&gt; get values =&gt; _values;
+ static const List&lt;State&gt; VALUES = const[IN_PROGRESS, INTERRUPTED, COMPLETE];
 
  static State create(String str) =&gt;
-     _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 
  const State._(String str): super(str);
 }
@@ -90,15 +88,15 @@ static const State INTERRUPTED = const State._('interrupted')
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="values">
+<div class="field"><h4 id="VALUES">
 <button class="show-code">Code</button>
-final List&lt;<a href="../chrome.downloads/State.html">State</a>&gt;         <strong>values</strong> <a class="anchor-link"
-            href="#values"
-            title="Permalink to State.values">#</a>
+const List&lt;<a href="../chrome.downloads/State.html">State</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to State.VALUES">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-static List&lt;State&gt; get values =&gt; _values;
+static const List&lt;State&gt; VALUES = const[IN_PROGRESS, INTERRUPTED, COMPLETE]
 </pre>
 </div>
 </div>
@@ -112,7 +110,7 @@ static List&lt;State&gt; get values =&gt; _values;
 <div class="doc">
 <pre class="source">
 static State create(String str) =&gt;
-   _values.singleWhere((ChromeEnum e) =&gt; e.value == str);
+   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>
