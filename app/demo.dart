@@ -38,8 +38,14 @@ void main() {
   action('getPackageDirectoryEntry()', handleGetPackageDirectoryEntry);
   br();
 
+  label('system');
+  action('cpu.info', handleSystemCpu);
+  action('cpu.memory', handleSystemMemory);
+  br();
+
   label('tts');
   action('getVoices()', handleGetVoices);
+  action('speak()', () => chrome.tts.speak('Hello World'));
   br();
 
   chrome.runtime.onStartup.listen((e) {
@@ -154,4 +160,16 @@ void handleAppWindowCreate() {
 void handleAppWindowCreateOptions() {
   chrome.app_window.create('demo.html',
       new chrome.CreateWindowOptions(width: 1200, height: 200));
+}
+
+void handleSystemCpu() {
+  chrome.system_cpu.getInfo().then((chrome.CpuInfo info) {
+    summary('${info.archName}: ${info.numOfProcessors} processors');
+  });
+}
+
+void handleSystemMemory() {
+  chrome.system_memory.getInfo().then((chrome.MemoryInfo info) {
+    summary('${info.capacity} bytes');
+  });
 }
