@@ -52,7 +52,7 @@ class ChromeRuntime {
    * Returns:
    * The manifest details.
    */
-  Map getManifest() {
+  Map<String, dynamic> getManifest() {
     return mapify(_runtime.callMethod('getManifest'));
   }
 
@@ -148,7 +148,7 @@ class ChromeRuntime {
    * occurs while connecting to the extension, the callback will be called with
    * no arguments and [runtime.lastError] will be set to the error message.
    */
-  Future<dynamic> sendMessage(var message, [String extensionId]) {
+  Future<dynamic> sendMessage(dynamic message, [String extensionId]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
     _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
     return completer.future;
@@ -166,7 +166,7 @@ class ChromeRuntime {
    * while connecting to the native messaging host, the callback will be called
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
-  Future<dynamic> sendNativeMessage(String application, Map message) {
+  Future<dynamic> sendNativeMessage(String application, Map<String, dynamic> message) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
     _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
     return completer.future;
@@ -236,10 +236,10 @@ class ChromeRuntime {
    * installed the next time the background page gets unloaded, if you want it
    * to be installed sooner you can explicitly call chrome.runtime.reload().
    */
-  Stream<Map> get onUpdateAvailable => _onUpdateAvailable.stream;
+  Stream<Map<String, dynamic>> get onUpdateAvailable => _onUpdateAvailable.stream;
 
-  final ChromeStreamController<Map> _onUpdateAvailable =
-      new ChromeStreamController<Map>.oneArg(_runtime['onUpdateAvailable'], mapify);
+  final ChromeStreamController<Map<String, dynamic>> _onUpdateAvailable =
+      new ChromeStreamController<Map<String, dynamic>>.oneArg(_runtime['onUpdateAvailable'], mapify);
 
   /**
    * Fired when a Chrome update is available, but isn't installed immediately

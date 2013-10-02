@@ -30,7 +30,7 @@ class ChromeContextMenus {
    * Returns:
    * The ID of the newly created item.
    */
-  dynamic create(Map createProperties, [var callback]) {
+  dynamic create(Map createProperties, [dynamic callback]) {
     return _contextMenus.callMethod('create', [jsify(createProperties), callback]);
   }
 
@@ -42,7 +42,7 @@ class ChromeContextMenus {
    * [updateProperties] The properties to update. Accepts the same values as the
    * create function.
    */
-  Future update(var id, Map updateProperties) {
+  Future update(dynamic id, Map updateProperties) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('update', [id, jsify(updateProperties), completer.callback]);
     return completer.future;
@@ -53,7 +53,7 @@ class ChromeContextMenus {
    * 
    * [menuItemId] The ID of the context menu item to remove.
    */
-  Future remove(var menuItemId) {
+  Future remove(dynamic menuItemId) {
     ChromeCompleter completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('remove', [menuItemId, completer.callback]);
     return completer.future;

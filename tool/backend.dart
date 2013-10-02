@@ -152,13 +152,13 @@ class _DefaultBackendContext {
     generator.writeln();
     generator.writeDocs(method.getDescription());
     generator.write("${method.returns.toReturnString()} ${method.name}(");
-    generator.write(method.requiredParams.map((p) => "${p} ${p.name}").join(', '));
+    generator.write(method.requiredParams.map((p) => "${p.toParamString(true)} ${p.name}").join(', '));
     if (method.optionalParams.isNotEmpty) {
       if (method.requiredParams.isNotEmpty) {
         generator.write(', ');
       }
       generator.write('[');
-      generator.write(method.optionalParams.map((p) => "${p} ${p.name}").join(', '));
+      generator.write(method.optionalParams.map((p) => "${p.toParamString(true)} ${p.name}").join(', '));
       generator.write(']');
     }
     generator.writeln(") {");
@@ -343,7 +343,6 @@ class _DefaultBackendContext {
       props.forEach((p) => _printProperty(p, 'this.proxy', true));
     }
 
-    // Currently, this is only for app_window.AppWindow
     type.methods.forEach((m) => _printMethod(m, 'proxy'));
 
     generator.writeln("}");

@@ -30,19 +30,19 @@ class ChromeSyncFileSystem {
     return completer.future;
   }
 
-  Future<StorageInfo> getUsageAndQuota(var fileSystem) {
+  Future<StorageInfo> getUsageAndQuota(dynamic fileSystem) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(StorageInfo.create);
     _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
     return completer.future;
   }
 
-  Future<FileStatus> getFileStatus(var fileEntry) {
+  Future<FileStatus> getFileStatus(dynamic fileEntry) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatus.create);
     _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
     return completer.future;
   }
 
-  Future<FileStatusInfo> getFileStatuses(var fileEntries) {
+  Future<FileStatusInfo> getFileStatuses(dynamic fileEntries) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(FileStatusInfo.create);
     _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
     return completer.future;

@@ -64,7 +64,7 @@ class ChromeDebugger {
    * JSON object with the response. Structure of the response varies depending
    * on the method and is defined by the remote debugging protocol.
    */
-  Future<Map> sendCommand(Debuggee target, String method, [Map commandParams]) {
+  Future<Map<String, dynamic>> sendCommand(Debuggee target, String method, [Map<String, dynamic> commandParams]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _debugger.callMethod('sendCommand', [target, method, jsify(commandParams), completer.callback]);
     return completer.future;
@@ -128,7 +128,7 @@ class OnEventEvent {
    * JSON object with the response. Structure of the response varies depending
    * on the method and is defined by the remote debugging protocol.
    */
-  Map params;
+  Map<String, dynamic> params;
 
   OnEventEvent(this.source, this.method, this.params);
 }

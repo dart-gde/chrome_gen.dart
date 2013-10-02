@@ -144,7 +144,7 @@ class Resource extends ChromeObject {
    * Set to undefined if the resource content was set successfully; describes
    * error otherwise.
    */
-  Future<Map> setContent(String content, bool commit) {
+  Future<Map<String, dynamic>> setContent(String content, bool commit) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     proxy.callMethod('setContent', [content, commit, completer.callback]);
     return completer.future;

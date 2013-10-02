@@ -12,19 +12,19 @@ class ChromeFileSystem {
 
   ChromeFileSystem._();
 
-  Future<String> getDisplayPath(var entry) {
+  Future<String> getDisplayPath(dynamic entry) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
     _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
     return completer.future;
   }
 
-  Future<dynamic> getWritableEntry(var entry) {
+  Future<dynamic> getWritableEntry(dynamic entry) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
     _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
     return completer.future;
   }
 
-  Future<bool> isWritableEntry(var entry) {
+  Future<bool> isWritableEntry(dynamic entry) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
     _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
     return completer.future;
@@ -48,7 +48,7 @@ class ChromeFileSystem {
     return completer.future;
   }
 
-  String retainEntry(var entry) {
+  String retainEntry(dynamic entry) {
     return _fileSystem.callMethod('retainEntry', [entry]);
   }
 }

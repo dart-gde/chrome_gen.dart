@@ -177,6 +177,7 @@ class ChromeType extends ChromeElement {
   static final ChromeType VAR = new ChromeType(type: 'var');
   static final ChromeType VOID = new ChromeType(type: 'void');
   static final ChromeType JS_OBJECT = new ChromeType(type: 'JsObject');
+  static final ChromeType STRING = new ChromeType(type: 'String');
 
   String name;
   String type;
