@@ -37,8 +37,6 @@ void main() {
   generator.generate();
 }
 
-final String LICENSE = null;
-
 class GenApiFile {
   final File inFile;
   final File outFile;
@@ -73,7 +71,7 @@ class GenApiFile {
 
     Backend backend = new Backend.createDefault(overrides);
     outFile.writeAsStringSync(
-        backend.generate(chromeLib, license: LICENSE, sourceFileName: fileName));
+        backend.generate(chromeLib, sourceFileName: fileName));
   }
 }
 
