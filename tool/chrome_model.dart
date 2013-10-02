@@ -151,6 +151,9 @@ class ChromeDeclaredType extends ChromeType {
   /// For a class like 'declarativeWebRequest.EditRequestCookie', this
   /// represents the 'declarativeWebRequest' part.
   String qualifier;
+  List<ChromeMethod> methods = [];
+
+  String toString() => name;
 }
 
 class ChromeEnumType extends ChromeType {
