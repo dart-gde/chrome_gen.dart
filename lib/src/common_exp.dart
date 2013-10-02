@@ -7,15 +7,13 @@ import 'dart:js';
  * The abstract superclass of objects that can hold [JsObject] proxies.
  */
 abstract class ChromeObject implements Serializable<JsObject> {
-  JsObject proxy;
+  final JsObject proxy;
 
   /**
    * Create a new instance of a `ChromeObject`, which creates and delegates to
    * a JsObject proxy.
    */
-  ChromeObject() {
-    proxy = new JsObject(context['Object']);
-  }
+  ChromeObject() : proxy = new JsObject(context['Object']);
 
   /**
    * Create a new instance of a `ChromeObject`, which delegates to the given
@@ -67,9 +65,10 @@ class ArrayBuffer extends ChromeObject {
   ArrayBuffer();
   ArrayBuffer.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
-  ArrayBuffer.fromString(String str) {
+  factory ArrayBuffer.fromString(String str) {
     var uint8Array = new JsObject(context['Uint8Array'], [jsify(str.codeUnits)]);
-    proxy = uint8Array['buffer'];
+
+    return new ArrayBuffer.fromProxy(uint8Array['buffer']);
   }
 }
 
