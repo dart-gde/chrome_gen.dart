@@ -23,15 +23,24 @@ abstract class Backend {
 }
 
 class DefaultBackend extends Backend {
-  DartGenerator generator;
-  ChromeLibrary library;
-
   DefaultBackend(Overrides overrides): super(overrides);
 
   String generate(ChromeLibrary library, {String license, String sourceFileName}) {
-    this.library = library;
-    generator = new DartGenerator();
+    var context = new _DefaultBackendContext(new DartGenerator(),
+        library, overrides);
 
+    return context.generate(license: license, sourceFileName: sourceFileName);
+  }
+}
+
+class _DefaultBackendContext {
+  final DartGenerator generator;
+  final ChromeLibrary library;
+  final Overrides overrides;
+
+  _DefaultBackendContext(this.generator, this.library, this.overrides);
+
+  String generate({String license, String sourceFileName}) {
     if (license != null) {
       generator.writeln(license);
       generator.writeln();
@@ -398,4 +407,3 @@ class DefaultBackend extends Backend {
     }
   }
 }
-
