@@ -59,12 +59,10 @@ class ChooseEntryType extends ChromeEnum {
   static const ChooseEntryType SAVEFILE = const ChooseEntryType._('saveFile');
   static const ChooseEntryType OPENDIRECTORY = const ChooseEntryType._('openDirectory');
 
-  static List<ChooseEntryType> _values = [OPENFILE, OPENWRITABLEFILE, SAVEFILE, OPENDIRECTORY];
-
-  static List<ChooseEntryType> get values => _values;
+  static const List<ChooseEntryType> VALUES = const[OPENFILE, OPENWRITABLEFILE, SAVEFILE, OPENDIRECTORY];
 
   static ChooseEntryType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const ChooseEntryType._(String str): super(str);
 }

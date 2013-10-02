@@ -40,12 +40,10 @@ class StorageUnitType extends ChromeEnum {
   static const StorageUnitType REMOVABLE = const StorageUnitType._('removable');
   static const StorageUnitType UNKNOWN = const StorageUnitType._('unknown');
 
-  static List<StorageUnitType> _values = [FIXED, REMOVABLE, UNKNOWN];
-
-  static List<StorageUnitType> get values => _values;
+  static const List<StorageUnitType> VALUES = const[FIXED, REMOVABLE, UNKNOWN];
 
   static StorageUnitType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const StorageUnitType._(String str): super(str);
 }
@@ -56,12 +54,10 @@ class EjectDeviceResultCode extends ChromeEnum {
   static const EjectDeviceResultCode NO_SUCH_DEVICE = const EjectDeviceResultCode._('no_such_device');
   static const EjectDeviceResultCode FAILURE = const EjectDeviceResultCode._('failure');
 
-  static List<EjectDeviceResultCode> _values = [SUCCESS, IN_USE, NO_SUCH_DEVICE, FAILURE];
-
-  static List<EjectDeviceResultCode> get values => _values;
+  static const List<EjectDeviceResultCode> VALUES = const[SUCCESS, IN_USE, NO_SUCH_DEVICE, FAILURE];
 
   static EjectDeviceResultCode create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const EjectDeviceResultCode._(String str): super(str);
 }

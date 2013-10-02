@@ -133,12 +133,10 @@ class SocketType extends ChromeEnum {
   static const SocketType TCP = const SocketType._('tcp');
   static const SocketType UDP = const SocketType._('udp');
 
-  static List<SocketType> _values = [TCP, UDP];
-
-  static List<SocketType> get values => _values;
+  static const List<SocketType> VALUES = const[TCP, UDP];
 
   static SocketType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const SocketType._(String str): super(str);
 }

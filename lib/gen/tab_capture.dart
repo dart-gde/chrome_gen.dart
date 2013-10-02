@@ -36,12 +36,10 @@ class TabCaptureState extends ChromeEnum {
   static const TabCaptureState STOPPED = const TabCaptureState._('stopped');
   static const TabCaptureState ERROR = const TabCaptureState._('error');
 
-  static List<TabCaptureState> _values = [PENDING, ACTIVE, STOPPED, ERROR];
-
-  static List<TabCaptureState> get values => _values;
+  static const List<TabCaptureState> VALUES = const[PENDING, ACTIVE, STOPPED, ERROR];
 
   static TabCaptureState create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const TabCaptureState._(String str): super(str);
 }

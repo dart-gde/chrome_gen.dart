@@ -80,12 +80,10 @@ class TemplateType extends ChromeEnum {
   static const TemplateType LIST = const TemplateType._('list');
   static const TemplateType PROGRESS = const TemplateType._('progress');
 
-  static List<TemplateType> _values = [BASIC, IMAGE, LIST, PROGRESS];
-
-  static List<TemplateType> get values => _values;
+  static const List<TemplateType> VALUES = const[BASIC, IMAGE, LIST, PROGRESS];
 
   static TemplateType create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const TemplateType._(String str): super(str);
 }

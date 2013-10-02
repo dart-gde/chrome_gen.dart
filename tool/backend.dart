@@ -285,22 +285,27 @@ class _DefaultBackendContext {
     generator.writeln();
     generator.writeDocs(type.documentation);
     generator.writeln("class ${type.name} extends ChromeEnum {");
+
+    var constNames = new List<String>();
+
     type.values.forEach((ChromeEnumEntry entry) {
       generator.writeDocs(entry.documentation);
-      generator.writeln("static const ${type.name} ${entry.name.toUpperCase()} "
+
+      // TODO: do proper const name generation - WITH_UNDERSCORE
+      var constName = entry.name.toUpperCase();
+      constNames.add(constName);
+
+      generator.writeln("static const ${type.name} ${constName} "
           "= const ${type.name}._('${entry.name}');");
     });
 
     generator.writeln();
-    String str = type.values.map((e) => e.name.toUpperCase()).join(', ');
-    generator.writeln("static List<${type.name}> _values = [${str}];");
-
-    generator.writeln();
-    generator.writeln("static List<${type.name}> get values => _values;");
+    String str = constNames.join(', ');
+    generator.writeln("static const List<${type.name}> VALUES = const[${str}];");
 
     generator.writeln();
     generator.writeln("static ${type.name} create(String str) =>");
-    generator.writeln("    _values.singleWhere((ChromeEnum e) => e.value == str);");
+    generator.writeln("    VALUES.singleWhere((ChromeEnum e) => e.value == str);");
 
     generator.writeln();
     generator.writeln("const ${type.name}._(String str): super(str);");

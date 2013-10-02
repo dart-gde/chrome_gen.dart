@@ -65,12 +65,10 @@ class DataBit extends ChromeEnum {
   static const DataBit SEVENBIT = const DataBit._('sevenbit');
   static const DataBit EIGHTBIT = const DataBit._('eightbit');
 
-  static List<DataBit> _values = [SEVENBIT, EIGHTBIT];
-
-  static List<DataBit> get values => _values;
+  static const List<DataBit> VALUES = const[SEVENBIT, EIGHTBIT];
 
   static DataBit create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const DataBit._(String str): super(str);
 }
@@ -80,12 +78,10 @@ class ParityBit extends ChromeEnum {
   static const ParityBit ODDPARITY = const ParityBit._('oddparity');
   static const ParityBit EVENPARITY = const ParityBit._('evenparity');
 
-  static List<ParityBit> _values = [NOPARITY, ODDPARITY, EVENPARITY];
-
-  static List<ParityBit> get values => _values;
+  static const List<ParityBit> VALUES = const[NOPARITY, ODDPARITY, EVENPARITY];
 
   static ParityBit create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const ParityBit._(String str): super(str);
 }
@@ -94,12 +90,10 @@ class StopBit extends ChromeEnum {
   static const StopBit ONESTOPBIT = const StopBit._('onestopbit');
   static const StopBit TWOSTOPBIT = const StopBit._('twostopbit');
 
-  static List<StopBit> _values = [ONESTOPBIT, TWOSTOPBIT];
-
-  static List<StopBit> get values => _values;
+  static const List<StopBit> VALUES = const[ONESTOPBIT, TWOSTOPBIT];
 
   static StopBit create(String str) =>
-      _values.singleWhere((ChromeEnum e) => e.value == str);
+      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const StopBit._(String str): super(str);
 }
