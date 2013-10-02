@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:args/args.dart';
@@ -75,17 +74,6 @@ class GenApiFile {
     Backend backend = new Backend.createDefault(overrides);
     outFile.writeAsStringSync(
         backend.generate(chromeLib, license: LICENSE, sourceFileName: fileName));
-  }
-
-  String _parseNamespace(List tokens) {
-    for (int i = 0; i < tokens.length; i++) {
-      if (tokens[i] == 'namespace' && i + 1 < tokens.length) {
-        List ns = tokens[i + 1];
-        return ns.join('.');
-      }
-    }
-
-    return null;
   }
 }
 
