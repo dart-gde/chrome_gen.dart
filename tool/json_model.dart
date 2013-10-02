@@ -137,12 +137,15 @@ class JsonEvent extends JsonParamType {
 }
 
 class JsonDeclaredType extends JsonType {
+  final List<JsonFunction> functions;
 
   static List<JsonDeclaredType> parse(List jsons) {
     return (jsons == null ? [] : jsons.map((j) => new JsonDeclaredType(j)).toList());
   }
 
-  JsonDeclaredType(json): super(json);
+  JsonDeclaredType(Map<String, dynamic> json) :
+      this.functions = JsonFunction.parse(json['functions']),
+      super(json);
 
   String get id => json['id'];
 
@@ -205,6 +208,8 @@ class JsonConverter {
 
   ChromeDeclaredType _convertDeclaredType(JsonDeclaredType t) {
     ChromeDeclaredType type = _convertType_(t, new ChromeDeclaredType());
+
+    type.methods =  t.functions.map(_convertMethod).toList();
 
     int index = type.name.lastIndexOf('.');
 
