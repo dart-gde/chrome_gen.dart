@@ -29,15 +29,12 @@ void main() {
 final String LICENSE = null;
 
 class GenApiFile {
-  File inFile;
-  File outFile;
-  Overrides overrides;
+  final File inFile;
+  final File outFile;
+  final Overrides overrides;
 
-  GenApiFile(this.inFile, this.outFile, [this.overrides]) {
-    if (overrides == null) {
-      overrides = new Overrides();
-    }
-
+  GenApiFile(this.inFile, this.outFile, [Overrides overrides]) :
+    this.overrides = (overrides == null) ? new Overrides() : overrides {
     if (!inFile.path.endsWith(".json") && !inFile.path.endsWith(".idl")) {
       throw new Exception('format not understood: ${inFile.path}');
     }
