@@ -13,7 +13,7 @@ class ChromeMediaGalleries {
   ChromeMediaGalleries._();
 
   Future<dynamic> getMediaFileSystems([MediaFileSystemsDetails details]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<dynamic>.oneArg();
     _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
     return completer.future;
   }

@@ -31,7 +31,7 @@ class ChromeFileBrowserHandler {
    * Result of the method.
    */
   Future<Map> selectFile(Map selectionParams) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _fileBrowserHandler.callMethod('selectFile', [jsify(selectionParams), completer.callback]);
     return completer.future;
   }

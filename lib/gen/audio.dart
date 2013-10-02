@@ -13,19 +13,19 @@ class ChromeAudio {
   ChromeAudio._();
 
   Future<JsObject> getInfo() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<JsObject>.oneArg();
     _audio.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }
 
   Future setActiveDevices(String ids) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _audio.callMethod('setActiveDevices', [ids, completer.callback]);
     return completer.future;
   }
 
   Future setProperties(String id, DeviceProperties properties) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _audio.callMethod('setProperties', [id, properties, completer.callback]);
     return completer.future;
   }

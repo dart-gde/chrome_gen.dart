@@ -13,7 +13,7 @@ class ChromeSocket {
   ChromeSocket._();
 
   Future<CreateInfo> create(SocketType type, [CreateOptions options]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(CreateInfo.create);
+    var completer = new ChromeCompleter<CreateInfo>.oneArg(CreateInfo.create);
     _socket.callMethod('create', [type, options, completer.callback]);
     return completer.future;
   }
@@ -23,13 +23,13 @@ class ChromeSocket {
   }
 
   Future<int> connect(int socketId, String hostname, int port) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('connect', [socketId, hostname, port, completer.callback]);
     return completer.future;
   }
 
   Future<int> bind(int socketId, String address, int port) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('bind', [socketId, address, port, completer.callback]);
     return completer.future;
   }
@@ -39,91 +39,91 @@ class ChromeSocket {
   }
 
   Future<SocketReadInfo> read(int socketId, [int bufferSize]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(SocketReadInfo.create);
+    var completer = new ChromeCompleter<SocketReadInfo>.oneArg(SocketReadInfo.create);
     _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
     return completer.future;
   }
 
   Future<SocketWriteInfo> write(int socketId, ArrayBuffer data) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(SocketWriteInfo.create);
+    var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(SocketWriteInfo.create);
     _socket.callMethod('write', [socketId, data, completer.callback]);
     return completer.future;
   }
 
   Future<RecvFromInfo> recvFrom(int socketId, [int bufferSize]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(RecvFromInfo.create);
+    var completer = new ChromeCompleter<RecvFromInfo>.oneArg(RecvFromInfo.create);
     _socket.callMethod('recvFrom', [socketId, bufferSize, completer.callback]);
     return completer.future;
   }
 
   Future<SocketWriteInfo> sendTo(int socketId, ArrayBuffer data, String address, int port) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(SocketWriteInfo.create);
+    var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(SocketWriteInfo.create);
     _socket.callMethod('sendTo', [socketId, data, address, port, completer.callback]);
     return completer.future;
   }
 
   Future<int> listen(int socketId, String address, int port, [int backlog]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('listen', [socketId, address, port, backlog, completer.callback]);
     return completer.future;
   }
 
   Future<AcceptInfo> accept(int socketId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(AcceptInfo.create);
+    var completer = new ChromeCompleter<AcceptInfo>.oneArg(AcceptInfo.create);
     _socket.callMethod('accept', [socketId, completer.callback]);
     return completer.future;
   }
 
   Future<bool> setKeepAlive(int socketId, bool enable, [int delay]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _socket.callMethod('setKeepAlive', [socketId, enable, delay, completer.callback]);
     return completer.future;
   }
 
   Future<bool> setNoDelay(int socketId, bool noDelay) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _socket.callMethod('setNoDelay', [socketId, noDelay, completer.callback]);
     return completer.future;
   }
 
   Future<SocketInfo> getInfo(int socketId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(SocketInfo.create);
+    var completer = new ChromeCompleter<SocketInfo>.oneArg(SocketInfo.create);
     _socket.callMethod('getInfo', [socketId, completer.callback]);
     return completer.future;
   }
 
   Future<NetworkInterface> getNetworkList() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(NetworkInterface.create);
+    var completer = new ChromeCompleter<NetworkInterface>.oneArg(NetworkInterface.create);
     _socket.callMethod('getNetworkList', [completer.callback]);
     return completer.future;
   }
 
   Future<int> joinGroup(int socketId, String address) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('joinGroup', [socketId, address, completer.callback]);
     return completer.future;
   }
 
   Future<int> leaveGroup(int socketId, String address) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('leaveGroup', [socketId, address, completer.callback]);
     return completer.future;
   }
 
   Future<int> setMulticastTimeToLive(int socketId, int ttl) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('setMulticastTimeToLive', [socketId, ttl, completer.callback]);
     return completer.future;
   }
 
   Future<int> setMulticastLoopbackMode(int socketId, bool enabled) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('setMulticastLoopbackMode', [socketId, enabled, completer.callback]);
     return completer.future;
   }
 
   Future<String> getJoinedGroups(int socketId) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _socket.callMethod('getJoinedGroups', [socketId, completer.callback]);
     return completer.future;
   }

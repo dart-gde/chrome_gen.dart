@@ -43,7 +43,7 @@ class ChromeContextMenus {
    * create function.
    */
   Future update(dynamic id, Map updateProperties) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('update', [id, jsify(updateProperties), completer.callback]);
     return completer.future;
   }
@@ -54,7 +54,7 @@ class ChromeContextMenus {
    * [menuItemId] The ID of the context menu item to remove.
    */
   Future remove(dynamic menuItemId) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('remove', [menuItemId, completer.callback]);
     return completer.future;
   }
@@ -63,7 +63,7 @@ class ChromeContextMenus {
    * Removes all context menu items added by this extension.
    */
   Future removeAll() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('removeAll', [completer.callback]);
     return completer.future;
   }

@@ -13,7 +13,7 @@ class ChromeSystemCpu {
   ChromeSystemCpu._();
 
   Future<CpuInfo> getInfo() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(CpuInfo.create);
+    var completer = new ChromeCompleter<CpuInfo>.oneArg(CpuInfo.create);
     _system_cpu.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }

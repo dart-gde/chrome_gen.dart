@@ -37,7 +37,7 @@ class ChromeBookmarks {
    * [idOrIdList] A single string-valued id, or an array of string-valued ids
    */
   Future<List<BookmarkTreeNode>> get(dynamic idOrIdList) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
+    var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('get', [idOrIdList, completer.callback]);
     return completer.future;
   }
@@ -46,7 +46,7 @@ class ChromeBookmarks {
    * Retrieves the children of the specified BookmarkTreeNode id.
    */
   Future<List<BookmarkTreeNode>> getChildren(String id) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
+    var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('getChildren', [id, completer.callback]);
     return completer.future;
   }
@@ -57,7 +57,7 @@ class ChromeBookmarks {
    * [numberOfItems] The maximum number of items to return.
    */
   Future<List<BookmarkTreeNode>> getRecent(int numberOfItems) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
+    var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('getRecent', [numberOfItems, completer.callback]);
     return completer.future;
   }
@@ -66,7 +66,7 @@ class ChromeBookmarks {
    * Retrieves the entire Bookmarks hierarchy.
    */
   Future<List<BookmarkTreeNode>> getTree() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
+    var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('getTree', [completer.callback]);
     return completer.future;
   }
@@ -77,7 +77,7 @@ class ChromeBookmarks {
    * [id] The ID of the root of the subtree to retrieve.
    */
   Future<List<BookmarkTreeNode>> getSubTree(String id) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
+    var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('getSubTree', [id, completer.callback]);
     return completer.future;
   }
@@ -86,7 +86,7 @@ class ChromeBookmarks {
    * Searches for BookmarkTreeNodes matching the given query.
    */
   Future<List<BookmarkTreeNode>> search(String query) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
+    var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('search', [query, completer.callback]);
     return completer.future;
   }
@@ -96,7 +96,7 @@ class ChromeBookmarks {
    * or missing, it will be a folder.
    */
   Future<BookmarkTreeNode> create(Map bookmark) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(BookmarkTreeNode.create);
+    var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(BookmarkTreeNode.create);
     _bookmarks.callMethod('create', [jsify(bookmark), completer.callback]);
     return completer.future;
   }
@@ -105,7 +105,7 @@ class ChromeBookmarks {
    * Moves the specified BookmarkTreeNode to the provided location.
    */
   Future<BookmarkTreeNode> move(String id, Map destination) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(BookmarkTreeNode.create);
+    var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(BookmarkTreeNode.create);
     _bookmarks.callMethod('move', [id, jsify(destination), completer.callback]);
     return completer.future;
   }
@@ -116,7 +116,7 @@ class ChromeBookmarks {
    * <b>Note:</b> Currently, only 'title' and 'url' are supported.
    */
   Future<BookmarkTreeNode> update(String id, Map changes) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(BookmarkTreeNode.create);
+    var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(BookmarkTreeNode.create);
     _bookmarks.callMethod('update', [id, jsify(changes), completer.callback]);
     return completer.future;
   }
@@ -125,7 +125,7 @@ class ChromeBookmarks {
    * Removes a bookmark or an empty bookmark folder.
    */
   Future remove(String id) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('remove', [id, completer.callback]);
     return completer.future;
   }
@@ -134,7 +134,7 @@ class ChromeBookmarks {
    * Recursively removes a bookmark folder.
    */
   Future removeTree(String id) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('removeTree', [id, completer.callback]);
     return completer.future;
   }
@@ -143,7 +143,7 @@ class ChromeBookmarks {
    * Imports bookmarks from a chrome html bookmark file
    */
   Future import() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('import', [completer.callback]);
     return completer.future;
   }
@@ -152,7 +152,7 @@ class ChromeBookmarks {
    * Exports bookmarks to a chrome html bookmark file
    */
   Future export() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('export', [completer.callback]);
     return completer.future;
   }

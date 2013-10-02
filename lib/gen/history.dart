@@ -23,7 +23,7 @@ class ChromeHistory {
    * query.
    */
   Future<List<HistoryItem>> search(Map query) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, HistoryItem.create));
+    var completer = new ChromeCompleter<List<HistoryItem>>.oneArg((e) => listify(e, HistoryItem.create));
     _history.callMethod('search', [jsify(query), completer.callback]);
     return completer.future;
   }
@@ -32,7 +32,7 @@ class ChromeHistory {
    * Retrieves information about visits to a URL.
    */
   Future<List<VisitItem>> getVisits(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, VisitItem.create));
+    var completer = new ChromeCompleter<List<VisitItem>>.oneArg((e) => listify(e, VisitItem.create));
     _history.callMethod('getVisits', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -42,7 +42,7 @@ class ChromeHistory {
    * type](#transition_types) of "link".
    */
   Future addUrl(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _history.callMethod('addUrl', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -51,7 +51,7 @@ class ChromeHistory {
    * Removes all occurrences of the given URL from the history.
    */
   Future deleteUrl(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _history.callMethod('deleteUrl', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -62,7 +62,7 @@ class ChromeHistory {
    * range.
    */
   Future deleteRange(Map range) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _history.callMethod('deleteRange', [jsify(range), completer.callback]);
     return completer.future;
   }
@@ -71,7 +71,7 @@ class ChromeHistory {
    * Deletes all items from the history.
    */
   Future deleteAll() {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _history.callMethod('deleteAll', [completer.callback]);
     return completer.future;
   }

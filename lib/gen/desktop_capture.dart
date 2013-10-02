@@ -13,7 +13,7 @@ class ChromeDesktopCapture {
   ChromeDesktopCapture._();
 
   Future<String> chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _desktopCapture.callMethod('chooseDesktopMedia', [sources, origin, completer.callback]);
     return completer.future;
   }

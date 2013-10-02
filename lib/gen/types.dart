@@ -36,7 +36,7 @@ class ChromeSetting extends ChromeObject {
    * Details of the currently effective value.
    */
   Future<Map> get(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    var completer = new ChromeCompleter<Map>.oneArg(mapify);
     proxy.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -47,7 +47,7 @@ class ChromeSetting extends ChromeObject {
    * [details] Which setting to change.
    */
   Future set(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     proxy.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -58,7 +58,7 @@ class ChromeSetting extends ChromeObject {
    * [details] Which setting to clear.
    */
   Future clear(Map details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     proxy.callMethod('clear', [jsify(details), completer.callback]);
     return completer.future;
   }

@@ -13,19 +13,19 @@ class ChromeIdentity {
   ChromeIdentity._();
 
   Future<String> getAuthToken([TokenDetails details]) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _identity.callMethod('getAuthToken', [details, completer.callback]);
     return completer.future;
   }
 
   Future removeCachedAuthToken(InvalidTokenDetails details) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _identity.callMethod('removeCachedAuthToken', [details, completer.callback]);
     return completer.future;
   }
 
   Future<String> launchWebAuthFlow(WebAuthFlowDetails details) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<String>.oneArg();
     _identity.callMethod('launchWebAuthFlow', [details, completer.callback]);
     return completer.future;
   }

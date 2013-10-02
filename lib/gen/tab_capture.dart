@@ -13,13 +13,13 @@ class ChromeTabCapture {
   ChromeTabCapture._();
 
   Future<dynamic> capture(CaptureOptions options) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<dynamic>.oneArg();
     _tabCapture.callMethod('capture', [options, completer.callback]);
     return completer.future;
   }
 
   Future<CaptureInfo> getCapturedTabs() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(CaptureInfo.create);
+    var completer = new ChromeCompleter<CaptureInfo>.oneArg(CaptureInfo.create);
     _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
     return completer.future;
   }

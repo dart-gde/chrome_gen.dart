@@ -221,11 +221,14 @@ class ChromeType extends ChromeElement {
       return refName;
     } else if (isAny) {
       return 'dynamic';
-    } else if (parameters.isEmpty) {
-       return type;
     } else {
-      return "${type}<${parameters.map((t) => t.toReturnString()).join(', ')}>";
+      return type + getReturnStringTypeParams();
     }
+  }
+
+  String getReturnStringTypeParams() {
+    if(parameters.isEmpty) return '';
+    return "<${parameters.map((t) => t.toReturnString()).join(', ')}>";
   }
 
   String toString() => toParamString();

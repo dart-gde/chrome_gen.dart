@@ -22,7 +22,7 @@ class ChromeInputIme {
    * this fails.
    */
   Future<bool> setComposition(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setComposition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -32,7 +32,7 @@ class ChromeInputIme {
    * IME, this fails.
    */
   Future<bool> clearComposition(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('clearComposition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -41,7 +41,7 @@ class ChromeInputIme {
    * Commits the provided text to the current input.
    */
   Future<bool> commitText(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('commitText', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -51,7 +51,7 @@ class ChromeInputIme {
    * doesn’t own the active IME
    */
   Future<bool> setCandidateWindowProperties(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setCandidateWindowProperties', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -61,7 +61,7 @@ class ChromeInputIme {
    * the active IME
    */
   Future<bool> setCandidates(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setCandidates', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -71,7 +71,7 @@ class ChromeInputIme {
    * this extension does not own the active IME.
    */
   Future<bool> setCursorPosition(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setCursorPosition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -80,7 +80,7 @@ class ChromeInputIme {
    * Adds the provided menu items to the language menu when this IME is active.
    */
   Future setMenuItems(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _input_ime.callMethod('setMenuItems', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -89,7 +89,7 @@ class ChromeInputIme {
    * Updates the state of the MenuItems specified
    */
   Future updateMenuItems(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _input_ime.callMethod('updateMenuItems', [jsify(parameters), completer.callback]);
     return completer.future;
   }
@@ -98,7 +98,7 @@ class ChromeInputIme {
    * Deletes the text around the caret.
    */
   Future deleteSurroundingText(Map parameters) {
-    ChromeCompleter completer = new ChromeCompleter.noArgs();
+    var completer = new ChromeCompleter.noArgs();
     _input_ime.callMethod('deleteSurroundingText', [jsify(parameters), completer.callback]);
     return completer.future;
   }

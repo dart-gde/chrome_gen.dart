@@ -25,7 +25,7 @@ class ChromePermissions {
    * The extension's active permissions.
    */
   Future<Permissions> getAll() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(Permissions.create);
+    var completer = new ChromeCompleter<Permissions>.oneArg(Permissions.create);
     _permissions.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -37,7 +37,7 @@ class ChromePermissions {
    * True if the extension has the specified permissions.
    */
   Future<bool> contains(Permissions permissions) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _permissions.callMethod('contains', [permissions, completer.callback]);
     return completer.future;
   }
@@ -51,7 +51,7 @@ class ChromePermissions {
    * True if the user granted the specified permissions.
    */
   Future<bool> request(Permissions permissions) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _permissions.callMethod('request', [permissions, completer.callback]);
     return completer.future;
   }
@@ -64,7 +64,7 @@ class ChromePermissions {
    * True if the permissions were removed.
    */
   Future<bool> remove(Permissions permissions) {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<bool>.oneArg();
     _permissions.callMethod('remove', [permissions, completer.callback]);
     return completer.future;
   }

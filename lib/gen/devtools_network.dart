@@ -23,7 +23,7 @@ class ChromeDevtoolsNetwork {
    * A HAR log. See HAR specification for details.
    */
   Future<Map<String, dynamic>> getHAR() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
+    var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
     _devtools_network.callMethod('getHAR', [completer.callback]);
     return completer.future;
   }
@@ -66,7 +66,7 @@ class Request extends ChromeObject {
    * Currently, only base64 is supported.
    */
   Future<JsObject> getContent() {
-    ChromeCompleter completer = new ChromeCompleter.oneArg();
+    var completer = new ChromeCompleter<JsObject>.oneArg();
     proxy.callMethod('getContent', [completer.callback]);
     return completer.future;
   }
