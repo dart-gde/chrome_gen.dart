@@ -22,7 +22,7 @@ class ChromeDevtoolsNetwork {
    * Returns:
    * A HAR log. See HAR specification for details.
    */
-  Future<Map> getHAR() {
+  Future<Map<String, dynamic>> getHAR() {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _devtools_network.callMethod('getHAR', [completer.callback]);
     return completer.future;

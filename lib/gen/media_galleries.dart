@@ -18,7 +18,7 @@ class ChromeMediaGalleries {
     return completer.future;
   }
 
-  MediaFileSystemMetadata getMediaFileSystemMetadata(var mediaFileSystem) {
+  MediaFileSystemMetadata getMediaFileSystemMetadata(dynamic mediaFileSystem) {
     return MediaFileSystemMetadata.create(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
   }
 }

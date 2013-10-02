@@ -22,7 +22,7 @@ class ChromeAppWindow {
     return AppWindow.create(_app_window.callMethod('current'));
   }
 
-  void initializeAppWindow(var state) {
+  void initializeAppWindow(dynamic state) {
     _app_window.callMethod('initializeAppWindow', [state]);
   }
 

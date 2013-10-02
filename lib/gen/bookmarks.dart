@@ -36,7 +36,7 @@ class ChromeBookmarks {
    * 
    * [idOrIdList] A single string-valued id, or an array of string-valued ids
    */
-  Future<List<BookmarkTreeNode>> get(var idOrIdList) {
+  Future<List<BookmarkTreeNode>> get(dynamic idOrIdList) {
     ChromeCompleter completer = new ChromeCompleter.oneArg((e) => listify(e, BookmarkTreeNode.create));
     _bookmarks.callMethod('get', [idOrIdList, completer.callback]);
     return completer.future;

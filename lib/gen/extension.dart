@@ -44,7 +44,7 @@ class ChromeExtension {
    * occurs while connecting to the extension, the callback will be called with
    * no arguments and [runtime.lastError] will be set to the error message.
    */
-  Future<dynamic> sendRequest(var request, [String extensionId]) {
+  Future<dynamic> sendRequest(dynamic request, [String extensionId]) {
     ChromeCompleter completer = new ChromeCompleter.oneArg();
     _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
     return completer.future;

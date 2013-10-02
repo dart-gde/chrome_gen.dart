@@ -62,7 +62,7 @@ class ChromeProcesses {
    * Metrics requiring aggregation over time will not be populated in each
    * Process object.
    */
-  Future<Map> getProcessInfo(var processIds, bool includeMemory) {
+  Future<Map> getProcessInfo(dynamic processIds, bool includeMemory) {
     ChromeCompleter completer = new ChromeCompleter.oneArg(mapify);
     _processes.callMethod('getProcessInfo', [processIds, includeMemory, completer.callback]);
     return completer.future;
