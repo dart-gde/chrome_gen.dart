@@ -352,7 +352,7 @@ class _DefaultBackendContext {
   /**
    * Return the name of the incoming JS type.
    */
-  String getJSType(ChromeType type) {
+  static String getJSType(ChromeType type) {
     if (type.isPrimitive) {
       return type.type;
     } else {
@@ -360,7 +360,7 @@ class _DefaultBackendContext {
     }
   }
 
-  String getCallbackConverter(ChromeType param) {
+  static String getCallbackConverter(ChromeType param) {
     if (param.isString || param.isInt || param.isBool) {
       return null;
     } else if (param.isList) {
@@ -380,7 +380,7 @@ class _DefaultBackendContext {
     }
   }
 
-  String getReturnConverter(ChromeType param) {
+  static String getReturnConverter(ChromeType param) {
     if (param.isString || param.isInt || param.isBool) {
       return '%s';
     } else if (param.isList) {
@@ -400,7 +400,7 @@ class _DefaultBackendContext {
     }
   }
 
-  String getParamConverter(ChromeType param) {
+  static String getParamConverter(ChromeType param) {
     if (param.isMap || param.isList) {
       return "jsify(${param.name})";
     } else {
