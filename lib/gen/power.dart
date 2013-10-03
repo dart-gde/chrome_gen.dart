@@ -12,15 +12,34 @@ class ChromePower {
 
   ChromePower._();
 
+  /**
+   * Requests that power management be temporarily disabled. |level|
+   *  describes the degree to which power management should be disabled.
+   *  If a request previously made by the same app is still active, it
+   *  will be replaced by the new request.
+   */
   void requestKeepAwake(Level level) {
     _power.callMethod('requestKeepAwake', [level]);
   }
 
+  /**
+   * Releases a request previously made via requestKeepAwake().
+   */
   void releaseKeepAwake() {
     _power.callMethod('releaseKeepAwake');
   }
 }
 
+/**
+ * Copyright (c) 2013 The Chromium Authors. All rights reserved.
+ *  Use of this source code is governed by a BSD-style license that can be
+ *  found in the LICENSE file.
+ *  Use the <code>chrome.power</code> API to override the system's power
+ *  management features.
+ *  Prevent the system from sleeping in response to user inactivity.
+ *  Prevent the display from being turned off or dimmed or the system
+ *  from sleeping in response to user inactivity.
+ */
 class Level extends ChromeEnum {
   static const Level SYSTEM = const Level._('system');
   static const Level DISPLAY = const Level._('display');

@@ -12,17 +12,40 @@ class ChromeMediaGalleries {
 
   ChromeMediaGalleries._();
 
+  /**
+   * Get the media galleries configured in this user agent. If none are
+   *  configured or available, the callback will receive an empty array.
+   * 
+   * 
+   * 
+   * Returns:
+   */
   Future<dynamic> getMediaFileSystems([MediaFileSystemsDetails details]) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
     return completer.future;
   }
 
+  /**
+   * Get metadata about a specific media file system.
+   */
   MediaFileSystemMetadata getMediaFileSystemMetadata(dynamic mediaFileSystem) {
     return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
   }
 }
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ *  Use of this source code is governed by a BSD-style license that can be
+ *  found in the LICENSE file.
+ * Use the <code>chrome.mediaGalleries</code> API to access media files
+ * (images,
+ *  video, audio) from the user's local disks (with the user's consent).
+ *  Do not act interactively.
+ *  Ask the user to manage permitted media galleries.
+ *  Ask the user to manage permitted galleries only if the return set would
+ *  otherwise be empty.
+ */
 class GetMediaFileSystemsInteractivity extends ChromeEnum {
   static const GetMediaFileSystemsInteractivity NO = const GetMediaFileSystemsInteractivity._('no');
   static const GetMediaFileSystemsInteractivity YES = const GetMediaFileSystemsInteractivity._('yes');

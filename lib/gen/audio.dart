@@ -12,18 +12,33 @@ class ChromeAudio {
 
   ChromeAudio._();
 
+  /**
+   * Get the information of all audio output and input devices.
+   * 
+   * 
+   * 
+   * Returns:
+   * [outputInfo] null
+   * [inputInfo] null
+   */
   Future<JsObject> getInfo() {
     var completer = new ChromeCompleter<JsObject>.oneArg();
     _audio.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }
 
+  /**
+   * Select a subset of audio devices as active.
+   */
   Future setActiveDevices(String ids) {
     var completer = new ChromeCompleter.noArgs();
     _audio.callMethod('setActiveDevices', [ids, completer.callback]);
     return completer.future;
   }
 
+  /**
+   * Sets the properties for the input or output device.
+   */
   Future setProperties(String id, DeviceProperties properties) {
     var completer = new ChromeCompleter.noArgs();
     _audio.callMethod('setProperties', [id, properties, completer.callback]);

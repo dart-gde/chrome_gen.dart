@@ -12,16 +12,56 @@ class ChromeAppWindow {
 
   ChromeAppWindow._();
 
+  /**
+   * The size and position of a window can be specified in a number of
+   *  different ways. The most simple option is not specifying anything at
+   *  all, in which case a default size and platform dependent position will
+   *  be used.
+   * 
+   *  Another option is to use the bounds property, which will put the window
+   *  at the specified coordinates with the specified size. If the window has
+   *  a frame, it's total size will be the size given plus the size of the
+   *  frame; that is, the size in bounds is the content size, not the window
+   *  size.
+   * 
+   *  To automatically remember the positions of windows you can give them ids.
+   *  If a window has an id, This id is used to remember the size and position
+   *  of the window whenever it is moved or resized. This size and position is
+   *  then used instead of the specified bounds on subsequent opening of a
+   *  window with the same id. If you need to open a window with an id at a
+   *  location other than the remembered default, you can create it hidden,
+   *  move it to the desired location, then show it.
+   * 
+   * 
+   * 
+   * Returns:
+   *  Called in the creating window (parent) before the load event is called in
+   *  the created window (child). The parent can set fields or functions on the
+   *  child usable from onload. E.g. background.js:<br>
+   *  <code>function(created_window) { created_window.contentWindow.foo =
+   *  function () { }; };</code>
+   *  <br>window.js:<br>
+   *  <code>window.onload = function () { foo(); }</code>
+   */
   Future<dynamic> create(String url, [CreateWindowOptions options]) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _app_window.callMethod('create', [url, options, completer.callback]);
     return completer.future;
   }
 
+  /**
+   * Returns an $ref:AppWindow object for the
+   *  current script context (ie JavaScript 'window' object). This can also be
+   *  called on a handle to a script context for another page, for example:
+   *  otherWindow.chrome.app.window.current().
+   */
   AppWindow current() {
     return _createAppWindow(_app_window.callMethod('current'));
   }
 
+  /**
+   * 
+   */
   void initializeAppWindow(dynamic state) {
     _app_window.callMethod('initializeAppWindow', [state]);
   }
@@ -57,6 +97,9 @@ class ChromeAppWindow {
       new ChromeStreamController.noArgs(_app_window['onRestored']);
 }
 
+/**
+ * State of a window: normal, fullscreen, maximized, minimized.
+ */
 class State extends ChromeEnum {
   static const State NORMAL = const State._('normal');
   static const State FULLSCREEN = const State._('fullscreen');
@@ -68,6 +111,10 @@ class State extends ChromeEnum {
   const State._(String str): super(str);
 }
 
+/**
+ * 'shell' is the default window type. 'panel' is managed by the OS
+ *  (Currently experimental, Ash only).
+ */
 class WindowType extends ChromeEnum {
   static const WindowType SHELL = const WindowType._('shell');
   static const WindowType PANEL = const WindowType._('panel');
@@ -180,74 +227,130 @@ class AppWindow extends ChromeObject {
   dynamic get contentWindow => proxy['contentWindow'];
   set contentWindow(var value) => proxy['contentWindow'] = value;
 
+  /**
+   * Focus the window.
+   */
   void focus() {
     proxy.callMethod('focus');
   }
 
+  /**
+   * Fullscreens the window.
+   */
   void fullscreen() {
     proxy.callMethod('fullscreen');
   }
 
+  /**
+   * Is the window fullscreen?
+   */
   bool isFullscreen() {
     return proxy.callMethod('isFullscreen');
   }
 
+  /**
+   * Minimize the window.
+   */
   void minimize() {
     proxy.callMethod('minimize');
   }
 
+  /**
+   * Is the window minimized?
+   */
   bool isMinimized() {
     return proxy.callMethod('isMinimized');
   }
 
+  /**
+   * Maximize the window.
+   */
   void maximize() {
     proxy.callMethod('maximize');
   }
 
+  /**
+   * Is the window maximized?
+   */
   bool isMaximized() {
     return proxy.callMethod('isMaximized');
   }
 
+  /**
+   * Restore the window, exiting a maximized, minimized, or fullscreen state.
+   */
   void restore() {
     proxy.callMethod('restore');
   }
 
+  /**
+   * Move the window to the position (|left|, |top|).
+   */
   void moveTo(int left, int top) {
     proxy.callMethod('moveTo', [left, top]);
   }
 
+  /**
+   * Resize the window to |width|x|height| pixels in size.
+   */
   void resizeTo(int width, int height) {
     proxy.callMethod('resizeTo', [width, height]);
   }
 
+  /**
+   * Draw attention to the window.
+   */
   void drawAttention() {
     proxy.callMethod('drawAttention');
   }
 
+  /**
+   * Clear attention to the window.
+   */
   void clearAttention() {
     proxy.callMethod('clearAttention');
   }
 
+  /**
+   * Close the window.
+   */
   void close() {
     proxy.callMethod('close');
   }
 
+  /**
+   * Show the window. Does nothing if the window is already visible.
+   */
   void show() {
     proxy.callMethod('show');
   }
 
+  /**
+   * Hide the window. Does nothing if the window is already hidden.
+   */
   void hide() {
     proxy.callMethod('hide');
   }
 
+  /**
+   * Get the window's bounds as a $ref:Bounds object.
+   */
   Bounds getBounds() {
     return _createBounds(proxy.callMethod('getBounds'));
   }
 
+  /**
+   * Set the window's bounds.
+   */
   void setBounds(Bounds bounds) {
     proxy.callMethod('setBounds', [bounds]);
   }
 
+  /**
+   * Set the app icon for the window (experimental).
+   *  Currently this is only being implemented on Ash.
+   *  TODO(stevenjb): Investigate implementing this on Windows and OSX.
+   */
   void setIcon(String icon_url) {
     proxy.callMethod('setIcon', [icon_url]);
   }
