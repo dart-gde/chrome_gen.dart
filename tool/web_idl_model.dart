@@ -480,7 +480,7 @@ class IDLConverter {
     namespace = collector.idlNamespace;
 
     ChromeLibrary library =  new ChromeLibrary(namespace.name);
-    library.documentation = namespace.description;
+    library.documentation = cleanDocComments(namespace.description);
 
     library.types = namespace.declaredTypes.map(_convertDeclaredType).toList();
     library.methods = namespace.functions.map(_convertMethod).toList();
@@ -499,7 +499,7 @@ class IDLConverter {
     ChromeDeclaredType chromeDeclaredType = new ChromeDeclaredType();
 
     chromeDeclaredType.name = idlDeclaredType.name;
-    chromeDeclaredType.documentation = idlDeclaredType.description;
+    chromeDeclaredType.documentation = cleanDocComments(idlDeclaredType.description);
     chromeDeclaredType.properties = idlDeclaredType.members.map(_convertProperty).toList();
     chromeDeclaredType.methods = idlDeclaredType.functions.map(_convertMethod).toList();
 
@@ -523,7 +523,7 @@ class IDLConverter {
   ChromeEnumType _convertEnum(IDLEnum idlProperty) {
     ChromeEnumType chromeEnumType = new ChromeEnumType();
     chromeEnumType.name = idlProperty.name;
-    chromeEnumType.documentation = idlProperty.description;
+    chromeEnumType.documentation = cleanDocComments(idlProperty.description);
     idlProperty.enumValues.forEach((IDLProperty value) {
       ChromeEnumEntry chromeEnumEntry = new ChromeEnumEntry();
       chromeEnumEntry.name = value.name;
@@ -535,7 +535,7 @@ class IDLConverter {
   ChromeMethod _convertMethod(IDLFunction idlMethod) {
     ChromeMethod chromeMethod = new ChromeMethod();
     chromeMethod.name = idlMethod.name;
-    chromeMethod.documentation = idlMethod.description;
+    chromeMethod.documentation = cleanDocComments(idlMethod.description);
     chromeMethod.returns = _convertType(idlMethod.returnType);
     chromeMethod.params = idlMethod.parameters.map(_convertParameter).toList();
 
@@ -566,7 +566,7 @@ class IDLConverter {
 
     if (params.length == 1) {
       future.parameters.add(params.first);
-      future.documentation = callback.description;
+      future.documentation = cleanDocComments(callback.description);
     } else if (params.length >= 2) {
       // TODO: we need to correctly handle mapping multiple parameters to a single
       // return, ala runtime.requestUpdateCheck() and devtools.inspectedWindow.eval().
@@ -632,4 +632,14 @@ String idlToDartRefName(String name, String refName) {
   } else {
     return name;
   }
+}
+
+String cleanDocComments(String comments) {
+  if (comments == null) {
+    return null;
+  }
+
+  // TODO(devoncarew): more docs cleanups
+
+  return comments.replaceAll('/*', '/');
 }

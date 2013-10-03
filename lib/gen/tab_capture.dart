@@ -12,12 +12,36 @@ class ChromeTabCapture {
 
   ChromeTabCapture._();
 
+  /**
+   * Captures the visible area of the currently active tab.
+   *  This method can only be used on the currently active page after the
+   *  extension has been <em>invoked</em>, similar to the way that
+   *  <a href="activeTab.html">activeTab</a> works.
+   *  Note that Chrome internal pages cannot be captured.
+   *  |options| : Configures the returned media stream.
+   *  |callback| : Callback with either the stream returned or null.
+   * 
+   * 
+   * 
+   * Returns:
+   */
   Future<dynamic> capture(CaptureOptions options) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _tabCapture.callMethod('capture', [options, completer.callback]);
     return completer.future;
   }
 
+  /**
+   * Returns a list of tabs that have requested capture or are being
+   *  captured, i.e. status != stopped and status != error.
+   *  This allows extensions to inform the user that there is an existing
+   *  tab capture that would prevent a new tab capture from succeeding (or
+   *  to prevent redundant requests for the same tab).
+   * 
+   * 
+   * 
+   * Returns:
+   */
   Future<CaptureInfo> getCapturedTabs() {
     var completer = new ChromeCompleter<CaptureInfo>.oneArg(_createCaptureInfo);
     _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
@@ -30,6 +54,13 @@ class ChromeTabCapture {
       new ChromeStreamController<CaptureInfo>.oneArg(_tabCapture['onStatusChanged'], _createCaptureInfo);
 }
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ *  Use of this source code is governed by a BSD-style license that can be
+ *  found in the LICENSE file.
+ *  Use the <code>chrome.tabCapture</code> API to interact with tab media
+ *  streams.
+ */
 class TabCaptureState extends ChromeEnum {
   static const TabCaptureState PENDING = const TabCaptureState._('pending');
   static const TabCaptureState ACTIVE = const TabCaptureState._('active');

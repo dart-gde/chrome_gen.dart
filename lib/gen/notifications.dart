@@ -12,24 +12,62 @@ class ChromeNotifications {
 
   ChromeNotifications._();
 
+  /**
+   * Creates and displays a notification having the contents in |options|,
+   *  identified by the id |notificationId|. If |notificationId| is empty,
+   *  |create| generates an id. If |notificationId| matches an existing
+   *  notification, |create| first clears that notification before proceeding
+   *  with the create operation. |callback| returns the notification id
+   *  (either supplied or generated) that represents the created notification.
+   * 
+   * 
+   * 
+   * Returns:
+   */
   Future<String> create(String notificationId, NotificationOptions options) {
     var completer = new ChromeCompleter<String>.oneArg();
     _notifications.callMethod('create', [notificationId, options, completer.callback]);
     return completer.future;
   }
 
+  /**
+   * Updates an existing notification having the id |notificationId| and the
+   *  options |options|. |callback| indicates whether a matching notification
+   *  existed.
+   * 
+   * 
+   * 
+   * Returns:
+   */
   Future<bool> update(String notificationId, NotificationOptions options) {
     var completer = new ChromeCompleter<bool>.oneArg();
     _notifications.callMethod('update', [notificationId, options, completer.callback]);
     return completer.future;
   }
 
+  /**
+   * Given a |notificationId| returned by the |create| method, clears the
+   *  corresponding notification. |callback| indicates whether a matching
+   *  notification existed.
+   * 
+   * 
+   * 
+   * Returns:
+   */
   Future<bool> clear(String notificationId) {
     var completer = new ChromeCompleter<bool>.oneArg();
     _notifications.callMethod('clear', [notificationId, completer.callback]);
     return completer.future;
   }
 
+  /**
+   * |callback| is executed with the set of notification_ids currently in
+   *  the system.
+   * 
+   * 
+   * 
+   * Returns:
+   */
   Future<dynamic> getAll() {
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _notifications.callMethod('getAll', [completer.callback]);
@@ -70,6 +108,17 @@ class OnButtonClickedEvent {
   OnButtonClickedEvent(this.notificationId, this.buttonIndex);
 }
 
+/**
+ * Copyright (c) 2013 The Chromium Authors. All rights reserved.
+ *  Use of this source code is governed by a BSD-style license that can be
+ *  found in the LICENSE file.
+ *  Use the <code>chrome.notifications</code> API to create rich notifications
+ *  using templates and show these notifications to users in the system tray.
+ *  icon, title, message, expandedMessage, up to two buttons
+ *  icon, title, message, expandedMessage, image, up to two buttons
+ *  icon, title, message, items, up to two buttons
+ *  icon, title, message, progress, up to two buttons
+ */
 class TemplateType extends ChromeEnum {
   static const TemplateType BASIC = const TemplateType._('basic');
   static const TemplateType IMAGE = const TemplateType._('image');
