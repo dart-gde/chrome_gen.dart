@@ -162,7 +162,7 @@ class _DefaultBackendContext {
   void _printClass() {
     List sections = library.name.split('.');
 
-    generator.writeln("class ${className} {");
+    generator.writeln("class ${className} extends ChromeApi {");
     generator.write("static final JsObject ${contextReference} = ");
     generator.writeln("context['chrome']['${sections.join('\'][\'')}'];");
     generator.writeln();
@@ -171,6 +171,15 @@ class _DefaultBackendContext {
     library.filteredProperties.forEach((p) => _printProperty(p, contextReference));
     library.methods.forEach(_printMethod);
     library.events.forEach(_printEvent);
+
+    generator.writeln();
+    generator.writeln("bool get available => ${contextReference} != null;");
+    generator.writeln();
+    generator.writeln("void _checkAvailable() {");
+    generator.writeln("if (${contextReference} == null) {");
+    generator.writeln("throw new Exception('chrome.${library.name} API not available');");
+    generator.writeln("}");
+    generator.writeln("}");
 
     generator.writeln("}");
   }
