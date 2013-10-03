@@ -1,14 +1,19 @@
 
 library chrome.src.common;
 
+import 'dart:convert';
+
+import 'dart:async';
 export 'dart:async';
+
+import 'dart:js';
 export 'dart:js';
+
+import 'package:logging/logging.dart' as log;
 
 export 'common_exp.dart';
 
-import 'dart:async';
-import 'dart:convert';
-import 'dart:js';
+final log.Logger _logger = new log.Logger('chrome_gen');
 
 JsObject _proxy;
 JsObject _jsJSON = context['JSON'];
@@ -52,8 +57,8 @@ Map mapify(JsObject obj) {
 dynamic selfConverter(var obj) => obj;
 
 dynamic apiNotAvailable(String apiName) {
-  print('${apiName} not available.');
-  print('This could be caused by a missing manifest.json permission or by running on an older version of Chrome.');
+  _logger.warning('${apiName} not available.');
+  _logger.info('This could be caused by a missing manifest.json permission or by running on an older version of Chrome.');
 
   return null;
 }
