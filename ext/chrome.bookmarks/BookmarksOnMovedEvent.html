@@ -38,9 +38,9 @@ class BookmarksOnMovedEvent {
  static BookmarksOnMovedEvent create(String id, JsObject moveInfo) =&gt;
      new BookmarksOnMovedEvent(id, mapify(moveInfo));
 
- String id;
+ final String id;
 
- Map moveInfo;
+ final Map moveInfo;
 
  BookmarksOnMovedEvent(this.id, this.moveInfo);
 }
@@ -83,25 +83,25 @@ BookmarksOnMovedEvent(this.id, this.moveInfo);
 <h3>Properties</h3>
 <div class="field"><h4 id="id">
 <button class="show-code">Code</button>
-String         <strong>id</strong> <a class="anchor-link"
+final String         <strong>id</strong> <a class="anchor-link"
             href="#id"
             title="Permalink to BookmarksOnMovedEvent.id">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String id
+final String id
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="moveInfo">
 <button class="show-code">Code</button>
-Map         <strong>moveInfo</strong> <a class="anchor-link"
+final Map         <strong>moveInfo</strong> <a class="anchor-link"
             href="#moveInfo"
             title="Permalink to BookmarksOnMovedEvent.moveInfo">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Map moveInfo
+final Map moveInfo
 </pre>
 </div>
 </div>

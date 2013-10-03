@@ -41,12 +41,12 @@ class OnExecuteEvent {
  /**
   * File browser action id as specified in the listener component's manifest.
   */
- String id;
+ final String id;
 
  /**
   * File handler execute event details.
   */
- FileHandlerExecuteEventDetails details;
+ final FileHandlerExecuteEventDetails details;
 
  OnExecuteEvent(this.id, this.details);
 }
@@ -89,27 +89,27 @@ OnExecuteEvent(this.id, this.details);
 <h3>Properties</h3>
 <div class="field"><h4 id="details">
 <button class="show-code">Code</button>
-<a href="../chrome.fileBrowserHandler/FileHandlerExecuteEventDetails.html">FileHandlerExecuteEventDetails</a>         <strong>details</strong> <a class="anchor-link"
+final <a href="../chrome.fileBrowserHandler/FileHandlerExecuteEventDetails.html">FileHandlerExecuteEventDetails</a>         <strong>details</strong> <a class="anchor-link"
             href="#details"
             title="Permalink to OnExecuteEvent.details">#</a>
         </h4>
         <div class="doc">
 <p>File handler execute event details.</p>
 <pre class="source">
-FileHandlerExecuteEventDetails details
+final FileHandlerExecuteEventDetails details
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="id">
 <button class="show-code">Code</button>
-String         <strong>id</strong> <a class="anchor-link"
+final String         <strong>id</strong> <a class="anchor-link"
             href="#id"
             title="Permalink to OnExecuteEvent.id">#</a>
         </h4>
         <div class="doc">
 <p>File browser action id as specified in the listener component's manifest.</p>
 <pre class="source">
-String id
+final String id
 </pre>
 </div>
 </div>

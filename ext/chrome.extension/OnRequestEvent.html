@@ -44,9 +44,9 @@ class OnRequestEvent {
   * 
   * The request sent by the calling script.
   */
- dynamic request;
+ final dynamic request;
 
- MessageSender sender;
+ final MessageSender sender;
 
  /**
   * Function to call (at most once) when you have a response. The argument
@@ -54,7 +54,7 @@ class OnRequestEvent {
   * you have more than one `onRequest` listener in the same document, then only
   * one may send a response.
   */
- dynamic sendResponse;
+ final dynamic sendResponse;
 
  OnRequestEvent(this.request, this.sender, this.sendResponse);
 }
@@ -97,7 +97,7 @@ OnRequestEvent(this.request, this.sender, this.sendResponse);
 <h3>Properties</h3>
 <div class="field"><h4 id="request">
 <button class="show-code">Code</button>
-var         <strong>request</strong> <a class="anchor-link"
+final         <strong>request</strong> <a class="anchor-link"
             href="#request"
             title="Permalink to OnRequestEvent.request">#</a>
         </h4>
@@ -106,25 +106,25 @@ var         <strong>request</strong> <a class="anchor-link"
 <code>optional</code></p>
 <p>The request sent by the calling script.</p>
 <pre class="source">
-dynamic request
+final dynamic request
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="sender">
 <button class="show-code">Code</button>
-<a href="../chrome.runtime/MessageSender.html">MessageSender</a>         <strong>sender</strong> <a class="anchor-link"
+final <a href="../chrome.runtime/MessageSender.html">MessageSender</a>         <strong>sender</strong> <a class="anchor-link"
             href="#sender"
             title="Permalink to OnRequestEvent.sender">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-MessageSender sender
+final MessageSender sender
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="sendResponse">
 <button class="show-code">Code</button>
-var         <strong>sendResponse</strong> <a class="anchor-link"
+final         <strong>sendResponse</strong> <a class="anchor-link"
             href="#sendResponse"
             title="Permalink to OnRequestEvent.sendResponse">#</a>
         </h4>
@@ -134,7 +134,7 @@ should be any JSON-ifiable object, or undefined if there is no response. If
 you have more than one <code>onRequest</code> listener in the same document, then only
 one may send a response.</p>
 <pre class="source">
-dynamic sendResponse
+final dynamic sendResponse
 </pre>
 </div>
 </div>

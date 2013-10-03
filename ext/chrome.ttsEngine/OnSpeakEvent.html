@@ -47,18 +47,18 @@ class OnSpeakEvent {
   * support speaking that many characters at a time, the utterance should be
   * split into smaller chunks and queued internally without returning an error.
   */
- String utterance;
+ final String utterance;
 
  /**
   * Options specified to the tts.speak() method.
   */
- Map options;
+ final Map options;
 
  /**
   * Call this function with events that occur in the process of speaking the
   * utterance.
   */
- dynamic sendTtsEvent;
+ final dynamic sendTtsEvent;
 
  OnSpeakEvent(this.utterance, this.options, this.sendTtsEvent);
 }
@@ -101,20 +101,20 @@ OnSpeakEvent(this.utterance, this.options, this.sendTtsEvent);
 <h3>Properties</h3>
 <div class="field"><h4 id="options">
 <button class="show-code">Code</button>
-Map         <strong>options</strong> <a class="anchor-link"
+final Map         <strong>options</strong> <a class="anchor-link"
             href="#options"
             title="Permalink to OnSpeakEvent.options">#</a>
         </h4>
         <div class="doc">
 <p>Options specified to the tts.speak() method.</p>
 <pre class="source">
-Map options
+final Map options
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="sendTtsEvent">
 <button class="show-code">Code</button>
-var         <strong>sendTtsEvent</strong> <a class="anchor-link"
+final         <strong>sendTtsEvent</strong> <a class="anchor-link"
             href="#sendTtsEvent"
             title="Permalink to OnSpeakEvent.sendTtsEvent">#</a>
         </h4>
@@ -122,13 +122,13 @@ var         <strong>sendTtsEvent</strong> <a class="anchor-link"
 <p>Call this function with events that occur in the process of speaking the
 utterance.</p>
 <pre class="source">
-dynamic sendTtsEvent
+final dynamic sendTtsEvent
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="utterance">
 <button class="show-code">Code</button>
-String         <strong>utterance</strong> <a class="anchor-link"
+final String         <strong>utterance</strong> <a class="anchor-link"
             href="#utterance"
             title="Permalink to OnSpeakEvent.utterance">#</a>
         </h4>
@@ -140,7 +140,7 @@ guaranteed to be no more than 32,768 characters. If this engine does not
 support speaking that many characters at a time, the utterance should be
 split into smaller chunks and queued internally without returning an error.</p>
 <pre class="source">
-String utterance
+final String utterance
 </pre>
 </div>
 </div>

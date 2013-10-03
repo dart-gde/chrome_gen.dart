@@ -38,9 +38,9 @@ class TabsOnRemovedEvent {
  static TabsOnRemovedEvent create(int tabId, JsObject removeInfo) =&gt;
      new TabsOnRemovedEvent(tabId, mapify(removeInfo));
 
- int tabId;
+ final int tabId;
 
- Map removeInfo;
+ final Map removeInfo;
 
  TabsOnRemovedEvent(this.tabId, this.removeInfo);
 }
@@ -83,25 +83,25 @@ TabsOnRemovedEvent(this.tabId, this.removeInfo);
 <h3>Properties</h3>
 <div class="field"><h4 id="removeInfo">
 <button class="show-code">Code</button>
-Map         <strong>removeInfo</strong> <a class="anchor-link"
+final Map         <strong>removeInfo</strong> <a class="anchor-link"
             href="#removeInfo"
             title="Permalink to TabsOnRemovedEvent.removeInfo">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Map removeInfo
+final Map removeInfo
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="tabId">
 <button class="show-code">Code</button>
-int         <strong>tabId</strong> <a class="anchor-link"
+final int         <strong>tabId</strong> <a class="anchor-link"
             href="#tabId"
             title="Permalink to TabsOnRemovedEvent.tabId">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-int tabId
+final int tabId
 </pre>
 </div>
 </div>

@@ -41,14 +41,14 @@ class OnEventEvent {
  /**
   * The debuggee that generated this event.
   */
- Debuggee source;
+ final Debuggee source;
 
  /**
   * Method name. Should be one of the notifications defined by the [remote
   * debugging
   * protocol](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
   */
- String method;
+ final String method;
 
  /**
   * JSON object with the response. Structure of the response varies depending
@@ -58,7 +58,7 @@ class OnEventEvent {
   * JSON object with the response. Structure of the response varies depending
   * on the method and is defined by the remote debugging protocol.
   */
- Map&lt;String, dynamic&gt; params;
+ final Map&lt;String, dynamic&gt; params;
 
  OnEventEvent(this.source, this.method, this.params);
 }
@@ -101,7 +101,7 @@ OnEventEvent(this.source, this.method, this.params);
 <h3>Properties</h3>
 <div class="field"><h4 id="method">
 <button class="show-code">Code</button>
-String         <strong>method</strong> <a class="anchor-link"
+final String         <strong>method</strong> <a class="anchor-link"
             href="#method"
             title="Permalink to OnEventEvent.method">#</a>
         </h4>
@@ -110,13 +110,13 @@ String         <strong>method</strong> <a class="anchor-link"
 debugging
 protocol</a>.</p>
 <pre class="source">
-String method
+final String method
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="params">
 <button class="show-code">Code</button>
-Map&lt;String, dynamic&gt;         <strong>params</strong> <a class="anchor-link"
+final Map&lt;String, dynamic&gt;         <strong>params</strong> <a class="anchor-link"
             href="#params"
             title="Permalink to OnEventEvent.params">#</a>
         </h4>
@@ -127,20 +127,20 @@ on the method and is defined by the remote debugging protocol.
 <p>JSON object with the response. Structure of the response varies depending
 on the method and is defined by the remote debugging protocol.</p>
 <pre class="source">
-Map&lt;String, dynamic&gt; params
+final Map&lt;String, dynamic&gt; params
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="source">
 <button class="show-code">Code</button>
-<a href="../chrome.debugger/Debuggee.html">Debuggee</a>         <strong>source</strong> <a class="anchor-link"
+final <a href="../chrome.debugger/Debuggee.html">Debuggee</a>         <strong>source</strong> <a class="anchor-link"
             href="#source"
             title="Permalink to OnEventEvent.source">#</a>
         </h4>
         <div class="doc">
 <p>The debuggee that generated this event.</p>
 <pre class="source">
-Debuggee source
+final Debuggee source
 </pre>
 </div>
 </div>

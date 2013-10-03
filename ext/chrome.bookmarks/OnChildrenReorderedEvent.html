@@ -39,9 +39,9 @@ class OnChildrenReorderedEvent {
  static OnChildrenReorderedEvent create(String id, JsObject reorderInfo) =&gt;
      new OnChildrenReorderedEvent(id, mapify(reorderInfo));
 
- String id;
+ final String id;
 
- Map reorderInfo;
+ final Map reorderInfo;
 
  OnChildrenReorderedEvent(this.id, this.reorderInfo);
 }
@@ -84,25 +84,25 @@ OnChildrenReorderedEvent(this.id, this.reorderInfo);
 <h3>Properties</h3>
 <div class="field"><h4 id="id">
 <button class="show-code">Code</button>
-String         <strong>id</strong> <a class="anchor-link"
+final String         <strong>id</strong> <a class="anchor-link"
             href="#id"
             title="Permalink to OnChildrenReorderedEvent.id">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String id
+final String id
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="reorderInfo">
 <button class="show-code">Code</button>
-Map         <strong>reorderInfo</strong> <a class="anchor-link"
+final Map         <strong>reorderInfo</strong> <a class="anchor-link"
             href="#reorderInfo"
             title="Permalink to OnChildrenReorderedEvent.reorderInfo">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Map reorderInfo
+final Map reorderInfo
 </pre>
 </div>
 </div>

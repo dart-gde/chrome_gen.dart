@@ -37,9 +37,9 @@ class OnClosedEvent {
  static OnClosedEvent create(String notificationId, bool byUser) =&gt;
      new OnClosedEvent(notificationId, byUser);
 
- String notificationId;
+ final String notificationId;
 
- bool byUser;
+ final bool byUser;
 
  OnClosedEvent(this.notificationId, this.byUser);
 }
@@ -82,25 +82,25 @@ OnClosedEvent(this.notificationId, this.byUser);
 <h3>Properties</h3>
 <div class="field"><h4 id="byUser">
 <button class="show-code">Code</button>
-bool         <strong>byUser</strong> <a class="anchor-link"
+final bool         <strong>byUser</strong> <a class="anchor-link"
             href="#byUser"
             title="Permalink to OnClosedEvent.byUser">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-bool byUser
+final bool byUser
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="notificationId">
 <button class="show-code">Code</button>
-String         <strong>notificationId</strong> <a class="anchor-link"
+final String         <strong>notificationId</strong> <a class="anchor-link"
             href="#notificationId"
             title="Permalink to OnClosedEvent.notificationId">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String notificationId
+final String notificationId
 </pre>
 </div>
 </div>

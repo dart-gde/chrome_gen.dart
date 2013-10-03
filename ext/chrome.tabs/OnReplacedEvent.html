@@ -38,9 +38,9 @@ class OnReplacedEvent {
  static OnReplacedEvent create(int addedTabId, int removedTabId) =&gt;
      new OnReplacedEvent(addedTabId, removedTabId);
 
- int addedTabId;
+ final int addedTabId;
 
- int removedTabId;
+ final int removedTabId;
 
  OnReplacedEvent(this.addedTabId, this.removedTabId);
 }
@@ -83,25 +83,25 @@ OnReplacedEvent(this.addedTabId, this.removedTabId);
 <h3>Properties</h3>
 <div class="field"><h4 id="addedTabId">
 <button class="show-code">Code</button>
-int         <strong>addedTabId</strong> <a class="anchor-link"
+final int         <strong>addedTabId</strong> <a class="anchor-link"
             href="#addedTabId"
             title="Permalink to OnReplacedEvent.addedTabId">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-int addedTabId
+final int addedTabId
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="removedTabId">
 <button class="show-code">Code</button>
-int         <strong>removedTabId</strong> <a class="anchor-link"
+final int         <strong>removedTabId</strong> <a class="anchor-link"
             href="#removedTabId"
             title="Permalink to OnReplacedEvent.removedTabId">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-int removedTabId
+final int removedTabId
 </pre>
 </div>
 </div>

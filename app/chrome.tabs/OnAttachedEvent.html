@@ -39,9 +39,9 @@ class OnAttachedEvent {
  static OnAttachedEvent create(int tabId, JsObject attachInfo) =&gt;
      new OnAttachedEvent(tabId, mapify(attachInfo));
 
- int tabId;
+ final int tabId;
 
- Map attachInfo;
+ final Map attachInfo;
 
  OnAttachedEvent(this.tabId, this.attachInfo);
 }
@@ -84,25 +84,25 @@ OnAttachedEvent(this.tabId, this.attachInfo);
 <h3>Properties</h3>
 <div class="field"><h4 id="attachInfo">
 <button class="show-code">Code</button>
-Map         <strong>attachInfo</strong> <a class="anchor-link"
+final Map         <strong>attachInfo</strong> <a class="anchor-link"
             href="#attachInfo"
             title="Permalink to OnAttachedEvent.attachInfo">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Map attachInfo
+final Map attachInfo
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="tabId">
 <button class="show-code">Code</button>
-int         <strong>tabId</strong> <a class="anchor-link"
+final int         <strong>tabId</strong> <a class="anchor-link"
             href="#tabId"
             title="Permalink to OnAttachedEvent.tabId">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-int tabId
+final int tabId
 </pre>
 </div>
 </div>

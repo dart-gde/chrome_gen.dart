@@ -41,19 +41,19 @@ class OnExitedEvent {
  /**
   * The ID of the process that exited.
   */
- int processId;
+ final int processId;
 
  /**
   * The type of exit that occurred for the process - normal, abnormal, killed,
   * crashed. Only available for renderer processes.
   */
- int exitType;
+ final int exitType;
 
  /**
   * The exit code if the process exited abnormally. Only available for renderer
   * processes.
   */
- int exitCode;
+ final int exitCode;
 
  OnExitedEvent(this.processId, this.exitType, this.exitCode);
 }
@@ -96,7 +96,7 @@ OnExitedEvent(this.processId, this.exitType, this.exitCode);
 <h3>Properties</h3>
 <div class="field"><h4 id="exitCode">
 <button class="show-code">Code</button>
-int         <strong>exitCode</strong> <a class="anchor-link"
+final int         <strong>exitCode</strong> <a class="anchor-link"
             href="#exitCode"
             title="Permalink to OnExitedEvent.exitCode">#</a>
         </h4>
@@ -104,13 +104,13 @@ int         <strong>exitCode</strong> <a class="anchor-link"
 <p>The exit code if the process exited abnormally. Only available for renderer
 processes.</p>
 <pre class="source">
-int exitCode
+final int exitCode
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="exitType">
 <button class="show-code">Code</button>
-int         <strong>exitType</strong> <a class="anchor-link"
+final int         <strong>exitType</strong> <a class="anchor-link"
             href="#exitType"
             title="Permalink to OnExitedEvent.exitType">#</a>
         </h4>
@@ -118,20 +118,20 @@ int         <strong>exitType</strong> <a class="anchor-link"
 <p>The type of exit that occurred for the process - normal, abnormal, killed,
 crashed. Only available for renderer processes.</p>
 <pre class="source">
-int exitType
+final int exitType
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="processId">
 <button class="show-code">Code</button>
-int         <strong>processId</strong> <a class="anchor-link"
+final int         <strong>processId</strong> <a class="anchor-link"
             href="#processId"
             title="Permalink to OnExitedEvent.processId">#</a>
         </h4>
         <div class="doc">
 <p>The ID of the process that exited.</p>
 <pre class="source">
-int processId
+final int processId
 </pre>
 </div>
 </div>

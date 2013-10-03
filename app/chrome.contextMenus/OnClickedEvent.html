@@ -42,7 +42,7 @@ class OnClickedEvent {
   * Information about the item clicked and the context where the click
   * happened.
   */
- OnClickData info;
+ final OnClickData info;
 
  /**
   * The details of the tab where the click took place. If the click did not
@@ -52,7 +52,7 @@ class OnClickedEvent {
   * The details of the tab where the click took place. If the click did not
   * take place in a tab, this parameter will be missing.
   */
- Tab tab;
+ final Tab tab;
 
  OnClickedEvent(this.info, this.tab);
 }
@@ -95,7 +95,7 @@ OnClickedEvent(this.info, this.tab);
 <h3>Properties</h3>
 <div class="field"><h4 id="info">
 <button class="show-code">Code</button>
-<a href="../chrome.contextMenus/OnClickData.html">OnClickData</a>         <strong>info</strong> <a class="anchor-link"
+final <a href="../chrome.contextMenus/OnClickData.html">OnClickData</a>         <strong>info</strong> <a class="anchor-link"
             href="#info"
             title="Permalink to OnClickedEvent.info">#</a>
         </h4>
@@ -103,13 +103,13 @@ OnClickedEvent(this.info, this.tab);
 <p>Information about the item clicked and the context where the click
 happened.</p>
 <pre class="source">
-OnClickData info
+final OnClickData info
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="tab">
 <button class="show-code">Code</button>
-<a href="../chrome.tabs/Tab.html">Tab</a>         <strong>tab</strong> <a class="anchor-link"
+final <a href="../chrome.tabs/Tab.html">Tab</a>         <strong>tab</strong> <a class="anchor-link"
             href="#tab"
             title="Permalink to OnClickedEvent.tab">#</a>
         </h4>
@@ -120,7 +120,7 @@ take place in a tab, this parameter will be missing.
 <p>The details of the tab where the click took place. If the click did not
 take place in a tab, this parameter will be missing.</p>
 <pre class="source">
-Tab tab
+final Tab tab
 </pre>
 </div>
 </div>

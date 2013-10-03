@@ -41,9 +41,9 @@ class TabsOnMovedEvent {
  static TabsOnMovedEvent create(int tabId, JsObject moveInfo) =&gt;
      new TabsOnMovedEvent(tabId, mapify(moveInfo));
 
- int tabId;
+ final int tabId;
 
- Map moveInfo;
+ final Map moveInfo;
 
  TabsOnMovedEvent(this.tabId, this.moveInfo);
 }
@@ -86,25 +86,25 @@ TabsOnMovedEvent(this.tabId, this.moveInfo);
 <h3>Properties</h3>
 <div class="field"><h4 id="moveInfo">
 <button class="show-code">Code</button>
-Map         <strong>moveInfo</strong> <a class="anchor-link"
+final Map         <strong>moveInfo</strong> <a class="anchor-link"
             href="#moveInfo"
             title="Permalink to TabsOnMovedEvent.moveInfo">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Map moveInfo
+final Map moveInfo
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="tabId">
 <button class="show-code">Code</button>
-int         <strong>tabId</strong> <a class="anchor-link"
+final int         <strong>tabId</strong> <a class="anchor-link"
             href="#tabId"
             title="Permalink to TabsOnMovedEvent.tabId">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-int tabId
+final int tabId
 </pre>
 </div>
 </div>

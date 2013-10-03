@@ -43,13 +43,13 @@ class OnDetachEvent {
  /**
   * The debuggee that was detached.
   */
- Debuggee source;
+ final Debuggee source;
 
  /**
   * Connection termination reason.
   * enum of `target_closed`, `canceled_by_user`, `replaced_with_devtools`
   */
- String reason;
+ final String reason;
 
  OnDetachEvent(this.source, this.reason);
 }
@@ -92,7 +92,7 @@ OnDetachEvent(this.source, this.reason);
 <h3>Properties</h3>
 <div class="field"><h4 id="reason">
 <button class="show-code">Code</button>
-String         <strong>reason</strong> <a class="anchor-link"
+final String         <strong>reason</strong> <a class="anchor-link"
             href="#reason"
             title="Permalink to OnDetachEvent.reason">#</a>
         </h4>
@@ -100,20 +100,20 @@ String         <strong>reason</strong> <a class="anchor-link"
 <p>Connection termination reason.
 enum of <code>target_closed</code>, <code>canceled_by_user</code>, <code>replaced_with_devtools</code></p>
 <pre class="source">
-String reason
+final String reason
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="source">
 <button class="show-code">Code</button>
-<a href="../chrome.debugger/Debuggee.html">Debuggee</a>         <strong>source</strong> <a class="anchor-link"
+final <a href="../chrome.debugger/Debuggee.html">Debuggee</a>         <strong>source</strong> <a class="anchor-link"
             href="#source"
             title="Permalink to OnDetachEvent.source">#</a>
         </h4>
         <div class="doc">
 <p>The debuggee that was detached.</p>
 <pre class="source">
-Debuggee source
+final Debuggee source
 </pre>
 </div>
 </div>

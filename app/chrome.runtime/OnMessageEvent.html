@@ -45,9 +45,9 @@ class OnMessageEvent {
   * 
   * The message sent by the calling script.
   */
- dynamic message;
+ final dynamic message;
 
- MessageSender sender;
+ final MessageSender sender;
 
  /**
   * Function to call (at most once) when you have a response. The argument
@@ -58,7 +58,7 @@ class OnMessageEvent {
   * asynchronously (this will keep the message channel open to the other end
   * until `sendResponse` is called).
   */
- dynamic sendResponse;
+ final dynamic sendResponse;
 
  OnMessageEvent(this.message, this.sender, this.sendResponse);
 }
@@ -101,7 +101,7 @@ OnMessageEvent(this.message, this.sender, this.sendResponse);
 <h3>Properties</h3>
 <div class="field"><h4 id="message">
 <button class="show-code">Code</button>
-var         <strong>message</strong> <a class="anchor-link"
+final         <strong>message</strong> <a class="anchor-link"
             href="#message"
             title="Permalink to OnMessageEvent.message">#</a>
         </h4>
@@ -110,25 +110,25 @@ var         <strong>message</strong> <a class="anchor-link"
 <code>optional</code></p>
 <p>The message sent by the calling script.</p>
 <pre class="source">
-dynamic message
+final dynamic message
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="sender">
 <button class="show-code">Code</button>
-<a href="../chrome.runtime/MessageSender.html">MessageSender</a>         <strong>sender</strong> <a class="anchor-link"
+final <a href="../chrome.runtime/MessageSender.html">MessageSender</a>         <strong>sender</strong> <a class="anchor-link"
             href="#sender"
             title="Permalink to OnMessageEvent.sender">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-MessageSender sender
+final MessageSender sender
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="sendResponse">
 <button class="show-code">Code</button>
-var         <strong>sendResponse</strong> <a class="anchor-link"
+final         <strong>sendResponse</strong> <a class="anchor-link"
             href="#sendResponse"
             title="Permalink to OnMessageEvent.sendResponse">#</a>
         </h4>
@@ -141,7 +141,7 @@ true from the event listener to indicate you wish to send a response
 asynchronously (this will keep the message channel open to the other end
 until <code>sendResponse</code> is called).</p>
 <pre class="source">
-dynamic sendResponse
+final dynamic sendResponse
 </pre>
 </div>
 </div>

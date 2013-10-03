@@ -41,18 +41,18 @@ class OnCandidateClickedEvent {
  /**
   * ID of the engine receiving the event
   */
- String engineID;
+ final String engineID;
 
  /**
   * ID of the candidate that was clicked.
   */
- int candidateID;
+ final int candidateID;
 
  /**
   * Which mouse buttons was clicked.
   * enum of `left`, `middle`, `right`
   */
- String button;
+ final String button;
 
  OnCandidateClickedEvent(this.engineID, this.candidateID, this.button);
 }
@@ -95,7 +95,7 @@ OnCandidateClickedEvent(this.engineID, this.candidateID, this.button);
 <h3>Properties</h3>
 <div class="field"><h4 id="button">
 <button class="show-code">Code</button>
-String         <strong>button</strong> <a class="anchor-link"
+final String         <strong>button</strong> <a class="anchor-link"
             href="#button"
             title="Permalink to OnCandidateClickedEvent.button">#</a>
         </h4>
@@ -103,33 +103,33 @@ String         <strong>button</strong> <a class="anchor-link"
 <p>Which mouse buttons was clicked.
 enum of <code>left</code>, <code>middle</code>, <code>right</code></p>
 <pre class="source">
-String button
+final String button
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="candidateID">
 <button class="show-code">Code</button>
-int         <strong>candidateID</strong> <a class="anchor-link"
+final int         <strong>candidateID</strong> <a class="anchor-link"
             href="#candidateID"
             title="Permalink to OnCandidateClickedEvent.candidateID">#</a>
         </h4>
         <div class="doc">
 <p>ID of the candidate that was clicked.</p>
 <pre class="source">
-int candidateID
+final int candidateID
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="engineID">
 <button class="show-code">Code</button>
-String         <strong>engineID</strong> <a class="anchor-link"
+final String         <strong>engineID</strong> <a class="anchor-link"
             href="#engineID"
             title="Permalink to OnCandidateClickedEvent.engineID">#</a>
         </h4>
         <div class="doc">
 <p>ID of the engine receiving the event</p>
 <pre class="source">
-String engineID
+final String engineID
 </pre>
 </div>
 </div>

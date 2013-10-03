@@ -38,9 +38,9 @@ class OnCreatedEvent {
  static OnCreatedEvent create(String id, JsObject bookmark) =&gt;
      new OnCreatedEvent(id, BookmarkTreeNode.create(bookmark));
 
- String id;
+ final String id;
 
- BookmarkTreeNode bookmark;
+ final BookmarkTreeNode bookmark;
 
  OnCreatedEvent(this.id, this.bookmark);
 }
@@ -83,25 +83,25 @@ OnCreatedEvent(this.id, this.bookmark);
 <h3>Properties</h3>
 <div class="field"><h4 id="bookmark">
 <button class="show-code">Code</button>
-<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>         <strong>bookmark</strong> <a class="anchor-link"
+final <a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>         <strong>bookmark</strong> <a class="anchor-link"
             href="#bookmark"
             title="Permalink to OnCreatedEvent.bookmark">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-BookmarkTreeNode bookmark
+final BookmarkTreeNode bookmark
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="id">
 <button class="show-code">Code</button>
-String         <strong>id</strong> <a class="anchor-link"
+final String         <strong>id</strong> <a class="anchor-link"
             href="#id"
             title="Permalink to OnCreatedEvent.id">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String id
+final String id
 </pre>
 </div>
 </div>

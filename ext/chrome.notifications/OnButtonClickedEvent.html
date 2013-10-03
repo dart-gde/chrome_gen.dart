@@ -37,9 +37,9 @@ class OnButtonClickedEvent {
  static OnButtonClickedEvent create(String notificationId, int buttonIndex) =&gt;
      new OnButtonClickedEvent(notificationId, buttonIndex);
 
- String notificationId;
+ final String notificationId;
 
- int buttonIndex;
+ final int buttonIndex;
 
  OnButtonClickedEvent(this.notificationId, this.buttonIndex);
 }
@@ -82,25 +82,25 @@ OnButtonClickedEvent(this.notificationId, this.buttonIndex);
 <h3>Properties</h3>
 <div class="field"><h4 id="buttonIndex">
 <button class="show-code">Code</button>
-int         <strong>buttonIndex</strong> <a class="anchor-link"
+final int         <strong>buttonIndex</strong> <a class="anchor-link"
             href="#buttonIndex"
             title="Permalink to OnButtonClickedEvent.buttonIndex">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-int buttonIndex
+final int buttonIndex
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="notificationId">
 <button class="show-code">Code</button>
-String         <strong>notificationId</strong> <a class="anchor-link"
+final String         <strong>notificationId</strong> <a class="anchor-link"
             href="#notificationId"
             title="Permalink to OnButtonClickedEvent.notificationId">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String notificationId
+final String notificationId
 </pre>
 </div>
 </div>

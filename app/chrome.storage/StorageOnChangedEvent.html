@@ -42,12 +42,12 @@ class StorageOnChangedEvent {
   * Object mapping each key that changed to its corresponding [StorageChange]
   * for that item.
   */
- Map changes;
+ final Map changes;
 
  /**
   * The name of the storage area (`sync` or `local`) the changes are for.
   */
- String areaName;
+ final String areaName;
 
  StorageOnChangedEvent(this.changes, this.areaName);
 }
@@ -90,20 +90,20 @@ StorageOnChangedEvent(this.changes, this.areaName);
 <h3>Properties</h3>
 <div class="field"><h4 id="areaName">
 <button class="show-code">Code</button>
-String         <strong>areaName</strong> <a class="anchor-link"
+final String         <strong>areaName</strong> <a class="anchor-link"
             href="#areaName"
             title="Permalink to StorageOnChangedEvent.areaName">#</a>
         </h4>
         <div class="doc">
 <p>The name of the storage area (<code>sync</code> or <code>local</code>) the changes are for.</p>
 <pre class="source">
-String areaName
+final String areaName
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="changes">
 <button class="show-code">Code</button>
-Map         <strong>changes</strong> <a class="anchor-link"
+final Map         <strong>changes</strong> <a class="anchor-link"
             href="#changes"
             title="Permalink to StorageOnChangedEvent.changes">#</a>
         </h4>
@@ -111,7 +111,7 @@ Map         <strong>changes</strong> <a class="anchor-link"
 <p>Object mapping each key that changed to its corresponding <a class="crossref" href="../chrome.storage/StorageChange.html">StorageChange</a>
 for that item.</p>
 <pre class="source">
-Map changes
+final Map changes
 </pre>
 </div>
 </div>

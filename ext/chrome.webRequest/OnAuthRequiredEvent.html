@@ -42,12 +42,12 @@ class OnAuthRequiredEvent {
  static OnAuthRequiredEvent create(JsObject details, JsObject callback) =&gt;
      new OnAuthRequiredEvent(mapify(details), callback);
 
- Map details;
+ final Map details;
 
  /**
   * `optional`
   */
- dynamic callback;
+ final dynamic callback;
 
  OnAuthRequiredEvent(this.details, this.callback);
 }
@@ -90,26 +90,26 @@ OnAuthRequiredEvent(this.details, this.callback);
 <h3>Properties</h3>
 <div class="field"><h4 id="callback">
 <button class="show-code">Code</button>
-var         <strong>callback</strong> <a class="anchor-link"
+final         <strong>callback</strong> <a class="anchor-link"
             href="#callback"
             title="Permalink to OnAuthRequiredEvent.callback">#</a>
         </h4>
         <div class="doc">
 <p><code>optional</code></p>
 <pre class="source">
-dynamic callback
+final dynamic callback
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="details">
 <button class="show-code">Code</button>
-Map         <strong>details</strong> <a class="anchor-link"
+final Map         <strong>details</strong> <a class="anchor-link"
             href="#details"
             title="Permalink to OnAuthRequiredEvent.details">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Map details
+final Map details
 </pre>
 </div>
 </div>

@@ -37,9 +37,9 @@ class OnDeterminingFilenameEvent {
  static OnDeterminingFilenameEvent create(JsObject downloadItem, JsObject suggest) =&gt;
      new OnDeterminingFilenameEvent(DownloadItem.create(downloadItem), SuggestFilenameCallback.create(suggest));
 
- DownloadItem downloadItem;
+ final DownloadItem downloadItem;
 
- SuggestFilenameCallback suggest;
+ final SuggestFilenameCallback suggest;
 
  OnDeterminingFilenameEvent(this.downloadItem, this.suggest);
 }
@@ -82,25 +82,25 @@ OnDeterminingFilenameEvent(this.downloadItem, this.suggest);
 <h3>Properties</h3>
 <div class="field"><h4 id="downloadItem">
 <button class="show-code">Code</button>
-<a href="../chrome.downloads/DownloadItem.html">DownloadItem</a>         <strong>downloadItem</strong> <a class="anchor-link"
+final <a href="../chrome.downloads/DownloadItem.html">DownloadItem</a>         <strong>downloadItem</strong> <a class="anchor-link"
             href="#downloadItem"
             title="Permalink to OnDeterminingFilenameEvent.downloadItem">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-DownloadItem downloadItem
+final DownloadItem downloadItem
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="suggest">
 <button class="show-code">Code</button>
-<a href="../chrome.src.common_exp/SuggestFilenameCallback.html">SuggestFilenameCallback</a>         <strong>suggest</strong> <a class="anchor-link"
+final <a href="../chrome.src.common_exp/SuggestFilenameCallback.html">SuggestFilenameCallback</a>         <strong>suggest</strong> <a class="anchor-link"
             href="#suggest"
             title="Permalink to OnDeterminingFilenameEvent.suggest">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-SuggestFilenameCallback suggest
+final SuggestFilenameCallback suggest
 </pre>
 </div>
 </div>

@@ -38,17 +38,17 @@ class OnUpdatedEvent {
  static OnUpdatedEvent create(int tabId, JsObject changeInfo, JsObject tab) =&gt;
      new OnUpdatedEvent(tabId, mapify(changeInfo), Tab.create(tab));
 
- int tabId;
+ final int tabId;
 
  /**
   * Lists the changes to the state of the tab that was updated.
   */
- Map changeInfo;
+ final Map changeInfo;
 
  /**
   * Gives the state of the tab that was updated.
   */
- Tab tab;
+ final Tab tab;
 
  OnUpdatedEvent(this.tabId, this.changeInfo, this.tab);
 }
@@ -91,39 +91,39 @@ OnUpdatedEvent(this.tabId, this.changeInfo, this.tab);
 <h3>Properties</h3>
 <div class="field"><h4 id="changeInfo">
 <button class="show-code">Code</button>
-Map         <strong>changeInfo</strong> <a class="anchor-link"
+final Map         <strong>changeInfo</strong> <a class="anchor-link"
             href="#changeInfo"
             title="Permalink to OnUpdatedEvent.changeInfo">#</a>
         </h4>
         <div class="doc">
 <p>Lists the changes to the state of the tab that was updated.</p>
 <pre class="source">
-Map changeInfo
+final Map changeInfo
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="tab">
 <button class="show-code">Code</button>
-<a href="../chrome.tabs/Tab.html">Tab</a>         <strong>tab</strong> <a class="anchor-link"
+final <a href="../chrome.tabs/Tab.html">Tab</a>         <strong>tab</strong> <a class="anchor-link"
             href="#tab"
             title="Permalink to OnUpdatedEvent.tab">#</a>
         </h4>
         <div class="doc">
 <p>Gives the state of the tab that was updated.</p>
 <pre class="source">
-Tab tab
+final Tab tab
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="tabId">
 <button class="show-code">Code</button>
-int         <strong>tabId</strong> <a class="anchor-link"
+final int         <strong>tabId</strong> <a class="anchor-link"
             href="#tabId"
             title="Permalink to OnUpdatedEvent.tabId">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-int tabId
+final int tabId
 </pre>
 </div>
 </div>

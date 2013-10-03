@@ -41,12 +41,12 @@ class OnKeyEventEvent {
  /**
   * ID of the engine receiving the event
   */
- String engineID;
+ final String engineID;
 
  /**
   * Data on the key event
   */
- KeyboardEvent keyData;
+ final KeyboardEvent keyData;
 
  OnKeyEventEvent(this.engineID, this.keyData);
 }
@@ -89,27 +89,27 @@ OnKeyEventEvent(this.engineID, this.keyData);
 <h3>Properties</h3>
 <div class="field"><h4 id="engineID">
 <button class="show-code">Code</button>
-String         <strong>engineID</strong> <a class="anchor-link"
+final String         <strong>engineID</strong> <a class="anchor-link"
             href="#engineID"
             title="Permalink to OnKeyEventEvent.engineID">#</a>
         </h4>
         <div class="doc">
 <p>ID of the engine receiving the event</p>
 <pre class="source">
-String engineID
+final String engineID
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="keyData">
 <button class="show-code">Code</button>
-<a href="../chrome.input_ime/KeyboardEvent.html">KeyboardEvent</a>         <strong>keyData</strong> <a class="anchor-link"
+final <a href="../chrome.input_ime/KeyboardEvent.html">KeyboardEvent</a>         <strong>keyData</strong> <a class="anchor-link"
             href="#keyData"
             title="Permalink to OnKeyEventEvent.keyData">#</a>
         </h4>
         <div class="doc">
 <p>Data on the key event</p>
 <pre class="source">
-KeyboardEvent keyData
+final KeyboardEvent keyData
 </pre>
 </div>
 </div>

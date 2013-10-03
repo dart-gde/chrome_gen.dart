@@ -39,12 +39,12 @@ class OnResourceContentCommittedEvent {
  static OnResourceContentCommittedEvent create(JsObject resource, String content) =&gt;
      new OnResourceContentCommittedEvent(Resource.create(resource), content);
 
- Resource resource;
+ final Resource resource;
 
  /**
   * New content of the resource.
   */
- String content;
+ final String content;
 
  OnResourceContentCommittedEvent(this.resource, this.content);
 }
@@ -87,26 +87,26 @@ OnResourceContentCommittedEvent(this.resource, this.content);
 <h3>Properties</h3>
 <div class="field"><h4 id="content">
 <button class="show-code">Code</button>
-String         <strong>content</strong> <a class="anchor-link"
+final String         <strong>content</strong> <a class="anchor-link"
             href="#content"
             title="Permalink to OnResourceContentCommittedEvent.content">#</a>
         </h4>
         <div class="doc">
 <p>New content of the resource.</p>
 <pre class="source">
-String content
+final String content
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="resource">
 <button class="show-code">Code</button>
-<a href="../chrome.devtools_inspectedWindow/Resource.html">Resource</a>         <strong>resource</strong> <a class="anchor-link"
+final <a href="../chrome.devtools_inspectedWindow/Resource.html">Resource</a>         <strong>resource</strong> <a class="anchor-link"
             href="#resource"
             title="Permalink to OnResourceContentCommittedEvent.resource">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Resource resource
+final Resource resource
 </pre>
 </div>
 </div>

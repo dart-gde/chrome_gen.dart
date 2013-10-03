@@ -39,9 +39,9 @@ class OnDetachedEvent {
  static OnDetachedEvent create(int tabId, JsObject detachInfo) =&gt;
      new OnDetachedEvent(tabId, mapify(detachInfo));
 
- int tabId;
+ final int tabId;
 
- Map detachInfo;
+ final Map detachInfo;
 
  OnDetachedEvent(this.tabId, this.detachInfo);
 }
@@ -84,25 +84,25 @@ OnDetachedEvent(this.tabId, this.detachInfo);
 <h3>Properties</h3>
 <div class="field"><h4 id="detachInfo">
 <button class="show-code">Code</button>
-Map         <strong>detachInfo</strong> <a class="anchor-link"
+final Map         <strong>detachInfo</strong> <a class="anchor-link"
             href="#detachInfo"
             title="Permalink to OnDetachedEvent.detachInfo">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Map detachInfo
+final Map detachInfo
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="tabId">
 <button class="show-code">Code</button>
-int         <strong>tabId</strong> <a class="anchor-link"
+final int         <strong>tabId</strong> <a class="anchor-link"
             href="#tabId"
             title="Permalink to OnDetachedEvent.tabId">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-int tabId
+final int tabId
 </pre>
 </div>
 </div>

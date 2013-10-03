@@ -40,9 +40,9 @@ class BookmarksOnRemovedEvent {
  static BookmarksOnRemovedEvent create(String id, JsObject removeInfo) =&gt;
      new BookmarksOnRemovedEvent(id, mapify(removeInfo));
 
- String id;
+ final String id;
 
- Map removeInfo;
+ final Map removeInfo;
 
  BookmarksOnRemovedEvent(this.id, this.removeInfo);
 }
@@ -85,25 +85,25 @@ BookmarksOnRemovedEvent(this.id, this.removeInfo);
 <h3>Properties</h3>
 <div class="field"><h4 id="id">
 <button class="show-code">Code</button>
-String         <strong>id</strong> <a class="anchor-link"
+final String         <strong>id</strong> <a class="anchor-link"
             href="#id"
             title="Permalink to BookmarksOnRemovedEvent.id">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String id
+final String id
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="removeInfo">
 <button class="show-code">Code</button>
-Map         <strong>removeInfo</strong> <a class="anchor-link"
+final Map         <strong>removeInfo</strong> <a class="anchor-link"
             href="#removeInfo"
             title="Permalink to BookmarksOnRemovedEvent.removeInfo">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Map removeInfo
+final Map removeInfo
 </pre>
 </div>
 </div>

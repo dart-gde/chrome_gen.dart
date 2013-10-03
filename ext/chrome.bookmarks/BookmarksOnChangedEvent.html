@@ -39,9 +39,9 @@ class BookmarksOnChangedEvent {
  static BookmarksOnChangedEvent create(String id, JsObject changeInfo) =&gt;
      new BookmarksOnChangedEvent(id, mapify(changeInfo));
 
- String id;
+ final String id;
 
- Map changeInfo;
+ final Map changeInfo;
 
  BookmarksOnChangedEvent(this.id, this.changeInfo);
 }
@@ -84,25 +84,25 @@ BookmarksOnChangedEvent(this.id, this.changeInfo);
 <h3>Properties</h3>
 <div class="field"><h4 id="changeInfo">
 <button class="show-code">Code</button>
-Map         <strong>changeInfo</strong> <a class="anchor-link"
+final Map         <strong>changeInfo</strong> <a class="anchor-link"
             href="#changeInfo"
             title="Permalink to BookmarksOnChangedEvent.changeInfo">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Map changeInfo
+final Map changeInfo
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="id">
 <button class="show-code">Code</button>
-String         <strong>id</strong> <a class="anchor-link"
+final String         <strong>id</strong> <a class="anchor-link"
             href="#id"
             title="Permalink to BookmarksOnChangedEvent.id">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String id
+final String id
 </pre>
 </div>
 </div>
