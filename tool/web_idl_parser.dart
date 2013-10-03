@@ -22,7 +22,7 @@ class ReservedNames {
 }
 
 /// Programming language specific combinators
-class XLanguageParsers {
+class BaseWebIdlParser {
   String _commentStart;
   String _commentEnd;
   String _commentLine;
@@ -34,7 +34,7 @@ class XLanguageParsers {
 
   ReservedNames _reserved;
 
-  XLanguageParsers({
+  BaseWebIdlParser({
     String         commentStart   : '/*',
     String         commentEnd     : '*/',
     String         commentLine    : '//',
@@ -276,7 +276,7 @@ final reservedNames = [ "readonly",
                         "namespace"];
 
 // http://www.w3.org/TR/WebIDL/#idl-grammar
-class WebIdlParser extends XLanguageParsers {
+class WebIdlParser extends BaseWebIdlParser {
   IDLCollector collector;
 
   WebIdlParser()
