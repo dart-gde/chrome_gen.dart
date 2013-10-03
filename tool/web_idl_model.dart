@@ -30,7 +30,7 @@ class IDLCollectorChrome implements IDLCollector {
   List _dictionaryMembers = [];
   List _dictionaryMethods = [];
 
-  namespace(l, sb) {
+  List namespace(l, sb) {
     idlNamespace.name = l[2].join('.');
     sb.clear();
 
@@ -38,7 +38,7 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  interface(l) {
+  List interface(List l) {
     if (l[1] == "Functions") {
       idlNamespace.functions.addAll(_functions);
       _functions = [];
@@ -56,7 +56,7 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  _functionParser(l, doc) {
+  IDLFunction _functionParser(List l, doc) {
     var ret = l[1][0];
     var name = l[1][1];
     var arg = l[1][2];
@@ -83,7 +83,7 @@ class IDLCollectorChrome implements IDLCollector {
     return function;
   }
 
-  interfaceMember(l, sb) {
+  List interfaceMember(List l, sb) {
     IDLFunction function = _functionParser(l, sb.toString());
     sb.clear();
     _functions.add(function);
@@ -92,7 +92,7 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  dictionary(l) {
+  List dictionary(List l) {
     String name = l[1];
     IDLDeclaredType declaredType = new IDLDeclaredType(name);
     declaredType.members.addAll(_dictionaryMembers);
@@ -107,7 +107,7 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  dictionaryMember(l, sb) {
+  List dictionaryMember(List l, sb) {
     String name = l[1];
     IDLProperty member = new IDLProperty(name);
     sb.clear();
@@ -123,7 +123,7 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  dictionaryMethod(l, sb) {
+  List dictionaryMethod(List l, sb) {
     IDLFunction function = _functionParser(l, sb.toString());
     sb.clear();
     _dictionaryMethods.add(function);
@@ -132,7 +132,7 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  enumStatement(l, sb) {
+  List enumStatement(List l, sb) {
     // Example from usb [enum, Direction, [in, [,, out, EMPTY]], ;]
     //    print("enumStatement:");
     //    print(l);
@@ -207,9 +207,7 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  IDLParameter _reduceParameter(a) {
-    var func = a;
-
+  IDLParameter _reduceParameter(List func) {
     if (func[1] is List) {
       var type = func[1][0];
       var name;
@@ -221,7 +219,8 @@ class IDLCollectorChrome implements IDLCollector {
         // throw does not know how to parse.
       }
 
-      IDLParameter param = new IDLParameter(name);
+      var idlType = IDLType.VAR;
+      bool optional = null;
 
       if (type is List) {
         type = type[0];
@@ -229,13 +228,13 @@ class IDLCollectorChrome implements IDLCollector {
           type = type[0];
         }
 
-        param.type = new IDLType(type);
-        param.optional = false;
+        idlType = new IDLType(type);
+        optional = false;
       } else if (type is String) {
         if (type == "optional") {
-          param.optional = true;
+          optional = true;
         } else {
-          param.optional = false;
+          optional = false;
         }
 
         if (func[1][1] is List) {
@@ -243,15 +242,15 @@ class IDLCollectorChrome implements IDLCollector {
           if (type is List) {
             type = type[0];
           }
-          param.type = new IDLType(type);
+          idlType = new IDLType(type);
         }
       }
 
-      return param;
+      return new IDLParameter(name, optional, idlType);
     }
   }
 
-  void _parameterParser(a, recursiveParams) {
+  void _parameterParser(a, List recursiveParams) {
     var func;
 
     if (a == EMPTY) return;
@@ -275,7 +274,7 @@ class IDLCollectorChrome implements IDLCollector {
     }
   }
 
-  callback(l, sb) {
+  List callback(List l, sb) {
     IDLFunction function = new IDLFunction(l[0], sb.toString());
     sb.clear();
     var arg = l[3];
@@ -402,14 +401,18 @@ class IDLDeclaredType {
 }
 
 class IDLParameter {
-  String name;
-  IDLType type = IDLType.VAR;
-  String description;
-  bool optional;
+  final String name;
+  final IDLType type;
+  final String description = null;
+  final bool optional;
 
-  List<IDLParameter> params = [];
+  IDLParameter(this.name, this.optional, this.type) {
+    assert(optional != null);
 
-  IDLParameter(this.name);
+    // TODO: these asserts break tests...weird
+    //assert(type != null);
+    //assert(name != null);
+  }
 
   bool get isCallback => name == 'callback' || name == 'responseCallback';
 
@@ -430,10 +433,10 @@ class IDLType {
   static IDLType VAR = new IDLType('var');
 
   /// The type name, i.e. string, integer, boolean, object, ...
-  String name;
+  final String name;
 
   /// Additional type info, from the $ref field. e.g. 'runtime.Port'
-  String refName;
+  final String refName;
 
   factory IDLType(String name) {
     if (name == null || name == 'void') {
@@ -453,11 +456,11 @@ class IDLType {
     }
   }
 
-  IDLType.fromRef(this.refName) {
+  IDLType.fromRef(this.refName) :
     name = 'object';
-  }
 
-  IDLType._(this.name);
+  IDLType._(this.name) :
+    refName = null;
 
   bool get isFunction => name == 'function';
   bool get isObject => name == 'object';
@@ -482,10 +485,10 @@ class IDLConverter {
     ChromeLibrary library =  new ChromeLibrary(namespace.name);
     library.documentation = cleanDocComments(namespace.description);
 
-    library.types = namespace.declaredTypes.map(_convertDeclaredType).toList();
-    library.methods = namespace.functions.map(_convertMethod).toList();
-    library.events = namespace.events.map(_convertEvent).toList();
-    library.enumTypes = namespace.enumTypes.map(_convertEnum).toList();
+    library.types.addAll(namespace.declaredTypes.map(_convertDeclaredType));
+    library.methods.addAll(namespace.functions.map(_convertMethod));
+    library.events.addAll(namespace.events.map(_convertEvent));
+    library.enumTypes.addAll(namespace.enumTypes.map(_convertEnum));
 
     return library;
   }
@@ -514,9 +517,7 @@ class IDLConverter {
   }
 
   ChromeProperty _convertProperty(IDLProperty idlProperty) {
-    ChromeProperty property = new ChromeProperty();
-    property.name = idlProperty.name;
-    property.type = _convertType(idlProperty.returnType);
+    ChromeProperty property = new ChromeProperty(idlProperty.name, _convertType(idlProperty.returnType));
     return property;
   }
 
@@ -590,7 +591,7 @@ class IDLConverter {
     ChromeType param = new ChromeType();
     param.name = parameter.name;
     param.type = idlToDartType(parameter.type.name);
-    param.refName = idlToDartRefName(parameter.type.name, parameter.type.refName);
+    param.refName = idlToDartRefName(parameter.type);
     param.optional = (parameter.optional == null) ? false : parameter.optional;
     return param;
   }
@@ -601,7 +602,7 @@ class IDLConverter {
     } else {
       ChromeType chromeType = new ChromeType();
       chromeType.type = idlToDartType(idlType.name);
-      chromeType.refName = idlToDartRefName(idlType.name, idlType.refName);
+      chromeType.refName = idlToDartRefName(idlType);
       return chromeType;
     }
   }
@@ -622,15 +623,15 @@ String idlToDartType(String type) {
   }
 }
 
-String idlToDartRefName(String name, String refName) {
-  if (TYPE_MAP.containsKey(name)) {
+String idlToDartRefName(IDLType type) {
+  if (TYPE_MAP.containsKey(type.name)) {
     return null;
-  } else if (refName != null) {
-    return refName;
-  } if (name == 'object') {
+  } else if (type.refName != null) {
+    return type.refName;
+  } if (type.name == 'object') {
     return null;
   } else {
-    return name;
+    return type.name;
   }
 }
 
