@@ -38,7 +38,7 @@ final <a href="chrome.identity/ChromeIdentity.html">ChromeIdentity</a>         <
         <div class="doc">
 <p>Accessor for the <code>chrome.identity</code> namespace.</p>
 <pre class="source">
-final ChromeIdentity identity = new ChromeIdentity._()
+final ChromeIdentity identity = ChromeIdentity._identity == null ? apiNotAvailable('chrome.identity') : new ChromeIdentity._()
 </pre>
 </div>
 </div>

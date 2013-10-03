@@ -41,7 +41,7 @@ final <a href="chrome.bookmarks/ChromeBookmarks.html">ChromeBookmarks</a>       
         <div class="doc">
 <p>Accessor for the <code>chrome.bookmarks</code> namespace.</p>
 <pre class="source">
-final ChromeBookmarks bookmarks = new ChromeBookmarks._()
+final ChromeBookmarks bookmarks = ChromeBookmarks._bookmarks == null ? apiNotAvailable('chrome.bookmarks') : new ChromeBookmarks._()
 </pre>
 </div>
 </div>

@@ -41,7 +41,7 @@ final <a href="chrome.input_ime/ChromeInputIme.html">ChromeInputIme</a>         
         <div class="doc">
 <p>Accessor for the <code>chrome.input.ime</code> namespace.</p>
 <pre class="source">
-final ChromeInputIme input_ime = new ChromeInputIme._()
+final ChromeInputIme input_ime = ChromeInputIme._input_ime == null ? apiNotAvailable('chrome.input.ime') : new ChromeInputIme._()
 </pre>
 </div>
 </div>

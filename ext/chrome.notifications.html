@@ -38,7 +38,7 @@ final <a href="chrome.notifications/ChromeNotifications.html">ChromeNotification
         <div class="doc">
 <p>Accessor for the <code>chrome.notifications</code> namespace.</p>
 <pre class="source">
-final ChromeNotifications notifications = new ChromeNotifications._()
+final ChromeNotifications notifications = ChromeNotifications._notifications == null ? apiNotAvailable('chrome.notifications') : new ChromeNotifications._()
 </pre>
 </div>
 </div>

@@ -42,7 +42,7 @@ final <a href="chrome.devtools_inspectedWindow/ChromeDevtoolsInspectedWindow.htm
         <div class="doc">
 <p>Accessor for the <code>chrome.devtools.inspectedWindow</code> namespace.</p>
 <pre class="source">
-final ChromeDevtoolsInspectedWindow devtools_inspectedWindow = new ChromeDevtoolsInspectedWindow._()
+final ChromeDevtoolsInspectedWindow devtools_inspectedWindow = ChromeDevtoolsInspectedWindow._devtools_inspectedWindow == null ? apiNotAvailable('chrome.devtools.inspectedWindow') : new ChromeDevtoolsInspectedWindow._()
 </pre>
 </div>
 </div>

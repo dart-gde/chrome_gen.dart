@@ -38,7 +38,7 @@ final <a href="chrome.system_storage/ChromeSystemStorage.html">ChromeSystemStora
         <div class="doc">
 <p>Accessor for the <code>chrome.system.storage</code> namespace.</p>
 <pre class="source">
-final ChromeSystemStorage system_storage = new ChromeSystemStorage._()
+final ChromeSystemStorage system_storage = ChromeSystemStorage._system_storage == null ? apiNotAvailable('chrome.system.storage') : new ChromeSystemStorage._()
 </pre>
 </div>
 </div>

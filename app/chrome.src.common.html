@@ -66,6 +66,21 @@ String get lastError {
 </div>
 <div>
 <h3>Functions</h3>
+<div class="method"><h4 id="apiNotAvailable">
+<button class="show-code">Code</button>
+dynamic <strong>apiNotAvailable</strong>(String apiName) <a class="anchor-link" href="#apiNotAvailable"
+              title="Permalink to apiNotAvailable">#</a></h4>
+<div class="doc">
+<pre class="source">
+dynamic apiNotAvailable(String apiName) {
+ print('${apiName} not available.');
+ print('This could be caused by a missing manifest.json permission or by running on an older version of Chrome.');
+
+ return null;
+}
+</pre>
+</div>
+</div>
 <div class="method"><h4 id="selfConverter">
 <button class="show-code">Code</button>
 dynamic <strong>selfConverter</strong>(obj) <a class="anchor-link" href="#selfConverter"

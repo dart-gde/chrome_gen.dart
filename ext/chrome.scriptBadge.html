@@ -40,7 +40,7 @@ final <a href="chrome.scriptBadge/ChromeScriptBadge.html">ChromeScriptBadge</a> 
         <div class="doc">
 <p>Accessor for the <code>chrome.scriptBadge</code> namespace.</p>
 <pre class="source">
-final ChromeScriptBadge scriptBadge = new ChromeScriptBadge._()
+final ChromeScriptBadge scriptBadge = ChromeScriptBadge._scriptBadge == null ? apiNotAvailable('chrome.scriptBadge') : new ChromeScriptBadge._()
 </pre>
 </div>
 </div>

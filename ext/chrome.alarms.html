@@ -38,7 +38,7 @@ final <a href="chrome.alarms/ChromeAlarms.html">ChromeAlarms</a>         <strong
         <div class="doc">
 <p>Accessor for the <code>chrome.alarms</code> namespace.</p>
 <pre class="source">
-final ChromeAlarms alarms = new ChromeAlarms._()
+final ChromeAlarms alarms = ChromeAlarms._alarms == null ? apiNotAvailable('chrome.alarms') : new ChromeAlarms._()
 </pre>
 </div>
 </div>

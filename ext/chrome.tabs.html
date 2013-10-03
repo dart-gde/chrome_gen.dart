@@ -40,7 +40,7 @@ final <a href="chrome.tabs/ChromeTabs.html">ChromeTabs</a>         <strong>tabs<
         <div class="doc">
 <p>Accessor for the <code>chrome.tabs</code> namespace.</p>
 <pre class="source">
-final ChromeTabs tabs = new ChromeTabs._()
+final ChromeTabs tabs = ChromeTabs._tabs == null ? apiNotAvailable('chrome.tabs') : new ChromeTabs._()
 </pre>
 </div>
 </div>

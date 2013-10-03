@@ -38,7 +38,7 @@ final <a href="chrome.system_display/ChromeSystemDisplay.html">ChromeSystemDispl
         <div class="doc">
 <p>Accessor for the <code>chrome.system.display</code> namespace.</p>
 <pre class="source">
-final ChromeSystemDisplay system_display = new ChromeSystemDisplay._()
+final ChromeSystemDisplay system_display = ChromeSystemDisplay._system_display == null ? apiNotAvailable('chrome.system.display') : new ChromeSystemDisplay._()
 </pre>
 </div>
 </div>

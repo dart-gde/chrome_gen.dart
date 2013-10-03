@@ -45,7 +45,7 @@ final <a href="chrome.ttsEngine/ChromeTtsEngine.html">ChromeTtsEngine</a>       
         <div class="doc">
 <p>Accessor for the <code>chrome.ttsEngine</code> namespace.</p>
 <pre class="source">
-final ChromeTtsEngine ttsEngine = new ChromeTtsEngine._()
+final ChromeTtsEngine ttsEngine = ChromeTtsEngine._ttsEngine == null ? apiNotAvailable('chrome.ttsEngine') : new ChromeTtsEngine._()
 </pre>
 </div>
 </div>

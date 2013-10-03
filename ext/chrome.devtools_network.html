@@ -40,7 +40,7 @@ final <a href="chrome.devtools_network/ChromeDevtoolsNetwork.html">ChromeDevtool
         <div class="doc">
 <p>Accessor for the <code>chrome.devtools.network</code> namespace.</p>
 <pre class="source">
-final ChromeDevtoolsNetwork devtools_network = new ChromeDevtoolsNetwork._()
+final ChromeDevtoolsNetwork devtools_network = ChromeDevtoolsNetwork._devtools_network == null ? apiNotAvailable('chrome.devtools.network') : new ChromeDevtoolsNetwork._()
 </pre>
 </div>
 </div>

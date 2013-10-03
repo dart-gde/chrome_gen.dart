@@ -38,7 +38,7 @@ final <a href="chrome.serial/ChromeSerial.html">ChromeSerial</a>         <strong
         <div class="doc">
 <p>Accessor for the <code>chrome.serial</code> namespace.</p>
 <pre class="source">
-final ChromeSerial serial = new ChromeSerial._()
+final ChromeSerial serial = ChromeSerial._serial == null ? apiNotAvailable('chrome.serial') : new ChromeSerial._()
 </pre>
 </div>
 </div>

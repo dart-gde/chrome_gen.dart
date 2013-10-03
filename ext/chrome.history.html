@@ -42,7 +42,7 @@ final <a href="chrome.history/ChromeHistory.html">ChromeHistory</a>         <str
         <div class="doc">
 <p>Accessor for the <code>chrome.history</code> namespace.</p>
 <pre class="source">
-final ChromeHistory history = new ChromeHistory._()
+final ChromeHistory history = ChromeHistory._history == null ? apiNotAvailable('chrome.history') : new ChromeHistory._()
 </pre>
 </div>
 </div>

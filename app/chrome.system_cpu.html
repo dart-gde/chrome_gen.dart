@@ -38,7 +38,7 @@ final <a href="chrome.system_cpu/ChromeSystemCpu.html">ChromeSystemCpu</a>      
         <div class="doc">
 <p>Accessor for the <code>chrome.system.cpu</code> namespace.</p>
 <pre class="source">
-final ChromeSystemCpu system_cpu = new ChromeSystemCpu._()
+final ChromeSystemCpu system_cpu = ChromeSystemCpu._system_cpu == null ? apiNotAvailable('chrome.system.cpu') : new ChromeSystemCpu._()
 </pre>
 </div>
 </div>

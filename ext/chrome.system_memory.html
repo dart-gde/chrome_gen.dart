@@ -38,7 +38,7 @@ final <a href="chrome.system_memory/ChromeSystemMemory.html">ChromeSystemMemory<
         <div class="doc">
 <p>Accessor for the <code>chrome.system.memory</code> namespace.</p>
 <pre class="source">
-final ChromeSystemMemory system_memory = new ChromeSystemMemory._()
+final ChromeSystemMemory system_memory = ChromeSystemMemory._system_memory == null ? apiNotAvailable('chrome.system.memory') : new ChromeSystemMemory._()
 </pre>
 </div>
 </div>

@@ -40,7 +40,7 @@ final <a href="chrome.i18n/ChromeI18N.html">ChromeI18N</a>         <strong>i18n<
         <div class="doc">
 <p>Accessor for the <code>chrome.i18n</code> namespace.</p>
 <pre class="source">
-final ChromeI18N i18n = new ChromeI18N._()
+final ChromeI18N i18n = ChromeI18N._i18n == null ? apiNotAvailable('chrome.i18n') : new ChromeI18N._()
 </pre>
 </div>
 </div>

@@ -43,7 +43,7 @@ final <a href="chrome.declarativeWebRequest/ChromeDeclarativeWebRequest.html">Ch
         <div class="doc">
 <p>Accessor for the <code>chrome.declarativeWebRequest</code> namespace.</p>
 <pre class="source">
-final ChromeDeclarativeWebRequest declarativeWebRequest = new ChromeDeclarativeWebRequest._()
+final ChromeDeclarativeWebRequest declarativeWebRequest = ChromeDeclarativeWebRequest._declarativeWebRequest == null ? apiNotAvailable('chrome.declarativeWebRequest') : new ChromeDeclarativeWebRequest._()
 </pre>
 </div>
 </div>

@@ -41,7 +41,7 @@ final <a href="chrome.devtools_panels/ChromeDevtoolsPanels.html">ChromeDevtoolsP
         <div class="doc">
 <p>Accessor for the <code>chrome.devtools.panels</code> namespace.</p>
 <pre class="source">
-final ChromeDevtoolsPanels devtools_panels = new ChromeDevtoolsPanels._()
+final ChromeDevtoolsPanels devtools_panels = ChromeDevtoolsPanels._devtools_panels == null ? apiNotAvailable('chrome.devtools.panels') : new ChromeDevtoolsPanels._()
 </pre>
 </div>
 </div>

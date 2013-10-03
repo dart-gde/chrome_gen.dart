@@ -42,7 +42,7 @@ final <a href="chrome.contentSettings/ChromeContentSettings.html">ChromeContentS
         <div class="doc">
 <p>Accessor for the <code>chrome.contentSettings</code> namespace.</p>
 <pre class="source">
-final ChromeContentSettings contentSettings = new ChromeContentSettings._()
+final ChromeContentSettings contentSettings = ChromeContentSettings._contentSettings == null ? apiNotAvailable('chrome.contentSettings') : new ChromeContentSettings._()
 </pre>
 </div>
 </div>
