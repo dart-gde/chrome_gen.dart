@@ -8,7 +8,7 @@ library chrome.processes;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.processes` namespace.
-final ChromeProcesses processes = (ChromeProcesses._processes == null ? null : new ChromeProcesses._());
+final ChromeProcesses processes = ChromeProcesses._processes == null ? apiNotAvailable('chrome.processes') : new ChromeProcesses._();
 
 class ChromeProcesses {
   static final JsObject _processes = context['chrome']['processes'];

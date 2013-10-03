@@ -5,7 +5,7 @@ library chrome.app_window;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.app.window` namespace.
-final ChromeAppWindow app_window = (ChromeAppWindow._app_window == null ? null : new ChromeAppWindow._());
+final ChromeAppWindow app_window = ChromeAppWindow._app_window == null ? apiNotAvailable('chrome.app.window') : new ChromeAppWindow._();
 
 class ChromeAppWindow {
   static final JsObject _app_window = context['chrome']['app']['window'];

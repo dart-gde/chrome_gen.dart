@@ -5,7 +5,7 @@ library chrome.audio;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.audio` namespace.
-final ChromeAudio audio = (ChromeAudio._audio == null ? null : new ChromeAudio._());
+final ChromeAudio audio = ChromeAudio._audio == null ? apiNotAvailable('chrome.audio') : new ChromeAudio._();
 
 class ChromeAudio {
   static final JsObject _audio = context['chrome']['audio'];

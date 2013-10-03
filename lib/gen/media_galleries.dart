@@ -5,7 +5,7 @@ library chrome.mediaGalleries;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.mediaGalleries` namespace.
-final ChromeMediaGalleries mediaGalleries = (ChromeMediaGalleries._mediaGalleries == null ? null : new ChromeMediaGalleries._());
+final ChromeMediaGalleries mediaGalleries = ChromeMediaGalleries._mediaGalleries == null ? apiNotAvailable('chrome.mediaGalleries') : new ChromeMediaGalleries._();
 
 class ChromeMediaGalleries {
   static final JsObject _mediaGalleries = context['chrome']['mediaGalleries'];

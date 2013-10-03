@@ -12,7 +12,7 @@ import 'runtime.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.extension` namespace.
-final ChromeExtension extension = (ChromeExtension._extension == null ? null : new ChromeExtension._());
+final ChromeExtension extension = ChromeExtension._extension == null ? apiNotAvailable('chrome.extension') : new ChromeExtension._();
 
 class ChromeExtension {
   static final JsObject _extension = context['chrome']['extension'];

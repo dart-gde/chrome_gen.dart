@@ -10,7 +10,7 @@ import 'events.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.declarativeContent` namespace.
-final ChromeDeclarativeContent declarativeContent = (ChromeDeclarativeContent._declarativeContent == null ? null : new ChromeDeclarativeContent._());
+final ChromeDeclarativeContent declarativeContent = ChromeDeclarativeContent._declarativeContent == null ? apiNotAvailable('chrome.declarativeContent') : new ChromeDeclarativeContent._();
 
 class ChromeDeclarativeContent {
   static final JsObject _declarativeContent = context['chrome']['declarativeContent'];

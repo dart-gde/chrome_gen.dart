@@ -5,7 +5,7 @@ library chrome.system_memory;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.system.memory` namespace.
-final ChromeSystemMemory system_memory = (ChromeSystemMemory._system_memory == null ? null : new ChromeSystemMemory._());
+final ChromeSystemMemory system_memory = ChromeSystemMemory._system_memory == null ? apiNotAvailable('chrome.system.memory') : new ChromeSystemMemory._();
 
 class ChromeSystemMemory {
   static final JsObject _system_memory = context['chrome']['system']['memory'];

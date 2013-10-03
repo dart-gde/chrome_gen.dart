@@ -10,7 +10,7 @@ import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.windows` namespace.
-final ChromeWindows windows = (ChromeWindows._windows == null ? null : new ChromeWindows._());
+final ChromeWindows windows = ChromeWindows._windows == null ? apiNotAvailable('chrome.windows') : new ChromeWindows._();
 
 class ChromeWindows {
   static final JsObject _windows = context['chrome']['windows'];

@@ -9,7 +9,7 @@ library chrome.storage;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.storage` namespace.
-final ChromeStorage storage = (ChromeStorage._storage == null ? null : new ChromeStorage._());
+final ChromeStorage storage = ChromeStorage._storage == null ? apiNotAvailable('chrome.storage') : new ChromeStorage._();
 
 class ChromeStorage {
   static final JsObject _storage = context['chrome']['storage'];

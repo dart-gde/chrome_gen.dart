@@ -5,7 +5,7 @@ library chrome.bluetooth;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.bluetooth` namespace.
-final ChromeBluetooth bluetooth = (ChromeBluetooth._bluetooth == null ? null : new ChromeBluetooth._());
+final ChromeBluetooth bluetooth = ChromeBluetooth._bluetooth == null ? apiNotAvailable('chrome.bluetooth') : new ChromeBluetooth._();
 
 class ChromeBluetooth {
   static final JsObject _bluetooth = context['chrome']['bluetooth'];

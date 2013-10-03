@@ -12,7 +12,7 @@ import 'types.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.privacy` namespace.
-final ChromePrivacy privacy = (ChromePrivacy._privacy == null ? null : new ChromePrivacy._());
+final ChromePrivacy privacy = ChromePrivacy._privacy == null ? apiNotAvailable('chrome.privacy') : new ChromePrivacy._();
 
 class ChromePrivacy {
   static final JsObject _privacy = context['chrome']['privacy'];

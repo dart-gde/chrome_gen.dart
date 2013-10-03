@@ -5,7 +5,7 @@ library chrome.usb;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.usb` namespace.
-final ChromeUsb usb = (ChromeUsb._usb == null ? null : new ChromeUsb._());
+final ChromeUsb usb = ChromeUsb._usb == null ? apiNotAvailable('chrome.usb') : new ChromeUsb._();
 
 class ChromeUsb {
   static final JsObject _usb = context['chrome']['usb'];

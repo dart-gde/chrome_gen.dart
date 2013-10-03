@@ -9,7 +9,7 @@ library chrome.omnibox;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.omnibox` namespace.
-final ChromeOmnibox omnibox = (ChromeOmnibox._omnibox == null ? null : new ChromeOmnibox._());
+final ChromeOmnibox omnibox = ChromeOmnibox._omnibox == null ? apiNotAvailable('chrome.omnibox') : new ChromeOmnibox._();
 
 class ChromeOmnibox {
   static final JsObject _omnibox = context['chrome']['omnibox'];

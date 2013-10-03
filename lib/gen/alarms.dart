@@ -5,7 +5,7 @@ library chrome.alarms;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.alarms` namespace.
-final ChromeAlarms alarms = (ChromeAlarms._alarms == null ? null : new ChromeAlarms._());
+final ChromeAlarms alarms = ChromeAlarms._alarms == null ? apiNotAvailable('chrome.alarms') : new ChromeAlarms._();
 
 class ChromeAlarms {
   static final JsObject _alarms = context['chrome']['alarms'];

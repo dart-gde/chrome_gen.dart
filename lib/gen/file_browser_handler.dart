@@ -10,7 +10,7 @@ library chrome.fileBrowserHandler;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.fileBrowserHandler` namespace.
-final ChromeFileBrowserHandler fileBrowserHandler = (ChromeFileBrowserHandler._fileBrowserHandler == null ? null : new ChromeFileBrowserHandler._());
+final ChromeFileBrowserHandler fileBrowserHandler = ChromeFileBrowserHandler._fileBrowserHandler == null ? apiNotAvailable('chrome.fileBrowserHandler') : new ChromeFileBrowserHandler._();
 
 class ChromeFileBrowserHandler {
   static final JsObject _fileBrowserHandler = context['chrome']['fileBrowserHandler'];

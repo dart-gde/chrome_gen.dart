@@ -10,7 +10,7 @@ library chrome.commands;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.commands` namespace.
-final ChromeCommands commands = (ChromeCommands._commands == null ? null : new ChromeCommands._());
+final ChromeCommands commands = ChromeCommands._commands == null ? apiNotAvailable('chrome.commands') : new ChromeCommands._();
 
 class ChromeCommands {
   static final JsObject _commands = context['chrome']['commands'];

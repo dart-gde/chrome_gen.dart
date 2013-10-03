@@ -12,7 +12,7 @@ import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.browserAction` namespace.
-final ChromeBrowserAction browserAction = (ChromeBrowserAction._browserAction == null ? null : new ChromeBrowserAction._());
+final ChromeBrowserAction browserAction = ChromeBrowserAction._browserAction == null ? apiNotAvailable('chrome.browserAction') : new ChromeBrowserAction._();
 
 class ChromeBrowserAction {
   static final JsObject _browserAction = context['chrome']['browserAction'];

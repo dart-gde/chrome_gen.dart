@@ -9,7 +9,7 @@ library chrome.browsingData;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.browsingData` namespace.
-final ChromeBrowsingData browsingData = (ChromeBrowsingData._browsingData == null ? null : new ChromeBrowsingData._());
+final ChromeBrowsingData browsingData = ChromeBrowsingData._browsingData == null ? apiNotAvailable('chrome.browsingData') : new ChromeBrowsingData._();
 
 class ChromeBrowsingData {
   static final JsObject _browsingData = context['chrome']['browsingData'];

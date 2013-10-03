@@ -5,7 +5,7 @@ library chrome.app_runtime;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.app.runtime` namespace.
-final ChromeAppRuntime app_runtime = (ChromeAppRuntime._app_runtime == null ? null : new ChromeAppRuntime._());
+final ChromeAppRuntime app_runtime = ChromeAppRuntime._app_runtime == null ? apiNotAvailable('chrome.app.runtime') : new ChromeAppRuntime._();
 
 class ChromeAppRuntime {
   static final JsObject _app_runtime = context['chrome']['app']['runtime'];

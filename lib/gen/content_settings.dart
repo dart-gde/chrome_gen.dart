@@ -11,7 +11,7 @@ library chrome.contentSettings;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.contentSettings` namespace.
-final ChromeContentSettings contentSettings = (ChromeContentSettings._contentSettings == null ? null : new ChromeContentSettings._());
+final ChromeContentSettings contentSettings = ChromeContentSettings._contentSettings == null ? apiNotAvailable('chrome.contentSettings') : new ChromeContentSettings._();
 
 class ChromeContentSettings {
   static final JsObject _contentSettings = context['chrome']['contentSettings'];

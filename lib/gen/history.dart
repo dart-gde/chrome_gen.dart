@@ -11,7 +11,7 @@ library chrome.history;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.history` namespace.
-final ChromeHistory history = (ChromeHistory._history == null ? null : new ChromeHistory._());
+final ChromeHistory history = ChromeHistory._history == null ? apiNotAvailable('chrome.history') : new ChromeHistory._();
 
 class ChromeHistory {
   static final JsObject _history = context['chrome']['history'];

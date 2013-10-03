@@ -8,7 +8,7 @@ library chrome.idle;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.idle` namespace.
-final ChromeIdle idle = (ChromeIdle._idle == null ? null : new ChromeIdle._());
+final ChromeIdle idle = ChromeIdle._idle == null ? apiNotAvailable('chrome.idle') : new ChromeIdle._();
 
 class ChromeIdle {
   static final JsObject _idle = context['chrome']['idle'];

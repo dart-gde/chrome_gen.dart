@@ -11,7 +11,7 @@ import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.pageAction` namespace.
-final ChromePageAction pageAction = (ChromePageAction._pageAction == null ? null : new ChromePageAction._());
+final ChromePageAction pageAction = ChromePageAction._pageAction == null ? apiNotAvailable('chrome.pageAction') : new ChromePageAction._();
 
 class ChromePageAction {
   static final JsObject _pageAction = context['chrome']['pageAction'];

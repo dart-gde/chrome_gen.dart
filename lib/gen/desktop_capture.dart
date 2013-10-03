@@ -5,7 +5,7 @@ library chrome.desktopCapture;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.desktopCapture` namespace.
-final ChromeDesktopCapture desktopCapture = (ChromeDesktopCapture._desktopCapture == null ? null : new ChromeDesktopCapture._());
+final ChromeDesktopCapture desktopCapture = ChromeDesktopCapture._desktopCapture == null ? apiNotAvailable('chrome.desktopCapture') : new ChromeDesktopCapture._();
 
 class ChromeDesktopCapture {
   static final JsObject _desktopCapture = context['chrome']['desktopCapture'];

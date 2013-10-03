@@ -5,7 +5,7 @@ library chrome.location;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.location` namespace.
-final ChromeLocation location = (ChromeLocation._location == null ? null : new ChromeLocation._());
+final ChromeLocation location = ChromeLocation._location == null ? apiNotAvailable('chrome.location') : new ChromeLocation._();
 
 class ChromeLocation {
   static final JsObject _location = context['chrome']['location'];

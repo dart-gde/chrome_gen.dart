@@ -9,7 +9,7 @@ library chrome.cookies;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.cookies` namespace.
-final ChromeCookies cookies = (ChromeCookies._cookies == null ? null : new ChromeCookies._());
+final ChromeCookies cookies = ChromeCookies._cookies == null ? apiNotAvailable('chrome.cookies') : new ChromeCookies._();
 
 class ChromeCookies {
   static final JsObject _cookies = context['chrome']['cookies'];

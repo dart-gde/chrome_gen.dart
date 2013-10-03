@@ -9,7 +9,7 @@ library chrome.i18n;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.i18n` namespace.
-final ChromeI18N i18n = (ChromeI18N._i18n == null ? null : new ChromeI18N._());
+final ChromeI18N i18n = ChromeI18N._i18n == null ? apiNotAvailable('chrome.i18n') : new ChromeI18N._();
 
 class ChromeI18N {
   static final JsObject _i18n = context['chrome']['i18n'];

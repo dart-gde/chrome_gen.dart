@@ -73,8 +73,8 @@ class _DefaultBackendContext {
     // final ChromeI18N i18n = ChromeI18N._i18n == null ? null : new ChromeI18N._();
     generator.writeDocs("Accessor for the `chrome.${library.name}` namespace.",
         preferSingle: true);
-    generator.writeln("final ${className} ${libraryName} = (${className}."
-        "${contextReference} == null ? null : new ${className}._());");
+    generator.writeln("final ${className} ${libraryName} = ${className}.${contextReference} == null ? "
+        "apiNotAvailable('chrome.${library.name}') : new ${className}._();");
     generator.writeln();
 
     _printClass();

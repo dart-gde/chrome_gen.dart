@@ -9,7 +9,7 @@ library chrome.webNavigation;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.webNavigation` namespace.
-final ChromeWebNavigation webNavigation = (ChromeWebNavigation._webNavigation == null ? null : new ChromeWebNavigation._());
+final ChromeWebNavigation webNavigation = ChromeWebNavigation._webNavigation == null ? apiNotAvailable('chrome.webNavigation') : new ChromeWebNavigation._();
 
 class ChromeWebNavigation {
   static final JsObject _webNavigation = context['chrome']['webNavigation'];

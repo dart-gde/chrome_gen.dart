@@ -10,7 +10,7 @@ library chrome.management;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.management` namespace.
-final ChromeManagement management = (ChromeManagement._management == null ? null : new ChromeManagement._());
+final ChromeManagement management = ChromeManagement._management == null ? apiNotAvailable('chrome.management') : new ChromeManagement._();
 
 class ChromeManagement {
   static final JsObject _management = context['chrome']['management'];

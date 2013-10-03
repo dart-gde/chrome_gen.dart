@@ -13,7 +13,7 @@ import 'events.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.declarativeWebRequest` namespace.
-final ChromeDeclarativeWebRequest declarativeWebRequest = (ChromeDeclarativeWebRequest._declarativeWebRequest == null ? null : new ChromeDeclarativeWebRequest._());
+final ChromeDeclarativeWebRequest declarativeWebRequest = ChromeDeclarativeWebRequest._declarativeWebRequest == null ? apiNotAvailable('chrome.declarativeWebRequest') : new ChromeDeclarativeWebRequest._();
 
 class ChromeDeclarativeWebRequest {
   static final JsObject _declarativeWebRequest = context['chrome']['declarativeWebRequest'];

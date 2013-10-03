@@ -11,7 +11,7 @@ import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.tabs` namespace.
-final ChromeTabs tabs = (ChromeTabs._tabs == null ? null : new ChromeTabs._());
+final ChromeTabs tabs = ChromeTabs._tabs == null ? apiNotAvailable('chrome.tabs') : new ChromeTabs._();
 
 class ChromeTabs {
   static final JsObject _tabs = context['chrome']['tabs'];
