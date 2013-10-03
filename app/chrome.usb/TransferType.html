@@ -41,9 +41,6 @@ class TransferType extends ChromeEnum {
 
  static const List&lt;TransferType&gt; VALUES = const[CONTROL, INTERRUPT, ISOCHRONOUS, BULK];
 
- static TransferType create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const TransferType._(String str): super(str);
 }
 </pre>
@@ -110,20 +107,6 @@ const List&lt;<a href="../chrome.usb/TransferType.html">TransferType</a>&gt;    
         <div class="doc">
 <pre class="source">
 static const List&lt;TransferType&gt; VALUES = const[CONTROL, INTERRUPT, ISOCHRONOUS, BULK]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.usb/TransferType.html">TransferType</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to TransferType.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static TransferType create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

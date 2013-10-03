@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class OpenOptions extends ChromeObject {
- static OpenOptions create(JsObject proxy) =&gt; proxy == null ? null : new OpenOptions.fromProxy(proxy);
 
  OpenOptions({int bitrate, DataBit dataBit, ParityBit parityBit, StopBit stopBit}) {
    if (bitrate != null) this.bitrate = bitrate;
@@ -48,13 +47,13 @@ class OpenOptions extends ChromeObject {
  int get bitrate =&gt; proxy['bitrate'];
  set bitrate(int value) =&gt; proxy['bitrate'] = value;
 
- DataBit get dataBit =&gt; DataBit.create(proxy['dataBit']);
+ DataBit get dataBit =&gt; _createDataBit(proxy['dataBit']);
  set dataBit(DataBit value) =&gt; proxy['dataBit'] = value;
 
- ParityBit get parityBit =&gt; ParityBit.create(proxy['parityBit']);
+ ParityBit get parityBit =&gt; _createParityBit(proxy['parityBit']);
  set parityBit(ParityBit value) =&gt; proxy['parityBit'] = value;
 
- StopBit get stopBit =&gt; StopBit.create(proxy['stopBit']);
+ StopBit get stopBit =&gt; _createStopBit(proxy['stopBit']);
  set stopBit(StopBit value) =&gt; proxy['stopBit'] = value;
 }
 </pre>
@@ -62,19 +61,6 @@ class OpenOptions extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>OpenOptions</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.serial/OpenOptions.html">OpenOptions</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to OpenOptions.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OpenOptions create(JsObject proxy) =&gt; proxy == null ? null : new OpenOptions.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -136,7 +122,7 @@ set bitrate(int value) =&gt; proxy['bitrate'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-DataBit get dataBit =&gt; DataBit.create(proxy['dataBit']);
+DataBit get dataBit =&gt; _createDataBit(proxy['dataBit']);
 </pre>
 <pre class="source">
 set dataBit(DataBit value) =&gt; proxy['dataBit'] = value;
@@ -151,7 +137,7 @@ set dataBit(DataBit value) =&gt; proxy['dataBit'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-ParityBit get parityBit =&gt; ParityBit.create(proxy['parityBit']);
+ParityBit get parityBit =&gt; _createParityBit(proxy['parityBit']);
 </pre>
 <pre class="source">
 set parityBit(ParityBit value) =&gt; proxy['parityBit'] = value;
@@ -178,7 +164,7 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-StopBit get stopBit =&gt; StopBit.create(proxy['stopBit']);
+StopBit get stopBit =&gt; _createStopBit(proxy['stopBit']);
 </pre>
 <pre class="source">
 set stopBit(StopBit value) =&gt; proxy['stopBit'] = value;

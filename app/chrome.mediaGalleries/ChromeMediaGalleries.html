@@ -45,7 +45,7 @@ class ChromeMediaGalleries {
  }
 
  MediaFileSystemMetadata getMediaFileSystemMetadata(dynamic mediaFileSystem) {
-   return MediaFileSystemMetadata.create(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
+   return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
  }
 }
 </pre>
@@ -59,7 +59,7 @@ class ChromeMediaGalleries {
 <div class="doc">
 <pre class="source">
 MediaFileSystemMetadata getMediaFileSystemMetadata(dynamic mediaFileSystem) {
- return MediaFileSystemMetadata.create(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
+ return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
 }
 </pre>
 </div>

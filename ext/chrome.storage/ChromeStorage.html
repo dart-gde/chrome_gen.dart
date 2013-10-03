@@ -41,12 +41,12 @@ class ChromeStorage {
  /**
   * Items in the `sync` storage area are synced using Chrome Sync.
   */
- StorageArea get sync =&gt; StorageArea.create(_storage['sync']);
+ StorageArea get sync =&gt; _createStorageArea(_storage['sync']);
 
  /**
   * Items in the `local` storage area are local to each machine.
   */
- StorageArea get local =&gt; StorageArea.create(_storage['local']);
+ StorageArea get local =&gt; _createStorageArea(_storage['local']);
 
  /**
   * Fired when one or more items change.
@@ -54,7 +54,7 @@ class ChromeStorage {
  Stream&lt;StorageOnChangedEvent&gt; get onChanged =&gt; _onChanged.stream;
 
  final ChromeStreamController&lt;StorageOnChangedEvent&gt; _onChanged =
-     new ChromeStreamController&lt;StorageOnChangedEvent&gt;.twoArgs(_storage['onChanged'], StorageOnChangedEvent.create);
+     new ChromeStreamController&lt;StorageOnChangedEvent&gt;.twoArgs(_storage['onChanged'], _createStorageOnChangedEvent);
 }
 </pre>
 </div>
@@ -69,7 +69,7 @@ final <a href="../chrome.storage/StorageArea.html">StorageArea</a>         <stro
         <div class="doc">
 <p>Items in the <code>local</code> storage area are local to each machine.</p>
 <pre class="source">
-StorageArea get local =&gt; StorageArea.create(_storage['local']);
+StorageArea get local =&gt; _createStorageArea(_storage['local']);
 </pre>
 </div>
 </div>
@@ -95,7 +95,7 @@ final <a href="../chrome.storage/StorageArea.html">StorageArea</a>         <stro
         <div class="doc">
 <p>Items in the <code>sync</code> storage area are synced using Chrome Sync.</p>
 <pre class="source">
-StorageArea get sync =&gt; StorageArea.create(_storage['sync']);
+StorageArea get sync =&gt; _createStorageArea(_storage['sync']);
 </pre>
 </div>
 </div>

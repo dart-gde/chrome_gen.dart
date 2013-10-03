@@ -40,9 +40,6 @@ class UsageType extends ChromeEnum {
 
  static const List&lt;UsageType&gt; VALUES = const[DATA, FEEDBACK, EXPLICITFEEDBACK];
 
- static UsageType create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const UsageType._(String str): super(str);
 }
 </pre>
@@ -97,20 +94,6 @@ const List&lt;<a href="../chrome.usb/UsageType.html">UsageType</a>&gt;         <
         <div class="doc">
 <pre class="source">
 static const List&lt;UsageType&gt; VALUES = const[DATA, FEEDBACK, EXPLICITFEEDBACK]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.usb/UsageType.html">UsageType</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to UsageType.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static UsageType create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

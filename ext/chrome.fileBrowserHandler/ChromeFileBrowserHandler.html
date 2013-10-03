@@ -63,7 +63,7 @@ class ChromeFileBrowserHandler {
  Stream&lt;OnExecuteEvent&gt; get onExecute =&gt; _onExecute.stream;
 
  final ChromeStreamController&lt;OnExecuteEvent&gt; _onExecute =
-     new ChromeStreamController&lt;OnExecuteEvent&gt;.twoArgs(_fileBrowserHandler['onExecute'], OnExecuteEvent.create);
+     new ChromeStreamController&lt;OnExecuteEvent&gt;.twoArgs(_fileBrowserHandler['onExecute'], _createOnExecuteEvent);
 }
 </pre>
 </div>

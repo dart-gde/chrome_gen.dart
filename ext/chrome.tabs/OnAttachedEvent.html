@@ -36,8 +36,6 @@
 between windows.</p>
 <pre class="source">
 class OnAttachedEvent {
- static OnAttachedEvent create(int tabId, JsObject attachInfo) =&gt;
-     new OnAttachedEvent(tabId, mapify(attachInfo));
 
  final int tabId;
 
@@ -46,20 +44,6 @@ class OnAttachedEvent {
  OnAttachedEvent(this.tabId, this.attachInfo);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.tabs/OnAttachedEvent.html">OnAttachedEvent</a> <strong>create</strong>(int tabId, JsObject attachInfo) <a class="anchor-link" href="#create"
-              title="Permalink to OnAttachedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnAttachedEvent create(int tabId, JsObject attachInfo) =&gt;
-   new OnAttachedEvent(tabId, mapify(attachInfo));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

@@ -162,7 +162,7 @@ class ChromeInputIme {
  Stream&lt;InputContext&gt; get onFocus =&gt; _onFocus.stream;
 
  final ChromeStreamController&lt;InputContext&gt; _onFocus =
-     new ChromeStreamController&lt;InputContext&gt;.oneArg(_input_ime['onFocus'], InputContext.create);
+     new ChromeStreamController&lt;InputContext&gt;.oneArg(_input_ime['onFocus'], _createInputContext);
 
  /**
   * This event is sent when focus leaves a text box. It is sent to all
@@ -181,7 +181,7 @@ class ChromeInputIme {
  Stream&lt;InputContext&gt; get onInputContextUpdate =&gt; _onInputContextUpdate.stream;
 
  final ChromeStreamController&lt;InputContext&gt; _onInputContextUpdate =
-     new ChromeStreamController&lt;InputContext&gt;.oneArg(_input_ime['onInputContextUpdate'], InputContext.create);
+     new ChromeStreamController&lt;InputContext&gt;.oneArg(_input_ime['onInputContextUpdate'], _createInputContext);
 
  /**
   * This event is sent if this extension owns the active IME.
@@ -189,7 +189,7 @@ class ChromeInputIme {
  Stream&lt;OnKeyEventEvent&gt; get onKeyEvent =&gt; _onKeyEvent.stream;
 
  final ChromeStreamController&lt;OnKeyEventEvent&gt; _onKeyEvent =
-     new ChromeStreamController&lt;OnKeyEventEvent&gt;.twoArgs(_input_ime['onKeyEvent'], OnKeyEventEvent.create);
+     new ChromeStreamController&lt;OnKeyEventEvent&gt;.twoArgs(_input_ime['onKeyEvent'], _createOnKeyEventEvent);
 
  /**
   * This event is sent if this extension owns the active IME.
@@ -197,7 +197,7 @@ class ChromeInputIme {
  Stream&lt;OnCandidateClickedEvent&gt; get onCandidateClicked =&gt; _onCandidateClicked.stream;
 
  final ChromeStreamController&lt;OnCandidateClickedEvent&gt; _onCandidateClicked =
-     new ChromeStreamController&lt;OnCandidateClickedEvent&gt;.threeArgs(_input_ime['onCandidateClicked'], OnCandidateClickedEvent.create);
+     new ChromeStreamController&lt;OnCandidateClickedEvent&gt;.threeArgs(_input_ime['onCandidateClicked'], _createOnCandidateClickedEvent);
 
  /**
   * Called when the user selects a menu item
@@ -205,7 +205,7 @@ class ChromeInputIme {
  Stream&lt;OnMenuItemActivatedEvent&gt; get onMenuItemActivated =&gt; _onMenuItemActivated.stream;
 
  final ChromeStreamController&lt;OnMenuItemActivatedEvent&gt; _onMenuItemActivated =
-     new ChromeStreamController&lt;OnMenuItemActivatedEvent&gt;.twoArgs(_input_ime['onMenuItemActivated'], OnMenuItemActivatedEvent.create);
+     new ChromeStreamController&lt;OnMenuItemActivatedEvent&gt;.twoArgs(_input_ime['onMenuItemActivated'], _createOnMenuItemActivatedEvent);
 
  /**
   * Called when the editable string around caret is changed or when the caret
@@ -215,7 +215,7 @@ class ChromeInputIme {
  Stream&lt;OnSurroundingTextChangedEvent&gt; get onSurroundingTextChanged =&gt; _onSurroundingTextChanged.stream;
 
  final ChromeStreamController&lt;OnSurroundingTextChangedEvent&gt; _onSurroundingTextChanged =
-     new ChromeStreamController&lt;OnSurroundingTextChangedEvent&gt;.twoArgs(_input_ime['onSurroundingTextChanged'], OnSurroundingTextChangedEvent.create);
+     new ChromeStreamController&lt;OnSurroundingTextChangedEvent&gt;.twoArgs(_input_ime['onSurroundingTextChanged'], _createOnSurroundingTextChangedEvent);
 
  /**
   * This event is sent when chrome terminates ongoing text input session.

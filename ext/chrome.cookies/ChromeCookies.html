@@ -51,7 +51,7 @@ class ChromeCookies {
   * was found.
   */
  Future&lt;Cookie&gt; get(Map details) {
-   var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(Cookie.create);
+   var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(_createCookie);
    _cookies.callMethod('get', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -68,7 +68,7 @@ class ChromeCookies {
   * All the existing, unexpired cookies that match the given cookie info.
   */
  Future&lt;List&lt;Cookie&gt;&gt; getAll(Map details) {
-   var completer = new ChromeCompleter&lt;List&lt;Cookie&gt;&gt;.oneArg((e) =&gt; listify(e, Cookie.create));
+   var completer = new ChromeCompleter&lt;List&lt;Cookie&gt;&gt;.oneArg((e) =&gt; listify(e, _createCookie));
    _cookies.callMethod('getAll', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -85,7 +85,7 @@ class ChromeCookies {
   * set.
   */
  Future&lt;Cookie&gt; set(Map details) {
-   var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(Cookie.create);
+   var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(_createCookie);
    _cookies.callMethod('set', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -113,7 +113,7 @@ class ChromeCookies {
   * All the existing cookie stores.
   */
  Future&lt;List&lt;CookieStore&gt;&gt; getAllCookieStores() {
-   var completer = new ChromeCompleter&lt;List&lt;CookieStore&gt;&gt;.oneArg((e) =&gt; listify(e, CookieStore.create));
+   var completer = new ChromeCompleter&lt;List&lt;CookieStore&gt;&gt;.oneArg((e) =&gt; listify(e, _createCookieStore));
    _cookies.callMethod('getAllCookieStores', [completer.callback]);
    return completer.future;
  }
@@ -170,7 +170,7 @@ Contains details about the cookie. This parameter is null if no such cookie
 was found.</p>
 <pre class="source">
 Future&lt;Cookie&gt; get(Map details) {
- var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(Cookie.create);
+ var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(_createCookie);
  _cookies.callMethod('get', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -192,7 +192,7 @@ with the earliest creation time will be first.</p>
 All the existing, unexpired cookies that match the given cookie info.</p>
 <pre class="source">
 Future&lt;List&lt;Cookie&gt;&gt; getAll(Map details) {
- var completer = new ChromeCompleter&lt;List&lt;Cookie&gt;&gt;.oneArg((e) =&gt; listify(e, Cookie.create));
+ var completer = new ChromeCompleter&lt;List&lt;Cookie&gt;&gt;.oneArg((e) =&gt; listify(e, _createCookie));
  _cookies.callMethod('getAll', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -209,7 +209,7 @@ Future&lt;List&lt;<a href="../chrome.cookies/CookieStore.html">CookieStore</a>&g
 All the existing cookie stores.</p>
 <pre class="source">
 Future&lt;List&lt;CookieStore&gt;&gt; getAllCookieStores() {
- var completer = new ChromeCompleter&lt;List&lt;CookieStore&gt;&gt;.oneArg((e) =&gt; listify(e, CookieStore.create));
+ var completer = new ChromeCompleter&lt;List&lt;CookieStore&gt;&gt;.oneArg((e) =&gt; listify(e, _createCookieStore));
  _cookies.callMethod('getAllCookieStores', [completer.callback]);
  return completer.future;
 }
@@ -252,7 +252,7 @@ any reason, this will be "null", and "chrome.runtime.lastError" will be
 set.</p>
 <pre class="source">
 Future&lt;Cookie&gt; set(Map details) {
- var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(Cookie.create);
+ var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(_createCookie);
  _cookies.callMethod('set', [jsify(details), completer.callback]);
  return completer.future;
 }

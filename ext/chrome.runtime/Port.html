@@ -35,7 +35,6 @@
 <p>An object which allows two way communication with other pages.</p>
 <pre class="source">
 class Port extends ChromeObject {
- static Port create(JsObject proxy) =&gt; proxy == null ? null : new Port.fromProxy(proxy);
 
  Port({String name, var disconnect, Event onDisconnect, Event onMessage, var postMessage, MessageSender sender}) {
    if (name != null) this.name = name;
@@ -54,10 +53,10 @@ class Port extends ChromeObject {
  dynamic get disconnect =&gt; proxy['disconnect'];
  set disconnect(var value) =&gt; proxy['disconnect'] = value;
 
- Event get onDisconnect =&gt; Event.create(proxy['onDisconnect']);
+ Event get onDisconnect =&gt; _createEvent(proxy['onDisconnect']);
  set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = value;
 
- Event get onMessage =&gt; Event.create(proxy['onMessage']);
+ Event get onMessage =&gt; _createEvent(proxy['onMessage']);
  set onMessage(Event value) =&gt; proxy['onMessage'] = value;
 
  dynamic get postMessage =&gt; proxy['postMessage'];
@@ -67,7 +66,7 @@ class Port extends ChromeObject {
   * This property will &lt;b&gt;only&lt;/b&gt; be present on ports passed to
   * onConnect/onConnectExternal listeners.
   */
- MessageSender get sender =&gt; MessageSender.create(proxy['sender']);
+ MessageSender get sender =&gt; _createMessageSender(proxy['sender']);
  set sender(MessageSender value) =&gt; proxy['sender'] = value;
 }
 </pre>
@@ -75,19 +74,6 @@ class Port extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>Port</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.runtime/Port.html">Port</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to Port.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static Port create(JsObject proxy) =&gt; proxy == null ? null : new Port.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -166,7 +152,7 @@ set name(String value) =&gt; proxy['name'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-Event get onDisconnect =&gt; Event.create(proxy['onDisconnect']);
+Event get onDisconnect =&gt; _createEvent(proxy['onDisconnect']);
 </pre>
 <pre class="source">
 set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = value;
@@ -181,7 +167,7 @@ set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-Event get onMessage =&gt; Event.create(proxy['onMessage']);
+Event get onMessage =&gt; _createEvent(proxy['onMessage']);
 </pre>
 <pre class="source">
 set onMessage(Event value) =&gt; proxy['onMessage'] = value;
@@ -225,7 +211,7 @@ final JsObject proxy
 <p>This property will &lt;b>only&lt;/b> be present on ports passed to
 onConnect/onConnectExternal listeners.</p>
 <pre class="source">
-MessageSender get sender =&gt; MessageSender.create(proxy['sender']);
+MessageSender get sender =&gt; _createMessageSender(proxy['sender']);
 </pre>
 <pre class="source">
 set sender(MessageSender value) =&gt; proxy['sender'] = value;

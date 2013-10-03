@@ -35,8 +35,6 @@
 <p>Fired each time a process is terminated, providing the type of exit.</p>
 <pre class="source">
 class OnExitedEvent {
- static OnExitedEvent create(int processId, int exitType, int exitCode) =&gt;
-     new OnExitedEvent(processId, exitType, exitCode);
 
  /**
   * The ID of the process that exited.
@@ -58,20 +56,6 @@ class OnExitedEvent {
  OnExitedEvent(this.processId, this.exitType, this.exitCode);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.processes/OnExitedEvent.html">OnExitedEvent</a> <strong>create</strong>(int processId, int exitType, int exitCode) <a class="anchor-link" href="#create"
-              title="Permalink to OnExitedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnExitedEvent create(int processId, int exitType, int exitCode) =&gt;
-   new OnExitedEvent(processId, exitType, exitCode);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

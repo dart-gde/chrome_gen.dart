@@ -35,8 +35,6 @@
 <p>Fired when a context menu item is clicked.</p>
 <pre class="source">
 class OnClickedEvent {
- static OnClickedEvent create(JsObject info, JsObject tab) =&gt;
-     new OnClickedEvent(OnClickData.create(info), Tab.create(tab));
 
  /**
   * Information about the item clicked and the context where the click
@@ -57,20 +55,6 @@ class OnClickedEvent {
  OnClickedEvent(this.info, this.tab);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.contextMenus/OnClickedEvent.html">OnClickedEvent</a> <strong>create</strong>(JsObject info, JsObject tab) <a class="anchor-link" href="#create"
-              title="Permalink to OnClickedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnClickedEvent create(JsObject info, JsObject tab) =&gt;
-   new OnClickedEvent(OnClickData.create(info), Tab.create(tab));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

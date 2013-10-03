@@ -39,7 +39,7 @@ class ChromeSystemMemory {
  ChromeSystemMemory._();
 
  Future&lt;MemoryInfo&gt; getInfo() {
-   var completer = new ChromeCompleter&lt;MemoryInfo&gt;.oneArg(MemoryInfo.create);
+   var completer = new ChromeCompleter&lt;MemoryInfo&gt;.oneArg(_createMemoryInfo);
    _system_memory.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
@@ -55,7 +55,7 @@ Future&lt;<a href="../chrome.system_memory/MemoryInfo.html">MemoryInfo</a>&gt; <
 <div class="doc">
 <pre class="source">
 Future&lt;MemoryInfo&gt; getInfo() {
- var completer = new ChromeCompleter&lt;MemoryInfo&gt;.oneArg(MemoryInfo.create);
+ var completer = new ChromeCompleter&lt;MemoryInfo&gt;.oneArg(_createMemoryInfo);
  _system_memory.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }

@@ -35,8 +35,6 @@
 <p>This event is sent if this extension owns the active IME.</p>
 <pre class="source">
 class OnCandidateClickedEvent {
- static OnCandidateClickedEvent create(String engineID, int candidateID, String button) =&gt;
-     new OnCandidateClickedEvent(engineID, candidateID, button);
 
  /**
   * ID of the engine receiving the event
@@ -57,20 +55,6 @@ class OnCandidateClickedEvent {
  OnCandidateClickedEvent(this.engineID, this.candidateID, this.button);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.input_ime/OnCandidateClickedEvent.html">OnCandidateClickedEvent</a> <strong>create</strong>(String engineID, int candidateID, String button) <a class="anchor-link" href="#create"
-              title="Permalink to OnCandidateClickedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnCandidateClickedEvent create(String engineID, int candidateID, String button) =&gt;
-   new OnCandidateClickedEvent(engineID, candidateID, button);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

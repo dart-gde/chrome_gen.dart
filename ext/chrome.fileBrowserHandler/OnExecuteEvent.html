@@ -35,8 +35,6 @@
 <p>Fired when file system action is executed from ChromeOS file browser.</p>
 <pre class="source">
 class OnExecuteEvent {
- static OnExecuteEvent create(String id, JsObject details) =&gt;
-     new OnExecuteEvent(id, FileHandlerExecuteEventDetails.create(details));
 
  /**
   * File browser action id as specified in the listener component's manifest.
@@ -51,20 +49,6 @@ class OnExecuteEvent {
  OnExecuteEvent(this.id, this.details);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.fileBrowserHandler/OnExecuteEvent.html">OnExecuteEvent</a> <strong>create</strong>(String id, JsObject details) <a class="anchor-link" href="#create"
-              title="Permalink to OnExecuteEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnExecuteEvent create(String id, JsObject details) =&gt;
-   new OnExecuteEvent(id, FileHandlerExecuteEventDetails.create(details));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

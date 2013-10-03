@@ -35,8 +35,6 @@
 <p>Deprecated. Please use onActivated.</p>
 <pre class="source">
 class OnSelectionChangedEvent {
- static OnSelectionChangedEvent create(int tabId, JsObject selectInfo) =&gt;
-     new OnSelectionChangedEvent(tabId, mapify(selectInfo));
 
  /**
   * The ID of the tab that has become active.
@@ -48,20 +46,6 @@ class OnSelectionChangedEvent {
  OnSelectionChangedEvent(this.tabId, this.selectInfo);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.tabs/OnSelectionChangedEvent.html">OnSelectionChangedEvent</a> <strong>create</strong>(int tabId, JsObject selectInfo) <a class="anchor-link" href="#create"
-              title="Permalink to OnSelectionChangedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnSelectionChangedEvent create(int tabId, JsObject selectInfo) =&gt;
-   new OnSelectionChangedEvent(tabId, mapify(selectInfo));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

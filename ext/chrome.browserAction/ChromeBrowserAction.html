@@ -112,7 +112,7 @@ class ChromeBrowserAction {
   * Gets the background color of the browser action.
   */
  Future&lt;ColorArray&gt; getBadgeBackgroundColor(Map details) {
-   var completer = new ChromeCompleter&lt;ColorArray&gt;.oneArg(ColorArray.create);
+   var completer = new ChromeCompleter&lt;ColorArray&gt;.oneArg(_createColorArray);
    _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -143,7 +143,7 @@ class ChromeBrowserAction {
  Stream&lt;Tab&gt; get onClicked =&gt; _onClicked.stream;
 
  final ChromeStreamController&lt;Tab&gt; _onClicked =
-     new ChromeStreamController&lt;Tab&gt;.oneArg(_browserAction['onClicked'], Tab.create);
+     new ChromeStreamController&lt;Tab&gt;.oneArg(_browserAction['onClicked'], _createTab);
 }
 </pre>
 </div>
@@ -205,7 +205,7 @@ Future&lt;<a href="../chrome.browserAction/ColorArray.html">ColorArray</a>&gt; <
 <p>Gets the background color of the browser action.</p>
 <pre class="source">
 Future&lt;ColorArray&gt; getBadgeBackgroundColor(Map details) {
- var completer = new ChromeCompleter&lt;ColorArray&gt;.oneArg(ColorArray.create);
+ var completer = new ChromeCompleter&lt;ColorArray&gt;.oneArg(_createColorArray);
  _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
  return completer.future;
 }

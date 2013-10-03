@@ -35,8 +35,6 @@
 <p>Fired when a tab is replaced with another tab due to prerendering or instant.</p>
 <pre class="source">
 class OnReplacedEvent {
- static OnReplacedEvent create(int addedTabId, int removedTabId) =&gt;
-     new OnReplacedEvent(addedTabId, removedTabId);
 
  final int addedTabId;
 
@@ -45,20 +43,6 @@ class OnReplacedEvent {
  OnReplacedEvent(this.addedTabId, this.removedTabId);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.tabs/OnReplacedEvent.html">OnReplacedEvent</a> <strong>create</strong>(int addedTabId, int removedTabId) <a class="anchor-link" href="#create"
-              title="Permalink to OnReplacedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnReplacedEvent create(int addedTabId, int removedTabId) =&gt;
-   new OnReplacedEvent(addedTabId, removedTabId);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

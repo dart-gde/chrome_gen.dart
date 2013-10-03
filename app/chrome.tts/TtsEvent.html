@@ -35,7 +35,6 @@
 <p>An event from the TTS engine to communicate the status of an utterance.</p>
 <pre class="source">
 class TtsEvent extends ChromeObject {
- static TtsEvent create(JsObject proxy) =&gt; proxy == null ? null : new TtsEvent.fromProxy(proxy);
 
  TtsEvent({String type, var charIndex, String errorMessage}) {
    if (type != null) this.type = type;
@@ -79,19 +78,6 @@ class TtsEvent extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>TtsEvent</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.tts/TtsEvent.html">TtsEvent</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to TtsEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static TtsEvent create(JsObject proxy) =&gt; proxy == null ? null : new TtsEvent.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">

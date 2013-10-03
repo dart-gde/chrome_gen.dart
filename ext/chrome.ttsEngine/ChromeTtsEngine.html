@@ -55,7 +55,7 @@ class ChromeTtsEngine {
  Stream&lt;OnSpeakEvent&gt; get onSpeak =&gt; _onSpeak.stream;
 
  final ChromeStreamController&lt;OnSpeakEvent&gt; _onSpeak =
-     new ChromeStreamController&lt;OnSpeakEvent&gt;.threeArgs(_ttsEngine['onSpeak'], OnSpeakEvent.create);
+     new ChromeStreamController&lt;OnSpeakEvent&gt;.threeArgs(_ttsEngine['onSpeak'], _createOnSpeakEvent);
 
  /**
   * Fired when a call is made to tts.stop and this extension may be in the

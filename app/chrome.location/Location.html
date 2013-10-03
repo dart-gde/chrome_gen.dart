@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class Location extends ChromeObject {
- static Location create(JsObject proxy) =&gt; proxy == null ? null : new Location.fromProxy(proxy);
 
  Location({String name, Coordinates coords, double timestamp}) {
    if (name != null) this.name = name;
@@ -47,7 +46,7 @@ class Location extends ChromeObject {
  String get name =&gt; proxy['name'];
  set name(String value) =&gt; proxy['name'] = value;
 
- Coordinates get coords =&gt; Coordinates.create(proxy['coords']);
+ Coordinates get coords =&gt; _createCoordinates(proxy['coords']);
  set coords(Coordinates value) =&gt; proxy['coords'] = value;
 
  double get timestamp =&gt; proxy['timestamp'];
@@ -58,19 +57,6 @@ class Location extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>Location</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.location/Location.html">Location</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to Location.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static Location create(JsObject proxy) =&gt; proxy == null ? null : new Location.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -116,7 +102,7 @@ Location.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-Coordinates get coords =&gt; Coordinates.create(proxy['coords']);
+Coordinates get coords =&gt; _createCoordinates(proxy['coords']);
 </pre>
 <pre class="source">
 set coords(Coordinates value) =&gt; proxy['coords'] = value;

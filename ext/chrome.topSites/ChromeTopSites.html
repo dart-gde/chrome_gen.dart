@@ -42,7 +42,7 @@ class ChromeTopSites {
   * Gets a list of top sites.
   */
  Future&lt;List&lt;MostVisitedURL&gt;&gt; get() {
-   var completer = new ChromeCompleter&lt;List&lt;MostVisitedURL&gt;&gt;.oneArg((e) =&gt; listify(e, MostVisitedURL.create));
+   var completer = new ChromeCompleter&lt;List&lt;MostVisitedURL&gt;&gt;.oneArg((e) =&gt; listify(e, _createMostVisitedURL));
    _topSites.callMethod('get', [completer.callback]);
    return completer.future;
  }
@@ -59,7 +59,7 @@ Future&lt;List&lt;<a href="../chrome.topSites/MostVisitedURL.html">MostVisitedUR
 <p>Gets a list of top sites.</p>
 <pre class="source">
 Future&lt;List&lt;MostVisitedURL&gt;&gt; get() {
- var completer = new ChromeCompleter&lt;List&lt;MostVisitedURL&gt;&gt;.oneArg((e) =&gt; listify(e, MostVisitedURL.create));
+ var completer = new ChromeCompleter&lt;List&lt;MostVisitedURL&gt;&gt;.oneArg((e) =&gt; listify(e, _createMostVisitedURL));
  _topSites.callMethod('get', [completer.callback]);
  return completer.future;
 }

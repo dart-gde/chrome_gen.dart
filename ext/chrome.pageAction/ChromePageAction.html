@@ -110,7 +110,7 @@ class ChromePageAction {
  Stream&lt;Tab&gt; get onClicked =&gt; _onClicked.stream;
 
  final ChromeStreamController&lt;Tab&gt; _onClicked =
-     new ChromeStreamController&lt;Tab&gt;.oneArg(_pageAction['onClicked'], Tab.create);
+     new ChromeStreamController&lt;Tab&gt;.oneArg(_pageAction['onClicked'], _createTab);
 }
 </pre>
 </div>

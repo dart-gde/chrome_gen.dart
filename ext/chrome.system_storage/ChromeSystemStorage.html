@@ -39,13 +39,13 @@ class ChromeSystemStorage {
  ChromeSystemStorage._();
 
  Future&lt;StorageUnitInfo&gt; getInfo() {
-   var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(StorageUnitInfo.create);
+   var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(_createStorageUnitInfo);
    _system_storage.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
 
  Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
-   var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(EjectDeviceResultCode.create);
+   var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(_createEjectDeviceResultCode);
    _system_storage.callMethod('ejectDevice', [id, completer.callback]);
    return completer.future;
  }
@@ -53,7 +53,7 @@ class ChromeSystemStorage {
  Stream&lt;StorageUnitInfo&gt; get onAttached =&gt; _onAttached.stream;
 
  final ChromeStreamController&lt;StorageUnitInfo&gt; _onAttached =
-     new ChromeStreamController&lt;StorageUnitInfo&gt;.oneArg(_system_storage['onAttached'], StorageUnitInfo.create);
+     new ChromeStreamController&lt;StorageUnitInfo&gt;.oneArg(_system_storage['onAttached'], _createStorageUnitInfo);
 
  Stream&lt;String&gt; get onDetached =&gt; _onDetached.stream;
 
@@ -98,7 +98,7 @@ Future&lt;<a href="../chrome.system_storage/EjectDeviceResultCode.html">EjectDev
 <div class="doc">
 <pre class="source">
 Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
- var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(EjectDeviceResultCode.create);
+ var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(_createEjectDeviceResultCode);
  _system_storage.callMethod('ejectDevice', [id, completer.callback]);
  return completer.future;
 }
@@ -112,7 +112,7 @@ Future&lt;<a href="../chrome.system_storage/StorageUnitInfo.html">StorageUnitInf
 <div class="doc">
 <pre class="source">
 Future&lt;StorageUnitInfo&gt; getInfo() {
- var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(StorageUnitInfo.create);
+ var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(_createStorageUnitInfo);
  _system_storage.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }

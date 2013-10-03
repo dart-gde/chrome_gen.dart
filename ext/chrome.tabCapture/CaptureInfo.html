@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class CaptureInfo extends ChromeObject {
- static CaptureInfo create(JsObject proxy) =&gt; proxy == null ? null : new CaptureInfo.fromProxy(proxy);
 
  CaptureInfo({int tabId, TabCaptureState status, bool fullscreen}) {
    if (tabId != null) this.tabId = tabId;
@@ -47,7 +46,7 @@ class CaptureInfo extends ChromeObject {
  int get tabId =&gt; proxy['tabId'];
  set tabId(int value) =&gt; proxy['tabId'] = value;
 
- TabCaptureState get status =&gt; TabCaptureState.create(proxy['status']);
+ TabCaptureState get status =&gt; _createTabCaptureState(proxy['status']);
  set status(TabCaptureState value) =&gt; proxy['status'] = value;
 
  bool get fullscreen =&gt; proxy['fullscreen'];
@@ -58,19 +57,6 @@ class CaptureInfo extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>CaptureInfo</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.tabCapture/CaptureInfo.html">CaptureInfo</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to CaptureInfo.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static CaptureInfo create(JsObject proxy) =&gt; proxy == null ? null : new CaptureInfo.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -143,7 +129,7 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-TabCaptureState get status =&gt; TabCaptureState.create(proxy['status']);
+TabCaptureState get status =&gt; _createTabCaptureState(proxy['status']);
 </pre>
 <pre class="source">
 set status(TabCaptureState value) =&gt; proxy['status'] = value;

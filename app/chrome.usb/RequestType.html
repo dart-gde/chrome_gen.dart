@@ -41,9 +41,6 @@ class RequestType extends ChromeEnum {
 
  static const List&lt;RequestType&gt; VALUES = const[STANDARD, CLASS, VENDOR, RESERVED];
 
- static RequestType create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const RequestType._(String str): super(str);
 }
 </pre>
@@ -110,20 +107,6 @@ const <a href="../chrome.usb/RequestType.html">RequestType</a>         <strong>V
         <div class="doc">
 <pre class="source">
 static const RequestType VENDOR = const RequestType._('vendor')
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.usb/RequestType.html">RequestType</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to RequestType.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static RequestType create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

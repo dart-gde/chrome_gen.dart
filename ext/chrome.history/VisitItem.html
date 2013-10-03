@@ -35,7 +35,6 @@
 <p>An object encapsulating one visit to a URL.</p>
 <pre class="source">
 class VisitItem extends ChromeObject {
- static VisitItem create(JsObject proxy) =&gt; proxy == null ? null : new VisitItem.fromProxy(proxy);
 
  VisitItem({String id, String visitId, var visitTime, String referringVisitId, String transition}) {
    if (id != null) this.id = id;
@@ -85,19 +84,6 @@ class VisitItem extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>VisitItem</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.history/VisitItem.html">VisitItem</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to VisitItem.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static VisitItem create(JsObject proxy) =&gt; proxy == null ? null : new VisitItem.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">

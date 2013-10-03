@@ -38,8 +38,6 @@ the other tabs that must move in response. This event is not fired when a tab
 is moved between windows. For that, see <code>onDetached.</code></p>
 <pre class="source">
 class TabsOnMovedEvent {
- static TabsOnMovedEvent create(int tabId, JsObject moveInfo) =&gt;
-     new TabsOnMovedEvent(tabId, mapify(moveInfo));
 
  final int tabId;
 
@@ -48,20 +46,6 @@ class TabsOnMovedEvent {
  TabsOnMovedEvent(this.tabId, this.moveInfo);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.tabs/TabsOnMovedEvent.html">TabsOnMovedEvent</a> <strong>create</strong>(int tabId, JsObject moveInfo) <a class="anchor-link" href="#create"
-              title="Permalink to TabsOnMovedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static TabsOnMovedEvent create(int tabId, JsObject moveInfo) =&gt;
-   new TabsOnMovedEvent(tabId, mapify(moveInfo));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class InputDeviceInfo extends ChromeObject {
- static InputDeviceInfo create(JsObject proxy) =&gt; proxy == null ? null : new InputDeviceInfo.fromProxy(proxy);
 
  InputDeviceInfo({String id, String name, bool isActive, bool isMuted, double gain}) {
    if (id != null) this.id = id;
@@ -66,19 +65,6 @@ class InputDeviceInfo extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>InputDeviceInfo</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.audio/InputDeviceInfo.html">InputDeviceInfo</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to InputDeviceInfo.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static InputDeviceInfo create(JsObject proxy) =&gt; proxy == null ? null : new InputDeviceInfo.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">

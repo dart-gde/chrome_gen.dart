@@ -35,8 +35,6 @@
 <p>Fired when a tab is closed.</p>
 <pre class="source">
 class TabsOnRemovedEvent {
- static TabsOnRemovedEvent create(int tabId, JsObject removeInfo) =&gt;
-     new TabsOnRemovedEvent(tabId, mapify(removeInfo));
 
  final int tabId;
 
@@ -45,20 +43,6 @@ class TabsOnRemovedEvent {
  TabsOnRemovedEvent(this.tabId, this.removeInfo);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.tabs/TabsOnRemovedEvent.html">TabsOnRemovedEvent</a> <strong>create</strong>(int tabId, JsObject removeInfo) <a class="anchor-link" href="#create"
-              title="Permalink to TabsOnRemovedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static TabsOnRemovedEvent create(int tabId, JsObject removeInfo) =&gt;
-   new TabsOnRemovedEvent(tabId, mapify(removeInfo));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

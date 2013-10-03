@@ -76,7 +76,7 @@ class ChromeOmnibox {
  Stream&lt;OnInputChangedEvent&gt; get onInputChanged =&gt; _onInputChanged.stream;
 
  final ChromeStreamController&lt;OnInputChangedEvent&gt; _onInputChanged =
-     new ChromeStreamController&lt;OnInputChangedEvent&gt;.twoArgs(_omnibox['onInputChanged'], OnInputChangedEvent.create);
+     new ChromeStreamController&lt;OnInputChangedEvent&gt;.twoArgs(_omnibox['onInputChanged'], _createOnInputChangedEvent);
 
  /**
   * User has accepted what is typed into the omnibox.
@@ -84,7 +84,7 @@ class ChromeOmnibox {
  Stream&lt;OnInputEnteredEvent&gt; get onInputEntered =&gt; _onInputEntered.stream;
 
  final ChromeStreamController&lt;OnInputEnteredEvent&gt; _onInputEntered =
-     new ChromeStreamController&lt;OnInputEnteredEvent&gt;.twoArgs(_omnibox['onInputEntered'], OnInputEnteredEvent.create);
+     new ChromeStreamController&lt;OnInputEnteredEvent&gt;.twoArgs(_omnibox['onInputEntered'], _createOnInputEnteredEvent);
 
  /**
   * User has ended the keyword input session without accepting the input.

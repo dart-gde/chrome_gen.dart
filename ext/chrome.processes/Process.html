@@ -35,7 +35,6 @@
 <p>An object containing information about one of the browser's processes.</p>
 <pre class="source">
 class Process extends ChromeObject {
- static Process create(JsObject proxy) =&gt; proxy == null ? null : new Process.fromProxy(proxy);
 
  Process({int id, int osProcessId, String type, String profile, List&lt;int&gt; tabs, var cpu, var network, var privateMemory, var jsMemoryAllocated, var jsMemoryUsed, var sqliteMemory, var fps, Cache imageCache, Cache scriptCache, Cache cssCache}) {
    if (id != null) this.id = id;
@@ -151,7 +150,7 @@ class Process extends ChromeObject {
   * available when receiving the object as part of a callback from onUpdated or
   * onUpdatedWithMemory.
   */
- Cache get imageCache =&gt; Cache.create(proxy['imageCache']);
+ Cache get imageCache =&gt; _createCache(proxy['imageCache']);
  set imageCache(Cache value) =&gt; proxy['imageCache'] = value;
 
  /**
@@ -159,7 +158,7 @@ class Process extends ChromeObject {
   * available when receiving the object as part of a callback from onUpdated or
   * onUpdatedWithMemory.
   */
- Cache get scriptCache =&gt; Cache.create(proxy['scriptCache']);
+ Cache get scriptCache =&gt; _createCache(proxy['scriptCache']);
  set scriptCache(Cache value) =&gt; proxy['scriptCache'] = value;
 
  /**
@@ -167,7 +166,7 @@ class Process extends ChromeObject {
   * available when receiving the object as part of a callback from onUpdated or
   * onUpdatedWithMemory.
   */
- Cache get cssCache =&gt; Cache.create(proxy['cssCache']);
+ Cache get cssCache =&gt; _createCache(proxy['cssCache']);
  set cssCache(Cache value) =&gt; proxy['cssCache'] = value;
 }
 </pre>
@@ -175,19 +174,6 @@ class Process extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>Process</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.processes/Process.html">Process</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to Process.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static Process create(JsObject proxy) =&gt; proxy == null ? null : new Process.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -266,7 +252,7 @@ set cpu(var value) =&gt; proxy['cpu'] = value;
 available when receiving the object as part of a callback from onUpdated or
 onUpdatedWithMemory.</p>
 <pre class="source">
-Cache get cssCache =&gt; Cache.create(proxy['cssCache']);
+Cache get cssCache =&gt; _createCache(proxy['cssCache']);
 </pre>
 <pre class="source">
 set cssCache(Cache value) =&gt; proxy['cssCache'] = value;
@@ -318,7 +304,7 @@ set id(int value) =&gt; proxy['id'] = value;
 available when receiving the object as part of a callback from onUpdated or
 onUpdatedWithMemory.</p>
 <pre class="source">
-Cache get imageCache =&gt; Cache.create(proxy['imageCache']);
+Cache get imageCache =&gt; _createCache(proxy['imageCache']);
 </pre>
 <pre class="source">
 set imageCache(Cache value) =&gt; proxy['imageCache'] = value;
@@ -452,7 +438,7 @@ final JsObject proxy
 available when receiving the object as part of a callback from onUpdated or
 onUpdatedWithMemory.</p>
 <pre class="source">
-Cache get scriptCache =&gt; Cache.create(proxy['scriptCache']);
+Cache get scriptCache =&gt; _createCache(proxy['scriptCache']);
 </pre>
 <pre class="source">
 set scriptCache(Cache value) =&gt; proxy['scriptCache'] = value;

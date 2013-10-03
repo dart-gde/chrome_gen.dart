@@ -35,8 +35,6 @@
 <p>Fired when a tab is updated.</p>
 <pre class="source">
 class OnUpdatedEvent {
- static OnUpdatedEvent create(int tabId, JsObject changeInfo, JsObject tab) =&gt;
-     new OnUpdatedEvent(tabId, mapify(changeInfo), Tab.create(tab));
 
  final int tabId;
 
@@ -53,20 +51,6 @@ class OnUpdatedEvent {
  OnUpdatedEvent(this.tabId, this.changeInfo, this.tab);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.tabs/OnUpdatedEvent.html">OnUpdatedEvent</a> <strong>create</strong>(int tabId, JsObject changeInfo, JsObject tab) <a class="anchor-link" href="#create"
-              title="Permalink to OnUpdatedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnUpdatedEvent create(int tabId, JsObject changeInfo, JsObject tab) =&gt;
-   new OnUpdatedEvent(tabId, mapify(changeInfo), Tab.create(tab));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

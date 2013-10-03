@@ -43,7 +43,7 @@ class ChromeHistory {
   * query.
   */
  Future&lt;List&lt;HistoryItem&gt;&gt; search(Map query) {
-   var completer = new ChromeCompleter&lt;List&lt;HistoryItem&gt;&gt;.oneArg((e) =&gt; listify(e, HistoryItem.create));
+   var completer = new ChromeCompleter&lt;List&lt;HistoryItem&gt;&gt;.oneArg((e) =&gt; listify(e, _createHistoryItem));
    _history.callMethod('search', [jsify(query), completer.callback]);
    return completer.future;
  }
@@ -52,7 +52,7 @@ class ChromeHistory {
   * Retrieves information about visits to a URL.
   */
  Future&lt;List&lt;VisitItem&gt;&gt; getVisits(Map details) {
-   var completer = new ChromeCompleter&lt;List&lt;VisitItem&gt;&gt;.oneArg((e) =&gt; listify(e, VisitItem.create));
+   var completer = new ChromeCompleter&lt;List&lt;VisitItem&gt;&gt;.oneArg((e) =&gt; listify(e, _createVisitItem));
    _history.callMethod('getVisits', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -103,7 +103,7 @@ class ChromeHistory {
  Stream&lt;HistoryItem&gt; get onVisited =&gt; _onVisited.stream;
 
  final ChromeStreamController&lt;HistoryItem&gt; _onVisited =
-     new ChromeStreamController&lt;HistoryItem&gt;.oneArg(_history['onVisited'], HistoryItem.create);
+     new ChromeStreamController&lt;HistoryItem&gt;.oneArg(_history['onVisited'], _createHistoryItem);
 
  /**
   * Fired when one or more URLs are removed from the history service.  When all
@@ -220,7 +220,7 @@ Future&lt;List&lt;<a href="../chrome.history/VisitItem.html">VisitItem</a>&gt;&g
 <p>Retrieves information about visits to a URL.</p>
 <pre class="source">
 Future&lt;List&lt;VisitItem&gt;&gt; getVisits(Map details) {
- var completer = new ChromeCompleter&lt;List&lt;VisitItem&gt;&gt;.oneArg((e) =&gt; listify(e, VisitItem.create));
+ var completer = new ChromeCompleter&lt;List&lt;VisitItem&gt;&gt;.oneArg((e) =&gt; listify(e, _createVisitItem));
  _history.callMethod('getVisits', [jsify(details), completer.callback]);
  return completer.future;
 }
@@ -236,7 +236,7 @@ Future&lt;List&lt;<a href="../chrome.history/HistoryItem.html">HistoryItem</a>&g
 query.</p>
 <pre class="source">
 Future&lt;List&lt;HistoryItem&gt;&gt; search(Map query) {
- var completer = new ChromeCompleter&lt;List&lt;HistoryItem&gt;&gt;.oneArg((e) =&gt; listify(e, HistoryItem.create));
+ var completer = new ChromeCompleter&lt;List&lt;HistoryItem&gt;&gt;.oneArg((e) =&gt; listify(e, _createHistoryItem));
  _history.callMethod('search', [jsify(query), completer.callback]);
  return completer.future;
 }

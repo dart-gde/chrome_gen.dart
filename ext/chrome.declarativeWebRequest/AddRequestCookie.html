@@ -37,7 +37,6 @@ the same name exists already. Note that it is preferred to use the Cookies
 API because this is computationally less expensive.</p>
 <pre class="source">
 class AddRequestCookie extends ChromeObject {
- static AddRequestCookie create(JsObject proxy) =&gt; proxy == null ? null : new AddRequestCookie.fromProxy(proxy);
 
  AddRequestCookie({RequestCookie cookie}) {
    if (cookie != null) this.cookie = cookie;
@@ -48,7 +47,7 @@ class AddRequestCookie extends ChromeObject {
  /**
   * Cookie to be added to the request. No field may be undefined.
   */
- RequestCookie get cookie =&gt; RequestCookie.create(proxy['cookie']);
+ RequestCookie get cookie =&gt; _createRequestCookie(proxy['cookie']);
  set cookie(RequestCookie value) =&gt; proxy['cookie'] = value;
 }
 </pre>
@@ -56,19 +55,6 @@ class AddRequestCookie extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>AddRequestCookie</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.declarativeWebRequest/AddRequestCookie.html">AddRequestCookie</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to AddRequestCookie.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static AddRequestCookie create(JsObject proxy) =&gt; proxy == null ? null : new AddRequestCookie.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -113,7 +99,7 @@ AddRequestCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
         <div class="doc">
 <p>Cookie to be added to the request. No field may be undefined.</p>
 <pre class="source">
-RequestCookie get cookie =&gt; RequestCookie.create(proxy['cookie']);
+RequestCookie get cookie =&gt; _createRequestCookie(proxy['cookie']);
 </pre>
 <pre class="source">
 set cookie(RequestCookie value) =&gt; proxy['cookie'] = value;

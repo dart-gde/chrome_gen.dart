@@ -39,7 +39,7 @@ class ChromePushMessaging {
  ChromePushMessaging._();
 
  Future&lt;ChannelIdResult&gt; getChannelId([bool interactive]) {
-   var completer = new ChromeCompleter&lt;ChannelIdResult&gt;.oneArg(ChannelIdResult.create);
+   var completer = new ChromeCompleter&lt;ChannelIdResult&gt;.oneArg(_createChannelIdResult);
    _pushMessaging.callMethod('getChannelId', [interactive, completer.callback]);
    return completer.future;
  }
@@ -47,7 +47,7 @@ class ChromePushMessaging {
  Stream&lt;Message&gt; get onMessage =&gt; _onMessage.stream;
 
  final ChromeStreamController&lt;Message&gt; _onMessage =
-     new ChromeStreamController&lt;Message&gt;.oneArg(_pushMessaging['onMessage'], Message.create);
+     new ChromeStreamController&lt;Message&gt;.oneArg(_pushMessaging['onMessage'], _createMessage);
 }
 </pre>
 </div>
@@ -75,7 +75,7 @@ Future&lt;<a href="../chrome.pushMessaging/ChannelIdResult.html">ChannelIdResult
 <div class="doc">
 <pre class="source">
 Future&lt;ChannelIdResult&gt; getChannelId([bool interactive]) {
- var completer = new ChromeCompleter&lt;ChannelIdResult&gt;.oneArg(ChannelIdResult.create);
+ var completer = new ChromeCompleter&lt;ChannelIdResult&gt;.oneArg(_createChannelIdResult);
  _pushMessaging.callMethod('getChannelId', [interactive, completer.callback]);
  return completer.future;
 }

@@ -100,7 +100,7 @@ class ChromeTts {
   * synthesis.
   */
  Future&lt;List&lt;TtsVoice&gt;&gt; getVoices() {
-   var completer = new ChromeCompleter&lt;List&lt;TtsVoice&gt;&gt;.oneArg((e) =&gt; listify(e, TtsVoice.create));
+   var completer = new ChromeCompleter&lt;List&lt;TtsVoice&gt;&gt;.oneArg((e) =&gt; listify(e, _createTtsVoice));
    _tts.callMethod('getVoices', [completer.callback]);
    return completer.future;
  }
@@ -111,7 +111,7 @@ class ChromeTts {
  Stream&lt;TtsEvent&gt; get onEvent =&gt; _onEvent.stream;
 
  final ChromeStreamController&lt;TtsEvent&gt; _onEvent =
-     new ChromeStreamController&lt;TtsEvent&gt;.oneArg(_tts['onEvent'], TtsEvent.create);
+     new ChromeStreamController&lt;TtsEvent&gt;.oneArg(_tts['onEvent'], _createTtsEvent);
 }
 </pre>
 </div>
@@ -144,7 +144,7 @@ Array of <a class="crossref" href="../chrome.tts/TtsVoice.html">TtsVoice</a> obj
 synthesis.</p>
 <pre class="source">
 Future&lt;List&lt;TtsVoice&gt;&gt; getVoices() {
- var completer = new ChromeCompleter&lt;List&lt;TtsVoice&gt;&gt;.oneArg((e) =&gt; listify(e, TtsVoice.create));
+ var completer = new ChromeCompleter&lt;List&lt;TtsVoice&gt;&gt;.oneArg((e) =&gt; listify(e, _createTtsVoice));
  _tts.callMethod('getVoices', [completer.callback]);
  return completer.future;
 }

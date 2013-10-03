@@ -35,7 +35,6 @@
 <p>Matches network events by various criteria.</p>
 <pre class="source">
 class RequestMatcher extends ChromeObject {
- static RequestMatcher create(JsObject proxy) =&gt; proxy == null ? null : new RequestMatcher.fromProxy(proxy);
 
  RequestMatcher({UrlFilter url, UrlFilter firstPartyForCookiesUrl, List&lt;String&gt; resourceType, List&lt;String&gt; contentType, List&lt;String&gt; excludeContentType, List&lt;HeaderFilter&gt; requestHeaders, List&lt;HeaderFilter&gt; excludeRequestHeaders, List&lt;HeaderFilter&gt; responseHeaders, List&lt;HeaderFilter&gt; excludeResponseHeaders, bool thirdPartyForCookies, List&lt;String&gt; stages}) {
    if (url != null) this.url = url;
@@ -57,7 +56,7 @@ class RequestMatcher extends ChromeObject {
   * Matches if the conditions of the UrlFilter are fulfilled for the URL of the
   * request.
   */
- UrlFilter get url =&gt; UrlFilter.create(proxy['url']);
+ UrlFilter get url =&gt; _createUrlFilter(proxy['url']);
  set url(UrlFilter value) =&gt; proxy['url'] = value;
 
  /**
@@ -66,7 +65,7 @@ class RequestMatcher extends ChromeObject {
   * present, can be different from the request's target URL, and describes what
   * is considered 'first party' for the sake of third-party checks for cookies.
   */
- UrlFilter get firstPartyForCookiesUrl =&gt; UrlFilter.create(proxy['firstPartyForCookiesUrl']);
+ UrlFilter get firstPartyForCookiesUrl =&gt; _createUrlFilter(proxy['firstPartyForCookiesUrl']);
  set firstPartyForCookiesUrl(UrlFilter value) =&gt; proxy['firstPartyForCookiesUrl'] = value;
 
  /**
@@ -94,28 +93,28 @@ class RequestMatcher extends ChromeObject {
   * Matches if some of the request headers is matched by one of the
   * HeaderFilters.
   */
- List&lt;HeaderFilter&gt; get requestHeaders =&gt; listify(proxy['requestHeaders'], HeaderFilter.create);
+ List&lt;HeaderFilter&gt; get requestHeaders =&gt; listify(proxy['requestHeaders'], _createHeaderFilter);
  set requestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['requestHeaders'] = value;
 
  /**
   * Matches if none of the request headers is matched by any of the
   * HeaderFilters.
   */
- List&lt;HeaderFilter&gt; get excludeRequestHeaders =&gt; listify(proxy['excludeRequestHeaders'], HeaderFilter.create);
+ List&lt;HeaderFilter&gt; get excludeRequestHeaders =&gt; listify(proxy['excludeRequestHeaders'], _createHeaderFilter);
  set excludeRequestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeRequestHeaders'] = value;
 
  /**
   * Matches if some of the response headers is matched by one of the
   * HeaderFilters.
   */
- List&lt;HeaderFilter&gt; get responseHeaders =&gt; listify(proxy['responseHeaders'], HeaderFilter.create);
+ List&lt;HeaderFilter&gt; get responseHeaders =&gt; listify(proxy['responseHeaders'], _createHeaderFilter);
  set responseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['responseHeaders'] = value;
 
  /**
   * Matches if none of the response headers is matched by any of the
   * HeaderFilters.
   */
- List&lt;HeaderFilter&gt; get excludeResponseHeaders =&gt; listify(proxy['excludeResponseHeaders'], HeaderFilter.create);
+ List&lt;HeaderFilter&gt; get excludeResponseHeaders =&gt; listify(proxy['excludeResponseHeaders'], _createHeaderFilter);
  set excludeResponseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeResponseHeaders'] = value;
 
  /**
@@ -140,19 +139,6 @@ class RequestMatcher extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>RequestMatcher</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.declarativeWebRequest/RequestMatcher.html">RequestMatcher</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to RequestMatcher.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static RequestMatcher create(JsObject proxy) =&gt; proxy == null ? null : new RequestMatcher.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -242,7 +228,7 @@ List&lt;<a href="../chrome.declarativeWebRequest/HeaderFilter.html">HeaderFilter
 <p>Matches if none of the request headers is matched by any of the
 HeaderFilters.</p>
 <pre class="source">
-List&lt;HeaderFilter&gt; get excludeRequestHeaders =&gt; listify(proxy['excludeRequestHeaders'], HeaderFilter.create);
+List&lt;HeaderFilter&gt; get excludeRequestHeaders =&gt; listify(proxy['excludeRequestHeaders'], _createHeaderFilter);
 </pre>
 <pre class="source">
 set excludeRequestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeRequestHeaders'] = value;
@@ -259,7 +245,7 @@ List&lt;<a href="../chrome.declarativeWebRequest/HeaderFilter.html">HeaderFilter
 <p>Matches if none of the response headers is matched by any of the
 HeaderFilters.</p>
 <pre class="source">
-List&lt;HeaderFilter&gt; get excludeResponseHeaders =&gt; listify(proxy['excludeResponseHeaders'], HeaderFilter.create);
+List&lt;HeaderFilter&gt; get excludeResponseHeaders =&gt; listify(proxy['excludeResponseHeaders'], _createHeaderFilter);
 </pre>
 <pre class="source">
 set excludeResponseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeResponseHeaders'] = value;
@@ -278,7 +264,7 @@ party' URL of the request. The 'first party' URL of a request, when
 present, can be different from the request's target URL, and describes what
 is considered 'first party' for the sake of third-party checks for cookies.</p>
 <pre class="source">
-UrlFilter get firstPartyForCookiesUrl =&gt; UrlFilter.create(proxy['firstPartyForCookiesUrl']);
+UrlFilter get firstPartyForCookiesUrl =&gt; _createUrlFilter(proxy['firstPartyForCookiesUrl']);
 </pre>
 <pre class="source">
 set firstPartyForCookiesUrl(UrlFilter value) =&gt; proxy['firstPartyForCookiesUrl'] = value;
@@ -307,7 +293,7 @@ List&lt;<a href="../chrome.declarativeWebRequest/HeaderFilter.html">HeaderFilter
 <p>Matches if some of the request headers is matched by one of the
 HeaderFilters.</p>
 <pre class="source">
-List&lt;HeaderFilter&gt; get requestHeaders =&gt; listify(proxy['requestHeaders'], HeaderFilter.create);
+List&lt;HeaderFilter&gt; get requestHeaders =&gt; listify(proxy['requestHeaders'], _createHeaderFilter);
 </pre>
 <pre class="source">
 set requestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['requestHeaders'] = value;
@@ -341,7 +327,7 @@ List&lt;<a href="../chrome.declarativeWebRequest/HeaderFilter.html">HeaderFilter
 <p>Matches if some of the response headers is matched by one of the
 HeaderFilters.</p>
 <pre class="source">
-List&lt;HeaderFilter&gt; get responseHeaders =&gt; listify(proxy['responseHeaders'], HeaderFilter.create);
+List&lt;HeaderFilter&gt; get responseHeaders =&gt; listify(proxy['responseHeaders'], _createHeaderFilter);
 </pre>
 <pre class="source">
 set responseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['responseHeaders'] = value;
@@ -395,7 +381,7 @@ set thirdPartyForCookies(bool value) =&gt; proxy['thirdPartyForCookies'] = value
 <p>Matches if the conditions of the UrlFilter are fulfilled for the URL of the
 request.</p>
 <pre class="source">
-UrlFilter get url =&gt; UrlFilter.create(proxy['url']);
+UrlFilter get url =&gt; _createUrlFilter(proxy['url']);
 </pre>
 <pre class="source">
 set url(UrlFilter value) =&gt; proxy['url'] = value;

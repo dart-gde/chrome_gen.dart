@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class WatchLocationRequestInfo extends ChromeObject {
- static WatchLocationRequestInfo create(JsObject proxy) =&gt; proxy == null ? null : new WatchLocationRequestInfo.fromProxy(proxy);
 
  WatchLocationRequestInfo({double minDistanceInMeters, double minTimeInMilliseconds, int maximumAge}) {
    if (minDistanceInMeters != null) this.minDistanceInMeters = minDistanceInMeters;
@@ -58,19 +57,6 @@ class WatchLocationRequestInfo extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>WatchLocationRequestInfo</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.location/WatchLocationRequestInfo.html">WatchLocationRequestInfo</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to WatchLocationRequestInfo.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static WatchLocationRequestInfo create(JsObject proxy) =&gt; proxy == null ? null : new WatchLocationRequestInfo.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">

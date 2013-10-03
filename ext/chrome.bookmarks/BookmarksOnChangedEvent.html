@@ -36,8 +36,6 @@
 and url changes trigger this.</p>
 <pre class="source">
 class BookmarksOnChangedEvent {
- static BookmarksOnChangedEvent create(String id, JsObject changeInfo) =&gt;
-     new BookmarksOnChangedEvent(id, mapify(changeInfo));
 
  final String id;
 
@@ -46,20 +44,6 @@ class BookmarksOnChangedEvent {
  BookmarksOnChangedEvent(this.id, this.changeInfo);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.bookmarks/BookmarksOnChangedEvent.html">BookmarksOnChangedEvent</a> <strong>create</strong>(String id, JsObject changeInfo) <a class="anchor-link" href="#create"
-              title="Permalink to BookmarksOnChangedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static BookmarksOnChangedEvent create(String id, JsObject changeInfo) =&gt;
-   new BookmarksOnChangedEvent(id, mapify(changeInfo));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

@@ -39,7 +39,7 @@ class ChromeSocket {
  ChromeSocket._();
 
  Future&lt;CreateInfo&gt; create(SocketType type, [CreateOptions options]) {
-   var completer = new ChromeCompleter&lt;CreateInfo&gt;.oneArg(CreateInfo.create);
+   var completer = new ChromeCompleter&lt;CreateInfo&gt;.oneArg(_createCreateInfo);
    _socket.callMethod('create', [type, options, completer.callback]);
    return completer.future;
  }
@@ -65,25 +65,25 @@ class ChromeSocket {
  }
 
  Future&lt;SocketReadInfo&gt; read(int socketId, [int bufferSize]) {
-   var completer = new ChromeCompleter&lt;SocketReadInfo&gt;.oneArg(SocketReadInfo.create);
+   var completer = new ChromeCompleter&lt;SocketReadInfo&gt;.oneArg(_createSocketReadInfo);
    _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
    return completer.future;
  }
 
  Future&lt;SocketWriteInfo&gt; write(int socketId, ArrayBuffer data) {
-   var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(SocketWriteInfo.create);
+   var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
    _socket.callMethod('write', [socketId, data, completer.callback]);
    return completer.future;
  }
 
  Future&lt;RecvFromInfo&gt; recvFrom(int socketId, [int bufferSize]) {
-   var completer = new ChromeCompleter&lt;RecvFromInfo&gt;.oneArg(RecvFromInfo.create);
+   var completer = new ChromeCompleter&lt;RecvFromInfo&gt;.oneArg(_createRecvFromInfo);
    _socket.callMethod('recvFrom', [socketId, bufferSize, completer.callback]);
    return completer.future;
  }
 
  Future&lt;SocketWriteInfo&gt; sendTo(int socketId, ArrayBuffer data, String address, int port) {
-   var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(SocketWriteInfo.create);
+   var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
    _socket.callMethod('sendTo', [socketId, data, address, port, completer.callback]);
    return completer.future;
  }
@@ -95,7 +95,7 @@ class ChromeSocket {
  }
 
  Future&lt;AcceptInfo&gt; accept(int socketId) {
-   var completer = new ChromeCompleter&lt;AcceptInfo&gt;.oneArg(AcceptInfo.create);
+   var completer = new ChromeCompleter&lt;AcceptInfo&gt;.oneArg(_createAcceptInfo);
    _socket.callMethod('accept', [socketId, completer.callback]);
    return completer.future;
  }
@@ -113,13 +113,13 @@ class ChromeSocket {
  }
 
  Future&lt;SocketInfo&gt; getInfo(int socketId) {
-   var completer = new ChromeCompleter&lt;SocketInfo&gt;.oneArg(SocketInfo.create);
+   var completer = new ChromeCompleter&lt;SocketInfo&gt;.oneArg(_createSocketInfo);
    _socket.callMethod('getInfo', [socketId, completer.callback]);
    return completer.future;
  }
 
  Future&lt;NetworkInterface&gt; getNetworkList() {
-   var completer = new ChromeCompleter&lt;NetworkInterface&gt;.oneArg(NetworkInterface.create);
+   var completer = new ChromeCompleter&lt;NetworkInterface&gt;.oneArg(_createNetworkInterface);
    _socket.callMethod('getNetworkList', [completer.callback]);
    return completer.future;
  }
@@ -165,7 +165,7 @@ Future&lt;<a href="../chrome.socket/AcceptInfo.html">AcceptInfo</a>&gt; <strong>
 <div class="doc">
 <pre class="source">
 Future&lt;AcceptInfo&gt; accept(int socketId) {
- var completer = new ChromeCompleter&lt;AcceptInfo&gt;.oneArg(AcceptInfo.create);
+ var completer = new ChromeCompleter&lt;AcceptInfo&gt;.oneArg(_createAcceptInfo);
  _socket.callMethod('accept', [socketId, completer.callback]);
  return completer.future;
 }
@@ -207,7 +207,7 @@ Future&lt;<a href="../chrome.socket/CreateInfo.html">CreateInfo</a>&gt; <strong>
 <div class="doc">
 <pre class="source">
 Future&lt;CreateInfo&gt; create(SocketType type, [CreateOptions options]) {
- var completer = new ChromeCompleter&lt;CreateInfo&gt;.oneArg(CreateInfo.create);
+ var completer = new ChromeCompleter&lt;CreateInfo&gt;.oneArg(_createCreateInfo);
  _socket.callMethod('create', [type, options, completer.callback]);
  return completer.future;
 }
@@ -245,7 +245,7 @@ Future&lt;<a href="../chrome.socket/SocketInfo.html">SocketInfo</a>&gt; <strong>
 <div class="doc">
 <pre class="source">
 Future&lt;SocketInfo&gt; getInfo(int socketId) {
- var completer = new ChromeCompleter&lt;SocketInfo&gt;.oneArg(SocketInfo.create);
+ var completer = new ChromeCompleter&lt;SocketInfo&gt;.oneArg(_createSocketInfo);
  _socket.callMethod('getInfo', [socketId, completer.callback]);
  return completer.future;
 }
@@ -273,7 +273,7 @@ Future&lt;<a href="../chrome.socket/NetworkInterface.html">NetworkInterface</a>&
 <div class="doc">
 <pre class="source">
 Future&lt;NetworkInterface&gt; getNetworkList() {
- var completer = new ChromeCompleter&lt;NetworkInterface&gt;.oneArg(NetworkInterface.create);
+ var completer = new ChromeCompleter&lt;NetworkInterface&gt;.oneArg(_createNetworkInterface);
  _socket.callMethod('getNetworkList', [completer.callback]);
  return completer.future;
 }
@@ -329,7 +329,7 @@ Future&lt;<a href="../chrome.socket/SocketReadInfo.html">SocketReadInfo</a>&gt; 
 <div class="doc">
 <pre class="source">
 Future&lt;SocketReadInfo&gt; read(int socketId, [int bufferSize]) {
- var completer = new ChromeCompleter&lt;SocketReadInfo&gt;.oneArg(SocketReadInfo.create);
+ var completer = new ChromeCompleter&lt;SocketReadInfo&gt;.oneArg(_createSocketReadInfo);
  _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
  return completer.future;
 }
@@ -343,7 +343,7 @@ Future&lt;<a href="../chrome.socket/RecvFromInfo.html">RecvFromInfo</a>&gt; <str
 <div class="doc">
 <pre class="source">
 Future&lt;RecvFromInfo&gt; recvFrom(int socketId, [int bufferSize]) {
- var completer = new ChromeCompleter&lt;RecvFromInfo&gt;.oneArg(RecvFromInfo.create);
+ var completer = new ChromeCompleter&lt;RecvFromInfo&gt;.oneArg(_createRecvFromInfo);
  _socket.callMethod('recvFrom', [socketId, bufferSize, completer.callback]);
  return completer.future;
 }
@@ -357,7 +357,7 @@ Future&lt;<a href="../chrome.socket/SocketWriteInfo.html">SocketWriteInfo</a>&gt
 <div class="doc">
 <pre class="source">
 Future&lt;SocketWriteInfo&gt; sendTo(int socketId, ArrayBuffer data, String address, int port) {
- var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(SocketWriteInfo.create);
+ var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
  _socket.callMethod('sendTo', [socketId, data, address, port, completer.callback]);
  return completer.future;
 }
@@ -427,7 +427,7 @@ Future&lt;<a href="../chrome.socket/SocketWriteInfo.html">SocketWriteInfo</a>&gt
 <div class="doc">
 <pre class="source">
 Future&lt;SocketWriteInfo&gt; write(int socketId, ArrayBuffer data) {
- var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(SocketWriteInfo.create);
+ var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
  _socket.callMethod('write', [socketId, data, completer.callback]);
  return completer.future;
 }

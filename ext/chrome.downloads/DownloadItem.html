@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class DownloadItem extends ChromeObject {
- static DownloadItem create(JsObject proxy) =&gt; proxy == null ? null : new DownloadItem.fromProxy(proxy);
 
  DownloadItem({int id, String url, String referrer, String filename, bool incognito, DangerType danger, String mime, String startTime, String endTime, String estimatedEndTime, State state, bool paused, bool canResume, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists, String byExtensionId, String byExtensionName}) {
    if (id != null) this.id = id;
@@ -76,7 +75,7 @@ class DownloadItem extends ChromeObject {
  bool get incognito =&gt; proxy['incognito'];
  set incognito(bool value) =&gt; proxy['incognito'] = value;
 
- DangerType get danger =&gt; DangerType.create(proxy['danger']);
+ DangerType get danger =&gt; _createDangerType(proxy['danger']);
  set danger(DangerType value) =&gt; proxy['danger'] = value;
 
  String get mime =&gt; proxy['mime'];
@@ -91,7 +90,7 @@ class DownloadItem extends ChromeObject {
  String get estimatedEndTime =&gt; proxy['estimatedEndTime'];
  set estimatedEndTime(String value) =&gt; proxy['estimatedEndTime'] = value;
 
- State get state =&gt; State.create(proxy['state']);
+ State get state =&gt; _createState(proxy['state']);
  set state(State value) =&gt; proxy['state'] = value;
 
  bool get paused =&gt; proxy['paused'];
@@ -100,7 +99,7 @@ class DownloadItem extends ChromeObject {
  bool get canResume =&gt; proxy['canResume'];
  set canResume(bool value) =&gt; proxy['canResume'] = value;
 
- InterruptReason get error =&gt; InterruptReason.create(proxy['error']);
+ InterruptReason get error =&gt; _createInterruptReason(proxy['error']);
  set error(InterruptReason value) =&gt; proxy['error'] = value;
 
  int get bytesReceived =&gt; proxy['bytesReceived'];
@@ -126,19 +125,6 @@ class DownloadItem extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>DownloadItem</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.downloads/DownloadItem.html">DownloadItem</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to DownloadItem.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static DownloadItem create(JsObject proxy) =&gt; proxy == null ? null : new DownloadItem.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -261,7 +247,7 @@ set canResume(bool value) =&gt; proxy['canResume'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-DangerType get danger =&gt; DangerType.create(proxy['danger']);
+DangerType get danger =&gt; _createDangerType(proxy['danger']);
 </pre>
 <pre class="source">
 set danger(DangerType value) =&gt; proxy['danger'] = value;
@@ -291,7 +277,7 @@ set endTime(String value) =&gt; proxy['endTime'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-InterruptReason get error =&gt; InterruptReason.create(proxy['error']);
+InterruptReason get error =&gt; _createInterruptReason(proxy['error']);
 </pre>
 <pre class="source">
 set error(InterruptReason value) =&gt; proxy['error'] = value;
@@ -468,7 +454,7 @@ set startTime(String value) =&gt; proxy['startTime'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-State get state =&gt; State.create(proxy['state']);
+State get state =&gt; _createState(proxy['state']);
 </pre>
 <pre class="source">
 set state(State value) =&gt; proxy['state'] = value;

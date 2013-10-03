@@ -45,7 +45,7 @@ class ChromeAppWindow {
  }
 
  AppWindow current() {
-   return AppWindow.create(_app_window.callMethod('current'));
+   return _createAppWindow(_app_window.callMethod('current'));
  }
 
  void initializeAppWindow(dynamic state) {
@@ -182,7 +182,7 @@ Future&lt;dynamic&gt; create(String url, [CreateWindowOptions options]) {
 <div class="doc">
 <pre class="source">
 AppWindow current() {
- return AppWindow.create(_app_window.callMethod('current'));
+ return _createAppWindow(_app_window.callMethod('current'));
 }
 </pre>
 </div>

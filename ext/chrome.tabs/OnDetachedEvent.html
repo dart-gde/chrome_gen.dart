@@ -36,8 +36,6 @@
 moved between windows.</p>
 <pre class="source">
 class OnDetachedEvent {
- static OnDetachedEvent create(int tabId, JsObject detachInfo) =&gt;
-     new OnDetachedEvent(tabId, mapify(detachInfo));
 
  final int tabId;
 
@@ -46,20 +44,6 @@ class OnDetachedEvent {
  OnDetachedEvent(this.tabId, this.detachInfo);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.tabs/OnDetachedEvent.html">OnDetachedEvent</a> <strong>create</strong>(int tabId, JsObject detachInfo) <a class="anchor-link" href="#create"
-              title="Permalink to OnDetachedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnDetachedEvent create(int tabId, JsObject detachInfo) =&gt;
-   new OnDetachedEvent(tabId, mapify(detachInfo));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

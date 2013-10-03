@@ -35,8 +35,6 @@
 <p>User has accepted what is typed into the omnibox.</p>
 <pre class="source">
 class OnInputEnteredEvent {
- static OnInputEnteredEvent create(String text, String disposition) =&gt;
-     new OnInputEnteredEvent(text, disposition);
 
  final String text;
 
@@ -52,20 +50,6 @@ class OnInputEnteredEvent {
  OnInputEnteredEvent(this.text, this.disposition);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.omnibox/OnInputEnteredEvent.html">OnInputEnteredEvent</a> <strong>create</strong>(String text, String disposition) <a class="anchor-link" href="#create"
-              title="Permalink to OnInputEnteredEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnInputEnteredEvent create(String text, String disposition) =&gt;
-   new OnInputEnteredEvent(text, disposition);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

@@ -45,7 +45,7 @@ class ChromeDownloads {
  }
 
  Future&lt;DownloadItem&gt; search(DownloadQuery query) {
-   var completer = new ChromeCompleter&lt;DownloadItem&gt;.oneArg(DownloadItem.create);
+   var completer = new ChromeCompleter&lt;DownloadItem&gt;.oneArg(_createDownloadItem);
    _downloads.callMethod('search', [query, completer.callback]);
    return completer.future;
  }
@@ -115,7 +115,7 @@ class ChromeDownloads {
  Stream&lt;DownloadItem&gt; get onCreated =&gt; _onCreated.stream;
 
  final ChromeStreamController&lt;DownloadItem&gt; _onCreated =
-     new ChromeStreamController&lt;DownloadItem&gt;.oneArg(_downloads['onCreated'], DownloadItem.create);
+     new ChromeStreamController&lt;DownloadItem&gt;.oneArg(_downloads['onCreated'], _createDownloadItem);
 
  Stream&lt;int&gt; get onErased =&gt; _onErased.stream;
 
@@ -125,12 +125,12 @@ class ChromeDownloads {
  Stream&lt;DownloadDelta&gt; get onChanged =&gt; _onChanged.stream;
 
  final ChromeStreamController&lt;DownloadDelta&gt; _onChanged =
-     new ChromeStreamController&lt;DownloadDelta&gt;.oneArg(_downloads['onChanged'], DownloadDelta.create);
+     new ChromeStreamController&lt;DownloadDelta&gt;.oneArg(_downloads['onChanged'], _createDownloadDelta);
 
  Stream&lt;OnDeterminingFilenameEvent&gt; get onDeterminingFilename =&gt; _onDeterminingFilename.stream;
 
  final ChromeStreamController&lt;OnDeterminingFilenameEvent&gt; _onDeterminingFilename =
-     new ChromeStreamController&lt;OnDeterminingFilenameEvent&gt;.twoArgs(_downloads['onDeterminingFilename'], OnDeterminingFilenameEvent.create);
+     new ChromeStreamController&lt;OnDeterminingFilenameEvent&gt;.twoArgs(_downloads['onDeterminingFilename'], _createOnDeterminingFilenameEvent);
 }
 </pre>
 </div>
@@ -330,7 +330,7 @@ Future&lt;<a href="../chrome.downloads/DownloadItem.html">DownloadItem</a>&gt; <
 <div class="doc">
 <pre class="source">
 Future&lt;DownloadItem&gt; search(DownloadQuery query) {
- var completer = new ChromeCompleter&lt;DownloadItem&gt;.oneArg(DownloadItem.create);
+ var completer = new ChromeCompleter&lt;DownloadItem&gt;.oneArg(_createDownloadItem);
  _downloads.callMethod('search', [query, completer.callback]);
  return completer.future;
 }

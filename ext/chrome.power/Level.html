@@ -39,9 +39,6 @@ class Level extends ChromeEnum {
 
  static const List&lt;Level&gt; VALUES = const[SYSTEM, DISPLAY];
 
- static Level create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const Level._(String str): super(str);
 }
 </pre>
@@ -84,20 +81,6 @@ const List&lt;<a href="../chrome.power/Level.html">Level</a>&gt;         <strong
         <div class="doc">
 <pre class="source">
 static const List&lt;Level&gt; VALUES = const[SYSTEM, DISPLAY]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.power/Level.html">Level</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to Level.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static Level create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

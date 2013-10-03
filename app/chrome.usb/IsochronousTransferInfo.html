@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class IsochronousTransferInfo extends ChromeObject {
- static IsochronousTransferInfo create(JsObject proxy) =&gt; proxy == null ? null : new IsochronousTransferInfo.fromProxy(proxy);
 
  IsochronousTransferInfo({GenericTransferInfo transferInfo, int packets, int packetLength}) {
    if (transferInfo != null) this.transferInfo = transferInfo;
@@ -44,7 +43,7 @@ class IsochronousTransferInfo extends ChromeObject {
 
  IsochronousTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
- GenericTransferInfo get transferInfo =&gt; GenericTransferInfo.create(proxy['transferInfo']);
+ GenericTransferInfo get transferInfo =&gt; _createGenericTransferInfo(proxy['transferInfo']);
  set transferInfo(GenericTransferInfo value) =&gt; proxy['transferInfo'] = value;
 
  int get packets =&gt; proxy['packets'];
@@ -58,19 +57,6 @@ class IsochronousTransferInfo extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>IsochronousTransferInfo</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.usb/IsochronousTransferInfo.html">IsochronousTransferInfo</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to IsochronousTransferInfo.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static IsochronousTransferInfo create(JsObject proxy) =&gt; proxy == null ? null : new IsochronousTransferInfo.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -158,7 +144,7 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-GenericTransferInfo get transferInfo =&gt; GenericTransferInfo.create(proxy['transferInfo']);
+GenericTransferInfo get transferInfo =&gt; _createGenericTransferInfo(proxy['transferInfo']);
 </pre>
 <pre class="source">
 set transferInfo(GenericTransferInfo value) =&gt; proxy['transferInfo'] = value;

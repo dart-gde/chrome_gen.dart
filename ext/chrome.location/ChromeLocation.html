@@ -49,7 +49,7 @@ class ChromeLocation {
  Stream&lt;Location&gt; get onLocationUpdate =&gt; _onLocationUpdate.stream;
 
  final ChromeStreamController&lt;Location&gt; _onLocationUpdate =
-     new ChromeStreamController&lt;Location&gt;.oneArg(_location['onLocationUpdate'], Location.create);
+     new ChromeStreamController&lt;Location&gt;.oneArg(_location['onLocationUpdate'], _createLocation);
 
  Stream&lt;String&gt; get onLocationError =&gt; _onLocationError.stream;
 

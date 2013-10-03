@@ -69,7 +69,7 @@ class ChromeFontSettings {
   * Gets a list of fonts on the system.
   */
  Future&lt;List&lt;FontName&gt;&gt; getFontList() {
-   var completer = new ChromeCompleter&lt;List&lt;FontName&gt;&gt;.oneArg((e) =&gt; listify(e, FontName.create));
+   var completer = new ChromeCompleter&lt;List&lt;FontName&gt;&gt;.oneArg((e) =&gt; listify(e, _createFontName));
    _fontSettings.callMethod('getFontList', [completer.callback]);
    return completer.future;
  }
@@ -381,7 +381,7 @@ Future&lt;List&lt;<a href="../chrome.fontSettings/FontName.html">FontName</a>&gt
 <p>Gets a list of fonts on the system.</p>
 <pre class="source">
 Future&lt;List&lt;FontName&gt;&gt; getFontList() {
- var completer = new ChromeCompleter&lt;List&lt;FontName&gt;&gt;.oneArg((e) =&gt; listify(e, FontName.create));
+ var completer = new ChromeCompleter&lt;List&lt;FontName&gt;&gt;.oneArg((e) =&gt; listify(e, _createFontName));
  _fontSettings.callMethod('getFontList', [completer.callback]);
  return completer.future;
 }

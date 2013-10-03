@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class FileInfo extends ChromeObject {
- static FileInfo create(JsObject proxy) =&gt; proxy == null ? null : new FileInfo.fromProxy(proxy);
 
  FileInfo({var fileEntry, FileStatus status, SyncAction action, SyncDirection direction}) {
    if (fileEntry != null) this.fileEntry = fileEntry;
@@ -48,13 +47,13 @@ class FileInfo extends ChromeObject {
  dynamic get fileEntry =&gt; proxy['fileEntry'];
  set fileEntry(var value) =&gt; proxy['fileEntry'] = value;
 
- FileStatus get status =&gt; FileStatus.create(proxy['status']);
+ FileStatus get status =&gt; _createFileStatus(proxy['status']);
  set status(FileStatus value) =&gt; proxy['status'] = value;
 
- SyncAction get action =&gt; SyncAction.create(proxy['action']);
+ SyncAction get action =&gt; _createSyncAction(proxy['action']);
  set action(SyncAction value) =&gt; proxy['action'] = value;
 
- SyncDirection get direction =&gt; SyncDirection.create(proxy['direction']);
+ SyncDirection get direction =&gt; _createSyncDirection(proxy['direction']);
  set direction(SyncDirection value) =&gt; proxy['direction'] = value;
 }
 </pre>
@@ -62,19 +61,6 @@ class FileInfo extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>FileInfo</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.syncFileSystem/FileInfo.html">FileInfo</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to FileInfo.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static FileInfo create(JsObject proxy) =&gt; proxy == null ? null : new FileInfo.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -121,7 +107,7 @@ FileInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-SyncAction get action =&gt; SyncAction.create(proxy['action']);
+SyncAction get action =&gt; _createSyncAction(proxy['action']);
 </pre>
 <pre class="source">
 set action(SyncAction value) =&gt; proxy['action'] = value;
@@ -136,7 +122,7 @@ set action(SyncAction value) =&gt; proxy['action'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-SyncDirection get direction =&gt; SyncDirection.create(proxy['direction']);
+SyncDirection get direction =&gt; _createSyncDirection(proxy['direction']);
 </pre>
 <pre class="source">
 set direction(SyncDirection value) =&gt; proxy['direction'] = value;
@@ -178,7 +164,7 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-FileStatus get status =&gt; FileStatus.create(proxy['status']);
+FileStatus get status =&gt; _createFileStatus(proxy['status']);
 </pre>
 <pre class="source">
 set status(FileStatus value) =&gt; proxy['status'] = value;

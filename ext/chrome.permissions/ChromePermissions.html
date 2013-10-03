@@ -45,7 +45,7 @@ class ChromePermissions {
   * The extension's active permissions.
   */
  Future&lt;Permissions&gt; getAll() {
-   var completer = new ChromeCompleter&lt;Permissions&gt;.oneArg(Permissions.create);
+   var completer = new ChromeCompleter&lt;Permissions&gt;.oneArg(_createPermissions);
    _permissions.callMethod('getAll', [completer.callback]);
    return completer.future;
  }
@@ -95,7 +95,7 @@ class ChromePermissions {
  Stream&lt;Permissions&gt; get onAdded =&gt; _onAdded.stream;
 
  final ChromeStreamController&lt;Permissions&gt; _onAdded =
-     new ChromeStreamController&lt;Permissions&gt;.oneArg(_permissions['onAdded'], Permissions.create);
+     new ChromeStreamController&lt;Permissions&gt;.oneArg(_permissions['onAdded'], _createPermissions);
 
  /**
   * Fired when access to permissions has been removed from the extension.
@@ -103,7 +103,7 @@ class ChromePermissions {
  Stream&lt;Permissions&gt; get onRemoved =&gt; _onRemoved.stream;
 
  final ChromeStreamController&lt;Permissions&gt; _onRemoved =
-     new ChromeStreamController&lt;Permissions&gt;.oneArg(_permissions['onRemoved'], Permissions.create);
+     new ChromeStreamController&lt;Permissions&gt;.oneArg(_permissions['onRemoved'], _createPermissions);
 }
 </pre>
 </div>
@@ -165,7 +165,7 @@ Future&lt;<a href="../chrome.permissions/Permissions.html">Permissions</a>&gt; <
 The extension's active permissions.</p>
 <pre class="source">
 Future&lt;Permissions&gt; getAll() {
- var completer = new ChromeCompleter&lt;Permissions&gt;.oneArg(Permissions.create);
+ var completer = new ChromeCompleter&lt;Permissions&gt;.oneArg(_createPermissions);
  _permissions.callMethod('getAll', [completer.callback]);
  return completer.future;
 }

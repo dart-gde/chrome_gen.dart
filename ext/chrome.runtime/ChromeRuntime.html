@@ -135,7 +135,7 @@ class ChromeRuntime {
   * exist.
   */
  Port connect([String extensionId, Map connectInfo]) {
-   return Port.create(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
+   return _createPort(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
  }
 
  /**
@@ -147,7 +147,7 @@ class ChromeRuntime {
   * Port through which messages can be sent and received with the application
   */
  Port connectNative(String application) {
-   return Port.create(_runtime.callMethod('connectNative', [application]));
+   return _createPort(_runtime.callMethod('connectNative', [application]));
  }
 
  /**
@@ -275,7 +275,7 @@ class ChromeRuntime {
  Stream&lt;Port&gt; get onConnect =&gt; _onConnect.stream;
 
  final ChromeStreamController&lt;Port&gt; _onConnect =
-     new ChromeStreamController&lt;Port&gt;.oneArg(_runtime['onConnect'], Port.create);
+     new ChromeStreamController&lt;Port&gt;.oneArg(_runtime['onConnect'], _createPort);
 
  /**
   * Fired when a connection is made from another extension.
@@ -283,7 +283,7 @@ class ChromeRuntime {
  Stream&lt;Port&gt; get onConnectExternal =&gt; _onConnectExternal.stream;
 
  final ChromeStreamController&lt;Port&gt; _onConnectExternal =
-     new ChromeStreamController&lt;Port&gt;.oneArg(_runtime['onConnectExternal'], Port.create);
+     new ChromeStreamController&lt;Port&gt;.oneArg(_runtime['onConnectExternal'], _createPort);
 
  /**
   * Fired when a message is sent from either an extension process or a content
@@ -292,7 +292,7 @@ class ChromeRuntime {
  Stream&lt;OnMessageEvent&gt; get onMessage =&gt; _onMessage.stream;
 
  final ChromeStreamController&lt;OnMessageEvent&gt; _onMessage =
-     new ChromeStreamController&lt;OnMessageEvent&gt;.threeArgs(_runtime['onMessage'], OnMessageEvent.create);
+     new ChromeStreamController&lt;OnMessageEvent&gt;.threeArgs(_runtime['onMessage'], _createOnMessageEvent);
 
  /**
   * Fired when a message is sent from another extension/app. Cannot be used in
@@ -301,7 +301,7 @@ class ChromeRuntime {
  Stream&lt;OnMessageExternalEvent&gt; get onMessageExternal =&gt; _onMessageExternal.stream;
 
  final ChromeStreamController&lt;OnMessageExternalEvent&gt; _onMessageExternal =
-     new ChromeStreamController&lt;OnMessageExternalEvent&gt;.threeArgs(_runtime['onMessageExternal'], OnMessageExternalEvent.create);
+     new ChromeStreamController&lt;OnMessageExternalEvent&gt;.threeArgs(_runtime['onMessageExternal'], _createOnMessageExternalEvent);
 
  /**
   * Fired when an app or the device that it runs on needs to be restarted. The
@@ -529,7 +529,7 @@ Port through which messages can be sent and received. The port's
 exist.</p>
 <pre class="source">
 Port connect([String extensionId, Map connectInfo]) {
- return Port.create(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
+ return _createPort(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
 }
 </pre>
 </div>
@@ -546,7 +546,7 @@ Port connect([String extensionId, Map connectInfo]) {
 Port through which messages can be sent and received with the application</p>
 <pre class="source">
 Port connectNative(String application) {
- return Port.create(_runtime.callMethod('connectNative', [application]));
+ return _createPort(_runtime.callMethod('connectNative', [application]));
 }
 </pre>
 </div>

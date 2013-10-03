@@ -58,9 +58,6 @@ class InterruptReason extends ChromeEnum {
 
  static const List&lt;InterruptReason&gt; VALUES = const[FILE_FAILED, FILE_ACCESS_DENIED, FILE_NO_SPACE, FILE_NAME_TOO_LONG, FILE_TOO_LARGE, FILE_VIRUS_INFECTED, FILE_TRANSIENT_ERROR, FILE_BLOCKED, FILE_SECURITY_CHECK_FAILED, FILE_TOO_SHORT, NETWORK_FAILED, NETWORK_TIMEOUT, NETWORK_DISCONNECTED, NETWORK_SERVER_DOWN, SERVER_FAILED, SERVER_NO_RANGE, SERVER_PRECONDITION, SERVER_BAD_CONTENT, USER_CANCELED, USER_SHUTDOWN, CRASH];
 
- static InterruptReason create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const InterruptReason._(String str): super(str);
 }
 </pre>
@@ -331,20 +328,6 @@ const List&lt;<a href="../chrome.downloads/InterruptReason.html">InterruptReason
         <div class="doc">
 <pre class="source">
 static const List&lt;InterruptReason&gt; VALUES = const[FILE_FAILED, FILE_ACCESS_DENIED, FILE_NO_SPACE, FILE_NAME_TOO_LONG, FILE_TOO_LARGE, FILE_VIRUS_INFECTED, FILE_TRANSIENT_ERROR, FILE_BLOCKED, FILE_SECURITY_CHECK_FAILED, FILE_TOO_SHORT, NETWORK_FAILED, NETWORK_TIMEOUT, NETWORK_DISCONNECTED, NETWORK_SERVER_DOWN, SERVER_FAILED, SERVER_NO_RANGE, SERVER_PRECONDITION, SERVER_BAD_CONTENT, USER_CANCELED, USER_SHUTDOWN, CRASH]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.downloads/InterruptReason.html">InterruptReason</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to InterruptReason.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static InterruptReason create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

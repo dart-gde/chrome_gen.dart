@@ -45,7 +45,7 @@ class ChromeTabCapture {
  }
 
  Future&lt;CaptureInfo&gt; getCapturedTabs() {
-   var completer = new ChromeCompleter&lt;CaptureInfo&gt;.oneArg(CaptureInfo.create);
+   var completer = new ChromeCompleter&lt;CaptureInfo&gt;.oneArg(_createCaptureInfo);
    _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
    return completer.future;
  }
@@ -53,7 +53,7 @@ class ChromeTabCapture {
  Stream&lt;CaptureInfo&gt; get onStatusChanged =&gt; _onStatusChanged.stream;
 
  final ChromeStreamController&lt;CaptureInfo&gt; _onStatusChanged =
-     new ChromeStreamController&lt;CaptureInfo&gt;.oneArg(_tabCapture['onStatusChanged'], CaptureInfo.create);
+     new ChromeStreamController&lt;CaptureInfo&gt;.oneArg(_tabCapture['onStatusChanged'], _createCaptureInfo);
 }
 </pre>
 </div>
@@ -95,7 +95,7 @@ Future&lt;<a href="../chrome.tabCapture/CaptureInfo.html">CaptureInfo</a>&gt; <s
 <div class="doc">
 <pre class="source">
 Future&lt;CaptureInfo&gt; getCapturedTabs() {
- var completer = new ChromeCompleter&lt;CaptureInfo&gt;.oneArg(CaptureInfo.create);
+ var completer = new ChromeCompleter&lt;CaptureInfo&gt;.oneArg(_createCaptureInfo);
  _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
  return completer.future;
 }

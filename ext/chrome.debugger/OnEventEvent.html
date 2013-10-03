@@ -35,8 +35,6 @@
 <p>Fired whenever debugging target issues instrumentation event.</p>
 <pre class="source">
 class OnEventEvent {
- static OnEventEvent create(JsObject source, String method, JsObject params) =&gt;
-     new OnEventEvent(Debuggee.create(source), method, mapify(params));
 
  /**
   * The debuggee that generated this event.
@@ -63,20 +61,6 @@ class OnEventEvent {
  OnEventEvent(this.source, this.method, this.params);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.debugger/OnEventEvent.html">OnEventEvent</a> <strong>create</strong>(JsObject source, String method, JsObject params) <a class="anchor-link" href="#create"
-              title="Permalink to OnEventEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnEventEvent create(JsObject source, String method, JsObject params) =&gt;
-   new OnEventEvent(Debuggee.create(source), method, mapify(params));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

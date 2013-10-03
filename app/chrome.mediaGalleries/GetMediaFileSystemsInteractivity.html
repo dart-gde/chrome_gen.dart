@@ -40,9 +40,6 @@ class GetMediaFileSystemsInteractivity extends ChromeEnum {
 
  static const List&lt;GetMediaFileSystemsInteractivity&gt; VALUES = const[NO, YES, IF_NEEDED];
 
- static GetMediaFileSystemsInteractivity create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const GetMediaFileSystemsInteractivity._(String str): super(str);
 }
 </pre>
@@ -97,20 +94,6 @@ const <a href="../chrome.mediaGalleries/GetMediaFileSystemsInteractivity.html">G
         <div class="doc">
 <pre class="source">
 static const GetMediaFileSystemsInteractivity YES = const GetMediaFileSystemsInteractivity._('yes')
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.mediaGalleries/GetMediaFileSystemsInteractivity.html">GetMediaFileSystemsInteractivity</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to GetMediaFileSystemsInteractivity.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static GetMediaFileSystemsInteractivity create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

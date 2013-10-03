@@ -40,9 +40,6 @@ class FileStatus extends ChromeEnum {
 
  static const List&lt;FileStatus&gt; VALUES = const[SYNCED, PENDING, CONFLICTING];
 
- static FileStatus create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const FileStatus._(String str): super(str);
 }
 </pre>
@@ -97,20 +94,6 @@ const List&lt;<a href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a>&
         <div class="doc">
 <pre class="source">
 static const List&lt;FileStatus&gt; VALUES = const[SYNCED, PENDING, CONFLICTING]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to FileStatus.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static FileStatus create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

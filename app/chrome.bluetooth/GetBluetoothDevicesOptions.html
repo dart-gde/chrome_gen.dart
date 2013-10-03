@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class GetBluetoothDevicesOptions extends ChromeObject {
- static GetBluetoothDevicesOptions create(JsObject proxy) =&gt; proxy == null ? null : new GetBluetoothDevicesOptions.fromProxy(proxy);
 
  GetBluetoothDevicesOptions({Profile profile, BluetoothDeviceCallback deviceCallback}) {
    if (profile != null) this.profile = profile;
@@ -43,10 +42,10 @@ class GetBluetoothDevicesOptions extends ChromeObject {
 
  GetBluetoothDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
- Profile get profile =&gt; Profile.create(proxy['profile']);
+ Profile get profile =&gt; _createProfile(proxy['profile']);
  set profile(Profile value) =&gt; proxy['profile'] = value;
 
- BluetoothDeviceCallback get deviceCallback =&gt; BluetoothDeviceCallback.create(proxy['deviceCallback']);
+ BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(proxy['deviceCallback']);
  set deviceCallback(BluetoothDeviceCallback value) =&gt; proxy['deviceCallback'] = value;
 }
 </pre>
@@ -54,19 +53,6 @@ class GetBluetoothDevicesOptions extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>GetBluetoothDevicesOptions</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.bluetooth/GetBluetoothDevicesOptions.html">GetBluetoothDevicesOptions</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to GetBluetoothDevicesOptions.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static GetBluetoothDevicesOptions create(JsObject proxy) =&gt; proxy == null ? null : new GetBluetoothDevicesOptions.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -111,7 +97,7 @@ GetBluetoothDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-BluetoothDeviceCallback get deviceCallback =&gt; BluetoothDeviceCallback.create(proxy['deviceCallback']);
+BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(proxy['deviceCallback']);
 </pre>
 <pre class="source">
 set deviceCallback(BluetoothDeviceCallback value) =&gt; proxy['deviceCallback'] = value;
@@ -126,7 +112,7 @@ set deviceCallback(BluetoothDeviceCallback value) =&gt; proxy['deviceCallback'] 
         </h4>
         <div class="doc">
 <pre class="source">
-Profile get profile =&gt; Profile.create(proxy['profile']);
+Profile get profile =&gt; _createProfile(proxy['profile']);
 </pre>
 <pre class="source">
 set profile(Profile value) =&gt; proxy['profile'] = value;

@@ -35,7 +35,6 @@
 <p>Represents a font name.</p>
 <pre class="source">
 class FontName extends ChromeObject {
- static FontName create(JsObject proxy) =&gt; proxy == null ? null : new FontName.fromProxy(proxy);
 
  FontName({String fontId, String displayName}) {
    if (fontId != null) this.fontId = fontId;
@@ -61,19 +60,6 @@ class FontName extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>FontName</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.fontSettings/FontName.html">FontName</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to FontName.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static FontName create(JsObject proxy) =&gt; proxy == null ? null : new FontName.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">

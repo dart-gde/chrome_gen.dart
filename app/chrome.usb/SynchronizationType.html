@@ -40,9 +40,6 @@ class SynchronizationType extends ChromeEnum {
 
  static const List&lt;SynchronizationType&gt; VALUES = const[ASYNCHRONOUS, ADAPTIVE, SYNCHRONOUS];
 
- static SynchronizationType create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const SynchronizationType._(String str): super(str);
 }
 </pre>
@@ -97,20 +94,6 @@ const List&lt;<a href="../chrome.usb/SynchronizationType.html">SynchronizationTy
         <div class="doc">
 <pre class="source">
 static const List&lt;SynchronizationType&gt; VALUES = const[ASYNCHRONOUS, ADAPTIVE, SYNCHRONOUS]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.usb/SynchronizationType.html">SynchronizationType</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to SynchronizationType.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static SynchronizationType create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

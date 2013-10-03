@@ -36,8 +36,6 @@
 being sorted in the UI.  This is not called as a result of a move().</p>
 <pre class="source">
 class OnChildrenReorderedEvent {
- static OnChildrenReorderedEvent create(String id, JsObject reorderInfo) =&gt;
-     new OnChildrenReorderedEvent(id, mapify(reorderInfo));
 
  final String id;
 
@@ -46,20 +44,6 @@ class OnChildrenReorderedEvent {
  OnChildrenReorderedEvent(this.id, this.reorderInfo);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.bookmarks/OnChildrenReorderedEvent.html">OnChildrenReorderedEvent</a> <strong>create</strong>(String id, JsObject reorderInfo) <a class="anchor-link" href="#create"
-              title="Permalink to OnChildrenReorderedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnChildrenReorderedEvent create(String id, JsObject reorderInfo) =&gt;
-   new OnChildrenReorderedEvent(id, mapify(reorderInfo));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

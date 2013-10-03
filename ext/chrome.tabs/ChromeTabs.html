@@ -42,7 +42,7 @@ class ChromeTabs {
   * Retrieves details about the specified tab.
   */
  Future&lt;Tab&gt; get(int tabId) {
-   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
    _tabs.callMethod('get', [tabId, completer.callback]);
    return completer.future;
  }
@@ -53,7 +53,7 @@ class ChromeTabs {
   * view).
   */
  Future&lt;Tab&gt; getCurrent() {
-   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
    _tabs.callMethod('getCurrent', [completer.callback]);
    return completer.future;
  }
@@ -70,7 +70,7 @@ class ChromeTabs {
   * closes or does not exist.
   */
  Port connect(int tabId, [Map connectInfo]) {
-   return Port.create(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
+   return _createPort(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
  }
 
  /**
@@ -111,7 +111,7 @@ class ChromeTabs {
   * [windowId] Defaults to the [current window](windows.html#current-window).
   */
  Future&lt;Tab&gt; getSelected([int windowId]) {
-   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
    _tabs.callMethod('getSelected', [windowId, completer.callback]);
    return completer.future;
  }
@@ -123,7 +123,7 @@ class ChromeTabs {
   * [windowId] Defaults to the [current window](windows.html#current-window).
   */
  Future&lt;List&lt;Tab&gt;&gt; getAllInWindow([int windowId]) {
-   var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, Tab.create));
+   var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, _createTab));
    _tabs.callMethod('getAllInWindow', [windowId, completer.callback]);
    return completer.future;
  }
@@ -135,7 +135,7 @@ class ChromeTabs {
   * Details about the created tab. Will contain the ID of the new tab.
   */
  Future&lt;Tab&gt; create(Map createProperties) {
-   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
    _tabs.callMethod('create', [jsify(createProperties), completer.callback]);
    return completer.future;
  }
@@ -151,7 +151,7 @@ class ChromeTabs {
   * requested.
   */
  Future&lt;Tab&gt; duplicate(int tabId) {
-   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
    _tabs.callMethod('duplicate', [tabId, completer.callback]);
    return completer.future;
  }
@@ -161,7 +161,7 @@ class ChromeTabs {
   * properties are specified.
   */
  Future&lt;List&lt;Tab&gt;&gt; query(Map queryInfo) {
-   var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, Tab.create));
+   var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, _createTab));
    _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
    return completer.future;
  }
@@ -173,7 +173,7 @@ class ChromeTabs {
   * Contains details about the window whose tabs were highlighted.
   */
  Future&lt;Window&gt; highlight(Map highlightInfo) {
-   var completer = new ChromeCompleter&lt;Window&gt;.oneArg(Window.create);
+   var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
    _tabs.callMethod('highlight', [jsify(highlightInfo), completer.callback]);
    return completer.future;
  }
@@ -190,7 +190,7 @@ class ChromeTabs {
   * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
   */
  Future&lt;Tab&gt; update(Map updateProperties, [int tabId]) {
-   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+   var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
    _tabs.callMethod('update', [tabId, jsify(updateProperties), completer.callback]);
    return completer.future;
  }
@@ -316,7 +316,7 @@ class ChromeTabs {
  Stream&lt;Tab&gt; get onCreated =&gt; _onCreated.stream;
 
  final ChromeStreamController&lt;Tab&gt; _onCreated =
-     new ChromeStreamController&lt;Tab&gt;.oneArg(_tabs['onCreated'], Tab.create);
+     new ChromeStreamController&lt;Tab&gt;.oneArg(_tabs['onCreated'], _createTab);
 
  /**
   * Fired when a tab is updated.
@@ -324,7 +324,7 @@ class ChromeTabs {
  Stream&lt;OnUpdatedEvent&gt; get onUpdated =&gt; _onUpdated.stream;
 
  final ChromeStreamController&lt;OnUpdatedEvent&gt; _onUpdated =
-     new ChromeStreamController&lt;OnUpdatedEvent&gt;.threeArgs(_tabs['onUpdated'], OnUpdatedEvent.create);
+     new ChromeStreamController&lt;OnUpdatedEvent&gt;.threeArgs(_tabs['onUpdated'], _createOnUpdatedEvent);
 
  /**
   * Fired when a tab is moved within a window. Only one move event is fired,
@@ -335,7 +335,7 @@ class ChromeTabs {
  Stream&lt;TabsOnMovedEvent&gt; get onMoved =&gt; _onMoved.stream;
 
  final ChromeStreamController&lt;TabsOnMovedEvent&gt; _onMoved =
-     new ChromeStreamController&lt;TabsOnMovedEvent&gt;.twoArgs(_tabs['onMoved'], TabsOnMovedEvent.create);
+     new ChromeStreamController&lt;TabsOnMovedEvent&gt;.twoArgs(_tabs['onMoved'], _createTabsOnMovedEvent);
 
  /**
   * Deprecated. Please use onActivated.
@@ -343,7 +343,7 @@ class ChromeTabs {
  Stream&lt;OnSelectionChangedEvent&gt; get onSelectionChanged =&gt; _onSelectionChanged.stream;
 
  final ChromeStreamController&lt;OnSelectionChangedEvent&gt; _onSelectionChanged =
-     new ChromeStreamController&lt;OnSelectionChangedEvent&gt;.twoArgs(_tabs['onSelectionChanged'], OnSelectionChangedEvent.create);
+     new ChromeStreamController&lt;OnSelectionChangedEvent&gt;.twoArgs(_tabs['onSelectionChanged'], _createOnSelectionChangedEvent);
 
  /**
   * Deprecated. Please use onActivated.
@@ -351,7 +351,7 @@ class ChromeTabs {
  Stream&lt;OnActiveChangedEvent&gt; get onActiveChanged =&gt; _onActiveChanged.stream;
 
  final ChromeStreamController&lt;OnActiveChangedEvent&gt; _onActiveChanged =
-     new ChromeStreamController&lt;OnActiveChangedEvent&gt;.twoArgs(_tabs['onActiveChanged'], OnActiveChangedEvent.create);
+     new ChromeStreamController&lt;OnActiveChangedEvent&gt;.twoArgs(_tabs['onActiveChanged'], _createOnActiveChangedEvent);
 
  /**
   * Fires when the active tab in a window changes. Note that the tab's URL may
@@ -386,7 +386,7 @@ class ChromeTabs {
  Stream&lt;OnDetachedEvent&gt; get onDetached =&gt; _onDetached.stream;
 
  final ChromeStreamController&lt;OnDetachedEvent&gt; _onDetached =
-     new ChromeStreamController&lt;OnDetachedEvent&gt;.twoArgs(_tabs['onDetached'], OnDetachedEvent.create);
+     new ChromeStreamController&lt;OnDetachedEvent&gt;.twoArgs(_tabs['onDetached'], _createOnDetachedEvent);
 
  /**
   * Fired when a tab is attached to a window, for example because it was moved
@@ -395,7 +395,7 @@ class ChromeTabs {
  Stream&lt;OnAttachedEvent&gt; get onAttached =&gt; _onAttached.stream;
 
  final ChromeStreamController&lt;OnAttachedEvent&gt; _onAttached =
-     new ChromeStreamController&lt;OnAttachedEvent&gt;.twoArgs(_tabs['onAttached'], OnAttachedEvent.create);
+     new ChromeStreamController&lt;OnAttachedEvent&gt;.twoArgs(_tabs['onAttached'], _createOnAttachedEvent);
 
  /**
   * Fired when a tab is closed.
@@ -403,7 +403,7 @@ class ChromeTabs {
  Stream&lt;TabsOnRemovedEvent&gt; get onRemoved =&gt; _onRemoved.stream;
 
  final ChromeStreamController&lt;TabsOnRemovedEvent&gt; _onRemoved =
-     new ChromeStreamController&lt;TabsOnRemovedEvent&gt;.twoArgs(_tabs['onRemoved'], TabsOnRemovedEvent.create);
+     new ChromeStreamController&lt;TabsOnRemovedEvent&gt;.twoArgs(_tabs['onRemoved'], _createTabsOnRemovedEvent);
 
  /**
   * Fired when a tab is replaced with another tab due to prerendering or
@@ -412,7 +412,7 @@ class ChromeTabs {
  Stream&lt;OnReplacedEvent&gt; get onReplaced =&gt; _onReplaced.stream;
 
  final ChromeStreamController&lt;OnReplacedEvent&gt; _onReplaced =
-     new ChromeStreamController&lt;OnReplacedEvent&gt;.twoArgs(_tabs['onReplaced'], OnReplacedEvent.create);
+     new ChromeStreamController&lt;OnReplacedEvent&gt;.twoArgs(_tabs['onReplaced'], _createOnReplacedEvent);
 }
 </pre>
 </div>
@@ -628,7 +628,7 @@ the specified tab. The port's <code>runtime.Port</code> event is fired if the ta
 closes or does not exist.</p>
 <pre class="source">
 Port connect(int tabId, [Map connectInfo]) {
- return Port.create(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
+ return _createPort(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
 }
 </pre>
 </div>
@@ -643,7 +643,7 @@ Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>create</strong>(
 Details about the created tab. Will contain the ID of the new tab.</p>
 <pre class="source">
 Future&lt;Tab&gt; create(Map createProperties) {
- var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
  _tabs.callMethod('create', [jsify(createProperties), completer.callback]);
  return completer.future;
 }
@@ -689,7 +689,7 @@ Details about the duplicated tab. The <code>tabs.Tab</code> object doesn't conta
 requested.</p>
 <pre class="source">
 Future&lt;Tab&gt; duplicate(int tabId) {
- var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
  _tabs.callMethod('duplicate', [tabId, completer.callback]);
  return completer.future;
 }
@@ -727,7 +727,7 @@ Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>get</strong>(int
 <p>Retrieves details about the specified tab.</p>
 <pre class="source">
 Future&lt;Tab&gt; get(int tabId) {
- var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
  _tabs.callMethod('get', [tabId, completer.callback]);
  return completer.future;
 }
@@ -745,7 +745,7 @@ all tabs in the specified window.</p>
 <span class="param">windowId</span> Defaults to the <a href="windows.html#current-window">current window</a>.</p>
 <pre class="source">
 Future&lt;List&lt;Tab&gt;&gt; getAllInWindow([int windowId]) {
- var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, Tab.create));
+ var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, _createTab));
  _tabs.callMethod('getAllInWindow', [windowId, completer.callback]);
  return completer.future;
 }
@@ -762,7 +762,7 @@ called from a non-tab context (for example: a background page or popup
 view).</p>
 <pre class="source">
 Future&lt;Tab&gt; getCurrent() {
- var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
  _tabs.callMethod('getCurrent', [completer.callback]);
  return completer.future;
 }
@@ -780,7 +780,7 @@ selected in the specified window.</p>
 <span class="param">windowId</span> Defaults to the <a href="windows.html#current-window">current window</a>.</p>
 <pre class="source">
 Future&lt;Tab&gt; getSelected([int windowId]) {
- var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
  _tabs.callMethod('getSelected', [windowId, completer.callback]);
  return completer.future;
 }
@@ -797,7 +797,7 @@ Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>highlig
 Contains details about the window whose tabs were highlighted.</p>
 <pre class="source">
 Future&lt;Window&gt; highlight(Map highlightInfo) {
- var completer = new ChromeCompleter&lt;Window&gt;.oneArg(Window.create);
+ var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
  _tabs.callMethod('highlight', [jsify(highlightInfo), completer.callback]);
  return completer.future;
 }
@@ -855,7 +855,7 @@ Future&lt;List&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt;&gt; <strong>quer
 properties are specified.</p>
 <pre class="source">
 Future&lt;List&lt;Tab&gt;&gt; query(Map queryInfo) {
- var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, Tab.create));
+ var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, _createTab));
  _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
  return completer.future;
 }
@@ -954,7 +954,7 @@ Details about the updated tab. The <code>tabs.Tab</code> object doesn't contain 
 <code>title</code> and <code>favIconUrl</code> if the <code>"tabs"</code> permission has not been requested.</p>
 <pre class="source">
 Future&lt;Tab&gt; update(Map updateProperties, [int tabId]) {
- var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(Tab.create);
+ var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
  _tabs.callMethod('update', [tabId, jsify(updateProperties), completer.callback]);
  return completer.future;
 }

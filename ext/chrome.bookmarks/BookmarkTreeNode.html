@@ -36,7 +36,6 @@
 ordered within their parent folder.</p>
 <pre class="source">
 class BookmarkTreeNode extends ChromeObject {
- static BookmarkTreeNode create(JsObject proxy) =&gt; proxy == null ? null : new BookmarkTreeNode.fromProxy(proxy);
 
  BookmarkTreeNode({String id, String parentId, int index, String url, String title, var dateAdded, var dateGroupModified, List&lt;BookmarkTreeNode&gt; children}) {
    if (id != null) this.id = id;
@@ -99,7 +98,7 @@ class BookmarkTreeNode extends ChromeObject {
  /**
   * An ordered list of children of this node.
   */
- List&lt;BookmarkTreeNode&gt; get children =&gt; listify(proxy['children'], BookmarkTreeNode.create);
+ List&lt;BookmarkTreeNode&gt; get children =&gt; listify(proxy['children'], _createBookmarkTreeNode);
  set children(List&lt;BookmarkTreeNode&gt; value) =&gt; proxy['children'] = value;
 }
 </pre>
@@ -107,19 +106,6 @@ class BookmarkTreeNode extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>BookmarkTreeNode</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to BookmarkTreeNode.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static BookmarkTreeNode create(JsObject proxy) =&gt; proxy == null ? null : new BookmarkTreeNode.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -171,7 +157,7 @@ List&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>
         <div class="doc">
 <p>An ordered list of children of this node.</p>
 <pre class="source">
-List&lt;BookmarkTreeNode&gt; get children =&gt; listify(proxy['children'], BookmarkTreeNode.create);
+List&lt;BookmarkTreeNode&gt; get children =&gt; listify(proxy['children'], _createBookmarkTreeNode);
 </pre>
 <pre class="source">
 set children(List&lt;BookmarkTreeNode&gt; value) =&gt; proxy['children'] = value;

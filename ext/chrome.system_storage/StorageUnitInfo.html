@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class StorageUnitInfo extends ChromeObject {
- static StorageUnitInfo create(JsObject proxy) =&gt; proxy == null ? null : new StorageUnitInfo.fromProxy(proxy);
 
  StorageUnitInfo({String id, String name, StorageUnitType type, double capacity}) {
    if (id != null) this.id = id;
@@ -51,7 +50,7 @@ class StorageUnitInfo extends ChromeObject {
  String get name =&gt; proxy['name'];
  set name(String value) =&gt; proxy['name'] = value;
 
- StorageUnitType get type =&gt; StorageUnitType.create(proxy['type']);
+ StorageUnitType get type =&gt; _createStorageUnitType(proxy['type']);
  set type(StorageUnitType value) =&gt; proxy['type'] = value;
 
  double get capacity =&gt; proxy['capacity'];
@@ -62,19 +61,6 @@ class StorageUnitInfo extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>StorageUnitInfo</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.system_storage/StorageUnitInfo.html">StorageUnitInfo</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to StorageUnitInfo.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static StorageUnitInfo create(JsObject proxy) =&gt; proxy == null ? null : new StorageUnitInfo.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -178,7 +164,7 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-StorageUnitType get type =&gt; StorageUnitType.create(proxy['type']);
+StorageUnitType get type =&gt; _createStorageUnitType(proxy['type']);
 </pre>
 <pre class="source">
 set type(StorageUnitType value) =&gt; proxy['type'] = value;

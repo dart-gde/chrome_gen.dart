@@ -35,7 +35,6 @@
 <p>Represents the Elements panel.</p>
 <pre class="source">
 class ElementsPanel extends ChromeObject {
- static ElementsPanel create(JsObject proxy) =&gt; proxy == null ? null : new ElementsPanel.fromProxy(proxy);
 
  ElementsPanel();
 
@@ -50,7 +49,7 @@ class ElementsPanel extends ChromeObject {
   * An ExtensionSidebarPane object for created sidebar pane.
   */
  Future&lt;ExtensionSidebarPane&gt; createSidebarPane(String title) {
-   var completer = new ChromeCompleter&lt;ExtensionSidebarPane&gt;.oneArg(ExtensionSidebarPane.create);
+   var completer = new ChromeCompleter&lt;ExtensionSidebarPane&gt;.oneArg(_createExtensionSidebarPane);
    proxy.callMethod('createSidebarPane', [title, completer.callback]);
    return completer.future;
  }
@@ -60,19 +59,6 @@ class ElementsPanel extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ElementsPanel</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.devtools_panels/ElementsPanel.html">ElementsPanel</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to ElementsPanel.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static ElementsPanel create(JsObject proxy) =&gt; proxy == null ? null : new ElementsPanel.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -133,7 +119,7 @@ Future&lt;<a href="../chrome.devtools_panels/ExtensionSidebarPane.html">Extensio
 An ExtensionSidebarPane object for created sidebar pane.</p>
 <pre class="source">
 Future&lt;ExtensionSidebarPane&gt; createSidebarPane(String title) {
- var completer = new ChromeCompleter&lt;ExtensionSidebarPane&gt;.oneArg(ExtensionSidebarPane.create);
+ var completer = new ChromeCompleter&lt;ExtensionSidebarPane&gt;.oneArg(_createExtensionSidebarPane);
  proxy.callMethod('createSidebarPane', [title, completer.callback]);
  return completer.future;
 }

@@ -45,21 +45,21 @@ class ChromeContentSettings {
   * &lt;br&gt;Default is [allow].&lt;br&gt;The primary URL is the URL representing the
   * cookie origin. The secondary URL is the URL of the top-level frame.
   */
- ContentSetting get cookies =&gt; ContentSetting.create(_contentSettings['cookies']);
+ ContentSetting get cookies =&gt; _createContentSetting(_contentSettings['cookies']);
 
  /**
   * Whether to show images. One of&lt;br&gt;[allow]: Show images,&lt;br&gt;[block]: Don't
   * show images. &lt;br&gt;Default is [allow].&lt;br&gt;The primary URL is the main-frame
   * URL. The secondary URL is the URL of the image.
   */
- ContentSetting get images =&gt; ContentSetting.create(_contentSettings['images']);
+ ContentSetting get images =&gt; _createContentSetting(_contentSettings['images']);
 
  /**
   * Whether to run JavaScript. One of&lt;br&gt;[allow]: Run JavaScript,&lt;br&gt;[block]:
   * Don't run JavaScript. &lt;br&gt;Default is [allow].&lt;br&gt;The primary URL is the
   * main-frame URL. The secondary URL is not used.
   */
- ContentSetting get javascript =&gt; ContentSetting.create(_contentSettings['javascript']);
+ ContentSetting get javascript =&gt; _createContentSetting(_contentSettings['javascript']);
 
  /**
   * Whether to run plug-ins. One of&lt;br&gt;[allow]: Run plug-ins
@@ -67,7 +67,7 @@ class ChromeContentSettings {
   * [allow].&lt;br&gt;The primary URL is the main-frame URL. The secondary URL is not
   * used.
   */
- ContentSetting get plugins =&gt; ContentSetting.create(_contentSettings['plugins']);
+ ContentSetting get plugins =&gt; _createContentSetting(_contentSettings['plugins']);
 
  /**
   * Whether to allow sites to show pop-ups. One of&lt;br&gt;[allow]: Allow sites to
@@ -75,7 +75,7 @@ class ChromeContentSettings {
   * [block].&lt;br&gt;The primary URL is the main-frame URL. The secondary URL is not
   * used.
   */
- ContentSetting get popups =&gt; ContentSetting.create(_contentSettings['popups']);
+ ContentSetting get popups =&gt; _createContentSetting(_contentSettings['popups']);
 
  /**
   * Whether to allow sites to show desktop notifications. One of&lt;br&gt;[allow]:
@@ -84,7 +84,7 @@ class ChromeContentSettings {
   * notifications. &lt;br&gt;Default is [ask].&lt;br&gt;The primary URL is the main-frame
   * URL. The secondary URL is not used.
   */
- ContentSetting get notifications =&gt; ContentSetting.create(_contentSettings['notifications']);
+ ContentSetting get notifications =&gt; _createContentSetting(_contentSettings['notifications']);
 }
 </pre>
 </div>
@@ -103,7 +103,7 @@ cookies,&lt;br><code>session_only</code>: Accept cookies only for the current se
 &lt;br>Default is <code>allow</code>.&lt;br>The primary URL is the URL representing the
 cookie origin. The secondary URL is the URL of the top-level frame.</p>
 <pre class="source">
-ContentSetting get cookies =&gt; ContentSetting.create(_contentSettings['cookies']);
+ContentSetting get cookies =&gt; _createContentSetting(_contentSettings['cookies']);
 </pre>
 </div>
 </div>
@@ -118,7 +118,7 @@ final <a href="../chrome.contentSettings/ContentSetting.html">ContentSetting</a>
 show images. &lt;br>Default is <code>allow</code>.&lt;br>The primary URL is the main-frame
 URL. The secondary URL is the URL of the image.</p>
 <pre class="source">
-ContentSetting get images =&gt; ContentSetting.create(_contentSettings['images']);
+ContentSetting get images =&gt; _createContentSetting(_contentSettings['images']);
 </pre>
 </div>
 </div>
@@ -133,7 +133,7 @@ final <a href="../chrome.contentSettings/ContentSetting.html">ContentSetting</a>
 Don't run JavaScript. &lt;br>Default is <code>allow</code>.&lt;br>The primary URL is the
 main-frame URL. The secondary URL is not used.</p>
 <pre class="source">
-ContentSetting get javascript =&gt; ContentSetting.create(_contentSettings['javascript']);
+ContentSetting get javascript =&gt; _createContentSetting(_contentSettings['javascript']);
 </pre>
 </div>
 </div>
@@ -150,7 +150,7 @@ show desktop notifications,&lt;br><code>ask</code>: Ask when a site wants to sho
 notifications. &lt;br>Default is <code>ask</code>.&lt;br>The primary URL is the main-frame
 URL. The secondary URL is not used.</p>
 <pre class="source">
-ContentSetting get notifications =&gt; ContentSetting.create(_contentSettings['notifications']);
+ContentSetting get notifications =&gt; _createContentSetting(_contentSettings['notifications']);
 </pre>
 </div>
 </div>
@@ -166,7 +166,7 @@ automatically,&lt;br><code>block</code>: Don't run plug-ins automatically. &lt;b
 <code>allow</code>.&lt;br>The primary URL is the main-frame URL. The secondary URL is not
 used.</p>
 <pre class="source">
-ContentSetting get plugins =&gt; ContentSetting.create(_contentSettings['plugins']);
+ContentSetting get plugins =&gt; _createContentSetting(_contentSettings['plugins']);
 </pre>
 </div>
 </div>
@@ -182,7 +182,7 @@ show pop-ups,&lt;br><code>block</code>: Don't allow sites to show pop-ups. &lt;b
 <code>block</code>.&lt;br>The primary URL is the main-frame URL. The secondary URL is not
 used.</p>
 <pre class="source">
-ContentSetting get popups =&gt; ContentSetting.create(_contentSettings['popups']);
+ContentSetting get popups =&gt; _createContentSetting(_contentSettings['popups']);
 </pre>
 </div>
 </div>

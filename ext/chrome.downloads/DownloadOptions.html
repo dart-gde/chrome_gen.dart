@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class DownloadOptions extends ChromeObject {
- static DownloadOptions create(JsObject proxy) =&gt; proxy == null ? null : new DownloadOptions.fromProxy(proxy);
 
  DownloadOptions({String url, String filename, FilenameConflictAction conflictAction, bool saveAs, HttpMethod method, HeaderNameValuePair headers, String body}) {
    if (url != null) this.url = url;
@@ -54,16 +53,16 @@ class DownloadOptions extends ChromeObject {
  String get filename =&gt; proxy['filename'];
  set filename(String value) =&gt; proxy['filename'] = value;
 
- FilenameConflictAction get conflictAction =&gt; FilenameConflictAction.create(proxy['conflictAction']);
+ FilenameConflictAction get conflictAction =&gt; _createFilenameConflictAction(proxy['conflictAction']);
  set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = value;
 
  bool get saveAs =&gt; proxy['saveAs'];
  set saveAs(bool value) =&gt; proxy['saveAs'] = value;
 
- HttpMethod get method =&gt; HttpMethod.create(proxy['method']);
+ HttpMethod get method =&gt; _createHttpMethod(proxy['method']);
  set method(HttpMethod value) =&gt; proxy['method'] = value;
 
- HeaderNameValuePair get headers =&gt; HeaderNameValuePair.create(proxy['headers']);
+ HeaderNameValuePair get headers =&gt; _createHeaderNameValuePair(proxy['headers']);
  set headers(HeaderNameValuePair value) =&gt; proxy['headers'] = value;
 
  String get body =&gt; proxy['body'];
@@ -74,19 +73,6 @@ class DownloadOptions extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>DownloadOptions</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.downloads/DownloadOptions.html">DownloadOptions</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to DownloadOptions.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static DownloadOptions create(JsObject proxy) =&gt; proxy == null ? null : new DownloadOptions.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -151,7 +137,7 @@ set body(String value) =&gt; proxy['body'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-FilenameConflictAction get conflictAction =&gt; FilenameConflictAction.create(proxy['conflictAction']);
+FilenameConflictAction get conflictAction =&gt; _createFilenameConflictAction(proxy['conflictAction']);
 </pre>
 <pre class="source">
 set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = value;
@@ -181,7 +167,7 @@ set filename(String value) =&gt; proxy['filename'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-HeaderNameValuePair get headers =&gt; HeaderNameValuePair.create(proxy['headers']);
+HeaderNameValuePair get headers =&gt; _createHeaderNameValuePair(proxy['headers']);
 </pre>
 <pre class="source">
 set headers(HeaderNameValuePair value) =&gt; proxy['headers'] = value;
@@ -196,7 +182,7 @@ set headers(HeaderNameValuePair value) =&gt; proxy['headers'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-HttpMethod get method =&gt; HttpMethod.create(proxy['method']);
+HttpMethod get method =&gt; _createHttpMethod(proxy['method']);
 </pre>
 <pre class="source">
 set method(HttpMethod value) =&gt; proxy['method'] = value;

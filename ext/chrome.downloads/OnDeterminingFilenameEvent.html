@@ -34,8 +34,6 @@
 <div class="doc">
 <pre class="source">
 class OnDeterminingFilenameEvent {
- static OnDeterminingFilenameEvent create(JsObject downloadItem, JsObject suggest) =&gt;
-     new OnDeterminingFilenameEvent(DownloadItem.create(downloadItem), SuggestFilenameCallback.create(suggest));
 
  final DownloadItem downloadItem;
 
@@ -44,20 +42,6 @@ class OnDeterminingFilenameEvent {
  OnDeterminingFilenameEvent(this.downloadItem, this.suggest);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.downloads/OnDeterminingFilenameEvent.html">OnDeterminingFilenameEvent</a> <strong>create</strong>(JsObject downloadItem, JsObject suggest) <a class="anchor-link" href="#create"
-              title="Permalink to OnDeterminingFilenameEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnDeterminingFilenameEvent create(JsObject downloadItem, JsObject suggest) =&gt;
-   new OnDeterminingFilenameEvent(DownloadItem.create(downloadItem), SuggestFilenameCallback.create(suggest));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

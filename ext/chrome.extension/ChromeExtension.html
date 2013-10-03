@@ -157,7 +157,7 @@ class ChromeExtension {
  Stream&lt;OnRequestEvent&gt; get onRequest =&gt; _onRequest.stream;
 
  final ChromeStreamController&lt;OnRequestEvent&gt; _onRequest =
-     new ChromeStreamController&lt;OnRequestEvent&gt;.threeArgs(_extension['onRequest'], OnRequestEvent.create);
+     new ChromeStreamController&lt;OnRequestEvent&gt;.threeArgs(_extension['onRequest'], _createOnRequestEvent);
 
  /**
   * Deprecated: please use onMessageExternal.
@@ -165,7 +165,7 @@ class ChromeExtension {
  Stream&lt;OnRequestExternalEvent&gt; get onRequestExternal =&gt; _onRequestExternal.stream;
 
  final ChromeStreamController&lt;OnRequestExternalEvent&gt; _onRequestExternal =
-     new ChromeStreamController&lt;OnRequestExternalEvent&gt;.threeArgs(_extension['onRequestExternal'], OnRequestExternalEvent.create);
+     new ChromeStreamController&lt;OnRequestExternalEvent&gt;.threeArgs(_extension['onRequestExternal'], _createOnRequestExternalEvent);
 }
 </pre>
 </div>

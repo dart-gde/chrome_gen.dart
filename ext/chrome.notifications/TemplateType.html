@@ -41,9 +41,6 @@ class TemplateType extends ChromeEnum {
 
  static const List&lt;TemplateType&gt; VALUES = const[BASIC, IMAGE, LIST, PROGRESS];
 
- static TemplateType create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const TemplateType._(String str): super(str);
 }
 </pre>
@@ -110,20 +107,6 @@ const List&lt;<a href="../chrome.notifications/TemplateType.html">TemplateType</
         <div class="doc">
 <pre class="source">
 static const List&lt;TemplateType&gt; VALUES = const[BASIC, IMAGE, LIST, PROGRESS]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.notifications/TemplateType.html">TemplateType</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to TemplateType.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static TemplateType create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

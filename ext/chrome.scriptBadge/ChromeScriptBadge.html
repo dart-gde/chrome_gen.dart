@@ -73,7 +73,7 @@ class ChromeScriptBadge {
  Stream&lt;Tab&gt; get onClicked =&gt; _onClicked.stream;
 
  final ChromeStreamController&lt;Tab&gt; _onClicked =
-     new ChromeStreamController&lt;Tab&gt;.oneArg(_scriptBadge['onClicked'], Tab.create);
+     new ChromeStreamController&lt;Tab&gt;.oneArg(_scriptBadge['onClicked'], _createTab);
 }
 </pre>
 </div>

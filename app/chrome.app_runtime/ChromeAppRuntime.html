@@ -41,7 +41,7 @@ class ChromeAppRuntime {
  Stream&lt;LaunchData&gt; get onLaunched =&gt; _onLaunched.stream;
 
  final ChromeStreamController&lt;LaunchData&gt; _onLaunched =
-     new ChromeStreamController&lt;LaunchData&gt;.oneArg(_app_runtime['onLaunched'], LaunchData.create);
+     new ChromeStreamController&lt;LaunchData&gt;.oneArg(_app_runtime['onLaunched'], _createLaunchData);
 
  Stream get onRestarted =&gt; _onRestarted.stream;
 

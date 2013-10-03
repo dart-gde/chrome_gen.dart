@@ -76,7 +76,7 @@ class ChromeDevtoolsInspectedWindow {
   * The resources within the page.
   */
  Future&lt;List&lt;Resource&gt;&gt; getResources() {
-   var completer = new ChromeCompleter&lt;List&lt;Resource&gt;&gt;.oneArg((e) =&gt; listify(e, Resource.create));
+   var completer = new ChromeCompleter&lt;List&lt;Resource&gt;&gt;.oneArg((e) =&gt; listify(e, _createResource));
    _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
    return completer.future;
  }
@@ -87,7 +87,7 @@ class ChromeDevtoolsInspectedWindow {
  Stream&lt;Resource&gt; get onResourceAdded =&gt; _onResourceAdded.stream;
 
  final ChromeStreamController&lt;Resource&gt; _onResourceAdded =
-     new ChromeStreamController&lt;Resource&gt;.oneArg(_devtools_inspectedWindow['onResourceAdded'], Resource.create);
+     new ChromeStreamController&lt;Resource&gt;.oneArg(_devtools_inspectedWindow['onResourceAdded'], _createResource);
 
  /**
   * Fired when a new revision of the resource is committed (e.g. user saves an
@@ -96,7 +96,7 @@ class ChromeDevtoolsInspectedWindow {
  Stream&lt;OnResourceContentCommittedEvent&gt; get onResourceContentCommitted =&gt; _onResourceContentCommitted.stream;
 
  final ChromeStreamController&lt;OnResourceContentCommittedEvent&gt; _onResourceContentCommitted =
-     new ChromeStreamController&lt;OnResourceContentCommittedEvent&gt;.twoArgs(_devtools_inspectedWindow['onResourceContentCommitted'], OnResourceContentCommittedEvent.create);
+     new ChromeStreamController&lt;OnResourceContentCommittedEvent&gt;.twoArgs(_devtools_inspectedWindow['onResourceContentCommitted'], _createOnResourceContentCommittedEvent);
 }
 </pre>
 </div>
@@ -179,7 +179,7 @@ Future&lt;List&lt;<a href="../chrome.devtools_inspectedWindow/Resource.html">Res
 The resources within the page.</p>
 <pre class="source">
 Future&lt;List&lt;Resource&gt;&gt; getResources() {
- var completer = new ChromeCompleter&lt;List&lt;Resource&gt;&gt;.oneArg((e) =&gt; listify(e, Resource.create));
+ var completer = new ChromeCompleter&lt;List&lt;Resource&gt;&gt;.oneArg((e) =&gt; listify(e, _createResource));
  _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
  return completer.future;
 }

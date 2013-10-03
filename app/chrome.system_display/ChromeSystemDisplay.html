@@ -39,7 +39,7 @@ class ChromeSystemDisplay {
  ChromeSystemDisplay._();
 
  Future&lt;DisplayUnitInfo&gt; getInfo() {
-   var completer = new ChromeCompleter&lt;DisplayUnitInfo&gt;.oneArg(DisplayUnitInfo.create);
+   var completer = new ChromeCompleter&lt;DisplayUnitInfo&gt;.oneArg(_createDisplayUnitInfo);
    _system_display.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
@@ -81,7 +81,7 @@ Future&lt;<a href="../chrome.system_display/DisplayUnitInfo.html">DisplayUnitInf
 <div class="doc">
 <pre class="source">
 Future&lt;DisplayUnitInfo&gt; getInfo() {
- var completer = new ChromeCompleter&lt;DisplayUnitInfo&gt;.oneArg(DisplayUnitInfo.create);
+ var completer = new ChromeCompleter&lt;DisplayUnitInfo&gt;.oneArg(_createDisplayUnitInfo);
  _system_display.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }

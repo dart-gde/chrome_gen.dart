@@ -35,8 +35,6 @@
 <p>Fired when a bookmark or folder is moved to a different parent folder.</p>
 <pre class="source">
 class BookmarksOnMovedEvent {
- static BookmarksOnMovedEvent create(String id, JsObject moveInfo) =&gt;
-     new BookmarksOnMovedEvent(id, mapify(moveInfo));
 
  final String id;
 
@@ -45,20 +43,6 @@ class BookmarksOnMovedEvent {
  BookmarksOnMovedEvent(this.id, this.moveInfo);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.bookmarks/BookmarksOnMovedEvent.html">BookmarksOnMovedEvent</a> <strong>create</strong>(String id, JsObject moveInfo) <a class="anchor-link" href="#create"
-              title="Permalink to BookmarksOnMovedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static BookmarksOnMovedEvent create(String id, JsObject moveInfo) =&gt;
-   new BookmarksOnMovedEvent(id, mapify(moveInfo));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

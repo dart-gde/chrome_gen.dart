@@ -39,8 +39,6 @@ user credentials are provided, this may be called multiple times for the same
 request.</p>
 <pre class="source">
 class OnAuthRequiredEvent {
- static OnAuthRequiredEvent create(JsObject details, JsObject callback) =&gt;
-     new OnAuthRequiredEvent(mapify(details), callback);
 
  final Map details;
 
@@ -52,20 +50,6 @@ class OnAuthRequiredEvent {
  OnAuthRequiredEvent(this.details, this.callback);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.webRequest/OnAuthRequiredEvent.html">OnAuthRequiredEvent</a> <strong>create</strong>(JsObject details, JsObject callback) <a class="anchor-link" href="#create"
-              title="Permalink to OnAuthRequiredEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnAuthRequiredEvent create(JsObject details, JsObject callback) =&gt;
-   new OnAuthRequiredEvent(mapify(details), callback);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

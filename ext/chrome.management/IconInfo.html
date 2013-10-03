@@ -35,7 +35,6 @@
 <p>Information about an icon belonging to an extension, app, or theme.</p>
 <pre class="source">
 class IconInfo extends ChromeObject {
- static IconInfo create(JsObject proxy) =&gt; proxy == null ? null : new IconInfo.fromProxy(proxy);
 
  IconInfo({int size, String url}) {
    if (size != null) this.size = size;
@@ -64,19 +63,6 @@ class IconInfo extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>IconInfo</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.management/IconInfo.html">IconInfo</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to IconInfo.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static IconInfo create(JsObject proxy) =&gt; proxy == null ? null : new IconInfo.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">

@@ -37,8 +37,6 @@ when either the tab is being closed or Chrome DevTools is being invoked for
 the attached tab.</p>
 <pre class="source">
 class OnDetachEvent {
- static OnDetachEvent create(JsObject source, String reason) =&gt;
-     new OnDetachEvent(Debuggee.create(source), reason);
 
  /**
   * The debuggee that was detached.
@@ -54,20 +52,6 @@ class OnDetachEvent {
  OnDetachEvent(this.source, this.reason);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.debugger/OnDetachEvent.html">OnDetachEvent</a> <strong>create</strong>(JsObject source, String reason) <a class="anchor-link" href="#create"
-              title="Permalink to OnDetachEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnDetachEvent create(JsObject source, String reason) =&gt;
-   new OnDetachEvent(Debuggee.create(source), reason);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

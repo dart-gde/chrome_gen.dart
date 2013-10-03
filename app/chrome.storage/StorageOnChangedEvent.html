@@ -35,8 +35,6 @@
 <p>Fired when one or more items change.</p>
 <pre class="source">
 class StorageOnChangedEvent {
- static StorageOnChangedEvent create(JsObject changes, String areaName) =&gt;
-     new StorageOnChangedEvent(mapify(changes), areaName);
 
  /**
   * Object mapping each key that changed to its corresponding [StorageChange]
@@ -52,20 +50,6 @@ class StorageOnChangedEvent {
  StorageOnChangedEvent(this.changes, this.areaName);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.storage/StorageOnChangedEvent.html">StorageOnChangedEvent</a> <strong>create</strong>(JsObject changes, String areaName) <a class="anchor-link" href="#create"
-              title="Permalink to StorageOnChangedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static StorageOnChangedEvent create(JsObject changes, String areaName) =&gt;
-   new StorageOnChangedEvent(mapify(changes), areaName);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

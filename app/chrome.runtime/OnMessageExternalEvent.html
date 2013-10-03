@@ -36,8 +36,6 @@
 content script.</p>
 <pre class="source">
 class OnMessageExternalEvent {
- static OnMessageExternalEvent create(JsObject message, JsObject sender, JsObject sendResponse) =&gt;
-     new OnMessageExternalEvent(message, MessageSender.create(sender), sendResponse);
 
  /**
   * The message sent by the calling script.
@@ -63,20 +61,6 @@ class OnMessageExternalEvent {
  OnMessageExternalEvent(this.message, this.sender, this.sendResponse);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.runtime/OnMessageExternalEvent.html">OnMessageExternalEvent</a> <strong>create</strong>(JsObject message, JsObject sender, JsObject sendResponse) <a class="anchor-link" href="#create"
-              title="Permalink to OnMessageExternalEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnMessageExternalEvent create(JsObject message, JsObject sender, JsObject sendResponse) =&gt;
-   new OnMessageExternalEvent(message, MessageSender.create(sender), sendResponse);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

@@ -65,7 +65,7 @@ class ChromeNotifications {
  Stream&lt;OnClosedEvent&gt; get onClosed =&gt; _onClosed.stream;
 
  final ChromeStreamController&lt;OnClosedEvent&gt; _onClosed =
-     new ChromeStreamController&lt;OnClosedEvent&gt;.twoArgs(_notifications['onClosed'], OnClosedEvent.create);
+     new ChromeStreamController&lt;OnClosedEvent&gt;.twoArgs(_notifications['onClosed'], _createOnClosedEvent);
 
  Stream&lt;String&gt; get onClicked =&gt; _onClicked.stream;
 
@@ -75,7 +75,7 @@ class ChromeNotifications {
  Stream&lt;OnButtonClickedEvent&gt; get onButtonClicked =&gt; _onButtonClicked.stream;
 
  final ChromeStreamController&lt;OnButtonClickedEvent&gt; _onButtonClicked =
-     new ChromeStreamController&lt;OnButtonClickedEvent&gt;.twoArgs(_notifications['onButtonClicked'], OnButtonClickedEvent.create);
+     new ChromeStreamController&lt;OnButtonClickedEvent&gt;.twoArgs(_notifications['onButtonClicked'], _createOnButtonClickedEvent);
 }
 </pre>
 </div>

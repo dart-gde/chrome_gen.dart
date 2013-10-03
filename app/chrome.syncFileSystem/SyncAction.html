@@ -40,9 +40,6 @@ class SyncAction extends ChromeEnum {
 
  static const List&lt;SyncAction&gt; VALUES = const[ADDED, UPDATED, DELETED];
 
- static SyncAction create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const SyncAction._(String str): super(str);
 }
 </pre>
@@ -97,20 +94,6 @@ const List&lt;<a href="../chrome.syncFileSystem/SyncAction.html">SyncAction</a>&
         <div class="doc">
 <pre class="source">
 static const List&lt;SyncAction&gt; VALUES = const[ADDED, UPDATED, DELETED]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.syncFileSystem/SyncAction.html">SyncAction</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to SyncAction.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static SyncAction create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

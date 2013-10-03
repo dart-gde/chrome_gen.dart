@@ -35,7 +35,6 @@
 <p>A filter of a cookie in HTTP Responses.</p>
 <pre class="source">
 class FilterResponseCookie extends ChromeObject {
- static FilterResponseCookie create(JsObject proxy) =&gt; proxy == null ? null : new FilterResponseCookie.fromProxy(proxy);
 
  FilterResponseCookie({String name, String value, String expires, var maxAge, String domain, String path, String secure, String httpOnly, int ageUpperBound, int ageLowerBound, bool sessionCookie}) {
    if (name != null) this.name = name;
@@ -136,19 +135,6 @@ class FilterResponseCookie extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>FilterResponseCookie</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.declarativeWebRequest/FilterResponseCookie.html">FilterResponseCookie</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to FilterResponseCookie.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static FilterResponseCookie create(JsObject proxy) =&gt; proxy == null ? null : new FilterResponseCookie.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">

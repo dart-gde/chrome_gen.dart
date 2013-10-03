@@ -94,7 +94,7 @@ class ChromeContextMenus {
  Stream&lt;OnClickedEvent&gt; get onClicked =&gt; _onClicked.stream;
 
  final ChromeStreamController&lt;OnClickedEvent&gt; _onClicked =
-     new ChromeStreamController&lt;OnClickedEvent&gt;.twoArgs(_contextMenus['onClicked'], OnClickedEvent.create);
+     new ChromeStreamController&lt;OnClickedEvent&gt;.twoArgs(_contextMenus['onClicked'], _createOnClickedEvent);
 }
 </pre>
 </div>

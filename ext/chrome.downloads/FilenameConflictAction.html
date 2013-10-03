@@ -40,9 +40,6 @@ class FilenameConflictAction extends ChromeEnum {
 
  static const List&lt;FilenameConflictAction&gt; VALUES = const[UNIQUIFY, OVERWRITE, PROMPT];
 
- static FilenameConflictAction create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const FilenameConflictAction._(String str): super(str);
 }
 </pre>
@@ -97,20 +94,6 @@ const List&lt;<a href="../chrome.downloads/FilenameConflictAction.html">Filename
         <div class="doc">
 <pre class="source">
 static const List&lt;FilenameConflictAction&gt; VALUES = const[UNIQUIFY, OVERWRITE, PROMPT]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.downloads/FilenameConflictAction.html">FilenameConflictAction</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to FilenameConflictAction.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static FilenameConflictAction create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

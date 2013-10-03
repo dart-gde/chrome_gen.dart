@@ -39,9 +39,6 @@ class HttpMethod extends ChromeEnum {
 
  static const List&lt;HttpMethod&gt; VALUES = const[GET, POST];
 
- static HttpMethod create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const HttpMethod._(String str): super(str);
 }
 </pre>
@@ -84,20 +81,6 @@ const List&lt;<a href="../chrome.downloads/HttpMethod.html">HttpMethod</a>&gt;  
         <div class="doc">
 <pre class="source">
 static const List&lt;HttpMethod&gt; VALUES = const[GET, POST]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.downloads/HttpMethod.html">HttpMethod</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to HttpMethod.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static HttpMethod create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

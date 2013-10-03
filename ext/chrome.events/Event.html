@@ -36,7 +36,6 @@
 event.</p>
 <pre class="source">
 class Event extends ChromeObject {
- static Event create(JsObject proxy) =&gt; proxy == null ? null : new Event.fromProxy(proxy);
 
  Event();
 
@@ -80,7 +79,7 @@ class Event extends ChromeObject {
   * Rules that were registered, the optional parameters are filled with values.
   */
  Future&lt;List&lt;Rule&gt;&gt; addRules(String eventName, List&lt;Rule&gt; rules) {
-   var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, Rule.create));
+   var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, _createRule));
    proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
    return completer.future;
  }
@@ -97,7 +96,7 @@ class Event extends ChromeObject {
   * Rules that were registered, the optional parameters are filled with values.
   */
  Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
-   var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, Rule.create));
+   var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, _createRule));
    proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
    return completer.future;
  }
@@ -121,19 +120,6 @@ class Event extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>Event</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.events/Event.html">Event</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to Event.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static Event create(JsObject proxy) =&gt; proxy == null ? null : new Event.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -212,7 +198,7 @@ rules.</p>
 Rules that were registered, the optional parameters are filled with values.</p>
 <pre class="source">
 Future&lt;List&lt;Rule&gt;&gt; addRules(String eventName, List&lt;Rule&gt; rules) {
- var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, Rule.create));
+ var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, _createRule));
  proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
  return completer.future;
 }
@@ -234,7 +220,7 @@ contained in this array are returned.</p>
 Rules that were registered, the optional parameters are filled with values.</p>
 <pre class="source">
 Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
- var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, Rule.create));
+ var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, _createRule));
  proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
  return completer.future;
 }

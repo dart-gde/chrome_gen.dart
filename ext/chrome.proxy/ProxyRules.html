@@ -37,7 +37,6 @@
 and 'fallbackProxy'.</p>
 <pre class="source">
 class ProxyRules extends ChromeObject {
- static ProxyRules create(JsObject proxy) =&gt; proxy == null ? null : new ProxyRules.fromProxy(proxy);
 
  ProxyRules({ProxyServer singleProxy, ProxyServer proxyForHttp, ProxyServer proxyForHttps, ProxyServer proxyForFtp, ProxyServer fallbackProxy, List&lt;String&gt; bypassList}) {
    if (singleProxy != null) this.singleProxy = singleProxy;
@@ -54,32 +53,32 @@ class ProxyRules extends ChromeObject {
   * The proxy server to be used for all per-URL requests (that is http, https,
   * and ftp).
   */
- ProxyServer get singleProxy =&gt; ProxyServer.create(this.proxy['singleProxy']);
+ ProxyServer get singleProxy =&gt; _createProxyServer(this.proxy['singleProxy']);
  set singleProxy(ProxyServer value) =&gt; this.proxy['singleProxy'] = value;
 
  /**
   * The proxy server to be used for HTTP requests.
   */
- ProxyServer get proxyForHttp =&gt; ProxyServer.create(this.proxy['proxyForHttp']);
+ ProxyServer get proxyForHttp =&gt; _createProxyServer(this.proxy['proxyForHttp']);
  set proxyForHttp(ProxyServer value) =&gt; this.proxy['proxyForHttp'] = value;
 
  /**
   * The proxy server to be used for HTTPS requests.
   */
- ProxyServer get proxyForHttps =&gt; ProxyServer.create(this.proxy['proxyForHttps']);
+ ProxyServer get proxyForHttps =&gt; _createProxyServer(this.proxy['proxyForHttps']);
  set proxyForHttps(ProxyServer value) =&gt; this.proxy['proxyForHttps'] = value;
 
  /**
   * The proxy server to be used for FTP requests.
   */
- ProxyServer get proxyForFtp =&gt; ProxyServer.create(this.proxy['proxyForFtp']);
+ ProxyServer get proxyForFtp =&gt; _createProxyServer(this.proxy['proxyForFtp']);
  set proxyForFtp(ProxyServer value) =&gt; this.proxy['proxyForFtp'] = value;
 
  /**
   * The proxy server to be used for everthing else or if any of the specific
   * proxyFor... is not specified.
   */
- ProxyServer get fallbackProxy =&gt; ProxyServer.create(this.proxy['fallbackProxy']);
+ ProxyServer get fallbackProxy =&gt; _createProxyServer(this.proxy['fallbackProxy']);
  set fallbackProxy(ProxyServer value) =&gt; this.proxy['fallbackProxy'] = value;
 
  /**
@@ -93,19 +92,6 @@ class ProxyRules extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ProxyRules</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.proxy/ProxyRules.html">ProxyRules</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to ProxyRules.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static ProxyRules create(JsObject proxy) =&gt; proxy == null ? null : new ProxyRules.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -172,7 +158,7 @@ set bypassList(List&lt;String&gt; value) =&gt; this.proxy['bypassList'] = value;
 <p>The proxy server to be used for everthing else or if any of the specific
 proxyFor... is not specified.</p>
 <pre class="source">
-ProxyServer get fallbackProxy =&gt; ProxyServer.create(this.proxy['fallbackProxy']);
+ProxyServer get fallbackProxy =&gt; _createProxyServer(this.proxy['fallbackProxy']);
 </pre>
 <pre class="source">
 set fallbackProxy(ProxyServer value) =&gt; this.proxy['fallbackProxy'] = value;
@@ -200,7 +186,7 @@ final JsObject proxy
         <div class="doc">
 <p>The proxy server to be used for FTP requests.</p>
 <pre class="source">
-ProxyServer get proxyForFtp =&gt; ProxyServer.create(this.proxy['proxyForFtp']);
+ProxyServer get proxyForFtp =&gt; _createProxyServer(this.proxy['proxyForFtp']);
 </pre>
 <pre class="source">
 set proxyForFtp(ProxyServer value) =&gt; this.proxy['proxyForFtp'] = value;
@@ -216,7 +202,7 @@ set proxyForFtp(ProxyServer value) =&gt; this.proxy['proxyForFtp'] = value;
         <div class="doc">
 <p>The proxy server to be used for HTTP requests.</p>
 <pre class="source">
-ProxyServer get proxyForHttp =&gt; ProxyServer.create(this.proxy['proxyForHttp']);
+ProxyServer get proxyForHttp =&gt; _createProxyServer(this.proxy['proxyForHttp']);
 </pre>
 <pre class="source">
 set proxyForHttp(ProxyServer value) =&gt; this.proxy['proxyForHttp'] = value;
@@ -232,7 +218,7 @@ set proxyForHttp(ProxyServer value) =&gt; this.proxy['proxyForHttp'] = value;
         <div class="doc">
 <p>The proxy server to be used for HTTPS requests.</p>
 <pre class="source">
-ProxyServer get proxyForHttps =&gt; ProxyServer.create(this.proxy['proxyForHttps']);
+ProxyServer get proxyForHttps =&gt; _createProxyServer(this.proxy['proxyForHttps']);
 </pre>
 <pre class="source">
 set proxyForHttps(ProxyServer value) =&gt; this.proxy['proxyForHttps'] = value;
@@ -249,7 +235,7 @@ set proxyForHttps(ProxyServer value) =&gt; this.proxy['proxyForHttps'] = value;
 <p>The proxy server to be used for all per-URL requests (that is http, https,
 and ftp).</p>
 <pre class="source">
-ProxyServer get singleProxy =&gt; ProxyServer.create(this.proxy['singleProxy']);
+ProxyServer get singleProxy =&gt; _createProxyServer(this.proxy['singleProxy']);
 </pre>
 <pre class="source">
 set singleProxy(ProxyServer value) =&gt; this.proxy['singleProxy'] = value;

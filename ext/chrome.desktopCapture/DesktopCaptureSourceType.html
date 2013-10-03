@@ -40,9 +40,6 @@ class DesktopCaptureSourceType extends ChromeEnum {
 
  static const List&lt;DesktopCaptureSourceType&gt; VALUES = const[SCREEN, WINDOW, TAB];
 
- static DesktopCaptureSourceType create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const DesktopCaptureSourceType._(String str): super(str);
 }
 </pre>
@@ -97,20 +94,6 @@ const <a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCa
         <div class="doc">
 <pre class="source">
 static const DesktopCaptureSourceType WINDOW = const DesktopCaptureSourceType._('window')
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to DesktopCaptureSourceType.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static DesktopCaptureSourceType create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

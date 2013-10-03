@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class ChooseEntryOptions extends ChromeObject {
- static ChooseEntryOptions create(JsObject proxy) =&gt; proxy == null ? null : new ChooseEntryOptions.fromProxy(proxy);
 
  ChooseEntryOptions({ChooseEntryType type, String suggestedName, AcceptOption accepts, bool acceptsAllTypes, bool acceptsMultiple}) {
    if (type != null) this.type = type;
@@ -46,13 +45,13 @@ class ChooseEntryOptions extends ChromeObject {
 
  ChooseEntryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
- ChooseEntryType get type =&gt; ChooseEntryType.create(proxy['type']);
+ ChooseEntryType get type =&gt; _createChooseEntryType(proxy['type']);
  set type(ChooseEntryType value) =&gt; proxy['type'] = value;
 
  String get suggestedName =&gt; proxy['suggestedName'];
  set suggestedName(String value) =&gt; proxy['suggestedName'] = value;
 
- AcceptOption get accepts =&gt; AcceptOption.create(proxy['accepts']);
+ AcceptOption get accepts =&gt; _createAcceptOption(proxy['accepts']);
  set accepts(AcceptOption value) =&gt; proxy['accepts'] = value;
 
  bool get acceptsAllTypes =&gt; proxy['acceptsAllTypes'];
@@ -66,19 +65,6 @@ class ChooseEntryOptions extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChooseEntryOptions</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.fileSystem/ChooseEntryOptions.html">ChooseEntryOptions</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to ChooseEntryOptions.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static ChooseEntryOptions create(JsObject proxy) =&gt; proxy == null ? null : new ChooseEntryOptions.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -126,7 +112,7 @@ ChooseEntryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-AcceptOption get accepts =&gt; AcceptOption.create(proxy['accepts']);
+AcceptOption get accepts =&gt; _createAcceptOption(proxy['accepts']);
 </pre>
 <pre class="source">
 set accepts(AcceptOption value) =&gt; proxy['accepts'] = value;
@@ -198,7 +184,7 @@ set suggestedName(String value) =&gt; proxy['suggestedName'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-ChooseEntryType get type =&gt; ChooseEntryType.create(proxy['type']);
+ChooseEntryType get type =&gt; _createChooseEntryType(proxy['type']);
 </pre>
 <pre class="source">
 set type(ChooseEntryType value) =&gt; proxy['type'] = value;

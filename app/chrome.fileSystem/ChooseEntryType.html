@@ -41,9 +41,6 @@ class ChooseEntryType extends ChromeEnum {
 
  static const List&lt;ChooseEntryType&gt; VALUES = const[OPENFILE, OPENWRITABLEFILE, SAVEFILE, OPENDIRECTORY];
 
- static ChooseEntryType create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const ChooseEntryType._(String str): super(str);
 }
 </pre>
@@ -110,20 +107,6 @@ const List&lt;<a href="../chrome.fileSystem/ChooseEntryType.html">ChooseEntryTyp
         <div class="doc">
 <pre class="source">
 static const List&lt;ChooseEntryType&gt; VALUES = const[OPENFILE, OPENWRITABLEFILE, SAVEFILE, OPENDIRECTORY]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.fileSystem/ChooseEntryType.html">ChooseEntryType</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to ChooseEntryType.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static ChooseEntryType create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

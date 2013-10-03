@@ -37,8 +37,6 @@ position is moved. The text length is limited to 100 characters for each back
 and forth direction.</p>
 <pre class="source">
 class OnSurroundingTextChangedEvent {
- static OnSurroundingTextChangedEvent create(String engineID, JsObject surroundingInfo) =&gt;
-     new OnSurroundingTextChangedEvent(engineID, mapify(surroundingInfo));
 
  /**
   * ID of the engine receiving the event
@@ -53,20 +51,6 @@ class OnSurroundingTextChangedEvent {
  OnSurroundingTextChangedEvent(this.engineID, this.surroundingInfo);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.input_ime/OnSurroundingTextChangedEvent.html">OnSurroundingTextChangedEvent</a> <strong>create</strong>(String engineID, JsObject surroundingInfo) <a class="anchor-link" href="#create"
-              title="Permalink to OnSurroundingTextChangedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnSurroundingTextChangedEvent create(String engineID, JsObject surroundingInfo) =&gt;
-   new OnSurroundingTextChangedEvent(engineID, mapify(surroundingInfo));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

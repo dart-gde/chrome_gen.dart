@@ -42,7 +42,7 @@ class ChromeProxy {
   * Proxy settings to be used. The value of this setting is a ProxyConfig
   * object.
   */
- ChromeSetting get settings =&gt; ChromeSetting.create(_proxy['settings']);
+ ChromeSetting get settings =&gt; _createChromeSetting(_proxy['settings']);
 
  /**
   * Notifies about proxy errors.
@@ -79,7 +79,7 @@ final <a href="../chrome.types/ChromeSetting.html">ChromeSetting</a>         <st
 <p>Proxy settings to be used. The value of this setting is a ProxyConfig
 object.</p>
 <pre class="source">
-ChromeSetting get settings =&gt; ChromeSetting.create(_proxy['settings']);
+ChromeSetting get settings =&gt; _createChromeSetting(_proxy['settings']);
 </pre>
 </div>
 </div>

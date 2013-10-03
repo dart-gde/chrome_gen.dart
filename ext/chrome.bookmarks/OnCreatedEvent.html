@@ -35,8 +35,6 @@
 <p>Fired when a bookmark or folder is created.</p>
 <pre class="source">
 class OnCreatedEvent {
- static OnCreatedEvent create(String id, JsObject bookmark) =&gt;
-     new OnCreatedEvent(id, BookmarkTreeNode.create(bookmark));
 
  final String id;
 
@@ -45,20 +43,6 @@ class OnCreatedEvent {
  OnCreatedEvent(this.id, this.bookmark);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.bookmarks/OnCreatedEvent.html">OnCreatedEvent</a> <strong>create</strong>(String id, JsObject bookmark) <a class="anchor-link" href="#create"
-              title="Permalink to OnCreatedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnCreatedEvent create(String id, JsObject bookmark) =&gt;
-   new OnCreatedEvent(id, BookmarkTreeNode.create(bookmark));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

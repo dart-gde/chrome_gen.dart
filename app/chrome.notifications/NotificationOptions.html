@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class NotificationOptions extends ChromeObject {
- static NotificationOptions create(JsObject proxy) =&gt; proxy == null ? null : new NotificationOptions.fromProxy(proxy);
 
  NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress}) {
    if (type != null) this.type = type;
@@ -55,13 +54,13 @@ class NotificationOptions extends ChromeObject {
 
  NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
- TemplateType get type =&gt; TemplateType.create(proxy['type']);
+ TemplateType get type =&gt; _createTemplateType(proxy['type']);
  set type(TemplateType value) =&gt; proxy['type'] = value;
 
  String get iconUrl =&gt; proxy['iconUrl'];
  set iconUrl(String value) =&gt; proxy['iconUrl'] = value;
 
- NotificationBitmap get iconBitmap =&gt; NotificationBitmap.create(proxy['iconBitmap']);
+ NotificationBitmap get iconBitmap =&gt; _createNotificationBitmap(proxy['iconBitmap']);
  set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = value;
 
  String get title =&gt; proxy['title'];
@@ -79,7 +78,7 @@ class NotificationOptions extends ChromeObject {
  double get eventTime =&gt; proxy['eventTime'];
  set eventTime(double value) =&gt; proxy['eventTime'] = value;
 
- NotificationButton get buttons =&gt; NotificationButton.create(proxy['buttons']);
+ NotificationButton get buttons =&gt; _createNotificationButton(proxy['buttons']);
  set buttons(NotificationButton value) =&gt; proxy['buttons'] = value;
 
  String get expandedMessage =&gt; proxy['expandedMessage'];
@@ -88,10 +87,10 @@ class NotificationOptions extends ChromeObject {
  String get imageUrl =&gt; proxy['imageUrl'];
  set imageUrl(String value) =&gt; proxy['imageUrl'] = value;
 
- NotificationBitmap get imageBitmap =&gt; NotificationBitmap.create(proxy['imageBitmap']);
+ NotificationBitmap get imageBitmap =&gt; _createNotificationBitmap(proxy['imageBitmap']);
  set imageBitmap(NotificationBitmap value) =&gt; proxy['imageBitmap'] = value;
 
- NotificationItem get items =&gt; NotificationItem.create(proxy['items']);
+ NotificationItem get items =&gt; _createNotificationItem(proxy['items']);
  set items(NotificationItem value) =&gt; proxy['items'] = value;
 
  int get progress =&gt; proxy['progress'];
@@ -102,19 +101,6 @@ class NotificationOptions extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>NotificationOptions</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.notifications/NotificationOptions.html">NotificationOptions</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to NotificationOptions.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static NotificationOptions create(JsObject proxy) =&gt; proxy == null ? null : new NotificationOptions.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -171,7 +157,7 @@ NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-NotificationButton get buttons =&gt; NotificationButton.create(proxy['buttons']);
+NotificationButton get buttons =&gt; _createNotificationButton(proxy['buttons']);
 </pre>
 <pre class="source">
 set buttons(NotificationButton value) =&gt; proxy['buttons'] = value;
@@ -231,7 +217,7 @@ set expandedMessage(String value) =&gt; proxy['expandedMessage'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-NotificationBitmap get iconBitmap =&gt; NotificationBitmap.create(proxy['iconBitmap']);
+NotificationBitmap get iconBitmap =&gt; _createNotificationBitmap(proxy['iconBitmap']);
 </pre>
 <pre class="source">
 set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = value;
@@ -261,7 +247,7 @@ set iconUrl(String value) =&gt; proxy['iconUrl'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-NotificationBitmap get imageBitmap =&gt; NotificationBitmap.create(proxy['imageBitmap']);
+NotificationBitmap get imageBitmap =&gt; _createNotificationBitmap(proxy['imageBitmap']);
 </pre>
 <pre class="source">
 set imageBitmap(NotificationBitmap value) =&gt; proxy['imageBitmap'] = value;
@@ -291,7 +277,7 @@ set imageUrl(String value) =&gt; proxy['imageUrl'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-NotificationItem get items =&gt; NotificationItem.create(proxy['items']);
+NotificationItem get items =&gt; _createNotificationItem(proxy['items']);
 </pre>
 <pre class="source">
 set items(NotificationItem value) =&gt; proxy['items'] = value;
@@ -378,7 +364,7 @@ set title(String value) =&gt; proxy['title'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-TemplateType get type =&gt; TemplateType.create(proxy['type']);
+TemplateType get type =&gt; _createTemplateType(proxy['type']);
 </pre>
 <pre class="source">
 set type(TemplateType value) =&gt; proxy['type'] = value;

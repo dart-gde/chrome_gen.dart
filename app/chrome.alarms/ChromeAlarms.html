@@ -43,13 +43,13 @@ class ChromeAlarms {
  }
 
  Future&lt;Alarm&gt; get([String name]) {
-   var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(Alarm.create);
+   var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(_createAlarm);
    _alarms.callMethod('get', [name, completer.callback]);
    return completer.future;
  }
 
  Future&lt;Alarm&gt; getAll() {
-   var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(Alarm.create);
+   var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(_createAlarm);
    _alarms.callMethod('getAll', [completer.callback]);
    return completer.future;
  }
@@ -65,7 +65,7 @@ class ChromeAlarms {
  Stream&lt;Alarm&gt; get onAlarm =&gt; _onAlarm.stream;
 
  final ChromeStreamController&lt;Alarm&gt; _onAlarm =
-     new ChromeStreamController&lt;Alarm&gt;.oneArg(_alarms['onAlarm'], Alarm.create);
+     new ChromeStreamController&lt;Alarm&gt;.oneArg(_alarms['onAlarm'], _createAlarm);
 }
 </pre>
 </div>
@@ -129,7 +129,7 @@ Future&lt;<a href="../chrome.alarms/Alarm.html">Alarm</a>&gt; <strong>get</stron
 <div class="doc">
 <pre class="source">
 Future&lt;Alarm&gt; get([String name]) {
- var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(Alarm.create);
+ var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(_createAlarm);
  _alarms.callMethod('get', [name, completer.callback]);
  return completer.future;
 }
@@ -143,7 +143,7 @@ Future&lt;<a href="../chrome.alarms/Alarm.html">Alarm</a>&gt; <strong>getAll</st
 <div class="doc">
 <pre class="source">
 Future&lt;Alarm&gt; getAll() {
- var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(Alarm.create);
+ var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(_createAlarm);
  _alarms.callMethod('getAll', [completer.callback]);
  return completer.future;
 }

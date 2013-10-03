@@ -35,8 +35,6 @@
 <p>This event is sent if this extension owns the active IME.</p>
 <pre class="source">
 class OnKeyEventEvent {
- static OnKeyEventEvent create(String engineID, JsObject keyData) =&gt;
-     new OnKeyEventEvent(engineID, KeyboardEvent.create(keyData));
 
  /**
   * ID of the engine receiving the event
@@ -51,20 +49,6 @@ class OnKeyEventEvent {
  OnKeyEventEvent(this.engineID, this.keyData);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.input_ime/OnKeyEventEvent.html">OnKeyEventEvent</a> <strong>create</strong>(String engineID, JsObject keyData) <a class="anchor-link" href="#create"
-              title="Permalink to OnKeyEventEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnKeyEventEvent create(String engineID, JsObject keyData) =&gt;
-   new OnKeyEventEvent(engineID, KeyboardEvent.create(keyData));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

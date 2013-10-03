@@ -36,8 +36,6 @@
 this extension's manifest is the first to match the options object.</p>
 <pre class="source">
 class OnSpeakEvent {
- static OnSpeakEvent create(String utterance, JsObject options, JsObject sendTtsEvent) =&gt;
-     new OnSpeakEvent(utterance, mapify(options), sendTtsEvent);
 
  /**
   * The text to speak, specified as either plain text or an SSML document. If
@@ -63,20 +61,6 @@ class OnSpeakEvent {
  OnSpeakEvent(this.utterance, this.options, this.sendTtsEvent);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.ttsEngine/OnSpeakEvent.html">OnSpeakEvent</a> <strong>create</strong>(String utterance, JsObject options, JsObject sendTtsEvent) <a class="anchor-link" href="#create"
-              title="Permalink to OnSpeakEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnSpeakEvent create(String utterance, JsObject options, JsObject sendTtsEvent) =&gt;
-   new OnSpeakEvent(utterance, mapify(options), sendTtsEvent);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

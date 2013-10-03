@@ -36,7 +36,6 @@
 instance, uses a separate cookie store from a non-incognito window.</p>
 <pre class="source">
 class CookieStore extends ChromeObject {
- static CookieStore create(JsObject proxy) =&gt; proxy == null ? null : new CookieStore.fromProxy(proxy);
 
  CookieStore({String id, List&lt;int&gt; tabIds}) {
    if (id != null) this.id = id;
@@ -62,19 +61,6 @@ class CookieStore extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>CookieStore</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.cookies/CookieStore.html">CookieStore</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to CookieStore.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static CookieStore create(JsObject proxy) =&gt; proxy == null ? null : new CookieStore.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">

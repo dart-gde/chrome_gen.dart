@@ -42,9 +42,6 @@ class ServiceStatus extends ChromeEnum {
 
  static const List&lt;ServiceStatus&gt; VALUES = const[INITIALIZING, RUNNING, AUTHENTICATION_REQUIRED, TEMPORARY_UNAVAILABLE, DISABLED];
 
- static ServiceStatus create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const ServiceStatus._(String str): super(str);
 }
 </pre>
@@ -123,20 +120,6 @@ const List&lt;<a href="../chrome.syncFileSystem/ServiceStatus.html">ServiceStatu
         <div class="doc">
 <pre class="source">
 static const List&lt;ServiceStatus&gt; VALUES = const[INITIALIZING, RUNNING, AUTHENTICATION_REQUIRED, TEMPORARY_UNAVAILABLE, DISABLED]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.syncFileSystem/ServiceStatus.html">ServiceStatus</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to ServiceStatus.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static ServiceStatus create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

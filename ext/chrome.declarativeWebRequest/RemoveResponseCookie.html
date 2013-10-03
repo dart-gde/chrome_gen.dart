@@ -36,7 +36,6 @@
 Cookies API because this is computationally less expensive.</p>
 <pre class="source">
 class RemoveResponseCookie extends ChromeObject {
- static RemoveResponseCookie create(JsObject proxy) =&gt; proxy == null ? null : new RemoveResponseCookie.fromProxy(proxy);
 
  RemoveResponseCookie({FilterResponseCookie filter}) {
    if (filter != null) this.filter = filter;
@@ -47,7 +46,7 @@ class RemoveResponseCookie extends ChromeObject {
  /**
   * Filter for cookies that will be removed. All empty entries are ignored.
   */
- FilterResponseCookie get filter =&gt; FilterResponseCookie.create(proxy['filter']);
+ FilterResponseCookie get filter =&gt; _createFilterResponseCookie(proxy['filter']);
  set filter(FilterResponseCookie value) =&gt; proxy['filter'] = value;
 }
 </pre>
@@ -55,19 +54,6 @@ class RemoveResponseCookie extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>RemoveResponseCookie</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.declarativeWebRequest/RemoveResponseCookie.html">RemoveResponseCookie</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to RemoveResponseCookie.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static RemoveResponseCookie create(JsObject proxy) =&gt; proxy == null ? null : new RemoveResponseCookie.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -112,7 +98,7 @@ RemoveResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
         <div class="doc">
 <p>Filter for cookies that will be removed. All empty entries are ignored.</p>
 <pre class="source">
-FilterResponseCookie get filter =&gt; FilterResponseCookie.create(proxy['filter']);
+FilterResponseCookie get filter =&gt; _createFilterResponseCookie(proxy['filter']);
 </pre>
 <pre class="source">
 set filter(FilterResponseCookie value) =&gt; proxy['filter'] = value;

@@ -35,8 +35,6 @@
 <p>Deprecated: please use onMessageExternal.</p>
 <pre class="source">
 class OnRequestExternalEvent {
- static OnRequestExternalEvent create(JsObject request, JsObject sender, JsObject sendResponse) =&gt;
-     new OnRequestExternalEvent(request, MessageSender.create(sender), sendResponse);
 
  /**
   * The request sent by the calling script.
@@ -57,20 +55,6 @@ class OnRequestExternalEvent {
  OnRequestExternalEvent(this.request, this.sender, this.sendResponse);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.extension/OnRequestExternalEvent.html">OnRequestExternalEvent</a> <strong>create</strong>(JsObject request, JsObject sender, JsObject sendResponse) <a class="anchor-link" href="#create"
-              title="Permalink to OnRequestExternalEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnRequestExternalEvent create(JsObject request, JsObject sender, JsObject sendResponse) =&gt;
-   new OnRequestExternalEvent(request, MessageSender.create(sender), sendResponse);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

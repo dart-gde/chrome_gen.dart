@@ -39,9 +39,6 @@ class SyncDirection extends ChromeEnum {
 
  static const List&lt;SyncDirection&gt; VALUES = const[LOCAL_TO_REMOTE, REMOTE_TO_LOCAL];
 
- static SyncDirection create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const SyncDirection._(String str): super(str);
 }
 </pre>
@@ -84,20 +81,6 @@ const List&lt;<a href="../chrome.syncFileSystem/SyncDirection.html">SyncDirectio
         <div class="doc">
 <pre class="source">
 static const List&lt;SyncDirection&gt; VALUES = const[LOCAL_TO_REMOTE, REMOTE_TO_LOCAL]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.syncFileSystem/SyncDirection.html">SyncDirection</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to SyncDirection.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static SyncDirection create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

@@ -40,9 +40,6 @@ class StorageUnitType extends ChromeEnum {
 
  static const List&lt;StorageUnitType&gt; VALUES = const[FIXED, REMOVABLE, UNKNOWN];
 
- static StorageUnitType create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const StorageUnitType._(String str): super(str);
 }
 </pre>
@@ -97,20 +94,6 @@ const List&lt;<a href="../chrome.system_storage/StorageUnitType.html">StorageUni
         <div class="doc">
 <pre class="source">
 static const List&lt;StorageUnitType&gt; VALUES = const[FIXED, REMOVABLE, UNKNOWN]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.system_storage/StorageUnitType.html">StorageUnitType</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to StorageUnitType.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static StorageUnitType create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

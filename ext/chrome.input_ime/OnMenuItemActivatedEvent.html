@@ -35,8 +35,6 @@
 <p>Called when the user selects a menu item</p>
 <pre class="source">
 class OnMenuItemActivatedEvent {
- static OnMenuItemActivatedEvent create(String engineID, String name) =&gt;
-     new OnMenuItemActivatedEvent(engineID, name);
 
  /**
   * ID of the engine receiving the event
@@ -51,20 +49,6 @@ class OnMenuItemActivatedEvent {
  OnMenuItemActivatedEvent(this.engineID, this.name);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.input_ime/OnMenuItemActivatedEvent.html">OnMenuItemActivatedEvent</a> <strong>create</strong>(String engineID, String name) <a class="anchor-link" href="#create"
-              title="Permalink to OnMenuItemActivatedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnMenuItemActivatedEvent create(String engineID, String name) =&gt;
-   new OnMenuItemActivatedEvent(engineID, name);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

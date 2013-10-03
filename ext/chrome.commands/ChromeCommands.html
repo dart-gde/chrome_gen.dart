@@ -43,7 +43,7 @@ class ChromeCommands {
   * shortcut (if active).
   */
  Future&lt;List&lt;Command&gt;&gt; getAll() {
-   var completer = new ChromeCompleter&lt;List&lt;Command&gt;&gt;.oneArg((e) =&gt; listify(e, Command.create));
+   var completer = new ChromeCompleter&lt;List&lt;Command&gt;&gt;.oneArg((e) =&gt; listify(e, _createCommand));
    _commands.callMethod('getAll', [completer.callback]);
    return completer.future;
  }
@@ -85,7 +85,7 @@ Future&lt;List&lt;<a href="../chrome.commands/Command.html">Command</a>&gt;&gt; 
 shortcut (if active).</p>
 <pre class="source">
 Future&lt;List&lt;Command&gt;&gt; getAll() {
- var completer = new ChromeCompleter&lt;List&lt;Command&gt;&gt;.oneArg((e) =&gt; listify(e, Command.create));
+ var completer = new ChromeCompleter&lt;List&lt;Command&gt;&gt;.oneArg((e) =&gt; listify(e, _createCommand));
  _commands.callMethod('getAll', [completer.callback]);
  return completer.future;
 }

@@ -94,7 +94,7 @@ class ChromeDebugger {
   * Array of TargetInfo objects corresponding to the available debug targets.
   */
  Future&lt;List&lt;TargetInfo&gt;&gt; getTargets() {
-   var completer = new ChromeCompleter&lt;List&lt;TargetInfo&gt;&gt;.oneArg((e) =&gt; listify(e, TargetInfo.create));
+   var completer = new ChromeCompleter&lt;List&lt;TargetInfo&gt;&gt;.oneArg((e) =&gt; listify(e, _createTargetInfo));
    _debugger.callMethod('getTargets', [completer.callback]);
    return completer.future;
  }
@@ -105,7 +105,7 @@ class ChromeDebugger {
  Stream&lt;OnEventEvent&gt; get onEvent =&gt; _onEvent.stream;
 
  final ChromeStreamController&lt;OnEventEvent&gt; _onEvent =
-     new ChromeStreamController&lt;OnEventEvent&gt;.threeArgs(_debugger['onEvent'], OnEventEvent.create);
+     new ChromeStreamController&lt;OnEventEvent&gt;.threeArgs(_debugger['onEvent'], _createOnEventEvent);
 
  /**
   * Fired when browser terminates debugging session for the tab. This happens
@@ -115,7 +115,7 @@ class ChromeDebugger {
  Stream&lt;OnDetachEvent&gt; get onDetach =&gt; _onDetach.stream;
 
  final ChromeStreamController&lt;OnDetachEvent&gt; _onDetach =
-     new ChromeStreamController&lt;OnDetachEvent&gt;.twoArgs(_debugger['onDetach'], OnDetachEvent.create);
+     new ChromeStreamController&lt;OnDetachEvent&gt;.twoArgs(_debugger['onDetach'], _createOnDetachEvent);
 }
 </pre>
 </div>
@@ -201,7 +201,7 @@ Future&lt;List&lt;<a href="../chrome.debugger/TargetInfo.html">TargetInfo</a>&gt
 Array of TargetInfo objects corresponding to the available debug targets.</p>
 <pre class="source">
 Future&lt;List&lt;TargetInfo&gt;&gt; getTargets() {
- var completer = new ChromeCompleter&lt;List&lt;TargetInfo&gt;&gt;.oneArg((e) =&gt; listify(e, TargetInfo.create));
+ var completer = new ChromeCompleter&lt;List&lt;TargetInfo&gt;&gt;.oneArg((e) =&gt; listify(e, _createTargetInfo));
  _debugger.callMethod('getTargets', [completer.callback]);
  return completer.future;
 }

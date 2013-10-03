@@ -40,9 +40,6 @@ class State extends ChromeEnum {
 
  static const List&lt;State&gt; VALUES = const[IN_PROGRESS, INTERRUPTED, COMPLETE];
 
- static State create(String str) =&gt;
-     VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
-
  const State._(String str): super(str);
 }
 </pre>
@@ -97,20 +94,6 @@ const List&lt;<a href="../chrome.downloads/State.html">State</a>&gt;         <st
         <div class="doc">
 <pre class="source">
 static const List&lt;State&gt; VALUES = const[IN_PROGRESS, INTERRUPTED, COMPLETE]
-</pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.downloads/State.html">State</a> <strong>create</strong>(String str) <a class="anchor-link" href="#create"
-              title="Permalink to State.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static State create(String str) =&gt;
-   VALUES.singleWhere((ChromeEnum e) =&gt; e.value == str);
 </pre>
 </div>
 </div>

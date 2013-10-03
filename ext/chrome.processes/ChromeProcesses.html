@@ -119,7 +119,7 @@ class ChromeProcesses {
  Stream&lt;Process&gt; get onCreated =&gt; _onCreated.stream;
 
  final ChromeStreamController&lt;Process&gt; _onCreated =
-     new ChromeStreamController&lt;Process&gt;.oneArg(_processes['onCreated'], Process.create);
+     new ChromeStreamController&lt;Process&gt;.oneArg(_processes['onCreated'], _createProcess);
 
  /**
   * Fired each time a process becomes unresponsive, providing the corrseponding
@@ -128,7 +128,7 @@ class ChromeProcesses {
  Stream&lt;Process&gt; get onUnresponsive =&gt; _onUnresponsive.stream;
 
  final ChromeStreamController&lt;Process&gt; _onUnresponsive =
-     new ChromeStreamController&lt;Process&gt;.oneArg(_processes['onUnresponsive'], Process.create);
+     new ChromeStreamController&lt;Process&gt;.oneArg(_processes['onUnresponsive'], _createProcess);
 
  /**
   * Fired each time a process is terminated, providing the type of exit.
@@ -136,7 +136,7 @@ class ChromeProcesses {
  Stream&lt;OnExitedEvent&gt; get onExited =&gt; _onExited.stream;
 
  final ChromeStreamController&lt;OnExitedEvent&gt; _onExited =
-     new ChromeStreamController&lt;OnExitedEvent&gt;.threeArgs(_processes['onExited'], OnExitedEvent.create);
+     new ChromeStreamController&lt;OnExitedEvent&gt;.threeArgs(_processes['onExited'], _createOnExitedEvent);
 }
 </pre>
 </div>

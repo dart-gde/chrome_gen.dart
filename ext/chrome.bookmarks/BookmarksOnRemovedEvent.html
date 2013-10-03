@@ -37,8 +37,6 @@ recursively, a single notification is fired for the folder, and none for its
 contents.</p>
 <pre class="source">
 class BookmarksOnRemovedEvent {
- static BookmarksOnRemovedEvent create(String id, JsObject removeInfo) =&gt;
-     new BookmarksOnRemovedEvent(id, mapify(removeInfo));
 
  final String id;
 
@@ -47,20 +45,6 @@ class BookmarksOnRemovedEvent {
  BookmarksOnRemovedEvent(this.id, this.removeInfo);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.bookmarks/BookmarksOnRemovedEvent.html">BookmarksOnRemovedEvent</a> <strong>create</strong>(String id, JsObject removeInfo) <a class="anchor-link" href="#create"
-              title="Permalink to BookmarksOnRemovedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static BookmarksOnRemovedEvent create(String id, JsObject removeInfo) =&gt;
-   new BookmarksOnRemovedEvent(id, mapify(removeInfo));
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

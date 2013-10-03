@@ -102,7 +102,7 @@ class ChromeWebRequest {
  Stream&lt;OnAuthRequiredEvent&gt; get onAuthRequired =&gt; _onAuthRequired.stream;
 
  final ChromeStreamController&lt;OnAuthRequiredEvent&gt; _onAuthRequired =
-     new ChromeStreamController&lt;OnAuthRequiredEvent&gt;.twoArgs(_webRequest['onAuthRequired'], OnAuthRequiredEvent.create);
+     new ChromeStreamController&lt;OnAuthRequiredEvent&gt;.twoArgs(_webRequest['onAuthRequired'], _createOnAuthRequiredEvent);
 
  /**
   * Fired when the first byte of the response body is received. For HTTP

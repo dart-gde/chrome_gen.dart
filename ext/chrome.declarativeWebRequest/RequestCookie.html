@@ -35,7 +35,6 @@
 <p>A filter or specification of a cookie in HTTP Requests.</p>
 <pre class="source">
 class RequestCookie extends ChromeObject {
- static RequestCookie create(JsObject proxy) =&gt; proxy == null ? null : new RequestCookie.fromProxy(proxy);
 
  RequestCookie({String name, String value}) {
    if (name != null) this.name = name;
@@ -61,19 +60,6 @@ class RequestCookie extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>RequestCookie</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.declarativeWebRequest/RequestCookie.html">RequestCookie</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to RequestCookie.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static RequestCookie create(JsObject proxy) =&gt; proxy == null ? null : new RequestCookie.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">

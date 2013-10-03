@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class OutOfBandPairingData extends ChromeObject {
- static OutOfBandPairingData create(JsObject proxy) =&gt; proxy == null ? null : new OutOfBandPairingData.fromProxy(proxy);
 
  OutOfBandPairingData({ArrayBuffer hash, ArrayBuffer randomizer}) {
    if (hash != null) this.hash = hash;
@@ -43,10 +42,10 @@ class OutOfBandPairingData extends ChromeObject {
 
  OutOfBandPairingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
- ArrayBuffer get hash =&gt; ArrayBuffer.create(proxy['hash']);
+ ArrayBuffer get hash =&gt; _createArrayBuffer(proxy['hash']);
  set hash(ArrayBuffer value) =&gt; proxy['hash'] = value;
 
- ArrayBuffer get randomizer =&gt; ArrayBuffer.create(proxy['randomizer']);
+ ArrayBuffer get randomizer =&gt; _createArrayBuffer(proxy['randomizer']);
  set randomizer(ArrayBuffer value) =&gt; proxy['randomizer'] = value;
 }
 </pre>
@@ -54,19 +53,6 @@ class OutOfBandPairingData extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>OutOfBandPairingData</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.bluetooth/OutOfBandPairingData.html">OutOfBandPairingData</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to OutOfBandPairingData.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OutOfBandPairingData create(JsObject proxy) =&gt; proxy == null ? null : new OutOfBandPairingData.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -111,7 +97,7 @@ OutOfBandPairingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-ArrayBuffer get hash =&gt; ArrayBuffer.create(proxy['hash']);
+ArrayBuffer get hash =&gt; _createArrayBuffer(proxy['hash']);
 </pre>
 <pre class="source">
 set hash(ArrayBuffer value) =&gt; proxy['hash'] = value;
@@ -138,7 +124,7 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-ArrayBuffer get randomizer =&gt; ArrayBuffer.create(proxy['randomizer']);
+ArrayBuffer get randomizer =&gt; _createArrayBuffer(proxy['randomizer']);
 </pre>
 <pre class="source">
 set randomizer(ArrayBuffer value) =&gt; proxy['randomizer'] = value;

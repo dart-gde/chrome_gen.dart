@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class Coordinates extends ChromeObject {
- static Coordinates create(JsObject proxy) =&gt; proxy == null ? null : new Coordinates.fromProxy(proxy);
 
  Coordinates({double latitude, double longitude, double altitude, double accuracy, double altitudeAccuracy, double heading, double speed}) {
    if (latitude != null) this.latitude = latitude;
@@ -74,19 +73,6 @@ class Coordinates extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>Coordinates</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.location/Coordinates.html">Coordinates</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to Coordinates.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static Coordinates create(JsObject proxy) =&gt; proxy == null ? null : new Coordinates.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">

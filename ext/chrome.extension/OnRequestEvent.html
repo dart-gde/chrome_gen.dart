@@ -35,8 +35,6 @@
 <p>Deprecated: please use onMessage.</p>
 <pre class="source">
 class OnRequestEvent {
- static OnRequestEvent create(JsObject request, JsObject sender, JsObject sendResponse) =&gt;
-     new OnRequestEvent(request, MessageSender.create(sender), sendResponse);
 
  /**
   * The request sent by the calling script.
@@ -59,20 +57,6 @@ class OnRequestEvent {
  OnRequestEvent(this.request, this.sender, this.sendResponse);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.extension/OnRequestEvent.html">OnRequestEvent</a> <strong>create</strong>(JsObject request, JsObject sender, JsObject sendResponse) <a class="anchor-link" href="#create"
-              title="Permalink to OnRequestEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnRequestEvent create(JsObject request, JsObject sender, JsObject sendResponse) =&gt;
-   new OnRequestEvent(request, MessageSender.create(sender), sendResponse);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

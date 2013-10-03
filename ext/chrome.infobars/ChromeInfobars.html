@@ -47,7 +47,7 @@ class ChromeInfobars {
   * Contains details about the window in which the infobar was created.
   */
  Future&lt;Window&gt; show(Map details) {
-   var completer = new ChromeCompleter&lt;Window&gt;.oneArg(Window.create);
+   var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
    _infobars.callMethod('show', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -68,7 +68,7 @@ infobar before then.</p>
 Contains details about the window in which the infobar was created.</p>
 <pre class="source">
 Future&lt;Window&gt; show(Map details) {
- var completer = new ChromeCompleter&lt;Window&gt;.oneArg(Window.create);
+ var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
  _infobars.callMethod('show', [jsify(details), completer.callback]);
  return completer.future;
 }

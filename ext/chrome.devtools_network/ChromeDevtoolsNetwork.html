@@ -57,7 +57,7 @@ class ChromeDevtoolsNetwork {
  Stream&lt;Request&gt; get onRequestFinished =&gt; _onRequestFinished.stream;
 
  final ChromeStreamController&lt;Request&gt; _onRequestFinished =
-     new ChromeStreamController&lt;Request&gt;.oneArg(_devtools_network['onRequestFinished'], Request.create);
+     new ChromeStreamController&lt;Request&gt;.oneArg(_devtools_network['onRequestFinished'], _createRequest);
 
  /**
   * Fired when the inspected window navigates to a new page.

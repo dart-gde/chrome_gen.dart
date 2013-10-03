@@ -35,8 +35,6 @@
 <p>User has changed what is typed into the omnibox.</p>
 <pre class="source">
 class OnInputChangedEvent {
- static OnInputChangedEvent create(String text, JsObject suggest) =&gt;
-     new OnInputChangedEvent(text, suggest);
 
  final String text;
 
@@ -49,20 +47,6 @@ class OnInputChangedEvent {
  OnInputChangedEvent(this.text, this.suggest);
 }
 </pre>
-</div>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.omnibox/OnInputChangedEvent.html">OnInputChangedEvent</a> <strong>create</strong>(String text, JsObject suggest) <a class="anchor-link" href="#create"
-              title="Permalink to OnInputChangedEvent.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static OnInputChangedEvent create(String text, JsObject suggest) =&gt;
-   new OnInputChangedEvent(text, suggest);
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>

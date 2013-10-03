@@ -41,7 +41,7 @@ class ChromeDevtoolsPanels {
  /**
   * Elements panel.
   */
- ElementsPanel get elements =&gt; ElementsPanel.create(_devtools_panels['elements']);
+ ElementsPanel get elements =&gt; _createElementsPanel(_devtools_panels['elements']);
 
  /**
   * Creates an extension panel.
@@ -58,7 +58,7 @@ class ChromeDevtoolsPanels {
   * An ExtensionPanel object representing the created panel.
   */
  Future&lt;ExtensionPanel&gt; create(String title, String iconPath, String pagePath) {
-   var completer = new ChromeCompleter&lt;ExtensionPanel&gt;.oneArg(ExtensionPanel.create);
+   var completer = new ChromeCompleter&lt;ExtensionPanel&gt;.oneArg(_createExtensionPanel);
    _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
    return completer.future;
  }
@@ -73,7 +73,7 @@ class ChromeDevtoolsPanels {
   * clicked.
   */
  Future&lt;Resource&gt; setOpenResourceHandler() {
-   var completer = new ChromeCompleter&lt;Resource&gt;.oneArg(Resource.create);
+   var completer = new ChromeCompleter&lt;Resource&gt;.oneArg(_createResource);
    _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
    return completer.future;
  }
@@ -91,7 +91,7 @@ final <a href="../chrome.devtools_panels/ElementsPanel.html">ElementsPanel</a>  
         <div class="doc">
 <p>Elements panel.</p>
 <pre class="source">
-ElementsPanel get elements =&gt; ElementsPanel.create(_devtools_panels['elements']);
+ElementsPanel get elements =&gt; _createElementsPanel(_devtools_panels['elements']);
 </pre>
 </div>
 </div>
@@ -116,7 +116,7 @@ directory.</p>
 An ExtensionPanel object representing the created panel.</p>
 <pre class="source">
 Future&lt;ExtensionPanel&gt; create(String title, String iconPath, String pagePath) {
- var completer = new ChromeCompleter&lt;ExtensionPanel&gt;.oneArg(ExtensionPanel.create);
+ var completer = new ChromeCompleter&lt;ExtensionPanel&gt;.oneArg(_createExtensionPanel);
  _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
  return completer.future;
 }
@@ -136,7 +136,7 @@ A <code>devtools.inspectedWindow.Resource</code> object for the resource that wa
 clicked.</p>
 <pre class="source">
 Future&lt;Resource&gt; setOpenResourceHandler() {
- var completer = new ChromeCompleter&lt;Resource&gt;.oneArg(Resource.create);
+ var completer = new ChromeCompleter&lt;Resource&gt;.oneArg(_createResource);
  _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
  return completer.future;
 }

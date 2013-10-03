@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class NotificationButton extends ChromeObject {
- static NotificationButton create(JsObject proxy) =&gt; proxy == null ? null : new NotificationButton.fromProxy(proxy);
 
  NotificationButton({String title, String iconUrl, NotificationBitmap iconBitmap}) {
    if (title != null) this.title = title;
@@ -50,7 +49,7 @@ class NotificationButton extends ChromeObject {
  String get iconUrl =&gt; proxy['iconUrl'];
  set iconUrl(String value) =&gt; proxy['iconUrl'] = value;
 
- NotificationBitmap get iconBitmap =&gt; NotificationBitmap.create(proxy['iconBitmap']);
+ NotificationBitmap get iconBitmap =&gt; _createNotificationBitmap(proxy['iconBitmap']);
  set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = value;
 }
 </pre>
@@ -58,19 +57,6 @@ class NotificationButton extends ChromeObject {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>NotificationButton</strong></span></p>
-<div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="create">
-<button class="show-code">Code</button>
-<a href="../chrome.notifications/NotificationButton.html">NotificationButton</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
-              title="Permalink to NotificationButton.create">#</a></h4>
-<div class="doc">
-<pre class="source">
-static NotificationButton create(JsObject proxy) =&gt; proxy == null ? null : new NotificationButton.fromProxy(proxy);
-</pre>
-</div>
-</div>
-</div>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -116,7 +102,7 @@ NotificationButton.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-NotificationBitmap get iconBitmap =&gt; NotificationBitmap.create(proxy['iconBitmap']);
+NotificationBitmap get iconBitmap =&gt; _createNotificationBitmap(proxy['iconBitmap']);
 </pre>
 <pre class="source">
 set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = value;
