@@ -13,35 +13,27 @@ class ChromeAppWindow {
   ChromeAppWindow._();
 
   /**
-   * The size and position of a window can be specified in a number of
-   *  different ways. The most simple option is not specifying anything at
-   *  all, in which case a default size and platform dependent position will
-   *  be used.
-   * 
-   *  Another option is to use the bounds property, which will put the window
-   *  at the specified coordinates with the specified size. If the window has
-   *  a frame, it's total size will be the size given plus the size of the
-   *  frame; that is, the size in bounds is the content size, not the window
-   *  size.
-   * 
-   *  To automatically remember the positions of windows you can give them ids.
-   *  If a window has an id, This id is used to remember the size and position
-   *  of the window whenever it is moved or resized. This size and position is
-   *  then used instead of the specified bounds on subsequent opening of a
-   *  window with the same id. If you need to open a window with an id at a
-   *  location other than the remembered default, you can create it hidden,
-   *  move it to the desired location, then show it.
-   * 
-   * 
+   * The size and position of a window can be specified in a number of different
+   * ways. The most simple option is not specifying anything at all, in which
+   * case a default size and platform dependent position will be used.
+   * Another option is to use the bounds property, which will put the window at
+   * the specified coordinates with the specified size. If the window has a
+   * frame, it's total size will be the size given plus the size of the frame;
+   * that is, the size in bounds is the content size, not the window size.
+   * To automatically remember the positions of windows you can give them ids.
+   * If a window has an id, This id is used to remember the size and position of
+   * the window whenever it is moved or resized. This size and position is then
+   * used instead of the specified bounds on subsequent opening of a window with
+   * the same id. If you need to open a window with an id at a location other
+   * than the remembered default, you can create it hidden, move it to the
+   * desired location, then show it.
    * 
    * Returns:
-   *  Called in the creating window (parent) before the load event is called in
-   *  the created window (child). The parent can set fields or functions on the
-   *  child usable from onload. E.g. background.js:<br>
-   *  <code>function(created_window) { created_window.contentWindow.foo =
-   *  function () { }; };</code>
-   *  <br>window.js:<br>
-   *  <code>window.onload = function () { foo(); }</code>
+   * Called in the creating window (parent) before the load event is called in
+   * the created window (child). The parent can set fields or functions on the
+   * child usable from onload. E.g. background.js:<br> `function(created_window)
+   * { created_window.contentWindow.foo = function () { }; };`
+   * <br>window.js:<br> `window.onload = function () { foo(); }`
    */
   Future<dynamic> create(String url, [CreateWindowOptions options]) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
@@ -50,18 +42,15 @@ class ChromeAppWindow {
   }
 
   /**
-   * Returns an $ref:AppWindow object for the
-   *  current script context (ie JavaScript 'window' object). This can also be
-   *  called on a handle to a script context for another page, for example:
-   *  otherWindow.chrome.app.window.current().
+   * Returns an $ref:AppWindow object for the current script context (ie
+   * JavaScript 'window' object). This can also be called on a handle to a
+   * script context for another page, for example:
+   * otherWindow.chrome.app.window.current().
    */
   AppWindow current() {
     return _createAppWindow(_app_window.callMethod('current'));
   }
 
-  /**
-   * 
-   */
   void initializeAppWindow(dynamic state) {
     _app_window.callMethod('initializeAppWindow', [state]);
   }
@@ -112,8 +101,8 @@ class State extends ChromeEnum {
 }
 
 /**
- * 'shell' is the default window type. 'panel' is managed by the OS
- *  (Currently experimental, Ash only).
+ * 'shell' is the default window type. 'panel' is managed by the OS (Currently
+ * experimental, Ash only).
  */
 class WindowType extends ChromeEnum {
   static const WindowType SHELL = const WindowType._('shell');
@@ -284,14 +273,16 @@ class AppWindow extends ChromeObject {
   }
 
   /**
-   * Move the window to the position (|left|, |top|).
+   * Move the window to the position (|left|,
+   * [top]).
    */
   void moveTo(int left, int top) {
     proxy.callMethod('moveTo', [left, top]);
   }
 
   /**
-   * Resize the window to |width|x|height| pixels in size.
+   * Resize the window to
+   * [width]x|height| pixels in size.
    */
   void resizeTo(int width, int height) {
     proxy.callMethod('resizeTo', [width, height]);
@@ -347,9 +338,9 @@ class AppWindow extends ChromeObject {
   }
 
   /**
-   * Set the app icon for the window (experimental).
-   *  Currently this is only being implemented on Ash.
-   *  TODO(stevenjb): Investigate implementing this on Windows and OSX.
+   * Set the app icon for the window (experimental). Currently this is only
+   * being implemented on Ash. TODO(stevenjb): Investigate implementing this on
+   * Windows and OSX.
    */
   void setIcon(String icon_url) {
     proxy.callMethod('setIcon', [icon_url]);
