@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
+import 'package:logging/logging.dart' as logging;
 
 import 'backend.dart';
 import 'chrome_model.dart';
@@ -32,6 +33,10 @@ void main() {
     overrides = new Overrides.fromFile(overridesFile);
   }
 
+  logging.Logger.root.onRecord.listen((logging.LogRecord record) {
+    print(record.message);
+  });
+
   GenApiFile generator = new GenApiFile(
       new File(results.rest.first), new File(results['out']), overrides);
   generator.generate();
@@ -50,7 +55,7 @@ class GenApiFile {
   }
 
   void generate() {
-    print("parsing ${inFile.path}...");
+    _logger.info("parsing ${inFile.path}...");
 
     ChromeLibrary chromeLib;
 
@@ -100,3 +105,5 @@ void _printUsage(ArgParser parser) {
   print('where <options> is one or more of:');
   print(parser.getUsage().replaceAll('\n\n', '\n'));
 }
+
+final logging.Logger _logger = new logging.Logger('GenApi');

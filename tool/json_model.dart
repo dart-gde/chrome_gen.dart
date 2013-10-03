@@ -155,31 +155,36 @@ class JsonDeclaredType extends JsonType {
 }
 
 ChromeLibrary convert(JsonNamespace namespace) {
-  return new JsonConverter().convert(namespace);
+  return JsonConverter.convert(namespace);
 }
 
 class JsonConverter {
-  ChromeLibrary library;
+  final ChromeLibrary library;
 
-  ChromeLibrary convert(JsonNamespace namespace) {
-    library = new ChromeLibrary();
-    library.name = namespace.namespace;
+  static ChromeLibrary convert(JsonNamespace namespace) {
+    var library = new ChromeLibrary(namespace.namespace);
+    var converter = new JsonConverter._(library);
+
+    return converter._convert(namespace);
+  }
+
+  JsonConverter._(this.library);
+
+  ChromeLibrary _convert(JsonNamespace namespace) {
     library.documentation = convertHtmlToDartdoc(namespace.description);
 
-    library.properties = namespace.properties.map(_convertProperty).toList();
-    library.types = namespace.types.map(_convertDeclaredType).toList();
-    library.methods = namespace.functions.map(_convertMethod).toList();
-    library.events = namespace.events.map(_convertEvent).toList();
+    library.properties.addAll(namespace.properties.map(_convertProperty));
+    library.types.addAll(namespace.types.map(_convertDeclaredType));
+    library.methods.addAll(namespace.functions.map(_convertMethod));
+    library.events.addAll(namespace.events.map(_convertEvent));
 
     return library;
   }
 
   ChromeProperty _convertProperty(JsonProperty p) {
-    ChromeProperty property = new ChromeProperty();
+    ChromeProperty property = new ChromeProperty(p.name, _convertType(p.type));
 
-    property.name = p.name;
     property.documentation = convertHtmlToDartdoc(p.description);
-    property.type = _convertType(p.type);
     property.nodoc = p.nodoc;
 
     return property;
@@ -302,13 +307,13 @@ class JsonConverter {
     } else if (t.ref != null) {
       type.type = "var";
 
-      List<String> names = parseQualifiedName(t.ref);
+      Pair<String, String> names = parseQualifiedName(t.ref);
 
-      if (names[0] != null) {
-        library.addImport(names[0]);
+      if (names.first != null) {
+        library.addImport(names.first);
       }
 
-      type.refName = names[1];
+      type.refName = names.last;
     } else {
       type.type = "var";
     }
@@ -352,7 +357,7 @@ bool _isInt(var val) {
   return false;
 }
 
-List<String> parseQualifiedName(String str) {
+Pair<String, String> parseQualifiedName(String str) {
   int index = str.lastIndexOf('.');
 
   if (index != -1) {
@@ -360,9 +365,9 @@ List<String> parseQualifiedName(String str) {
     String qualifier = str.substring(0, index);
     String name = str.substring(index + 1);
 
-    return [qualifier, name];
+    return new Pair(qualifier, name);
   } else {
-    return [null, str];
+    return new Pair(null, str);
   }
 }
 

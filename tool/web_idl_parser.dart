@@ -277,17 +277,14 @@ final reservedNames = [ "readonly",
 
 // http://www.w3.org/TR/WebIDL/#idl-grammar
 class WebIdlParser extends BaseWebIdlParser {
-  IDLCollector collector;
+  final IDLCollector collector;
 
-  WebIdlParser()
-  : super(reservedNames: reservedNames) {
-    collector = new IDLCollector();
-  }
+  WebIdlParser() :
+    collector = new IDLCollector(),
+    super(reservedNames: reservedNames);
 
-  WebIdlParser.withCollector(IDLCollector collector)
-  : super(reservedNames: reservedNames) {
-    this.collector = collector;
-  }
+  WebIdlParser.withCollector(this.collector) :
+    super(reservedNames: reservedNames);
 
   get start =>  whiteSpace > (stmts() < eof);
 
