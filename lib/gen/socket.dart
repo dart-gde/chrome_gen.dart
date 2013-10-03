@@ -5,7 +5,7 @@ library chrome.socket;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.socket` namespace.
-final ChromeSocket socket = new ChromeSocket._();
+final ChromeSocket socket = ChromeSocket._socket == null ? apiNotAvailable('chrome.socket') : new ChromeSocket._();
 
 class ChromeSocket {
   static final JsObject _socket = context['chrome']['socket'];

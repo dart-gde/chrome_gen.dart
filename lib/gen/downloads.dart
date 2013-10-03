@@ -5,7 +5,7 @@ library chrome.downloads;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.downloads` namespace.
-final ChromeDownloads downloads = new ChromeDownloads._();
+final ChromeDownloads downloads = ChromeDownloads._downloads == null ? apiNotAvailable('chrome.downloads') : new ChromeDownloads._();
 
 class ChromeDownloads {
   static final JsObject _downloads = context['chrome']['downloads'];

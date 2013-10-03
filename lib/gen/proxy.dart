@@ -11,7 +11,7 @@ import 'types.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.proxy` namespace.
-final ChromeProxy proxy = new ChromeProxy._();
+final ChromeProxy proxy = ChromeProxy._proxy == null ? apiNotAvailable('chrome.proxy') : new ChromeProxy._();
 
 class ChromeProxy {
   static final JsObject _proxy = context['chrome']['proxy'];

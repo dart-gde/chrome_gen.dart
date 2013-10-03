@@ -5,7 +5,7 @@ library chrome.system_cpu;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.system.cpu` namespace.
-final ChromeSystemCpu system_cpu = new ChromeSystemCpu._();
+final ChromeSystemCpu system_cpu = ChromeSystemCpu._system_cpu == null ? apiNotAvailable('chrome.system.cpu') : new ChromeSystemCpu._();
 
 class ChromeSystemCpu {
   static final JsObject _system_cpu = context['chrome']['system']['cpu'];

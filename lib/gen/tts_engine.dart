@@ -15,7 +15,7 @@ import 'tts.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.ttsEngine` namespace.
-final ChromeTtsEngine ttsEngine = new ChromeTtsEngine._();
+final ChromeTtsEngine ttsEngine = ChromeTtsEngine._ttsEngine == null ? apiNotAvailable('chrome.ttsEngine') : new ChromeTtsEngine._();
 
 class ChromeTtsEngine {
   static final JsObject _ttsEngine = context['chrome']['ttsEngine'];

@@ -11,7 +11,7 @@ import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.contextMenus` namespace.
-final ChromeContextMenus contextMenus = new ChromeContextMenus._();
+final ChromeContextMenus contextMenus = ChromeContextMenus._contextMenus == null ? apiNotAvailable('chrome.contextMenus') : new ChromeContextMenus._();
 
 class ChromeContextMenus {
   static final JsObject _contextMenus = context['chrome']['contextMenus'];

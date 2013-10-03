@@ -11,7 +11,7 @@ import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.sessions` namespace.
-final ChromeSessions sessions = new ChromeSessions._();
+final ChromeSessions sessions = ChromeSessions._sessions == null ? apiNotAvailable('chrome.sessions') : new ChromeSessions._();
 
 class ChromeSessions {
   static final JsObject _sessions = context['chrome']['sessions'];

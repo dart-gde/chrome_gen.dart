@@ -5,7 +5,7 @@ library chrome.pushMessaging;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.pushMessaging` namespace.
-final ChromePushMessaging pushMessaging = new ChromePushMessaging._();
+final ChromePushMessaging pushMessaging = ChromePushMessaging._pushMessaging == null ? apiNotAvailable('chrome.pushMessaging') : new ChromePushMessaging._();
 
 class ChromePushMessaging {
   static final JsObject _pushMessaging = context['chrome']['pushMessaging'];

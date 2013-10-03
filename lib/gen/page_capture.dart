@@ -8,7 +8,7 @@ library chrome.pageCapture;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.pageCapture` namespace.
-final ChromePageCapture pageCapture = new ChromePageCapture._();
+final ChromePageCapture pageCapture = ChromePageCapture._pageCapture == null ? apiNotAvailable('chrome.pageCapture') : new ChromePageCapture._();
 
 class ChromePageCapture {
   static final JsObject _pageCapture = context['chrome']['pageCapture'];

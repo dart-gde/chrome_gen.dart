@@ -11,7 +11,7 @@ library chrome.devtools_inspectedWindow;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.devtools.inspectedWindow` namespace.
-final ChromeDevtoolsInspectedWindow devtools_inspectedWindow = new ChromeDevtoolsInspectedWindow._();
+final ChromeDevtoolsInspectedWindow devtools_inspectedWindow = ChromeDevtoolsInspectedWindow._devtools_inspectedWindow == null ? apiNotAvailable('chrome.devtools.inspectedWindow') : new ChromeDevtoolsInspectedWindow._();
 
 class ChromeDevtoolsInspectedWindow {
   static final JsObject _devtools_inspectedWindow = context['chrome']['devtools']['inspectedWindow'];

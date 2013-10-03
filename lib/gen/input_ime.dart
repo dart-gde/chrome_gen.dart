@@ -10,7 +10,7 @@ library chrome.input_ime;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.input.ime` namespace.
-final ChromeInputIme input_ime = new ChromeInputIme._();
+final ChromeInputIme input_ime = ChromeInputIme._input_ime == null ? apiNotAvailable('chrome.input.ime') : new ChromeInputIme._();
 
 class ChromeInputIme {
   static final JsObject _input_ime = context['chrome']['input']['ime'];

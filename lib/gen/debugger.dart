@@ -14,7 +14,7 @@ library chrome.debugger;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.debugger` namespace.
-final ChromeDebugger debugger = new ChromeDebugger._();
+final ChromeDebugger debugger = ChromeDebugger._debugger == null ? apiNotAvailable('chrome.debugger') : new ChromeDebugger._();
 
 class ChromeDebugger {
   static final JsObject _debugger = context['chrome']['debugger'];

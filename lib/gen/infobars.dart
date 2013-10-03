@@ -10,7 +10,7 @@ import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.infobars` namespace.
-final ChromeInfobars infobars = new ChromeInfobars._();
+final ChromeInfobars infobars = ChromeInfobars._infobars == null ? apiNotAvailable('chrome.infobars') : new ChromeInfobars._();
 
 class ChromeInfobars {
   static final JsObject _infobars = context['chrome']['infobars'];

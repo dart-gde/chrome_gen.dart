@@ -5,7 +5,7 @@ library chrome.system_storage;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.system.storage` namespace.
-final ChromeSystemStorage system_storage = new ChromeSystemStorage._();
+final ChromeSystemStorage system_storage = ChromeSystemStorage._system_storage == null ? apiNotAvailable('chrome.system.storage') : new ChromeSystemStorage._();
 
 class ChromeSystemStorage {
   static final JsObject _system_storage = context['chrome']['system']['storage'];

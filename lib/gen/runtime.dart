@@ -13,7 +13,7 @@ import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.runtime` namespace.
-final ChromeRuntime runtime = new ChromeRuntime._();
+final ChromeRuntime runtime = ChromeRuntime._runtime == null ? apiNotAvailable('chrome.runtime') : new ChromeRuntime._();
 
 class ChromeRuntime {
   static final JsObject _runtime = context['chrome']['runtime'];

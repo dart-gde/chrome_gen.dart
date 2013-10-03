@@ -5,7 +5,7 @@ library chrome.serial;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.serial` namespace.
-final ChromeSerial serial = new ChromeSerial._();
+final ChromeSerial serial = ChromeSerial._serial == null ? apiNotAvailable('chrome.serial') : new ChromeSerial._();
 
 class ChromeSerial {
   static final JsObject _serial = context['chrome']['serial'];

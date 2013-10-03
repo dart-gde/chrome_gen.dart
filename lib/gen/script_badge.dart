@@ -10,7 +10,7 @@ import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.scriptBadge` namespace.
-final ChromeScriptBadge scriptBadge = new ChromeScriptBadge._();
+final ChromeScriptBadge scriptBadge = ChromeScriptBadge._scriptBadge == null ? apiNotAvailable('chrome.scriptBadge') : new ChromeScriptBadge._();
 
 class ChromeScriptBadge {
   static final JsObject _scriptBadge = context['chrome']['scriptBadge'];

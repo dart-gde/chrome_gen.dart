@@ -5,7 +5,7 @@ library chrome.syncFileSystem;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.syncFileSystem` namespace.
-final ChromeSyncFileSystem syncFileSystem = new ChromeSyncFileSystem._();
+final ChromeSyncFileSystem syncFileSystem = ChromeSyncFileSystem._syncFileSystem == null ? apiNotAvailable('chrome.syncFileSystem') : new ChromeSyncFileSystem._();
 
 class ChromeSyncFileSystem {
   static final JsObject _syncFileSystem = context['chrome']['syncFileSystem'];
