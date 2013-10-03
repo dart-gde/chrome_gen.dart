@@ -14,14 +14,14 @@ class EMPTY {
  */
 class IDLCollector {
   IDLNamespace idlNamespace;
-  namespace(l) => l; // Must return type passed for parser to continue.
+  namespace(l, sb) => l; // Must return type passed for parser to continue.
   interface(l) => l; // Must return type passed for parser to continue.
-  interfaceMember(l) => l; // Must return type passed for parser to continue.
+  interfaceMember(l, sb) => l; // Must return type passed for parser to continue.
   dictionary(l) => l; // Must return type passed for parser to continue.
-  dictionaryMember(l) => l; // Must return type passed for parser to continue.
-  dictionaryMethod(l) => l; // Must return type passed for parser to continue.
-  enumStatement(l) => l; // Must return type passed for parser to continue.
-  callback(l) => l; // Must return type passed for parser to continue.
+  dictionaryMember(l, sb) => l; // Must return type passed for parser to continue.
+  dictionaryMethod(l, sb) => l; // Must return type passed for parser to continue.
+  enumStatement(l, sb) => l; // Must return type passed for parser to continue.
+  callback(l, sb) => l; // Must return type passed for parser to continue.
 }
 
 class IDLCollectorChrome implements IDLCollector {
@@ -30,8 +30,9 @@ class IDLCollectorChrome implements IDLCollector {
   List _dictionaryMembers = [];
   List _dictionaryMethods = [];
 
-  namespace(l) {
+  namespace(l, sb) {
     idlNamespace.name = l[2].join('.');
+    sb.clear();
 
     // Must return type passed for parser to continue.
     return l;
@@ -55,11 +56,11 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  _functionParser(l) {
+  _functionParser(l, doc) {
     var ret = l[1][0];
     var name = l[1][1];
     var arg = l[1][2];
-    IDLFunction function = new IDLFunction(name);
+    IDLFunction function = new IDLFunction(name, doc);
 
     List recursiveParams = [];
 
@@ -82,8 +83,9 @@ class IDLCollectorChrome implements IDLCollector {
     return function;
   }
 
-  interfaceMember(l) {
-    IDLFunction function = _functionParser(l);
+  interfaceMember(l, sb) {
+    IDLFunction function = _functionParser(l, sb.toString());
+    sb.clear();
     _functions.add(function);
 
     // Must return type passed for parser to continue.
@@ -105,9 +107,10 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  dictionaryMember(l) {
+  dictionaryMember(l, sb) {
     String name = l[1];
     IDLProperty member = new IDLProperty(name);
+    sb.clear();
     var type = l[0][0];
 
     if (type is List) {
@@ -120,15 +123,16 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  dictionaryMethod(l) {
-    IDLFunction function = _functionParser(l);
+  dictionaryMethod(l, sb) {
+    IDLFunction function = _functionParser(l, sb.toString());
+    sb.clear();
     _dictionaryMethods.add(function);
 
     // Must return type passed for parser to continue.
     return l;
   }
 
-  enumStatement(l) {
+  enumStatement(l, sb) {
     // Example from usb [enum, Direction, [in, [,, out, EMPTY]], ;]
     //    print("enumStatement:");
     //    print(l);
@@ -136,6 +140,8 @@ class IDLCollectorChrome implements IDLCollector {
     String enumName = l[1];
     var arg = l[2];
     IDLEnum idlEnum = new IDLEnum(enumName);
+    idlEnum.description = sb.toString();
+    sb.clear();
 
     valueParser(a) {
       var value;
@@ -143,16 +149,32 @@ class IDLCollectorChrome implements IDLCollector {
       // Continue until EMPTY is hit
       if (a == EMPTY) return;
 
-      if (a.length == 3) {
+      if (a.length == 4) {
         // recursive
-        value = a[1];
+        value = a[2];
         // Create value type and add to list of IDLEnum
         //idlEnum.enumValues.add(value);
         IDLProperty idlValue = new IDLProperty(value);
         idlEnum.members.add(idlValue);
 
-        if (a[2] != EMPTY) {
-          valueParser(a[2]);
+        if (a[3] != EMPTY) {
+          valueParser(a[3]);
+          return;
+        } else {
+          return;
+        }
+      }
+
+      if (a.length == 5) {
+        // recursive
+        value = a[3];
+        // Create value type and add to list of IDLEnum
+        //idlEnum.enumValues.add(value);
+        IDLProperty idlValue = new IDLProperty(value);
+        idlEnum.members.add(idlValue);
+
+        if (a[4] != EMPTY) {
+          valueParser(a[4]);
           return;
         } else {
           return;
@@ -161,18 +183,23 @@ class IDLCollectorChrome implements IDLCollector {
 
       // TODO: do we hit this type of condition or should we
       // just ignore and/or throw error.
-      if (a.length == 2){
-        value = a[1];
+      if (a.length == 3){
+        value = a[2];
         IDLProperty idlValue = new IDLProperty(value);
       }
     };
 
     if (arg != EMPTY) {
       // Parse the first enum value
-      var value = arg[0];
+      var value = arg[1];
       IDLProperty idlValue = new IDLProperty(value);
       idlEnum.members.add(idlValue);
-      valueParser(arg[1]);
+
+      if (arg[3] is List) {
+        valueParser(arg[3]);
+      } else {
+        valueParser(arg[2]);
+      }
     }
 
     idlNamespace.enumTypes.add(idlEnum);
@@ -248,9 +275,9 @@ class IDLCollectorChrome implements IDLCollector {
     }
   }
 
-  callback(l) {
-    IDLFunction function = new IDLFunction(l[0]);
-
+  callback(l, sb) {
+    IDLFunction function = new IDLFunction(l[0], sb.toString());
+    sb.clear();
     var arg = l[3];
     List recursiveParams = [];
 
@@ -453,6 +480,7 @@ class IDLConverter {
     namespace = collector.idlNamespace;
 
     ChromeLibrary library =  new ChromeLibrary(namespace.name);
+    library.documentation = namespace.description;
 
     library.types = namespace.declaredTypes.map(_convertDeclaredType).toList();
     library.methods = namespace.functions.map(_convertMethod).toList();
@@ -471,6 +499,7 @@ class IDLConverter {
     ChromeDeclaredType chromeDeclaredType = new ChromeDeclaredType();
 
     chromeDeclaredType.name = idlDeclaredType.name;
+    chromeDeclaredType.documentation = idlDeclaredType.description;
     chromeDeclaredType.properties = idlDeclaredType.members.map(_convertProperty).toList();
     chromeDeclaredType.methods = idlDeclaredType.functions.map(_convertMethod).toList();
 
@@ -494,6 +523,7 @@ class IDLConverter {
   ChromeEnumType _convertEnum(IDLEnum idlProperty) {
     ChromeEnumType chromeEnumType = new ChromeEnumType();
     chromeEnumType.name = idlProperty.name;
+    chromeEnumType.documentation = idlProperty.description;
     idlProperty.enumValues.forEach((IDLProperty value) {
       ChromeEnumEntry chromeEnumEntry = new ChromeEnumEntry();
       chromeEnumEntry.name = value.name;
@@ -505,6 +535,7 @@ class IDLConverter {
   ChromeMethod _convertMethod(IDLFunction idlMethod) {
     ChromeMethod chromeMethod = new ChromeMethod();
     chromeMethod.name = idlMethod.name;
+    chromeMethod.documentation = idlMethod.description;
     chromeMethod.returns = _convertType(idlMethod.returnType);
     chromeMethod.params = idlMethod.parameters.map(_convertParameter).toList();
 
@@ -535,7 +566,7 @@ class IDLConverter {
 
     if (params.length == 1) {
       future.parameters.add(params.first);
-      future.documentation = "";
+      future.documentation = callback.description;
     } else if (params.length >= 2) {
       // TODO: we need to correctly handle mapping multiple parameters to a single
       // return, ala runtime.requestUpdateCheck() and devtools.inspectedWindow.eval().
