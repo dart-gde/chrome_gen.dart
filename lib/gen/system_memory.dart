@@ -12,6 +12,13 @@ class ChromeSystemMemory {
 
   ChromeSystemMemory._();
 
+  /**
+   * Get physical memory information.
+   * 
+   * 
+   * 
+   * Returns:
+   */
   Future<MemoryInfo> getInfo() {
     var completer = new ChromeCompleter<MemoryInfo>.oneArg(_createMemoryInfo);
     _system_memory.callMethod('getInfo', [completer.callback]);

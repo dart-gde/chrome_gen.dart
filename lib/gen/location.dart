@@ -12,10 +12,22 @@ class ChromeLocation {
 
   ChromeLocation._();
 
+  /**
+   * TODO(vadimt): Consider adding getWatch() and getAllWatches().
+   *  Starts a location watching request.
+   *  |name| : Optional name to identify this request. Defaults to the empty
+   *  string.
+   *  |requestInfo| : Optional parameters for this request.
+   */
   void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
     _location.callMethod('watchLocation', [name, requestInfo]);
   }
 
+  /**
+   * Ends a location watching request.
+   *  |name| : Optional name to identify the request to remove. Defaults to the
+   *  empty string.
+   */
   void clearWatch(String name) {
     _location.callMethod('clearWatch', [name]);
   }
