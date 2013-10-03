@@ -12,8 +12,6 @@ class ChromeAudio {
 
   ChromeAudio._();
 
-  bool get available => _audio != null;
-
   /**
    * Get the information of all audio output and input devices.
    * 

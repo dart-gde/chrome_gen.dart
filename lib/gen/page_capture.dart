@@ -15,8 +15,6 @@ class ChromePageCapture {
 
   ChromePageCapture._();
 
-  bool get available => _pageCapture != null;
-
   /**
    * Saves the content of the tab with given id as MHTML.
    * 

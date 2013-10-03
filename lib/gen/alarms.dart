@@ -12,8 +12,6 @@ class ChromeAlarms {
 
   ChromeAlarms._();
 
-  bool get available => _alarms != null;
-
   /**
    * Creates an alarm.  Near the time(s) specified by [alarmInfo], the `onAlarm`
    * event is fired. If there is another alarm with the same name (or no name if

@@ -17,8 +17,6 @@ class ChromeManagement {
 
   ChromeManagement._();
 
-  bool get available => _management != null;
-
   /**
    * Returns a list of information about installed extensions and apps.
    */

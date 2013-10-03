@@ -12,8 +12,6 @@ class ChromeTabCapture {
 
   ChromeTabCapture._();
 
-  bool get available => _tabCapture != null;
-
   /**
    * Captures the visible area of the currently active tab. This method can only
    * be used on the currently active page after the extension has been

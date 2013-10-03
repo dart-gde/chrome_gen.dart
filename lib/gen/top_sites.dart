@@ -16,8 +16,6 @@ class ChromeTopSites {
 
   ChromeTopSites._();
 
-  bool get available => _topSites != null;
-
   /**
    * Gets a list of top sites.
    */

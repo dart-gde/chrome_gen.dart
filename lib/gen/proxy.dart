@@ -18,8 +18,6 @@ class ChromeProxy {
 
   ChromeProxy._();
 
-  bool get available => _proxy != null;
-
   /**
    * Proxy settings to be used. The value of this setting is a ProxyConfig
    * object.

@@ -12,8 +12,6 @@ class ChromeUsb {
 
   ChromeUsb._();
 
-  bool get available => _usb != null;
-
   /**
    * Lists USB devices specified by vendorId/productId/interfaceId tuple.
    * [options]: The properties to search for on target devices.

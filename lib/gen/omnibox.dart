@@ -16,8 +16,6 @@ class ChromeOmnibox {
 
   ChromeOmnibox._();
 
-  bool get available => _omnibox != null;
-
   /**
    * A callback passed to the onInputChanged event used for sending suggestions
    * back to the browser.

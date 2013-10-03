@@ -16,8 +16,6 @@ class ChromeStorage {
 
   ChromeStorage._();
 
-  bool get available => _storage != null;
-
   /**
    * Items in the `sync` storage area are synced using Chrome Sync.
    */

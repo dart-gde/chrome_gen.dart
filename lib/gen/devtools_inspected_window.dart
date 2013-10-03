@@ -18,8 +18,6 @@ class ChromeDevtoolsInspectedWindow {
 
   ChromeDevtoolsInspectedWindow._();
 
-  bool get available => _devtools_inspectedWindow != null;
-
   /**
    * The ID of the tab being inspected. This ID may be used with chrome.tabs.*
    * API.

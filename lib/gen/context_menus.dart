@@ -18,8 +18,6 @@ class ChromeContextMenus {
 
   ChromeContextMenus._();
 
-  bool get available => _contextMenus != null;
-
   /**
    * Creates a new context menu item. Note that if an error occurs during
    * creation, you may not find out until the creation callback fires (the

@@ -12,8 +12,6 @@ class ChromeDownloads {
 
   ChromeDownloads._();
 
-  bool get available => _downloads != null;
-
   /**
    * Download a URL. If the URL uses the HTTP[S] protocol, then the request will
    * include all cookies currently set for its hostname. If both `filename` and

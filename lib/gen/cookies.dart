@@ -16,8 +16,6 @@ class ChromeCookies {
 
   ChromeCookies._();
 
-  bool get available => _cookies != null;
-
   /**
    * Retrieves information about a single cookie. If more than one cookie of the
    * same name exists for the given URL, the one with the longest path will be

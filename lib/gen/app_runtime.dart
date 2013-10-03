@@ -12,8 +12,6 @@ class ChromeAppRuntime {
 
   ChromeAppRuntime._();
 
-  bool get available => _app_runtime != null;
-
   Stream<LaunchData> get onLaunched => _onLaunched.stream;
 
   final ChromeStreamController<LaunchData> _onLaunched =

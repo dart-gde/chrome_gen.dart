@@ -18,8 +18,6 @@ class ChromePermissions {
 
   ChromePermissions._();
 
-  bool get available => _permissions != null;
-
   /**
    * Gets the extension's current set of permissions.
    * 

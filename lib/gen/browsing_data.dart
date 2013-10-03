@@ -16,8 +16,6 @@ class ChromeBrowsingData {
 
   ChromeBrowsingData._();
 
-  bool get available => _browsingData != null;
-
   /**
    * Reports which types of data are currently selected in the 'Clear browsing
    * data' settings UI.  Note: some of the data types included in this API are

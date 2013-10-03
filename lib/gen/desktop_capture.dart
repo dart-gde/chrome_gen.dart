@@ -12,8 +12,6 @@ class ChromeDesktopCapture {
 
   ChromeDesktopCapture._();
 
-  bool get available => _desktopCapture != null;
-
   /**
    * Shows desktop media picker UI with the specified set of sources.
    * 

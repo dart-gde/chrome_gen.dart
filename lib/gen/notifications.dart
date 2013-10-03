@@ -12,8 +12,6 @@ class ChromeNotifications {
 
   ChromeNotifications._();
 
-  bool get available => _notifications != null;
-
   /**
    * Creates and displays a notification having the contents in
    * [options], identified by the id

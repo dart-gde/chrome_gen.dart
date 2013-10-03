@@ -21,8 +21,6 @@ class ChromeDebugger {
 
   ChromeDebugger._();
 
-  bool get available => _debugger != null;
-
   /**
    * Attaches debugger to the given target.
    * 

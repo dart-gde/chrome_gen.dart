@@ -12,8 +12,6 @@ class ChromeAppWindow {
 
   ChromeAppWindow._();
 
-  bool get available => _app_window != null;
-
   /**
    * The size and position of a window can be specified in a number of different
    * ways. The most simple option is not specifying anything at all, in which

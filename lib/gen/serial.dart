@@ -12,8 +12,6 @@ class ChromeSerial {
 
   ChromeSerial._();
 
-  bool get available => _serial != null;
-
   /**
    * Returns names of valid ports on this machine, each of which is likely to be
    * valid to pass as the port argument to open(). The list is regenerated each

@@ -17,8 +17,6 @@ class ChromeCommands {
 
   ChromeCommands._();
 
-  bool get available => _commands != null;
-
   /**
    * Returns all the registered extension commands for this extension and their
    * shortcut (if active).

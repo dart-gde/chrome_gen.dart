@@ -167,9 +167,6 @@ class _DefaultBackendContext {
     generator.writeln();
     generator.writeln("${className}._();");
 
-    generator.writeln();
-    generator.writeln("bool get available => ${contextReference} != null;");
-
     library.filteredProperties.forEach((p) => _printProperty(p, contextReference));
     library.methods.forEach(_printMethod);
     library.events.forEach(_printEvent);

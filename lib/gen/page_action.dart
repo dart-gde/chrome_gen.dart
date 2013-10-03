@@ -18,8 +18,6 @@ class ChromePageAction {
 
   ChromePageAction._();
 
-  bool get available => _pageAction != null;
-
   /**
    * Shows the page action. The page action is shown whenever the tab is
    * selected.

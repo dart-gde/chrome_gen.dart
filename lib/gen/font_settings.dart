@@ -15,8 +15,6 @@ class ChromeFontSettings {
 
   ChromeFontSettings._();
 
-  bool get available => _fontSettings != null;
-
   /**
    * Clears the font set by this extension, if any.
    */

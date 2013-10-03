@@ -18,8 +18,6 @@ class ChromeSessions {
 
   ChromeSessions._();
 
-  bool get available => _sessions != null;
-
   /**
    * The maximum number of [Session] that will be included in a requested list.
    */

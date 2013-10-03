@@ -19,8 +19,6 @@ class ChromePrivacy {
 
   ChromePrivacy._();
 
-  bool get available => _privacy != null;
-
   /**
    * Settings that influence Chrome's handling of network connections in
    * general.

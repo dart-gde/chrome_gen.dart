@@ -16,8 +16,6 @@ class ChromeWebNavigation {
 
   ChromeWebNavigation._();
 
-  bool get available => _webNavigation != null;
-
   /**
    * Retrieves information about the given frame. A frame refers to an
    * &lt;iframe&gt; or a &lt;frame&gt; of a web page and is identified by a tab

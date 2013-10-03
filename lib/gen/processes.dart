@@ -15,8 +15,6 @@ class ChromeProcesses {
 
   ChromeProcesses._();
 
-  bool get available => _processes != null;
-
   /**
    * Terminates the specified renderer process. Equivalent to visiting
    * about:crash, but without changing the tab's URL.

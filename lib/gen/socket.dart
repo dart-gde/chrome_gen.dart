@@ -12,8 +12,6 @@ class ChromeSocket {
 
   ChromeSocket._();
 
-  bool get available => _socket != null;
-
   /**
    * Creates a socket of the specified type that will connect to the specified
    * remote machine.

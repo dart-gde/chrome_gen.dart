@@ -12,8 +12,6 @@ class ChromeIdentity {
 
   ChromeIdentity._();
 
-  bool get available => _identity != null;
-
   /**
    * Gets an OAuth2 access token using the client ID and scopes specified in the
    * <a href="app_identity.html#update_manifest">`oauth2` section of

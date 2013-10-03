@@ -20,8 +20,6 @@ class ChromeRuntime {
 
   ChromeRuntime._();
 
-  bool get available => _runtime != null;
-
   /**
    * This will be defined during an API method callback if there was an error
    */

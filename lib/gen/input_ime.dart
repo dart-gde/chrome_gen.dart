@@ -17,8 +17,6 @@ class ChromeInputIme {
 
   ChromeInputIme._();
 
-  bool get available => _input_ime != null;
-
   /**
    * Set the current composition. If this extension does not own the active IME,
    * this fails.

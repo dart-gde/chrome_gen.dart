@@ -18,8 +18,6 @@ class ChromeTts {
 
   ChromeTts._();
 
-  bool get available => _tts != null;
-
   /**
    * Speaks text using a text-to-speech engine.
    * 

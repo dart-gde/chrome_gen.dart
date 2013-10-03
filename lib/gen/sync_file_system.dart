@@ -12,8 +12,6 @@ class ChromeSyncFileSystem {
 
   ChromeSyncFileSystem._();
 
-  bool get available => _syncFileSystem != null;
-
   /**
    * Returns a syncable filesystem backed by Google Drive. The returned
    * `DOMFileSystem` instance can be operated on in the same way as the

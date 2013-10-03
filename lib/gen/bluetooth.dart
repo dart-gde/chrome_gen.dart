@@ -12,8 +12,6 @@ class ChromeBluetooth {
 
   ChromeBluetooth._();
 
-  bool get available => _bluetooth != null;
-
   /**
    * These functions all report failures via chrome.runtime.lastError. Registers
    * the JavaScript application as an implementation for the given Profile; if a

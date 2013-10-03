@@ -17,8 +17,6 @@ class ChromeFileBrowserHandler {
 
   ChromeFileBrowserHandler._();
 
-  bool get available => _fileBrowserHandler != null;
-
   /**
    * Prompts user to select file path under which file should be saved. When the
    * file is selected, file access permission required to use the file (read,

@@ -12,8 +12,6 @@ class ChromePower {
 
   ChromePower._();
 
-  bool get available => _power != null;
-
   /**
    * Requests that power management be temporarily disabled.
    * [level] describes the degree to which power management should be disabled.

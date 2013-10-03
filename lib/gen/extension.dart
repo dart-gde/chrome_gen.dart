@@ -19,8 +19,6 @@ class ChromeExtension {
 
   ChromeExtension._();
 
-  bool get available => _extension != null;
-
   /**
    * Set for the lifetime of a callback if an ansychronous extension api has
    * resulted in an error. If no error has occured lastError will be

@@ -17,8 +17,6 @@ class ChromeDeclarativeContent {
 
   ChromeDeclarativeContent._();
 
-  bool get available => _declarativeContent != null;
-
   Stream get onPageChanged => _onPageChanged.stream;
 
   final ChromeStreamController _onPageChanged =

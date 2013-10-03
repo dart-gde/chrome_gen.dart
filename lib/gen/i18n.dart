@@ -16,8 +16,6 @@ class ChromeI18N {
 
   ChromeI18N._();
 
-  bool get available => _i18n != null;
-
   /**
    * Gets the accept-languages of the browser. This is different from the locale
    * used by the browser; to get the locale, use `window.navigator.language`.

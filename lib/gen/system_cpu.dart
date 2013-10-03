@@ -12,8 +12,6 @@ class ChromeSystemCpu {
 
   ChromeSystemCpu._();
 
-  bool get available => _system_cpu != null;
-
   /**
    * Queries basic CPU information of the system.
    */

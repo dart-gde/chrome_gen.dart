@@ -17,8 +17,6 @@ class ChromeBookmarks {
 
   ChromeBookmarks._();
 
-  bool get available => _bookmarks != null;
-
   /**
    * The maximum number of `move`, `update`, `create`, or `remove` operations
    * that can be performed each hour. Updates that would cause this limit to be

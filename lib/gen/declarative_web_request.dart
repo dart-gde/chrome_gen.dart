@@ -20,8 +20,6 @@ class ChromeDeclarativeWebRequest {
 
   ChromeDeclarativeWebRequest._();
 
-  bool get available => _declarativeWebRequest != null;
-
   Stream get onRequest => _onRequest.stream;
 
   final ChromeStreamController _onRequest =

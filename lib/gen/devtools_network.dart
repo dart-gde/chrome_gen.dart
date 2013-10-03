@@ -16,8 +16,6 @@ class ChromeDevtoolsNetwork {
 
   ChromeDevtoolsNetwork._();
 
-  bool get available => _devtools_network != null;
-
   /**
    * Returns HAR log that contains all known network requests.
    * 

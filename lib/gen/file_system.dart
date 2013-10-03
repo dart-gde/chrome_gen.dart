@@ -12,8 +12,6 @@ class ChromeFileSystem {
 
   ChromeFileSystem._();
 
-  bool get available => _fileSystem != null;
-
   /**
    * Get the display path of an Entry object. The display path is based on the
    * full path of the file or directory on the local file system, but may be

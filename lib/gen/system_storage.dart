@@ -12,8 +12,6 @@ class ChromeSystemStorage {
 
   ChromeSystemStorage._();
 
-  bool get available => _system_storage != null;
-
   /**
    * Get the storage information from the system. The argument passed to the
    * callback is an array of StorageUnitInfo objects.

@@ -12,8 +12,6 @@ class ChromeLocation {
 
   ChromeLocation._();
 
-  bool get available => _location != null;
-
   /**
    * TODO(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
    * location watching request.

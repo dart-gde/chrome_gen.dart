@@ -14,8 +14,6 @@ class ChromeEvents {
   static final JsObject _events = context['chrome']['events'];
 
   ChromeEvents._();
-
-  bool get available => _events != null;
 }
 
 /**

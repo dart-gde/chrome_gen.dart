@@ -12,8 +12,6 @@ class ChromeMediaGalleries {
 
   ChromeMediaGalleries._();
 
-  bool get available => _mediaGalleries != null;
-
   /**
    * Get the media galleries configured in this user agent. If none are
    * configured or available, the callback will receive an empty array.

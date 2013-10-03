@@ -17,8 +17,6 @@ class ChromeWindows {
 
   ChromeWindows._();
 
-  bool get available => _windows != null;
-
   /**
    * The windowId value that represents the absence of a chrome browser window.
    */

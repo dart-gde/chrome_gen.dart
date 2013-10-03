@@ -18,8 +18,6 @@ class ChromeDevtoolsPanels {
 
   ChromeDevtoolsPanels._();
 
-  bool get available => _devtools_panels != null;
-
   /**
    * Elements panel.
    */

@@ -15,8 +15,6 @@ class ChromeIdle {
 
   ChromeIdle._();
 
-  bool get available => _idle != null;
-
   /**
    * Returns "locked" if the system is locked, "idle" if the user has not
    * generated any input for a specified number of seconds, or "active"

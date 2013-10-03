@@ -17,8 +17,6 @@ class ChromeInfobars {
 
   ChromeInfobars._();
 
-  bool get available => _infobars != null;
-
   /**
    * Shows an infobar in the specified tab. The infobar will be closed
    * automatically when the tab navigates. Use window.close() to close the

@@ -16,8 +16,6 @@ class ChromeWebstore {
 
   ChromeWebstore._();
 
-  bool get available => _webstore != null;
-
   void install([String url, dynamic successCallback, dynamic failureCallback]) {
     _webstore.callMethod('install', [url, successCallback, failureCallback]);
   }

@@ -12,8 +12,6 @@ class ChromeSystemMemory {
 
   ChromeSystemMemory._();
 
-  bool get available => _system_memory != null;
-
   /**
    * Get physical memory information.
    */

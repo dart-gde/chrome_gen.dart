@@ -17,8 +17,6 @@ class ChromeScriptBadge {
 
   ChromeScriptBadge._();
 
-  bool get available => _scriptBadge != null;
-
   /**
    * Sets the html document to be opened as a popup when the user clicks on the
    * script badge's icon.

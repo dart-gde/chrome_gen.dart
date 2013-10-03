@@ -14,8 +14,6 @@ class ChromeTypes {
   static final JsObject _types = context['chrome']['types'];
 
   ChromeTypes._();
-
-  bool get available => _types != null;
 }
 
 /**

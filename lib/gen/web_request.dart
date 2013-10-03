@@ -16,8 +16,6 @@ class ChromeWebRequest {
 
   ChromeWebRequest._();
 
-  bool get available => _webRequest != null;
-
   /**
    * The maximum number of times that `handlerBehaviorChanged` can be called per
    * 10 minute sustained interval. `handlerBehaviorChanged` is an expensive

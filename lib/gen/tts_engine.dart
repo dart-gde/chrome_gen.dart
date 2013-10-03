@@ -22,8 +22,6 @@ class ChromeTtsEngine {
 
   ChromeTtsEngine._();
 
-  bool get available => _ttsEngine != null;
-
   /**
    * Routes a TTS event from a speech engine to a client.
    * 

@@ -12,8 +12,6 @@ class ChromePushMessaging {
 
   ChromePushMessaging._();
 
-  bool get available => _pushMessaging != null;
-
   /**
    * Retrieves the channel ID associated with this app or extension. Typically
    * an app or extension will want to send this value to its application server

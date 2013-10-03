@@ -18,8 +18,6 @@ class ChromeContentSettings {
 
   ChromeContentSettings._();
 
-  bool get available => _contentSettings != null;
-
   /**
    * Whether to allow cookies and other local data to be set by websites. One
    * of<br>[allow]: Accept cookies,<br>[block]: Block

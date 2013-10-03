@@ -18,8 +18,6 @@ class ChromeTabs {
 
   ChromeTabs._();
 
-  bool get available => _tabs != null;
-
   /**
    * Retrieves details about the specified tab.
    */

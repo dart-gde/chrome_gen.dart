@@ -18,8 +18,6 @@ class ChromeHistory {
 
   ChromeHistory._();
 
-  bool get available => _history != null;
-
   /**
    * Searches the history for the last visit time of each page matching the
    * query.

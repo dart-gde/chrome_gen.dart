@@ -19,8 +19,6 @@ class ChromeBrowserAction {
 
   ChromeBrowserAction._();
 
-  bool get available => _browserAction != null;
-
   /**
    * Sets the title of the browser action. This shows up in the tooltip.
    */

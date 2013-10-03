@@ -12,8 +12,6 @@ class ChromeSystemDisplay {
 
   ChromeSystemDisplay._();
 
-  bool get available => _system_display != null;
-
   /**
    * Get the information of all attached display devices.
    */
