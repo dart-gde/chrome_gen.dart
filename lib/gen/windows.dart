@@ -12,7 +12,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.windows` namespace.
 final ChromeWindows windows = new ChromeWindows._();
 
-class ChromeWindows {
+class ChromeWindows extends ChromeApi {
   static final JsObject _windows = context['chrome']['windows'];
 
   ChromeWindows._();
@@ -34,6 +34,8 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> get(int windowId, [Map getInfo]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('get', [windowId, jsify(getInfo), completer.callback]);
     return completer.future;
@@ -45,6 +47,8 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> getCurrent([Map getInfo]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('getCurrent', [jsify(getInfo), completer.callback]);
     return completer.future;
@@ -57,6 +61,8 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> getLastFocused([Map getInfo]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('getLastFocused', [jsify(getInfo), completer.callback]);
     return completer.future;
@@ -68,6 +74,8 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<List<Window>> getAll([Map getInfo]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<Window>>.oneArg((e) => listify(e, _createWindow));
     _windows.callMethod('getAll', [jsify(getInfo), completer.callback]);
     return completer.future;
@@ -81,6 +89,8 @@ class ChromeWindows {
    * Contains details about the created window.
    */
   Future<Window> create([Map createData]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('create', [jsify(createData), completer.callback]);
     return completer.future;
@@ -91,6 +101,8 @@ class ChromeWindows {
    * want to change; unspecified properties will be left unchanged.
    */
   Future<Window> update(int windowId, Map updateInfo) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('update', [windowId, jsify(updateInfo), completer.callback]);
     return completer.future;
@@ -100,6 +112,8 @@ class ChromeWindows {
    * Removes (closes) a window, and all the tabs inside it.
    */
   Future remove(int windowId) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _windows.callMethod('remove', [windowId, completer.callback]);
     return completer.future;
@@ -131,6 +145,14 @@ class ChromeWindows {
 
   final ChromeStreamController<int> _onFocusChanged =
       new ChromeStreamController<int>.oneArg(_windows['onFocusChanged'], selfConverter);
+
+  bool get available => _windows != null;
+
+  void _checkAvailability() {
+    if (_windows == null) {
+      throw new Exception('chrome.windows API not available');
+    }
+  }
 }
 
 class Window extends ChromeObject {

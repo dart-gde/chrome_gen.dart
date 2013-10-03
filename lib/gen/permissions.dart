@@ -13,7 +13,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.permissions` namespace.
 final ChromePermissions permissions = new ChromePermissions._();
 
-class ChromePermissions {
+class ChromePermissions extends ChromeApi {
   static final JsObject _permissions = context['chrome']['permissions'];
 
   ChromePermissions._();
@@ -25,6 +25,8 @@ class ChromePermissions {
    * The extension's active permissions.
    */
   Future<Permissions> getAll() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Permissions>.oneArg(_createPermissions);
     _permissions.callMethod('getAll', [completer.callback]);
     return completer.future;
@@ -37,6 +39,8 @@ class ChromePermissions {
    * True if the extension has the specified permissions.
    */
   Future<bool> contains(Permissions permissions) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _permissions.callMethod('contains', [permissions, completer.callback]);
     return completer.future;
@@ -51,6 +55,8 @@ class ChromePermissions {
    * True if the user granted the specified permissions.
    */
   Future<bool> request(Permissions permissions) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _permissions.callMethod('request', [permissions, completer.callback]);
     return completer.future;
@@ -64,6 +70,8 @@ class ChromePermissions {
    * True if the permissions were removed.
    */
   Future<bool> remove(Permissions permissions) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _permissions.callMethod('remove', [permissions, completer.callback]);
     return completer.future;
@@ -84,6 +92,14 @@ class ChromePermissions {
 
   final ChromeStreamController<Permissions> _onRemoved =
       new ChromeStreamController<Permissions>.oneArg(_permissions['onRemoved'], _createPermissions);
+
+  bool get available => _permissions != null;
+
+  void _checkAvailability() {
+    if (_permissions == null) {
+      throw new Exception('chrome.permissions API not available');
+    }
+  }
 }
 
 class Permissions extends ChromeObject {

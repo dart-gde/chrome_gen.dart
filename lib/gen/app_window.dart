@@ -7,7 +7,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.app.window` namespace.
 final ChromeAppWindow app_window = new ChromeAppWindow._();
 
-class ChromeAppWindow {
+class ChromeAppWindow extends ChromeApi {
   static final JsObject _app_window = context['chrome']['app']['window'];
 
   ChromeAppWindow._();
@@ -36,6 +36,8 @@ class ChromeAppWindow {
    * <br>window.js:<br> `window.onload = function () { foo(); }`
    */
   Future<dynamic> create(String url, [CreateWindowOptions options]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _app_window.callMethod('create', [url, options, completer.callback]);
     return completer.future;
@@ -48,10 +50,14 @@ class ChromeAppWindow {
    * otherWindow.chrome.app.window.current().
    */
   AppWindow current() {
+    _checkAvailability();
+
     return _createAppWindow(_app_window.callMethod('current'));
   }
 
   void initializeAppWindow(dynamic state) {
+    _checkAvailability();
+
     _app_window.callMethod('initializeAppWindow', [state]);
   }
 
@@ -84,6 +90,14 @@ class ChromeAppWindow {
 
   final ChromeStreamController _onRestored =
       new ChromeStreamController.noArgs(_app_window['onRestored']);
+
+  bool get available => _app_window != null;
+
+  void _checkAvailability() {
+    if (_app_window == null) {
+      throw new Exception('chrome.app.window API not available');
+    }
+  }
 }
 
 /**

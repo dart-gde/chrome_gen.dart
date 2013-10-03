@@ -7,7 +7,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.app.runtime` namespace.
 final ChromeAppRuntime app_runtime = new ChromeAppRuntime._();
 
-class ChromeAppRuntime {
+class ChromeAppRuntime extends ChromeApi {
   static final JsObject _app_runtime = context['chrome']['app']['runtime'];
 
   ChromeAppRuntime._();
@@ -21,6 +21,14 @@ class ChromeAppRuntime {
 
   final ChromeStreamController _onRestarted =
       new ChromeStreamController.noArgs(_app_runtime['onRestarted']);
+
+  bool get available => _app_runtime != null;
+
+  void _checkAvailability() {
+    if (_app_runtime == null) {
+      throw new Exception('chrome.app.runtime API not available');
+    }
+  }
 }
 
 class LaunchItem extends ChromeObject {

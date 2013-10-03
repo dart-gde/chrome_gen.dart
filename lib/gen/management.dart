@@ -12,7 +12,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.management` namespace.
 final ChromeManagement management = new ChromeManagement._();
 
-class ChromeManagement {
+class ChromeManagement extends ChromeApi {
   static final JsObject _management = context['chrome']['management'];
 
   ChromeManagement._();
@@ -21,6 +21,8 @@ class ChromeManagement {
    * Returns a list of information about installed extensions and apps.
    */
   Future<List<ExtensionInfo>> getAll() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<ExtensionInfo>>.oneArg((e) => listify(e, _createExtensionInfo));
     _management.callMethod('getAll', [completer.callback]);
     return completer.future;
@@ -33,6 +35,8 @@ class ChromeManagement {
    * [id] The ID from an item of [ExtensionInfo.]
    */
   Future<ExtensionInfo> get(String id) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<ExtensionInfo>.oneArg(_createExtensionInfo);
     _management.callMethod('get', [id, completer.callback]);
     return completer.future;
@@ -45,6 +49,8 @@ class ChromeManagement {
    * [id] The ID of an already installed extension.
    */
   Future<List<String>> getPermissionWarningsById(String id) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _management.callMethod('getPermissionWarningsById', [id, completer.callback]);
     return completer.future;
@@ -58,6 +64,8 @@ class ChromeManagement {
    * [manifestStr] Extension manifest JSON string.
    */
   Future<List<String>> getPermissionWarningsByManifest(String manifestStr) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _management.callMethod('getPermissionWarningsByManifest', [manifestStr, completer.callback]);
     return completer.future;
@@ -71,6 +79,8 @@ class ChromeManagement {
    * [enabled] Whether this item should be enabled or disabled.
    */
   Future setEnabled(String id, bool enabled) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('setEnabled', [id, enabled, completer.callback]);
     return completer.future;
@@ -82,6 +92,8 @@ class ChromeManagement {
    * [id] This should be the id from an item of [ExtensionInfo.]
    */
   Future uninstall(String id, [Map options]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('uninstall', [id, jsify(options), completer.callback]);
     return completer.future;
@@ -92,6 +104,8 @@ class ChromeManagement {
    * requesting the 'management' permission in the manifest.
    */
   Future uninstallSelf([Map options]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('uninstallSelf', [jsify(options), completer.callback]);
     return completer.future;
@@ -103,6 +117,8 @@ class ChromeManagement {
    * [id] The extension id of the application.
    */
   Future launchApp(String id) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('launchApp', [id, completer.callback]);
     return completer.future;
@@ -139,6 +155,14 @@ class ChromeManagement {
 
   final ChromeStreamController<ExtensionInfo> _onDisabled =
       new ChromeStreamController<ExtensionInfo>.oneArg(_management['onDisabled'], _createExtensionInfo);
+
+  bool get available => _management != null;
+
+  void _checkAvailability() {
+    if (_management == null) {
+      throw new Exception('chrome.management API not available');
+    }
+  }
 }
 
 /**

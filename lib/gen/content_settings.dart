@@ -13,7 +13,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.contentSettings` namespace.
 final ChromeContentSettings contentSettings = new ChromeContentSettings._();
 
-class ChromeContentSettings {
+class ChromeContentSettings extends ChromeApi {
   static final JsObject _contentSettings = context['chrome']['contentSettings'];
 
   ChromeContentSettings._();
@@ -65,6 +65,14 @@ class ChromeContentSettings {
    * URL. The secondary URL is not used.
    */
   ContentSetting get notifications => _createContentSetting(_contentSettings['notifications']);
+
+  bool get available => _contentSettings != null;
+
+  void _checkAvailability() {
+    if (_contentSettings == null) {
+      throw new Exception('chrome.contentSettings API not available');
+    }
+  }
 }
 
 /**

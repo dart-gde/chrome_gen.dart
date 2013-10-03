@@ -16,7 +16,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.debugger` namespace.
 final ChromeDebugger debugger = new ChromeDebugger._();
 
-class ChromeDebugger {
+class ChromeDebugger extends ChromeApi {
   static final JsObject _debugger = context['chrome']['debugger'];
 
   ChromeDebugger._();
@@ -32,6 +32,8 @@ class ChromeDebugger {
    * [here](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
    */
   Future attach(Debuggee target, String requiredVersion) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _debugger.callMethod('attach', [target, requiredVersion, completer.callback]);
     return completer.future;
@@ -43,6 +45,8 @@ class ChromeDebugger {
    * [target] Debugging target from which you want to detach.
    */
   Future detach(Debuggee target) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _debugger.callMethod('detach', [target, completer.callback]);
     return completer.future;
@@ -65,6 +69,8 @@ class ChromeDebugger {
    * on the method and is defined by the remote debugging protocol.
    */
   Future<Map<String, dynamic>> sendCommand(Debuggee target, String method, [Map<String, dynamic> commandParams]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
     _debugger.callMethod('sendCommand', [target, method, jsify(commandParams), completer.callback]);
     return completer.future;
@@ -77,6 +83,8 @@ class ChromeDebugger {
    * Array of TargetInfo objects corresponding to the available debug targets.
    */
   Future<List<TargetInfo>> getTargets() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<TargetInfo>>.oneArg((e) => listify(e, _createTargetInfo));
     _debugger.callMethod('getTargets', [completer.callback]);
     return completer.future;
@@ -99,6 +107,14 @@ class ChromeDebugger {
 
   final ChromeStreamController<OnDetachEvent> _onDetach =
       new ChromeStreamController<OnDetachEvent>.twoArgs(_debugger['onDetach'], _createOnDetachEvent);
+
+  bool get available => _debugger != null;
+
+  void _checkAvailability() {
+    if (_debugger == null) {
+      throw new Exception('chrome.debugger API not available');
+    }
+  }
 }
 
 /**

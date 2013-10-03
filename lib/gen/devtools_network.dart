@@ -11,7 +11,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.devtools.network` namespace.
 final ChromeDevtoolsNetwork devtools_network = new ChromeDevtoolsNetwork._();
 
-class ChromeDevtoolsNetwork {
+class ChromeDevtoolsNetwork extends ChromeApi {
   static final JsObject _devtools_network = context['chrome']['devtools']['network'];
 
   ChromeDevtoolsNetwork._();
@@ -23,6 +23,8 @@ class ChromeDevtoolsNetwork {
    * A HAR log. See HAR specification for details.
    */
   Future<Map<String, dynamic>> getHAR() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
     _devtools_network.callMethod('getHAR', [completer.callback]);
     return completer.future;
@@ -44,6 +46,14 @@ class ChromeDevtoolsNetwork {
 
   final ChromeStreamController<String> _onNavigated =
       new ChromeStreamController<String>.oneArg(_devtools_network['onNavigated'], selfConverter);
+
+  bool get available => _devtools_network != null;
+
+  void _checkAvailability() {
+    if (_devtools_network == null) {
+      throw new Exception('chrome.devtools.network API not available');
+    }
+  }
 }
 
 /**

@@ -14,7 +14,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.browserAction` namespace.
 final ChromeBrowserAction browserAction = new ChromeBrowserAction._();
 
-class ChromeBrowserAction {
+class ChromeBrowserAction extends ChromeApi {
   static final JsObject _browserAction = context['chrome']['browserAction'];
 
   ChromeBrowserAction._();
@@ -23,6 +23,8 @@ class ChromeBrowserAction {
    * Sets the title of the browser action. This shows up in the tooltip.
    */
   void setTitle(Map details) {
+    _checkAvailability();
+
     _browserAction.callMethod('setTitle', [jsify(details)]);
   }
 
@@ -30,6 +32,8 @@ class ChromeBrowserAction {
    * Gets the title of the browser action.
    */
   Future<String> getTitle(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _browserAction.callMethod('getTitle', [jsify(details), completer.callback]);
     return completer.future;
@@ -42,6 +46,8 @@ class ChromeBrowserAction {
    * <b>imageData</b> property must be specified.
    */
   Future setIcon(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _browserAction.callMethod('setIcon', [jsify(details), completer.callback]);
     return completer.future;
@@ -52,6 +58,8 @@ class ChromeBrowserAction {
    * browser action's icon.
    */
   void setPopup(Map details) {
+    _checkAvailability();
+
     _browserAction.callMethod('setPopup', [jsify(details)]);
   }
 
@@ -59,6 +67,8 @@ class ChromeBrowserAction {
    * Gets the html document set as the popup for this browser action.
    */
   Future<String> getPopup(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _browserAction.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
@@ -69,6 +79,8 @@ class ChromeBrowserAction {
    * of the icon.
    */
   void setBadgeText(Map details) {
+    _checkAvailability();
+
     _browserAction.callMethod('setBadgeText', [jsify(details)]);
   }
 
@@ -77,6 +89,8 @@ class ChromeBrowserAction {
    * non-tab-specific badge text is returned.
    */
   Future<String> getBadgeText(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _browserAction.callMethod('getBadgeText', [jsify(details), completer.callback]);
     return completer.future;
@@ -86,6 +100,8 @@ class ChromeBrowserAction {
    * Sets the background color for the badge.
    */
   void setBadgeBackgroundColor(Map details) {
+    _checkAvailability();
+
     _browserAction.callMethod('setBadgeBackgroundColor', [jsify(details)]);
   }
 
@@ -93,6 +109,8 @@ class ChromeBrowserAction {
    * Gets the background color of the browser action.
    */
   Future<ColorArray> getBadgeBackgroundColor(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<ColorArray>.oneArg(_createColorArray);
     _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
     return completer.future;
@@ -105,6 +123,8 @@ class ChromeBrowserAction {
    * [tabId] The id of the tab for which you want to modify the browser action.
    */
   void enable([int tabId]) {
+    _checkAvailability();
+
     _browserAction.callMethod('enable', [tabId]);
   }
 
@@ -114,6 +134,8 @@ class ChromeBrowserAction {
    * [tabId] The id of the tab for which you want to modify the browser action.
    */
   void disable([int tabId]) {
+    _checkAvailability();
+
     _browserAction.callMethod('disable', [tabId]);
   }
 
@@ -125,6 +147,14 @@ class ChromeBrowserAction {
 
   final ChromeStreamController<Tab> _onClicked =
       new ChromeStreamController<Tab>.oneArg(_browserAction['onClicked'], _createTab);
+
+  bool get available => _browserAction != null;
+
+  void _checkAvailability() {
+    if (_browserAction == null) {
+      throw new Exception('chrome.browserAction API not available');
+    }
+  }
 }
 
 class ColorArray extends ChromeObject {

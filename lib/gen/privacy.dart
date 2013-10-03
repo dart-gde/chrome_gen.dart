@@ -14,7 +14,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.privacy` namespace.
 final ChromePrivacy privacy = new ChromePrivacy._();
 
-class ChromePrivacy {
+class ChromePrivacy extends ChromeApi {
   static final JsObject _privacy = context['chrome']['privacy'];
 
   ChromePrivacy._();
@@ -36,4 +36,12 @@ class ChromePrivacy {
    * websites.
    */
   Map get websites => mapify(_privacy['websites']);
+
+  bool get available => _privacy != null;
+
+  void _checkAvailability() {
+    if (_privacy == null) {
+      throw new Exception('chrome.privacy API not available');
+    }
+  }
 }

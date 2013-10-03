@@ -7,7 +7,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.fileSystem` namespace.
 final ChromeFileSystem fileSystem = new ChromeFileSystem._();
 
-class ChromeFileSystem {
+class ChromeFileSystem extends ChromeApi {
   static final JsObject _fileSystem = context['chrome']['fileSystem'];
 
   ChromeFileSystem._();
@@ -18,6 +18,8 @@ class ChromeFileSystem {
    * made more readable for display purposes.
    */
   Future<String> getDisplayPath(dynamic entry) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
     return completer.future;
@@ -30,6 +32,8 @@ class ChromeFileSystem {
    * have the 'directory' permission under 'fileSystem'.
    */
   Future<dynamic> getWritableEntry(dynamic entry) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
     return completer.future;
@@ -39,6 +43,8 @@ class ChromeFileSystem {
    * Gets whether this Entry is writable or not.
    */
   Future<bool> isWritableEntry(dynamic entry) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
     return completer.future;
@@ -52,6 +58,8 @@ class ChromeFileSystem {
    * [fileEntries] null
    */
   Future<JsObject> chooseEntry([ChooseEntryOptions options]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<JsObject>.oneArg();
     _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
     return completer.future;
@@ -62,6 +70,8 @@ class ChromeFileSystem {
    * will fail otherwise. This method is new in Chrome 30.
    */
   Future<dynamic> restoreEntry(String id) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
     return completer.future;
@@ -73,6 +83,8 @@ class ChromeFileSystem {
    * 30.
    */
   Future<bool> isRestorable(String id) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _fileSystem.callMethod('isRestorable', [id, completer.callback]);
     return completer.future;
@@ -88,7 +100,17 @@ class ChromeFileSystem {
    * new in Chrome 30.
    */
   String retainEntry(dynamic entry) {
+    _checkAvailability();
+
     return _fileSystem.callMethod('retainEntry', [entry]);
+  }
+
+  bool get available => _fileSystem != null;
+
+  void _checkAvailability() {
+    if (_fileSystem == null) {
+      throw new Exception('chrome.fileSystem API not available');
+    }
   }
 }
 

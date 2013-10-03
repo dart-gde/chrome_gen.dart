@@ -11,7 +11,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.cookies` namespace.
 final ChromeCookies cookies = new ChromeCookies._();
 
-class ChromeCookies {
+class ChromeCookies extends ChromeApi {
   static final JsObject _cookies = context['chrome']['cookies'];
 
   ChromeCookies._();
@@ -29,6 +29,8 @@ class ChromeCookies {
    * was found.
    */
   Future<Cookie> get(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Cookie>.oneArg(_createCookie);
     _cookies.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
@@ -46,6 +48,8 @@ class ChromeCookies {
    * All the existing, unexpired cookies that match the given cookie info.
    */
   Future<List<Cookie>> getAll(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<Cookie>>.oneArg((e) => listify(e, _createCookie));
     _cookies.callMethod('getAll', [jsify(details), completer.callback]);
     return completer.future;
@@ -63,6 +67,8 @@ class ChromeCookies {
    * set.
    */
   Future<Cookie> set(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Cookie>.oneArg(_createCookie);
     _cookies.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
@@ -79,6 +85,8 @@ class ChromeCookies {
    * set.
    */
   Future<Map> remove(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _cookies.callMethod('remove', [jsify(details), completer.callback]);
     return completer.future;
@@ -91,6 +99,8 @@ class ChromeCookies {
    * All the existing cookie stores.
    */
   Future<List<CookieStore>> getAllCookieStores() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<CookieStore>>.oneArg((e) => listify(e, _createCookieStore));
     _cookies.callMethod('getAllCookieStores', [completer.callback]);
     return completer.future;
@@ -107,6 +117,14 @@ class ChromeCookies {
 
   final ChromeStreamController<Map> _onChanged =
       new ChromeStreamController<Map>.oneArg(_cookies['onChanged'], mapify);
+
+  bool get available => _cookies != null;
+
+  void _checkAvailability() {
+    if (_cookies == null) {
+      throw new Exception('chrome.cookies API not available');
+    }
+  }
 }
 
 /**

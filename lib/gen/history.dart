@@ -13,7 +13,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.history` namespace.
 final ChromeHistory history = new ChromeHistory._();
 
-class ChromeHistory {
+class ChromeHistory extends ChromeApi {
   static final JsObject _history = context['chrome']['history'];
 
   ChromeHistory._();
@@ -23,6 +23,8 @@ class ChromeHistory {
    * query.
    */
   Future<List<HistoryItem>> search(Map query) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<HistoryItem>>.oneArg((e) => listify(e, _createHistoryItem));
     _history.callMethod('search', [jsify(query), completer.callback]);
     return completer.future;
@@ -32,6 +34,8 @@ class ChromeHistory {
    * Retrieves information about visits to a URL.
    */
   Future<List<VisitItem>> getVisits(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<VisitItem>>.oneArg((e) => listify(e, _createVisitItem));
     _history.callMethod('getVisits', [jsify(details), completer.callback]);
     return completer.future;
@@ -42,6 +46,8 @@ class ChromeHistory {
    * type](#transition_types) of "link".
    */
   Future addUrl(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _history.callMethod('addUrl', [jsify(details), completer.callback]);
     return completer.future;
@@ -51,6 +57,8 @@ class ChromeHistory {
    * Removes all occurrences of the given URL from the history.
    */
   Future deleteUrl(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _history.callMethod('deleteUrl', [jsify(details), completer.callback]);
     return completer.future;
@@ -62,6 +70,8 @@ class ChromeHistory {
    * range.
    */
   Future deleteRange(Map range) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _history.callMethod('deleteRange', [jsify(range), completer.callback]);
     return completer.future;
@@ -71,6 +81,8 @@ class ChromeHistory {
    * Deletes all items from the history.
    */
   Future deleteAll() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _history.callMethod('deleteAll', [completer.callback]);
     return completer.future;
@@ -93,6 +105,14 @@ class ChromeHistory {
 
   final ChromeStreamController<Map> _onVisitRemoved =
       new ChromeStreamController<Map>.oneArg(_history['onVisitRemoved'], mapify);
+
+  bool get available => _history != null;
+
+  void _checkAvailability() {
+    if (_history == null) {
+      throw new Exception('chrome.history API not available');
+    }
+  }
 }
 
 /**

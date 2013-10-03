@@ -12,7 +12,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.infobars` namespace.
 final ChromeInfobars infobars = new ChromeInfobars._();
 
-class ChromeInfobars {
+class ChromeInfobars extends ChromeApi {
   static final JsObject _infobars = context['chrome']['infobars'];
 
   ChromeInfobars._();
@@ -26,9 +26,19 @@ class ChromeInfobars {
    * Contains details about the window in which the infobar was created.
    */
   Future<Window> show(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _infobars.callMethod('show', [jsify(details), completer.callback]);
     return completer.future;
+  }
+
+  bool get available => _infobars != null;
+
+  void _checkAvailability() {
+    if (_infobars == null) {
+      throw new Exception('chrome.infobars API not available');
+    }
   }
 }
 

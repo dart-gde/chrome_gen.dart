@@ -7,7 +7,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.system.storage` namespace.
 final ChromeSystemStorage system_storage = new ChromeSystemStorage._();
 
-class ChromeSystemStorage {
+class ChromeSystemStorage extends ChromeApi {
   static final JsObject _system_storage = context['chrome']['system']['storage'];
 
   ChromeSystemStorage._();
@@ -17,6 +17,8 @@ class ChromeSystemStorage {
    * callback is an array of StorageUnitInfo objects.
    */
   Future<StorageUnitInfo> getInfo() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<StorageUnitInfo>.oneArg(_createStorageUnitInfo);
     _system_storage.callMethod('getInfo', [completer.callback]);
     return completer.future;
@@ -26,6 +28,8 @@ class ChromeSystemStorage {
    * Ejects a removable storage device.
    */
   Future<EjectDeviceResultCode> ejectDevice(String id) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<EjectDeviceResultCode>.oneArg(_createEjectDeviceResultCode);
     _system_storage.callMethod('ejectDevice', [id, completer.callback]);
     return completer.future;
@@ -40,6 +44,14 @@ class ChromeSystemStorage {
 
   final ChromeStreamController<String> _onDetached =
       new ChromeStreamController<String>.oneArg(_system_storage['onDetached'], selfConverter);
+
+  bool get available => _system_storage != null;
+
+  void _checkAvailability() {
+    if (_system_storage == null) {
+      throw new Exception('chrome.system.storage API not available');
+    }
+  }
 }
 
 /**

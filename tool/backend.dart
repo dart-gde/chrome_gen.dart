@@ -175,7 +175,7 @@ class _DefaultBackendContext {
     generator.writeln();
     generator.writeln("bool get available => ${contextReference} != null;");
     generator.writeln();
-    generator.writeln("void _checkAvailable() {");
+    generator.writeln("void _checkAvailability() {");
     generator.writeln("if (${contextReference} == null) {");
     generator.writeln("throw new Exception('chrome.${library.name} API not available');");
     generator.writeln("}");
@@ -205,7 +205,7 @@ class _DefaultBackendContext {
    * represent the `this` object. It wil default to the chrome. namespace
    * reference (e.g., `_app_window`).
    */
-  void _printMethod(ChromeMethod method, [String thisOverride]) {
+  void _printMethod(ChromeMethod method, {String thisOverride, bool checkAvailability: true}) {
     if (thisOverride == null) {
       thisOverride = contextReference;
     }
@@ -223,6 +223,10 @@ class _DefaultBackendContext {
       generator.write(']');
     }
     generator.writeln(") {");
+    if (checkAvailability) {
+      generator.writeln("_checkAvailability();");
+      generator.writeln();
+    }
     if (method.usesCallback) {
       ChromeType future = method.returns;
       var returnType = future.getReturnStringTypeParams();
@@ -394,7 +398,8 @@ class _DefaultBackendContext {
       props.forEach((p) => _printProperty(p, 'this.proxy', true));
     }
 
-    type.methods.forEach((m) => _printMethod(m, 'proxy'));
+    type.methods.forEach(
+        (m) => _printMethod(m, thisOverride: 'proxy', checkAvailability: false));
 
     generator.writeln("}");
   }

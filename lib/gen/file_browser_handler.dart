@@ -12,7 +12,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.fileBrowserHandler` namespace.
 final ChromeFileBrowserHandler fileBrowserHandler = new ChromeFileBrowserHandler._();
 
-class ChromeFileBrowserHandler {
+class ChromeFileBrowserHandler extends ChromeApi {
   static final JsObject _fileBrowserHandler = context['chrome']['fileBrowserHandler'];
 
   ChromeFileBrowserHandler._();
@@ -31,6 +31,8 @@ class ChromeFileBrowserHandler {
    * Result of the method.
    */
   Future<Map> selectFile(Map selectionParams) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _fileBrowserHandler.callMethod('selectFile', [jsify(selectionParams), completer.callback]);
     return completer.future;
@@ -43,6 +45,14 @@ class ChromeFileBrowserHandler {
 
   final ChromeStreamController<OnExecuteEvent> _onExecute =
       new ChromeStreamController<OnExecuteEvent>.twoArgs(_fileBrowserHandler['onExecute'], _createOnExecuteEvent);
+
+  bool get available => _fileBrowserHandler != null;
+
+  void _checkAvailability() {
+    if (_fileBrowserHandler == null) {
+      throw new Exception('chrome.fileBrowserHandler API not available');
+    }
+  }
 }
 
 /**

@@ -10,7 +10,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.processes` namespace.
 final ChromeProcesses processes = new ChromeProcesses._();
 
-class ChromeProcesses {
+class ChromeProcesses extends ChromeApi {
   static final JsObject _processes = context['chrome']['processes'];
 
   ChromeProcesses._();
@@ -25,6 +25,8 @@ class ChromeProcesses {
    * True if terminating the process was successful, otherwise false.
    */
   Future<bool> terminate(int processId) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _processes.callMethod('terminate', [processId, completer.callback]);
     return completer.future;
@@ -40,6 +42,8 @@ class ChromeProcesses {
    * Process ID of the tab's renderer process.
    */
   Future<int> getProcessIdForTab(int tabId) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<int>.oneArg();
     _processes.callMethod('getProcessIdForTab', [tabId, completer.callback]);
     return completer.future;
@@ -63,6 +67,8 @@ class ChromeProcesses {
    * Process object.
    */
   Future<Map> getProcessInfo(dynamic processIds, bool includeMemory) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _processes.callMethod('getProcessInfo', [processIds, includeMemory, completer.callback]);
     return completer.future;
@@ -114,6 +120,14 @@ class ChromeProcesses {
 
   final ChromeStreamController<OnExitedEvent> _onExited =
       new ChromeStreamController<OnExitedEvent>.threeArgs(_processes['onExited'], _createOnExitedEvent);
+
+  bool get available => _processes != null;
+
+  void _checkAvailability() {
+    if (_processes == null) {
+      throw new Exception('chrome.processes API not available');
+    }
+  }
 }
 
 /**

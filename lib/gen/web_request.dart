@@ -11,7 +11,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.webRequest` namespace.
 final ChromeWebRequest webRequest = new ChromeWebRequest._();
 
-class ChromeWebRequest {
+class ChromeWebRequest extends ChromeApi {
   static final JsObject _webRequest = context['chrome']['webRequest'];
 
   ChromeWebRequest._();
@@ -29,6 +29,8 @@ class ChromeWebRequest {
    * expensive. Don't call it often.
    */
   Future handlerBehaviorChanged() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _webRequest.callMethod('handlerBehaviorChanged', [completer.callback]);
     return completer.future;
@@ -115,6 +117,14 @@ class ChromeWebRequest {
 
   final ChromeStreamController<Map> _onErrorOccurred =
       new ChromeStreamController<Map>.oneArg(_webRequest['onErrorOccurred'], mapify);
+
+  bool get available => _webRequest != null;
+
+  void _checkAvailability() {
+    if (_webRequest == null) {
+      throw new Exception('chrome.webRequest API not available');
+    }
+  }
 }
 
 /**

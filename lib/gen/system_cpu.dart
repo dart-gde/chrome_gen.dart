@@ -7,7 +7,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.system.cpu` namespace.
 final ChromeSystemCpu system_cpu = new ChromeSystemCpu._();
 
-class ChromeSystemCpu {
+class ChromeSystemCpu extends ChromeApi {
   static final JsObject _system_cpu = context['chrome']['system']['cpu'];
 
   ChromeSystemCpu._();
@@ -16,9 +16,19 @@ class ChromeSystemCpu {
    * Queries basic CPU information of the system.
    */
   Future<CpuInfo> getInfo() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<CpuInfo>.oneArg(_createCpuInfo);
     _system_cpu.callMethod('getInfo', [completer.callback]);
     return completer.future;
+  }
+
+  bool get available => _system_cpu != null;
+
+  void _checkAvailability() {
+    if (_system_cpu == null) {
+      throw new Exception('chrome.system.cpu API not available');
+    }
   }
 }
 

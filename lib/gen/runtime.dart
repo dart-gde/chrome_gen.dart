@@ -15,7 +15,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.runtime` namespace.
 final ChromeRuntime runtime = new ChromeRuntime._();
 
-class ChromeRuntime {
+class ChromeRuntime extends ChromeApi {
   static final JsObject _runtime = context['chrome']['runtime'];
 
   ChromeRuntime._();
@@ -40,6 +40,8 @@ class ChromeRuntime {
    * The JavaScript 'window' object for the background page.
    */
   Future<dynamic> getBackgroundPage() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _runtime.callMethod('getBackgroundPage', [completer.callback]);
     return completer.future;
@@ -53,6 +55,8 @@ class ChromeRuntime {
    * The manifest details.
    */
   Map<String, dynamic> getManifest() {
+    _checkAvailability();
+
     return mapify(_runtime.callMethod('getManifest'));
   }
 
@@ -67,6 +71,8 @@ class ChromeRuntime {
    * The fully-qualified URL to the resource.
    */
   String getURL(String path) {
+    _checkAvailability();
+
     return _runtime.callMethod('getURL', [path]);
   }
 
@@ -76,6 +82,8 @@ class ChromeRuntime {
    * characters.
    */
   void setUninstallUrl(String url) {
+    _checkAvailability();
+
     _runtime.callMethod('setUninstallUrl', [url]);
   }
 
@@ -83,6 +91,8 @@ class ChromeRuntime {
    * Reloads the app or extension.
    */
   void reload() {
+    _checkAvailability();
+
     _runtime.callMethod('reload');
   }
 
@@ -96,6 +106,8 @@ class ChromeRuntime {
    * the available update.
    */
   Future<JsObject> requestUpdateCheck() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<JsObject>.oneArg();
     _runtime.callMethod('requestUpdateCheck', [completer.callback]);
     return completer.future;
@@ -117,6 +129,8 @@ class ChromeRuntime {
    * exist.
    */
   Port connect([String extensionId, Map connectInfo]) {
+    _checkAvailability();
+
     return _createPort(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
   }
 
@@ -129,6 +143,8 @@ class ChromeRuntime {
    * Port through which messages can be sent and received with the application
    */
   Port connectNative(String application) {
+    _checkAvailability();
+
     return _createPort(_runtime.callMethod('connectNative', [application]));
   }
 
@@ -149,6 +165,8 @@ class ChromeRuntime {
    * no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendMessage(dynamic message, [String extensionId]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
     return completer.future;
@@ -167,6 +185,8 @@ class ChromeRuntime {
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendNativeMessage(String application, Map<String, dynamic> message) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
     return completer.future;
@@ -176,6 +196,8 @@ class ChromeRuntime {
    * Returns information about the current platform.
    */
   Future<Map> getPlatformInfo() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _runtime.callMethod('getPlatformInfo', [completer.callback]);
     return completer.future;
@@ -185,6 +207,8 @@ class ChromeRuntime {
    * Returns a DirectoryEntry for the package directory.
    */
   Future<dynamic> getPackageDirectoryEntry() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
     return completer.future;
@@ -296,6 +320,14 @@ class ChromeRuntime {
 
   final ChromeStreamController<String> _onRestartRequired =
       new ChromeStreamController<String>.oneArg(_runtime['onRestartRequired'], selfConverter);
+
+  bool get available => _runtime != null;
+
+  void _checkAvailability() {
+    if (_runtime == null) {
+      throw new Exception('chrome.runtime API not available');
+    }
+  }
 }
 
 /**

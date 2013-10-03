@@ -7,7 +7,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.desktopCapture` namespace.
 final ChromeDesktopCapture desktopCapture = new ChromeDesktopCapture._();
 
-class ChromeDesktopCapture {
+class ChromeDesktopCapture extends ChromeApi {
   static final JsObject _desktopCapture = context['chrome']['desktopCapture'];
 
   ChromeDesktopCapture._();
@@ -29,9 +29,19 @@ class ChromeDesktopCapture {
    * callback is called with an empty `streamId`.
    */
   Future<String> chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _desktopCapture.callMethod('chooseDesktopMedia', [sources, origin, completer.callback]);
     return completer.future;
+  }
+
+  bool get available => _desktopCapture != null;
+
+  void _checkAvailability() {
+    if (_desktopCapture == null) {
+      throw new Exception('chrome.desktopCapture API not available');
+    }
   }
 }
 

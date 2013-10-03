@@ -7,7 +7,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.system.display` namespace.
 final ChromeSystemDisplay system_display = new ChromeSystemDisplay._();
 
-class ChromeSystemDisplay {
+class ChromeSystemDisplay extends ChromeApi {
   static final JsObject _system_display = context['chrome']['system']['display'];
 
   ChromeSystemDisplay._();
@@ -16,6 +16,8 @@ class ChromeSystemDisplay {
    * Get the information of all attached display devices.
    */
   Future<DisplayUnitInfo> getInfo() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<DisplayUnitInfo>.oneArg(_createDisplayUnitInfo);
     _system_display.callMethod('getInfo', [completer.callback]);
     return completer.future;
@@ -34,6 +36,8 @@ class ChromeSystemDisplay {
    * queried.
    */
   Future setDisplayProperties(String id, DisplayProperties info) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _system_display.callMethod('setDisplayProperties', [id, info, completer.callback]);
     return completer.future;
@@ -43,6 +47,14 @@ class ChromeSystemDisplay {
 
   final ChromeStreamController _onDisplayChanged =
       new ChromeStreamController.noArgs(_system_display['onDisplayChanged']);
+
+  bool get available => _system_display != null;
+
+  void _checkAvailability() {
+    if (_system_display == null) {
+      throw new Exception('chrome.system.display API not available');
+    }
+  }
 }
 
 class Insets extends ChromeObject {

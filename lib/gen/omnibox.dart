@@ -11,7 +11,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.omnibox` namespace.
 final ChromeOmnibox omnibox = new ChromeOmnibox._();
 
-class ChromeOmnibox {
+class ChromeOmnibox extends ChromeApi {
   static final JsObject _omnibox = context['chrome']['omnibox'];
 
   ChromeOmnibox._();
@@ -23,6 +23,8 @@ class ChromeOmnibox {
    * [suggestResults] An array of suggest results
    */
   void sendSuggestions(int requestId, List<SuggestResult> suggestResults) {
+    _checkAvailability();
+
     _omnibox.callMethod('sendSuggestions', [requestId, jsify(suggestResults)]);
   }
 
@@ -35,6 +37,8 @@ class ChromeOmnibox {
    * parameter.
    */
   void setDefaultSuggestion(DefaultSuggestResult suggestion) {
+    _checkAvailability();
+
     _omnibox.callMethod('setDefaultSuggestion', [suggestion]);
   }
 
@@ -71,6 +75,14 @@ class ChromeOmnibox {
 
   final ChromeStreamController _onInputCancelled =
       new ChromeStreamController.noArgs(_omnibox['onInputCancelled']);
+
+  bool get available => _omnibox != null;
+
+  void _checkAvailability() {
+    if (_omnibox == null) {
+      throw new Exception('chrome.omnibox API not available');
+    }
+  }
 }
 
 /**

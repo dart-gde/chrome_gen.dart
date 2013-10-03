@@ -17,7 +17,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.ttsEngine` namespace.
 final ChromeTtsEngine ttsEngine = new ChromeTtsEngine._();
 
-class ChromeTtsEngine {
+class ChromeTtsEngine extends ChromeApi {
   static final JsObject _ttsEngine = context['chrome']['ttsEngine'];
 
   ChromeTtsEngine._();
@@ -29,6 +29,8 @@ class ChromeTtsEngine {
    * status of this utterance.
    */
   void sendTtsEvent(int requestId, TtsEvent event) {
+    _checkAvailability();
+
     _ttsEngine.callMethod('sendTtsEvent', [requestId, event]);
   }
 
@@ -71,6 +73,14 @@ class ChromeTtsEngine {
 
   final ChromeStreamController _onResume =
       new ChromeStreamController.noArgs(_ttsEngine['onResume']);
+
+  bool get available => _ttsEngine != null;
+
+  void _checkAvailability() {
+    if (_ttsEngine == null) {
+      throw new Exception('chrome.ttsEngine API not available');
+    }
+  }
 }
 
 /**

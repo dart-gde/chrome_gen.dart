@@ -13,7 +13,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.pageAction` namespace.
 final ChromePageAction pageAction = new ChromePageAction._();
 
-class ChromePageAction {
+class ChromePageAction extends ChromeApi {
   static final JsObject _pageAction = context['chrome']['pageAction'];
 
   ChromePageAction._();
@@ -25,6 +25,8 @@ class ChromePageAction {
    * [tabId] The id of the tab for which you want to modify the page action.
    */
   void show(int tabId) {
+    _checkAvailability();
+
     _pageAction.callMethod('show', [tabId]);
   }
 
@@ -34,6 +36,8 @@ class ChromePageAction {
    * [tabId] The id of the tab for which you want to modify the page action.
    */
   void hide(int tabId) {
+    _checkAvailability();
+
     _pageAction.callMethod('hide', [tabId]);
   }
 
@@ -42,6 +46,8 @@ class ChromePageAction {
    * page action.
    */
   void setTitle(Map details) {
+    _checkAvailability();
+
     _pageAction.callMethod('setTitle', [jsify(details)]);
   }
 
@@ -49,6 +55,8 @@ class ChromePageAction {
    * Gets the title of the page action.
    */
   Future<String> getTitle(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
     return completer.future;
@@ -61,6 +69,8 @@ class ChromePageAction {
    * <b>imageData</b> property must be specified.
    */
   Future setIcon(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
     return completer.future;
@@ -71,6 +81,8 @@ class ChromePageAction {
    * page action's icon.
    */
   void setPopup(Map details) {
+    _checkAvailability();
+
     _pageAction.callMethod('setPopup', [jsify(details)]);
   }
 
@@ -78,6 +90,8 @@ class ChromePageAction {
    * Gets the html document set as the popup for this page action.
    */
   Future<String> getPopup(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
@@ -91,6 +105,14 @@ class ChromePageAction {
 
   final ChromeStreamController<Tab> _onClicked =
       new ChromeStreamController<Tab>.oneArg(_pageAction['onClicked'], _createTab);
+
+  bool get available => _pageAction != null;
+
+  void _checkAvailability() {
+    if (_pageAction == null) {
+      throw new Exception('chrome.pageAction API not available');
+    }
+  }
 }
 
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

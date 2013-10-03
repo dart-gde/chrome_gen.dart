@@ -7,7 +7,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.location` namespace.
 final ChromeLocation location = new ChromeLocation._();
 
-class ChromeLocation {
+class ChromeLocation extends ChromeApi {
   static final JsObject _location = context['chrome']['location'];
 
   ChromeLocation._();
@@ -20,6 +20,8 @@ class ChromeLocation {
    * [requestInfo] : Optional parameters for this request.
    */
   void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
+    _checkAvailability();
+
     _location.callMethod('watchLocation', [name, requestInfo]);
   }
 
@@ -29,6 +31,8 @@ class ChromeLocation {
    * empty string.
    */
   void clearWatch(String name) {
+    _checkAvailability();
+
     _location.callMethod('clearWatch', [name]);
   }
 
@@ -41,6 +45,14 @@ class ChromeLocation {
 
   final ChromeStreamController<String> _onLocationError =
       new ChromeStreamController<String>.oneArg(_location['onLocationError'], selfConverter);
+
+  bool get available => _location != null;
+
+  void _checkAvailability() {
+    if (_location == null) {
+      throw new Exception('chrome.location API not available');
+    }
+  }
 }
 
 class Coordinates extends ChromeObject {

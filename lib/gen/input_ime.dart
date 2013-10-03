@@ -12,7 +12,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.input.ime` namespace.
 final ChromeInputIme input_ime = new ChromeInputIme._();
 
-class ChromeInputIme {
+class ChromeInputIme extends ChromeApi {
   static final JsObject _input_ime = context['chrome']['input']['ime'];
 
   ChromeInputIme._();
@@ -22,6 +22,8 @@ class ChromeInputIme {
    * this fails.
    */
   Future<bool> setComposition(Map parameters) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setComposition', [jsify(parameters), completer.callback]);
     return completer.future;
@@ -32,6 +34,8 @@ class ChromeInputIme {
    * IME, this fails.
    */
   Future<bool> clearComposition(Map parameters) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('clearComposition', [jsify(parameters), completer.callback]);
     return completer.future;
@@ -41,6 +45,8 @@ class ChromeInputIme {
    * Commits the provided text to the current input.
    */
   Future<bool> commitText(Map parameters) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('commitText', [jsify(parameters), completer.callback]);
     return completer.future;
@@ -51,6 +57,8 @@ class ChromeInputIme {
    * doesn’t own the active IME
    */
   Future<bool> setCandidateWindowProperties(Map parameters) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setCandidateWindowProperties', [jsify(parameters), completer.callback]);
     return completer.future;
@@ -61,6 +69,8 @@ class ChromeInputIme {
    * the active IME
    */
   Future<bool> setCandidates(Map parameters) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setCandidates', [jsify(parameters), completer.callback]);
     return completer.future;
@@ -71,6 +81,8 @@ class ChromeInputIme {
    * this extension does not own the active IME.
    */
   Future<bool> setCursorPosition(Map parameters) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setCursorPosition', [jsify(parameters), completer.callback]);
     return completer.future;
@@ -80,6 +92,8 @@ class ChromeInputIme {
    * Adds the provided menu items to the language menu when this IME is active.
    */
   Future setMenuItems(Map parameters) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _input_ime.callMethod('setMenuItems', [jsify(parameters), completer.callback]);
     return completer.future;
@@ -89,6 +103,8 @@ class ChromeInputIme {
    * Updates the state of the MenuItems specified
    */
   Future updateMenuItems(Map parameters) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _input_ime.callMethod('updateMenuItems', [jsify(parameters), completer.callback]);
     return completer.future;
@@ -98,6 +114,8 @@ class ChromeInputIme {
    * Deletes the text around the caret.
    */
   Future deleteSurroundingText(Map parameters) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _input_ime.callMethod('deleteSurroundingText', [jsify(parameters), completer.callback]);
     return completer.future;
@@ -113,6 +131,8 @@ class ChromeInputIme {
    * [response] True if the keystroke was handled, false if not
    */
   void keyEventHandled(String requestId, bool response) {
+    _checkAvailability();
+
     _input_ime.callMethod('keyEventHandled', [requestId, response]);
   }
 
@@ -203,6 +223,14 @@ class ChromeInputIme {
 
   final ChromeStreamController<String> _onReset =
       new ChromeStreamController<String>.oneArg(_input_ime['onReset'], selfConverter);
+
+  bool get available => _input_ime != null;
+
+  void _checkAvailability() {
+    if (_input_ime == null) {
+      throw new Exception('chrome.input.ime API not available');
+    }
+  }
 }
 
 /**

@@ -13,7 +13,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.proxy` namespace.
 final ChromeProxy proxy = new ChromeProxy._();
 
-class ChromeProxy {
+class ChromeProxy extends ChromeApi {
   static final JsObject _proxy = context['chrome']['proxy'];
 
   ChromeProxy._();
@@ -31,6 +31,14 @@ class ChromeProxy {
 
   final ChromeStreamController<Map> _onProxyError =
       new ChromeStreamController<Map>.oneArg(_proxy['onProxyError'], mapify);
+
+  bool get available => _proxy != null;
+
+  void _checkAvailability() {
+    if (_proxy == null) {
+      throw new Exception('chrome.proxy API not available');
+    }
+  }
 }
 
 /**

@@ -11,7 +11,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.storage` namespace.
 final ChromeStorage storage = new ChromeStorage._();
 
-class ChromeStorage {
+class ChromeStorage extends ChromeApi {
   static final JsObject _storage = context['chrome']['storage'];
 
   ChromeStorage._();
@@ -33,6 +33,14 @@ class ChromeStorage {
 
   final ChromeStreamController<StorageOnChangedEvent> _onChanged =
       new ChromeStreamController<StorageOnChangedEvent>.twoArgs(_storage['onChanged'], _createStorageOnChangedEvent);
+
+  bool get available => _storage != null;
+
+  void _checkAvailability() {
+    if (_storage == null) {
+      throw new Exception('chrome.storage API not available');
+    }
+  }
 }
 
 /**

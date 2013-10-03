@@ -13,7 +13,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.tts` namespace.
 final ChromeTts tts = new ChromeTts._();
 
-class ChromeTts {
+class ChromeTts extends ChromeApi {
   static final JsObject _tts = context['chrome']['tts'];
 
   ChromeTts._();
@@ -29,6 +29,8 @@ class ChromeTts {
    * [options] The speech options.
    */
   Future speak(String utterance, [Map options]) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter.noArgs();
     _tts.callMethod('speak', [utterance, jsify(options), completer.callback]);
     return completer.future;
@@ -40,6 +42,8 @@ class ChromeTts {
    * call to speak.
    */
   void stop() {
+    _checkAvailability();
+
     _tts.callMethod('stop');
   }
 
@@ -48,6 +52,8 @@ class ChromeTts {
    * to resume or stop will un-pause speech.
    */
   void pause() {
+    _checkAvailability();
+
     _tts.callMethod('pause');
   }
 
@@ -55,6 +61,8 @@ class ChromeTts {
    * If speech was paused, resumes speaking where it left off.
    */
   void resume() {
+    _checkAvailability();
+
     _tts.callMethod('resume');
   }
 
@@ -67,6 +75,8 @@ class ChromeTts {
    * True if speaking, false otherwise.
    */
   Future<bool> isSpeaking() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _tts.callMethod('isSpeaking', [completer.callback]);
     return completer.future;
@@ -80,6 +90,8 @@ class ChromeTts {
    * synthesis.
    */
   Future<List<TtsVoice>> getVoices() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<TtsVoice>>.oneArg((e) => listify(e, _createTtsVoice));
     _tts.callMethod('getVoices', [completer.callback]);
     return completer.future;
@@ -92,6 +104,14 @@ class ChromeTts {
 
   final ChromeStreamController<TtsEvent> _onEvent =
       new ChromeStreamController<TtsEvent>.oneArg(_tts['onEvent'], _createTtsEvent);
+
+  bool get available => _tts != null;
+
+  void _checkAvailability() {
+    if (_tts == null) {
+      throw new Exception('chrome.tts API not available');
+    }
+  }
 }
 
 /**

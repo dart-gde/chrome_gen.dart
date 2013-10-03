@@ -13,7 +13,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.devtools.panels` namespace.
 final ChromeDevtoolsPanels devtools_panels = new ChromeDevtoolsPanels._();
 
-class ChromeDevtoolsPanels {
+class ChromeDevtoolsPanels extends ChromeApi {
   static final JsObject _devtools_panels = context['chrome']['devtools']['panels'];
 
   ChromeDevtoolsPanels._();
@@ -38,6 +38,8 @@ class ChromeDevtoolsPanels {
    * An ExtensionPanel object representing the created panel.
    */
   Future<ExtensionPanel> create(String title, String iconPath, String pagePath) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<ExtensionPanel>.oneArg(_createExtensionPanel);
     _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
     return completer.future;
@@ -53,9 +55,19 @@ class ChromeDevtoolsPanels {
    * clicked.
    */
   Future<Resource> setOpenResourceHandler() {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Resource>.oneArg(_createResource);
     _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
     return completer.future;
+  }
+
+  bool get available => _devtools_panels != null;
+
+  void _checkAvailability() {
+    if (_devtools_panels == null) {
+      throw new Exception('chrome.devtools.panels API not available');
+    }
   }
 }
 

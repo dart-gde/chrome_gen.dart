@@ -7,7 +7,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.power` namespace.
 final ChromePower power = new ChromePower._();
 
-class ChromePower {
+class ChromePower extends ChromeApi {
   static final JsObject _power = context['chrome']['power'];
 
   ChromePower._();
@@ -19,6 +19,8 @@ class ChromePower {
    * replaced by the new request.
    */
   void requestKeepAwake(Level level) {
+    _checkAvailability();
+
     _power.callMethod('requestKeepAwake', [level]);
   }
 
@@ -26,7 +28,17 @@ class ChromePower {
    * Releases a request previously made via requestKeepAwake().
    */
   void releaseKeepAwake() {
+    _checkAvailability();
+
     _power.callMethod('releaseKeepAwake');
+  }
+
+  bool get available => _power != null;
+
+  void _checkAvailability() {
+    if (_power == null) {
+      throw new Exception('chrome.power API not available');
+    }
   }
 }
 

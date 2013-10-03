@@ -11,7 +11,7 @@ import '../src/common.dart';
 /// Accessor for the `chrome.webNavigation` namespace.
 final ChromeWebNavigation webNavigation = new ChromeWebNavigation._();
 
-class ChromeWebNavigation {
+class ChromeWebNavigation extends ChromeApi {
   static final JsObject _webNavigation = context['chrome']['webNavigation'];
 
   ChromeWebNavigation._();
@@ -28,6 +28,8 @@ class ChromeWebNavigation {
    * and/or tab ID are invalid.
    */
   Future<Map> getFrame(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _webNavigation.callMethod('getFrame', [jsify(details), completer.callback]);
     return completer.future;
@@ -42,6 +44,8 @@ class ChromeWebNavigation {
    * A list of frames in the given tab, null if the specified tab ID is invalid.
    */
   Future<List<Map>> getAllFrames(Map details) {
+    _checkAvailability();
+
     var completer = new ChromeCompleter<List<Map>>.oneArg((e) => listify(e, mapify));
     _webNavigation.callMethod('getAllFrames', [jsify(details), completer.callback]);
     return completer.future;
@@ -128,4 +132,12 @@ class ChromeWebNavigation {
 
   final ChromeStreamController<Map> _onHistoryStateUpdated =
       new ChromeStreamController<Map>.oneArg(_webNavigation['onHistoryStateUpdated'], mapify);
+
+  bool get available => _webNavigation != null;
+
+  void _checkAvailability() {
+    if (_webNavigation == null) {
+      throw new Exception('chrome.webNavigation API not available');
+    }
+  }
 }
