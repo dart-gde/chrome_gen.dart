@@ -13,20 +13,17 @@ class ChromeSerial {
   ChromeSerial._();
 
   /**
-   * Returns names of valid ports on this machine, each of which is likely to
-   *  be valid to pass as the port argument to open(). The list is regenerated
-   *  each time this method is called, as port validity is dynamic.
+   * Returns names of valid ports on this machine, each of which is likely to be
+   * valid to pass as the port argument to open(). The list is regenerated each
+   * time this method is called, as port validity is dynamic.
    * 
-   *  |callback| : Called with the list of ports.
-   * 
-   * 
+   * [callback] : Called with the list of ports.
    * 
    * Returns:
-   *  Copyright (c) 2012 The Chromium Authors. All rights reserved.
-   *  Use of this source code is governed by a BSD-style license that can be
-   *  found in the LICENSE file.
-   *  Use the <code>chrome.serial</code> API to read from and write to a device
-   *  connected to a serial port.
+   * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+   * source code is governed by a BSD-style license that can be found in the
+   * LICENSE file. Use the `chrome.serial` API to read from and write to a
+   * device connected to a serial port.
    */
   Future<String> getPorts() {
     var completer = new ChromeCompleter<String>.oneArg();
@@ -36,13 +33,9 @@ class ChromeSerial {
 
   /**
    * Opens a connection to the given serial port.
-   *  |port| : The name of the serial port to open.
-   *  |options| : Connection options.
-   *  |callback| : Called when the connection has been opened.
-   * 
-   * 
-   * 
-   * Returns:
+   * [port] : The name of the serial port to open.
+   * [options] : Connection options.
+   * [callback] : Called when the connection has been opened.
    */
   Future<OpenInfo> open(String port, [OpenOptions options]) {
     var completer = new ChromeCompleter<OpenInfo>.oneArg(_createOpenInfo);
@@ -52,13 +45,11 @@ class ChromeSerial {
 
   /**
    * Closes an open connection.
-   *  |connectionId| : The id of the opened connection.
-   *  |callback| : Called when the connection has been closed.
-   * 
-   * 
+   * [connectionId] : The id of the opened connection.
+   * [callback] : Called when the connection has been closed.
    * 
    * Returns:
-   *  Returns true if operation was successful.
+   * Returns true if operation was successful.
    */
   Future<bool> close(int connectionId) {
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -68,14 +59,10 @@ class ChromeSerial {
 
   /**
    * Reads a byte from the given connection.
-   *  |connectionId| : The id of the connection.
-   *  |bytesToRead| : The number of bytes to read.
-   *  |callback| : Called when all the requested bytes have been read or
-   *               when the read blocks.
-   * 
-   * 
-   * 
-   * Returns:
+   * [connectionId] : The id of the connection.
+   * [bytesToRead] : The number of bytes to read.
+   * [callback] : Called when all the requested bytes have been read or
+   * when the read blocks.
    */
   Future<SerialReadInfo> read(int connectionId, int bytesToRead) {
     var completer = new ChromeCompleter<SerialReadInfo>.oneArg(_createSerialReadInfo);
@@ -85,13 +72,9 @@ class ChromeSerial {
 
   /**
    * Writes a string to the given connection.
-   *  |connectionId| : The id of the connection.
-   *  |data| : The string to write.
-   *  |callback| : Called when the string has been written.
-   * 
-   * 
-   * 
-   * Returns:
+   * [connectionId] : The id of the connection.
+   * [data] : The string to write.
+   * [callback] : Called when the string has been written.
    */
   Future<SerialWriteInfo> write(int connectionId, ArrayBuffer data) {
     var completer = new ChromeCompleter<SerialWriteInfo>.oneArg(_createSerialWriteInfo);
@@ -101,13 +84,11 @@ class ChromeSerial {
 
   /**
    * Flushes all bytes in the given connection's input and output buffers.
-   *  |connectionId| : The id of the connection.
-   *  |callback| : Called when the flush is complete.
-   * 
-   * 
+   * [connectionId] : The id of the connection.
+   * [callback] : Called when the flush is complete.
    * 
    * Returns:
-   *  Returns true if operation was successful.
+   * Returns true if operation was successful.
    */
   Future<bool> flush(int connectionId) {
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -115,20 +96,12 @@ class ChromeSerial {
     return completer.future;
   }
 
-  /**
-   * Returns:
-   *  Returns a snapshot of current control signals.
-   */
   Future<ControlSignalOptions> getControlSignals(int connectionId) {
     var completer = new ChromeCompleter<ControlSignalOptions>.oneArg(_createControlSignalOptions);
     _serial.callMethod('getControlSignals', [connectionId, completer.callback]);
     return completer.future;
   }
 
-  /**
-   * Returns:
-   *  Returns true if operation was successful.
-   */
   Future<bool> setControlSignals(int connectionId, ControlSignalOptions options) {
     var completer = new ChromeCompleter<bool>.oneArg();
     _serial.callMethod('setControlSignals', [connectionId, options, completer.callback]);
@@ -136,9 +109,6 @@ class ChromeSerial {
   }
 }
 
-/**
- * 
- */
 class DataBit extends ChromeEnum {
   static const DataBit SEVENBIT = const DataBit._('sevenbit');
   static const DataBit EIGHTBIT = const DataBit._('eightbit');
@@ -148,9 +118,6 @@ class DataBit extends ChromeEnum {
   const DataBit._(String str): super(str);
 }
 
-/**
- * 
- */
 class ParityBit extends ChromeEnum {
   static const ParityBit NOPARITY = const ParityBit._('noparity');
   static const ParityBit ODDPARITY = const ParityBit._('oddparity');
@@ -161,9 +128,6 @@ class ParityBit extends ChromeEnum {
   const ParityBit._(String str): super(str);
 }
 
-/**
- * 
- */
 class StopBit extends ChromeEnum {
   static const StopBit ONESTOPBIT = const StopBit._('onestopbit');
   static const StopBit TWOSTOPBIT = const StopBit._('twostopbit');

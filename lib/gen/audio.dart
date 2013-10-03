@@ -15,8 +15,6 @@ class ChromeAudio {
   /**
    * Get the information of all audio output and input devices.
    * 
-   * 
-   * 
    * Returns:
    * [outputInfo] null
    * [inputInfo] null

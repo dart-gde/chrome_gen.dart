@@ -14,10 +14,6 @@ class ChromeSystemCpu {
 
   /**
    * Queries basic CPU information of the system.
-   * 
-   * 
-   * 
-   * Returns:
    */
   Future<CpuInfo> getInfo() {
     var completer = new ChromeCompleter<CpuInfo>.oneArg(_createCpuInfo);
