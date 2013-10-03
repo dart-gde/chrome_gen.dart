@@ -10,20 +10,20 @@ import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.scriptBadge` namespace.
-final ChromeScriptBadge scriptBadge = new ChromeScriptBadge._();
+final ChromeScriptBadge scriptBadge = (ChromeScriptBadge._scriptBadge == null ? null : new ChromeScriptBadge._());
 
-class ChromeScriptBadge extends ChromeApi {
+class ChromeScriptBadge {
   static final JsObject _scriptBadge = context['chrome']['scriptBadge'];
 
   ChromeScriptBadge._();
+
+  bool get available => _scriptBadge != null;
 
   /**
    * Sets the html document to be opened as a popup when the user clicks on the
    * script badge's icon.
    */
   void setPopup(Map details) {
-    _checkAvailability();
-
     _scriptBadge.callMethod('setPopup', [jsify(details)]);
   }
 
@@ -31,8 +31,6 @@ class ChromeScriptBadge extends ChromeApi {
    * Gets the html document set as the popup for this script badge.
    */
   Future<String> getPopup(Map details) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<String>.oneArg();
     _scriptBadge.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
@@ -46,8 +44,6 @@ class ChromeScriptBadge extends ChromeApi {
    * has already run on this tab, this call does nothing.
    */
   void getAttention(Map details) {
-    _checkAvailability();
-
     _scriptBadge.callMethod('getAttention', [jsify(details)]);
   }
 
@@ -59,14 +55,6 @@ class ChromeScriptBadge extends ChromeApi {
 
   final ChromeStreamController<Tab> _onClicked =
       new ChromeStreamController<Tab>.oneArg(_scriptBadge['onClicked'], _createTab);
-
-  bool get available => _scriptBadge != null;
-
-  void _checkAvailability() {
-    if (_scriptBadge == null) {
-      throw new Exception('chrome.scriptBadge API not available');
-    }
-  }
 }
 
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

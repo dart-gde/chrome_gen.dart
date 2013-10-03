@@ -15,12 +15,14 @@ import 'tts.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.ttsEngine` namespace.
-final ChromeTtsEngine ttsEngine = new ChromeTtsEngine._();
+final ChromeTtsEngine ttsEngine = (ChromeTtsEngine._ttsEngine == null ? null : new ChromeTtsEngine._());
 
-class ChromeTtsEngine extends ChromeApi {
+class ChromeTtsEngine {
   static final JsObject _ttsEngine = context['chrome']['ttsEngine'];
 
   ChromeTtsEngine._();
+
+  bool get available => _ttsEngine != null;
 
   /**
    * Routes a TTS event from a speech engine to a client.
@@ -29,8 +31,6 @@ class ChromeTtsEngine extends ChromeApi {
    * status of this utterance.
    */
   void sendTtsEvent(int requestId, TtsEvent event) {
-    _checkAvailability();
-
     _ttsEngine.callMethod('sendTtsEvent', [requestId, event]);
   }
 
@@ -73,14 +73,6 @@ class ChromeTtsEngine extends ChromeApi {
 
   final ChromeStreamController _onResume =
       new ChromeStreamController.noArgs(_ttsEngine['onResume']);
-
-  bool get available => _ttsEngine != null;
-
-  void _checkAvailability() {
-    if (_ttsEngine == null) {
-      throw new Exception('chrome.ttsEngine API not available');
-    }
-  }
 }
 
 /**

@@ -11,12 +11,14 @@ library chrome.contentSettings;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.contentSettings` namespace.
-final ChromeContentSettings contentSettings = new ChromeContentSettings._();
+final ChromeContentSettings contentSettings = (ChromeContentSettings._contentSettings == null ? null : new ChromeContentSettings._());
 
-class ChromeContentSettings extends ChromeApi {
+class ChromeContentSettings {
   static final JsObject _contentSettings = context['chrome']['contentSettings'];
 
   ChromeContentSettings._();
+
+  bool get available => _contentSettings != null;
 
   /**
    * Whether to allow cookies and other local data to be set by websites. One
@@ -65,14 +67,6 @@ class ChromeContentSettings extends ChromeApi {
    * URL. The secondary URL is not used.
    */
   ContentSetting get notifications => _createContentSetting(_contentSettings['notifications']);
-
-  bool get available => _contentSettings != null;
-
-  void _checkAvailability() {
-    if (_contentSettings == null) {
-      throw new Exception('chrome.contentSettings API not available');
-    }
-  }
 }
 
 /**

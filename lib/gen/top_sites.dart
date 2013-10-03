@@ -9,30 +9,22 @@ library chrome.topSites;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.topSites` namespace.
-final ChromeTopSites topSites = new ChromeTopSites._();
+final ChromeTopSites topSites = (ChromeTopSites._topSites == null ? null : new ChromeTopSites._());
 
-class ChromeTopSites extends ChromeApi {
+class ChromeTopSites {
   static final JsObject _topSites = context['chrome']['topSites'];
 
   ChromeTopSites._();
+
+  bool get available => _topSites != null;
 
   /**
    * Gets a list of top sites.
    */
   Future<List<MostVisitedURL>> get() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<MostVisitedURL>>.oneArg((e) => listify(e, _createMostVisitedURL));
     _topSites.callMethod('get', [completer.callback]);
     return completer.future;
-  }
-
-  bool get available => _topSites != null;
-
-  void _checkAvailability() {
-    if (_topSites == null) {
-      throw new Exception('chrome.topSites API not available');
-    }
   }
 }
 

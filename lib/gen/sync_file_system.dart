@@ -5,12 +5,14 @@ library chrome.syncFileSystem;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.syncFileSystem` namespace.
-final ChromeSyncFileSystem syncFileSystem = new ChromeSyncFileSystem._();
+final ChromeSyncFileSystem syncFileSystem = (ChromeSyncFileSystem._syncFileSystem == null ? null : new ChromeSyncFileSystem._());
 
-class ChromeSyncFileSystem extends ChromeApi {
+class ChromeSyncFileSystem {
   static final JsObject _syncFileSystem = context['chrome']['syncFileSystem'];
 
   ChromeSyncFileSystem._();
+
+  bool get available => _syncFileSystem != null;
 
   /**
    * Returns a syncable filesystem backed by Google Drive. The returned
@@ -24,8 +26,6 @@ class ChromeSyncFileSystem extends ChromeApi {
    * A callback type for requestFileSystem.
    */
   Future<dynamic> requestFileSystem() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
     return completer.future;
@@ -40,8 +40,6 @@ class ChromeSyncFileSystem extends ChromeApi {
    * not.
    */
   Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
     return completer.future;
@@ -54,8 +52,6 @@ class ChromeSyncFileSystem extends ChromeApi {
    * A callback type for getConflictResolutionPolicy.
    */
   Future<ConflictResolutionPolicy> getConflictResolutionPolicy() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<ConflictResolutionPolicy>.oneArg(_createConflictResolutionPolicy);
     _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
     return completer.future;
@@ -69,8 +65,6 @@ class ChromeSyncFileSystem extends ChromeApi {
    * A callback type for getUsageAndQuota.
    */
   Future<StorageInfo> getUsageAndQuota(dynamic fileSystem) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<StorageInfo>.oneArg(_createStorageInfo);
     _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
     return completer.future;
@@ -86,8 +80,6 @@ class ChromeSyncFileSystem extends ChromeApi {
    * A callback type for getFileStatus.
    */
   Future<FileStatus> getFileStatus(dynamic fileEntry) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<FileStatus>.oneArg(_createFileStatus);
     _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
     return completer.future;
@@ -101,8 +93,6 @@ class ChromeSyncFileSystem extends ChromeApi {
    * A callback type for getFileStatuses.
    */
   Future<FileStatusInfo> getFileStatuses(dynamic fileEntries) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<FileStatusInfo>.oneArg(_createFileStatusInfo);
     _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
     return completer.future;
@@ -115,8 +105,6 @@ class ChromeSyncFileSystem extends ChromeApi {
    * A callback type for getServiceStatus.
    */
   Future<ServiceStatus> getServiceStatus() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<ServiceStatus>.oneArg(_createServiceStatus);
     _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
     return completer.future;
@@ -131,14 +119,6 @@ class ChromeSyncFileSystem extends ChromeApi {
 
   final ChromeStreamController<FileInfo> _onFileStatusChanged =
       new ChromeStreamController<FileInfo>.oneArg(_syncFileSystem['onFileStatusChanged'], _createFileInfo);
-
-  bool get available => _syncFileSystem != null;
-
-  void _checkAvailability() {
-    if (_syncFileSystem == null) {
-      throw new Exception('chrome.syncFileSystem API not available');
-    }
-  }
 }
 
 /**

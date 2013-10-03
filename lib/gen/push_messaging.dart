@@ -5,12 +5,14 @@ library chrome.pushMessaging;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.pushMessaging` namespace.
-final ChromePushMessaging pushMessaging = new ChromePushMessaging._();
+final ChromePushMessaging pushMessaging = (ChromePushMessaging._pushMessaging == null ? null : new ChromePushMessaging._());
 
-class ChromePushMessaging extends ChromeApi {
+class ChromePushMessaging {
   static final JsObject _pushMessaging = context['chrome']['pushMessaging'];
 
   ChromePushMessaging._();
+
+  bool get available => _pushMessaging != null;
 
   /**
    * Retrieves the channel ID associated with this app or extension. Typically
@@ -20,8 +22,6 @@ class ChromePushMessaging extends ChromeApi {
    * when they are not already logged in.
    */
   Future<ChannelIdResult> getChannelId([bool interactive]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<ChannelIdResult>.oneArg(_createChannelIdResult);
     _pushMessaging.callMethod('getChannelId', [interactive, completer.callback]);
     return completer.future;
@@ -31,14 +31,6 @@ class ChromePushMessaging extends ChromeApi {
 
   final ChromeStreamController<Message> _onMessage =
       new ChromeStreamController<Message>.oneArg(_pushMessaging['onMessage'], _createMessage);
-
-  bool get available => _pushMessaging != null;
-
-  void _checkAvailability() {
-    if (_pushMessaging == null) {
-      throw new Exception('chrome.pushMessaging API not available');
-    }
-  }
 }
 
 class Message extends ChromeObject {

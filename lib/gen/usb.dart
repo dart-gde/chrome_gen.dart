@@ -5,12 +5,14 @@ library chrome.usb;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.usb` namespace.
-final ChromeUsb usb = new ChromeUsb._();
+final ChromeUsb usb = (ChromeUsb._usb == null ? null : new ChromeUsb._());
 
-class ChromeUsb extends ChromeApi {
+class ChromeUsb {
   static final JsObject _usb = context['chrome']['usb'];
 
   ChromeUsb._();
+
+  bool get available => _usb != null;
 
   /**
    * Lists USB devices specified by vendorId/productId/interfaceId tuple.
@@ -19,8 +21,6 @@ class ChromeUsb extends ChromeApi {
    * [Device]s on complete.
    */
   Future<Device> getDevices(EnumerateDevicesOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<Device>.oneArg(_createDevice);
     _usb.callMethod('getDevices', [options, completer.callback]);
     return completer.future;
@@ -35,8 +35,6 @@ class ChromeUsb extends ChromeApi {
    * [interfaceId]:
    */
   Future<bool> requestAccess(Device device, int interfaceId) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<bool>.oneArg();
     _usb.callMethod('requestAccess', [device, interfaceId, completer.callback]);
     return completer.future;
@@ -49,8 +47,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked with the created ConnectionHandle on complete.
    */
   Future<ConnectionHandle> openDevice(Device device) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
     _usb.callMethod('openDevice', [device, completer.callback]);
     return completer.future;
@@ -74,8 +70,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked with the opened ConnectionHandle on complete.
    */
   Future<ConnectionHandle> findDevices(EnumerateDevicesAndRequestAccessOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
     _usb.callMethod('findDevices', [options, completer.callback]);
     return completer.future;
@@ -88,8 +82,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: The callback to invoke once the device is closed.
    */
   Future closeDevice(ConnectionHandle handle) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _usb.callMethod('closeDevice', [handle, completer.callback]);
     return completer.future;
@@ -101,8 +93,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: The callback to invoke when the interfaces are enumerated.
    */
   Future<InterfaceDescriptor> listInterfaces(ConnectionHandle handle) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<InterfaceDescriptor>.oneArg(_createInterfaceDescriptor);
     _usb.callMethod('listInterfaces', [handle, completer.callback]);
     return completer.future;
@@ -120,8 +110,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: The callback to invoke once the interface is claimed.
    */
   Future claimInterface(ConnectionHandle handle, int interfaceNumber) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _usb.callMethod('claimInterface', [handle, interfaceNumber, completer.callback]);
     return completer.future;
@@ -134,8 +122,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: The callback to invoke once the interface is released.
    */
   Future releaseInterface(ConnectionHandle handle, int interfaceNumber) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _usb.callMethod('releaseInterface', [handle, interfaceNumber, completer.callback]);
     return completer.future;
@@ -149,8 +135,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: The callback to invoke once the interface setting is set.
    */
   Future setInterfaceAlternateSetting(ConnectionHandle handle, int interfaceNumber, int alternateSetting) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _usb.callMethod('setInterfaceAlternateSetting', [handle, interfaceNumber, alternateSetting, completer.callback]);
     return completer.future;
@@ -168,8 +152,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked once the transfer has completed.
    */
   Future<TransferResultInfo> controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('controlTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
@@ -182,8 +164,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked once the transfer has completed.
    */
   Future<TransferResultInfo> bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('bulkTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
@@ -196,8 +176,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked once the transfer has completed.
    */
   Future<TransferResultInfo> interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('interruptTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
@@ -211,8 +189,6 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked once the transfer has been completed.
    */
   Future<TransferResultInfo> isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('isochronousTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
@@ -231,19 +207,9 @@ class ChromeUsb extends ChromeApi {
    * whether the reset is completed successfully.
    */
   Future<bool> resetDevice(ConnectionHandle handle) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<bool>.oneArg();
     _usb.callMethod('resetDevice', [handle, completer.callback]);
     return completer.future;
-  }
-
-  bool get available => _usb != null;
-
-  void _checkAvailability() {
-    if (_usb == null) {
-      throw new Exception('chrome.usb API not available');
-    }
   }
 }
 

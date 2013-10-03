@@ -5,12 +5,14 @@ library chrome.alarms;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.alarms` namespace.
-final ChromeAlarms alarms = new ChromeAlarms._();
+final ChromeAlarms alarms = (ChromeAlarms._alarms == null ? null : new ChromeAlarms._());
 
-class ChromeAlarms extends ChromeApi {
+class ChromeAlarms {
   static final JsObject _alarms = context['chrome']['alarms'];
 
   ChromeAlarms._();
+
+  bool get available => _alarms != null;
 
   /**
    * Creates an alarm.  Near the time(s) specified by [alarmInfo], the `onAlarm`
@@ -35,8 +37,6 @@ class ChromeAlarms extends ChromeApi {
    * [delayInMinutes].
    */
   void create(AlarmCreateInfo alarmInfo, [String name]) {
-    _checkAvailability();
-
     _alarms.callMethod('create', [name, alarmInfo]);
   }
 
@@ -45,8 +45,6 @@ class ChromeAlarms extends ChromeApi {
    * [name]: The name of the alarm to get. Defaults to the empty string.
    */
   Future<Alarm> get([String name]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<Alarm>.oneArg(_createAlarm);
     _alarms.callMethod('get', [name, completer.callback]);
     return completer.future;
@@ -56,8 +54,6 @@ class ChromeAlarms extends ChromeApi {
    * Gets an array of all the alarms.
    */
   Future<Alarm> getAll() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<Alarm>.oneArg(_createAlarm);
     _alarms.callMethod('getAll', [completer.callback]);
     return completer.future;
@@ -68,8 +64,6 @@ class ChromeAlarms extends ChromeApi {
    * [name]: The name of the alarm to clear. Defaults to the empty string.
    */
   void clear([String name]) {
-    _checkAvailability();
-
     _alarms.callMethod('clear', [name]);
   }
 
@@ -77,8 +71,6 @@ class ChromeAlarms extends ChromeApi {
    * Clears all alarms.
    */
   void clearAll() {
-    _checkAvailability();
-
     _alarms.callMethod('clearAll');
   }
 
@@ -86,14 +78,6 @@ class ChromeAlarms extends ChromeApi {
 
   final ChromeStreamController<Alarm> _onAlarm =
       new ChromeStreamController<Alarm>.oneArg(_alarms['onAlarm'], _createAlarm);
-
-  bool get available => _alarms != null;
-
-  void _checkAvailability() {
-    if (_alarms == null) {
-      throw new Exception('chrome.alarms API not available');
-    }
-  }
 }
 
 class Alarm extends ChromeObject {

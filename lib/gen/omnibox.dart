@@ -9,12 +9,14 @@ library chrome.omnibox;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.omnibox` namespace.
-final ChromeOmnibox omnibox = new ChromeOmnibox._();
+final ChromeOmnibox omnibox = (ChromeOmnibox._omnibox == null ? null : new ChromeOmnibox._());
 
-class ChromeOmnibox extends ChromeApi {
+class ChromeOmnibox {
   static final JsObject _omnibox = context['chrome']['omnibox'];
 
   ChromeOmnibox._();
+
+  bool get available => _omnibox != null;
 
   /**
    * A callback passed to the onInputChanged event used for sending suggestions
@@ -23,8 +25,6 @@ class ChromeOmnibox extends ChromeApi {
    * [suggestResults] An array of suggest results
    */
   void sendSuggestions(int requestId, List<SuggestResult> suggestResults) {
-    _checkAvailability();
-
     _omnibox.callMethod('sendSuggestions', [requestId, jsify(suggestResults)]);
   }
 
@@ -37,8 +37,6 @@ class ChromeOmnibox extends ChromeApi {
    * parameter.
    */
   void setDefaultSuggestion(DefaultSuggestResult suggestion) {
-    _checkAvailability();
-
     _omnibox.callMethod('setDefaultSuggestion', [suggestion]);
   }
 
@@ -75,14 +73,6 @@ class ChromeOmnibox extends ChromeApi {
 
   final ChromeStreamController _onInputCancelled =
       new ChromeStreamController.noArgs(_omnibox['onInputCancelled']);
-
-  bool get available => _omnibox != null;
-
-  void _checkAvailability() {
-    if (_omnibox == null) {
-      throw new Exception('chrome.omnibox API not available');
-    }
-  }
 }
 
 /**

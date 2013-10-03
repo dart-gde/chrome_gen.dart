@@ -5,12 +5,14 @@ library chrome.audio;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.audio` namespace.
-final ChromeAudio audio = new ChromeAudio._();
+final ChromeAudio audio = (ChromeAudio._audio == null ? null : new ChromeAudio._());
 
-class ChromeAudio extends ChromeApi {
+class ChromeAudio {
   static final JsObject _audio = context['chrome']['audio'];
 
   ChromeAudio._();
+
+  bool get available => _audio != null;
 
   /**
    * Get the information of all audio output and input devices.
@@ -20,8 +22,6 @@ class ChromeAudio extends ChromeApi {
    * [inputInfo] null
    */
   Future<JsObject> getInfo() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<JsObject>.oneArg();
     _audio.callMethod('getInfo', [completer.callback]);
     return completer.future;
@@ -31,8 +31,6 @@ class ChromeAudio extends ChromeApi {
    * Select a subset of audio devices as active.
    */
   Future setActiveDevices(String ids) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _audio.callMethod('setActiveDevices', [ids, completer.callback]);
     return completer.future;
@@ -42,8 +40,6 @@ class ChromeAudio extends ChromeApi {
    * Sets the properties for the input or output device.
    */
   Future setProperties(String id, DeviceProperties properties) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _audio.callMethod('setProperties', [id, properties, completer.callback]);
     return completer.future;
@@ -53,14 +49,6 @@ class ChromeAudio extends ChromeApi {
 
   final ChromeStreamController _onDeviceChanged =
       new ChromeStreamController.noArgs(_audio['onDeviceChanged']);
-
-  bool get available => _audio != null;
-
-  void _checkAvailability() {
-    if (_audio == null) {
-      throw new Exception('chrome.audio API not available');
-    }
-  }
 }
 
 class OutputDeviceInfo extends ChromeObject {

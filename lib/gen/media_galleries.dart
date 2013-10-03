@@ -5,20 +5,20 @@ library chrome.mediaGalleries;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.mediaGalleries` namespace.
-final ChromeMediaGalleries mediaGalleries = new ChromeMediaGalleries._();
+final ChromeMediaGalleries mediaGalleries = (ChromeMediaGalleries._mediaGalleries == null ? null : new ChromeMediaGalleries._());
 
-class ChromeMediaGalleries extends ChromeApi {
+class ChromeMediaGalleries {
   static final JsObject _mediaGalleries = context['chrome']['mediaGalleries'];
 
   ChromeMediaGalleries._();
+
+  bool get available => _mediaGalleries != null;
 
   /**
    * Get the media galleries configured in this user agent. If none are
    * configured or available, the callback will receive an empty array.
    */
   Future<dynamic> getMediaFileSystems([MediaFileSystemsDetails details]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
     return completer.future;
@@ -28,17 +28,7 @@ class ChromeMediaGalleries extends ChromeApi {
    * Get metadata about a specific media file system.
    */
   MediaFileSystemMetadata getMediaFileSystemMetadata(dynamic mediaFileSystem) {
-    _checkAvailability();
-
     return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
-  }
-
-  bool get available => _mediaGalleries != null;
-
-  void _checkAvailability() {
-    if (_mediaGalleries == null) {
-      throw new Exception('chrome.mediaGalleries API not available');
-    }
   }
 }
 

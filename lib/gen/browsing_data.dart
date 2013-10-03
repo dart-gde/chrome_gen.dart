@@ -9,12 +9,14 @@ library chrome.browsingData;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.browsingData` namespace.
-final ChromeBrowsingData browsingData = new ChromeBrowsingData._();
+final ChromeBrowsingData browsingData = (ChromeBrowsingData._browsingData == null ? null : new ChromeBrowsingData._());
 
-class ChromeBrowsingData extends ChromeApi {
+class ChromeBrowsingData {
   static final JsObject _browsingData = context['chrome']['browsingData'];
 
   ChromeBrowsingData._();
+
+  bool get available => _browsingData != null;
 
   /**
    * Reports which types of data are currently selected in the 'Clear browsing
@@ -23,8 +25,6 @@ class ChromeBrowsingData extends ChromeApi {
    * one data type listed here.
    */
   Future<Map> settings() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _browsingData.callMethod('settings', [completer.callback]);
     return completer.future;
@@ -36,8 +36,6 @@ class ChromeBrowsingData extends ChromeApi {
    * [dataToRemove] The set of data types to remove.
    */
   Future remove(RemovalOptions options, DataTypeSet dataToRemove) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('remove', [options, dataToRemove, completer.callback]);
     return completer.future;
@@ -47,8 +45,6 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears websites' appcache data.
    */
   Future removeAppcache(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeAppcache', [options, completer.callback]);
     return completer.future;
@@ -58,8 +54,6 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears the browser's cache.
    */
   Future removeCache(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeCache', [options, completer.callback]);
     return completer.future;
@@ -70,8 +64,6 @@ class ChromeBrowsingData extends ChromeApi {
    * a particular timeframe.
    */
   Future removeCookies(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeCookies', [options, completer.callback]);
     return completer.future;
@@ -82,8 +74,6 @@ class ChromeBrowsingData extends ChromeApi {
    * themselves).
    */
   Future removeDownloads(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeDownloads', [options, completer.callback]);
     return completer.future;
@@ -93,8 +83,6 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears websites' file system data.
    */
   Future removeFileSystems(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeFileSystems', [options, completer.callback]);
     return completer.future;
@@ -104,8 +92,6 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears the browser's stored form data (autofill).
    */
   Future removeFormData(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeFormData', [options, completer.callback]);
     return completer.future;
@@ -115,8 +101,6 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears the browser's history.
    */
   Future removeHistory(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeHistory', [options, completer.callback]);
     return completer.future;
@@ -126,8 +110,6 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears websites' IndexedDB data.
    */
   Future removeIndexedDB(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeIndexedDB', [options, completer.callback]);
     return completer.future;
@@ -137,8 +119,6 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears websites' local storage data.
    */
   Future removeLocalStorage(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeLocalStorage', [options, completer.callback]);
     return completer.future;
@@ -148,8 +128,6 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears plugins' data.
    */
   Future removePluginData(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removePluginData', [options, completer.callback]);
     return completer.future;
@@ -159,8 +137,6 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears the browser's stored passwords.
    */
   Future removePasswords(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removePasswords', [options, completer.callback]);
     return completer.future;
@@ -170,19 +146,9 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears websites' WebSQL data.
    */
   Future removeWebSQL(RemovalOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeWebSQL', [options, completer.callback]);
     return completer.future;
-  }
-
-  bool get available => _browsingData != null;
-
-  void _checkAvailability() {
-    if (_browsingData == null) {
-      throw new Exception('chrome.browsingData API not available');
-    }
   }
 }
 

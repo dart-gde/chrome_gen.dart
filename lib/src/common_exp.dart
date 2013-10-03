@@ -6,19 +6,6 @@ import 'dart:js';
 /**
  * The abstract superclass of objects that can hold [JsObject] proxies.
  */
-abstract class ChromeApi {
-  /**
-   * Returns whether this particular Chrome API is available. An API might not
-   * be available if it's definied on a newer Chrome version then the runtime
-   * platform, or if the application is missing a permissions entry in its
-   * manifest.json file.
-   */
-  bool get available;
-}
-
-/**
- * The abstract superclass of objects that can hold [JsObject] proxies.
- */
 abstract class ChromeObject implements Serializable<JsObject> {
   final JsObject proxy;
 

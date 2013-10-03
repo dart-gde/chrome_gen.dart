@@ -8,19 +8,19 @@ library chrome.fontSettings;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.fontSettings` namespace.
-final ChromeFontSettings fontSettings = new ChromeFontSettings._();
+final ChromeFontSettings fontSettings = (ChromeFontSettings._fontSettings == null ? null : new ChromeFontSettings._());
 
-class ChromeFontSettings extends ChromeApi {
+class ChromeFontSettings {
   static final JsObject _fontSettings = context['chrome']['fontSettings'];
 
   ChromeFontSettings._();
+
+  bool get available => _fontSettings != null;
 
   /**
    * Clears the font set by this extension, if any.
    */
   Future clearFont(Map details) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('clearFont', [jsify(details), completer.callback]);
     return completer.future;
@@ -30,8 +30,6 @@ class ChromeFontSettings extends ChromeApi {
    * Gets the font for a given script and generic font family.
    */
   Future<Map> getFont(Map details) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _fontSettings.callMethod('getFont', [jsify(details), completer.callback]);
     return completer.future;
@@ -41,8 +39,6 @@ class ChromeFontSettings extends ChromeApi {
    * Sets the font for a given script and generic font family.
    */
   Future setFont(Map details) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('setFont', [jsify(details), completer.callback]);
     return completer.future;
@@ -52,8 +48,6 @@ class ChromeFontSettings extends ChromeApi {
    * Gets a list of fonts on the system.
    */
   Future<List<FontName>> getFontList() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<FontName>>.oneArg((e) => listify(e, _createFontName));
     _fontSettings.callMethod('getFontList', [completer.callback]);
     return completer.future;
@@ -65,8 +59,6 @@ class ChromeFontSettings extends ChromeApi {
    * [details] This parameter is currently unused.
    */
   Future clearDefaultFontSize([Map details]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('clearDefaultFontSize', [jsify(details), completer.callback]);
     return completer.future;
@@ -78,8 +70,6 @@ class ChromeFontSettings extends ChromeApi {
    * [details] This parameter is currently unused.
    */
   Future<Map> getDefaultFontSize([Map details]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _fontSettings.callMethod('getDefaultFontSize', [jsify(details), completer.callback]);
     return completer.future;
@@ -89,8 +79,6 @@ class ChromeFontSettings extends ChromeApi {
    * Sets the default font size.
    */
   Future setDefaultFontSize(Map details) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('setDefaultFontSize', [jsify(details), completer.callback]);
     return completer.future;
@@ -102,8 +90,6 @@ class ChromeFontSettings extends ChromeApi {
    * [details] This parameter is currently unused.
    */
   Future clearDefaultFixedFontSize([Map details]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('clearDefaultFixedFontSize', [jsify(details), completer.callback]);
     return completer.future;
@@ -115,8 +101,6 @@ class ChromeFontSettings extends ChromeApi {
    * [details] This parameter is currently unused.
    */
   Future<Map> getDefaultFixedFontSize([Map details]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _fontSettings.callMethod('getDefaultFixedFontSize', [jsify(details), completer.callback]);
     return completer.future;
@@ -126,8 +110,6 @@ class ChromeFontSettings extends ChromeApi {
    * Sets the default size for fixed width fonts.
    */
   Future setDefaultFixedFontSize(Map details) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('setDefaultFixedFontSize', [jsify(details), completer.callback]);
     return completer.future;
@@ -139,8 +121,6 @@ class ChromeFontSettings extends ChromeApi {
    * [details] This parameter is currently unused.
    */
   Future clearMinimumFontSize([Map details]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('clearMinimumFontSize', [jsify(details), completer.callback]);
     return completer.future;
@@ -152,8 +132,6 @@ class ChromeFontSettings extends ChromeApi {
    * [details] This parameter is currently unused.
    */
   Future<Map> getMinimumFontSize([Map details]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _fontSettings.callMethod('getMinimumFontSize', [jsify(details), completer.callback]);
     return completer.future;
@@ -163,8 +141,6 @@ class ChromeFontSettings extends ChromeApi {
    * Sets the minimum font size.
    */
   Future setMinimumFontSize(Map details) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _fontSettings.callMethod('setMinimumFontSize', [jsify(details), completer.callback]);
     return completer.future;
@@ -201,14 +177,6 @@ class ChromeFontSettings extends ChromeApi {
 
   final ChromeStreamController<Map> _onMinimumFontSizeChanged =
       new ChromeStreamController<Map>.oneArg(_fontSettings['onMinimumFontSizeChanged'], mapify);
-
-  bool get available => _fontSettings != null;
-
-  void _checkAvailability() {
-    if (_fontSettings == null) {
-      throw new Exception('chrome.fontSettings API not available');
-    }
-  }
 }
 
 /**

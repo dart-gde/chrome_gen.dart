@@ -10,12 +10,14 @@ library chrome.bookmarks;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.bookmarks` namespace.
-final ChromeBookmarks bookmarks = new ChromeBookmarks._();
+final ChromeBookmarks bookmarks = (ChromeBookmarks._bookmarks == null ? null : new ChromeBookmarks._());
 
-class ChromeBookmarks extends ChromeApi {
+class ChromeBookmarks {
   static final JsObject _bookmarks = context['chrome']['bookmarks'];
 
   ChromeBookmarks._();
+
+  bool get available => _bookmarks != null;
 
   /**
    * The maximum number of `move`, `update`, `create`, or `remove` operations
@@ -37,8 +39,6 @@ class ChromeBookmarks extends ChromeApi {
    * [idOrIdList] A single string-valued id, or an array of string-valued ids
    */
   Future<List<BookmarkTreeNode>> get(dynamic idOrIdList) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('get', [idOrIdList, completer.callback]);
     return completer.future;
@@ -48,8 +48,6 @@ class ChromeBookmarks extends ChromeApi {
    * Retrieves the children of the specified BookmarkTreeNode id.
    */
   Future<List<BookmarkTreeNode>> getChildren(String id) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('getChildren', [id, completer.callback]);
     return completer.future;
@@ -61,8 +59,6 @@ class ChromeBookmarks extends ChromeApi {
    * [numberOfItems] The maximum number of items to return.
    */
   Future<List<BookmarkTreeNode>> getRecent(int numberOfItems) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('getRecent', [numberOfItems, completer.callback]);
     return completer.future;
@@ -72,8 +68,6 @@ class ChromeBookmarks extends ChromeApi {
    * Retrieves the entire Bookmarks hierarchy.
    */
   Future<List<BookmarkTreeNode>> getTree() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('getTree', [completer.callback]);
     return completer.future;
@@ -85,8 +79,6 @@ class ChromeBookmarks extends ChromeApi {
    * [id] The ID of the root of the subtree to retrieve.
    */
   Future<List<BookmarkTreeNode>> getSubTree(String id) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('getSubTree', [id, completer.callback]);
     return completer.future;
@@ -96,8 +88,6 @@ class ChromeBookmarks extends ChromeApi {
    * Searches for BookmarkTreeNodes matching the given query.
    */
   Future<List<BookmarkTreeNode>> search(String query) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('search', [query, completer.callback]);
     return completer.future;
@@ -108,8 +98,6 @@ class ChromeBookmarks extends ChromeApi {
    * or missing, it will be a folder.
    */
   Future<BookmarkTreeNode> create(Map bookmark) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
     _bookmarks.callMethod('create', [jsify(bookmark), completer.callback]);
     return completer.future;
@@ -119,8 +107,6 @@ class ChromeBookmarks extends ChromeApi {
    * Moves the specified BookmarkTreeNode to the provided location.
    */
   Future<BookmarkTreeNode> move(String id, Map destination) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
     _bookmarks.callMethod('move', [id, jsify(destination), completer.callback]);
     return completer.future;
@@ -132,8 +118,6 @@ class ChromeBookmarks extends ChromeApi {
    * <b>Note:</b> Currently, only 'title' and 'url' are supported.
    */
   Future<BookmarkTreeNode> update(String id, Map changes) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
     _bookmarks.callMethod('update', [id, jsify(changes), completer.callback]);
     return completer.future;
@@ -143,8 +127,6 @@ class ChromeBookmarks extends ChromeApi {
    * Removes a bookmark or an empty bookmark folder.
    */
   Future remove(String id) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('remove', [id, completer.callback]);
     return completer.future;
@@ -154,8 +136,6 @@ class ChromeBookmarks extends ChromeApi {
    * Recursively removes a bookmark folder.
    */
   Future removeTree(String id) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('removeTree', [id, completer.callback]);
     return completer.future;
@@ -165,8 +145,6 @@ class ChromeBookmarks extends ChromeApi {
    * Imports bookmarks from a chrome html bookmark file
    */
   Future import() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('import', [completer.callback]);
     return completer.future;
@@ -176,8 +154,6 @@ class ChromeBookmarks extends ChromeApi {
    * Exports bookmarks to a chrome html bookmark file
    */
   Future export() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('export', [completer.callback]);
     return completer.future;
@@ -244,14 +220,6 @@ class ChromeBookmarks extends ChromeApi {
 
   final ChromeStreamController _onImportEnded =
       new ChromeStreamController.noArgs(_bookmarks['onImportEnded']);
-
-  bool get available => _bookmarks != null;
-
-  void _checkAvailability() {
-    if (_bookmarks == null) {
-      throw new Exception('chrome.bookmarks API not available');
-    }
-  }
 }
 
 /**

@@ -5,12 +5,14 @@ library chrome.notifications;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.notifications` namespace.
-final ChromeNotifications notifications = new ChromeNotifications._();
+final ChromeNotifications notifications = (ChromeNotifications._notifications == null ? null : new ChromeNotifications._());
 
-class ChromeNotifications extends ChromeApi {
+class ChromeNotifications {
   static final JsObject _notifications = context['chrome']['notifications'];
 
   ChromeNotifications._();
+
+  bool get available => _notifications != null;
 
   /**
    * Creates and displays a notification having the contents in
@@ -25,8 +27,6 @@ class ChromeNotifications extends ChromeApi {
    * represents the created notification.
    */
   Future<String> create(String notificationId, NotificationOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<String>.oneArg();
     _notifications.callMethod('create', [notificationId, options, completer.callback]);
     return completer.future;
@@ -39,8 +39,6 @@ class ChromeNotifications extends ChromeApi {
    * [callback] indicates whether a matching notification existed.
    */
   Future<bool> update(String notificationId, NotificationOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<bool>.oneArg();
     _notifications.callMethod('update', [notificationId, options, completer.callback]);
     return completer.future;
@@ -53,8 +51,6 @@ class ChromeNotifications extends ChromeApi {
    * [callback] indicates whether a matching notification existed.
    */
   Future<bool> clear(String notificationId) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<bool>.oneArg();
     _notifications.callMethod('clear', [notificationId, completer.callback]);
     return completer.future;
@@ -65,8 +61,6 @@ class ChromeNotifications extends ChromeApi {
    * system.
    */
   Future<dynamic> getAll() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _notifications.callMethod('getAll', [completer.callback]);
     return completer.future;
@@ -86,14 +80,6 @@ class ChromeNotifications extends ChromeApi {
 
   final ChromeStreamController<OnButtonClickedEvent> _onButtonClicked =
       new ChromeStreamController<OnButtonClickedEvent>.twoArgs(_notifications['onButtonClicked'], _createOnButtonClickedEvent);
-
-  bool get available => _notifications != null;
-
-  void _checkAvailability() {
-    if (_notifications == null) {
-      throw new Exception('chrome.notifications API not available');
-    }
-  }
 }
 
 class OnClosedEvent {

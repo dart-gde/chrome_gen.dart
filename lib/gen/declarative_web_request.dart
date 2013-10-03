@@ -13,12 +13,14 @@ import 'events.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.declarativeWebRequest` namespace.
-final ChromeDeclarativeWebRequest declarativeWebRequest = new ChromeDeclarativeWebRequest._();
+final ChromeDeclarativeWebRequest declarativeWebRequest = (ChromeDeclarativeWebRequest._declarativeWebRequest == null ? null : new ChromeDeclarativeWebRequest._());
 
-class ChromeDeclarativeWebRequest extends ChromeApi {
+class ChromeDeclarativeWebRequest {
   static final JsObject _declarativeWebRequest = context['chrome']['declarativeWebRequest'];
 
   ChromeDeclarativeWebRequest._();
+
+  bool get available => _declarativeWebRequest != null;
 
   Stream get onRequest => _onRequest.stream;
 
@@ -34,14 +36,6 @@ class ChromeDeclarativeWebRequest extends ChromeApi {
 
   final ChromeStreamController<Map> _onMessage =
       new ChromeStreamController<Map>.oneArg(_declarativeWebRequest['onMessage'], mapify);
-
-  bool get available => _declarativeWebRequest != null;
-
-  void _checkAvailability() {
-    if (_declarativeWebRequest == null) {
-      throw new Exception('chrome.declarativeWebRequest API not available');
-    }
-  }
 }
 
 /**

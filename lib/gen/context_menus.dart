@@ -11,12 +11,14 @@ import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.contextMenus` namespace.
-final ChromeContextMenus contextMenus = new ChromeContextMenus._();
+final ChromeContextMenus contextMenus = (ChromeContextMenus._contextMenus == null ? null : new ChromeContextMenus._());
 
-class ChromeContextMenus extends ChromeApi {
+class ChromeContextMenus {
   static final JsObject _contextMenus = context['chrome']['contextMenus'];
 
   ChromeContextMenus._();
+
+  bool get available => _contextMenus != null;
 
   /**
    * Creates a new context menu item. Note that if an error occurs during
@@ -31,8 +33,6 @@ class ChromeContextMenus extends ChromeApi {
    * The ID of the newly created item.
    */
   dynamic create(Map createProperties, [dynamic callback]) {
-    _checkAvailability();
-
     return _contextMenus.callMethod('create', [jsify(createProperties), callback]);
   }
 
@@ -45,8 +45,6 @@ class ChromeContextMenus extends ChromeApi {
    * create function.
    */
   Future update(dynamic id, Map updateProperties) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('update', [id, jsify(updateProperties), completer.callback]);
     return completer.future;
@@ -58,8 +56,6 @@ class ChromeContextMenus extends ChromeApi {
    * [menuItemId] The ID of the context menu item to remove.
    */
   Future remove(dynamic menuItemId) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('remove', [menuItemId, completer.callback]);
     return completer.future;
@@ -69,8 +65,6 @@ class ChromeContextMenus extends ChromeApi {
    * Removes all context menu items added by this extension.
    */
   Future removeAll() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('removeAll', [completer.callback]);
     return completer.future;
@@ -83,14 +77,6 @@ class ChromeContextMenus extends ChromeApi {
 
   final ChromeStreamController<OnClickedEvent> _onClicked =
       new ChromeStreamController<OnClickedEvent>.twoArgs(_contextMenus['onClicked'], _createOnClickedEvent);
-
-  bool get available => _contextMenus != null;
-
-  void _checkAvailability() {
-    if (_contextMenus == null) {
-      throw new Exception('chrome.contextMenus API not available');
-    }
-  }
 }
 
 /**

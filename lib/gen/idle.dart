@@ -8,12 +8,14 @@ library chrome.idle;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.idle` namespace.
-final ChromeIdle idle = new ChromeIdle._();
+final ChromeIdle idle = (ChromeIdle._idle == null ? null : new ChromeIdle._());
 
-class ChromeIdle extends ChromeApi {
+class ChromeIdle {
   static final JsObject _idle = context['chrome']['idle'];
 
   ChromeIdle._();
+
+  bool get available => _idle != null;
 
   /**
    * Returns "locked" if the system is locked, "idle" if the user has not
@@ -28,8 +30,6 @@ class ChromeIdle extends ChromeApi {
    * enum of `active`, `idle`, `locked`
    */
   Future<String> queryState(int detectionIntervalInSeconds) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<String>.oneArg();
     _idle.callMethod('queryState', [detectionIntervalInSeconds, completer.callback]);
     return completer.future;
@@ -43,8 +43,6 @@ class ChromeIdle extends ChromeApi {
    * system is in an idle state.
    */
   void setDetectionInterval(int intervalInSeconds) {
-    _checkAvailability();
-
     _idle.callMethod('setDetectionInterval', [intervalInSeconds]);
   }
 
@@ -59,12 +57,4 @@ class ChromeIdle extends ChromeApi {
 
   final ChromeStreamController<String> _onStateChanged =
       new ChromeStreamController<String>.oneArg(_idle['onStateChanged'], selfConverter);
-
-  bool get available => _idle != null;
-
-  void _checkAvailability() {
-    if (_idle == null) {
-      throw new Exception('chrome.idle API not available');
-    }
-  }
 }

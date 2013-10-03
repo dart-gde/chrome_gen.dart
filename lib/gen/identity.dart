@@ -5,12 +5,14 @@ library chrome.identity;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.identity` namespace.
-final ChromeIdentity identity = new ChromeIdentity._();
+final ChromeIdentity identity = (ChromeIdentity._identity == null ? null : new ChromeIdentity._());
 
-class ChromeIdentity extends ChromeApi {
+class ChromeIdentity {
   static final JsObject _identity = context['chrome']['identity'];
 
   ChromeIdentity._();
+
+  bool get available => _identity != null;
 
   /**
    * Gets an OAuth2 access token using the client ID and scopes specified in the
@@ -25,8 +27,6 @@ class ChromeIdentity extends ChromeApi {
    * manifest, or undefined if there was an error.
    */
   Future<String> getAuthToken([TokenDetails details]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<String>.oneArg();
     _identity.callMethod('getAuthToken', [details, completer.callback]);
     return completer.future;
@@ -42,8 +42,6 @@ class ChromeIdentity extends ChromeApi {
    * [callback] : Called when the token has been removed from the cache.
    */
   Future removeCachedAuthToken(InvalidTokenDetails details) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _identity.callMethod('removeCachedAuthToken', [details, completer.callback]);
     return completer.future;
@@ -61,19 +59,9 @@ class ChromeIdentity extends ChromeApi {
    * [callback] : Called with the URL redirected back to your application.
    */
   Future<String> launchWebAuthFlow(WebAuthFlowDetails details) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<String>.oneArg();
     _identity.callMethod('launchWebAuthFlow', [details, completer.callback]);
     return completer.future;
-  }
-
-  bool get available => _identity != null;
-
-  void _checkAvailability() {
-    if (_identity == null) {
-      throw new Exception('chrome.identity API not available');
-    }
   }
 }
 

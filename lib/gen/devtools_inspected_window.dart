@@ -11,12 +11,14 @@ library chrome.devtools_inspectedWindow;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.devtools.inspectedWindow` namespace.
-final ChromeDevtoolsInspectedWindow devtools_inspectedWindow = new ChromeDevtoolsInspectedWindow._();
+final ChromeDevtoolsInspectedWindow devtools_inspectedWindow = (ChromeDevtoolsInspectedWindow._devtools_inspectedWindow == null ? null : new ChromeDevtoolsInspectedWindow._());
 
-class ChromeDevtoolsInspectedWindow extends ChromeApi {
+class ChromeDevtoolsInspectedWindow {
   static final JsObject _devtools_inspectedWindow = context['chrome']['devtools']['inspectedWindow'];
 
   ChromeDevtoolsInspectedWindow._();
+
+  bool get available => _devtools_inspectedWindow != null;
 
   /**
    * The ID of the tab being inspected. This ID may be used with chrome.tabs.*
@@ -37,8 +39,6 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
    * expression.
    */
   Future<JsObject> eval(String expression) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<JsObject>.oneArg();
     _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
     return completer.future;
@@ -48,8 +48,6 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
    * Reloads the inspected page.
    */
   void reload([Map reloadOptions]) {
-    _checkAvailability();
-
     _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
   }
 
@@ -60,8 +58,6 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
    * The resources within the page.
    */
   Future<List<Resource>> getResources() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<Resource>>.oneArg((e) => listify(e, _createResource));
     _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
     return completer.future;
@@ -83,14 +79,6 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
 
   final ChromeStreamController<OnResourceContentCommittedEvent> _onResourceContentCommitted =
       new ChromeStreamController<OnResourceContentCommittedEvent>.twoArgs(_devtools_inspectedWindow['onResourceContentCommitted'], _createOnResourceContentCommittedEvent);
-
-  bool get available => _devtools_inspectedWindow != null;
-
-  void _checkAvailability() {
-    if (_devtools_inspectedWindow == null) {
-      throw new Exception('chrome.devtools.inspectedWindow API not available');
-    }
-  }
 }
 
 /**

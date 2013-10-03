@@ -9,12 +9,14 @@ library chrome.storage;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.storage` namespace.
-final ChromeStorage storage = new ChromeStorage._();
+final ChromeStorage storage = (ChromeStorage._storage == null ? null : new ChromeStorage._());
 
-class ChromeStorage extends ChromeApi {
+class ChromeStorage {
   static final JsObject _storage = context['chrome']['storage'];
 
   ChromeStorage._();
+
+  bool get available => _storage != null;
 
   /**
    * Items in the `sync` storage area are synced using Chrome Sync.
@@ -33,14 +35,6 @@ class ChromeStorage extends ChromeApi {
 
   final ChromeStreamController<StorageOnChangedEvent> _onChanged =
       new ChromeStreamController<StorageOnChangedEvent>.twoArgs(_storage['onChanged'], _createStorageOnChangedEvent);
-
-  bool get available => _storage != null;
-
-  void _checkAvailability() {
-    if (_storage == null) {
-      throw new Exception('chrome.storage API not available');
-    }
-  }
 }
 
 /**

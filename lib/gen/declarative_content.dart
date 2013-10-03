@@ -10,25 +10,19 @@ import 'events.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.declarativeContent` namespace.
-final ChromeDeclarativeContent declarativeContent = new ChromeDeclarativeContent._();
+final ChromeDeclarativeContent declarativeContent = (ChromeDeclarativeContent._declarativeContent == null ? null : new ChromeDeclarativeContent._());
 
-class ChromeDeclarativeContent extends ChromeApi {
+class ChromeDeclarativeContent {
   static final JsObject _declarativeContent = context['chrome']['declarativeContent'];
 
   ChromeDeclarativeContent._();
+
+  bool get available => _declarativeContent != null;
 
   Stream get onPageChanged => _onPageChanged.stream;
 
   final ChromeStreamController _onPageChanged =
       new ChromeStreamController.noArgs(_declarativeContent['onPageChanged']);
-
-  bool get available => _declarativeContent != null;
-
-  void _checkAvailability() {
-    if (_declarativeContent == null) {
-      throw new Exception('chrome.declarativeContent API not available');
-    }
-  }
 }
 
 /**

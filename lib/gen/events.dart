@@ -8,20 +8,14 @@ library chrome.events;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.events` namespace.
-final ChromeEvents events = new ChromeEvents._();
+final ChromeEvents events = (ChromeEvents._events == null ? null : new ChromeEvents._());
 
-class ChromeEvents extends ChromeApi {
+class ChromeEvents {
   static final JsObject _events = context['chrome']['events'];
 
   ChromeEvents._();
 
   bool get available => _events != null;
-
-  void _checkAvailability() {
-    if (_events == null) {
-      throw new Exception('chrome.events API not available');
-    }
-  }
 }
 
 /**

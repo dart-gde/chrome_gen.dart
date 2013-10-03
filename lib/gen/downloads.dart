@@ -5,12 +5,14 @@ library chrome.downloads;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.downloads` namespace.
-final ChromeDownloads downloads = new ChromeDownloads._();
+final ChromeDownloads downloads = (ChromeDownloads._downloads == null ? null : new ChromeDownloads._());
 
-class ChromeDownloads extends ChromeApi {
+class ChromeDownloads {
   static final JsObject _downloads = context['chrome']['downloads'];
 
   ChromeDownloads._();
+
+  bool get available => _downloads != null;
 
   /**
    * Download a URL. If the URL uses the HTTP[S] protocol, then the request will
@@ -26,8 +28,6 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: Called with the id of the new $ref:DownloadItem.
    */
   Future<int> download(DownloadOptions options) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<int>.oneArg();
     _downloads.callMethod('download', [options, completer.callback]);
     return completer.future;
@@ -41,8 +41,6 @@ class ChromeDownloads extends ChromeApi {
    * `startedAfter` to the `startTime` of the last item from the last page.
    */
   Future<DownloadItem> search(DownloadQuery query) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<DownloadItem>.oneArg(_createDownloadItem);
     _downloads.callMethod('search', [query, completer.callback]);
     return completer.future;
@@ -56,8 +54,6 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: Called when the pause request is completed.
    */
   Future pause(int downloadId) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('pause', [downloadId, completer.callback]);
     return completer.future;
@@ -71,8 +67,6 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: Called when the resume request is completed.
    */
   Future resume(int downloadId) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('resume', [downloadId, completer.callback]);
     return completer.future;
@@ -85,8 +79,6 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: Called when the cancel request is completed.
    */
   Future cancel(int downloadId) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('cancel', [downloadId, completer.callback]);
     return completer.future;
@@ -106,8 +98,6 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: A URL to an image that represents the download.
    */
   Future<String> getFileIcon(int downloadId, [GetFileIconOptions options]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<String>.oneArg();
     _downloads.callMethod('getFileIcon', [downloadId, options, completer.callback]);
     return completer.future;
@@ -122,8 +112,6 @@ class ChromeDownloads extends ChromeApi {
    * [downloadId]: The identifier for the downloaded file.
    */
   void open(int downloadId) {
-    _checkAvailability();
-
     _downloads.callMethod('open', [downloadId]);
   }
 
@@ -132,8 +120,6 @@ class ChromeDownloads extends ChromeApi {
    * [downloadId]: The identifier for the downloaded file.
    */
   void show(int downloadId) {
-    _checkAvailability();
-
     _downloads.callMethod('show', [downloadId]);
   }
 
@@ -141,8 +127,6 @@ class ChromeDownloads extends ChromeApi {
    * Show the default Downloads folder in a file manager.
    */
   void showDefaultFolder() {
-    _checkAvailability();
-
     _downloads.callMethod('showDefaultFolder');
   }
 
@@ -152,8 +136,6 @@ class ChromeDownloads extends ChromeApi {
    * $ref:DownloadItem that matches `query`, then `callback` will be called.
    */
   Future<int> erase(DownloadQuery query) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<int>.oneArg();
     _downloads.callMethod('erase', [query, completer.callback]);
     return completer.future;
@@ -164,8 +146,6 @@ class ChromeDownloads extends ChromeApi {
    * complete; otherwise return an error through $ref:runtime.lastError.
    */
   Future removeFile(int downloadId) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('removeFile', [downloadId, completer.callback]);
     return completer.future;
@@ -183,8 +163,6 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: Called when the danger prompt dialog closes.
    */
   Future acceptDanger(int downloadId) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('acceptDanger', [downloadId, completer.callback]);
     return completer.future;
@@ -195,8 +173,6 @@ class ChromeDownloads extends ChromeApi {
    * javascript `ondragstart` handler.
    */
   void drag(int downloadId) {
-    _checkAvailability();
-
     _downloads.callMethod('drag', [downloadId]);
   }
 
@@ -209,8 +185,6 @@ class ChromeDownloads extends ChromeApi {
    * addition to the `"downloads"` permission.
    */
   void setShelfEnabled(bool enabled) {
-    _checkAvailability();
-
     _downloads.callMethod('setShelfEnabled', [enabled]);
   }
 
@@ -233,14 +207,6 @@ class ChromeDownloads extends ChromeApi {
 
   final ChromeStreamController<OnDeterminingFilenameEvent> _onDeterminingFilename =
       new ChromeStreamController<OnDeterminingFilenameEvent>.twoArgs(_downloads['onDeterminingFilename'], _createOnDeterminingFilenameEvent);
-
-  bool get available => _downloads != null;
-
-  void _checkAvailability() {
-    if (_downloads == null) {
-      throw new Exception('chrome.downloads API not available');
-    }
-  }
 }
 
 class OnDeterminingFilenameEvent {

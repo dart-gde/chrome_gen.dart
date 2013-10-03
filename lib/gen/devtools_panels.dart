@@ -11,12 +11,14 @@ import 'devtools_inspected_window.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.devtools.panels` namespace.
-final ChromeDevtoolsPanels devtools_panels = new ChromeDevtoolsPanels._();
+final ChromeDevtoolsPanels devtools_panels = (ChromeDevtoolsPanels._devtools_panels == null ? null : new ChromeDevtoolsPanels._());
 
-class ChromeDevtoolsPanels extends ChromeApi {
+class ChromeDevtoolsPanels {
   static final JsObject _devtools_panels = context['chrome']['devtools']['panels'];
 
   ChromeDevtoolsPanels._();
+
+  bool get available => _devtools_panels != null;
 
   /**
    * Elements panel.
@@ -38,8 +40,6 @@ class ChromeDevtoolsPanels extends ChromeApi {
    * An ExtensionPanel object representing the created panel.
    */
   Future<ExtensionPanel> create(String title, String iconPath, String pagePath) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<ExtensionPanel>.oneArg(_createExtensionPanel);
     _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
     return completer.future;
@@ -55,19 +55,9 @@ class ChromeDevtoolsPanels extends ChromeApi {
    * clicked.
    */
   Future<Resource> setOpenResourceHandler() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<Resource>.oneArg(_createResource);
     _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
     return completer.future;
-  }
-
-  bool get available => _devtools_panels != null;
-
-  void _checkAvailability() {
-    if (_devtools_panels == null) {
-      throw new Exception('chrome.devtools.panels API not available');
-    }
   }
 }
 

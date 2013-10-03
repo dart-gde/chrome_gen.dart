@@ -8,12 +8,14 @@ library chrome.pageCapture;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.pageCapture` namespace.
-final ChromePageCapture pageCapture = new ChromePageCapture._();
+final ChromePageCapture pageCapture = (ChromePageCapture._pageCapture == null ? null : new ChromePageCapture._());
 
-class ChromePageCapture extends ChromeApi {
+class ChromePageCapture {
   static final JsObject _pageCapture = context['chrome']['pageCapture'];
 
   ChromePageCapture._();
+
+  bool get available => _pageCapture != null;
 
   /**
    * Saves the content of the tab with given id as MHTML.
@@ -22,18 +24,8 @@ class ChromePageCapture extends ChromeApi {
    * The MHTML data as a Blob.
    */
   Future<dynamic> saveAsMHTML(Map details) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _pageCapture.callMethod('saveAsMHTML', [jsify(details), completer.callback]);
     return completer.future;
-  }
-
-  bool get available => _pageCapture != null;
-
-  void _checkAvailability() {
-    if (_pageCapture == null) {
-      throw new Exception('chrome.pageCapture API not available');
-    }
   }
 }

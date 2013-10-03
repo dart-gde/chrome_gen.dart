@@ -11,12 +11,14 @@ import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.sessions` namespace.
-final ChromeSessions sessions = new ChromeSessions._();
+final ChromeSessions sessions = (ChromeSessions._sessions == null ? null : new ChromeSessions._());
 
-class ChromeSessions extends ChromeApi {
+class ChromeSessions {
   static final JsObject _sessions = context['chrome']['sessions'];
 
   ChromeSessions._();
+
+  bool get available => _sessions != null;
 
   /**
    * The maximum number of [Session] that will be included in a requested list.
@@ -32,8 +34,6 @@ class ChromeSessions extends ChromeApi {
    * either tabs or windows.
    */
   Future<List<Session>> getRecentlyClosed([Filter filter]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<Session>>.oneArg((e) => listify(e, _createSession));
     _sessions.callMethod('getRecentlyClosed', [filter, completer.callback]);
     return completer.future;
@@ -49,8 +49,6 @@ class ChromeSessions extends ChromeApi {
    * [windows.Window] of the [Session] objects.
    */
   Future<List<Device>> getDevices([Filter filter]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<Device>>.oneArg((e) => listify(e, _createDevice));
     _sessions.callMethod('getDevices', [filter, completer.callback]);
     return completer.future;
@@ -67,19 +65,9 @@ class ChromeSessions extends ChromeApi {
    * A [Session] containing the restored [windows.Window] or [tabs.Tab] object.
    */
   Future<Session> restore([String sessionId]) {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<Session>.oneArg(_createSession);
     _sessions.callMethod('restore', [sessionId, completer.callback]);
     return completer.future;
-  }
-
-  bool get available => _sessions != null;
-
-  void _checkAvailability() {
-    if (_sessions == null) {
-      throw new Exception('chrome.sessions API not available');
-    }
   }
 }
 

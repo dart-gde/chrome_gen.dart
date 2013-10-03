@@ -10,20 +10,20 @@ library chrome.commands;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.commands` namespace.
-final ChromeCommands commands = new ChromeCommands._();
+final ChromeCommands commands = (ChromeCommands._commands == null ? null : new ChromeCommands._());
 
-class ChromeCommands extends ChromeApi {
+class ChromeCommands {
   static final JsObject _commands = context['chrome']['commands'];
 
   ChromeCommands._();
+
+  bool get available => _commands != null;
 
   /**
    * Returns all the registered extension commands for this extension and their
    * shortcut (if active).
    */
   Future<List<Command>> getAll() {
-    _checkAvailability();
-
     var completer = new ChromeCompleter<List<Command>>.oneArg((e) => listify(e, _createCommand));
     _commands.callMethod('getAll', [completer.callback]);
     return completer.future;
@@ -36,14 +36,6 @@ class ChromeCommands extends ChromeApi {
 
   final ChromeStreamController<String> _onCommand =
       new ChromeStreamController<String>.oneArg(_commands['onCommand'], selfConverter);
-
-  bool get available => _commands != null;
-
-  void _checkAvailability() {
-    if (_commands == null) {
-      throw new Exception('chrome.commands API not available');
-    }
-  }
 }
 
 class Command extends ChromeObject {
