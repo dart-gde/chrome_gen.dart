@@ -169,7 +169,7 @@ class XLanguageParsers {
 
   Parser<String> symbol(String symb) => lexeme(string(symb));
 
-  Parser lexeme(Parser p) => p < whiteSpace;
+  Parser lexeme(Parser p) => p < spaces;
 
   Parser get _start => string(_commentStart);
   Parser get _end => string(_commentEnd);
@@ -190,12 +190,6 @@ class XLanguageParsers {
   StringBuffer commendLineBuffer = new StringBuffer();
   _recordOneCommentLine(c) {
     commendLineBuffer.write(c);
-
-    if (c == '\n') {
-      print("${commendLineBuffer.toString()}");
-      print("RESETTING COMMAINDLINEBUFFER");
-      commendLineBuffer.clear();
-    }
     return c != '\n';
   }
   Parser get _oneLineComment =>
@@ -299,7 +293,7 @@ class WebIdlParser extends XLanguageParsers {
 
   stmts() => stmt();
 
-  stmt() => namespace() | rec(definitions);
+  stmt() => (whiteSpace.maybe + namespace()).list | rec(definitions);
 
   // Custom Google WebIDL grammar
   namespace() => (rec(extendedAttributeList)
@@ -311,20 +305,20 @@ class WebIdlParser extends XLanguageParsers {
   // Custom Google WebIDL grammar
   namespaceIdentifier() => identifier.sepBy(dot) | identifier;
 
-  definitions() => (rec(extendedAttributeList)
+  definitions() => (whiteSpace.maybe + rec(extendedAttributeList)
                     + rec(definition)
                     + rec(definitions)).list
                     | spaces;
 
-  definition() => rec(callbackOrInterface)
-                  | rec(partial)
-                  | rec(dictionary)
-                  | rec(exception)
-                  | rec(enumStmt)
-                  | rec(typedefStmt)
-                  | rec(implementsStatement);
+  definition() => (whiteSpace.maybe + rec(callbackOrInterface)).list
+                  | (whiteSpace.maybe + rec(partial)).list
+                  | (whiteSpace.maybe + rec(dictionary)).list
+                  | (whiteSpace.maybe + rec(exception)).list
+                  | (whiteSpace.maybe + rec(enumStmt)).list
+                  | (whiteSpace.maybe + rec(typedefStmt)).list
+                  | (whiteSpace.maybe + rec(implementsStatement)).list;
 
-  callbackOrInterface() => (reserved["callback"]
+  callbackOrInterface() => (whiteSpace.maybe + reserved["callback"]
                            + rec(callbackRestOrInterface)).list
                            | rec(interfaceStmt);
 
@@ -340,12 +334,12 @@ class WebIdlParser extends XLanguageParsers {
 
   partialDefinition() => rec(partialInterface) | rec(partialDictionary);
 
-  partialInterface() => (reserved["interface"]
+  partialInterface() => (whiteSpace.maybe + reserved["interface"]
                         + identifier
                         + braces(rec(interfaceMembers))
                         + semi).list;
 
-  interfaceMembers() => (rec(extendedAttributeList)
+  interfaceMembers() => (whiteSpace.maybe + rec(extendedAttributeList)
                         + rec(interfaceMember)
                         + rec(interfaceMembers)).list
                         | spaces;
@@ -360,7 +354,7 @@ class WebIdlParser extends XLanguageParsers {
                   + braces(rec(dictionaryMembers))
                   + semi).list ^ (l) => collector.dictionary(l);
 
-  dictionaryMembers() => (rec(extendedAttributeList)
+  dictionaryMembers() => (whiteSpace.maybe + rec(extendedAttributeList)
                           + rec(dictionaryMember)
                           + rec(dictionaryMembers)).list
                           | spaces;
@@ -373,7 +367,7 @@ class WebIdlParser extends XLanguageParsers {
                         | rec(operation)
                         ^ (l) { return collector.dictionaryMethod(l, commendLineBuffer); };
 
-  partialDictionary() => (reserved["dictionary"]
+  partialDictionary() => (whiteSpace.maybe + reserved["dictionary"]
                          + identifier
                          + braces(rec(dictionaryMembers))
                          + semi).list;
@@ -412,9 +406,9 @@ class WebIdlParser extends XLanguageParsers {
   enumValues() => (symbol(",") + stringLiteral + rec(enumValues)).list | spaces;
 
   // chrome idl does not follow the WebIDL spec, enums should be string literal.
-  enumIdentifierList() => (identifier + rec(enumIdentifiers)).list;
+  enumIdentifierList() => (whiteSpace.maybe + identifier + whiteSpace.maybe +  rec(enumIdentifiers)).list;
 
-  enumIdentifiers() => (symbol(",") + identifier + rec(enumIdentifiers)).list | spaces;
+  enumIdentifiers() => (whiteSpace.maybe + symbol(",") + whiteSpace.maybe + identifier + rec(enumIdentifiers)).list | spaces;
 
   callbackRest() => (identifier
                     + symbol('=')

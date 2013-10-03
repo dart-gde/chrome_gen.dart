@@ -31,7 +31,6 @@ class IDLCollectorChrome implements IDLCollector {
   List _dictionaryMethods = [];
 
   namespace(l, sb) {
-    print("namespace comment: ${sb.toString()}");
     idlNamespace.name = l[2].join('.');
     sb.clear();
 
@@ -85,7 +84,6 @@ class IDLCollectorChrome implements IDLCollector {
   }
 
   interfaceMember(l, sb) {
-    print("interfaceMember comment ${sb.toString()}");
     IDLFunction function = _functionParser(l, sb.toString());
     sb.clear();
     _functions.add(function);
@@ -110,7 +108,6 @@ class IDLCollectorChrome implements IDLCollector {
   }
 
   dictionaryMember(l, sb) {
-    print("dictionaryMember comment ${sb.toString()}");
     String name = l[1];
     IDLProperty member = new IDLProperty(name);
     sb.clear();
@@ -127,7 +124,6 @@ class IDLCollectorChrome implements IDLCollector {
   }
 
   dictionaryMethod(l, sb) {
-    print("dictionaryMethod comment ${sb.toString()}");
     IDLFunction function = _functionParser(l, sb.toString());
     sb.clear();
     _dictionaryMethods.add(function);
@@ -141,7 +137,6 @@ class IDLCollectorChrome implements IDLCollector {
     //    print("enumStatement:");
     //    print(l);
 
-    print("dictionaryMethod comment ${sb.toString()}");
     String enumName = l[1];
     var arg = l[2];
     IDLEnum idlEnum = new IDLEnum(enumName);
@@ -154,16 +149,32 @@ class IDLCollectorChrome implements IDLCollector {
       // Continue until EMPTY is hit
       if (a == EMPTY) return;
 
-      if (a.length == 3) {
+      if (a.length == 4) {
         // recursive
-        value = a[1];
+        value = a[2];
         // Create value type and add to list of IDLEnum
         //idlEnum.enumValues.add(value);
         IDLProperty idlValue = new IDLProperty(value);
         idlEnum.members.add(idlValue);
 
-        if (a[2] != EMPTY) {
-          valueParser(a[2]);
+        if (a[3] != EMPTY) {
+          valueParser(a[3]);
+          return;
+        } else {
+          return;
+        }
+      }
+
+      if (a.length == 5) {
+        // recursive
+        value = a[3];
+        // Create value type and add to list of IDLEnum
+        //idlEnum.enumValues.add(value);
+        IDLProperty idlValue = new IDLProperty(value);
+        idlEnum.members.add(idlValue);
+
+        if (a[4] != EMPTY) {
+          valueParser(a[4]);
           return;
         } else {
           return;
@@ -172,18 +183,23 @@ class IDLCollectorChrome implements IDLCollector {
 
       // TODO: do we hit this type of condition or should we
       // just ignore and/or throw error.
-      if (a.length == 2){
-        value = a[1];
+      if (a.length == 3){
+        value = a[2];
         IDLProperty idlValue = new IDLProperty(value);
       }
     };
 
     if (arg != EMPTY) {
       // Parse the first enum value
-      var value = arg[0];
+      var value = arg[1];
       IDLProperty idlValue = new IDLProperty(value);
       idlEnum.members.add(idlValue);
-      valueParser(arg[1]);
+
+      if (arg[3] is List) {
+        valueParser(arg[3]);
+      } else {
+        valueParser(arg[2]);
+      }
     }
 
     idlNamespace.enumTypes.add(idlEnum);
@@ -260,7 +276,6 @@ class IDLCollectorChrome implements IDLCollector {
   }
 
   callback(l, sb) {
-    print("dictionaryMethod comment ${sb.toString()}");
     IDLFunction function = new IDLFunction(l[0], sb.toString());
     sb.clear();
     var arg = l[3];
