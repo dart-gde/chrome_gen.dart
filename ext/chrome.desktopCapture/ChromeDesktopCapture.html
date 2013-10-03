@@ -38,6 +38,25 @@ class ChromeDesktopCapture {
 
  ChromeDesktopCapture._();
 
+ /**
+  * Shows desktop media picker UI with the specified set of sources.
+  * 
+  *  |sources|: Set of sources that should be shown to the user.
+  * 
+  *  |origin|: Optional origin of the page for which the stream is created. If
+  *  not specified then the resulting stream can be used only the calling
+  *  extension, otherwise the stream can be used only by a page with the
+  *  specified origin.
+  * 
+  * 
+  * 
+  * Returns:
+  *  |streamId|: An opaque string that can be passed to
+  *  &lt;code&gt;getUserMedia()&lt;/code&gt; API to generate media stream that corresponds
+  *  to the source selected by the user. If user didn't select any source
+  *  (i.e. canceled the prompt) then the callback is called with an empty
+  *  &lt;code&gt;streamId&lt;/code&gt;.
+  */
  Future&lt;String&gt; chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _desktopCapture.callMethod('chooseDesktopMedia', [sources, origin, completer.callback]);
@@ -53,6 +72,18 @@ class ChromeDesktopCapture {
 Future&lt;String&gt; <strong>chooseDesktopMedia</strong>(<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a> sources, [String origin]) <a class="anchor-link" href="#chooseDesktopMedia"
               title="Permalink to ChromeDesktopCapture.chooseDesktopMedia">#</a></h4>
 <div class="doc">
+<p>Shows desktop media picker UI with the specified set of sources.</p>
+<p> |sources|: Set of sources that should be shown to the user.</p>
+<p> |origin|: Optional origin of the page for which the stream is created. If
+ not specified then the resulting stream can be used only the calling
+ extension, otherwise the stream can be used only by a page with the
+ specified origin.</p>
+<p>Returns:
+ |streamId|: An opaque string that can be passed to
+ &lt;code>getUserMedia()&lt;/code> API to generate media stream that corresponds
+ to the source selected by the user. If user didn't select any source
+ (i.e. canceled the prompt) then the callback is called with an empty
+ &lt;code>streamId&lt;/code>.</p>
 <pre class="source">
 Future&lt;String&gt; chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();

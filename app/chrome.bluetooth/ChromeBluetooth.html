@@ -38,84 +38,181 @@ class ChromeBluetooth {
 
  ChromeBluetooth._();
 
+ /**
+  * These functions all report failures via chrome.runtime.lastError.
+  *  Registers the JavaScript application as an implementation for the given
+  *  Profile; if a channel or PSM is specified, the profile will be exported
+  *  in the host's SDP and GATT tables and advertised to other devices.
+  */
  Future addProfile(Profile profile) {
    var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('addProfile', [profile, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Unregisters the JavaScript application as an implementation for the given
+  *  Profile; only the uuid field of the Profile object is used.
+  */
  Future removeProfile(Profile profile) {
    var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('removeProfile', [profile, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Get information about the Bluetooth adapter.
+  *  |callback| : Called with an AdapterState object describing the adapter
+  *               state.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;AdapterState&gt; getAdapterState() {
    var completer = new ChromeCompleter&lt;AdapterState&gt;.oneArg(_createAdapterState);
    _bluetooth.callMethod('getAdapterState', [completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Get a bluetooth devices known to the system.  Known devices are either
+  *  currently paired, or have been paired in the past.
+  *  |options|  : Controls which devices are returned and provides
+  *               |deviceCallback|, which is called for each matching device.
+  *  |callback| : Called when the search is completed.
+  *               |options.deviceCallback| will not be called after
+  *               |callback| has been called.
+  */
  Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
    var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('getBluetoothDevices', [options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Returns the set of exported profiles for the device specified in options.
+  *  This function will not initiate a connection to the remote device.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;Profile&gt; getProfiles(GetProfilesOptions options) {
    var completer = new ChromeCompleter&lt;Profile&gt;.oneArg(_createProfile);
    _bluetooth.callMethod('getProfiles', [options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Get a list of services provided by a device.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;ServiceRecord&gt; getServices(GetServicesOptions options) {
    var completer = new ChromeCompleter&lt;ServiceRecord&gt;.oneArg(_createServiceRecord);
    _bluetooth.callMethod('getServices', [options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Connect to a service on a device.
+  *  |options|  : The options for the connection.
+  *  |callback| : Called to indicate success or failure.
+  */
  Future connect(ConnectOptions options) {
    var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('connect', [options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Close a Bluetooth connection.
+  *  |options|  : The options for this function.
+  *  |callback| : Called to indicate success or failure.
+  */
  Future disconnect(DisconnectOptions options) {
    var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('disconnect', [options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Read data from a Bluetooth connection.
+  *  |options|  : The options for this function.
+  *  |callback| : Called with the data when it is available.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;ArrayBuffer&gt; read(ReadOptions options) {
    var completer = new ChromeCompleter&lt;ArrayBuffer&gt;.oneArg(_createArrayBuffer);
    _bluetooth.callMethod('read', [options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Write data to a Bluetooth connection.
+  *  |options|  : The options for this function.
+  *  |callback| : Called with the number of bytes written.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;int&gt; write(WriteOptions options) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
    _bluetooth.callMethod('write', [options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Get the local Out of Band Pairing data.
+  *  |callback| : Called with the data.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;OutOfBandPairingData&gt; getLocalOutOfBandPairingData() {
    var completer = new ChromeCompleter&lt;OutOfBandPairingData&gt;.oneArg(_createOutOfBandPairingData);
    _bluetooth.callMethod('getLocalOutOfBandPairingData', [completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Set the Out of Band Pairing data for a remote device.
+  *  Any previous Out Of Band Pairing Data for this device is overwritten.
+  *  |options|  : The options for this function.
+  *  |callback| : Called to indicate success or failure.
+  */
  Future setOutOfBandPairingData(SetOutOfBandPairingDataOptions options) {
    var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('setOutOfBandPairingData', [options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Start discovery. Discovered devices will be returned via the
+  *  |onBluetoothDeviceDiscovered| callback.  Discovery will fail to start if it is
+  *  already in progress.  Discovery can be resource intensive: stopDiscovery
+  *  should be called as soon as possible.
+  *  |options|  : The options for this function.
+  *  |callback| : Called to indicate success or failure.
+  */
  Future startDiscovery(StartDiscoveryOptions options) {
    var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('startDiscovery', [options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Stop discovery.
+  *  |callback| : Called to indicate success or failure.
+  */
  Future stopDiscovery() {
    var completer = new ChromeCompleter.noArgs();
    _bluetooth.callMethod('stopDiscovery', [completer.callback]);
@@ -168,6 +265,10 @@ Stream&lt;Socket&gt; get onConnection =&gt; _onConnection.stream;
 Future <strong>addProfile</strong>(<a href="../chrome.bluetooth/Profile.html">Profile</a> profile) <a class="anchor-link" href="#addProfile"
               title="Permalink to ChromeBluetooth.addProfile">#</a></h4>
 <div class="doc">
+<p>These functions all report failures via chrome.runtime.lastError.
+ Registers the JavaScript application as an implementation for the given
+ Profile; if a channel or PSM is specified, the profile will be exported
+ in the host's SDP and GATT tables and advertised to other devices.</p>
 <pre class="source">
 Future addProfile(Profile profile) {
  var completer = new ChromeCompleter.noArgs();
@@ -182,6 +283,9 @@ Future addProfile(Profile profile) {
 Future <strong>connect</strong>(<a href="../chrome.bluetooth/ConnectOptions.html">ConnectOptions</a> options) <a class="anchor-link" href="#connect"
               title="Permalink to ChromeBluetooth.connect">#</a></h4>
 <div class="doc">
+<p>Connect to a service on a device.
+ |options|  : The options for the connection.
+ |callback| : Called to indicate success or failure.</p>
 <pre class="source">
 Future connect(ConnectOptions options) {
  var completer = new ChromeCompleter.noArgs();
@@ -196,6 +300,9 @@ Future connect(ConnectOptions options) {
 Future <strong>disconnect</strong>(<a href="../chrome.bluetooth/DisconnectOptions.html">DisconnectOptions</a> options) <a class="anchor-link" href="#disconnect"
               title="Permalink to ChromeBluetooth.disconnect">#</a></h4>
 <div class="doc">
+<p>Close a Bluetooth connection.
+ |options|  : The options for this function.
+ |callback| : Called to indicate success or failure.</p>
 <pre class="source">
 Future disconnect(DisconnectOptions options) {
  var completer = new ChromeCompleter.noArgs();
@@ -210,6 +317,11 @@ Future disconnect(DisconnectOptions options) {
 Future&lt;<a href="../chrome.bluetooth/AdapterState.html">AdapterState</a>&gt; <strong>getAdapterState</strong>() <a class="anchor-link" href="#getAdapterState"
               title="Permalink to ChromeBluetooth.getAdapterState">#</a></h4>
 <div class="doc">
+<p>Get information about the Bluetooth adapter.
+ |callback| : Called with an AdapterState object describing the adapter</p>
+<pre><code>          state.
+</code></pre>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;AdapterState&gt; getAdapterState() {
  var completer = new ChromeCompleter&lt;AdapterState&gt;.oneArg(_createAdapterState);
@@ -224,6 +336,15 @@ Future&lt;AdapterState&gt; getAdapterState() {
 Future <strong>getBluetoothDevices</strong>(<a href="../chrome.bluetooth/GetBluetoothDevicesOptions.html">GetBluetoothDevicesOptions</a> options) <a class="anchor-link" href="#getBluetoothDevices"
               title="Permalink to ChromeBluetooth.getBluetoothDevices">#</a></h4>
 <div class="doc">
+<p>Get a bluetooth devices known to the system.  Known devices are either
+ currently paired, or have been paired in the past.
+ |options|  : Controls which devices are returned and provides</p>
+<pre><code>          |deviceCallback|, which is called for each matching device.
+</code></pre>
+<p> |callback| : Called when the search is completed.</p>
+<pre><code>          |options.deviceCallback| will not be called after
+          |callback| has been called.
+</code></pre>
 <pre class="source">
 Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
  var completer = new ChromeCompleter.noArgs();
@@ -238,6 +359,9 @@ Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
 Future&lt;<a href="../chrome.bluetooth/OutOfBandPairingData.html">OutOfBandPairingData</a>&gt; <strong>getLocalOutOfBandPairingData</strong>() <a class="anchor-link" href="#getLocalOutOfBandPairingData"
               title="Permalink to ChromeBluetooth.getLocalOutOfBandPairingData">#</a></h4>
 <div class="doc">
+<p>Get the local Out of Band Pairing data.
+ |callback| : Called with the data.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;OutOfBandPairingData&gt; getLocalOutOfBandPairingData() {
  var completer = new ChromeCompleter&lt;OutOfBandPairingData&gt;.oneArg(_createOutOfBandPairingData);
@@ -252,6 +376,9 @@ Future&lt;OutOfBandPairingData&gt; getLocalOutOfBandPairingData() {
 Future&lt;<a href="../chrome.bluetooth/Profile.html">Profile</a>&gt; <strong>getProfiles</strong>(<a href="../chrome.bluetooth/GetProfilesOptions.html">GetProfilesOptions</a> options) <a class="anchor-link" href="#getProfiles"
               title="Permalink to ChromeBluetooth.getProfiles">#</a></h4>
 <div class="doc">
+<p>Returns the set of exported profiles for the device specified in options.
+ This function will not initiate a connection to the remote device.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;Profile&gt; getProfiles(GetProfilesOptions options) {
  var completer = new ChromeCompleter&lt;Profile&gt;.oneArg(_createProfile);
@@ -266,6 +393,8 @@ Future&lt;Profile&gt; getProfiles(GetProfilesOptions options) {
 Future&lt;<a href="../chrome.bluetooth/ServiceRecord.html">ServiceRecord</a>&gt; <strong>getServices</strong>(<a href="../chrome.bluetooth/GetServicesOptions.html">GetServicesOptions</a> options) <a class="anchor-link" href="#getServices"
               title="Permalink to ChromeBluetooth.getServices">#</a></h4>
 <div class="doc">
+<p>Get a list of services provided by a device.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;ServiceRecord&gt; getServices(GetServicesOptions options) {
  var completer = new ChromeCompleter&lt;ServiceRecord&gt;.oneArg(_createServiceRecord);
@@ -280,6 +409,10 @@ Future&lt;ServiceRecord&gt; getServices(GetServicesOptions options) {
 Future&lt;<a href="../chrome.src.common_exp/ArrayBuffer.html">ArrayBuffer</a>&gt; <strong>read</strong>(<a href="../chrome.bluetooth/ReadOptions.html">ReadOptions</a> options) <a class="anchor-link" href="#read"
               title="Permalink to ChromeBluetooth.read">#</a></h4>
 <div class="doc">
+<p>Read data from a Bluetooth connection.
+ |options|  : The options for this function.
+ |callback| : Called with the data when it is available.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;ArrayBuffer&gt; read(ReadOptions options) {
  var completer = new ChromeCompleter&lt;ArrayBuffer&gt;.oneArg(_createArrayBuffer);
@@ -294,6 +427,8 @@ Future&lt;ArrayBuffer&gt; read(ReadOptions options) {
 Future <strong>removeProfile</strong>(<a href="../chrome.bluetooth/Profile.html">Profile</a> profile) <a class="anchor-link" href="#removeProfile"
               title="Permalink to ChromeBluetooth.removeProfile">#</a></h4>
 <div class="doc">
+<p>Unregisters the JavaScript application as an implementation for the given
+ Profile; only the uuid field of the Profile object is used.</p>
 <pre class="source">
 Future removeProfile(Profile profile) {
  var completer = new ChromeCompleter.noArgs();
@@ -308,6 +443,10 @@ Future removeProfile(Profile profile) {
 Future <strong>setOutOfBandPairingData</strong>(<a href="../chrome.bluetooth/SetOutOfBandPairingDataOptions.html">SetOutOfBandPairingDataOptions</a> options) <a class="anchor-link" href="#setOutOfBandPairingData"
               title="Permalink to ChromeBluetooth.setOutOfBandPairingData">#</a></h4>
 <div class="doc">
+<p>Set the Out of Band Pairing data for a remote device.
+ Any previous Out Of Band Pairing Data for this device is overwritten.
+ |options|  : The options for this function.
+ |callback| : Called to indicate success or failure.</p>
 <pre class="source">
 Future setOutOfBandPairingData(SetOutOfBandPairingDataOptions options) {
  var completer = new ChromeCompleter.noArgs();
@@ -322,6 +461,12 @@ Future setOutOfBandPairingData(SetOutOfBandPairingDataOptions options) {
 Future <strong>startDiscovery</strong>(<a href="../chrome.bluetooth/StartDiscoveryOptions.html">StartDiscoveryOptions</a> options) <a class="anchor-link" href="#startDiscovery"
               title="Permalink to ChromeBluetooth.startDiscovery">#</a></h4>
 <div class="doc">
+<p>Start discovery. Discovered devices will be returned via the
+ |onBluetoothDeviceDiscovered| callback.  Discovery will fail to start if it is
+ already in progress.  Discovery can be resource intensive: stopDiscovery
+ should be called as soon as possible.
+ |options|  : The options for this function.
+ |callback| : Called to indicate success or failure.</p>
 <pre class="source">
 Future startDiscovery(StartDiscoveryOptions options) {
  var completer = new ChromeCompleter.noArgs();
@@ -336,6 +481,8 @@ Future startDiscovery(StartDiscoveryOptions options) {
 Future <strong>stopDiscovery</strong>() <a class="anchor-link" href="#stopDiscovery"
               title="Permalink to ChromeBluetooth.stopDiscovery">#</a></h4>
 <div class="doc">
+<p>Stop discovery.
+ |callback| : Called to indicate success or failure.</p>
 <pre class="source">
 Future stopDiscovery() {
  var completer = new ChromeCompleter.noArgs();
@@ -350,6 +497,10 @@ Future stopDiscovery() {
 Future&lt;int&gt; <strong>write</strong>(<a href="../chrome.bluetooth/WriteOptions.html">WriteOptions</a> options) <a class="anchor-link" href="#write"
               title="Permalink to ChromeBluetooth.write">#</a></h4>
 <div class="doc">
+<p>Write data to a Bluetooth connection.
+ |options|  : The options for this function.
+ |callback| : Called with the number of bytes written.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;int&gt; write(WriteOptions options) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();

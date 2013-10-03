@@ -32,6 +32,16 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<p>Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style license that can be
+ found in the LICENSE file.
+Use the &lt;code>chrome.mediaGalleries&lt;/code> API to access media files
+(images,
+ video, audio) from the user's local disks (with the user's consent).
+ Do not act interactively.
+ Ask the user to manage permitted media galleries.
+ Ask the user to manage permitted galleries only if the return set would
+ otherwise be empty.</p>
 <pre class="source">
 class GetMediaFileSystemsInteractivity extends ChromeEnum {
  static const GetMediaFileSystemsInteractivity NO = const GetMediaFileSystemsInteractivity._('no');

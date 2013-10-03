@@ -44,74 +44,130 @@ class AppWindow extends ChromeObject {
  dynamic get contentWindow =&gt; proxy['contentWindow'];
  set contentWindow(var value) =&gt; proxy['contentWindow'] = value;
 
+ /**
+  * Focus the window.
+  */
  void focus() {
    proxy.callMethod('focus');
  }
 
+ /**
+  * Fullscreens the window.
+  */
  void fullscreen() {
    proxy.callMethod('fullscreen');
  }
 
+ /**
+  * Is the window fullscreen?
+  */
  bool isFullscreen() {
    return proxy.callMethod('isFullscreen');
  }
 
+ /**
+  * Minimize the window.
+  */
  void minimize() {
    proxy.callMethod('minimize');
  }
 
+ /**
+  * Is the window minimized?
+  */
  bool isMinimized() {
    return proxy.callMethod('isMinimized');
  }
 
+ /**
+  * Maximize the window.
+  */
  void maximize() {
    proxy.callMethod('maximize');
  }
 
+ /**
+  * Is the window maximized?
+  */
  bool isMaximized() {
    return proxy.callMethod('isMaximized');
  }
 
+ /**
+  * Restore the window, exiting a maximized, minimized, or fullscreen state.
+  */
  void restore() {
    proxy.callMethod('restore');
  }
 
+ /**
+  * Move the window to the position (|left|, |top|).
+  */
  void moveTo(int left, int top) {
    proxy.callMethod('moveTo', [left, top]);
  }
 
+ /**
+  * Resize the window to |width|x|height| pixels in size.
+  */
  void resizeTo(int width, int height) {
    proxy.callMethod('resizeTo', [width, height]);
  }
 
+ /**
+  * Draw attention to the window.
+  */
  void drawAttention() {
    proxy.callMethod('drawAttention');
  }
 
+ /**
+  * Clear attention to the window.
+  */
  void clearAttention() {
    proxy.callMethod('clearAttention');
  }
 
+ /**
+  * Close the window.
+  */
  void close() {
    proxy.callMethod('close');
  }
 
+ /**
+  * Show the window. Does nothing if the window is already visible.
+  */
  void show() {
    proxy.callMethod('show');
  }
 
+ /**
+  * Hide the window. Does nothing if the window is already hidden.
+  */
  void hide() {
    proxy.callMethod('hide');
  }
 
+ /**
+  * Get the window's bounds as a $ref:Bounds object.
+  */
  Bounds getBounds() {
    return _createBounds(proxy.callMethod('getBounds'));
  }
 
+ /**
+  * Set the window's bounds.
+  */
  void setBounds(Bounds bounds) {
    proxy.callMethod('setBounds', [bounds]);
  }
 
+ /**
+  * Set the app icon for the window (experimental).
+  *  Currently this is only being implemented on Ash.
+  *  TODO(stevenjb): Investigate implementing this on Windows and OSX.
+  */
  void setIcon(String icon_url) {
    proxy.callMethod('setIcon', [icon_url]);
  }
@@ -191,6 +247,7 @@ final JsObject proxy
 void <strong>clearAttention</strong>() <a class="anchor-link" href="#clearAttention"
               title="Permalink to AppWindow.clearAttention">#</a></h4>
 <div class="doc">
+<p>Clear attention to the window.</p>
 <pre class="source">
 void clearAttention() {
  proxy.callMethod('clearAttention');
@@ -203,6 +260,7 @@ void clearAttention() {
 void <strong>close</strong>() <a class="anchor-link" href="#close"
               title="Permalink to AppWindow.close">#</a></h4>
 <div class="doc">
+<p>Close the window.</p>
 <pre class="source">
 void close() {
  proxy.callMethod('close');
@@ -215,6 +273,7 @@ void close() {
 void <strong>drawAttention</strong>() <a class="anchor-link" href="#drawAttention"
               title="Permalink to AppWindow.drawAttention">#</a></h4>
 <div class="doc">
+<p>Draw attention to the window.</p>
 <pre class="source">
 void drawAttention() {
  proxy.callMethod('drawAttention');
@@ -227,6 +286,7 @@ void drawAttention() {
 void <strong>focus</strong>() <a class="anchor-link" href="#focus"
               title="Permalink to AppWindow.focus">#</a></h4>
 <div class="doc">
+<p>Focus the window.</p>
 <pre class="source">
 void focus() {
  proxy.callMethod('focus');
@@ -239,6 +299,7 @@ void focus() {
 void <strong>fullscreen</strong>() <a class="anchor-link" href="#fullscreen"
               title="Permalink to AppWindow.fullscreen">#</a></h4>
 <div class="doc">
+<p>Fullscreens the window.</p>
 <pre class="source">
 void fullscreen() {
  proxy.callMethod('fullscreen');
@@ -251,6 +312,7 @@ void fullscreen() {
 <a href="../chrome.src.common_exp/Bounds.html">Bounds</a> <strong>getBounds</strong>() <a class="anchor-link" href="#getBounds"
               title="Permalink to AppWindow.getBounds">#</a></h4>
 <div class="doc">
+<p>Get the window's bounds as a $ref:Bounds object.</p>
 <pre class="source">
 Bounds getBounds() {
  return _createBounds(proxy.callMethod('getBounds'));
@@ -263,6 +325,7 @@ Bounds getBounds() {
 void <strong>hide</strong>() <a class="anchor-link" href="#hide"
               title="Permalink to AppWindow.hide">#</a></h4>
 <div class="doc">
+<p>Hide the window. Does nothing if the window is already hidden.</p>
 <pre class="source">
 void hide() {
  proxy.callMethod('hide');
@@ -275,6 +338,7 @@ void hide() {
 bool <strong>isFullscreen</strong>() <a class="anchor-link" href="#isFullscreen"
               title="Permalink to AppWindow.isFullscreen">#</a></h4>
 <div class="doc">
+<p>Is the window fullscreen?</p>
 <pre class="source">
 bool isFullscreen() {
  return proxy.callMethod('isFullscreen');
@@ -287,6 +351,7 @@ bool isFullscreen() {
 bool <strong>isMaximized</strong>() <a class="anchor-link" href="#isMaximized"
               title="Permalink to AppWindow.isMaximized">#</a></h4>
 <div class="doc">
+<p>Is the window maximized?</p>
 <pre class="source">
 bool isMaximized() {
  return proxy.callMethod('isMaximized');
@@ -299,6 +364,7 @@ bool isMaximized() {
 bool <strong>isMinimized</strong>() <a class="anchor-link" href="#isMinimized"
               title="Permalink to AppWindow.isMinimized">#</a></h4>
 <div class="doc">
+<p>Is the window minimized?</p>
 <pre class="source">
 bool isMinimized() {
  return proxy.callMethod('isMinimized');
@@ -311,6 +377,7 @@ bool isMinimized() {
 void <strong>maximize</strong>() <a class="anchor-link" href="#maximize"
               title="Permalink to AppWindow.maximize">#</a></h4>
 <div class="doc">
+<p>Maximize the window.</p>
 <pre class="source">
 void maximize() {
  proxy.callMethod('maximize');
@@ -323,6 +390,7 @@ void maximize() {
 void <strong>minimize</strong>() <a class="anchor-link" href="#minimize"
               title="Permalink to AppWindow.minimize">#</a></h4>
 <div class="doc">
+<p>Minimize the window.</p>
 <pre class="source">
 void minimize() {
  proxy.callMethod('minimize');
@@ -335,6 +403,7 @@ void minimize() {
 void <strong>moveTo</strong>(int left, int top) <a class="anchor-link" href="#moveTo"
               title="Permalink to AppWindow.moveTo">#</a></h4>
 <div class="doc">
+<p>Move the window to the position (|left|, |top|).</p>
 <pre class="source">
 void moveTo(int left, int top) {
  proxy.callMethod('moveTo', [left, top]);
@@ -347,6 +416,7 @@ void moveTo(int left, int top) {
 void <strong>resizeTo</strong>(int width, int height) <a class="anchor-link" href="#resizeTo"
               title="Permalink to AppWindow.resizeTo">#</a></h4>
 <div class="doc">
+<p>Resize the window to |width|x|height| pixels in size.</p>
 <pre class="source">
 void resizeTo(int width, int height) {
  proxy.callMethod('resizeTo', [width, height]);
@@ -359,6 +429,7 @@ void resizeTo(int width, int height) {
 void <strong>restore</strong>() <a class="anchor-link" href="#restore"
               title="Permalink to AppWindow.restore">#</a></h4>
 <div class="doc">
+<p>Restore the window, exiting a maximized, minimized, or fullscreen state.</p>
 <pre class="source">
 void restore() {
  proxy.callMethod('restore');
@@ -371,6 +442,7 @@ void restore() {
 void <strong>setBounds</strong>(<a href="../chrome.src.common_exp/Bounds.html">Bounds</a> bounds) <a class="anchor-link" href="#setBounds"
               title="Permalink to AppWindow.setBounds">#</a></h4>
 <div class="doc">
+<p>Set the window's bounds.</p>
 <pre class="source">
 void setBounds(Bounds bounds) {
  proxy.callMethod('setBounds', [bounds]);
@@ -383,6 +455,9 @@ void setBounds(Bounds bounds) {
 void <strong>setIcon</strong>(String icon_url) <a class="anchor-link" href="#setIcon"
               title="Permalink to AppWindow.setIcon">#</a></h4>
 <div class="doc">
+<p>Set the app icon for the window (experimental).
+ Currently this is only being implemented on Ash.
+ TODO(stevenjb): Investigate implementing this on Windows and OSX.</p>
 <pre class="source">
 void setIcon(String icon_url) {
  proxy.callMethod('setIcon', [icon_url]);
@@ -395,6 +470,7 @@ void setIcon(String icon_url) {
 void <strong>show</strong>() <a class="anchor-link" href="#show"
               title="Permalink to AppWindow.show">#</a></h4>
 <div class="doc">
+<p>Show the window. Does nothing if the window is already visible.</p>
 <pre class="source">
 void show() {
  proxy.callMethod('show');

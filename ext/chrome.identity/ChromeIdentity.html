@@ -38,18 +38,65 @@ class ChromeIdentity {
 
  ChromeIdentity._();
 
+ /**
+  * Gets an OAuth2 access token using the client ID and scopes
+  *  specified in the &lt;a
+  *  href="app_identity.html#update_manifest"&gt;&lt;code&gt;oauth2&lt;/code&gt;
+  *  section of manifest.json&lt;/a&gt;.
+  * 
+  *  The Identity API caches access tokens in memory, so it's ok to
+  *  call &lt;code&gt;getAuthToken&lt;/code&gt; any time a token is
+  *  required. The token cache automatically handles expiration.
+  * 
+  *  |details| : Token options.
+  *  |callback| : Called with an OAuth2 access token as specified by the
+  *  manifest, or undefined if there was an error.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;String&gt; getAuthToken([TokenDetails details]) {
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _identity.callMethod('getAuthToken', [details, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Removes an OAuth2 access token from the Identity API's token cache.
+  * 
+  *  If an access token is discovered to be invalid, it should be
+  *  passed to removeCachedAuthToken to remove it from the
+  *  cache. The app may then retrieve a fresh token with
+  *  &lt;code&gt;getAuthToken&lt;/code&gt;.
+  * 
+  *  |details| : Token information.
+  *  |callback| : Called when the token has been removed from the cache.
+  */
  Future removeCachedAuthToken(InvalidTokenDetails details) {
    var completer = new ChromeCompleter.noArgs();
    _identity.callMethod('removeCachedAuthToken', [details, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Starts an auth flow at the specified URL.
+  * 
+  *  This method enables auth flows with non-Google identity
+  *  providers by launching a web view and navigating it to the
+  *  first URL in the provider's auth flow. When the provider
+  *  redirects to a URL matching the pattern
+  *  &lt;code&gt;https://&amp;lt;app-id&amp;gt;.chromiumapp.org/&lt;/code&gt;, the
+  *  window will close, and the final redirect URL will be passed to
+  *  the &lt;var&gt;callback&lt;/var&gt; function.
+  * 
+  *  |details| : WebAuth flow options.
+  *  |callback| : Called with the URL redirected back to your application.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _identity.callMethod('launchWebAuthFlow', [details, completer.callback]);
@@ -65,6 +112,17 @@ class ChromeIdentity {
 Future&lt;String&gt; <strong>getAuthToken</strong>([<a href="../chrome.identity/TokenDetails.html">TokenDetails</a> details]) <a class="anchor-link" href="#getAuthToken"
               title="Permalink to ChromeIdentity.getAuthToken">#</a></h4>
 <div class="doc">
+<p>Gets an OAuth2 access token using the client ID and scopes
+ specified in the &lt;a
+ href="app<em>identity.html#update</em>manifest">&lt;code>oauth2&lt;/code>
+ section of manifest.json&lt;/a>.</p>
+<p> The Identity API caches access tokens in memory, so it's ok to
+ call &lt;code>getAuthToken&lt;/code> any time a token is
+ required. The token cache automatically handles expiration.</p>
+<p> |details| : Token options.
+ |callback| : Called with an OAuth2 access token as specified by the
+ manifest, or undefined if there was an error.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;String&gt; getAuthToken([TokenDetails details]) {
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -79,6 +137,17 @@ Future&lt;String&gt; getAuthToken([TokenDetails details]) {
 Future&lt;String&gt; <strong>launchWebAuthFlow</strong>(<a href="../chrome.identity/WebAuthFlowDetails.html">WebAuthFlowDetails</a> details) <a class="anchor-link" href="#launchWebAuthFlow"
               title="Permalink to ChromeIdentity.launchWebAuthFlow">#</a></h4>
 <div class="doc">
+<p>Starts an auth flow at the specified URL.</p>
+<p> This method enables auth flows with non-Google identity
+ providers by launching a web view and navigating it to the
+ first URL in the provider's auth flow. When the provider
+ redirects to a URL matching the pattern
+ &lt;code>https://&lt;app-id&gt;.chromiumapp.org/&lt;/code>, the
+ window will close, and the final redirect URL will be passed to
+ the &lt;var>callback&lt;/var> function.</p>
+<p> |details| : WebAuth flow options.
+ |callback| : Called with the URL redirected back to your application.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -93,6 +162,13 @@ Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
 Future <strong>removeCachedAuthToken</strong>(<a href="../chrome.identity/InvalidTokenDetails.html">InvalidTokenDetails</a> details) <a class="anchor-link" href="#removeCachedAuthToken"
               title="Permalink to ChromeIdentity.removeCachedAuthToken">#</a></h4>
 <div class="doc">
+<p>Removes an OAuth2 access token from the Identity API's token cache.</p>
+<p> If an access token is discovered to be invalid, it should be
+ passed to removeCachedAuthToken to remove it from the
+ cache. The app may then retrieve a fresh token with
+ &lt;code>getAuthToken&lt;/code>.</p>
+<p> |details| : Token information.
+ |callback| : Called when the token has been removed from the cache.</p>
 <pre class="source">
 Future removeCachedAuthToken(InvalidTokenDetails details) {
  var completer = new ChromeCompleter.noArgs();

@@ -38,12 +38,27 @@ class ChromeSystemStorage {
 
  ChromeSystemStorage._();
 
+ /**
+  * Get the storage information from the system. The argument passed to the
+  *  callback is an array of StorageUnitInfo objects.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;StorageUnitInfo&gt; getInfo() {
    var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(_createStorageUnitInfo);
    _system_storage.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Ejects a removable storage device.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
    var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(_createEjectDeviceResultCode);
    _system_storage.callMethod('ejectDevice', [id, completer.callback]);
@@ -96,6 +111,8 @@ Stream&lt;String&gt; get onDetached =&gt; _onDetached.stream;
 Future&lt;<a href="../chrome.system_storage/EjectDeviceResultCode.html">EjectDeviceResultCode</a>&gt; <strong>ejectDevice</strong>(String id) <a class="anchor-link" href="#ejectDevice"
               title="Permalink to ChromeSystemStorage.ejectDevice">#</a></h4>
 <div class="doc">
+<p>Ejects a removable storage device.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
  var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(_createEjectDeviceResultCode);
@@ -110,6 +127,9 @@ Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
 Future&lt;<a href="../chrome.system_storage/StorageUnitInfo.html">StorageUnitInfo</a>&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeSystemStorage.getInfo">#</a></h4>
 <div class="doc">
+<p>Get the storage information from the system. The argument passed to the
+ callback is an array of StorageUnitInfo objects.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;StorageUnitInfo&gt; getInfo() {
  var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(_createStorageUnitInfo);

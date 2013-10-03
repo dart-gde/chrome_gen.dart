@@ -38,6 +38,13 @@ class ChromeSystemMemory {
 
  ChromeSystemMemory._();
 
+ /**
+  * Get physical memory information.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;MemoryInfo&gt; getInfo() {
    var completer = new ChromeCompleter&lt;MemoryInfo&gt;.oneArg(_createMemoryInfo);
    _system_memory.callMethod('getInfo', [completer.callback]);
@@ -53,6 +60,8 @@ class ChromeSystemMemory {
 Future&lt;<a href="../chrome.system_memory/MemoryInfo.html">MemoryInfo</a>&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeSystemMemory.getInfo">#</a></h4>
 <div class="doc">
+<p>Get physical memory information.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;MemoryInfo&gt; getInfo() {
  var completer = new ChromeCompleter&lt;MemoryInfo&gt;.oneArg(_createMemoryInfo);

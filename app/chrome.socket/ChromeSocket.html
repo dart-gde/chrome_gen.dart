@@ -38,116 +38,352 @@ class ChromeSocket {
 
  ChromeSocket._();
 
+ /**
+  * Creates a socket of the specified type that will connect to the specified
+  *  remote machine.
+  *  |type| : The type of socket to create. Must be &lt;code&gt;tcp&lt;/code&gt; or
+  *  &lt;code&gt;udp&lt;/code&gt;.
+  *  |options| : The socket options.
+  *  |callback| : Called when the socket has been created.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;CreateInfo&gt; create(SocketType type, [CreateOptions options]) {
    var completer = new ChromeCompleter&lt;CreateInfo&gt;.oneArg(_createCreateInfo);
    _socket.callMethod('create', [type, options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Destroys the socket. Each socket created should be destroyed after use.
+  *  |socketId| : The socketId.
+  */
  void destroy(int socketId) {
    _socket.callMethod('destroy', [socketId]);
  }
 
+ /**
+  * Connects the socket to the remote machine (for a &lt;code&gt;tcp&lt;/code&gt;
+  *  socket). For a &lt;code&gt;udp&lt;/code&gt; socket, this sets the default address
+  *  which packets are sent to and read from for &lt;code&gt;read()&lt;/code&gt;
+  *  and &lt;code&gt;write()&lt;/code&gt; calls.
+  *  |socketId| : The socketId.
+  *  |hostname| : The hostname or IP address of the remote machine.
+  *  |port| : The port of the remote machine.
+  *  |callback| : Called when the connection attempt is complete.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;int&gt; connect(int socketId, String hostname, int port) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
    _socket.callMethod('connect', [socketId, hostname, port, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Binds the local address for socket. Currently, it does not support
+  *  TCP socket.
+  *  |socketId| : The socketId.
+  *  |address| : The address of the local machine.
+  *  |port| : The port of the local machine.
+  *  |callback| : Called when the bind attempt is complete.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;int&gt; bind(int socketId, String address, int port) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
    _socket.callMethod('bind', [socketId, address, port, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Disconnects the socket. For UDP sockets, &lt;code&gt;disconnect&lt;/code&gt; is a
+  *  non-operation but is safe to call.
+  *  |socketId| : The socketId.
+  */
  void disconnect(int socketId) {
    _socket.callMethod('disconnect', [socketId]);
  }
 
+ /**
+  * Reads data from the given connected socket.
+  *  |socketId| : The socketId.
+  *  |bufferSize| : The read buffer size.
+  *  |callback| : Delivers data that was available to be read without
+  *  blocking.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;SocketReadInfo&gt; read(int socketId, [int bufferSize]) {
    var completer = new ChromeCompleter&lt;SocketReadInfo&gt;.oneArg(_createSocketReadInfo);
    _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Writes data on the given connected socket.
+  *  |socketId| : The socketId.
+  *  |data| : The data to write.
+  *  |callback| : Called when the write operation completes without blocking
+  *  or an error occurs.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;SocketWriteInfo&gt; write(int socketId, ArrayBuffer data) {
    var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
    _socket.callMethod('write', [socketId, data, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Receives data from the given UDP socket.
+  *  |socketId| : The socketId.
+  *  |bufferSize| : The receive buffer size.
+  *  |callback| : Returns result of the recvFrom operation.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;RecvFromInfo&gt; recvFrom(int socketId, [int bufferSize]) {
    var completer = new ChromeCompleter&lt;RecvFromInfo&gt;.oneArg(_createRecvFromInfo);
    _socket.callMethod('recvFrom', [socketId, bufferSize, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Sends data on the given UDP socket to the given address and port.
+  *  |socketId| : The socketId.
+  *  |data| : The data to write.
+  *  |address| : The address of the remote machine.
+  *  |port| : The port of the remote machine.
+  *  |callback| : Called when the send operation completes without blocking
+  *  or an error occurs.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;SocketWriteInfo&gt; sendTo(int socketId, ArrayBuffer data, String address, int port) {
    var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
    _socket.callMethod('sendTo', [socketId, data, address, port, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * This method applies to TCP sockets only.
+  *  Listens for connections on the specified port and address. This
+  *  effectively makes this a server socket, and client socket
+  *  functions (connect, read, write) can no longer be used on this socket.
+  *  |socketId| : The socketId.
+  *  |address| : The address of the local machine.
+  *  |port| : The port of the local machine.
+  *  |backlog| : Length of the socket's listen queue.
+  *  |callback| : Called when listen operation completes.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;int&gt; listen(int socketId, String address, int port, [int backlog]) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
    _socket.callMethod('listen', [socketId, address, port, backlog, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * This method applies to TCP sockets only.
+  *  Registers a callback function to be called when a connection is
+  *  accepted on this listening server socket. Listen must be called first.
+  *  If there is already an active accept callback, this callback will be
+  *  invoked immediately with an error as the resultCode.
+  *  |socketId| : The socketId.
+  *  |callback| : The callback is invoked when a new socket is accepted.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;AcceptInfo&gt; accept(int socketId) {
    var completer = new ChromeCompleter&lt;AcceptInfo&gt;.oneArg(_createAcceptInfo);
    _socket.callMethod('accept', [socketId, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Enables or disables the keep-alive functionality for a TCP connection.
+  *  |socketId| : The socketId.
+  *  |enable| : If true, enable keep-alive functionality.
+  *  |delay| : Set the delay seconds between the last data packet received
+  *  and the first keepalive probe. Default is 0.
+  *  |callback| : Called when the setKeepAlive attempt is complete.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;bool&gt; setKeepAlive(int socketId, bool enable, [int delay]) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _socket.callMethod('setKeepAlive', [socketId, enable, delay, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Sets or clears &lt;code&gt;TCP_NODELAY&lt;/code&gt; for a TCP connection. Nagle's
+  *  algorithm will be disabled when &lt;code&gt;TCP_NODELAY&lt;/code&gt; is set.
+  *  |socketId| : The socketId.
+  *  |noDelay| : If true, disables Nagle's algorithm.
+  *  |callback| : Called when the setNoDelay attempt is complete.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;bool&gt; setNoDelay(int socketId, bool noDelay) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _socket.callMethod('setNoDelay', [socketId, noDelay, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Retrieves the state of the given socket.
+  *  |socketId| : The socketId.
+  *  |callback| : Called when the state is available.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;SocketInfo&gt; getInfo(int socketId) {
    var completer = new ChromeCompleter&lt;SocketInfo&gt;.oneArg(_createSocketInfo);
    _socket.callMethod('getInfo', [socketId, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Retrieves information about local adapters on this system.
+  *  |callback| : Called when local adapter information is available.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;NetworkInterface&gt; getNetworkList() {
    var completer = new ChromeCompleter&lt;NetworkInterface&gt;.oneArg(_createNetworkInterface);
    _socket.callMethod('getNetworkList', [completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Join the multicast group and start to receive packets from that group.
+  *  The socket must be of UDP type and must be bound to a local port
+  *  before calling this method.
+  *  |socketId| : The socketId.
+  *  |address| : The group address to join. Domain names are not supported.
+  *  |callback| : Called when the join group operation is done with an
+  *  integer parameter indicating the platform-independent error code.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;int&gt; joinGroup(int socketId, String address) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
    _socket.callMethod('joinGroup', [socketId, address, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Leave the multicast group previously joined using &lt;code&gt;joinGroup&lt;/code&gt;.
+  *  It's not necessary to leave the multicast group before destroying the
+  *  socket or exiting. This is automatically called by the OS.
+  * 
+  *  Leaving the group will prevent the router from sending multicast
+  *  datagrams to the local host, presuming no other process on the host is
+  *  still joined to the group.
+  * 
+  *  |socketId| : The socketId.
+  *  |address| : The group address to leave. Domain names are not supported.
+  *  |callback| : Called when the leave group operation is done with an
+  *  integer parameter indicating the platform-independent error code.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;int&gt; leaveGroup(int socketId, String address) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
    _socket.callMethod('leaveGroup', [socketId, address, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Set the time-to-live of multicast packets sent to the multicast group.
+  * 
+  *  Calling this method does not require multicast permissions.
+  * 
+  *  |socketId| : The socketId.
+  *  |ttl| : The time-to-live value.
+  *  |callback| : Called when the configuration operation is done.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;int&gt; setMulticastTimeToLive(int socketId, int ttl) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
    _socket.callMethod('setMulticastTimeToLive', [socketId, ttl, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Set whether multicast packets sent from the host to the multicast
+  *  group will be looped back to the host.
+  * 
+  *  Note: the behavior of &lt;code&gt;setMulticastLoopbackMode&lt;/code&gt; is slightly
+  *  different between Windows and Unix-like systems. The inconsistency
+  *  happens only when there is more than one application on the same host
+  *  joined to the same multicast group while having different settings on
+  *  multicast loopback mode. On Windows, the applications with loopback off
+  *  will not RECEIVE the loopback packets; while on Unix-like systems, the
+  *  applications with loopback off will not SEND the loopback packets to
+  *  other applications on the same host. See MSDN: http://goo.gl/6vqbj
+  * 
+  *  Calling this method does not require multicast permissions.
+  * 
+  *  |socketId| : The socketId.
+  *  |enabled| : Indicate whether to enable loopback mode.
+  *  |callback| : Called when the configuration operation is done.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;int&gt; setMulticastLoopbackMode(int socketId, bool enabled) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
    _socket.callMethod('setMulticastLoopbackMode', [socketId, enabled, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Get the multicast group addresses the socket is currently joined to.
+  *  |socketId| : The socketId.
+  *  |callback| : Called with an array of strings of the result.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;String&gt; getJoinedGroups(int socketId) {
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _socket.callMethod('getJoinedGroups', [socketId, completer.callback]);
@@ -163,6 +399,14 @@ class ChromeSocket {
 Future&lt;<a href="../chrome.socket/AcceptInfo.html">AcceptInfo</a>&gt; <strong>accept</strong>(int socketId) <a class="anchor-link" href="#accept"
               title="Permalink to ChromeSocket.accept">#</a></h4>
 <div class="doc">
+<p>This method applies to TCP sockets only.
+ Registers a callback function to be called when a connection is
+ accepted on this listening server socket. Listen must be called first.
+ If there is already an active accept callback, this callback will be
+ invoked immediately with an error as the resultCode.
+ |socketId| : The socketId.
+ |callback| : The callback is invoked when a new socket is accepted.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;AcceptInfo&gt; accept(int socketId) {
  var completer = new ChromeCompleter&lt;AcceptInfo&gt;.oneArg(_createAcceptInfo);
@@ -177,6 +421,13 @@ Future&lt;AcceptInfo&gt; accept(int socketId) {
 Future&lt;int&gt; <strong>bind</strong>(int socketId, String address, int port) <a class="anchor-link" href="#bind"
               title="Permalink to ChromeSocket.bind">#</a></h4>
 <div class="doc">
+<p>Binds the local address for socket. Currently, it does not support
+ TCP socket.
+ |socketId| : The socketId.
+ |address| : The address of the local machine.
+ |port| : The port of the local machine.
+ |callback| : Called when the bind attempt is complete.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;int&gt; bind(int socketId, String address, int port) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -191,6 +442,15 @@ Future&lt;int&gt; bind(int socketId, String address, int port) {
 Future&lt;int&gt; <strong>connect</strong>(int socketId, String hostname, int port) <a class="anchor-link" href="#connect"
               title="Permalink to ChromeSocket.connect">#</a></h4>
 <div class="doc">
+<p>Connects the socket to the remote machine (for a &lt;code>tcp&lt;/code>
+ socket). For a &lt;code>udp&lt;/code> socket, this sets the default address
+ which packets are sent to and read from for &lt;code>read()&lt;/code>
+ and &lt;code>write()&lt;/code> calls.
+ |socketId| : The socketId.
+ |hostname| : The hostname or IP address of the remote machine.
+ |port| : The port of the remote machine.
+ |callback| : Called when the connection attempt is complete.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;int&gt; connect(int socketId, String hostname, int port) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -205,6 +465,13 @@ Future&lt;int&gt; connect(int socketId, String hostname, int port) {
 Future&lt;<a href="../chrome.socket/CreateInfo.html">CreateInfo</a>&gt; <strong>create</strong>(<a href="../chrome.socket/SocketType.html">SocketType</a> type, [<a href="../chrome.socket/CreateOptions.html">CreateOptions</a> options]) <a class="anchor-link" href="#create"
               title="Permalink to ChromeSocket.create">#</a></h4>
 <div class="doc">
+<p>Creates a socket of the specified type that will connect to the specified
+ remote machine.
+ |type| : The type of socket to create. Must be &lt;code>tcp&lt;/code> or
+ &lt;code>udp&lt;/code>.
+ |options| : The socket options.
+ |callback| : Called when the socket has been created.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;CreateInfo&gt; create(SocketType type, [CreateOptions options]) {
  var completer = new ChromeCompleter&lt;CreateInfo&gt;.oneArg(_createCreateInfo);
@@ -219,6 +486,8 @@ Future&lt;CreateInfo&gt; create(SocketType type, [CreateOptions options]) {
 void <strong>destroy</strong>(int socketId) <a class="anchor-link" href="#destroy"
               title="Permalink to ChromeSocket.destroy">#</a></h4>
 <div class="doc">
+<p>Destroys the socket. Each socket created should be destroyed after use.
+ |socketId| : The socketId.</p>
 <pre class="source">
 void destroy(int socketId) {
  _socket.callMethod('destroy', [socketId]);
@@ -231,6 +500,9 @@ void destroy(int socketId) {
 void <strong>disconnect</strong>(int socketId) <a class="anchor-link" href="#disconnect"
               title="Permalink to ChromeSocket.disconnect">#</a></h4>
 <div class="doc">
+<p>Disconnects the socket. For UDP sockets, &lt;code>disconnect&lt;/code> is a
+ non-operation but is safe to call.
+ |socketId| : The socketId.</p>
 <pre class="source">
 void disconnect(int socketId) {
  _socket.callMethod('disconnect', [socketId]);
@@ -243,6 +515,10 @@ void disconnect(int socketId) {
 Future&lt;<a href="../chrome.socket/SocketInfo.html">SocketInfo</a>&gt; <strong>getInfo</strong>(int socketId) <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeSocket.getInfo">#</a></h4>
 <div class="doc">
+<p>Retrieves the state of the given socket.
+ |socketId| : The socketId.
+ |callback| : Called when the state is available.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;SocketInfo&gt; getInfo(int socketId) {
  var completer = new ChromeCompleter&lt;SocketInfo&gt;.oneArg(_createSocketInfo);
@@ -257,6 +533,10 @@ Future&lt;SocketInfo&gt; getInfo(int socketId) {
 Future&lt;String&gt; <strong>getJoinedGroups</strong>(int socketId) <a class="anchor-link" href="#getJoinedGroups"
               title="Permalink to ChromeSocket.getJoinedGroups">#</a></h4>
 <div class="doc">
+<p>Get the multicast group addresses the socket is currently joined to.
+ |socketId| : The socketId.
+ |callback| : Called with an array of strings of the result.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;String&gt; getJoinedGroups(int socketId) {
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -271,6 +551,9 @@ Future&lt;String&gt; getJoinedGroups(int socketId) {
 Future&lt;<a href="../chrome.socket/NetworkInterface.html">NetworkInterface</a>&gt; <strong>getNetworkList</strong>() <a class="anchor-link" href="#getNetworkList"
               title="Permalink to ChromeSocket.getNetworkList">#</a></h4>
 <div class="doc">
+<p>Retrieves information about local adapters on this system.
+ |callback| : Called when local adapter information is available.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;NetworkInterface&gt; getNetworkList() {
  var completer = new ChromeCompleter&lt;NetworkInterface&gt;.oneArg(_createNetworkInterface);
@@ -285,6 +568,14 @@ Future&lt;NetworkInterface&gt; getNetworkList() {
 Future&lt;int&gt; <strong>joinGroup</strong>(int socketId, String address) <a class="anchor-link" href="#joinGroup"
               title="Permalink to ChromeSocket.joinGroup">#</a></h4>
 <div class="doc">
+<p>Join the multicast group and start to receive packets from that group.
+ The socket must be of UDP type and must be bound to a local port
+ before calling this method.
+ |socketId| : The socketId.
+ |address| : The group address to join. Domain names are not supported.
+ |callback| : Called when the join group operation is done with an
+ integer parameter indicating the platform-independent error code.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;int&gt; joinGroup(int socketId, String address) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -299,6 +590,17 @@ Future&lt;int&gt; joinGroup(int socketId, String address) {
 Future&lt;int&gt; <strong>leaveGroup</strong>(int socketId, String address) <a class="anchor-link" href="#leaveGroup"
               title="Permalink to ChromeSocket.leaveGroup">#</a></h4>
 <div class="doc">
+<p>Leave the multicast group previously joined using &lt;code>joinGroup&lt;/code>.
+ It's not necessary to leave the multicast group before destroying the
+ socket or exiting. This is automatically called by the OS.</p>
+<p> Leaving the group will prevent the router from sending multicast
+ datagrams to the local host, presuming no other process on the host is
+ still joined to the group.</p>
+<p> |socketId| : The socketId.
+ |address| : The group address to leave. Domain names are not supported.
+ |callback| : Called when the leave group operation is done with an
+ integer parameter indicating the platform-independent error code.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;int&gt; leaveGroup(int socketId, String address) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -313,6 +615,16 @@ Future&lt;int&gt; leaveGroup(int socketId, String address) {
 Future&lt;int&gt; <strong>listen</strong>(int socketId, String address, int port, [int backlog]) <a class="anchor-link" href="#listen"
               title="Permalink to ChromeSocket.listen">#</a></h4>
 <div class="doc">
+<p>This method applies to TCP sockets only.
+ Listens for connections on the specified port and address. This
+ effectively makes this a server socket, and client socket
+ functions (connect, read, write) can no longer be used on this socket.
+ |socketId| : The socketId.
+ |address| : The address of the local machine.
+ |port| : The port of the local machine.
+ |backlog| : Length of the socket's listen queue.
+ |callback| : Called when listen operation completes.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;int&gt; listen(int socketId, String address, int port, [int backlog]) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -327,6 +639,12 @@ Future&lt;int&gt; listen(int socketId, String address, int port, [int backlog]) 
 Future&lt;<a href="../chrome.socket/SocketReadInfo.html">SocketReadInfo</a>&gt; <strong>read</strong>(int socketId, [int bufferSize]) <a class="anchor-link" href="#read"
               title="Permalink to ChromeSocket.read">#</a></h4>
 <div class="doc">
+<p>Reads data from the given connected socket.
+ |socketId| : The socketId.
+ |bufferSize| : The read buffer size.
+ |callback| : Delivers data that was available to be read without
+ blocking.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;SocketReadInfo&gt; read(int socketId, [int bufferSize]) {
  var completer = new ChromeCompleter&lt;SocketReadInfo&gt;.oneArg(_createSocketReadInfo);
@@ -341,6 +659,11 @@ Future&lt;SocketReadInfo&gt; read(int socketId, [int bufferSize]) {
 Future&lt;<a href="../chrome.socket/RecvFromInfo.html">RecvFromInfo</a>&gt; <strong>recvFrom</strong>(int socketId, [int bufferSize]) <a class="anchor-link" href="#recvFrom"
               title="Permalink to ChromeSocket.recvFrom">#</a></h4>
 <div class="doc">
+<p>Receives data from the given UDP socket.
+ |socketId| : The socketId.
+ |bufferSize| : The receive buffer size.
+ |callback| : Returns result of the recvFrom operation.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;RecvFromInfo&gt; recvFrom(int socketId, [int bufferSize]) {
  var completer = new ChromeCompleter&lt;RecvFromInfo&gt;.oneArg(_createRecvFromInfo);
@@ -355,6 +678,14 @@ Future&lt;RecvFromInfo&gt; recvFrom(int socketId, [int bufferSize]) {
 Future&lt;<a href="../chrome.socket/SocketWriteInfo.html">SocketWriteInfo</a>&gt; <strong>sendTo</strong>(int socketId, <a href="../chrome.src.common_exp/ArrayBuffer.html">ArrayBuffer</a> data, String address, int port) <a class="anchor-link" href="#sendTo"
               title="Permalink to ChromeSocket.sendTo">#</a></h4>
 <div class="doc">
+<p>Sends data on the given UDP socket to the given address and port.
+ |socketId| : The socketId.
+ |data| : The data to write.
+ |address| : The address of the remote machine.
+ |port| : The port of the remote machine.
+ |callback| : Called when the send operation completes without blocking
+ or an error occurs.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;SocketWriteInfo&gt; sendTo(int socketId, ArrayBuffer data, String address, int port) {
  var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
@@ -369,6 +700,13 @@ Future&lt;SocketWriteInfo&gt; sendTo(int socketId, ArrayBuffer data, String addr
 Future&lt;bool&gt; <strong>setKeepAlive</strong>(int socketId, bool enable, [int delay]) <a class="anchor-link" href="#setKeepAlive"
               title="Permalink to ChromeSocket.setKeepAlive">#</a></h4>
 <div class="doc">
+<p>Enables or disables the keep-alive functionality for a TCP connection.
+ |socketId| : The socketId.
+ |enable| : If true, enable keep-alive functionality.
+ |delay| : Set the delay seconds between the last data packet received
+ and the first keepalive probe. Default is 0.
+ |callback| : Called when the setKeepAlive attempt is complete.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;bool&gt; setKeepAlive(int socketId, bool enable, [int delay]) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
@@ -383,6 +721,21 @@ Future&lt;bool&gt; setKeepAlive(int socketId, bool enable, [int delay]) {
 Future&lt;int&gt; <strong>setMulticastLoopbackMode</strong>(int socketId, bool enabled) <a class="anchor-link" href="#setMulticastLoopbackMode"
               title="Permalink to ChromeSocket.setMulticastLoopbackMode">#</a></h4>
 <div class="doc">
+<p>Set whether multicast packets sent from the host to the multicast
+ group will be looped back to the host.</p>
+<p> Note: the behavior of &lt;code>setMulticastLoopbackMode&lt;/code> is slightly
+ different between Windows and Unix-like systems. The inconsistency
+ happens only when there is more than one application on the same host
+ joined to the same multicast group while having different settings on
+ multicast loopback mode. On Windows, the applications with loopback off
+ will not RECEIVE the loopback packets; while on Unix-like systems, the
+ applications with loopback off will not SEND the loopback packets to
+ other applications on the same host. See MSDN: http://goo.gl/6vqbj</p>
+<p> Calling this method does not require multicast permissions.</p>
+<p> |socketId| : The socketId.
+ |enabled| : Indicate whether to enable loopback mode.
+ |callback| : Called when the configuration operation is done.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;int&gt; setMulticastLoopbackMode(int socketId, bool enabled) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -397,6 +750,12 @@ Future&lt;int&gt; setMulticastLoopbackMode(int socketId, bool enabled) {
 Future&lt;int&gt; <strong>setMulticastTimeToLive</strong>(int socketId, int ttl) <a class="anchor-link" href="#setMulticastTimeToLive"
               title="Permalink to ChromeSocket.setMulticastTimeToLive">#</a></h4>
 <div class="doc">
+<p>Set the time-to-live of multicast packets sent to the multicast group.</p>
+<p> Calling this method does not require multicast permissions.</p>
+<p> |socketId| : The socketId.
+ |ttl| : The time-to-live value.
+ |callback| : Called when the configuration operation is done.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;int&gt; setMulticastTimeToLive(int socketId, int ttl) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -411,6 +770,12 @@ Future&lt;int&gt; setMulticastTimeToLive(int socketId, int ttl) {
 Future&lt;bool&gt; <strong>setNoDelay</strong>(int socketId, bool noDelay) <a class="anchor-link" href="#setNoDelay"
               title="Permalink to ChromeSocket.setNoDelay">#</a></h4>
 <div class="doc">
+<p>Sets or clears &lt;code>TCP<em>NODELAY&lt;/code> for a TCP connection. Nagle's
+ algorithm will be disabled when &lt;code>TCP</em>NODELAY&lt;/code> is set.
+ |socketId| : The socketId.
+ |noDelay| : If true, disables Nagle's algorithm.
+ |callback| : Called when the setNoDelay attempt is complete.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;bool&gt; setNoDelay(int socketId, bool noDelay) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
@@ -425,6 +790,12 @@ Future&lt;bool&gt; setNoDelay(int socketId, bool noDelay) {
 Future&lt;<a href="../chrome.socket/SocketWriteInfo.html">SocketWriteInfo</a>&gt; <strong>write</strong>(int socketId, <a href="../chrome.src.common_exp/ArrayBuffer.html">ArrayBuffer</a> data) <a class="anchor-link" href="#write"
               title="Permalink to ChromeSocket.write">#</a></h4>
 <div class="doc">
+<p>Writes data on the given connected socket.
+ |socketId| : The socketId.
+ |data| : The data to write.
+ |callback| : Called when the write operation completes without blocking
+ or an error occurs.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;SocketWriteInfo&gt; write(int socketId, ArrayBuffer data) {
  var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);

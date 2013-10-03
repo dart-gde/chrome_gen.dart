@@ -38,12 +38,36 @@ class ChromeTabCapture {
 
  ChromeTabCapture._();
 
+ /**
+  * Captures the visible area of the currently active tab.
+  *  This method can only be used on the currently active page after the
+  *  extension has been &lt;em&gt;invoked&lt;/em&gt;, similar to the way that
+  *  &lt;a href="activeTab.html"&gt;activeTab&lt;/a&gt; works.
+  *  Note that Chrome internal pages cannot be captured.
+  *  |options| : Configures the returned media stream.
+  *  |callback| : Callback with either the stream returned or null.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;dynamic&gt; capture(CaptureOptions options) {
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _tabCapture.callMethod('capture', [options, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Returns a list of tabs that have requested capture or are being
+  *  captured, i.e. status != stopped and status != error.
+  *  This allows extensions to inform the user that there is an existing
+  *  tab capture that would prevent a new tab capture from succeeding (or
+  *  to prevent redundant requests for the same tab).
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;CaptureInfo&gt; getCapturedTabs() {
    var completer = new ChromeCompleter&lt;CaptureInfo&gt;.oneArg(_createCaptureInfo);
    _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
@@ -79,6 +103,14 @@ Stream&lt;CaptureInfo&gt; get onStatusChanged =&gt; _onStatusChanged.stream;
 Future&lt;dynamic&gt; <strong>capture</strong>(<a href="../chrome.tabCapture/CaptureOptions.html">CaptureOptions</a> options) <a class="anchor-link" href="#capture"
               title="Permalink to ChromeTabCapture.capture">#</a></h4>
 <div class="doc">
+<p>Captures the visible area of the currently active tab.
+ This method can only be used on the currently active page after the
+ extension has been &lt;em>invoked&lt;/em>, similar to the way that
+ &lt;a href="activeTab.html">activeTab&lt;/a> works.
+ Note that Chrome internal pages cannot be captured.
+ |options| : Configures the returned media stream.
+ |callback| : Callback with either the stream returned or null.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;dynamic&gt; capture(CaptureOptions options) {
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -93,6 +125,12 @@ Future&lt;dynamic&gt; capture(CaptureOptions options) {
 Future&lt;<a href="../chrome.tabCapture/CaptureInfo.html">CaptureInfo</a>&gt; <strong>getCapturedTabs</strong>() <a class="anchor-link" href="#getCapturedTabs"
               title="Permalink to ChromeTabCapture.getCapturedTabs">#</a></h4>
 <div class="doc">
+<p>Returns a list of tabs that have requested capture or are being
+ captured, i.e. status != stopped and status != error.
+ This allows extensions to inform the user that there is an existing
+ tab capture that would prevent a new tab capture from succeeding (or
+ to prevent redundant requests for the same tab).</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;CaptureInfo&gt; getCapturedTabs() {
  var completer = new ChromeCompleter&lt;CaptureInfo&gt;.oneArg(_createCaptureInfo);

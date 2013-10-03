@@ -38,12 +38,23 @@ class ChromeMediaGalleries {
 
  ChromeMediaGalleries._();
 
+ /**
+  * Get the media galleries configured in this user agent. If none are
+  *  configured or available, the callback will receive an empty array.
+  * 
+  * 
+  * 
+  * Returns:
+  */
  Future&lt;dynamic&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Get metadata about a specific media file system.
+  */
  MediaFileSystemMetadata getMediaFileSystemMetadata(dynamic mediaFileSystem) {
    return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
  }
@@ -57,6 +68,7 @@ class ChromeMediaGalleries {
 <a href="../chrome.mediaGalleries/MediaFileSystemMetadata.html">MediaFileSystemMetadata</a> <strong>getMediaFileSystemMetadata</strong>(mediaFileSystem) <a class="anchor-link" href="#getMediaFileSystemMetadata"
               title="Permalink to ChromeMediaGalleries.getMediaFileSystemMetadata">#</a></h4>
 <div class="doc">
+<p>Get metadata about a specific media file system.</p>
 <pre class="source">
 MediaFileSystemMetadata getMediaFileSystemMetadata(dynamic mediaFileSystem) {
  return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
@@ -69,6 +81,9 @@ MediaFileSystemMetadata getMediaFileSystemMetadata(dynamic mediaFileSystem) {
 Future&lt;dynamic&gt; <strong>getMediaFileSystems</strong>([<a href="../chrome.mediaGalleries/MediaFileSystemsDetails.html">MediaFileSystemsDetails</a> details]) <a class="anchor-link" href="#getMediaFileSystems"
               title="Permalink to ChromeMediaGalleries.getMediaFileSystems">#</a></h4>
 <div class="doc">
+<p>Get the media galleries configured in this user agent. If none are
+ configured or available, the callback will receive an empty array.</p>
+<p>Returns:</p>
 <pre class="source">
 Future&lt;dynamic&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();

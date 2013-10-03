@@ -38,42 +38,112 @@ class ChromeSyncFileSystem {
 
  ChromeSyncFileSystem._();
 
+ /**
+  * Returns a syncable filesystem backed by Google Drive.
+  *  The returned &lt;code&gt;DOMFileSystem&lt;/code&gt; instance can be operated on
+  *  in the same way as the Temporary and Persistant file systems (see
+  * &lt;a
+  * href="http://www.w3.org/TR/file-system-api/"&gt;http://www.w3.org/TR/file-system-api/&lt;/a&gt;).
+  *  Calling this multiple times from
+  *  the same app will return the same handle to the same file system.
+  * 
+  * 
+  * 
+  * Returns:
+  *  A callback type for requestFileSystem.
+  */
  Future&lt;dynamic&gt; requestFileSystem() {
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Sets the default conflict resolution policy
+  *  for the &lt;code&gt;'syncable'&lt;/code&gt; file storage for the app.
+  *  By default it is set to &lt;code&gt;'last_write_win'&lt;/code&gt;.
+  *  When conflict resolution policy is set to &lt;code&gt;'last_write_win'&lt;/code&gt;
+  *  conflicts for existing files are automatically resolved next time
+  *  the file is updated.
+  *  |callback| can be optionally given to know if the request has
+  *  succeeded or not.
+  */
  Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
    var completer = new ChromeCompleter.noArgs();
    _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Gets the current conflict resolution policy.
+  * 
+  * 
+  * 
+  * Returns:
+  *  A callback type for getConflictResolutionPolicy.
+  */
  Future&lt;ConflictResolutionPolicy&gt; getConflictResolutionPolicy() {
    var completer = new ChromeCompleter&lt;ConflictResolutionPolicy&gt;.oneArg(_createConflictResolutionPolicy);
    _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Returns the current usage and quota in bytes
+  *  for the &lt;code&gt;'syncable'&lt;/code&gt; file storage for the app.
+  * 
+  * 
+  * 
+  * Returns:
+  *  A callback type for getUsageAndQuota.
+  */
  Future&lt;StorageInfo&gt; getUsageAndQuota(dynamic fileSystem) {
    var completer = new ChromeCompleter&lt;StorageInfo&gt;.oneArg(_createStorageInfo);
    _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Returns the $ref:FileStatus for the given &lt;code&gt;fileEntry&lt;/code&gt;.
+  *  The status value can be &lt;code&gt;'synced'&lt;/code&gt;,
+  *  &lt;code&gt;'pending'&lt;/code&gt; or &lt;code&gt;'conflicting'&lt;/code&gt;.
+  *  Note that &lt;code&gt;'conflicting'&lt;/code&gt; state only happens when
+  *  the service's conflict resolution policy is set to &lt;code&gt;'manual'&lt;/code&gt;.
+  * 
+  * 
+  * 
+  * Returns:
+  *  A callback type for getFileStatus.
+  */
  Future&lt;FileStatus&gt; getFileStatus(dynamic fileEntry) {
    var completer = new ChromeCompleter&lt;FileStatus&gt;.oneArg(_createFileStatus);
    _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Returns each $ref:FileStatus for the given &lt;code&gt;fileEntry&lt;/code&gt; array.
+  *  Typically called with the result from dirReader.readEntries().
+  * 
+  * 
+  * 
+  * Returns:
+  *  A callback type for getFileStatuses.
+  */
  Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
    var completer = new ChromeCompleter&lt;FileStatusInfo&gt;.oneArg(_createFileStatusInfo);
    _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Returns the current sync backend status.
+  * 
+  * 
+  * 
+  * Returns:
+  *  A callback type for getServiceStatus.
+  */
  Future&lt;ServiceStatus&gt; getServiceStatus() {
    var completer = new ChromeCompleter&lt;ServiceStatus&gt;.oneArg(_createServiceStatus);
    _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
@@ -126,6 +196,9 @@ Stream&lt;ServiceInfo&gt; get onServiceStatusChanged =&gt; _onServiceStatusChang
 Future&lt;<a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">ConflictResolutionPolicy</a>&gt; <strong>getConflictResolutionPolicy</strong>() <a class="anchor-link" href="#getConflictResolutionPolicy"
               title="Permalink to ChromeSyncFileSystem.getConflictResolutionPolicy">#</a></h4>
 <div class="doc">
+<p>Gets the current conflict resolution policy.</p>
+<p>Returns:
+ A callback type for getConflictResolutionPolicy.</p>
 <pre class="source">
 Future&lt;ConflictResolutionPolicy&gt; getConflictResolutionPolicy() {
  var completer = new ChromeCompleter&lt;ConflictResolutionPolicy&gt;.oneArg(_createConflictResolutionPolicy);
@@ -140,6 +213,13 @@ Future&lt;ConflictResolutionPolicy&gt; getConflictResolutionPolicy() {
 Future&lt;<a href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a>&gt; <strong>getFileStatus</strong>(fileEntry) <a class="anchor-link" href="#getFileStatus"
               title="Permalink to ChromeSyncFileSystem.getFileStatus">#</a></h4>
 <div class="doc">
+<p>Returns the $ref:FileStatus for the given &lt;code>fileEntry&lt;/code>.
+ The status value can be &lt;code>'synced'&lt;/code>,
+ &lt;code>'pending'&lt;/code> or &lt;code>'conflicting'&lt;/code>.
+ Note that &lt;code>'conflicting'&lt;/code> state only happens when
+ the service's conflict resolution policy is set to &lt;code>'manual'&lt;/code>.</p>
+<p>Returns:
+ A callback type for getFileStatus.</p>
 <pre class="source">
 Future&lt;FileStatus&gt; getFileStatus(dynamic fileEntry) {
  var completer = new ChromeCompleter&lt;FileStatus&gt;.oneArg(_createFileStatus);
@@ -154,6 +234,10 @@ Future&lt;FileStatus&gt; getFileStatus(dynamic fileEntry) {
 Future&lt;<a href="../chrome.syncFileSystem/FileStatusInfo.html">FileStatusInfo</a>&gt; <strong>getFileStatuses</strong>(fileEntries) <a class="anchor-link" href="#getFileStatuses"
               title="Permalink to ChromeSyncFileSystem.getFileStatuses">#</a></h4>
 <div class="doc">
+<p>Returns each $ref:FileStatus for the given &lt;code>fileEntry&lt;/code> array.
+ Typically called with the result from dirReader.readEntries().</p>
+<p>Returns:
+ A callback type for getFileStatuses.</p>
 <pre class="source">
 Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
  var completer = new ChromeCompleter&lt;FileStatusInfo&gt;.oneArg(_createFileStatusInfo);
@@ -168,6 +252,9 @@ Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
 Future&lt;<a href="../chrome.syncFileSystem/ServiceStatus.html">ServiceStatus</a>&gt; <strong>getServiceStatus</strong>() <a class="anchor-link" href="#getServiceStatus"
               title="Permalink to ChromeSyncFileSystem.getServiceStatus">#</a></h4>
 <div class="doc">
+<p>Returns the current sync backend status.</p>
+<p>Returns:
+ A callback type for getServiceStatus.</p>
 <pre class="source">
 Future&lt;ServiceStatus&gt; getServiceStatus() {
  var completer = new ChromeCompleter&lt;ServiceStatus&gt;.oneArg(_createServiceStatus);
@@ -182,6 +269,10 @@ Future&lt;ServiceStatus&gt; getServiceStatus() {
 Future&lt;<a href="../chrome.syncFileSystem/StorageInfo.html">StorageInfo</a>&gt; <strong>getUsageAndQuota</strong>(fileSystem) <a class="anchor-link" href="#getUsageAndQuota"
               title="Permalink to ChromeSyncFileSystem.getUsageAndQuota">#</a></h4>
 <div class="doc">
+<p>Returns the current usage and quota in bytes
+ for the &lt;code>'syncable'&lt;/code> file storage for the app.</p>
+<p>Returns:
+ A callback type for getUsageAndQuota.</p>
 <pre class="source">
 Future&lt;StorageInfo&gt; getUsageAndQuota(dynamic fileSystem) {
  var completer = new ChromeCompleter&lt;StorageInfo&gt;.oneArg(_createStorageInfo);
@@ -196,6 +287,15 @@ Future&lt;StorageInfo&gt; getUsageAndQuota(dynamic fileSystem) {
 Future&lt;dynamic&gt; <strong>requestFileSystem</strong>() <a class="anchor-link" href="#requestFileSystem"
               title="Permalink to ChromeSyncFileSystem.requestFileSystem">#</a></h4>
 <div class="doc">
+<p>Returns a syncable filesystem backed by Google Drive.
+ The returned &lt;code>DOMFileSystem&lt;/code> instance can be operated on
+ in the same way as the Temporary and Persistant file systems (see
+&lt;a
+href="http://www.w3.org/TR/file-system-api/">http://www.w3.org/TR/file-system-api/&lt;/a>).
+ Calling this multiple times from
+ the same app will return the same handle to the same file system.</p>
+<p>Returns:
+ A callback type for requestFileSystem.</p>
 <pre class="source">
 Future&lt;dynamic&gt; requestFileSystem() {
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -210,6 +310,14 @@ Future&lt;dynamic&gt; requestFileSystem() {
 Future <strong>setConflictResolutionPolicy</strong>(<a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">ConflictResolutionPolicy</a> policy) <a class="anchor-link" href="#setConflictResolutionPolicy"
               title="Permalink to ChromeSyncFileSystem.setConflictResolutionPolicy">#</a></h4>
 <div class="doc">
+<p>Sets the default conflict resolution policy
+ for the &lt;code>'syncable'&lt;/code> file storage for the app.
+ By default it is set to &lt;code>'last<em>write</em>win'&lt;/code>.
+ When conflict resolution policy is set to &lt;code>'last<em>write</em>win'&lt;/code>
+ conflicts for existing files are automatically resolved next time
+ the file is updated.
+ |callback| can be optionally given to know if the request has
+ succeeded or not.</p>
 <pre class="source">
 Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
  var completer = new ChromeCompleter.noArgs();

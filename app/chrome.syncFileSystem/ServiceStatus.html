@@ -32,6 +32,20 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<p>The sync service is being initialized (e.g. restoring data from the
+ database, checking connectivity and authenticating to the service etc).
+ The sync service is up and running.
+ The sync service is not synchronizing files because the remote service
+ needs to be authenticated by the user to proceed.
+ The sync service is not synchronizing files because the remote service
+ is (temporarily) unavailable due to some recoverable errors, e.g.
+ network is offline, the remote service is down or not
+ reachable etc. More details should be given by |description| parameter
+ in OnServiceInfoUpdated (which could contain service-specific details).
+ The sync service is disabled and the content will never sync.
+ (E.g. this could happen when the user has no account on
+ the remote service or the sync service has had an unrecoverable
+ error.)</p>
 <pre class="source">
 class ServiceStatus extends ChromeEnum {
  static const ServiceStatus INITIALIZING = const ServiceStatus._('initializing');

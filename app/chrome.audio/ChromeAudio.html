@@ -38,18 +38,33 @@ class ChromeAudio {
 
  ChromeAudio._();
 
+ /**
+  * Get the information of all audio output and input devices.
+  * 
+  * 
+  * 
+  * Returns:
+  * [outputInfo] null
+  * [inputInfo] null
+  */
  Future&lt;JsObject&gt; getInfo() {
    var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
    _audio.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Select a subset of audio devices as active.
+  */
  Future setActiveDevices(String ids) {
    var completer = new ChromeCompleter.noArgs();
    _audio.callMethod('setActiveDevices', [ids, completer.callback]);
    return completer.future;
  }
 
+ /**
+  * Sets the properties for the input or output device.
+  */
  Future setProperties(String id, DeviceProperties properties) {
    var completer = new ChromeCompleter.noArgs();
    _audio.callMethod('setProperties', [id, properties, completer.callback]);
@@ -85,6 +100,10 @@ Stream get onDeviceChanged =&gt; _onDeviceChanged.stream;
 Future&lt;JsObject&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeAudio.getInfo">#</a></h4>
 <div class="doc">
+<p>Get the information of all audio output and input devices.</p>
+<p>Returns:
+<code>outputInfo</code> null
+<code>inputInfo</code> null</p>
 <pre class="source">
 Future&lt;JsObject&gt; getInfo() {
  var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
@@ -99,6 +118,7 @@ Future&lt;JsObject&gt; getInfo() {
 Future <strong>setActiveDevices</strong>(String ids) <a class="anchor-link" href="#setActiveDevices"
               title="Permalink to ChromeAudio.setActiveDevices">#</a></h4>
 <div class="doc">
+<p>Select a subset of audio devices as active.</p>
 <pre class="source">
 Future setActiveDevices(String ids) {
  var completer = new ChromeCompleter.noArgs();
@@ -113,6 +133,7 @@ Future setActiveDevices(String ids) {
 Future <strong>setProperties</strong>(String id, <a href="../chrome.audio/DeviceProperties.html">DeviceProperties</a> properties) <a class="anchor-link" href="#setProperties"
               title="Permalink to ChromeAudio.setProperties">#</a></h4>
 <div class="doc">
+<p>Sets the properties for the input or output device.</p>
 <pre class="source">
 Future setProperties(String id, DeviceProperties properties) {
  var completer = new ChromeCompleter.noArgs();
