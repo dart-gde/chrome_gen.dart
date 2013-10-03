@@ -312,9 +312,9 @@ class OnMessageEvent {
    * 
    * The message sent by the calling script.
    */
-  dynamic message;
+  final dynamic message;
 
-  MessageSender sender;
+  final MessageSender sender;
 
   /**
    * Function to call (at most once) when you have a response. The argument
@@ -325,7 +325,7 @@ class OnMessageEvent {
    * asynchronously (this will keep the message channel open to the other end
    * until `sendResponse` is called).
    */
-  dynamic sendResponse;
+  final dynamic sendResponse;
 
   OnMessageEvent(this.message, this.sender, this.sendResponse);
 }
@@ -344,9 +344,9 @@ class OnMessageExternalEvent {
    * 
    * The message sent by the calling script.
    */
-  dynamic message;
+  final dynamic message;
 
-  MessageSender sender;
+  final MessageSender sender;
 
   /**
    * Function to call (at most once) when you have a response. The argument
@@ -357,7 +357,7 @@ class OnMessageExternalEvent {
    * asynchronously (this will keep the message channel open to the other end
    * until `sendResponse` is called).
    */
-  dynamic sendResponse;
+  final dynamic sendResponse;
 
   OnMessageExternalEvent(this.message, this.sender, this.sendResponse);
 }

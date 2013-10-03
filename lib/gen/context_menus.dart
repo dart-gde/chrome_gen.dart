@@ -88,7 +88,7 @@ class OnClickedEvent {
    * Information about the item clicked and the context where the click
    * happened.
    */
-  OnClickData info;
+  final OnClickData info;
 
   /**
    * The details of the tab where the click took place. If the click did not
@@ -98,7 +98,7 @@ class OnClickedEvent {
    * The details of the tab where the click took place. If the click did not
    * take place in a tab, this parameter will be missing.
    */
-  Tab tab;
+  final Tab tab;
 
   OnClickedEvent(this.info, this.tab);
 }

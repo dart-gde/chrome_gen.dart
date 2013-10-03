@@ -111,9 +111,9 @@ class OnDeterminingFilenameEvent {
   static OnDeterminingFilenameEvent create(JsObject downloadItem, JsObject suggest) =>
       new OnDeterminingFilenameEvent(DownloadItem.create(downloadItem), SuggestFilenameCallback.create(suggest));
 
-  DownloadItem downloadItem;
+  final DownloadItem downloadItem;
 
-  SuggestFilenameCallback suggest;
+  final SuggestFilenameCallback suggest;
 
   OnDeterminingFilenameEvent(this.downloadItem, this.suggest);
 }

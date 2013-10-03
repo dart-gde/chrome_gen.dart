@@ -80,13 +80,13 @@ class OnInputChangedEvent {
   static OnInputChangedEvent create(String text, JsObject suggest) =>
       new OnInputChangedEvent(text, suggest);
 
-  String text;
+  final String text;
 
   /**
    * A callback passed to the onInputChanged event used for sending suggestions
    * back to the browser.
    */
-  dynamic suggest;
+  final dynamic suggest;
 
   OnInputChangedEvent(this.text, this.suggest);
 }
@@ -98,7 +98,7 @@ class OnInputEnteredEvent {
   static OnInputEnteredEvent create(String text, String disposition) =>
       new OnInputEnteredEvent(text, disposition);
 
-  String text;
+  final String text;
 
   /**
    * The window disposition for the omnibox query. This is the recommended
@@ -107,7 +107,7 @@ class OnInputEnteredEvent {
    * navigation should take place in a new selected tab.
    * enum of `currentTab`, `newForegroundTab`, `newBackgroundTab`
    */
-  String disposition;
+  final String disposition;
 
   OnInputEnteredEvent(this.text, this.disposition);
 }

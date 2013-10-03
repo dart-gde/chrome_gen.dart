@@ -89,18 +89,18 @@ class OnSpeakEvent {
    * support speaking that many characters at a time, the utterance should be
    * split into smaller chunks and queued internally without returning an error.
    */
-  String utterance;
+  final String utterance;
 
   /**
    * Options specified to the tts.speak() method.
    */
-  Map options;
+  final Map options;
 
   /**
    * Call this function with events that occur in the process of speaking the
    * utterance.
    */
-  dynamic sendTtsEvent;
+  final dynamic sendTtsEvent;
 
   OnSpeakEvent(this.utterance, this.options, this.sendTtsEvent);
 }

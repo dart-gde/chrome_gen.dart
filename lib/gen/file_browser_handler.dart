@@ -55,12 +55,12 @@ class OnExecuteEvent {
   /**
    * File browser action id as specified in the listener component's manifest.
    */
-  String id;
+  final String id;
 
   /**
    * File handler execute event details.
    */
-  FileHandlerExecuteEventDetails details;
+  final FileHandlerExecuteEventDetails details;
 
   OnExecuteEvent(this.id, this.details);
 }
