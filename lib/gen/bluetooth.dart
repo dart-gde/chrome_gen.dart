@@ -13,10 +13,10 @@ class ChromeBluetooth {
   ChromeBluetooth._();
 
   /**
-   * These functions all report failures via chrome.runtime.lastError.
-   *  Registers the JavaScript application as an implementation for the given
-   *  Profile; if a channel or PSM is specified, the profile will be exported
-   *  in the host's SDP and GATT tables and advertised to other devices.
+   * These functions all report failures via chrome.runtime.lastError. Registers
+   * the JavaScript application as an implementation for the given Profile; if a
+   * channel or PSM is specified, the profile will be exported in the host's SDP
+   * and GATT tables and advertised to other devices.
    */
   Future addProfile(Profile profile) {
     var completer = new ChromeCompleter.noArgs();
@@ -26,7 +26,7 @@ class ChromeBluetooth {
 
   /**
    * Unregisters the JavaScript application as an implementation for the given
-   *  Profile; only the uuid field of the Profile object is used.
+   * Profile; only the uuid field of the Profile object is used.
    */
   Future removeProfile(Profile profile) {
     var completer = new ChromeCompleter.noArgs();
@@ -36,12 +36,8 @@ class ChromeBluetooth {
 
   /**
    * Get information about the Bluetooth adapter.
-   *  |callback| : Called with an AdapterState object describing the adapter
-   *               state.
-   * 
-   * 
-   * 
-   * Returns:
+   * [callback] : Called with an AdapterState object describing the adapter
+   * state.
    */
   Future<AdapterState> getAdapterState() {
     var completer = new ChromeCompleter<AdapterState>.oneArg(_createAdapterState);
@@ -51,12 +47,12 @@ class ChromeBluetooth {
 
   /**
    * Get a bluetooth devices known to the system.  Known devices are either
-   *  currently paired, or have been paired in the past.
-   *  |options|  : Controls which devices are returned and provides
-   *               |deviceCallback|, which is called for each matching device.
-   *  |callback| : Called when the search is completed.
-   *               |options.deviceCallback| will not be called after
-   *               |callback| has been called.
+   * currently paired, or have been paired in the past.
+   * [options]  : Controls which devices are returned and provides             
+   * [deviceCallback], which is called for each matching device.
+   * [callback] : Called when the search is completed.             
+   * [options.deviceCallback] will not be called after             
+   * [callback] has been called.
    */
   Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
     var completer = new ChromeCompleter.noArgs();
@@ -66,11 +62,7 @@ class ChromeBluetooth {
 
   /**
    * Returns the set of exported profiles for the device specified in options.
-   *  This function will not initiate a connection to the remote device.
-   * 
-   * 
-   * 
-   * Returns:
+   * This function will not initiate a connection to the remote device.
    */
   Future<Profile> getProfiles(GetProfilesOptions options) {
     var completer = new ChromeCompleter<Profile>.oneArg(_createProfile);
@@ -80,10 +72,6 @@ class ChromeBluetooth {
 
   /**
    * Get a list of services provided by a device.
-   * 
-   * 
-   * 
-   * Returns:
    */
   Future<ServiceRecord> getServices(GetServicesOptions options) {
     var completer = new ChromeCompleter<ServiceRecord>.oneArg(_createServiceRecord);
@@ -93,8 +81,8 @@ class ChromeBluetooth {
 
   /**
    * Connect to a service on a device.
-   *  |options|  : The options for the connection.
-   *  |callback| : Called to indicate success or failure.
+   * [options]  : The options for the connection.
+   * [callback] : Called to indicate success or failure.
    */
   Future connect(ConnectOptions options) {
     var completer = new ChromeCompleter.noArgs();
@@ -104,8 +92,8 @@ class ChromeBluetooth {
 
   /**
    * Close a Bluetooth connection.
-   *  |options|  : The options for this function.
-   *  |callback| : Called to indicate success or failure.
+   * [options]  : The options for this function.
+   * [callback] : Called to indicate success or failure.
    */
   Future disconnect(DisconnectOptions options) {
     var completer = new ChromeCompleter.noArgs();
@@ -115,12 +103,8 @@ class ChromeBluetooth {
 
   /**
    * Read data from a Bluetooth connection.
-   *  |options|  : The options for this function.
-   *  |callback| : Called with the data when it is available.
-   * 
-   * 
-   * 
-   * Returns:
+   * [options]  : The options for this function.
+   * [callback] : Called with the data when it is available.
    */
   Future<ArrayBuffer> read(ReadOptions options) {
     var completer = new ChromeCompleter<ArrayBuffer>.oneArg(_createArrayBuffer);
@@ -130,12 +114,8 @@ class ChromeBluetooth {
 
   /**
    * Write data to a Bluetooth connection.
-   *  |options|  : The options for this function.
-   *  |callback| : Called with the number of bytes written.
-   * 
-   * 
-   * 
-   * Returns:
+   * [options]  : The options for this function.
+   * [callback] : Called with the number of bytes written.
    */
   Future<int> write(WriteOptions options) {
     var completer = new ChromeCompleter<int>.oneArg();
@@ -145,11 +125,7 @@ class ChromeBluetooth {
 
   /**
    * Get the local Out of Band Pairing data.
-   *  |callback| : Called with the data.
-   * 
-   * 
-   * 
-   * Returns:
+   * [callback] : Called with the data.
    */
   Future<OutOfBandPairingData> getLocalOutOfBandPairingData() {
     var completer = new ChromeCompleter<OutOfBandPairingData>.oneArg(_createOutOfBandPairingData);
@@ -158,10 +134,10 @@ class ChromeBluetooth {
   }
 
   /**
-   * Set the Out of Band Pairing data for a remote device.
-   *  Any previous Out Of Band Pairing Data for this device is overwritten.
-   *  |options|  : The options for this function.
-   *  |callback| : Called to indicate success or failure.
+   * Set the Out of Band Pairing data for a remote device. Any previous Out Of
+   * Band Pairing Data for this device is overwritten.
+   * [options]  : The options for this function.
+   * [callback] : Called to indicate success or failure.
    */
   Future setOutOfBandPairingData(SetOutOfBandPairingDataOptions options) {
     var completer = new ChromeCompleter.noArgs();
@@ -171,11 +147,11 @@ class ChromeBluetooth {
 
   /**
    * Start discovery. Discovered devices will be returned via the
-   *  |onBluetoothDeviceDiscovered| callback.  Discovery will fail to start if it is
-   *  already in progress.  Discovery can be resource intensive: stopDiscovery
-   *  should be called as soon as possible.
-   *  |options|  : The options for this function.
-   *  |callback| : Called to indicate success or failure.
+   * [onBluetoothDeviceDiscovered] callback.  Discovery will fail to start if it is
+   * already in progress.  Discovery can be resource intensive: stopDiscovery
+   * should be called as soon as possible.
+   * [options]  : The options for this function.
+   * [callback] : Called to indicate success or failure.
    */
   Future startDiscovery(StartDiscoveryOptions options) {
     var completer = new ChromeCompleter.noArgs();
@@ -185,7 +161,7 @@ class ChromeBluetooth {
 
   /**
    * Stop discovery.
-   *  |callback| : Called to indicate success or failure.
+   * [callback] : Called to indicate success or failure.
    */
   Future stopDiscovery() {
     var completer = new ChromeCompleter.noArgs();
