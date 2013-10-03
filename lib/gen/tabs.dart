@@ -402,17 +402,17 @@ class OnUpdatedEvent {
   static OnUpdatedEvent create(int tabId, JsObject changeInfo, JsObject tab) =>
       new OnUpdatedEvent(tabId, mapify(changeInfo), Tab.create(tab));
 
-  int tabId;
+  final int tabId;
 
   /**
    * Lists the changes to the state of the tab that was updated.
    */
-  Map changeInfo;
+  final Map changeInfo;
 
   /**
    * Gives the state of the tab that was updated.
    */
-  Tab tab;
+  final Tab tab;
 
   OnUpdatedEvent(this.tabId, this.changeInfo, this.tab);
 }
@@ -427,9 +427,9 @@ class TabsOnMovedEvent {
   static TabsOnMovedEvent create(int tabId, JsObject moveInfo) =>
       new TabsOnMovedEvent(tabId, mapify(moveInfo));
 
-  int tabId;
+  final int tabId;
 
-  Map moveInfo;
+  final Map moveInfo;
 
   TabsOnMovedEvent(this.tabId, this.moveInfo);
 }
@@ -444,9 +444,9 @@ class OnSelectionChangedEvent {
   /**
    * The ID of the tab that has become active.
    */
-  int tabId;
+  final int tabId;
 
-  Map selectInfo;
+  final Map selectInfo;
 
   OnSelectionChangedEvent(this.tabId, this.selectInfo);
 }
@@ -461,9 +461,9 @@ class OnActiveChangedEvent {
   /**
    * The ID of the tab that has become active.
    */
-  int tabId;
+  final int tabId;
 
-  Map selectInfo;
+  final Map selectInfo;
 
   OnActiveChangedEvent(this.tabId, this.selectInfo);
 }
@@ -476,9 +476,9 @@ class OnDetachedEvent {
   static OnDetachedEvent create(int tabId, JsObject detachInfo) =>
       new OnDetachedEvent(tabId, mapify(detachInfo));
 
-  int tabId;
+  final int tabId;
 
-  Map detachInfo;
+  final Map detachInfo;
 
   OnDetachedEvent(this.tabId, this.detachInfo);
 }
@@ -491,9 +491,9 @@ class OnAttachedEvent {
   static OnAttachedEvent create(int tabId, JsObject attachInfo) =>
       new OnAttachedEvent(tabId, mapify(attachInfo));
 
-  int tabId;
+  final int tabId;
 
-  Map attachInfo;
+  final Map attachInfo;
 
   OnAttachedEvent(this.tabId, this.attachInfo);
 }
@@ -505,9 +505,9 @@ class TabsOnRemovedEvent {
   static TabsOnRemovedEvent create(int tabId, JsObject removeInfo) =>
       new TabsOnRemovedEvent(tabId, mapify(removeInfo));
 
-  int tabId;
+  final int tabId;
 
-  Map removeInfo;
+  final Map removeInfo;
 
   TabsOnRemovedEvent(this.tabId, this.removeInfo);
 }
@@ -519,9 +519,9 @@ class OnReplacedEvent {
   static OnReplacedEvent create(int addedTabId, int removedTabId) =>
       new OnReplacedEvent(addedTabId, removedTabId);
 
-  int addedTabId;
+  final int addedTabId;
 
-  int removedTabId;
+  final int removedTabId;
 
   OnReplacedEvent(this.addedTabId, this.removedTabId);
 }

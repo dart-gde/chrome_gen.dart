@@ -276,7 +276,7 @@ class _DefaultBackendContext {
     props.forEach((ChromeProperty property) {
       generator.writeln();
       generator.writeDocs(property.getDescription());
-      generator.writeln("${property.type.toReturnString()} ${property.name};");
+      generator.writeln("final ${property.type.toReturnString()} ${property.name};");
     });
     generator.writeln();
     String params = props.map((p) => 'this.${p.name}').join(', ');

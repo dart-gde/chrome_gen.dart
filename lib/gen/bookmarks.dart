@@ -227,9 +227,9 @@ class OnCreatedEvent {
   static OnCreatedEvent create(String id, JsObject bookmark) =>
       new OnCreatedEvent(id, BookmarkTreeNode.create(bookmark));
 
-  String id;
+  final String id;
 
-  BookmarkTreeNode bookmark;
+  final BookmarkTreeNode bookmark;
 
   OnCreatedEvent(this.id, this.bookmark);
 }
@@ -243,9 +243,9 @@ class BookmarksOnRemovedEvent {
   static BookmarksOnRemovedEvent create(String id, JsObject removeInfo) =>
       new BookmarksOnRemovedEvent(id, mapify(removeInfo));
 
-  String id;
+  final String id;
 
-  Map removeInfo;
+  final Map removeInfo;
 
   BookmarksOnRemovedEvent(this.id, this.removeInfo);
 }
@@ -258,9 +258,9 @@ class BookmarksOnChangedEvent {
   static BookmarksOnChangedEvent create(String id, JsObject changeInfo) =>
       new BookmarksOnChangedEvent(id, mapify(changeInfo));
 
-  String id;
+  final String id;
 
-  Map changeInfo;
+  final Map changeInfo;
 
   BookmarksOnChangedEvent(this.id, this.changeInfo);
 }
@@ -272,9 +272,9 @@ class BookmarksOnMovedEvent {
   static BookmarksOnMovedEvent create(String id, JsObject moveInfo) =>
       new BookmarksOnMovedEvent(id, mapify(moveInfo));
 
-  String id;
+  final String id;
 
-  Map moveInfo;
+  final Map moveInfo;
 
   BookmarksOnMovedEvent(this.id, this.moveInfo);
 }
@@ -287,9 +287,9 @@ class OnChildrenReorderedEvent {
   static OnChildrenReorderedEvent create(String id, JsObject reorderInfo) =>
       new OnChildrenReorderedEvent(id, mapify(reorderInfo));
 
-  String id;
+  final String id;
 
-  Map reorderInfo;
+  final Map reorderInfo;
 
   OnChildrenReorderedEvent(this.id, this.reorderInfo);
 }

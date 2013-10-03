@@ -56,9 +56,9 @@ class OnClosedEvent {
   static OnClosedEvent create(String notificationId, bool byUser) =>
       new OnClosedEvent(notificationId, byUser);
 
-  String notificationId;
+  final String notificationId;
 
-  bool byUser;
+  final bool byUser;
 
   OnClosedEvent(this.notificationId, this.byUser);
 }
@@ -67,9 +67,9 @@ class OnButtonClickedEvent {
   static OnButtonClickedEvent create(String notificationId, int buttonIndex) =>
       new OnButtonClickedEvent(notificationId, buttonIndex);
 
-  String notificationId;
+  final String notificationId;
 
-  int buttonIndex;
+  final int buttonIndex;
 
   OnButtonClickedEvent(this.notificationId, this.buttonIndex);
 }

@@ -162,9 +162,9 @@ class OnRequestEvent {
    * 
    * The request sent by the calling script.
    */
-  dynamic request;
+  final dynamic request;
 
-  MessageSender sender;
+  final MessageSender sender;
 
   /**
    * Function to call (at most once) when you have a response. The argument
@@ -172,7 +172,7 @@ class OnRequestEvent {
    * you have more than one `onRequest` listener in the same document, then only
    * one may send a response.
    */
-  dynamic sendResponse;
+  final dynamic sendResponse;
 
   OnRequestEvent(this.request, this.sender, this.sendResponse);
 }
@@ -190,15 +190,15 @@ class OnRequestExternalEvent {
    * 
    * The request sent by the calling script.
    */
-  dynamic request;
+  final dynamic request;
 
-  MessageSender sender;
+  final MessageSender sender;
 
   /**
    * Function to call when you have a response. The argument should be any
    * JSON-ifiable object, or undefined if there is no response.
    */
-  dynamic sendResponse;
+  final dynamic sendResponse;
 
   OnRequestExternalEvent(this.request, this.sender, this.sendResponse);
 }

@@ -128,12 +128,12 @@ class OnAuthRequiredEvent {
   static OnAuthRequiredEvent create(JsObject details, JsObject callback) =>
       new OnAuthRequiredEvent(mapify(details), callback);
 
-  Map details;
+  final Map details;
 
   /**
    * `optional`
    */
-  dynamic callback;
+  final dynamic callback;
 
   OnAuthRequiredEvent(this.details, this.callback);
 }
