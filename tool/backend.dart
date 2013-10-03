@@ -384,8 +384,7 @@ class _DefaultBackendContext {
       props.forEach((p) => _printProperty(p, 'this.proxy', true));
     }
 
-    type.methods.forEach(
-        (m) => _printMethod(m, 'proxy'));
+    type.methods.forEach((m) => _printMethod(m, 'proxy'));
 
     generator.writeln("}");
   }
