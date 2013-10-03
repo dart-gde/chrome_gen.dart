@@ -87,12 +87,12 @@ class OnResourceContentCommittedEvent {
   static OnResourceContentCommittedEvent create(JsObject resource, String content) =>
       new OnResourceContentCommittedEvent(Resource.create(resource), content);
 
-  Resource resource;
+  final Resource resource;
 
   /**
    * New content of the resource.
    */
-  String content;
+  final String content;
 
   OnResourceContentCommittedEvent(this.resource, this.content);
 }

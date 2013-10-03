@@ -126,19 +126,19 @@ class OnExitedEvent {
   /**
    * The ID of the process that exited.
    */
-  int processId;
+  final int processId;
 
   /**
    * The type of exit that occurred for the process - normal, abnormal, killed,
    * crashed. Only available for renderer processes.
    */
-  int exitType;
+  final int exitType;
 
   /**
    * The exit code if the process exited abnormally. Only available for renderer
    * processes.
    */
-  int exitCode;
+  final int exitCode;
 
   OnExitedEvent(this.processId, this.exitType, this.exitCode);
 }

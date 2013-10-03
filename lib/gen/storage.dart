@@ -46,12 +46,12 @@ class StorageOnChangedEvent {
    * Object mapping each key that changed to its corresponding [StorageChange]
    * for that item.
    */
-  Map changes;
+  final Map changes;
 
   /**
    * The name of the storage area (`sync` or `local`) the changes are for.
    */
-  String areaName;
+  final String areaName;
 
   StorageOnChangedEvent(this.changes, this.areaName);
 }

@@ -215,12 +215,12 @@ class OnKeyEventEvent {
   /**
    * ID of the engine receiving the event
    */
-  String engineID;
+  final String engineID;
 
   /**
    * Data on the key event
    */
-  KeyboardEvent keyData;
+  final KeyboardEvent keyData;
 
   OnKeyEventEvent(this.engineID, this.keyData);
 }
@@ -235,18 +235,18 @@ class OnCandidateClickedEvent {
   /**
    * ID of the engine receiving the event
    */
-  String engineID;
+  final String engineID;
 
   /**
    * ID of the candidate that was clicked.
    */
-  int candidateID;
+  final int candidateID;
 
   /**
    * Which mouse buttons was clicked.
    * enum of `left`, `middle`, `right`
    */
-  String button;
+  final String button;
 
   OnCandidateClickedEvent(this.engineID, this.candidateID, this.button);
 }
@@ -261,12 +261,12 @@ class OnMenuItemActivatedEvent {
   /**
    * ID of the engine receiving the event
    */
-  String engineID;
+  final String engineID;
 
   /**
    * Name of the MenuItem which was activated
    */
-  String name;
+  final String name;
 
   OnMenuItemActivatedEvent(this.engineID, this.name);
 }
@@ -283,12 +283,12 @@ class OnSurroundingTextChangedEvent {
   /**
    * ID of the engine receiving the event
    */
-  String engineID;
+  final String engineID;
 
   /**
    * The surrounding information.
    */
-  Map surroundingInfo;
+  final Map surroundingInfo;
 
   OnSurroundingTextChangedEvent(this.engineID, this.surroundingInfo);
 }

@@ -111,14 +111,14 @@ class OnEventEvent {
   /**
    * The debuggee that generated this event.
    */
-  Debuggee source;
+  final Debuggee source;
 
   /**
    * Method name. Should be one of the notifications defined by the [remote
    * debugging
    * protocol](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
    */
-  String method;
+  final String method;
 
   /**
    * JSON object with the response. Structure of the response varies depending
@@ -128,7 +128,7 @@ class OnEventEvent {
    * JSON object with the response. Structure of the response varies depending
    * on the method and is defined by the remote debugging protocol.
    */
-  Map<String, dynamic> params;
+  final Map<String, dynamic> params;
 
   OnEventEvent(this.source, this.method, this.params);
 }
@@ -145,13 +145,13 @@ class OnDetachEvent {
   /**
    * The debuggee that was detached.
    */
-  Debuggee source;
+  final Debuggee source;
 
   /**
    * Connection termination reason.
    * enum of `target_closed`, `canceled_by_user`, `replaced_with_devtools`
    */
-  String reason;
+  final String reason;
 
   OnDetachEvent(this.source, this.reason);
 }
