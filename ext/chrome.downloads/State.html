@@ -32,13 +32,10 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<dl><dt>in_progress</dt>
-     <dd>The download is currently receiving data from the server.</dd>
-     <dt>interrupted</dt>
-     <dd>An error broke the connection with the file host.</dd>
-     <dt>complete</dt>
-     <dd>The download completed successfully.</dd>
- </dl>
+<dl><dt>in_progress</dt>     <dd>The download is currently receiving data
+from the server.</dd>     <dt>interrupted</dt>     <dd>An error broke the
+connection with the file host.</dd>     <dt>complete</dt>     <dd>The
+download completed successfully.</dd> </dl>
 <pre class="source">
 class State extends ChromeEnum {
  static const State IN_PROGRESS = const State._('in_progress');

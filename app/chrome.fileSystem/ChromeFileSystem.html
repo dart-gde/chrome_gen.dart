@@ -39,13 +39,9 @@ class ChromeFileSystem {
  ChromeFileSystem._();
 
  /**
-  * Get the display path of an Entry object. The display path is based on
-  *  the full path of the file or directory on the local file system, but may
-  *  be made more readable for display purposes.
-  * 
-  * 
-  * 
-  * Returns:
+  * Get the display path of an Entry object. The display path is based on the
+  * full path of the file or directory on the local file system, but may be
+  * made more readable for display purposes.
   */
  Future&lt;String&gt; getDisplayPath(dynamic entry) {
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -55,13 +51,9 @@ class ChromeFileSystem {
 
  /**
   * Get a writable Entry from another Entry. This call will fail if the
-  *  application does not have the 'write' permission under 'fileSystem'. If
-  *  entry is a DirectoryEntry, this call will fail if the application does
-  *  not have the 'directory' permission under 'fileSystem'.
-  * 
-  * 
-  * 
-  * Returns:
+  * application does not have the 'write' permission under 'fileSystem'. If
+  * entry is a DirectoryEntry, this call will fail if the application does not
+  * have the 'directory' permission under 'fileSystem'.
   */
  Future&lt;dynamic&gt; getWritableEntry(dynamic entry) {
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -71,10 +63,6 @@ class ChromeFileSystem {
 
  /**
   * Gets whether this Entry is writable or not.
-  * 
-  * 
-  * 
-  * Returns:
   */
  Future&lt;bool&gt; isWritableEntry(dynamic entry) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
@@ -84,8 +72,6 @@ class ChromeFileSystem {
 
  /**
   * Ask the user to choose a file or directory.
-  * 
-  * 
   * 
   * Returns:
   * [entry] null
@@ -99,11 +85,7 @@ class ChromeFileSystem {
 
  /**
   * Returns the file entry with the given id if it can be restored. This call
-  *  will fail otherwise. This method is new in Chrome 30.
-  * 
-  * 
-  * 
-  * Returns:
+  * will fail otherwise. This method is new in Chrome 30.
   */
  Future&lt;dynamic&gt; restoreEntry(String id) {
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -112,13 +94,9 @@ class ChromeFileSystem {
  }
 
  /**
-  * Returns whether a file entry for the given id can be restored, i.e.
-  *  whether restoreEntry would succeed with this id now. This method is new
-  *  in Chrome 30.
-  * 
-  * 
-  * 
-  * Returns:
+  * Returns whether a file entry for the given id can be restored, i.e. whether
+  * restoreEntry would succeed with this id now. This method is new in Chrome
+  * 30.
   */
  Future&lt;bool&gt; isRestorable(String id) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
@@ -128,12 +106,12 @@ class ChromeFileSystem {
 
  /**
   * Returns an id that can be passed to restoreEntry to regain access to a
-  *  given file entry. Only the 500 most recently used entries are retained,
-  *  where calls to retainEntry and restoreEntry count as use. If the app has
-  *  the 'retainEntries' permission under 'fileSystem' (currently restricted
-  *  to dev channel), entries are retained indefinitely. Otherwise, entries
-  *  are retained only while the app is running and across restarts. This
-  *  method is new in Chrome 30.
+  * given file entry. Only the 500 most recently used entries are retained,
+  * where calls to retainEntry and restoreEntry count as use. If the app has
+  * the 'retainEntries' permission under 'fileSystem' (currently restricted to
+  * dev channel), entries are retained indefinitely. Otherwise, entries are
+  * retained only while the app is running and across restarts. This method is
+  * new in Chrome 30.
   */
  String retainEntry(dynamic entry) {
    return _fileSystem.callMethod('retainEntry', [entry]);
@@ -166,10 +144,9 @@ Future&lt;JsObject&gt; chooseEntry([ChooseEntryOptions options]) {
 Future&lt;String&gt; <strong>getDisplayPath</strong>(entry) <a class="anchor-link" href="#getDisplayPath"
               title="Permalink to ChromeFileSystem.getDisplayPath">#</a></h4>
 <div class="doc">
-<p>Get the display path of an Entry object. The display path is based on
- the full path of the file or directory on the local file system, but may
- be made more readable for display purposes.</p>
-<p>Returns:</p>
+<p>Get the display path of an Entry object. The display path is based on the
+full path of the file or directory on the local file system, but may be
+made more readable for display purposes.</p>
 <pre class="source">
 Future&lt;String&gt; getDisplayPath(dynamic entry) {
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -185,10 +162,9 @@ Future&lt;dynamic&gt; <strong>getWritableEntry</strong>(entry) <a class="anchor-
               title="Permalink to ChromeFileSystem.getWritableEntry">#</a></h4>
 <div class="doc">
 <p>Get a writable Entry from another Entry. This call will fail if the
- application does not have the 'write' permission under 'fileSystem'. If
- entry is a DirectoryEntry, this call will fail if the application does
- not have the 'directory' permission under 'fileSystem'.</p>
-<p>Returns:</p>
+application does not have the 'write' permission under 'fileSystem'. If
+entry is a DirectoryEntry, this call will fail if the application does not
+have the 'directory' permission under 'fileSystem'.</p>
 <pre class="source">
 Future&lt;dynamic&gt; getWritableEntry(dynamic entry) {
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -203,10 +179,9 @@ Future&lt;dynamic&gt; getWritableEntry(dynamic entry) {
 Future&lt;bool&gt; <strong>isRestorable</strong>(String id) <a class="anchor-link" href="#isRestorable"
               title="Permalink to ChromeFileSystem.isRestorable">#</a></h4>
 <div class="doc">
-<p>Returns whether a file entry for the given id can be restored, i.e.
- whether restoreEntry would succeed with this id now. This method is new
- in Chrome 30.</p>
-<p>Returns:</p>
+<p>Returns whether a file entry for the given id can be restored, i.e. whether
+restoreEntry would succeed with this id now. This method is new in Chrome
+30.</p>
 <pre class="source">
 Future&lt;bool&gt; isRestorable(String id) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
@@ -222,7 +197,6 @@ Future&lt;bool&gt; <strong>isWritableEntry</strong>(entry) <a class="anchor-link
               title="Permalink to ChromeFileSystem.isWritableEntry">#</a></h4>
 <div class="doc">
 <p>Gets whether this Entry is writable or not.</p>
-<p>Returns:</p>
 <pre class="source">
 Future&lt;bool&gt; isWritableEntry(dynamic entry) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
@@ -238,8 +212,7 @@ Future&lt;dynamic&gt; <strong>restoreEntry</strong>(String id) <a class="anchor-
               title="Permalink to ChromeFileSystem.restoreEntry">#</a></h4>
 <div class="doc">
 <p>Returns the file entry with the given id if it can be restored. This call
- will fail otherwise. This method is new in Chrome 30.</p>
-<p>Returns:</p>
+will fail otherwise. This method is new in Chrome 30.</p>
 <pre class="source">
 Future&lt;dynamic&gt; restoreEntry(String id) {
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -255,12 +228,12 @@ String <strong>retainEntry</strong>(entry) <a class="anchor-link" href="#retainE
               title="Permalink to ChromeFileSystem.retainEntry">#</a></h4>
 <div class="doc">
 <p>Returns an id that can be passed to restoreEntry to regain access to a
- given file entry. Only the 500 most recently used entries are retained,
- where calls to retainEntry and restoreEntry count as use. If the app has
- the 'retainEntries' permission under 'fileSystem' (currently restricted
- to dev channel), entries are retained indefinitely. Otherwise, entries
- are retained only while the app is running and across restarts. This
- method is new in Chrome 30.</p>
+given file entry. Only the 500 most recently used entries are retained,
+where calls to retainEntry and restoreEntry count as use. If the app has
+the 'retainEntries' permission under 'fileSystem' (currently restricted to
+dev channel), entries are retained indefinitely. Otherwise, entries are
+retained only while the app is running and across restarts. This method is
+new in Chrome 30.</p>
 <pre class="source">
 String retainEntry(dynamic entry) {
  return _fileSystem.callMethod('retainEntry', [entry]);

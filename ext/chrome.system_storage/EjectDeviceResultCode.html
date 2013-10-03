@@ -32,13 +32,11 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>The ejection command is successful -- the application can prompt the user
- to remove the device.
- The device is in use by another application. The ejection did not
- succeed; the user should not remove the device until the other
- application is done with the device.
- There is no such device known.
- The ejection command failed.</p>
+<p>The ejection command is successful -- the application can prompt the user to
+remove the device. The device is in use by another application. The ejection
+did not succeed; the user should not remove the device until the other
+application is done with the device. There is no such device known. The
+ejection command failed.</p>
 <pre class="source">
 class EjectDeviceResultCode extends ChromeEnum {
  static const EjectDeviceResultCode SUCCESS = const EjectDeviceResultCode._('success');

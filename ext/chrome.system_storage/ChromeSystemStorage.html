@@ -40,11 +40,7 @@ class ChromeSystemStorage {
 
  /**
   * Get the storage information from the system. The argument passed to the
-  *  callback is an array of StorageUnitInfo objects.
-  * 
-  * 
-  * 
-  * Returns:
+  * callback is an array of StorageUnitInfo objects.
   */
  Future&lt;StorageUnitInfo&gt; getInfo() {
    var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(_createStorageUnitInfo);
@@ -54,10 +50,6 @@ class ChromeSystemStorage {
 
  /**
   * Ejects a removable storage device.
-  * 
-  * 
-  * 
-  * Returns:
   */
  Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
    var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(_createEjectDeviceResultCode);
@@ -112,7 +104,6 @@ Future&lt;<a href="../chrome.system_storage/EjectDeviceResultCode.html">EjectDev
               title="Permalink to ChromeSystemStorage.ejectDevice">#</a></h4>
 <div class="doc">
 <p>Ejects a removable storage device.</p>
-<p>Returns:</p>
 <pre class="source">
 Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
  var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(_createEjectDeviceResultCode);
@@ -128,8 +119,7 @@ Future&lt;<a href="../chrome.system_storage/StorageUnitInfo.html">StorageUnitInf
               title="Permalink to ChromeSystemStorage.getInfo">#</a></h4>
 <div class="doc">
 <p>Get the storage information from the system. The argument passed to the
- callback is an array of StorageUnitInfo objects.</p>
-<p>Returns:</p>
+callback is an array of StorageUnitInfo objects.</p>
 <pre class="source">
 Future&lt;StorageUnitInfo&gt; getInfo() {
  var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(_createStorageUnitInfo);

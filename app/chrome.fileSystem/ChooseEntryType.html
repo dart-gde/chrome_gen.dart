@@ -32,21 +32,20 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>Prompts the user to open an existing file and returns a FileEntry on
- success. From Chrome 31 onwards, the FileEntry will be writable if the
- application has the 'write' permission under 'fileSystem'; otherwise, the
- FileEntry will be read-only.
- Prompts the user to open an existing file and returns a writable
- FileEntry on success. Calls using this type will fail unless the
- application has the 'write' permission under 'fileSystem'.
- Prompts the user to open an existing file or a new file and returns a
- writable FileEntry on success. Calls using this type will fail unless the
- application has the 'write' permission under 'fileSystem'.
- Prompts the user to open a directory and returns a DirectoryEntry on
- success. Calls using this type will fail unless the application has the
- 'directory' permission under 'fileSystem'. If the application has the
- 'write' permission under 'fileSystem', the returned DirectoryEntry will
- be writable; otherwise it will be read-only. New in Chrome 31.</p>
+<p>Prompts the user to open an existing file and returns a FileEntry on success.
+From Chrome 31 onwards, the FileEntry will be writable if the application has
+the 'write' permission under 'fileSystem'; otherwise, the FileEntry will be
+read-only. Prompts the user to open an existing file and returns a writable
+FileEntry on success. Calls using this type will fail unless the application
+has the 'write' permission under 'fileSystem'. Prompts the user to open an
+existing file or a new file and returns a writable FileEntry on success.
+Calls using this type will fail unless the application has the 'write'
+permission under 'fileSystem'. Prompts the user to open a directory and
+returns a DirectoryEntry on success. Calls using this type will fail unless
+the application has the 'directory' permission under 'fileSystem'. If the
+application has the 'write' permission under 'fileSystem', the returned
+DirectoryEntry will be writable; otherwise it will be read-only. New in
+Chrome 31.</p>
 <pre class="source">
 class ChooseEntryType extends ChromeEnum {
  static const ChooseEntryType OPENFILE = const ChooseEntryType._('openFile');

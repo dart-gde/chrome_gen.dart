@@ -39,11 +39,11 @@ class ChromeLocation {
  ChromeLocation._();
 
  /**
-  * TODO(vadimt): Consider adding getWatch() and getAllWatches().
-  *  Starts a location watching request.
-  *  |name| : Optional name to identify this request. Defaults to the empty
-  *  string.
-  *  |requestInfo| : Optional parameters for this request.
+  * TODO(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
+  * location watching request.
+  * [name] : Optional name to identify this request. Defaults to the empty
+  * string.
+  * [requestInfo] : Optional parameters for this request.
   */
  void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
    _location.callMethod('watchLocation', [name, requestInfo]);
@@ -51,8 +51,8 @@ class ChromeLocation {
 
  /**
   * Ends a location watching request.
-  *  |name| : Optional name to identify the request to remove. Defaults to the
-  *  empty string.
+  * [name] : Optional name to identify the request to remove. Defaults to the
+  * empty string.
   */
  void clearWatch(String name) {
    _location.callMethod('clearWatch', [name]);
@@ -105,8 +105,9 @@ void <strong>clearWatch</strong>(String name) <a class="anchor-link" href="#clea
               title="Permalink to ChromeLocation.clearWatch">#</a></h4>
 <div class="doc">
 <p>Ends a location watching request.
- |name| : Optional name to identify the request to remove. Defaults to the
- empty string.</p>
+
+<span class="param">name</span> : Optional name to identify the request to remove. Defaults to the
+empty string.</p>
 <pre class="source">
 void clearWatch(String name) {
  _location.callMethod('clearWatch', [name]);
@@ -119,11 +120,13 @@ void clearWatch(String name) {
 void <strong>watchLocation</strong>(String name, <a href="../chrome.location/WatchLocationRequestInfo.html">WatchLocationRequestInfo</a> requestInfo) <a class="anchor-link" href="#watchLocation"
               title="Permalink to ChromeLocation.watchLocation">#</a></h4>
 <div class="doc">
-<p>TODO(vadimt): Consider adding getWatch() and getAllWatches().
- Starts a location watching request.
- |name| : Optional name to identify this request. Defaults to the empty
- string.
- |requestInfo| : Optional parameters for this request.</p>
+<p>TODO(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
+location watching request.
+
+<span class="param">name</span> : Optional name to identify this request. Defaults to the empty
+string.
+
+<span class="param">requestInfo</span> : Optional parameters for this request.</p>
 <pre class="source">
 void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
  _location.callMethod('watchLocation', [name, requestInfo]);

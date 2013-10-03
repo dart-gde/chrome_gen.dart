@@ -39,16 +39,16 @@ class ChromeNotifications {
  ChromeNotifications._();
 
  /**
-  * Creates and displays a notification having the contents in |options|,
-  *  identified by the id |notificationId|. If |notificationId| is empty,
-  *  |create| generates an id. If |notificationId| matches an existing
-  *  notification, |create| first clears that notification before proceeding
-  *  with the create operation. |callback| returns the notification id
-  *  (either supplied or generated) that represents the created notification.
-  * 
-  * 
-  * 
-  * Returns:
+  * Creates and displays a notification having the contents in
+  * [options], identified by the id
+  * [notificationId]. If
+  * [notificationId] is empty,
+  * [create] generates an id. If
+  * [notificationId] matches an existing notification,
+  * [create] first clears that notification before proceeding with the create
+  * operation.
+  * [callback] returns the notification id (either supplied or generated) that
+  * represents the created notification.
   */
  Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -57,13 +57,10 @@ class ChromeNotifications {
  }
 
  /**
-  * Updates an existing notification having the id |notificationId| and the
-  *  options |options|. |callback| indicates whether a matching notification
-  *  existed.
-  * 
-  * 
-  * 
-  * Returns:
+  * Updates an existing notification having the id
+  * [notificationId] and the options
+  * [options].
+  * [callback] indicates whether a matching notification existed.
   */
  Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
@@ -72,13 +69,10 @@ class ChromeNotifications {
  }
 
  /**
-  * Given a |notificationId| returned by the |create| method, clears the
-  *  corresponding notification. |callback| indicates whether a matching
-  *  notification existed.
-  * 
-  * 
-  * 
-  * Returns:
+  * Given a
+  * [notificationId] returned by the
+  * [create] method, clears the corresponding notification.
+  * [callback] indicates whether a matching notification existed.
   */
  Future&lt;bool&gt; clear(String notificationId) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
@@ -87,12 +81,8 @@ class ChromeNotifications {
  }
 
  /**
-  * |callback| is executed with the set of notification_ids currently in
-  *  the system.
-  * 
-  * 
-  * 
-  * Returns:
+  * |callback| is executed with the set of notification_ids currently in the
+  * system.
   */
  Future&lt;dynamic&gt; getAll() {
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -163,10 +153,11 @@ Stream&lt;OnClosedEvent&gt; get onClosed =&gt; _onClosed.stream;
 Future&lt;bool&gt; <strong>clear</strong>(String notificationId) <a class="anchor-link" href="#clear"
               title="Permalink to ChromeNotifications.clear">#</a></h4>
 <div class="doc">
-<p>Given a |notificationId| returned by the |create| method, clears the
- corresponding notification. |callback| indicates whether a matching
- notification existed.</p>
-<p>Returns:</p>
+<p>Given a
+
+<span class="param">notificationId</span> returned by the
+<a class="crossref" href="../chrome.notifications/ChromeNotifications.html#create">create</a> method, clears the corresponding notification.
+<code>callback</code> indicates whether a matching notification existed.</p>
 <pre class="source">
 Future&lt;bool&gt; clear(String notificationId) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
@@ -181,13 +172,20 @@ Future&lt;bool&gt; clear(String notificationId) {
 Future&lt;String&gt; <strong>create</strong>(String notificationId, <a href="../chrome.notifications/NotificationOptions.html">NotificationOptions</a> options) <a class="anchor-link" href="#create"
               title="Permalink to ChromeNotifications.create">#</a></h4>
 <div class="doc">
-<p>Creates and displays a notification having the contents in |options|,
- identified by the id |notificationId|. If |notificationId| is empty,
- |create| generates an id. If |notificationId| matches an existing
- notification, |create| first clears that notification before proceeding
- with the create operation. |callback| returns the notification id
- (either supplied or generated) that represents the created notification.</p>
-<p>Returns:</p>
+<p>Creates and displays a notification having the contents in
+
+<span class="param">options</span>, identified by the id
+
+<span class="param">notificationId</span>. If
+
+<span class="param">notificationId</span> is empty,
+<a class="crossref" href="../chrome.notifications/ChromeNotifications.html#create">create</a> generates an id. If
+
+<span class="param">notificationId</span> matches an existing notification,
+<a class="crossref" href="../chrome.notifications/ChromeNotifications.html#create">create</a> first clears that notification before proceeding with the create
+operation.
+<code>callback</code> returns the notification id (either supplied or generated) that
+represents the created notification.</p>
 <pre class="source">
 Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -202,9 +200,8 @@ Future&lt;String&gt; create(String notificationId, NotificationOptions options) 
 Future&lt;dynamic&gt; <strong>getAll</strong>() <a class="anchor-link" href="#getAll"
               title="Permalink to ChromeNotifications.getAll">#</a></h4>
 <div class="doc">
-<p>|callback| is executed with the set of notification_ids currently in
- the system.</p>
-<p>Returns:</p>
+<p>|callback| is executed with the set of notification_ids currently in the
+system.</p>
 <pre class="source">
 Future&lt;dynamic&gt; getAll() {
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -219,10 +216,12 @@ Future&lt;dynamic&gt; getAll() {
 Future&lt;bool&gt; <strong>update</strong>(String notificationId, <a href="../chrome.notifications/NotificationOptions.html">NotificationOptions</a> options) <a class="anchor-link" href="#update"
               title="Permalink to ChromeNotifications.update">#</a></h4>
 <div class="doc">
-<p>Updates an existing notification having the id |notificationId| and the
- options |options|. |callback| indicates whether a matching notification
- existed.</p>
-<p>Returns:</p>
+<p>Updates an existing notification having the id
+
+<span class="param">notificationId</span> and the options
+
+<span class="param">options</span>.
+<code>callback</code> indicates whether a matching notification existed.</p>
 <pre class="source">
 Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();

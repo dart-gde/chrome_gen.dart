@@ -101,14 +101,16 @@ class AppWindow extends ChromeObject {
  }
 
  /**
-  * Move the window to the position (|left|, |top|).
+  * Move the window to the position (|left|,
+  * [top]).
   */
  void moveTo(int left, int top) {
    proxy.callMethod('moveTo', [left, top]);
  }
 
  /**
-  * Resize the window to |width|x|height| pixels in size.
+  * Resize the window to
+  * [width]x|height| pixels in size.
   */
  void resizeTo(int width, int height) {
    proxy.callMethod('resizeTo', [width, height]);
@@ -164,9 +166,9 @@ class AppWindow extends ChromeObject {
  }
 
  /**
-  * Set the app icon for the window (experimental).
-  *  Currently this is only being implemented on Ash.
-  *  TODO(stevenjb): Investigate implementing this on Windows and OSX.
+  * Set the app icon for the window (experimental). Currently this is only
+  * being implemented on Ash. TODO(stevenjb): Investigate implementing this on
+  * Windows and OSX.
   */
  void setIcon(String icon_url) {
    proxy.callMethod('setIcon', [icon_url]);
@@ -403,7 +405,9 @@ void minimize() {
 void <strong>moveTo</strong>(int left, int top) <a class="anchor-link" href="#moveTo"
               title="Permalink to AppWindow.moveTo">#</a></h4>
 <div class="doc">
-<p>Move the window to the position (|left|, |top|).</p>
+<p>Move the window to the position (|left|,
+
+<span class="param">top</span>).</p>
 <pre class="source">
 void moveTo(int left, int top) {
  proxy.callMethod('moveTo', [left, top]);
@@ -416,7 +420,9 @@ void moveTo(int left, int top) {
 void <strong>resizeTo</strong>(int width, int height) <a class="anchor-link" href="#resizeTo"
               title="Permalink to AppWindow.resizeTo">#</a></h4>
 <div class="doc">
-<p>Resize the window to |width|x|height| pixels in size.</p>
+<p>Resize the window to
+
+<span class="param">width</span>x|height| pixels in size.</p>
 <pre class="source">
 void resizeTo(int width, int height) {
  proxy.callMethod('resizeTo', [width, height]);
@@ -455,9 +461,9 @@ void setBounds(Bounds bounds) {
 void <strong>setIcon</strong>(String icon_url) <a class="anchor-link" href="#setIcon"
               title="Permalink to AppWindow.setIcon">#</a></h4>
 <div class="doc">
-<p>Set the app icon for the window (experimental).
- Currently this is only being implemented on Ash.
- TODO(stevenjb): Investigate implementing this on Windows and OSX.</p>
+<p>Set the app icon for the window (experimental). Currently this is only
+being implemented on Ash. TODO(stevenjb): Investigate implementing this on
+Windows and OSX.</p>
 <pre class="source">
 void setIcon(String icon_url) {
  proxy.callMethod('setIcon', [icon_url]);

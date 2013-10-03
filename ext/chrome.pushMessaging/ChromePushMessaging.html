@@ -39,16 +39,11 @@ class ChromePushMessaging {
  ChromePushMessaging._();
 
  /**
-  * Retrieves the channel ID associated with this app or extension.
-  *  Typically an app or extension will want to send this value
-  *  to its application server so the server can use it
-  *  to trigger push messages back to the app or extension.
-  *  If the interactive flag is set, we will ask the user to log in
-  *  when they are not already logged in.
-  * 
-  * 
-  * 
-  * Returns:
+  * Retrieves the channel ID associated with this app or extension. Typically
+  * an app or extension will want to send this value to its application server
+  * so the server can use it to trigger push messages back to the app or
+  * extension. If the interactive flag is set, we will ask the user to log in
+  * when they are not already logged in.
   */
  Future&lt;ChannelIdResult&gt; getChannelId([bool interactive]) {
    var completer = new ChromeCompleter&lt;ChannelIdResult&gt;.oneArg(_createChannelIdResult);
@@ -85,13 +80,11 @@ Stream&lt;Message&gt; get onMessage =&gt; _onMessage.stream;
 Future&lt;<a href="../chrome.pushMessaging/ChannelIdResult.html">ChannelIdResult</a>&gt; <strong>getChannelId</strong>([bool interactive]) <a class="anchor-link" href="#getChannelId"
               title="Permalink to ChromePushMessaging.getChannelId">#</a></h4>
 <div class="doc">
-<p>Retrieves the channel ID associated with this app or extension.
- Typically an app or extension will want to send this value
- to its application server so the server can use it
- to trigger push messages back to the app or extension.
- If the interactive flag is set, we will ask the user to log in
- when they are not already logged in.</p>
-<p>Returns:</p>
+<p>Retrieves the channel ID associated with this app or extension. Typically
+an app or extension will want to send this value to its application server
+so the server can use it to trigger push messages back to the app or
+extension. If the interactive flag is set, we will ask the user to log in
+when they are not already logged in.</p>
 <pre class="source">
 Future&lt;ChannelIdResult&gt; getChannelId([bool interactive]) {
  var completer = new ChromeCompleter&lt;ChannelIdResult&gt;.oneArg(_createChannelIdResult);
