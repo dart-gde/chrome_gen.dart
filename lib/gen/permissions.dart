@@ -11,7 +11,7 @@ library chrome.permissions;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.permissions` namespace.
-final ChromePermissions permissions = new ChromePermissions._();
+final ChromePermissions permissions = ChromePermissions._permissions == null ? apiNotAvailable('chrome.permissions') : new ChromePermissions._();
 
 class ChromePermissions {
   static final JsObject _permissions = context['chrome']['permissions'];

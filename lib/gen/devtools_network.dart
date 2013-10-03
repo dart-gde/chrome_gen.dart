@@ -9,7 +9,7 @@ library chrome.devtools_network;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.devtools.network` namespace.
-final ChromeDevtoolsNetwork devtools_network = new ChromeDevtoolsNetwork._();
+final ChromeDevtoolsNetwork devtools_network = ChromeDevtoolsNetwork._devtools_network == null ? apiNotAvailable('chrome.devtools.network') : new ChromeDevtoolsNetwork._();
 
 class ChromeDevtoolsNetwork {
   static final JsObject _devtools_network = context['chrome']['devtools']['network'];

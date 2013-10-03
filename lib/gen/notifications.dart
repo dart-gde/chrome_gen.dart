@@ -5,7 +5,7 @@ library chrome.notifications;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.notifications` namespace.
-final ChromeNotifications notifications = new ChromeNotifications._();
+final ChromeNotifications notifications = ChromeNotifications._notifications == null ? apiNotAvailable('chrome.notifications') : new ChromeNotifications._();
 
 class ChromeNotifications {
   static final JsObject _notifications = context['chrome']['notifications'];

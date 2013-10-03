@@ -8,7 +8,7 @@ library chrome.fontSettings;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.fontSettings` namespace.
-final ChromeFontSettings fontSettings = new ChromeFontSettings._();
+final ChromeFontSettings fontSettings = ChromeFontSettings._fontSettings == null ? apiNotAvailable('chrome.fontSettings') : new ChromeFontSettings._();
 
 class ChromeFontSettings {
   static final JsObject _fontSettings = context['chrome']['fontSettings'];

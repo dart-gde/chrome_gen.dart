@@ -10,7 +10,7 @@ library chrome.bookmarks;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.bookmarks` namespace.
-final ChromeBookmarks bookmarks = new ChromeBookmarks._();
+final ChromeBookmarks bookmarks = ChromeBookmarks._bookmarks == null ? apiNotAvailable('chrome.bookmarks') : new ChromeBookmarks._();
 
 class ChromeBookmarks {
   static final JsObject _bookmarks = context['chrome']['bookmarks'];

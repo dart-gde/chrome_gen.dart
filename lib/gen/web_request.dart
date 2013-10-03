@@ -9,7 +9,7 @@ library chrome.webRequest;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.webRequest` namespace.
-final ChromeWebRequest webRequest = new ChromeWebRequest._();
+final ChromeWebRequest webRequest = ChromeWebRequest._webRequest == null ? apiNotAvailable('chrome.webRequest') : new ChromeWebRequest._();
 
 class ChromeWebRequest {
   static final JsObject _webRequest = context['chrome']['webRequest'];

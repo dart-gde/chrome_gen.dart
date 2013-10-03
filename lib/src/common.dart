@@ -51,6 +51,13 @@ Map mapify(JsObject obj) {
 
 dynamic selfConverter(var obj) => obj;
 
+dynamic apiNotAvailable(String apiName) {
+  print('${apiName} not available.');
+  print('This could be caused by a missing manifest.json permission or by running on an older version of Chrome.');
+
+  return null;
+}
+
 // TODO: some chrome APIs use lastError, and some don't
 
 /**

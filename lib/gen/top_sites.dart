@@ -9,7 +9,7 @@ library chrome.topSites;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.topSites` namespace.
-final ChromeTopSites topSites = new ChromeTopSites._();
+final ChromeTopSites topSites = ChromeTopSites._topSites == null ? apiNotAvailable('chrome.topSites') : new ChromeTopSites._();
 
 class ChromeTopSites {
   static final JsObject _topSites = context['chrome']['topSites'];

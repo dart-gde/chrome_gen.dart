@@ -5,7 +5,7 @@ library chrome.tabCapture;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.tabCapture` namespace.
-final ChromeTabCapture tabCapture = new ChromeTabCapture._();
+final ChromeTabCapture tabCapture = ChromeTabCapture._tabCapture == null ? apiNotAvailable('chrome.tabCapture') : new ChromeTabCapture._();
 
 class ChromeTabCapture {
   static final JsObject _tabCapture = context['chrome']['tabCapture'];

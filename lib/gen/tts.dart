@@ -11,7 +11,7 @@ library chrome.tts;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.tts` namespace.
-final ChromeTts tts = new ChromeTts._();
+final ChromeTts tts = ChromeTts._tts == null ? apiNotAvailable('chrome.tts') : new ChromeTts._();
 
 class ChromeTts {
   static final JsObject _tts = context['chrome']['tts'];

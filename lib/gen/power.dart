@@ -5,7 +5,7 @@ library chrome.power;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.power` namespace.
-final ChromePower power = new ChromePower._();
+final ChromePower power = ChromePower._power == null ? apiNotAvailable('chrome.power') : new ChromePower._();
 
 class ChromePower {
   static final JsObject _power = context['chrome']['power'];

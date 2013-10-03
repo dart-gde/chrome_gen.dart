@@ -5,7 +5,7 @@ library chrome.fileSystem;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.fileSystem` namespace.
-final ChromeFileSystem fileSystem = new ChromeFileSystem._();
+final ChromeFileSystem fileSystem = ChromeFileSystem._fileSystem == null ? apiNotAvailable('chrome.fileSystem') : new ChromeFileSystem._();
 
 class ChromeFileSystem {
   static final JsObject _fileSystem = context['chrome']['fileSystem'];

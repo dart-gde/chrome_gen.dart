@@ -11,7 +11,7 @@ import 'devtools_inspected_window.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.devtools.panels` namespace.
-final ChromeDevtoolsPanels devtools_panels = new ChromeDevtoolsPanels._();
+final ChromeDevtoolsPanels devtools_panels = ChromeDevtoolsPanels._devtools_panels == null ? apiNotAvailable('chrome.devtools.panels') : new ChromeDevtoolsPanels._();
 
 class ChromeDevtoolsPanels {
   static final JsObject _devtools_panels = context['chrome']['devtools']['panels'];

@@ -5,7 +5,7 @@ library chrome.identity;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.identity` namespace.
-final ChromeIdentity identity = new ChromeIdentity._();
+final ChromeIdentity identity = ChromeIdentity._identity == null ? apiNotAvailable('chrome.identity') : new ChromeIdentity._();
 
 class ChromeIdentity {
   static final JsObject _identity = context['chrome']['identity'];

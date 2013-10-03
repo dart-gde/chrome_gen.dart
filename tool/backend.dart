@@ -70,11 +70,11 @@ class _DefaultBackendContext {
     generator.writeln("import '../src/common.dart';");
     generator.writeln();
 
-    // final ChromeI18N i18n = new ChromeI18N._();
+    // final ChromeI18N i18n = ChromeI18N._i18n == null ? null : new ChromeI18N._();
     generator.writeDocs("Accessor for the `chrome.${library.name}` namespace.",
         preferSingle: true);
-    generator.writeln("final ${className} ${libraryName}"
-        " = new ${className}._();");
+    generator.writeln("final ${className} ${libraryName} = ${className}.${contextReference} == null ? "
+        "apiNotAvailable('chrome.${library.name}') : new ${className}._();");
     generator.writeln();
 
     _printClass();
@@ -134,7 +134,6 @@ class _DefaultBackendContext {
     } else {
       creatorTemplate = "%s _create%s(JsObject proxy) => proxy == null ? null : new %s.fromProxy(proxy);";
     }
-
 
     generator.writeln(creatorTemplate.replaceAll('%s', creator));
   }

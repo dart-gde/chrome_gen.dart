@@ -9,7 +9,7 @@ library chrome.webstore;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.webstore` namespace.
-final ChromeWebstore webstore = new ChromeWebstore._();
+final ChromeWebstore webstore = ChromeWebstore._webstore == null ? apiNotAvailable('chrome.webstore') : new ChromeWebstore._();
 
 class ChromeWebstore {
   static final JsObject _webstore = context['chrome']['webstore'];
