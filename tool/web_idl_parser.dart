@@ -1,11 +1,230 @@
 
 library web_idl_parser;
 
+import 'dart:math';
+
 import 'package:parsers/parsers.dart';
 import 'web_idl_model.dart';
 export 'web_idl_model.dart' show EMPTY;
 
 final Parser spaces = (space.many > success(EMPTY)) % 'spaces';
+
+_consStr(c) => (String cs) => "$c$cs";
+
+class ReservedNames {
+  Map<String, Parser<String>> _map;
+  ReservedNames._(this._map);
+  Parser<String> operator[](String key) {
+    final res = _map[key];
+    if (res == null) throw "$key is not a reserved name";
+    else return res;
+  }
+}
+
+/// Programming language specific combinators
+class XLanguageParsers {
+  String _commentStart;
+  String _commentEnd;
+  String _commentLine;
+  bool _nestedComments;
+  Parser<String> _identStart;
+  Parser<String> _identLetter;
+  Set<String> _reservedNames;
+  bool _caseSensitive;
+
+  ReservedNames _reserved;
+
+  XLanguageParsers({
+    String         commentStart   : '/*',
+    String         commentEnd     : '*/',
+    String         commentLine    : '//',
+    bool           nestedComments : false,
+    Parser<String> identStart     : null, // letter | char('_')
+    Parser<String> identLetter    : null, // alphanum | char('_')
+    List<String>   reservedNames  : const []
+  }) {
+    final identStartDefault = letter | char('_');
+    final identLetterDefault = alphanum | char('_');
+
+    _commentStart = commentStart;
+    _commentEnd = commentEnd;
+    _commentLine = commentLine;
+    _nestedComments = nestedComments;
+    _identStart = (identStart == null) ? identStartDefault : identStart;
+    _identLetter = (identLetter == null) ? identLetterDefault : identLetter;
+    _reservedNames = new Set<String>.from(reservedNames);
+  }
+
+  Parser<String> get semi  => symbol(';') % 'semicolon';
+  Parser<String> get comma => symbol(',') % 'comma';
+  Parser<String> get colon => symbol(':') % 'colon';
+  Parser<String> get dot   => symbol('.') % 'dot';
+
+  Parser<String> get _ident =>
+      success((c) => (cs) => _consStr(c)(cs.join()))
+      * _identStart
+      * _identLetter.many;
+
+  Parser<String> get identifier =>
+      lexeme(_ident >> (name) =>
+             _reservedNames.contains(name) ? fail : success(name))
+      % 'identifier';
+
+  ReservedNames get reserved {
+    if (_reserved == null) {
+      final map = new Map<String, Parser<String>>();
+      for (final name in _reservedNames) {
+        map[name] = lexeme(string(name).notFollowedBy(_identLetter));
+      }
+      _reserved = new ReservedNames._(map);
+    }
+    return _reserved;
+  }
+
+  final Parser<String> _escapeCode =
+      (char('a')  > success('\a'))
+    | (char('b')  > success('\b'))
+    | (char('f')  > success('\f'))
+    | (char('n')  > success('\n'))
+    | (char('r')  > success('\r'))
+    | (char('t')  > success('\t'))
+    | (char('v')  > success('\v'))
+    | (char('\\') > success('\\'))
+    | (char('"')  > success('"'))
+    | (char("'")  > success("'"));
+
+  Parser<String> get _charChar => (char('\\') > _escapeCode)
+                                | pred((c) => c != "'");
+
+  Parser<String> get charLiteral =>
+      lexeme(_charChar.between(char("'"), char("'")))
+      % 'character literal';
+
+  Parser<String> get _stringChar => (char('\\') > _escapeCode)
+                                  | pred((c) => c != '"');
+
+  Parser<String> get stringLiteral =>
+      lexeme(_stringChar.many.between(char('"'), char('"')))
+      .map((cs) => cs.join())
+      % 'string literal';
+
+  Map<String, int> _digitToInt = {
+    '0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8,
+    '9': 9, 'a': 10, 'b': 11, 'c': 12, 'd': 13, 'e': 14, 'f': 15, 'A': 10,
+    'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15
+  };
+
+  Parser<int> _number(int base, Parser baseDigit) => baseDigit.many1 >> (ds) {
+    int res = 0;
+    for (final d in ds) { res = base * res + _digitToInt[d]; }
+    return success(res);
+  };
+
+  Parser<int> get _zeroNumber =>
+      char('0') > (hexaDecimal | octal | decimal | success(0));
+
+  Parser<int> get _nat => _zeroNumber | decimal;
+
+  Parser<int> get _int => lexeme(_sign) * _nat;
+
+  Parser<Function> get _sign => (char('-') > success((n) => -n))
+                              | (char('+') > success((n) => n))
+                              | success((n) => n);
+
+  Parser<int> get natural => lexeme(_nat) % 'natural number';
+
+  Parser<int> get intLiteral => lexeme(_int) % 'integer';
+
+  num _power(num e) => e < 0 ? 1.0 / _power(-e) : pow(10, e);
+
+  Parser<double> get _exponent =>
+      oneOf('eE') > success((f) => (e) => _power(f(e))) * _sign * decimal;
+
+  Parser<double> get _fraction => char('.') > digit.many1 >> (ds) {
+    double res = 0.0;
+    for (int i = ds.length - 1; i >= 0; i--) {
+      res = (res + _digitToInt[ds[i]]) / 10.0;
+    }
+    return success(res);
+  };
+
+  Parser<double> _fractExponent(int n) =>
+      (success((fract) => (expo) => (n + fract) * expo)
+          * _fraction
+          * _exponent.orElse(1.0))
+      | _exponent.map((expo) => n * expo);
+
+  Parser<double> get floatLiteral =>
+      lexeme(decimal >> _fractExponent) % 'float';
+
+  Parser<int> get decimal => _number(10, digit) % 'decimal number';
+
+  Parser<int> get hexaDecimal =>
+      (oneOf("xX") > _number(16, oneOf("0123456789abcdefABCDEF")))
+      % 'hexadecimal number';
+
+  Parser<int> get octal =>
+      (oneOf("oO") > _number(8, oneOf("01234567")))
+      % 'octal number';
+
+  Parser<String> symbol(String symb) => lexeme(string(symb));
+
+  Parser lexeme(Parser p) => p < whiteSpace;
+
+  Parser get _start => string(_commentStart);
+  Parser get _end => string(_commentEnd);
+  Parser get _notStartNorEnd => (_start | _end).notAhead > anyChar;
+
+  Parser _multiLineComment() => _start > _inComment();
+
+  Parser _inComment() =>
+      _nestedComments ? _inCommentMulti() : _inCommentSingle();
+
+  Parser _inCommentMulti() => _notStartNorEnd.skipMany > _recOrEnd();
+
+  Parser _recOrEnd() => (rec(_multiLineComment) > rec(_inCommentMulti))
+                      | (_end > success(null));
+
+  Parser _inCommentSingle() => anyChar.skipManyUntil(_end);
+
+  StringBuffer commendLineBuffer = new StringBuffer();
+  _recordOneCommentLine(c) {
+    commendLineBuffer.write(c);
+
+    if (c == '\n') {
+      print("${commendLineBuffer.toString()}");
+      print("RESETTING COMMAINDLINEBUFFER");
+      commendLineBuffer.clear();
+    }
+    return c != '\n';
+  }
+  Parser get _oneLineComment =>
+      string(_commentLine) > (pred(_recordOneCommentLine).skipMany > success(null));
+
+  Parser get whiteSpace => _whiteSpace % 'whitespace/comment';
+
+  Parser get _whiteSpace {
+    if (_commentLine.isEmpty && _commentStart.isEmpty) {
+      return space.skipMany;
+    } else if (_commentLine.isEmpty) {
+      return (space | _multiLineComment()).skipMany;
+    } else if (_commentStart.isEmpty) {
+      return (space | _oneLineComment).skipMany;
+    } else {
+      return (space | _oneLineComment | _multiLineComment()).skipMany;
+    }
+  }
+
+  Parser parens(Parser p) => p.between(symbol('('), symbol(')'));
+
+  Parser braces(Parser p) => p.between(symbol('{'), symbol('}'));
+
+  Parser angles(Parser p) => p.between(symbol('<'), symbol('>'));
+
+  Parser brackets(Parser p) => p.between(symbol('['), symbol(']'));
+}
+
+
 
 final reservedNames = [ "readonly",
                         // ArgumentNameKeyword
@@ -63,7 +282,7 @@ final reservedNames = [ "readonly",
                         "namespace"];
 
 // http://www.w3.org/TR/WebIDL/#idl-grammar
-class WebIdlParser extends LanguageParsers {
+class WebIdlParser extends XLanguageParsers {
   IDLCollector collector;
 
   WebIdlParser()
@@ -87,7 +306,7 @@ class WebIdlParser extends LanguageParsers {
                 + reserved["namespace"]
                 + namespaceIdentifier()
                 + braces(rec(definitions))
-                + semi).list ^ (l) => collector.namespace(l);
+                + semi).list ^ (l) => collector.namespace(l, commendLineBuffer);
 
   // Custom Google WebIDL grammar
   namespaceIdentifier() => identifier.sepBy(dot) | identifier;
@@ -133,7 +352,7 @@ class WebIdlParser extends LanguageParsers {
 
   interfaceMember() => rec(constStmt)
                      | rec(attributeOrOperation)
-                     ^ (l) => collector.interfaceMember(l);
+                     ^ (l) => collector.interfaceMember(l, commendLineBuffer);
 
   dictionary() => (reserved["dictionary"]
                   + identifier
@@ -148,11 +367,11 @@ class WebIdlParser extends LanguageParsers {
 
   dictionaryMember() => (rec(type) + identifier + rec(defaultStmt) + semi).list
                         // Wrapped in braces not to get caught by the next pipe.
-                        ^ (l) { return collector.dictionaryMember(l); }
+                        ^ (l) { return collector.dictionaryMember(l, commendLineBuffer); }
                         // Non standard WebIDL in Chrome IDL operations as
                         // dictionary members
                         | rec(operation)
-                        ^ (l) { return collector.dictionaryMethod(l); };
+                        ^ (l) { return collector.dictionaryMethod(l, commendLineBuffer); };
 
   partialDictionary() => (reserved["dictionary"]
                          + identifier
@@ -186,7 +405,7 @@ class WebIdlParser extends LanguageParsers {
                 + identifier
                 + braces(rec(enumIdentifierList))
                 + semi).list
-                ^ (l) => collector.enumStatement(l);
+                ^ (l) => collector.enumStatement(l, commendLineBuffer);
 
   enumValueList() => (stringLiteral + rec(enumValues)).list;
 
@@ -201,7 +420,7 @@ class WebIdlParser extends LanguageParsers {
                     + symbol('=')
                     + rec(returnType)
                     + parens(rec(argumentList))
-                    + semi).list ^ (l) => collector.callback(l);
+                    + semi).list ^ (l) => collector.callback(l, commendLineBuffer);
 
   typedefStmt() => (reserved["typedef"]
                     + rec(extendedAttributeList)
