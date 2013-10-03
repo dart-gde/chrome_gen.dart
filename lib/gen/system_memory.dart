@@ -13,14 +13,13 @@ class ChromeSystemMemory {
   ChromeSystemMemory._();
 
   Future<MemoryInfo> getInfo() {
-    var completer = new ChromeCompleter<MemoryInfo>.oneArg(MemoryInfo.create);
+    var completer = new ChromeCompleter<MemoryInfo>.oneArg(_createMemoryInfo);
     _system_memory.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }
 }
 
 class MemoryInfo extends ChromeObject {
-  static MemoryInfo create(JsObject proxy) => proxy == null ? null : new MemoryInfo.fromProxy(proxy);
 
   MemoryInfo({double capacity, double availableCapacity}) {
     if (capacity != null) this.capacity = capacity;
@@ -35,3 +34,5 @@ class MemoryInfo extends ChromeObject {
   double get availableCapacity => proxy['availableCapacity'];
   set availableCapacity(double value) => proxy['availableCapacity'] = value;
 }
+
+MemoryInfo _createMemoryInfo(JsObject proxy) => proxy == null ? null : new MemoryInfo.fromProxy(proxy);

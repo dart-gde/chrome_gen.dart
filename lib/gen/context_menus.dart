@@ -74,15 +74,13 @@ class ChromeContextMenus {
   Stream<OnClickedEvent> get onClicked => _onClicked.stream;
 
   final ChromeStreamController<OnClickedEvent> _onClicked =
-      new ChromeStreamController<OnClickedEvent>.twoArgs(_contextMenus['onClicked'], OnClickedEvent.create);
+      new ChromeStreamController<OnClickedEvent>.twoArgs(_contextMenus['onClicked'], _createOnClickedEvent);
 }
 
 /**
  * Fired when a context menu item is clicked.
  */
 class OnClickedEvent {
-  static OnClickedEvent create(JsObject info, JsObject tab) =>
-      new OnClickedEvent(OnClickData.create(info), Tab.create(tab));
 
   /**
    * Information about the item clicked and the context where the click
@@ -107,7 +105,6 @@ class OnClickedEvent {
  * Information sent when a context menu item is clicked.
  */
 class OnClickData extends ChromeObject {
-  static OnClickData create(JsObject proxy) => proxy == null ? null : new OnClickData.fromProxy(proxy);
 
   OnClickData({var menuItemId, var parentMenuItemId, String mediaType, String linkUrl, String srcUrl, String pageUrl, String frameUrl, String selectionText, bool editable, bool wasChecked, bool checked}) {
     if (menuItemId != null) this.menuItemId = menuItemId;
@@ -198,3 +195,8 @@ class OnClickData extends ChromeObject {
   bool get checked => proxy['checked'];
   set checked(bool value) => proxy['checked'] = value;
 }
+
+OnClickedEvent _createOnClickedEvent(JsObject info, JsObject tab) =>
+    new OnClickedEvent(_createOnClickData(info), _createTab(tab));
+OnClickData _createOnClickData(JsObject proxy) => proxy == null ? null : new OnClickData.fromProxy(proxy);
+Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

@@ -96,7 +96,7 @@ class ChromeProcesses {
   Stream<Process> get onCreated => _onCreated.stream;
 
   final ChromeStreamController<Process> _onCreated =
-      new ChromeStreamController<Process>.oneArg(_processes['onCreated'], Process.create);
+      new ChromeStreamController<Process>.oneArg(_processes['onCreated'], _createProcess);
 
   /**
    * Fired each time a process becomes unresponsive, providing the corrseponding
@@ -105,7 +105,7 @@ class ChromeProcesses {
   Stream<Process> get onUnresponsive => _onUnresponsive.stream;
 
   final ChromeStreamController<Process> _onUnresponsive =
-      new ChromeStreamController<Process>.oneArg(_processes['onUnresponsive'], Process.create);
+      new ChromeStreamController<Process>.oneArg(_processes['onUnresponsive'], _createProcess);
 
   /**
    * Fired each time a process is terminated, providing the type of exit.
@@ -113,15 +113,13 @@ class ChromeProcesses {
   Stream<OnExitedEvent> get onExited => _onExited.stream;
 
   final ChromeStreamController<OnExitedEvent> _onExited =
-      new ChromeStreamController<OnExitedEvent>.threeArgs(_processes['onExited'], OnExitedEvent.create);
+      new ChromeStreamController<OnExitedEvent>.threeArgs(_processes['onExited'], _createOnExitedEvent);
 }
 
 /**
  * Fired each time a process is terminated, providing the type of exit.
  */
 class OnExitedEvent {
-  static OnExitedEvent create(int processId, int exitType, int exitCode) =>
-      new OnExitedEvent(processId, exitType, exitCode);
 
   /**
    * The ID of the process that exited.
@@ -147,7 +145,6 @@ class OnExitedEvent {
  * An object containing information about one of the browser's processes.
  */
 class Process extends ChromeObject {
-  static Process create(JsObject proxy) => proxy == null ? null : new Process.fromProxy(proxy);
 
   Process({int id, int osProcessId, String type, String profile, List<int> tabs, var cpu, var network, var privateMemory, var jsMemoryAllocated, var jsMemoryUsed, var sqliteMemory, var fps, Cache imageCache, Cache scriptCache, Cache cssCache}) {
     if (id != null) this.id = id;
@@ -263,7 +260,7 @@ class Process extends ChromeObject {
    * available when receiving the object as part of a callback from onUpdated or
    * onUpdatedWithMemory.
    */
-  Cache get imageCache => Cache.create(proxy['imageCache']);
+  Cache get imageCache => _createCache(proxy['imageCache']);
   set imageCache(Cache value) => proxy['imageCache'] = value;
 
   /**
@@ -271,7 +268,7 @@ class Process extends ChromeObject {
    * available when receiving the object as part of a callback from onUpdated or
    * onUpdatedWithMemory.
    */
-  Cache get scriptCache => Cache.create(proxy['scriptCache']);
+  Cache get scriptCache => _createCache(proxy['scriptCache']);
   set scriptCache(Cache value) => proxy['scriptCache'] = value;
 
   /**
@@ -279,7 +276,7 @@ class Process extends ChromeObject {
    * available when receiving the object as part of a callback from onUpdated or
    * onUpdatedWithMemory.
    */
-  Cache get cssCache => Cache.create(proxy['cssCache']);
+  Cache get cssCache => _createCache(proxy['cssCache']);
   set cssCache(Cache value) => proxy['cssCache'] = value;
 }
 
@@ -288,7 +285,6 @@ class Process extends ChromeObject {
  * cache used by the browser.
  */
 class Cache extends ChromeObject {
-  static Cache create(JsObject proxy) => proxy == null ? null : new Cache.fromProxy(proxy);
 
   Cache({var size, var liveSize}) {
     if (size != null) this.size = size;
@@ -309,3 +305,8 @@ class Cache extends ChromeObject {
   dynamic get liveSize => proxy['liveSize'];
   set liveSize(var value) => proxy['liveSize'] = value;
 }
+
+Process _createProcess(JsObject proxy) => proxy == null ? null : new Process.fromProxy(proxy);
+OnExitedEvent _createOnExitedEvent(int processId, int exitType, int exitCode) =>
+    new OnExitedEvent(processId, exitType, exitCode);
+Cache _createCache(JsObject proxy) => proxy == null ? null : new Cache.fromProxy(proxy);

@@ -56,7 +56,7 @@ class ChromeDevtoolsInspectedWindow {
    * The resources within the page.
    */
   Future<List<Resource>> getResources() {
-    var completer = new ChromeCompleter<List<Resource>>.oneArg((e) => listify(e, Resource.create));
+    var completer = new ChromeCompleter<List<Resource>>.oneArg((e) => listify(e, _createResource));
     _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
     return completer.future;
   }
@@ -67,7 +67,7 @@ class ChromeDevtoolsInspectedWindow {
   Stream<Resource> get onResourceAdded => _onResourceAdded.stream;
 
   final ChromeStreamController<Resource> _onResourceAdded =
-      new ChromeStreamController<Resource>.oneArg(_devtools_inspectedWindow['onResourceAdded'], Resource.create);
+      new ChromeStreamController<Resource>.oneArg(_devtools_inspectedWindow['onResourceAdded'], _createResource);
 
   /**
    * Fired when a new revision of the resource is committed (e.g. user saves an
@@ -76,7 +76,7 @@ class ChromeDevtoolsInspectedWindow {
   Stream<OnResourceContentCommittedEvent> get onResourceContentCommitted => _onResourceContentCommitted.stream;
 
   final ChromeStreamController<OnResourceContentCommittedEvent> _onResourceContentCommitted =
-      new ChromeStreamController<OnResourceContentCommittedEvent>.twoArgs(_devtools_inspectedWindow['onResourceContentCommitted'], OnResourceContentCommittedEvent.create);
+      new ChromeStreamController<OnResourceContentCommittedEvent>.twoArgs(_devtools_inspectedWindow['onResourceContentCommitted'], _createOnResourceContentCommittedEvent);
 }
 
 /**
@@ -84,8 +84,6 @@ class ChromeDevtoolsInspectedWindow {
  * edited version of the resource in the Developer Tools).
  */
 class OnResourceContentCommittedEvent {
-  static OnResourceContentCommittedEvent create(JsObject resource, String content) =>
-      new OnResourceContentCommittedEvent(Resource.create(resource), content);
 
   final Resource resource;
 
@@ -102,7 +100,6 @@ class OnResourceContentCommittedEvent {
  * image.
  */
 class Resource extends ChromeObject {
-  static Resource create(JsObject proxy) => proxy == null ? null : new Resource.fromProxy(proxy);
 
   Resource({String url}) {
     if (url != null) this.url = url;
@@ -150,3 +147,7 @@ class Resource extends ChromeObject {
     return completer.future;
   }
 }
+
+Resource _createResource(JsObject proxy) => proxy == null ? null : new Resource.fromProxy(proxy);
+OnResourceContentCommittedEvent _createOnResourceContentCommittedEvent(JsObject resource, String content) =>
+    new OnResourceContentCommittedEvent(_createResource(resource), content);

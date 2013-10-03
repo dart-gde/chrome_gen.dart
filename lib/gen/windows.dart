@@ -34,7 +34,7 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> get(int windowId, [Map getInfo]) {
-    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('get', [windowId, jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -45,7 +45,7 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> getCurrent([Map getInfo]) {
-    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('getCurrent', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -57,7 +57,7 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> getLastFocused([Map getInfo]) {
-    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('getLastFocused', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -68,7 +68,7 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<List<Window>> getAll([Map getInfo]) {
-    var completer = new ChromeCompleter<List<Window>>.oneArg((e) => listify(e, Window.create));
+    var completer = new ChromeCompleter<List<Window>>.oneArg((e) => listify(e, _createWindow));
     _windows.callMethod('getAll', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
@@ -81,7 +81,7 @@ class ChromeWindows {
    * Contains details about the created window.
    */
   Future<Window> create([Map createData]) {
-    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('create', [jsify(createData), completer.callback]);
     return completer.future;
   }
@@ -91,7 +91,7 @@ class ChromeWindows {
    * want to change; unspecified properties will be left unchanged.
    */
   Future<Window> update(int windowId, Map updateInfo) {
-    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('update', [windowId, jsify(updateInfo), completer.callback]);
     return completer.future;
   }
@@ -111,7 +111,7 @@ class ChromeWindows {
   Stream<Window> get onCreated => _onCreated.stream;
 
   final ChromeStreamController<Window> _onCreated =
-      new ChromeStreamController<Window>.oneArg(_windows['onCreated'], Window.create);
+      new ChromeStreamController<Window>.oneArg(_windows['onCreated'], _createWindow);
 
   /**
    * Fired when a window is removed (closed).
@@ -134,7 +134,6 @@ class ChromeWindows {
 }
 
 class Window extends ChromeObject {
-  static Window create(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
 
   Window({int id, bool focused, int top, int left, int width, int height, List<Tab> tabs, bool incognito, String type, String state, bool alwaysOnTop, String sessionId}) {
     if (id != null) this.id = id;
@@ -203,7 +202,7 @@ class Window extends ChromeObject {
   /**
    * Array of [tabs.Tab] objects representing the current tabs in the window.
    */
-  List<Tab> get tabs => listify(proxy['tabs'], Tab.create);
+  List<Tab> get tabs => listify(proxy['tabs'], _createTab);
   set tabs(List<Tab> value) => proxy['tabs'] = value;
 
   /**
@@ -243,3 +242,6 @@ class Window extends ChromeObject {
   String get sessionId => proxy['sessionId'];
   set sessionId(String value) => proxy['sessionId'] = value;
 }
+
+Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
+Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

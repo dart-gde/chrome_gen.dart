@@ -52,5 +52,7 @@ class ChromeScriptBadge {
   Stream<Tab> get onClicked => _onClicked.stream;
 
   final ChromeStreamController<Tab> _onClicked =
-      new ChromeStreamController<Tab>.oneArg(_scriptBadge['onClicked'], Tab.create);
+      new ChromeStreamController<Tab>.oneArg(_scriptBadge['onClicked'], _createTab);
 }
+
+Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

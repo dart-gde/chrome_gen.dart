@@ -35,7 +35,7 @@ class ChromeDevtoolsNetwork {
   Stream<Request> get onRequestFinished => _onRequestFinished.stream;
 
   final ChromeStreamController<Request> _onRequestFinished =
-      new ChromeStreamController<Request>.oneArg(_devtools_network['onRequestFinished'], Request.create);
+      new ChromeStreamController<Request>.oneArg(_devtools_network['onRequestFinished'], _createRequest);
 
   /**
    * Fired when the inspected window navigates to a new page.
@@ -51,7 +51,6 @@ class ChromeDevtoolsNetwork {
  * on). See HAR Specification for reference.
  */
 class Request extends ChromeObject {
-  static Request create(JsObject proxy) => proxy == null ? null : new Request.fromProxy(proxy);
 
   Request();
 
@@ -71,3 +70,5 @@ class Request extends ChromeObject {
     return completer.future;
   }
 }
+
+Request _createRequest(JsObject proxy) => proxy == null ? null : new Request.fromProxy(proxy);

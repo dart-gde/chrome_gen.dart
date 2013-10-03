@@ -77,7 +77,7 @@ class ChromeDebugger {
    * Array of TargetInfo objects corresponding to the available debug targets.
    */
   Future<List<TargetInfo>> getTargets() {
-    var completer = new ChromeCompleter<List<TargetInfo>>.oneArg((e) => listify(e, TargetInfo.create));
+    var completer = new ChromeCompleter<List<TargetInfo>>.oneArg((e) => listify(e, _createTargetInfo));
     _debugger.callMethod('getTargets', [completer.callback]);
     return completer.future;
   }
@@ -88,7 +88,7 @@ class ChromeDebugger {
   Stream<OnEventEvent> get onEvent => _onEvent.stream;
 
   final ChromeStreamController<OnEventEvent> _onEvent =
-      new ChromeStreamController<OnEventEvent>.threeArgs(_debugger['onEvent'], OnEventEvent.create);
+      new ChromeStreamController<OnEventEvent>.threeArgs(_debugger['onEvent'], _createOnEventEvent);
 
   /**
    * Fired when browser terminates debugging session for the tab. This happens
@@ -98,15 +98,13 @@ class ChromeDebugger {
   Stream<OnDetachEvent> get onDetach => _onDetach.stream;
 
   final ChromeStreamController<OnDetachEvent> _onDetach =
-      new ChromeStreamController<OnDetachEvent>.twoArgs(_debugger['onDetach'], OnDetachEvent.create);
+      new ChromeStreamController<OnDetachEvent>.twoArgs(_debugger['onDetach'], _createOnDetachEvent);
 }
 
 /**
  * Fired whenever debugging target issues instrumentation event.
  */
 class OnEventEvent {
-  static OnEventEvent create(JsObject source, String method, JsObject params) =>
-      new OnEventEvent(Debuggee.create(source), method, mapify(params));
 
   /**
    * The debuggee that generated this event.
@@ -139,8 +137,6 @@ class OnEventEvent {
  * the attached tab.
  */
 class OnDetachEvent {
-  static OnDetachEvent create(JsObject source, String reason) =>
-      new OnDetachEvent(Debuggee.create(source), reason);
 
   /**
    * The debuggee that was detached.
@@ -160,7 +156,6 @@ class OnDetachEvent {
  * Debuggee identifier. Either tabId or extensionId must be specified
  */
 class Debuggee extends ChromeObject {
-  static Debuggee create(JsObject proxy) => proxy == null ? null : new Debuggee.fromProxy(proxy);
 
   Debuggee({int tabId, String extensionId, String targetId}) {
     if (tabId != null) this.tabId = tabId;
@@ -195,7 +190,6 @@ class Debuggee extends ChromeObject {
  * Debug target information
  */
 class TargetInfo extends ChromeObject {
-  static TargetInfo create(JsObject proxy) => proxy == null ? null : new TargetInfo.fromProxy(proxy);
 
   TargetInfo({String type, String id, int tabId, String extensionId, bool attached, String title, String url, String faviconUrl}) {
     if (type != null) this.type = type;
@@ -259,3 +253,10 @@ class TargetInfo extends ChromeObject {
   String get faviconUrl => proxy['faviconUrl'];
   set faviconUrl(String value) => proxy['faviconUrl'] = value;
 }
+
+TargetInfo _createTargetInfo(JsObject proxy) => proxy == null ? null : new TargetInfo.fromProxy(proxy);
+OnEventEvent _createOnEventEvent(JsObject source, String method, JsObject params) =>
+    new OnEventEvent(_createDebuggee(source), method, mapify(params));
+OnDetachEvent _createOnDetachEvent(JsObject source, String reason) =>
+    new OnDetachEvent(_createDebuggee(source), reason);
+Debuggee _createDebuggee(JsObject proxy) => proxy == null ? null : new Debuggee.fromProxy(proxy);

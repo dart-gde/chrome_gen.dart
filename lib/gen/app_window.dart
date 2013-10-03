@@ -19,7 +19,7 @@ class ChromeAppWindow {
   }
 
   AppWindow current() {
-    return AppWindow.create(_app_window.callMethod('current'));
+    return _createAppWindow(_app_window.callMethod('current'));
   }
 
   void initializeAppWindow(dynamic state) {
@@ -65,9 +65,6 @@ class State extends ChromeEnum {
 
   static const List<State> VALUES = const[NORMAL, FULLSCREEN, MAXIMIZED, MINIMIZED];
 
-  static State create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const State._(String str): super(str);
 }
 
@@ -77,14 +74,10 @@ class WindowType extends ChromeEnum {
 
   static const List<WindowType> VALUES = const[SHELL, PANEL];
 
-  static WindowType create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const WindowType._(String str): super(str);
 }
 
 class CreateWindowOptions extends ChromeObject {
-  static CreateWindowOptions create(JsObject proxy) => proxy == null ? null : new CreateWindowOptions.fromProxy(proxy);
 
   CreateWindowOptions({String id, int defaultWidth, int defaultHeight, int defaultLeft, int defaultTop, int width, int height, int left, int top, int minWidth, int minHeight, int maxWidth, int maxHeight, WindowType type, String frame, Bounds bounds, bool transparentBackground, State state, bool hidden, bool resizable, bool singleton}) {
     if (id != null) this.id = id;
@@ -151,19 +144,19 @@ class CreateWindowOptions extends ChromeObject {
   int get maxHeight => proxy['maxHeight'];
   set maxHeight(int value) => proxy['maxHeight'] = value;
 
-  WindowType get type => WindowType.create(proxy['type']);
+  WindowType get type => _createWindowType(proxy['type']);
   set type(WindowType value) => proxy['type'] = value;
 
   String get frame => proxy['frame'];
   set frame(String value) => proxy['frame'] = value;
 
-  Bounds get bounds => Bounds.create(proxy['bounds']);
+  Bounds get bounds => _createBounds(proxy['bounds']);
   set bounds(Bounds value) => proxy['bounds'] = value;
 
   bool get transparentBackground => proxy['transparentBackground'];
   set transparentBackground(bool value) => proxy['transparentBackground'] = value;
 
-  State get state => State.create(proxy['state']);
+  State get state => _createState(proxy['state']);
   set state(State value) => proxy['state'] = value;
 
   bool get hidden => proxy['hidden'];
@@ -177,7 +170,6 @@ class CreateWindowOptions extends ChromeObject {
 }
 
 class AppWindow extends ChromeObject {
-  static AppWindow create(JsObject proxy) => proxy == null ? null : new AppWindow.fromProxy(proxy);
 
   AppWindow({var contentWindow}) {
     if (contentWindow != null) this.contentWindow = contentWindow;
@@ -249,7 +241,7 @@ class AppWindow extends ChromeObject {
   }
 
   Bounds getBounds() {
-    return Bounds.create(proxy.callMethod('getBounds'));
+    return _createBounds(proxy.callMethod('getBounds'));
   }
 
   void setBounds(Bounds bounds) {
@@ -260,3 +252,8 @@ class AppWindow extends ChromeObject {
     proxy.callMethod('setIcon', [icon_url]);
   }
 }
+
+AppWindow _createAppWindow(JsObject proxy) => proxy == null ? null : new AppWindow.fromProxy(proxy);
+WindowType _createWindowType(String value) => WindowType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+Bounds _createBounds(JsObject proxy) => proxy == null ? null : new Bounds.fromProxy(proxy);
+State _createState(String value) => State.VALUES.singleWhere((ChromeEnum e) => e.value == value);

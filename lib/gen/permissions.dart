@@ -25,7 +25,7 @@ class ChromePermissions {
    * The extension's active permissions.
    */
   Future<Permissions> getAll() {
-    var completer = new ChromeCompleter<Permissions>.oneArg(Permissions.create);
+    var completer = new ChromeCompleter<Permissions>.oneArg(_createPermissions);
     _permissions.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -75,7 +75,7 @@ class ChromePermissions {
   Stream<Permissions> get onAdded => _onAdded.stream;
 
   final ChromeStreamController<Permissions> _onAdded =
-      new ChromeStreamController<Permissions>.oneArg(_permissions['onAdded'], Permissions.create);
+      new ChromeStreamController<Permissions>.oneArg(_permissions['onAdded'], _createPermissions);
 
   /**
    * Fired when access to permissions has been removed from the extension.
@@ -83,11 +83,10 @@ class ChromePermissions {
   Stream<Permissions> get onRemoved => _onRemoved.stream;
 
   final ChromeStreamController<Permissions> _onRemoved =
-      new ChromeStreamController<Permissions>.oneArg(_permissions['onRemoved'], Permissions.create);
+      new ChromeStreamController<Permissions>.oneArg(_permissions['onRemoved'], _createPermissions);
 }
 
 class Permissions extends ChromeObject {
-  static Permissions create(JsObject proxy) => proxy == null ? null : new Permissions.fromProxy(proxy);
 
   Permissions({List<String> permissions, List<String> origins}) {
     if (permissions != null) this.permissions = permissions;
@@ -108,3 +107,5 @@ class Permissions extends ChromeObject {
   List<String> get origins => listify(proxy['origins']);
   set origins(List<String> value) => proxy['origins'] = value;
 }
+
+Permissions _createPermissions(JsObject proxy) => proxy == null ? null : new Permissions.fromProxy(proxy);

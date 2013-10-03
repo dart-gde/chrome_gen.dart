@@ -15,7 +15,7 @@ class ChromeAppRuntime {
   Stream<LaunchData> get onLaunched => _onLaunched.stream;
 
   final ChromeStreamController<LaunchData> _onLaunched =
-      new ChromeStreamController<LaunchData>.oneArg(_app_runtime['onLaunched'], LaunchData.create);
+      new ChromeStreamController<LaunchData>.oneArg(_app_runtime['onLaunched'], _createLaunchData);
 
   Stream get onRestarted => _onRestarted.stream;
 
@@ -24,7 +24,6 @@ class ChromeAppRuntime {
 }
 
 class LaunchItem extends ChromeObject {
-  static LaunchItem create(JsObject proxy) => proxy == null ? null : new LaunchItem.fromProxy(proxy);
 
   LaunchItem({var entry, String type}) {
     if (entry != null) this.entry = entry;
@@ -41,7 +40,6 @@ class LaunchItem extends ChromeObject {
 }
 
 class LaunchData extends ChromeObject {
-  static LaunchData create(JsObject proxy) => proxy == null ? null : new LaunchData.fromProxy(proxy);
 
   LaunchData({String id, LaunchItem items}) {
     if (id != null) this.id = id;
@@ -53,6 +51,9 @@ class LaunchData extends ChromeObject {
   String get id => proxy['id'];
   set id(String value) => proxy['id'] = value;
 
-  LaunchItem get items => LaunchItem.create(proxy['items']);
+  LaunchItem get items => _createLaunchItem(proxy['items']);
   set items(LaunchItem value) => proxy['items'] = value;
 }
+
+LaunchData _createLaunchData(JsObject proxy) => proxy == null ? null : new LaunchData.fromProxy(proxy);
+LaunchItem _createLaunchItem(JsObject proxy) => proxy == null ? null : new LaunchItem.fromProxy(proxy);

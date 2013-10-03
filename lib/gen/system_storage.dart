@@ -13,13 +13,13 @@ class ChromeSystemStorage {
   ChromeSystemStorage._();
 
   Future<StorageUnitInfo> getInfo() {
-    var completer = new ChromeCompleter<StorageUnitInfo>.oneArg(StorageUnitInfo.create);
+    var completer = new ChromeCompleter<StorageUnitInfo>.oneArg(_createStorageUnitInfo);
     _system_storage.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }
 
   Future<EjectDeviceResultCode> ejectDevice(String id) {
-    var completer = new ChromeCompleter<EjectDeviceResultCode>.oneArg(EjectDeviceResultCode.create);
+    var completer = new ChromeCompleter<EjectDeviceResultCode>.oneArg(_createEjectDeviceResultCode);
     _system_storage.callMethod('ejectDevice', [id, completer.callback]);
     return completer.future;
   }
@@ -27,7 +27,7 @@ class ChromeSystemStorage {
   Stream<StorageUnitInfo> get onAttached => _onAttached.stream;
 
   final ChromeStreamController<StorageUnitInfo> _onAttached =
-      new ChromeStreamController<StorageUnitInfo>.oneArg(_system_storage['onAttached'], StorageUnitInfo.create);
+      new ChromeStreamController<StorageUnitInfo>.oneArg(_system_storage['onAttached'], _createStorageUnitInfo);
 
   Stream<String> get onDetached => _onDetached.stream;
 
@@ -42,9 +42,6 @@ class StorageUnitType extends ChromeEnum {
 
   static const List<StorageUnitType> VALUES = const[FIXED, REMOVABLE, UNKNOWN];
 
-  static StorageUnitType create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const StorageUnitType._(String str): super(str);
 }
 
@@ -56,14 +53,10 @@ class EjectDeviceResultCode extends ChromeEnum {
 
   static const List<EjectDeviceResultCode> VALUES = const[SUCCESS, IN_USE, NO_SUCH_DEVICE, FAILURE];
 
-  static EjectDeviceResultCode create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const EjectDeviceResultCode._(String str): super(str);
 }
 
 class StorageUnitInfo extends ChromeObject {
-  static StorageUnitInfo create(JsObject proxy) => proxy == null ? null : new StorageUnitInfo.fromProxy(proxy);
 
   StorageUnitInfo({String id, String name, StorageUnitType type, double capacity}) {
     if (id != null) this.id = id;
@@ -80,9 +73,13 @@ class StorageUnitInfo extends ChromeObject {
   String get name => proxy['name'];
   set name(String value) => proxy['name'] = value;
 
-  StorageUnitType get type => StorageUnitType.create(proxy['type']);
+  StorageUnitType get type => _createStorageUnitType(proxy['type']);
   set type(StorageUnitType value) => proxy['type'] = value;
 
   double get capacity => proxy['capacity'];
   set capacity(double value) => proxy['capacity'] = value;
 }
+
+StorageUnitInfo _createStorageUnitInfo(JsObject proxy) => proxy == null ? null : new StorageUnitInfo.fromProxy(proxy);
+EjectDeviceResultCode _createEjectDeviceResultCode(String value) => EjectDeviceResultCode.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+StorageUnitType _createStorageUnitType(String value) => StorageUnitType.VALUES.singleWhere((ChromeEnum e) => e.value == value);

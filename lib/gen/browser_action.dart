@@ -93,7 +93,7 @@ class ChromeBrowserAction {
    * Gets the background color of the browser action.
    */
   Future<ColorArray> getBadgeBackgroundColor(Map details) {
-    var completer = new ChromeCompleter<ColorArray>.oneArg(ColorArray.create);
+    var completer = new ChromeCompleter<ColorArray>.oneArg(_createColorArray);
     _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -124,11 +124,10 @@ class ChromeBrowserAction {
   Stream<Tab> get onClicked => _onClicked.stream;
 
   final ChromeStreamController<Tab> _onClicked =
-      new ChromeStreamController<Tab>.oneArg(_browserAction['onClicked'], Tab.create);
+      new ChromeStreamController<Tab>.oneArg(_browserAction['onClicked'], _createTab);
 }
 
 class ColorArray extends ChromeObject {
-  static ColorArray create(JsObject proxy) => proxy == null ? null : new ColorArray.fromProxy(proxy);
 
   ColorArray();
 
@@ -140,9 +139,11 @@ class ColorArray extends ChromeObject {
  * `canvas` element).
  */
 class ImageDataType extends ChromeObject {
-  static ImageDataType create(JsObject proxy) => proxy == null ? null : new ImageDataType.fromProxy(proxy);
 
   ImageDataType();
 
   ImageDataType.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
+
+ColorArray _createColorArray(JsObject proxy) => proxy == null ? null : new ColorArray.fromProxy(proxy);
+Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

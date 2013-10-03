@@ -80,7 +80,7 @@ class ChromeWebRequest {
   Stream<OnAuthRequiredEvent> get onAuthRequired => _onAuthRequired.stream;
 
   final ChromeStreamController<OnAuthRequiredEvent> _onAuthRequired =
-      new ChromeStreamController<OnAuthRequiredEvent>.twoArgs(_webRequest['onAuthRequired'], OnAuthRequiredEvent.create);
+      new ChromeStreamController<OnAuthRequiredEvent>.twoArgs(_webRequest['onAuthRequired'], _createOnAuthRequiredEvent);
 
   /**
    * Fired when the first byte of the response body is received. For HTTP
@@ -125,8 +125,6 @@ class ChromeWebRequest {
  * request.
  */
 class OnAuthRequiredEvent {
-  static OnAuthRequiredEvent create(JsObject details, JsObject callback) =>
-      new OnAuthRequiredEvent(mapify(details), callback);
 
   final Map details;
 
@@ -142,7 +140,6 @@ class OnAuthRequiredEvent {
  * An object describing filters to apply to webRequest events.
  */
 class RequestFilter extends ChromeObject {
-  static RequestFilter create(JsObject proxy) => proxy == null ? null : new RequestFilter.fromProxy(proxy);
 
   RequestFilter({List<String> urls, List<String> types, int tabId, int windowId}) {
     if (urls != null) this.urls = urls;
@@ -179,7 +176,6 @@ class RequestFilter extends ChromeObject {
  * containing the keys `name` and either `value` or `binaryValue`.
  */
 class HttpHeaders extends ChromeObject {
-  static HttpHeaders create(JsObject proxy) => proxy == null ? null : new HttpHeaders.fromProxy(proxy);
 
   HttpHeaders();
 
@@ -191,7 +187,6 @@ class HttpHeaders extends ChromeObject {
  * applied. Allows the event handler to modify network requests.
  */
 class BlockingResponse extends ChromeObject {
-  static BlockingResponse create(JsObject proxy) => proxy == null ? null : new BlockingResponse.fromProxy(proxy);
 
   BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, HttpHeaders responseHeaders, Map authCredentials}) {
     if (cancel != null) this.cancel = cancel;
@@ -222,7 +217,7 @@ class BlockingResponse extends ChromeObject {
    * Only used as a response to the onBeforeSendHeaders event. If set, the
    * request is made with these request headers instead.
    */
-  HttpHeaders get requestHeaders => HttpHeaders.create(proxy['requestHeaders']);
+  HttpHeaders get requestHeaders => _createHttpHeaders(proxy['requestHeaders']);
   set requestHeaders(HttpHeaders value) => proxy['requestHeaders'] = value;
 
   /**
@@ -232,7 +227,7 @@ class BlockingResponse extends ChromeObject {
    * to limit the number of conflicts (only one extension may modify
    * `responseHeaders` for each request).
    */
-  HttpHeaders get responseHeaders => HttpHeaders.create(proxy['responseHeaders']);
+  HttpHeaders get responseHeaders => _createHttpHeaders(proxy['responseHeaders']);
   set responseHeaders(HttpHeaders value) => proxy['responseHeaders'] = value;
 
   /**
@@ -247,7 +242,6 @@ class BlockingResponse extends ChromeObject {
  * Contains data uploaded in a URL request.
  */
 class UploadData extends ChromeObject {
-  static UploadData create(JsObject proxy) => proxy == null ? null : new UploadData.fromProxy(proxy);
 
   UploadData({var bytes, String file}) {
     if (bytes != null) this.bytes = bytes;
@@ -268,3 +262,7 @@ class UploadData extends ChromeObject {
   String get file => proxy['file'];
   set file(String value) => proxy['file'] = value;
 }
+
+OnAuthRequiredEvent _createOnAuthRequiredEvent(JsObject details, JsObject callback) =>
+    new OnAuthRequiredEvent(mapify(details), callback);
+HttpHeaders _createHttpHeaders(JsObject proxy) => proxy == null ? null : new HttpHeaders.fromProxy(proxy);

@@ -22,7 +22,7 @@ class ChromeTabs {
    * Retrieves details about the specified tab.
    */
   Future<Tab> get(int tabId) {
-    var completer = new ChromeCompleter<Tab>.oneArg(Tab.create);
+    var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('get', [tabId, completer.callback]);
     return completer.future;
   }
@@ -33,7 +33,7 @@ class ChromeTabs {
    * view).
    */
   Future<Tab> getCurrent() {
-    var completer = new ChromeCompleter<Tab>.oneArg(Tab.create);
+    var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('getCurrent', [completer.callback]);
     return completer.future;
   }
@@ -50,7 +50,7 @@ class ChromeTabs {
    * closes or does not exist.
    */
   Port connect(int tabId, [Map connectInfo]) {
-    return Port.create(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
+    return _createPort(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
   }
 
   /**
@@ -91,7 +91,7 @@ class ChromeTabs {
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
   Future<Tab> getSelected([int windowId]) {
-    var completer = new ChromeCompleter<Tab>.oneArg(Tab.create);
+    var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('getSelected', [windowId, completer.callback]);
     return completer.future;
   }
@@ -103,7 +103,7 @@ class ChromeTabs {
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
   Future<List<Tab>> getAllInWindow([int windowId]) {
-    var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, Tab.create));
+    var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, _createTab));
     _tabs.callMethod('getAllInWindow', [windowId, completer.callback]);
     return completer.future;
   }
@@ -115,7 +115,7 @@ class ChromeTabs {
    * Details about the created tab. Will contain the ID of the new tab.
    */
   Future<Tab> create(Map createProperties) {
-    var completer = new ChromeCompleter<Tab>.oneArg(Tab.create);
+    var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('create', [jsify(createProperties), completer.callback]);
     return completer.future;
   }
@@ -131,7 +131,7 @@ class ChromeTabs {
    * requested.
    */
   Future<Tab> duplicate(int tabId) {
-    var completer = new ChromeCompleter<Tab>.oneArg(Tab.create);
+    var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('duplicate', [tabId, completer.callback]);
     return completer.future;
   }
@@ -141,7 +141,7 @@ class ChromeTabs {
    * properties are specified.
    */
   Future<List<Tab>> query(Map queryInfo) {
-    var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, Tab.create));
+    var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, _createTab));
     _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
     return completer.future;
   }
@@ -153,7 +153,7 @@ class ChromeTabs {
    * Contains details about the window whose tabs were highlighted.
    */
   Future<Window> highlight(Map highlightInfo) {
-    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _tabs.callMethod('highlight', [jsify(highlightInfo), completer.callback]);
     return completer.future;
   }
@@ -170,7 +170,7 @@ class ChromeTabs {
    * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
    */
   Future<Tab> update(Map updateProperties, [int tabId]) {
-    var completer = new ChromeCompleter<Tab>.oneArg(Tab.create);
+    var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('update', [tabId, jsify(updateProperties), completer.callback]);
     return completer.future;
   }
@@ -296,7 +296,7 @@ class ChromeTabs {
   Stream<Tab> get onCreated => _onCreated.stream;
 
   final ChromeStreamController<Tab> _onCreated =
-      new ChromeStreamController<Tab>.oneArg(_tabs['onCreated'], Tab.create);
+      new ChromeStreamController<Tab>.oneArg(_tabs['onCreated'], _createTab);
 
   /**
    * Fired when a tab is updated.
@@ -304,7 +304,7 @@ class ChromeTabs {
   Stream<OnUpdatedEvent> get onUpdated => _onUpdated.stream;
 
   final ChromeStreamController<OnUpdatedEvent> _onUpdated =
-      new ChromeStreamController<OnUpdatedEvent>.threeArgs(_tabs['onUpdated'], OnUpdatedEvent.create);
+      new ChromeStreamController<OnUpdatedEvent>.threeArgs(_tabs['onUpdated'], _createOnUpdatedEvent);
 
   /**
    * Fired when a tab is moved within a window. Only one move event is fired,
@@ -315,7 +315,7 @@ class ChromeTabs {
   Stream<TabsOnMovedEvent> get onMoved => _onMoved.stream;
 
   final ChromeStreamController<TabsOnMovedEvent> _onMoved =
-      new ChromeStreamController<TabsOnMovedEvent>.twoArgs(_tabs['onMoved'], TabsOnMovedEvent.create);
+      new ChromeStreamController<TabsOnMovedEvent>.twoArgs(_tabs['onMoved'], _createTabsOnMovedEvent);
 
   /**
    * Deprecated. Please use onActivated.
@@ -323,7 +323,7 @@ class ChromeTabs {
   Stream<OnSelectionChangedEvent> get onSelectionChanged => _onSelectionChanged.stream;
 
   final ChromeStreamController<OnSelectionChangedEvent> _onSelectionChanged =
-      new ChromeStreamController<OnSelectionChangedEvent>.twoArgs(_tabs['onSelectionChanged'], OnSelectionChangedEvent.create);
+      new ChromeStreamController<OnSelectionChangedEvent>.twoArgs(_tabs['onSelectionChanged'], _createOnSelectionChangedEvent);
 
   /**
    * Deprecated. Please use onActivated.
@@ -331,7 +331,7 @@ class ChromeTabs {
   Stream<OnActiveChangedEvent> get onActiveChanged => _onActiveChanged.stream;
 
   final ChromeStreamController<OnActiveChangedEvent> _onActiveChanged =
-      new ChromeStreamController<OnActiveChangedEvent>.twoArgs(_tabs['onActiveChanged'], OnActiveChangedEvent.create);
+      new ChromeStreamController<OnActiveChangedEvent>.twoArgs(_tabs['onActiveChanged'], _createOnActiveChangedEvent);
 
   /**
    * Fires when the active tab in a window changes. Note that the tab's URL may
@@ -366,7 +366,7 @@ class ChromeTabs {
   Stream<OnDetachedEvent> get onDetached => _onDetached.stream;
 
   final ChromeStreamController<OnDetachedEvent> _onDetached =
-      new ChromeStreamController<OnDetachedEvent>.twoArgs(_tabs['onDetached'], OnDetachedEvent.create);
+      new ChromeStreamController<OnDetachedEvent>.twoArgs(_tabs['onDetached'], _createOnDetachedEvent);
 
   /**
    * Fired when a tab is attached to a window, for example because it was moved
@@ -375,7 +375,7 @@ class ChromeTabs {
   Stream<OnAttachedEvent> get onAttached => _onAttached.stream;
 
   final ChromeStreamController<OnAttachedEvent> _onAttached =
-      new ChromeStreamController<OnAttachedEvent>.twoArgs(_tabs['onAttached'], OnAttachedEvent.create);
+      new ChromeStreamController<OnAttachedEvent>.twoArgs(_tabs['onAttached'], _createOnAttachedEvent);
 
   /**
    * Fired when a tab is closed.
@@ -383,7 +383,7 @@ class ChromeTabs {
   Stream<TabsOnRemovedEvent> get onRemoved => _onRemoved.stream;
 
   final ChromeStreamController<TabsOnRemovedEvent> _onRemoved =
-      new ChromeStreamController<TabsOnRemovedEvent>.twoArgs(_tabs['onRemoved'], TabsOnRemovedEvent.create);
+      new ChromeStreamController<TabsOnRemovedEvent>.twoArgs(_tabs['onRemoved'], _createTabsOnRemovedEvent);
 
   /**
    * Fired when a tab is replaced with another tab due to prerendering or
@@ -392,15 +392,13 @@ class ChromeTabs {
   Stream<OnReplacedEvent> get onReplaced => _onReplaced.stream;
 
   final ChromeStreamController<OnReplacedEvent> _onReplaced =
-      new ChromeStreamController<OnReplacedEvent>.twoArgs(_tabs['onReplaced'], OnReplacedEvent.create);
+      new ChromeStreamController<OnReplacedEvent>.twoArgs(_tabs['onReplaced'], _createOnReplacedEvent);
 }
 
 /**
  * Fired when a tab is updated.
  */
 class OnUpdatedEvent {
-  static OnUpdatedEvent create(int tabId, JsObject changeInfo, JsObject tab) =>
-      new OnUpdatedEvent(tabId, mapify(changeInfo), Tab.create(tab));
 
   final int tabId;
 
@@ -424,8 +422,6 @@ class OnUpdatedEvent {
  * is moved between windows. For that, see [onDetached.]
  */
 class TabsOnMovedEvent {
-  static TabsOnMovedEvent create(int tabId, JsObject moveInfo) =>
-      new TabsOnMovedEvent(tabId, mapify(moveInfo));
 
   final int tabId;
 
@@ -438,8 +434,6 @@ class TabsOnMovedEvent {
  * Deprecated. Please use onActivated.
  */
 class OnSelectionChangedEvent {
-  static OnSelectionChangedEvent create(int tabId, JsObject selectInfo) =>
-      new OnSelectionChangedEvent(tabId, mapify(selectInfo));
 
   /**
    * The ID of the tab that has become active.
@@ -455,8 +449,6 @@ class OnSelectionChangedEvent {
  * Deprecated. Please use onActivated.
  */
 class OnActiveChangedEvent {
-  static OnActiveChangedEvent create(int tabId, JsObject selectInfo) =>
-      new OnActiveChangedEvent(tabId, mapify(selectInfo));
 
   /**
    * The ID of the tab that has become active.
@@ -473,8 +465,6 @@ class OnActiveChangedEvent {
  * moved between windows.
  */
 class OnDetachedEvent {
-  static OnDetachedEvent create(int tabId, JsObject detachInfo) =>
-      new OnDetachedEvent(tabId, mapify(detachInfo));
 
   final int tabId;
 
@@ -488,8 +478,6 @@ class OnDetachedEvent {
  * between windows.
  */
 class OnAttachedEvent {
-  static OnAttachedEvent create(int tabId, JsObject attachInfo) =>
-      new OnAttachedEvent(tabId, mapify(attachInfo));
 
   final int tabId;
 
@@ -502,8 +490,6 @@ class OnAttachedEvent {
  * Fired when a tab is closed.
  */
 class TabsOnRemovedEvent {
-  static TabsOnRemovedEvent create(int tabId, JsObject removeInfo) =>
-      new TabsOnRemovedEvent(tabId, mapify(removeInfo));
 
   final int tabId;
 
@@ -516,8 +502,6 @@ class TabsOnRemovedEvent {
  * Fired when a tab is replaced with another tab due to prerendering or instant.
  */
 class OnReplacedEvent {
-  static OnReplacedEvent create(int addedTabId, int removedTabId) =>
-      new OnReplacedEvent(addedTabId, removedTabId);
 
   final int addedTabId;
 
@@ -527,7 +511,6 @@ class OnReplacedEvent {
 }
 
 class Tab extends ChromeObject {
-  static Tab create(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
 
   Tab({int id, int index, int windowId, int openerTabId, bool highlighted, bool active, bool pinned, String url, String title, String favIconUrl, String status, bool incognito, int width, int height, String sessionId}) {
     if (id != null) this.id = id;
@@ -655,7 +638,6 @@ class Tab extends ChromeObject {
  * must be set, but both may not be set at the same time.
  */
 class InjectDetails extends ChromeObject {
-  static InjectDetails create(JsObject proxy) => proxy == null ? null : new InjectDetails.fromProxy(proxy);
 
   InjectDetails({String code, String file, bool allFrames, String runAt}) {
     if (code != null) this.code = code;
@@ -694,3 +676,23 @@ class InjectDetails extends ChromeObject {
   String get runAt => proxy['runAt'];
   set runAt(String value) => proxy['runAt'] = value;
 }
+
+Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
+Port _createPort(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);
+Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
+OnUpdatedEvent _createOnUpdatedEvent(int tabId, JsObject changeInfo, JsObject tab) =>
+    new OnUpdatedEvent(tabId, mapify(changeInfo), _createTab(tab));
+TabsOnMovedEvent _createTabsOnMovedEvent(int tabId, JsObject moveInfo) =>
+    new TabsOnMovedEvent(tabId, mapify(moveInfo));
+OnSelectionChangedEvent _createOnSelectionChangedEvent(int tabId, JsObject selectInfo) =>
+    new OnSelectionChangedEvent(tabId, mapify(selectInfo));
+OnActiveChangedEvent _createOnActiveChangedEvent(int tabId, JsObject selectInfo) =>
+    new OnActiveChangedEvent(tabId, mapify(selectInfo));
+OnDetachedEvent _createOnDetachedEvent(int tabId, JsObject detachInfo) =>
+    new OnDetachedEvent(tabId, mapify(detachInfo));
+OnAttachedEvent _createOnAttachedEvent(int tabId, JsObject attachInfo) =>
+    new OnAttachedEvent(tabId, mapify(attachInfo));
+TabsOnRemovedEvent _createTabsOnRemovedEvent(int tabId, JsObject removeInfo) =>
+    new TabsOnRemovedEvent(tabId, mapify(removeInfo));
+OnReplacedEvent _createOnReplacedEvent(int addedTabId, int removedTabId) =>
+    new OnReplacedEvent(addedTabId, removedTabId);

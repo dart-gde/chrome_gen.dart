@@ -19,7 +19,7 @@ class ChromeSerial {
   }
 
   Future<OpenInfo> open(String port, [OpenOptions options]) {
-    var completer = new ChromeCompleter<OpenInfo>.oneArg(OpenInfo.create);
+    var completer = new ChromeCompleter<OpenInfo>.oneArg(_createOpenInfo);
     _serial.callMethod('open', [port, options, completer.callback]);
     return completer.future;
   }
@@ -31,13 +31,13 @@ class ChromeSerial {
   }
 
   Future<SerialReadInfo> read(int connectionId, int bytesToRead) {
-    var completer = new ChromeCompleter<SerialReadInfo>.oneArg(SerialReadInfo.create);
+    var completer = new ChromeCompleter<SerialReadInfo>.oneArg(_createSerialReadInfo);
     _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
     return completer.future;
   }
 
   Future<SerialWriteInfo> write(int connectionId, ArrayBuffer data) {
-    var completer = new ChromeCompleter<SerialWriteInfo>.oneArg(SerialWriteInfo.create);
+    var completer = new ChromeCompleter<SerialWriteInfo>.oneArg(_createSerialWriteInfo);
     _serial.callMethod('write', [connectionId, data, completer.callback]);
     return completer.future;
   }
@@ -49,7 +49,7 @@ class ChromeSerial {
   }
 
   Future<ControlSignalOptions> getControlSignals(int connectionId) {
-    var completer = new ChromeCompleter<ControlSignalOptions>.oneArg(ControlSignalOptions.create);
+    var completer = new ChromeCompleter<ControlSignalOptions>.oneArg(_createControlSignalOptions);
     _serial.callMethod('getControlSignals', [connectionId, completer.callback]);
     return completer.future;
   }
@@ -67,9 +67,6 @@ class DataBit extends ChromeEnum {
 
   static const List<DataBit> VALUES = const[SEVENBIT, EIGHTBIT];
 
-  static DataBit create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const DataBit._(String str): super(str);
 }
 
@@ -80,9 +77,6 @@ class ParityBit extends ChromeEnum {
 
   static const List<ParityBit> VALUES = const[NOPARITY, ODDPARITY, EVENPARITY];
 
-  static ParityBit create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const ParityBit._(String str): super(str);
 }
 
@@ -92,14 +86,10 @@ class StopBit extends ChromeEnum {
 
   static const List<StopBit> VALUES = const[ONESTOPBIT, TWOSTOPBIT];
 
-  static StopBit create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const StopBit._(String str): super(str);
 }
 
 class OpenOptions extends ChromeObject {
-  static OpenOptions create(JsObject proxy) => proxy == null ? null : new OpenOptions.fromProxy(proxy);
 
   OpenOptions({int bitrate, DataBit dataBit, ParityBit parityBit, StopBit stopBit}) {
     if (bitrate != null) this.bitrate = bitrate;
@@ -113,18 +103,17 @@ class OpenOptions extends ChromeObject {
   int get bitrate => proxy['bitrate'];
   set bitrate(int value) => proxy['bitrate'] = value;
 
-  DataBit get dataBit => DataBit.create(proxy['dataBit']);
+  DataBit get dataBit => _createDataBit(proxy['dataBit']);
   set dataBit(DataBit value) => proxy['dataBit'] = value;
 
-  ParityBit get parityBit => ParityBit.create(proxy['parityBit']);
+  ParityBit get parityBit => _createParityBit(proxy['parityBit']);
   set parityBit(ParityBit value) => proxy['parityBit'] = value;
 
-  StopBit get stopBit => StopBit.create(proxy['stopBit']);
+  StopBit get stopBit => _createStopBit(proxy['stopBit']);
   set stopBit(StopBit value) => proxy['stopBit'] = value;
 }
 
 class OpenInfo extends ChromeObject {
-  static OpenInfo create(JsObject proxy) => proxy == null ? null : new OpenInfo.fromProxy(proxy);
 
   OpenInfo({int connectionId}) {
     if (connectionId != null) this.connectionId = connectionId;
@@ -137,7 +126,6 @@ class OpenInfo extends ChromeObject {
 }
 
 class SerialReadInfo extends ChromeObject {
-  static SerialReadInfo create(JsObject proxy) => proxy == null ? null : new SerialReadInfo.fromProxy(proxy);
 
   SerialReadInfo({int bytesRead, ArrayBuffer data}) {
     if (bytesRead != null) this.bytesRead = bytesRead;
@@ -149,12 +137,11 @@ class SerialReadInfo extends ChromeObject {
   int get bytesRead => proxy['bytesRead'];
   set bytesRead(int value) => proxy['bytesRead'] = value;
 
-  ArrayBuffer get data => ArrayBuffer.create(proxy['data']);
+  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
   set data(ArrayBuffer value) => proxy['data'] = value;
 }
 
 class SerialWriteInfo extends ChromeObject {
-  static SerialWriteInfo create(JsObject proxy) => proxy == null ? null : new SerialWriteInfo.fromProxy(proxy);
 
   SerialWriteInfo({int bytesWritten}) {
     if (bytesWritten != null) this.bytesWritten = bytesWritten;
@@ -167,7 +154,6 @@ class SerialWriteInfo extends ChromeObject {
 }
 
 class ControlSignalOptions extends ChromeObject {
-  static ControlSignalOptions create(JsObject proxy) => proxy == null ? null : new ControlSignalOptions.fromProxy(proxy);
 
   ControlSignalOptions({bool dtr, bool rts, bool dcd, bool cts}) {
     if (dtr != null) this.dtr = dtr;
@@ -190,3 +176,12 @@ class ControlSignalOptions extends ChromeObject {
   bool get cts => proxy['cts'];
   set cts(bool value) => proxy['cts'] = value;
 }
+
+OpenInfo _createOpenInfo(JsObject proxy) => proxy == null ? null : new OpenInfo.fromProxy(proxy);
+SerialReadInfo _createSerialReadInfo(JsObject proxy) => proxy == null ? null : new SerialReadInfo.fromProxy(proxy);
+SerialWriteInfo _createSerialWriteInfo(JsObject proxy) => proxy == null ? null : new SerialWriteInfo.fromProxy(proxy);
+ControlSignalOptions _createControlSignalOptions(JsObject proxy) => proxy == null ? null : new ControlSignalOptions.fromProxy(proxy);
+DataBit _createDataBit(String value) => DataBit.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+ParityBit _createParityBit(String value) => ParityBit.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+StopBit _createStopBit(String value) => StopBit.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);

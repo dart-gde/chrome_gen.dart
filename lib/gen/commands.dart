@@ -22,7 +22,7 @@ class ChromeCommands {
    * shortcut (if active).
    */
   Future<List<Command>> getAll() {
-    var completer = new ChromeCompleter<List<Command>>.oneArg((e) => listify(e, Command.create));
+    var completer = new ChromeCompleter<List<Command>>.oneArg((e) => listify(e, _createCommand));
     _commands.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -37,7 +37,6 @@ class ChromeCommands {
 }
 
 class Command extends ChromeObject {
-  static Command create(JsObject proxy) => proxy == null ? null : new Command.fromProxy(proxy);
 
   Command({String name, String description, String shortcut}) {
     if (name != null) this.name = name;
@@ -65,3 +64,5 @@ class Command extends ChromeObject {
   String get shortcut => proxy['shortcut'];
   set shortcut(String value) => proxy['shortcut'] = value;
 }
+
+Command _createCommand(JsObject proxy) => proxy == null ? null : new Command.fromProxy(proxy);

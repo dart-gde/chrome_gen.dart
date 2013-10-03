@@ -39,7 +39,7 @@ class ChromeTtsEngine {
   Stream<OnSpeakEvent> get onSpeak => _onSpeak.stream;
 
   final ChromeStreamController<OnSpeakEvent> _onSpeak =
-      new ChromeStreamController<OnSpeakEvent>.threeArgs(_ttsEngine['onSpeak'], OnSpeakEvent.create);
+      new ChromeStreamController<OnSpeakEvent>.threeArgs(_ttsEngine['onSpeak'], _createOnSpeakEvent);
 
   /**
    * Fired when a call is made to tts.stop and this extension may be in the
@@ -78,8 +78,6 @@ class ChromeTtsEngine {
  * this extension's manifest is the first to match the options object.
  */
 class OnSpeakEvent {
-  static OnSpeakEvent create(String utterance, JsObject options, JsObject sendTtsEvent) =>
-      new OnSpeakEvent(utterance, mapify(options), sendTtsEvent);
 
   /**
    * The text to speak, specified as either plain text or an SSML document. If
@@ -104,3 +102,6 @@ class OnSpeakEvent {
 
   OnSpeakEvent(this.utterance, this.options, this.sendTtsEvent);
 }
+
+OnSpeakEvent _createOnSpeakEvent(String utterance, JsObject options, JsObject sendTtsEvent) =>
+    new OnSpeakEvent(utterance, mapify(options), sendTtsEvent);

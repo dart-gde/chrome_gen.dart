@@ -32,7 +32,6 @@ class ChromeIdentity {
 }
 
 class TokenDetails extends ChromeObject {
-  static TokenDetails create(JsObject proxy) => proxy == null ? null : new TokenDetails.fromProxy(proxy);
 
   TokenDetails({bool interactive}) {
     if (interactive != null) this.interactive = interactive;
@@ -45,7 +44,6 @@ class TokenDetails extends ChromeObject {
 }
 
 class InvalidTokenDetails extends ChromeObject {
-  static InvalidTokenDetails create(JsObject proxy) => proxy == null ? null : new InvalidTokenDetails.fromProxy(proxy);
 
   InvalidTokenDetails({String token}) {
     if (token != null) this.token = token;
@@ -58,7 +56,6 @@ class InvalidTokenDetails extends ChromeObject {
 }
 
 class WebAuthFlowDetails extends ChromeObject {
-  static WebAuthFlowDetails create(JsObject proxy) => proxy == null ? null : new WebAuthFlowDetails.fromProxy(proxy);
 
   WebAuthFlowDetails({String url, bool interactive}) {
     if (url != null) this.url = url;

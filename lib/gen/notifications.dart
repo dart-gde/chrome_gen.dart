@@ -39,7 +39,7 @@ class ChromeNotifications {
   Stream<OnClosedEvent> get onClosed => _onClosed.stream;
 
   final ChromeStreamController<OnClosedEvent> _onClosed =
-      new ChromeStreamController<OnClosedEvent>.twoArgs(_notifications['onClosed'], OnClosedEvent.create);
+      new ChromeStreamController<OnClosedEvent>.twoArgs(_notifications['onClosed'], _createOnClosedEvent);
 
   Stream<String> get onClicked => _onClicked.stream;
 
@@ -49,12 +49,10 @@ class ChromeNotifications {
   Stream<OnButtonClickedEvent> get onButtonClicked => _onButtonClicked.stream;
 
   final ChromeStreamController<OnButtonClickedEvent> _onButtonClicked =
-      new ChromeStreamController<OnButtonClickedEvent>.twoArgs(_notifications['onButtonClicked'], OnButtonClickedEvent.create);
+      new ChromeStreamController<OnButtonClickedEvent>.twoArgs(_notifications['onButtonClicked'], _createOnButtonClickedEvent);
 }
 
 class OnClosedEvent {
-  static OnClosedEvent create(String notificationId, bool byUser) =>
-      new OnClosedEvent(notificationId, byUser);
 
   final String notificationId;
 
@@ -64,8 +62,6 @@ class OnClosedEvent {
 }
 
 class OnButtonClickedEvent {
-  static OnButtonClickedEvent create(String notificationId, int buttonIndex) =>
-      new OnButtonClickedEvent(notificationId, buttonIndex);
 
   final String notificationId;
 
@@ -82,14 +78,10 @@ class TemplateType extends ChromeEnum {
 
   static const List<TemplateType> VALUES = const[BASIC, IMAGE, LIST, PROGRESS];
 
-  static TemplateType create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const TemplateType._(String str): super(str);
 }
 
 class NotificationItem extends ChromeObject {
-  static NotificationItem create(JsObject proxy) => proxy == null ? null : new NotificationItem.fromProxy(proxy);
 
   NotificationItem({String title, String message}) {
     if (title != null) this.title = title;
@@ -106,7 +98,6 @@ class NotificationItem extends ChromeObject {
 }
 
 class NotificationBitmap extends ChromeObject {
-  static NotificationBitmap create(JsObject proxy) => proxy == null ? null : new NotificationBitmap.fromProxy(proxy);
 
   NotificationBitmap({int width, int height, ArrayBuffer data}) {
     if (width != null) this.width = width;
@@ -122,12 +113,11 @@ class NotificationBitmap extends ChromeObject {
   int get height => proxy['height'];
   set height(int value) => proxy['height'] = value;
 
-  ArrayBuffer get data => ArrayBuffer.create(proxy['data']);
+  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
   set data(ArrayBuffer value) => proxy['data'] = value;
 }
 
 class NotificationButton extends ChromeObject {
-  static NotificationButton create(JsObject proxy) => proxy == null ? null : new NotificationButton.fromProxy(proxy);
 
   NotificationButton({String title, String iconUrl, NotificationBitmap iconBitmap}) {
     if (title != null) this.title = title;
@@ -143,12 +133,11 @@ class NotificationButton extends ChromeObject {
   String get iconUrl => proxy['iconUrl'];
   set iconUrl(String value) => proxy['iconUrl'] = value;
 
-  NotificationBitmap get iconBitmap => NotificationBitmap.create(proxy['iconBitmap']);
+  NotificationBitmap get iconBitmap => _createNotificationBitmap(proxy['iconBitmap']);
   set iconBitmap(NotificationBitmap value) => proxy['iconBitmap'] = value;
 }
 
 class NotificationOptions extends ChromeObject {
-  static NotificationOptions create(JsObject proxy) => proxy == null ? null : new NotificationOptions.fromProxy(proxy);
 
   NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress}) {
     if (type != null) this.type = type;
@@ -169,13 +158,13 @@ class NotificationOptions extends ChromeObject {
 
   NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
-  TemplateType get type => TemplateType.create(proxy['type']);
+  TemplateType get type => _createTemplateType(proxy['type']);
   set type(TemplateType value) => proxy['type'] = value;
 
   String get iconUrl => proxy['iconUrl'];
   set iconUrl(String value) => proxy['iconUrl'] = value;
 
-  NotificationBitmap get iconBitmap => NotificationBitmap.create(proxy['iconBitmap']);
+  NotificationBitmap get iconBitmap => _createNotificationBitmap(proxy['iconBitmap']);
   set iconBitmap(NotificationBitmap value) => proxy['iconBitmap'] = value;
 
   String get title => proxy['title'];
@@ -193,7 +182,7 @@ class NotificationOptions extends ChromeObject {
   double get eventTime => proxy['eventTime'];
   set eventTime(double value) => proxy['eventTime'] = value;
 
-  NotificationButton get buttons => NotificationButton.create(proxy['buttons']);
+  NotificationButton get buttons => _createNotificationButton(proxy['buttons']);
   set buttons(NotificationButton value) => proxy['buttons'] = value;
 
   String get expandedMessage => proxy['expandedMessage'];
@@ -202,12 +191,22 @@ class NotificationOptions extends ChromeObject {
   String get imageUrl => proxy['imageUrl'];
   set imageUrl(String value) => proxy['imageUrl'] = value;
 
-  NotificationBitmap get imageBitmap => NotificationBitmap.create(proxy['imageBitmap']);
+  NotificationBitmap get imageBitmap => _createNotificationBitmap(proxy['imageBitmap']);
   set imageBitmap(NotificationBitmap value) => proxy['imageBitmap'] = value;
 
-  NotificationItem get items => NotificationItem.create(proxy['items']);
+  NotificationItem get items => _createNotificationItem(proxy['items']);
   set items(NotificationItem value) => proxy['items'] = value;
 
   int get progress => proxy['progress'];
   set progress(int value) => proxy['progress'] = value;
 }
+
+OnClosedEvent _createOnClosedEvent(String notificationId, bool byUser) =>
+    new OnClosedEvent(notificationId, byUser);
+OnButtonClickedEvent _createOnButtonClickedEvent(String notificationId, int buttonIndex) =>
+    new OnButtonClickedEvent(notificationId, buttonIndex);
+ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);
+NotificationBitmap _createNotificationBitmap(JsObject proxy) => proxy == null ? null : new NotificationBitmap.fromProxy(proxy);
+TemplateType _createTemplateType(String value) => TemplateType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+NotificationButton _createNotificationButton(JsObject proxy) => proxy == null ? null : new NotificationButton.fromProxy(proxy);
+NotificationItem _createNotificationItem(JsObject proxy) => proxy == null ? null : new NotificationItem.fromProxy(proxy);

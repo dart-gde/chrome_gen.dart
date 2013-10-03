@@ -19,7 +19,7 @@ class ChromeDownloads {
   }
 
   Future<DownloadItem> search(DownloadQuery query) {
-    var completer = new ChromeCompleter<DownloadItem>.oneArg(DownloadItem.create);
+    var completer = new ChromeCompleter<DownloadItem>.oneArg(_createDownloadItem);
     _downloads.callMethod('search', [query, completer.callback]);
     return completer.future;
   }
@@ -89,7 +89,7 @@ class ChromeDownloads {
   Stream<DownloadItem> get onCreated => _onCreated.stream;
 
   final ChromeStreamController<DownloadItem> _onCreated =
-      new ChromeStreamController<DownloadItem>.oneArg(_downloads['onCreated'], DownloadItem.create);
+      new ChromeStreamController<DownloadItem>.oneArg(_downloads['onCreated'], _createDownloadItem);
 
   Stream<int> get onErased => _onErased.stream;
 
@@ -99,17 +99,15 @@ class ChromeDownloads {
   Stream<DownloadDelta> get onChanged => _onChanged.stream;
 
   final ChromeStreamController<DownloadDelta> _onChanged =
-      new ChromeStreamController<DownloadDelta>.oneArg(_downloads['onChanged'], DownloadDelta.create);
+      new ChromeStreamController<DownloadDelta>.oneArg(_downloads['onChanged'], _createDownloadDelta);
 
   Stream<OnDeterminingFilenameEvent> get onDeterminingFilename => _onDeterminingFilename.stream;
 
   final ChromeStreamController<OnDeterminingFilenameEvent> _onDeterminingFilename =
-      new ChromeStreamController<OnDeterminingFilenameEvent>.twoArgs(_downloads['onDeterminingFilename'], OnDeterminingFilenameEvent.create);
+      new ChromeStreamController<OnDeterminingFilenameEvent>.twoArgs(_downloads['onDeterminingFilename'], _createOnDeterminingFilenameEvent);
 }
 
 class OnDeterminingFilenameEvent {
-  static OnDeterminingFilenameEvent create(JsObject downloadItem, JsObject suggest) =>
-      new OnDeterminingFilenameEvent(DownloadItem.create(downloadItem), SuggestFilenameCallback.create(suggest));
 
   final DownloadItem downloadItem;
 
@@ -125,9 +123,6 @@ class FilenameConflictAction extends ChromeEnum {
 
   static const List<FilenameConflictAction> VALUES = const[UNIQUIFY, OVERWRITE, PROMPT];
 
-  static FilenameConflictAction create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const FilenameConflictAction._(String str): super(str);
 }
 
@@ -136,9 +131,6 @@ class HttpMethod extends ChromeEnum {
   static const HttpMethod POST = const HttpMethod._('POST');
 
   static const List<HttpMethod> VALUES = const[GET, POST];
-
-  static HttpMethod create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const HttpMethod._(String str): super(str);
 }
@@ -168,9 +160,6 @@ class InterruptReason extends ChromeEnum {
 
   static const List<InterruptReason> VALUES = const[FILE_FAILED, FILE_ACCESS_DENIED, FILE_NO_SPACE, FILE_NAME_TOO_LONG, FILE_TOO_LARGE, FILE_VIRUS_INFECTED, FILE_TRANSIENT_ERROR, FILE_BLOCKED, FILE_SECURITY_CHECK_FAILED, FILE_TOO_SHORT, NETWORK_FAILED, NETWORK_TIMEOUT, NETWORK_DISCONNECTED, NETWORK_SERVER_DOWN, SERVER_FAILED, SERVER_NO_RANGE, SERVER_PRECONDITION, SERVER_BAD_CONTENT, USER_CANCELED, USER_SHUTDOWN, CRASH];
 
-  static InterruptReason create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const InterruptReason._(String str): super(str);
 }
 
@@ -186,9 +175,6 @@ class DangerType extends ChromeEnum {
 
   static const List<DangerType> VALUES = const[FILE, URL, CONTENT, UNCOMMON, HOST, UNWANTED, SAFE, ACCEPTED];
 
-  static DangerType create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const DangerType._(String str): super(str);
 }
 
@@ -199,14 +185,10 @@ class State extends ChromeEnum {
 
   static const List<State> VALUES = const[IN_PROGRESS, INTERRUPTED, COMPLETE];
 
-  static State create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const State._(String str): super(str);
 }
 
 class HeaderNameValuePair extends ChromeObject {
-  static HeaderNameValuePair create(JsObject proxy) => proxy == null ? null : new HeaderNameValuePair.fromProxy(proxy);
 
   HeaderNameValuePair({String name, String value}) {
     if (name != null) this.name = name;
@@ -223,7 +205,6 @@ class HeaderNameValuePair extends ChromeObject {
 }
 
 class FilenameSuggestion extends ChromeObject {
-  static FilenameSuggestion create(JsObject proxy) => proxy == null ? null : new FilenameSuggestion.fromProxy(proxy);
 
   FilenameSuggestion({String filename, FilenameConflictAction conflictAction}) {
     if (filename != null) this.filename = filename;
@@ -235,12 +216,11 @@ class FilenameSuggestion extends ChromeObject {
   String get filename => proxy['filename'];
   set filename(String value) => proxy['filename'] = value;
 
-  FilenameConflictAction get conflictAction => FilenameConflictAction.create(proxy['conflictAction']);
+  FilenameConflictAction get conflictAction => _createFilenameConflictAction(proxy['conflictAction']);
   set conflictAction(FilenameConflictAction value) => proxy['conflictAction'] = value;
 }
 
 class DownloadOptions extends ChromeObject {
-  static DownloadOptions create(JsObject proxy) => proxy == null ? null : new DownloadOptions.fromProxy(proxy);
 
   DownloadOptions({String url, String filename, FilenameConflictAction conflictAction, bool saveAs, HttpMethod method, HeaderNameValuePair headers, String body}) {
     if (url != null) this.url = url;
@@ -260,16 +240,16 @@ class DownloadOptions extends ChromeObject {
   String get filename => proxy['filename'];
   set filename(String value) => proxy['filename'] = value;
 
-  FilenameConflictAction get conflictAction => FilenameConflictAction.create(proxy['conflictAction']);
+  FilenameConflictAction get conflictAction => _createFilenameConflictAction(proxy['conflictAction']);
   set conflictAction(FilenameConflictAction value) => proxy['conflictAction'] = value;
 
   bool get saveAs => proxy['saveAs'];
   set saveAs(bool value) => proxy['saveAs'] = value;
 
-  HttpMethod get method => HttpMethod.create(proxy['method']);
+  HttpMethod get method => _createHttpMethod(proxy['method']);
   set method(HttpMethod value) => proxy['method'] = value;
 
-  HeaderNameValuePair get headers => HeaderNameValuePair.create(proxy['headers']);
+  HeaderNameValuePair get headers => _createHeaderNameValuePair(proxy['headers']);
   set headers(HeaderNameValuePair value) => proxy['headers'] = value;
 
   String get body => proxy['body'];
@@ -277,7 +257,6 @@ class DownloadOptions extends ChromeObject {
 }
 
 class DownloadItem extends ChromeObject {
-  static DownloadItem create(JsObject proxy) => proxy == null ? null : new DownloadItem.fromProxy(proxy);
 
   DownloadItem({int id, String url, String referrer, String filename, bool incognito, DangerType danger, String mime, String startTime, String endTime, String estimatedEndTime, State state, bool paused, bool canResume, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists, String byExtensionId, String byExtensionName}) {
     if (id != null) this.id = id;
@@ -319,7 +298,7 @@ class DownloadItem extends ChromeObject {
   bool get incognito => proxy['incognito'];
   set incognito(bool value) => proxy['incognito'] = value;
 
-  DangerType get danger => DangerType.create(proxy['danger']);
+  DangerType get danger => _createDangerType(proxy['danger']);
   set danger(DangerType value) => proxy['danger'] = value;
 
   String get mime => proxy['mime'];
@@ -334,7 +313,7 @@ class DownloadItem extends ChromeObject {
   String get estimatedEndTime => proxy['estimatedEndTime'];
   set estimatedEndTime(String value) => proxy['estimatedEndTime'] = value;
 
-  State get state => State.create(proxy['state']);
+  State get state => _createState(proxy['state']);
   set state(State value) => proxy['state'] = value;
 
   bool get paused => proxy['paused'];
@@ -343,7 +322,7 @@ class DownloadItem extends ChromeObject {
   bool get canResume => proxy['canResume'];
   set canResume(bool value) => proxy['canResume'] = value;
 
-  InterruptReason get error => InterruptReason.create(proxy['error']);
+  InterruptReason get error => _createInterruptReason(proxy['error']);
   set error(InterruptReason value) => proxy['error'] = value;
 
   int get bytesReceived => proxy['bytesReceived'];
@@ -366,7 +345,6 @@ class DownloadItem extends ChromeObject {
 }
 
 class DownloadQuery extends ChromeObject {
-  static DownloadQuery create(JsObject proxy) => proxy == null ? null : new DownloadQuery.fromProxy(proxy);
 
   DownloadQuery({String query, String startedBefore, String startedAfter, String endedBefore, String endedAfter, int totalBytesGreater, int totalBytesLess, String filenameRegex, String urlRegex, int limit, String orderBy, int id, String url, String filename, DangerType danger, String mime, String startTime, String endTime, State state, bool paused, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists}) {
     if (query != null) this.query = query;
@@ -440,7 +418,7 @@ class DownloadQuery extends ChromeObject {
   String get filename => proxy['filename'];
   set filename(String value) => proxy['filename'] = value;
 
-  DangerType get danger => DangerType.create(proxy['danger']);
+  DangerType get danger => _createDangerType(proxy['danger']);
   set danger(DangerType value) => proxy['danger'] = value;
 
   String get mime => proxy['mime'];
@@ -452,13 +430,13 @@ class DownloadQuery extends ChromeObject {
   String get endTime => proxy['endTime'];
   set endTime(String value) => proxy['endTime'] = value;
 
-  State get state => State.create(proxy['state']);
+  State get state => _createState(proxy['state']);
   set state(State value) => proxy['state'] = value;
 
   bool get paused => proxy['paused'];
   set paused(bool value) => proxy['paused'] = value;
 
-  InterruptReason get error => InterruptReason.create(proxy['error']);
+  InterruptReason get error => _createInterruptReason(proxy['error']);
   set error(InterruptReason value) => proxy['error'] = value;
 
   int get bytesReceived => proxy['bytesReceived'];
@@ -475,7 +453,6 @@ class DownloadQuery extends ChromeObject {
 }
 
 class StringDelta extends ChromeObject {
-  static StringDelta create(JsObject proxy) => proxy == null ? null : new StringDelta.fromProxy(proxy);
 
   StringDelta({String previous, String current}) {
     if (previous != null) this.previous = previous;
@@ -492,7 +469,6 @@ class StringDelta extends ChromeObject {
 }
 
 class LongDelta extends ChromeObject {
-  static LongDelta create(JsObject proxy) => proxy == null ? null : new LongDelta.fromProxy(proxy);
 
   LongDelta({int previous, int current}) {
     if (previous != null) this.previous = previous;
@@ -509,7 +485,6 @@ class LongDelta extends ChromeObject {
 }
 
 class BooleanDelta extends ChromeObject {
-  static BooleanDelta create(JsObject proxy) => proxy == null ? null : new BooleanDelta.fromProxy(proxy);
 
   BooleanDelta({bool previous, bool current}) {
     if (previous != null) this.previous = previous;
@@ -526,7 +501,6 @@ class BooleanDelta extends ChromeObject {
 }
 
 class DownloadDelta extends ChromeObject {
-  static DownloadDelta create(JsObject proxy) => proxy == null ? null : new DownloadDelta.fromProxy(proxy);
 
   DownloadDelta({int id, StringDelta url, StringDelta filename, StringDelta danger, StringDelta mime, StringDelta startTime, StringDelta endTime, StringDelta state, BooleanDelta canResume, BooleanDelta paused, StringDelta error, LongDelta totalBytes, LongDelta fileSize, BooleanDelta exists}) {
     if (id != null) this.id = id;
@@ -550,48 +524,47 @@ class DownloadDelta extends ChromeObject {
   int get id => proxy['id'];
   set id(int value) => proxy['id'] = value;
 
-  StringDelta get url => StringDelta.create(proxy['url']);
+  StringDelta get url => _createStringDelta(proxy['url']);
   set url(StringDelta value) => proxy['url'] = value;
 
-  StringDelta get filename => StringDelta.create(proxy['filename']);
+  StringDelta get filename => _createStringDelta(proxy['filename']);
   set filename(StringDelta value) => proxy['filename'] = value;
 
-  StringDelta get danger => StringDelta.create(proxy['danger']);
+  StringDelta get danger => _createStringDelta(proxy['danger']);
   set danger(StringDelta value) => proxy['danger'] = value;
 
-  StringDelta get mime => StringDelta.create(proxy['mime']);
+  StringDelta get mime => _createStringDelta(proxy['mime']);
   set mime(StringDelta value) => proxy['mime'] = value;
 
-  StringDelta get startTime => StringDelta.create(proxy['startTime']);
+  StringDelta get startTime => _createStringDelta(proxy['startTime']);
   set startTime(StringDelta value) => proxy['startTime'] = value;
 
-  StringDelta get endTime => StringDelta.create(proxy['endTime']);
+  StringDelta get endTime => _createStringDelta(proxy['endTime']);
   set endTime(StringDelta value) => proxy['endTime'] = value;
 
-  StringDelta get state => StringDelta.create(proxy['state']);
+  StringDelta get state => _createStringDelta(proxy['state']);
   set state(StringDelta value) => proxy['state'] = value;
 
-  BooleanDelta get canResume => BooleanDelta.create(proxy['canResume']);
+  BooleanDelta get canResume => _createBooleanDelta(proxy['canResume']);
   set canResume(BooleanDelta value) => proxy['canResume'] = value;
 
-  BooleanDelta get paused => BooleanDelta.create(proxy['paused']);
+  BooleanDelta get paused => _createBooleanDelta(proxy['paused']);
   set paused(BooleanDelta value) => proxy['paused'] = value;
 
-  StringDelta get error => StringDelta.create(proxy['error']);
+  StringDelta get error => _createStringDelta(proxy['error']);
   set error(StringDelta value) => proxy['error'] = value;
 
-  LongDelta get totalBytes => LongDelta.create(proxy['totalBytes']);
+  LongDelta get totalBytes => _createLongDelta(proxy['totalBytes']);
   set totalBytes(LongDelta value) => proxy['totalBytes'] = value;
 
-  LongDelta get fileSize => LongDelta.create(proxy['fileSize']);
+  LongDelta get fileSize => _createLongDelta(proxy['fileSize']);
   set fileSize(LongDelta value) => proxy['fileSize'] = value;
 
-  BooleanDelta get exists => BooleanDelta.create(proxy['exists']);
+  BooleanDelta get exists => _createBooleanDelta(proxy['exists']);
   set exists(BooleanDelta value) => proxy['exists'] = value;
 }
 
 class GetFileIconOptions extends ChromeObject {
-  static GetFileIconOptions create(JsObject proxy) => proxy == null ? null : new GetFileIconOptions.fromProxy(proxy);
 
   GetFileIconOptions({int size}) {
     if (size != null) this.size = size;
@@ -602,3 +575,18 @@ class GetFileIconOptions extends ChromeObject {
   int get size => proxy['size'];
   set size(int value) => proxy['size'] = value;
 }
+
+DownloadItem _createDownloadItem(JsObject proxy) => proxy == null ? null : new DownloadItem.fromProxy(proxy);
+DownloadDelta _createDownloadDelta(JsObject proxy) => proxy == null ? null : new DownloadDelta.fromProxy(proxy);
+OnDeterminingFilenameEvent _createOnDeterminingFilenameEvent(JsObject downloadItem, JsObject suggest) =>
+    new OnDeterminingFilenameEvent(_createDownloadItem(downloadItem), _createSuggestFilenameCallback(suggest));
+FilenameConflictAction _createFilenameConflictAction(String value) => FilenameConflictAction.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+HttpMethod _createHttpMethod(String value) => HttpMethod.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+HeaderNameValuePair _createHeaderNameValuePair(JsObject proxy) => proxy == null ? null : new HeaderNameValuePair.fromProxy(proxy);
+DangerType _createDangerType(String value) => DangerType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+State _createState(String value) => State.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+InterruptReason _createInterruptReason(String value) => InterruptReason.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+StringDelta _createStringDelta(JsObject proxy) => proxy == null ? null : new StringDelta.fromProxy(proxy);
+BooleanDelta _createBooleanDelta(JsObject proxy) => proxy == null ? null : new BooleanDelta.fromProxy(proxy);
+LongDelta _createLongDelta(JsObject proxy) => proxy == null ? null : new LongDelta.fromProxy(proxy);
+SuggestFilenameCallback _createSuggestFilenameCallback(JsObject proxy) => proxy == null ? null : new SuggestFilenameCallback.fromProxy(proxy);

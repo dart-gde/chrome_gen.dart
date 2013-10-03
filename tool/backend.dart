@@ -38,6 +38,8 @@ class _DefaultBackendContext {
   final ChromeLibrary library;
   final Overrides overrides;
 
+  final Set<String> _neededFactories = new Set<String>();
+
   _DefaultBackendContext(this.generator, this.library, this.overrides);
 
   String generate({String license, String sourceFileName}) {
@@ -81,11 +83,60 @@ class _DefaultBackendContext {
     library.enumTypes.forEach((t) => _printEnumType(t));
     library.types.forEach((t) => _printDeclaredType(t));
 
+    if(_neededFactories.isNotEmpty) {
+      generator.writeln();
+
+      var created = new Set<String>();
+
+      while(_neededFactories.isNotEmpty) {
+        var factoryType = _neededFactories.first;
+        _neededFactories.remove(factoryType);
+
+        if(!created.contains(factoryType)) {
+          _writeFactory(factoryType);
+          created.add(factoryType);
+        }
+      }
+    }
+
     overrides.classRenamesFor(library.name).forEach((List<String> renamePair) {
       generator.renameSymbol(renamePair[0], renamePair[1]);
     });
 
     return generator.toString();
+  }
+
+  void _writeFactory(String creator) {
+    String creatorTemplate = null;
+
+    var type = library.eventTypes.firstWhere((e) => e.name == creator, orElse: () => null);
+
+    if(type != null) {
+      Iterable<ChromeProperty> props = type.filteredProperties;
+
+      String createParams = props.map((p) => '${getJSType(p.type)} ${p.name}').join(', ');
+      generator.writeln("${creator} _create$creator(${createParams}) =>");
+      String cvtParams = props.map((ChromeProperty p) {
+        String cvt = getCallbackConverter(p.type, _neededFactories);
+        if (cvt == null) {
+          return p.name;
+        } else {
+          return "${cvt}(${p.name})";
+        }
+      }).join(', ');
+      generator.writeln("    new ${creator}(${cvtParams});");
+      return;
+    }
+
+    var enumType = library.enumTypes.firstWhere((e) => e.name == creator, orElse: () => null);
+    if(enumType != null) {
+      creatorTemplate = "%s _create%s(String value) => %s.VALUES.singleWhere((ChromeEnum e) => e.value == value);";
+    } else {
+      creatorTemplate = "%s _create%s(JsObject proxy) => proxy == null ? null : new %s.fromProxy(proxy);";
+    }
+
+
+    generator.writeln(creatorTemplate.replaceAll('%s', creator));
   }
 
   String get libraryName {
@@ -125,7 +176,7 @@ class _DefaultBackendContext {
   }
 
   void _printProperty(ChromeProperty property, String refString, [bool printSetter = false]) {
-    String converter = getReturnConverter(property.type);
+    String converter = getReturnConverter(property.type, _neededFactories);
     String getterBody = "${refString}['${property.name}']";
 
     generator.writeln();
@@ -171,7 +222,7 @@ class _DefaultBackendContext {
         generator.writeln("noArgs();");
       } else if (future.parameters.length == 1) {
         ChromeType param = future.parameters.first;
-        var callbackConverter = getCallbackConverter(param);
+        var callbackConverter = getCallbackConverter(param, _neededFactories);
         if (callbackConverter == null) {
           generator.writeln("oneArg();");
         } else {
@@ -203,7 +254,7 @@ class _DefaultBackendContext {
     if (method.usesCallback || method.returns.isVoid) {
       generator.writeln("${methodCall};");
     } else {
-      String returnConverter = getReturnConverter(method.returns);
+      String returnConverter = getReturnConverter(method.returns, _neededFactories);
 
       if (returnConverter.contains(',')) {
         generator.writeln("var ret = ${methodCall};");
@@ -238,7 +289,7 @@ class _DefaultBackendContext {
 
     if (type != null) {
       generator.writeln("final ChromeStreamController<${typeName}> _${event.name} =");
-      String converter = getCallbackConverter(type);
+      String converter = getCallbackConverter(type, _neededFactories);
       if (converter == null) {
         converter = 'selfConverter';
       }
@@ -262,17 +313,6 @@ class _DefaultBackendContext {
     generator.writeln();
     generator.writeDocs(type.documentation);
     generator.writeln("class ${className} {");
-    String createParams = props.map((p) => '${getJSType(p.type)} ${p.name}').join(', ');
-    generator.writeln("static ${className} create(${createParams}) =>");
-    String cvtParams = props.map((ChromeProperty p) {
-      String cvt = getCallbackConverter(p.type);
-      if (cvt == null) {
-        return p.name;
-      } else {
-        return "${cvt}(${p.name})";
-      }
-    }).join(', ');
-    generator.writeln("    new ${className}(${cvtParams});");
     props.forEach((ChromeProperty property) {
       generator.writeln();
       generator.writeDocs(property.getDescription());
@@ -307,10 +347,6 @@ class _DefaultBackendContext {
     generator.writeln("static const List<${type.name}> VALUES = const[${str}];");
 
     generator.writeln();
-    generator.writeln("static ${type.name} create(String str) =>");
-    generator.writeln("    VALUES.singleWhere((ChromeEnum e) => e.value == str);");
-
-    generator.writeln();
     generator.writeln("const ${type.name}._(String str): super(str);");
 
     generator.writeln("}");
@@ -328,8 +364,6 @@ class _DefaultBackendContext {
     generator.writeln();
     generator.writeDocs(type.documentation);
     generator.writeln("class ${className} extends ChromeObject {");
-    generator.writeln("static ${className} create(JsObject proxy) => "
-        "proxy == null ? null : new ${className}.fromProxy(proxy);");
     generator.writeln();
     if (props.isNotEmpty) {
       generator.write("${className}({");
@@ -367,11 +401,11 @@ class _DefaultBackendContext {
     }
   }
 
-  static String getCallbackConverter(ChromeType param) {
+  static String getCallbackConverter(ChromeType param, Set<String> creators) {
     if (param.isString || param.isInt || param.isBool) {
       return null;
     } else if (param.isList) {
-      var firstParamCallbackConverter = getCallbackConverter(param.parameters.first);
+      var firstParamCallbackConverter = getCallbackConverter(param.parameters.first, creators);
       if (firstParamCallbackConverter == null) {
         // if the elements are identity converters
         return "listify";
@@ -382,17 +416,18 @@ class _DefaultBackendContext {
     } else if (param.isMap) {
       return 'mapify';
     } else if (param.isReferencedType) {
-      return '${param.refName}.create';
+      creators.add(param.refName);
+      return '_create${param.refName}';
     } else {
       return null;
     }
   }
 
-  static String getReturnConverter(ChromeType param) {
+  static String getReturnConverter(ChromeType param, Set<String> creators) {
     if (param.isString || param.isInt || param.isBool) {
       return '%s';
     } else if (param.isList) {
-      var firstParamCallbackConverter = getCallbackConverter(param.parameters.first);
+      var firstParamCallbackConverter = getCallbackConverter(param.parameters.first, creators);
       if (firstParamCallbackConverter == null) {
         // if the elements are identity converters
         return "listify(%s)";
@@ -403,7 +438,8 @@ class _DefaultBackendContext {
     } else if (param.isMap) {
       return 'mapify(%s)';
     } else if (param.isReferencedType) {
-      return '${param.refName}.create(%s)';
+      creators.add(param.refName);
+      return '_create${param.refName}(%s)';
     } else {
       return '%s';
     }

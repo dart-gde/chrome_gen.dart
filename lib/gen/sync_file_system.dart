@@ -25,31 +25,31 @@ class ChromeSyncFileSystem {
   }
 
   Future<ConflictResolutionPolicy> getConflictResolutionPolicy() {
-    var completer = new ChromeCompleter<ConflictResolutionPolicy>.oneArg(ConflictResolutionPolicy.create);
+    var completer = new ChromeCompleter<ConflictResolutionPolicy>.oneArg(_createConflictResolutionPolicy);
     _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
     return completer.future;
   }
 
   Future<StorageInfo> getUsageAndQuota(dynamic fileSystem) {
-    var completer = new ChromeCompleter<StorageInfo>.oneArg(StorageInfo.create);
+    var completer = new ChromeCompleter<StorageInfo>.oneArg(_createStorageInfo);
     _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
     return completer.future;
   }
 
   Future<FileStatus> getFileStatus(dynamic fileEntry) {
-    var completer = new ChromeCompleter<FileStatus>.oneArg(FileStatus.create);
+    var completer = new ChromeCompleter<FileStatus>.oneArg(_createFileStatus);
     _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
     return completer.future;
   }
 
   Future<FileStatusInfo> getFileStatuses(dynamic fileEntries) {
-    var completer = new ChromeCompleter<FileStatusInfo>.oneArg(FileStatusInfo.create);
+    var completer = new ChromeCompleter<FileStatusInfo>.oneArg(_createFileStatusInfo);
     _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
     return completer.future;
   }
 
   Future<ServiceStatus> getServiceStatus() {
-    var completer = new ChromeCompleter<ServiceStatus>.oneArg(ServiceStatus.create);
+    var completer = new ChromeCompleter<ServiceStatus>.oneArg(_createServiceStatus);
     _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
     return completer.future;
   }
@@ -57,12 +57,12 @@ class ChromeSyncFileSystem {
   Stream<ServiceInfo> get onServiceStatusChanged => _onServiceStatusChanged.stream;
 
   final ChromeStreamController<ServiceInfo> _onServiceStatusChanged =
-      new ChromeStreamController<ServiceInfo>.oneArg(_syncFileSystem['onServiceStatusChanged'], ServiceInfo.create);
+      new ChromeStreamController<ServiceInfo>.oneArg(_syncFileSystem['onServiceStatusChanged'], _createServiceInfo);
 
   Stream<FileInfo> get onFileStatusChanged => _onFileStatusChanged.stream;
 
   final ChromeStreamController<FileInfo> _onFileStatusChanged =
-      new ChromeStreamController<FileInfo>.oneArg(_syncFileSystem['onFileStatusChanged'], FileInfo.create);
+      new ChromeStreamController<FileInfo>.oneArg(_syncFileSystem['onFileStatusChanged'], _createFileInfo);
 }
 
 class SyncAction extends ChromeEnum {
@@ -71,9 +71,6 @@ class SyncAction extends ChromeEnum {
   static const SyncAction DELETED = const SyncAction._('deleted');
 
   static const List<SyncAction> VALUES = const[ADDED, UPDATED, DELETED];
-
-  static SyncAction create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const SyncAction._(String str): super(str);
 }
@@ -87,9 +84,6 @@ class ServiceStatus extends ChromeEnum {
 
   static const List<ServiceStatus> VALUES = const[INITIALIZING, RUNNING, AUTHENTICATION_REQUIRED, TEMPORARY_UNAVAILABLE, DISABLED];
 
-  static ServiceStatus create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const ServiceStatus._(String str): super(str);
 }
 
@@ -100,9 +94,6 @@ class FileStatus extends ChromeEnum {
 
   static const List<FileStatus> VALUES = const[SYNCED, PENDING, CONFLICTING];
 
-  static FileStatus create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const FileStatus._(String str): super(str);
 }
 
@@ -111,9 +102,6 @@ class SyncDirection extends ChromeEnum {
   static const SyncDirection REMOTE_TO_LOCAL = const SyncDirection._('remote_to_local');
 
   static const List<SyncDirection> VALUES = const[LOCAL_TO_REMOTE, REMOTE_TO_LOCAL];
-
-  static SyncDirection create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const SyncDirection._(String str): super(str);
 }
@@ -124,14 +112,10 @@ class ConflictResolutionPolicy extends ChromeEnum {
 
   static const List<ConflictResolutionPolicy> VALUES = const[LAST_WRITE_WIN, MANUAL];
 
-  static ConflictResolutionPolicy create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const ConflictResolutionPolicy._(String str): super(str);
 }
 
 class FileInfo extends ChromeObject {
-  static FileInfo create(JsObject proxy) => proxy == null ? null : new FileInfo.fromProxy(proxy);
 
   FileInfo({var fileEntry, FileStatus status, SyncAction action, SyncDirection direction}) {
     if (fileEntry != null) this.fileEntry = fileEntry;
@@ -145,18 +129,17 @@ class FileInfo extends ChromeObject {
   dynamic get fileEntry => proxy['fileEntry'];
   set fileEntry(var value) => proxy['fileEntry'] = value;
 
-  FileStatus get status => FileStatus.create(proxy['status']);
+  FileStatus get status => _createFileStatus(proxy['status']);
   set status(FileStatus value) => proxy['status'] = value;
 
-  SyncAction get action => SyncAction.create(proxy['action']);
+  SyncAction get action => _createSyncAction(proxy['action']);
   set action(SyncAction value) => proxy['action'] = value;
 
-  SyncDirection get direction => SyncDirection.create(proxy['direction']);
+  SyncDirection get direction => _createSyncDirection(proxy['direction']);
   set direction(SyncDirection value) => proxy['direction'] = value;
 }
 
 class FileStatusInfo extends ChromeObject {
-  static FileStatusInfo create(JsObject proxy) => proxy == null ? null : new FileStatusInfo.fromProxy(proxy);
 
   FileStatusInfo({var fileEntry, FileStatus status, String error}) {
     if (fileEntry != null) this.fileEntry = fileEntry;
@@ -169,7 +152,7 @@ class FileStatusInfo extends ChromeObject {
   dynamic get fileEntry => proxy['fileEntry'];
   set fileEntry(var value) => proxy['fileEntry'] = value;
 
-  FileStatus get status => FileStatus.create(proxy['status']);
+  FileStatus get status => _createFileStatus(proxy['status']);
   set status(FileStatus value) => proxy['status'] = value;
 
   String get error => proxy['error'];
@@ -177,7 +160,6 @@ class FileStatusInfo extends ChromeObject {
 }
 
 class StorageInfo extends ChromeObject {
-  static StorageInfo create(JsObject proxy) => proxy == null ? null : new StorageInfo.fromProxy(proxy);
 
   StorageInfo({int usageBytes, int quotaBytes}) {
     if (usageBytes != null) this.usageBytes = usageBytes;
@@ -194,7 +176,6 @@ class StorageInfo extends ChromeObject {
 }
 
 class ServiceInfo extends ChromeObject {
-  static ServiceInfo create(JsObject proxy) => proxy == null ? null : new ServiceInfo.fromProxy(proxy);
 
   ServiceInfo({ServiceStatus state, String description}) {
     if (state != null) this.state = state;
@@ -203,9 +184,19 @@ class ServiceInfo extends ChromeObject {
 
   ServiceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
-  ServiceStatus get state => ServiceStatus.create(proxy['state']);
+  ServiceStatus get state => _createServiceStatus(proxy['state']);
   set state(ServiceStatus value) => proxy['state'] = value;
 
   String get description => proxy['description'];
   set description(String value) => proxy['description'] = value;
 }
+
+ConflictResolutionPolicy _createConflictResolutionPolicy(String value) => ConflictResolutionPolicy.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+StorageInfo _createStorageInfo(JsObject proxy) => proxy == null ? null : new StorageInfo.fromProxy(proxy);
+FileStatus _createFileStatus(String value) => FileStatus.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+FileStatusInfo _createFileStatusInfo(JsObject proxy) => proxy == null ? null : new FileStatusInfo.fromProxy(proxy);
+ServiceStatus _createServiceStatus(String value) => ServiceStatus.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+ServiceInfo _createServiceInfo(JsObject proxy) => proxy == null ? null : new ServiceInfo.fromProxy(proxy);
+FileInfo _createFileInfo(JsObject proxy) => proxy == null ? null : new FileInfo.fromProxy(proxy);
+SyncAction _createSyncAction(String value) => SyncAction.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+SyncDirection _createSyncDirection(String value) => SyncDirection.VALUES.singleWhere((ChromeEnum e) => e.value == value);

@@ -26,8 +26,10 @@ class ChromeInfobars {
    * Contains details about the window in which the infobar was created.
    */
   Future<Window> show(Map details) {
-    var completer = new ChromeCompleter<Window>.oneArg(Window.create);
+    var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _infobars.callMethod('show', [jsify(details), completer.callback]);
     return completer.future;
   }
 }
+
+Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);

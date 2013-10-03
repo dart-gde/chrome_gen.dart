@@ -13,14 +13,13 @@ class ChromeSystemCpu {
   ChromeSystemCpu._();
 
   Future<CpuInfo> getInfo() {
-    var completer = new ChromeCompleter<CpuInfo>.oneArg(CpuInfo.create);
+    var completer = new ChromeCompleter<CpuInfo>.oneArg(_createCpuInfo);
     _system_cpu.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }
 }
 
 class CpuInfo extends ChromeObject {
-  static CpuInfo create(JsObject proxy) => proxy == null ? null : new CpuInfo.fromProxy(proxy);
 
   CpuInfo({int numOfProcessors, String archName, String modelName}) {
     if (numOfProcessors != null) this.numOfProcessors = numOfProcessors;
@@ -39,3 +38,5 @@ class CpuInfo extends ChromeObject {
   String get modelName => proxy['modelName'];
   set modelName(String value) => proxy['modelName'] = value;
 }
+
+CpuInfo _createCpuInfo(JsObject proxy) => proxy == null ? null : new CpuInfo.fromProxy(proxy);

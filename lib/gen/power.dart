@@ -27,8 +27,5 @@ class Level extends ChromeEnum {
 
   static const List<Level> VALUES = const[SYSTEM, DISPLAY];
 
-  static Level create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const Level._(String str): super(str);
 }

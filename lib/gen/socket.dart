@@ -13,7 +13,7 @@ class ChromeSocket {
   ChromeSocket._();
 
   Future<CreateInfo> create(SocketType type, [CreateOptions options]) {
-    var completer = new ChromeCompleter<CreateInfo>.oneArg(CreateInfo.create);
+    var completer = new ChromeCompleter<CreateInfo>.oneArg(_createCreateInfo);
     _socket.callMethod('create', [type, options, completer.callback]);
     return completer.future;
   }
@@ -39,25 +39,25 @@ class ChromeSocket {
   }
 
   Future<SocketReadInfo> read(int socketId, [int bufferSize]) {
-    var completer = new ChromeCompleter<SocketReadInfo>.oneArg(SocketReadInfo.create);
+    var completer = new ChromeCompleter<SocketReadInfo>.oneArg(_createSocketReadInfo);
     _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
     return completer.future;
   }
 
   Future<SocketWriteInfo> write(int socketId, ArrayBuffer data) {
-    var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(SocketWriteInfo.create);
+    var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createSocketWriteInfo);
     _socket.callMethod('write', [socketId, data, completer.callback]);
     return completer.future;
   }
 
   Future<RecvFromInfo> recvFrom(int socketId, [int bufferSize]) {
-    var completer = new ChromeCompleter<RecvFromInfo>.oneArg(RecvFromInfo.create);
+    var completer = new ChromeCompleter<RecvFromInfo>.oneArg(_createRecvFromInfo);
     _socket.callMethod('recvFrom', [socketId, bufferSize, completer.callback]);
     return completer.future;
   }
 
   Future<SocketWriteInfo> sendTo(int socketId, ArrayBuffer data, String address, int port) {
-    var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(SocketWriteInfo.create);
+    var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createSocketWriteInfo);
     _socket.callMethod('sendTo', [socketId, data, address, port, completer.callback]);
     return completer.future;
   }
@@ -69,7 +69,7 @@ class ChromeSocket {
   }
 
   Future<AcceptInfo> accept(int socketId) {
-    var completer = new ChromeCompleter<AcceptInfo>.oneArg(AcceptInfo.create);
+    var completer = new ChromeCompleter<AcceptInfo>.oneArg(_createAcceptInfo);
     _socket.callMethod('accept', [socketId, completer.callback]);
     return completer.future;
   }
@@ -87,13 +87,13 @@ class ChromeSocket {
   }
 
   Future<SocketInfo> getInfo(int socketId) {
-    var completer = new ChromeCompleter<SocketInfo>.oneArg(SocketInfo.create);
+    var completer = new ChromeCompleter<SocketInfo>.oneArg(_createSocketInfo);
     _socket.callMethod('getInfo', [socketId, completer.callback]);
     return completer.future;
   }
 
   Future<NetworkInterface> getNetworkList() {
-    var completer = new ChromeCompleter<NetworkInterface>.oneArg(NetworkInterface.create);
+    var completer = new ChromeCompleter<NetworkInterface>.oneArg(_createNetworkInterface);
     _socket.callMethod('getNetworkList', [completer.callback]);
     return completer.future;
   }
@@ -135,14 +135,10 @@ class SocketType extends ChromeEnum {
 
   static const List<SocketType> VALUES = const[TCP, UDP];
 
-  static SocketType create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const SocketType._(String str): super(str);
 }
 
 class CreateOptions extends ChromeObject {
-  static CreateOptions create(JsObject proxy) => proxy == null ? null : new CreateOptions.fromProxy(proxy);
 
   CreateOptions();
 
@@ -150,7 +146,6 @@ class CreateOptions extends ChromeObject {
 }
 
 class CreateInfo extends ChromeObject {
-  static CreateInfo create(JsObject proxy) => proxy == null ? null : new CreateInfo.fromProxy(proxy);
 
   CreateInfo({int socketId}) {
     if (socketId != null) this.socketId = socketId;
@@ -163,7 +158,6 @@ class CreateInfo extends ChromeObject {
 }
 
 class AcceptInfo extends ChromeObject {
-  static AcceptInfo create(JsObject proxy) => proxy == null ? null : new AcceptInfo.fromProxy(proxy);
 
   AcceptInfo({int resultCode, int socketId}) {
     if (resultCode != null) this.resultCode = resultCode;
@@ -180,7 +174,6 @@ class AcceptInfo extends ChromeObject {
 }
 
 class SocketReadInfo extends ChromeObject {
-  static SocketReadInfo create(JsObject proxy) => proxy == null ? null : new SocketReadInfo.fromProxy(proxy);
 
   SocketReadInfo({int resultCode, ArrayBuffer data}) {
     if (resultCode != null) this.resultCode = resultCode;
@@ -192,12 +185,11 @@ class SocketReadInfo extends ChromeObject {
   int get resultCode => proxy['resultCode'];
   set resultCode(int value) => proxy['resultCode'] = value;
 
-  ArrayBuffer get data => ArrayBuffer.create(proxy['data']);
+  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
   set data(ArrayBuffer value) => proxy['data'] = value;
 }
 
 class SocketWriteInfo extends ChromeObject {
-  static SocketWriteInfo create(JsObject proxy) => proxy == null ? null : new SocketWriteInfo.fromProxy(proxy);
 
   SocketWriteInfo({int bytesWritten}) {
     if (bytesWritten != null) this.bytesWritten = bytesWritten;
@@ -210,7 +202,6 @@ class SocketWriteInfo extends ChromeObject {
 }
 
 class RecvFromInfo extends ChromeObject {
-  static RecvFromInfo create(JsObject proxy) => proxy == null ? null : new RecvFromInfo.fromProxy(proxy);
 
   RecvFromInfo({int resultCode, ArrayBuffer data, String address, int port}) {
     if (resultCode != null) this.resultCode = resultCode;
@@ -224,7 +215,7 @@ class RecvFromInfo extends ChromeObject {
   int get resultCode => proxy['resultCode'];
   set resultCode(int value) => proxy['resultCode'] = value;
 
-  ArrayBuffer get data => ArrayBuffer.create(proxy['data']);
+  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
   set data(ArrayBuffer value) => proxy['data'] = value;
 
   String get address => proxy['address'];
@@ -235,7 +226,6 @@ class RecvFromInfo extends ChromeObject {
 }
 
 class SocketInfo extends ChromeObject {
-  static SocketInfo create(JsObject proxy) => proxy == null ? null : new SocketInfo.fromProxy(proxy);
 
   SocketInfo({SocketType socketType, bool connected, String peerAddress, int peerPort, String localAddress, int localPort}) {
     if (socketType != null) this.socketType = socketType;
@@ -248,7 +238,7 @@ class SocketInfo extends ChromeObject {
 
   SocketInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
-  SocketType get socketType => SocketType.create(proxy['socketType']);
+  SocketType get socketType => _createSocketType(proxy['socketType']);
   set socketType(SocketType value) => proxy['socketType'] = value;
 
   bool get connected => proxy['connected'];
@@ -268,7 +258,6 @@ class SocketInfo extends ChromeObject {
 }
 
 class NetworkInterface extends ChromeObject {
-  static NetworkInterface create(JsObject proxy) => proxy == null ? null : new NetworkInterface.fromProxy(proxy);
 
   NetworkInterface({String name, String address}) {
     if (name != null) this.name = name;
@@ -283,3 +272,13 @@ class NetworkInterface extends ChromeObject {
   String get address => proxy['address'];
   set address(String value) => proxy['address'] = value;
 }
+
+CreateInfo _createCreateInfo(JsObject proxy) => proxy == null ? null : new CreateInfo.fromProxy(proxy);
+SocketReadInfo _createSocketReadInfo(JsObject proxy) => proxy == null ? null : new SocketReadInfo.fromProxy(proxy);
+SocketWriteInfo _createSocketWriteInfo(JsObject proxy) => proxy == null ? null : new SocketWriteInfo.fromProxy(proxy);
+RecvFromInfo _createRecvFromInfo(JsObject proxy) => proxy == null ? null : new RecvFromInfo.fromProxy(proxy);
+AcceptInfo _createAcceptInfo(JsObject proxy) => proxy == null ? null : new AcceptInfo.fromProxy(proxy);
+SocketInfo _createSocketInfo(JsObject proxy) => proxy == null ? null : new SocketInfo.fromProxy(proxy);
+NetworkInterface _createNetworkInterface(JsObject proxy) => proxy == null ? null : new NetworkInterface.fromProxy(proxy);
+ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);
+SocketType _createSocketType(String value) => SocketType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
