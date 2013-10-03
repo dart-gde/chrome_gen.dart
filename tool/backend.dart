@@ -117,7 +117,7 @@ class _DefaultBackendContext {
       String createParams = props.map((p) => '${getJSType(p.type)} ${p.name}').join(', ');
       generator.writeln("${creator} _create$creator(${createParams}) =>");
       String cvtParams = props.map((ChromeProperty p) {
-        String cvt = getCallbackConverter(p.type, _neededFactories);
+        String cvt = getCallbackConverter(p.type);
         if (cvt == null) {
           return p.name;
         } else {
@@ -175,7 +175,7 @@ class _DefaultBackendContext {
   }
 
   void _printProperty(ChromeProperty property, String refString, [bool printSetter = false]) {
-    String converter = getReturnConverter(property.type, _neededFactories);
+    String converter = getReturnConverter(property.type);
     String getterBody = "${refString}['${property.name}']";
 
     generator.writeln();
@@ -221,7 +221,7 @@ class _DefaultBackendContext {
         generator.writeln("noArgs();");
       } else if (future.parameters.length == 1) {
         ChromeType param = future.parameters.first;
-        var callbackConverter = getCallbackConverter(param, _neededFactories);
+        var callbackConverter = getCallbackConverter(param);
         if (callbackConverter == null) {
           generator.writeln("oneArg();");
         } else {
@@ -253,7 +253,7 @@ class _DefaultBackendContext {
     if (method.usesCallback || method.returns.isVoid) {
       generator.writeln("${methodCall};");
     } else {
-      String returnConverter = getReturnConverter(method.returns, _neededFactories);
+      String returnConverter = getReturnConverter(method.returns);
 
       if (returnConverter.contains(',')) {
         generator.writeln("var ret = ${methodCall};");
@@ -288,7 +288,7 @@ class _DefaultBackendContext {
 
     if (type != null) {
       generator.writeln("final ChromeStreamController<${typeName}> _${event.name} =");
-      String converter = getCallbackConverter(type, _neededFactories);
+      String converter = getCallbackConverter(type);
       if (converter == null) {
         converter = 'selfConverter';
       }
@@ -307,7 +307,7 @@ class _DefaultBackendContext {
     // We do class renames in a lexical basis for the entire compilation unit.
     String className = type.name; //overrides.className(library.name, type.name);
 
-    Iterable<ChromeProperty> props = type.filteredProperties;
+    var props = type.filteredProperties.toList();
 
     generator.writeln();
     generator.writeDocs(type.documentation);
@@ -400,11 +400,11 @@ class _DefaultBackendContext {
     }
   }
 
-  static String getCallbackConverter(ChromeType param, Set<String> creators) {
+  String getCallbackConverter(ChromeType param) {
     if (param.isString || param.isInt || param.isBool) {
       return null;
     } else if (param.isList) {
-      var firstParamCallbackConverter = getCallbackConverter(param.parameters.first, creators);
+      var firstParamCallbackConverter = getCallbackConverter(param.parameters.first);
       if (firstParamCallbackConverter == null) {
         // if the elements are identity converters
         return "listify";
@@ -415,18 +415,18 @@ class _DefaultBackendContext {
     } else if (param.isMap) {
       return 'mapify';
     } else if (param.isReferencedType) {
-      creators.add(param.refName);
+      _neededFactories.add(param.refName);
       return '_create${param.refName}';
     } else {
       return null;
     }
   }
 
-  static String getReturnConverter(ChromeType param, Set<String> creators) {
+  String getReturnConverter(ChromeType param) {
     if (param.isString || param.isInt || param.isBool) {
       return '%s';
     } else if (param.isList) {
-      var firstParamCallbackConverter = getCallbackConverter(param.parameters.first, creators);
+      var firstParamCallbackConverter = getCallbackConverter(param.parameters.first);
       if (firstParamCallbackConverter == null) {
         // if the elements are identity converters
         return "listify(%s)";
@@ -437,7 +437,7 @@ class _DefaultBackendContext {
     } else if (param.isMap) {
       return 'mapify(%s)';
     } else if (param.isReferencedType) {
-      creators.add(param.refName);
+      _neededFactories.add(param.refName);
       return '_create${param.refName}(%s)';
     } else {
       return '%s';

@@ -3,6 +3,8 @@ library gen_apis;
 
 import 'dart:io';
 import 'dart:convert';
+import 'package:logging/logging.dart' as logging;
+import 'package:path/path.dart' as pathos;
 
 import 'gen_api.dart';
 import 'overrides.dart';
@@ -15,24 +17,39 @@ import 'src/utils.dart';
 void main() {
   DateTime startTime = new DateTime.now();
 
+  logging.Logger.root.onRecord.listen((logging.LogRecord record) {
+    print(record.message);
+  });
+
   new GenApis().generate();
 
   Duration elapsed = new DateTime.now().difference(startTime);
   print("generated in ${elapsed.inMilliseconds}ms.");
 }
 
-class GenApis {
-  Directory outDir;
-  Directory idlDir;
-  File apisFile;
-  File overridesFile;
+final logging.Logger _logger = new logging.Logger('GenApis');
 
-  GenApis() {
-    _init();
+class GenApis {
+  final String outDirPath;
+  final Directory idlDir;
+  final File apisFile;
+  final File overridesFile;
+
+  GenApis() :
+    outDirPath = pathos.join(pathos.current, 'lib'),
+    apisFile = new File('meta/apis.json'),
+    overridesFile = new File('meta/overrides.json'),
+    idlDir = new Directory('idl') {
+
+
+    if (!idlDir.existsSync()) {
+      throw new Exception('${idlDir.path} not found');
+    }
   }
 
+
   void generate() {
-    print("reading ${apisFile.path}...");
+    _logger.info("reading ${apisFile.path}...");
 
     var apisInfo = JSON.decode(apisFile.readAsStringSync());
 
@@ -40,23 +57,10 @@ class GenApis {
     _generateApi('ext', apisInfo['extension'], alreadyWritten: apisInfo['packaged_app']);
   }
 
-  void _init() {
-    print(Directory.current);
-
-    outDir = new Directory('lib');
-    apisFile = new File('meta/apis.json');
-    overridesFile = new File('meta/overrides.json');
-    idlDir = new Directory('idl');
-
-    if (!idlDir.existsSync()) {
-      throw new Exception('${idlDir.path} not found');
-    }
-  }
-
   void _generateApi(String name, List<String> libraryNames,
                     {List<String> alreadyWritten, bool includeAppSrc: false,
                      String licence}) {
-    File libFile = new File("${outDir.path}/chrome_${name}.dart");
+    File libFile = new File(pathos.join(outDirPath, "chrome_${name}.dart"));
 
     DartGenerator generator = new DartGenerator();
 
@@ -86,7 +90,7 @@ class GenApis {
     }
 
     libFile.writeAsStringSync(generator.toString());
-    print('wrote ${libFile.path}');
+    _logger.info('wrote ${libFile.path}');
 
     if (alreadyWritten != null) {
       libraryNames.removeWhere((e) => alreadyWritten.contains(e));
@@ -106,7 +110,7 @@ class GenApis {
     File jsonFile = new File("${idlDir.path}/${locateName}.json");
     File idlFile = new File("${idlDir.path}/${locateName}.idl");
 
-    File outFile = new File("${outDir.path}/gen/${fileName}.dart");
+    File outFile = new File(pathos.join(outDirPath, 'gen', "${fileName}.dart"));
 
     if (jsonFile.existsSync()) {
       GenApiFile apiGen = new GenApiFile(jsonFile, outFile, overrides);
@@ -115,8 +119,7 @@ class GenApis {
       GenApiFile apiGen = new GenApiFile(idlFile, outFile, overrides);
       apiGen.generate();
     } else {
-      print("Unable to locate idl or json file for '${jsLibName}'.");
-      exit(1);
+      throw new UnsupportedError("Unable to locate idl or json file for '${jsLibName}'.");
     }
   }
 }

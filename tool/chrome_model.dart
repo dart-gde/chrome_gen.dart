@@ -7,8 +7,10 @@ library chrome_model;
 
 import 'src/utils.dart';
 
-class ChromeElement {
+abstract class ChromeElement {
   String documentation;
+
+  String get name;
 
   void appendDocs(String str) {
     if (documentation != null) {
@@ -22,19 +24,19 @@ class ChromeElement {
 class ChromeLibrary extends ChromeElement {
   /// This is straight from the json/idl namespace name. I.e., app.window,
   /// system.display, terminalPrivate, devtools.inspectedWindow.
-  String name;
+  final String name;
 
-  ChromeLibrary([this.name]);
+  ChromeLibrary(this.name);
 
-  List<ChromeProperty> properties = [];
-  List<ChromeMethod> methods = [];
-  List<ChromeEvent> events = [];
+  final List<ChromeProperty> properties = [];
+  final List<ChromeMethod> methods = [];
+  final List<ChromeEvent> events = [];
   /// Synthetic classes used to represent multi-return stream events.
-  List<ChromeType> eventTypes = [];
-  List<ChromeEnumType> enumTypes = [];
-  List<ChromeDeclaredType> types = [];
+  final List<ChromeType> eventTypes = [];
+  final List<ChromeEnumType> enumTypes = [];
+  final List<ChromeDeclaredType> types = [];
 
-  List<String> imports = [];
+  final List<String> imports = [];
 
   void addImport(String str) {
     if (str != null && str != name && !imports.contains(str)) {
@@ -55,9 +57,12 @@ class ChromeLibrary extends ChromeElement {
 }
 
 class ChromeProperty extends ChromeElement {
-  ChromeType type;
-  String name;
+  final String name;
+  final ChromeType type;
+
   bool nodoc = false;
+
+  ChromeProperty(this.name, this.type);
 
   String getDescription() {
     if (documentation == null) {
@@ -125,9 +130,7 @@ class ChromeEvent extends ChromeType {
       newType.refName = typeName;
       newType.documentation = documentation;
       newType.properties = parameters.map((ChromeType t) {
-        ChromeProperty p = new ChromeProperty();
-        p.name = t.name;
-        p.type = t;
+        ChromeProperty p = new ChromeProperty(t.name, t);
         p.documentation = t.documentation;
         if (t.optional) {
           p.documentation = _appendDocs(p.documentation, '`optional`');
