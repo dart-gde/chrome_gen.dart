@@ -37,7 +37,6 @@ class ChromeAudio {
 }
 
 class OutputDeviceInfo extends ChromeObject {
-  static OutputDeviceInfo create(JsObject proxy) => proxy == null ? null : new OutputDeviceInfo.fromProxy(proxy);
 
   OutputDeviceInfo({String id, String name, bool isActive, bool isMuted, double volume}) {
     if (id != null) this.id = id;
@@ -66,7 +65,6 @@ class OutputDeviceInfo extends ChromeObject {
 }
 
 class InputDeviceInfo extends ChromeObject {
-  static InputDeviceInfo create(JsObject proxy) => proxy == null ? null : new InputDeviceInfo.fromProxy(proxy);
 
   InputDeviceInfo({String id, String name, bool isActive, bool isMuted, double gain}) {
     if (id != null) this.id = id;
@@ -95,7 +93,6 @@ class InputDeviceInfo extends ChromeObject {
 }
 
 class DeviceProperties extends ChromeObject {
-  static DeviceProperties create(JsObject proxy) => proxy == null ? null : new DeviceProperties.fromProxy(proxy);
 
   DeviceProperties({bool isMuted, double volume, double gain}) {
     if (isMuted != null) this.isMuted = isMuted;

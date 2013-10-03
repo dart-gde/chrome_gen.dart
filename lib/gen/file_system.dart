@@ -61,14 +61,10 @@ class ChooseEntryType extends ChromeEnum {
 
   static const List<ChooseEntryType> VALUES = const[OPENFILE, OPENWRITABLEFILE, SAVEFILE, OPENDIRECTORY];
 
-  static ChooseEntryType create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const ChooseEntryType._(String str): super(str);
 }
 
 class AcceptOption extends ChromeObject {
-  static AcceptOption create(JsObject proxy) => proxy == null ? null : new AcceptOption.fromProxy(proxy);
 
   AcceptOption({String description, String mimeTypes, String extensions}) {
     if (description != null) this.description = description;
@@ -89,7 +85,6 @@ class AcceptOption extends ChromeObject {
 }
 
 class ChooseEntryOptions extends ChromeObject {
-  static ChooseEntryOptions create(JsObject proxy) => proxy == null ? null : new ChooseEntryOptions.fromProxy(proxy);
 
   ChooseEntryOptions({ChooseEntryType type, String suggestedName, AcceptOption accepts, bool acceptsAllTypes, bool acceptsMultiple}) {
     if (type != null) this.type = type;
@@ -101,13 +96,13 @@ class ChooseEntryOptions extends ChromeObject {
 
   ChooseEntryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
-  ChooseEntryType get type => ChooseEntryType.create(proxy['type']);
+  ChooseEntryType get type => _createChooseEntryType(proxy['type']);
   set type(ChooseEntryType value) => proxy['type'] = value;
 
   String get suggestedName => proxy['suggestedName'];
   set suggestedName(String value) => proxy['suggestedName'] = value;
 
-  AcceptOption get accepts => AcceptOption.create(proxy['accepts']);
+  AcceptOption get accepts => _createAcceptOption(proxy['accepts']);
   set accepts(AcceptOption value) => proxy['accepts'] = value;
 
   bool get acceptsAllTypes => proxy['acceptsAllTypes'];
@@ -116,3 +111,6 @@ class ChooseEntryOptions extends ChromeObject {
   bool get acceptsMultiple => proxy['acceptsMultiple'];
   set acceptsMultiple(bool value) => proxy['acceptsMultiple'] = value;
 }
+
+ChooseEntryType _createChooseEntryType(String value) => ChooseEntryType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+AcceptOption _createAcceptOption(JsObject proxy) => proxy == null ? null : new AcceptOption.fromProxy(proxy);

@@ -19,7 +19,7 @@ class ChromeMediaGalleries {
   }
 
   MediaFileSystemMetadata getMediaFileSystemMetadata(dynamic mediaFileSystem) {
-    return MediaFileSystemMetadata.create(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
+    return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
   }
 }
 
@@ -30,14 +30,10 @@ class GetMediaFileSystemsInteractivity extends ChromeEnum {
 
   static const List<GetMediaFileSystemsInteractivity> VALUES = const[NO, YES, IF_NEEDED];
 
-  static GetMediaFileSystemsInteractivity create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const GetMediaFileSystemsInteractivity._(String str): super(str);
 }
 
 class MediaFileSystemsDetails extends ChromeObject {
-  static MediaFileSystemsDetails create(JsObject proxy) => proxy == null ? null : new MediaFileSystemsDetails.fromProxy(proxy);
 
   MediaFileSystemsDetails({GetMediaFileSystemsInteractivity interactive}) {
     if (interactive != null) this.interactive = interactive;
@@ -45,12 +41,11 @@ class MediaFileSystemsDetails extends ChromeObject {
 
   MediaFileSystemsDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
-  GetMediaFileSystemsInteractivity get interactive => GetMediaFileSystemsInteractivity.create(proxy['interactive']);
+  GetMediaFileSystemsInteractivity get interactive => _createGetMediaFileSystemsInteractivity(proxy['interactive']);
   set interactive(GetMediaFileSystemsInteractivity value) => proxy['interactive'] = value;
 }
 
 class MediaFileSystemMetadata extends ChromeObject {
-  static MediaFileSystemMetadata create(JsObject proxy) => proxy == null ? null : new MediaFileSystemMetadata.fromProxy(proxy);
 
   MediaFileSystemMetadata({String name, String galleryId, String deviceId, bool isRemovable, bool isMediaDevice}) {
     if (name != null) this.name = name;
@@ -77,3 +72,6 @@ class MediaFileSystemMetadata extends ChromeObject {
   bool get isMediaDevice => proxy['isMediaDevice'];
   set isMediaDevice(bool value) => proxy['isMediaDevice'] = value;
 }
+
+MediaFileSystemMetadata _createMediaFileSystemMetadata(JsObject proxy) => proxy == null ? null : new MediaFileSystemMetadata.fromProxy(proxy);
+GetMediaFileSystemsInteractivity _createGetMediaFileSystemsInteractivity(String value) => GetMediaFileSystemsInteractivity.VALUES.singleWhere((ChromeEnum e) => e.value == value);

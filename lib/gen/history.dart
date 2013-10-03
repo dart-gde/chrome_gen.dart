@@ -23,7 +23,7 @@ class ChromeHistory {
    * query.
    */
   Future<List<HistoryItem>> search(Map query) {
-    var completer = new ChromeCompleter<List<HistoryItem>>.oneArg((e) => listify(e, HistoryItem.create));
+    var completer = new ChromeCompleter<List<HistoryItem>>.oneArg((e) => listify(e, _createHistoryItem));
     _history.callMethod('search', [jsify(query), completer.callback]);
     return completer.future;
   }
@@ -32,7 +32,7 @@ class ChromeHistory {
    * Retrieves information about visits to a URL.
    */
   Future<List<VisitItem>> getVisits(Map details) {
-    var completer = new ChromeCompleter<List<VisitItem>>.oneArg((e) => listify(e, VisitItem.create));
+    var completer = new ChromeCompleter<List<VisitItem>>.oneArg((e) => listify(e, _createVisitItem));
     _history.callMethod('getVisits', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -83,7 +83,7 @@ class ChromeHistory {
   Stream<HistoryItem> get onVisited => _onVisited.stream;
 
   final ChromeStreamController<HistoryItem> _onVisited =
-      new ChromeStreamController<HistoryItem>.oneArg(_history['onVisited'], HistoryItem.create);
+      new ChromeStreamController<HistoryItem>.oneArg(_history['onVisited'], _createHistoryItem);
 
   /**
    * Fired when one or more URLs are removed from the history service.  When all
@@ -99,7 +99,6 @@ class ChromeHistory {
  * An object encapsulating one result of a history query.
  */
 class HistoryItem extends ChromeObject {
-  static HistoryItem create(JsObject proxy) => proxy == null ? null : new HistoryItem.fromProxy(proxy);
 
   HistoryItem({String id, String url, String title, var lastVisitTime, int visitCount, int typedCount}) {
     if (id != null) this.id = id;
@@ -155,7 +154,6 @@ class HistoryItem extends ChromeObject {
  * An object encapsulating one visit to a URL.
  */
 class VisitItem extends ChromeObject {
-  static VisitItem create(JsObject proxy) => proxy == null ? null : new VisitItem.fromProxy(proxy);
 
   VisitItem({String id, String visitId, var visitTime, String referringVisitId, String transition}) {
     if (id != null) this.id = id;
@@ -200,3 +198,6 @@ class VisitItem extends ChromeObject {
   String get transition => proxy['transition'];
   set transition(String value) => proxy['transition'] = value;
 }
+
+HistoryItem _createHistoryItem(JsObject proxy) => proxy == null ? null : new HistoryItem.fromProxy(proxy);
+VisitItem _createVisitItem(JsObject proxy) => proxy == null ? null : new VisitItem.fromProxy(proxy);

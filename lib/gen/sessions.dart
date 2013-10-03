@@ -32,7 +32,7 @@ class ChromeSessions {
    * either tabs or windows.
    */
   Future<List<Session>> getRecentlyClosed([Filter filter]) {
-    var completer = new ChromeCompleter<List<Session>>.oneArg((e) => listify(e, Session.create));
+    var completer = new ChromeCompleter<List<Session>>.oneArg((e) => listify(e, _createSession));
     _sessions.callMethod('getRecentlyClosed', [filter, completer.callback]);
     return completer.future;
   }
@@ -47,7 +47,7 @@ class ChromeSessions {
    * [windows.Window] of the [Session] objects.
    */
   Future<List<Device>> getDevices([Filter filter]) {
-    var completer = new ChromeCompleter<List<Device>>.oneArg((e) => listify(e, Device.create));
+    var completer = new ChromeCompleter<List<Device>>.oneArg((e) => listify(e, _createDevice));
     _sessions.callMethod('getDevices', [filter, completer.callback]);
     return completer.future;
   }
@@ -63,14 +63,13 @@ class ChromeSessions {
    * A [Session] containing the restored [windows.Window] or [tabs.Tab] object.
    */
   Future<Session> restore([String sessionId]) {
-    var completer = new ChromeCompleter<Session>.oneArg(Session.create);
+    var completer = new ChromeCompleter<Session>.oneArg(_createSession);
     _sessions.callMethod('restore', [sessionId, completer.callback]);
     return completer.future;
   }
 }
 
 class Filter extends ChromeObject {
-  static Filter create(JsObject proxy) => proxy == null ? null : new Filter.fromProxy(proxy);
 
   Filter({int maxResults}) {
     if (maxResults != null) this.maxResults = maxResults;
@@ -88,7 +87,6 @@ class Filter extends ChromeObject {
 }
 
 class Session extends ChromeObject {
-  static Session create(JsObject proxy) => proxy == null ? null : new Session.fromProxy(proxy);
 
   Session({int lastModified, Tab tab, Window window}) {
     if (lastModified != null) this.lastModified = lastModified;
@@ -109,19 +107,18 @@ class Session extends ChromeObject {
    * The [tabs.Tab], if this entry describes a tab. Either this or
    * [Session.window] will be set.
    */
-  Tab get tab => Tab.create(proxy['tab']);
+  Tab get tab => _createTab(proxy['tab']);
   set tab(Tab value) => proxy['tab'] = value;
 
   /**
    * The [windows.Window], if this entry describes a window. Either this or
    * [Session.tab] will be set.
    */
-  Window get window => Window.create(proxy['window']);
+  Window get window => _createWindow(proxy['window']);
   set window(Window value) => proxy['window'] = value;
 }
 
 class Device extends ChromeObject {
-  static Device create(JsObject proxy) => proxy == null ? null : new Device.fromProxy(proxy);
 
   Device({String info, List<Session> sessions}) {
     if (info != null) this.info = info;
@@ -140,6 +137,11 @@ class Device extends ChromeObject {
    * A list of open window sessions for the foreign device, sorted from most
    * recently to least recently modified session.
    */
-  List<Session> get sessions => listify(proxy['sessions'], Session.create);
+  List<Session> get sessions => listify(proxy['sessions'], _createSession);
   set sessions(List<Session> value) => proxy['sessions'] = value;
 }
+
+Session _createSession(JsObject proxy) => proxy == null ? null : new Session.fromProxy(proxy);
+Device _createDevice(JsObject proxy) => proxy == null ? null : new Device.fromProxy(proxy);
+Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
+Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);

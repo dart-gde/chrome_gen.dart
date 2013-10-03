@@ -13,7 +13,7 @@ class ChromeSystemDisplay {
   ChromeSystemDisplay._();
 
   Future<DisplayUnitInfo> getInfo() {
-    var completer = new ChromeCompleter<DisplayUnitInfo>.oneArg(DisplayUnitInfo.create);
+    var completer = new ChromeCompleter<DisplayUnitInfo>.oneArg(_createDisplayUnitInfo);
     _system_display.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }
@@ -31,7 +31,6 @@ class ChromeSystemDisplay {
 }
 
 class Insets extends ChromeObject {
-  static Insets create(JsObject proxy) => proxy == null ? null : new Insets.fromProxy(proxy);
 
   Insets({int left, int top, int right, int bottom}) {
     if (left != null) this.left = left;
@@ -56,7 +55,6 @@ class Insets extends ChromeObject {
 }
 
 class DisplayUnitInfo extends ChromeObject {
-  static DisplayUnitInfo create(JsObject proxy) => proxy == null ? null : new DisplayUnitInfo.fromProxy(proxy);
 
   DisplayUnitInfo({String id, String name, String mirroringSourceId, bool isPrimary, bool isInternal, bool isEnabled, double dpiX, double dpiY, int rotation, Bounds bounds, Insets overscan, Bounds workArea}) {
     if (id != null) this.id = id;
@@ -102,18 +100,17 @@ class DisplayUnitInfo extends ChromeObject {
   int get rotation => proxy['rotation'];
   set rotation(int value) => proxy['rotation'] = value;
 
-  Bounds get bounds => Bounds.create(proxy['bounds']);
+  Bounds get bounds => _createBounds(proxy['bounds']);
   set bounds(Bounds value) => proxy['bounds'] = value;
 
-  Insets get overscan => Insets.create(proxy['overscan']);
+  Insets get overscan => _createInsets(proxy['overscan']);
   set overscan(Insets value) => proxy['overscan'] = value;
 
-  Bounds get workArea => Bounds.create(proxy['workArea']);
+  Bounds get workArea => _createBounds(proxy['workArea']);
   set workArea(Bounds value) => proxy['workArea'] = value;
 }
 
 class DisplayProperties extends ChromeObject {
-  static DisplayProperties create(JsObject proxy) => proxy == null ? null : new DisplayProperties.fromProxy(proxy);
 
   DisplayProperties({String mirroringSourceId, bool isPrimary, Insets overscan, int rotation, int boundsOriginX, int boundsOriginY}) {
     if (mirroringSourceId != null) this.mirroringSourceId = mirroringSourceId;
@@ -132,7 +129,7 @@ class DisplayProperties extends ChromeObject {
   bool get isPrimary => proxy['isPrimary'];
   set isPrimary(bool value) => proxy['isPrimary'] = value;
 
-  Insets get overscan => Insets.create(proxy['overscan']);
+  Insets get overscan => _createInsets(proxy['overscan']);
   set overscan(Insets value) => proxy['overscan'] = value;
 
   int get rotation => proxy['rotation'];
@@ -144,3 +141,7 @@ class DisplayProperties extends ChromeObject {
   int get boundsOriginY => proxy['boundsOriginY'];
   set boundsOriginY(int value) => proxy['boundsOriginY'] = value;
 }
+
+DisplayUnitInfo _createDisplayUnitInfo(JsObject proxy) => proxy == null ? null : new DisplayUnitInfo.fromProxy(proxy);
+Bounds _createBounds(JsObject proxy) => proxy == null ? null : new Bounds.fromProxy(proxy);
+Insets _createInsets(JsObject proxy) => proxy == null ? null : new Insets.fromProxy(proxy);

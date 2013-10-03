@@ -117,7 +117,7 @@ class ChromeRuntime {
    * exist.
    */
   Port connect([String extensionId, Map connectInfo]) {
-    return Port.create(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
+    return _createPort(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
   }
 
   /**
@@ -129,7 +129,7 @@ class ChromeRuntime {
    * Port through which messages can be sent and received with the application
    */
   Port connectNative(String application) {
-    return Port.create(_runtime.callMethod('connectNative', [application]));
+    return _createPort(_runtime.callMethod('connectNative', [application]));
   }
 
   /**
@@ -257,7 +257,7 @@ class ChromeRuntime {
   Stream<Port> get onConnect => _onConnect.stream;
 
   final ChromeStreamController<Port> _onConnect =
-      new ChromeStreamController<Port>.oneArg(_runtime['onConnect'], Port.create);
+      new ChromeStreamController<Port>.oneArg(_runtime['onConnect'], _createPort);
 
   /**
    * Fired when a connection is made from another extension.
@@ -265,7 +265,7 @@ class ChromeRuntime {
   Stream<Port> get onConnectExternal => _onConnectExternal.stream;
 
   final ChromeStreamController<Port> _onConnectExternal =
-      new ChromeStreamController<Port>.oneArg(_runtime['onConnectExternal'], Port.create);
+      new ChromeStreamController<Port>.oneArg(_runtime['onConnectExternal'], _createPort);
 
   /**
    * Fired when a message is sent from either an extension process or a content
@@ -274,7 +274,7 @@ class ChromeRuntime {
   Stream<OnMessageEvent> get onMessage => _onMessage.stream;
 
   final ChromeStreamController<OnMessageEvent> _onMessage =
-      new ChromeStreamController<OnMessageEvent>.threeArgs(_runtime['onMessage'], OnMessageEvent.create);
+      new ChromeStreamController<OnMessageEvent>.threeArgs(_runtime['onMessage'], _createOnMessageEvent);
 
   /**
    * Fired when a message is sent from another extension/app. Cannot be used in
@@ -283,7 +283,7 @@ class ChromeRuntime {
   Stream<OnMessageExternalEvent> get onMessageExternal => _onMessageExternal.stream;
 
   final ChromeStreamController<OnMessageExternalEvent> _onMessageExternal =
-      new ChromeStreamController<OnMessageExternalEvent>.threeArgs(_runtime['onMessageExternal'], OnMessageExternalEvent.create);
+      new ChromeStreamController<OnMessageExternalEvent>.threeArgs(_runtime['onMessageExternal'], _createOnMessageExternalEvent);
 
   /**
    * Fired when an app or the device that it runs on needs to be restarted. The
@@ -303,8 +303,6 @@ class ChromeRuntime {
  * script.
  */
 class OnMessageEvent {
-  static OnMessageEvent create(JsObject message, JsObject sender, JsObject sendResponse) =>
-      new OnMessageEvent(message, MessageSender.create(sender), sendResponse);
 
   /**
    * The message sent by the calling script.
@@ -335,8 +333,6 @@ class OnMessageEvent {
  * content script.
  */
 class OnMessageExternalEvent {
-  static OnMessageExternalEvent create(JsObject message, JsObject sender, JsObject sendResponse) =>
-      new OnMessageExternalEvent(message, MessageSender.create(sender), sendResponse);
 
   /**
    * The message sent by the calling script.
@@ -366,7 +362,6 @@ class OnMessageExternalEvent {
  * An object which allows two way communication with other pages.
  */
 class Port extends ChromeObject {
-  static Port create(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);
 
   Port({String name, var disconnect, Event onDisconnect, Event onMessage, var postMessage, MessageSender sender}) {
     if (name != null) this.name = name;
@@ -385,10 +380,10 @@ class Port extends ChromeObject {
   dynamic get disconnect => proxy['disconnect'];
   set disconnect(var value) => proxy['disconnect'] = value;
 
-  Event get onDisconnect => Event.create(proxy['onDisconnect']);
+  Event get onDisconnect => _createEvent(proxy['onDisconnect']);
   set onDisconnect(Event value) => proxy['onDisconnect'] = value;
 
-  Event get onMessage => Event.create(proxy['onMessage']);
+  Event get onMessage => _createEvent(proxy['onMessage']);
   set onMessage(Event value) => proxy['onMessage'] = value;
 
   dynamic get postMessage => proxy['postMessage'];
@@ -398,7 +393,7 @@ class Port extends ChromeObject {
    * This property will <b>only</b> be present on ports passed to
    * onConnect/onConnectExternal listeners.
    */
-  MessageSender get sender => MessageSender.create(proxy['sender']);
+  MessageSender get sender => _createMessageSender(proxy['sender']);
   set sender(MessageSender value) => proxy['sender'] = value;
 }
 
@@ -407,7 +402,6 @@ class Port extends ChromeObject {
  * or request.
  */
 class MessageSender extends ChromeObject {
-  static MessageSender create(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);
 
   MessageSender({Tab tab, String id, String url}) {
     if (tab != null) this.tab = tab;
@@ -422,7 +416,7 @@ class MessageSender extends ChromeObject {
    * *only* be present when the connection was opened from a tab (including
    * content scripts), and *only* if the receiver is an extension, not an app.
    */
-  Tab get tab => Tab.create(proxy['tab']);
+  Tab get tab => _createTab(proxy['tab']);
   set tab(Tab value) => proxy['tab'] = value;
 
   /**
@@ -439,3 +433,12 @@ class MessageSender extends ChromeObject {
   String get url => proxy['url'];
   set url(String value) => proxy['url'] = value;
 }
+
+Port _createPort(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);
+OnMessageEvent _createOnMessageEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
+    new OnMessageEvent(message, _createMessageSender(sender), sendResponse);
+OnMessageExternalEvent _createOnMessageExternalEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
+    new OnMessageExternalEvent(message, _createMessageSender(sender), sendResponse);
+Event _createEvent(JsObject proxy) => proxy == null ? null : new Event.fromProxy(proxy);
+MessageSender _createMessageSender(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);
+Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

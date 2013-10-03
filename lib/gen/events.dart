@@ -20,7 +20,6 @@ class ChromeEvents {
  * Description of a declarative rule for handling events.
  */
 class Rule extends ChromeObject {
-  static Rule create(JsObject proxy) => proxy == null ? null : new Rule.fromProxy(proxy);
 
   Rule({String id, List<String> tags, List<dynamic> conditions, List<dynamic> actions, int priority}) {
     if (id != null) this.id = id;
@@ -68,7 +67,6 @@ class Rule extends ChromeObject {
  * event.
  */
 class Event extends ChromeObject {
-  static Event create(JsObject proxy) => proxy == null ? null : new Event.fromProxy(proxy);
 
   Event();
 
@@ -112,7 +110,7 @@ class Event extends ChromeObject {
    * Rules that were registered, the optional parameters are filled with values.
    */
   Future<List<Rule>> addRules(String eventName, List<Rule> rules) {
-    var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, Rule.create));
+    var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, _createRule));
     proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
     return completer.future;
   }
@@ -129,7 +127,7 @@ class Event extends ChromeObject {
    * Rules that were registered, the optional parameters are filled with values.
    */
   Future<List<Rule>> getRules(String eventName, [List<String> ruleIdentifiers]) {
-    var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, Rule.create));
+    var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, _createRule));
     proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
     return completer.future;
   }
@@ -154,7 +152,6 @@ class Event extends ChromeObject {
  * criteria are case sensitive.
  */
 class UrlFilter extends ChromeObject {
-  static UrlFilter create(JsObject proxy) => proxy == null ? null : new UrlFilter.fromProxy(proxy);
 
   UrlFilter({String hostContains, String hostEquals, String hostPrefix, String hostSuffix, String pathContains, String pathEquals, String pathPrefix, String pathSuffix, String queryContains, String queryEquals, String queryPrefix, String querySuffix, String urlContains, String urlEquals, String urlMatches, String originAndPathMatches, String urlPrefix, String urlSuffix, List<String> schemes, List<dynamic> ports}) {
     if (hostContains != null) this.hostContains = hostContains;
@@ -325,3 +322,5 @@ class UrlFilter extends ChromeObject {
   List<dynamic> get ports => listify(proxy['ports']);
   set ports(List<dynamic> value) => proxy['ports'] = value;
 }
+
+Rule _createRule(JsObject proxy) => proxy == null ? null : new Rule.fromProxy(proxy);

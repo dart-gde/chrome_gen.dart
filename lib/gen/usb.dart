@@ -13,7 +13,7 @@ class ChromeUsb {
   ChromeUsb._();
 
   Future<Device> getDevices(EnumerateDevicesOptions options) {
-    var completer = new ChromeCompleter<Device>.oneArg(Device.create);
+    var completer = new ChromeCompleter<Device>.oneArg(_createDevice);
     _usb.callMethod('getDevices', [options, completer.callback]);
     return completer.future;
   }
@@ -25,13 +25,13 @@ class ChromeUsb {
   }
 
   Future<ConnectionHandle> openDevice(Device device) {
-    var completer = new ChromeCompleter<ConnectionHandle>.oneArg(ConnectionHandle.create);
+    var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
     _usb.callMethod('openDevice', [device, completer.callback]);
     return completer.future;
   }
 
   Future<ConnectionHandle> findDevices(EnumerateDevicesAndRequestAccessOptions options) {
-    var completer = new ChromeCompleter<ConnectionHandle>.oneArg(ConnectionHandle.create);
+    var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
     _usb.callMethod('findDevices', [options, completer.callback]);
     return completer.future;
   }
@@ -43,7 +43,7 @@ class ChromeUsb {
   }
 
   Future<InterfaceDescriptor> listInterfaces(ConnectionHandle handle) {
-    var completer = new ChromeCompleter<InterfaceDescriptor>.oneArg(InterfaceDescriptor.create);
+    var completer = new ChromeCompleter<InterfaceDescriptor>.oneArg(_createInterfaceDescriptor);
     _usb.callMethod('listInterfaces', [handle, completer.callback]);
     return completer.future;
   }
@@ -67,25 +67,25 @@ class ChromeUsb {
   }
 
   Future<TransferResultInfo> controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
-    var completer = new ChromeCompleter<TransferResultInfo>.oneArg(TransferResultInfo.create);
+    var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('controlTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
   }
 
   Future<TransferResultInfo> bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
-    var completer = new ChromeCompleter<TransferResultInfo>.oneArg(TransferResultInfo.create);
+    var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('bulkTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
   }
 
   Future<TransferResultInfo> interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
-    var completer = new ChromeCompleter<TransferResultInfo>.oneArg(TransferResultInfo.create);
+    var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('interruptTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
   }
 
   Future<TransferResultInfo> isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
-    var completer = new ChromeCompleter<TransferResultInfo>.oneArg(TransferResultInfo.create);
+    var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('isochronousTransfer', [handle, transferInfo, completer.callback]);
     return completer.future;
   }
@@ -103,9 +103,6 @@ class Direction extends ChromeEnum {
 
   static const List<Direction> VALUES = const[IN, OUT];
 
-  static Direction create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const Direction._(String str): super(str);
 }
 
@@ -116,9 +113,6 @@ class Recipient extends ChromeEnum {
   static const Recipient OTHER = const Recipient._('other');
 
   static const List<Recipient> VALUES = const[DEVICE, _INTERFACE, ENDPOINT, OTHER];
-
-  static Recipient create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const Recipient._(String str): super(str);
 }
@@ -131,9 +125,6 @@ class RequestType extends ChromeEnum {
 
   static const List<RequestType> VALUES = const[STANDARD, CLASS, VENDOR, RESERVED];
 
-  static RequestType create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const RequestType._(String str): super(str);
 }
 
@@ -145,9 +136,6 @@ class TransferType extends ChromeEnum {
 
   static const List<TransferType> VALUES = const[CONTROL, INTERRUPT, ISOCHRONOUS, BULK];
 
-  static TransferType create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const TransferType._(String str): super(str);
 }
 
@@ -157,9 +145,6 @@ class SynchronizationType extends ChromeEnum {
   static const SynchronizationType SYNCHRONOUS = const SynchronizationType._('synchronous');
 
   static const List<SynchronizationType> VALUES = const[ASYNCHRONOUS, ADAPTIVE, SYNCHRONOUS];
-
-  static SynchronizationType create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
 
   const SynchronizationType._(String str): super(str);
 }
@@ -171,14 +156,10 @@ class UsageType extends ChromeEnum {
 
   static const List<UsageType> VALUES = const[DATA, FEEDBACK, EXPLICITFEEDBACK];
 
-  static UsageType create(String str) =>
-      VALUES.singleWhere((ChromeEnum e) => e.value == str);
-
   const UsageType._(String str): super(str);
 }
 
 class Device extends ChromeObject {
-  static Device create(JsObject proxy) => proxy == null ? null : new Device.fromProxy(proxy);
 
   Device({int device, int vendorId, int productId}) {
     if (device != null) this.device = device;
@@ -199,7 +180,6 @@ class Device extends ChromeObject {
 }
 
 class ConnectionHandle extends ChromeObject {
-  static ConnectionHandle create(JsObject proxy) => proxy == null ? null : new ConnectionHandle.fromProxy(proxy);
 
   ConnectionHandle({int handle, int vendorId, int productId}) {
     if (handle != null) this.handle = handle;
@@ -220,7 +200,6 @@ class ConnectionHandle extends ChromeObject {
 }
 
 class EndpointDescriptor extends ChromeObject {
-  static EndpointDescriptor create(JsObject proxy) => proxy == null ? null : new EndpointDescriptor.fromProxy(proxy);
 
   EndpointDescriptor({int address, TransferType type, Direction direction, int maximumPacketSize, SynchronizationType synchronization, UsageType usage, int pollingInterval}) {
     if (address != null) this.address = address;
@@ -237,19 +216,19 @@ class EndpointDescriptor extends ChromeObject {
   int get address => proxy['address'];
   set address(int value) => proxy['address'] = value;
 
-  TransferType get type => TransferType.create(proxy['type']);
+  TransferType get type => _createTransferType(proxy['type']);
   set type(TransferType value) => proxy['type'] = value;
 
-  Direction get direction => Direction.create(proxy['direction']);
+  Direction get direction => _createDirection(proxy['direction']);
   set direction(Direction value) => proxy['direction'] = value;
 
   int get maximumPacketSize => proxy['maximumPacketSize'];
   set maximumPacketSize(int value) => proxy['maximumPacketSize'] = value;
 
-  SynchronizationType get synchronization => SynchronizationType.create(proxy['synchronization']);
+  SynchronizationType get synchronization => _createSynchronizationType(proxy['synchronization']);
   set synchronization(SynchronizationType value) => proxy['synchronization'] = value;
 
-  UsageType get usage => UsageType.create(proxy['usage']);
+  UsageType get usage => _createUsageType(proxy['usage']);
   set usage(UsageType value) => proxy['usage'] = value;
 
   int get pollingInterval => proxy['pollingInterval'];
@@ -257,7 +236,6 @@ class EndpointDescriptor extends ChromeObject {
 }
 
 class InterfaceDescriptor extends ChromeObject {
-  static InterfaceDescriptor create(JsObject proxy) => proxy == null ? null : new InterfaceDescriptor.fromProxy(proxy);
 
   InterfaceDescriptor({int interfaceNumber, int alternateSetting, int interfaceClass, int interfaceSubclass, int interfaceProtocol, String description, EndpointDescriptor endpoints}) {
     if (interfaceNumber != null) this.interfaceNumber = interfaceNumber;
@@ -289,12 +267,11 @@ class InterfaceDescriptor extends ChromeObject {
   String get description => proxy['description'];
   set description(String value) => proxy['description'] = value;
 
-  EndpointDescriptor get endpoints => EndpointDescriptor.create(proxy['endpoints']);
+  EndpointDescriptor get endpoints => _createEndpointDescriptor(proxy['endpoints']);
   set endpoints(EndpointDescriptor value) => proxy['endpoints'] = value;
 }
 
 class ControlTransferInfo extends ChromeObject {
-  static ControlTransferInfo create(JsObject proxy) => proxy == null ? null : new ControlTransferInfo.fromProxy(proxy);
 
   ControlTransferInfo({Direction direction, Recipient recipient, RequestType requestType, int request, int value, int index, int length, ArrayBuffer data}) {
     if (direction != null) this.direction = direction;
@@ -309,13 +286,13 @@ class ControlTransferInfo extends ChromeObject {
 
   ControlTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
-  Direction get direction => Direction.create(proxy['direction']);
+  Direction get direction => _createDirection(proxy['direction']);
   set direction(Direction value) => proxy['direction'] = value;
 
-  Recipient get recipient => Recipient.create(proxy['recipient']);
+  Recipient get recipient => _createRecipient(proxy['recipient']);
   set recipient(Recipient value) => proxy['recipient'] = value;
 
-  RequestType get requestType => RequestType.create(proxy['requestType']);
+  RequestType get requestType => _createRequestType(proxy['requestType']);
   set requestType(RequestType value) => proxy['requestType'] = value;
 
   int get request => proxy['request'];
@@ -330,12 +307,11 @@ class ControlTransferInfo extends ChromeObject {
   int get length => proxy['length'];
   set length(int value) => proxy['length'] = value;
 
-  ArrayBuffer get data => ArrayBuffer.create(proxy['data']);
+  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
   set data(ArrayBuffer value) => proxy['data'] = value;
 }
 
 class GenericTransferInfo extends ChromeObject {
-  static GenericTransferInfo create(JsObject proxy) => proxy == null ? null : new GenericTransferInfo.fromProxy(proxy);
 
   GenericTransferInfo({Direction direction, int endpoint, int length, ArrayBuffer data}) {
     if (direction != null) this.direction = direction;
@@ -346,7 +322,7 @@ class GenericTransferInfo extends ChromeObject {
 
   GenericTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
-  Direction get direction => Direction.create(proxy['direction']);
+  Direction get direction => _createDirection(proxy['direction']);
   set direction(Direction value) => proxy['direction'] = value;
 
   int get endpoint => proxy['endpoint'];
@@ -355,12 +331,11 @@ class GenericTransferInfo extends ChromeObject {
   int get length => proxy['length'];
   set length(int value) => proxy['length'] = value;
 
-  ArrayBuffer get data => ArrayBuffer.create(proxy['data']);
+  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
   set data(ArrayBuffer value) => proxy['data'] = value;
 }
 
 class IsochronousTransferInfo extends ChromeObject {
-  static IsochronousTransferInfo create(JsObject proxy) => proxy == null ? null : new IsochronousTransferInfo.fromProxy(proxy);
 
   IsochronousTransferInfo({GenericTransferInfo transferInfo, int packets, int packetLength}) {
     if (transferInfo != null) this.transferInfo = transferInfo;
@@ -370,7 +345,7 @@ class IsochronousTransferInfo extends ChromeObject {
 
   IsochronousTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
-  GenericTransferInfo get transferInfo => GenericTransferInfo.create(proxy['transferInfo']);
+  GenericTransferInfo get transferInfo => _createGenericTransferInfo(proxy['transferInfo']);
   set transferInfo(GenericTransferInfo value) => proxy['transferInfo'] = value;
 
   int get packets => proxy['packets'];
@@ -381,7 +356,6 @@ class IsochronousTransferInfo extends ChromeObject {
 }
 
 class TransferResultInfo extends ChromeObject {
-  static TransferResultInfo create(JsObject proxy) => proxy == null ? null : new TransferResultInfo.fromProxy(proxy);
 
   TransferResultInfo({int resultCode, ArrayBuffer data}) {
     if (resultCode != null) this.resultCode = resultCode;
@@ -393,12 +367,11 @@ class TransferResultInfo extends ChromeObject {
   int get resultCode => proxy['resultCode'];
   set resultCode(int value) => proxy['resultCode'] = value;
 
-  ArrayBuffer get data => ArrayBuffer.create(proxy['data']);
+  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
   set data(ArrayBuffer value) => proxy['data'] = value;
 }
 
 class EnumerateDevicesOptions extends ChromeObject {
-  static EnumerateDevicesOptions create(JsObject proxy) => proxy == null ? null : new EnumerateDevicesOptions.fromProxy(proxy);
 
   EnumerateDevicesOptions({int vendorId, int productId}) {
     if (vendorId != null) this.vendorId = vendorId;
@@ -415,7 +388,6 @@ class EnumerateDevicesOptions extends ChromeObject {
 }
 
 class EnumerateDevicesAndRequestAccessOptions extends ChromeObject {
-  static EnumerateDevicesAndRequestAccessOptions create(JsObject proxy) => proxy == null ? null : new EnumerateDevicesAndRequestAccessOptions.fromProxy(proxy);
 
   EnumerateDevicesAndRequestAccessOptions({int vendorId, int productId, int interfaceId}) {
     if (vendorId != null) this.vendorId = vendorId;
@@ -434,3 +406,17 @@ class EnumerateDevicesAndRequestAccessOptions extends ChromeObject {
   int get interfaceId => proxy['interfaceId'];
   set interfaceId(int value) => proxy['interfaceId'] = value;
 }
+
+Device _createDevice(JsObject proxy) => proxy == null ? null : new Device.fromProxy(proxy);
+ConnectionHandle _createConnectionHandle(JsObject proxy) => proxy == null ? null : new ConnectionHandle.fromProxy(proxy);
+InterfaceDescriptor _createInterfaceDescriptor(JsObject proxy) => proxy == null ? null : new InterfaceDescriptor.fromProxy(proxy);
+TransferResultInfo _createTransferResultInfo(JsObject proxy) => proxy == null ? null : new TransferResultInfo.fromProxy(proxy);
+TransferType _createTransferType(String value) => TransferType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+Direction _createDirection(String value) => Direction.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+SynchronizationType _createSynchronizationType(String value) => SynchronizationType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+UsageType _createUsageType(String value) => UsageType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+EndpointDescriptor _createEndpointDescriptor(JsObject proxy) => proxy == null ? null : new EndpointDescriptor.fromProxy(proxy);
+Recipient _createRecipient(String value) => Recipient.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+RequestType _createRequestType(String value) => RequestType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);
+GenericTransferInfo _createGenericTransferInfo(JsObject proxy) => proxy == null ? null : new GenericTransferInfo.fromProxy(proxy);

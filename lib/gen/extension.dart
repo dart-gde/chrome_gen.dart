@@ -138,7 +138,7 @@ class ChromeExtension {
   Stream<OnRequestEvent> get onRequest => _onRequest.stream;
 
   final ChromeStreamController<OnRequestEvent> _onRequest =
-      new ChromeStreamController<OnRequestEvent>.threeArgs(_extension['onRequest'], OnRequestEvent.create);
+      new ChromeStreamController<OnRequestEvent>.threeArgs(_extension['onRequest'], _createOnRequestEvent);
 
   /**
    * Deprecated: please use onMessageExternal.
@@ -146,15 +146,13 @@ class ChromeExtension {
   Stream<OnRequestExternalEvent> get onRequestExternal => _onRequestExternal.stream;
 
   final ChromeStreamController<OnRequestExternalEvent> _onRequestExternal =
-      new ChromeStreamController<OnRequestExternalEvent>.threeArgs(_extension['onRequestExternal'], OnRequestExternalEvent.create);
+      new ChromeStreamController<OnRequestExternalEvent>.threeArgs(_extension['onRequestExternal'], _createOnRequestExternalEvent);
 }
 
 /**
  * Deprecated: please use onMessage.
  */
 class OnRequestEvent {
-  static OnRequestEvent create(JsObject request, JsObject sender, JsObject sendResponse) =>
-      new OnRequestEvent(request, MessageSender.create(sender), sendResponse);
 
   /**
    * The request sent by the calling script.
@@ -181,8 +179,6 @@ class OnRequestEvent {
  * Deprecated: please use onMessageExternal.
  */
 class OnRequestExternalEvent {
-  static OnRequestExternalEvent create(JsObject request, JsObject sender, JsObject sendResponse) =>
-      new OnRequestExternalEvent(request, MessageSender.create(sender), sendResponse);
 
   /**
    * The request sent by the calling script.
@@ -202,3 +198,9 @@ class OnRequestExternalEvent {
 
   OnRequestExternalEvent(this.request, this.sender, this.sendResponse);
 }
+
+OnRequestEvent _createOnRequestEvent(JsObject request, JsObject sender, JsObject sendResponse) =>
+    new OnRequestEvent(request, _createMessageSender(sender), sendResponse);
+OnRequestExternalEvent _createOnRequestExternalEvent(JsObject request, JsObject sender, JsObject sendResponse) =>
+    new OnRequestExternalEvent(request, _createMessageSender(sender), sendResponse);
+MessageSender _createMessageSender(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);

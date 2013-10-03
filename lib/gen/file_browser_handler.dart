@@ -42,15 +42,13 @@ class ChromeFileBrowserHandler {
   Stream<OnExecuteEvent> get onExecute => _onExecute.stream;
 
   final ChromeStreamController<OnExecuteEvent> _onExecute =
-      new ChromeStreamController<OnExecuteEvent>.twoArgs(_fileBrowserHandler['onExecute'], OnExecuteEvent.create);
+      new ChromeStreamController<OnExecuteEvent>.twoArgs(_fileBrowserHandler['onExecute'], _createOnExecuteEvent);
 }
 
 /**
  * Fired when file system action is executed from ChromeOS file browser.
  */
 class OnExecuteEvent {
-  static OnExecuteEvent create(String id, JsObject details) =>
-      new OnExecuteEvent(id, FileHandlerExecuteEventDetails.create(details));
 
   /**
    * File browser action id as specified in the listener component's manifest.
@@ -69,7 +67,6 @@ class OnExecuteEvent {
  * Event details payload for fileBrowserHandler.onExecute event.
  */
 class FileHandlerExecuteEventDetails extends ChromeObject {
-  static FileHandlerExecuteEventDetails create(JsObject proxy) => proxy == null ? null : new FileHandlerExecuteEventDetails.fromProxy(proxy);
 
   FileHandlerExecuteEventDetails({List<dynamic> entries, int tab_id}) {
     if (entries != null) this.entries = entries;
@@ -92,3 +89,7 @@ class FileHandlerExecuteEventDetails extends ChromeObject {
   int get tab_id => proxy['tab_id'];
   set tab_id(int value) => proxy['tab_id'] = value;
 }
+
+OnExecuteEvent _createOnExecuteEvent(String id, JsObject details) =>
+    new OnExecuteEvent(id, _createFileHandlerExecuteEventDetails(details));
+FileHandlerExecuteEventDetails _createFileHandlerExecuteEventDetails(JsObject proxy) => proxy == null ? null : new FileHandlerExecuteEventDetails.fromProxy(proxy);

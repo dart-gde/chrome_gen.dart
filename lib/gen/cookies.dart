@@ -29,7 +29,7 @@ class ChromeCookies {
    * was found.
    */
   Future<Cookie> get(Map details) {
-    var completer = new ChromeCompleter<Cookie>.oneArg(Cookie.create);
+    var completer = new ChromeCompleter<Cookie>.oneArg(_createCookie);
     _cookies.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -46,7 +46,7 @@ class ChromeCookies {
    * All the existing, unexpired cookies that match the given cookie info.
    */
   Future<List<Cookie>> getAll(Map details) {
-    var completer = new ChromeCompleter<List<Cookie>>.oneArg((e) => listify(e, Cookie.create));
+    var completer = new ChromeCompleter<List<Cookie>>.oneArg((e) => listify(e, _createCookie));
     _cookies.callMethod('getAll', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -63,7 +63,7 @@ class ChromeCookies {
    * set.
    */
   Future<Cookie> set(Map details) {
-    var completer = new ChromeCompleter<Cookie>.oneArg(Cookie.create);
+    var completer = new ChromeCompleter<Cookie>.oneArg(_createCookie);
     _cookies.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -91,7 +91,7 @@ class ChromeCookies {
    * All the existing cookie stores.
    */
   Future<List<CookieStore>> getAllCookieStores() {
-    var completer = new ChromeCompleter<List<CookieStore>>.oneArg((e) => listify(e, CookieStore.create));
+    var completer = new ChromeCompleter<List<CookieStore>>.oneArg((e) => listify(e, _createCookieStore));
     _cookies.callMethod('getAllCookieStores', [completer.callback]);
     return completer.future;
   }
@@ -113,7 +113,6 @@ class ChromeCookies {
  * Represents information about an HTTP cookie.
  */
 class Cookie extends ChromeObject {
-  static Cookie create(JsObject proxy) => proxy == null ? null : new Cookie.fromProxy(proxy);
 
   Cookie({String name, String value, String domain, bool hostOnly, String path, bool secure, bool httpOnly, bool session, var expirationDate, String storeId}) {
     if (name != null) this.name = name;
@@ -202,7 +201,6 @@ class Cookie extends ChromeObject {
  * instance, uses a separate cookie store from a non-incognito window.
  */
 class CookieStore extends ChromeObject {
-  static CookieStore create(JsObject proxy) => proxy == null ? null : new CookieStore.fromProxy(proxy);
 
   CookieStore({String id, List<int> tabIds}) {
     if (id != null) this.id = id;
@@ -223,3 +221,6 @@ class CookieStore extends ChromeObject {
   List<int> get tabIds => listify(proxy['tabIds']);
   set tabIds(List<int> value) => proxy['tabIds'] = value;
 }
+
+Cookie _createCookie(JsObject proxy) => proxy == null ? null : new Cookie.fromProxy(proxy);
+CookieStore _createCookieStore(JsObject proxy) => proxy == null ? null : new CookieStore.fromProxy(proxy);

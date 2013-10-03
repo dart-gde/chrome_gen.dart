@@ -90,5 +90,7 @@ class ChromePageAction {
   Stream<Tab> get onClicked => _onClicked.stream;
 
   final ChromeStreamController<Tab> _onClicked =
-      new ChromeStreamController<Tab>.oneArg(_pageAction['onClicked'], Tab.create);
+      new ChromeStreamController<Tab>.oneArg(_pageAction['onClicked'], _createTab);
 }
+
+Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

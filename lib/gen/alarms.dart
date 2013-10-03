@@ -17,13 +17,13 @@ class ChromeAlarms {
   }
 
   Future<Alarm> get([String name]) {
-    var completer = new ChromeCompleter<Alarm>.oneArg(Alarm.create);
+    var completer = new ChromeCompleter<Alarm>.oneArg(_createAlarm);
     _alarms.callMethod('get', [name, completer.callback]);
     return completer.future;
   }
 
   Future<Alarm> getAll() {
-    var completer = new ChromeCompleter<Alarm>.oneArg(Alarm.create);
+    var completer = new ChromeCompleter<Alarm>.oneArg(_createAlarm);
     _alarms.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -39,11 +39,10 @@ class ChromeAlarms {
   Stream<Alarm> get onAlarm => _onAlarm.stream;
 
   final ChromeStreamController<Alarm> _onAlarm =
-      new ChromeStreamController<Alarm>.oneArg(_alarms['onAlarm'], Alarm.create);
+      new ChromeStreamController<Alarm>.oneArg(_alarms['onAlarm'], _createAlarm);
 }
 
 class Alarm extends ChromeObject {
-  static Alarm create(JsObject proxy) => proxy == null ? null : new Alarm.fromProxy(proxy);
 
   Alarm({String name, double scheduledTime, double periodInMinutes}) {
     if (name != null) this.name = name;
@@ -64,7 +63,6 @@ class Alarm extends ChromeObject {
 }
 
 class AlarmCreateInfo extends ChromeObject {
-  static AlarmCreateInfo create(JsObject proxy) => proxy == null ? null : new AlarmCreateInfo.fromProxy(proxy);
 
   AlarmCreateInfo({double when, double delayInMinutes, double periodInMinutes}) {
     if (when != null) this.when = when;
@@ -83,3 +81,5 @@ class AlarmCreateInfo extends ChromeObject {
   double get periodInMinutes => proxy['periodInMinutes'];
   set periodInMinutes(double value) => proxy['periodInMinutes'] = value;
 }
+
+Alarm _createAlarm(JsObject proxy) => proxy == null ? null : new Alarm.fromProxy(proxy);

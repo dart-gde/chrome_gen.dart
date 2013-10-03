@@ -46,7 +46,7 @@ class ChromeFontSettings {
    * Gets a list of fonts on the system.
    */
   Future<List<FontName>> getFontList() {
-    var completer = new ChromeCompleter<List<FontName>>.oneArg((e) => listify(e, FontName.create));
+    var completer = new ChromeCompleter<List<FontName>>.oneArg((e) => listify(e, _createFontName));
     _fontSettings.callMethod('getFontList', [completer.callback]);
     return completer.future;
   }
@@ -181,7 +181,6 @@ class ChromeFontSettings {
  * Represents a font name.
  */
 class FontName extends ChromeObject {
-  static FontName create(JsObject proxy) => proxy == null ? null : new FontName.fromProxy(proxy);
 
   FontName({String fontId, String displayName}) {
     if (fontId != null) this.fontId = fontId;
@@ -225,7 +224,6 @@ class FontName extends ChromeObject {
  * `Visp`, `Wara`, `Wole`, `Xpeo`, `Xsux`, `Yiii`, `Zmth`, `Zsym`, `Zyyy`
  */
 class ScriptCode extends ChromeObject {
-  static ScriptCode create(JsObject proxy) => proxy == null ? null : new ScriptCode.fromProxy(proxy);
 
   ScriptCode();
 
@@ -237,7 +235,6 @@ class ScriptCode extends ChromeObject {
  * enum of `standard`, `sansserif`, `serif`, `fixed`, `cursive`, `fantasy`
  */
 class GenericFamily extends ChromeObject {
-  static GenericFamily create(JsObject proxy) => proxy == null ? null : new GenericFamily.fromProxy(proxy);
 
   GenericFamily();
 
@@ -254,9 +251,10 @@ class GenericFamily extends ChromeObject {
  * `controllable_by_this_extension`, `controlled_by_this_extension`
  */
 class LevelOfControl extends ChromeObject {
-  static LevelOfControl create(JsObject proxy) => proxy == null ? null : new LevelOfControl.fromProxy(proxy);
 
   LevelOfControl();
 
   LevelOfControl.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
+
+FontName _createFontName(JsObject proxy) => proxy == null ? null : new FontName.fromProxy(proxy);

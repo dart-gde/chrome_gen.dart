@@ -23,7 +23,7 @@ class ChromeLocation {
   Stream<Location> get onLocationUpdate => _onLocationUpdate.stream;
 
   final ChromeStreamController<Location> _onLocationUpdate =
-      new ChromeStreamController<Location>.oneArg(_location['onLocationUpdate'], Location.create);
+      new ChromeStreamController<Location>.oneArg(_location['onLocationUpdate'], _createLocation);
 
   Stream<String> get onLocationError => _onLocationError.stream;
 
@@ -32,7 +32,6 @@ class ChromeLocation {
 }
 
 class Coordinates extends ChromeObject {
-  static Coordinates create(JsObject proxy) => proxy == null ? null : new Coordinates.fromProxy(proxy);
 
   Coordinates({double latitude, double longitude, double altitude, double accuracy, double altitudeAccuracy, double heading, double speed}) {
     if (latitude != null) this.latitude = latitude;
@@ -69,7 +68,6 @@ class Coordinates extends ChromeObject {
 }
 
 class Location extends ChromeObject {
-  static Location create(JsObject proxy) => proxy == null ? null : new Location.fromProxy(proxy);
 
   Location({String name, Coordinates coords, double timestamp}) {
     if (name != null) this.name = name;
@@ -82,7 +80,7 @@ class Location extends ChromeObject {
   String get name => proxy['name'];
   set name(String value) => proxy['name'] = value;
 
-  Coordinates get coords => Coordinates.create(proxy['coords']);
+  Coordinates get coords => _createCoordinates(proxy['coords']);
   set coords(Coordinates value) => proxy['coords'] = value;
 
   double get timestamp => proxy['timestamp'];
@@ -90,7 +88,6 @@ class Location extends ChromeObject {
 }
 
 class WatchLocationRequestInfo extends ChromeObject {
-  static WatchLocationRequestInfo create(JsObject proxy) => proxy == null ? null : new WatchLocationRequestInfo.fromProxy(proxy);
 
   WatchLocationRequestInfo({double minDistanceInMeters, double minTimeInMilliseconds, int maximumAge}) {
     if (minDistanceInMeters != null) this.minDistanceInMeters = minDistanceInMeters;
@@ -109,3 +106,6 @@ class WatchLocationRequestInfo extends ChromeObject {
   int get maximumAge => proxy['maximumAge'];
   set maximumAge(int value) => proxy['maximumAge'] = value;
 }
+
+Location _createLocation(JsObject proxy) => proxy == null ? null : new Location.fromProxy(proxy);
+Coordinates _createCoordinates(JsObject proxy) => proxy == null ? null : new Coordinates.fromProxy(proxy);

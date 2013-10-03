@@ -54,7 +54,7 @@ class ChromeOmnibox {
   Stream<OnInputChangedEvent> get onInputChanged => _onInputChanged.stream;
 
   final ChromeStreamController<OnInputChangedEvent> _onInputChanged =
-      new ChromeStreamController<OnInputChangedEvent>.twoArgs(_omnibox['onInputChanged'], OnInputChangedEvent.create);
+      new ChromeStreamController<OnInputChangedEvent>.twoArgs(_omnibox['onInputChanged'], _createOnInputChangedEvent);
 
   /**
    * User has accepted what is typed into the omnibox.
@@ -62,7 +62,7 @@ class ChromeOmnibox {
   Stream<OnInputEnteredEvent> get onInputEntered => _onInputEntered.stream;
 
   final ChromeStreamController<OnInputEnteredEvent> _onInputEntered =
-      new ChromeStreamController<OnInputEnteredEvent>.twoArgs(_omnibox['onInputEntered'], OnInputEnteredEvent.create);
+      new ChromeStreamController<OnInputEnteredEvent>.twoArgs(_omnibox['onInputEntered'], _createOnInputEnteredEvent);
 
   /**
    * User has ended the keyword input session without accepting the input.
@@ -77,8 +77,6 @@ class ChromeOmnibox {
  * User has changed what is typed into the omnibox.
  */
 class OnInputChangedEvent {
-  static OnInputChangedEvent create(String text, JsObject suggest) =>
-      new OnInputChangedEvent(text, suggest);
 
   final String text;
 
@@ -95,8 +93,6 @@ class OnInputChangedEvent {
  * User has accepted what is typed into the omnibox.
  */
 class OnInputEnteredEvent {
-  static OnInputEnteredEvent create(String text, String disposition) =>
-      new OnInputEnteredEvent(text, disposition);
 
   final String text;
 
@@ -116,7 +112,6 @@ class OnInputEnteredEvent {
  * A suggest result.
  */
 class SuggestResult extends ChromeObject {
-  static SuggestResult create(JsObject proxy) => proxy == null ? null : new SuggestResult.fromProxy(proxy);
 
   SuggestResult({String content, String description}) {
     if (content != null) this.content = content;
@@ -147,7 +142,6 @@ class SuggestResult extends ChromeObject {
  * A suggest result.
  */
 class DefaultSuggestResult extends ChromeObject {
-  static DefaultSuggestResult create(JsObject proxy) => proxy == null ? null : new DefaultSuggestResult.fromProxy(proxy);
 
   DefaultSuggestResult({String description}) {
     if (description != null) this.description = description;
@@ -165,3 +159,8 @@ class DefaultSuggestResult extends ChromeObject {
   String get description => proxy['description'];
   set description(String value) => proxy['description'] = value;
 }
+
+OnInputChangedEvent _createOnInputChangedEvent(String text, JsObject suggest) =>
+    new OnInputChangedEvent(text, suggest);
+OnInputEnteredEvent _createOnInputEnteredEvent(String text, String disposition) =>
+    new OnInputEnteredEvent(text, disposition);

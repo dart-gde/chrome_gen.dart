@@ -80,7 +80,7 @@ class ChromeTts {
    * synthesis.
    */
   Future<List<TtsVoice>> getVoices() {
-    var completer = new ChromeCompleter<List<TtsVoice>>.oneArg((e) => listify(e, TtsVoice.create));
+    var completer = new ChromeCompleter<List<TtsVoice>>.oneArg((e) => listify(e, _createTtsVoice));
     _tts.callMethod('getVoices', [completer.callback]);
     return completer.future;
   }
@@ -91,14 +91,13 @@ class ChromeTts {
   Stream<TtsEvent> get onEvent => _onEvent.stream;
 
   final ChromeStreamController<TtsEvent> _onEvent =
-      new ChromeStreamController<TtsEvent>.oneArg(_tts['onEvent'], TtsEvent.create);
+      new ChromeStreamController<TtsEvent>.oneArg(_tts['onEvent'], _createTtsEvent);
 }
 
 /**
  * An event from the TTS engine to communicate the status of an utterance.
  */
 class TtsEvent extends ChromeObject {
-  static TtsEvent create(JsObject proxy) => proxy == null ? null : new TtsEvent.fromProxy(proxy);
 
   TtsEvent({String type, var charIndex, String errorMessage}) {
     if (type != null) this.type = type;
@@ -142,7 +141,6 @@ class TtsEvent extends ChromeObject {
  * A description of a voice available for speech synthesis.
  */
 class TtsVoice extends ChromeObject {
-  static TtsVoice create(JsObject proxy) => proxy == null ? null : new TtsVoice.fromProxy(proxy);
 
   TtsVoice({String voiceName, String lang, String gender, String extensionId, List<String> eventTypes}) {
     if (voiceName != null) this.voiceName = voiceName;
@@ -186,3 +184,6 @@ class TtsVoice extends ChromeObject {
   List<String> get eventTypes => listify(proxy['eventTypes']);
   set eventTypes(List<String> value) => proxy['eventTypes'] = value;
 }
+
+TtsVoice _createTtsVoice(JsObject proxy) => proxy == null ? null : new TtsVoice.fromProxy(proxy);
+TtsEvent _createTtsEvent(JsObject proxy) => proxy == null ? null : new TtsEvent.fromProxy(proxy);

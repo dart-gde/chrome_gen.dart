@@ -154,7 +154,6 @@ class ChromeBrowsingData {
  * Options that determine exactly what data will be removed.
  */
 class RemovalOptions extends ChromeObject {
-  static RemovalOptions create(JsObject proxy) => proxy == null ? null : new RemovalOptions.fromProxy(proxy);
 
   RemovalOptions({var since, Map originTypes}) {
     if (since != null) this.since = since;
@@ -186,7 +185,6 @@ class RemovalOptions extends ChromeObject {
  * A set of data types. Missing data types are interpreted as `false`.
  */
 class DataTypeSet extends ChromeObject {
-  static DataTypeSet create(JsObject proxy) => proxy == null ? null : new DataTypeSet.fromProxy(proxy);
 
   DataTypeSet({bool appcache, bool cache, bool cookies, bool downloads, bool fileSystems, bool formData, bool history, bool indexedDB, bool localStorage, bool serverBoundCertificates, bool pluginData, bool passwords, bool webSQL}) {
     if (appcache != null) this.appcache = appcache;

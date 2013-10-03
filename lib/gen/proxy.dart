@@ -22,7 +22,7 @@ class ChromeProxy {
    * Proxy settings to be used. The value of this setting is a ProxyConfig
    * object.
    */
-  ChromeSetting get settings => ChromeSetting.create(_proxy['settings']);
+  ChromeSetting get settings => _createChromeSetting(_proxy['settings']);
 
   /**
    * Notifies about proxy errors.
@@ -37,7 +37,6 @@ class ChromeProxy {
  * An object encapsulating a single proxy server's specification.
  */
 class ProxyServer extends ChromeObject {
-  static ProxyServer create(JsObject proxy) => proxy == null ? null : new ProxyServer.fromProxy(proxy);
 
   ProxyServer({String scheme, String host, int port}) {
     if (scheme != null) this.scheme = scheme;
@@ -75,7 +74,6 @@ class ProxyServer extends ChromeObject {
  * and 'fallbackProxy'.
  */
 class ProxyRules extends ChromeObject {
-  static ProxyRules create(JsObject proxy) => proxy == null ? null : new ProxyRules.fromProxy(proxy);
 
   ProxyRules({ProxyServer singleProxy, ProxyServer proxyForHttp, ProxyServer proxyForHttps, ProxyServer proxyForFtp, ProxyServer fallbackProxy, List<String> bypassList}) {
     if (singleProxy != null) this.singleProxy = singleProxy;
@@ -92,32 +90,32 @@ class ProxyRules extends ChromeObject {
    * The proxy server to be used for all per-URL requests (that is http, https,
    * and ftp).
    */
-  ProxyServer get singleProxy => ProxyServer.create(this.proxy['singleProxy']);
+  ProxyServer get singleProxy => _createProxyServer(this.proxy['singleProxy']);
   set singleProxy(ProxyServer value) => this.proxy['singleProxy'] = value;
 
   /**
    * The proxy server to be used for HTTP requests.
    */
-  ProxyServer get proxyForHttp => ProxyServer.create(this.proxy['proxyForHttp']);
+  ProxyServer get proxyForHttp => _createProxyServer(this.proxy['proxyForHttp']);
   set proxyForHttp(ProxyServer value) => this.proxy['proxyForHttp'] = value;
 
   /**
    * The proxy server to be used for HTTPS requests.
    */
-  ProxyServer get proxyForHttps => ProxyServer.create(this.proxy['proxyForHttps']);
+  ProxyServer get proxyForHttps => _createProxyServer(this.proxy['proxyForHttps']);
   set proxyForHttps(ProxyServer value) => this.proxy['proxyForHttps'] = value;
 
   /**
    * The proxy server to be used for FTP requests.
    */
-  ProxyServer get proxyForFtp => ProxyServer.create(this.proxy['proxyForFtp']);
+  ProxyServer get proxyForFtp => _createProxyServer(this.proxy['proxyForFtp']);
   set proxyForFtp(ProxyServer value) => this.proxy['proxyForFtp'] = value;
 
   /**
    * The proxy server to be used for everthing else or if any of the specific
    * proxyFor... is not specified.
    */
-  ProxyServer get fallbackProxy => ProxyServer.create(this.proxy['fallbackProxy']);
+  ProxyServer get fallbackProxy => _createProxyServer(this.proxy['fallbackProxy']);
   set fallbackProxy(ProxyServer value) => this.proxy['fallbackProxy'] = value;
 
   /**
@@ -132,7 +130,6 @@ class ProxyRules extends ChromeObject {
  * should be non-empty.
  */
 class PacScript extends ChromeObject {
-  static PacScript create(JsObject proxy) => proxy == null ? null : new PacScript.fromProxy(proxy);
 
   PacScript({String url, String data, bool mandatory}) {
     if (url != null) this.url = url;
@@ -166,7 +163,6 @@ class PacScript extends ChromeObject {
  * An object encapsulating a complete proxy configuration.
  */
 class ProxyConfig extends ChromeObject {
-  static ProxyConfig create(JsObject proxy) => proxy == null ? null : new ProxyConfig.fromProxy(proxy);
 
   ProxyConfig({ProxyRules rules, PacScript pacScript, String mode}) {
     if (rules != null) this.rules = rules;
@@ -180,14 +176,14 @@ class ProxyConfig extends ChromeObject {
    * The proxy rules describing this configuration. Use this for 'fixed_servers'
    * mode.
    */
-  ProxyRules get rules => ProxyRules.create(this.proxy['rules']);
+  ProxyRules get rules => _createProxyRules(this.proxy['rules']);
   set rules(ProxyRules value) => this.proxy['rules'] = value;
 
   /**
    * The proxy auto-config (PAC) script for this configuration. Use this for
    * 'pac_script' mode.
    */
-  PacScript get pacScript => PacScript.create(this.proxy['pacScript']);
+  PacScript get pacScript => _createPacScript(this.proxy['pacScript']);
   set pacScript(PacScript value) => this.proxy['pacScript'] = value;
 
   /**
@@ -199,3 +195,8 @@ class ProxyConfig extends ChromeObject {
   String get mode => this.proxy['mode'];
   set mode(String value) => this.proxy['mode'] = value;
 }
+
+ChromeSetting _createChromeSetting(JsObject proxy) => proxy == null ? null : new ChromeSetting.fromProxy(proxy);
+ProxyServer _createProxyServer(JsObject proxy) => proxy == null ? null : new ProxyServer.fromProxy(proxy);
+ProxyRules _createProxyRules(JsObject proxy) => proxy == null ? null : new ProxyRules.fromProxy(proxy);
+PacScript _createPacScript(JsObject proxy) => proxy == null ? null : new PacScript.fromProxy(proxy);

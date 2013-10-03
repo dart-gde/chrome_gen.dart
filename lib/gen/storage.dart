@@ -19,12 +19,12 @@ class ChromeStorage {
   /**
    * Items in the `sync` storage area are synced using Chrome Sync.
    */
-  StorageArea get sync => StorageArea.create(_storage['sync']);
+  StorageArea get sync => _createStorageArea(_storage['sync']);
 
   /**
    * Items in the `local` storage area are local to each machine.
    */
-  StorageArea get local => StorageArea.create(_storage['local']);
+  StorageArea get local => _createStorageArea(_storage['local']);
 
   /**
    * Fired when one or more items change.
@@ -32,15 +32,13 @@ class ChromeStorage {
   Stream<StorageOnChangedEvent> get onChanged => _onChanged.stream;
 
   final ChromeStreamController<StorageOnChangedEvent> _onChanged =
-      new ChromeStreamController<StorageOnChangedEvent>.twoArgs(_storage['onChanged'], StorageOnChangedEvent.create);
+      new ChromeStreamController<StorageOnChangedEvent>.twoArgs(_storage['onChanged'], _createStorageOnChangedEvent);
 }
 
 /**
  * Fired when one or more items change.
  */
 class StorageOnChangedEvent {
-  static StorageOnChangedEvent create(JsObject changes, String areaName) =>
-      new StorageOnChangedEvent(mapify(changes), areaName);
 
   /**
    * Object mapping each key that changed to its corresponding [StorageChange]
@@ -57,7 +55,6 @@ class StorageOnChangedEvent {
 }
 
 class StorageChange extends ChromeObject {
-  static StorageChange create(JsObject proxy) => proxy == null ? null : new StorageChange.fromProxy(proxy);
 
   StorageChange({var oldValue, var newValue}) {
     if (oldValue != null) this.oldValue = oldValue;
@@ -80,7 +77,6 @@ class StorageChange extends ChromeObject {
 }
 
 class StorageArea extends ChromeObject {
-  static StorageArea create(JsObject proxy) => proxy == null ? null : new StorageArea.fromProxy(proxy);
 
   StorageArea();
 
@@ -151,3 +147,7 @@ class StorageArea extends ChromeObject {
     return completer.future;
   }
 }
+
+StorageArea _createStorageArea(JsObject proxy) => proxy == null ? null : new StorageArea.fromProxy(proxy);
+StorageOnChangedEvent _createStorageOnChangedEvent(JsObject changes, String areaName) =>
+    new StorageOnChangedEvent(mapify(changes), areaName);

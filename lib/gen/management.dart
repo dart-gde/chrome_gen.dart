@@ -21,7 +21,7 @@ class ChromeManagement {
    * Returns a list of information about installed extensions and apps.
    */
   Future<List<ExtensionInfo>> getAll() {
-    var completer = new ChromeCompleter<List<ExtensionInfo>>.oneArg((e) => listify(e, ExtensionInfo.create));
+    var completer = new ChromeCompleter<List<ExtensionInfo>>.oneArg((e) => listify(e, _createExtensionInfo));
     _management.callMethod('getAll', [completer.callback]);
     return completer.future;
   }
@@ -33,7 +33,7 @@ class ChromeManagement {
    * [id] The ID from an item of [ExtensionInfo.]
    */
   Future<ExtensionInfo> get(String id) {
-    var completer = new ChromeCompleter<ExtensionInfo>.oneArg(ExtensionInfo.create);
+    var completer = new ChromeCompleter<ExtensionInfo>.oneArg(_createExtensionInfo);
     _management.callMethod('get', [id, completer.callback]);
     return completer.future;
   }
@@ -114,7 +114,7 @@ class ChromeManagement {
   Stream<ExtensionInfo> get onInstalled => _onInstalled.stream;
 
   final ChromeStreamController<ExtensionInfo> _onInstalled =
-      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onInstalled'], ExtensionInfo.create);
+      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onInstalled'], _createExtensionInfo);
 
   /**
    * Fired when an app or extension has been uninstalled.
@@ -130,7 +130,7 @@ class ChromeManagement {
   Stream<ExtensionInfo> get onEnabled => _onEnabled.stream;
 
   final ChromeStreamController<ExtensionInfo> _onEnabled =
-      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onEnabled'], ExtensionInfo.create);
+      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onEnabled'], _createExtensionInfo);
 
   /**
    * Fired when an app or extension has been disabled.
@@ -138,14 +138,13 @@ class ChromeManagement {
   Stream<ExtensionInfo> get onDisabled => _onDisabled.stream;
 
   final ChromeStreamController<ExtensionInfo> _onDisabled =
-      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onDisabled'], ExtensionInfo.create);
+      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onDisabled'], _createExtensionInfo);
 }
 
 /**
  * Information about an icon belonging to an extension, app, or theme.
  */
 class IconInfo extends ChromeObject {
-  static IconInfo create(JsObject proxy) => proxy == null ? null : new IconInfo.fromProxy(proxy);
 
   IconInfo({int size, String url}) {
     if (size != null) this.size = size;
@@ -174,7 +173,6 @@ class IconInfo extends ChromeObject {
  * Information about an installed extension, app, or theme.
  */
 class ExtensionInfo extends ChromeObject {
-  static ExtensionInfo create(JsObject proxy) => proxy == null ? null : new ExtensionInfo.fromProxy(proxy);
 
   ExtensionInfo({String id, String name, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List<IconInfo> icons, List<String> permissions, List<String> hostPermissions, String installType}) {
     if (id != null) this.id = id;
@@ -286,7 +284,7 @@ class ExtensionInfo extends ChromeObject {
    * height attributes on img tags referencing these images. See the [manifest
    * documentation on icons](manifest/icons.html) for more details.
    */
-  List<IconInfo> get icons => listify(proxy['icons'], IconInfo.create);
+  List<IconInfo> get icons => listify(proxy['icons'], _createIconInfo);
   set icons(List<IconInfo> value) => proxy['icons'] = value;
 
   /**
@@ -313,3 +311,6 @@ class ExtensionInfo extends ChromeObject {
   String get installType => proxy['installType'];
   set installType(String value) => proxy['installType'] = value;
 }
+
+ExtensionInfo _createExtensionInfo(JsObject proxy) => proxy == null ? null : new ExtensionInfo.fromProxy(proxy);
+IconInfo _createIconInfo(JsObject proxy) => proxy == null ? null : new IconInfo.fromProxy(proxy);

@@ -141,7 +141,7 @@ class ChromeInputIme {
   Stream<InputContext> get onFocus => _onFocus.stream;
 
   final ChromeStreamController<InputContext> _onFocus =
-      new ChromeStreamController<InputContext>.oneArg(_input_ime['onFocus'], InputContext.create);
+      new ChromeStreamController<InputContext>.oneArg(_input_ime['onFocus'], _createInputContext);
 
   /**
    * This event is sent when focus leaves a text box. It is sent to all
@@ -160,7 +160,7 @@ class ChromeInputIme {
   Stream<InputContext> get onInputContextUpdate => _onInputContextUpdate.stream;
 
   final ChromeStreamController<InputContext> _onInputContextUpdate =
-      new ChromeStreamController<InputContext>.oneArg(_input_ime['onInputContextUpdate'], InputContext.create);
+      new ChromeStreamController<InputContext>.oneArg(_input_ime['onInputContextUpdate'], _createInputContext);
 
   /**
    * This event is sent if this extension owns the active IME.
@@ -168,7 +168,7 @@ class ChromeInputIme {
   Stream<OnKeyEventEvent> get onKeyEvent => _onKeyEvent.stream;
 
   final ChromeStreamController<OnKeyEventEvent> _onKeyEvent =
-      new ChromeStreamController<OnKeyEventEvent>.twoArgs(_input_ime['onKeyEvent'], OnKeyEventEvent.create);
+      new ChromeStreamController<OnKeyEventEvent>.twoArgs(_input_ime['onKeyEvent'], _createOnKeyEventEvent);
 
   /**
    * This event is sent if this extension owns the active IME.
@@ -176,7 +176,7 @@ class ChromeInputIme {
   Stream<OnCandidateClickedEvent> get onCandidateClicked => _onCandidateClicked.stream;
 
   final ChromeStreamController<OnCandidateClickedEvent> _onCandidateClicked =
-      new ChromeStreamController<OnCandidateClickedEvent>.threeArgs(_input_ime['onCandidateClicked'], OnCandidateClickedEvent.create);
+      new ChromeStreamController<OnCandidateClickedEvent>.threeArgs(_input_ime['onCandidateClicked'], _createOnCandidateClickedEvent);
 
   /**
    * Called when the user selects a menu item
@@ -184,7 +184,7 @@ class ChromeInputIme {
   Stream<OnMenuItemActivatedEvent> get onMenuItemActivated => _onMenuItemActivated.stream;
 
   final ChromeStreamController<OnMenuItemActivatedEvent> _onMenuItemActivated =
-      new ChromeStreamController<OnMenuItemActivatedEvent>.twoArgs(_input_ime['onMenuItemActivated'], OnMenuItemActivatedEvent.create);
+      new ChromeStreamController<OnMenuItemActivatedEvent>.twoArgs(_input_ime['onMenuItemActivated'], _createOnMenuItemActivatedEvent);
 
   /**
    * Called when the editable string around caret is changed or when the caret
@@ -194,7 +194,7 @@ class ChromeInputIme {
   Stream<OnSurroundingTextChangedEvent> get onSurroundingTextChanged => _onSurroundingTextChanged.stream;
 
   final ChromeStreamController<OnSurroundingTextChangedEvent> _onSurroundingTextChanged =
-      new ChromeStreamController<OnSurroundingTextChangedEvent>.twoArgs(_input_ime['onSurroundingTextChanged'], OnSurroundingTextChangedEvent.create);
+      new ChromeStreamController<OnSurroundingTextChangedEvent>.twoArgs(_input_ime['onSurroundingTextChanged'], _createOnSurroundingTextChangedEvent);
 
   /**
    * This event is sent when chrome terminates ongoing text input session.
@@ -209,8 +209,6 @@ class ChromeInputIme {
  * This event is sent if this extension owns the active IME.
  */
 class OnKeyEventEvent {
-  static OnKeyEventEvent create(String engineID, JsObject keyData) =>
-      new OnKeyEventEvent(engineID, KeyboardEvent.create(keyData));
 
   /**
    * ID of the engine receiving the event
@@ -229,8 +227,6 @@ class OnKeyEventEvent {
  * This event is sent if this extension owns the active IME.
  */
 class OnCandidateClickedEvent {
-  static OnCandidateClickedEvent create(String engineID, int candidateID, String button) =>
-      new OnCandidateClickedEvent(engineID, candidateID, button);
 
   /**
    * ID of the engine receiving the event
@@ -255,8 +251,6 @@ class OnCandidateClickedEvent {
  * Called when the user selects a menu item
  */
 class OnMenuItemActivatedEvent {
-  static OnMenuItemActivatedEvent create(String engineID, String name) =>
-      new OnMenuItemActivatedEvent(engineID, name);
 
   /**
    * ID of the engine receiving the event
@@ -277,8 +271,6 @@ class OnMenuItemActivatedEvent {
  * and forth direction.
  */
 class OnSurroundingTextChangedEvent {
-  static OnSurroundingTextChangedEvent create(String engineID, JsObject surroundingInfo) =>
-      new OnSurroundingTextChangedEvent(engineID, mapify(surroundingInfo));
 
   /**
    * ID of the engine receiving the event
@@ -297,7 +289,6 @@ class OnSurroundingTextChangedEvent {
  * See http://www.w3.org/TR/DOM-Level-3-Events/#events-KeyboardEvent
  */
 class KeyboardEvent extends ChromeObject {
-  static KeyboardEvent create(JsObject proxy) => proxy == null ? null : new KeyboardEvent.fromProxy(proxy);
 
   KeyboardEvent({String type, String requestId, String key, String code, bool altKey, bool ctrlKey, bool shiftKey, bool capsLock}) {
     if (type != null) this.type = type;
@@ -367,7 +358,6 @@ class KeyboardEvent extends ChromeObject {
  * Describes an input Context
  */
 class InputContext extends ChromeObject {
-  static InputContext create(JsObject proxy) => proxy == null ? null : new InputContext.fromProxy(proxy);
 
   InputContext({int contextID, String type}) {
     if (contextID != null) this.contextID = contextID;
@@ -396,7 +386,6 @@ class InputContext extends ChromeObject {
  * language menu.
  */
 class MenuItem extends ChromeObject {
-  static MenuItem create(JsObject proxy) => proxy == null ? null : new MenuItem.fromProxy(proxy);
 
   MenuItem({String id, String label, String style, bool visible, bool checked, bool enabled}) {
     if (id != null) this.id = id;
@@ -447,3 +436,14 @@ class MenuItem extends ChromeObject {
   bool get enabled => proxy['enabled'];
   set enabled(bool value) => proxy['enabled'] = value;
 }
+
+InputContext _createInputContext(JsObject proxy) => proxy == null ? null : new InputContext.fromProxy(proxy);
+OnKeyEventEvent _createOnKeyEventEvent(String engineID, JsObject keyData) =>
+    new OnKeyEventEvent(engineID, _createKeyboardEvent(keyData));
+OnCandidateClickedEvent _createOnCandidateClickedEvent(String engineID, int candidateID, String button) =>
+    new OnCandidateClickedEvent(engineID, candidateID, button);
+OnMenuItemActivatedEvent _createOnMenuItemActivatedEvent(String engineID, String name) =>
+    new OnMenuItemActivatedEvent(engineID, name);
+OnSurroundingTextChangedEvent _createOnSurroundingTextChangedEvent(String engineID, JsObject surroundingInfo) =>
+    new OnSurroundingTextChangedEvent(engineID, mapify(surroundingInfo));
+KeyboardEvent _createKeyboardEvent(JsObject proxy) => proxy == null ? null : new KeyboardEvent.fromProxy(proxy);

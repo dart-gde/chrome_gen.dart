@@ -27,7 +27,6 @@ class ChromeDeclarativeContent {
  * Matches the state of a web page by various criteria.
  */
 class PageStateMatcher extends ChromeObject {
-  static PageStateMatcher create(JsObject proxy) => proxy == null ? null : new PageStateMatcher.fromProxy(proxy);
 
   PageStateMatcher({UrlFilter pageUrl, List<String> css}) {
     if (pageUrl != null) this.pageUrl = pageUrl;
@@ -40,7 +39,7 @@ class PageStateMatcher extends ChromeObject {
    * Matches if the condition of the UrlFilter are fulfilled for the top-level
    * URL of the page.
    */
-  UrlFilter get pageUrl => UrlFilter.create(proxy['pageUrl']);
+  UrlFilter get pageUrl => _createUrlFilter(proxy['pageUrl']);
   set pageUrl(UrlFilter value) => proxy['pageUrl'] = value;
 
   /**
@@ -60,9 +59,10 @@ class PageStateMatcher extends ChromeObject {
  * page action will grant access to the active tab.
  */
 class ShowPageAction extends ChromeObject {
-  static ShowPageAction create(JsObject proxy) => proxy == null ? null : new ShowPageAction.fromProxy(proxy);
 
   ShowPageAction();
 
   ShowPageAction.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
+
+UrlFilter _createUrlFilter(JsObject proxy) => proxy == null ? null : new UrlFilter.fromProxy(proxy);
