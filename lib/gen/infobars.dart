@@ -13,7 +13,7 @@ import '../src/common.dart';
 final ChromeInfobars infobars = ChromeInfobars._infobars == null ? apiNotAvailable('chrome.infobars') : new ChromeInfobars._();
 
 class ChromeInfobars {
-  static final JsObject _infobars = context['chrome']['infobars'];
+  static final JsObject _infobars = chrome['infobars'];
 
   ChromeInfobars._();
 

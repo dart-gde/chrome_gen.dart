@@ -15,16 +15,9 @@ export 'common_exp.dart';
 
 final log.Logger _logger = new log.Logger('chrome_gen');
 
-JsObject _proxy;
-JsObject _jsJSON = context['JSON'];
+final JsObject _jsJSON = context['JSON'];
 
-JsObject get chrome {
-  if (_proxy == null) {
-    _proxy = context['chrome'];
-  }
-
-  return _proxy;
-}
+final JsObject chrome = context['chrome'];
 
 String get lastError {
   JsObject error = chrome['runtime']['lastError'];

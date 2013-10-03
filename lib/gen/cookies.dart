@@ -12,7 +12,7 @@ import '../src/common.dart';
 final ChromeCookies cookies = ChromeCookies._cookies == null ? apiNotAvailable('chrome.cookies') : new ChromeCookies._();
 
 class ChromeCookies {
-  static final JsObject _cookies = context['chrome']['cookies'];
+  static final JsObject _cookies = chrome['cookies'];
 
   ChromeCookies._();
 

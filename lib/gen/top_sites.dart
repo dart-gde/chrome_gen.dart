@@ -12,7 +12,7 @@ import '../src/common.dart';
 final ChromeTopSites topSites = ChromeTopSites._topSites == null ? apiNotAvailable('chrome.topSites') : new ChromeTopSites._();
 
 class ChromeTopSites {
-  static final JsObject _topSites = context['chrome']['topSites'];
+  static final JsObject _topSites = chrome['topSites'];
 
   ChromeTopSites._();
 

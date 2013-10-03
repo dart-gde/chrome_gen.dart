@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromePermissions permissions = ChromePermissions._permissions == null ? apiNotAvailable('chrome.permissions') : new ChromePermissions._();
 
 class ChromePermissions {
-  static final JsObject _permissions = context['chrome']['permissions'];
+  static final JsObject _permissions = chrome['permissions'];
 
   ChromePermissions._();
 

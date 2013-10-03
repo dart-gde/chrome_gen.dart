@@ -13,7 +13,7 @@ import '../src/common.dart';
 final ChromeBookmarks bookmarks = ChromeBookmarks._bookmarks == null ? apiNotAvailable('chrome.bookmarks') : new ChromeBookmarks._();
 
 class ChromeBookmarks {
-  static final JsObject _bookmarks = context['chrome']['bookmarks'];
+  static final JsObject _bookmarks = chrome['bookmarks'];
 
   ChromeBookmarks._();
 

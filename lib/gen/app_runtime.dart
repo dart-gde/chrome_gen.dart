@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeAppRuntime app_runtime = ChromeAppRuntime._app_runtime == null ? apiNotAvailable('chrome.app.runtime') : new ChromeAppRuntime._();
 
 class ChromeAppRuntime {
-  static final JsObject _app_runtime = context['chrome']['app']['runtime'];
+  static final JsObject _app_runtime = chrome['app']['runtime'];
 
   ChromeAppRuntime._();
 

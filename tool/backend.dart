@@ -163,7 +163,7 @@ class _DefaultBackendContext {
 
     generator.writeln("class ${className} {");
     generator.write("static final JsObject ${contextReference} = ");
-    generator.writeln("context['chrome']['${sections.join('\'][\'')}'];");
+    generator.writeln("chrome['${sections.join('\'][\'')}'];");
     generator.writeln();
     generator.writeln("${className}._();");
 

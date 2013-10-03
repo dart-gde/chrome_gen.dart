@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeDesktopCapture desktopCapture = ChromeDesktopCapture._desktopCapture == null ? apiNotAvailable('chrome.desktopCapture') : new ChromeDesktopCapture._();
 
 class ChromeDesktopCapture {
-  static final JsObject _desktopCapture = context['chrome']['desktopCapture'];
+  static final JsObject _desktopCapture = chrome['desktopCapture'];
 
   ChromeDesktopCapture._();
 

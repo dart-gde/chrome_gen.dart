@@ -11,7 +11,7 @@ import '../src/common.dart';
 final ChromeEvents events = ChromeEvents._events == null ? apiNotAvailable('chrome.events') : new ChromeEvents._();
 
 class ChromeEvents {
-  static final JsObject _events = context['chrome']['events'];
+  static final JsObject _events = chrome['events'];
 
   ChromeEvents._();
 }

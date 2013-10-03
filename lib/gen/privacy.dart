@@ -15,7 +15,7 @@ import '../src/common.dart';
 final ChromePrivacy privacy = ChromePrivacy._privacy == null ? apiNotAvailable('chrome.privacy') : new ChromePrivacy._();
 
 class ChromePrivacy {
-  static final JsObject _privacy = context['chrome']['privacy'];
+  static final JsObject _privacy = chrome['privacy'];
 
   ChromePrivacy._();
 

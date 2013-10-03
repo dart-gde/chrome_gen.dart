@@ -13,7 +13,7 @@ import '../src/common.dart';
 final ChromeScriptBadge scriptBadge = ChromeScriptBadge._scriptBadge == null ? apiNotAvailable('chrome.scriptBadge') : new ChromeScriptBadge._();
 
 class ChromeScriptBadge {
-  static final JsObject _scriptBadge = context['chrome']['scriptBadge'];
+  static final JsObject _scriptBadge = chrome['scriptBadge'];
 
   ChromeScriptBadge._();
 

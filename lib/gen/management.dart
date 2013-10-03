@@ -13,7 +13,7 @@ import '../src/common.dart';
 final ChromeManagement management = ChromeManagement._management == null ? apiNotAvailable('chrome.management') : new ChromeManagement._();
 
 class ChromeManagement {
-  static final JsObject _management = context['chrome']['management'];
+  static final JsObject _management = chrome['management'];
 
   ChromeManagement._();
 

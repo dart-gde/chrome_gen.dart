@@ -13,7 +13,7 @@ import '../src/common.dart';
 final ChromeInputIme input_ime = ChromeInputIme._input_ime == null ? apiNotAvailable('chrome.input.ime') : new ChromeInputIme._();
 
 class ChromeInputIme {
-  static final JsObject _input_ime = context['chrome']['input']['ime'];
+  static final JsObject _input_ime = chrome['input']['ime'];
 
   ChromeInputIme._();
 

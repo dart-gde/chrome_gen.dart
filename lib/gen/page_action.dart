@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromePageAction pageAction = ChromePageAction._pageAction == null ? apiNotAvailable('chrome.pageAction') : new ChromePageAction._();
 
 class ChromePageAction {
-  static final JsObject _pageAction = context['chrome']['pageAction'];
+  static final JsObject _pageAction = chrome['pageAction'];
 
   ChromePageAction._();
 

@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeUsb usb = ChromeUsb._usb == null ? apiNotAvailable('chrome.usb') : new ChromeUsb._();
 
 class ChromeUsb {
-  static final JsObject _usb = context['chrome']['usb'];
+  static final JsObject _usb = chrome['usb'];
 
   ChromeUsb._();
 

@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeSystemCpu system_cpu = ChromeSystemCpu._system_cpu == null ? apiNotAvailable('chrome.system.cpu') : new ChromeSystemCpu._();
 
 class ChromeSystemCpu {
-  static final JsObject _system_cpu = context['chrome']['system']['cpu'];
+  static final JsObject _system_cpu = chrome['system']['cpu'];
 
   ChromeSystemCpu._();
 

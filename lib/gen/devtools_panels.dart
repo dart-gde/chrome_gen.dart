@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromeDevtoolsPanels devtools_panels = ChromeDevtoolsPanels._devtools_panels == null ? apiNotAvailable('chrome.devtools.panels') : new ChromeDevtoolsPanels._();
 
 class ChromeDevtoolsPanels {
-  static final JsObject _devtools_panels = context['chrome']['devtools']['panels'];
+  static final JsObject _devtools_panels = chrome['devtools']['panels'];
 
   ChromeDevtoolsPanels._();
 

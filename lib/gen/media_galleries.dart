@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeMediaGalleries mediaGalleries = ChromeMediaGalleries._mediaGalleries == null ? apiNotAvailable('chrome.mediaGalleries') : new ChromeMediaGalleries._();
 
 class ChromeMediaGalleries {
-  static final JsObject _mediaGalleries = context['chrome']['mediaGalleries'];
+  static final JsObject _mediaGalleries = chrome['mediaGalleries'];
 
   ChromeMediaGalleries._();
 

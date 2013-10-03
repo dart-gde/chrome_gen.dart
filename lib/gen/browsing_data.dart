@@ -12,7 +12,7 @@ import '../src/common.dart';
 final ChromeBrowsingData browsingData = ChromeBrowsingData._browsingData == null ? apiNotAvailable('chrome.browsingData') : new ChromeBrowsingData._();
 
 class ChromeBrowsingData {
-  static final JsObject _browsingData = context['chrome']['browsingData'];
+  static final JsObject _browsingData = chrome['browsingData'];
 
   ChromeBrowsingData._();
 

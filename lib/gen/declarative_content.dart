@@ -13,7 +13,7 @@ import '../src/common.dart';
 final ChromeDeclarativeContent declarativeContent = ChromeDeclarativeContent._declarativeContent == null ? apiNotAvailable('chrome.declarativeContent') : new ChromeDeclarativeContent._();
 
 class ChromeDeclarativeContent {
-  static final JsObject _declarativeContent = context['chrome']['declarativeContent'];
+  static final JsObject _declarativeContent = chrome['declarativeContent'];
 
   ChromeDeclarativeContent._();
 
