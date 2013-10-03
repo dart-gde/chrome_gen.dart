@@ -634,12 +634,39 @@ String idlToDartRefName(String name, String refName) {
   }
 }
 
-String cleanDocComments(String comments) {
-  if (comments == null) {
+String cleanDocComments(String str) {
+  if (str == null) {
     return null;
   }
 
-  // TODO(devoncarew): more docs cleanups
+  str = str.trim();
 
-  return comments.replaceAll('/*', '/');
+  if (str.isEmpty) {
+    return null;
+  }
+
+  str = str.replaceAll('\n ', ' ');
+  str = str.replaceAll(new RegExp('\n\n+'), '\n');
+
+  //  |foo| ==> [foo]
+  str = str.replaceAllMapped(
+      new RegExp(r" \|([\.\w]*)\|"),
+      (Match m) => "\n[${m.group(1)}]");
+
+
+  str = str.replaceAll('<code>', '`');
+  str = str.replaceAll('</code>', '`');
+
+  str = str.replaceAll('<em>', '_');
+  str = str.replaceAll('</em>', '_');
+
+  str = str.replaceAll('<strong>', '*');
+  str = str.replaceAll('</strong>', '*');
+
+  str = str.replaceAll('<var>', '[');
+  str = str.replaceAll('</var>', ']');
+
+  str = str.replaceAll('&mdash;', '-');
+
+  return str.replaceAll('/*', '/');
 }

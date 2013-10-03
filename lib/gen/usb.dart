@@ -14,12 +14,9 @@ class ChromeUsb {
 
   /**
    * Lists USB devices specified by vendorId/productId/interfaceId tuple.
-   *  |options|: The properties to search for on target devices.
-   *  |callback|: Invoked with a list of |Device|s on complete.
-   * 
-   * 
-   * 
-   * Returns:
+   * [options]: The properties to search for on target devices.
+   * [callback]: Invoked with a list of
+   * [Device]s on complete.
    */
   Future<Device> getDevices(EnumerateDevicesOptions options) {
     var completer = new ChromeCompleter<Device>.oneArg(_createDevice);
@@ -29,16 +26,11 @@ class ChromeUsb {
 
   /**
    * This method is ChromeOS specific. Calling this method on other platforms
-   *  will fail.
-   *  Requests access from the permission broker to an OS claimed device if the
-   *  given interface on the device is not claimed.
+   * will fail. Requests access from the permission broker to an OS claimed
+   * device if the given interface on the device is not claimed.
    * 
-   *  |device|: The device to request access to.
-   *  |interfaceId|: 
-   * 
-   * 
-   * 
-   * Returns:
+   * [device]: The device to request access to.
+   * [interfaceId]:
    */
   Future<bool> requestAccess(Device device, int interfaceId) {
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -47,13 +39,10 @@ class ChromeUsb {
   }
 
   /**
-   * Opens a USB device returned by |getDevices|.
-   *  |device|: The device to open.
-   *  |callback|: Invoked with the created ConnectionHandle on complete.
-   * 
-   * 
-   * 
-   * Returns:
+   * Opens a USB device returned by
+   * [getDevices].
+   * [device]: The device to open.
+   * [callback]: Invoked with the created ConnectionHandle on complete.
    */
   Future<ConnectionHandle> openDevice(Device device) {
     var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
@@ -63,25 +52,20 @@ class ChromeUsb {
 
   /**
    * Finds USB devices specified by the vendorId/productId/interfaceId tuple
-   *  and, if permissions allow, opens them for use.
+   * and, if permissions allow, opens them for use.
+   * On Chrome OS, you can specify the interfaceId. In that case the method
+   * will request access from permission broker in the same way as in
+   * [requestUsbAcess].
+   * If the access request is rejected, or the device is failed to be opened,
+   * its connection handle will not be created or returned.
+   *  Calling this method is equivalent to calling
+   * [getDevices] followed by a series of
+   * [requestAccess] (if it is on ChromeOs) and
+   * [openDevice] calls, and returning all the successfully opened connection
+   * handles.
    * 
-   *  On Chrome OS, you can specify the interfaceId. In that case the method
-   *  will request access from permission broker in the same way as in
-   *  |requestUsbAcess|.
-   * 
-   *  If the access request is rejected, or the device is failed to be opened,
-   *  its connection handle will not be created or returned.
-   * 
-   *  Calling this method is equivalent to calling |getDevices| followed by
-   *  a series of |requestAccess| (if it is on ChromeOs) and |openDevice|
-   *  calls, and returning all the successfully opened connection handles.
-   * 
-   *  |options|: The properties to search for on target devices.
-   *  |callback|: Invoked with the opened ConnectionHandle on complete.
-   * 
-   * 
-   * 
-   * Returns:
+   * [options]: The properties to search for on target devices.
+   * [callback]: Invoked with the opened ConnectionHandle on complete.
    */
   Future<ConnectionHandle> findDevices(EnumerateDevicesAndRequestAccessOptions options) {
     var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
@@ -90,10 +74,10 @@ class ChromeUsb {
   }
 
   /**
-   * Closes a connection handle. Invoking operations on a device after it
-   *  has been closed is a safe operation, but causes no action to be taken.
-   *  |handle|: The connection handle to close.
-   *  |callback|: The callback to invoke once the device is closed.
+   * Closes a connection handle. Invoking operations on a device after it has
+   * been closed is a safe operation, but causes no action to be taken.
+   * [handle]: The connection handle to close.
+   * [callback]: The callback to invoke once the device is closed.
    */
   Future closeDevice(ConnectionHandle handle) {
     var completer = new ChromeCompleter.noArgs();
@@ -103,12 +87,8 @@ class ChromeUsb {
 
   /**
    * Lists all the interfaces on the USB device.
-   *  |handle|: The device from which the interfaces should be listed.
-   *  |callback|: The callback to invoke when the interfaces are enumerated.
-   * 
-   * 
-   * 
-   * Returns:
+   * [handle]: The device from which the interfaces should be listed.
+   * [callback]: The callback to invoke when the interfaces are enumerated.
    */
   Future<InterfaceDescriptor> listInterfaces(ConnectionHandle handle) {
     var completer = new ChromeCompleter<InterfaceDescriptor>.oneArg(_createInterfaceDescriptor);
@@ -117,16 +97,15 @@ class ChromeUsb {
   }
 
   /**
-   * Claims an interface on the specified USB device.
-   *  Before you can transfer data with endpoints, you must claim their parent
-   *  interfaces. Only one connection handle on the same host can claim each
-   *  interface. If the interface is already claimed, this call will fail.
-   * 
+   * Claims an interface on the specified USB device. Before you can transfer
+   * data with endpoints, you must claim their parent interfaces. Only one
+   * connection handle on the same host can claim each interface. If the
+   * interface is already claimed, this call will fail.
    *  You shall call releaseInterface when the interface is not needed anymore.
    * 
-   *  |handle|: The device on which the interface is to be claimed.
-   *  |interface|: The interface number to be claimed.
-   *  |callback|: The callback to invoke once the interface is claimed.
+   * [handle]: The device on which the interface is to be claimed.
+   * [interface]: The interface number to be claimed.
+   * [callback]: The callback to invoke once the interface is claimed.
    */
   Future claimInterface(ConnectionHandle handle, int interfaceNumber) {
     var completer = new ChromeCompleter.noArgs();
@@ -136,9 +115,9 @@ class ChromeUsb {
 
   /**
    * Releases a claim to an interface on the provided device.
-   *  |handle|: The device on which the interface is to be released.
-   *  |interface|: The interface number to be released.
-   *  |callback|: The callback to invoke once the interface is released.
+   * [handle]: The device on which the interface is to be released.
+   * [interface]: The interface number to be released.
+   * [callback]: The callback to invoke once the interface is released.
    */
   Future releaseInterface(ConnectionHandle handle, int interfaceNumber) {
     var completer = new ChromeCompleter.noArgs();
@@ -147,12 +126,11 @@ class ChromeUsb {
   }
 
   /**
-   * Selects an alternate setting on a previously claimed interface on a
-   *  device.
-   *  |handle|: The device on which the interface settings are to be set.
-   *  |interface|: The interface number to be set.
-   *  |alternateSetting|: The alternate setting to set.
-   *  |callback|: The callback to invoke once the interface setting is set.
+   * Selects an alternate setting on a previously claimed interface on a device.
+   * [handle]: The device on which the interface settings are to be set.
+   * [interface]: The interface number to be set.
+   * [alternateSetting]: The alternate setting to set.
+   * [callback]: The callback to invoke once the interface setting is set.
    */
   Future setInterfaceAlternateSetting(ConnectionHandle handle, int interfaceNumber, int alternateSetting) {
     var completer = new ChromeCompleter.noArgs();
@@ -162,19 +140,14 @@ class ChromeUsb {
 
   /**
    * Performs a control transfer on the specified device. See the
-   *  ControlTransferInfo structure for the parameters required to make a
-   *  transfer.
+   * ControlTransferInfo structure for the parameters required to make a
+   * transfer.
+   * Conceptually control transfer talks to the device itself. You do not need
+   * to claim interface 0 to perform a control transfer.
    * 
-   *  Conceptually control transfer talks to the device itself. You do not need
-   *  to claim interface 0 to perform a control transfer.
-   * 
-   *  |handle|: A connection handle to make the transfer on.
-   *  |transferInfo|: The parameters to the transfer. See ControlTransferInfo.
-   *  |callback|: Invoked once the transfer has completed.
-   * 
-   * 
-   * 
-   * Returns:
+   * [handle]: A connection handle to make the transfer on.
+   * [transferInfo]: The parameters to the transfer. See ControlTransferInfo.
+   * [callback]: Invoked once the transfer has completed.
    */
   Future<TransferResultInfo> controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
@@ -184,13 +157,9 @@ class ChromeUsb {
 
   /**
    * Performs a bulk transfer on the specified device.
-   *  |handle|: A connection handle to make the transfer on.
-   *  |transferInfo|: The parameters to the transfer. See GenericTransferInfo.
-   *  |callback|: Invoked once the transfer has completed.
-   * 
-   * 
-   * 
-   * Returns:
+   * [handle]: A connection handle to make the transfer on.
+   * [transferInfo]: The parameters to the transfer. See GenericTransferInfo.
+   * [callback]: Invoked once the transfer has completed.
    */
   Future<TransferResultInfo> bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
@@ -200,13 +169,9 @@ class ChromeUsb {
 
   /**
    * Performs an interrupt transfer on the specified device.
-   *  |handle|: A connection handle to make the transfer on.
-   *  |transferInfo|: The parameters to the transfer. See GenericTransferInfo.
-   *  |callback|: Invoked once the transfer has completed.
-   * 
-   * 
-   * 
-   * Returns:
+   * [handle]: A connection handle to make the transfer on.
+   * [transferInfo]: The parameters to the transfer. See GenericTransferInfo.
+   * [callback]: Invoked once the transfer has completed.
    */
   Future<TransferResultInfo> interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
@@ -216,14 +181,10 @@ class ChromeUsb {
 
   /**
    * Performs an isochronous transfer on the specific device.
-   *  |handle|: A connection handle to make the transfer on.
-   *  |transferInfo|: The parameters to the transfer. See
-   *  IsochronousTransferInfo.
-   *  |callback|: Invoked once the transfer has been completed.
-   * 
-   * 
-   * 
-   * Returns:
+   * [handle]: A connection handle to make the transfer on.
+   * [transferInfo]: The parameters to the transfer. See
+   * IsochronousTransferInfo.
+   * [callback]: Invoked once the transfer has been completed.
    */
   Future<TransferResultInfo> isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
@@ -232,19 +193,16 @@ class ChromeUsb {
   }
 
   /**
-   * Tries to reset the USB device and restores it to the previous status.
-   *  If the reset fails, the given connection handle will be closed and the 
-   *  USB device will appear to be disconnected then reconnected. 
-   *  In that case you must call |getDevices| or |findDevices| again to acquire
-   *  the device.
+   * Tries to reset the USB device and restores it to the previous status. If
+   * the reset fails, the given connection handle will be closed and the  USB
+   * device will appear to be disconnected then reconnected.  In that case you
+   * must call
+   * [getDevices] or
+   * [findDevices] again to acquire the device.
    * 
-   *  |handle|: A connection handle to reset.
-   *  |callback|: Invoked once the device is reset with a boolean indicating
-   *  whether the reset is completed successfully.
-   * 
-   * 
-   * 
-   * Returns:
+   * [handle]: A connection handle to reset.
+   * [callback]: Invoked once the device is reset with a boolean indicating
+   * whether the reset is completed successfully.
    */
   Future<bool> resetDevice(ConnectionHandle handle) {
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -254,15 +212,13 @@ class ChromeUsb {
 }
 
 /**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved.
- *  Use of this source code is governed by a BSD-style license that can be
- *  found in the LICENSE file.
- *  Use the <code>chrome.usb</code> API to interact with connected USB
- *  devices. This API provides access to USB operations from within the context
- * of an app. Using this API, apps can function as drivers for hardware
- * devices.
- *  Direction, Recipient, RequestType, and TransferType all map to their
- *  namesakes within the USB specification.
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.usb` API to interact with connected USB
+ * devices. This API provides access to USB operations from within the context
+ * of an app. Using this API, apps can function as drivers for hardware devices.
+ * Direction, Recipient, RequestType, and TransferType all map to their
+ * namesakes within the USB specification.
  */
 class Direction extends ChromeEnum {
   static const Direction IN = const Direction._('in');
@@ -273,9 +229,6 @@ class Direction extends ChromeEnum {
   const Direction._(String str): super(str);
 }
 
-/**
- * 
- */
 class Recipient extends ChromeEnum {
   static const Recipient DEVICE = const Recipient._('device');
   static const Recipient _INTERFACE = const Recipient._('_interface');
@@ -287,9 +240,6 @@ class Recipient extends ChromeEnum {
   const Recipient._(String str): super(str);
 }
 
-/**
- * 
- */
 class RequestType extends ChromeEnum {
   static const RequestType STANDARD = const RequestType._('standard');
   static const RequestType CLASS = const RequestType._('class');
@@ -301,9 +251,6 @@ class RequestType extends ChromeEnum {
   const RequestType._(String str): super(str);
 }
 
-/**
- * 
- */
 class TransferType extends ChromeEnum {
   static const TransferType CONTROL = const TransferType._('control');
   static const TransferType INTERRUPT = const TransferType._('interrupt');
@@ -317,7 +264,7 @@ class TransferType extends ChromeEnum {
 
 /**
  * For isochronous mode, SynchronizationType and UsageType map to their
- *  namesakes within the USB specification.
+ * namesakes within the USB specification.
  */
 class SynchronizationType extends ChromeEnum {
   static const SynchronizationType ASYNCHRONOUS = const SynchronizationType._('asynchronous');
@@ -329,9 +276,6 @@ class SynchronizationType extends ChromeEnum {
   const SynchronizationType._(String str): super(str);
 }
 
-/**
- * 
- */
 class UsageType extends ChromeEnum {
   static const UsageType DATA = const UsageType._('data');
   static const UsageType FEEDBACK = const UsageType._('feedback');

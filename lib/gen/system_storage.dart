@@ -14,11 +14,7 @@ class ChromeSystemStorage {
 
   /**
    * Get the storage information from the system. The argument passed to the
-   *  callback is an array of StorageUnitInfo objects.
-   * 
-   * 
-   * 
-   * Returns:
+   * callback is an array of StorageUnitInfo objects.
    */
   Future<StorageUnitInfo> getInfo() {
     var completer = new ChromeCompleter<StorageUnitInfo>.oneArg(_createStorageUnitInfo);
@@ -28,10 +24,6 @@ class ChromeSystemStorage {
 
   /**
    * Ejects a removable storage device.
-   * 
-   * 
-   * 
-   * Returns:
    */
   Future<EjectDeviceResultCode> ejectDevice(String id) {
     var completer = new ChromeCompleter<EjectDeviceResultCode>.oneArg(_createEjectDeviceResultCode);
@@ -51,15 +43,12 @@ class ChromeSystemStorage {
 }
 
 /**
- * Copyright 2013 The Chromium Authors. All rights reserved.
- *  Use of this source code is governed by a BSD-style license that can be
- *  found in the LICENSE file.
- *  Use the <code>chrome.system.storage</code> API to query storage device
- *  information and be notified when a removable storage device is attached and
- *  detached.
- *  The storage has fixed media, e.g. hard disk or SSD.
- *  The storage is removable, e.g. USB flash drive.
- *  The storage type is unknown.
+ * Copyright 2013 The Chromium Authors. All rights reserved. Use of this source
+ * code is governed by a BSD-style license that can be found in the LICENSE
+ * file. Use the `chrome.system.storage` API to query storage device information
+ * and be notified when a removable storage device is attached and detached. The
+ * storage has fixed media, e.g. hard disk or SSD. The storage is removable,
+ * e.g. USB flash drive. The storage type is unknown.
  */
 class StorageUnitType extends ChromeEnum {
   static const StorageUnitType FIXED = const StorageUnitType._('fixed');
@@ -72,13 +61,11 @@ class StorageUnitType extends ChromeEnum {
 }
 
 /**
- * The ejection command is successful -- the application can prompt the user
- *  to remove the device.
- *  The device is in use by another application. The ejection did not
- *  succeed; the user should not remove the device until the other
- *  application is done with the device.
- *  There is no such device known.
- *  The ejection command failed.
+ * The ejection command is successful -- the application can prompt the user to
+ * remove the device. The device is in use by another application. The ejection
+ * did not succeed; the user should not remove the device until the other
+ * application is done with the device. There is no such device known. The
+ * ejection command failed.
  */
 class EjectDeviceResultCode extends ChromeEnum {
   static const EjectDeviceResultCode SUCCESS = const EjectDeviceResultCode._('success');

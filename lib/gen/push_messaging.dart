@@ -13,16 +13,11 @@ class ChromePushMessaging {
   ChromePushMessaging._();
 
   /**
-   * Retrieves the channel ID associated with this app or extension.
-   *  Typically an app or extension will want to send this value
-   *  to its application server so the server can use it
-   *  to trigger push messages back to the app or extension.
-   *  If the interactive flag is set, we will ask the user to log in
-   *  when they are not already logged in.
-   * 
-   * 
-   * 
-   * Returns:
+   * Retrieves the channel ID associated with this app or extension. Typically
+   * an app or extension will want to send this value to its application server
+   * so the server can use it to trigger push messages back to the app or
+   * extension. If the interactive flag is set, we will ask the user to log in
+   * when they are not already logged in.
    */
   Future<ChannelIdResult> getChannelId([bool interactive]) {
     var completer = new ChromeCompleter<ChannelIdResult>.oneArg(_createChannelIdResult);
