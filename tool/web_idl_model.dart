@@ -677,6 +677,7 @@ String cleanDocComments(String str) {
 
   // convert whitespace newline ==> newline
   str = str.replaceAll(new RegExp(' \n'), '\n');
+  str = str.replaceAll(new RegExp('  +'), ' ');
 
   return str.replaceAll('/*', '/');
 }
