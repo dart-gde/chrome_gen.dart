@@ -13,11 +13,11 @@ class ChromeNotifications {
   ChromeNotifications._();
 
   /**
-   * Creates and displays a notification having the contents in |options|,
-   * identified by the id |notificationId|. If |notificationId| is empty,
-   * |create| generates an id. If |notificationId| matches an existing
-   * notification, |create| first clears that notification before proceeding
-   * with the create operation. |callback| returns the notification id (either
+   * Creates and displays a notification having the contents in [options],
+   * identified by the id [notificationId]. If [notificationId] is empty,
+   * [create] generates an id. If [notificationId] matches an existing
+   * notification, [create] first clears that notification before proceeding
+   * with the create operation. [callback] returns the notification id (either
    * supplied or generated) that represents the created notification.
    */
   Future<String> create(String notificationId, NotificationOptions options) {
@@ -27,8 +27,8 @@ class ChromeNotifications {
   }
 
   /**
-   * Updates an existing notification having the id |notificationId| and the
-   * options |options|. |callback| indicates whether a matching notification
+   * Updates an existing notification having the id [notificationId] and the
+   * options [options]. [callback] indicates whether a matching notification
    * existed.
    */
   Future<bool> update(String notificationId, NotificationOptions options) {
@@ -38,8 +38,8 @@ class ChromeNotifications {
   }
 
   /**
-   * Given a |notificationId| returned by the |create| method, clears the
-   * corresponding notification. |callback| indicates whether a matching
+   * Given a [notificationId] returned by the [create] method, clears the
+   * corresponding notification. [callback] indicates whether a matching
    * notification existed.
    */
   Future<bool> clear(String notificationId) {
@@ -49,7 +49,7 @@ class ChromeNotifications {
   }
 
   /**
-   * |callback| is executed with the set of notification_ids currently in the
+   * [callback] is executed with the set of notification_ids currently in the
    * system.
    */
   Future<dynamic> getAll() {

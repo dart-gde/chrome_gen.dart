@@ -22,13 +22,13 @@ class ChromeSystemDisplay {
   }
 
   /**
-   * Updates the properties for the display specified by |id|, according to the
-   * information provided in |info|. On failure, $ref:runtime.lastError will be
+   * Updates the properties for the display specified by [id], according to the
+   * information provided in [info]. On failure, $ref:runtime.lastError will be
    * set.
    * [id]: The display's unique identifier.
    * [info]: The information about display properties that should be changed.
    * A property will be changed only if a new value for it is specified in
-   * |info|.
+   * [info].
    * [callback]: Empty function called when the function finishes. To find out
    * whether the function succeeded, $ref:runtime.lastError should be
    * queried.

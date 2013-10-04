@@ -15,7 +15,7 @@ class ChromeUsb {
   /**
    * Lists USB devices specified by vendorId/productId/interfaceId tuple.
    * [options]: The properties to search for on target devices.
-   * [callback]: Invoked with a list of |Device|s on complete.
+   * [callback]: Invoked with a list of [Device]s on complete.
    */
   Future<Device> getDevices(EnumerateDevicesOptions options) {
     var completer = new ChromeCompleter<Device>.oneArg(_createDevice);
@@ -38,7 +38,7 @@ class ChromeUsb {
   }
 
   /**
-   * Opens a USB device returned by |getDevices|.
+   * Opens a USB device returned by [getDevices].
    * [device]: The device to open.
    * [callback]: Invoked with the created ConnectionHandle on complete.
    */
@@ -54,13 +54,13 @@ class ChromeUsb {
    * 
    * On Chrome OS, you can specify the interfaceId. In that case the method will
    * request access from permission broker in the same way as in
-   * |requestUsbAcess|.
+   * [requestUsbAcess].
    * 
    * If the access request is rejected, or the device is failed to be opened,
    * its connection handle will not be created or returned.
    * 
-   * Calling this method is equivalent to calling |getDevices| followed by a
-   * series of |requestAccess| (if it is on ChromeOs) and |openDevice| calls,
+   * Calling this method is equivalent to calling [getDevices] followed by a
+   * series of [requestAccess] (if it is on ChromeOs) and [openDevice] calls,
    * and returning all the successfully opened connection handles.
    * 
    * [options]: The properties to search for on target devices.
@@ -197,7 +197,7 @@ class ChromeUsb {
    * Tries to reset the USB device and restores it to the previous status. If
    * the reset fails, the given connection handle will be closed and the  USB
    * device will appear to be disconnected then reconnected.  In that case you
-   * must call |getDevices| or |findDevices| again to acquire the device.
+   * must call [getDevices] or [findDevices] again to acquire the device.
    * 
    * [handle]: A connection handle to reset.
    * [callback]: Invoked once the device is reset with a boolean indicating

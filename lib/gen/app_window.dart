@@ -273,14 +273,14 @@ class AppWindow extends ChromeObject {
   }
 
   /**
-   * Move the window to the position (|left|, |top|).
+   * Move the window to the position ([left], [top]).
    */
   void moveTo(int left, int top) {
     proxy.callMethod('moveTo', [left, top]);
   }
 
   /**
-   * Resize the window to |width|x|height| pixels in size.
+   * Resize the window to [width]x[height] pixels in size.
    */
   void resizeTo(int width, int height) {
     proxy.callMethod('resizeTo', [width, height]);

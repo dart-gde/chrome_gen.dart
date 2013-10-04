@@ -155,7 +155,7 @@ class ChromeDownloads {
    * $ref:onChanged event will fire, otherwise nothing will happen.  When all
    * the data is fetched into a temporary file and either the download is not
    * dangerous or the danger has been accepted, then the temporary file is
-   * renamed to the target filename, the |state| changes to 'complete', and
+   * renamed to the target filename, the [state] changes to 'complete', and
    * $ref:onChanged fires.
    * [downloadId]: The identifier for the $ref:DownloadItem.
    * [callback]: Called when the danger prompt dialog closes.
