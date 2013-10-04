@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromeTts tts = ChromeTts._tts == null ? apiNotAvailable('chrome.tts') : new ChromeTts._();
 
 class ChromeTts {
-  static final JsObject _tts = context['chrome']['tts'];
+  static final JsObject _tts = chrome['tts'];
 
   ChromeTts._();
 

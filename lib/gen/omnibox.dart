@@ -12,7 +12,7 @@ import '../src/common.dart';
 final ChromeOmnibox omnibox = ChromeOmnibox._omnibox == null ? apiNotAvailable('chrome.omnibox') : new ChromeOmnibox._();
 
 class ChromeOmnibox {
-  static final JsObject _omnibox = context['chrome']['omnibox'];
+  static final JsObject _omnibox = chrome['omnibox'];
 
   ChromeOmnibox._();
 

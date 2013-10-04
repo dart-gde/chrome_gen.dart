@@ -11,7 +11,7 @@ import '../src/common.dart';
 final ChromePageCapture pageCapture = ChromePageCapture._pageCapture == null ? apiNotAvailable('chrome.pageCapture') : new ChromePageCapture._();
 
 class ChromePageCapture {
-  static final JsObject _pageCapture = context['chrome']['pageCapture'];
+  static final JsObject _pageCapture = chrome['pageCapture'];
 
   ChromePageCapture._();
 

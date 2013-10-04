@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromePower power = ChromePower._power == null ? apiNotAvailable('chrome.power') : new ChromePower._();
 
 class ChromePower {
-  static final JsObject _power = context['chrome']['power'];
+  static final JsObject _power = chrome['power'];
 
   ChromePower._();
 

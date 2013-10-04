@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeBluetooth bluetooth = ChromeBluetooth._bluetooth == null ? apiNotAvailable('chrome.bluetooth') : new ChromeBluetooth._();
 
 class ChromeBluetooth {
-  static final JsObject _bluetooth = context['chrome']['bluetooth'];
+  static final JsObject _bluetooth = chrome['bluetooth'];
 
   ChromeBluetooth._();
 

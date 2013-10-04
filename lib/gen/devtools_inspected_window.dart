@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromeDevtoolsInspectedWindow devtools_inspectedWindow = ChromeDevtoolsInspectedWindow._devtools_inspectedWindow == null ? apiNotAvailable('chrome.devtools.inspectedWindow') : new ChromeDevtoolsInspectedWindow._();
 
 class ChromeDevtoolsInspectedWindow {
-  static final JsObject _devtools_inspectedWindow = context['chrome']['devtools']['inspectedWindow'];
+  static final JsObject _devtools_inspectedWindow = chrome['devtools']['inspectedWindow'];
 
   ChromeDevtoolsInspectedWindow._();
 

@@ -13,7 +13,7 @@ import '../src/common.dart';
 final ChromeFileBrowserHandler fileBrowserHandler = ChromeFileBrowserHandler._fileBrowserHandler == null ? apiNotAvailable('chrome.fileBrowserHandler') : new ChromeFileBrowserHandler._();
 
 class ChromeFileBrowserHandler {
-  static final JsObject _fileBrowserHandler = context['chrome']['fileBrowserHandler'];
+  static final JsObject _fileBrowserHandler = chrome['fileBrowserHandler'];
 
   ChromeFileBrowserHandler._();
 

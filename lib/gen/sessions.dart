@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromeSessions sessions = ChromeSessions._sessions == null ? apiNotAvailable('chrome.sessions') : new ChromeSessions._();
 
 class ChromeSessions {
-  static final JsObject _sessions = context['chrome']['sessions'];
+  static final JsObject _sessions = chrome['sessions'];
 
   ChromeSessions._();
 

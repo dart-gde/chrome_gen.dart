@@ -16,7 +16,7 @@ import '../src/common.dart';
 final ChromeDeclarativeWebRequest declarativeWebRequest = ChromeDeclarativeWebRequest._declarativeWebRequest == null ? apiNotAvailable('chrome.declarativeWebRequest') : new ChromeDeclarativeWebRequest._();
 
 class ChromeDeclarativeWebRequest {
-  static final JsObject _declarativeWebRequest = context['chrome']['declarativeWebRequest'];
+  static final JsObject _declarativeWebRequest = chrome['declarativeWebRequest'];
 
   ChromeDeclarativeWebRequest._();
 

@@ -12,7 +12,7 @@ import '../src/common.dart';
 final ChromeWebNavigation webNavigation = ChromeWebNavigation._webNavigation == null ? apiNotAvailable('chrome.webNavigation') : new ChromeWebNavigation._();
 
 class ChromeWebNavigation {
-  static final JsObject _webNavigation = context['chrome']['webNavigation'];
+  static final JsObject _webNavigation = chrome['webNavigation'];
 
   ChromeWebNavigation._();
 

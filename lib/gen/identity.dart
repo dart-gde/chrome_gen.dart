@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeIdentity identity = ChromeIdentity._identity == null ? apiNotAvailable('chrome.identity') : new ChromeIdentity._();
 
 class ChromeIdentity {
-  static final JsObject _identity = context['chrome']['identity'];
+  static final JsObject _identity = chrome['identity'];
 
   ChromeIdentity._();
 

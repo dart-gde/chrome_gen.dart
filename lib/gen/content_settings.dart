@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromeContentSettings contentSettings = ChromeContentSettings._contentSettings == null ? apiNotAvailable('chrome.contentSettings') : new ChromeContentSettings._();
 
 class ChromeContentSettings {
-  static final JsObject _contentSettings = context['chrome']['contentSettings'];
+  static final JsObject _contentSettings = chrome['contentSettings'];
 
   ChromeContentSettings._();
 

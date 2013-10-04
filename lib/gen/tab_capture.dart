@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeTabCapture tabCapture = ChromeTabCapture._tabCapture == null ? apiNotAvailable('chrome.tabCapture') : new ChromeTabCapture._();
 
 class ChromeTabCapture {
-  static final JsObject _tabCapture = context['chrome']['tabCapture'];
+  static final JsObject _tabCapture = chrome['tabCapture'];
 
   ChromeTabCapture._();
 

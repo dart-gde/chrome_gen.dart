@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromeHistory history = ChromeHistory._history == null ? apiNotAvailable('chrome.history') : new ChromeHistory._();
 
 class ChromeHistory {
-  static final JsObject _history = context['chrome']['history'];
+  static final JsObject _history = chrome['history'];
 
   ChromeHistory._();
 

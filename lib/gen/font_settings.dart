@@ -11,7 +11,7 @@ import '../src/common.dart';
 final ChromeFontSettings fontSettings = ChromeFontSettings._fontSettings == null ? apiNotAvailable('chrome.fontSettings') : new ChromeFontSettings._();
 
 class ChromeFontSettings {
-  static final JsObject _fontSettings = context['chrome']['fontSettings'];
+  static final JsObject _fontSettings = chrome['fontSettings'];
 
   ChromeFontSettings._();
 

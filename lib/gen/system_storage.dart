@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeSystemStorage system_storage = ChromeSystemStorage._system_storage == null ? apiNotAvailable('chrome.system.storage') : new ChromeSystemStorage._();
 
 class ChromeSystemStorage {
-  static final JsObject _system_storage = context['chrome']['system']['storage'];
+  static final JsObject _system_storage = chrome['system']['storage'];
 
   ChromeSystemStorage._();
 

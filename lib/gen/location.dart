@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeLocation location = ChromeLocation._location == null ? apiNotAvailable('chrome.location') : new ChromeLocation._();
 
 class ChromeLocation {
-  static final JsObject _location = context['chrome']['location'];
+  static final JsObject _location = chrome['location'];
 
   ChromeLocation._();
 

@@ -11,7 +11,7 @@ import '../src/common.dart';
 final ChromeProcesses processes = ChromeProcesses._processes == null ? apiNotAvailable('chrome.processes') : new ChromeProcesses._();
 
 class ChromeProcesses {
-  static final JsObject _processes = context['chrome']['processes'];
+  static final JsObject _processes = chrome['processes'];
 
   ChromeProcesses._();
 

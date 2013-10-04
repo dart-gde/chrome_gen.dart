@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeAppWindow app_window = ChromeAppWindow._app_window == null ? apiNotAvailable('chrome.app.window') : new ChromeAppWindow._();
 
 class ChromeAppWindow {
-  static final JsObject _app_window = context['chrome']['app']['window'];
+  static final JsObject _app_window = chrome['app']['window'];
 
   ChromeAppWindow._();
 

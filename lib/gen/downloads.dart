@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeDownloads downloads = ChromeDownloads._downloads == null ? apiNotAvailable('chrome.downloads') : new ChromeDownloads._();
 
 class ChromeDownloads {
-  static final JsObject _downloads = context['chrome']['downloads'];
+  static final JsObject _downloads = chrome['downloads'];
 
   ChromeDownloads._();
 

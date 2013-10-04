@@ -15,7 +15,7 @@ import '../src/common.dart';
 final ChromeExtension extension = ChromeExtension._extension == null ? apiNotAvailable('chrome.extension') : new ChromeExtension._();
 
 class ChromeExtension {
-  static final JsObject _extension = context['chrome']['extension'];
+  static final JsObject _extension = chrome['extension'];
 
   ChromeExtension._();
 

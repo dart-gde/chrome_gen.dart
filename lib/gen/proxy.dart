@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromeProxy proxy = ChromeProxy._proxy == null ? apiNotAvailable('chrome.proxy') : new ChromeProxy._();
 
 class ChromeProxy {
-  static final JsObject _proxy = context['chrome']['proxy'];
+  static final JsObject _proxy = chrome['proxy'];
 
   ChromeProxy._();
 
