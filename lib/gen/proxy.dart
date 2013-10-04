@@ -37,7 +37,6 @@ class ChromeProxy {
  * An object encapsulating a single proxy server's specification.
  */
 class ProxyServer extends ChromeObject {
-
   ProxyServer({String scheme, String host, int port}) {
     if (scheme != null) this.scheme = scheme;
     if (host != null) this.host = host;
@@ -74,7 +73,6 @@ class ProxyServer extends ChromeObject {
  * and 'fallbackProxy'.
  */
 class ProxyRules extends ChromeObject {
-
   ProxyRules({ProxyServer singleProxy, ProxyServer proxyForHttp, ProxyServer proxyForHttps, ProxyServer proxyForFtp, ProxyServer fallbackProxy, List<String> bypassList}) {
     if (singleProxy != null) this.singleProxy = singleProxy;
     if (proxyForHttp != null) this.proxyForHttp = proxyForHttp;
@@ -130,7 +128,6 @@ class ProxyRules extends ChromeObject {
  * should be non-empty.
  */
 class PacScript extends ChromeObject {
-
   PacScript({String url, String data, bool mandatory}) {
     if (url != null) this.url = url;
     if (data != null) this.data = data;
@@ -163,7 +160,6 @@ class PacScript extends ChromeObject {
  * An object encapsulating a complete proxy configuration.
  */
 class ProxyConfig extends ChromeObject {
-
   ProxyConfig({ProxyRules rules, PacScript pacScript, String mode}) {
     if (rules != null) this.rules = rules;
     if (pacScript != null) this.pacScript = pacScript;

@@ -31,7 +31,6 @@ class ChromeTopSites {
  * page.
  */
 class MostVisitedURL extends ChromeObject {
-
   MostVisitedURL({String url, String title}) {
     if (url != null) this.url = url;
     if (title != null) this.title = title;

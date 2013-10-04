@@ -87,7 +87,6 @@ class ChromePermissions {
 }
 
 class Permissions extends ChromeObject {
-
   Permissions({List<String> permissions, List<String> origins}) {
     if (permissions != null) this.permissions = permissions;
     if (origins != null) this.origins = origins;

@@ -50,7 +50,6 @@ class ChromeAudio {
 }
 
 class OutputDeviceInfo extends ChromeObject {
-
   OutputDeviceInfo({String id, String name, bool isActive, bool isMuted, double volume}) {
     if (id != null) this.id = id;
     if (name != null) this.name = name;
@@ -78,7 +77,6 @@ class OutputDeviceInfo extends ChromeObject {
 }
 
 class InputDeviceInfo extends ChromeObject {
-
   InputDeviceInfo({String id, String name, bool isActive, bool isMuted, double gain}) {
     if (id != null) this.id = id;
     if (name != null) this.name = name;
@@ -106,7 +104,6 @@ class InputDeviceInfo extends ChromeObject {
 }
 
 class DeviceProperties extends ChromeObject {
-
   DeviceProperties({bool isMuted, double volume, double gain}) {
     if (isMuted != null) this.isMuted = isMuted;
     if (volume != null) this.volume = volume;

@@ -152,11 +152,11 @@ class ChromeDownloads {
   /**
    * Prompt the user to accept a dangerous download. Does not automatically
    * accept dangerous downloads. If the download is accepted, then an
-   * $ref:onChanged event will fire, otherwise nothing will happen.  When all
-   * the data is fetched into a temporary file and either the download is not
+   * $ref:onChanged event will fire, otherwise nothing will happen. When all the
+   * data is fetched into a temporary file and either the download is not
    * dangerous or the danger has been accepted, then the temporary file is
-   * renamed to the target filename, the
-   * [state] changes to 'complete', and $ref:onChanged fires.
+   * renamed to the target filename, the [state] changes to 'complete', and
+   * $ref:onChanged fires.
    * [downloadId]: The identifier for the $ref:DownloadItem.
    * [callback]: Called when the danger prompt dialog closes.
    */
@@ -217,11 +217,11 @@ class OnDeterminingFilenameEvent {
 }
 
 /**
- * <dl><dt>uniquify</dt>     <dd>To avoid duplication, the `filename` is changed
- * to     include a counter before the filename extension.</dd>
- * <dt>overwrite</dt>     <dd>The existing file will be overwritten with the new
- * file.</dd>     <dt>prompt</dt>     <dd>The user will be prompted with a file
- * chooser dialog.</dd> </dl>
+ * <dl><dt>uniquify</dt> <dd>To avoid duplication, the `filename` is changed to
+ * include a counter before the filename extension.</dd> <dt>overwrite</dt>
+ * <dd>The existing file will be overwritten with the new file.</dd>
+ * <dt>prompt</dt> <dd>The user will be prompted with a file chooser
+ * dialog.</dd> </dl>
  */
 class FilenameConflictAction extends ChromeEnum {
   static const FilenameConflictAction UNIQUIFY = const FilenameConflictAction._('uniquify');
@@ -271,17 +271,16 @@ class InterruptReason extends ChromeEnum {
 }
 
 /**
- * <dl><dt>file</dt>     <dd>The download's filename is suspicious.</dd>
- * <dt>url</dt>     <dd>The download's URL is known to be malicious.</dd>
- * <dt>content</dt>     <dd>The downloaded file is known to be malicious.</dd>
- * <dt>uncommon</dt>     <dd>The download's URL is not commonly downloaded and
- * could be     dangerous.</dd>     <dt>host</dt>     <dd>The download came from
- * a host known to distribute malicious     binaries and is likely
- * dangerous.</dd>     <dt>unwanted</dt>     <dd>The download is potentially
- * unwanted or unsafe. E.g. it could make     changes to browser or computer
- * settings.</dd>     <dt>safe</dt>     <dd>The download presents no known
- * danger to the user's computer.</dd>     <dt>accepted</dt>     <dd>The user
- * has accepted the dangerous download.</dd> </dl>
+ * <dl><dt>file</dt> <dd>The download's filename is suspicious.</dd>
+ * <dt>url</dt> <dd>The download's URL is known to be malicious.</dd>
+ * <dt>content</dt> <dd>The downloaded file is known to be malicious.</dd>
+ * <dt>uncommon</dt> <dd>The download's URL is not commonly downloaded and could
+ * be dangerous.</dd> <dt>host</dt> <dd>The download came from a host known to
+ * distribute malicious binaries and is likely dangerous.</dd> <dt>unwanted</dt>
+ * <dd>The download is potentially unwanted or unsafe. E.g. it could make
+ * changes to browser or computer settings.</dd> <dt>safe</dt> <dd>The download
+ * presents no known danger to the user's computer.</dd> <dt>accepted</dt>
+ * <dd>The user has accepted the dangerous download.</dd> </dl>
  */
 class DangerType extends ChromeEnum {
   static const DangerType FILE = const DangerType._('file');
@@ -299,10 +298,10 @@ class DangerType extends ChromeEnum {
 }
 
 /**
- * <dl><dt>in_progress</dt>     <dd>The download is currently receiving data
- * from the server.</dd>     <dt>interrupted</dt>     <dd>An error broke the
- * connection with the file host.</dd>     <dt>complete</dt>     <dd>The
- * download completed successfully.</dd> </dl>
+ * <dl><dt>in_progress</dt> <dd>The download is currently receiving data from
+ * the server.</dd> <dt>interrupted</dt> <dd>An error broke the connection with
+ * the file host.</dd> <dt>complete</dt> <dd>The download completed
+ * successfully.</dd> </dl>
  */
 class State extends ChromeEnum {
   static const State IN_PROGRESS = const State._('in_progress');
@@ -315,7 +314,6 @@ class State extends ChromeEnum {
 }
 
 class HeaderNameValuePair extends ChromeObject {
-
   HeaderNameValuePair({String name, String value}) {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
@@ -331,7 +329,6 @@ class HeaderNameValuePair extends ChromeObject {
 }
 
 class FilenameSuggestion extends ChromeObject {
-
   FilenameSuggestion({String filename, FilenameConflictAction conflictAction}) {
     if (filename != null) this.filename = filename;
     if (conflictAction != null) this.conflictAction = conflictAction;
@@ -347,7 +344,6 @@ class FilenameSuggestion extends ChromeObject {
 }
 
 class DownloadOptions extends ChromeObject {
-
   DownloadOptions({String url, String filename, FilenameConflictAction conflictAction, bool saveAs, HttpMethod method, HeaderNameValuePair headers, String body}) {
     if (url != null) this.url = url;
     if (filename != null) this.filename = filename;
@@ -383,7 +379,6 @@ class DownloadOptions extends ChromeObject {
 }
 
 class DownloadItem extends ChromeObject {
-
   DownloadItem({int id, String url, String referrer, String filename, bool incognito, DangerType danger, String mime, String startTime, String endTime, String estimatedEndTime, State state, bool paused, bool canResume, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists, String byExtensionId, String byExtensionName}) {
     if (id != null) this.id = id;
     if (url != null) this.url = url;
@@ -471,7 +466,6 @@ class DownloadItem extends ChromeObject {
 }
 
 class DownloadQuery extends ChromeObject {
-
   DownloadQuery({String query, String startedBefore, String startedAfter, String endedBefore, String endedAfter, int totalBytesGreater, int totalBytesLess, String filenameRegex, String urlRegex, int limit, String orderBy, int id, String url, String filename, DangerType danger, String mime, String startTime, String endTime, State state, bool paused, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists}) {
     if (query != null) this.query = query;
     if (startedBefore != null) this.startedBefore = startedBefore;
@@ -579,7 +573,6 @@ class DownloadQuery extends ChromeObject {
 }
 
 class StringDelta extends ChromeObject {
-
   StringDelta({String previous, String current}) {
     if (previous != null) this.previous = previous;
     if (current != null) this.current = current;
@@ -595,7 +588,6 @@ class StringDelta extends ChromeObject {
 }
 
 class LongDelta extends ChromeObject {
-
   LongDelta({int previous, int current}) {
     if (previous != null) this.previous = previous;
     if (current != null) this.current = current;
@@ -611,7 +603,6 @@ class LongDelta extends ChromeObject {
 }
 
 class BooleanDelta extends ChromeObject {
-
   BooleanDelta({bool previous, bool current}) {
     if (previous != null) this.previous = previous;
     if (current != null) this.current = current;
@@ -627,7 +618,6 @@ class BooleanDelta extends ChromeObject {
 }
 
 class DownloadDelta extends ChromeObject {
-
   DownloadDelta({int id, StringDelta url, StringDelta filename, StringDelta danger, StringDelta mime, StringDelta startTime, StringDelta endTime, StringDelta state, BooleanDelta canResume, BooleanDelta paused, StringDelta error, LongDelta totalBytes, LongDelta fileSize, BooleanDelta exists}) {
     if (id != null) this.id = id;
     if (url != null) this.url = url;
@@ -691,7 +681,6 @@ class DownloadDelta extends ChromeObject {
 }
 
 class GetFileIconOptions extends ChromeObject {
-
   GetFileIconOptions({int size}) {
     if (size != null) this.size = size;
   }

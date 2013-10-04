@@ -13,16 +13,12 @@ class ChromeNotifications {
   ChromeNotifications._();
 
   /**
-   * Creates and displays a notification having the contents in
-   * [options], identified by the id
-   * [notificationId]. If
-   * [notificationId] is empty,
-   * [create] generates an id. If
-   * [notificationId] matches an existing notification,
-   * [create] first clears that notification before proceeding with the create
-   * operation.
-   * [callback] returns the notification id (either supplied or generated) that
-   * represents the created notification.
+   * Creates and displays a notification having the contents in [options],
+   * identified by the id [notificationId]. If [notificationId] is empty,
+   * [create] generates an id. If [notificationId] matches an existing
+   * notification, [create] first clears that notification before proceeding
+   * with the create operation. [callback] returns the notification id (either
+   * supplied or generated) that represents the created notification.
    */
   Future<String> create(String notificationId, NotificationOptions options) {
     var completer = new ChromeCompleter<String>.oneArg();
@@ -31,10 +27,9 @@ class ChromeNotifications {
   }
 
   /**
-   * Updates an existing notification having the id
-   * [notificationId] and the options
-   * [options].
-   * [callback] indicates whether a matching notification existed.
+   * Updates an existing notification having the id [notificationId] and the
+   * options [options]. [callback] indicates whether a matching notification
+   * existed.
    */
   Future<bool> update(String notificationId, NotificationOptions options) {
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -43,10 +38,9 @@ class ChromeNotifications {
   }
 
   /**
-   * Given a
-   * [notificationId] returned by the
-   * [create] method, clears the corresponding notification.
-   * [callback] indicates whether a matching notification existed.
+   * Given a [notificationId] returned by the [create] method, clears the
+   * corresponding notification. [callback] indicates whether a matching
+   * notification existed.
    */
   Future<bool> clear(String notificationId) {
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -55,7 +49,7 @@ class ChromeNotifications {
   }
 
   /**
-   * |callback| is executed with the set of notification_ids currently in the
+   * [callback] is executed with the set of notification_ids currently in the
    * system.
    */
   Future<dynamic> getAll() {
@@ -119,7 +113,6 @@ class TemplateType extends ChromeEnum {
 }
 
 class NotificationItem extends ChromeObject {
-
   NotificationItem({String title, String message}) {
     if (title != null) this.title = title;
     if (message != null) this.message = message;
@@ -135,7 +128,6 @@ class NotificationItem extends ChromeObject {
 }
 
 class NotificationBitmap extends ChromeObject {
-
   NotificationBitmap({int width, int height, ArrayBuffer data}) {
     if (width != null) this.width = width;
     if (height != null) this.height = height;
@@ -155,7 +147,6 @@ class NotificationBitmap extends ChromeObject {
 }
 
 class NotificationButton extends ChromeObject {
-
   NotificationButton({String title, String iconUrl, NotificationBitmap iconBitmap}) {
     if (title != null) this.title = title;
     if (iconUrl != null) this.iconUrl = iconUrl;
@@ -175,7 +166,6 @@ class NotificationButton extends ChromeObject {
 }
 
 class NotificationOptions extends ChromeObject {
-
   NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress}) {
     if (type != null) this.type = type;
     if (iconUrl != null) this.iconUrl = iconUrl;

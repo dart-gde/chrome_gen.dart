@@ -21,7 +21,6 @@ class ChromeTypes {
  * [proxy.settings] for an example.
  */
 class ChromeSetting extends ChromeObject {
-
   ChromeSetting();
 
   ChromeSetting.fromProxy(JsObject proxy): super.fromProxy(proxy);

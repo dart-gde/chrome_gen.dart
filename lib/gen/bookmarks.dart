@@ -289,7 +289,6 @@ class OnChildrenReorderedEvent {
  * ordered within their parent folder.
  */
 class BookmarkTreeNode extends ChromeObject {
-
   BookmarkTreeNode({String id, String parentId, int index, String url, String title, var dateAdded, var dateGroupModified, List<BookmarkTreeNode> children}) {
     if (id != null) this.id = id;
     if (parentId != null) this.parentId = parentId;

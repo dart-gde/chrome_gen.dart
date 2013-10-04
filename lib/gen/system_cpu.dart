@@ -23,7 +23,6 @@ class ChromeSystemCpu {
 }
 
 class CpuInfo extends ChromeObject {
-
   CpuInfo({int numOfProcessors, String archName, String modelName}) {
     if (numOfProcessors != null) this.numOfProcessors = numOfProcessors;
     if (archName != null) this.archName = archName;
