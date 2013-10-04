@@ -36,7 +36,6 @@
 ordered within their parent folder.</p>
 <pre class="source">
 class BookmarkTreeNode extends ChromeObject {
-
  BookmarkTreeNode({String id, String parentId, int index, String url, String title, var dateAdded, var dateGroupModified, List&lt;BookmarkTreeNode&gt; children}) {
    if (id != null) this.id = id;
    if (parentId != null) this.parentId = parentId;

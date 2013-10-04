@@ -49,7 +49,8 @@ class ChromeDesktopCapture {
   * specified origin.
   * 
   * Returns:
-  * |streamId|: An opaque string that can be passed to `getUserMedia()` API to
+  * 
+  * [streamId]: An opaque string that can be passed to `getUserMedia()` API to
   * generate media stream that corresponds to the source selected by the user.
   * If user didn't select any source (i.e. canceled the prompt) then the
   * callback is called with an empty `streamId`.
@@ -77,8 +78,8 @@ Future&lt;String&gt; <strong>chooseDesktopMedia</strong>(<a href="../chrome.desk
 not specified then the resulting stream can be used only the calling
 extension, otherwise the stream can be used only by a page with the
 specified origin.</p>
-<p>Returns:
-|streamId|: An opaque string that can be passed to <code>getUserMedia()</code> API to
+<p>Returns:</p>
+<p><code>streamId</code>: An opaque string that can be passed to <code>getUserMedia()</code> API to
 generate media stream that corresponds to the source selected by the user.
 If user didn't select any source (i.e. canceled the prompt) then the
 callback is called with an empty <code>streamId</code>.</p>

@@ -35,7 +35,6 @@
 <p>A specification of a cookie in HTTP Responses.</p>
 <pre class="source">
 class ResponseCookie extends ChromeObject {
-
  ResponseCookie({String name, String value, String expires, var maxAge, String domain, String path, String secure, String httpOnly}) {
    if (name != null) this.name = name;
    if (value != null) this.value = value;

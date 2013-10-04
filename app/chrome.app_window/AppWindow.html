@@ -34,7 +34,6 @@
 <div class="doc">
 <pre class="source">
 class AppWindow extends ChromeObject {
-
  AppWindow({var contentWindow}) {
    if (contentWindow != null) this.contentWindow = contentWindow;
  }
@@ -101,16 +100,14 @@ class AppWindow extends ChromeObject {
  }
 
  /**
-  * Move the window to the position (|left|,
-  * [top]).
+  * Move the window to the position ([left], [top]).
   */
  void moveTo(int left, int top) {
    proxy.callMethod('moveTo', [left, top]);
  }
 
  /**
-  * Resize the window to
-  * [width]x|height| pixels in size.
+  * Resize the window to [width]x[height] pixels in size.
   */
  void resizeTo(int width, int height) {
    proxy.callMethod('resizeTo', [width, height]);
@@ -405,8 +402,8 @@ void minimize() {
 void <strong>moveTo</strong>(int left, int top) <a class="anchor-link" href="#moveTo"
               title="Permalink to AppWindow.moveTo">#</a></h4>
 <div class="doc">
-<p>Move the window to the position (|left|,
-
+<p>Move the window to the position (
+<span class="param">left</span>, 
 <span class="param">top</span>).</p>
 <pre class="source">
 void moveTo(int left, int top) {
@@ -420,9 +417,9 @@ void moveTo(int left, int top) {
 void <strong>resizeTo</strong>(int width, int height) <a class="anchor-link" href="#resizeTo"
               title="Permalink to AppWindow.resizeTo">#</a></h4>
 <div class="doc">
-<p>Resize the window to
-
-<span class="param">width</span>x|height| pixels in size.</p>
+<p>Resize the window to 
+<span class="param">width</span>x
+<span class="param">height</span> pixels in size.</p>
 <pre class="source">
 void resizeTo(int width, int height) {
  proxy.callMethod('resizeTo', [width, height]);

@@ -43,7 +43,7 @@ class ChromeSerial {
   * valid to pass as the port argument to open(). The list is regenerated each
   * time this method is called, as port validity is dynamic.
   * 
-  * [callback] : Called with the list of ports.
+  * [callback]: Called with the list of ports.
   * 
   * Returns:
   * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
@@ -59,9 +59,9 @@ class ChromeSerial {
 
  /**
   * Opens a connection to the given serial port.
-  * [port] : The name of the serial port to open.
-  * [options] : Connection options.
-  * [callback] : Called when the connection has been opened.
+  * [port]: The name of the serial port to open.
+  * [options]: Connection options.
+  * [callback]: Called when the connection has been opened.
   */
  Future&lt;OpenInfo&gt; open(String port, [OpenOptions options]) {
    var completer = new ChromeCompleter&lt;OpenInfo&gt;.oneArg(_createOpenInfo);
@@ -71,8 +71,8 @@ class ChromeSerial {
 
  /**
   * Closes an open connection.
-  * [connectionId] : The id of the opened connection.
-  * [callback] : Called when the connection has been closed.
+  * [connectionId]: The id of the opened connection.
+  * [callback]: Called when the connection has been closed.
   * 
   * Returns:
   * Returns true if operation was successful.
@@ -85,10 +85,10 @@ class ChromeSerial {
 
  /**
   * Reads a byte from the given connection.
-  * [connectionId] : The id of the connection.
-  * [bytesToRead] : The number of bytes to read.
-  * [callback] : Called when all the requested bytes have been read or
-  * when the read blocks.
+  * [connectionId]: The id of the connection.
+  * [bytesToRead]: The number of bytes to read.
+  * [callback]: Called when all the requested bytes have been read or when the
+  * read blocks.
   */
  Future&lt;SerialReadInfo&gt; read(int connectionId, int bytesToRead) {
    var completer = new ChromeCompleter&lt;SerialReadInfo&gt;.oneArg(_createSerialReadInfo);
@@ -98,9 +98,9 @@ class ChromeSerial {
 
  /**
   * Writes a string to the given connection.
-  * [connectionId] : The id of the connection.
-  * [data] : The string to write.
-  * [callback] : Called when the string has been written.
+  * [connectionId]: The id of the connection.
+  * [data]: The string to write.
+  * [callback]: Called when the string has been written.
   */
  Future&lt;SerialWriteInfo&gt; write(int connectionId, ArrayBuffer data) {
    var completer = new ChromeCompleter&lt;SerialWriteInfo&gt;.oneArg(_createSerialWriteInfo);
@@ -110,8 +110,8 @@ class ChromeSerial {
 
  /**
   * Flushes all bytes in the given connection's input and output buffers.
-  * [connectionId] : The id of the connection.
-  * [callback] : Called when the flush is complete.
+  * [connectionId]: The id of the connection.
+  * [callback]: Called when the flush is complete.
   * 
   * Returns:
   * Returns true if operation was successful.
@@ -145,8 +145,8 @@ Future&lt;bool&gt; <strong>close</strong>(int connectionId) <a class="anchor-lin
 <div class="doc">
 <p>Closes an open connection.
 
-<span class="param">connectionId</span> : The id of the opened connection.
-<code>callback</code> : Called when the connection has been closed.</p>
+<span class="param">connectionId</span>: The id of the opened connection.
+<code>callback</code>: Called when the connection has been closed.</p>
 <p>Returns:
 Returns true if operation was successful.</p>
 <pre class="source">
@@ -165,8 +165,8 @@ Future&lt;bool&gt; <strong>flush</strong>(int connectionId) <a class="anchor-lin
 <div class="doc">
 <p>Flushes all bytes in the given connection's input and output buffers.
 
-<span class="param">connectionId</span> : The id of the connection.
-<code>callback</code> : Called when the flush is complete.</p>
+<span class="param">connectionId</span>: The id of the connection.
+<code>callback</code>: Called when the flush is complete.</p>
 <p>Returns:
 Returns true if operation was successful.</p>
 <pre class="source">
@@ -200,7 +200,7 @@ Future&lt;String&gt; <strong>getPorts</strong>() <a class="anchor-link" href="#g
 <p>Returns names of valid ports on this machine, each of which is likely to be
 valid to pass as the port argument to open(). The list is regenerated each
 time this method is called, as port validity is dynamic.</p>
-<p><code>callback</code> : Called with the list of ports.</p>
+<p><code>callback</code>: Called with the list of ports.</p>
 <p>Returns:
 Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
 source code is governed by a BSD-style license that can be found in the
@@ -222,10 +222,10 @@ Future&lt;<a href="../chrome.serial/OpenInfo.html">OpenInfo</a>&gt; <strong>open
 <div class="doc">
 <p>Opens a connection to the given serial port.
 
-<span class="param">port</span> : The name of the serial port to open.
+<span class="param">port</span>: The name of the serial port to open.
 
-<span class="param">options</span> : Connection options.
-<code>callback</code> : Called when the connection has been opened.</p>
+<span class="param">options</span>: Connection options.
+<code>callback</code>: Called when the connection has been opened.</p>
 <pre class="source">
 Future&lt;OpenInfo&gt; open(String port, [OpenOptions options]) {
  var completer = new ChromeCompleter&lt;OpenInfo&gt;.oneArg(_createOpenInfo);
@@ -242,11 +242,11 @@ Future&lt;<a href="../chrome.serial/SerialReadInfo.html">SerialReadInfo</a>&gt; 
 <div class="doc">
 <p>Reads a byte from the given connection.
 
-<span class="param">connectionId</span> : The id of the connection.
+<span class="param">connectionId</span>: The id of the connection.
 
-<span class="param">bytesToRead</span> : The number of bytes to read.
-<code>callback</code> : Called when all the requested bytes have been read or
-when the read blocks.</p>
+<span class="param">bytesToRead</span>: The number of bytes to read.
+<code>callback</code>: Called when all the requested bytes have been read or when the
+read blocks.</p>
 <pre class="source">
 Future&lt;SerialReadInfo&gt; read(int connectionId, int bytesToRead) {
  var completer = new ChromeCompleter&lt;SerialReadInfo&gt;.oneArg(_createSerialReadInfo);
@@ -277,10 +277,10 @@ Future&lt;<a href="../chrome.serial/SerialWriteInfo.html">SerialWriteInfo</a>&gt
 <div class="doc">
 <p>Writes a string to the given connection.
 
-<span class="param">connectionId</span> : The id of the connection.
+<span class="param">connectionId</span>: The id of the connection.
 
-<span class="param">data</span> : The string to write.
-<code>callback</code> : Called when the string has been written.</p>
+<span class="param">data</span>: The string to write.
+<code>callback</code>: Called when the string has been written.</p>
 <pre class="source">
 Future&lt;SerialWriteInfo&gt; write(int connectionId, ArrayBuffer data) {
  var completer = new ChromeCompleter&lt;SerialWriteInfo&gt;.oneArg(_createSerialWriteInfo);

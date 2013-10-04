@@ -35,7 +35,6 @@
 <p>Matches network events by various criteria.</p>
 <pre class="source">
 class RequestMatcher extends ChromeObject {
-
  RequestMatcher({UrlFilter url, UrlFilter firstPartyForCookiesUrl, List&lt;String&gt; resourceType, List&lt;String&gt; contentType, List&lt;String&gt; excludeContentType, List&lt;HeaderFilter&gt; requestHeaders, List&lt;HeaderFilter&gt; excludeRequestHeaders, List&lt;HeaderFilter&gt; responseHeaders, List&lt;HeaderFilter&gt; excludeResponseHeaders, bool thirdPartyForCookies, List&lt;String&gt; stages}) {
    if (url != null) this.url = url;
    if (firstPartyForCookiesUrl != null) this.firstPartyForCookiesUrl = firstPartyForCookiesUrl;

@@ -36,7 +36,6 @@
 applied. Allows the event handler to modify network requests.</p>
 <pre class="source">
 class BlockingResponse extends ChromeObject {
-
  BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, HttpHeaders responseHeaders, Map authCredentials}) {
    if (cancel != null) this.cancel = cancel;
    if (redirectUrl != null) this.redirectUrl = redirectUrl;

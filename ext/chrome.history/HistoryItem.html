@@ -35,7 +35,6 @@
 <p>An object encapsulating one result of a history query.</p>
 <pre class="source">
 class HistoryItem extends ChromeObject {
-
  HistoryItem({String id, String url, String title, var lastVisitTime, int visitCount, int typedCount}) {
    if (id != null) this.id = id;
    if (url != null) this.url = url;

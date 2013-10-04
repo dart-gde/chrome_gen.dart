@@ -35,7 +35,6 @@
 <p>Represents information about an HTTP cookie.</p>
 <pre class="source">
 class Cookie extends ChromeObject {
-
  Cookie({String name, String value, String domain, bool hostOnly, String path, bool secure, bool httpOnly, bool session, var expirationDate, String storeId}) {
    if (name != null) this.name = name;
    if (value != null) this.value = value;

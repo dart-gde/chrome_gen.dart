@@ -35,7 +35,6 @@
 <p>Information about an installed extension, app, or theme.</p>
 <pre class="source">
 class ExtensionInfo extends ChromeObject {
-
  ExtensionInfo({String id, String name, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List&lt;IconInfo&gt; icons, List&lt;String&gt; permissions, List&lt;String&gt; hostPermissions, String installType}) {
    if (id != null) this.id = id;
    if (name != null) this.name = name;

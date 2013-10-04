@@ -36,7 +36,6 @@
 instance, uses a separate cookie store from a non-incognito window.</p>
 <pre class="source">
 class CookieStore extends ChromeObject {
-
  CookieStore({String id, List&lt;int&gt; tabIds}) {
    if (id != null) this.id = id;
    if (tabIds != null) this.tabIds = tabIds;

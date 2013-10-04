@@ -41,9 +41,9 @@ class ChromeLocation {
  /**
   * TODO(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
   * location watching request.
-  * [name] : Optional name to identify this request. Defaults to the empty
+  * [name]: Optional name to identify this request. Defaults to the empty
   * string.
-  * [requestInfo] : Optional parameters for this request.
+  * [requestInfo]: Optional parameters for this request.
   */
  void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
    _location.callMethod('watchLocation', [name, requestInfo]);
@@ -51,7 +51,7 @@ class ChromeLocation {
 
  /**
   * Ends a location watching request.
-  * [name] : Optional name to identify the request to remove. Defaults to the
+  * [name]: Optional name to identify the request to remove. Defaults to the
   * empty string.
   */
  void clearWatch(String name) {
@@ -106,7 +106,7 @@ void <strong>clearWatch</strong>(String name) <a class="anchor-link" href="#clea
 <div class="doc">
 <p>Ends a location watching request.
 
-<span class="param">name</span> : Optional name to identify the request to remove. Defaults to the
+<span class="param">name</span>: Optional name to identify the request to remove. Defaults to the
 empty string.</p>
 <pre class="source">
 void clearWatch(String name) {
@@ -123,10 +123,10 @@ void <strong>watchLocation</strong>(String name, <a href="../chrome.location/Wat
 <p>TODO(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
 location watching request.
 
-<span class="param">name</span> : Optional name to identify this request. Defaults to the empty
+<span class="param">name</span>: Optional name to identify this request. Defaults to the empty
 string.
 
-<span class="param">requestInfo</span> : Optional parameters for this request.</p>
+<span class="param">requestInfo</span>: Optional parameters for this request.</p>
 <pre class="source">
 void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
  _location.callMethod('watchLocation', [name, requestInfo]);

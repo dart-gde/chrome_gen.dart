@@ -35,7 +35,6 @@
 <p>An object which allows two way communication with other pages.</p>
 <pre class="source">
 class Port extends ChromeObject {
-
  Port({String name, var disconnect, Event onDisconnect, Event onMessage, var postMessage, MessageSender sender}) {
    if (name != null) this.name = name;
    if (disconnect != null) this.disconnect = disconnect;

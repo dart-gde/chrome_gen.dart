@@ -35,7 +35,6 @@
 <p>A filter of a cookie in HTTP Responses.</p>
 <pre class="source">
 class FilterResponseCookie extends ChromeObject {
-
  FilterResponseCookie({String name, String value, String expires, var maxAge, String domain, String path, String secure, String httpOnly, int ageUpperBound, int ageLowerBound, bool sessionCookie}) {
    if (name != null) this.name = name;
    if (value != null) this.value = value;

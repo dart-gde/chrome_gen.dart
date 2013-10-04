@@ -178,11 +178,11 @@ class ChromeDownloads {
  /**
   * Prompt the user to accept a dangerous download. Does not automatically
   * accept dangerous downloads. If the download is accepted, then an
-  * $ref:onChanged event will fire, otherwise nothing will happen.  When all
-  * the data is fetched into a temporary file and either the download is not
+  * $ref:onChanged event will fire, otherwise nothing will happen. When all the
+  * data is fetched into a temporary file and either the download is not
   * dangerous or the danger has been accepted, then the temporary file is
-  * renamed to the target filename, the
-  * [state] changes to 'complete', and $ref:onChanged fires.
+  * renamed to the target filename, the [state] changes to 'complete', and
+  * $ref:onChanged fires.
   * [downloadId]: The identifier for the $ref:DownloadItem.
   * [callback]: Called when the danger prompt dialog closes.
   */
@@ -294,11 +294,11 @@ Future <strong>acceptDanger</strong>(int downloadId) <a class="anchor-link" href
 <div class="doc">
 <p>Prompt the user to accept a dangerous download. Does not automatically
 accept dangerous downloads. If the download is accepted, then an
-$ref:onChanged event will fire, otherwise nothing will happen.  When all
-the data is fetched into a temporary file and either the download is not
+$ref:onChanged event will fire, otherwise nothing will happen. When all the
+data is fetched into a temporary file and either the download is not
 dangerous or the danger has been accepted, then the temporary file is
-renamed to the target filename, the
-<code>state</code> changes to 'complete', and $ref:onChanged fires.
+renamed to the target filename, the <code>state</code> changes to 'complete', and
+$ref:onChanged fires.
 
 <span class="param">downloadId</span>: The identifier for the $ref:DownloadItem.
 <code>callback</code>: Called when the danger prompt dialog closes.</p>

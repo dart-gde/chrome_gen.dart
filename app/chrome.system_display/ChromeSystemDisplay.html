@@ -48,16 +48,14 @@ class ChromeSystemDisplay {
  }
 
  /**
-  * Updates the properties for the display specified by
-  * [id], according to the information provided in
-  * [info]. On failure, $ref:runtime.lastError will be set.
+  * Updates the properties for the display specified by [id], according to the
+  * information provided in [info]. On failure, $ref:runtime.lastError will be
+  * set.
   * [id]: The display's unique identifier.
-  * [info]: The information about display properties that should be changed.
-  * A property will be changed only if a new value for it is specified in
-  * [info].
+  * [info]: The information about display properties that should be changed. A
+  * property will be changed only if a new value for it is specified in [info].
   * [callback]: Empty function called when the function finishes. To find out
-  * whether the function succeeded, $ref:runtime.lastError should be
-  * queried.
+  * whether the function succeeded, $ref:runtime.lastError should be queried.
   */
  Future setDisplayProperties(String id, DisplayProperties info) {
    var completer = new ChromeCompleter.noArgs();
@@ -109,21 +107,19 @@ Future&lt;DisplayUnitInfo&gt; getInfo() {
 Future <strong>setDisplayProperties</strong>(String id, <a href="../chrome.system_display/DisplayProperties.html">DisplayProperties</a> info) <a class="anchor-link" href="#setDisplayProperties"
               title="Permalink to ChromeSystemDisplay.setDisplayProperties">#</a></h4>
 <div class="doc">
-<p>Updates the properties for the display specified by
-
-<span class="param">id</span>, according to the information provided in
-
-<span class="param">info</span>. On failure, $ref:runtime.lastError will be set.
+<p>Updates the properties for the display specified by 
+<span class="param">id</span>, according to the
+information provided in 
+<span class="param">info</span>. On failure, $ref:runtime.lastError will be
+set.
 
 <span class="param">id</span>: The display's unique identifier.
 
-<span class="param">info</span>: The information about display properties that should be changed.
-A property will be changed only if a new value for it is specified in
-
+<span class="param">info</span>: The information about display properties that should be changed. A
+property will be changed only if a new value for it is specified in 
 <span class="param">info</span>.
 <code>callback</code>: Empty function called when the function finishes. To find out
-whether the function succeeded, $ref:runtime.lastError should be
-queried.</p>
+whether the function succeeded, $ref:runtime.lastError should be queried.</p>
 <pre class="source">
 Future setDisplayProperties(String id, DisplayProperties info) {
  var completer = new ChromeCompleter.noArgs();

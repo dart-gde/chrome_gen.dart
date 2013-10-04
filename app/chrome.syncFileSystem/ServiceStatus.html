@@ -39,11 +39,10 @@ because the remote service needs to be authenticated by the user to proceed.
 The sync service is not synchronizing files because the remote service is
 (temporarily) unavailable due to some recoverable errors, e.g. network is
 offline, the remote service is down or not reachable etc. More details should
-be given by
-<code>description</code> parameter in OnServiceInfoUpdated (which could contain
-service-specific details). The sync service is disabled and the content will
-never sync. (E.g. this could happen when the user has no account on the
-remote service or the sync service has had an unrecoverable error.)</p>
+be given by <code>description</code> parameter in OnServiceInfoUpdated (which could
+contain service-specific details). The sync service is disabled and the
+content will never sync. (E.g. this could happen when the user has no account
+on the remote service or the sync service has had an unrecoverable error.)</p>
 <pre class="source">
 class ServiceStatus extends ChromeEnum {
  static const ServiceStatus INITIALIZING = const ServiceStatus._('initializing');
