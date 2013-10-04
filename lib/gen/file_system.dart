@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeFileSystem fileSystem = ChromeFileSystem._fileSystem == null ? apiNotAvailable('chrome.fileSystem') : new ChromeFileSystem._();
 
 class ChromeFileSystem {
-  static final JsObject _fileSystem = context['chrome']['fileSystem'];
+  static final JsObject _fileSystem = chrome['fileSystem'];
 
   ChromeFileSystem._();
 

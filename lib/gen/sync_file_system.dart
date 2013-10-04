@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeSyncFileSystem syncFileSystem = ChromeSyncFileSystem._syncFileSystem == null ? apiNotAvailable('chrome.syncFileSystem') : new ChromeSyncFileSystem._();
 
 class ChromeSyncFileSystem {
-  static final JsObject _syncFileSystem = context['chrome']['syncFileSystem'];
+  static final JsObject _syncFileSystem = chrome['syncFileSystem'];
 
   ChromeSyncFileSystem._();
 

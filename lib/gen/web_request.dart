@@ -12,7 +12,7 @@ import '../src/common.dart';
 final ChromeWebRequest webRequest = ChromeWebRequest._webRequest == null ? apiNotAvailable('chrome.webRequest') : new ChromeWebRequest._();
 
 class ChromeWebRequest {
-  static final JsObject _webRequest = context['chrome']['webRequest'];
+  static final JsObject _webRequest = chrome['webRequest'];
 
   ChromeWebRequest._();
 

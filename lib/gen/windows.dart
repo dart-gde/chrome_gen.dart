@@ -13,7 +13,7 @@ import '../src/common.dart';
 final ChromeWindows windows = ChromeWindows._windows == null ? apiNotAvailable('chrome.windows') : new ChromeWindows._();
 
 class ChromeWindows {
-  static final JsObject _windows = context['chrome']['windows'];
+  static final JsObject _windows = chrome['windows'];
 
   ChromeWindows._();
 

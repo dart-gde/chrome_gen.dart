@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeSystemDisplay system_display = ChromeSystemDisplay._system_display == null ? apiNotAvailable('chrome.system.display') : new ChromeSystemDisplay._();
 
 class ChromeSystemDisplay {
-  static final JsObject _system_display = context['chrome']['system']['display'];
+  static final JsObject _system_display = chrome['system']['display'];
 
   ChromeSystemDisplay._();
 

@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeSerial serial = ChromeSerial._serial == null ? apiNotAvailable('chrome.serial') : new ChromeSerial._();
 
 class ChromeSerial {
-  static final JsObject _serial = context['chrome']['serial'];
+  static final JsObject _serial = chrome['serial'];
 
   ChromeSerial._();
 

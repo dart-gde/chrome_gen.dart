@@ -12,7 +12,7 @@ import '../src/common.dart';
 final ChromeWebstore webstore = ChromeWebstore._webstore == null ? apiNotAvailable('chrome.webstore') : new ChromeWebstore._();
 
 class ChromeWebstore {
-  static final JsObject _webstore = context['chrome']['webstore'];
+  static final JsObject _webstore = chrome['webstore'];
 
   ChromeWebstore._();
 

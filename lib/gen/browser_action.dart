@@ -15,7 +15,7 @@ import '../src/common.dart';
 final ChromeBrowserAction browserAction = ChromeBrowserAction._browserAction == null ? apiNotAvailable('chrome.browserAction') : new ChromeBrowserAction._();
 
 class ChromeBrowserAction {
-  static final JsObject _browserAction = context['chrome']['browserAction'];
+  static final JsObject _browserAction = chrome['browserAction'];
 
   ChromeBrowserAction._();
 

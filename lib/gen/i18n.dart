@@ -12,7 +12,7 @@ import '../src/common.dart';
 final ChromeI18N i18n = ChromeI18N._i18n == null ? apiNotAvailable('chrome.i18n') : new ChromeI18N._();
 
 class ChromeI18N {
-  static final JsObject _i18n = context['chrome']['i18n'];
+  static final JsObject _i18n = chrome['i18n'];
 
   ChromeI18N._();
 

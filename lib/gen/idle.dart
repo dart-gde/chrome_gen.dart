@@ -11,7 +11,7 @@ import '../src/common.dart';
 final ChromeIdle idle = ChromeIdle._idle == null ? apiNotAvailable('chrome.idle') : new ChromeIdle._();
 
 class ChromeIdle {
-  static final JsObject _idle = context['chrome']['idle'];
+  static final JsObject _idle = chrome['idle'];
 
   ChromeIdle._();
 

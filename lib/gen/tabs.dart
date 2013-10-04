@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromeTabs tabs = ChromeTabs._tabs == null ? apiNotAvailable('chrome.tabs') : new ChromeTabs._();
 
 class ChromeTabs {
-  static final JsObject _tabs = context['chrome']['tabs'];
+  static final JsObject _tabs = chrome['tabs'];
 
   ChromeTabs._();
 

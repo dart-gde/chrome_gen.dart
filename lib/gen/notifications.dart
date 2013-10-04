@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeNotifications notifications = ChromeNotifications._notifications == null ? apiNotAvailable('chrome.notifications') : new ChromeNotifications._();
 
 class ChromeNotifications {
-  static final JsObject _notifications = context['chrome']['notifications'];
+  static final JsObject _notifications = chrome['notifications'];
 
   ChromeNotifications._();
 

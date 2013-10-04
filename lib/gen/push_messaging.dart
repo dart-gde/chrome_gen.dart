@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromePushMessaging pushMessaging = ChromePushMessaging._pushMessaging == null ? apiNotAvailable('chrome.pushMessaging') : new ChromePushMessaging._();
 
 class ChromePushMessaging {
-  static final JsObject _pushMessaging = context['chrome']['pushMessaging'];
+  static final JsObject _pushMessaging = chrome['pushMessaging'];
 
   ChromePushMessaging._();
 

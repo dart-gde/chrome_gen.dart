@@ -13,7 +13,7 @@ import '../src/common.dart';
 final ChromeCommands commands = ChromeCommands._commands == null ? apiNotAvailable('chrome.commands') : new ChromeCommands._();
 
 class ChromeCommands {
-  static final JsObject _commands = context['chrome']['commands'];
+  static final JsObject _commands = chrome['commands'];
 
   ChromeCommands._();
 

@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeSocket socket = ChromeSocket._socket == null ? apiNotAvailable('chrome.socket') : new ChromeSocket._();
 
 class ChromeSocket {
-  static final JsObject _socket = context['chrome']['socket'];
+  static final JsObject _socket = chrome['socket'];
 
   ChromeSocket._();
 

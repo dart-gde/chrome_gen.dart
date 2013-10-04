@@ -11,7 +11,7 @@ import '../src/common.dart';
 final ChromeTypes types = ChromeTypes._types == null ? apiNotAvailable('chrome.types') : new ChromeTypes._();
 
 class ChromeTypes {
-  static final JsObject _types = context['chrome']['types'];
+  static final JsObject _types = chrome['types'];
 
   ChromeTypes._();
 }

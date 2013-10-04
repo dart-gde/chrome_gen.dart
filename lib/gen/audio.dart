@@ -8,7 +8,7 @@ import '../src/common.dart';
 final ChromeAudio audio = ChromeAudio._audio == null ? apiNotAvailable('chrome.audio') : new ChromeAudio._();
 
 class ChromeAudio {
-  static final JsObject _audio = context['chrome']['audio'];
+  static final JsObject _audio = chrome['audio'];
 
   ChromeAudio._();
 

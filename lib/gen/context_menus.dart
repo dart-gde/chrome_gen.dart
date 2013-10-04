@@ -14,7 +14,7 @@ import '../src/common.dart';
 final ChromeContextMenus contextMenus = ChromeContextMenus._contextMenus == null ? apiNotAvailable('chrome.contextMenus') : new ChromeContextMenus._();
 
 class ChromeContextMenus {
-  static final JsObject _contextMenus = context['chrome']['contextMenus'];
+  static final JsObject _contextMenus = chrome['contextMenus'];
 
   ChromeContextMenus._();
 
