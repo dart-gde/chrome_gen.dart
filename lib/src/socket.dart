@@ -96,7 +96,7 @@ class TcpClient {
 //
 //  void _read(Timer timer) {
 //    _logger.fine("enter: read()");
-//    socket.read(_createInfo.socketId).then((SocketReadInfo readInfo) {
+//    Socket.read(_createInfo.socketId).then((SocketReadInfo readInfo) {
 //      if (readInfo == null) {
 //        return;
 //      }
@@ -129,101 +129,4 @@ class TcpClient {
 //    });
 //  }
 
-}
-
-class TcpServer {
-  Logger _logger = new Logger("TcpServer");
-
-  List<TcpClient> _openConnections = []; // list of open sockets
-  CreateInfo _createInfo; // socketid data
-
-  String address;
-  int port;
-  int backlog;
-  var options;
-
-  bool _isListening = false;
-  bool get isListening => _isListening;
-
-  TcpServer(this.address, this.port, {this.backlog: 5, this.options});
-
-  OnReceived receive;
-  _onReceived(String message, TcpClient client) {
-    _logger.fine("message: ${message}");
-    if (receive != null) {
-      receive(message, client);
-    }
-  }
-
-  OnReadTcpSocket onRead;
-  _onReadTcpSocket(SocketReadInfo readInfo) {
-    _logger.fine("readInfo: ${readInfo}");
-    if (onRead != null) {
-      onRead(readInfo);
-    }
-  }
-
-  OnAcceptedCallback onAccept;
-  _onAccept(AcceptInfo acceptInfo) {
-    _logger.fine("acceptInfo = ${acceptInfo}");
-
-    // continue to accept other connections.
-    socket.accept(_createInfo.socketId).then(_onAccept);
-
-    _logger.fine("moved onto new connection");
-
-    if (acceptInfo.resultCode == 0) {
-      // successful
-      var tcpConnection = new TcpClient.fromSocketId(
-          acceptInfo.socketId,
-          connected: onAccept,
-          onRead: _onReadTcpSocket,
-          receive: _onReceived);
-
-      _openConnections.add(tcpConnection);
-
-    } else {
-      // error
-      _logger.shout("accept(): resultCode = ${acceptInfo.resultCode}");
-    }
-  }
-
-  Future<bool> listen() {
-    var completer = new Completer();
-    socket.create(SocketType.TCP).then((CreateInfo createInfo) {
-      _createInfo = createInfo;
-      _logger.fine("listen(): socket.create(): _createInfo = ${_createInfo}");
-
-      socket.listen(_createInfo.socketId, address, port, backlog)
-      .then((int resultCode) {
-        _logger.fine("listen(): socket.listen() resultCode = ${resultCode}");
-        if (resultCode == 0) {
-          socket.accept(_createInfo.socketId).then(_onAccept);
-        } else {
-          // error
-          _logger.shout("listen(): resultCode = ${resultCode}");
-        }
-      });
-
-      _isListening = true;
-      completer.complete(isListening);
-    });
-
-    return completer.future;
-  }
-
-  connect() {}
-
-  void disconnect() {
-    if (_createInfo != null) {
-      socket.disconnect(_createInfo.socketId);
-    }
-
-    _openConnections.forEach((TcpClient client) => client.disconnect());
-    _openConnections.clear();
-    _createInfo = null;
-  }
-
-  // receive() {}
-  send() {}
 }
