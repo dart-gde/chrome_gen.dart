@@ -119,6 +119,7 @@ class IDLCollectorChrome implements IDLCollector {
 
     member.returnType = new IDLType(type);
     _dictionaryMembers.add(member);
+
     // Must return type passed for parser to continue.
     return l;
   }
@@ -134,9 +135,6 @@ class IDLCollectorChrome implements IDLCollector {
 
   List enumStatement(List l, StringBuffer sb) {
     // Example from usb [enum, Direction, [in, [,, out, EMPTY]], ;]
-    //    print("enumStatement:");
-    //    print(l);
-
     String enumName = l[1];
     var arg = l[2];
     IDLEnum idlEnum = new IDLEnum(enumName);
