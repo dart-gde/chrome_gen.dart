@@ -15,8 +15,7 @@ class ChromeUsb {
   /**
    * Lists USB devices specified by vendorId/productId/interfaceId tuple.
    * [options]: The properties to search for on target devices.
-   * [callback]: Invoked with a list of
-   * [Device]s on complete.
+   * [callback]: Invoked with a list of |Device|s on complete.
    */
   Future<Device> getDevices(EnumerateDevicesOptions options) {
     var completer = new ChromeCompleter<Device>.oneArg(_createDevice);
@@ -39,8 +38,7 @@ class ChromeUsb {
   }
 
   /**
-   * Opens a USB device returned by
-   * [getDevices].
+   * Opens a USB device returned by |getDevices|.
    * [device]: The device to open.
    * [callback]: Invoked with the created ConnectionHandle on complete.
    */
@@ -53,16 +51,17 @@ class ChromeUsb {
   /**
    * Finds USB devices specified by the vendorId/productId/interfaceId tuple
    * and, if permissions allow, opens them for use.
-   * On Chrome OS, you can specify the interfaceId. In that case the method
-   * will request access from permission broker in the same way as in
-   * [requestUsbAcess].
+   * 
+   * On Chrome OS, you can specify the interfaceId. In that case the method will
+   * request access from permission broker in the same way as in
+   * |requestUsbAcess|.
+   * 
    * If the access request is rejected, or the device is failed to be opened,
    * its connection handle will not be created or returned.
-   *  Calling this method is equivalent to calling
-   * [getDevices] followed by a series of
-   * [requestAccess] (if it is on ChromeOs) and
-   * [openDevice] calls, and returning all the successfully opened connection
-   * handles.
+   * 
+   * Calling this method is equivalent to calling |getDevices| followed by a
+   * series of |requestAccess| (if it is on ChromeOs) and |openDevice| calls,
+   * and returning all the successfully opened connection handles.
    * 
    * [options]: The properties to search for on target devices.
    * [callback]: Invoked with the opened ConnectionHandle on complete.
@@ -101,7 +100,8 @@ class ChromeUsb {
    * data with endpoints, you must claim their parent interfaces. Only one
    * connection handle on the same host can claim each interface. If the
    * interface is already claimed, this call will fail.
-   *  You shall call releaseInterface when the interface is not needed anymore.
+   * 
+   * You shall call releaseInterface when the interface is not needed anymore.
    * 
    * [handle]: The device on which the interface is to be claimed.
    * [interface]: The interface number to be claimed.
@@ -142,6 +142,7 @@ class ChromeUsb {
    * Performs a control transfer on the specified device. See the
    * ControlTransferInfo structure for the parameters required to make a
    * transfer.
+   * 
    * Conceptually control transfer talks to the device itself. You do not need
    * to claim interface 0 to perform a control transfer.
    * 
@@ -196,9 +197,7 @@ class ChromeUsb {
    * Tries to reset the USB device and restores it to the previous status. If
    * the reset fails, the given connection handle will be closed and the  USB
    * device will appear to be disconnected then reconnected.  In that case you
-   * must call
-   * [getDevices] or
-   * [findDevices] again to acquire the device.
+   * must call |getDevices| or |findDevices| again to acquire the device.
    * 
    * [handle]: A connection handle to reset.
    * [callback]: Invoked once the device is reset with a boolean indicating
@@ -287,7 +286,6 @@ class UsageType extends ChromeEnum {
 }
 
 class Device extends ChromeObject {
-
   Device({int device, int vendorId, int productId}) {
     if (device != null) this.device = device;
     if (vendorId != null) this.vendorId = vendorId;
@@ -307,7 +305,6 @@ class Device extends ChromeObject {
 }
 
 class ConnectionHandle extends ChromeObject {
-
   ConnectionHandle({int handle, int vendorId, int productId}) {
     if (handle != null) this.handle = handle;
     if (vendorId != null) this.vendorId = vendorId;
@@ -327,7 +324,6 @@ class ConnectionHandle extends ChromeObject {
 }
 
 class EndpointDescriptor extends ChromeObject {
-
   EndpointDescriptor({int address, TransferType type, Direction direction, int maximumPacketSize, SynchronizationType synchronization, UsageType usage, int pollingInterval}) {
     if (address != null) this.address = address;
     if (type != null) this.type = type;
@@ -363,7 +359,6 @@ class EndpointDescriptor extends ChromeObject {
 }
 
 class InterfaceDescriptor extends ChromeObject {
-
   InterfaceDescriptor({int interfaceNumber, int alternateSetting, int interfaceClass, int interfaceSubclass, int interfaceProtocol, String description, EndpointDescriptor endpoints}) {
     if (interfaceNumber != null) this.interfaceNumber = interfaceNumber;
     if (alternateSetting != null) this.alternateSetting = alternateSetting;
@@ -399,7 +394,6 @@ class InterfaceDescriptor extends ChromeObject {
 }
 
 class ControlTransferInfo extends ChromeObject {
-
   ControlTransferInfo({Direction direction, Recipient recipient, RequestType requestType, int request, int value, int index, int length, ArrayBuffer data}) {
     if (direction != null) this.direction = direction;
     if (recipient != null) this.recipient = recipient;
@@ -439,7 +433,6 @@ class ControlTransferInfo extends ChromeObject {
 }
 
 class GenericTransferInfo extends ChromeObject {
-
   GenericTransferInfo({Direction direction, int endpoint, int length, ArrayBuffer data}) {
     if (direction != null) this.direction = direction;
     if (endpoint != null) this.endpoint = endpoint;
@@ -463,7 +456,6 @@ class GenericTransferInfo extends ChromeObject {
 }
 
 class IsochronousTransferInfo extends ChromeObject {
-
   IsochronousTransferInfo({GenericTransferInfo transferInfo, int packets, int packetLength}) {
     if (transferInfo != null) this.transferInfo = transferInfo;
     if (packets != null) this.packets = packets;
@@ -483,7 +475,6 @@ class IsochronousTransferInfo extends ChromeObject {
 }
 
 class TransferResultInfo extends ChromeObject {
-
   TransferResultInfo({int resultCode, ArrayBuffer data}) {
     if (resultCode != null) this.resultCode = resultCode;
     if (data != null) this.data = data;
@@ -499,7 +490,6 @@ class TransferResultInfo extends ChromeObject {
 }
 
 class EnumerateDevicesOptions extends ChromeObject {
-
   EnumerateDevicesOptions({int vendorId, int productId}) {
     if (vendorId != null) this.vendorId = vendorId;
     if (productId != null) this.productId = productId;
@@ -515,7 +505,6 @@ class EnumerateDevicesOptions extends ChromeObject {
 }
 
 class EnumerateDevicesAndRequestAccessOptions extends ChromeObject {
-
   EnumerateDevicesAndRequestAccessOptions({int vendorId, int productId, int interfaceId}) {
     if (vendorId != null) this.vendorId = vendorId;
     if (productId != null) this.productId = productId;

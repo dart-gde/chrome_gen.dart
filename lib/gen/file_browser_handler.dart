@@ -67,7 +67,6 @@ class OnExecuteEvent {
  * Event details payload for fileBrowserHandler.onExecute event.
  */
 class FileHandlerExecuteEventDetails extends ChromeObject {
-
   FileHandlerExecuteEventDetails({List<dynamic> entries, int tab_id}) {
     if (entries != null) this.entries = entries;
     if (tab_id != null) this.tab_id = tab_id;

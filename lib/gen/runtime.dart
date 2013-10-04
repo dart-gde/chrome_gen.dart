@@ -362,7 +362,6 @@ class OnMessageExternalEvent {
  * An object which allows two way communication with other pages.
  */
 class Port extends ChromeObject {
-
   Port({String name, var disconnect, Event onDisconnect, Event onMessage, var postMessage, MessageSender sender}) {
     if (name != null) this.name = name;
     if (disconnect != null) this.disconnect = disconnect;
@@ -402,7 +401,6 @@ class Port extends ChromeObject {
  * or request.
  */
 class MessageSender extends ChromeObject {
-
   MessageSender({Tab tab, String id, String url}) {
     if (tab != null) this.tab = tab;
     if (id != null) this.id = id;

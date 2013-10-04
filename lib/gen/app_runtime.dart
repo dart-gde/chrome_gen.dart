@@ -24,7 +24,6 @@ class ChromeAppRuntime {
 }
 
 class LaunchItem extends ChromeObject {
-
   LaunchItem({var entry, String type}) {
     if (entry != null) this.entry = entry;
     if (type != null) this.type = type;
@@ -40,7 +39,6 @@ class LaunchItem extends ChromeObject {
 }
 
 class LaunchData extends ChromeObject {
-
   LaunchData({String id, LaunchItem items}) {
     if (id != null) this.id = id;
     if (items != null) this.items = items;

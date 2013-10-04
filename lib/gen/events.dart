@@ -20,7 +20,6 @@ class ChromeEvents {
  * Description of a declarative rule for handling events.
  */
 class Rule extends ChromeObject {
-
   Rule({String id, List<String> tags, List<dynamic> conditions, List<dynamic> actions, int priority}) {
     if (id != null) this.id = id;
     if (tags != null) this.tags = tags;
@@ -67,7 +66,6 @@ class Rule extends ChromeObject {
  * event.
  */
 class Event extends ChromeObject {
-
   Event();
 
   Event.fromProxy(JsObject proxy): super.fromProxy(proxy);
@@ -152,7 +150,6 @@ class Event extends ChromeObject {
  * criteria are case sensitive.
  */
 class UrlFilter extends ChromeObject {
-
   UrlFilter({String hostContains, String hostEquals, String hostPrefix, String hostSuffix, String pathContains, String pathEquals, String pathPrefix, String pathSuffix, String queryContains, String queryEquals, String queryPrefix, String querySuffix, String urlContains, String urlEquals, String urlMatches, String originAndPathMatches, String urlPrefix, String urlSuffix, List<String> schemes, List<dynamic> ports}) {
     if (hostContains != null) this.hostContains = hostContains;
     if (hostEquals != null) this.hostEquals = hostEquals;

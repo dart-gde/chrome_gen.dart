@@ -647,13 +647,14 @@ String cleanDocComments(String str) {
   }
 
   str = str.replaceAll('\n ', ' ');
-  str = str.replaceAll(new RegExp('\n\n+'), '\n');
+  str = str.replaceAll(new RegExp('\n+'), '\n\n');
+  str = str.replaceAll(new RegExp('(\n )+'), '\n');
 
-  //  |foo| ==> [foo]
+  // |foo| ==> [foo]
   str = str.replaceAllMapped(
-      new RegExp(r" \|([\.\w]*)\|"),
-      (Match m) => "\n[${m.group(1)}]");
-
+      new RegExp(r"\|([\.\w]*)\|\s*:"),
+      (Match m) => "\n[${m.group(1)}]:");
+  str = str.replaceAll(new RegExp('\n\s?(\n\s?)+'), '\n\n');
 
   str = str.replaceAll('<code>', '`');
   str = str.replaceAll('</code>', '`');
@@ -668,6 +669,9 @@ String cleanDocComments(String str) {
   str = str.replaceAll('</var>', ']');
 
   str = str.replaceAll('&mdash;', '-');
+
+  // convert whitespace newline ==> newline
+  str = str.replaceAll(new RegExp(' \n'), '\n');
 
   return str.replaceAll('/*', '/');
 }

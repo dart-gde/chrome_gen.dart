@@ -16,10 +16,12 @@ class ChromeAppWindow {
    * The size and position of a window can be specified in a number of different
    * ways. The most simple option is not specifying anything at all, in which
    * case a default size and platform dependent position will be used.
+   * 
    * Another option is to use the bounds property, which will put the window at
    * the specified coordinates with the specified size. If the window has a
    * frame, it's total size will be the size given plus the size of the frame;
    * that is, the size in bounds is the content size, not the window size.
+   * 
    * To automatically remember the positions of windows you can give them ids.
    * If a window has an id, This id is used to remember the size and position of
    * the window whenever it is moved or resized. This size and position is then
@@ -114,7 +116,6 @@ class WindowType extends ChromeEnum {
 }
 
 class CreateWindowOptions extends ChromeObject {
-
   CreateWindowOptions({String id, int defaultWidth, int defaultHeight, int defaultLeft, int defaultTop, int width, int height, int left, int top, int minWidth, int minHeight, int maxWidth, int maxHeight, WindowType type, String frame, Bounds bounds, bool transparentBackground, State state, bool hidden, bool resizable, bool singleton}) {
     if (id != null) this.id = id;
     if (defaultWidth != null) this.defaultWidth = defaultWidth;
@@ -206,7 +207,6 @@ class CreateWindowOptions extends ChromeObject {
 }
 
 class AppWindow extends ChromeObject {
-
   AppWindow({var contentWindow}) {
     if (contentWindow != null) this.contentWindow = contentWindow;
   }
@@ -273,16 +273,14 @@ class AppWindow extends ChromeObject {
   }
 
   /**
-   * Move the window to the position (|left|,
-   * [top]).
+   * Move the window to the position (|left|, |top|).
    */
   void moveTo(int left, int top) {
     proxy.callMethod('moveTo', [left, top]);
   }
 
   /**
-   * Resize the window to
-   * [width]x|height| pixels in size.
+   * Resize the window to |width|x|height| pixels in size.
    */
   void resizeTo(int width, int height) {
     proxy.callMethod('resizeTo', [width, height]);

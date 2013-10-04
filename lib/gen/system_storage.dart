@@ -79,7 +79,6 @@ class EjectDeviceResultCode extends ChromeEnum {
 }
 
 class StorageUnitInfo extends ChromeObject {
-
   StorageUnitInfo({String id, String name, StorageUnitType type, double capacity}) {
     if (id != null) this.id = id;
     if (name != null) this.name = name;

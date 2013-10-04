@@ -145,7 +145,6 @@ class OnExitedEvent {
  * An object containing information about one of the browser's processes.
  */
 class Process extends ChromeObject {
-
   Process({int id, int osProcessId, String type, String profile, List<int> tabs, var cpu, var network, var privateMemory, var jsMemoryAllocated, var jsMemoryUsed, var sqliteMemory, var fps, Cache imageCache, Cache scriptCache, Cache cssCache}) {
     if (id != null) this.id = id;
     if (osProcessId != null) this.osProcessId = osProcessId;
@@ -285,7 +284,6 @@ class Process extends ChromeObject {
  * cache used by the browser.
  */
 class Cache extends ChromeObject {
-
   Cache({var size, var liveSize}) {
     if (size != null) this.size = size;
     if (liveSize != null) this.liveSize = liveSize;

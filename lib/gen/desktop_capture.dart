@@ -23,7 +23,8 @@ class ChromeDesktopCapture {
    * specified origin.
    * 
    * Returns:
-   * |streamId|: An opaque string that can be passed to `getUserMedia()` API to
+   * 
+   * [streamId]: An opaque string that can be passed to `getUserMedia()` API to
    * generate media stream that corresponds to the source selected by the user.
    * If user didn't select any source (i.e. canceled the prompt) then the
    * callback is called with an empty `streamId`.
