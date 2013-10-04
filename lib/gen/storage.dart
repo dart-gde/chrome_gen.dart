@@ -55,7 +55,6 @@ class StorageOnChangedEvent {
 }
 
 class StorageChange extends ChromeObject {
-
   StorageChange({var oldValue, var newValue}) {
     if (oldValue != null) this.oldValue = oldValue;
     if (newValue != null) this.newValue = newValue;
@@ -77,7 +76,6 @@ class StorageChange extends ChromeObject {
 }
 
 class StorageArea extends ChromeObject {
-
   StorageArea();
 
   StorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);

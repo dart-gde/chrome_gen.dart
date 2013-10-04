@@ -17,7 +17,7 @@ class ChromeSerial {
    * valid to pass as the port argument to open(). The list is regenerated each
    * time this method is called, as port validity is dynamic.
    * 
-   * [callback] : Called with the list of ports.
+   * [callback]: Called with the list of ports.
    * 
    * Returns:
    * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
@@ -33,9 +33,9 @@ class ChromeSerial {
 
   /**
    * Opens a connection to the given serial port.
-   * [port] : The name of the serial port to open.
-   * [options] : Connection options.
-   * [callback] : Called when the connection has been opened.
+   * [port]: The name of the serial port to open.
+   * [options]: Connection options.
+   * [callback]: Called when the connection has been opened.
    */
   Future<OpenInfo> open(String port, [OpenOptions options]) {
     var completer = new ChromeCompleter<OpenInfo>.oneArg(_createOpenInfo);
@@ -45,8 +45,8 @@ class ChromeSerial {
 
   /**
    * Closes an open connection.
-   * [connectionId] : The id of the opened connection.
-   * [callback] : Called when the connection has been closed.
+   * [connectionId]: The id of the opened connection.
+   * [callback]: Called when the connection has been closed.
    * 
    * Returns:
    * Returns true if operation was successful.
@@ -59,10 +59,10 @@ class ChromeSerial {
 
   /**
    * Reads a byte from the given connection.
-   * [connectionId] : The id of the connection.
-   * [bytesToRead] : The number of bytes to read.
-   * [callback] : Called when all the requested bytes have been read or
-   * when the read blocks.
+   * [connectionId]: The id of the connection.
+   * [bytesToRead]: The number of bytes to read.
+   * [callback]: Called when all the requested bytes have been read or when the
+   * read blocks.
    */
   Future<SerialReadInfo> read(int connectionId, int bytesToRead) {
     var completer = new ChromeCompleter<SerialReadInfo>.oneArg(_createSerialReadInfo);
@@ -72,9 +72,9 @@ class ChromeSerial {
 
   /**
    * Writes a string to the given connection.
-   * [connectionId] : The id of the connection.
-   * [data] : The string to write.
-   * [callback] : Called when the string has been written.
+   * [connectionId]: The id of the connection.
+   * [data]: The string to write.
+   * [callback]: Called when the string has been written.
    */
   Future<SerialWriteInfo> write(int connectionId, ArrayBuffer data) {
     var completer = new ChromeCompleter<SerialWriteInfo>.oneArg(_createSerialWriteInfo);
@@ -84,8 +84,8 @@ class ChromeSerial {
 
   /**
    * Flushes all bytes in the given connection's input and output buffers.
-   * [connectionId] : The id of the connection.
-   * [callback] : Called when the flush is complete.
+   * [connectionId]: The id of the connection.
+   * [callback]: Called when the flush is complete.
    * 
    * Returns:
    * Returns true if operation was successful.
@@ -138,7 +138,6 @@ class StopBit extends ChromeEnum {
 }
 
 class OpenOptions extends ChromeObject {
-
   OpenOptions({int bitrate, DataBit dataBit, ParityBit parityBit, StopBit stopBit}) {
     if (bitrate != null) this.bitrate = bitrate;
     if (dataBit != null) this.dataBit = dataBit;
@@ -162,7 +161,6 @@ class OpenOptions extends ChromeObject {
 }
 
 class OpenInfo extends ChromeObject {
-
   OpenInfo({int connectionId}) {
     if (connectionId != null) this.connectionId = connectionId;
   }
@@ -174,7 +172,6 @@ class OpenInfo extends ChromeObject {
 }
 
 class SerialReadInfo extends ChromeObject {
-
   SerialReadInfo({int bytesRead, ArrayBuffer data}) {
     if (bytesRead != null) this.bytesRead = bytesRead;
     if (data != null) this.data = data;
@@ -190,7 +187,6 @@ class SerialReadInfo extends ChromeObject {
 }
 
 class SerialWriteInfo extends ChromeObject {
-
   SerialWriteInfo({int bytesWritten}) {
     if (bytesWritten != null) this.bytesWritten = bytesWritten;
   }
@@ -202,7 +198,6 @@ class SerialWriteInfo extends ChromeObject {
 }
 
 class ControlSignalOptions extends ChromeObject {
-
   ControlSignalOptions({bool dtr, bool rts, bool dcd, bool cts}) {
     if (dtr != null) this.dtr = dtr;
     if (rts != null) this.rts = rts;

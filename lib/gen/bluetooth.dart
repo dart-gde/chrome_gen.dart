@@ -36,7 +36,7 @@ class ChromeBluetooth {
 
   /**
    * Get information about the Bluetooth adapter.
-   * [callback] : Called with an AdapterState object describing the adapter
+   * [callback]: Called with an AdapterState object describing the adapter
    * state.
    */
   Future<AdapterState> getAdapterState() {
@@ -46,13 +46,12 @@ class ChromeBluetooth {
   }
 
   /**
-   * Get a bluetooth devices known to the system.  Known devices are either
+   * Get a bluetooth devices known to the system. Known devices are either
    * currently paired, or have been paired in the past.
-   * [options]  : Controls which devices are returned and provides             
+   * [options]: Controls which devices are returned and provides
    * [deviceCallback], which is called for each matching device.
-   * [callback] : Called when the search is completed.             
-   * [options.deviceCallback] will not be called after             
-   * [callback] has been called.
+   * [callback]: Called when the search is completed. |options.deviceCallback|
+   * will not be called after [callback] has been called.
    */
   Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
     var completer = new ChromeCompleter.noArgs();
@@ -81,8 +80,8 @@ class ChromeBluetooth {
 
   /**
    * Connect to a service on a device.
-   * [options]  : The options for the connection.
-   * [callback] : Called to indicate success or failure.
+   * [options]: The options for the connection.
+   * [callback]: Called to indicate success or failure.
    */
   Future connect(ConnectOptions options) {
     var completer = new ChromeCompleter.noArgs();
@@ -92,8 +91,8 @@ class ChromeBluetooth {
 
   /**
    * Close a Bluetooth connection.
-   * [options]  : The options for this function.
-   * [callback] : Called to indicate success or failure.
+   * [options]: The options for this function.
+   * [callback]: Called to indicate success or failure.
    */
   Future disconnect(DisconnectOptions options) {
     var completer = new ChromeCompleter.noArgs();
@@ -103,8 +102,8 @@ class ChromeBluetooth {
 
   /**
    * Read data from a Bluetooth connection.
-   * [options]  : The options for this function.
-   * [callback] : Called with the data when it is available.
+   * [options]: The options for this function.
+   * [callback]: Called with the data when it is available.
    */
   Future<ArrayBuffer> read(ReadOptions options) {
     var completer = new ChromeCompleter<ArrayBuffer>.oneArg(_createArrayBuffer);
@@ -114,8 +113,8 @@ class ChromeBluetooth {
 
   /**
    * Write data to a Bluetooth connection.
-   * [options]  : The options for this function.
-   * [callback] : Called with the number of bytes written.
+   * [options]: The options for this function.
+   * [callback]: Called with the number of bytes written.
    */
   Future<int> write(WriteOptions options) {
     var completer = new ChromeCompleter<int>.oneArg();
@@ -125,7 +124,7 @@ class ChromeBluetooth {
 
   /**
    * Get the local Out of Band Pairing data.
-   * [callback] : Called with the data.
+   * [callback]: Called with the data.
    */
   Future<OutOfBandPairingData> getLocalOutOfBandPairingData() {
     var completer = new ChromeCompleter<OutOfBandPairingData>.oneArg(_createOutOfBandPairingData);
@@ -136,8 +135,8 @@ class ChromeBluetooth {
   /**
    * Set the Out of Band Pairing data for a remote device. Any previous Out Of
    * Band Pairing Data for this device is overwritten.
-   * [options]  : The options for this function.
-   * [callback] : Called to indicate success or failure.
+   * [options]: The options for this function.
+   * [callback]: Called to indicate success or failure.
    */
   Future setOutOfBandPairingData(SetOutOfBandPairingDataOptions options) {
     var completer = new ChromeCompleter.noArgs();
@@ -147,11 +146,11 @@ class ChromeBluetooth {
 
   /**
    * Start discovery. Discovered devices will be returned via the
-   * [onBluetoothDeviceDiscovered] callback.  Discovery will fail to start if it is
-   * already in progress.  Discovery can be resource intensive: stopDiscovery
+   * [onBluetoothDeviceDiscovered] callback. Discovery will fail to start if it is
+   * already in progress. Discovery can be resource intensive: stopDiscovery
    * should be called as soon as possible.
-   * [options]  : The options for this function.
-   * [callback] : Called to indicate success or failure.
+   * [options]: The options for this function.
+   * [callback]: Called to indicate success or failure.
    */
   Future startDiscovery(StartDiscoveryOptions options) {
     var completer = new ChromeCompleter.noArgs();
@@ -161,7 +160,7 @@ class ChromeBluetooth {
 
   /**
    * Stop discovery.
-   * [callback] : Called to indicate success or failure.
+   * [callback]: Called to indicate success or failure.
    */
   Future stopDiscovery() {
     var completer = new ChromeCompleter.noArgs();
@@ -181,7 +180,6 @@ class ChromeBluetooth {
 }
 
 class AdapterState extends ChromeObject {
-
   AdapterState({String address, String name, bool powered, bool available, bool discovering}) {
     if (address != null) this.address = address;
     if (name != null) this.name = name;
@@ -209,7 +207,6 @@ class AdapterState extends ChromeObject {
 }
 
 class BluetoothDevice extends ChromeObject {
-
   BluetoothDevice({String address, String name, bool paired, bool connected}) {
     if (address != null) this.address = address;
     if (name != null) this.name = name;
@@ -233,7 +230,6 @@ class BluetoothDevice extends ChromeObject {
 }
 
 class Profile extends ChromeObject {
-
   Profile({String uuid, String name, int channel, int psm, bool requireAuthentication, bool requireAuthorization, bool autoConnect, int version, int features}) {
     if (uuid != null) this.uuid = uuid;
     if (name != null) this.name = name;
@@ -277,7 +273,6 @@ class Profile extends ChromeObject {
 }
 
 class ServiceRecord extends ChromeObject {
-
   ServiceRecord({String name, String uuid}) {
     if (name != null) this.name = name;
     if (uuid != null) this.uuid = uuid;
@@ -293,7 +288,6 @@ class ServiceRecord extends ChromeObject {
 }
 
 class Socket extends ChromeObject {
-
   Socket({BluetoothDevice device, Profile profile, int id}) {
     if (device != null) this.device = device;
     if (profile != null) this.profile = profile;
@@ -313,7 +307,6 @@ class Socket extends ChromeObject {
 }
 
 class OutOfBandPairingData extends ChromeObject {
-
   OutOfBandPairingData({ArrayBuffer hash, ArrayBuffer randomizer}) {
     if (hash != null) this.hash = hash;
     if (randomizer != null) this.randomizer = randomizer;
@@ -329,7 +322,6 @@ class OutOfBandPairingData extends ChromeObject {
 }
 
 class GetBluetoothDevicesOptions extends ChromeObject {
-
   GetBluetoothDevicesOptions({Profile profile, BluetoothDeviceCallback deviceCallback}) {
     if (profile != null) this.profile = profile;
     if (deviceCallback != null) this.deviceCallback = deviceCallback;
@@ -345,7 +337,6 @@ class GetBluetoothDevicesOptions extends ChromeObject {
 }
 
 class GetProfilesOptions extends ChromeObject {
-
   GetProfilesOptions({BluetoothDevice device}) {
     if (device != null) this.device = device;
   }
@@ -357,7 +348,6 @@ class GetProfilesOptions extends ChromeObject {
 }
 
 class GetServicesOptions extends ChromeObject {
-
   GetServicesOptions({String deviceAddress}) {
     if (deviceAddress != null) this.deviceAddress = deviceAddress;
   }
@@ -369,7 +359,6 @@ class GetServicesOptions extends ChromeObject {
 }
 
 class ConnectOptions extends ChromeObject {
-
   ConnectOptions({BluetoothDevice device, Profile profile}) {
     if (device != null) this.device = device;
     if (profile != null) this.profile = profile;
@@ -385,7 +374,6 @@ class ConnectOptions extends ChromeObject {
 }
 
 class DisconnectOptions extends ChromeObject {
-
   DisconnectOptions({Socket socket}) {
     if (socket != null) this.socket = socket;
   }
@@ -397,7 +385,6 @@ class DisconnectOptions extends ChromeObject {
 }
 
 class ReadOptions extends ChromeObject {
-
   ReadOptions({Socket socket}) {
     if (socket != null) this.socket = socket;
   }
@@ -409,7 +396,6 @@ class ReadOptions extends ChromeObject {
 }
 
 class WriteOptions extends ChromeObject {
-
   WriteOptions({Socket socket, ArrayBuffer data}) {
     if (socket != null) this.socket = socket;
     if (data != null) this.data = data;
@@ -425,7 +411,6 @@ class WriteOptions extends ChromeObject {
 }
 
 class SetOutOfBandPairingDataOptions extends ChromeObject {
-
   SetOutOfBandPairingDataOptions({String address, OutOfBandPairingData data}) {
     if (address != null) this.address = address;
     if (data != null) this.data = data;
@@ -441,7 +426,6 @@ class SetOutOfBandPairingDataOptions extends ChromeObject {
 }
 
 class StartDiscoveryOptions extends ChromeObject {
-
   StartDiscoveryOptions({BluetoothDeviceCallback deviceCallback}) {
     if (deviceCallback != null) this.deviceCallback = deviceCallback;
   }

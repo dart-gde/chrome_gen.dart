@@ -17,8 +17,8 @@ class ChromeTabCapture {
    * be used on the currently active page after the extension has been
    * _invoked_, similar to the way that <a href="activeTab.html">activeTab</a>
    * works. Note that Chrome internal pages cannot be captured.
-   * [options] : Configures the returned media stream.
-   * [callback] : Callback with either the stream returned or null.
+   * [options]: Configures the returned media stream.
+   * [callback]: Callback with either the stream returned or null.
    */
   Future<dynamic> capture(CaptureOptions options) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
@@ -63,7 +63,6 @@ class TabCaptureState extends ChromeEnum {
 }
 
 class CaptureInfo extends ChromeObject {
-
   CaptureInfo({int tabId, TabCaptureState status, bool fullscreen}) {
     if (tabId != null) this.tabId = tabId;
     if (status != null) this.status = status;
@@ -83,7 +82,6 @@ class CaptureInfo extends ChromeObject {
 }
 
 class MediaStreamConstraint extends ChromeObject {
-
   MediaStreamConstraint({var mandatory}) {
     if (mandatory != null) this.mandatory = mandatory;
   }
@@ -95,7 +93,6 @@ class MediaStreamConstraint extends ChromeObject {
 }
 
 class CaptureOptions extends ChromeObject {
-
   CaptureOptions({bool audio, bool video, MediaStreamConstraint audioConstraints, MediaStreamConstraint videoConstraints}) {
     if (audio != null) this.audio = audio;
     if (video != null) this.video = video;

@@ -113,7 +113,6 @@ class ChromeCookies {
  * Represents information about an HTTP cookie.
  */
 class Cookie extends ChromeObject {
-
   Cookie({String name, String value, String domain, bool hostOnly, String path, bool secure, bool httpOnly, bool session, var expirationDate, String storeId}) {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
@@ -201,7 +200,6 @@ class Cookie extends ChromeObject {
  * instance, uses a separate cookie store from a non-incognito window.
  */
 class CookieStore extends ChromeObject {
-
   CookieStore({String id, List<int> tabIds}) {
     if (id != null) this.id = id;
     if (tabIds != null) this.tabIds = tabIds;

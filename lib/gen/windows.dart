@@ -134,7 +134,6 @@ class ChromeWindows {
 }
 
 class Window extends ChromeObject {
-
   Window({int id, bool focused, int top, int left, int width, int height, List<Tab> tabs, bool incognito, String type, String state, bool alwaysOnTop, String sessionId}) {
     if (id != null) this.id = id;
     if (focused != null) this.focused = focused;

@@ -15,9 +15,9 @@ class ChromeLocation {
   /**
    * TODO(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
    * location watching request.
-   * [name] : Optional name to identify this request. Defaults to the empty
+   * [name]: Optional name to identify this request. Defaults to the empty
    * string.
-   * [requestInfo] : Optional parameters for this request.
+   * [requestInfo]: Optional parameters for this request.
    */
   void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
     _location.callMethod('watchLocation', [name, requestInfo]);
@@ -25,7 +25,7 @@ class ChromeLocation {
 
   /**
    * Ends a location watching request.
-   * [name] : Optional name to identify the request to remove. Defaults to the
+   * [name]: Optional name to identify the request to remove. Defaults to the
    * empty string.
    */
   void clearWatch(String name) {
@@ -44,7 +44,6 @@ class ChromeLocation {
 }
 
 class Coordinates extends ChromeObject {
-
   Coordinates({double latitude, double longitude, double altitude, double accuracy, double altitudeAccuracy, double heading, double speed}) {
     if (latitude != null) this.latitude = latitude;
     if (longitude != null) this.longitude = longitude;
@@ -80,7 +79,6 @@ class Coordinates extends ChromeObject {
 }
 
 class Location extends ChromeObject {
-
   Location({String name, Coordinates coords, double timestamp}) {
     if (name != null) this.name = name;
     if (coords != null) this.coords = coords;
@@ -100,7 +98,6 @@ class Location extends ChromeObject {
 }
 
 class WatchLocationRequestInfo extends ChromeObject {
-
   WatchLocationRequestInfo({double minDistanceInMeters, double minTimeInMilliseconds, int maximumAge}) {
     if (minDistanceInMeters != null) this.minDistanceInMeters = minDistanceInMeters;
     if (minTimeInMilliseconds != null) this.minTimeInMilliseconds = minTimeInMilliseconds;

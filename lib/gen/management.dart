@@ -145,7 +145,6 @@ class ChromeManagement {
  * Information about an icon belonging to an extension, app, or theme.
  */
 class IconInfo extends ChromeObject {
-
   IconInfo({int size, String url}) {
     if (size != null) this.size = size;
     if (url != null) this.url = url;
@@ -173,7 +172,6 @@ class IconInfo extends ChromeObject {
  * Information about an installed extension, app, or theme.
  */
 class ExtensionInfo extends ChromeObject {
-
   ExtensionInfo({String id, String name, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List<IconInfo> icons, List<String> permissions, List<String> hostPermissions, String installType}) {
     if (id != null) this.id = id;
     if (name != null) this.name = name;
