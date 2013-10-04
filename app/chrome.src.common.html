@@ -37,13 +37,7 @@ final JsObject         <strong>chrome</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-JsObject get chrome {
- if (_proxy == null) {
-   _proxy = context['chrome'];
- }
-
- return _proxy;
-}
+final JsObject chrome = context['chrome']
 </pre>
 </div>
 </div>
@@ -73,8 +67,8 @@ dynamic <strong>apiNotAvailable</strong>(String apiName) <a class="anchor-link" 
 <div class="doc">
 <pre class="source">
 dynamic apiNotAvailable(String apiName) {
- print('${apiName} not available.');
- print('This could be caused by a missing manifest.json permission or by running on an older version of Chrome.');
+ _logger.warning('${apiName} not available.');
+ _logger.info('This could be caused by a missing manifest.json permission or by running on an older version of Chrome.');
 
  return null;
 }
