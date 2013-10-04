@@ -61,8 +61,8 @@ class ChromeSerial {
    * Reads a byte from the given connection.
    * [connectionId]: The id of the connection.
    * [bytesToRead]: The number of bytes to read.
-   * [callback]: Called when all the requested bytes have been read or
-   * when the read blocks.
+   * [callback]: Called when all the requested bytes have been read or when the
+   * read blocks.
    */
   Future<SerialReadInfo> read(int connectionId, int bytesToRead) {
     var completer = new ChromeCompleter<SerialReadInfo>.oneArg(_createSerialReadInfo);

@@ -195,8 +195,8 @@ class ChromeUsb {
 
   /**
    * Tries to reset the USB device and restores it to the previous status. If
-   * the reset fails, the given connection handle will be closed and the  USB
-   * device will appear to be disconnected then reconnected.  In that case you
+   * the reset fails, the given connection handle will be closed and the USB
+   * device will appear to be disconnected then reconnected. In that case you
    * must call [getDevices] or [findDevices] again to acquire the device.
    * 
    * [handle]: A connection handle to reset.
