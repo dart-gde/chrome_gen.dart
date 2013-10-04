@@ -70,7 +70,6 @@ class ChromeSessions {
 }
 
 class Filter extends ChromeObject {
-
   Filter({int maxResults}) {
     if (maxResults != null) this.maxResults = maxResults;
   }
@@ -87,7 +86,6 @@ class Filter extends ChromeObject {
 }
 
 class Session extends ChromeObject {
-
   Session({int lastModified, Tab tab, Window window}) {
     if (lastModified != null) this.lastModified = lastModified;
     if (tab != null) this.tab = tab;
@@ -119,7 +117,6 @@ class Session extends ChromeObject {
 }
 
 class Device extends ChromeObject {
-
   Device({String info, List<Session> sessions}) {
     if (info != null) this.info = info;
     if (sessions != null) this.sessions = sessions;

@@ -105,7 +105,6 @@ class OnClickedEvent {
  * Information sent when a context menu item is clicked.
  */
 class OnClickData extends ChromeObject {
-
   OnClickData({var menuItemId, var parentMenuItemId, String mediaType, String linkUrl, String srcUrl, String pageUrl, String frameUrl, String selectionText, bool editable, bool wasChecked, bool checked}) {
     if (menuItemId != null) this.menuItemId = menuItemId;
     if (parentMenuItemId != null) this.parentMenuItemId = parentMenuItemId;

@@ -15,9 +15,9 @@ class ChromeSocket {
   /**
    * Creates a socket of the specified type that will connect to the specified
    * remote machine.
-   * [type] : The type of socket to create. Must be `tcp` or `udp`.
-   * [options] : The socket options.
-   * [callback] : Called when the socket has been created.
+   * [type]: The type of socket to create. Must be `tcp` or `udp`.
+   * [options]: The socket options.
+   * [callback]: Called when the socket has been created.
    */
   Future<CreateInfo> create(SocketType type, [CreateOptions options]) {
     var completer = new ChromeCompleter<CreateInfo>.oneArg(_createCreateInfo);
@@ -27,7 +27,7 @@ class ChromeSocket {
 
   /**
    * Destroys the socket. Each socket created should be destroyed after use.
-   * [socketId] : The socketId.
+   * [socketId]: The socketId.
    */
   void destroy(int socketId) {
     _socket.callMethod('destroy', [socketId]);
@@ -37,10 +37,10 @@ class ChromeSocket {
    * Connects the socket to the remote machine (for a `tcp` socket). For a `udp`
    * socket, this sets the default address which packets are sent to and read
    * from for `read()` and `write()` calls.
-   * [socketId] : The socketId.
-   * [hostname] : The hostname or IP address of the remote machine.
-   * [port] : The port of the remote machine.
-   * [callback] : Called when the connection attempt is complete.
+   * [socketId]: The socketId.
+   * [hostname]: The hostname or IP address of the remote machine.
+   * [port]: The port of the remote machine.
+   * [callback]: Called when the connection attempt is complete.
    */
   Future<int> connect(int socketId, String hostname, int port) {
     var completer = new ChromeCompleter<int>.oneArg();
@@ -51,10 +51,10 @@ class ChromeSocket {
   /**
    * Binds the local address for socket. Currently, it does not support TCP
    * socket.
-   * [socketId] : The socketId.
-   * [address] : The address of the local machine.
-   * [port] : The port of the local machine.
-   * [callback] : Called when the bind attempt is complete.
+   * [socketId]: The socketId.
+   * [address]: The address of the local machine.
+   * [port]: The port of the local machine.
+   * [callback]: Called when the bind attempt is complete.
    */
   Future<int> bind(int socketId, String address, int port) {
     var completer = new ChromeCompleter<int>.oneArg();
@@ -65,7 +65,7 @@ class ChromeSocket {
   /**
    * Disconnects the socket. For UDP sockets, `disconnect` is a non-operation
    * but is safe to call.
-   * [socketId] : The socketId.
+   * [socketId]: The socketId.
    */
   void disconnect(int socketId) {
     _socket.callMethod('disconnect', [socketId]);
@@ -73,9 +73,9 @@ class ChromeSocket {
 
   /**
    * Reads data from the given connected socket.
-   * [socketId] : The socketId.
-   * [bufferSize] : The read buffer size.
-   * [callback] : Delivers data that was available to be read without blocking.
+   * [socketId]: The socketId.
+   * [bufferSize]: The read buffer size.
+   * [callback]: Delivers data that was available to be read without blocking.
    */
   Future<SocketReadInfo> read(int socketId, [int bufferSize]) {
     var completer = new ChromeCompleter<SocketReadInfo>.oneArg(_createSocketReadInfo);
@@ -85,9 +85,9 @@ class ChromeSocket {
 
   /**
    * Writes data on the given connected socket.
-   * [socketId] : The socketId.
-   * [data] : The data to write.
-   * [callback] : Called when the write operation completes without blocking or
+   * [socketId]: The socketId.
+   * [data]: The data to write.
+   * [callback]: Called when the write operation completes without blocking or
    * an error occurs.
    */
   Future<SocketWriteInfo> write(int socketId, ArrayBuffer data) {
@@ -98,9 +98,9 @@ class ChromeSocket {
 
   /**
    * Receives data from the given UDP socket.
-   * [socketId] : The socketId.
-   * [bufferSize] : The receive buffer size.
-   * [callback] : Returns result of the recvFrom operation.
+   * [socketId]: The socketId.
+   * [bufferSize]: The receive buffer size.
+   * [callback]: Returns result of the recvFrom operation.
    */
   Future<RecvFromInfo> recvFrom(int socketId, [int bufferSize]) {
     var completer = new ChromeCompleter<RecvFromInfo>.oneArg(_createRecvFromInfo);
@@ -110,12 +110,12 @@ class ChromeSocket {
 
   /**
    * Sends data on the given UDP socket to the given address and port.
-   * [socketId] : The socketId.
-   * [data] : The data to write.
-   * [address] : The address of the remote machine.
-   * [port] : The port of the remote machine.
-   * [callback] : Called when the send operation completes without blocking or
-   * an error occurs.
+   * [socketId]: The socketId.
+   * [data]: The data to write.
+   * [address]: The address of the remote machine.
+   * [port]: The port of the remote machine.
+   * [callback]: Called when the send operation completes without blocking or an
+   * error occurs.
    */
   Future<SocketWriteInfo> sendTo(int socketId, ArrayBuffer data, String address, int port) {
     var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createSocketWriteInfo);
@@ -128,11 +128,11 @@ class ChromeSocket {
    * specified port and address. This effectively makes this a server socket,
    * and client socket functions (connect, read, write) can no longer be used on
    * this socket.
-   * [socketId] : The socketId.
-   * [address] : The address of the local machine.
-   * [port] : The port of the local machine.
-   * [backlog] : Length of the socket's listen queue.
-   * [callback] : Called when listen operation completes.
+   * [socketId]: The socketId.
+   * [address]: The address of the local machine.
+   * [port]: The port of the local machine.
+   * [backlog]: Length of the socket's listen queue.
+   * [callback]: Called when listen operation completes.
    */
   Future<int> listen(int socketId, String address, int port, [int backlog]) {
     var completer = new ChromeCompleter<int>.oneArg();
@@ -145,8 +145,8 @@ class ChromeSocket {
    * be called when a connection is accepted on this listening server socket.
    * Listen must be called first. If there is already an active accept callback,
    * this callback will be invoked immediately with an error as the resultCode.
-   * [socketId] : The socketId.
-   * [callback] : The callback is invoked when a new socket is accepted.
+   * [socketId]: The socketId.
+   * [callback]: The callback is invoked when a new socket is accepted.
    */
   Future<AcceptInfo> accept(int socketId) {
     var completer = new ChromeCompleter<AcceptInfo>.oneArg(_createAcceptInfo);
@@ -156,11 +156,11 @@ class ChromeSocket {
 
   /**
    * Enables or disables the keep-alive functionality for a TCP connection.
-   * [socketId] : The socketId.
-   * [enable] : If true, enable keep-alive functionality.
-   * [delay] : Set the delay seconds between the last data packet received and
+   * [socketId]: The socketId.
+   * [enable]: If true, enable keep-alive functionality.
+   * [delay]: Set the delay seconds between the last data packet received and
    * the first keepalive probe. Default is 0.
-   * [callback] : Called when the setKeepAlive attempt is complete.
+   * [callback]: Called when the setKeepAlive attempt is complete.
    */
   Future<bool> setKeepAlive(int socketId, bool enable, [int delay]) {
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -171,9 +171,9 @@ class ChromeSocket {
   /**
    * Sets or clears `TCP_NODELAY` for a TCP connection. Nagle's algorithm will
    * be disabled when `TCP_NODELAY` is set.
-   * [socketId] : The socketId.
-   * [noDelay] : If true, disables Nagle's algorithm.
-   * [callback] : Called when the setNoDelay attempt is complete.
+   * [socketId]: The socketId.
+   * [noDelay]: If true, disables Nagle's algorithm.
+   * [callback]: Called when the setNoDelay attempt is complete.
    */
   Future<bool> setNoDelay(int socketId, bool noDelay) {
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -183,8 +183,8 @@ class ChromeSocket {
 
   /**
    * Retrieves the state of the given socket.
-   * [socketId] : The socketId.
-   * [callback] : Called when the state is available.
+   * [socketId]: The socketId.
+   * [callback]: Called when the state is available.
    */
   Future<SocketInfo> getInfo(int socketId) {
     var completer = new ChromeCompleter<SocketInfo>.oneArg(_createSocketInfo);
@@ -194,7 +194,7 @@ class ChromeSocket {
 
   /**
    * Retrieves information about local adapters on this system.
-   * [callback] : Called when local adapter information is available.
+   * [callback]: Called when local adapter information is available.
    */
   Future<NetworkInterface> getNetworkList() {
     var completer = new ChromeCompleter<NetworkInterface>.oneArg(_createNetworkInterface);
@@ -206,9 +206,9 @@ class ChromeSocket {
    * Join the multicast group and start to receive packets from that group. The
    * socket must be of UDP type and must be bound to a local port before calling
    * this method.
-   * [socketId] : The socketId.
-   * [address] : The group address to join. Domain names are not supported.
-   * [callback] : Called when the join group operation is done with an integer
+   * [socketId]: The socketId.
+   * [address]: The group address to join. Domain names are not supported.
+   * [callback]: Called when the join group operation is done with an integer
    * parameter indicating the platform-independent error code.
    */
   Future<int> joinGroup(int socketId, String address) {
@@ -221,13 +221,14 @@ class ChromeSocket {
    * Leave the multicast group previously joined using `joinGroup`. It's not
    * necessary to leave the multicast group before destroying the socket or
    * exiting. This is automatically called by the OS.
+   * 
    * Leaving the group will prevent the router from sending multicast datagrams
    * to the local host, presuming no other process on the host is still joined
    * to the group.
    * 
-   * [socketId] : The socketId.
-   * [address] : The group address to leave. Domain names are not supported.
-   * [callback] : Called when the leave group operation is done with an integer
+   * [socketId]: The socketId.
+   * [address]: The group address to leave. Domain names are not supported.
+   * [callback]: Called when the leave group operation is done with an integer
    * parameter indicating the platform-independent error code.
    */
   Future<int> leaveGroup(int socketId, String address) {
@@ -238,11 +239,12 @@ class ChromeSocket {
 
   /**
    * Set the time-to-live of multicast packets sent to the multicast group.
-   *  Calling this method does not require multicast permissions.
    * 
-   * [socketId] : The socketId.
-   * [ttl] : The time-to-live value.
-   * [callback] : Called when the configuration operation is done.
+   * Calling this method does not require multicast permissions.
+   * 
+   * [socketId]: The socketId.
+   * [ttl]: The time-to-live value.
+   * [callback]: Called when the configuration operation is done.
    */
   Future<int> setMulticastTimeToLive(int socketId, int ttl) {
     var completer = new ChromeCompleter<int>.oneArg();
@@ -253,6 +255,7 @@ class ChromeSocket {
   /**
    * Set whether multicast packets sent from the host to the multicast group
    * will be looped back to the host.
+   * 
    * Note: the behavior of `setMulticastLoopbackMode` is slightly different
    * between Windows and Unix-like systems. The inconsistency happens only when
    * there is more than one application on the same host joined to the same
@@ -261,11 +264,12 @@ class ChromeSocket {
    * loopback packets; while on Unix-like systems, the applications with
    * loopback off will not SEND the loopback packets to other applications on
    * the same host. See MSDN: http://goo.gl/6vqbj
-   *  Calling this method does not require multicast permissions.
    * 
-   * [socketId] : The socketId.
-   * [enabled] : Indicate whether to enable loopback mode.
-   * [callback] : Called when the configuration operation is done.
+   * Calling this method does not require multicast permissions.
+   * 
+   * [socketId]: The socketId.
+   * [enabled]: Indicate whether to enable loopback mode.
+   * [callback]: Called when the configuration operation is done.
    */
   Future<int> setMulticastLoopbackMode(int socketId, bool enabled) {
     var completer = new ChromeCompleter<int>.oneArg();
@@ -275,8 +279,8 @@ class ChromeSocket {
 
   /**
    * Get the multicast group addresses the socket is currently joined to.
-   * [socketId] : The socketId.
-   * [callback] : Called with an array of strings of the result.
+   * [socketId]: The socketId.
+   * [callback]: Called with an array of strings of the result.
    */
   Future<String> getJoinedGroups(int socketId) {
     var completer = new ChromeCompleter<String>.oneArg();
@@ -301,14 +305,12 @@ class SocketType extends ChromeEnum {
 }
 
 class CreateOptions extends ChromeObject {
-
   CreateOptions();
 
   CreateOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
 class CreateInfo extends ChromeObject {
-
   CreateInfo({int socketId}) {
     if (socketId != null) this.socketId = socketId;
   }
@@ -320,7 +322,6 @@ class CreateInfo extends ChromeObject {
 }
 
 class AcceptInfo extends ChromeObject {
-
   AcceptInfo({int resultCode, int socketId}) {
     if (resultCode != null) this.resultCode = resultCode;
     if (socketId != null) this.socketId = socketId;
@@ -336,7 +337,6 @@ class AcceptInfo extends ChromeObject {
 }
 
 class SocketReadInfo extends ChromeObject {
-
   SocketReadInfo({int resultCode, ArrayBuffer data}) {
     if (resultCode != null) this.resultCode = resultCode;
     if (data != null) this.data = data;
@@ -352,7 +352,6 @@ class SocketReadInfo extends ChromeObject {
 }
 
 class SocketWriteInfo extends ChromeObject {
-
   SocketWriteInfo({int bytesWritten}) {
     if (bytesWritten != null) this.bytesWritten = bytesWritten;
   }
@@ -364,7 +363,6 @@ class SocketWriteInfo extends ChromeObject {
 }
 
 class RecvFromInfo extends ChromeObject {
-
   RecvFromInfo({int resultCode, ArrayBuffer data, String address, int port}) {
     if (resultCode != null) this.resultCode = resultCode;
     if (data != null) this.data = data;
@@ -388,7 +386,6 @@ class RecvFromInfo extends ChromeObject {
 }
 
 class SocketInfo extends ChromeObject {
-
   SocketInfo({SocketType socketType, bool connected, String peerAddress, int peerPort, String localAddress, int localPort}) {
     if (socketType != null) this.socketType = socketType;
     if (connected != null) this.connected = connected;
@@ -420,7 +417,6 @@ class SocketInfo extends ChromeObject {
 }
 
 class NetworkInterface extends ChromeObject {
-
   NetworkInterface({String name, String address}) {
     if (name != null) this.name = name;
     if (address != null) this.address = address;

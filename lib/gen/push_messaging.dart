@@ -32,7 +32,6 @@ class ChromePushMessaging {
 }
 
 class Message extends ChromeObject {
-
   Message({int subchannelId, String payload}) {
     if (subchannelId != null) this.subchannelId = subchannelId;
     if (payload != null) this.payload = payload;
@@ -48,7 +47,6 @@ class Message extends ChromeObject {
 }
 
 class ChannelIdResult extends ChromeObject {
-
   ChannelIdResult({String channelId}) {
     if (channelId != null) this.channelId = channelId;
   }

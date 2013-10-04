@@ -99,7 +99,6 @@ class ChromeHistory {
  * An object encapsulating one result of a history query.
  */
 class HistoryItem extends ChromeObject {
-
   HistoryItem({String id, String url, String title, var lastVisitTime, int visitCount, int typedCount}) {
     if (id != null) this.id = id;
     if (url != null) this.url = url;
@@ -154,7 +153,6 @@ class HistoryItem extends ChromeObject {
  * An object encapsulating one visit to a URL.
  */
 class VisitItem extends ChromeObject {
-
   VisitItem({String id, String visitId, var visitTime, String referringVisitId, String transition}) {
     if (id != null) this.id = id;
     if (visitId != null) this.visitId = visitId;

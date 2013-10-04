@@ -289,7 +289,6 @@ class OnSurroundingTextChangedEvent {
  * See http://www.w3.org/TR/DOM-Level-3-Events/#events-KeyboardEvent
  */
 class KeyboardEvent extends ChromeObject {
-
   KeyboardEvent({String type, String requestId, String key, String code, bool altKey, bool ctrlKey, bool shiftKey, bool capsLock}) {
     if (type != null) this.type = type;
     if (requestId != null) this.requestId = requestId;
@@ -358,7 +357,6 @@ class KeyboardEvent extends ChromeObject {
  * Describes an input Context
  */
 class InputContext extends ChromeObject {
-
   InputContext({int contextID, String type}) {
     if (contextID != null) this.contextID = contextID;
     if (type != null) this.type = type;
@@ -386,7 +384,6 @@ class InputContext extends ChromeObject {
  * language menu.
  */
 class MenuItem extends ChromeObject {
-
   MenuItem({String id, String label, String style, bool visible, bool checked, bool enabled}) {
     if (id != null) this.id = id;
     if (label != null) this.label = label;

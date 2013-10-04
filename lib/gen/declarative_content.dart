@@ -27,7 +27,6 @@ class ChromeDeclarativeContent {
  * Matches the state of a web page by various criteria.
  */
 class PageStateMatcher extends ChromeObject {
-
   PageStateMatcher({UrlFilter pageUrl, List<String> css}) {
     if (pageUrl != null) this.pageUrl = pageUrl;
     if (css != null) this.css = css;
@@ -59,7 +58,6 @@ class PageStateMatcher extends ChromeObject {
  * page action will grant access to the active tab.
  */
 class ShowPageAction extends ChromeObject {
-
   ShowPageAction();
 
   ShowPageAction.fromProxy(JsObject proxy): super.fromProxy(proxy);

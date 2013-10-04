@@ -22,13 +22,13 @@ class ChromeSystemDisplay {
   }
 
   /**
-   * Updates the properties for the display specified by
-   * [id], according to the information provided in
-   * [info]. On failure, $ref:runtime.lastError will be set.
+   * Updates the properties for the display specified by |id|, according to the
+   * information provided in |info|. On failure, $ref:runtime.lastError will be
+   * set.
    * [id]: The display's unique identifier.
    * [info]: The information about display properties that should be changed.
    * A property will be changed only if a new value for it is specified in
-   * [info].
+   * |info|.
    * [callback]: Empty function called when the function finishes. To find out
    * whether the function succeeded, $ref:runtime.lastError should be
    * queried.
@@ -46,7 +46,6 @@ class ChromeSystemDisplay {
 }
 
 class Insets extends ChromeObject {
-
   Insets({int left, int top, int right, int bottom}) {
     if (left != null) this.left = left;
     if (top != null) this.top = top;
@@ -70,7 +69,6 @@ class Insets extends ChromeObject {
 }
 
 class DisplayUnitInfo extends ChromeObject {
-
   DisplayUnitInfo({String id, String name, String mirroringSourceId, bool isPrimary, bool isInternal, bool isEnabled, double dpiX, double dpiY, int rotation, Bounds bounds, Insets overscan, Bounds workArea}) {
     if (id != null) this.id = id;
     if (name != null) this.name = name;
@@ -126,7 +124,6 @@ class DisplayUnitInfo extends ChromeObject {
 }
 
 class DisplayProperties extends ChromeObject {
-
   DisplayProperties({String mirroringSourceId, bool isPrimary, Insets overscan, int rotation, int boundsOriginX, int boundsOriginY}) {
     if (mirroringSourceId != null) this.mirroringSourceId = mirroringSourceId;
     if (isPrimary != null) this.isPrimary = isPrimary;

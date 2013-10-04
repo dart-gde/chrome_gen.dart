@@ -120,7 +120,6 @@ class ChooseEntryType extends ChromeEnum {
 }
 
 class AcceptOption extends ChromeObject {
-
   AcceptOption({String description, String mimeTypes, String extensions}) {
     if (description != null) this.description = description;
     if (mimeTypes != null) this.mimeTypes = mimeTypes;
@@ -140,7 +139,6 @@ class AcceptOption extends ChromeObject {
 }
 
 class ChooseEntryOptions extends ChromeObject {
-
   ChooseEntryOptions({ChooseEntryType type, String suggestedName, AcceptOption accepts, bool acceptsAllTypes, bool acceptsMultiple}) {
     if (type != null) this.type = type;
     if (suggestedName != null) this.suggestedName = suggestedName;

@@ -50,7 +50,6 @@ class GetMediaFileSystemsInteractivity extends ChromeEnum {
 }
 
 class MediaFileSystemsDetails extends ChromeObject {
-
   MediaFileSystemsDetails({GetMediaFileSystemsInteractivity interactive}) {
     if (interactive != null) this.interactive = interactive;
   }
@@ -62,7 +61,6 @@ class MediaFileSystemsDetails extends ChromeObject {
 }
 
 class MediaFileSystemMetadata extends ChromeObject {
-
   MediaFileSystemMetadata({String name, String galleryId, String deviceId, bool isRemovable, bool isMediaDevice}) {
     if (name != null) this.name = name;
     if (galleryId != null) this.galleryId = galleryId;

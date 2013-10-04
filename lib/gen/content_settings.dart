@@ -73,7 +73,6 @@ class ChromeContentSettings {
  * Identifiers](contentSettings.html#resource-identifiers).
  */
 class ResourceIdentifier extends ChromeObject {
-
   ResourceIdentifier({String id, String description}) {
     if (id != null) this.id = id;
     if (description != null) this.description = description;
@@ -95,7 +94,6 @@ class ResourceIdentifier extends ChromeObject {
 }
 
 class ContentSetting extends ChromeObject {
-
   ContentSetting();
 
   ContentSetting.fromProxy(JsObject proxy): super.fromProxy(proxy);

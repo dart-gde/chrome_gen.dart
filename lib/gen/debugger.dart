@@ -156,7 +156,6 @@ class OnDetachEvent {
  * Debuggee identifier. Either tabId or extensionId must be specified
  */
 class Debuggee extends ChromeObject {
-
   Debuggee({int tabId, String extensionId, String targetId}) {
     if (tabId != null) this.tabId = tabId;
     if (extensionId != null) this.extensionId = extensionId;
@@ -190,7 +189,6 @@ class Debuggee extends ChromeObject {
  * Debug target information
  */
 class TargetInfo extends ChromeObject {
-
   TargetInfo({String type, String id, int tabId, String extensionId, bool attached, String title, String url, String faviconUrl}) {
     if (type != null) this.type = type;
     if (id != null) this.id = id;

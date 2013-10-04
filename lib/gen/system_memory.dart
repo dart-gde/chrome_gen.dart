@@ -23,7 +23,6 @@ class ChromeSystemMemory {
 }
 
 class MemoryInfo extends ChromeObject {
-
   MemoryInfo({double capacity, double availableCapacity}) {
     if (capacity != null) this.capacity = capacity;
     if (availableCapacity != null) this.availableCapacity = availableCapacity;

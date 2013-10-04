@@ -100,7 +100,6 @@ class OnResourceContentCommittedEvent {
  * image.
  */
 class Resource extends ChromeObject {
-
   Resource({String url}) {
     if (url != null) this.url = url;
   }

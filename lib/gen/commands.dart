@@ -37,7 +37,6 @@ class ChromeCommands {
 }
 
 class Command extends ChromeObject {
-
   Command({String name, String description, String shortcut}) {
     if (name != null) this.name = name;
     if (description != null) this.description = description;

@@ -41,7 +41,6 @@ class ChromeDeclarativeWebRequest {
  * as a conjunction.
  */
 class HeaderFilter extends ChromeObject {
-
   HeaderFilter({String namePrefix, String nameSuffix, var nameContains, String nameEquals, String valuePrefix, String valueSuffix, var valueContains, String valueEquals}) {
     if (namePrefix != null) this.namePrefix = namePrefix;
     if (nameSuffix != null) this.nameSuffix = nameSuffix;
@@ -108,7 +107,6 @@ class HeaderFilter extends ChromeObject {
  * Matches network events by various criteria.
  */
 class RequestMatcher extends ChromeObject {
-
   RequestMatcher({UrlFilter url, UrlFilter firstPartyForCookiesUrl, List<String> resourceType, List<String> contentType, List<String> excludeContentType, List<HeaderFilter> requestHeaders, List<HeaderFilter> excludeRequestHeaders, List<HeaderFilter> responseHeaders, List<HeaderFilter> excludeResponseHeaders, bool thirdPartyForCookies, List<String> stages}) {
     if (url != null) this.url = url;
     if (firstPartyForCookiesUrl != null) this.firstPartyForCookiesUrl = firstPartyForCookiesUrl;
@@ -212,7 +210,6 @@ class RequestMatcher extends ChromeObject {
  * Declarative event action that cancels a network request.
  */
 class CancelRequest extends ChromeObject {
-
   CancelRequest();
 
   CancelRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
@@ -222,7 +219,6 @@ class CancelRequest extends ChromeObject {
  * Declarative event action that redirects a network request.
  */
 class RedirectRequest extends ChromeObject {
-
   RedirectRequest({String redirectUrl}) {
     if (redirectUrl != null) this.redirectUrl = redirectUrl;
   }
@@ -241,7 +237,6 @@ class RedirectRequest extends ChromeObject {
  * image.
  */
 class RedirectToTransparentImage extends ChromeObject {
-
   RedirectToTransparentImage();
 
   RedirectToTransparentImage.fromProxy(JsObject proxy): super.fromProxy(proxy);
@@ -252,7 +247,6 @@ class RedirectToTransparentImage extends ChromeObject {
  * document.
  */
 class RedirectToEmptyDocument extends ChromeObject {
-
   RedirectToEmptyDocument();
 
   RedirectToEmptyDocument.fromProxy(JsObject proxy): super.fromProxy(proxy);
@@ -263,7 +257,6 @@ class RedirectToEmptyDocument extends ChromeObject {
  * expressions use the [RE2 syntax](http://code.google.com/p/re2/wiki/Syntax).
  */
 class RedirectByRegEx extends ChromeObject {
-
   RedirectByRegEx({String from, String to}) {
     if (from != null) this.from = from;
     if (to != null) this.to = to;
@@ -293,7 +286,6 @@ class RedirectByRegEx extends ChromeObject {
  * occurs only once in each request.
  */
 class SetRequestHeader extends ChromeObject {
-
   SetRequestHeader({String name, String value}) {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
@@ -320,7 +312,6 @@ class SetRequestHeader extends ChromeObject {
  * request header name occurs only once in each request.
  */
 class RemoveRequestHeader extends ChromeObject {
-
   RemoveRequestHeader({String name}) {
     if (name != null) this.name = name;
   }
@@ -340,7 +331,6 @@ class RemoveRequestHeader extends ChromeObject {
  * add a new response header in order to replace one.
  */
 class AddResponseHeader extends ChromeObject {
-
   AddResponseHeader({String name, String value}) {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
@@ -365,7 +355,6 @@ class AddResponseHeader extends ChromeObject {
  * Removes all response headers of the specified names and values.
  */
 class RemoveResponseHeader extends ChromeObject {
-
   RemoveResponseHeader({String name, String value}) {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
@@ -390,7 +379,6 @@ class RemoveResponseHeader extends ChromeObject {
  * Masks all rules that match the specified criteria.
  */
 class IgnoreRules extends ChromeObject {
-
   IgnoreRules({int lowerPriorityThan, String hasTag}) {
     if (lowerPriorityThan != null) this.lowerPriorityThan = lowerPriorityThan;
     if (hasTag != null) this.hasTag = hasTag;
@@ -421,7 +409,6 @@ class IgnoreRules extends ChromeObject {
  * Triggers the [declarativeWebRequest.onMessage] event.
  */
 class SendMessageToExtension extends ChromeObject {
-
   SendMessageToExtension({String message}) {
     if (message != null) this.message = message;
   }
@@ -440,7 +427,6 @@ class SendMessageToExtension extends ChromeObject {
  * A filter or specification of a cookie in HTTP Requests.
  */
 class RequestCookie extends ChromeObject {
-
   RequestCookie({String name, String value}) {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
@@ -465,7 +451,6 @@ class RequestCookie extends ChromeObject {
  * A specification of a cookie in HTTP Responses.
  */
 class ResponseCookie extends ChromeObject {
-
   ResponseCookie({String name, String value, String expires, var maxAge, String domain, String path, String secure, String httpOnly}) {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
@@ -532,7 +517,6 @@ class ResponseCookie extends ChromeObject {
  * A filter of a cookie in HTTP Responses.
  */
 class FilterResponseCookie extends ChromeObject {
-
   FilterResponseCookie({String name, String value, String expires, var maxAge, String domain, String path, String secure, String httpOnly, int ageUpperBound, int ageLowerBound, bool sessionCookie}) {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
@@ -634,7 +618,6 @@ class FilterResponseCookie extends ChromeObject {
  * API because this is computationally less expensive.
  */
 class AddRequestCookie extends ChromeObject {
-
   AddRequestCookie({RequestCookie cookie}) {
     if (cookie != null) this.cookie = cookie;
   }
@@ -654,7 +637,6 @@ class AddRequestCookie extends ChromeObject {
  * API because this is computationally less expensive.
  */
 class AddResponseCookie extends ChromeObject {
-
   AddResponseCookie({ResponseCookie cookie}) {
     if (cookie != null) this.cookie = cookie;
   }
@@ -674,7 +656,6 @@ class AddResponseCookie extends ChromeObject {
  * Cookies API because this is computationally less expensive.
  */
 class EditRequestCookie extends ChromeObject {
-
   EditRequestCookie({RequestCookie filter, RequestCookie modification}) {
     if (filter != null) this.filter = filter;
     if (modification != null) this.modification = modification;
@@ -701,7 +682,6 @@ class EditRequestCookie extends ChromeObject {
  * Cookies API because this is computationally less expensive.
  */
 class EditResponseCookie extends ChromeObject {
-
   EditResponseCookie({FilterResponseCookie filter, ResponseCookie modification}) {
     if (filter != null) this.filter = filter;
     if (modification != null) this.modification = modification;
@@ -728,7 +708,6 @@ class EditResponseCookie extends ChromeObject {
  * Cookies API because this is computationally less expensive.
  */
 class RemoveRequestCookie extends ChromeObject {
-
   RemoveRequestCookie({RequestCookie filter}) {
     if (filter != null) this.filter = filter;
   }
@@ -747,7 +726,6 @@ class RemoveRequestCookie extends ChromeObject {
  * Cookies API because this is computationally less expensive.
  */
 class RemoveResponseCookie extends ChromeObject {
-
   RemoveResponseCookie({FilterResponseCookie filter}) {
     if (filter != null) this.filter = filter;
   }

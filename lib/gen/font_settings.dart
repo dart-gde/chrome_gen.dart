@@ -181,7 +181,6 @@ class ChromeFontSettings {
  * Represents a font name.
  */
 class FontName extends ChromeObject {
-
   FontName({String fontId, String displayName}) {
     if (fontId != null) this.fontId = fontId;
     if (displayName != null) this.displayName = displayName;
@@ -224,7 +223,6 @@ class FontName extends ChromeObject {
  * `Visp`, `Wara`, `Wole`, `Xpeo`, `Xsux`, `Yiii`, `Zmth`, `Zsym`, `Zyyy`
  */
 class ScriptCode extends ChromeObject {
-
   ScriptCode();
 
   ScriptCode.fromProxy(JsObject proxy): super.fromProxy(proxy);
@@ -235,7 +233,6 @@ class ScriptCode extends ChromeObject {
  * enum of `standard`, `sansserif`, `serif`, `fixed`, `cursive`, `fantasy`
  */
 class GenericFamily extends ChromeObject {
-
   GenericFamily();
 
   GenericFamily.fromProxy(JsObject proxy): super.fromProxy(proxy);
@@ -251,7 +248,6 @@ class GenericFamily extends ChromeObject {
  * `controllable_by_this_extension`, `controlled_by_this_extension`
  */
 class LevelOfControl extends ChromeObject {
-
   LevelOfControl();
 
   LevelOfControl.fromProxy(JsObject proxy): super.fromProxy(proxy);

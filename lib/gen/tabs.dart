@@ -511,7 +511,6 @@ class OnReplacedEvent {
 }
 
 class Tab extends ChromeObject {
-
   Tab({int id, int index, int windowId, int openerTabId, bool highlighted, bool active, bool pinned, String url, String title, String favIconUrl, String status, bool incognito, int width, int height, String sessionId}) {
     if (id != null) this.id = id;
     if (index != null) this.index = index;
@@ -638,7 +637,6 @@ class Tab extends ChromeObject {
  * must be set, but both may not be set at the same time.
  */
 class InjectDetails extends ChromeObject {
-
   InjectDetails({String code, String file, bool allFrames, String runAt}) {
     if (code != null) this.code = code;
     if (file != null) this.file = file;

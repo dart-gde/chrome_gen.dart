@@ -98,7 +98,6 @@ class ChromeTts {
  * An event from the TTS engine to communicate the status of an utterance.
  */
 class TtsEvent extends ChromeObject {
-
   TtsEvent({String type, var charIndex, String errorMessage}) {
     if (type != null) this.type = type;
     if (charIndex != null) this.charIndex = charIndex;
@@ -141,7 +140,6 @@ class TtsEvent extends ChromeObject {
  * A description of a voice available for speech synthesis.
  */
 class TtsVoice extends ChromeObject {
-
   TtsVoice({String voiceName, String lang, String gender, String extensionId, List<String> eventTypes}) {
     if (voiceName != null) this.voiceName = voiceName;
     if (lang != null) this.lang = lang;

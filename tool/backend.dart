@@ -363,7 +363,6 @@ class _DefaultBackendContext {
     generator.writeln();
     generator.writeDocs(type.documentation);
     generator.writeln("class ${className} extends ChromeObject {");
-    generator.writeln();
     if (props.isNotEmpty) {
       generator.write("${className}({");
       generator.write(props.map((p) => "${p.type} ${p.name}").join(', '));

@@ -112,7 +112,6 @@ class OnInputEnteredEvent {
  * A suggest result.
  */
 class SuggestResult extends ChromeObject {
-
   SuggestResult({String content, String description}) {
     if (content != null) this.content = content;
     if (description != null) this.description = description;
@@ -142,7 +141,6 @@ class SuggestResult extends ChromeObject {
  * A suggest result.
  */
 class DefaultSuggestResult extends ChromeObject {
-
   DefaultSuggestResult({String description}) {
     if (description != null) this.description = description;
   }

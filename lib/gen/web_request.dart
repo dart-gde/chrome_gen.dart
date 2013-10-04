@@ -140,7 +140,6 @@ class OnAuthRequiredEvent {
  * An object describing filters to apply to webRequest events.
  */
 class RequestFilter extends ChromeObject {
-
   RequestFilter({List<String> urls, List<String> types, int tabId, int windowId}) {
     if (urls != null) this.urls = urls;
     if (types != null) this.types = types;
@@ -176,7 +175,6 @@ class RequestFilter extends ChromeObject {
  * containing the keys `name` and either `value` or `binaryValue`.
  */
 class HttpHeaders extends ChromeObject {
-
   HttpHeaders();
 
   HttpHeaders.fromProxy(JsObject proxy): super.fromProxy(proxy);
@@ -187,7 +185,6 @@ class HttpHeaders extends ChromeObject {
  * applied. Allows the event handler to modify network requests.
  */
 class BlockingResponse extends ChromeObject {
-
   BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, HttpHeaders responseHeaders, Map authCredentials}) {
     if (cancel != null) this.cancel = cancel;
     if (redirectUrl != null) this.redirectUrl = redirectUrl;
@@ -242,7 +239,6 @@ class BlockingResponse extends ChromeObject {
  * Contains data uploaded in a URL request.
  */
 class UploadData extends ChromeObject {
-
   UploadData({var bytes, String file}) {
     if (bytes != null) this.bytes = bytes;
     if (file != null) this.file = file;
