@@ -49,9 +49,9 @@ class ChromeBluetooth {
    * Get a bluetooth devices known to the system.  Known devices are either
    * currently paired, or have been paired in the past.
    * [options]: Controls which devices are returned and provides
-   * |deviceCallback|, which is called for each matching device.
+   * [deviceCallback], which is called for each matching device.
    * [callback]: Called when the search is completed.
-   * |options.deviceCallback| will not be called after              |callback|
+   * |options.deviceCallback| will not be called after              [callback]
    * has been called.
    */
   Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
@@ -147,7 +147,7 @@ class ChromeBluetooth {
 
   /**
    * Start discovery. Discovered devices will be returned via the
-   * |onBluetoothDeviceDiscovered| callback.  Discovery will fail to start if it is
+   * [onBluetoothDeviceDiscovered] callback.  Discovery will fail to start if it is
    * already in progress.  Discovery can be resource intensive: stopDiscovery
    * should be called as soon as possible.
    * [options]: The options for this function.

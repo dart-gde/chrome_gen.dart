@@ -656,6 +656,11 @@ String cleanDocComments(String str) {
       (Match m) => "\n[${m.group(1)}]:");
   str = str.replaceAll(new RegExp('\n\s?(\n\s?)+'), '\n\n');
 
+  // |width|x|height| ==> [width]x[height]
+  str = str.replaceAllMapped(
+      new RegExp(r"\|(\w+)\|"),
+      (Match m) => "[${m.group(1)}]");
+
   str = str.replaceAll('<code>', '`');
   str = str.replaceAll('</code>', '`');
 

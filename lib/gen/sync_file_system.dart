@@ -34,7 +34,7 @@ class ChromeSyncFileSystem {
    * storage for the app. By default it is set to `'last_write_win'`. When
    * conflict resolution policy is set to `'last_write_win'` conflicts for
    * existing files are automatically resolved next time the file is updated.
-   * |callback| can be optionally given to know if the request has succeeded or
+   * [callback] can be optionally given to know if the request has succeeded or
    * not.
    */
   Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
@@ -147,7 +147,7 @@ class SyncAction extends ChromeEnum {
  * The sync service is not synchronizing files because the remote service is
  * (temporarily) unavailable due to some recoverable errors, e.g. network is
  * offline, the remote service is down or not reachable etc. More details should
- * be given by |description| parameter in OnServiceInfoUpdated (which could
+ * be given by [description] parameter in OnServiceInfoUpdated (which could
  * contain service-specific details). The sync service is disabled and the
  * content will never sync. (E.g. this could happen when the user has no account
  * on the remote service or the sync service has had an unrecoverable error.)
