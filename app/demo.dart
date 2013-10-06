@@ -38,6 +38,11 @@ void main() {
   action('getPackageDirectoryEntry()', handleGetPackageDirectoryEntry);
   br();
 
+  label('socket');
+  action('read()', handleSocketRead);
+  action('read() error', handleSocketReadError);
+  br();
+
   label('system');
   action('cpu.info', handleSystemCpu);
   action('cpu.memory', handleSystemMemory);
@@ -171,5 +176,49 @@ void handleSystemCpu() {
 void handleSystemMemory() {
   chrome.system_memory.getInfo().then((chrome.MemoryInfo info) {
     summary('${info.capacity} bytes');
+  });
+}
+
+void handleSocketRead() {
+  summary("starting read...");
+
+  int socketId = 0;
+
+  chrome.socket.create(chrome.SocketType.TCP).then((chrome.CreateInfo info) {
+    socketId = info.socketId;
+    print("socketId: ${socketId}");
+    return chrome.socket.connect(socketId, 'www.google.com', 80);
+  }).then((int code) {
+    print("code: ${code}");
+    chrome.socket.write(socketId, new chrome.ArrayBuffer.fromString('HEAD /robots.txt HTTP/1.0\r\n\r\n'));
+    return chrome.socket.read(socketId);
+  }).then((chrome.SocketReadInfo info) {
+    print("info.resultCode: ${info.resultCode}");
+    String str = new String.fromCharCodes(info.data.getBytes());
+    summary(str);
+    return chrome.socket.read(socketId);
+  }).then((chrome.SocketReadInfo info) {
+    // info.resultCode should == -15
+    print("info.resultCode: ${info.resultCode}");
+  }).catchError((e) {
+    summary("error: ${e}");
+  });
+}
+
+void handleSocketReadError() {
+  int socketId = 0;
+
+  chrome.socket.create(chrome.SocketType.TCP).then((chrome.CreateInfo info) {
+    socketId = info.socketId;
+    print("socketId: ${socketId}");
+    return chrome.socket.connect(socketId, 'www.google.com', 80);
+  }).then((int code) {
+    print("code: ${code}");
+    chrome.socket.destroy(socketId);
+    return chrome.socket.read(socketId);
+  }).then((chrome.SocketReadInfo info) {
+    summary("info.resultCode: ${info.resultCode}");
+  }).catchError((e) {
+    summary("error: ${e}");
   });
 }

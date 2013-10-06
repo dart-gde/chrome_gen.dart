@@ -58,17 +58,36 @@ class Bounds extends ChromeObject {
   set height(int value) => proxy['height'] = value;
 }
 
-// TODO: this implementation needs to be fleshed out
 class ArrayBuffer extends ChromeObject {
   static ArrayBuffer create(JsObject proxy) => new ArrayBuffer.fromProxy(proxy);
 
   ArrayBuffer();
   ArrayBuffer.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
+  factory ArrayBuffer.fromBytes(List<int> data) {
+    var uint8Array = new JsObject(context['Uint8Array'], [jsify(data)]);
+
+    return new ArrayBuffer.fromProxy(uint8Array['buffer']);
+  }
+
   factory ArrayBuffer.fromString(String str) {
     var uint8Array = new JsObject(context['Uint8Array'], [jsify(str.codeUnits)]);
 
     return new ArrayBuffer.fromProxy(uint8Array['buffer']);
+  }
+
+  List<int> getBytes() {
+    var int8View = new JsObject(context['Uint8Array'], [proxy]);
+
+    List<int> result = new List<int>(int8View['length']);
+
+    // TODO: this is _very_ slow
+    // can we instead do: jsArray = Array.apply([], int8View);
+    for (int i = 0; i < result.length; i++) {
+      result[i] = int8View[i];
+    }
+
+    return result;
   }
 }
 
