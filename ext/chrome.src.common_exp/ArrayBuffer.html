@@ -39,10 +39,30 @@ class ArrayBuffer extends ChromeObject {
  ArrayBuffer();
  ArrayBuffer.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
+ factory ArrayBuffer.fromBytes(List&lt;int&gt; data) {
+   var uint8Array = new JsObject(context['Uint8Array'], [jsify(data)]);
+
+   return new ArrayBuffer.fromProxy(uint8Array['buffer']);
+ }
+
  factory ArrayBuffer.fromString(String str) {
    var uint8Array = new JsObject(context['Uint8Array'], [jsify(str.codeUnits)]);
 
    return new ArrayBuffer.fromProxy(uint8Array['buffer']);
+ }
+
+ List&lt;int&gt; getBytes() {
+   var int8View = new JsObject(context['Uint8Array'], [proxy]);
+
+   List&lt;int&gt; result = new List&lt;int&gt;(int8View['length']);
+
+   // TODO: this is _very_ slow
+   // can we instead do: jsArray = Array.apply([], int8View);
+   for (int i = 0; i &lt; result.length; i++) {
+     result[i] = int8View[i];
+   }
+
+   return result;
  }
 }
 </pre>
@@ -76,6 +96,20 @@ a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
 ArrayBuffer();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="fromBytes">
+<button class="show-code">Code</button>
+factory <strong>ArrayBuffer.fromBytes</strong>(List&lt;int&gt; data) <a class="anchor-link" href="#fromBytes"
+              title="Permalink to ArrayBuffer.ArrayBuffer.fromBytes">#</a></h4>
+<div class="doc">
+<pre class="source">
+factory ArrayBuffer.fromBytes(List&lt;int&gt; data) {
+ var uint8Array = new JsObject(context['Uint8Array'], [jsify(data)]);
+
+ return new ArrayBuffer.fromProxy(uint8Array['buffer']);
+}
 </pre>
 </div>
 </div>
@@ -123,8 +157,30 @@ final JsObject proxy
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
+<div class="method"><h4 id="getBytes">
+<button class="show-code">Code</button>
+List&lt;int&gt; <strong>getBytes</strong>() <a class="anchor-link" href="#getBytes"
+              title="Permalink to ArrayBuffer.getBytes">#</a></h4>
+<div class="doc">
+<pre class="source">
+List&lt;int&gt; getBytes() {
+ var int8View = new JsObject(context['Uint8Array'], [proxy]);
+
+ List&lt;int&gt; result = new List&lt;int&gt;(int8View['length']);
+
+ // TODO: this is _very_ slow
+ // can we instead do: jsArray = Array.apply([], int8View);
+ for (int i = 0; i &lt; result.length; i++) {
+   result[i] = int8View[i];
+ }
+
+ return result;
+}
+</pre>
+</div>
+</div>
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
 JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
