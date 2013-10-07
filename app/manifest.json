@@ -17,6 +17,7 @@
     "idle",
     "system.cpu",
     "system.memory",
+    { "socket" : ["tcp-connect", "tcp-listen"] },
     "tts"
   ]
 }
