@@ -9,6 +9,61 @@ export 'web_idl_model.dart' show EMPTY;
 
 final Parser spaces = (space.many > success(EMPTY)) % 'spaces';
 
+final reservedNames = [ "readonly",
+                        // ArgumentNameKeyword
+                        "attribute",
+                        "callback",
+                        "const",
+                        "creator",
+                        "deleter",
+                        "dictionary",
+                        "enum",
+                        "exception",
+                        "getter",
+                        "implements",
+                        "inherit",
+                        "interface",
+                        "legacycaller",
+                        "partial",
+                        "setter",
+                        "static",
+                        "stringifier",
+                        "typedef",
+                        "unrestricted",
+                        // Other
+                        "-",
+                        ".",
+                        "...",
+                        ":",
+                        ";",
+                        "<",
+                        ">",
+                        "?",
+                        "Date",
+                        "DOMString",
+                        "Infinity",
+                        "NaN",
+                        "any",
+                        "any?",
+                        "boolean",
+                        "byte",
+                        "double",
+                        "false",
+                        "float",
+                        "long",
+                        "null",
+                        "object",
+                        "octet",
+                        "or",
+                        "optional",
+                        "sequence",
+                        "short",
+                        "true",
+                        "unsigned",
+                        "void",
+                        // Custom google reserved word
+                        "namespace"];
+
 _consStr(c) => (String cs) => "$c$cs";
 
 class ReservedNames {
@@ -217,63 +272,6 @@ class BaseWebIdlParser {
 
   Parser brackets(Parser p) => p.between(symbol('['), symbol(']'));
 }
-
-
-
-final reservedNames = [ "readonly",
-                        // ArgumentNameKeyword
-                        "attribute",
-                        "callback",
-                        "const",
-                        "creator",
-                        "deleter",
-                        "dictionary",
-                        "enum",
-                        "exception",
-                        "getter",
-                        "implements",
-                        "inherit",
-                        "interface",
-                        "legacycaller",
-                        "partial",
-                        "setter",
-                        "static",
-                        "stringifier",
-                        "typedef",
-                        "unrestricted",
-                        // Other
-                        "-",
-                        ".",
-                        "...",
-                        ":",
-                        ";",
-                        "<",
-                        ">",
-                        "?",
-                        "Date",
-                        "DOMString",
-                        "Infinity",
-                        "NaN",
-                        "any",
-                        "any?",
-                        "boolean",
-                        "byte",
-                        "double",
-                        "false",
-                        "float",
-                        "long",
-                        "null",
-                        "object",
-                        "octet",
-                        "or",
-                        "optional",
-                        "sequence",
-                        "short",
-                        "true",
-                        "unsigned",
-                        "void",
-                        // Custom google reserved word
-                        "namespace"];
 
 // http://www.w3.org/TR/WebIDL/#idl-grammar
 class WebIdlParser extends BaseWebIdlParser {
