@@ -6,7 +6,7 @@ import 'chrome_model.dart';
 class EMPTY {
   // EPSILON
   const EMPTY();
-  toString() => "EMPTY";
+  String toString() => "EMPTY";
 }
 
 /**
@@ -14,14 +14,14 @@ class EMPTY {
  */
 class IDLCollector {
   IDLNamespace idlNamespace;
-  namespace(l, sb) => l; // Must return type passed for parser to continue.
-  interface(l) => l; // Must return type passed for parser to continue.
-  interfaceMember(l, sb) => l; // Must return type passed for parser to continue.
-  dictionary(l) => l; // Must return type passed for parser to continue.
-  dictionaryMember(l, sb) => l; // Must return type passed for parser to continue.
-  dictionaryMethod(l, sb) => l; // Must return type passed for parser to continue.
-  enumStatement(l, sb) => l; // Must return type passed for parser to continue.
-  callback(l, sb) => l; // Must return type passed for parser to continue.
+  List namespace(List l, StringBuffer sb) => l; // Must return type passed for parser to continue.
+  List interface(List l) => l; // Must return type passed for parser to continue.
+  List interfaceMember(List l, StringBuffer sb) => l; // Must return type passed for parser to continue.
+  List dictionary(List l) => l; // Must return type passed for parser to continue.
+  List dictionaryMember(List l, StringBuffer sb) => l; // Must return type passed for parser to continue.
+  List dictionaryMethod(List l, StringBuffer sb) => l; // Must return type passed for parser to continue.
+  List enumStatement(List l, StringBuffer sb) => l; // Must return type passed for parser to continue.
+  List callback(List l, StringBuffer sb) => l; // Must return type passed for parser to continue.
 }
 
 class IDLCollectorChrome implements IDLCollector {
@@ -30,7 +30,7 @@ class IDLCollectorChrome implements IDLCollector {
   List _dictionaryMembers = [];
   List _dictionaryMethods = [];
 
-  List namespace(l, sb) {
+  List namespace(l, StringBuffer sb) {
     idlNamespace.name = l[2].join('.');
     sb.clear();
 
@@ -83,7 +83,7 @@ class IDLCollectorChrome implements IDLCollector {
     return function;
   }
 
-  List interfaceMember(List l, sb) {
+  List interfaceMember(List l, StringBuffer sb) {
     IDLFunction function = _functionParser(l, sb.toString());
     sb.clear();
     _functions.add(function);
@@ -107,7 +107,7 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  List dictionaryMember(List l, sb) {
+  List dictionaryMember(List l, StringBuffer sb) {
     String name = l[1];
     IDLProperty member = new IDLProperty(name);
     sb.clear();
@@ -119,11 +119,12 @@ class IDLCollectorChrome implements IDLCollector {
 
     member.returnType = new IDLType(type);
     _dictionaryMembers.add(member);
+
     // Must return type passed for parser to continue.
     return l;
   }
 
-  List dictionaryMethod(List l, sb) {
+  List dictionaryMethod(List l, StringBuffer sb) {
     IDLFunction function = _functionParser(l, sb.toString());
     sb.clear();
     _dictionaryMethods.add(function);
@@ -132,11 +133,8 @@ class IDLCollectorChrome implements IDLCollector {
     return l;
   }
 
-  List enumStatement(List l, sb) {
+  List enumStatement(List l, StringBuffer sb) {
     // Example from usb [enum, Direction, [in, [,, out, EMPTY]], ;]
-    //    print("enumStatement:");
-    //    print(l);
-
     String enumName = l[1];
     var arg = l[2];
     IDLEnum idlEnum = new IDLEnum(enumName);
@@ -274,7 +272,7 @@ class IDLCollectorChrome implements IDLCollector {
     }
   }
 
-  List callback(List l, sb) {
+  List callback(List l, StringBuffer sb) {
     IDLFunction function = new IDLFunction(l[0], sb.toString());
     sb.clear();
     var arg = l[3];
