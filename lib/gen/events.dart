@@ -321,3 +321,4 @@ class UrlFilter extends ChromeObject {
 }
 
 Rule _createRule(JsObject proxy) => proxy == null ? null : new Rule.fromProxy(proxy);
+

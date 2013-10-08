@@ -228,3 +228,4 @@ DataBit _createDataBit(String value) => DataBit.VALUES.singleWhere((ChromeEnum e
 ParityBit _createParityBit(String value) => ParityBit.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 StopBit _createStopBit(String value) => StopBit.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);
+

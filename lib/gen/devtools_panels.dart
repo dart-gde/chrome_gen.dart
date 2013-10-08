@@ -194,3 +194,4 @@ ExtensionPanel _createExtensionPanel(JsObject proxy) => proxy == null ? null : n
 Resource _createResource(JsObject proxy) => proxy == null ? null : new Resource.fromProxy(proxy);
 ExtensionSidebarPane _createExtensionSidebarPane(JsObject proxy) => proxy == null ? null : new ExtensionSidebarPane.fromProxy(proxy);
 Button _createButton(JsObject proxy) => proxy == null ? null : new Button.fromProxy(proxy);
+

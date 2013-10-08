@@ -69,9 +69,9 @@ class ChromeSyncFileSystem {
   }
 
   /**
-   * Returns the $ref:FileStatus for the given `fileEntry`. The status value can
-   * be `'synced'`, `'pending'` or `'conflicting'`. Note that `'conflicting'`
-   * state only happens when the service's conflict resolution policy is set to
+   * Returns the [FileStatus] for the given `fileEntry`. The status value can be
+   * `'synced'`, `'pending'` or `'conflicting'`. Note that `'conflicting'` state
+   * only happens when the service's conflict resolution policy is set to
    * `'manual'`.
    * 
    * Returns:
@@ -84,8 +84,8 @@ class ChromeSyncFileSystem {
   }
 
   /**
-   * Returns each $ref:FileStatus for the given `fileEntry` array. Typically
-   * called with the result from dirReader.readEntries().
+   * Returns each [FileStatus] for the given `fileEntry` array. Typically called
+   * with the result from dirReader.readEntries().
    * 
    * Returns:
    * A callback type for getFileStatuses.
@@ -278,3 +278,4 @@ ServiceInfo _createServiceInfo(JsObject proxy) => proxy == null ? null : new Ser
 FileInfo _createFileInfo(JsObject proxy) => proxy == null ? null : new FileInfo.fromProxy(proxy);
 SyncAction _createSyncAction(String value) => SyncAction.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 SyncDirection _createSyncDirection(String value) => SyncDirection.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+

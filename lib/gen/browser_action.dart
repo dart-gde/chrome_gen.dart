@@ -145,3 +145,4 @@ class ImageDataType extends ChromeObject {
 
 ColorArray _createColorArray(JsObject proxy) => proxy == null ? null : new ColorArray.fromProxy(proxy);
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
+

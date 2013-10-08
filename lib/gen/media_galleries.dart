@@ -89,3 +89,4 @@ class MediaFileSystemMetadata extends ChromeObject {
 
 MediaFileSystemMetadata _createMediaFileSystemMetadata(JsObject proxy) => proxy == null ? null : new MediaFileSystemMetadata.fromProxy(proxy);
 GetMediaFileSystemsInteractivity _createGetMediaFileSystemsInteractivity(String value) => GetMediaFileSystemsInteractivity.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+

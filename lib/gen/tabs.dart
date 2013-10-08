@@ -399,14 +399,11 @@ class ChromeTabs {
  * Fired when a tab is updated.
  */
 class OnUpdatedEvent {
-
   final int tabId;
-
   /**
    * Lists the changes to the state of the tab that was updated.
    */
   final Map changeInfo;
-
   /**
    * Gives the state of the tab that was updated.
    */
@@ -422,9 +419,7 @@ class OnUpdatedEvent {
  * is moved between windows. For that, see [onDetached.]
  */
 class TabsOnMovedEvent {
-
   final int tabId;
-
   final Map moveInfo;
 
   TabsOnMovedEvent(this.tabId, this.moveInfo);
@@ -434,12 +429,10 @@ class TabsOnMovedEvent {
  * Deprecated. Please use onActivated.
  */
 class OnSelectionChangedEvent {
-
   /**
    * The ID of the tab that has become active.
    */
   final int tabId;
-
   final Map selectInfo;
 
   OnSelectionChangedEvent(this.tabId, this.selectInfo);
@@ -449,12 +442,10 @@ class OnSelectionChangedEvent {
  * Deprecated. Please use onActivated.
  */
 class OnActiveChangedEvent {
-
   /**
    * The ID of the tab that has become active.
    */
   final int tabId;
-
   final Map selectInfo;
 
   OnActiveChangedEvent(this.tabId, this.selectInfo);
@@ -465,9 +456,7 @@ class OnActiveChangedEvent {
  * moved between windows.
  */
 class OnDetachedEvent {
-
   final int tabId;
-
   final Map detachInfo;
 
   OnDetachedEvent(this.tabId, this.detachInfo);
@@ -478,9 +467,7 @@ class OnDetachedEvent {
  * between windows.
  */
 class OnAttachedEvent {
-
   final int tabId;
-
   final Map attachInfo;
 
   OnAttachedEvent(this.tabId, this.attachInfo);
@@ -490,9 +477,7 @@ class OnAttachedEvent {
  * Fired when a tab is closed.
  */
 class TabsOnRemovedEvent {
-
   final int tabId;
-
   final Map removeInfo;
 
   TabsOnRemovedEvent(this.tabId, this.removeInfo);
@@ -502,9 +487,7 @@ class TabsOnRemovedEvent {
  * Fired when a tab is replaced with another tab due to prerendering or instant.
  */
 class OnReplacedEvent {
-
   final int addedTabId;
-
   final int removedTabId;
 
   OnReplacedEvent(this.addedTabId, this.removedTabId);
@@ -694,3 +677,4 @@ TabsOnRemovedEvent _createTabsOnRemovedEvent(int tabId, JsObject removeInfo) =>
     new TabsOnRemovedEvent(tabId, mapify(removeInfo));
 OnReplacedEvent _createOnReplacedEvent(int addedTabId, int removedTabId) =>
     new OnReplacedEvent(addedTabId, removedTabId);
+

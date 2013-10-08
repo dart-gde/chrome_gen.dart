@@ -125,9 +125,7 @@ class ChromeWebRequest {
  * request.
  */
 class OnAuthRequiredEvent {
-
   final Map details;
-
   /**
    * `optional`
    */
@@ -262,3 +260,4 @@ class UploadData extends ChromeObject {
 OnAuthRequiredEvent _createOnAuthRequiredEvent(JsObject details, JsObject callback) =>
     new OnAuthRequiredEvent(mapify(details), callback);
 HttpHeaders _createHttpHeaders(JsObject proxy) => proxy == null ? null : new HttpHeaders.fromProxy(proxy);
+

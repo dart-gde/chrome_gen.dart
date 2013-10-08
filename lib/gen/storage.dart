@@ -39,13 +39,11 @@ class ChromeStorage {
  * Fired when one or more items change.
  */
 class StorageOnChangedEvent {
-
   /**
    * Object mapping each key that changed to its corresponding [StorageChange]
    * for that item.
    */
   final Map changes;
-
   /**
    * The name of the storage area (`sync` or `local`) the changes are for.
    */
@@ -149,3 +147,4 @@ class StorageArea extends ChromeObject {
 StorageArea _createStorageArea(JsObject proxy) => proxy == null ? null : new StorageArea.fromProxy(proxy);
 StorageOnChangedEvent _createStorageOnChangedEvent(JsObject changes, String areaName) =>
     new StorageOnChangedEvent(mapify(changes), areaName);
+

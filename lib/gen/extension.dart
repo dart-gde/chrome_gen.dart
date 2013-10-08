@@ -153,7 +153,6 @@ class ChromeExtension {
  * Deprecated: please use onMessage.
  */
 class OnRequestEvent {
-
   /**
    * The request sent by the calling script.
    * `optional`
@@ -161,9 +160,7 @@ class OnRequestEvent {
    * The request sent by the calling script.
    */
   final dynamic request;
-
   final MessageSender sender;
-
   /**
    * Function to call (at most once) when you have a response. The argument
    * should be any JSON-ifiable object, or undefined if there is no response. If
@@ -179,7 +176,6 @@ class OnRequestEvent {
  * Deprecated: please use onMessageExternal.
  */
 class OnRequestExternalEvent {
-
   /**
    * The request sent by the calling script.
    * `optional`
@@ -187,9 +183,7 @@ class OnRequestExternalEvent {
    * The request sent by the calling script.
    */
   final dynamic request;
-
   final MessageSender sender;
-
   /**
    * Function to call when you have a response. The argument should be any
    * JSON-ifiable object, or undefined if there is no response.
@@ -204,3 +198,4 @@ OnRequestEvent _createOnRequestEvent(JsObject request, JsObject sender, JsObject
 OnRequestExternalEvent _createOnRequestExternalEvent(JsObject request, JsObject sender, JsObject sendResponse) =>
     new OnRequestExternalEvent(request, _createMessageSender(sender), sendResponse);
 MessageSender _createMessageSender(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);
+

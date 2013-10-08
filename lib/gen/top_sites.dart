@@ -52,3 +52,4 @@ class MostVisitedURL extends ChromeObject {
 }
 
 MostVisitedURL _createMostVisitedURL(JsObject proxy) => proxy == null ? null : new MostVisitedURL.fromProxy(proxy);
+
