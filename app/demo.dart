@@ -15,6 +15,14 @@ void main() {
   action("fullscreen()", () => chrome.app_window.current().fullscreen());
   br();
 
+  label('audio');
+  action("getInfo()", handleAudioGetInfo);
+  br();
+
+  label('fileSystem');
+  action("chooseEntry()", handleChooseEntry);
+  br();
+
   label('i18n');
   action("message()", handleI18NMessage);
   action("languages()", handleI18NLanguages);
@@ -158,6 +166,12 @@ void handleAlarmsCreate() {
   summary('alarms.create: firing event in 1 minute');
 }
 
+void handleAudioGetInfo() {
+  chrome.audio.getInfo().then((chrome.GetInfoResult info) {
+    summary("${info.outputInfo} ${info.inputInfo}");
+  });
+}
+
 void handleAppWindowCreate() {
   chrome.app_window.create('demo.html');
 }
@@ -220,5 +234,14 @@ void handleSocketReadError() {
     summary("info.resultCode: ${info.resultCode}");
   }).catchError((e) {
     summary("error: ${e}");
+  });
+}
+
+void handleChooseEntry() {
+  // TODO: we need to hand-write chrome.fileSystem.chooseEntry(); it's return is
+  // weird.
+  chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_WRITABLE_FILE);
+  chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    summary("result: ${result}");
   });
 }

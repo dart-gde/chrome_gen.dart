@@ -79,9 +79,11 @@ class _DefaultBackendContext {
 
     _printClass();
 
-    library.eventTypes.forEach((t) => _printEventType(t));
-    library.enumTypes.forEach((t) => _printEnumType(t));
-    library.types.forEach((t) => _printDeclaredType(t));
+    library.eventTypes.forEach(_printEventType);
+    library.enumTypes.forEach(_printEnumType);
+    library.types.forEach(_printDeclaredType);
+
+    library.returnTypes.forEach(_printReturnType);
 
     if(_neededFactories.isNotEmpty) {
       generator.writeln();
@@ -219,6 +221,9 @@ class _DefaultBackendContext {
       generator.write("var completer = new ChromeCompleter${returnType}.");
       if (future.parameters.length == 0) {
         generator.writeln("noArgs();");
+      } else if (future.parameters.length == 1 && future.parameters.first.isCombinedReturnValue) {
+        ChromeType param = future.parameters.first;
+        generator.writeln("oneArg(${param.refName}._create);");
       } else if (future.parameters.length == 1) {
         ChromeType param = future.parameters.first;
         var callbackConverter = getCallbackConverter(param);
@@ -227,12 +232,6 @@ class _DefaultBackendContext {
         } else {
           generator.writeln("oneArg(${callbackConverter});");
         }
-      } else if (future.parameters.length == 2) {
-        // TODO: currently, the json convert is changing 2 arg calls to 1 arg.
-        throw new UnimplementedError('not yet supported');
-        generator.writeln("twoArgs((arg1, arg2) {");
-        generator.writeln("return null;");
-        generator.writeln("});");
       } else {
         throw new StateError('unsupported number of params(${future.parameters.length})');
       }
@@ -333,8 +332,7 @@ class _DefaultBackendContext {
     type.values.forEach((ChromeEnumEntry entry) {
       generator.writeDocs(entry.documentation);
 
-      // TODO: do proper const name generation - WITH_UNDERSCORE
-      var constName = entry.name.toUpperCase();
+      var constName = fromCamelCase(entry.name).toUpperCase();
       constNames.add(constName);
 
       generator.writeln("static const ${type.name} ${constName} "
@@ -385,6 +383,32 @@ class _DefaultBackendContext {
 
     type.methods.forEach((m) => _printMethod(m, 'proxy'));
 
+    generator.writeln("}");
+  }
+
+  void _printReturnType(ChromeReturnType type) {
+    String className = type.name;
+
+    generator.writeln();
+    generator.writeln("class ${className} {");
+    generator.write("static ${className} _create(");
+    generator.write(type.params.map((p) => p.name).join(', '));
+      generator.writeln(") {");
+    generator.write("return new ${className}._(");
+    generator.write(type.params.map((ChromeType p) {
+      String converter = getReturnConverter(p);
+      return converter.replaceFirst('%s', p.name);
+    }).join(', '));
+    generator.writeln(");");
+    generator.writeln("}");
+    generator.writeln();
+    type.params.forEach((ChromeType p) {
+      generator.writeln("${p.toReturnString()} ${p.name};");
+    });
+    generator.writeln();
+    generator.write("${className}._(");
+    generator.write(type.params.map((p) => "this.${p.name}").join(', '));
+    generator.writeln(");");
     generator.writeln("}");
   }
 

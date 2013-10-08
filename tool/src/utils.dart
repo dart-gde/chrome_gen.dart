@@ -41,9 +41,13 @@ String toCamelCase(String str) {
 
 /// fooBar ==> foo_bar
 String fromCamelCase(String str) {
-  return str.replaceAllMapped(
-      new RegExp(r"[A-Z]"),
-      (Match m) => "_${m.group(0).toLowerCase()}");
+  if (str == str.toUpperCase()) {
+    return str;
+  } else {
+    return str.replaceAllMapped(
+        new RegExp(r"[A-Z]"),
+        (Match m) => "_${m.group(0).toLowerCase()}");
+  }
 }
 
 /// foo ==> Foo

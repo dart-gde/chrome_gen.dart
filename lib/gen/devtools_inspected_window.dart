@@ -36,8 +36,8 @@ class ChromeDevtoolsInspectedWindow {
    * [isException] Set if an exception was caught while evaluating the
    * expression.
    */
-  Future<JsObject> eval(String expression) {
-    var completer = new ChromeCompleter<JsObject>.oneArg();
+  Future<EvalResult> eval(String expression) {
+    var completer = new ChromeCompleter<EvalResult>.oneArg(EvalResult._create);
     _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
     return completer.future;
   }
@@ -120,8 +120,8 @@ class Resource extends ChromeObject {
    * [encoding] Empty if content is not encoded, encoding name otherwise.
    * Currently, only base64 is supported.
    */
-  Future<JsObject> getContent() {
-    var completer = new ChromeCompleter<JsObject>.oneArg();
+  Future<GetResourceContentResult> getContent() {
+    var completer = new ChromeCompleter<GetResourceContentResult>.oneArg(GetResourceContentResult._create);
     proxy.callMethod('getContent', [completer.callback]);
     return completer.future;
   }
@@ -145,6 +145,28 @@ class Resource extends ChromeObject {
     proxy.callMethod('setContent', [content, commit, completer.callback]);
     return completer.future;
   }
+}
+
+class GetResourceContentResult {
+  static GetResourceContentResult _create(content, encoding) {
+    return new GetResourceContentResult._(content, encoding);
+  }
+
+  String content;
+  String encoding;
+
+  GetResourceContentResult._(this.content, this.encoding);
+}
+
+class EvalResult {
+  static EvalResult _create(result, isException) {
+    return new EvalResult._(mapify(result), isException);
+  }
+
+  Map<String, dynamic> result;
+  bool isException;
+
+  EvalResult._(this.result, this.isException);
 }
 
 Resource _createResource(JsObject proxy) => proxy == null ? null : new Resource.fromProxy(proxy);

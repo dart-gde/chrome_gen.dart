@@ -51,8 +51,8 @@ class ChromeFileSystem {
    * [entry] null
    * [fileEntries] null
    */
-  Future<JsObject> chooseEntry([ChooseEntryOptions options]) {
-    var completer = new ChromeCompleter<JsObject>.oneArg();
+  Future<ChooseEntryResult> chooseEntry([ChooseEntryOptions options]) {
+    var completer = new ChromeCompleter<ChooseEntryResult>.oneArg(ChooseEntryResult._create);
     _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
     return completer.future;
   }
@@ -109,12 +109,12 @@ class ChromeFileSystem {
  * Chrome 31.
  */
 class ChooseEntryType extends ChromeEnum {
-  static const ChooseEntryType OPENFILE = const ChooseEntryType._('openFile');
-  static const ChooseEntryType OPENWRITABLEFILE = const ChooseEntryType._('openWritableFile');
-  static const ChooseEntryType SAVEFILE = const ChooseEntryType._('saveFile');
-  static const ChooseEntryType OPENDIRECTORY = const ChooseEntryType._('openDirectory');
+  static const ChooseEntryType OPEN_FILE = const ChooseEntryType._('openFile');
+  static const ChooseEntryType OPEN_WRITABLE_FILE = const ChooseEntryType._('openWritableFile');
+  static const ChooseEntryType SAVE_FILE = const ChooseEntryType._('saveFile');
+  static const ChooseEntryType OPEN_DIRECTORY = const ChooseEntryType._('openDirectory');
 
-  static const List<ChooseEntryType> VALUES = const[OPENFILE, OPENWRITABLEFILE, SAVEFILE, OPENDIRECTORY];
+  static const List<ChooseEntryType> VALUES = const[OPEN_FILE, OPEN_WRITABLE_FILE, SAVE_FILE, OPEN_DIRECTORY];
 
   const ChooseEntryType._(String str): super(str);
 }
@@ -163,6 +163,17 @@ class ChooseEntryOptions extends ChromeObject {
 
   bool get acceptsMultiple => proxy['acceptsMultiple'];
   set acceptsMultiple(bool value) => proxy['acceptsMultiple'] = value;
+}
+
+class ChooseEntryResult {
+  static ChooseEntryResult _create(entry, fileEntries) {
+    return new ChooseEntryResult._(entry, fileEntries);
+  }
+
+  dynamic entry;
+  dynamic fileEntries;
+
+  ChooseEntryResult._(this.entry, this.fileEntries);
 }
 
 ChooseEntryType _createChooseEntryType(String value) => ChooseEntryType.VALUES.singleWhere((ChromeEnum e) => e.value == value);

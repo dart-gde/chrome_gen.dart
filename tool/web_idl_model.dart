@@ -2,6 +2,7 @@
 library web_idl_model;
 
 import 'chrome_model.dart';
+import 'src/utils.dart';
 
 class EMPTY {
   // EPSILON
@@ -476,11 +477,12 @@ ChromeLibrary convert(IDLCollector collector) {
 
 class IDLConverter {
   IDLNamespace namespace;
+  ChromeLibrary library;
 
   ChromeLibrary convert(IDLCollector collector) {
     namespace = collector.idlNamespace;
 
-    ChromeLibrary library =  new ChromeLibrary(namespace.name);
+    library =  new ChromeLibrary(namespace.name);
     library.documentation = cleanDocComments(namespace.description);
 
     library.types.addAll(namespace.declaredTypes.map(_convertDeclaredType));
@@ -541,7 +543,7 @@ class IDLConverter {
     if (chromeMethod.returns == null) {
       if (!idlMethod.parameters.isEmpty && idlMethod.parameters.last.isCallback) {
         ChromeType chromeType = chromeMethod.params.removeLast();
-        chromeMethod.returns = _convertToFuture(chromeType);
+        chromeMethod.returns = _convertToFuture(chromeMethod, chromeType);
       } else {
         chromeMethod.returns = ChromeType.VOID;
       }
@@ -550,7 +552,7 @@ class IDLConverter {
     return chromeMethod;
   }
 
-  ChromeType _convertToFuture(ChromeType chromeType) {
+  ChromeType _convertToFuture(ChromeMethod method, ChromeType chromeType) {
     ChromeType future = new ChromeType();
     future.type = "Future";
 
@@ -566,12 +568,20 @@ class IDLConverter {
     if (params.length == 1) {
       future.parameters.add(params.first);
       future.documentation = cleanDocComments(callback.description);
-    } else if (params.length >= 2) {
-      // TODO: we need to correctly handle mapping multiple parameters to a single
-      // return, ala runtime.requestUpdateCheck() and devtools.inspectedWindow.eval().
-      future.parameters.add(ChromeType.JS_OBJECT);
+    } else if (params.length == 2) {
+      ChromeType type = new ChromeType(
+          type: 'var', refName: "${titleCase(method.name)}Result");
+      type.combinedReturnValue = true;
+      type.parameters.addAll(params);
+
+      library.returnTypes.add(new ChromeReturnType(type.refName, params));
+
+      future.parameters.add(type);
       future.documentation = params.map(
           (p) => "[${p.name}] ${p.documentation}").join('\n');
+    } else if (params.length > 2) {
+      throw new UnsupportedError(
+          "unable to convert ${params.length} return values into a single return");
     }
 
     return future;
@@ -676,6 +686,8 @@ String cleanDocComments(String str) {
   // convert whitespace newline ==> newline
   str = str.replaceAll(new RegExp(' \n'), '\n');
   str = str.replaceAll(new RegExp('  +'), ' ');
+
+  str = str.replaceAll('TODO(', 'todo(');
 
   return str.replaceAll('/*', '/');
 }
