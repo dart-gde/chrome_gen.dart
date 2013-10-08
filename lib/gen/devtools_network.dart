@@ -70,6 +70,9 @@ class Request extends ChromeObject {
   }
 }
 
+/**
+ * The return type for [getContent].
+ */
 class GetRequestContentResult {
   static GetRequestContentResult _create(content, encoding) {
     return new GetRequestContentResult._(content, encoding);
@@ -82,3 +85,4 @@ class GetRequestContentResult {
 }
 
 Request _createRequest(JsObject proxy) => proxy == null ? null : new Request.fromProxy(proxy);
+

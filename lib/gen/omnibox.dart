@@ -77,9 +77,7 @@ class ChromeOmnibox {
  * User has changed what is typed into the omnibox.
  */
 class OnInputChangedEvent {
-
   final String text;
-
   /**
    * A callback passed to the onInputChanged event used for sending suggestions
    * back to the browser.
@@ -93,9 +91,7 @@ class OnInputChangedEvent {
  * User has accepted what is typed into the omnibox.
  */
 class OnInputEnteredEvent {
-
   final String text;
-
   /**
    * The window disposition for the omnibox query. This is the recommended
    * context to display results. For example, if the omnibox command is to
@@ -162,3 +158,4 @@ OnInputChangedEvent _createOnInputChangedEvent(String text, JsObject suggest) =>
     new OnInputChangedEvent(text, suggest);
 OnInputEnteredEvent _createOnInputEnteredEvent(String text, String disposition) =>
     new OnInputEnteredEvent(text, disposition);
+

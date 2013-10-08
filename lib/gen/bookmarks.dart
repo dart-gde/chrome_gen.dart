@@ -224,9 +224,7 @@ class ChromeBookmarks {
  * Fired when a bookmark or folder is created.
  */
 class OnCreatedEvent {
-
   final String id;
-
   final BookmarkTreeNode bookmark;
 
   OnCreatedEvent(this.id, this.bookmark);
@@ -238,9 +236,7 @@ class OnCreatedEvent {
  * contents.
  */
 class BookmarksOnRemovedEvent {
-
   final String id;
-
   final Map removeInfo;
 
   BookmarksOnRemovedEvent(this.id, this.removeInfo);
@@ -251,9 +247,7 @@ class BookmarksOnRemovedEvent {
  * and url changes trigger this.
  */
 class BookmarksOnChangedEvent {
-
   final String id;
-
   final Map changeInfo;
 
   BookmarksOnChangedEvent(this.id, this.changeInfo);
@@ -263,9 +257,7 @@ class BookmarksOnChangedEvent {
  * Fired when a bookmark or folder is moved to a different parent folder.
  */
 class BookmarksOnMovedEvent {
-
   final String id;
-
   final Map moveInfo;
 
   BookmarksOnMovedEvent(this.id, this.moveInfo);
@@ -276,9 +268,7 @@ class BookmarksOnMovedEvent {
  * being sorted in the UI.  This is not called as a result of a move().
  */
 class OnChildrenReorderedEvent {
-
   final String id;
-
   final Map reorderInfo;
 
   OnChildrenReorderedEvent(this.id, this.reorderInfo);
@@ -365,3 +355,4 @@ BookmarksOnMovedEvent _createBookmarksOnMovedEvent(String id, JsObject moveInfo)
     new BookmarksOnMovedEvent(id, mapify(moveInfo));
 OnChildrenReorderedEvent _createOnChildrenReorderedEvent(String id, JsObject reorderInfo) =>
     new OnChildrenReorderedEvent(id, mapify(reorderInfo));
+

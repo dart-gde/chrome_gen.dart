@@ -120,18 +120,15 @@ class ChromeProcesses {
  * Fired each time a process is terminated, providing the type of exit.
  */
 class OnExitedEvent {
-
   /**
    * The ID of the process that exited.
    */
   final int processId;
-
   /**
    * The type of exit that occurred for the process - normal, abnormal, killed,
    * crashed. Only available for renderer processes.
    */
   final int exitType;
-
   /**
    * The exit code if the process exited abnormally. Only available for renderer
    * processes.
@@ -308,3 +305,4 @@ Process _createProcess(JsObject proxy) => proxy == null ? null : new Process.fro
 OnExitedEvent _createOnExitedEvent(int processId, int exitType, int exitCode) =>
     new OnExitedEvent(processId, exitType, exitCode);
 Cache _createCache(JsObject proxy) => proxy == null ? null : new Cache.fromProxy(proxy);
+

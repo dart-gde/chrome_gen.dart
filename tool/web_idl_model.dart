@@ -669,6 +669,11 @@ String cleanDocComments(String str) {
       new RegExp(r"\|(\w+)\|"),
       (Match m) => "[${m.group(1)}]");
 
+  // $ref:runtime.onConnect ==> [runtime.onConnect]
+  str = str.replaceAllMapped(
+      new RegExp(r"\$ref:([\.\w]*\w)"),
+      (Match m) => "[${m.group(1)}]");
+
   str = str.replaceAll('<code>', '`');
   str = str.replaceAll('</code>', '`');
 

@@ -81,13 +81,11 @@ class ChromeContextMenus {
  * Fired when a context menu item is clicked.
  */
 class OnClickedEvent {
-
   /**
    * Information about the item clicked and the context where the click
    * happened.
    */
   final OnClickData info;
-
   /**
    * The details of the tab where the click took place. If the click did not
    * take place in a tab, this parameter will be missing.
@@ -199,3 +197,4 @@ OnClickedEvent _createOnClickedEvent(JsObject info, JsObject tab) =>
     new OnClickedEvent(_createOnClickData(info), _createTab(tab));
 OnClickData _createOnClickData(JsObject proxy) => proxy == null ? null : new OnClickData.fromProxy(proxy);
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
+

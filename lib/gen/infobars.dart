@@ -33,3 +33,4 @@ class ChromeInfobars {
 }
 
 Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
+

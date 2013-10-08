@@ -139,3 +139,4 @@ class ContentSetting extends ChromeObject {
 
 ContentSetting _createContentSetting(JsObject proxy) => proxy == null ? null : new ContentSetting.fromProxy(proxy);
 ResourceIdentifier _createResourceIdentifier(JsObject proxy) => proxy == null ? null : new ResourceIdentifier.fromProxy(proxy);
+

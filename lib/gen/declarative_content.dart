@@ -64,3 +64,4 @@ class ShowPageAction extends ChromeObject {
 }
 
 UrlFilter _createUrlFilter(JsObject proxy) => proxy == null ? null : new UrlFilter.fromProxy(proxy);
+

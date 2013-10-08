@@ -118,3 +118,4 @@ class WatchLocationRequestInfo extends ChromeObject {
 
 Location _createLocation(JsObject proxy) => proxy == null ? null : new Location.fromProxy(proxy);
 Coordinates _createCoordinates(JsObject proxy) => proxy == null ? null : new Coordinates.fromProxy(proxy);
+

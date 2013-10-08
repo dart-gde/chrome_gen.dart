@@ -44,10 +44,9 @@ class ChromeAppWindow {
   }
 
   /**
-   * Returns an $ref:AppWindow object for the current script context (ie
-   * JavaScript 'window' object). This can also be called on a handle to a
-   * script context for another page, for example:
-   * otherWindow.chrome.app.window.current().
+   * Returns an [AppWindow] object for the current script context (ie JavaScript
+   * 'window' object). This can also be called on a handle to a script context
+   * for another page, for example: otherWindow.chrome.app.window.current().
    */
   AppWindow current() {
     return _createAppWindow(_app_window.callMethod('current'));
@@ -322,7 +321,7 @@ class AppWindow extends ChromeObject {
   }
 
   /**
-   * Get the window's bounds as a $ref:Bounds object.
+   * Get the window's bounds as a [Bounds] object.
    */
   Bounds getBounds() {
     return _createBounds(proxy.callMethod('getBounds'));
@@ -349,3 +348,4 @@ AppWindow _createAppWindow(JsObject proxy) => proxy == null ? null : new AppWind
 WindowType _createWindowType(String value) => WindowType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 Bounds _createBounds(JsObject proxy) => proxy == null ? null : new Bounds.fromProxy(proxy);
 State _createState(String value) => State.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+

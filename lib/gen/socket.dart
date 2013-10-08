@@ -440,3 +440,4 @@ SocketInfo _createSocketInfo(JsObject proxy) => proxy == null ? null : new Socke
 NetworkInterface _createNetworkInterface(JsObject proxy) => proxy == null ? null : new NetworkInterface.fromProxy(proxy);
 ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);
 SocketType _createSocketType(String value) => SocketType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+

@@ -209,12 +209,10 @@ class ChromeInputIme {
  * This event is sent if this extension owns the active IME.
  */
 class OnKeyEventEvent {
-
   /**
    * ID of the engine receiving the event
    */
   final String engineID;
-
   /**
    * Data on the key event
    */
@@ -227,17 +225,14 @@ class OnKeyEventEvent {
  * This event is sent if this extension owns the active IME.
  */
 class OnCandidateClickedEvent {
-
   /**
    * ID of the engine receiving the event
    */
   final String engineID;
-
   /**
    * ID of the candidate that was clicked.
    */
   final int candidateID;
-
   /**
    * Which mouse buttons was clicked.
    * enum of `left`, `middle`, `right`
@@ -251,12 +246,10 @@ class OnCandidateClickedEvent {
  * Called when the user selects a menu item
  */
 class OnMenuItemActivatedEvent {
-
   /**
    * ID of the engine receiving the event
    */
   final String engineID;
-
   /**
    * Name of the MenuItem which was activated
    */
@@ -271,12 +264,10 @@ class OnMenuItemActivatedEvent {
  * and forth direction.
  */
 class OnSurroundingTextChangedEvent {
-
   /**
    * ID of the engine receiving the event
    */
   final String engineID;
-
   /**
    * The surrounding information.
    */
@@ -444,3 +435,4 @@ OnMenuItemActivatedEvent _createOnMenuItemActivatedEvent(String engineID, String
 OnSurroundingTextChangedEvent _createOnSurroundingTextChangedEvent(String engineID, JsObject surroundingInfo) =>
     new OnSurroundingTextChangedEvent(engineID, mapify(surroundingInfo));
 KeyboardEvent _createKeyboardEvent(JsObject proxy) => proxy == null ? null : new KeyboardEvent.fromProxy(proxy);
+

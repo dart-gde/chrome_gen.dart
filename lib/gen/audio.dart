@@ -122,6 +122,9 @@ class DeviceProperties extends ChromeObject {
   set gain(double value) => proxy['gain'] = value;
 }
 
+/**
+ * The return type for [getInfo].
+ */
 class GetInfoResult {
   static GetInfoResult _create(outputInfo, inputInfo) {
     return new GetInfoResult._(_createOutputDeviceInfo(outputInfo), _createInputDeviceInfo(inputInfo));
@@ -135,3 +138,4 @@ class GetInfoResult {
 
 OutputDeviceInfo _createOutputDeviceInfo(JsObject proxy) => proxy == null ? null : new OutputDeviceInfo.fromProxy(proxy);
 InputDeviceInfo _createInputDeviceInfo(JsObject proxy) => proxy == null ? null : new InputDeviceInfo.fromProxy(proxy);
+

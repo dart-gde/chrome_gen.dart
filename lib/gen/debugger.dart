@@ -105,19 +105,16 @@ class ChromeDebugger {
  * Fired whenever debugging target issues instrumentation event.
  */
 class OnEventEvent {
-
   /**
    * The debuggee that generated this event.
    */
   final Debuggee source;
-
   /**
    * Method name. Should be one of the notifications defined by the [remote
    * debugging
    * protocol](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
    */
   final String method;
-
   /**
    * JSON object with the response. Structure of the response varies depending
    * on the method and is defined by the remote debugging protocol.
@@ -137,12 +134,10 @@ class OnEventEvent {
  * the attached tab.
  */
 class OnDetachEvent {
-
   /**
    * The debuggee that was detached.
    */
   final Debuggee source;
-
   /**
    * Connection termination reason.
    * enum of `target_closed`, `canceled_by_user`, `replaced_with_devtools`
@@ -258,3 +253,4 @@ OnEventEvent _createOnEventEvent(JsObject source, String method, JsObject params
 OnDetachEvent _createOnDetachEvent(JsObject source, String reason) =>
     new OnDetachEvent(_createDebuggee(source), reason);
 Debuggee _createDebuggee(JsObject proxy) => proxy == null ? null : new Debuggee.fromProxy(proxy);
+

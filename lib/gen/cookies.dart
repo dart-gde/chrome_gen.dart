@@ -222,3 +222,4 @@ class CookieStore extends ChromeObject {
 
 Cookie _createCookie(JsObject proxy) => proxy == null ? null : new Cookie.fromProxy(proxy);
 CookieStore _createCookieStore(JsObject proxy) => proxy == null ? null : new CookieStore.fromProxy(proxy);
+
