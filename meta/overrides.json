@@ -24,7 +24,10 @@
     "bookmarks.OnMovedEvent" : "BookmarksOnMovedEvent",
     "bookmarks.OnRemovedEvent" : "BookmarksOnRemovedEvent",
     "tabs.OnMovedEvent" : "TabsOnMovedEvent",
-    "tabs.OnRemovedEvent" : "TabsOnRemovedEvent"
+    "tabs.OnRemovedEvent" : "TabsOnRemovedEvent",
+
+    "devtools.inspectedWindow.GetContentResult" : "GetResourceContentResult",
+    "devtools.network.GetContentResult" : "GetRequestContentResult"
   }
 
 }

@@ -202,7 +202,7 @@ class JsonConverter {
       if (!f.parameters.isEmpty && f.parameters.last.isCallback) {
         ChromeType type = method.params.removeLast();
 
-        method.returns = _convertToFuture(type);
+        method.returns = _convertToFuture(method, type);
       } else {
         method.returns = ChromeType.VOID;
       }
@@ -238,23 +238,29 @@ class JsonConverter {
     }
   }
 
-  ChromeType _convertToFuture(ChromeType type) {
+  ChromeType _convertToFuture(ChromeMethod method, ChromeType chromeType) {
     ChromeType future = new ChromeType();
-
     future.type = "Future";
 
-    if (type.parameters.length == 1) {
-      future.parameters.add(type.parameters.first);
-      future.documentation = future.parameters.first.documentation;
-    } else if (type.parameters.length >= 2) {
-      // TODO: we need to correctly handle mapping multiple parameters to a single
-      // return
-      // runtime.requestUpdateCheck()
-      // devtools.inspectedWindow.eval()
+    List<ChromeType> params = chromeType.parameters;
 
-      future.parameters.add(ChromeType.JS_OBJECT);
-      future.documentation = type.parameters.map(
+    if (params.length == 1) {
+      future.parameters.add(params.first);
+      future.documentation = params.first.documentation;
+    } else if (params.length == 2) {
+      ChromeType type = new ChromeType(
+          type: 'var', refName: "${titleCase(method.name)}Result");
+      type.combinedReturnValue = true;
+      type.parameters.addAll(params);
+
+      library.returnTypes.add(new ChromeReturnType(type.refName, params));
+
+      future.parameters.add(type);
+      future.documentation = params.map(
           (p) => "[${p.name}] ${p.documentation}").join('\n');
+    } else if (params.length > 2) {
+      throw new UnsupportedError(
+          "unable to convert ${params.length} return values into a single return");
     }
 
     return future;

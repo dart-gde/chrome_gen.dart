@@ -63,11 +63,22 @@ class Request extends ChromeObject {
    * [encoding] Empty if content is not encoded, encoding name otherwise.
    * Currently, only base64 is supported.
    */
-  Future<JsObject> getContent() {
-    var completer = new ChromeCompleter<JsObject>.oneArg();
+  Future<GetRequestContentResult> getContent() {
+    var completer = new ChromeCompleter<GetRequestContentResult>.oneArg(GetRequestContentResult._create);
     proxy.callMethod('getContent', [completer.callback]);
     return completer.future;
   }
+}
+
+class GetRequestContentResult {
+  static GetRequestContentResult _create(content, encoding) {
+    return new GetRequestContentResult._(content, encoding);
+  }
+
+  String content;
+  String encoding;
+
+  GetRequestContentResult._(this.content, this.encoding);
 }
 
 Request _createRequest(JsObject proxy) => proxy == null ? null : new Request.fromProxy(proxy);

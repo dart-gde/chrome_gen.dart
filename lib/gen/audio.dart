@@ -19,8 +19,8 @@ class ChromeAudio {
    * [outputInfo] null
    * [inputInfo] null
    */
-  Future<JsObject> getInfo() {
-    var completer = new ChromeCompleter<JsObject>.oneArg();
+  Future<GetInfoResult> getInfo() {
+    var completer = new ChromeCompleter<GetInfoResult>.oneArg(GetInfoResult._create);
     _audio.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }
@@ -121,3 +121,17 @@ class DeviceProperties extends ChromeObject {
   double get gain => proxy['gain'];
   set gain(double value) => proxy['gain'] = value;
 }
+
+class GetInfoResult {
+  static GetInfoResult _create(outputInfo, inputInfo) {
+    return new GetInfoResult._(_createOutputDeviceInfo(outputInfo), _createInputDeviceInfo(inputInfo));
+  }
+
+  OutputDeviceInfo outputInfo;
+  InputDeviceInfo inputInfo;
+
+  GetInfoResult._(this.outputInfo, this.inputInfo);
+}
+
+OutputDeviceInfo _createOutputDeviceInfo(JsObject proxy) => proxy == null ? null : new OutputDeviceInfo.fromProxy(proxy);
+InputDeviceInfo _createInputDeviceInfo(JsObject proxy) => proxy == null ? null : new InputDeviceInfo.fromProxy(proxy);
