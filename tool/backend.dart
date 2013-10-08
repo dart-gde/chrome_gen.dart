@@ -393,7 +393,7 @@ class _DefaultBackendContext {
     generator.writeln("class ${className} {");
     generator.write("static ${className} _create(");
     generator.write(type.params.map((p) => p.name).join(', '));
-      generator.writeln(") {");
+    generator.writeln(") {");
     generator.write("return new ${className}._(");
     generator.write(type.params.map((ChromeType p) {
       String converter = getReturnConverter(p);
