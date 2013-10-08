@@ -90,8 +90,9 @@ class ChromeExtension {
   * Returns:
   * Array of global objects
   */
- List&lt;dynamic&gt; getViews([Map fetchProperties]) {
-   return listify(_extension.callMethod('getViews', [jsify(fetchProperties)]));
+ List&lt;Window&gt; getViews([Map fetchProperties]) {
+   var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
+   return ret;
  }
 
  /**
@@ -99,8 +100,8 @@ class ChromeExtension {
   * inside the current extension. Returns null if the extension has no
   * background page.
   */
- dynamic getBackgroundPage() {
-   return _extension.callMethod('getBackgroundPage');
+ Window getBackgroundPage() {
+   return _createWindow(_extension.callMethod('getBackgroundPage'));
  }
 
  /**
@@ -112,8 +113,9 @@ class ChromeExtension {
   * Returns:
   * Array of global window objects
   */
- List&lt;dynamic&gt; getExtensionTabs([int windowId]) {
-   return listify(_extension.callMethod('getExtensionTabs', [windowId]));
+ List&lt;Window&gt; getExtensionTabs([int windowId]) {
+   var ret = _extension.callMethod('getExtensionTabs', [windowId]);
+   return ret;
  }
 
  /**
@@ -232,22 +234,22 @@ Stream&lt;OnRequestExternalEvent&gt; get onRequestExternal =&gt; _onRequestExter
 <h3>Methods</h3>
 <div class="method"><h4 id="getBackgroundPage">
 <button class="show-code">Code</button>
-dynamic <strong>getBackgroundPage</strong>() <a class="anchor-link" href="#getBackgroundPage"
+<a href="../chrome.windows/Window.html">Window</a> <strong>getBackgroundPage</strong>() <a class="anchor-link" href="#getBackgroundPage"
               title="Permalink to ChromeExtension.getBackgroundPage">#</a></h4>
 <div class="doc">
 <p>Returns the JavaScript 'window' object for the background page running
 inside the current extension. Returns null if the extension has no
 background page.</p>
 <pre class="source">
-dynamic getBackgroundPage() {
- return _extension.callMethod('getBackgroundPage');
+Window getBackgroundPage() {
+ return _createWindow(_extension.callMethod('getBackgroundPage'));
 }
 </pre>
 </div>
 </div>
 <div class="method"><h4 id="getExtensionTabs">
 <button class="show-code">Code</button>
-List&lt;dynamic&gt; <strong>getExtensionTabs</strong>([int windowId]) <a class="anchor-link" href="#getExtensionTabs"
+List&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>getExtensionTabs</strong>([int windowId]) <a class="anchor-link" href="#getExtensionTabs"
               title="Permalink to ChromeExtension.getExtensionTabs">#</a></h4>
 <div class="doc">
 <p>Deprecated. Please use getViews({type: 'TAB'}). Returns an array of the
@@ -257,8 +259,9 @@ tabs attached to the specified window.</p>
 <p>Returns:
 Array of global window objects</p>
 <pre class="source">
-List&lt;dynamic&gt; getExtensionTabs([int windowId]) {
- return listify(_extension.callMethod('getExtensionTabs', [windowId]));
+List&lt;Window&gt; getExtensionTabs([int windowId]) {
+ var ret = _extension.callMethod('getExtensionTabs', [windowId]);
+ return ret;
 }
 </pre>
 </div>
@@ -284,7 +287,7 @@ String getURL(String path) {
 </div>
 <div class="method"><h4 id="getViews">
 <button class="show-code">Code</button>
-List&lt;dynamic&gt; <strong>getViews</strong>([Map fetchProperties]) <a class="anchor-link" href="#getViews"
+List&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>getViews</strong>([Map fetchProperties]) <a class="anchor-link" href="#getViews"
               title="Permalink to ChromeExtension.getViews">#</a></h4>
 <div class="doc">
 <p>Returns an array of the JavaScript 'window' objects for each of the pages
@@ -292,8 +295,9 @@ running inside the current extension.</p>
 <p>Returns:
 Array of global objects</p>
 <pre class="source">
-List&lt;dynamic&gt; getViews([Map fetchProperties]) {
- return listify(_extension.callMethod('getViews', [jsify(fetchProperties)]));
+List&lt;Window&gt; getViews([Map fetchProperties]) {
+ var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
+ return ret;
 }
 </pre>
 </div>

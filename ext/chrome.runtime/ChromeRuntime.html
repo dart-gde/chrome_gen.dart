@@ -57,8 +57,8 @@ class ChromeRuntime {
   * Returns:
   * The JavaScript 'window' object for the background page.
   */
- Future&lt;dynamic&gt; getBackgroundPage() {
-   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
+ Future&lt;Window&gt; getBackgroundPage() {
+   var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
    _runtime.callMethod('getBackgroundPage', [completer.callback]);
    return completer.future;
  }
@@ -202,8 +202,8 @@ class ChromeRuntime {
  /**
   * Returns a DirectoryEntry for the package directory.
   */
- Future&lt;dynamic&gt; getPackageDirectoryEntry() {
-   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
+ Future&lt;DirectoryEntry&gt; getPackageDirectoryEntry() {
+   var completer = new ChromeCompleter&lt;DirectoryEntry&gt;.oneArg(_createDirectoryEntry);
    _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
    return completer.future;
  }
@@ -553,7 +553,7 @@ Port connectNative(String application) {
 </div>
 <div class="method"><h4 id="getBackgroundPage">
 <button class="show-code">Code</button>
-Future&lt;dynamic&gt; <strong>getBackgroundPage</strong>() <a class="anchor-link" href="#getBackgroundPage"
+Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>getBackgroundPage</strong>() <a class="anchor-link" href="#getBackgroundPage"
               title="Permalink to ChromeRuntime.getBackgroundPage">#</a></h4>
 <div class="doc">
 <p>Retrieves the JavaScript 'window' object for the background page running
@@ -563,8 +563,8 @@ is no background page, an error is set.</p>
 <p>Returns:
 The JavaScript 'window' object for the background page.</p>
 <pre class="source">
-Future&lt;dynamic&gt; getBackgroundPage() {
- var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
+Future&lt;Window&gt; getBackgroundPage() {
+ var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
  _runtime.callMethod('getBackgroundPage', [completer.callback]);
  return completer.future;
 }
@@ -589,13 +589,13 @@ Map&lt;String, dynamic&gt; getManifest() {
 </div>
 <div class="method"><h4 id="getPackageDirectoryEntry">
 <button class="show-code">Code</button>
-Future&lt;dynamic&gt; <strong>getPackageDirectoryEntry</strong>() <a class="anchor-link" href="#getPackageDirectoryEntry"
+Future&lt;<a href="../chrome.src.files/DirectoryEntry.html">DirectoryEntry</a>&gt; <strong>getPackageDirectoryEntry</strong>() <a class="anchor-link" href="#getPackageDirectoryEntry"
               title="Permalink to ChromeRuntime.getPackageDirectoryEntry">#</a></h4>
 <div class="doc">
 <p>Returns a DirectoryEntry for the package directory.</p>
 <pre class="source">
-Future&lt;dynamic&gt; getPackageDirectoryEntry() {
- var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
+Future&lt;DirectoryEntry&gt; getPackageDirectoryEntry() {
+ var completer = new ChromeCompleter&lt;DirectoryEntry&gt;.oneArg(_createDirectoryEntry);
  _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
  return completer.future;
 }

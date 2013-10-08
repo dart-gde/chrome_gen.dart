@@ -63,8 +63,8 @@ class ChromeAppWindow {
   * { created_window.contentWindow.foo = function () { }; };`
   * &lt;br&gt;window.js:&lt;br&gt; `window.onload = function () { foo(); }`
   */
- Future&lt;dynamic&gt; create(String url, [CreateWindowOptions options]) {
-   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
+ Future&lt;AppWindow&gt; create(String url, [CreateWindowOptions options]) {
+   var completer = new ChromeCompleter&lt;AppWindow&gt;.oneArg(_createAppWindow);
    _app_window.callMethod('create', [url, options, completer.callback]);
    return completer.future;
  }
@@ -193,7 +193,7 @@ Stream get onRestored =&gt; _onRestored.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="create">
 <button class="show-code">Code</button>
-Future&lt;dynamic&gt; <strong>create</strong>(String url, [<a href="../chrome.app_window/CreateWindowOptions.html">CreateWindowOptions</a> options]) <a class="anchor-link" href="#create"
+Future&lt;<a href="../chrome.app_window/AppWindow.html">AppWindow</a>&gt; <strong>create</strong>(String url, [<a href="../chrome.app_window/CreateWindowOptions.html">CreateWindowOptions</a> options]) <a class="anchor-link" href="#create"
               title="Permalink to ChromeAppWindow.create">#</a></h4>
 <div class="doc">
 <p>The size and position of a window can be specified in a number of different
@@ -217,8 +217,8 @@ child usable from onload. E.g. background.js:&lt;br> <code>function(created_wind
 { created_window.contentWindow.foo = function () { }; };</code>
 &lt;br>window.js:&lt;br> <code>window.onload = function () { foo(); }</code></p>
 <pre class="source">
-Future&lt;dynamic&gt; create(String url, [CreateWindowOptions options]) {
- var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
+Future&lt;AppWindow&gt; create(String url, [CreateWindowOptions options]) {
+ var completer = new ChromeCompleter&lt;AppWindow&gt;.oneArg(_createAppWindow);
  _app_window.callMethod('create', [url, options, completer.callback]);
  return completer.future;
 }
