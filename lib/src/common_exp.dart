@@ -100,3 +100,11 @@ class BluetoothDeviceCallback {
 class SuggestFilenameCallback {
   SuggestFilenameCallback.fromProxy(JsObject proxy);
 }
+
+// TODO:
+class LocalMediaStream extends ChromeObject {
+  static LocalMediaStream create(JsObject proxy) => new LocalMediaStream.fromProxy(proxy);
+
+  LocalMediaStream();
+  LocalMediaStream.fromProxy(JsObject proxy): super.fromProxy(proxy);
+}

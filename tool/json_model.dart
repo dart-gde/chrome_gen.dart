@@ -306,10 +306,10 @@ class JsonConverter {
 //        }
 //      }
 
-//    } else if (t.type == 'object' && t.isInstanceOf != null) {
-//      type.type = "var";
-//      type.refName = t.isInstanceOf;
-//      library.addImport(getImportForClass(type.refName));
+    } else if (t.type == 'object' && t.isInstanceOf != null) {
+      type.type = "var";
+      type.refName = t.isInstanceOf;
+      library.addImport(getImportForClass(type.refName));
     } else if (t.ref != null) {
       type.type = "var";
 
@@ -375,13 +375,4 @@ Pair<String, String> parseQualifiedName(String str) {
   } else {
     return new Pair(null, str);
   }
-}
-
-Map _importMap = const {
-  'DirectoryEntry': '../src/files.dart',
-  'Window': 'windows'
-};
-
-String getImportForClass(String name) {
-  return _importMap[name];
 }

@@ -207,6 +207,13 @@ class IDLCollectorChrome implements IDLCollector {
   }
 
   IDLParameter _reduceParameter(List func) {
+    String instanceHint;
+
+    if (func[0] is List && func[0][0][0] == 'instanceOf') {
+      List hint = func[0][0][1];
+      instanceHint = hint[1][0];
+    }
+
     if (func[1] is List) {
       var type = func[1][0];
       var name;
@@ -227,7 +234,12 @@ class IDLCollectorChrome implements IDLCollector {
           type = type[0];
         }
 
-        idlType = new IDLType(type);
+        if (instanceHint != null) {
+          idlType = new IDLType.fromRef(instanceHint);
+        } else {
+          idlType = new IDLType(type);
+        }
+
         optional = false;
       } else if (type is String) {
         if (type == "optional") {
@@ -600,6 +612,7 @@ class IDLConverter {
     param.name = parameter.name;
     param.type = idlToDartType(parameter.type.name);
     param.refName = idlToDartRefName(parameter.type);
+    library.addImport(getImportForClass(param.refName));
     param.optional = (parameter.optional == null) ? false : parameter.optional;
     return param;
   }
@@ -611,6 +624,7 @@ class IDLConverter {
       ChromeType chromeType = new ChromeType();
       chromeType.type = idlToDartType(idlType.name);
       chromeType.refName = idlToDartRefName(idlType);
+      library.addImport(getImportForClass(chromeType.refName));
       return chromeType;
     }
   }
