@@ -50,6 +50,8 @@ Map mapify(JsObject obj) {
 dynamic selfConverter(var obj) => obj;
 
 dynamic apiNotAvailable(String apiName) {
+  // TODO: we need a bit more warning then this - if people aren't using
+  // logging, they won't see a message.
   _logger.warning('${apiName} not available.');
   _logger.info('This could be caused by a missing manifest.json permission or by running on an older version of Chrome.');
 

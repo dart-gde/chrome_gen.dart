@@ -278,9 +278,9 @@ class SynchronizationType extends ChromeEnum {
 class UsageType extends ChromeEnum {
   static const UsageType DATA = const UsageType._('data');
   static const UsageType FEEDBACK = const UsageType._('feedback');
-  static const UsageType EXPLICITFEEDBACK = const UsageType._('explicitFeedback');
+  static const UsageType EXPLICIT_FEEDBACK = const UsageType._('explicitFeedback');
 
-  static const List<UsageType> VALUES = const[DATA, FEEDBACK, EXPLICITFEEDBACK];
+  static const List<UsageType> VALUES = const[DATA, FEEDBACK, EXPLICIT_FEEDBACK];
 
   const UsageType._(String str): super(str);
 }

@@ -337,7 +337,7 @@ class AppWindow extends ChromeObject {
 
   /**
    * Set the app icon for the window (experimental). Currently this is only
-   * being implemented on Ash. TODO(stevenjb): Investigate implementing this on
+   * being implemented on Ash. todo(stevenjb): Investigate implementing this on
    * Windows and OSX.
    */
   void setIcon(String icon_url) {

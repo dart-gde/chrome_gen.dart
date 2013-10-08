@@ -13,7 +13,7 @@ class ChromeLocation {
   ChromeLocation._();
 
   /**
-   * TODO(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
+   * todo(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
    * location watching request.
    * [name]: Optional name to identify this request. Defaults to the empty
    * string.

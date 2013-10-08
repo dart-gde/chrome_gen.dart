@@ -95,8 +95,8 @@ class ChromeRuntime {
    * [details] If an update is available, this contains more information about
    * the available update.
    */
-  Future<JsObject> requestUpdateCheck() {
-    var completer = new ChromeCompleter<JsObject>.oneArg();
+  Future<RequestUpdateCheckResult> requestUpdateCheck() {
+    var completer = new ChromeCompleter<RequestUpdateCheckResult>.oneArg(RequestUpdateCheckResult._create);
     _runtime.callMethod('requestUpdateCheck', [completer.callback]);
     return completer.future;
   }
@@ -430,6 +430,17 @@ class MessageSender extends ChromeObject {
    */
   String get url => proxy['url'];
   set url(String value) => proxy['url'] = value;
+}
+
+class RequestUpdateCheckResult {
+  static RequestUpdateCheckResult _create(status, details) {
+    return new RequestUpdateCheckResult._(status, mapify(details));
+  }
+
+  String status;
+  Map details;
+
+  RequestUpdateCheckResult._(this.status, this.details);
 }
 
 Port _createPort(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);

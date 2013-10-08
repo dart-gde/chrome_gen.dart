@@ -35,6 +35,7 @@ class ChromeLibrary extends ChromeElement {
   final List<ChromeType> eventTypes = [];
   final List<ChromeEnumType> enumTypes = [];
   final List<ChromeDeclaredType> types = [];
+  final List<ChromeReturnType> returnTypes = [];
 
   final List<String> imports = [];
 
@@ -159,6 +160,18 @@ class ChromeDeclaredType extends ChromeType {
   String toString() => name;
 }
 
+/**
+ * This class is used to represent a multiple value return from a method.
+ */
+class ChromeReturnType {
+  final String name;
+  final List<ChromeType> params;
+
+  ChromeReturnType(this.name, this.params);
+
+  String toString() => name;
+}
+
 class ChromeEnumType extends ChromeType {
   /// The list of values entries for enum types.
   List<ChromeEnumEntry> values = [];
@@ -186,6 +199,8 @@ class ChromeType extends ChromeElement {
   String type;
   String refName;
   bool optional;
+  bool combinedReturnValue = false;
+
   /// Only used when this type represents a stream event type. This is the
   /// number of JS callback parameters.
   int arity = 1;
@@ -193,12 +208,14 @@ class ChromeType extends ChromeElement {
   List<ChromeProperty> properties = [];
   List<String> enumOptions;
 
-  ChromeType({this.type});
+  ChromeType({this.type, this.refName});
 
   bool get isAny => type == 'var';
   bool get isReferencedType => isAny && refName != null;
   bool get isVoid => type == 'void';
   bool get isFuture => type == 'Future';
+  /// This is used to return two or more values from a function.
+  bool get isCombinedReturnValue => combinedReturnValue;
   bool get isList => type == 'List';
   bool get isMap => type == 'Map';
   bool get isString => type == 'String';
