@@ -35,19 +35,16 @@
 <p>Fired whenever debugging target issues instrumentation event.</p>
 <pre class="source">
 class OnEventEvent {
-
  /**
   * The debuggee that generated this event.
   */
  final Debuggee source;
-
  /**
   * Method name. Should be one of the notifications defined by the [remote
   * debugging
   * protocol](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
   */
  final String method;
-
  /**
   * JSON object with the response. Structure of the response varies depending
   * on the method and is defined by the remote debugging protocol.

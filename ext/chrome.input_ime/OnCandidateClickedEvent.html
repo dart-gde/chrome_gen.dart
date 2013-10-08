@@ -35,17 +35,14 @@
 <p>This event is sent if this extension owns the active IME.</p>
 <pre class="source">
 class OnCandidateClickedEvent {
-
  /**
   * ID of the engine receiving the event
   */
  final String engineID;
-
  /**
   * ID of the candidate that was clicked.
   */
  final int candidateID;
-
  /**
   * Which mouse buttons was clicked.
   * enum of `left`, `middle`, `right`

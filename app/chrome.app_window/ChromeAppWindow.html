@@ -70,10 +70,9 @@ class ChromeAppWindow {
  }
 
  /**
-  * Returns an $ref:AppWindow object for the current script context (ie
-  * JavaScript 'window' object). This can also be called on a handle to a
-  * script context for another page, for example:
-  * otherWindow.chrome.app.window.current().
+  * Returns an [AppWindow] object for the current script context (ie JavaScript
+  * 'window' object). This can also be called on a handle to a script context
+  * for another page, for example: otherWindow.chrome.app.window.current().
   */
  AppWindow current() {
    return _createAppWindow(_app_window.callMethod('current'));
@@ -231,10 +230,9 @@ Future&lt;dynamic&gt; create(String url, [CreateWindowOptions options]) {
 <a href="../chrome.app_window/AppWindow.html">AppWindow</a> <strong>current</strong>() <a class="anchor-link" href="#current"
               title="Permalink to ChromeAppWindow.current">#</a></h4>
 <div class="doc">
-<p>Returns an $ref:AppWindow object for the current script context (ie
-JavaScript 'window' object). This can also be called on a handle to a
-script context for another page, for example:
-otherWindow.chrome.app.window.current().</p>
+<p>Returns an <a class="crossref" href="../chrome.app_window/AppWindow.html">AppWindow</a> object for the current script context (ie JavaScript
+'window' object). This can also be called on a handle to a script context
+for another page, for example: otherWindow.chrome.app.window.current().</p>
 <pre class="source">
 AppWindow current() {
  return _createAppWindow(_app_window.callMethod('current'));

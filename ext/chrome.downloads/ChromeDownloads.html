@@ -43,13 +43,13 @@ class ChromeDownloads {
   * include all cookies currently set for its hostname. If both `filename` and
   * `saveAs` are specified, then the Save As dialog will be displayed,
   * pre-populated with the specified `filename`. If the download started
-  * successfully, `callback` will be called with the new $ref:DownloadItem's
+  * successfully, `callback` will be called with the new [DownloadItem]'s
   * `downloadId`. If there was an error starting the download, then `callback`
-  * will be called with `downloadId=undefined` and $ref:runtime.lastError will
+  * will be called with `downloadId=undefined` and [runtime.lastError] will
   * contain a descriptive string. The error strings are not guaranteed to
   * remain backwards compatible between releases. Extensions must not parse it.
   * [options]: What to download and how.
-  * [callback]: Called with the id of the new $ref:DownloadItem.
+  * [callback]: Called with the id of the new [DownloadItem].
   */
  Future&lt;int&gt; download(DownloadOptions options) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -58,11 +58,11 @@ class ChromeDownloads {
  }
 
  /**
-  * Find $ref:DownloadItem. Set `query` to the empty object to get all
-  * $ref:DownloadItem. To get a specific $ref:DownloadItem, set only the `id`
-  * field. To page through a large number of items, set `orderBy:
-  * ['-startTime']`, set `limit` to the number of items per page, and set
-  * `startedAfter` to the `startTime` of the last item from the last page.
+  * Find [DownloadItem]. Set `query` to the empty object to get all
+  * [DownloadItem]. To get a specific [DownloadItem], set only the `id` field.
+  * To page through a large number of items, set `orderBy: ['-startTime']`, set
+  * `limit` to the number of items per page, and set `startedAfter` to the
+  * `startTime` of the last item from the last page.
   */
  Future&lt;DownloadItem&gt; search(DownloadQuery query) {
    var completer = new ChromeCompleter&lt;DownloadItem&gt;.oneArg(_createDownloadItem);
@@ -72,8 +72,8 @@ class ChromeDownloads {
 
  /**
   * Pause the download. If the request was successful the download is in a
-  * paused state. Otherwise $ref:runtime.lastError contains an error message.
-  * The request will fail if the download is not active.
+  * paused state. Otherwise [runtime.lastError] contains an error message. The
+  * request will fail if the download is not active.
   * [downloadId]: The id of the download to pause.
   * [callback]: Called when the pause request is completed.
   */
@@ -85,7 +85,7 @@ class ChromeDownloads {
 
  /**
   * Resume a paused download. If the request was successful the download is in
-  * progress and unpaused. Otherwise $ref:runtime.lastError contains an error
+  * progress and unpaused. Otherwise [runtime.lastError] contains an error
   * message. The request will fail if the download is not active.
   * [downloadId]: The id of the download to resume.
   * [callback]: Called when the resume request is completed.
@@ -110,14 +110,14 @@ class ChromeDownloads {
 
  /**
   * Retrieve an icon for the specified download. For new downloads, file icons
-  * are available after the $ref:onCreated event has been received. The image
+  * are available after the [onCreated] event has been received. The image
   * returned by this function while a download is in progress may be different
   * from the image returned after the download is complete. Icon retrieval is
   * done by querying the underlying operating system or toolkit depending on
   * the platform. The icon that is returned will therefore depend on a number
   * of factors including state of the download, platform, registered file types
-  * and visual theme. If a file icon cannot be determined,
-  * $ref:runtime.lastError will contain an error message.
+  * and visual theme. If a file icon cannot be determined, [runtime.lastError]
+  * will contain an error message.
   * [downloadId]: The identifier for the download.
   * [callback]: A URL to an image that represents the download.
   */
@@ -128,11 +128,10 @@ class ChromeDownloads {
  }
 
  /**
-  * Open the downloaded file now if the $ref:DownloadItem is complete;
-  * otherwise returns an error through $ref:runtime.lastError. Requires the
+  * Open the downloaded file now if the [DownloadItem] is complete; otherwise
+  * returns an error through [runtime.lastError]. Requires the
   * `"downloads.open"` permission in addition to the `"downloads"` permission.
-  * An $ref:onChanged event will fire when the item is opened for the first
-  * time.
+  * An [onChanged] event will fire when the item is opened for the first time.
   * [downloadId]: The identifier for the downloaded file.
   */
  void open(int downloadId) {
@@ -155,9 +154,9 @@ class ChromeDownloads {
  }
 
  /**
-  * Erase matching $ref:DownloadItem from history without deleting the
-  * downloaded file. An $ref:onErased event will fire for each
-  * $ref:DownloadItem that matches `query`, then `callback` will be called.
+  * Erase matching [DownloadItem] from history without deleting the downloaded
+  * file. An [onErased] event will fire for each [DownloadItem] that matches
+  * `query`, then `callback` will be called.
   */
  Future&lt;int&gt; erase(DownloadQuery query) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -166,8 +165,8 @@ class ChromeDownloads {
  }
 
  /**
-  * Remove the downloaded file if it exists and the $ref:DownloadItem is
-  * complete; otherwise return an error through $ref:runtime.lastError.
+  * Remove the downloaded file if it exists and the [DownloadItem] is complete;
+  * otherwise return an error through [runtime.lastError].
   */
  Future removeFile(int downloadId) {
    var completer = new ChromeCompleter.noArgs();
@@ -178,12 +177,12 @@ class ChromeDownloads {
  /**
   * Prompt the user to accept a dangerous download. Does not automatically
   * accept dangerous downloads. If the download is accepted, then an
-  * $ref:onChanged event will fire, otherwise nothing will happen. When all the
+  * [onChanged] event will fire, otherwise nothing will happen. When all the
   * data is fetched into a temporary file and either the download is not
   * dangerous or the danger has been accepted, then the temporary file is
   * renamed to the target filename, the [state] changes to 'complete', and
-  * $ref:onChanged fires.
-  * [downloadId]: The identifier for the $ref:DownloadItem.
+  * [onChanged] fires.
+  * [downloadId]: The identifier for the [DownloadItem].
   * [callback]: Called when the danger prompt dialog closes.
   */
  Future acceptDanger(int downloadId) {
@@ -205,7 +204,7 @@ class ChromeDownloads {
   * with the current browser profile. The shelf will be disabled as long as at
   * least one extension has disabled it. Enabling the shelf while at least one
   * other extension has disabled it will return an error through
-  * $ref:runtime.lastError. Requires the `"downloads.shelf"` permission in
+  * [runtime.lastError]. Requires the `"downloads.shelf"` permission in
   * addition to the `"downloads"` permission.
   */
  void setShelfEnabled(bool enabled) {
@@ -294,13 +293,13 @@ Future <strong>acceptDanger</strong>(int downloadId) <a class="anchor-link" href
 <div class="doc">
 <p>Prompt the user to accept a dangerous download. Does not automatically
 accept dangerous downloads. If the download is accepted, then an
-$ref:onChanged event will fire, otherwise nothing will happen. When all the
+<a class="crossref" href="../chrome.downloads/ChromeDownloads.html#onChanged">onChanged</a> event will fire, otherwise nothing will happen. When all the
 data is fetched into a temporary file and either the download is not
 dangerous or the danger has been accepted, then the temporary file is
 renamed to the target filename, the <code>state</code> changes to 'complete', and
-$ref:onChanged fires.
+<a class="crossref" href="../chrome.downloads/ChromeDownloads.html#onChanged">onChanged</a> fires.
 
-<span class="param">downloadId</span>: The identifier for the $ref:DownloadItem.
+<span class="param">downloadId</span>: The identifier for the <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a>.
 <code>callback</code>: Called when the danger prompt dialog closes.</p>
 <pre class="source">
 Future acceptDanger(int downloadId) {
@@ -339,14 +338,14 @@ Future&lt;int&gt; <strong>download</strong>(<a href="../chrome.downloads/Downloa
 include all cookies currently set for its hostname. If both <code>filename</code> and
 <code>saveAs</code> are specified, then the Save As dialog will be displayed,
 pre-populated with the specified <code>filename</code>. If the download started
-successfully, <code>callback</code> will be called with the new $ref:DownloadItem's
+successfully, <code>callback</code> will be called with the new <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a>'s
 <code>downloadId</code>. If there was an error starting the download, then <code>callback</code>
-will be called with <code>downloadId=undefined</code> and $ref:runtime.lastError will
+will be called with <code>downloadId=undefined</code> and <code>runtime.lastError</code> will
 contain a descriptive string. The error strings are not guaranteed to
 remain backwards compatible between releases. Extensions must not parse it.
 
 <span class="param">options</span>: What to download and how.
-<code>callback</code>: Called with the id of the new $ref:DownloadItem.</p>
+<code>callback</code>: Called with the id of the new <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a>.</p>
 <pre class="source">
 Future&lt;int&gt; download(DownloadOptions options) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -375,9 +374,9 @@ void drag(int downloadId) {
 Future&lt;int&gt; <strong>erase</strong>(<a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a> query) <a class="anchor-link" href="#erase"
               title="Permalink to ChromeDownloads.erase">#</a></h4>
 <div class="doc">
-<p>Erase matching $ref:DownloadItem from history without deleting the
-downloaded file. An $ref:onErased event will fire for each
-$ref:DownloadItem that matches <code>query</code>, then <code>callback</code> will be called.</p>
+<p>Erase matching <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a> from history without deleting the downloaded
+file. An <a class="crossref" href="../chrome.downloads/ChromeDownloads.html#onErased">onErased</a> event will fire for each <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a> that matches
+<code>query</code>, then <code>callback</code> will be called.</p>
 <pre class="source">
 Future&lt;int&gt; erase(DownloadQuery query) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
@@ -393,14 +392,14 @@ Future&lt;String&gt; <strong>getFileIcon</strong>(int downloadId, [<a href="../c
               title="Permalink to ChromeDownloads.getFileIcon">#</a></h4>
 <div class="doc">
 <p>Retrieve an icon for the specified download. For new downloads, file icons
-are available after the $ref:onCreated event has been received. The image
+are available after the <a class="crossref" href="../chrome.downloads/ChromeDownloads.html#onCreated">onCreated</a> event has been received. The image
 returned by this function while a download is in progress may be different
 from the image returned after the download is complete. Icon retrieval is
 done by querying the underlying operating system or toolkit depending on
 the platform. The icon that is returned will therefore depend on a number
 of factors including state of the download, platform, registered file types
-and visual theme. If a file icon cannot be determined,
-$ref:runtime.lastError will contain an error message.
+and visual theme. If a file icon cannot be determined, <code>runtime.lastError</code>
+will contain an error message.
 
 <span class="param">downloadId</span>: The identifier for the download.
 <code>callback</code>: A URL to an image that represents the download.</p>
@@ -418,11 +417,10 @@ Future&lt;String&gt; getFileIcon(int downloadId, [GetFileIconOptions options]) {
 void <strong>open</strong>(int downloadId) <a class="anchor-link" href="#open"
               title="Permalink to ChromeDownloads.open">#</a></h4>
 <div class="doc">
-<p>Open the downloaded file now if the $ref:DownloadItem is complete;
-otherwise returns an error through $ref:runtime.lastError. Requires the
+<p>Open the downloaded file now if the <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a> is complete; otherwise
+returns an error through <code>runtime.lastError</code>. Requires the
 <code>"downloads.open"</code> permission in addition to the <code>"downloads"</code> permission.
-An $ref:onChanged event will fire when the item is opened for the first
-time.
+An <a class="crossref" href="../chrome.downloads/ChromeDownloads.html#onChanged">onChanged</a> event will fire when the item is opened for the first time.
 
 <span class="param">downloadId</span>: The identifier for the downloaded file.</p>
 <pre class="source">
@@ -438,8 +436,8 @@ Future <strong>pause</strong>(int downloadId) <a class="anchor-link" href="#paus
               title="Permalink to ChromeDownloads.pause">#</a></h4>
 <div class="doc">
 <p>Pause the download. If the request was successful the download is in a
-paused state. Otherwise $ref:runtime.lastError contains an error message.
-The request will fail if the download is not active.
+paused state. Otherwise <code>runtime.lastError</code> contains an error message. The
+request will fail if the download is not active.
 
 <span class="param">downloadId</span>: The id of the download to pause.
 <code>callback</code>: Called when the pause request is completed.</p>
@@ -457,8 +455,8 @@ Future pause(int downloadId) {
 Future <strong>removeFile</strong>(int downloadId) <a class="anchor-link" href="#removeFile"
               title="Permalink to ChromeDownloads.removeFile">#</a></h4>
 <div class="doc">
-<p>Remove the downloaded file if it exists and the $ref:DownloadItem is
-complete; otherwise return an error through $ref:runtime.lastError.</p>
+<p>Remove the downloaded file if it exists and the <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a> is complete;
+otherwise return an error through <code>runtime.lastError</code>.</p>
 <pre class="source">
 Future removeFile(int downloadId) {
  var completer = new ChromeCompleter.noArgs();
@@ -474,7 +472,7 @@ Future <strong>resume</strong>(int downloadId) <a class="anchor-link" href="#res
               title="Permalink to ChromeDownloads.resume">#</a></h4>
 <div class="doc">
 <p>Resume a paused download. If the request was successful the download is in
-progress and unpaused. Otherwise $ref:runtime.lastError contains an error
+progress and unpaused. Otherwise <code>runtime.lastError</code> contains an error
 message. The request will fail if the download is not active.
 
 <span class="param">downloadId</span>: The id of the download to resume.
@@ -493,11 +491,11 @@ Future resume(int downloadId) {
 Future&lt;<a href="../chrome.downloads/DownloadItem.html">DownloadItem</a>&gt; <strong>search</strong>(<a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a> query) <a class="anchor-link" href="#search"
               title="Permalink to ChromeDownloads.search">#</a></h4>
 <div class="doc">
-<p>Find $ref:DownloadItem. Set <code>query</code> to the empty object to get all
-$ref:DownloadItem. To get a specific $ref:DownloadItem, set only the <code>id</code>
-field. To page through a large number of items, set <code>orderBy:
-['-startTime']</code>, set <code>limit</code> to the number of items per page, and set
-<code>startedAfter</code> to the <code>startTime</code> of the last item from the last page.</p>
+<p>Find <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a>. Set <code>query</code> to the empty object to get all
+<a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a>. To get a specific <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a>, set only the <code>id</code> field.
+To page through a large number of items, set <code>orderBy: ['-startTime']</code>, set
+<code>limit</code> to the number of items per page, and set <code>startedAfter</code> to the
+<code>startTime</code> of the last item from the last page.</p>
 <pre class="source">
 Future&lt;DownloadItem&gt; search(DownloadQuery query) {
  var completer = new ChromeCompleter&lt;DownloadItem&gt;.oneArg(_createDownloadItem);
@@ -516,7 +514,7 @@ void <strong>setShelfEnabled</strong>(bool enabled) <a class="anchor-link" href=
 with the current browser profile. The shelf will be disabled as long as at
 least one extension has disabled it. Enabling the shelf while at least one
 other extension has disabled it will return an error through
-$ref:runtime.lastError. Requires the <code>"downloads.shelf"</code> permission in
+<code>runtime.lastError</code>. Requires the <code>"downloads.shelf"</code> permission in
 addition to the <code>"downloads"</code> permission.</p>
 <pre class="source">
 void setShelfEnabled(bool enabled) {
