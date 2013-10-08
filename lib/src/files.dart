@@ -10,3 +10,19 @@ class DirectoryEntry extends ChromeObject {
   DirectoryEntry();
   DirectoryEntry.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
+
+// TODO:
+class Entry extends ChromeObject {
+  static Entry create(JsObject proxy) => new Entry.fromProxy(proxy);
+
+  Entry();
+  Entry.fromProxy(JsObject proxy): super.fromProxy(proxy);
+}
+
+// TODO:
+class DOMFileSystem extends ChromeObject {
+  static DOMFileSystem create(JsObject proxy) => new DOMFileSystem.fromProxy(proxy);
+
+  DOMFileSystem();
+  DOMFileSystem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+}

@@ -37,8 +37,8 @@ class ChromeAppWindow {
    * { created_window.contentWindow.foo = function () { }; };`
    * <br>window.js:<br> `window.onload = function () { foo(); }`
    */
-  Future<dynamic> create(String url, [CreateWindowOptions options]) {
-    var completer = new ChromeCompleter<dynamic>.oneArg();
+  Future<AppWindow> create(String url, [CreateWindowOptions options]) {
+    var completer = new ChromeCompleter<AppWindow>.oneArg(_createAppWindow);
     _app_window.callMethod('create', [url, options, completer.callback]);
     return completer.future;
   }

@@ -2,6 +2,7 @@
 
 library chrome.fileSystem;
 
+import '../src/files.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.fileSystem` namespace.
@@ -17,7 +18,7 @@ class ChromeFileSystem {
    * full path of the file or directory on the local file system, but may be
    * made more readable for display purposes.
    */
-  Future<String> getDisplayPath(dynamic entry) {
+  Future<String> getDisplayPath(Entry entry) {
     var completer = new ChromeCompleter<String>.oneArg();
     _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
     return completer.future;
@@ -29,8 +30,8 @@ class ChromeFileSystem {
    * entry is a DirectoryEntry, this call will fail if the application does not
    * have the 'directory' permission under 'fileSystem'.
    */
-  Future<dynamic> getWritableEntry(dynamic entry) {
-    var completer = new ChromeCompleter<dynamic>.oneArg();
+  Future<Entry> getWritableEntry(Entry entry) {
+    var completer = new ChromeCompleter<Entry>.oneArg(_createEntry);
     _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
     return completer.future;
   }
@@ -38,7 +39,7 @@ class ChromeFileSystem {
   /**
    * Gets whether this Entry is writable or not.
    */
-  Future<bool> isWritableEntry(dynamic entry) {
+  Future<bool> isWritableEntry(Entry entry) {
     var completer = new ChromeCompleter<bool>.oneArg();
     _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
     return completer.future;
@@ -61,8 +62,8 @@ class ChromeFileSystem {
    * Returns the file entry with the given id if it can be restored. This call
    * will fail otherwise. This method is new in Chrome 30.
    */
-  Future<dynamic> restoreEntry(String id) {
-    var completer = new ChromeCompleter<dynamic>.oneArg();
+  Future<Entry> restoreEntry(String id) {
+    var completer = new ChromeCompleter<Entry>.oneArg(_createEntry);
     _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
     return completer.future;
   }
@@ -87,7 +88,7 @@ class ChromeFileSystem {
    * retained only while the app is running and across restarts. This method is
    * new in Chrome 30.
    */
-  String retainEntry(dynamic entry) {
+  String retainEntry(Entry entry) {
     return _fileSystem.callMethod('retainEntry', [entry]);
   }
 }
@@ -179,6 +180,7 @@ class ChooseEntryResult {
   ChooseEntryResult._(this.entry, this.fileEntries);
 }
 
+Entry _createEntry(JsObject proxy) => proxy == null ? null : new Entry.fromProxy(proxy);
 ChooseEntryType _createChooseEntryType(String value) => ChooseEntryType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 AcceptOption _createAcceptOption(JsObject proxy) => proxy == null ? null : new AcceptOption.fromProxy(proxy);
 
