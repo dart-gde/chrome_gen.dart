@@ -2,6 +2,7 @@
 
 library chrome.mediaGalleries;
 
+import '../src/files.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.mediaGalleries` namespace.
@@ -25,7 +26,7 @@ class ChromeMediaGalleries {
   /**
    * Get metadata about a specific media file system.
    */
-  MediaFileSystemMetadata getMediaFileSystemMetadata(dynamic mediaFileSystem) {
+  MediaFileSystemMetadata getMediaFileSystemMetadata(DOMFileSystem mediaFileSystem) {
     return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
   }
 }

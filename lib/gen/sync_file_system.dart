@@ -2,6 +2,7 @@
 
 library chrome.syncFileSystem;
 
+import '../src/files.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.syncFileSystem` namespace.
@@ -23,8 +24,8 @@ class ChromeSyncFileSystem {
    * Returns:
    * A callback type for requestFileSystem.
    */
-  Future<dynamic> requestFileSystem() {
-    var completer = new ChromeCompleter<dynamic>.oneArg();
+  Future<DOMFileSystem> requestFileSystem() {
+    var completer = new ChromeCompleter<DOMFileSystem>.oneArg(_createDOMFileSystem);
     _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
     return completer.future;
   }
@@ -62,7 +63,7 @@ class ChromeSyncFileSystem {
    * Returns:
    * A callback type for getUsageAndQuota.
    */
-  Future<StorageInfo> getUsageAndQuota(dynamic fileSystem) {
+  Future<StorageInfo> getUsageAndQuota(DOMFileSystem fileSystem) {
     var completer = new ChromeCompleter<StorageInfo>.oneArg(_createStorageInfo);
     _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
     return completer.future;
@@ -77,7 +78,7 @@ class ChromeSyncFileSystem {
    * Returns:
    * A callback type for getFileStatus.
    */
-  Future<FileStatus> getFileStatus(dynamic fileEntry) {
+  Future<FileStatus> getFileStatus(Entry fileEntry) {
     var completer = new ChromeCompleter<FileStatus>.oneArg(_createFileStatus);
     _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
     return completer.future;
@@ -269,6 +270,7 @@ class ServiceInfo extends ChromeObject {
   set description(String value) => proxy['description'] = value;
 }
 
+DOMFileSystem _createDOMFileSystem(JsObject proxy) => proxy == null ? null : new DOMFileSystem.fromProxy(proxy);
 ConflictResolutionPolicy _createConflictResolutionPolicy(String value) => ConflictResolutionPolicy.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 StorageInfo _createStorageInfo(JsObject proxy) => proxy == null ? null : new StorageInfo.fromProxy(proxy);
 FileStatus _createFileStatus(String value) => FileStatus.VALUES.singleWhere((ChromeEnum e) => e.value == value);

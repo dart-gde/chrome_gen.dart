@@ -20,8 +20,8 @@ class ChromeTabCapture {
    * [options]: Configures the returned media stream.
    * [callback]: Callback with either the stream returned or null.
    */
-  Future<dynamic> capture(CaptureOptions options) {
-    var completer = new ChromeCompleter<dynamic>.oneArg();
+  Future<LocalMediaStream> capture(CaptureOptions options) {
+    var completer = new ChromeCompleter<LocalMediaStream>.oneArg(_createLocalMediaStream);
     _tabCapture.callMethod('capture', [options, completer.callback]);
     return completer.future;
   }
@@ -115,6 +115,7 @@ class CaptureOptions extends ChromeObject {
   set videoConstraints(MediaStreamConstraint value) => proxy['videoConstraints'] = value;
 }
 
+LocalMediaStream _createLocalMediaStream(JsObject proxy) => proxy == null ? null : new LocalMediaStream.fromProxy(proxy);
 CaptureInfo _createCaptureInfo(JsObject proxy) => proxy == null ? null : new CaptureInfo.fromProxy(proxy);
 TabCaptureState _createTabCaptureState(String value) => TabCaptureState.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 MediaStreamConstraint _createMediaStreamConstraint(JsObject proxy) => proxy == null ? null : new MediaStreamConstraint.fromProxy(proxy);

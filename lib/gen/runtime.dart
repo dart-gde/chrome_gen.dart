@@ -8,8 +8,10 @@
  */
 library chrome.runtime;
 
+import '../src/files.dart';
 import 'events.dart';
 import 'tabs.dart';
+import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.runtime` namespace.
@@ -39,8 +41,8 @@ class ChromeRuntime {
    * Returns:
    * The JavaScript 'window' object for the background page.
    */
-  Future<dynamic> getBackgroundPage() {
-    var completer = new ChromeCompleter<dynamic>.oneArg();
+  Future<Window> getBackgroundPage() {
+    var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _runtime.callMethod('getBackgroundPage', [completer.callback]);
     return completer.future;
   }
@@ -184,8 +186,8 @@ class ChromeRuntime {
   /**
    * Returns a DirectoryEntry for the package directory.
    */
-  Future<dynamic> getPackageDirectoryEntry() {
-    var completer = new ChromeCompleter<dynamic>.oneArg();
+  Future<DirectoryEntry> getPackageDirectoryEntry() {
+    var completer = new ChromeCompleter<DirectoryEntry>.oneArg(_createDirectoryEntry);
     _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
     return completer.future;
   }
@@ -440,7 +442,9 @@ class RequestUpdateCheckResult {
   RequestUpdateCheckResult._(this.status, this.details);
 }
 
+Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
 Port _createPort(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);
+DirectoryEntry _createDirectoryEntry(JsObject proxy) => proxy == null ? null : new DirectoryEntry.fromProxy(proxy);
 OnMessageEvent _createOnMessageEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
     new OnMessageEvent(message, _createMessageSender(sender), sendResponse);
 OnMessageExternalEvent _createOnMessageExternalEvent(JsObject message, JsObject sender, JsObject sendResponse) =>

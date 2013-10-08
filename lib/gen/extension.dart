@@ -9,6 +9,7 @@
 library chrome.extension;
 
 import 'runtime.dart';
+import 'windows.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.extension` namespace.
@@ -71,8 +72,9 @@ class ChromeExtension {
    * Returns:
    * Array of global objects
    */
-  List<dynamic> getViews([Map fetchProperties]) {
-    return listify(_extension.callMethod('getViews', [jsify(fetchProperties)]));
+  List<Window> getViews([Map fetchProperties]) {
+    var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
+    return ret;
   }
 
   /**
@@ -80,8 +82,8 @@ class ChromeExtension {
    * inside the current extension. Returns null if the extension has no
    * background page.
    */
-  dynamic getBackgroundPage() {
-    return _extension.callMethod('getBackgroundPage');
+  Window getBackgroundPage() {
+    return _createWindow(_extension.callMethod('getBackgroundPage'));
   }
 
   /**
@@ -93,8 +95,9 @@ class ChromeExtension {
    * Returns:
    * Array of global window objects
    */
-  List<dynamic> getExtensionTabs([int windowId]) {
-    return listify(_extension.callMethod('getExtensionTabs', [windowId]));
+  List<Window> getExtensionTabs([int windowId]) {
+    var ret = _extension.callMethod('getExtensionTabs', [windowId]);
+    return ret;
   }
 
   /**
@@ -193,6 +196,7 @@ class OnRequestExternalEvent {
   OnRequestExternalEvent(this.request, this.sender, this.sendResponse);
 }
 
+Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
 OnRequestEvent _createOnRequestEvent(JsObject request, JsObject sender, JsObject sendResponse) =>
     new OnRequestEvent(request, _createMessageSender(sender), sendResponse);
 OnRequestExternalEvent _createOnRequestExternalEvent(JsObject request, JsObject sender, JsObject sendResponse) =>
