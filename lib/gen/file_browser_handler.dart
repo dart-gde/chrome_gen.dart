@@ -49,12 +49,10 @@ class ChromeFileBrowserHandler {
  * Fired when file system action is executed from ChromeOS file browser.
  */
 class OnExecuteEvent {
-
   /**
    * File browser action id as specified in the listener component's manifest.
    */
   final String id;
-
   /**
    * File handler execute event details.
    */
@@ -92,3 +90,4 @@ class FileHandlerExecuteEventDetails extends ChromeObject {
 OnExecuteEvent _createOnExecuteEvent(String id, JsObject details) =>
     new OnExecuteEvent(id, _createFileHandlerExecuteEventDetails(details));
 FileHandlerExecuteEventDetails _createFileHandlerExecuteEventDetails(JsObject proxy) => proxy == null ? null : new FileHandlerExecuteEventDetails.fromProxy(proxy);
+

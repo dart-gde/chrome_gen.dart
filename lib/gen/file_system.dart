@@ -165,6 +165,9 @@ class ChooseEntryOptions extends ChromeObject {
   set acceptsMultiple(bool value) => proxy['acceptsMultiple'] = value;
 }
 
+/**
+ * The return type for [chooseEntry].
+ */
 class ChooseEntryResult {
   static ChooseEntryResult _create(entry, fileEntries) {
     return new ChooseEntryResult._(entry, fileEntries);
@@ -178,3 +181,4 @@ class ChooseEntryResult {
 
 ChooseEntryType _createChooseEntryType(String value) => ChooseEntryType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 AcceptOption _createAcceptOption(JsObject proxy) => proxy == null ? null : new AcceptOption.fromProxy(proxy);
+

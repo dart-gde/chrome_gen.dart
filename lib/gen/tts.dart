@@ -185,3 +185,4 @@ class TtsVoice extends ChromeObject {
 
 TtsVoice _createTtsVoice(JsObject proxy) => proxy == null ? null : new TtsVoice.fromProxy(proxy);
 TtsEvent _createTtsEvent(JsObject proxy) => proxy == null ? null : new TtsEvent.fromProxy(proxy);
+

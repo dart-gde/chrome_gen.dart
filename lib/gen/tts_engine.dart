@@ -78,7 +78,6 @@ class ChromeTtsEngine {
  * this extension's manifest is the first to match the options object.
  */
 class OnSpeakEvent {
-
   /**
    * The text to speak, specified as either plain text or an SSML document. If
    * your engine does not support SSML, you should strip out all XML markup and
@@ -88,12 +87,10 @@ class OnSpeakEvent {
    * split into smaller chunks and queued internally without returning an error.
    */
   final String utterance;
-
   /**
    * Options specified to the tts.speak() method.
    */
   final Map options;
-
   /**
    * Call this function with events that occur in the process of speaking the
    * utterance.
@@ -105,3 +102,4 @@ class OnSpeakEvent {
 
 OnSpeakEvent _createOnSpeakEvent(String utterance, JsObject options, JsObject sendTtsEvent) =>
     new OnSpeakEvent(utterance, mapify(options), sendTtsEvent);
+

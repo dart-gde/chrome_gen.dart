@@ -65,3 +65,4 @@ class Command extends ChromeObject {
 }
 
 Command _createCommand(JsObject proxy) => proxy == null ? null : new Command.fromProxy(proxy);
+

@@ -99,6 +99,8 @@ class _DefaultBackendContext {
           created.add(factoryType);
         }
       }
+
+      generator.writeln();
     }
 
     overrides.classRenamesFor(library.name).forEach((List<String> renamePair) {
@@ -106,38 +108,6 @@ class _DefaultBackendContext {
     });
 
     return generator.toString();
-  }
-
-  void _writeFactory(String creator) {
-    String creatorTemplate = null;
-
-    var type = library.eventTypes.firstWhere((e) => e.name == creator, orElse: () => null);
-
-    if(type != null) {
-      Iterable<ChromeProperty> props = type.filteredProperties;
-
-      String createParams = props.map((p) => '${getJSType(p.type)} ${p.name}').join(', ');
-      generator.writeln("${creator} _create$creator(${createParams}) =>");
-      String cvtParams = props.map((ChromeProperty p) {
-        String cvt = getCallbackConverter(p.type);
-        if (cvt == null) {
-          return p.name;
-        } else {
-          return "${cvt}(${p.name})";
-        }
-      }).join(', ');
-      generator.writeln("    new ${creator}(${cvtParams});");
-      return;
-    }
-
-    var enumType = library.enumTypes.firstWhere((e) => e.name == creator, orElse: () => null);
-    if(enumType != null) {
-      creatorTemplate = "%s _create%s(String value) => %s.VALUES.singleWhere((ChromeEnum e) => e.value == value);";
-    } else {
-      creatorTemplate = "%s _create%s(JsObject proxy) => proxy == null ? null : new %s.fromProxy(proxy);";
-    }
-
-    generator.writeln(creatorTemplate.replaceAll('%s', creator));
   }
 
   String get libraryName {
@@ -312,7 +282,6 @@ class _DefaultBackendContext {
     generator.writeDocs(type.documentation);
     generator.writeln("class ${className} {");
     props.forEach((ChromeProperty property) {
-      generator.writeln();
       generator.writeDocs(property.getDescription());
       generator.writeln("final ${property.type.toReturnString()} ${property.name};");
     });
@@ -389,7 +358,14 @@ class _DefaultBackendContext {
   void _printReturnType(ChromeReturnType type) {
     String className = type.name;
 
+    String methodName =
+        className.substring(0, 1).toLowerCase() + className.substring(1);
+    if (methodName.endsWith('Result')) {
+      methodName =   methodName.substring(0, methodName.length - 6);
+    }
+
     generator.writeln();
+    generator.writeDocs('The return type for [${methodName}].');
     generator.writeln("class ${className} {");
     generator.write("static ${className} _create(");
     generator.write(type.params.map((p) => p.name).join(', '));
@@ -410,6 +386,38 @@ class _DefaultBackendContext {
     generator.write(type.params.map((p) => "this.${p.name}").join(', '));
     generator.writeln(");");
     generator.writeln("}");
+  }
+
+  void _writeFactory(String creator) {
+    String creatorTemplate = null;
+
+    var type = library.eventTypes.firstWhere((e) => e.name == creator, orElse: () => null);
+
+    if(type != null) {
+      Iterable<ChromeProperty> props = type.filteredProperties;
+
+      String createParams = props.map((p) => '${getJSType(p.type)} ${p.name}').join(', ');
+      generator.writeln("${creator} _create$creator(${createParams}) =>");
+      String cvtParams = props.map((ChromeProperty p) {
+        String cvt = getCallbackConverter(p.type);
+        if (cvt == null) {
+          return p.name;
+        } else {
+          return "${cvt}(${p.name})";
+        }
+      }).join(', ');
+      generator.writeln("    new ${creator}(${cvtParams});");
+      return;
+    }
+
+    var enumType = library.enumTypes.firstWhere((e) => e.name == creator, orElse: () => null);
+    if(enumType != null) {
+      creatorTemplate = "%s _create%s(String value) => %s.VALUES.singleWhere((ChromeEnum e) => e.value == value);";
+    } else {
+      creatorTemplate = "%s _create%s(JsObject proxy) => proxy == null ? null : new %s.fromProxy(proxy);";
+    }
+
+    generator.writeln(creatorTemplate.replaceAll('%s', creator));
   }
 
   /**

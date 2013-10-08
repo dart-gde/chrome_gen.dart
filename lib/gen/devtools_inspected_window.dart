@@ -84,9 +84,7 @@ class ChromeDevtoolsInspectedWindow {
  * edited version of the resource in the Developer Tools).
  */
 class OnResourceContentCommittedEvent {
-
   final Resource resource;
-
   /**
    * New content of the resource.
    */
@@ -147,6 +145,9 @@ class Resource extends ChromeObject {
   }
 }
 
+/**
+ * The return type for [getContent].
+ */
 class GetResourceContentResult {
   static GetResourceContentResult _create(content, encoding) {
     return new GetResourceContentResult._(content, encoding);
@@ -158,6 +159,9 @@ class GetResourceContentResult {
   GetResourceContentResult._(this.content, this.encoding);
 }
 
+/**
+ * The return type for [eval].
+ */
 class EvalResult {
   static EvalResult _create(result, isException) {
     return new EvalResult._(mapify(result), isException);
@@ -172,3 +176,4 @@ class EvalResult {
 Resource _createResource(JsObject proxy) => proxy == null ? null : new Resource.fromProxy(proxy);
 OnResourceContentCommittedEvent _createOnResourceContentCommittedEvent(JsObject resource, String content) =>
     new OnResourceContentCommittedEvent(_createResource(resource), content);
+

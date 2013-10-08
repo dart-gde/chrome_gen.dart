@@ -744,3 +744,4 @@ HeaderFilter _createHeaderFilter(JsObject proxy) => proxy == null ? null : new H
 RequestCookie _createRequestCookie(JsObject proxy) => proxy == null ? null : new RequestCookie.fromProxy(proxy);
 ResponseCookie _createResponseCookie(JsObject proxy) => proxy == null ? null : new ResponseCookie.fromProxy(proxy);
 FilterResponseCookie _createFilterResponseCookie(JsObject proxy) => proxy == null ? null : new FilterResponseCookie.fromProxy(proxy);
+

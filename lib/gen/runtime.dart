@@ -303,7 +303,6 @@ class ChromeRuntime {
  * script.
  */
 class OnMessageEvent {
-
   /**
    * The message sent by the calling script.
    * `optional`
@@ -311,9 +310,7 @@ class OnMessageEvent {
    * The message sent by the calling script.
    */
   final dynamic message;
-
   final MessageSender sender;
-
   /**
    * Function to call (at most once) when you have a response. The argument
    * should be any JSON-ifiable object. If you have more than one `onMessage`
@@ -333,7 +330,6 @@ class OnMessageEvent {
  * content script.
  */
 class OnMessageExternalEvent {
-
   /**
    * The message sent by the calling script.
    * `optional`
@@ -341,9 +337,7 @@ class OnMessageExternalEvent {
    * The message sent by the calling script.
    */
   final dynamic message;
-
   final MessageSender sender;
-
   /**
    * Function to call (at most once) when you have a response. The argument
    * should be any JSON-ifiable object. If you have more than one `onMessage`
@@ -432,6 +426,9 @@ class MessageSender extends ChromeObject {
   set url(String value) => proxy['url'] = value;
 }
 
+/**
+ * The return type for [requestUpdateCheck].
+ */
 class RequestUpdateCheckResult {
   static RequestUpdateCheckResult _create(status, details) {
     return new RequestUpdateCheckResult._(status, mapify(details));
@@ -451,3 +448,4 @@ OnMessageExternalEvent _createOnMessageExternalEvent(JsObject message, JsObject 
 Event _createEvent(JsObject proxy) => proxy == null ? null : new Event.fromProxy(proxy);
 MessageSender _createMessageSender(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
+
