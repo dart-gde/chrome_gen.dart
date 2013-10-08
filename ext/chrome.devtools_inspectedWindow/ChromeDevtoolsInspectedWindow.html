@@ -56,8 +56,8 @@ class ChromeDevtoolsInspectedWindow {
   * [isException] Set if an exception was caught while evaluating the
   * expression.
   */
- Future&lt;JsObject&gt; eval(String expression) {
-   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
+ Future&lt;EvalResult&gt; eval(String expression) {
+   var completer = new ChromeCompleter&lt;EvalResult&gt;.oneArg(EvalResult._create);
    _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
    return completer.future;
  }
@@ -148,7 +148,7 @@ int get tabId =&gt; _devtools_inspectedWindow['tabId'];
 <h3>Methods</h3>
 <div class="method"><h4 id="eval">
 <button class="show-code">Code</button>
-Future&lt;JsObject&gt; <strong>eval</strong>(String expression) <a class="anchor-link" href="#eval"
+Future&lt;<a href="../chrome.devtools_inspectedWindow/EvalResult.html">EvalResult</a>&gt; <strong>eval</strong>(String expression) <a class="anchor-link" href="#eval"
               title="Permalink to ChromeDevtoolsInspectedWindow.eval">#</a></h4>
 <div class="doc">
 <p>Evaluates a JavaScript expression in the context of the main frame of the
@@ -161,8 +161,8 @@ otherwise an exception is thrown.</p>
 <code>isException</code> Set if an exception was caught while evaluating the
 expression.</p>
 <pre class="source">
-Future&lt;JsObject&gt; eval(String expression) {
- var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
+Future&lt;EvalResult&gt; eval(String expression) {
+ var completer = new ChromeCompleter&lt;EvalResult&gt;.oneArg(EvalResult._create);
  _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
  return completer.future;
 }

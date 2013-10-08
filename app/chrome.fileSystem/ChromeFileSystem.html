@@ -77,8 +77,8 @@ class ChromeFileSystem {
   * [entry] null
   * [fileEntries] null
   */
- Future&lt;JsObject&gt; chooseEntry([ChooseEntryOptions options]) {
-   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
+ Future&lt;ChooseEntryResult&gt; chooseEntry([ChooseEntryOptions options]) {
+   var completer = new ChromeCompleter&lt;ChooseEntryResult&gt;.oneArg(ChooseEntryResult._create);
    _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
    return completer.future;
  }
@@ -123,7 +123,7 @@ class ChromeFileSystem {
 <h3>Methods</h3>
 <div class="method"><h4 id="chooseEntry">
 <button class="show-code">Code</button>
-Future&lt;JsObject&gt; <strong>chooseEntry</strong>([<a href="../chrome.fileSystem/ChooseEntryOptions.html">ChooseEntryOptions</a> options]) <a class="anchor-link" href="#chooseEntry"
+Future&lt;<a href="../chrome.fileSystem/ChooseEntryResult.html">ChooseEntryResult</a>&gt; <strong>chooseEntry</strong>([<a href="../chrome.fileSystem/ChooseEntryOptions.html">ChooseEntryOptions</a> options]) <a class="anchor-link" href="#chooseEntry"
               title="Permalink to ChromeFileSystem.chooseEntry">#</a></h4>
 <div class="doc">
 <p>Ask the user to choose a file or directory.</p>
@@ -131,8 +131,8 @@ Future&lt;JsObject&gt; <strong>chooseEntry</strong>([<a href="../chrome.fileSyst
 <code>entry</code> null
 <code>fileEntries</code> null</p>
 <pre class="source">
-Future&lt;JsObject&gt; chooseEntry([ChooseEntryOptions options]) {
- var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
+Future&lt;ChooseEntryResult&gt; chooseEntry([ChooseEntryOptions options]) {
+ var completer = new ChromeCompleter&lt;ChooseEntryResult&gt;.oneArg(ChooseEntryResult._create);
  _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
  return completer.future;
 }

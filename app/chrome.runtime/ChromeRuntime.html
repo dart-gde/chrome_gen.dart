@@ -113,8 +113,8 @@ class ChromeRuntime {
   * [details] If an update is available, this contains more information about
   * the available update.
   */
- Future&lt;JsObject&gt; requestUpdateCheck() {
-   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
+ Future&lt;RequestUpdateCheckResult&gt; requestUpdateCheck() {
+   var completer = new ChromeCompleter&lt;RequestUpdateCheckResult&gt;.oneArg(RequestUpdateCheckResult._create);
    _runtime.callMethod('requestUpdateCheck', [completer.callback]);
    return completer.future;
  }
@@ -651,7 +651,7 @@ void reload() {
 </div>
 <div class="method"><h4 id="requestUpdateCheck">
 <button class="show-code">Code</button>
-Future&lt;JsObject&gt; <strong>requestUpdateCheck</strong>() <a class="anchor-link" href="#requestUpdateCheck"
+Future&lt;<a href="../chrome.runtime/RequestUpdateCheckResult.html">RequestUpdateCheckResult</a>&gt; <strong>requestUpdateCheck</strong>() <a class="anchor-link" href="#requestUpdateCheck"
               title="Permalink to ChromeRuntime.requestUpdateCheck">#</a></h4>
 <div class="doc">
 <p>Requests an update check for this app/extension.</p>
@@ -661,8 +661,8 @@ enum of <code>throttled</code>, <code>no_update</code>, <code>update_available</
 <code>details</code> If an update is available, this contains more information about
 the available update.</p>
 <pre class="source">
-Future&lt;JsObject&gt; requestUpdateCheck() {
- var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
+Future&lt;RequestUpdateCheckResult&gt; requestUpdateCheck() {
+ var completer = new ChromeCompleter&lt;RequestUpdateCheckResult&gt;.oneArg(RequestUpdateCheckResult._create);
  _runtime.callMethod('requestUpdateCheck', [completer.callback]);
  return completer.future;
 }

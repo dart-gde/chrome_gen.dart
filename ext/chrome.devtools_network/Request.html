@@ -48,8 +48,8 @@ class Request extends ChromeObject {
   * [encoding] Empty if content is not encoded, encoding name otherwise.
   * Currently, only base64 is supported.
   */
- Future&lt;JsObject&gt; getContent() {
-   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
+ Future&lt;GetRequestContentResult&gt; getContent() {
+   var completer = new ChromeCompleter&lt;GetRequestContentResult&gt;.oneArg(GetRequestContentResult._create);
    proxy.callMethod('getContent', [completer.callback]);
    return completer.future;
  }
@@ -109,7 +109,7 @@ final JsObject proxy
 <h3>Methods</h3>
 <div class="method"><h4 id="getContent">
 <button class="show-code">Code</button>
-Future&lt;JsObject&gt; <strong>getContent</strong>() <a class="anchor-link" href="#getContent"
+Future&lt;<a href="../chrome.devtools_network/GetRequestContentResult.html">GetRequestContentResult</a>&gt; <strong>getContent</strong>() <a class="anchor-link" href="#getContent"
               title="Permalink to Request.getContent">#</a></h4>
 <div class="doc">
 <p>Returns content of the response body.</p>
@@ -118,8 +118,8 @@ Future&lt;JsObject&gt; <strong>getContent</strong>() <a class="anchor-link" href
 <code>encoding</code> Empty if content is not encoded, encoding name otherwise.
 Currently, only base64 is supported.</p>
 <pre class="source">
-Future&lt;JsObject&gt; getContent() {
- var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
+Future&lt;GetRequestContentResult&gt; getContent() {
+ var completer = new ChromeCompleter&lt;GetRequestContentResult&gt;.oneArg(GetRequestContentResult._create);
  proxy.callMethod('getContent', [completer.callback]);
  return completer.future;
 }

@@ -45,8 +45,8 @@ class ChromeAudio {
   * [outputInfo] null
   * [inputInfo] null
   */
- Future&lt;JsObject&gt; getInfo() {
-   var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
+ Future&lt;GetInfoResult&gt; getInfo() {
+   var completer = new ChromeCompleter&lt;GetInfoResult&gt;.oneArg(GetInfoResult._create);
    _audio.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
@@ -95,7 +95,7 @@ Stream get onDeviceChanged =&gt; _onDeviceChanged.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="getInfo">
 <button class="show-code">Code</button>
-Future&lt;JsObject&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
+Future&lt;<a href="../chrome.audio/GetInfoResult.html">GetInfoResult</a>&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeAudio.getInfo">#</a></h4>
 <div class="doc">
 <p>Get the information of all audio output and input devices.</p>
@@ -103,8 +103,8 @@ Future&lt;JsObject&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#
 <code>outputInfo</code> null
 <code>inputInfo</code> null</p>
 <pre class="source">
-Future&lt;JsObject&gt; getInfo() {
- var completer = new ChromeCompleter&lt;JsObject&gt;.oneArg();
+Future&lt;GetInfoResult&gt; getInfo() {
+ var completer = new ChromeCompleter&lt;GetInfoResult&gt;.oneArg(GetInfoResult._create);
  _audio.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }
