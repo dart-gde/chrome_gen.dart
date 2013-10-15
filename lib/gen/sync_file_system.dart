@@ -15,7 +15,7 @@ class ChromeSyncFileSystem {
 
   /**
    * Returns a syncable filesystem backed by Google Drive. The returned
-   * `DOMFileSystem` instance can be operated on in the same way as the
+   * `FileSystem` instance can be operated on in the same way as the
    * Temporary and Persistant file systems (see <a
    * href="http://www.w3.org/TR/file-system-api/">http://www.w3.org/TR/file-system-api/</a>).
    * Calling this multiple times from the same app will return the same handle
@@ -24,8 +24,8 @@ class ChromeSyncFileSystem {
    * Returns:
    * A callback type for requestFileSystem.
    */
-  Future<DOMFileSystem> requestFileSystem() {
-    var completer = new ChromeCompleter<DOMFileSystem>.oneArg(_createDOMFileSystem);
+  Future<FileSystem> requestFileSystem() {
+    var completer = new ChromeCompleter<FileSystem>.oneArg(_createFileSystem);
     _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
     return completer.future;
   }
@@ -63,7 +63,7 @@ class ChromeSyncFileSystem {
    * Returns:
    * A callback type for getUsageAndQuota.
    */
-  Future<StorageInfo> getUsageAndQuota(DOMFileSystem fileSystem) {
+  Future<StorageInfo> getUsageAndQuota(FileSystem fileSystem) {
     var completer = new ChromeCompleter<StorageInfo>.oneArg(_createStorageInfo);
     _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
     return completer.future;
@@ -270,7 +270,7 @@ class ServiceInfo extends ChromeObject {
   set description(String value) => proxy['description'] = value;
 }
 
-DOMFileSystem _createDOMFileSystem(JsObject proxy) => proxy == null ? null : new DOMFileSystem.fromProxy(proxy);
+FileSystem _createFileSystem(JsObject proxy) => proxy == null ? null : new CrFileSystem.fromProxy(proxy);
 ConflictResolutionPolicy _createConflictResolutionPolicy(String value) => ConflictResolutionPolicy.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 StorageInfo _createStorageInfo(JsObject proxy) => proxy == null ? null : new StorageInfo.fromProxy(proxy);
 FileStatus _createFileStatus(String value) => FileStatus.VALUES.singleWhere((ChromeEnum e) => e.value == value);
