@@ -8,12 +8,12 @@ library chrome.events;
 import '../src/common.dart';
 
 /// Accessor for the `chrome.events` namespace.
-final ChromeEvents events = ChromeEvents._events == null ? apiNotAvailable('chrome.events') : new ChromeEvents._();
+final ChromeChromeEvents events = ChromeChromeEvents._events == null ? apiNotAvailable('chrome.events') : new ChromeChromeEvents._();
 
-class ChromeEvents {
+class ChromeChromeEvents {
   static final JsObject _events = chrome['events'];
 
-  ChromeEvents._();
+  ChromeChromeEvents._();
 }
 
 /**
@@ -65,10 +65,10 @@ class Rule extends ChromeObject {
  * An object which allows the addition and removal of listeners for a Chrome
  * event.
  */
-class Event extends ChromeObject {
-  Event();
+class ChromeEvent extends ChromeObject {
+  ChromeEvent();
 
-  Event.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ChromeEvent.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
    * Registers an event listener _callback_ to an event.

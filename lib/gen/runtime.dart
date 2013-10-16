@@ -273,19 +273,19 @@ class ChromeRuntime {
    * Fired when a message is sent from either an extension process or a content
    * script.
    */
-  Stream<OnMessageEvent> get onMessage => _onMessage.stream;
+  Stream<OnMessageChromeEvent> get onMessage => _onMessage.stream;
 
-  final ChromeStreamController<OnMessageEvent> _onMessage =
-      new ChromeStreamController<OnMessageEvent>.threeArgs(_runtime['onMessage'], _createOnMessageEvent);
+  final ChromeStreamController<OnMessageChromeEvent> _onMessage =
+      new ChromeStreamController<OnMessageChromeEvent>.threeArgs(_runtime['onMessage'], _createOnMessageChromeEvent);
 
   /**
    * Fired when a message is sent from another extension/app. Cannot be used in
    * a content script.
    */
-  Stream<OnMessageExternalEvent> get onMessageExternal => _onMessageExternal.stream;
+  Stream<OnMessageExternalChromeEvent> get onMessageExternal => _onMessageExternal.stream;
 
-  final ChromeStreamController<OnMessageExternalEvent> _onMessageExternal =
-      new ChromeStreamController<OnMessageExternalEvent>.threeArgs(_runtime['onMessageExternal'], _createOnMessageExternalEvent);
+  final ChromeStreamController<OnMessageExternalChromeEvent> _onMessageExternal =
+      new ChromeStreamController<OnMessageExternalChromeEvent>.threeArgs(_runtime['onMessageExternal'], _createOnMessageExternalChromeEvent);
 
   /**
    * Fired when an app or the device that it runs on needs to be restarted. The
@@ -304,7 +304,7 @@ class ChromeRuntime {
  * Fired when a message is sent from either an extension process or a content
  * script.
  */
-class OnMessageEvent {
+class OnMessageChromeEvent {
   /**
    * The message sent by the calling script.
    * `optional`
@@ -324,14 +324,14 @@ class OnMessageEvent {
    */
   final dynamic sendResponse;
 
-  OnMessageEvent(this.message, this.sender, this.sendResponse);
+  OnMessageChromeEvent(this.message, this.sender, this.sendResponse);
 }
 
 /**
  * Fired when a message is sent from another extension/app. Cannot be used in a
  * content script.
  */
-class OnMessageExternalEvent {
+class OnMessageExternalChromeEvent {
   /**
    * The message sent by the calling script.
    * `optional`
@@ -351,14 +351,14 @@ class OnMessageExternalEvent {
    */
   final dynamic sendResponse;
 
-  OnMessageExternalEvent(this.message, this.sender, this.sendResponse);
+  OnMessageExternalChromeEvent(this.message, this.sender, this.sendResponse);
 }
 
 /**
  * An object which allows two way communication with other pages.
  */
 class Port extends ChromeObject {
-  Port({String name, var disconnect, Event onDisconnect, Event onMessage, var postMessage, MessageSender sender}) {
+  Port({String name, var disconnect, ChromeEvent onDisconnect, ChromeEvent onMessage, var postMessage, MessageSender sender}) {
     if (name != null) this.name = name;
     if (disconnect != null) this.disconnect = disconnect;
     if (onDisconnect != null) this.onDisconnect = onDisconnect;
@@ -375,11 +375,11 @@ class Port extends ChromeObject {
   dynamic get disconnect => proxy['disconnect'];
   set disconnect(var value) => proxy['disconnect'] = value;
 
-  Event get onDisconnect => _createEvent(proxy['onDisconnect']);
-  set onDisconnect(Event value) => proxy['onDisconnect'] = value;
+  ChromeEvent get onDisconnect => _createChromeEvent(proxy['onDisconnect']);
+  set onDisconnect(ChromeEvent value) => proxy['onDisconnect'] = value;
 
-  Event get onMessage => _createEvent(proxy['onMessage']);
-  set onMessage(Event value) => proxy['onMessage'] = value;
+  ChromeEvent get onMessage => _createChromeEvent(proxy['onMessage']);
+  set onMessage(ChromeEvent value) => proxy['onMessage'] = value;
 
   dynamic get postMessage => proxy['postMessage'];
   set postMessage(var value) => proxy['postMessage'] = value;
@@ -445,10 +445,10 @@ class RequestUpdateCheckResult {
 Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
 Port _createPort(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);
 DirectoryEntry _createDirectoryEntry(JsObject proxy) => proxy == null ? null : new CrDirectoryEntry.fromProxy(proxy);
-OnMessageEvent _createOnMessageEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
-    new OnMessageEvent(message, _createMessageSender(sender), sendResponse);
-OnMessageExternalEvent _createOnMessageExternalEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
-    new OnMessageExternalEvent(message, _createMessageSender(sender), sendResponse);
-Event _createEvent(JsObject proxy) => proxy == null ? null : new Event.fromProxy(proxy);
+OnMessageChromeEvent _createOnMessageChromeEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
+    new OnMessageChromeEvent(message, _createMessageSender(sender), sendResponse);
+OnMessageExternalChromeEvent _createOnMessageExternalChromeEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
+    new OnMessageExternalChromeEvent(message, _createMessageSender(sender), sendResponse);
+ChromeEvent _createChromeEvent(JsObject proxy) => proxy == null ? null : new ChromeEvent.fromProxy(proxy);
 MessageSender _createMessageSender(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

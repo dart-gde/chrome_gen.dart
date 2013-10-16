@@ -3,6 +3,7 @@ library chrome.src.files;
 
 import 'dart:async';
 import 'dart:js';
+//import 'dart:html' show EventStreamProvider;
 
 import 'common.dart';
 
@@ -40,7 +41,7 @@ abstract class CrEntry extends ChromeObject implements Entry {
     if (proxy == null) {
       return null;
     } else if (proxy.toString().contains('FileEntry]')) {
-      return new CrFileEntry.fromProxy(proxy);
+      return new ChromeFileEntry.fromProxy(proxy);
     } else {
       return new CrDirectoryEntry.fromProxy(proxy);
     }
@@ -78,7 +79,7 @@ abstract class CrEntry extends ChromeObject implements Entry {
   }
 
   Future<Entry> getParent() {
-    var completer = new _ChromeCompleterWithError<Metadata>.oneArg((obj) => new CrDirectoryEntry.fromProxy(obj));
+    var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrDirectoryEntry.fromProxy(obj));
     proxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
     return completer.future;
   }
@@ -98,8 +99,9 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
   }
 
   Future<Entry> getFile(String path) {
-    // TODO:
-
+    var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrEntry.fromProxy(obj));
+    proxy.callMethod('getFile', [path, completer.callback, completer.errorCallback]);
+    return completer.future;
   }
 
   Future<Entry> getDirectory(String path) {
@@ -108,8 +110,7 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
   }
 
   DirectoryReader createReader() {
-    // TODO:
-
+    return new CrDirectoryReader.fromProxy(proxy.callMethod('createReader'));
   }
 
   Future removeRecursively() {
@@ -123,7 +124,38 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
   int get hashCode => proxy.hashCode;
 }
 
-class CrFileEntry extends CrEntry implements FileEntry {
+class CrDirectoryReader extends ChromeObject implements DirectoryReader {
+  CrDirectoryReader.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+
+  /**
+   * Return a list of child entries for this directory.
+   */
+  Future<List<Entry>> readEntries() {
+    Completer<List<Entry>> completer = new Completer();
+
+    List<Entry> entries = [];
+
+    Function entriesCallback = null;
+    Function errorCallback = (var domError) {
+      completer.completeError(domError);
+    };
+
+    entriesCallback = (/*Entry[]*/ result) {
+      if (result['length'] == 0) {
+        completer.complete(entries);
+      } else {
+        entries.addAll(listify(result).map((e) => new CrEntry.fromProxy(e)));
+        proxy.callMethod('readEntries', [entriesCallback, errorCallback]);
+      }
+    };
+
+    proxy.callMethod('readEntries', [entriesCallback, errorCallback]);
+
+    return completer.future;
+  }
+}
+
+abstract class CrFileEntry extends CrEntry implements FileEntry {
   CrFileEntry.fromProxy(JsObject proxy) : super._fromProxy(proxy);
 
   Future<FileWriter> createWriter() {
@@ -132,8 +164,9 @@ class CrFileEntry extends CrEntry implements FileEntry {
   }
 
   Future<File> file() {
-    // TODO:
-
+    var completer = new _ChromeCompleterWithError<File>.oneArg((obj) => new CrFile.fromProxy(obj));
+    proxy.callMethod('file', [completer.callback, completer.errorCallback]);
+    return completer.future;
   }
 
   bool operator==(Object other) => other is CrDirectoryEntry &&
@@ -141,6 +174,126 @@ class CrFileEntry extends CrEntry implements FileEntry {
 
   int get hashCode => proxy.hashCode;
 }
+
+/**
+ * A convience class for reading and writing file content.
+ */
+class ChromeFileEntry extends CrFileEntry {
+  ChromeFileEntry.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+
+  /**
+   * Return the contents of the file as a String.
+   */
+  Future<String> readText() {
+    return file().then((File file) {
+      Completer<String> completer = new Completer();
+
+      var reader = new JsObject(context['FileReader']);
+      reader['onload'] = (var event) {
+        completer.complete(reader['result']);
+      };
+      reader['onerror'] = (var domError) {
+        completer.completeError(domError);
+      };
+      reader.callMethod('readAsText', [file]);
+
+      return completer.future;
+    });
+  }
+
+  /**
+   * Write out the given String to the file.
+   */
+  Future writeText(String text) {
+    return _createWriter().then((ChromeObject _writer) {
+      JsObject writer = _writer.proxy;
+
+      Completer<FileEntry> completer = new Completer();
+
+      JsObject blob = new JsObject(context['Blob'], [jsify([text])]);
+
+      writer['onwrite'] = (var event) {
+        writer['onwrite'] = null;
+        writer.callMethod('truncate', [writer['length']]);
+        completer.complete(this);
+      };
+      writer['onerror'] = (var event) {
+        completer.completeError(event);
+      };
+      writer.callMethod('write', [blob, jsify({'type': 'text/plain'})]);
+
+      return completer.future;
+    });
+  }
+
+  Future<ChromeObject> _createWriter() {
+    var completer = new _ChromeCompleterWithError<ChromeObject>.oneArg((obj) => new ChromeObject.fromProxy(obj));
+    proxy.callMethod('createWriter', [completer.callback, completer.errorCallback]);
+    return completer.future;
+  }
+}
+
+abstract class CrBlob extends ChromeObject implements Blob {
+  CrBlob.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+
+  int get size => proxy['size'];
+  String get type => proxy['type'];
+
+  Blob slice([int start, int end, String contentType]) {
+    // TODO:
+  }
+}
+
+class CrFile extends CrBlob implements File {
+  CrFile.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+
+  DateTime get lastModifiedDate {
+    JsObject jsDateTime = proxy['lastModifiedDate'];
+    return new DateTime.fromMillisecondsSinceEpoch(
+        jsDateTime.callMethod('getTime()'));
+  }
+  String get name => proxy['name'];
+  String get relativePath => proxy['relativePath'];
+}
+
+//abstract class CrEventTarget extends ChromeObject implements EventTarget {
+//  CrEventTarget.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+//  CrEventTarget();
+//
+//  // TODO: ?
+//  Events get on => new Events(this);
+//
+//  bool dispatchEvent(Event event) { }
+//
+//  // won't implement
+//  void $dom_addEventListener(String type, EventListener listener, [bool useCapture]) { }
+//  void $dom_removeEventListener(String type, EventListener listener, [bool useCapture]) { }
+//}
+//
+//class CrFileReader extends CrEventTarget implements FileReader {
+//  static const EventStreamProvider<ProgressEvent> loadEvent = const EventStreamProvider<ProgressEvent>('load');
+//  static const EventStreamProvider<Event> errorEvent = const EventStreamProvider<Event>('error');
+//
+//  CrFileReader.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+//  CrFileReader();
+//
+//  Stream<ProgressEvent> get onLoad => loadEvent.forTarget(this);
+//  Stream<Event> get onError => errorEvent.forTarget(this);
+//
+//  void readAsText(Blob blob, [String encoding]) {
+//    // TODO: sdkjhsdfkjh
+//
+//  }
+//}
+//
+///**
+// * An alias for [CrFileReader].
+// */
+//class ChromeFileReader extends CrFileReader {
+//  ChromeFileReader.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+//  ChromeFileReader();
+//}
+
 
 // TODO: Blob, File, FileWriter, ...
 
