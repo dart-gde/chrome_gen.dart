@@ -444,7 +444,7 @@ class RequestUpdateCheckResult {
 
 Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
 Port _createPort(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);
-DirectoryEntry _createDirectoryEntry(JsObject proxy) => proxy == null ? null : new DirectoryEntry.fromProxy(proxy);
+DirectoryEntry _createDirectoryEntry(JsObject proxy) => proxy == null ? null : new CrDirectoryEntry.fromProxy(proxy);
 OnMessageEvent _createOnMessageEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
     new OnMessageEvent(message, _createMessageSender(sender), sendResponse);
 OnMessageExternalEvent _createOnMessageExternalEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
