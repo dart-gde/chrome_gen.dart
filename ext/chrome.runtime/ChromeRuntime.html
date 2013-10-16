@@ -114,7 +114,7 @@ class ChromeRuntime {
   * the available update.
   */
  Future&lt;RequestUpdateCheckResult&gt; requestUpdateCheck() {
-   var completer = new ChromeCompleter&lt;RequestUpdateCheckResult&gt;.oneArg(RequestUpdateCheckResult._create);
+   var completer = new ChromeCompleter&lt;RequestUpdateCheckResult&gt;.twoArgs(RequestUpdateCheckResult._create);
    _runtime.callMethod('requestUpdateCheck', [completer.callback]);
    return completer.future;
  }
@@ -662,7 +662,7 @@ enum of <code>throttled</code>, <code>no_update</code>, <code>update_available</
 the available update.</p>
 <pre class="source">
 Future&lt;RequestUpdateCheckResult&gt; requestUpdateCheck() {
- var completer = new ChromeCompleter&lt;RequestUpdateCheckResult&gt;.oneArg(RequestUpdateCheckResult._create);
+ var completer = new ChromeCompleter&lt;RequestUpdateCheckResult&gt;.twoArgs(RequestUpdateCheckResult._create);
  _runtime.callMethod('requestUpdateCheck', [completer.callback]);
  return completer.future;
 }

@@ -78,7 +78,7 @@ class ChromeFileSystem {
   * [fileEntries] null
   */
  Future&lt;ChooseEntryResult&gt; chooseEntry([ChooseEntryOptions options]) {
-   var completer = new ChromeCompleter&lt;ChooseEntryResult&gt;.oneArg(ChooseEntryResult._create);
+   var completer = new ChromeCompleter&lt;ChooseEntryResult&gt;.twoArgs(ChooseEntryResult._create);
    _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
    return completer.future;
  }
@@ -132,7 +132,7 @@ Future&lt;<a href="../chrome.fileSystem/ChooseEntryResult.html">ChooseEntryResul
 <code>fileEntries</code> null</p>
 <pre class="source">
 Future&lt;ChooseEntryResult&gt; chooseEntry([ChooseEntryOptions options]) {
- var completer = new ChromeCompleter&lt;ChooseEntryResult&gt;.oneArg(ChooseEntryResult._create);
+ var completer = new ChromeCompleter&lt;ChooseEntryResult&gt;.twoArgs(ChooseEntryResult._create);
  _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
  return completer.future;
 }

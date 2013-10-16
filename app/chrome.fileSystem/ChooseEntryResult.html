@@ -36,11 +36,11 @@
 <pre class="source">
 class ChooseEntryResult {
  static ChooseEntryResult _create(entry, fileEntries) {
-   return new ChooseEntryResult._(entry, fileEntries);
+   return new ChooseEntryResult._(_createEntry(entry), _createFileEntry(fileEntries));
  }
 
- dynamic entry;
- dynamic fileEntries;
+ Entry entry;
+ FileEntry fileEntries;
 
  ChooseEntryResult._(this.entry, this.fileEntries);
 }
@@ -50,25 +50,25 @@ class ChooseEntryResult {
 <h3>Properties</h3>
 <div class="field"><h4 id="entry">
 <button class="show-code">Code</button>
-var         <strong>entry</strong> <a class="anchor-link"
+Entry         <strong>entry</strong> <a class="anchor-link"
             href="#entry"
             title="Permalink to ChooseEntryResult.entry">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-dynamic entry
+Entry entry
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="fileEntries">
 <button class="show-code">Code</button>
-var         <strong>fileEntries</strong> <a class="anchor-link"
+FileEntry         <strong>fileEntries</strong> <a class="anchor-link"
             href="#fileEntries"
             title="Permalink to ChooseEntryResult.fileEntries">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-dynamic fileEntries
+FileEntry fileEntries
 </pre>
 </div>
 </div>

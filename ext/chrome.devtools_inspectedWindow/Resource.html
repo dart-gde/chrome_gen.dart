@@ -57,7 +57,7 @@ class Resource extends ChromeObject {
   * Currently, only base64 is supported.
   */
  Future&lt;GetResourceContentResult&gt; getContent() {
-   var completer = new ChromeCompleter&lt;GetResourceContentResult&gt;.oneArg(GetResourceContentResult._create);
+   var completer = new ChromeCompleter&lt;GetResourceContentResult&gt;.twoArgs(GetResourceContentResult._create);
    proxy.callMethod('getContent', [completer.callback]);
    return completer.future;
  }
@@ -165,7 +165,7 @@ Future&lt;<a href="../chrome.devtools_inspectedWindow/GetResourceContentResult.h
 Currently, only base64 is supported.</p>
 <pre class="source">
 Future&lt;GetResourceContentResult&gt; getContent() {
- var completer = new ChromeCompleter&lt;GetResourceContentResult&gt;.oneArg(GetResourceContentResult._create);
+ var completer = new ChromeCompleter&lt;GetResourceContentResult&gt;.twoArgs(GetResourceContentResult._create);
  proxy.callMethod('getContent', [completer.callback]);
  return completer.future;
 }

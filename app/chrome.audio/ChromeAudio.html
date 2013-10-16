@@ -46,7 +46,7 @@ class ChromeAudio {
   * [inputInfo] null
   */
  Future&lt;GetInfoResult&gt; getInfo() {
-   var completer = new ChromeCompleter&lt;GetInfoResult&gt;.oneArg(GetInfoResult._create);
+   var completer = new ChromeCompleter&lt;GetInfoResult&gt;.twoArgs(GetInfoResult._create);
    _audio.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
@@ -104,7 +104,7 @@ Future&lt;<a href="../chrome.audio/GetInfoResult.html">GetInfoResult</a>&gt; <st
 <code>inputInfo</code> null</p>
 <pre class="source">
 Future&lt;GetInfoResult&gt; getInfo() {
- var completer = new ChromeCompleter&lt;GetInfoResult&gt;.oneArg(GetInfoResult._create);
+ var completer = new ChromeCompleter&lt;GetInfoResult&gt;.twoArgs(GetInfoResult._create);
  _audio.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }

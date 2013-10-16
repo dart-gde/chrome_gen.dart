@@ -42,8 +42,8 @@ class ChromeMediaGalleries {
   * Get the media galleries configured in this user agent. If none are
   * configured or available, the callback will receive an empty array.
   */
- Future&lt;dynamic&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
-   var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
+ Future&lt;FileSystem&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
+   var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
    _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
    return completer.future;
  }
@@ -74,14 +74,14 @@ MediaFileSystemMetadata getMediaFileSystemMetadata(FileSystem mediaFileSystem) {
 </div>
 <div class="method"><h4 id="getMediaFileSystems">
 <button class="show-code">Code</button>
-Future&lt;dynamic&gt; <strong>getMediaFileSystems</strong>([<a href="../chrome.mediaGalleries/MediaFileSystemsDetails.html">MediaFileSystemsDetails</a> details]) <a class="anchor-link" href="#getMediaFileSystems"
+Future&lt;FileSystem&gt; <strong>getMediaFileSystems</strong>([<a href="../chrome.mediaGalleries/MediaFileSystemsDetails.html">MediaFileSystemsDetails</a> details]) <a class="anchor-link" href="#getMediaFileSystems"
               title="Permalink to ChromeMediaGalleries.getMediaFileSystems">#</a></h4>
 <div class="doc">
 <p>Get the media galleries configured in this user agent. If none are
 configured or available, the callback will receive an empty array.</p>
 <pre class="source">
-Future&lt;dynamic&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
- var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
+Future&lt;FileSystem&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
+ var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
  _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
  return completer.future;
 }

@@ -57,7 +57,7 @@ class ChromeDevtoolsInspectedWindow {
   * expression.
   */
  Future&lt;EvalResult&gt; eval(String expression) {
-   var completer = new ChromeCompleter&lt;EvalResult&gt;.oneArg(EvalResult._create);
+   var completer = new ChromeCompleter&lt;EvalResult&gt;.twoArgs(EvalResult._create);
    _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
    return completer.future;
  }
@@ -162,7 +162,7 @@ otherwise an exception is thrown.</p>
 expression.</p>
 <pre class="source">
 Future&lt;EvalResult&gt; eval(String expression) {
- var completer = new ChromeCompleter&lt;EvalResult&gt;.oneArg(EvalResult._create);
+ var completer = new ChromeCompleter&lt;EvalResult&gt;.twoArgs(EvalResult._create);
  _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
  return completer.future;
 }

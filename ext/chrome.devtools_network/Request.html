@@ -49,7 +49,7 @@ class Request extends ChromeObject {
   * Currently, only base64 is supported.
   */
  Future&lt;GetRequestContentResult&gt; getContent() {
-   var completer = new ChromeCompleter&lt;GetRequestContentResult&gt;.oneArg(GetRequestContentResult._create);
+   var completer = new ChromeCompleter&lt;GetRequestContentResult&gt;.twoArgs(GetRequestContentResult._create);
    proxy.callMethod('getContent', [completer.callback]);
    return completer.future;
  }
@@ -119,7 +119,7 @@ Future&lt;<a href="../chrome.devtools_network/GetRequestContentResult.html">GetR
 Currently, only base64 is supported.</p>
 <pre class="source">
 Future&lt;GetRequestContentResult&gt; getContent() {
- var completer = new ChromeCompleter&lt;GetRequestContentResult&gt;.oneArg(GetRequestContentResult._create);
+ var completer = new ChromeCompleter&lt;GetRequestContentResult&gt;.twoArgs(GetRequestContentResult._create);
  proxy.callMethod('getContent', [completer.callback]);
  return completer.future;
 }
