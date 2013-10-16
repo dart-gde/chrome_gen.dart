@@ -40,7 +40,7 @@ class ChromeSyncFileSystem {
 
  /**
   * Returns a syncable filesystem backed by Google Drive. The returned
-  * `DOMFileSystem` instance can be operated on in the same way as the
+  * `FileSystem` instance can be operated on in the same way as the
   * Temporary and Persistant file systems (see &lt;a
   * href="http://www.w3.org/TR/file-system-api/"&gt;http://www.w3.org/TR/file-system-api/&lt;/a&gt;).
   * Calling this multiple times from the same app will return the same handle
@@ -49,8 +49,8 @@ class ChromeSyncFileSystem {
   * Returns:
   * A callback type for requestFileSystem.
   */
- Future&lt;DOMFileSystem&gt; requestFileSystem() {
-   var completer = new ChromeCompleter&lt;DOMFileSystem&gt;.oneArg(_createDOMFileSystem);
+ Future&lt;FileSystem&gt; requestFileSystem() {
+   var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
    _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
    return completer.future;
  }
@@ -88,7 +88,7 @@ class ChromeSyncFileSystem {
   * Returns:
   * A callback type for getUsageAndQuota.
   */
- Future&lt;StorageInfo&gt; getUsageAndQuota(DOMFileSystem fileSystem) {
+ Future&lt;StorageInfo&gt; getUsageAndQuota(FileSystem fileSystem) {
    var completer = new ChromeCompleter&lt;StorageInfo&gt;.oneArg(_createStorageInfo);
    _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
    return completer.future;
@@ -194,7 +194,7 @@ Future&lt;ConflictResolutionPolicy&gt; getConflictResolutionPolicy() {
 </div>
 <div class="method"><h4 id="getFileStatus">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a>&gt; <strong>getFileStatus</strong>(<a href="../chrome.src.files/Entry.html">Entry</a> fileEntry) <a class="anchor-link" href="#getFileStatus"
+Future&lt;<a href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a>&gt; <strong>getFileStatus</strong>(Entry fileEntry) <a class="anchor-link" href="#getFileStatus"
               title="Permalink to ChromeSyncFileSystem.getFileStatus">#</a></h4>
 <div class="doc">
 <p>Returns the <a class="crossref" href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a> for the given <code>fileEntry</code>. The status value can be
@@ -249,7 +249,7 @@ Future&lt;ServiceStatus&gt; getServiceStatus() {
 </div>
 <div class="method"><h4 id="getUsageAndQuota">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.syncFileSystem/StorageInfo.html">StorageInfo</a>&gt; <strong>getUsageAndQuota</strong>(<a href="../chrome.src.files/DOMFileSystem.html">DOMFileSystem</a> fileSystem) <a class="anchor-link" href="#getUsageAndQuota"
+Future&lt;<a href="../chrome.syncFileSystem/StorageInfo.html">StorageInfo</a>&gt; <strong>getUsageAndQuota</strong>(FileSystem fileSystem) <a class="anchor-link" href="#getUsageAndQuota"
               title="Permalink to ChromeSyncFileSystem.getUsageAndQuota">#</a></h4>
 <div class="doc">
 <p>Returns the current usage and quota in bytes for the <code>'syncable'</code> file
@@ -257,7 +257,7 @@ storage for the app.</p>
 <p>Returns:
 A callback type for getUsageAndQuota.</p>
 <pre class="source">
-Future&lt;StorageInfo&gt; getUsageAndQuota(DOMFileSystem fileSystem) {
+Future&lt;StorageInfo&gt; getUsageAndQuota(FileSystem fileSystem) {
  var completer = new ChromeCompleter&lt;StorageInfo&gt;.oneArg(_createStorageInfo);
  _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
  return completer.future;
@@ -267,11 +267,11 @@ Future&lt;StorageInfo&gt; getUsageAndQuota(DOMFileSystem fileSystem) {
 </div>
 <div class="method"><h4 id="requestFileSystem">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.src.files/DOMFileSystem.html">DOMFileSystem</a>&gt; <strong>requestFileSystem</strong>() <a class="anchor-link" href="#requestFileSystem"
+Future&lt;FileSystem&gt; <strong>requestFileSystem</strong>() <a class="anchor-link" href="#requestFileSystem"
               title="Permalink to ChromeSyncFileSystem.requestFileSystem">#</a></h4>
 <div class="doc">
 <p>Returns a syncable filesystem backed by Google Drive. The returned
-<code>DOMFileSystem</code> instance can be operated on in the same way as the
+<code>FileSystem</code> instance can be operated on in the same way as the
 Temporary and Persistant file systems (see &lt;a
 href="http://www.w3.org/TR/file-system-api/">http://www.w3.org/TR/file-system-api/&lt;/a>).
 Calling this multiple times from the same app will return the same handle
@@ -279,8 +279,8 @@ to the same file system.</p>
 <p>Returns:
 A callback type for requestFileSystem.</p>
 <pre class="source">
-Future&lt;DOMFileSystem&gt; requestFileSystem() {
- var completer = new ChromeCompleter&lt;DOMFileSystem&gt;.oneArg(_createDOMFileSystem);
+Future&lt;FileSystem&gt; requestFileSystem() {
+ var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
  _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
  return completer.future;
 }

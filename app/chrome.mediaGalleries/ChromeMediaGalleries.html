@@ -51,7 +51,7 @@ class ChromeMediaGalleries {
  /**
   * Get metadata about a specific media file system.
   */
- MediaFileSystemMetadata getMediaFileSystemMetadata(DOMFileSystem mediaFileSystem) {
+ MediaFileSystemMetadata getMediaFileSystemMetadata(FileSystem mediaFileSystem) {
    return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
  }
 }
@@ -61,12 +61,12 @@ class ChromeMediaGalleries {
 <h3>Methods</h3>
 <div class="method"><h4 id="getMediaFileSystemMetadata">
 <button class="show-code">Code</button>
-<a href="../chrome.mediaGalleries/MediaFileSystemMetadata.html">MediaFileSystemMetadata</a> <strong>getMediaFileSystemMetadata</strong>(<a href="../chrome.src.files/DOMFileSystem.html">DOMFileSystem</a> mediaFileSystem) <a class="anchor-link" href="#getMediaFileSystemMetadata"
+<a href="../chrome.mediaGalleries/MediaFileSystemMetadata.html">MediaFileSystemMetadata</a> <strong>getMediaFileSystemMetadata</strong>(FileSystem mediaFileSystem) <a class="anchor-link" href="#getMediaFileSystemMetadata"
               title="Permalink to ChromeMediaGalleries.getMediaFileSystemMetadata">#</a></h4>
 <div class="doc">
 <p>Get metadata about a specific media file system.</p>
 <pre class="source">
-MediaFileSystemMetadata getMediaFileSystemMetadata(DOMFileSystem mediaFileSystem) {
+MediaFileSystemMetadata getMediaFileSystemMetadata(FileSystem mediaFileSystem) {
  return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
 }
 </pre>

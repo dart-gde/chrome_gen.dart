@@ -141,7 +141,7 @@ Future&lt;ChooseEntryResult&gt; chooseEntry([ChooseEntryOptions options]) {
 </div>
 <div class="method"><h4 id="getDisplayPath">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>getDisplayPath</strong>(<a href="../chrome.src.files/Entry.html">Entry</a> entry) <a class="anchor-link" href="#getDisplayPath"
+Future&lt;String&gt; <strong>getDisplayPath</strong>(Entry entry) <a class="anchor-link" href="#getDisplayPath"
               title="Permalink to ChromeFileSystem.getDisplayPath">#</a></h4>
 <div class="doc">
 <p>Get the display path of an Entry object. The display path is based on the
@@ -158,7 +158,7 @@ Future&lt;String&gt; getDisplayPath(Entry entry) {
 </div>
 <div class="method"><h4 id="getWritableEntry">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.src.files/Entry.html">Entry</a>&gt; <strong>getWritableEntry</strong>(<a href="../chrome.src.files/Entry.html">Entry</a> entry) <a class="anchor-link" href="#getWritableEntry"
+Future&lt;Entry&gt; <strong>getWritableEntry</strong>(Entry entry) <a class="anchor-link" href="#getWritableEntry"
               title="Permalink to ChromeFileSystem.getWritableEntry">#</a></h4>
 <div class="doc">
 <p>Get a writable Entry from another Entry. This call will fail if the
@@ -193,7 +193,7 @@ Future&lt;bool&gt; isRestorable(String id) {
 </div>
 <div class="method"><h4 id="isWritableEntry">
 <button class="show-code">Code</button>
-Future&lt;bool&gt; <strong>isWritableEntry</strong>(<a href="../chrome.src.files/Entry.html">Entry</a> entry) <a class="anchor-link" href="#isWritableEntry"
+Future&lt;bool&gt; <strong>isWritableEntry</strong>(Entry entry) <a class="anchor-link" href="#isWritableEntry"
               title="Permalink to ChromeFileSystem.isWritableEntry">#</a></h4>
 <div class="doc">
 <p>Gets whether this Entry is writable or not.</p>
@@ -208,7 +208,7 @@ Future&lt;bool&gt; isWritableEntry(Entry entry) {
 </div>
 <div class="method"><h4 id="restoreEntry">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.src.files/Entry.html">Entry</a>&gt; <strong>restoreEntry</strong>(String id) <a class="anchor-link" href="#restoreEntry"
+Future&lt;Entry&gt; <strong>restoreEntry</strong>(String id) <a class="anchor-link" href="#restoreEntry"
               title="Permalink to ChromeFileSystem.restoreEntry">#</a></h4>
 <div class="doc">
 <p>Returns the file entry with the given id if it can be restored. This call
@@ -224,7 +224,7 @@ Future&lt;Entry&gt; restoreEntry(String id) {
 </div>
 <div class="method"><h4 id="retainEntry">
 <button class="show-code">Code</button>
-String <strong>retainEntry</strong>(<a href="../chrome.src.files/Entry.html">Entry</a> entry) <a class="anchor-link" href="#retainEntry"
+String <strong>retainEntry</strong>(Entry entry) <a class="anchor-link" href="#retainEntry"
               title="Permalink to ChromeFileSystem.retainEntry">#</a></h4>
 <div class="doc">
 <p>Returns an id that can be passed to restoreEntry to regain access to a
