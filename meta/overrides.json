@@ -10,9 +10,6 @@
   ],
 
   "renameClass": {
-    "events.Event": "ChromeEvent",
-    "runtime.Event": "ChromeEvent",
-
     "bluetooth.Device": "BluetoothDevice",
     "serial.Device": "SerialDevice",
 
