@@ -6,7 +6,7 @@ import 'dart:js';
 /**
  * The abstract superclass of objects that can hold [JsObject] proxies.
  */
-abstract class ChromeObject implements Serializable<JsObject> {
+class ChromeObject implements Serializable<JsObject> {
   final JsObject proxy;
 
   /**

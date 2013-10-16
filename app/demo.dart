@@ -20,7 +20,9 @@ void main() {
   br();
 
   label('files');
-  action("read and write", handleFileReadWrite);
+  action("read contents", handleFileRead);
+  action("write contents", handleFileWrite);
+  action("get file", handleDirGetFile);
   action("dir info", handleDirInfo);
   action("dir listings", handleDirListings);
   br();
@@ -267,9 +269,36 @@ void handleRequestFileSystem() {
   });
 }
 
-void handleFileReadWrite() {
-  // TODO:
-  summary("todo:");
+void handleFileRead() {
+  // choose a file
+  chrome.ChromeFileEntry entry;
+
+  chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_WRITABLE_FILE);
+  chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    entry = result.entry;
+
+    summary("choose: ${entry.name}");
+
+    entry.readText().then((String contents) {
+      summary("choose: ${entry.name}; contents.length=${contents.length}");
+    });
+  });
+}
+
+void handleFileWrite() {
+  // choose a file
+  chrome.ChromeFileEntry entry;
+
+  chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_WRITABLE_FILE);
+  chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    entry = result.entry;
+
+    summary("choose: ${entry.name}");
+
+    entry.writeText("foo bar baz").then((_) {
+      summary("choose: ${entry.name}; written successfully");
+    });
+  });
 }
 
 void handleDirInfo() {
@@ -287,13 +316,18 @@ void handleDirInfo() {
 }
 
 void handleDirGetFile() {
-  // TODO:
-  // Future<Entry> getFile(String path) {
-  summary("todo:");
+  chrome.runtime.getPackageDirectoryEntry().then((chrome.DirectoryEntry dir) {
+    dir.getFile('manifest.json').then((Entry entry) {
+      summary("file: ${entry}");
+    });
+  });
 }
 
 void handleDirListings() {
-  // TODO:
-  summary("todo:");
+  chrome.runtime.getPackageDirectoryEntry().then((chrome.DirectoryEntry dir) {
+    dir.createReader().readEntries().then((List<Entry> entries) {
+      summary(entries.join(', '));
+    });
+  });
 }
 
