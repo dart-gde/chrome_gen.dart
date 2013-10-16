@@ -41,7 +41,7 @@ class _DefaultBackendContext {
     "DirectoryEntry": "CrDirectoryEntry",
     "DOMFileSystem": "CrFileSystem",
     "Entry": "CrEntry",
-    "FileEntry": "CrFileEntry"
+    "FileEntry": "ChromeFileEntry"
   };
 
   final DartGenerator generator;
