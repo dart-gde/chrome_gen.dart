@@ -53,7 +53,7 @@ class ChromeFileSystem {
    * [fileEntries] null
    */
   Future<ChooseEntryResult> chooseEntry([ChooseEntryOptions options]) {
-    var completer = new ChromeCompleter<ChooseEntryResult>.oneArg(ChooseEntryResult._create);
+    var completer = new ChromeCompleter<ChooseEntryResult>.twoArgs(ChooseEntryResult._create);
     _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
     return completer.future;
   }
