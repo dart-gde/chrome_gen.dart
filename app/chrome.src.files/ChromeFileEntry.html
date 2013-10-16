@@ -2,19 +2,19 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>CrDirectoryEntry class / chrome.src.files Library / Dart Documentation</title>
+        <title>ChromeFileEntry class / chrome.src.files Library / Dart Documentation</title>
         <link rel="stylesheet" type="text/css"
             href="../styles.css">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
-        <body data-library="chrome.src.files" data-type="CrDirectoryEntry">
+        <body data-library="chrome.src.files" data-type="ChromeFileEntry">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
           <a href="../index.html">Dart Documentation</a>
-         &rsaquo; <a href="../chrome.src.files.html">chrome.src.files</a> &rsaquo; <a href="../chrome.src.files/CrDirectoryEntry.html">CrDirectoryEntry</a>        <div id="search-box">
+         &rsaquo; <a href="../chrome.src.files.html">chrome.src.files</a> &rsaquo; <a href="../chrome.src.files/ChromeFileEntry.html">ChromeFileEntry</a>        <div id="search-box">
           <input type="search" name="q" id="q" autocomplete="off"
               class="search-input" placeholder="Search API">
         </div>
@@ -26,83 +26,97 @@
         
 </div>
 <div class="content">
-        <h2><strong>CrDirectoryEntry</strong>
+        <h2><strong>ChromeFileEntry</strong>
           class
         </h2>
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<p>A convience class for reading and writing file content.</p>
 <pre class="source">
-class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
- CrDirectoryEntry.fromProxy(JsObject proxy) : super._fromProxy(proxy);
+class ChromeFileEntry extends CrFileEntry {
+ ChromeFileEntry.fromProxy(JsObject proxy) : super.fromProxy(proxy);
 
- Future&lt;Entry&gt; createFile(String path, {bool exclusive: false}) {
-   // TODO:
+ /**
+  * Return the contents of the file as a String.
+  */
+ Future&lt;String&gt; readText() {
+   return file().then((File file) {
+     Completer&lt;String&gt; completer = new Completer();
 
+     var reader = new JsObject(context['FileReader']);
+     reader['onload'] = (var event) {
+       completer.complete(reader['result']);
+     };
+     reader['onerror'] = (var domError) {
+       completer.completeError(domError);
+     };
+     reader.callMethod('readAsText', [file]);
+
+     return completer.future;
+   });
  }
 
- Future&lt;Entry&gt; createDirectory(String path, {bool exclusive: false}) {
-   // TODO:
+ /**
+  * Write out the given String to the file.
+  */
+ Future writeText(String text) {
+   return _createWriter().then((ChromeObject _writer) {
+     JsObject writer = _writer.proxy;
 
+     Completer&lt;FileEntry&gt; completer = new Completer();
+
+     JsObject blob = new JsObject(context['Blob'], [jsify([text])]);
+
+     writer['onwrite'] = (var event) {
+       writer['onwrite'] = null;
+       writer.callMethod('truncate', [writer['length']]);
+       completer.complete(this);
+     };
+     writer['onerror'] = (var event) {
+       completer.completeError(event);
+     };
+     writer.callMethod('write', [blob, jsify({'type': 'text/plain'})]);
+
+     return completer.future;
+   });
  }
 
- Future&lt;Entry&gt; getFile(String path) {
-   var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
-   proxy.callMethod('getFile', [path, completer.callback, completer.errorCallback]);
+ Future&lt;ChromeObject&gt; _createWriter() {
+   var completer = new _ChromeCompleterWithError&lt;ChromeObject&gt;.oneArg((obj) =&gt; new ChromeObject.fromProxy(obj));
+   proxy.callMethod('createWriter', [completer.callback, completer.errorCallback]);
    return completer.future;
  }
-
- Future&lt;Entry&gt; getDirectory(String path) {
-   // TODO:
-
- }
-
- DirectoryReader createReader() {
-   return new CrDirectoryReader.fromProxy(proxy.callMethod('createReader'));
- }
-
- Future removeRecursively() {
-   // TODO:
-
- }
-
- bool operator==(Object other) =&gt; other is CrDirectoryEntry &amp;&amp;
-     (other as CrDirectoryEntry).proxy == proxy;
-
- int get hashCode =&gt; proxy.hashCode;
 }
 </pre>
 </div>
 <h3>Extends</h3>
 <p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.files/CrEntry.html">CrEntry</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>CrDirectoryEntry</strong></span></p>
-<h3>Implements</h3>
-<p>
-<span class="type-box"><span class="icon-class"></span><a href="../dart_html/DirectoryEntry.html">DirectoryEntry</a></span></p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.files/CrEntry.html">CrEntry</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.files/CrFileEntry.html">CrFileEntry</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeFileEntry</strong></span></p>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>CrDirectoryEntry.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
-              title="Permalink to CrDirectoryEntry.CrDirectoryEntry.fromProxy">#</a></h4>
+new <strong>ChromeFileEntry.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+              title="Permalink to ChromeFileEntry.ChromeFileEntry.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
 <p>Create a new instance of a <code>ChromeObject</code>, which delegates to the given
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-CrDirectoryEntry.fromProxy(JsObject proxy) : super._fromProxy(proxy);
+ChromeFileEntry.fromProxy(JsObject proxy) : super.fromProxy(proxy);
 </pre>
 </div>
 </div>
 </div>
-<div>
+<div class="inherited">
 <h3>Properties</h3>
 <div class="field inherited"><h4 id="filesystem">
 <button class="show-code">Code</button>
 final FileSystem         <strong>filesystem</strong> <a class="anchor-link"
             href="#filesystem"
-            title="Permalink to CrDirectoryEntry.filesystem">#</a>
+            title="Permalink to ChromeFileEntry.filesystem">#</a>
         </h4>
         <div class="inherited-from">inherited from Entry </div><div class="doc">
 <pre class="source">
@@ -114,7 +128,7 @@ final FileSystem filesystem
 <button class="show-code">Code</button>
 final String         <strong>fullPath</strong> <a class="anchor-link"
             href="#fullPath"
-            title="Permalink to CrDirectoryEntry.fullPath">#</a>
+            title="Permalink to ChromeFileEntry.fullPath">#</a>
         </h4>
         <div class="inherited-from">inherited from Entry </div><div class="doc">
 <pre class="source">
@@ -122,13 +136,13 @@ final String fullPath
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="hashCode">
+<div class="field inherited"><h4 id="hashCode">
 <button class="show-code">Code</button>
 final int         <strong>hashCode</strong> <a class="anchor-link"
             href="#hashCode"
-            title="Permalink to CrDirectoryEntry.hashCode">#</a>
+            title="Permalink to ChromeFileEntry.hashCode">#</a>
         </h4>
-        <div class="doc">
+        <div class="inherited-from">inherited from <a href="../chrome.src.files/CrFileEntry.html">CrFileEntry</a> </div><div class="doc">
 <div class="inherited">
 <p>Get a hash code for this object.</p>
 <p>All objects have hash codes. Hash codes are guaranteed to be the
@@ -136,7 +150,7 @@ same for objects that are equal when compared using the equality
 operator <code>==</code>. Other than that there are no guarantees about
 the hash codes. They will not be consistent between runs and
 there are no distribution guarantees.</p>
-<p>If a subclass overrides <a class="crossref" href="../chrome.src.files/CrDirectoryEntry.html#hashCode">hashCode</a> it should override the
+<p>If a subclass overrides <a class="crossref" href="../chrome.src.files/CrFileEntry.html#hashCode">hashCode</a> it should override the
 equality operator as well to maintain consistency.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
@@ -148,7 +162,7 @@ int get hashCode =&gt; proxy.hashCode;
 <button class="show-code">Code</button>
 final bool         <strong>isDirectory</strong> <a class="anchor-link"
             href="#isDirectory"
-            title="Permalink to CrDirectoryEntry.isDirectory">#</a>
+            title="Permalink to ChromeFileEntry.isDirectory">#</a>
         </h4>
         <div class="inherited-from">inherited from Entry </div><div class="doc">
 <pre class="source">
@@ -160,7 +174,7 @@ final bool isDirectory
 <button class="show-code">Code</button>
 final bool         <strong>isFile</strong> <a class="anchor-link"
             href="#isFile"
-            title="Permalink to CrDirectoryEntry.isFile">#</a>
+            title="Permalink to ChromeFileEntry.isFile">#</a>
         </h4>
         <div class="inherited-from">inherited from Entry </div><div class="doc">
 <pre class="source">
@@ -172,7 +186,7 @@ final bool isFile
 <button class="show-code">Code</button>
 final String         <strong>name</strong> <a class="anchor-link"
             href="#name"
-            title="Permalink to CrDirectoryEntry.name">#</a>
+            title="Permalink to ChromeFileEntry.name">#</a>
         </h4>
         <div class="inherited-from">inherited from Entry </div><div class="doc">
 <pre class="source">
@@ -184,7 +198,7 @@ final String name
 <button class="show-code">Code</button>
 final JsObject         <strong>proxy</strong> <a class="anchor-link"
             href="#proxy"
-            title="Permalink to CrDirectoryEntry.proxy">#</a>
+            title="Permalink to ChromeFileEntry.proxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
@@ -196,7 +210,7 @@ final JsObject proxy
 <button class="show-code">Code</button>
 final Type         <strong>runtimeType</strong> <a class="anchor-link"
             href="#runtimeType"
-            title="Permalink to CrDirectoryEntry.runtimeType">#</a>
+            title="Permalink to ChromeFileEntry.runtimeType">#</a>
         </h4>
         <div class="inherited-from">inherited from Interceptor </div><div class="doc">
 <div class="inherited">
@@ -208,13 +222,13 @@ Type get runtimeType =&gt; getRuntimeType(this);
 </div>
 </div>
 </div>
-<div>
+<div class="inherited">
 <h3>Operators</h3>
-<div class="method"><h4 id="==">
+<div class="method inherited"><h4 id="==">
 <button class="show-code">Code</button>
 bool <strong>operator ==</strong>(Object other) <a class="anchor-link" href="#=="
-              title="Permalink to CrDirectoryEntry.operator ==">#</a></h4>
-<div class="doc">
+              title="Permalink to ChromeFileEntry.operator ==">#</a></h4>
+<div class="inherited-from">inherited from <a href="../chrome.src.files/CrFileEntry.html">CrFileEntry</a> </div><div class="doc">
 <div class="inherited">
 <p>The equality operator.</p>
 <p>The default behavior for all <a class="crossref" href="../dart_core/Object.html">Object</a>s is to return true if and
@@ -234,7 +248,7 @@ That is, it must be:</p><ul><li>
 should not change over time, or at least only change if one of the objects
 was modified.</p>
 <p>If a subclass overrides the equality operator it should override
-the <a class="crossref" href="../chrome.src.files/CrDirectoryEntry.html#hashCode">hashCode</a> method as well to maintain consistency.</p>
+the <a class="crossref" href="../chrome.src.files/CrFileEntry.html#hashCode">hashCode</a> method as well to maintain consistency.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
 bool operator==(Object other) =&gt; other is CrDirectoryEntry &amp;&amp;
@@ -248,7 +262,7 @@ bool operator==(Object other) =&gt; other is CrDirectoryEntry &amp;&amp;
 <div class="method inherited"><h4 id="copyTo">
 <button class="show-code">Code</button>
 Future&lt;Entry&gt; <strong>copyTo</strong>(DirectoryEntry parent, {String name}) <a class="anchor-link" href="#copyTo"
-              title="Permalink to CrDirectoryEntry.copyTo">#</a></h4>
+              title="Permalink to ChromeFileEntry.copyTo">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
@@ -258,86 +272,28 @@ Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="createDirectory">
+<div class="method inherited"><h4 id="createWriter">
 <button class="show-code">Code</button>
-Future&lt;Entry&gt; <strong>createDirectory</strong>(String path, {bool exclusive: false}) <a class="anchor-link" href="#createDirectory"
-              title="Permalink to CrDirectoryEntry.createDirectory">#</a></h4>
-<div class="doc">
-<div class="inherited">
-<p>Create a new directory with the specified <code>path</code>. If <code>exclusive</code> is true,
-the returned Future will complete with an error if a directory already
-exists with the specified <code>path</code>.</p>
-<div class="docs-inherited-from">docs inherited from DirectoryEntry </div></div>
+Future&lt;FileWriter&gt; <strong>createWriter</strong>() <a class="anchor-link" href="#createWriter"
+              title="Permalink to ChromeFileEntry.createWriter">#</a></h4>
+<div class="inherited-from">inherited from <a href="../chrome.src.files/CrFileEntry.html">CrFileEntry</a> </div><div class="doc">
 <pre class="source">
-Future&lt;Entry&gt; createDirectory(String path, {bool exclusive: false}) {
+Future&lt;FileWriter&gt; createWriter() {
  // TODO:
 
 }
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="createFile">
+<div class="method inherited"><h4 id="file">
 <button class="show-code">Code</button>
-Future&lt;Entry&gt; <strong>createFile</strong>(String path, {bool exclusive: false}) <a class="anchor-link" href="#createFile"
-              title="Permalink to CrDirectoryEntry.createFile">#</a></h4>
-<div class="doc">
-<div class="inherited">
-<p>Create a new file with the specified <code>path</code>. If <code>exclusive</code> is true,
-the returned Future will complete with an error if a file already
-exists at the specified <code>path</code>.</p>
-<div class="docs-inherited-from">docs inherited from DirectoryEntry </div></div>
+Future&lt;File&gt; <strong>file</strong>() <a class="anchor-link" href="#file"
+              title="Permalink to ChromeFileEntry.file">#</a></h4>
+<div class="inherited-from">inherited from <a href="../chrome.src.files/CrFileEntry.html">CrFileEntry</a> </div><div class="doc">
 <pre class="source">
-Future&lt;Entry&gt; createFile(String path, {bool exclusive: false}) {
- // TODO:
-
-}
-</pre>
-</div>
-</div>
-<div class="method"><h4 id="createReader">
-<button class="show-code">Code</button>
-DirectoryReader <strong>createReader</strong>() <a class="anchor-link" href="#createReader"
-              title="Permalink to CrDirectoryEntry.createReader">#</a></h4>
-<div class="doc">
-<pre class="source">
-DirectoryReader createReader() {
- return new CrDirectoryReader.fromProxy(proxy.callMethod('createReader'));
-}
-</pre>
-</div>
-</div>
-<div class="method"><h4 id="getDirectory">
-<button class="show-code">Code</button>
-Future&lt;Entry&gt; <strong>getDirectory</strong>(String path) <a class="anchor-link" href="#getDirectory"
-              title="Permalink to CrDirectoryEntry.getDirectory">#</a></h4>
-<div class="doc">
-<div class="inherited">
-<p>Retrieve an already existing directory entry. The returned future will
-result in an error if a directory at <code>path</code> does not exist or if the item
-at <code>path</code> is not a directory.</p>
-<div class="docs-inherited-from">docs inherited from DirectoryEntry </div></div>
-<pre class="source">
-Future&lt;Entry&gt; getDirectory(String path) {
- // TODO:
-
-}
-</pre>
-</div>
-</div>
-<div class="method"><h4 id="getFile">
-<button class="show-code">Code</button>
-Future&lt;Entry&gt; <strong>getFile</strong>(String path) <a class="anchor-link" href="#getFile"
-              title="Permalink to CrDirectoryEntry.getFile">#</a></h4>
-<div class="doc">
-<div class="inherited">
-<p>Retrieve an already existing file entry. The returned future will
-result in an error if a file at <code>path</code> does not exist or if the item at
-<code>path</code> is not a file.</p>
-<div class="docs-inherited-from">docs inherited from DirectoryEntry </div></div>
-<pre class="source">
-Future&lt;Entry&gt; getFile(String path) {
- var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
- proxy.callMethod('getFile', [path, completer.callback, completer.errorCallback]);
+Future&lt;File&gt; file() {
+ var completer = new _ChromeCompleterWithError&lt;File&gt;.oneArg((obj) =&gt; new CrFile.fromProxy(obj));
+ proxy.callMethod('file', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -346,7 +302,7 @@ Future&lt;Entry&gt; getFile(String path) {
 <div class="method inherited"><h4 id="getMetadata">
 <button class="show-code">Code</button>
 Future&lt;Metadata&gt; <strong>getMetadata</strong>() <a class="anchor-link" href="#getMetadata"
-              title="Permalink to CrDirectoryEntry.getMetadata">#</a></h4>
+              title="Permalink to ChromeFileEntry.getMetadata">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;Metadata&gt; getMetadata() {
@@ -360,7 +316,7 @@ Future&lt;Metadata&gt; getMetadata() {
 <div class="method inherited"><h4 id="getParent">
 <button class="show-code">Code</button>
 Future&lt;Entry&gt; <strong>getParent</strong>() <a class="anchor-link" href="#getParent"
-              title="Permalink to CrDirectoryEntry.getParent">#</a></h4>
+              title="Permalink to ChromeFileEntry.getParent">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; getParent() {
@@ -374,7 +330,7 @@ Future&lt;Entry&gt; getParent() {
 <div class="method inherited"><h4 id="moveTo">
 <button class="show-code">Code</button>
 Future&lt;Entry&gt; <strong>moveTo</strong>(DirectoryEntry parent, {String name}) <a class="anchor-link" href="#moveTo"
-              title="Permalink to CrDirectoryEntry.moveTo">#</a></h4>
+              title="Permalink to ChromeFileEntry.moveTo">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
@@ -387,7 +343,7 @@ Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
 <div class="method inherited"><h4 id="noSuchMethod">
 <button class="show-code">Code</button>
 dynamic <strong>noSuchMethod</strong>(Invocation invocation) <a class="anchor-link" href="#noSuchMethod"
-              title="Permalink to CrDirectoryEntry.noSuchMethod">#</a></h4>
+              title="Permalink to ChromeFileEntry.noSuchMethod">#</a></h4>
 <div class="inherited-from">inherited from Interceptor </div><div class="doc">
 <div class="inherited">
 <p><a class="crossref" href="../dart__interceptors/Interceptor.html#noSuchMethod">noSuchMethod</a> is invoked when users invoke a non-existant method
@@ -409,10 +365,36 @@ dynamic noSuchMethod(Invocation invocation) {
 </pre>
 </div>
 </div>
+<div class="method"><h4 id="readText">
+<button class="show-code">Code</button>
+Future&lt;String&gt; <strong>readText</strong>() <a class="anchor-link" href="#readText"
+              title="Permalink to ChromeFileEntry.readText">#</a></h4>
+<div class="doc">
+<p>Return the contents of the file as a String.</p>
+<pre class="source">
+Future&lt;String&gt; readText() {
+ return file().then((File file) {
+   Completer&lt;String&gt; completer = new Completer();
+
+   var reader = new JsObject(context['FileReader']);
+   reader['onload'] = (var event) {
+     completer.complete(reader['result']);
+   };
+   reader['onerror'] = (var domError) {
+     completer.completeError(domError);
+   };
+   reader.callMethod('readAsText', [file]);
+
+   return completer.future;
+ });
+}
+</pre>
+</div>
+</div>
 <div class="method inherited"><h4 id="remove">
 <button class="show-code">Code</button>
 Future <strong>remove</strong>() <a class="anchor-link" href="#remove"
-              title="Permalink to CrDirectoryEntry.remove">#</a></h4>
+              title="Permalink to ChromeFileEntry.remove">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future remove() {
@@ -422,23 +404,10 @@ Future remove() {
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="removeRecursively">
-<button class="show-code">Code</button>
-Future <strong>removeRecursively</strong>() <a class="anchor-link" href="#removeRecursively"
-              title="Permalink to CrDirectoryEntry.removeRecursively">#</a></h4>
-<div class="doc">
-<pre class="source">
-Future removeRecursively() {
- // TODO:
-
-}
-</pre>
-</div>
-</div>
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
 JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
-              title="Permalink to CrDirectoryEntry.toJs">#</a></h4>
+              title="Permalink to ChromeFileEntry.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
 JsObject toJs() =&gt; proxy;
@@ -448,7 +417,7 @@ JsObject toJs() =&gt; proxy;
 <div class="method inherited"><h4 id="toString">
 <button class="show-code">Code</button>
 String <strong>toString</strong>() <a class="anchor-link" href="#toString"
-              title="Permalink to CrDirectoryEntry.toString">#</a></h4>
+              title="Permalink to ChromeFileEntry.toString">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <div class="inherited">
 <p>Returns a string representation of this object.</p>
@@ -461,10 +430,41 @@ String toString() =&gt; proxy.toString();
 <div class="method inherited"><h4 id="toUrl">
 <button class="show-code">Code</button>
 String <strong>toUrl</strong>() <a class="anchor-link" href="#toUrl"
-              title="Permalink to CrDirectoryEntry.toUrl">#</a></h4>
+              title="Permalink to ChromeFileEntry.toUrl">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 String toUrl() =&gt; this.proxy.callMethod('toURL');
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="writeText">
+<button class="show-code">Code</button>
+Future <strong>writeText</strong>(String text) <a class="anchor-link" href="#writeText"
+              title="Permalink to ChromeFileEntry.writeText">#</a></h4>
+<div class="doc">
+<p>Write out the given String to the file.</p>
+<pre class="source">
+Future writeText(String text) {
+ return _createWriter().then((ChromeObject _writer) {
+   JsObject writer = _writer.proxy;
+
+   Completer&lt;FileEntry&gt; completer = new Completer();
+
+   JsObject blob = new JsObject(context['Blob'], [jsify([text])]);
+
+   writer['onwrite'] = (var event) {
+     writer['onwrite'] = null;
+     writer.callMethod('truncate', [writer['length']]);
+     completer.complete(this);
+   };
+   writer['onerror'] = (var event) {
+     completer.completeError(event);
+   };
+   writer.callMethod('write', [blob, jsify({'type': 'text/plain'})]);
+
+   return completer.future;
+ });
+}
 </pre>
 </div>
 </div>

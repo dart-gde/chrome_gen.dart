@@ -2,7 +2,7 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>CrFileEntry class / chrome.src.files Library / Dart Documentation</title>
+        <title>CrFileEntry abstract class / chrome.src.files Library / Dart Documentation</title>
         <link rel="stylesheet" type="text/css"
             href="../styles.css">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
@@ -27,13 +27,13 @@
 </div>
 <div class="content">
         <h2><strong>CrFileEntry</strong>
-          class
+          abstract class
         </h2>
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class CrFileEntry extends CrEntry implements FileEntry {
+abstract class CrFileEntry extends CrEntry implements FileEntry {
  CrFileEntry.fromProxy(JsObject proxy) : super._fromProxy(proxy);
 
  Future&lt;FileWriter&gt; createWriter() {
@@ -42,8 +42,9 @@ class CrFileEntry extends CrEntry implements FileEntry {
  }
 
  Future&lt;File&gt; file() {
-   // TODO:
-
+   var completer = new _ChromeCompleterWithError&lt;File&gt;.oneArg((obj) =&gt; new CrFile.fromProxy(obj));
+   proxy.callMethod('file', [completer.callback, completer.errorCallback]);
+   return completer.future;
  }
 
  bool operator==(Object other) =&gt; other is CrDirectoryEntry &amp;&amp;
@@ -56,6 +57,9 @@ class CrFileEntry extends CrEntry implements FileEntry {
 <h3>Extends</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.files/CrEntry.html">CrEntry</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>CrFileEntry</strong></span></p>
+<h3>Subclasses</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.files/ChromeFileEntry.html">ChromeFileEntry</a></span></p>
 <h3>Implements</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../dart_html/FileEntry.html">FileEntry</a></span></p>
@@ -258,8 +262,9 @@ Future&lt;File&gt; <strong>file</strong>() <a class="anchor-link" href="#file"
 <div class="doc">
 <pre class="source">
 Future&lt;File&gt; file() {
- // TODO:
-
+ var completer = new _ChromeCompleterWithError&lt;File&gt;.oneArg((obj) =&gt; new CrFile.fromProxy(obj));
+ proxy.callMethod('file', [completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -285,7 +290,7 @@ Future&lt;Entry&gt; <strong>getParent</strong>() <a class="anchor-link" href="#g
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; getParent() {
- var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
  proxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
  return completer.future;
 }

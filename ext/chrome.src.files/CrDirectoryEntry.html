@@ -47,8 +47,9 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
  }
 
  Future&lt;Entry&gt; getFile(String path) {
-   // TODO:
-
+   var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
+   proxy.callMethod('getFile', [path, completer.callback, completer.errorCallback]);
+   return completer.future;
  }
 
  Future&lt;Entry&gt; getDirectory(String path) {
@@ -57,8 +58,7 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
  }
 
  DirectoryReader createReader() {
-   // TODO:
-
+   return new CrDirectoryReader.fromProxy(proxy.callMethod('createReader'));
  }
 
  Future removeRecursively() {
@@ -301,8 +301,7 @@ DirectoryReader <strong>createReader</strong>() <a class="anchor-link" href="#cr
 <div class="doc">
 <pre class="source">
 DirectoryReader createReader() {
- // TODO:
-
+ return new CrDirectoryReader.fromProxy(proxy.callMethod('createReader'));
 }
 </pre>
 </div>
@@ -337,8 +336,9 @@ result in an error if a file at <code>path</code> does not exist or if the item 
 <div class="docs-inherited-from">docs inherited from DirectoryEntry </div></div>
 <pre class="source">
 Future&lt;Entry&gt; getFile(String path) {
- // TODO:
-
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
+ proxy.callMethod('getFile', [path, completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -364,7 +364,7 @@ Future&lt;Entry&gt; <strong>getParent</strong>() <a class="anchor-link" href="#g
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; getParent() {
- var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
  proxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
  return completer.future;
 }

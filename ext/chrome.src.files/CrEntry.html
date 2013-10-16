@@ -42,7 +42,7 @@ abstract class CrEntry extends ChromeObject implements Entry {
    if (proxy == null) {
      return null;
    } else if (proxy.toString().contains('FileEntry]')) {
-     return new CrFileEntry.fromProxy(proxy);
+     return new ChromeFileEntry.fromProxy(proxy);
    } else {
      return new CrDirectoryEntry.fromProxy(proxy);
    }
@@ -80,7 +80,7 @@ abstract class CrEntry extends ChromeObject implements Entry {
  }
 
  Future&lt;Entry&gt; getParent() {
-   var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+   var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
    proxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
    return completer.future;
  }
@@ -115,7 +115,7 @@ factory CrEntry.fromProxy(JsObject proxy) {
  if (proxy == null) {
    return null;
  } else if (proxy.toString().contains('FileEntry]')) {
-   return new CrFileEntry.fromProxy(proxy);
+   return new ChromeFileEntry.fromProxy(proxy);
  } else {
    return new CrDirectoryEntry.fromProxy(proxy);
  }
@@ -306,7 +306,7 @@ Future&lt;Entry&gt; <strong>getParent</strong>() <a class="anchor-link" href="#g
 <div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; getParent() {
- var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
  proxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
