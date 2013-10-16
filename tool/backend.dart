@@ -40,7 +40,8 @@ class _DefaultBackendContext {
   static final Map ALT_FACTORIES = {
     "DirectoryEntry": "CrDirectoryEntry",
     "DOMFileSystem": "CrFileSystem",
-    "Entry": "CrEntry"
+    "Entry": "CrEntry",
+    "FileEntry": "CrFileEntry"
   };
 
   final DartGenerator generator;
@@ -200,7 +201,7 @@ class _DefaultBackendContext {
         generator.writeln("noArgs();");
       } else if (future.parameters.length == 1 && future.parameters.first.isCombinedReturnValue) {
         ChromeType param = future.parameters.first;
-        generator.writeln("oneArg(${param.refName}._create);");
+        generator.writeln("twoArgs(${param.refName}._create);");
       } else if (future.parameters.length == 1) {
         ChromeType param = future.parameters.first;
         var callbackConverter = getCallbackConverter(param);

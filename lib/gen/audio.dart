@@ -20,7 +20,7 @@ class ChromeAudio {
    * [inputInfo] null
    */
   Future<GetInfoResult> getInfo() {
-    var completer = new ChromeCompleter<GetInfoResult>.oneArg(GetInfoResult._create);
+    var completer = new ChromeCompleter<GetInfoResult>.twoArgs(GetInfoResult._create);
     _audio.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }

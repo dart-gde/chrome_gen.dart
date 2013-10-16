@@ -17,6 +17,7 @@
     "audio",
     { "fileSystem": ["write", "retainEntries", "directory"] },
     "idle",
+    "syncFileSystem",
     "system.cpu",
     "system.memory",
     { "socket" : ["tcp-connect", "tcp-listen"] },

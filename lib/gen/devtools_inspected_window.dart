@@ -37,7 +37,7 @@ class ChromeDevtoolsInspectedWindow {
    * expression.
    */
   Future<EvalResult> eval(String expression) {
-    var completer = new ChromeCompleter<EvalResult>.oneArg(EvalResult._create);
+    var completer = new ChromeCompleter<EvalResult>.twoArgs(EvalResult._create);
     _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
     return completer.future;
   }
@@ -119,7 +119,7 @@ class Resource extends ChromeObject {
    * Currently, only base64 is supported.
    */
   Future<GetResourceContentResult> getContent() {
-    var completer = new ChromeCompleter<GetResourceContentResult>.oneArg(GetResourceContentResult._create);
+    var completer = new ChromeCompleter<GetResourceContentResult>.twoArgs(GetResourceContentResult._create);
     proxy.callMethod('getContent', [completer.callback]);
     return completer.future;
   }

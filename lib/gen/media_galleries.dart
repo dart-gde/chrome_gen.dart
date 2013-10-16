@@ -17,8 +17,8 @@ class ChromeMediaGalleries {
    * Get the media galleries configured in this user agent. If none are
    * configured or available, the callback will receive an empty array.
    */
-  Future<dynamic> getMediaFileSystems([MediaFileSystemsDetails details]) {
-    var completer = new ChromeCompleter<dynamic>.oneArg();
+  Future<FileSystem> getMediaFileSystems([MediaFileSystemsDetails details]) {
+    var completer = new ChromeCompleter<FileSystem>.oneArg(_createFileSystem);
     _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
     return completer.future;
   }
@@ -88,5 +88,6 @@ class MediaFileSystemMetadata extends ChromeObject {
   set isMediaDevice(bool value) => proxy['isMediaDevice'] = value;
 }
 
+FileSystem _createFileSystem(JsObject proxy) => proxy == null ? null : new CrFileSystem.fromProxy(proxy);
 MediaFileSystemMetadata _createMediaFileSystemMetadata(JsObject proxy) => proxy == null ? null : new MediaFileSystemMetadata.fromProxy(proxy);
 GetMediaFileSystemsInteractivity _createGetMediaFileSystemsInteractivity(String value) => GetMediaFileSystemsInteractivity.VALUES.singleWhere((ChromeEnum e) => e.value == value);

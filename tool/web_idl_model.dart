@@ -253,7 +253,12 @@ class IDLCollectorChrome implements IDLCollector {
           if (type is List) {
             type = type[0];
           }
-          idlType = new IDLType(type);
+
+          if (instanceHint != null) {
+            idlType = new IDLType.fromRef(instanceHint);
+          } else {
+            idlType = new IDLType(type);
+          }
         }
       }
 
