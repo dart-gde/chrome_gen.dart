@@ -34,6 +34,12 @@ class DefaultBackend extends Backend {
 }
 
 class _DefaultBackendContext {
+  static final Map ALT_FACTORIES = {
+    "DirectoryEntry": "CrDirectoryEntry",
+    "DOMFileSystem": "CrFileSystem",
+    "Entry": "CrEntry"
+  };
+
   final DartGenerator generator;
   final ChromeLibrary library;
   final Overrides overrides;
@@ -85,7 +91,7 @@ class _DefaultBackendContext {
 
     library.returnTypes.forEach(_printReturnType);
 
-    if(_neededFactories.isNotEmpty) {
+    if (_neededFactories.isNotEmpty) {
       generator.writeln();
 
       var created = new Set<String>();
@@ -393,7 +399,7 @@ class _DefaultBackendContext {
 
     var type = library.eventTypes.firstWhere((e) => e.name == creator, orElse: () => null);
 
-    if(type != null) {
+    if (type != null) {
       Iterable<ChromeProperty> props = type.filteredProperties;
 
       String createParams = props.map((p) => '${getJSType(p.type)} ${p.name}').join(', ');
@@ -411,13 +417,18 @@ class _DefaultBackendContext {
     }
 
     var enumType = library.enumTypes.firstWhere((e) => e.name == creator, orElse: () => null);
-    if(enumType != null) {
+
+    if (enumType != null) {
       creatorTemplate = "%s _create%s(String value) => %s.VALUES.singleWhere((ChromeEnum e) => e.value == value);";
     } else {
-      creatorTemplate = "%s _create%s(JsObject proxy) => proxy == null ? null : new %s.fromProxy(proxy);";
+      creatorTemplate = "%s _create%s(JsObject proxy) => proxy == null ? null : new %t.fromProxy(proxy);";
     }
 
-    generator.writeln(creatorTemplate.replaceAll('%s', creator));
+    String altCreator =
+        ALT_FACTORIES.containsKey(creator) ? ALT_FACTORIES[creator] : creator;
+
+    generator.writeln(
+        creatorTemplate.replaceAll('%s', creator).replaceAll('%t', altCreator));
   }
 
   /**

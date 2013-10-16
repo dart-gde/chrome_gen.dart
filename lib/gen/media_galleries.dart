@@ -26,7 +26,7 @@ class ChromeMediaGalleries {
   /**
    * Get metadata about a specific media file system.
    */
-  MediaFileSystemMetadata getMediaFileSystemMetadata(DOMFileSystem mediaFileSystem) {
+  MediaFileSystemMetadata getMediaFileSystemMetadata(FileSystem mediaFileSystem) {
     return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
   }
 }

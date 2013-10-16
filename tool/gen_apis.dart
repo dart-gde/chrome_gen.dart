@@ -82,11 +82,11 @@ class GenApis {
           "export 'gen/${convertJSLibNameToFileName(libName)}.dart';");
     }
 
+    generator.writeln();
     generator.writeln("export 'src/common_exp.dart';");
 
     if (includeAppSrc) {
-      generator.writeln("export 'src/files.dart';");
-      generator.writeln("export 'src/socket.dart';");
+      generator.writeln("export 'src/files_exp.dart';");
     }
 
     libFile.writeAsStringSync(generator.toString());
