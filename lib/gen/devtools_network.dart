@@ -64,7 +64,7 @@ class Request extends ChromeObject {
    * Currently, only base64 is supported.
    */
   Future<GetRequestContentResult> getContent() {
-    var completer = new ChromeCompleter<GetRequestContentResult>.oneArg(GetRequestContentResult._create);
+    var completer = new ChromeCompleter<GetRequestContentResult>.twoArgs(GetRequestContentResult._create);
     proxy.callMethod('getContent', [completer.callback]);
     return completer.future;
   }

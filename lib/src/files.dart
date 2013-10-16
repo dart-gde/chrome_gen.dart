@@ -34,10 +34,15 @@ class CrMetadata extends ChromeObject implements Metadata {
 abstract class CrEntry extends ChromeObject implements Entry {
   // This factory returns either a FileEntry or a DirectoryEntry.
   factory CrEntry.fromProxy(JsObject proxy) {
-    if (proxy.instanceof(context['DirectoryEntry'])) {
-      return new CrDirectoryEntry.fromProxy(proxy);
-    } else {
+    // TODO: the toString() hack below is unfortunate :(. I would like to use:
+    // proxy.instanceof(context['DirectoryEntry'])
+
+    if (proxy == null) {
+      return null;
+    } else if (proxy.toString().contains('FileEntry]')) {
       return new CrFileEntry.fromProxy(proxy);
+    } else {
+      return new CrDirectoryEntry.fromProxy(proxy);
     }
   }
 

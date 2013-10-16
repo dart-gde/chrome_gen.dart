@@ -53,7 +53,7 @@ class ChromeFileSystem {
    * [fileEntries] null
    */
   Future<ChooseEntryResult> chooseEntry([ChooseEntryOptions options]) {
-    var completer = new ChromeCompleter<ChooseEntryResult>.oneArg(ChooseEntryResult._create);
+    var completer = new ChromeCompleter<ChooseEntryResult>.twoArgs(ChooseEntryResult._create);
     _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
     return completer.future;
   }
@@ -171,11 +171,11 @@ class ChooseEntryOptions extends ChromeObject {
  */
 class ChooseEntryResult {
   static ChooseEntryResult _create(entry, fileEntries) {
-    return new ChooseEntryResult._(entry, fileEntries);
+    return new ChooseEntryResult._(_createEntry(entry), _createFileEntry(fileEntries));
   }
 
-  dynamic entry;
-  dynamic fileEntries;
+  Entry entry;
+  FileEntry fileEntries;
 
   ChooseEntryResult._(this.entry, this.fileEntries);
 }
@@ -183,3 +183,4 @@ class ChooseEntryResult {
 Entry _createEntry(JsObject proxy) => proxy == null ? null : new CrEntry.fromProxy(proxy);
 ChooseEntryType _createChooseEntryType(String value) => ChooseEntryType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 AcceptOption _createAcceptOption(JsObject proxy) => proxy == null ? null : new AcceptOption.fromProxy(proxy);
+FileEntry _createFileEntry(JsObject proxy) => proxy == null ? null : new CrFileEntry.fromProxy(proxy);

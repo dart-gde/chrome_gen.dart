@@ -19,6 +19,12 @@ void main() {
   action("getInfo()", handleAudioGetInfo);
   br();
 
+  label('files');
+  action("read and write", handleFileReadWrite);
+  action("dir info", handleDirInfo);
+  action("dir listings", handleDirListings);
+  br();
+
   label('fileSystem');
   action("chooseEntry()", handleChooseEntry);
   br();
@@ -44,11 +50,16 @@ void main() {
   action('getManifest()', handleRuntimeGetManifest);
   action('getPlatformInfo()', handleGetPlatformInfo);
   action('getPackageDirectoryEntry()', handleGetPackageDirectoryEntry);
+  action('requestUpdateCheck()', handleRuntimeRequestUpdateCheck);
   br();
 
   label('socket');
   action('read()', handleSocketRead);
   action('read() error', handleSocketReadError);
+  br();
+
+  label('syncFileSystem');
+  action("requestFileSystem()", handleRequestFileSystem);
   br();
 
   label('system');
@@ -161,6 +172,12 @@ void handleGetPackageDirectoryEntry() {
   });
 }
 
+void handleRuntimeRequestUpdateCheck() {
+  chrome.runtime.requestUpdateCheck().then((chrome.RequestUpdateCheckResult result) {
+    summary("${result}, status=${result.status}, ${result.details}");
+  });
+}
+
 void handleAlarmsCreate() {
   chrome.alarms.create(new chrome.AlarmCreateInfo(periodInMinutes: 1.0), 'myNewAlarm');
   summary('alarms.create: firing event in 1 minute');
@@ -238,10 +255,45 @@ void handleSocketReadError() {
 }
 
 void handleChooseEntry() {
-  // TODO: we need to hand-write chrome.fileSystem.chooseEntry(); it's return is
-  // weird.
   chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_WRITABLE_FILE);
   chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
-    summary("result: ${result}");
+    summary("result: ${result}, ${result.entry}, name=${result.entry.name}, fullPath=${result.entry.fullPath}");
   });
 }
+
+void handleRequestFileSystem() {
+  chrome.syncFileSystem.requestFileSystem().then((FileSystem fs) {
+    summary("result: ${fs}");
+  });
+}
+
+void handleFileReadWrite() {
+  // TODO:
+  summary("todo:");
+}
+
+void handleDirInfo() {
+  List items = [];
+
+  chrome.runtime.getPackageDirectoryEntry().then((chrome.DirectoryEntry dir) {
+    items.add("filesystem: ${dir.filesystem}");
+    items.add("fullPath: ${dir.fullPath}");
+    items.add("isDirectory: ${dir.isDirectory}");
+    items.add("isFile: ${dir.isFile}");
+    items.add("name: ${dir.name}");
+
+    summary(items.join(', '));
+  });
+}
+
+void handleDirGetFile() {
+  // TODO:
+  // Future<Entry> getFile(String path) {
+  summary("todo:");
+}
+
+void handleDirListings() {
+  // TODO:
+  summary("todo:");
+}
+

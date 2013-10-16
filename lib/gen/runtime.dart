@@ -98,7 +98,7 @@ class ChromeRuntime {
    * the available update.
    */
   Future<RequestUpdateCheckResult> requestUpdateCheck() {
-    var completer = new ChromeCompleter<RequestUpdateCheckResult>.oneArg(RequestUpdateCheckResult._create);
+    var completer = new ChromeCompleter<RequestUpdateCheckResult>.twoArgs(RequestUpdateCheckResult._create);
     _runtime.callMethod('requestUpdateCheck', [completer.callback]);
     return completer.future;
   }
