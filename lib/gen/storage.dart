@@ -147,4 +147,3 @@ class StorageArea extends ChromeObject {
 StorageArea _createStorageArea(JsObject proxy) => proxy == null ? null : new StorageArea.fromProxy(proxy);
 StorageOnChangedEvent _createStorageOnChangedEvent(JsObject changes, String areaName) =>
     new StorageOnChangedEvent(mapify(changes), areaName);
-

@@ -119,4 +119,3 @@ class AlarmCreateInfo extends ChromeObject {
 }
 
 Alarm _createAlarm(JsObject proxy) => proxy == null ? null : new Alarm.fromProxy(proxy);
-

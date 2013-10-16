@@ -90,4 +90,3 @@ class FileHandlerExecuteEventDetails extends ChromeObject {
 OnExecuteEvent _createOnExecuteEvent(String id, JsObject details) =>
     new OnExecuteEvent(id, _createFileHandlerExecuteEventDetails(details));
 FileHandlerExecuteEventDetails _createFileHandlerExecuteEventDetails(JsObject proxy) => proxy == null ? null : new FileHandlerExecuteEventDetails.fromProxy(proxy);
-

@@ -119,4 +119,3 @@ LocalMediaStream _createLocalMediaStream(JsObject proxy) => proxy == null ? null
 CaptureInfo _createCaptureInfo(JsObject proxy) => proxy == null ? null : new CaptureInfo.fromProxy(proxy);
 TabCaptureState _createTabCaptureState(String value) => TabCaptureState.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 MediaStreamConstraint _createMediaStreamConstraint(JsObject proxy) => proxy == null ? null : new MediaStreamConstraint.fromProxy(proxy);
-

@@ -196,4 +196,3 @@ ChromeSetting _createChromeSetting(JsObject proxy) => proxy == null ? null : new
 ProxyServer _createProxyServer(JsObject proxy) => proxy == null ? null : new ProxyServer.fromProxy(proxy);
 ProxyRules _createProxyRules(JsObject proxy) => proxy == null ? null : new ProxyRules.fromProxy(proxy);
 PacScript _createPacScript(JsObject proxy) => proxy == null ? null : new PacScript.fromProxy(proxy);
-

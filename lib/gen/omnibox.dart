@@ -158,4 +158,3 @@ OnInputChangedEvent _createOnInputChangedEvent(String text, JsObject suggest) =>
     new OnInputChangedEvent(text, suggest);
 OnInputEnteredEvent _createOnInputEnteredEvent(String text, String disposition) =>
     new OnInputEnteredEvent(text, disposition);
-

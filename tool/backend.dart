@@ -34,6 +34,9 @@ class DefaultBackend extends Backend {
 }
 
 class _DefaultBackendContext {
+  /**
+   * Used to be able to construct specific subclasses of a given type.
+   */
   static final Map ALT_FACTORIES = {
     "DirectoryEntry": "CrDirectoryEntry",
     "DOMFileSystem": "CrFileSystem",
@@ -105,8 +108,6 @@ class _DefaultBackendContext {
           created.add(factoryType);
         }
       }
-
-      generator.writeln();
     }
 
     overrides.classRenamesFor(library.name).forEach((List<String> renamePair) {

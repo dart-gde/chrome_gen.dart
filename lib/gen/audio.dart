@@ -138,4 +138,3 @@ class GetInfoResult {
 
 OutputDeviceInfo _createOutputDeviceInfo(JsObject proxy) => proxy == null ? null : new OutputDeviceInfo.fromProxy(proxy);
 InputDeviceInfo _createInputDeviceInfo(JsObject proxy) => proxy == null ? null : new InputDeviceInfo.fromProxy(proxy);
-

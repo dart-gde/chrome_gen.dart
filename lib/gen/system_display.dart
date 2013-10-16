@@ -155,4 +155,3 @@ class DisplayProperties extends ChromeObject {
 DisplayUnitInfo _createDisplayUnitInfo(JsObject proxy) => proxy == null ? null : new DisplayUnitInfo.fromProxy(proxy);
 Bounds _createBounds(JsObject proxy) => proxy == null ? null : new Bounds.fromProxy(proxy);
 Insets _createInsets(JsObject proxy) => proxy == null ? null : new Insets.fromProxy(proxy);
-

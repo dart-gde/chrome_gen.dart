@@ -355,4 +355,3 @@ BookmarksOnMovedEvent _createBookmarksOnMovedEvent(String id, JsObject moveInfo)
     new BookmarksOnMovedEvent(id, mapify(moveInfo));
 OnChildrenReorderedEvent _createOnChildrenReorderedEvent(String id, JsObject reorderInfo) =>
     new OnChildrenReorderedEvent(id, mapify(reorderInfo));
-

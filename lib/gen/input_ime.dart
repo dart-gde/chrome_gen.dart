@@ -435,4 +435,3 @@ OnMenuItemActivatedEvent _createOnMenuItemActivatedEvent(String engineID, String
 OnSurroundingTextChangedEvent _createOnSurroundingTextChangedEvent(String engineID, JsObject surroundingInfo) =>
     new OnSurroundingTextChangedEvent(engineID, mapify(surroundingInfo));
 KeyboardEvent _createKeyboardEvent(JsObject proxy) => proxy == null ? null : new KeyboardEvent.fromProxy(proxy);
-

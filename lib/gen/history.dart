@@ -199,4 +199,3 @@ class VisitItem extends ChromeObject {
 
 HistoryItem _createHistoryItem(JsObject proxy) => proxy == null ? null : new HistoryItem.fromProxy(proxy);
 VisitItem _createVisitItem(JsObject proxy) => proxy == null ? null : new VisitItem.fromProxy(proxy);
-

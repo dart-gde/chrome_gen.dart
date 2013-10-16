@@ -444,4 +444,3 @@ OutOfBandPairingData _createOutOfBandPairingData(JsObject proxy) => proxy == nul
 Socket _createSocket(JsObject proxy) => proxy == null ? null : new Socket.fromProxy(proxy);
 BluetoothDevice _createBluetoothDevice(JsObject proxy) => proxy == null ? null : new BluetoothDevice.fromProxy(proxy);
 BluetoothDeviceCallback _createBluetoothDeviceCallback(JsObject proxy) => proxy == null ? null : new BluetoothDeviceCallback.fromProxy(proxy);
-

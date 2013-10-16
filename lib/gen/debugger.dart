@@ -253,4 +253,3 @@ OnEventEvent _createOnEventEvent(JsObject source, String method, JsObject params
 OnDetachEvent _createOnDetachEvent(JsObject source, String reason) =>
     new OnDetachEvent(_createDebuggee(source), reason);
 Debuggee _createDebuggee(JsObject proxy) => proxy == null ? null : new Debuggee.fromProxy(proxy);
-

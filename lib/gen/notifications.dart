@@ -233,4 +233,3 @@ NotificationBitmap _createNotificationBitmap(JsObject proxy) => proxy == null ? 
 TemplateType _createTemplateType(String value) => TemplateType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 NotificationButton _createNotificationButton(JsObject proxy) => proxy == null ? null : new NotificationButton.fromProxy(proxy);
 NotificationItem _createNotificationItem(JsObject proxy) => proxy == null ? null : new NotificationItem.fromProxy(proxy);
-
