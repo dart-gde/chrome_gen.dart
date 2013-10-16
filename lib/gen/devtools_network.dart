@@ -85,4 +85,3 @@ class GetRequestContentResult {
 }
 
 Request _createRequest(JsObject proxy) => proxy == null ? null : new Request.fromProxy(proxy);
-

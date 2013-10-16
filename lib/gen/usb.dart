@@ -536,4 +536,3 @@ Recipient _createRecipient(String value) => Recipient.VALUES.singleWhere((Chrome
 RequestType _createRequestType(String value) => RequestType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);
 GenericTransferInfo _createGenericTransferInfo(JsObject proxy) => proxy == null ? null : new GenericTransferInfo.fromProxy(proxy);
-

@@ -42,4 +42,3 @@ class CpuInfo extends ChromeObject {
 }
 
 CpuInfo _createCpuInfo(JsObject proxy) => proxy == null ? null : new CpuInfo.fromProxy(proxy);
-

@@ -280,4 +280,3 @@ ServiceInfo _createServiceInfo(JsObject proxy) => proxy == null ? null : new Ser
 FileInfo _createFileInfo(JsObject proxy) => proxy == null ? null : new FileInfo.fromProxy(proxy);
 SyncAction _createSyncAction(String value) => SyncAction.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 SyncDirection _createSyncDirection(String value) => SyncDirection.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-

@@ -104,4 +104,3 @@ class StorageUnitInfo extends ChromeObject {
 StorageUnitInfo _createStorageUnitInfo(JsObject proxy) => proxy == null ? null : new StorageUnitInfo.fromProxy(proxy);
 EjectDeviceResultCode _createEjectDeviceResultCode(String value) => EjectDeviceResultCode.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 StorageUnitType _createStorageUnitType(String value) => StorageUnitType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-

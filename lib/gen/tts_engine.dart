@@ -102,4 +102,3 @@ class OnSpeakEvent {
 
 OnSpeakEvent _createOnSpeakEvent(String utterance, JsObject options, JsObject sendTtsEvent) =>
     new OnSpeakEvent(utterance, mapify(options), sendTtsEvent);
-

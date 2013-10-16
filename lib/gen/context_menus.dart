@@ -197,4 +197,3 @@ OnClickedEvent _createOnClickedEvent(JsObject info, JsObject tab) =>
     new OnClickedEvent(_createOnClickData(info), _createTab(tab));
 OnClickData _createOnClickData(JsObject proxy) => proxy == null ? null : new OnClickData.fromProxy(proxy);
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
-

@@ -254,4 +254,3 @@ class LevelOfControl extends ChromeObject {
 }
 
 FontName _createFontName(JsObject proxy) => proxy == null ? null : new FontName.fromProxy(proxy);
-

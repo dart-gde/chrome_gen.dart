@@ -452,4 +452,3 @@ OnMessageExternalEvent _createOnMessageExternalEvent(JsObject message, JsObject 
 Event _createEvent(JsObject proxy) => proxy == null ? null : new Event.fromProxy(proxy);
 MessageSender _createMessageSender(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
-

@@ -702,4 +702,3 @@ StringDelta _createStringDelta(JsObject proxy) => proxy == null ? null : new Str
 BooleanDelta _createBooleanDelta(JsObject proxy) => proxy == null ? null : new BooleanDelta.fromProxy(proxy);
 LongDelta _createLongDelta(JsObject proxy) => proxy == null ? null : new LongDelta.fromProxy(proxy);
 SuggestFilenameCallback _createSuggestFilenameCallback(JsObject proxy) => proxy == null ? null : new SuggestFilenameCallback.fromProxy(proxy);
-

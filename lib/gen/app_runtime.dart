@@ -55,4 +55,3 @@ class LaunchData extends ChromeObject {
 
 LaunchData _createLaunchData(JsObject proxy) => proxy == null ? null : new LaunchData.fromProxy(proxy);
 LaunchItem _createLaunchItem(JsObject proxy) => proxy == null ? null : new LaunchItem.fromProxy(proxy);
-

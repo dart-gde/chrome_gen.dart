@@ -202,4 +202,3 @@ OnRequestEvent _createOnRequestEvent(JsObject request, JsObject sender, JsObject
 OnRequestExternalEvent _createOnRequestExternalEvent(JsObject request, JsObject sender, JsObject sendResponse) =>
     new OnRequestExternalEvent(request, _createMessageSender(sender), sendResponse);
 MessageSender _createMessageSender(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);
-

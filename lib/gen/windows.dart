@@ -244,4 +244,3 @@ class Window extends ChromeObject {
 
 Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
-
