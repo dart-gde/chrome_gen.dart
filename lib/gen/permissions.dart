@@ -108,4 +108,3 @@ class Permissions extends ChromeObject {
 }
 
 Permissions _createPermissions(JsObject proxy) => proxy == null ? null : new Permissions.fromProxy(proxy);
-

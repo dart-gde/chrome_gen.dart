@@ -305,4 +305,3 @@ Process _createProcess(JsObject proxy) => proxy == null ? null : new Process.fro
 OnExitedEvent _createOnExitedEvent(int processId, int exitType, int exitCode) =>
     new OnExitedEvent(processId, exitType, exitCode);
 Cache _createCache(JsObject proxy) => proxy == null ? null : new Cache.fromProxy(proxy);
-

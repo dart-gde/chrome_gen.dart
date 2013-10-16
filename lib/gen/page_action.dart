@@ -94,4 +94,3 @@ class ChromePageAction {
 }
 
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
-

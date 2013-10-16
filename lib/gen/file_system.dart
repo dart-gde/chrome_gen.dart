@@ -183,4 +183,3 @@ class ChooseEntryResult {
 Entry _createEntry(JsObject proxy) => proxy == null ? null : new CrEntry.fromProxy(proxy);
 ChooseEntryType _createChooseEntryType(String value) => ChooseEntryType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 AcceptOption _createAcceptOption(JsObject proxy) => proxy == null ? null : new AcceptOption.fromProxy(proxy);
-

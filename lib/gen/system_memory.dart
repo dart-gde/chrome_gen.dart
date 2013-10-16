@@ -38,4 +38,3 @@ class MemoryInfo extends ChromeObject {
 }
 
 MemoryInfo _createMemoryInfo(JsObject proxy) => proxy == null ? null : new MemoryInfo.fromProxy(proxy);
-

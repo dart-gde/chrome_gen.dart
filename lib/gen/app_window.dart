@@ -348,4 +348,3 @@ AppWindow _createAppWindow(JsObject proxy) => proxy == null ? null : new AppWind
 WindowType _createWindowType(String value) => WindowType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 Bounds _createBounds(JsObject proxy) => proxy == null ? null : new Bounds.fromProxy(proxy);
 State _createState(String value) => State.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-

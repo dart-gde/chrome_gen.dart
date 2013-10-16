@@ -142,4 +142,3 @@ Session _createSession(JsObject proxy) => proxy == null ? null : new Session.fro
 Device _createDevice(JsObject proxy) => proxy == null ? null : new Device.fromProxy(proxy);
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
 Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
-

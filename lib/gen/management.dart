@@ -312,4 +312,3 @@ class ExtensionInfo extends ChromeObject {
 
 ExtensionInfo _createExtensionInfo(JsObject proxy) => proxy == null ? null : new ExtensionInfo.fromProxy(proxy);
 IconInfo _createIconInfo(JsObject proxy) => proxy == null ? null : new IconInfo.fromProxy(proxy);
-

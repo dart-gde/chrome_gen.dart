@@ -176,4 +176,3 @@ class EvalResult {
 Resource _createResource(JsObject proxy) => proxy == null ? null : new Resource.fromProxy(proxy);
 OnResourceContentCommittedEvent _createOnResourceContentCommittedEvent(JsObject resource, String content) =>
     new OnResourceContentCommittedEvent(_createResource(resource), content);
-

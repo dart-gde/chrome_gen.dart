@@ -59,4 +59,3 @@ class ChannelIdResult extends ChromeObject {
 
 ChannelIdResult _createChannelIdResult(JsObject proxy) => proxy == null ? null : new ChannelIdResult.fromProxy(proxy);
 Message _createMessage(JsObject proxy) => proxy == null ? null : new Message.fromProxy(proxy);
-

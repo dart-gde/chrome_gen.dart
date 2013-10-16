@@ -677,4 +677,3 @@ TabsOnRemovedEvent _createTabsOnRemovedEvent(int tabId, JsObject removeInfo) =>
     new TabsOnRemovedEvent(tabId, mapify(removeInfo));
 OnReplacedEvent _createOnReplacedEvent(int addedTabId, int removedTabId) =>
     new OnReplacedEvent(addedTabId, removedTabId);
-
