@@ -32,9 +32,8 @@ class CrMetadata extends ChromeObject implements Metadata {
 }
 
 abstract class CrEntry extends ChromeObject implements Entry {
-  // This needs to either create a FileEntry or a DirectoryEntry.
+  // This factory returns either a FileEntry or a DirectoryEntry.
   factory CrEntry.fromProxy(JsObject proxy) {
-    // TODO: does this instanceof check work?
     if (proxy.instanceof(context['DirectoryEntry'])) {
       return new CrDirectoryEntry.fromProxy(proxy);
     } else {
