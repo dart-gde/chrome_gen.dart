@@ -30,7 +30,7 @@ class ChromeCookies {
    */
   Future<Cookie> get(Map details) {
     var completer = new ChromeCompleter<Cookie>.oneArg(_createCookie);
-    _cookies.callMethod('get', [new JsObject.jsify(details), completer.callback]);
+    _cookies.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -47,7 +47,7 @@ class ChromeCookies {
    */
   Future<List<Cookie>> getAll(Map details) {
     var completer = new ChromeCompleter<List<Cookie>>.oneArg((e) => listify(e, _createCookie));
-    _cookies.callMethod('getAll', [new JsObject.jsify(details), completer.callback]);
+    _cookies.callMethod('getAll', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -64,7 +64,7 @@ class ChromeCookies {
    */
   Future<Cookie> set(Map details) {
     var completer = new ChromeCompleter<Cookie>.oneArg(_createCookie);
-    _cookies.callMethod('set', [new JsObject.jsify(details), completer.callback]);
+    _cookies.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -80,7 +80,7 @@ class ChromeCookies {
    */
   Future<Map> remove(Map details) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
-    _cookies.callMethod('remove', [new JsObject.jsify(details), completer.callback]);
+    _cookies.callMethod('remove', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -185,7 +185,7 @@ class Cookie extends ChromeObject {
    * epoch. Not provided for session cookies.
    */
   dynamic get expirationDate => proxy['expirationDate'];
-  set expirationDate(var value) => proxy['expirationDate'] = value;
+  set expirationDate(var value) => proxy['expirationDate'] = jsify(value);
 
   /**
    * The ID of the cookie store containing this cookie, as provided in
@@ -217,7 +217,7 @@ class CookieStore extends ChromeObject {
    * Identifiers of all the browser tabs that share this cookie store.
    */
   List<int> get tabIds => listify(proxy['tabIds']);
-  set tabIds(List<int> value) => proxy['tabIds'] = value;
+  set tabIds(List<int> value) => proxy['tabIds'] = jsify(value);
 }
 
 Cookie _createCookie(JsObject proxy) => proxy == null ? null : new Cookie.fromProxy(proxy);

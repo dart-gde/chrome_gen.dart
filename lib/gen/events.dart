@@ -40,19 +40,19 @@ class Rule extends ChromeObject {
    * Tags can be used to annotate rules and perform operations on sets of rules.
    */
   List<String> get tags => listify(proxy['tags']);
-  set tags(List<String> value) => proxy['tags'] = value;
+  set tags(List<String> value) => proxy['tags'] = jsify(value);
 
   /**
    * List of conditions that can trigger the actions.
    */
   List<dynamic> get conditions => listify(proxy['conditions']);
-  set conditions(List<dynamic> value) => proxy['conditions'] = value;
+  set conditions(List<dynamic> value) => proxy['conditions'] = jsify(value);
 
   /**
    * List of actions that are triggered if one of the condtions is fulfilled.
    */
   List<dynamic> get actions => listify(proxy['actions']);
-  set actions(List<dynamic> value) => proxy['actions'] = value;
+  set actions(List<dynamic> value) => proxy['actions'] = jsify(value);
 
   /**
    * Optional priority of this rule. Defaults to 100.
@@ -89,7 +89,7 @@ class Event extends ChromeObject {
   }
 
   bool hasListener(dynamic callback) {
-    return proxy.callMethod('hasListener', [callback]);
+    return proxy.callMethod('hasListener', [jsify(callback)]);
   }
 
   bool hasListeners() {
@@ -109,7 +109,7 @@ class Event extends ChromeObject {
    */
   Future<List<Rule>> addRules(String eventName, List<Rule> rules) {
     var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, _createRule));
-    proxy.callMethod('addRules', [eventName, new JsObject.jsify(rules), completer.callback]);
+    proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
     return completer.future;
   }
 
@@ -126,7 +126,7 @@ class Event extends ChromeObject {
    */
   Future<List<Rule>> getRules(String eventName, [List<String> ruleIdentifiers]) {
     var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, _createRule));
-    proxy.callMethod('getRules', [eventName, new JsObject.jsify(ruleIdentifiers), completer.callback]);
+    proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
     return completer.future;
   }
 
@@ -140,7 +140,7 @@ class Event extends ChromeObject {
    */
   Future removeRules(String eventName, [List<String> ruleIdentifiers]) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('removeRules', [eventName, new JsObject.jsify(ruleIdentifiers), completer.callback]);
+    proxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
     return completer.future;
   }
 }
@@ -309,7 +309,7 @@ class UrlFilter extends ChromeObject {
    * in the array.
    */
   List<String> get schemes => listify(proxy['schemes']);
-  set schemes(List<String> value) => proxy['schemes'] = value;
+  set schemes(List<String> value) => proxy['schemes'] = jsify(value);
 
   /**
    * Matches if the port of the URL is contained in any of the specified port
@@ -317,7 +317,7 @@ class UrlFilter extends ChromeObject {
    * 80, 443 and in the range 1000-1200.
    */
   List<dynamic> get ports => listify(proxy['ports']);
-  set ports(List<dynamic> value) => proxy['ports'] = value;
+  set ports(List<dynamic> value) => proxy['ports'] = jsify(value);
 }
 
 Rule _createRule(JsObject proxy) => proxy == null ? null : new Rule.fromProxy(proxy);

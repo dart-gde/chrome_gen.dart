@@ -22,7 +22,7 @@ class ChromeScriptBadge {
    * script badge's icon.
    */
   void setPopup(Map details) {
-    _scriptBadge.callMethod('setPopup', [new JsObject.jsify(details)]);
+    _scriptBadge.callMethod('setPopup', [jsify(details)]);
   }
 
   /**
@@ -30,7 +30,7 @@ class ChromeScriptBadge {
    */
   Future<String> getPopup(Map details) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _scriptBadge.callMethod('getPopup', [new JsObject.jsify(details), completer.callback]);
+    _scriptBadge.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -42,7 +42,7 @@ class ChromeScriptBadge {
    * has already run on this tab, this call does nothing.
    */
   void getAttention(Map details) {
-    _scriptBadge.callMethod('getAttention', [new JsObject.jsify(details)]);
+    _scriptBadge.callMethod('getAttention', [jsify(details)]);
   }
 
   /**

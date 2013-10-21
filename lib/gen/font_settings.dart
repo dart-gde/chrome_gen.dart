@@ -20,7 +20,7 @@ class ChromeFontSettings {
    */
   Future clearFont(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('clearFont', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('clearFont', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -29,7 +29,7 @@ class ChromeFontSettings {
    */
   Future<Map> getFont(Map details) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
-    _fontSettings.callMethod('getFont', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('getFont', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -38,7 +38,7 @@ class ChromeFontSettings {
    */
   Future setFont(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('setFont', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('setFont', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -58,7 +58,7 @@ class ChromeFontSettings {
    */
   Future clearDefaultFontSize([Map details]) {
     var completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('clearDefaultFontSize', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('clearDefaultFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -69,7 +69,7 @@ class ChromeFontSettings {
    */
   Future<Map> getDefaultFontSize([Map details]) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
-    _fontSettings.callMethod('getDefaultFontSize', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('getDefaultFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -78,7 +78,7 @@ class ChromeFontSettings {
    */
   Future setDefaultFontSize(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('setDefaultFontSize', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('setDefaultFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -89,7 +89,7 @@ class ChromeFontSettings {
    */
   Future clearDefaultFixedFontSize([Map details]) {
     var completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('clearDefaultFixedFontSize', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('clearDefaultFixedFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -100,7 +100,7 @@ class ChromeFontSettings {
    */
   Future<Map> getDefaultFixedFontSize([Map details]) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
-    _fontSettings.callMethod('getDefaultFixedFontSize', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('getDefaultFixedFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -109,7 +109,7 @@ class ChromeFontSettings {
    */
   Future setDefaultFixedFontSize(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('setDefaultFixedFontSize', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('setDefaultFixedFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -120,7 +120,7 @@ class ChromeFontSettings {
    */
   Future clearMinimumFontSize([Map details]) {
     var completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('clearMinimumFontSize', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('clearMinimumFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -131,7 +131,7 @@ class ChromeFontSettings {
    */
   Future<Map> getMinimumFontSize([Map details]) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
-    _fontSettings.callMethod('getMinimumFontSize', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('getMinimumFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -140,7 +140,7 @@ class ChromeFontSettings {
    */
   Future setMinimumFontSize(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    _fontSettings.callMethod('setMinimumFontSize', [new JsObject.jsify(details), completer.callback]);
+    _fontSettings.callMethod('setMinimumFontSize', [jsify(details), completer.callback]);
     return completer.future;
   }
 

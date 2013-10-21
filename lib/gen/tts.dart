@@ -30,7 +30,7 @@ class ChromeTts {
    */
   Future speak(String utterance, [Map options]) {
     var completer = new ChromeCompleter.noArgs();
-    _tts.callMethod('speak', [utterance, new JsObject.jsify(options), completer.callback]);
+    _tts.callMethod('speak', [utterance, jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -127,7 +127,7 @@ class TtsEvent extends ChromeObject {
    * The index of the current character in the utterance.
    */
   dynamic get charIndex => proxy['charIndex'];
-  set charIndex(var value) => proxy['charIndex'] = value;
+  set charIndex(var value) => proxy['charIndex'] = jsify(value);
 
   /**
    * The error description, if the event type is 'error'.
@@ -180,7 +180,7 @@ class TtsVoice extends ChromeObject {
    * All of the callback event types that this voice is capable of sending.
    */
   List<String> get eventTypes => listify(proxy['eventTypes']);
-  set eventTypes(List<String> value) => proxy['eventTypes'] = value;
+  set eventTypes(List<String> value) => proxy['eventTypes'] = jsify(value);
 }
 
 TtsVoice _createTtsVoice(JsObject proxy) => proxy == null ? null : new TtsVoice.fromProxy(proxy);

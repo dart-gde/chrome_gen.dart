@@ -19,7 +19,7 @@ class ChromeUsb {
    */
   Future<Device> getDevices(EnumerateDevicesOptions options) {
     var completer = new ChromeCompleter<Device>.oneArg(_createDevice);
-    _usb.callMethod('getDevices', [options, completer.callback]);
+    _usb.callMethod('getDevices', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -33,7 +33,7 @@ class ChromeUsb {
    */
   Future<bool> requestAccess(Device device, int interfaceId) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _usb.callMethod('requestAccess', [device, interfaceId, completer.callback]);
+    _usb.callMethod('requestAccess', [jsify(device), interfaceId, completer.callback]);
     return completer.future;
   }
 
@@ -44,7 +44,7 @@ class ChromeUsb {
    */
   Future<ConnectionHandle> openDevice(Device device) {
     var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
-    _usb.callMethod('openDevice', [device, completer.callback]);
+    _usb.callMethod('openDevice', [jsify(device), completer.callback]);
     return completer.future;
   }
 
@@ -68,7 +68,7 @@ class ChromeUsb {
    */
   Future<ConnectionHandle> findDevices(EnumerateDevicesAndRequestAccessOptions options) {
     var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
-    _usb.callMethod('findDevices', [options, completer.callback]);
+    _usb.callMethod('findDevices', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -80,7 +80,7 @@ class ChromeUsb {
    */
   Future closeDevice(ConnectionHandle handle) {
     var completer = new ChromeCompleter.noArgs();
-    _usb.callMethod('closeDevice', [handle, completer.callback]);
+    _usb.callMethod('closeDevice', [jsify(handle), completer.callback]);
     return completer.future;
   }
 
@@ -91,7 +91,7 @@ class ChromeUsb {
    */
   Future<InterfaceDescriptor> listInterfaces(ConnectionHandle handle) {
     var completer = new ChromeCompleter<InterfaceDescriptor>.oneArg(_createInterfaceDescriptor);
-    _usb.callMethod('listInterfaces', [handle, completer.callback]);
+    _usb.callMethod('listInterfaces', [jsify(handle), completer.callback]);
     return completer.future;
   }
 
@@ -109,7 +109,7 @@ class ChromeUsb {
    */
   Future claimInterface(ConnectionHandle handle, int interfaceNumber) {
     var completer = new ChromeCompleter.noArgs();
-    _usb.callMethod('claimInterface', [handle, interfaceNumber, completer.callback]);
+    _usb.callMethod('claimInterface', [jsify(handle), interfaceNumber, completer.callback]);
     return completer.future;
   }
 
@@ -121,7 +121,7 @@ class ChromeUsb {
    */
   Future releaseInterface(ConnectionHandle handle, int interfaceNumber) {
     var completer = new ChromeCompleter.noArgs();
-    _usb.callMethod('releaseInterface', [handle, interfaceNumber, completer.callback]);
+    _usb.callMethod('releaseInterface', [jsify(handle), interfaceNumber, completer.callback]);
     return completer.future;
   }
 
@@ -134,7 +134,7 @@ class ChromeUsb {
    */
   Future setInterfaceAlternateSetting(ConnectionHandle handle, int interfaceNumber, int alternateSetting) {
     var completer = new ChromeCompleter.noArgs();
-    _usb.callMethod('setInterfaceAlternateSetting', [handle, interfaceNumber, alternateSetting, completer.callback]);
+    _usb.callMethod('setInterfaceAlternateSetting', [jsify(handle), interfaceNumber, alternateSetting, completer.callback]);
     return completer.future;
   }
 
@@ -152,7 +152,7 @@ class ChromeUsb {
    */
   Future<TransferResultInfo> controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
-    _usb.callMethod('controlTransfer', [handle, transferInfo, completer.callback]);
+    _usb.callMethod('controlTransfer', [jsify(handle), jsify(transferInfo), completer.callback]);
     return completer.future;
   }
 
@@ -164,7 +164,7 @@ class ChromeUsb {
    */
   Future<TransferResultInfo> bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
-    _usb.callMethod('bulkTransfer', [handle, transferInfo, completer.callback]);
+    _usb.callMethod('bulkTransfer', [jsify(handle), jsify(transferInfo), completer.callback]);
     return completer.future;
   }
 
@@ -176,7 +176,7 @@ class ChromeUsb {
    */
   Future<TransferResultInfo> interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
-    _usb.callMethod('interruptTransfer', [handle, transferInfo, completer.callback]);
+    _usb.callMethod('interruptTransfer', [jsify(handle), jsify(transferInfo), completer.callback]);
     return completer.future;
   }
 
@@ -189,7 +189,7 @@ class ChromeUsb {
    */
   Future<TransferResultInfo> isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
-    _usb.callMethod('isochronousTransfer', [handle, transferInfo, completer.callback]);
+    _usb.callMethod('isochronousTransfer', [jsify(handle), jsify(transferInfo), completer.callback]);
     return completer.future;
   }
 
@@ -205,7 +205,7 @@ class ChromeUsb {
    */
   Future<bool> resetDevice(ConnectionHandle handle) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _usb.callMethod('resetDevice', [handle, completer.callback]);
+    _usb.callMethod('resetDevice', [jsify(handle), completer.callback]);
     return completer.future;
   }
 }
@@ -340,19 +340,19 @@ class EndpointDescriptor extends ChromeObject {
   set address(int value) => proxy['address'] = value;
 
   TransferType get type => _createTransferType(proxy['type']);
-  set type(TransferType value) => proxy['type'] = value;
+  set type(TransferType value) => proxy['type'] = jsify(value);
 
   Direction get direction => _createDirection(proxy['direction']);
-  set direction(Direction value) => proxy['direction'] = value;
+  set direction(Direction value) => proxy['direction'] = jsify(value);
 
   int get maximumPacketSize => proxy['maximumPacketSize'];
   set maximumPacketSize(int value) => proxy['maximumPacketSize'] = value;
 
   SynchronizationType get synchronization => _createSynchronizationType(proxy['synchronization']);
-  set synchronization(SynchronizationType value) => proxy['synchronization'] = value;
+  set synchronization(SynchronizationType value) => proxy['synchronization'] = jsify(value);
 
   UsageType get usage => _createUsageType(proxy['usage']);
-  set usage(UsageType value) => proxy['usage'] = value;
+  set usage(UsageType value) => proxy['usage'] = jsify(value);
 
   int get pollingInterval => proxy['pollingInterval'];
   set pollingInterval(int value) => proxy['pollingInterval'] = value;
@@ -390,7 +390,7 @@ class InterfaceDescriptor extends ChromeObject {
   set description(String value) => proxy['description'] = value;
 
   EndpointDescriptor get endpoints => _createEndpointDescriptor(proxy['endpoints']);
-  set endpoints(EndpointDescriptor value) => proxy['endpoints'] = value;
+  set endpoints(EndpointDescriptor value) => proxy['endpoints'] = jsify(value);
 }
 
 class ControlTransferInfo extends ChromeObject {
@@ -408,13 +408,13 @@ class ControlTransferInfo extends ChromeObject {
   ControlTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   Direction get direction => _createDirection(proxy['direction']);
-  set direction(Direction value) => proxy['direction'] = value;
+  set direction(Direction value) => proxy['direction'] = jsify(value);
 
   Recipient get recipient => _createRecipient(proxy['recipient']);
-  set recipient(Recipient value) => proxy['recipient'] = value;
+  set recipient(Recipient value) => proxy['recipient'] = jsify(value);
 
   RequestType get requestType => _createRequestType(proxy['requestType']);
-  set requestType(RequestType value) => proxy['requestType'] = value;
+  set requestType(RequestType value) => proxy['requestType'] = jsify(value);
 
   int get request => proxy['request'];
   set request(int value) => proxy['request'] = value;
@@ -429,7 +429,7 @@ class ControlTransferInfo extends ChromeObject {
   set length(int value) => proxy['length'] = value;
 
   ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = value;
+  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
 }
 
 class GenericTransferInfo extends ChromeObject {
@@ -443,7 +443,7 @@ class GenericTransferInfo extends ChromeObject {
   GenericTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   Direction get direction => _createDirection(proxy['direction']);
-  set direction(Direction value) => proxy['direction'] = value;
+  set direction(Direction value) => proxy['direction'] = jsify(value);
 
   int get endpoint => proxy['endpoint'];
   set endpoint(int value) => proxy['endpoint'] = value;
@@ -452,7 +452,7 @@ class GenericTransferInfo extends ChromeObject {
   set length(int value) => proxy['length'] = value;
 
   ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = value;
+  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
 }
 
 class IsochronousTransferInfo extends ChromeObject {
@@ -465,7 +465,7 @@ class IsochronousTransferInfo extends ChromeObject {
   IsochronousTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   GenericTransferInfo get transferInfo => _createGenericTransferInfo(proxy['transferInfo']);
-  set transferInfo(GenericTransferInfo value) => proxy['transferInfo'] = value;
+  set transferInfo(GenericTransferInfo value) => proxy['transferInfo'] = jsify(value);
 
   int get packets => proxy['packets'];
   set packets(int value) => proxy['packets'] = value;
@@ -486,7 +486,7 @@ class TransferResultInfo extends ChromeObject {
   set resultCode(int value) => proxy['resultCode'] = value;
 
   ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = value;
+  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
 }
 
 class EnumerateDevicesOptions extends ChromeObject {

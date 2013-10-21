@@ -29,7 +29,7 @@ class ChromeWebNavigation {
    */
   Future<Map> getFrame(Map details) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
-    _webNavigation.callMethod('getFrame', [new JsObject.jsify(details), completer.callback]);
+    _webNavigation.callMethod('getFrame', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -43,7 +43,7 @@ class ChromeWebNavigation {
    */
   Future<List<Map>> getAllFrames(Map details) {
     var completer = new ChromeCompleter<List<Map>>.oneArg((e) => listify(e, mapify));
-    _webNavigation.callMethod('getAllFrames', [new JsObject.jsify(details), completer.callback]);
+    _webNavigation.callMethod('getAllFrames', [jsify(details), completer.callback]);
     return completer.future;
   }
 

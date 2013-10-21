@@ -11,6 +11,7 @@ export 'dart:js';
 
 import 'package:logging/logging.dart' as log;
 
+import 'common_exp.dart';
 export 'common_exp.dart';
 
 final log.Logger _logger = new log.Logger('chrome_gen');
@@ -45,6 +46,22 @@ List listify(JsObject obj, [Function transformer = null]) {
 
 Map mapify(JsObject obj) {
   return JSON.decode(_jsJSON.callMethod('stringify', [obj]));
+}
+
+dynamic jsify(dynamic obj) {
+  if (obj == null) {
+    return null;
+  } else if (obj is ChromeObject) {
+    return (obj as ChromeObject).proxy;
+  } else if (obj is ChromeEnum) {
+    return (obj as ChromeEnum).value;
+  } else if (obj is Map) {
+    return new JsObject.jsify(obj);
+  } else if (obj is Iterable) {
+    return new JsObject.jsify(obj);
+  } else {
+    return obj;
+  }
 }
 
 dynamic selfConverter(var obj) => obj;

@@ -32,7 +32,7 @@ class LaunchItem extends ChromeObject {
   LaunchItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get entry => proxy['entry'];
-  set entry(var value) => proxy['entry'] = value;
+  set entry(var value) => proxy['entry'] = jsify(value);
 
   String get type => proxy['type'];
   set type(String value) => proxy['type'] = value;
@@ -50,7 +50,7 @@ class LaunchData extends ChromeObject {
   set id(String value) => proxy['id'] = value;
 
   LaunchItem get items => _createLaunchItem(proxy['items']);
-  set items(LaunchItem value) => proxy['items'] = value;
+  set items(LaunchItem value) => proxy['items'] = jsify(value);
 }
 
 LaunchData _createLaunchData(JsObject proxy) => proxy == null ? null : new LaunchData.fromProxy(proxy);

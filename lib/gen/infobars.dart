@@ -27,7 +27,7 @@ class ChromeInfobars {
    */
   Future<Window> show(Map details) {
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
-    _infobars.callMethod('show', [new JsObject.jsify(details), completer.callback]);
+    _infobars.callMethod('show', [jsify(details), completer.callback]);
     return completer.future;
   }
 }

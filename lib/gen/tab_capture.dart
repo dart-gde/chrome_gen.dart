@@ -22,7 +22,7 @@ class ChromeTabCapture {
    */
   Future<LocalMediaStream> capture(CaptureOptions options) {
     var completer = new ChromeCompleter<LocalMediaStream>.oneArg(_createLocalMediaStream);
-    _tabCapture.callMethod('capture', [options, completer.callback]);
+    _tabCapture.callMethod('capture', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -75,7 +75,7 @@ class CaptureInfo extends ChromeObject {
   set tabId(int value) => proxy['tabId'] = value;
 
   TabCaptureState get status => _createTabCaptureState(proxy['status']);
-  set status(TabCaptureState value) => proxy['status'] = value;
+  set status(TabCaptureState value) => proxy['status'] = jsify(value);
 
   bool get fullscreen => proxy['fullscreen'];
   set fullscreen(bool value) => proxy['fullscreen'] = value;
@@ -89,7 +89,7 @@ class MediaStreamConstraint extends ChromeObject {
   MediaStreamConstraint.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get mandatory => proxy['mandatory'];
-  set mandatory(var value) => proxy['mandatory'] = value;
+  set mandatory(var value) => proxy['mandatory'] = jsify(value);
 }
 
 class CaptureOptions extends ChromeObject {
@@ -109,10 +109,10 @@ class CaptureOptions extends ChromeObject {
   set video(bool value) => proxy['video'] = value;
 
   MediaStreamConstraint get audioConstraints => _createMediaStreamConstraint(proxy['audioConstraints']);
-  set audioConstraints(MediaStreamConstraint value) => proxy['audioConstraints'] = value;
+  set audioConstraints(MediaStreamConstraint value) => proxy['audioConstraints'] = jsify(value);
 
   MediaStreamConstraint get videoConstraints => _createMediaStreamConstraint(proxy['videoConstraints']);
-  set videoConstraints(MediaStreamConstraint value) => proxy['videoConstraints'] = value;
+  set videoConstraints(MediaStreamConstraint value) => proxy['videoConstraints'] = jsify(value);
 }
 
 LocalMediaStream _createLocalMediaStream(JsObject proxy) => proxy == null ? null : new LocalMediaStream.fromProxy(proxy);

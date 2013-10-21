@@ -33,7 +33,7 @@ class ChromeSystemDisplay {
    */
   Future setDisplayProperties(String id, DisplayProperties info) {
     var completer = new ChromeCompleter.noArgs();
-    _system_display.callMethod('setDisplayProperties', [id, info, completer.callback]);
+    _system_display.callMethod('setDisplayProperties', [id, jsify(info), completer.callback]);
     return completer.future;
   }
 
@@ -103,22 +103,22 @@ class DisplayUnitInfo extends ChromeObject {
   set isEnabled(bool value) => proxy['isEnabled'] = value;
 
   double get dpiX => proxy['dpiX'];
-  set dpiX(double value) => proxy['dpiX'] = value;
+  set dpiX(double value) => proxy['dpiX'] = jsify(value);
 
   double get dpiY => proxy['dpiY'];
-  set dpiY(double value) => proxy['dpiY'] = value;
+  set dpiY(double value) => proxy['dpiY'] = jsify(value);
 
   int get rotation => proxy['rotation'];
   set rotation(int value) => proxy['rotation'] = value;
 
   Bounds get bounds => _createBounds(proxy['bounds']);
-  set bounds(Bounds value) => proxy['bounds'] = value;
+  set bounds(Bounds value) => proxy['bounds'] = jsify(value);
 
   Insets get overscan => _createInsets(proxy['overscan']);
-  set overscan(Insets value) => proxy['overscan'] = value;
+  set overscan(Insets value) => proxy['overscan'] = jsify(value);
 
   Bounds get workArea => _createBounds(proxy['workArea']);
-  set workArea(Bounds value) => proxy['workArea'] = value;
+  set workArea(Bounds value) => proxy['workArea'] = jsify(value);
 }
 
 class DisplayProperties extends ChromeObject {
@@ -140,7 +140,7 @@ class DisplayProperties extends ChromeObject {
   set isPrimary(bool value) => proxy['isPrimary'] = value;
 
   Insets get overscan => _createInsets(proxy['overscan']);
-  set overscan(Insets value) => proxy['overscan'] = value;
+  set overscan(Insets value) => proxy['overscan'] = jsify(value);
 
   int get rotation => proxy['rotation'];
   set rotation(int value) => proxy['rotation'] = value;

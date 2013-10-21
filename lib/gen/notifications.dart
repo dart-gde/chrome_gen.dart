@@ -22,7 +22,7 @@ class ChromeNotifications {
    */
   Future<String> create(String notificationId, NotificationOptions options) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _notifications.callMethod('create', [notificationId, options, completer.callback]);
+    _notifications.callMethod('create', [notificationId, jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -33,7 +33,7 @@ class ChromeNotifications {
    */
   Future<bool> update(String notificationId, NotificationOptions options) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _notifications.callMethod('update', [notificationId, options, completer.callback]);
+    _notifications.callMethod('update', [notificationId, jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -139,7 +139,7 @@ class NotificationBitmap extends ChromeObject {
   set height(int value) => proxy['height'] = value;
 
   ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = value;
+  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
 }
 
 class NotificationButton extends ChromeObject {
@@ -158,7 +158,7 @@ class NotificationButton extends ChromeObject {
   set iconUrl(String value) => proxy['iconUrl'] = value;
 
   NotificationBitmap get iconBitmap => _createNotificationBitmap(proxy['iconBitmap']);
-  set iconBitmap(NotificationBitmap value) => proxy['iconBitmap'] = value;
+  set iconBitmap(NotificationBitmap value) => proxy['iconBitmap'] = jsify(value);
 }
 
 class NotificationOptions extends ChromeObject {
@@ -182,13 +182,13 @@ class NotificationOptions extends ChromeObject {
   NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   TemplateType get type => _createTemplateType(proxy['type']);
-  set type(TemplateType value) => proxy['type'] = value;
+  set type(TemplateType value) => proxy['type'] = jsify(value);
 
   String get iconUrl => proxy['iconUrl'];
   set iconUrl(String value) => proxy['iconUrl'] = value;
 
   NotificationBitmap get iconBitmap => _createNotificationBitmap(proxy['iconBitmap']);
-  set iconBitmap(NotificationBitmap value) => proxy['iconBitmap'] = value;
+  set iconBitmap(NotificationBitmap value) => proxy['iconBitmap'] = jsify(value);
 
   String get title => proxy['title'];
   set title(String value) => proxy['title'] = value;
@@ -203,10 +203,10 @@ class NotificationOptions extends ChromeObject {
   set priority(int value) => proxy['priority'] = value;
 
   double get eventTime => proxy['eventTime'];
-  set eventTime(double value) => proxy['eventTime'] = value;
+  set eventTime(double value) => proxy['eventTime'] = jsify(value);
 
   NotificationButton get buttons => _createNotificationButton(proxy['buttons']);
-  set buttons(NotificationButton value) => proxy['buttons'] = value;
+  set buttons(NotificationButton value) => proxy['buttons'] = jsify(value);
 
   String get expandedMessage => proxy['expandedMessage'];
   set expandedMessage(String value) => proxy['expandedMessage'] = value;
@@ -215,10 +215,10 @@ class NotificationOptions extends ChromeObject {
   set imageUrl(String value) => proxy['imageUrl'] = value;
 
   NotificationBitmap get imageBitmap => _createNotificationBitmap(proxy['imageBitmap']);
-  set imageBitmap(NotificationBitmap value) => proxy['imageBitmap'] = value;
+  set imageBitmap(NotificationBitmap value) => proxy['imageBitmap'] = jsify(value);
 
   NotificationItem get items => _createNotificationItem(proxy['items']);
-  set items(NotificationItem value) => proxy['items'] = value;
+  set items(NotificationItem value) => proxy['items'] = jsify(value);
 
   int get progress => proxy['progress'];
   set progress(int value) => proxy['progress'] = value;

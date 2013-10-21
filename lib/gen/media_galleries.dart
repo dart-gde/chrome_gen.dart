@@ -19,7 +19,7 @@ class ChromeMediaGalleries {
    */
   Future<FileSystem> getMediaFileSystems([MediaFileSystemsDetails details]) {
     var completer = new ChromeCompleter<FileSystem>.oneArg(_createFileSystem);
-    _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
+    _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -27,7 +27,7 @@ class ChromeMediaGalleries {
    * Get metadata about a specific media file system.
    */
   MediaFileSystemMetadata getMediaFileSystemMetadata(FileSystem mediaFileSystem) {
-    return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
+    return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [jsify(mediaFileSystem)]));
   }
 }
 
@@ -58,7 +58,7 @@ class MediaFileSystemsDetails extends ChromeObject {
   MediaFileSystemsDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   GetMediaFileSystemsInteractivity get interactive => _createGetMediaFileSystemsInteractivity(proxy['interactive']);
-  set interactive(GetMediaFileSystemsInteractivity value) => proxy['interactive'] = value;
+  set interactive(GetMediaFileSystemsInteractivity value) => proxy['interactive'] = jsify(value);
 }
 
 class MediaFileSystemMetadata extends ChromeObject {

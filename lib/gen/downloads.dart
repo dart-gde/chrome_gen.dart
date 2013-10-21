@@ -27,7 +27,7 @@ class ChromeDownloads {
    */
   Future<int> download(DownloadOptions options) {
     var completer = new ChromeCompleter<int>.oneArg();
-    _downloads.callMethod('download', [options, completer.callback]);
+    _downloads.callMethod('download', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -40,7 +40,7 @@ class ChromeDownloads {
    */
   Future<DownloadItem> search(DownloadQuery query) {
     var completer = new ChromeCompleter<DownloadItem>.oneArg(_createDownloadItem);
-    _downloads.callMethod('search', [query, completer.callback]);
+    _downloads.callMethod('search', [jsify(query), completer.callback]);
     return completer.future;
   }
 
@@ -97,7 +97,7 @@ class ChromeDownloads {
    */
   Future<String> getFileIcon(int downloadId, [GetFileIconOptions options]) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _downloads.callMethod('getFileIcon', [downloadId, options, completer.callback]);
+    _downloads.callMethod('getFileIcon', [downloadId, jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -134,7 +134,7 @@ class ChromeDownloads {
    */
   Future<int> erase(DownloadQuery query) {
     var completer = new ChromeCompleter<int>.oneArg();
-    _downloads.callMethod('erase', [query, completer.callback]);
+    _downloads.callMethod('erase', [jsify(query), completer.callback]);
     return completer.future;
   }
 
@@ -337,7 +337,7 @@ class FilenameSuggestion extends ChromeObject {
   set filename(String value) => proxy['filename'] = value;
 
   FilenameConflictAction get conflictAction => _createFilenameConflictAction(proxy['conflictAction']);
-  set conflictAction(FilenameConflictAction value) => proxy['conflictAction'] = value;
+  set conflictAction(FilenameConflictAction value) => proxy['conflictAction'] = jsify(value);
 }
 
 class DownloadOptions extends ChromeObject {
@@ -360,16 +360,16 @@ class DownloadOptions extends ChromeObject {
   set filename(String value) => proxy['filename'] = value;
 
   FilenameConflictAction get conflictAction => _createFilenameConflictAction(proxy['conflictAction']);
-  set conflictAction(FilenameConflictAction value) => proxy['conflictAction'] = value;
+  set conflictAction(FilenameConflictAction value) => proxy['conflictAction'] = jsify(value);
 
   bool get saveAs => proxy['saveAs'];
   set saveAs(bool value) => proxy['saveAs'] = value;
 
   HttpMethod get method => _createHttpMethod(proxy['method']);
-  set method(HttpMethod value) => proxy['method'] = value;
+  set method(HttpMethod value) => proxy['method'] = jsify(value);
 
   HeaderNameValuePair get headers => _createHeaderNameValuePair(proxy['headers']);
-  set headers(HeaderNameValuePair value) => proxy['headers'] = value;
+  set headers(HeaderNameValuePair value) => proxy['headers'] = jsify(value);
 
   String get body => proxy['body'];
   set body(String value) => proxy['body'] = value;
@@ -417,7 +417,7 @@ class DownloadItem extends ChromeObject {
   set incognito(bool value) => proxy['incognito'] = value;
 
   DangerType get danger => _createDangerType(proxy['danger']);
-  set danger(DangerType value) => proxy['danger'] = value;
+  set danger(DangerType value) => proxy['danger'] = jsify(value);
 
   String get mime => proxy['mime'];
   set mime(String value) => proxy['mime'] = value;
@@ -432,7 +432,7 @@ class DownloadItem extends ChromeObject {
   set estimatedEndTime(String value) => proxy['estimatedEndTime'] = value;
 
   State get state => _createState(proxy['state']);
-  set state(State value) => proxy['state'] = value;
+  set state(State value) => proxy['state'] = jsify(value);
 
   bool get paused => proxy['paused'];
   set paused(bool value) => proxy['paused'] = value;
@@ -441,7 +441,7 @@ class DownloadItem extends ChromeObject {
   set canResume(bool value) => proxy['canResume'] = value;
 
   InterruptReason get error => _createInterruptReason(proxy['error']);
-  set error(InterruptReason value) => proxy['error'] = value;
+  set error(InterruptReason value) => proxy['error'] = jsify(value);
 
   int get bytesReceived => proxy['bytesReceived'];
   set bytesReceived(int value) => proxy['bytesReceived'] = value;
@@ -536,7 +536,7 @@ class DownloadQuery extends ChromeObject {
   set filename(String value) => proxy['filename'] = value;
 
   DangerType get danger => _createDangerType(proxy['danger']);
-  set danger(DangerType value) => proxy['danger'] = value;
+  set danger(DangerType value) => proxy['danger'] = jsify(value);
 
   String get mime => proxy['mime'];
   set mime(String value) => proxy['mime'] = value;
@@ -548,13 +548,13 @@ class DownloadQuery extends ChromeObject {
   set endTime(String value) => proxy['endTime'] = value;
 
   State get state => _createState(proxy['state']);
-  set state(State value) => proxy['state'] = value;
+  set state(State value) => proxy['state'] = jsify(value);
 
   bool get paused => proxy['paused'];
   set paused(bool value) => proxy['paused'] = value;
 
   InterruptReason get error => _createInterruptReason(proxy['error']);
-  set error(InterruptReason value) => proxy['error'] = value;
+  set error(InterruptReason value) => proxy['error'] = jsify(value);
 
   int get bytesReceived => proxy['bytesReceived'];
   set bytesReceived(int value) => proxy['bytesReceived'] = value;
@@ -638,43 +638,43 @@ class DownloadDelta extends ChromeObject {
   set id(int value) => proxy['id'] = value;
 
   StringDelta get url => _createStringDelta(proxy['url']);
-  set url(StringDelta value) => proxy['url'] = value;
+  set url(StringDelta value) => proxy['url'] = jsify(value);
 
   StringDelta get filename => _createStringDelta(proxy['filename']);
-  set filename(StringDelta value) => proxy['filename'] = value;
+  set filename(StringDelta value) => proxy['filename'] = jsify(value);
 
   StringDelta get danger => _createStringDelta(proxy['danger']);
-  set danger(StringDelta value) => proxy['danger'] = value;
+  set danger(StringDelta value) => proxy['danger'] = jsify(value);
 
   StringDelta get mime => _createStringDelta(proxy['mime']);
-  set mime(StringDelta value) => proxy['mime'] = value;
+  set mime(StringDelta value) => proxy['mime'] = jsify(value);
 
   StringDelta get startTime => _createStringDelta(proxy['startTime']);
-  set startTime(StringDelta value) => proxy['startTime'] = value;
+  set startTime(StringDelta value) => proxy['startTime'] = jsify(value);
 
   StringDelta get endTime => _createStringDelta(proxy['endTime']);
-  set endTime(StringDelta value) => proxy['endTime'] = value;
+  set endTime(StringDelta value) => proxy['endTime'] = jsify(value);
 
   StringDelta get state => _createStringDelta(proxy['state']);
-  set state(StringDelta value) => proxy['state'] = value;
+  set state(StringDelta value) => proxy['state'] = jsify(value);
 
   BooleanDelta get canResume => _createBooleanDelta(proxy['canResume']);
-  set canResume(BooleanDelta value) => proxy['canResume'] = value;
+  set canResume(BooleanDelta value) => proxy['canResume'] = jsify(value);
 
   BooleanDelta get paused => _createBooleanDelta(proxy['paused']);
-  set paused(BooleanDelta value) => proxy['paused'] = value;
+  set paused(BooleanDelta value) => proxy['paused'] = jsify(value);
 
   StringDelta get error => _createStringDelta(proxy['error']);
-  set error(StringDelta value) => proxy['error'] = value;
+  set error(StringDelta value) => proxy['error'] = jsify(value);
 
   LongDelta get totalBytes => _createLongDelta(proxy['totalBytes']);
-  set totalBytes(LongDelta value) => proxy['totalBytes'] = value;
+  set totalBytes(LongDelta value) => proxy['totalBytes'] = jsify(value);
 
   LongDelta get fileSize => _createLongDelta(proxy['fileSize']);
-  set fileSize(LongDelta value) => proxy['fileSize'] = value;
+  set fileSize(LongDelta value) => proxy['fileSize'] = jsify(value);
 
   BooleanDelta get exists => _createBooleanDelta(proxy['exists']);
-  set exists(BooleanDelta value) => proxy['exists'] = value;
+  set exists(BooleanDelta value) => proxy['exists'] = jsify(value);
 }
 
 class GetFileIconOptions extends ChromeObject {

@@ -20,7 +20,7 @@ class ChromeFileSystem {
    */
   Future<String> getDisplayPath(Entry entry) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
+    _fileSystem.callMethod('getDisplayPath', [jsify(entry), completer.callback]);
     return completer.future;
   }
 
@@ -32,7 +32,7 @@ class ChromeFileSystem {
    */
   Future<Entry> getWritableEntry(Entry entry) {
     var completer = new ChromeCompleter<Entry>.oneArg(_createEntry);
-    _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
+    _fileSystem.callMethod('getWritableEntry', [jsify(entry), completer.callback]);
     return completer.future;
   }
 
@@ -41,7 +41,7 @@ class ChromeFileSystem {
    */
   Future<bool> isWritableEntry(Entry entry) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
+    _fileSystem.callMethod('isWritableEntry', [jsify(entry), completer.callback]);
     return completer.future;
   }
 
@@ -54,7 +54,7 @@ class ChromeFileSystem {
    */
   Future<ChooseEntryResult> chooseEntry([ChooseEntryOptions options]) {
     var completer = new ChromeCompleter<ChooseEntryResult>.twoArgs(ChooseEntryResult._create);
-    _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
+    _fileSystem.callMethod('chooseEntry', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -89,7 +89,7 @@ class ChromeFileSystem {
    * new in Chrome 30.
    */
   String retainEntry(Entry entry) {
-    return _fileSystem.callMethod('retainEntry', [entry]);
+    return _fileSystem.callMethod('retainEntry', [jsify(entry)]);
   }
 }
 
@@ -151,13 +151,13 @@ class ChooseEntryOptions extends ChromeObject {
   ChooseEntryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   ChooseEntryType get type => _createChooseEntryType(proxy['type']);
-  set type(ChooseEntryType value) => proxy['type'] = value;
+  set type(ChooseEntryType value) => proxy['type'] = jsify(value);
 
   String get suggestedName => proxy['suggestedName'];
   set suggestedName(String value) => proxy['suggestedName'] = value;
 
   AcceptOption get accepts => _createAcceptOption(proxy['accepts']);
-  set accepts(AcceptOption value) => proxy['accepts'] = value;
+  set accepts(AcceptOption value) => proxy['accepts'] = jsify(value);
 
   bool get acceptsAllTypes => proxy['acceptsAllTypes'];
   set acceptsAllTypes(bool value) => proxy['acceptsAllTypes'] = value;

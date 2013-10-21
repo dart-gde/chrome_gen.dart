@@ -47,7 +47,7 @@ class ChromeExtension {
    */
   Future<dynamic> sendRequest(dynamic request, [String extensionId]) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
-    _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
+    _extension.callMethod('sendRequest', [extensionId, jsify(request), completer.callback]);
     return completer.future;
   }
 
@@ -73,7 +73,7 @@ class ChromeExtension {
    * Array of global objects
    */
   List<Window> getViews([Map fetchProperties]) {
-    var ret = _extension.callMethod('getViews', [new JsObject.jsify(fetchProperties)]);
+    var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
     return ret;
   }
 

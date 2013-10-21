@@ -19,7 +19,7 @@ class ChromePower {
    * new request.
    */
   void requestKeepAwake(Level level) {
-    _power.callMethod('requestKeepAwake', [ChromeEnum.convert(level)]);
+    _power.callMethod('requestKeepAwake', [jsify(level)]);
   }
 
   /**

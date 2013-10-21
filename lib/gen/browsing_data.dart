@@ -35,7 +35,7 @@ class ChromeBrowsingData {
    */
   Future remove(RemovalOptions options, DataTypeSet dataToRemove) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('remove', [options, dataToRemove, completer.callback]);
+    _browsingData.callMethod('remove', [jsify(options), jsify(dataToRemove), completer.callback]);
     return completer.future;
   }
 
@@ -44,7 +44,7 @@ class ChromeBrowsingData {
    */
   Future removeAppcache(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removeAppcache', [options, completer.callback]);
+    _browsingData.callMethod('removeAppcache', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -53,7 +53,7 @@ class ChromeBrowsingData {
    */
   Future removeCache(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removeCache', [options, completer.callback]);
+    _browsingData.callMethod('removeCache', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -63,7 +63,7 @@ class ChromeBrowsingData {
    */
   Future removeCookies(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removeCookies', [options, completer.callback]);
+    _browsingData.callMethod('removeCookies', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -73,7 +73,7 @@ class ChromeBrowsingData {
    */
   Future removeDownloads(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removeDownloads', [options, completer.callback]);
+    _browsingData.callMethod('removeDownloads', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -82,7 +82,7 @@ class ChromeBrowsingData {
    */
   Future removeFileSystems(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removeFileSystems', [options, completer.callback]);
+    _browsingData.callMethod('removeFileSystems', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -91,7 +91,7 @@ class ChromeBrowsingData {
    */
   Future removeFormData(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removeFormData', [options, completer.callback]);
+    _browsingData.callMethod('removeFormData', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -100,7 +100,7 @@ class ChromeBrowsingData {
    */
   Future removeHistory(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removeHistory', [options, completer.callback]);
+    _browsingData.callMethod('removeHistory', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -109,7 +109,7 @@ class ChromeBrowsingData {
    */
   Future removeIndexedDB(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removeIndexedDB', [options, completer.callback]);
+    _browsingData.callMethod('removeIndexedDB', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -118,7 +118,7 @@ class ChromeBrowsingData {
    */
   Future removeLocalStorage(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removeLocalStorage', [options, completer.callback]);
+    _browsingData.callMethod('removeLocalStorage', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -127,7 +127,7 @@ class ChromeBrowsingData {
    */
   Future removePluginData(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removePluginData', [options, completer.callback]);
+    _browsingData.callMethod('removePluginData', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -136,7 +136,7 @@ class ChromeBrowsingData {
    */
   Future removePasswords(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removePasswords', [options, completer.callback]);
+    _browsingData.callMethod('removePasswords', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -145,7 +145,7 @@ class ChromeBrowsingData {
    */
   Future removeWebSQL(RemovalOptions options) {
     var completer = new ChromeCompleter.noArgs();
-    _browsingData.callMethod('removeWebSQL', [options, completer.callback]);
+    _browsingData.callMethod('removeWebSQL', [jsify(options), completer.callback]);
     return completer.future;
   }
 }
@@ -168,7 +168,7 @@ class RemovalOptions extends ChromeObject {
    * data).
    */
   dynamic get since => proxy['since'];
-  set since(var value) => proxy['since'] = value;
+  set since(var value) => proxy['since'] = jsify(value);
 
   /**
    * An object whose properties specify which origin types ought to be cleared.
@@ -177,7 +177,7 @@ class RemovalOptions extends ChromeObject {
    * before adding 'protectedWeb' or 'extensions'.
    */
   Map get originTypes => mapify(proxy['originTypes']);
-  set originTypes(Map value) => proxy['originTypes'] = value;
+  set originTypes(Map value) => proxy['originTypes'] = jsify(value);
 }
 
 /**

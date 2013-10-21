@@ -64,13 +64,13 @@ class StorageChange extends ChromeObject {
    * The old value of the item, if there was an old value.
    */
   dynamic get oldValue => proxy['oldValue'];
-  set oldValue(var value) => proxy['oldValue'] = value;
+  set oldValue(var value) => proxy['oldValue'] = jsify(value);
 
   /**
    * The new value of the item, if there is a new value.
    */
   dynamic get newValue => proxy['newValue'];
-  set newValue(var value) => proxy['newValue'] = value;
+  set newValue(var value) => proxy['newValue'] = jsify(value);
 }
 
 class StorageArea extends ChromeObject {
@@ -91,7 +91,7 @@ class StorageArea extends ChromeObject {
    */
   Future<Map<String, dynamic>> get([dynamic keys]) {
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
-    proxy.callMethod('get', [keys, completer.callback]);
+    proxy.callMethod('get', [jsify(keys), completer.callback]);
     return completer.future;
   }
 
@@ -107,7 +107,7 @@ class StorageArea extends ChromeObject {
    */
   Future<int> getBytesInUse([dynamic keys]) {
     var completer = new ChromeCompleter<int>.oneArg();
-    proxy.callMethod('getBytesInUse', [keys, completer.callback]);
+    proxy.callMethod('getBytesInUse', [jsify(keys), completer.callback]);
     return completer.future;
   }
 
@@ -119,7 +119,7 @@ class StorageArea extends ChromeObject {
    */
   Future set(Map<String, dynamic> items) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('set', [new JsObject.jsify(items), completer.callback]);
+    proxy.callMethod('set', [jsify(items), completer.callback]);
     return completer.future;
   }
 
@@ -130,7 +130,7 @@ class StorageArea extends ChromeObject {
    */
   Future remove(dynamic keys) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('remove', [keys, completer.callback]);
+    proxy.callMethod('remove', [jsify(keys), completer.callback]);
     return completer.future;
   }
 

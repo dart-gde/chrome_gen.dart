@@ -42,7 +42,7 @@ class ChromePageAction {
    * page action.
    */
   void setTitle(Map details) {
-    _pageAction.callMethod('setTitle', [new JsObject.jsify(details)]);
+    _pageAction.callMethod('setTitle', [jsify(details)]);
   }
 
   /**
@@ -50,7 +50,7 @@ class ChromePageAction {
    */
   Future<String> getTitle(Map details) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _pageAction.callMethod('getTitle', [new JsObject.jsify(details), completer.callback]);
+    _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -62,7 +62,7 @@ class ChromePageAction {
    */
   Future setIcon(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    _pageAction.callMethod('setIcon', [new JsObject.jsify(details), completer.callback]);
+    _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -71,7 +71,7 @@ class ChromePageAction {
    * page action's icon.
    */
   void setPopup(Map details) {
-    _pageAction.callMethod('setPopup', [new JsObject.jsify(details)]);
+    _pageAction.callMethod('setPopup', [jsify(details)]);
   }
 
   /**
@@ -79,7 +79,7 @@ class ChromePageAction {
    */
   Future<String> getPopup(Map details) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _pageAction.callMethod('getPopup', [new JsObject.jsify(details), completer.callback]);
+    _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
   }
 

@@ -23,7 +23,7 @@ class ChromeInputIme {
    */
   Future<bool> setComposition(Map parameters) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _input_ime.callMethod('setComposition', [new JsObject.jsify(parameters), completer.callback]);
+    _input_ime.callMethod('setComposition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -33,7 +33,7 @@ class ChromeInputIme {
    */
   Future<bool> clearComposition(Map parameters) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _input_ime.callMethod('clearComposition', [new JsObject.jsify(parameters), completer.callback]);
+    _input_ime.callMethod('clearComposition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -42,7 +42,7 @@ class ChromeInputIme {
    */
   Future<bool> commitText(Map parameters) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _input_ime.callMethod('commitText', [new JsObject.jsify(parameters), completer.callback]);
+    _input_ime.callMethod('commitText', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -52,7 +52,7 @@ class ChromeInputIme {
    */
   Future<bool> setCandidateWindowProperties(Map parameters) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _input_ime.callMethod('setCandidateWindowProperties', [new JsObject.jsify(parameters), completer.callback]);
+    _input_ime.callMethod('setCandidateWindowProperties', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -62,7 +62,7 @@ class ChromeInputIme {
    */
   Future<bool> setCandidates(Map parameters) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _input_ime.callMethod('setCandidates', [new JsObject.jsify(parameters), completer.callback]);
+    _input_ime.callMethod('setCandidates', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -72,7 +72,7 @@ class ChromeInputIme {
    */
   Future<bool> setCursorPosition(Map parameters) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _input_ime.callMethod('setCursorPosition', [new JsObject.jsify(parameters), completer.callback]);
+    _input_ime.callMethod('setCursorPosition', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -81,7 +81,7 @@ class ChromeInputIme {
    */
   Future setMenuItems(Map parameters) {
     var completer = new ChromeCompleter.noArgs();
-    _input_ime.callMethod('setMenuItems', [new JsObject.jsify(parameters), completer.callback]);
+    _input_ime.callMethod('setMenuItems', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -90,7 +90,7 @@ class ChromeInputIme {
    */
   Future updateMenuItems(Map parameters) {
     var completer = new ChromeCompleter.noArgs();
-    _input_ime.callMethod('updateMenuItems', [new JsObject.jsify(parameters), completer.callback]);
+    _input_ime.callMethod('updateMenuItems', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 
@@ -99,7 +99,7 @@ class ChromeInputIme {
    */
   Future deleteSurroundingText(Map parameters) {
     var completer = new ChromeCompleter.noArgs();
-    _input_ime.callMethod('deleteSurroundingText', [new JsObject.jsify(parameters), completer.callback]);
+    _input_ime.callMethod('deleteSurroundingText', [jsify(parameters), completer.callback]);
     return completer.future;
   }
 

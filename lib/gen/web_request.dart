@@ -152,14 +152,14 @@ class RequestFilter extends ChromeObject {
    * will be filtered out.
    */
   List<String> get urls => listify(proxy['urls']);
-  set urls(List<String> value) => proxy['urls'] = value;
+  set urls(List<String> value) => proxy['urls'] = jsify(value);
 
   /**
    * A list of request types. Requests that cannot match any of the types will
    * be filtered out.
    */
   List<String> get types => listify(proxy['types']);
-  set types(List<String> value) => proxy['types'] = value;
+  set types(List<String> value) => proxy['types'] = jsify(value);
 
   int get tabId => proxy['tabId'];
   set tabId(int value) => proxy['tabId'] = value;
@@ -213,7 +213,7 @@ class BlockingResponse extends ChromeObject {
    * request is made with these request headers instead.
    */
   HttpHeaders get requestHeaders => _createHttpHeaders(proxy['requestHeaders']);
-  set requestHeaders(HttpHeaders value) => proxy['requestHeaders'] = value;
+  set requestHeaders(HttpHeaders value) => proxy['requestHeaders'] = jsify(value);
 
   /**
    * Only used as a response to the onHeadersReceived event. If set, the server
@@ -223,14 +223,14 @@ class BlockingResponse extends ChromeObject {
    * `responseHeaders` for each request).
    */
   HttpHeaders get responseHeaders => _createHttpHeaders(proxy['responseHeaders']);
-  set responseHeaders(HttpHeaders value) => proxy['responseHeaders'] = value;
+  set responseHeaders(HttpHeaders value) => proxy['responseHeaders'] = jsify(value);
 
   /**
    * Only used as a response to the onAuthRequired event. If set, the request is
    * made using the supplied credentials.
    */
   Map get authCredentials => mapify(proxy['authCredentials']);
-  set authCredentials(Map value) => proxy['authCredentials'] = value;
+  set authCredentials(Map value) => proxy['authCredentials'] = jsify(value);
 }
 
 /**
@@ -248,7 +248,7 @@ class UploadData extends ChromeObject {
    * An ArrayBuffer with a copy of the data.
    */
   dynamic get bytes => proxy['bytes'];
-  set bytes(var value) => proxy['bytes'] = value;
+  set bytes(var value) => proxy['bytes'] = jsify(value);
 
   /**
    * A string with the file's path and name.

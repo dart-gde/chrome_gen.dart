@@ -31,10 +31,10 @@ class MemoryInfo extends ChromeObject {
   MemoryInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   double get capacity => proxy['capacity'];
-  set capacity(double value) => proxy['capacity'] = value;
+  set capacity(double value) => proxy['capacity'] = jsify(value);
 
   double get availableCapacity => proxy['availableCapacity'];
-  set availableCapacity(double value) => proxy['availableCapacity'] = value;
+  set availableCapacity(double value) => proxy['availableCapacity'] = jsify(value);
 }
 
 MemoryInfo _createMemoryInfo(JsObject proxy) => proxy == null ? null : new MemoryInfo.fromProxy(proxy);

@@ -70,7 +70,7 @@ class HeaderFilter extends ChromeObject {
    * Matches if the header name contains all of the specified strings.
    */
   dynamic get nameContains => proxy['nameContains'];
-  set nameContains(var value) => proxy['nameContains'] = value;
+  set nameContains(var value) => proxy['nameContains'] = jsify(value);
 
   /**
    * Matches if the header name is equal to the specified string.
@@ -94,7 +94,7 @@ class HeaderFilter extends ChromeObject {
    * Matches if the header value contains all of the specified strings.
    */
   dynamic get valueContains => proxy['valueContains'];
-  set valueContains(var value) => proxy['valueContains'] = value;
+  set valueContains(var value) => proxy['valueContains'] = jsify(value);
 
   /**
    * Matches if the header value is equal to the specified string.
@@ -128,7 +128,7 @@ class RequestMatcher extends ChromeObject {
    * request.
    */
   UrlFilter get url => _createUrlFilter(proxy['url']);
-  set url(UrlFilter value) => proxy['url'] = value;
+  set url(UrlFilter value) => proxy['url'] = jsify(value);
 
   /**
    * Matches if the conditions of the UrlFilter are fulfilled for the 'first
@@ -137,56 +137,56 @@ class RequestMatcher extends ChromeObject {
    * is considered 'first party' for the sake of third-party checks for cookies.
    */
   UrlFilter get firstPartyForCookiesUrl => _createUrlFilter(proxy['firstPartyForCookiesUrl']);
-  set firstPartyForCookiesUrl(UrlFilter value) => proxy['firstPartyForCookiesUrl'] = value;
+  set firstPartyForCookiesUrl(UrlFilter value) => proxy['firstPartyForCookiesUrl'] = jsify(value);
 
   /**
    * Matches if the request type of a request is contained in the list. Requests
    * that cannot match any of the types will be filtered out.
    */
   List<String> get resourceType => listify(proxy['resourceType']);
-  set resourceType(List<String> value) => proxy['resourceType'] = value;
+  set resourceType(List<String> value) => proxy['resourceType'] = jsify(value);
 
   /**
    * Matches if the MIME media type of a response (from the HTTP Content-Type
    * header) is contained in the list.
    */
   List<String> get contentType => listify(proxy['contentType']);
-  set contentType(List<String> value) => proxy['contentType'] = value;
+  set contentType(List<String> value) => proxy['contentType'] = jsify(value);
 
   /**
    * Matches if the MIME media type of a response (from the HTTP Content-Type
    * header) is _not_ contained in the list.
    */
   List<String> get excludeContentType => listify(proxy['excludeContentType']);
-  set excludeContentType(List<String> value) => proxy['excludeContentType'] = value;
+  set excludeContentType(List<String> value) => proxy['excludeContentType'] = jsify(value);
 
   /**
    * Matches if some of the request headers is matched by one of the
    * HeaderFilters.
    */
   List<HeaderFilter> get requestHeaders => listify(proxy['requestHeaders'], _createHeaderFilter);
-  set requestHeaders(List<HeaderFilter> value) => proxy['requestHeaders'] = value;
+  set requestHeaders(List<HeaderFilter> value) => proxy['requestHeaders'] = jsify(value);
 
   /**
    * Matches if none of the request headers is matched by any of the
    * HeaderFilters.
    */
   List<HeaderFilter> get excludeRequestHeaders => listify(proxy['excludeRequestHeaders'], _createHeaderFilter);
-  set excludeRequestHeaders(List<HeaderFilter> value) => proxy['excludeRequestHeaders'] = value;
+  set excludeRequestHeaders(List<HeaderFilter> value) => proxy['excludeRequestHeaders'] = jsify(value);
 
   /**
    * Matches if some of the response headers is matched by one of the
    * HeaderFilters.
    */
   List<HeaderFilter> get responseHeaders => listify(proxy['responseHeaders'], _createHeaderFilter);
-  set responseHeaders(List<HeaderFilter> value) => proxy['responseHeaders'] = value;
+  set responseHeaders(List<HeaderFilter> value) => proxy['responseHeaders'] = jsify(value);
 
   /**
    * Matches if none of the response headers is matched by any of the
    * HeaderFilters.
    */
   List<HeaderFilter> get excludeResponseHeaders => listify(proxy['excludeResponseHeaders'], _createHeaderFilter);
-  set excludeResponseHeaders(List<HeaderFilter> value) => proxy['excludeResponseHeaders'] = value;
+  set excludeResponseHeaders(List<HeaderFilter> value) => proxy['excludeResponseHeaders'] = jsify(value);
 
   /**
    * If set to true, matches requests that are subject to third-party cookie
@@ -203,7 +203,7 @@ class RequestMatcher extends ChromeObject {
    * applicable in stages compatible with all attributes.
    */
   List<String> get stages => listify(proxy['stages']);
-  set stages(List<String> value) => proxy['stages'] = value;
+  set stages(List<String> value) => proxy['stages'] = jsify(value);
 }
 
 /**
@@ -486,7 +486,7 @@ class ResponseCookie extends ChromeObject {
    * Value of the Max-Age cookie attribute
    */
   dynamic get maxAge => proxy['maxAge'];
-  set maxAge(var value) => proxy['maxAge'] = value;
+  set maxAge(var value) => proxy['maxAge'] = jsify(value);
 
   /**
    * Value of the Domain cookie attribute.
@@ -555,7 +555,7 @@ class FilterResponseCookie extends ChromeObject {
    * Value of the Max-Age cookie attribute
    */
   dynamic get maxAge => proxy['maxAge'];
-  set maxAge(var value) => proxy['maxAge'] = value;
+  set maxAge(var value) => proxy['maxAge'] = jsify(value);
 
   /**
    * Value of the Domain cookie attribute.
@@ -628,7 +628,7 @@ class AddRequestCookie extends ChromeObject {
    * Cookie to be added to the request. No field may be undefined.
    */
   RequestCookie get cookie => _createRequestCookie(proxy['cookie']);
-  set cookie(RequestCookie value) => proxy['cookie'] = value;
+  set cookie(RequestCookie value) => proxy['cookie'] = jsify(value);
 }
 
 /**
@@ -648,7 +648,7 @@ class AddResponseCookie extends ChromeObject {
    * specified.
    */
   ResponseCookie get cookie => _createResponseCookie(proxy['cookie']);
-  set cookie(ResponseCookie value) => proxy['cookie'] = value;
+  set cookie(ResponseCookie value) => proxy['cookie'] = jsify(value);
 }
 
 /**
@@ -667,14 +667,14 @@ class EditRequestCookie extends ChromeObject {
    * Filter for cookies that will be modified. All empty entries are ignored.
    */
   RequestCookie get filter => _createRequestCookie(proxy['filter']);
-  set filter(RequestCookie value) => proxy['filter'] = value;
+  set filter(RequestCookie value) => proxy['filter'] = jsify(value);
 
   /**
    * Attributes that shall be overridden in cookies that machted the filter.
    * Attributes that are set to an empty string are removed.
    */
   RequestCookie get modification => _createRequestCookie(proxy['modification']);
-  set modification(RequestCookie value) => proxy['modification'] = value;
+  set modification(RequestCookie value) => proxy['modification'] = jsify(value);
 }
 
 /**
@@ -693,14 +693,14 @@ class EditResponseCookie extends ChromeObject {
    * Filter for cookies that will be modified. All empty entries are ignored.
    */
   FilterResponseCookie get filter => _createFilterResponseCookie(proxy['filter']);
-  set filter(FilterResponseCookie value) => proxy['filter'] = value;
+  set filter(FilterResponseCookie value) => proxy['filter'] = jsify(value);
 
   /**
    * Attributes that shall be overridden in cookies that machted the filter.
    * Attributes that are set to an empty string are removed.
    */
   ResponseCookie get modification => _createResponseCookie(proxy['modification']);
-  set modification(ResponseCookie value) => proxy['modification'] = value;
+  set modification(ResponseCookie value) => proxy['modification'] = jsify(value);
 }
 
 /**
@@ -718,7 +718,7 @@ class RemoveRequestCookie extends ChromeObject {
    * Filter for cookies that will be removed. All empty entries are ignored.
    */
   RequestCookie get filter => _createRequestCookie(proxy['filter']);
-  set filter(RequestCookie value) => proxy['filter'] = value;
+  set filter(RequestCookie value) => proxy['filter'] = jsify(value);
 }
 
 /**
@@ -736,7 +736,7 @@ class RemoveResponseCookie extends ChromeObject {
    * Filter for cookies that will be removed. All empty entries are ignored.
    */
   FilterResponseCookie get filter => _createFilterResponseCookie(proxy['filter']);
-  set filter(FilterResponseCookie value) => proxy['filter'] = value;
+  set filter(FilterResponseCookie value) => proxy['filter'] = jsify(value);
 }
 
 UrlFilter _createUrlFilter(JsObject proxy) => proxy == null ? null : new UrlFilter.fromProxy(proxy);

@@ -33,7 +33,7 @@ class ChromeSessions {
    */
   Future<List<Session>> getRecentlyClosed([Filter filter]) {
     var completer = new ChromeCompleter<List<Session>>.oneArg((e) => listify(e, _createSession));
-    _sessions.callMethod('getRecentlyClosed', [filter, completer.callback]);
+    _sessions.callMethod('getRecentlyClosed', [jsify(filter), completer.callback]);
     return completer.future;
   }
 
@@ -48,7 +48,7 @@ class ChromeSessions {
    */
   Future<List<Device>> getDevices([Filter filter]) {
     var completer = new ChromeCompleter<List<Device>>.oneArg((e) => listify(e, _createDevice));
-    _sessions.callMethod('getDevices', [filter, completer.callback]);
+    _sessions.callMethod('getDevices', [jsify(filter), completer.callback]);
     return completer.future;
   }
 
@@ -106,14 +106,14 @@ class Session extends ChromeObject {
    * [Session.window] will be set.
    */
   Tab get tab => _createTab(proxy['tab']);
-  set tab(Tab value) => proxy['tab'] = value;
+  set tab(Tab value) => proxy['tab'] = jsify(value);
 
   /**
    * The [windows.Window], if this entry describes a window. Either this or
    * [Session.tab] will be set.
    */
   Window get window => _createWindow(proxy['window']);
-  set window(Window value) => proxy['window'] = value;
+  set window(Window value) => proxy['window'] = jsify(value);
 }
 
 class Device extends ChromeObject {
@@ -135,7 +135,7 @@ class Device extends ChromeObject {
    * recently to least recently modified session.
    */
   List<Session> get sessions => listify(proxy['sessions'], _createSession);
-  set sessions(List<Session> value) => proxy['sessions'] = value;
+  set sessions(List<Session> value) => proxy['sessions'] = jsify(value);
 }
 
 Session _createSession(JsObject proxy) => proxy == null ? null : new Session.fromProxy(proxy);

@@ -38,7 +38,7 @@ class ChromeBookmarks {
    */
   Future<List<BookmarkTreeNode>> get(dynamic idOrIdList) {
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
-    _bookmarks.callMethod('get', [idOrIdList, completer.callback]);
+    _bookmarks.callMethod('get', [jsify(idOrIdList), completer.callback]);
     return completer.future;
   }
 
@@ -97,7 +97,7 @@ class ChromeBookmarks {
    */
   Future<BookmarkTreeNode> create(Map bookmark) {
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
-    _bookmarks.callMethod('create', [new JsObject.jsify(bookmark), completer.callback]);
+    _bookmarks.callMethod('create', [jsify(bookmark), completer.callback]);
     return completer.future;
   }
 
@@ -106,7 +106,7 @@ class ChromeBookmarks {
    */
   Future<BookmarkTreeNode> move(String id, Map destination) {
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
-    _bookmarks.callMethod('move', [id, new JsObject.jsify(destination), completer.callback]);
+    _bookmarks.callMethod('move', [id, jsify(destination), completer.callback]);
     return completer.future;
   }
 
@@ -117,7 +117,7 @@ class ChromeBookmarks {
    */
   Future<BookmarkTreeNode> update(String id, Map changes) {
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
-    _bookmarks.callMethod('update', [id, new JsObject.jsify(changes), completer.callback]);
+    _bookmarks.callMethod('update', [id, jsify(changes), completer.callback]);
     return completer.future;
   }
 
@@ -328,20 +328,20 @@ class BookmarkTreeNode extends ChromeObject {
    * Date(dateAdded)`).
    */
   dynamic get dateAdded => proxy['dateAdded'];
-  set dateAdded(var value) => proxy['dateAdded'] = value;
+  set dateAdded(var value) => proxy['dateAdded'] = jsify(value);
 
   /**
    * When the contents of this folder last changed, in milliseconds since the
    * epoch.
    */
   dynamic get dateGroupModified => proxy['dateGroupModified'];
-  set dateGroupModified(var value) => proxy['dateGroupModified'] = value;
+  set dateGroupModified(var value) => proxy['dateGroupModified'] = jsify(value);
 
   /**
    * An ordered list of children of this node.
    */
   List<BookmarkTreeNode> get children => listify(proxy['children'], _createBookmarkTreeNode);
-  set children(List<BookmarkTreeNode> value) => proxy['children'] = value;
+  set children(List<BookmarkTreeNode> value) => proxy['children'] = jsify(value);
 }
 
 BookmarkTreeNode _createBookmarkTreeNode(JsObject proxy) => proxy == null ? null : new BookmarkTreeNode.fromProxy(proxy);

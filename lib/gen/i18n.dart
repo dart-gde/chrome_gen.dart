@@ -45,6 +45,6 @@ class ChromeI18N {
    * Message localized for current locale.
    */
   String getMessage(String messageName, [dynamic substitutions]) {
-    return _i18n.callMethod('getMessage', [messageName, substitutions]);
+    return _i18n.callMethod('getMessage', [messageName, jsify(substitutions)]);
   }
 }

@@ -35,7 +35,7 @@ class ChromeWindows {
    */
   Future<Window> get(int windowId, [Map getInfo]) {
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
-    _windows.callMethod('get', [windowId, new JsObject.jsify(getInfo), completer.callback]);
+    _windows.callMethod('get', [windowId, jsify(getInfo), completer.callback]);
     return completer.future;
   }
 
@@ -46,7 +46,7 @@ class ChromeWindows {
    */
   Future<Window> getCurrent([Map getInfo]) {
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
-    _windows.callMethod('getCurrent', [new JsObject.jsify(getInfo), completer.callback]);
+    _windows.callMethod('getCurrent', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
 
@@ -58,7 +58,7 @@ class ChromeWindows {
    */
   Future<Window> getLastFocused([Map getInfo]) {
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
-    _windows.callMethod('getLastFocused', [new JsObject.jsify(getInfo), completer.callback]);
+    _windows.callMethod('getLastFocused', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
 
@@ -69,7 +69,7 @@ class ChromeWindows {
    */
   Future<List<Window>> getAll([Map getInfo]) {
     var completer = new ChromeCompleter<List<Window>>.oneArg((e) => listify(e, _createWindow));
-    _windows.callMethod('getAll', [new JsObject.jsify(getInfo), completer.callback]);
+    _windows.callMethod('getAll', [jsify(getInfo), completer.callback]);
     return completer.future;
   }
 
@@ -82,7 +82,7 @@ class ChromeWindows {
    */
   Future<Window> create([Map createData]) {
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
-    _windows.callMethod('create', [new JsObject.jsify(createData), completer.callback]);
+    _windows.callMethod('create', [jsify(createData), completer.callback]);
     return completer.future;
   }
 
@@ -92,7 +92,7 @@ class ChromeWindows {
    */
   Future<Window> update(int windowId, Map updateInfo) {
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
-    _windows.callMethod('update', [windowId, new JsObject.jsify(updateInfo), completer.callback]);
+    _windows.callMethod('update', [windowId, jsify(updateInfo), completer.callback]);
     return completer.future;
   }
 
@@ -202,7 +202,7 @@ class Window extends ChromeObject {
    * Array of [tabs.Tab] objects representing the current tabs in the window.
    */
   List<Tab> get tabs => listify(proxy['tabs'], _createTab);
-  set tabs(List<Tab> value) => proxy['tabs'] = value;
+  set tabs(List<Tab> value) => proxy['tabs'] = jsify(value);
 
   /**
    * Whether the window is incognito.

@@ -95,10 +95,10 @@ class StorageUnitInfo extends ChromeObject {
   set name(String value) => proxy['name'] = value;
 
   StorageUnitType get type => _createStorageUnitType(proxy['type']);
-  set type(StorageUnitType value) => proxy['type'] = value;
+  set type(StorageUnitType value) => proxy['type'] = jsify(value);
 
   double get capacity => proxy['capacity'];
-  set capacity(double value) => proxy['capacity'] = value;
+  set capacity(double value) => proxy['capacity'] = jsify(value);
 }
 
 StorageUnitInfo _createStorageUnitInfo(JsObject proxy) => proxy == null ? null : new StorageUnitInfo.fromProxy(proxy);

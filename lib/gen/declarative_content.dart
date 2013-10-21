@@ -39,7 +39,7 @@ class PageStateMatcher extends ChromeObject {
    * URL of the page.
    */
   UrlFilter get pageUrl => _createUrlFilter(proxy['pageUrl']);
-  set pageUrl(UrlFilter value) => proxy['pageUrl'] = value;
+  set pageUrl(UrlFilter value) => proxy['pageUrl'] = jsify(value);
 
   /**
    * Matches if all of the CSS selectors in the array match in a frame with the
@@ -47,7 +47,7 @@ class PageStateMatcher extends ChromeObject {
    * selectors here can slow down web sites.
    */
   List<String> get css => listify(proxy['css']);
-  set css(List<String> value) => proxy['css'] = value;
+  set css(List<String> value) => proxy['css'] = jsify(value);
 }
 
 /**

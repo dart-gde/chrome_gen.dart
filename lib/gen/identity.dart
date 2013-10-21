@@ -27,7 +27,7 @@ class ChromeIdentity {
    */
   Future<String> getAuthToken([TokenDetails details]) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _identity.callMethod('getAuthToken', [details, completer.callback]);
+    _identity.callMethod('getAuthToken', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -43,7 +43,7 @@ class ChromeIdentity {
    */
   Future removeCachedAuthToken(InvalidTokenDetails details) {
     var completer = new ChromeCompleter.noArgs();
-    _identity.callMethod('removeCachedAuthToken', [details, completer.callback]);
+    _identity.callMethod('removeCachedAuthToken', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -61,7 +61,7 @@ class ChromeIdentity {
    */
   Future<String> launchWebAuthFlow(WebAuthFlowDetails details) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _identity.callMethod('launchWebAuthFlow', [details, completer.callback]);
+    _identity.callMethod('launchWebAuthFlow', [jsify(details), completer.callback]);
     return completer.future;
   }
 }

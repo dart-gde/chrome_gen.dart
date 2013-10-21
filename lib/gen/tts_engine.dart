@@ -29,7 +29,7 @@ class ChromeTtsEngine {
    * status of this utterance.
    */
   void sendTtsEvent(int requestId, TtsEvent event) {
-    _ttsEngine.callMethod('sendTtsEvent', [requestId, event]);
+    _ttsEngine.callMethod('sendTtsEvent', [requestId, jsify(event)]);
   }
 
   /**

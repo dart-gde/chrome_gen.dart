@@ -64,7 +64,7 @@ class ChromeProcesses {
    */
   Future<Map> getProcessInfo(dynamic processIds, bool includeMemory) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
-    _processes.callMethod('getProcessInfo', [processIds, includeMemory, completer.callback]);
+    _processes.callMethod('getProcessInfo', [jsify(processIds), includeMemory, completer.callback]);
     return completer.future;
   }
 
@@ -193,7 +193,7 @@ class Process extends ChromeObject {
    * be non-empty for renderer processes only.
    */
   List<int> get tabs => listify(proxy['tabs']);
-  set tabs(List<int> value) => proxy['tabs'] = value;
+  set tabs(List<int> value) => proxy['tabs'] = jsify(value);
 
   /**
    * The most recent measurement of the process CPU usage, between 0 and 100%.
@@ -201,7 +201,7 @@ class Process extends ChromeObject {
    * onUpdated or onUpdatedWithMemory.
    */
   dynamic get cpu => proxy['cpu'];
-  set cpu(var value) => proxy['cpu'] = value;
+  set cpu(var value) => proxy['cpu'] = jsify(value);
 
   /**
    * The most recent measurement of the process network usage, in bytes per
@@ -209,7 +209,7 @@ class Process extends ChromeObject {
    * onUpdated or onUpdatedWithMemory.
    */
   dynamic get network => proxy['network'];
-  set network(var value) => proxy['network'] = value;
+  set network(var value) => proxy['network'] = jsify(value);
 
   /**
    * The most recent measurement of the process private memory usage, in bytes.
@@ -217,7 +217,7 @@ class Process extends ChromeObject {
    * onUpdatedWithMemory or getProcessInfo with the includeMemory flag.
    */
   dynamic get privateMemory => proxy['privateMemory'];
-  set privateMemory(var value) => proxy['privateMemory'] = value;
+  set privateMemory(var value) => proxy['privateMemory'] = jsify(value);
 
   /**
    * The most recent measurement of the process JavaScript allocated memory, in
@@ -225,7 +225,7 @@ class Process extends ChromeObject {
    * onUpdated or onUpdatedWithMemory.
    */
   dynamic get jsMemoryAllocated => proxy['jsMemoryAllocated'];
-  set jsMemoryAllocated(var value) => proxy['jsMemoryAllocated'] = value;
+  set jsMemoryAllocated(var value) => proxy['jsMemoryAllocated'] = jsify(value);
 
   /**
    * The most recent measurement of the process JavaScript memory used, in
@@ -233,7 +233,7 @@ class Process extends ChromeObject {
    * onUpdated or onUpdatedWithMemory.
    */
   dynamic get jsMemoryUsed => proxy['jsMemoryUsed'];
-  set jsMemoryUsed(var value) => proxy['jsMemoryUsed'] = value;
+  set jsMemoryUsed(var value) => proxy['jsMemoryUsed'] = jsify(value);
 
   /**
    * The most recent measurement of the process’s SQLite memory usage, in bytes.
@@ -241,7 +241,7 @@ class Process extends ChromeObject {
    * onUpdated or onUpdatedWithMemory.
    */
   dynamic get sqliteMemory => proxy['sqliteMemory'];
-  set sqliteMemory(var value) => proxy['sqliteMemory'] = value;
+  set sqliteMemory(var value) => proxy['sqliteMemory'] = jsify(value);
 
   /**
    * The most recent measurement of the process frames per second. Only
@@ -249,7 +249,7 @@ class Process extends ChromeObject {
    * onUpdatedWithMemory.
    */
   dynamic get fps => proxy['fps'];
-  set fps(var value) => proxy['fps'] = value;
+  set fps(var value) => proxy['fps'] = jsify(value);
 
   /**
    * The most recent information about the image cache for the process. Only
@@ -257,7 +257,7 @@ class Process extends ChromeObject {
    * onUpdatedWithMemory.
    */
   Cache get imageCache => _createCache(proxy['imageCache']);
-  set imageCache(Cache value) => proxy['imageCache'] = value;
+  set imageCache(Cache value) => proxy['imageCache'] = jsify(value);
 
   /**
    * The most recent information about the script cache for the process. Only
@@ -265,7 +265,7 @@ class Process extends ChromeObject {
    * onUpdatedWithMemory.
    */
   Cache get scriptCache => _createCache(proxy['scriptCache']);
-  set scriptCache(Cache value) => proxy['scriptCache'] = value;
+  set scriptCache(Cache value) => proxy['scriptCache'] = jsify(value);
 
   /**
    * The most recent information about the CSS cache for the process. Only
@@ -273,7 +273,7 @@ class Process extends ChromeObject {
    * onUpdatedWithMemory.
    */
   Cache get cssCache => _createCache(proxy['cssCache']);
-  set cssCache(Cache value) => proxy['cssCache'] = value;
+  set cssCache(Cache value) => proxy['cssCache'] = jsify(value);
 }
 
 /**
@@ -292,13 +292,13 @@ class Cache extends ChromeObject {
    * The size of the cache, in bytes.
    */
   dynamic get size => proxy['size'];
-  set size(var value) => proxy['size'] = value;
+  set size(var value) => proxy['size'] = jsify(value);
 
   /**
    * The part of the cache that is utilized, in bytes.
    */
   dynamic get liveSize => proxy['liveSize'];
-  set liveSize(var value) => proxy['liveSize'] = value;
+  set liveSize(var value) => proxy['liveSize'] = jsify(value);
 }
 
 Process _createProcess(JsObject proxy) => proxy == null ? null : new Process.fromProxy(proxy);

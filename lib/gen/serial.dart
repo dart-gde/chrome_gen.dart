@@ -39,7 +39,7 @@ class ChromeSerial {
    */
   Future<OpenInfo> open(String port, [OpenOptions options]) {
     var completer = new ChromeCompleter<OpenInfo>.oneArg(_createOpenInfo);
-    _serial.callMethod('open', [port, options, completer.callback]);
+    _serial.callMethod('open', [port, jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -78,7 +78,7 @@ class ChromeSerial {
    */
   Future<SerialWriteInfo> write(int connectionId, ArrayBuffer data) {
     var completer = new ChromeCompleter<SerialWriteInfo>.oneArg(_createSerialWriteInfo);
-    _serial.callMethod('write', [connectionId, data, completer.callback]);
+    _serial.callMethod('write', [connectionId, jsify(data), completer.callback]);
     return completer.future;
   }
 
@@ -104,7 +104,7 @@ class ChromeSerial {
 
   Future<bool> setControlSignals(int connectionId, ControlSignalOptions options) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _serial.callMethod('setControlSignals', [connectionId, options, completer.callback]);
+    _serial.callMethod('setControlSignals', [connectionId, jsify(options), completer.callback]);
     return completer.future;
   }
 }
@@ -151,13 +151,13 @@ class OpenOptions extends ChromeObject {
   set bitrate(int value) => proxy['bitrate'] = value;
 
   DataBit get dataBit => _createDataBit(proxy['dataBit']);
-  set dataBit(DataBit value) => proxy['dataBit'] = value;
+  set dataBit(DataBit value) => proxy['dataBit'] = jsify(value);
 
   ParityBit get parityBit => _createParityBit(proxy['parityBit']);
-  set parityBit(ParityBit value) => proxy['parityBit'] = value;
+  set parityBit(ParityBit value) => proxy['parityBit'] = jsify(value);
 
   StopBit get stopBit => _createStopBit(proxy['stopBit']);
-  set stopBit(StopBit value) => proxy['stopBit'] = value;
+  set stopBit(StopBit value) => proxy['stopBit'] = jsify(value);
 }
 
 class OpenInfo extends ChromeObject {
@@ -183,7 +183,7 @@ class SerialReadInfo extends ChromeObject {
   set bytesRead(int value) => proxy['bytesRead'] = value;
 
   ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = value;
+  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
 }
 
 class SerialWriteInfo extends ChromeObject {

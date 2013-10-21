@@ -54,6 +54,12 @@ class ChromeLibrary extends ChromeElement {
 
   Iterable<ChromeProperty> get filteredProperties => properties.where((p) => !p.nodoc);
 
+  bool isEnumType(ChromeType refType) {
+    if (!refType.isAny) return false;
+
+    return enumTypes.any((t) => t.name == refType.refName);
+  }
+
   String toString() => name;
 }
 
