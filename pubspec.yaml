@@ -1,5 +1,5 @@
 name: chrome_gen
-version: 0.0.7-dev
+version: 0.0.7
 environment:
   sdk: ">=0.8.4"
 authors:
