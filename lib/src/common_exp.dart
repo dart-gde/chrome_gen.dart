@@ -6,7 +6,7 @@ import 'dart:js';
 /**
  * The abstract superclass of objects that can hold [JsObject] proxies.
  */
-class ChromeObject implements Serializable<JsObject> {
+class ChromeObject {
   final JsObject proxy;
 
   /**
@@ -29,12 +29,11 @@ class ChromeObject implements Serializable<JsObject> {
 /**
  * The abstract superclass of Chrome enums.
  */
-abstract class ChromeEnum implements Serializable<String> {
+abstract class ChromeEnum {
   final String value;
 
   const ChromeEnum(this.value);
 
-  String toJs() => value;
   String toString() => value;
 }
 
@@ -65,13 +64,13 @@ class ArrayBuffer extends ChromeObject {
   ArrayBuffer.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   factory ArrayBuffer.fromBytes(List<int> data) {
-    var uint8Array = new JsObject(context['Uint8Array'], [jsify(data)]);
+    var uint8Array = new JsObject(context['Uint8Array'], [new JsObject.jsify(data)]);
 
     return new ArrayBuffer.fromProxy(uint8Array['buffer']);
   }
 
   factory ArrayBuffer.fromString(String str) {
-    var uint8Array = new JsObject(context['Uint8Array'], [jsify(str.codeUnits)]);
+    var uint8Array = new JsObject(context['Uint8Array'], [new JsObject.jsify(str.codeUnits)]);
 
     return new ArrayBuffer.fromProxy(uint8Array['buffer']);
   }

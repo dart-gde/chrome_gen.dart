@@ -38,7 +38,7 @@ class ChromeBookmarks {
    */
   Future<List<BookmarkTreeNode>> get(dynamic idOrIdList) {
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
-    _bookmarks.callMethod('get', [idOrIdList, completer.callback]);
+    _bookmarks.callMethod('get', [jsify(idOrIdList), completer.callback]);
     return completer.future;
   }
 
@@ -328,20 +328,20 @@ class BookmarkTreeNode extends ChromeObject {
    * Date(dateAdded)`).
    */
   dynamic get dateAdded => proxy['dateAdded'];
-  set dateAdded(var value) => proxy['dateAdded'] = value;
+  set dateAdded(var value) => proxy['dateAdded'] = jsify(value);
 
   /**
    * When the contents of this folder last changed, in milliseconds since the
    * epoch.
    */
   dynamic get dateGroupModified => proxy['dateGroupModified'];
-  set dateGroupModified(var value) => proxy['dateGroupModified'] = value;
+  set dateGroupModified(var value) => proxy['dateGroupModified'] = jsify(value);
 
   /**
    * An ordered list of children of this node.
    */
   List<BookmarkTreeNode> get children => listify(proxy['children'], _createBookmarkTreeNode);
-  set children(List<BookmarkTreeNode> value) => proxy['children'] = value;
+  set children(List<BookmarkTreeNode> value) => proxy['children'] = jsify(value);
 }
 
 BookmarkTreeNode _createBookmarkTreeNode(JsObject proxy) => proxy == null ? null : new BookmarkTreeNode.fromProxy(proxy);

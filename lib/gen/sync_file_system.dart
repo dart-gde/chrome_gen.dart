@@ -40,7 +40,7 @@ class ChromeSyncFileSystem {
    */
   Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
     var completer = new ChromeCompleter.noArgs();
-    _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
+    _syncFileSystem.callMethod('setConflictResolutionPolicy', [jsify(policy), completer.callback]);
     return completer.future;
   }
 
@@ -65,7 +65,7 @@ class ChromeSyncFileSystem {
    */
   Future<StorageInfo> getUsageAndQuota(FileSystem fileSystem) {
     var completer = new ChromeCompleter<StorageInfo>.oneArg(_createStorageInfo);
-    _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
+    _syncFileSystem.callMethod('getUsageAndQuota', [jsify(fileSystem), completer.callback]);
     return completer.future;
   }
 
@@ -80,7 +80,7 @@ class ChromeSyncFileSystem {
    */
   Future<FileStatus> getFileStatus(Entry fileEntry) {
     var completer = new ChromeCompleter<FileStatus>.oneArg(_createFileStatus);
-    _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
+    _syncFileSystem.callMethod('getFileStatus', [jsify(fileEntry), completer.callback]);
     return completer.future;
   }
 
@@ -93,7 +93,7 @@ class ChromeSyncFileSystem {
    */
   Future<FileStatusInfo> getFileStatuses(dynamic fileEntries) {
     var completer = new ChromeCompleter<FileStatusInfo>.oneArg(_createFileStatusInfo);
-    _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
+    _syncFileSystem.callMethod('getFileStatuses', [jsify(fileEntries), completer.callback]);
     return completer.future;
   }
 
@@ -209,16 +209,16 @@ class FileInfo extends ChromeObject {
   FileInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get fileEntry => proxy['fileEntry'];
-  set fileEntry(var value) => proxy['fileEntry'] = value;
+  set fileEntry(var value) => proxy['fileEntry'] = jsify(value);
 
   FileStatus get status => _createFileStatus(proxy['status']);
-  set status(FileStatus value) => proxy['status'] = value;
+  set status(FileStatus value) => proxy['status'] = jsify(value);
 
   SyncAction get action => _createSyncAction(proxy['action']);
-  set action(SyncAction value) => proxy['action'] = value;
+  set action(SyncAction value) => proxy['action'] = jsify(value);
 
   SyncDirection get direction => _createSyncDirection(proxy['direction']);
-  set direction(SyncDirection value) => proxy['direction'] = value;
+  set direction(SyncDirection value) => proxy['direction'] = jsify(value);
 }
 
 class FileStatusInfo extends ChromeObject {
@@ -231,10 +231,10 @@ class FileStatusInfo extends ChromeObject {
   FileStatusInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get fileEntry => proxy['fileEntry'];
-  set fileEntry(var value) => proxy['fileEntry'] = value;
+  set fileEntry(var value) => proxy['fileEntry'] = jsify(value);
 
   FileStatus get status => _createFileStatus(proxy['status']);
-  set status(FileStatus value) => proxy['status'] = value;
+  set status(FileStatus value) => proxy['status'] = jsify(value);
 
   String get error => proxy['error'];
   set error(String value) => proxy['error'] = value;
@@ -264,7 +264,7 @@ class ServiceInfo extends ChromeObject {
   ServiceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   ServiceStatus get state => _createServiceStatus(proxy['state']);
-  set state(ServiceStatus value) => proxy['state'] = value;
+  set state(ServiceStatus value) => proxy['state'] = jsify(value);
 
   String get description => proxy['description'];
   set description(String value) => proxy['description'] = value;

@@ -210,7 +210,7 @@ class ChromeFileEntry extends CrFileEntry {
 
       Completer<FileEntry> completer = new Completer();
 
-      JsObject blob = new JsObject(context['Blob'], [jsify([text])]);
+      JsObject blob = new JsObject(context['Blob'], [new JsObject.jsify([text])]);
 
       writer['onwrite'] = (var event) {
         writer['onwrite'] = null;
@@ -220,7 +220,7 @@ class ChromeFileEntry extends CrFileEntry {
       writer['onerror'] = (var event) {
         completer.completeError(event);
       };
-      writer.callMethod('write', [blob, jsify({'type': 'text/plain'})]);
+      writer.callMethod('write', [blob, new JsObject.jsify({'type': 'text/plain'})]);
 
       return completer.future;
     });

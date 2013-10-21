@@ -152,7 +152,7 @@ class ChromeRuntime {
    */
   Future<dynamic> sendMessage(dynamic message, [String extensionId]) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
-    _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
+    _runtime.callMethod('sendMessage', [extensionId, jsify(message), completer.callback]);
     return completer.future;
   }
 
@@ -373,23 +373,23 @@ class Port extends ChromeObject {
   set name(String value) => proxy['name'] = value;
 
   dynamic get disconnect => proxy['disconnect'];
-  set disconnect(var value) => proxy['disconnect'] = value;
+  set disconnect(var value) => proxy['disconnect'] = jsify(value);
 
   Event get onDisconnect => _createEvent(proxy['onDisconnect']);
-  set onDisconnect(Event value) => proxy['onDisconnect'] = value;
+  set onDisconnect(Event value) => proxy['onDisconnect'] = jsify(value);
 
   Event get onMessage => _createEvent(proxy['onMessage']);
-  set onMessage(Event value) => proxy['onMessage'] = value;
+  set onMessage(Event value) => proxy['onMessage'] = jsify(value);
 
   dynamic get postMessage => proxy['postMessage'];
-  set postMessage(var value) => proxy['postMessage'] = value;
+  set postMessage(var value) => proxy['postMessage'] = jsify(value);
 
   /**
    * This property will <b>only</b> be present on ports passed to
    * onConnect/onConnectExternal listeners.
    */
   MessageSender get sender => _createMessageSender(proxy['sender']);
-  set sender(MessageSender value) => proxy['sender'] = value;
+  set sender(MessageSender value) => proxy['sender'] = jsify(value);
 }
 
 /**
@@ -411,7 +411,7 @@ class MessageSender extends ChromeObject {
    * content scripts), and *only* if the receiver is an extension, not an app.
    */
   Tab get tab => _createTab(proxy['tab']);
-  set tab(Tab value) => proxy['tab'] = value;
+  set tab(Tab value) => proxy['tab'] = jsify(value);
 
   /**
    * The ID of the extension or app that opened the connection, if any.

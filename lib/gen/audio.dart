@@ -39,7 +39,7 @@ class ChromeAudio {
    */
   Future setProperties(String id, DeviceProperties properties) {
     var completer = new ChromeCompleter.noArgs();
-    _audio.callMethod('setProperties', [id, properties, completer.callback]);
+    _audio.callMethod('setProperties', [id, jsify(properties), completer.callback]);
     return completer.future;
   }
 
@@ -73,7 +73,7 @@ class OutputDeviceInfo extends ChromeObject {
   set isMuted(bool value) => proxy['isMuted'] = value;
 
   double get volume => proxy['volume'];
-  set volume(double value) => proxy['volume'] = value;
+  set volume(double value) => proxy['volume'] = jsify(value);
 }
 
 class InputDeviceInfo extends ChromeObject {
@@ -100,7 +100,7 @@ class InputDeviceInfo extends ChromeObject {
   set isMuted(bool value) => proxy['isMuted'] = value;
 
   double get gain => proxy['gain'];
-  set gain(double value) => proxy['gain'] = value;
+  set gain(double value) => proxy['gain'] = jsify(value);
 }
 
 class DeviceProperties extends ChromeObject {
@@ -116,10 +116,10 @@ class DeviceProperties extends ChromeObject {
   set isMuted(bool value) => proxy['isMuted'] = value;
 
   double get volume => proxy['volume'];
-  set volume(double value) => proxy['volume'] = value;
+  set volume(double value) => proxy['volume'] = jsify(value);
 
   double get gain => proxy['gain'];
-  set gain(double value) => proxy['gain'] = value;
+  set gain(double value) => proxy['gain'] = jsify(value);
 }
 
 /**

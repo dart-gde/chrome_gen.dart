@@ -38,7 +38,7 @@ class ChromePermissions {
    */
   Future<bool> contains(Permissions permissions) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _permissions.callMethod('contains', [permissions, completer.callback]);
+    _permissions.callMethod('contains', [jsify(permissions), completer.callback]);
     return completer.future;
   }
 
@@ -52,7 +52,7 @@ class ChromePermissions {
    */
   Future<bool> request(Permissions permissions) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _permissions.callMethod('request', [permissions, completer.callback]);
+    _permissions.callMethod('request', [jsify(permissions), completer.callback]);
     return completer.future;
   }
 
@@ -65,7 +65,7 @@ class ChromePermissions {
    */
   Future<bool> remove(Permissions permissions) {
     var completer = new ChromeCompleter<bool>.oneArg();
-    _permissions.callMethod('remove', [permissions, completer.callback]);
+    _permissions.callMethod('remove', [jsify(permissions), completer.callback]);
     return completer.future;
   }
 
@@ -98,13 +98,13 @@ class Permissions extends ChromeObject {
    * List of named permissions (does not include hosts or origins).
    */
   List<String> get permissions => listify(proxy['permissions']);
-  set permissions(List<String> value) => proxy['permissions'] = value;
+  set permissions(List<String> value) => proxy['permissions'] = jsify(value);
 
   /**
    * List of origin permissions.
    */
   List<String> get origins => listify(proxy['origins']);
-  set origins(List<String> value) => proxy['origins'] = value;
+  set origins(List<String> value) => proxy['origins'] = jsify(value);
 }
 
 Permissions _createPermissions(JsObject proxy) => proxy == null ? null : new Permissions.fromProxy(proxy);

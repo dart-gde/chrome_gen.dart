@@ -21,7 +21,7 @@ class ChromeSocket {
    */
   Future<CreateInfo> create(SocketType type, [CreateOptions options]) {
     var completer = new ChromeCompleter<CreateInfo>.oneArg(_createCreateInfo);
-    _socket.callMethod('create', [type, options, completer.callback]);
+    _socket.callMethod('create', [jsify(type), jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -92,7 +92,7 @@ class ChromeSocket {
    */
   Future<SocketWriteInfo> write(int socketId, ArrayBuffer data) {
     var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createSocketWriteInfo);
-    _socket.callMethod('write', [socketId, data, completer.callback]);
+    _socket.callMethod('write', [socketId, jsify(data), completer.callback]);
     return completer.future;
   }
 
@@ -119,7 +119,7 @@ class ChromeSocket {
    */
   Future<SocketWriteInfo> sendTo(int socketId, ArrayBuffer data, String address, int port) {
     var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createSocketWriteInfo);
-    _socket.callMethod('sendTo', [socketId, data, address, port, completer.callback]);
+    _socket.callMethod('sendTo', [socketId, jsify(data), address, port, completer.callback]);
     return completer.future;
   }
 
@@ -348,7 +348,7 @@ class SocketReadInfo extends ChromeObject {
   set resultCode(int value) => proxy['resultCode'] = value;
 
   ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = value;
+  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
 }
 
 class SocketWriteInfo extends ChromeObject {
@@ -376,7 +376,7 @@ class RecvFromInfo extends ChromeObject {
   set resultCode(int value) => proxy['resultCode'] = value;
 
   ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = value;
+  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
 
   String get address => proxy['address'];
   set address(String value) => proxy['address'] = value;
@@ -398,7 +398,7 @@ class SocketInfo extends ChromeObject {
   SocketInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   SocketType get socketType => _createSocketType(proxy['socketType']);
-  set socketType(SocketType value) => proxy['socketType'] = value;
+  set socketType(SocketType value) => proxy['socketType'] = jsify(value);
 
   bool get connected => proxy['connected'];
   set connected(bool value) => proxy['connected'] = value;

@@ -283,19 +283,19 @@ class ExtensionInfo extends ChromeObject {
    * documentation on icons](manifest/icons.html) for more details.
    */
   List<IconInfo> get icons => listify(proxy['icons'], _createIconInfo);
-  set icons(List<IconInfo> value) => proxy['icons'] = value;
+  set icons(List<IconInfo> value) => proxy['icons'] = jsify(value);
 
   /**
    * Returns a list of API based permissions.
    */
   List<String> get permissions => listify(proxy['permissions']);
-  set permissions(List<String> value) => proxy['permissions'] = value;
+  set permissions(List<String> value) => proxy['permissions'] = jsify(value);
 
   /**
    * Returns a list of host based permissions.
    */
   List<String> get hostPermissions => listify(proxy['hostPermissions']);
-  set hostPermissions(List<String> value) => proxy['hostPermissions'] = value;
+  set hostPermissions(List<String> value) => proxy['hostPermissions'] = jsify(value);
 
   /**
    * How the extension was installed. One of<br>[admin]: The extension was

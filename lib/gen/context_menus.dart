@@ -31,7 +31,7 @@ class ChromeContextMenus {
    * The ID of the newly created item.
    */
   dynamic create(Map createProperties, [dynamic callback]) {
-    return _contextMenus.callMethod('create', [jsify(createProperties), callback]);
+    return _contextMenus.callMethod('create', [jsify(createProperties), jsify(callback)]);
   }
 
   /**
@@ -44,7 +44,7 @@ class ChromeContextMenus {
    */
   Future update(dynamic id, Map updateProperties) {
     var completer = new ChromeCompleter.noArgs();
-    _contextMenus.callMethod('update', [id, jsify(updateProperties), completer.callback]);
+    _contextMenus.callMethod('update', [jsify(id), jsify(updateProperties), completer.callback]);
     return completer.future;
   }
 
@@ -55,7 +55,7 @@ class ChromeContextMenus {
    */
   Future remove(dynamic menuItemId) {
     var completer = new ChromeCompleter.noArgs();
-    _contextMenus.callMethod('remove', [menuItemId, completer.callback]);
+    _contextMenus.callMethod('remove', [jsify(menuItemId), completer.callback]);
     return completer.future;
   }
 
@@ -123,13 +123,13 @@ class OnClickData extends ChromeObject {
    * The ID of the menu item that was clicked.
    */
   dynamic get menuItemId => proxy['menuItemId'];
-  set menuItemId(var value) => proxy['menuItemId'] = value;
+  set menuItemId(var value) => proxy['menuItemId'] = jsify(value);
 
   /**
    * The parent ID, if any, for the item clicked.
    */
   dynamic get parentMenuItemId => proxy['parentMenuItemId'];
-  set parentMenuItemId(var value) => proxy['parentMenuItemId'] = value;
+  set parentMenuItemId(var value) => proxy['parentMenuItemId'] = jsify(value);
 
   /**
    * One of 'image', 'video', or 'audio' if the context menu was activated on

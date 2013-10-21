@@ -37,7 +37,7 @@ class ChromeAlarms {
    * [delayInMinutes].
    */
   void create(AlarmCreateInfo alarmInfo, [String name]) {
-    _alarms.callMethod('create', [name, alarmInfo]);
+    _alarms.callMethod('create', [name, jsify(alarmInfo)]);
   }
 
   /**
@@ -93,10 +93,10 @@ class Alarm extends ChromeObject {
   set name(String value) => proxy['name'] = value;
 
   double get scheduledTime => proxy['scheduledTime'];
-  set scheduledTime(double value) => proxy['scheduledTime'] = value;
+  set scheduledTime(double value) => proxy['scheduledTime'] = jsify(value);
 
   double get periodInMinutes => proxy['periodInMinutes'];
-  set periodInMinutes(double value) => proxy['periodInMinutes'] = value;
+  set periodInMinutes(double value) => proxy['periodInMinutes'] = jsify(value);
 }
 
 class AlarmCreateInfo extends ChromeObject {
@@ -109,13 +109,13 @@ class AlarmCreateInfo extends ChromeObject {
   AlarmCreateInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   double get when => proxy['when'];
-  set when(double value) => proxy['when'] = value;
+  set when(double value) => proxy['when'] = jsify(value);
 
   double get delayInMinutes => proxy['delayInMinutes'];
-  set delayInMinutes(double value) => proxy['delayInMinutes'] = value;
+  set delayInMinutes(double value) => proxy['delayInMinutes'] = jsify(value);
 
   double get periodInMinutes => proxy['periodInMinutes'];
-  set periodInMinutes(double value) => proxy['periodInMinutes'] = value;
+  set periodInMinutes(double value) => proxy['periodInMinutes'] = jsify(value);
 }
 
 Alarm _createAlarm(JsObject proxy) => proxy == null ? null : new Alarm.fromProxy(proxy);

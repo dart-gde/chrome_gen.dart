@@ -33,7 +33,7 @@ class ChromeDebugger {
    */
   Future attach(Debuggee target, String requiredVersion) {
     var completer = new ChromeCompleter.noArgs();
-    _debugger.callMethod('attach', [target, requiredVersion, completer.callback]);
+    _debugger.callMethod('attach', [jsify(target), requiredVersion, completer.callback]);
     return completer.future;
   }
 
@@ -44,7 +44,7 @@ class ChromeDebugger {
    */
   Future detach(Debuggee target) {
     var completer = new ChromeCompleter.noArgs();
-    _debugger.callMethod('detach', [target, completer.callback]);
+    _debugger.callMethod('detach', [jsify(target), completer.callback]);
     return completer.future;
   }
 
@@ -66,7 +66,7 @@ class ChromeDebugger {
    */
   Future<Map<String, dynamic>> sendCommand(Debuggee target, String method, [Map<String, dynamic> commandParams]) {
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
-    _debugger.callMethod('sendCommand', [target, method, jsify(commandParams), completer.callback]);
+    _debugger.callMethod('sendCommand', [jsify(target), method, jsify(commandParams), completer.callback]);
     return completer.future;
   }
 

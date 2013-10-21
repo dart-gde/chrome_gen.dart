@@ -133,7 +133,7 @@ class HistoryItem extends ChromeObject {
    * epoch.
    */
   dynamic get lastVisitTime => proxy['lastVisitTime'];
-  set lastVisitTime(var value) => proxy['lastVisitTime'] = value;
+  set lastVisitTime(var value) => proxy['lastVisitTime'] = jsify(value);
 
   /**
    * The number of times the user has navigated to this page.
@@ -179,7 +179,7 @@ class VisitItem extends ChromeObject {
    * When this visit occurred, represented in milliseconds since the epoch.
    */
   dynamic get visitTime => proxy['visitTime'];
-  set visitTime(var value) => proxy['visitTime'] = value;
+  set visitTime(var value) => proxy['visitTime'] = jsify(value);
 
   /**
    * The visit ID of the referrer.

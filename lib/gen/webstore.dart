@@ -17,6 +17,6 @@ class ChromeWebstore {
   ChromeWebstore._();
 
   void install([String url, dynamic successCallback, dynamic failureCallback]) {
-    _webstore.callMethod('install', [url, successCallback, failureCallback]);
+    _webstore.callMethod('install', [url, jsify(successCallback), jsify(failureCallback)]);
   }
 }

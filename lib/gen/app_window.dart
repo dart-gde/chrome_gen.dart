@@ -39,7 +39,7 @@ class ChromeAppWindow {
    */
   Future<AppWindow> create(String url, [CreateWindowOptions options]) {
     var completer = new ChromeCompleter<AppWindow>.oneArg(_createAppWindow);
-    _app_window.callMethod('create', [url, options, completer.callback]);
+    _app_window.callMethod('create', [url, jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -53,7 +53,7 @@ class ChromeAppWindow {
   }
 
   void initializeAppWindow(dynamic state) {
-    _app_window.callMethod('initializeAppWindow', [state]);
+    _app_window.callMethod('initializeAppWindow', [jsify(state)]);
   }
 
   Stream get onBoundsChanged => _onBoundsChanged.stream;
@@ -181,19 +181,19 @@ class CreateWindowOptions extends ChromeObject {
   set maxHeight(int value) => proxy['maxHeight'] = value;
 
   WindowType get type => _createWindowType(proxy['type']);
-  set type(WindowType value) => proxy['type'] = value;
+  set type(WindowType value) => proxy['type'] = jsify(value);
 
   String get frame => proxy['frame'];
   set frame(String value) => proxy['frame'] = value;
 
   Bounds get bounds => _createBounds(proxy['bounds']);
-  set bounds(Bounds value) => proxy['bounds'] = value;
+  set bounds(Bounds value) => proxy['bounds'] = jsify(value);
 
   bool get transparentBackground => proxy['transparentBackground'];
   set transparentBackground(bool value) => proxy['transparentBackground'] = value;
 
   State get state => _createState(proxy['state']);
-  set state(State value) => proxy['state'] = value;
+  set state(State value) => proxy['state'] = jsify(value);
 
   bool get hidden => proxy['hidden'];
   set hidden(bool value) => proxy['hidden'] = value;
@@ -213,7 +213,7 @@ class AppWindow extends ChromeObject {
   AppWindow.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get contentWindow => proxy['contentWindow'];
-  set contentWindow(var value) => proxy['contentWindow'] = value;
+  set contentWindow(var value) => proxy['contentWindow'] = jsify(value);
 
   /**
    * Focus the window.
@@ -331,7 +331,7 @@ class AppWindow extends ChromeObject {
    * Set the window's bounds.
    */
   void setBounds(Bounds bounds) {
-    proxy.callMethod('setBounds', [bounds]);
+    proxy.callMethod('setBounds', [jsify(bounds)]);
   }
 
   /**

@@ -77,7 +77,7 @@ class FileHandlerExecuteEventDetails extends ChromeObject {
    * (selected in ChromeOS file browser).
    */
   List<dynamic> get entries => listify(proxy['entries']);
-  set entries(List<dynamic> value) => proxy['entries'] = value;
+  set entries(List<dynamic> value) => proxy['entries'] = jsify(value);
 
   /**
    * The ID of the tab that raised this event. Tab IDs are unique within a

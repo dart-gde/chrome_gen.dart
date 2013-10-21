@@ -166,7 +166,8 @@ class _DefaultBackendContext {
 
     if (printSetter) {
       // set periodInMinutes(double value) => proxy['periodInMinutes'] = value;
-      generator.writeln("set ${property.name}(${property.type} value) => ${getterBody} = value;");
+      generator.writeln("set ${property.name}(${property.type} value) => "
+          "${getterBody} = ${getSetterConverter(property.type, 'value')};");
     }
   }
 
@@ -488,11 +489,19 @@ class _DefaultBackendContext {
     }
   }
 
-  static String getParamConverter(ChromeType param) {
+  String getParamConverter(ChromeType param) {
+    return getSetterConverter(param, param.name);
+  }
+
+  String getSetterConverter(ChromeType param, String name) {
     if (param.isMap || param.isList) {
-      return "jsify(${param.name})";
+      return "jsify(${name})";
+    } else if (library.isEnumType(param)) {
+      return "jsify(${name})";
+    } else if (param.isPrimitive) {
+      return name;
     } else {
-      return param.name;
+      return "jsify(${name})";
     }
   }
 }

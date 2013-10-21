@@ -35,7 +35,7 @@ class ChromeOmnibox {
    * parameter.
    */
   void setDefaultSuggestion(DefaultSuggestResult suggestion) {
-    _omnibox.callMethod('setDefaultSuggestion', [suggestion]);
+    _omnibox.callMethod('setDefaultSuggestion', [jsify(suggestion)]);
   }
 
   /**

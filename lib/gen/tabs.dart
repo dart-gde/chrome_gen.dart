@@ -63,7 +63,7 @@ class ChromeTabs {
    */
   Future<dynamic> sendRequest(int tabId, dynamic request) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
-    _tabs.callMethod('sendRequest', [tabId, request, completer.callback]);
+    _tabs.callMethod('sendRequest', [tabId, jsify(request), completer.callback]);
     return completer.future;
   }
 
@@ -80,7 +80,7 @@ class ChromeTabs {
    */
   Future<dynamic> sendMessage(int tabId, dynamic message) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
-    _tabs.callMethod('sendMessage', [tabId, message, completer.callback]);
+    _tabs.callMethod('sendMessage', [tabId, jsify(message), completer.callback]);
     return completer.future;
   }
 
@@ -187,7 +187,7 @@ class ChromeTabs {
    */
   Future<dynamic> move(dynamic tabIds, Map moveProperties) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
-    _tabs.callMethod('move', [tabIds, jsify(moveProperties), completer.callback]);
+    _tabs.callMethod('move', [jsify(tabIds), jsify(moveProperties), completer.callback]);
     return completer.future;
   }
 
@@ -210,7 +210,7 @@ class ChromeTabs {
    */
   Future remove(dynamic tabIds) {
     var completer = new ChromeCompleter.noArgs();
-    _tabs.callMethod('remove', [tabIds, completer.callback]);
+    _tabs.callMethod('remove', [jsify(tabIds), completer.callback]);
     return completer.future;
   }
 
@@ -269,7 +269,7 @@ class ChromeTabs {
    */
   Future<List<dynamic>> executeScript(InjectDetails details, [int tabId]) {
     var completer = new ChromeCompleter<List<dynamic>>.oneArg(listify);
-    _tabs.callMethod('executeScript', [tabId, details, completer.callback]);
+    _tabs.callMethod('executeScript', [tabId, jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -284,7 +284,7 @@ class ChromeTabs {
    */
   Future insertCSS(InjectDetails details, [int tabId]) {
     var completer = new ChromeCompleter.noArgs();
-    _tabs.callMethod('insertCSS', [tabId, details, completer.callback]);
+    _tabs.callMethod('insertCSS', [tabId, jsify(details), completer.callback]);
     return completer.future;
   }
 

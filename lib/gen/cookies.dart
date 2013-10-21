@@ -185,7 +185,7 @@ class Cookie extends ChromeObject {
    * epoch. Not provided for session cookies.
    */
   dynamic get expirationDate => proxy['expirationDate'];
-  set expirationDate(var value) => proxy['expirationDate'] = value;
+  set expirationDate(var value) => proxy['expirationDate'] = jsify(value);
 
   /**
    * The ID of the cookie store containing this cookie, as provided in
@@ -217,7 +217,7 @@ class CookieStore extends ChromeObject {
    * Identifiers of all the browser tabs that share this cookie store.
    */
   List<int> get tabIds => listify(proxy['tabIds']);
-  set tabIds(List<int> value) => proxy['tabIds'] = value;
+  set tabIds(List<int> value) => proxy['tabIds'] = jsify(value);
 }
 
 Cookie _createCookie(JsObject proxy) => proxy == null ? null : new Cookie.fromProxy(proxy);

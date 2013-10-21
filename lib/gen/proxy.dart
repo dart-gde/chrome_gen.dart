@@ -89,38 +89,38 @@ class ProxyRules extends ChromeObject {
    * and ftp).
    */
   ProxyServer get singleProxy => _createProxyServer(this.proxy['singleProxy']);
-  set singleProxy(ProxyServer value) => this.proxy['singleProxy'] = value;
+  set singleProxy(ProxyServer value) => this.proxy['singleProxy'] = jsify(value);
 
   /**
    * The proxy server to be used for HTTP requests.
    */
   ProxyServer get proxyForHttp => _createProxyServer(this.proxy['proxyForHttp']);
-  set proxyForHttp(ProxyServer value) => this.proxy['proxyForHttp'] = value;
+  set proxyForHttp(ProxyServer value) => this.proxy['proxyForHttp'] = jsify(value);
 
   /**
    * The proxy server to be used for HTTPS requests.
    */
   ProxyServer get proxyForHttps => _createProxyServer(this.proxy['proxyForHttps']);
-  set proxyForHttps(ProxyServer value) => this.proxy['proxyForHttps'] = value;
+  set proxyForHttps(ProxyServer value) => this.proxy['proxyForHttps'] = jsify(value);
 
   /**
    * The proxy server to be used for FTP requests.
    */
   ProxyServer get proxyForFtp => _createProxyServer(this.proxy['proxyForFtp']);
-  set proxyForFtp(ProxyServer value) => this.proxy['proxyForFtp'] = value;
+  set proxyForFtp(ProxyServer value) => this.proxy['proxyForFtp'] = jsify(value);
 
   /**
    * The proxy server to be used for everthing else or if any of the specific
    * proxyFor... is not specified.
    */
   ProxyServer get fallbackProxy => _createProxyServer(this.proxy['fallbackProxy']);
-  set fallbackProxy(ProxyServer value) => this.proxy['fallbackProxy'] = value;
+  set fallbackProxy(ProxyServer value) => this.proxy['fallbackProxy'] = jsify(value);
 
   /**
    * List of servers to connect to without a proxy server.
    */
   List<String> get bypassList => listify(this.proxy['bypassList']);
-  set bypassList(List<String> value) => this.proxy['bypassList'] = value;
+  set bypassList(List<String> value) => this.proxy['bypassList'] = jsify(value);
 }
 
 /**
@@ -173,14 +173,14 @@ class ProxyConfig extends ChromeObject {
    * mode.
    */
   ProxyRules get rules => _createProxyRules(this.proxy['rules']);
-  set rules(ProxyRules value) => this.proxy['rules'] = value;
+  set rules(ProxyRules value) => this.proxy['rules'] = jsify(value);
 
   /**
    * The proxy auto-config (PAC) script for this configuration. Use this for
    * 'pac_script' mode.
    */
   PacScript get pacScript => _createPacScript(this.proxy['pacScript']);
-  set pacScript(PacScript value) => this.proxy['pacScript'] = value;
+  set pacScript(PacScript value) => this.proxy['pacScript'] = jsify(value);
 
   /**
    * 'direct' = Never use a proxy<br>'auto_detect' = Auto detect proxy
