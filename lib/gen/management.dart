@@ -83,7 +83,7 @@ class ChromeManagement {
    */
   Future uninstall(String id, [Map options]) {
     var completer = new ChromeCompleter.noArgs();
-    _management.callMethod('uninstall', [id, jsify(options), completer.callback]);
+    _management.callMethod('uninstall', [id, new JsObject.jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -93,7 +93,7 @@ class ChromeManagement {
    */
   Future uninstallSelf([Map options]) {
     var completer = new ChromeCompleter.noArgs();
-    _management.callMethod('uninstallSelf', [jsify(options), completer.callback]);
+    _management.callMethod('uninstallSelf', [new JsObject.jsify(options), completer.callback]);
     return completer.future;
   }
 

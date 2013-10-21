@@ -97,7 +97,7 @@ class ChromeBookmarks {
    */
   Future<BookmarkTreeNode> create(Map bookmark) {
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
-    _bookmarks.callMethod('create', [jsify(bookmark), completer.callback]);
+    _bookmarks.callMethod('create', [new JsObject.jsify(bookmark), completer.callback]);
     return completer.future;
   }
 
@@ -106,7 +106,7 @@ class ChromeBookmarks {
    */
   Future<BookmarkTreeNode> move(String id, Map destination) {
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
-    _bookmarks.callMethod('move', [id, jsify(destination), completer.callback]);
+    _bookmarks.callMethod('move', [id, new JsObject.jsify(destination), completer.callback]);
     return completer.future;
   }
 
@@ -117,7 +117,7 @@ class ChromeBookmarks {
    */
   Future<BookmarkTreeNode> update(String id, Map changes) {
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
-    _bookmarks.callMethod('update', [id, jsify(changes), completer.callback]);
+    _bookmarks.callMethod('update', [id, new JsObject.jsify(changes), completer.callback]);
     return completer.future;
   }
 

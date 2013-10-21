@@ -23,7 +23,7 @@ class ChromePageCapture {
    */
   Future<dynamic> saveAsMHTML(Map details) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
-    _pageCapture.callMethod('saveAsMHTML', [jsify(details), completer.callback]);
+    _pageCapture.callMethod('saveAsMHTML', [new JsObject.jsify(details), completer.callback]);
     return completer.future;
   }
 }

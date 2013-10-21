@@ -119,7 +119,7 @@ class ChromeRuntime {
    * exist.
    */
   Port connect([String extensionId, Map connectInfo]) {
-    return _createPort(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
+    return _createPort(_runtime.callMethod('connect', [extensionId, new JsObject.jsify(connectInfo)]));
   }
 
   /**
@@ -170,7 +170,7 @@ class ChromeRuntime {
    */
   Future<dynamic> sendNativeMessage(String application, Map<String, dynamic> message) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
-    _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
+    _runtime.callMethod('sendNativeMessage', [application, new JsObject.jsify(message), completer.callback]);
     return completer.future;
   }
 

@@ -23,7 +23,7 @@ class ChromeBrowserAction {
    * Sets the title of the browser action. This shows up in the tooltip.
    */
   void setTitle(Map details) {
-    _browserAction.callMethod('setTitle', [jsify(details)]);
+    _browserAction.callMethod('setTitle', [new JsObject.jsify(details)]);
   }
 
   /**
@@ -31,7 +31,7 @@ class ChromeBrowserAction {
    */
   Future<String> getTitle(Map details) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _browserAction.callMethod('getTitle', [jsify(details), completer.callback]);
+    _browserAction.callMethod('getTitle', [new JsObject.jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -43,7 +43,7 @@ class ChromeBrowserAction {
    */
   Future setIcon(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    _browserAction.callMethod('setIcon', [jsify(details), completer.callback]);
+    _browserAction.callMethod('setIcon', [new JsObject.jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -52,7 +52,7 @@ class ChromeBrowserAction {
    * browser action's icon.
    */
   void setPopup(Map details) {
-    _browserAction.callMethod('setPopup', [jsify(details)]);
+    _browserAction.callMethod('setPopup', [new JsObject.jsify(details)]);
   }
 
   /**
@@ -60,7 +60,7 @@ class ChromeBrowserAction {
    */
   Future<String> getPopup(Map details) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _browserAction.callMethod('getPopup', [jsify(details), completer.callback]);
+    _browserAction.callMethod('getPopup', [new JsObject.jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -69,7 +69,7 @@ class ChromeBrowserAction {
    * of the icon.
    */
   void setBadgeText(Map details) {
-    _browserAction.callMethod('setBadgeText', [jsify(details)]);
+    _browserAction.callMethod('setBadgeText', [new JsObject.jsify(details)]);
   }
 
   /**
@@ -78,7 +78,7 @@ class ChromeBrowserAction {
    */
   Future<String> getBadgeText(Map details) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _browserAction.callMethod('getBadgeText', [jsify(details), completer.callback]);
+    _browserAction.callMethod('getBadgeText', [new JsObject.jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -86,7 +86,7 @@ class ChromeBrowserAction {
    * Sets the background color for the badge.
    */
   void setBadgeBackgroundColor(Map details) {
-    _browserAction.callMethod('setBadgeBackgroundColor', [jsify(details)]);
+    _browserAction.callMethod('setBadgeBackgroundColor', [new JsObject.jsify(details)]);
   }
 
   /**
@@ -94,7 +94,7 @@ class ChromeBrowserAction {
    */
   Future<ColorArray> getBadgeBackgroundColor(Map details) {
     var completer = new ChromeCompleter<ColorArray>.oneArg(_createColorArray);
-    _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
+    _browserAction.callMethod('getBadgeBackgroundColor', [new JsObject.jsify(details), completer.callback]);
     return completer.future;
   }
 

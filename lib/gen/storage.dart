@@ -119,7 +119,7 @@ class StorageArea extends ChromeObject {
    */
   Future set(Map<String, dynamic> items) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('set', [jsify(items), completer.callback]);
+    proxy.callMethod('set', [new JsObject.jsify(items), completer.callback]);
     return completer.future;
   }
 

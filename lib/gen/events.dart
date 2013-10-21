@@ -109,7 +109,7 @@ class Event extends ChromeObject {
    */
   Future<List<Rule>> addRules(String eventName, List<Rule> rules) {
     var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, _createRule));
-    proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
+    proxy.callMethod('addRules', [eventName, new JsObject.jsify(rules), completer.callback]);
     return completer.future;
   }
 
@@ -126,7 +126,7 @@ class Event extends ChromeObject {
    */
   Future<List<Rule>> getRules(String eventName, [List<String> ruleIdentifiers]) {
     var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, _createRule));
-    proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
+    proxy.callMethod('getRules', [eventName, new JsObject.jsify(ruleIdentifiers), completer.callback]);
     return completer.future;
   }
 
@@ -140,7 +140,7 @@ class Event extends ChromeObject {
    */
   Future removeRules(String eventName, [List<String> ruleIdentifiers]) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
+    proxy.callMethod('removeRules', [eventName, new JsObject.jsify(ruleIdentifiers), completer.callback]);
     return completer.future;
   }
 }

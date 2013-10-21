@@ -73,7 +73,7 @@ class ChromeExtension {
    * Array of global objects
    */
   List<Window> getViews([Map fetchProperties]) {
-    var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
+    var ret = _extension.callMethod('getViews', [new JsObject.jsify(fetchProperties)]);
     return ret;
   }
 

@@ -50,7 +50,7 @@ class ChromeTabs {
    * closes or does not exist.
    */
   Port connect(int tabId, [Map connectInfo]) {
-    return _createPort(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
+    return _createPort(_tabs.callMethod('connect', [tabId, new JsObject.jsify(connectInfo)]));
   }
 
   /**
@@ -116,7 +116,7 @@ class ChromeTabs {
    */
   Future<Tab> create(Map createProperties) {
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
-    _tabs.callMethod('create', [jsify(createProperties), completer.callback]);
+    _tabs.callMethod('create', [new JsObject.jsify(createProperties), completer.callback]);
     return completer.future;
   }
 
@@ -142,7 +142,7 @@ class ChromeTabs {
    */
   Future<List<Tab>> query(Map queryInfo) {
     var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, _createTab));
-    _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
+    _tabs.callMethod('query', [new JsObject.jsify(queryInfo), completer.callback]);
     return completer.future;
   }
 
@@ -154,7 +154,7 @@ class ChromeTabs {
    */
   Future<Window> highlight(Map highlightInfo) {
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
-    _tabs.callMethod('highlight', [jsify(highlightInfo), completer.callback]);
+    _tabs.callMethod('highlight', [new JsObject.jsify(highlightInfo), completer.callback]);
     return completer.future;
   }
 
@@ -171,7 +171,7 @@ class ChromeTabs {
    */
   Future<Tab> update(Map updateProperties, [int tabId]) {
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
-    _tabs.callMethod('update', [tabId, jsify(updateProperties), completer.callback]);
+    _tabs.callMethod('update', [tabId, new JsObject.jsify(updateProperties), completer.callback]);
     return completer.future;
   }
 
@@ -187,7 +187,7 @@ class ChromeTabs {
    */
   Future<dynamic> move(dynamic tabIds, Map moveProperties) {
     var completer = new ChromeCompleter<dynamic>.oneArg();
-    _tabs.callMethod('move', [tabIds, jsify(moveProperties), completer.callback]);
+    _tabs.callMethod('move', [tabIds, new JsObject.jsify(moveProperties), completer.callback]);
     return completer.future;
   }
 
@@ -199,7 +199,7 @@ class ChromeTabs {
    */
   Future reload([int tabId, Map reloadProperties]) {
     var completer = new ChromeCompleter.noArgs();
-    _tabs.callMethod('reload', [tabId, jsify(reloadProperties), completer.callback]);
+    _tabs.callMethod('reload', [tabId, new JsObject.jsify(reloadProperties), completer.callback]);
     return completer.future;
   }
 
@@ -251,7 +251,7 @@ class ChromeTabs {
    */
   Future<String> captureVisibleTab([int windowId, Map options]) {
     var completer = new ChromeCompleter<String>.oneArg();
-    _tabs.callMethod('captureVisibleTab', [windowId, jsify(options), completer.callback]);
+    _tabs.callMethod('captureVisibleTab', [windowId, new JsObject.jsify(options), completer.callback]);
     return completer.future;
   }
 

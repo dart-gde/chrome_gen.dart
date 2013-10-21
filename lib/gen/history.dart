@@ -24,7 +24,7 @@ class ChromeHistory {
    */
   Future<List<HistoryItem>> search(Map query) {
     var completer = new ChromeCompleter<List<HistoryItem>>.oneArg((e) => listify(e, _createHistoryItem));
-    _history.callMethod('search', [jsify(query), completer.callback]);
+    _history.callMethod('search', [new JsObject.jsify(query), completer.callback]);
     return completer.future;
   }
 
@@ -33,7 +33,7 @@ class ChromeHistory {
    */
   Future<List<VisitItem>> getVisits(Map details) {
     var completer = new ChromeCompleter<List<VisitItem>>.oneArg((e) => listify(e, _createVisitItem));
-    _history.callMethod('getVisits', [jsify(details), completer.callback]);
+    _history.callMethod('getVisits', [new JsObject.jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -43,7 +43,7 @@ class ChromeHistory {
    */
   Future addUrl(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    _history.callMethod('addUrl', [jsify(details), completer.callback]);
+    _history.callMethod('addUrl', [new JsObject.jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -52,7 +52,7 @@ class ChromeHistory {
    */
   Future deleteUrl(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    _history.callMethod('deleteUrl', [jsify(details), completer.callback]);
+    _history.callMethod('deleteUrl', [new JsObject.jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -63,7 +63,7 @@ class ChromeHistory {
    */
   Future deleteRange(Map range) {
     var completer = new ChromeCompleter.noArgs();
-    _history.callMethod('deleteRange', [jsify(range), completer.callback]);
+    _history.callMethod('deleteRange', [new JsObject.jsify(range), completer.callback]);
     return completer.future;
   }
 

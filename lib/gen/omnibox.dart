@@ -23,7 +23,7 @@ class ChromeOmnibox {
    * [suggestResults] An array of suggest results
    */
   void sendSuggestions(int requestId, List<SuggestResult> suggestResults) {
-    _omnibox.callMethod('sendSuggestions', [requestId, jsify(suggestResults)]);
+    _omnibox.callMethod('sendSuggestions', [requestId, new JsObject.jsify(suggestResults)]);
   }
 
   /**

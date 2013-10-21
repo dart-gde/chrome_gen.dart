@@ -66,7 +66,7 @@ class ChromeDebugger {
    */
   Future<Map<String, dynamic>> sendCommand(Debuggee target, String method, [Map<String, dynamic> commandParams]) {
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
-    _debugger.callMethod('sendCommand', [target, method, jsify(commandParams), completer.callback]);
+    _debugger.callMethod('sendCommand', [target, method, new JsObject.jsify(commandParams), completer.callback]);
     return completer.future;
   }
 
