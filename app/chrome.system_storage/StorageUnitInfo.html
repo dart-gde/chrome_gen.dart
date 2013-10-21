@@ -50,10 +50,10 @@ class StorageUnitInfo extends ChromeObject {
  set name(String value) =&gt; proxy['name'] = value;
 
  StorageUnitType get type =&gt; _createStorageUnitType(proxy['type']);
- set type(StorageUnitType value) =&gt; proxy['type'] = value;
+ set type(StorageUnitType value) =&gt; proxy['type'] = jsify(value);
 
  double get capacity =&gt; proxy['capacity'];
- set capacity(double value) =&gt; proxy['capacity'] = value;
+ set capacity(double value) =&gt; proxy['capacity'] = jsify(value);
 }
 </pre>
 </div>
@@ -109,7 +109,7 @@ double         <strong>capacity</strong> <a class="anchor-link"
 double get capacity =&gt; proxy['capacity'];
 </pre>
 <pre class="source">
-set capacity(double value) =&gt; proxy['capacity'] = value;
+set capacity(double value) =&gt; proxy['capacity'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -166,7 +166,7 @@ final JsObject proxy
 StorageUnitType get type =&gt; _createStorageUnitType(proxy['type']);
 </pre>
 <pre class="source">
-set type(StorageUnitType value) =&gt; proxy['type'] = value;
+set type(StorageUnitType value) =&gt; proxy['type'] = jsify(value);
 </pre>
 </div>
 </div>

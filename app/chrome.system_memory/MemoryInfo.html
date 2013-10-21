@@ -42,10 +42,10 @@ class MemoryInfo extends ChromeObject {
  MemoryInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  double get capacity =&gt; proxy['capacity'];
- set capacity(double value) =&gt; proxy['capacity'] = value;
+ set capacity(double value) =&gt; proxy['capacity'] = jsify(value);
 
  double get availableCapacity =&gt; proxy['availableCapacity'];
- set availableCapacity(double value) =&gt; proxy['availableCapacity'] = value;
+ set availableCapacity(double value) =&gt; proxy['availableCapacity'] = jsify(value);
 }
 </pre>
 </div>
@@ -99,7 +99,7 @@ double         <strong>availableCapacity</strong> <a class="anchor-link"
 double get availableCapacity =&gt; proxy['availableCapacity'];
 </pre>
 <pre class="source">
-set availableCapacity(double value) =&gt; proxy['availableCapacity'] = value;
+set availableCapacity(double value) =&gt; proxy['availableCapacity'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -114,7 +114,7 @@ double         <strong>capacity</strong> <a class="anchor-link"
 double get capacity =&gt; proxy['capacity'];
 </pre>
 <pre class="source">
-set capacity(double value) =&gt; proxy['capacity'] = value;
+set capacity(double value) =&gt; proxy['capacity'] = jsify(value);
 </pre>
 </div>
 </div>

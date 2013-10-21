@@ -65,7 +65,7 @@ class ChromeAppWindow {
   */
  Future&lt;AppWindow&gt; create(String url, [CreateWindowOptions options]) {
    var completer = new ChromeCompleter&lt;AppWindow&gt;.oneArg(_createAppWindow);
-   _app_window.callMethod('create', [url, options, completer.callback]);
+   _app_window.callMethod('create', [url, jsify(options), completer.callback]);
    return completer.future;
  }
 
@@ -79,7 +79,7 @@ class ChromeAppWindow {
  }
 
  void initializeAppWindow(dynamic state) {
-   _app_window.callMethod('initializeAppWindow', [state]);
+   _app_window.callMethod('initializeAppWindow', [jsify(state)]);
  }
 
  Stream get onBoundsChanged =&gt; _onBoundsChanged.stream;
@@ -219,7 +219,7 @@ child usable from onload. E.g. background.js:&lt;br> <code>function(created_wind
 <pre class="source">
 Future&lt;AppWindow&gt; create(String url, [CreateWindowOptions options]) {
  var completer = new ChromeCompleter&lt;AppWindow&gt;.oneArg(_createAppWindow);
- _app_window.callMethod('create', [url, options, completer.callback]);
+ _app_window.callMethod('create', [url, jsify(options), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -247,7 +247,7 @@ void <strong>initializeAppWindow</strong>(state) <a class="anchor-link" href="#i
 <div class="doc">
 <pre class="source">
 void initializeAppWindow(dynamic state) {
- _app_window.callMethod('initializeAppWindow', [state]);
+ _app_window.callMethod('initializeAppWindow', [jsify(state)]);
 }
 </pre>
 </div>

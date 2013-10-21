@@ -70,22 +70,22 @@ class DisplayUnitInfo extends ChromeObject {
  set isEnabled(bool value) =&gt; proxy['isEnabled'] = value;
 
  double get dpiX =&gt; proxy['dpiX'];
- set dpiX(double value) =&gt; proxy['dpiX'] = value;
+ set dpiX(double value) =&gt; proxy['dpiX'] = jsify(value);
 
  double get dpiY =&gt; proxy['dpiY'];
- set dpiY(double value) =&gt; proxy['dpiY'] = value;
+ set dpiY(double value) =&gt; proxy['dpiY'] = jsify(value);
 
  int get rotation =&gt; proxy['rotation'];
  set rotation(int value) =&gt; proxy['rotation'] = value;
 
  Bounds get bounds =&gt; _createBounds(proxy['bounds']);
- set bounds(Bounds value) =&gt; proxy['bounds'] = value;
+ set bounds(Bounds value) =&gt; proxy['bounds'] = jsify(value);
 
  Insets get overscan =&gt; _createInsets(proxy['overscan']);
- set overscan(Insets value) =&gt; proxy['overscan'] = value;
+ set overscan(Insets value) =&gt; proxy['overscan'] = jsify(value);
 
  Bounds get workArea =&gt; _createBounds(proxy['workArea']);
- set workArea(Bounds value) =&gt; proxy['workArea'] = value;
+ set workArea(Bounds value) =&gt; proxy['workArea'] = jsify(value);
 }
 </pre>
 </div>
@@ -149,7 +149,7 @@ DisplayUnitInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 Bounds get bounds =&gt; _createBounds(proxy['bounds']);
 </pre>
 <pre class="source">
-set bounds(Bounds value) =&gt; proxy['bounds'] = value;
+set bounds(Bounds value) =&gt; proxy['bounds'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -164,7 +164,7 @@ double         <strong>dpiX</strong> <a class="anchor-link"
 double get dpiX =&gt; proxy['dpiX'];
 </pre>
 <pre class="source">
-set dpiX(double value) =&gt; proxy['dpiX'] = value;
+set dpiX(double value) =&gt; proxy['dpiX'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -179,7 +179,7 @@ double         <strong>dpiY</strong> <a class="anchor-link"
 double get dpiY =&gt; proxy['dpiY'];
 </pre>
 <pre class="source">
-set dpiY(double value) =&gt; proxy['dpiY'] = value;
+set dpiY(double value) =&gt; proxy['dpiY'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -284,7 +284,7 @@ set name(String value) =&gt; proxy['name'] = value;
 Insets get overscan =&gt; _createInsets(proxy['overscan']);
 </pre>
 <pre class="source">
-set overscan(Insets value) =&gt; proxy['overscan'] = value;
+set overscan(Insets value) =&gt; proxy['overscan'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -326,7 +326,7 @@ set rotation(int value) =&gt; proxy['rotation'] = value;
 Bounds get workArea =&gt; _createBounds(proxy['workArea']);
 </pre>
 <pre class="source">
-set workArea(Bounds value) =&gt; proxy['workArea'] = value;
+set workArea(Bounds value) =&gt; proxy['workArea'] = jsify(value);
 </pre>
 </div>
 </div>

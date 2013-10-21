@@ -47,7 +47,7 @@ class FileHandlerExecuteEventDetails extends ChromeObject {
   * (selected in ChromeOS file browser).
   */
  List&lt;dynamic&gt; get entries =&gt; listify(proxy['entries']);
- set entries(List&lt;dynamic&gt; value) =&gt; proxy['entries'] = value;
+ set entries(List&lt;dynamic&gt; value) =&gt; proxy['entries'] = jsify(value);
 
  /**
   * The ID of the tab that raised this event. Tab IDs are unique within a
@@ -110,7 +110,7 @@ List&lt;dynamic&gt;         <strong>entries</strong> <a class="anchor-link"
 List&lt;dynamic&gt; get entries =&gt; listify(proxy['entries']);
 </pre>
 <pre class="source">
-set entries(List&lt;dynamic&gt; value) =&gt; proxy['entries'] = value;
+set entries(List&lt;dynamic&gt; value) =&gt; proxy['entries'] = jsify(value);
 </pre>
 </div>
 </div>

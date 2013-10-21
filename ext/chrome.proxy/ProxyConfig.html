@@ -48,14 +48,14 @@ class ProxyConfig extends ChromeObject {
   * mode.
   */
  ProxyRules get rules =&gt; _createProxyRules(this.proxy['rules']);
- set rules(ProxyRules value) =&gt; this.proxy['rules'] = value;
+ set rules(ProxyRules value) =&gt; this.proxy['rules'] = jsify(value);
 
  /**
   * The proxy auto-config (PAC) script for this configuration. Use this for
   * 'pac_script' mode.
   */
  PacScript get pacScript =&gt; _createPacScript(this.proxy['pacScript']);
- set pacScript(PacScript value) =&gt; this.proxy['pacScript'] = value;
+ set pacScript(PacScript value) =&gt; this.proxy['pacScript'] = jsify(value);
 
  /**
   * 'direct' = Never use a proxy&lt;br&gt;'auto_detect' = Auto detect proxy
@@ -140,7 +140,7 @@ set mode(String value) =&gt; this.proxy['mode'] = value;
 PacScript get pacScript =&gt; _createPacScript(this.proxy['pacScript']);
 </pre>
 <pre class="source">
-set pacScript(PacScript value) =&gt; this.proxy['pacScript'] = value;
+set pacScript(PacScript value) =&gt; this.proxy['pacScript'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -169,7 +169,7 @@ mode.</p>
 ProxyRules get rules =&gt; _createProxyRules(this.proxy['rules']);
 </pre>
 <pre class="source">
-set rules(ProxyRules value) =&gt; this.proxy['rules'] = value;
+set rules(ProxyRules value) =&gt; this.proxy['rules'] = jsify(value);
 </pre>
 </div>
 </div>

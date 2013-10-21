@@ -47,7 +47,7 @@ class RecvFromInfo extends ChromeObject {
  set resultCode(int value) =&gt; proxy['resultCode'] = value;
 
  ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
- set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+ set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 
  String get address =&gt; proxy['address'];
  set address(String value) =&gt; proxy['address'] = value;
@@ -124,7 +124,7 @@ set address(String value) =&gt; proxy['address'] = value;
 ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
 </pre>
 <pre class="source">
-set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 </pre>
 </div>
 </div>

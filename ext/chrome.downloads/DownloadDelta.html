@@ -57,43 +57,43 @@ class DownloadDelta extends ChromeObject {
  set id(int value) =&gt; proxy['id'] = value;
 
  StringDelta get url =&gt; _createStringDelta(proxy['url']);
- set url(StringDelta value) =&gt; proxy['url'] = value;
+ set url(StringDelta value) =&gt; proxy['url'] = jsify(value);
 
  StringDelta get filename =&gt; _createStringDelta(proxy['filename']);
- set filename(StringDelta value) =&gt; proxy['filename'] = value;
+ set filename(StringDelta value) =&gt; proxy['filename'] = jsify(value);
 
  StringDelta get danger =&gt; _createStringDelta(proxy['danger']);
- set danger(StringDelta value) =&gt; proxy['danger'] = value;
+ set danger(StringDelta value) =&gt; proxy['danger'] = jsify(value);
 
  StringDelta get mime =&gt; _createStringDelta(proxy['mime']);
- set mime(StringDelta value) =&gt; proxy['mime'] = value;
+ set mime(StringDelta value) =&gt; proxy['mime'] = jsify(value);
 
  StringDelta get startTime =&gt; _createStringDelta(proxy['startTime']);
- set startTime(StringDelta value) =&gt; proxy['startTime'] = value;
+ set startTime(StringDelta value) =&gt; proxy['startTime'] = jsify(value);
 
  StringDelta get endTime =&gt; _createStringDelta(proxy['endTime']);
- set endTime(StringDelta value) =&gt; proxy['endTime'] = value;
+ set endTime(StringDelta value) =&gt; proxy['endTime'] = jsify(value);
 
  StringDelta get state =&gt; _createStringDelta(proxy['state']);
- set state(StringDelta value) =&gt; proxy['state'] = value;
+ set state(StringDelta value) =&gt; proxy['state'] = jsify(value);
 
  BooleanDelta get canResume =&gt; _createBooleanDelta(proxy['canResume']);
- set canResume(BooleanDelta value) =&gt; proxy['canResume'] = value;
+ set canResume(BooleanDelta value) =&gt; proxy['canResume'] = jsify(value);
 
  BooleanDelta get paused =&gt; _createBooleanDelta(proxy['paused']);
- set paused(BooleanDelta value) =&gt; proxy['paused'] = value;
+ set paused(BooleanDelta value) =&gt; proxy['paused'] = jsify(value);
 
  StringDelta get error =&gt; _createStringDelta(proxy['error']);
- set error(StringDelta value) =&gt; proxy['error'] = value;
+ set error(StringDelta value) =&gt; proxy['error'] = jsify(value);
 
  LongDelta get totalBytes =&gt; _createLongDelta(proxy['totalBytes']);
- set totalBytes(LongDelta value) =&gt; proxy['totalBytes'] = value;
+ set totalBytes(LongDelta value) =&gt; proxy['totalBytes'] = jsify(value);
 
  LongDelta get fileSize =&gt; _createLongDelta(proxy['fileSize']);
- set fileSize(LongDelta value) =&gt; proxy['fileSize'] = value;
+ set fileSize(LongDelta value) =&gt; proxy['fileSize'] = jsify(value);
 
  BooleanDelta get exists =&gt; _createBooleanDelta(proxy['exists']);
- set exists(BooleanDelta value) =&gt; proxy['exists'] = value;
+ set exists(BooleanDelta value) =&gt; proxy['exists'] = jsify(value);
 }
 </pre>
 </div>
@@ -159,7 +159,7 @@ DownloadDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
 BooleanDelta get canResume =&gt; _createBooleanDelta(proxy['canResume']);
 </pre>
 <pre class="source">
-set canResume(BooleanDelta value) =&gt; proxy['canResume'] = value;
+set canResume(BooleanDelta value) =&gt; proxy['canResume'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -174,7 +174,7 @@ set canResume(BooleanDelta value) =&gt; proxy['canResume'] = value;
 StringDelta get danger =&gt; _createStringDelta(proxy['danger']);
 </pre>
 <pre class="source">
-set danger(StringDelta value) =&gt; proxy['danger'] = value;
+set danger(StringDelta value) =&gt; proxy['danger'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -189,7 +189,7 @@ set danger(StringDelta value) =&gt; proxy['danger'] = value;
 StringDelta get endTime =&gt; _createStringDelta(proxy['endTime']);
 </pre>
 <pre class="source">
-set endTime(StringDelta value) =&gt; proxy['endTime'] = value;
+set endTime(StringDelta value) =&gt; proxy['endTime'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -204,7 +204,7 @@ set endTime(StringDelta value) =&gt; proxy['endTime'] = value;
 StringDelta get error =&gt; _createStringDelta(proxy['error']);
 </pre>
 <pre class="source">
-set error(StringDelta value) =&gt; proxy['error'] = value;
+set error(StringDelta value) =&gt; proxy['error'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -219,7 +219,7 @@ set error(StringDelta value) =&gt; proxy['error'] = value;
 BooleanDelta get exists =&gt; _createBooleanDelta(proxy['exists']);
 </pre>
 <pre class="source">
-set exists(BooleanDelta value) =&gt; proxy['exists'] = value;
+set exists(BooleanDelta value) =&gt; proxy['exists'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -234,7 +234,7 @@ set exists(BooleanDelta value) =&gt; proxy['exists'] = value;
 StringDelta get filename =&gt; _createStringDelta(proxy['filename']);
 </pre>
 <pre class="source">
-set filename(StringDelta value) =&gt; proxy['filename'] = value;
+set filename(StringDelta value) =&gt; proxy['filename'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -249,7 +249,7 @@ set filename(StringDelta value) =&gt; proxy['filename'] = value;
 LongDelta get fileSize =&gt; _createLongDelta(proxy['fileSize']);
 </pre>
 <pre class="source">
-set fileSize(LongDelta value) =&gt; proxy['fileSize'] = value;
+set fileSize(LongDelta value) =&gt; proxy['fileSize'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -279,7 +279,7 @@ set id(int value) =&gt; proxy['id'] = value;
 StringDelta get mime =&gt; _createStringDelta(proxy['mime']);
 </pre>
 <pre class="source">
-set mime(StringDelta value) =&gt; proxy['mime'] = value;
+set mime(StringDelta value) =&gt; proxy['mime'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -294,7 +294,7 @@ set mime(StringDelta value) =&gt; proxy['mime'] = value;
 BooleanDelta get paused =&gt; _createBooleanDelta(proxy['paused']);
 </pre>
 <pre class="source">
-set paused(BooleanDelta value) =&gt; proxy['paused'] = value;
+set paused(BooleanDelta value) =&gt; proxy['paused'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -321,7 +321,7 @@ final JsObject proxy
 StringDelta get startTime =&gt; _createStringDelta(proxy['startTime']);
 </pre>
 <pre class="source">
-set startTime(StringDelta value) =&gt; proxy['startTime'] = value;
+set startTime(StringDelta value) =&gt; proxy['startTime'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -336,7 +336,7 @@ set startTime(StringDelta value) =&gt; proxy['startTime'] = value;
 StringDelta get state =&gt; _createStringDelta(proxy['state']);
 </pre>
 <pre class="source">
-set state(StringDelta value) =&gt; proxy['state'] = value;
+set state(StringDelta value) =&gt; proxy['state'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -351,7 +351,7 @@ set state(StringDelta value) =&gt; proxy['state'] = value;
 LongDelta get totalBytes =&gt; _createLongDelta(proxy['totalBytes']);
 </pre>
 <pre class="source">
-set totalBytes(LongDelta value) =&gt; proxy['totalBytes'] = value;
+set totalBytes(LongDelta value) =&gt; proxy['totalBytes'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -366,7 +366,7 @@ set totalBytes(LongDelta value) =&gt; proxy['totalBytes'] = value;
 StringDelta get url =&gt; _createStringDelta(proxy['url']);
 </pre>
 <pre class="source">
-set url(StringDelta value) =&gt; proxy['url'] = value;
+set url(StringDelta value) =&gt; proxy['url'] = jsify(value);
 </pre>
 </div>
 </div>

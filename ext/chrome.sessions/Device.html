@@ -52,7 +52,7 @@ class Device extends ChromeObject {
   * recently to least recently modified session.
   */
  List&lt;Session&gt; get sessions =&gt; listify(proxy['sessions'], _createSession);
- set sessions(List&lt;Session&gt; value) =&gt; proxy['sessions'] = value;
+ set sessions(List&lt;Session&gt; value) =&gt; proxy['sessions'] = jsify(value);
 }
 </pre>
 </div>
@@ -136,7 +136,7 @@ recently to least recently modified session.</p>
 List&lt;Session&gt; get sessions =&gt; listify(proxy['sessions'], _createSession);
 </pre>
 <pre class="source">
-set sessions(List&lt;Session&gt; value) =&gt; proxy['sessions'] = value;
+set sessions(List&lt;Session&gt; value) =&gt; proxy['sessions'] = jsify(value);
 </pre>
 </div>
 </div>

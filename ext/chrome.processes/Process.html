@@ -86,7 +86,7 @@ class Process extends ChromeObject {
   * be non-empty for renderer processes only.
   */
  List&lt;int&gt; get tabs =&gt; listify(proxy['tabs']);
- set tabs(List&lt;int&gt; value) =&gt; proxy['tabs'] = value;
+ set tabs(List&lt;int&gt; value) =&gt; proxy['tabs'] = jsify(value);
 
  /**
   * The most recent measurement of the process CPU usage, between 0 and 100%.
@@ -94,7 +94,7 @@ class Process extends ChromeObject {
   * onUpdated or onUpdatedWithMemory.
   */
  dynamic get cpu =&gt; proxy['cpu'];
- set cpu(var value) =&gt; proxy['cpu'] = value;
+ set cpu(var value) =&gt; proxy['cpu'] = jsify(value);
 
  /**
   * The most recent measurement of the process network usage, in bytes per
@@ -102,7 +102,7 @@ class Process extends ChromeObject {
   * onUpdated or onUpdatedWithMemory.
   */
  dynamic get network =&gt; proxy['network'];
- set network(var value) =&gt; proxy['network'] = value;
+ set network(var value) =&gt; proxy['network'] = jsify(value);
 
  /**
   * The most recent measurement of the process private memory usage, in bytes.
@@ -110,7 +110,7 @@ class Process extends ChromeObject {
   * onUpdatedWithMemory or getProcessInfo with the includeMemory flag.
   */
  dynamic get privateMemory =&gt; proxy['privateMemory'];
- set privateMemory(var value) =&gt; proxy['privateMemory'] = value;
+ set privateMemory(var value) =&gt; proxy['privateMemory'] = jsify(value);
 
  /**
   * The most recent measurement of the process JavaScript allocated memory, in
@@ -118,7 +118,7 @@ class Process extends ChromeObject {
   * onUpdated or onUpdatedWithMemory.
   */
  dynamic get jsMemoryAllocated =&gt; proxy['jsMemoryAllocated'];
- set jsMemoryAllocated(var value) =&gt; proxy['jsMemoryAllocated'] = value;
+ set jsMemoryAllocated(var value) =&gt; proxy['jsMemoryAllocated'] = jsify(value);
 
  /**
   * The most recent measurement of the process JavaScript memory used, in
@@ -126,7 +126,7 @@ class Process extends ChromeObject {
   * onUpdated or onUpdatedWithMemory.
   */
  dynamic get jsMemoryUsed =&gt; proxy['jsMemoryUsed'];
- set jsMemoryUsed(var value) =&gt; proxy['jsMemoryUsed'] = value;
+ set jsMemoryUsed(var value) =&gt; proxy['jsMemoryUsed'] = jsify(value);
 
  /**
   * The most recent measurement of the process’s SQLite memory usage, in bytes.
@@ -134,7 +134,7 @@ class Process extends ChromeObject {
   * onUpdated or onUpdatedWithMemory.
   */
  dynamic get sqliteMemory =&gt; proxy['sqliteMemory'];
- set sqliteMemory(var value) =&gt; proxy['sqliteMemory'] = value;
+ set sqliteMemory(var value) =&gt; proxy['sqliteMemory'] = jsify(value);
 
  /**
   * The most recent measurement of the process frames per second. Only
@@ -142,7 +142,7 @@ class Process extends ChromeObject {
   * onUpdatedWithMemory.
   */
  dynamic get fps =&gt; proxy['fps'];
- set fps(var value) =&gt; proxy['fps'] = value;
+ set fps(var value) =&gt; proxy['fps'] = jsify(value);
 
  /**
   * The most recent information about the image cache for the process. Only
@@ -150,7 +150,7 @@ class Process extends ChromeObject {
   * onUpdatedWithMemory.
   */
  Cache get imageCache =&gt; _createCache(proxy['imageCache']);
- set imageCache(Cache value) =&gt; proxy['imageCache'] = value;
+ set imageCache(Cache value) =&gt; proxy['imageCache'] = jsify(value);
 
  /**
   * The most recent information about the script cache for the process. Only
@@ -158,7 +158,7 @@ class Process extends ChromeObject {
   * onUpdatedWithMemory.
   */
  Cache get scriptCache =&gt; _createCache(proxy['scriptCache']);
- set scriptCache(Cache value) =&gt; proxy['scriptCache'] = value;
+ set scriptCache(Cache value) =&gt; proxy['scriptCache'] = jsify(value);
 
  /**
   * The most recent information about the CSS cache for the process. Only
@@ -166,7 +166,7 @@ class Process extends ChromeObject {
   * onUpdatedWithMemory.
   */
  Cache get cssCache =&gt; _createCache(proxy['cssCache']);
- set cssCache(Cache value) =&gt; proxy['cssCache'] = value;
+ set cssCache(Cache value) =&gt; proxy['cssCache'] = jsify(value);
 }
 </pre>
 </div>
@@ -236,7 +236,7 @@ onUpdated or onUpdatedWithMemory.</p>
 dynamic get cpu =&gt; proxy['cpu'];
 </pre>
 <pre class="source">
-set cpu(var value) =&gt; proxy['cpu'] = value;
+set cpu(var value) =&gt; proxy['cpu'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -254,7 +254,7 @@ onUpdatedWithMemory.</p>
 Cache get cssCache =&gt; _createCache(proxy['cssCache']);
 </pre>
 <pre class="source">
-set cssCache(Cache value) =&gt; proxy['cssCache'] = value;
+set cssCache(Cache value) =&gt; proxy['cssCache'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -272,7 +272,7 @@ onUpdatedWithMemory.</p>
 dynamic get fps =&gt; proxy['fps'];
 </pre>
 <pre class="source">
-set fps(var value) =&gt; proxy['fps'] = value;
+set fps(var value) =&gt; proxy['fps'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -306,7 +306,7 @@ onUpdatedWithMemory.</p>
 Cache get imageCache =&gt; _createCache(proxy['imageCache']);
 </pre>
 <pre class="source">
-set imageCache(Cache value) =&gt; proxy['imageCache'] = value;
+set imageCache(Cache value) =&gt; proxy['imageCache'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -324,7 +324,7 @@ onUpdated or onUpdatedWithMemory.</p>
 dynamic get jsMemoryAllocated =&gt; proxy['jsMemoryAllocated'];
 </pre>
 <pre class="source">
-set jsMemoryAllocated(var value) =&gt; proxy['jsMemoryAllocated'] = value;
+set jsMemoryAllocated(var value) =&gt; proxy['jsMemoryAllocated'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -342,7 +342,7 @@ onUpdated or onUpdatedWithMemory.</p>
 dynamic get jsMemoryUsed =&gt; proxy['jsMemoryUsed'];
 </pre>
 <pre class="source">
-set jsMemoryUsed(var value) =&gt; proxy['jsMemoryUsed'] = value;
+set jsMemoryUsed(var value) =&gt; proxy['jsMemoryUsed'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -360,7 +360,7 @@ onUpdated or onUpdatedWithMemory.</p>
 dynamic get network =&gt; proxy['network'];
 </pre>
 <pre class="source">
-set network(var value) =&gt; proxy['network'] = value;
+set network(var value) =&gt; proxy['network'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -394,7 +394,7 @@ onUpdatedWithMemory or getProcessInfo with the includeMemory flag.</p>
 dynamic get privateMemory =&gt; proxy['privateMemory'];
 </pre>
 <pre class="source">
-set privateMemory(var value) =&gt; proxy['privateMemory'] = value;
+set privateMemory(var value) =&gt; proxy['privateMemory'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -440,7 +440,7 @@ onUpdatedWithMemory.</p>
 Cache get scriptCache =&gt; _createCache(proxy['scriptCache']);
 </pre>
 <pre class="source">
-set scriptCache(Cache value) =&gt; proxy['scriptCache'] = value;
+set scriptCache(Cache value) =&gt; proxy['scriptCache'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -458,7 +458,7 @@ onUpdated or onUpdatedWithMemory.</p>
 dynamic get sqliteMemory =&gt; proxy['sqliteMemory'];
 </pre>
 <pre class="source">
-set sqliteMemory(var value) =&gt; proxy['sqliteMemory'] = value;
+set sqliteMemory(var value) =&gt; proxy['sqliteMemory'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -475,7 +475,7 @@ be non-empty for renderer processes only.</p>
 List&lt;int&gt; get tabs =&gt; listify(proxy['tabs']);
 </pre>
 <pre class="source">
-set tabs(List&lt;int&gt; value) =&gt; proxy['tabs'] = value;
+set tabs(List&lt;int&gt; value) =&gt; proxy['tabs'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -47,7 +47,7 @@ class ChromeSocket {
   */
  Future&lt;CreateInfo&gt; create(SocketType type, [CreateOptions options]) {
    var completer = new ChromeCompleter&lt;CreateInfo&gt;.oneArg(_createCreateInfo);
-   _socket.callMethod('create', [type, options, completer.callback]);
+   _socket.callMethod('create', [jsify(type), jsify(options), completer.callback]);
    return completer.future;
  }
 
@@ -118,7 +118,7 @@ class ChromeSocket {
   */
  Future&lt;SocketWriteInfo&gt; write(int socketId, ArrayBuffer data) {
    var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
-   _socket.callMethod('write', [socketId, data, completer.callback]);
+   _socket.callMethod('write', [socketId, jsify(data), completer.callback]);
    return completer.future;
  }
 
@@ -145,7 +145,7 @@ class ChromeSocket {
   */
  Future&lt;SocketWriteInfo&gt; sendTo(int socketId, ArrayBuffer data, String address, int port) {
    var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
-   _socket.callMethod('sendTo', [socketId, data, address, port, completer.callback]);
+   _socket.callMethod('sendTo', [socketId, jsify(data), address, port, completer.callback]);
    return completer.future;
  }
 
@@ -401,7 +401,7 @@ remote machine.
 <pre class="source">
 Future&lt;CreateInfo&gt; create(SocketType type, [CreateOptions options]) {
  var completer = new ChromeCompleter&lt;CreateInfo&gt;.oneArg(_createCreateInfo);
- _socket.callMethod('create', [type, options, completer.callback]);
+ _socket.callMethod('create', [jsify(type), jsify(options), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -625,7 +625,7 @@ error occurs.</p>
 <pre class="source">
 Future&lt;SocketWriteInfo&gt; sendTo(int socketId, ArrayBuffer data, String address, int port) {
  var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
- _socket.callMethod('sendTo', [socketId, data, address, port, completer.callback]);
+ _socket.callMethod('sendTo', [socketId, jsify(data), address, port, completer.callback]);
  return completer.future;
 }
 </pre>
@@ -741,7 +741,7 @@ an error occurs.</p>
 <pre class="source">
 Future&lt;SocketWriteInfo&gt; write(int socketId, ArrayBuffer data) {
  var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
- _socket.callMethod('write', [socketId, data, completer.callback]);
+ _socket.callMethod('write', [socketId, jsify(data), completer.callback]);
  return completer.future;
 }
 </pre>

@@ -61,7 +61,7 @@ class VisitItem extends ChromeObject {
   * When this visit occurred, represented in milliseconds since the epoch.
   */
  dynamic get visitTime =&gt; proxy['visitTime'];
- set visitTime(var value) =&gt; proxy['visitTime'] = value;
+ set visitTime(var value) =&gt; proxy['visitTime'] = jsify(value);
 
  /**
   * The visit ID of the referrer.
@@ -213,7 +213,7 @@ var         <strong>visitTime</strong> <a class="anchor-link"
 dynamic get visitTime =&gt; proxy['visitTime'];
 </pre>
 <pre class="source">
-set visitTime(var value) =&gt; proxy['visitTime'] = value;
+set visitTime(var value) =&gt; proxy['visitTime'] = jsify(value);
 </pre>
 </div>
 </div>

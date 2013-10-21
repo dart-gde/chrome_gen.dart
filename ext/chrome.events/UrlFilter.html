@@ -195,7 +195,7 @@ class UrlFilter extends ChromeObject {
   * in the array.
   */
  List&lt;String&gt; get schemes =&gt; listify(proxy['schemes']);
- set schemes(List&lt;String&gt; value) =&gt; proxy['schemes'] = value;
+ set schemes(List&lt;String&gt; value) =&gt; proxy['schemes'] = jsify(value);
 
  /**
   * Matches if the port of the URL is contained in any of the specified port
@@ -203,7 +203,7 @@ class UrlFilter extends ChromeObject {
   * 80, 443 and in the range 1000-1200.
   */
  List&lt;dynamic&gt; get ports =&gt; listify(proxy['ports']);
- set ports(List&lt;dynamic&gt; value) =&gt; proxy['ports'] = value;
+ set ports(List&lt;dynamic&gt; value) =&gt; proxy['ports'] = jsify(value);
 }
 </pre>
 </div>
@@ -432,7 +432,7 @@ lists. For example <code>[80, 443, [1000, 1200]]</code> matches all requests on 
 List&lt;dynamic&gt; get ports =&gt; listify(proxy['ports']);
 </pre>
 <pre class="source">
-set ports(List&lt;dynamic&gt; value) =&gt; proxy['ports'] = value;
+set ports(List&lt;dynamic&gt; value) =&gt; proxy['ports'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -525,7 +525,7 @@ in the array.</p>
 List&lt;String&gt; get schemes =&gt; listify(proxy['schemes']);
 </pre>
 <pre class="source">
-set schemes(List&lt;String&gt; value) =&gt; proxy['schemes'] = value;
+set schemes(List&lt;String&gt; value) =&gt; proxy['schemes'] = jsify(value);
 </pre>
 </div>
 </div>

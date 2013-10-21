@@ -49,7 +49,7 @@ class NotificationBitmap extends ChromeObject {
  set height(int value) =&gt; proxy['height'] = value;
 
  ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
- set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+ set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 }
 </pre>
 </div>
@@ -104,7 +104,7 @@ NotificationBitmap.fromProxy(JsObject proxy): super.fromProxy(proxy);
 ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
 </pre>
 <pre class="source">
-set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 </pre>
 </div>
 </div>

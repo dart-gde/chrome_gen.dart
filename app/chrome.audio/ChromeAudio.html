@@ -65,7 +65,7 @@ class ChromeAudio {
   */
  Future setProperties(String id, DeviceProperties properties) {
    var completer = new ChromeCompleter.noArgs();
-   _audio.callMethod('setProperties', [id, properties, completer.callback]);
+   _audio.callMethod('setProperties', [id, jsify(properties), completer.callback]);
    return completer.future;
  }
 
@@ -135,7 +135,7 @@ Future <strong>setProperties</strong>(String id, <a href="../chrome.audio/Device
 <pre class="source">
 Future setProperties(String id, DeviceProperties properties) {
  var completer = new ChromeCompleter.noArgs();
- _audio.callMethod('setProperties', [id, properties, completer.callback]);
+ _audio.callMethod('setProperties', [id, jsify(properties), completer.callback]);
  return completer.future;
 }
 </pre>

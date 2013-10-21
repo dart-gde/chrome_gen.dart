@@ -59,7 +59,7 @@ class ChromeBookmarks {
   */
  Future&lt;List&lt;BookmarkTreeNode&gt;&gt; get(dynamic idOrIdList) {
    var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
-   _bookmarks.callMethod('get', [idOrIdList, completer.callback]);
+   _bookmarks.callMethod('get', [jsify(idOrIdList), completer.callback]);
    return completer.future;
  }
 
@@ -416,7 +416,7 @@ Future&lt;List&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTr
 <pre class="source">
 Future&lt;List&lt;BookmarkTreeNode&gt;&gt; get(dynamic idOrIdList) {
  var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
- _bookmarks.callMethod('get', [idOrIdList, completer.callback]);
+ _bookmarks.callMethod('get', [jsify(idOrIdList), completer.callback]);
  return completer.future;
 }
 </pre>

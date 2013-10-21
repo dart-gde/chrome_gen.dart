@@ -63,7 +63,7 @@ class ChromeAlarms {
   * [delayInMinutes].
   */
  void create(AlarmCreateInfo alarmInfo, [String name]) {
-   _alarms.callMethod('create', [name, alarmInfo]);
+   _alarms.callMethod('create', [name, jsify(alarmInfo)]);
  }
 
  /**
@@ -180,7 +180,7 @@ set for a repeating alarm, <code>periodInMinutes</code> is used as the default f
 <code>delayInMinutes</code>.</p>
 <pre class="source">
 void create(AlarmCreateInfo alarmInfo, [String name]) {
- _alarms.callMethod('create', [name, alarmInfo]);
+ _alarms.callMethod('create', [name, jsify(alarmInfo)]);
 }
 </pre>
 </div>

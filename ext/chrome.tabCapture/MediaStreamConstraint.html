@@ -41,7 +41,7 @@ class MediaStreamConstraint extends ChromeObject {
  MediaStreamConstraint.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  dynamic get mandatory =&gt; proxy['mandatory'];
- set mandatory(var value) =&gt; proxy['mandatory'] = value;
+ set mandatory(var value) =&gt; proxy['mandatory'] = jsify(value);
 }
 </pre>
 </div>
@@ -94,7 +94,7 @@ var         <strong>mandatory</strong> <a class="anchor-link"
 dynamic get mandatory =&gt; proxy['mandatory'];
 </pre>
 <pre class="source">
-set mandatory(var value) =&gt; proxy['mandatory'] = value;
+set mandatory(var value) =&gt; proxy['mandatory'] = jsify(value);
 </pre>
 </div>
 </div>

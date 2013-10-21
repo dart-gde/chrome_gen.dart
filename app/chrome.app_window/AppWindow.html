@@ -41,7 +41,7 @@ class AppWindow extends ChromeObject {
  AppWindow.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  dynamic get contentWindow =&gt; proxy['contentWindow'];
- set contentWindow(var value) =&gt; proxy['contentWindow'] = value;
+ set contentWindow(var value) =&gt; proxy['contentWindow'] = jsify(value);
 
  /**
   * Focus the window.
@@ -159,7 +159,7 @@ class AppWindow extends ChromeObject {
   * Set the window's bounds.
   */
  void setBounds(Bounds bounds) {
-   proxy.callMethod('setBounds', [bounds]);
+   proxy.callMethod('setBounds', [jsify(bounds)]);
  }
 
  /**
@@ -222,7 +222,7 @@ var         <strong>contentWindow</strong> <a class="anchor-link"
 dynamic get contentWindow =&gt; proxy['contentWindow'];
 </pre>
 <pre class="source">
-set contentWindow(var value) =&gt; proxy['contentWindow'] = value;
+set contentWindow(var value) =&gt; proxy['contentWindow'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -448,7 +448,7 @@ void <strong>setBounds</strong>(<a href="../chrome.src.common_exp/Bounds.html">B
 <p>Set the window's bounds.</p>
 <pre class="source">
 void setBounds(Bounds bounds) {
- proxy.callMethod('setBounds', [bounds]);
+ proxy.callMethod('setBounds', [jsify(bounds)]);
 }
 </pre>
 </div>

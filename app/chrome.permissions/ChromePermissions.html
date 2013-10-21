@@ -58,7 +58,7 @@ class ChromePermissions {
   */
  Future&lt;bool&gt; contains(Permissions permissions) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
-   _permissions.callMethod('contains', [permissions, completer.callback]);
+   _permissions.callMethod('contains', [jsify(permissions), completer.callback]);
    return completer.future;
  }
 
@@ -72,7 +72,7 @@ class ChromePermissions {
   */
  Future&lt;bool&gt; request(Permissions permissions) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
-   _permissions.callMethod('request', [permissions, completer.callback]);
+   _permissions.callMethod('request', [jsify(permissions), completer.callback]);
    return completer.future;
  }
 
@@ -85,7 +85,7 @@ class ChromePermissions {
   */
  Future&lt;bool&gt; remove(Permissions permissions) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
-   _permissions.callMethod('remove', [permissions, completer.callback]);
+   _permissions.callMethod('remove', [jsify(permissions), completer.callback]);
    return completer.future;
  }
 
@@ -149,7 +149,7 @@ True if the extension has the specified permissions.</p>
 <pre class="source">
 Future&lt;bool&gt; contains(Permissions permissions) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
- _permissions.callMethod('contains', [permissions, completer.callback]);
+ _permissions.callMethod('contains', [jsify(permissions), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -184,7 +184,7 @@ True if the permissions were removed.</p>
 <pre class="source">
 Future&lt;bool&gt; remove(Permissions permissions) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
- _permissions.callMethod('remove', [permissions, completer.callback]);
+ _permissions.callMethod('remove', [jsify(permissions), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -203,7 +203,7 @@ True if the user granted the specified permissions.</p>
 <pre class="source">
 Future&lt;bool&gt; request(Permissions permissions) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
- _permissions.callMethod('request', [permissions, completer.callback]);
+ _permissions.callMethod('request', [jsify(permissions), completer.callback]);
  return completer.future;
 }
 </pre>

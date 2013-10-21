@@ -49,14 +49,14 @@ class RequestFilter extends ChromeObject {
   * will be filtered out.
   */
  List&lt;String&gt; get urls =&gt; listify(proxy['urls']);
- set urls(List&lt;String&gt; value) =&gt; proxy['urls'] = value;
+ set urls(List&lt;String&gt; value) =&gt; proxy['urls'] = jsify(value);
 
  /**
   * A list of request types. Requests that cannot match any of the types will
   * be filtered out.
   */
  List&lt;String&gt; get types =&gt; listify(proxy['types']);
- set types(List&lt;String&gt; value) =&gt; proxy['types'] = value;
+ set types(List&lt;String&gt; value) =&gt; proxy['types'] = jsify(value);
 
  int get tabId =&gt; proxy['tabId'];
  set tabId(int value) =&gt; proxy['tabId'] = value;
@@ -147,7 +147,7 @@ be filtered out.</p>
 List&lt;String&gt; get types =&gt; listify(proxy['types']);
 </pre>
 <pre class="source">
-set types(List&lt;String&gt; value) =&gt; proxy['types'] = value;
+set types(List&lt;String&gt; value) =&gt; proxy['types'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -164,7 +164,7 @@ will be filtered out.</p>
 List&lt;String&gt; get urls =&gt; listify(proxy['urls']);
 </pre>
 <pre class="source">
-set urls(List&lt;String&gt; value) =&gt; proxy['urls'] = value;
+set urls(List&lt;String&gt; value) =&gt; proxy['urls'] = jsify(value);
 </pre>
 </div>
 </div>

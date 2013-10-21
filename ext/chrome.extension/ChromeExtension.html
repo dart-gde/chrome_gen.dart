@@ -65,7 +65,7 @@ class ChromeExtension {
   */
  Future&lt;dynamic&gt; sendRequest(dynamic request, [String extensionId]) {
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
-   _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
+   _extension.callMethod('sendRequest', [extensionId, jsify(request), completer.callback]);
    return completer.future;
  }
 
@@ -354,7 +354,7 @@ no arguments and <code>runtime.lastError</code> will be set to the error message
 <pre class="source">
 Future&lt;dynamic&gt; sendRequest(dynamic request, [String extensionId]) {
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
- _extension.callMethod('sendRequest', [extensionId, request, completer.callback]);
+ _extension.callMethod('sendRequest', [extensionId, jsify(request), completer.callback]);
  return completer.future;
 }
 </pre>

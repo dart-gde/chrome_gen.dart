@@ -50,23 +50,23 @@ class Port extends ChromeObject {
  set name(String value) =&gt; proxy['name'] = value;
 
  dynamic get disconnect =&gt; proxy['disconnect'];
- set disconnect(var value) =&gt; proxy['disconnect'] = value;
+ set disconnect(var value) =&gt; proxy['disconnect'] = jsify(value);
 
  Event get onDisconnect =&gt; _createEvent(proxy['onDisconnect']);
- set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = value;
+ set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = jsify(value);
 
  Event get onMessage =&gt; _createEvent(proxy['onMessage']);
- set onMessage(Event value) =&gt; proxy['onMessage'] = value;
+ set onMessage(Event value) =&gt; proxy['onMessage'] = jsify(value);
 
  dynamic get postMessage =&gt; proxy['postMessage'];
- set postMessage(var value) =&gt; proxy['postMessage'] = value;
+ set postMessage(var value) =&gt; proxy['postMessage'] = jsify(value);
 
  /**
   * This property will &lt;b&gt;only&lt;/b&gt; be present on ports passed to
   * onConnect/onConnectExternal listeners.
   */
  MessageSender get sender =&gt; _createMessageSender(proxy['sender']);
- set sender(MessageSender value) =&gt; proxy['sender'] = value;
+ set sender(MessageSender value) =&gt; proxy['sender'] = jsify(value);
 }
 </pre>
 </div>
@@ -124,7 +124,7 @@ var         <strong>disconnect</strong> <a class="anchor-link"
 dynamic get disconnect =&gt; proxy['disconnect'];
 </pre>
 <pre class="source">
-set disconnect(var value) =&gt; proxy['disconnect'] = value;
+set disconnect(var value) =&gt; proxy['disconnect'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -154,7 +154,7 @@ set name(String value) =&gt; proxy['name'] = value;
 Event get onDisconnect =&gt; _createEvent(proxy['onDisconnect']);
 </pre>
 <pre class="source">
-set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = value;
+set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -169,7 +169,7 @@ set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = value;
 Event get onMessage =&gt; _createEvent(proxy['onMessage']);
 </pre>
 <pre class="source">
-set onMessage(Event value) =&gt; proxy['onMessage'] = value;
+set onMessage(Event value) =&gt; proxy['onMessage'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -184,7 +184,7 @@ var         <strong>postMessage</strong> <a class="anchor-link"
 dynamic get postMessage =&gt; proxy['postMessage'];
 </pre>
 <pre class="source">
-set postMessage(var value) =&gt; proxy['postMessage'] = value;
+set postMessage(var value) =&gt; proxy['postMessage'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -213,7 +213,7 @@ onConnect/onConnectExternal listeners.</p>
 MessageSender get sender =&gt; _createMessageSender(proxy['sender']);
 </pre>
 <pre class="source">
-set sender(MessageSender value) =&gt; proxy['sender'] = value;
+set sender(MessageSender value) =&gt; proxy['sender'] = jsify(value);
 </pre>
 </div>
 </div>

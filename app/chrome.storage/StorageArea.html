@@ -51,7 +51,7 @@ class StorageArea extends ChromeObject {
   */
  Future&lt;Map&lt;String, dynamic&gt;&gt; get([dynamic keys]) {
    var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
-   proxy.callMethod('get', [keys, completer.callback]);
+   proxy.callMethod('get', [jsify(keys), completer.callback]);
    return completer.future;
  }
 
@@ -67,7 +67,7 @@ class StorageArea extends ChromeObject {
   */
  Future&lt;int&gt; getBytesInUse([dynamic keys]) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
-   proxy.callMethod('getBytesInUse', [keys, completer.callback]);
+   proxy.callMethod('getBytesInUse', [jsify(keys), completer.callback]);
    return completer.future;
  }
 
@@ -90,7 +90,7 @@ class StorageArea extends ChromeObject {
   */
  Future remove(dynamic keys) {
    var completer = new ChromeCompleter.noArgs();
-   proxy.callMethod('remove', [keys, completer.callback]);
+   proxy.callMethod('remove', [jsify(keys), completer.callback]);
    return completer.future;
  }
 
@@ -187,7 +187,7 @@ Object with items in their key-value mappings.</p>
 <pre class="source">
 Future&lt;Map&lt;String, dynamic&gt;&gt; get([dynamic keys]) {
  var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
- proxy.callMethod('get', [keys, completer.callback]);
+ proxy.callMethod('get', [jsify(keys), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -208,7 +208,7 @@ Amount of space being used in storage, in bytes.</p>
 <pre class="source">
 Future&lt;int&gt; getBytesInUse([dynamic keys]) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
- proxy.callMethod('getBytesInUse', [keys, completer.callback]);
+ proxy.callMethod('getBytesInUse', [jsify(keys), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -225,7 +225,7 @@ Future <strong>remove</strong>(keys) <a class="anchor-link" href="#remove"
 <pre class="source">
 Future remove(dynamic keys) {
  var completer = new ChromeCompleter.noArgs();
- proxy.callMethod('remove', [keys, completer.callback]);
+ proxy.callMethod('remove', [jsify(keys), completer.callback]);
  return completer.future;
 }
 </pre>

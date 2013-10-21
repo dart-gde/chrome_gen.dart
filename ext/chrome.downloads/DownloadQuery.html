@@ -107,7 +107,7 @@ class DownloadQuery extends ChromeObject {
  set filename(String value) =&gt; proxy['filename'] = value;
 
  DangerType get danger =&gt; _createDangerType(proxy['danger']);
- set danger(DangerType value) =&gt; proxy['danger'] = value;
+ set danger(DangerType value) =&gt; proxy['danger'] = jsify(value);
 
  String get mime =&gt; proxy['mime'];
  set mime(String value) =&gt; proxy['mime'] = value;
@@ -119,13 +119,13 @@ class DownloadQuery extends ChromeObject {
  set endTime(String value) =&gt; proxy['endTime'] = value;
 
  State get state =&gt; _createState(proxy['state']);
- set state(State value) =&gt; proxy['state'] = value;
+ set state(State value) =&gt; proxy['state'] = jsify(value);
 
  bool get paused =&gt; proxy['paused'];
  set paused(bool value) =&gt; proxy['paused'] = value;
 
  InterruptReason get error =&gt; _createInterruptReason(proxy['error']);
- set error(InterruptReason value) =&gt; proxy['error'] = value;
+ set error(InterruptReason value) =&gt; proxy['error'] = jsify(value);
 
  int get bytesReceived =&gt; proxy['bytesReceived'];
  set bytesReceived(int value) =&gt; proxy['bytesReceived'] = value;
@@ -229,7 +229,7 @@ set bytesReceived(int value) =&gt; proxy['bytesReceived'] = value;
 DangerType get danger =&gt; _createDangerType(proxy['danger']);
 </pre>
 <pre class="source">
-set danger(DangerType value) =&gt; proxy['danger'] = value;
+set danger(DangerType value) =&gt; proxy['danger'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -289,7 +289,7 @@ set endTime(String value) =&gt; proxy['endTime'] = value;
 InterruptReason get error =&gt; _createInterruptReason(proxy['error']);
 </pre>
 <pre class="source">
-set error(InterruptReason value) =&gt; proxy['error'] = value;
+set error(InterruptReason value) =&gt; proxy['error'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -511,7 +511,7 @@ set startTime(String value) =&gt; proxy['startTime'] = value;
 State get state =&gt; _createState(proxy['state']);
 </pre>
 <pre class="source">
-set state(State value) =&gt; proxy['state'] = value;
+set state(State value) =&gt; proxy['state'] = jsify(value);
 </pre>
 </div>
 </div>

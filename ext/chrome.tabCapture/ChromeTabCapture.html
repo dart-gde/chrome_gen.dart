@@ -48,7 +48,7 @@ class ChromeTabCapture {
   */
  Future&lt;LocalMediaStream&gt; capture(CaptureOptions options) {
    var completer = new ChromeCompleter&lt;LocalMediaStream&gt;.oneArg(_createLocalMediaStream);
-   _tabCapture.callMethod('capture', [options, completer.callback]);
+   _tabCapture.callMethod('capture', [jsify(options), completer.callback]);
    return completer.future;
  }
 
@@ -104,7 +104,7 @@ works. Note that Chrome internal pages cannot be captured.
 <pre class="source">
 Future&lt;LocalMediaStream&gt; capture(CaptureOptions options) {
  var completer = new ChromeCompleter&lt;LocalMediaStream&gt;.oneArg(_createLocalMediaStream);
- _tabCapture.callMethod('capture', [options, completer.callback]);
+ _tabCapture.callMethod('capture', [jsify(options), completer.callback]);
  return completer.future;
 }
 </pre>

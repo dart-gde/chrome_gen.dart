@@ -67,7 +67,7 @@ class ChromeI18N {
   * Message localized for current locale.
   */
  String getMessage(String messageName, [dynamic substitutions]) {
-   return _i18n.callMethod('getMessage', [messageName, substitutions]);
+   return _i18n.callMethod('getMessage', [messageName, jsify(substitutions)]);
  }
 }
 </pre>
@@ -111,7 +111,7 @@ href='i18n-messages.html'><code>messages.json</code>&lt;/a> file.</p>
 Message localized for current locale.</p>
 <pre class="source">
 String getMessage(String messageName, [dynamic substitutions]) {
- return _i18n.callMethod('getMessage', [messageName, substitutions]);
+ return _i18n.callMethod('getMessage', [messageName, jsify(substitutions)]);
 }
 </pre>
 </div>

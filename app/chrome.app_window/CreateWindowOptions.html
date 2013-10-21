@@ -100,19 +100,19 @@ class CreateWindowOptions extends ChromeObject {
  set maxHeight(int value) =&gt; proxy['maxHeight'] = value;
 
  WindowType get type =&gt; _createWindowType(proxy['type']);
- set type(WindowType value) =&gt; proxy['type'] = value;
+ set type(WindowType value) =&gt; proxy['type'] = jsify(value);
 
  String get frame =&gt; proxy['frame'];
  set frame(String value) =&gt; proxy['frame'] = value;
 
  Bounds get bounds =&gt; _createBounds(proxy['bounds']);
- set bounds(Bounds value) =&gt; proxy['bounds'] = value;
+ set bounds(Bounds value) =&gt; proxy['bounds'] = jsify(value);
 
  bool get transparentBackground =&gt; proxy['transparentBackground'];
  set transparentBackground(bool value) =&gt; proxy['transparentBackground'] = value;
 
  State get state =&gt; _createState(proxy['state']);
- set state(State value) =&gt; proxy['state'] = value;
+ set state(State value) =&gt; proxy['state'] = jsify(value);
 
  bool get hidden =&gt; proxy['hidden'];
  set hidden(bool value) =&gt; proxy['hidden'] = value;
@@ -194,7 +194,7 @@ CreateWindowOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 Bounds get bounds =&gt; _createBounds(proxy['bounds']);
 </pre>
 <pre class="source">
-set bounds(Bounds value) =&gt; proxy['bounds'] = value;
+set bounds(Bounds value) =&gt; proxy['bounds'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -446,7 +446,7 @@ set singleton(bool value) =&gt; proxy['singleton'] = value;
 State get state =&gt; _createState(proxy['state']);
 </pre>
 <pre class="source">
-set state(State value) =&gt; proxy['state'] = value;
+set state(State value) =&gt; proxy['state'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -491,7 +491,7 @@ set transparentBackground(bool value) =&gt; proxy['transparentBackground'] = val
 WindowType get type =&gt; _createWindowType(proxy['type']);
 </pre>
 <pre class="source">
-set type(WindowType value) =&gt; proxy['type'] = value;
+set type(WindowType value) =&gt; proxy['type'] = jsify(value);
 </pre>
 </div>
 </div>

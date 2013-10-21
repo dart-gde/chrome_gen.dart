@@ -48,7 +48,7 @@ class ChromeNotifications {
   */
  Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
-   _notifications.callMethod('create', [notificationId, options, completer.callback]);
+   _notifications.callMethod('create', [notificationId, jsify(options), completer.callback]);
    return completer.future;
  }
 
@@ -59,7 +59,7 @@ class ChromeNotifications {
   */
  Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
-   _notifications.callMethod('update', [notificationId, options, completer.callback]);
+   _notifications.callMethod('update', [notificationId, jsify(options), completer.callback]);
    return completer.future;
  }
 
@@ -178,7 +178,7 @@ supplied or generated) that represents the created notification.</p>
 <pre class="source">
 Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
- _notifications.callMethod('create', [notificationId, options, completer.callback]);
+ _notifications.callMethod('create', [notificationId, jsify(options), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -213,7 +213,7 @@ existed.</p>
 <pre class="source">
 Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
- _notifications.callMethod('update', [notificationId, options, completer.callback]);
+ _notifications.callMethod('update', [notificationId, jsify(options), completer.callback]);
  return completer.future;
 }
 </pre>

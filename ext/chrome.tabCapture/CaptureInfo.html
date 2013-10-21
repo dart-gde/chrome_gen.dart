@@ -46,7 +46,7 @@ class CaptureInfo extends ChromeObject {
  set tabId(int value) =&gt; proxy['tabId'] = value;
 
  TabCaptureState get status =&gt; _createTabCaptureState(proxy['status']);
- set status(TabCaptureState value) =&gt; proxy['status'] = value;
+ set status(TabCaptureState value) =&gt; proxy['status'] = jsify(value);
 
  bool get fullscreen =&gt; proxy['fullscreen'];
  set fullscreen(bool value) =&gt; proxy['fullscreen'] = value;
@@ -131,7 +131,7 @@ final JsObject proxy
 TabCaptureState get status =&gt; _createTabCaptureState(proxy['status']);
 </pre>
 <pre class="source">
-set status(TabCaptureState value) =&gt; proxy['status'] = value;
+set status(TabCaptureState value) =&gt; proxy['status'] = jsify(value);
 </pre>
 </div>
 </div>

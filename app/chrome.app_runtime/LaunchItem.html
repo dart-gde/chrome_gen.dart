@@ -42,7 +42,7 @@ class LaunchItem extends ChromeObject {
  LaunchItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  dynamic get entry =&gt; proxy['entry'];
- set entry(var value) =&gt; proxy['entry'] = value;
+ set entry(var value) =&gt; proxy['entry'] = jsify(value);
 
  String get type =&gt; proxy['type'];
  set type(String value) =&gt; proxy['type'] = value;
@@ -99,7 +99,7 @@ var         <strong>entry</strong> <a class="anchor-link"
 dynamic get entry =&gt; proxy['entry'];
 </pre>
 <pre class="source">
-set entry(var value) =&gt; proxy['entry'] = value;
+set entry(var value) =&gt; proxy['entry'] = jsify(value);
 </pre>
 </div>
 </div>

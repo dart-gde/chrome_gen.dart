@@ -46,10 +46,10 @@ class Alarm extends ChromeObject {
  set name(String value) =&gt; proxy['name'] = value;
 
  double get scheduledTime =&gt; proxy['scheduledTime'];
- set scheduledTime(double value) =&gt; proxy['scheduledTime'] = value;
+ set scheduledTime(double value) =&gt; proxy['scheduledTime'] = jsify(value);
 
  double get periodInMinutes =&gt; proxy['periodInMinutes'];
- set periodInMinutes(double value) =&gt; proxy['periodInMinutes'] = value;
+ set periodInMinutes(double value) =&gt; proxy['periodInMinutes'] = jsify(value);
 }
 </pre>
 </div>
@@ -119,7 +119,7 @@ double         <strong>periodInMinutes</strong> <a class="anchor-link"
 double get periodInMinutes =&gt; proxy['periodInMinutes'];
 </pre>
 <pre class="source">
-set periodInMinutes(double value) =&gt; proxy['periodInMinutes'] = value;
+set periodInMinutes(double value) =&gt; proxy['periodInMinutes'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -146,7 +146,7 @@ double         <strong>scheduledTime</strong> <a class="anchor-link"
 double get scheduledTime =&gt; proxy['scheduledTime'];
 </pre>
 <pre class="source">
-set scheduledTime(double value) =&gt; proxy['scheduledTime'] = value;
+set scheduledTime(double value) =&gt; proxy['scheduledTime'] = jsify(value);
 </pre>
 </div>
 </div>

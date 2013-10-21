@@ -168,7 +168,7 @@ class ChromeRuntime {
   */
  Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId]) {
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
-   _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
+   _runtime.callMethod('sendMessage', [extensionId, jsify(message), completer.callback]);
    return completer.future;
  }
 
@@ -690,7 +690,7 @@ no arguments and <code>runtime.lastError</code> will be set to the error message
 <pre class="source">
 Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId]) {
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
- _runtime.callMethod('sendMessage', [extensionId, message, completer.callback]);
+ _runtime.callMethod('sendMessage', [extensionId, jsify(message), completer.callback]);
  return completer.future;
 }
 </pre>

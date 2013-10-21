@@ -43,7 +43,7 @@ class IsochronousTransferInfo extends ChromeObject {
  IsochronousTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  GenericTransferInfo get transferInfo =&gt; _createGenericTransferInfo(proxy['transferInfo']);
- set transferInfo(GenericTransferInfo value) =&gt; proxy['transferInfo'] = value;
+ set transferInfo(GenericTransferInfo value) =&gt; proxy['transferInfo'] = jsify(value);
 
  int get packets =&gt; proxy['packets'];
  set packets(int value) =&gt; proxy['packets'] = value;
@@ -146,7 +146,7 @@ final JsObject proxy
 GenericTransferInfo get transferInfo =&gt; _createGenericTransferInfo(proxy['transferInfo']);
 </pre>
 <pre class="source">
-set transferInfo(GenericTransferInfo value) =&gt; proxy['transferInfo'] = value;
+set transferInfo(GenericTransferInfo value) =&gt; proxy['transferInfo'] = jsify(value);
 </pre>
 </div>
 </div>

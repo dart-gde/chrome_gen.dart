@@ -55,13 +55,13 @@ class OnClickData extends ChromeObject {
   * The ID of the menu item that was clicked.
   */
  dynamic get menuItemId =&gt; proxy['menuItemId'];
- set menuItemId(var value) =&gt; proxy['menuItemId'] = value;
+ set menuItemId(var value) =&gt; proxy['menuItemId'] = jsify(value);
 
  /**
   * The parent ID, if any, for the item clicked.
   */
  dynamic get parentMenuItemId =&gt; proxy['parentMenuItemId'];
- set parentMenuItemId(var value) =&gt; proxy['parentMenuItemId'] = value;
+ set parentMenuItemId(var value) =&gt; proxy['parentMenuItemId'] = jsify(value);
 
  /**
   * One of 'image', 'video', or 'audio' if the context menu was activated on
@@ -270,7 +270,7 @@ var         <strong>menuItemId</strong> <a class="anchor-link"
 dynamic get menuItemId =&gt; proxy['menuItemId'];
 </pre>
 <pre class="source">
-set menuItemId(var value) =&gt; proxy['menuItemId'] = value;
+set menuItemId(var value) =&gt; proxy['menuItemId'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -304,7 +304,7 @@ var         <strong>parentMenuItemId</strong> <a class="anchor-link"
 dynamic get parentMenuItemId =&gt; proxy['parentMenuItemId'];
 </pre>
 <pre class="source">
-set parentMenuItemId(var value) =&gt; proxy['parentMenuItemId'] = value;
+set parentMenuItemId(var value) =&gt; proxy['parentMenuItemId'] = jsify(value);
 </pre>
 </div>
 </div>

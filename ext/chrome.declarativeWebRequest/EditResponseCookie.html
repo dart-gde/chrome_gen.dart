@@ -47,14 +47,14 @@ class EditResponseCookie extends ChromeObject {
   * Filter for cookies that will be modified. All empty entries are ignored.
   */
  FilterResponseCookie get filter =&gt; _createFilterResponseCookie(proxy['filter']);
- set filter(FilterResponseCookie value) =&gt; proxy['filter'] = value;
+ set filter(FilterResponseCookie value) =&gt; proxy['filter'] = jsify(value);
 
  /**
   * Attributes that shall be overridden in cookies that machted the filter.
   * Attributes that are set to an empty string are removed.
   */
  ResponseCookie get modification =&gt; _createResponseCookie(proxy['modification']);
- set modification(ResponseCookie value) =&gt; proxy['modification'] = value;
+ set modification(ResponseCookie value) =&gt; proxy['modification'] = jsify(value);
 }
 </pre>
 </div>
@@ -109,7 +109,7 @@ EditResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 FilterResponseCookie get filter =&gt; _createFilterResponseCookie(proxy['filter']);
 </pre>
 <pre class="source">
-set filter(FilterResponseCookie value) =&gt; proxy['filter'] = value;
+set filter(FilterResponseCookie value) =&gt; proxy['filter'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -126,7 +126,7 @@ Attributes that are set to an empty string are removed.</p>
 ResponseCookie get modification =&gt; _createResponseCookie(proxy['modification']);
 </pre>
 <pre class="source">
-set modification(ResponseCookie value) =&gt; proxy['modification'] = value;
+set modification(ResponseCookie value) =&gt; proxy['modification'] = jsify(value);
 </pre>
 </div>
 </div>

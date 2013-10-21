@@ -45,7 +45,7 @@ class ChromeFileSystem {
   */
  Future&lt;String&gt; getDisplayPath(Entry entry) {
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
-   _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
+   _fileSystem.callMethod('getDisplayPath', [jsify(entry), completer.callback]);
    return completer.future;
  }
 
@@ -57,7 +57,7 @@ class ChromeFileSystem {
   */
  Future&lt;Entry&gt; getWritableEntry(Entry entry) {
    var completer = new ChromeCompleter&lt;Entry&gt;.oneArg(_createEntry);
-   _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
+   _fileSystem.callMethod('getWritableEntry', [jsify(entry), completer.callback]);
    return completer.future;
  }
 
@@ -66,7 +66,7 @@ class ChromeFileSystem {
   */
  Future&lt;bool&gt; isWritableEntry(Entry entry) {
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
-   _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
+   _fileSystem.callMethod('isWritableEntry', [jsify(entry), completer.callback]);
    return completer.future;
  }
 
@@ -79,7 +79,7 @@ class ChromeFileSystem {
   */
  Future&lt;ChooseEntryResult&gt; chooseEntry([ChooseEntryOptions options]) {
    var completer = new ChromeCompleter&lt;ChooseEntryResult&gt;.twoArgs(ChooseEntryResult._create);
-   _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
+   _fileSystem.callMethod('chooseEntry', [jsify(options), completer.callback]);
    return completer.future;
  }
 
@@ -114,7 +114,7 @@ class ChromeFileSystem {
   * new in Chrome 30.
   */
  String retainEntry(Entry entry) {
-   return _fileSystem.callMethod('retainEntry', [entry]);
+   return _fileSystem.callMethod('retainEntry', [jsify(entry)]);
  }
 }
 </pre>
@@ -133,7 +133,7 @@ Future&lt;<a href="../chrome.fileSystem/ChooseEntryResult.html">ChooseEntryResul
 <pre class="source">
 Future&lt;ChooseEntryResult&gt; chooseEntry([ChooseEntryOptions options]) {
  var completer = new ChromeCompleter&lt;ChooseEntryResult&gt;.twoArgs(ChooseEntryResult._create);
- _fileSystem.callMethod('chooseEntry', [options, completer.callback]);
+ _fileSystem.callMethod('chooseEntry', [jsify(options), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -150,7 +150,7 @@ made more readable for display purposes.</p>
 <pre class="source">
 Future&lt;String&gt; getDisplayPath(Entry entry) {
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
- _fileSystem.callMethod('getDisplayPath', [entry, completer.callback]);
+ _fileSystem.callMethod('getDisplayPath', [jsify(entry), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -168,7 +168,7 @@ have the 'directory' permission under 'fileSystem'.</p>
 <pre class="source">
 Future&lt;Entry&gt; getWritableEntry(Entry entry) {
  var completer = new ChromeCompleter&lt;Entry&gt;.oneArg(_createEntry);
- _fileSystem.callMethod('getWritableEntry', [entry, completer.callback]);
+ _fileSystem.callMethod('getWritableEntry', [jsify(entry), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -200,7 +200,7 @@ Future&lt;bool&gt; <strong>isWritableEntry</strong>(Entry entry) <a class="ancho
 <pre class="source">
 Future&lt;bool&gt; isWritableEntry(Entry entry) {
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
- _fileSystem.callMethod('isWritableEntry', [entry, completer.callback]);
+ _fileSystem.callMethod('isWritableEntry', [jsify(entry), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -236,7 +236,7 @@ retained only while the app is running and across restarts. This method is
 new in Chrome 30.</p>
 <pre class="source">
 String retainEntry(Entry entry) {
- return _fileSystem.callMethod('retainEntry', [entry]);
+ return _fileSystem.callMethod('retainEntry', [jsify(entry)]);
 }
 </pre>
 </div>

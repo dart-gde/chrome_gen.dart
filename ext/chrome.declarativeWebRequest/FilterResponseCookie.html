@@ -73,7 +73,7 @@ class FilterResponseCookie extends ChromeObject {
   * Value of the Max-Age cookie attribute
   */
  dynamic get maxAge =&gt; proxy['maxAge'];
- set maxAge(var value) =&gt; proxy['maxAge'] = value;
+ set maxAge(var value) =&gt; proxy['maxAge'] = jsify(value);
 
  /**
   * Value of the Domain cookie attribute.
@@ -282,7 +282,7 @@ var         <strong>maxAge</strong> <a class="anchor-link"
 dynamic get maxAge =&gt; proxy['maxAge'];
 </pre>
 <pre class="source">
-set maxAge(var value) =&gt; proxy['maxAge'] = value;
+set maxAge(var value) =&gt; proxy['maxAge'] = jsify(value);
 </pre>
 </div>
 </div>

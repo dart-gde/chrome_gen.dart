@@ -65,7 +65,7 @@ class HeaderFilter extends ChromeObject {
   * Matches if the header name contains all of the specified strings.
   */
  dynamic get nameContains =&gt; proxy['nameContains'];
- set nameContains(var value) =&gt; proxy['nameContains'] = value;
+ set nameContains(var value) =&gt; proxy['nameContains'] = jsify(value);
 
  /**
   * Matches if the header name is equal to the specified string.
@@ -89,7 +89,7 @@ class HeaderFilter extends ChromeObject {
   * Matches if the header value contains all of the specified strings.
   */
  dynamic get valueContains =&gt; proxy['valueContains'];
- set valueContains(var value) =&gt; proxy['valueContains'] = value;
+ set valueContains(var value) =&gt; proxy['valueContains'] = jsify(value);
 
  /**
   * Matches if the header value is equal to the specified string.
@@ -156,7 +156,7 @@ var         <strong>nameContains</strong> <a class="anchor-link"
 dynamic get nameContains =&gt; proxy['nameContains'];
 </pre>
 <pre class="source">
-set nameContains(var value) =&gt; proxy['nameContains'] = value;
+set nameContains(var value) =&gt; proxy['nameContains'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -232,7 +232,7 @@ var         <strong>valueContains</strong> <a class="anchor-link"
 dynamic get valueContains =&gt; proxy['valueContains'];
 </pre>
 <pre class="source">
-set valueContains(var value) =&gt; proxy['valueContains'] = value;
+set valueContains(var value) =&gt; proxy['valueContains'] = jsify(value);
 </pre>
 </div>
 </div>

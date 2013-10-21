@@ -54,13 +54,13 @@ class NotificationOptions extends ChromeObject {
  NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  TemplateType get type =&gt; _createTemplateType(proxy['type']);
- set type(TemplateType value) =&gt; proxy['type'] = value;
+ set type(TemplateType value) =&gt; proxy['type'] = jsify(value);
 
  String get iconUrl =&gt; proxy['iconUrl'];
  set iconUrl(String value) =&gt; proxy['iconUrl'] = value;
 
  NotificationBitmap get iconBitmap =&gt; _createNotificationBitmap(proxy['iconBitmap']);
- set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = value;
+ set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = jsify(value);
 
  String get title =&gt; proxy['title'];
  set title(String value) =&gt; proxy['title'] = value;
@@ -75,10 +75,10 @@ class NotificationOptions extends ChromeObject {
  set priority(int value) =&gt; proxy['priority'] = value;
 
  double get eventTime =&gt; proxy['eventTime'];
- set eventTime(double value) =&gt; proxy['eventTime'] = value;
+ set eventTime(double value) =&gt; proxy['eventTime'] = jsify(value);
 
  NotificationButton get buttons =&gt; _createNotificationButton(proxy['buttons']);
- set buttons(NotificationButton value) =&gt; proxy['buttons'] = value;
+ set buttons(NotificationButton value) =&gt; proxy['buttons'] = jsify(value);
 
  String get expandedMessage =&gt; proxy['expandedMessage'];
  set expandedMessage(String value) =&gt; proxy['expandedMessage'] = value;
@@ -87,10 +87,10 @@ class NotificationOptions extends ChromeObject {
  set imageUrl(String value) =&gt; proxy['imageUrl'] = value;
 
  NotificationBitmap get imageBitmap =&gt; _createNotificationBitmap(proxy['imageBitmap']);
- set imageBitmap(NotificationBitmap value) =&gt; proxy['imageBitmap'] = value;
+ set imageBitmap(NotificationBitmap value) =&gt; proxy['imageBitmap'] = jsify(value);
 
  NotificationItem get items =&gt; _createNotificationItem(proxy['items']);
- set items(NotificationItem value) =&gt; proxy['items'] = value;
+ set items(NotificationItem value) =&gt; proxy['items'] = jsify(value);
 
  int get progress =&gt; proxy['progress'];
  set progress(int value) =&gt; proxy['progress'] = value;
@@ -159,7 +159,7 @@ NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 NotificationButton get buttons =&gt; _createNotificationButton(proxy['buttons']);
 </pre>
 <pre class="source">
-set buttons(NotificationButton value) =&gt; proxy['buttons'] = value;
+set buttons(NotificationButton value) =&gt; proxy['buttons'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -189,7 +189,7 @@ double         <strong>eventTime</strong> <a class="anchor-link"
 double get eventTime =&gt; proxy['eventTime'];
 </pre>
 <pre class="source">
-set eventTime(double value) =&gt; proxy['eventTime'] = value;
+set eventTime(double value) =&gt; proxy['eventTime'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -219,7 +219,7 @@ set expandedMessage(String value) =&gt; proxy['expandedMessage'] = value;
 NotificationBitmap get iconBitmap =&gt; _createNotificationBitmap(proxy['iconBitmap']);
 </pre>
 <pre class="source">
-set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = value;
+set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -249,7 +249,7 @@ set iconUrl(String value) =&gt; proxy['iconUrl'] = value;
 NotificationBitmap get imageBitmap =&gt; _createNotificationBitmap(proxy['imageBitmap']);
 </pre>
 <pre class="source">
-set imageBitmap(NotificationBitmap value) =&gt; proxy['imageBitmap'] = value;
+set imageBitmap(NotificationBitmap value) =&gt; proxy['imageBitmap'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -279,7 +279,7 @@ set imageUrl(String value) =&gt; proxy['imageUrl'] = value;
 NotificationItem get items =&gt; _createNotificationItem(proxy['items']);
 </pre>
 <pre class="source">
-set items(NotificationItem value) =&gt; proxy['items'] = value;
+set items(NotificationItem value) =&gt; proxy['items'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -366,7 +366,7 @@ set title(String value) =&gt; proxy['title'] = value;
 TemplateType get type =&gt; _createTemplateType(proxy['type']);
 </pre>
 <pre class="source">
-set type(TemplateType value) =&gt; proxy['type'] = value;
+set type(TemplateType value) =&gt; proxy['type'] = jsify(value);
 </pre>
 </div>
 </div>

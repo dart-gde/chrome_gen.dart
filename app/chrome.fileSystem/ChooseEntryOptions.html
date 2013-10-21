@@ -45,13 +45,13 @@ class ChooseEntryOptions extends ChromeObject {
  ChooseEntryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  ChooseEntryType get type =&gt; _createChooseEntryType(proxy['type']);
- set type(ChooseEntryType value) =&gt; proxy['type'] = value;
+ set type(ChooseEntryType value) =&gt; proxy['type'] = jsify(value);
 
  String get suggestedName =&gt; proxy['suggestedName'];
  set suggestedName(String value) =&gt; proxy['suggestedName'] = value;
 
  AcceptOption get accepts =&gt; _createAcceptOption(proxy['accepts']);
- set accepts(AcceptOption value) =&gt; proxy['accepts'] = value;
+ set accepts(AcceptOption value) =&gt; proxy['accepts'] = jsify(value);
 
  bool get acceptsAllTypes =&gt; proxy['acceptsAllTypes'];
  set acceptsAllTypes(bool value) =&gt; proxy['acceptsAllTypes'] = value;
@@ -114,7 +114,7 @@ ChooseEntryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 AcceptOption get accepts =&gt; _createAcceptOption(proxy['accepts']);
 </pre>
 <pre class="source">
-set accepts(AcceptOption value) =&gt; proxy['accepts'] = value;
+set accepts(AcceptOption value) =&gt; proxy['accepts'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -186,7 +186,7 @@ set suggestedName(String value) =&gt; proxy['suggestedName'] = value;
 ChooseEntryType get type =&gt; _createChooseEntryType(proxy['type']);
 </pre>
 <pre class="source">
-set type(ChooseEntryType value) =&gt; proxy['type'] = value;
+set type(ChooseEntryType value) =&gt; proxy['type'] = jsify(value);
 </pre>
 </div>
 </div>

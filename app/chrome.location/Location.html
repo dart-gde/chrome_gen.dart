@@ -46,10 +46,10 @@ class Location extends ChromeObject {
  set name(String value) =&gt; proxy['name'] = value;
 
  Coordinates get coords =&gt; _createCoordinates(proxy['coords']);
- set coords(Coordinates value) =&gt; proxy['coords'] = value;
+ set coords(Coordinates value) =&gt; proxy['coords'] = jsify(value);
 
  double get timestamp =&gt; proxy['timestamp'];
- set timestamp(double value) =&gt; proxy['timestamp'] = value;
+ set timestamp(double value) =&gt; proxy['timestamp'] = jsify(value);
 }
 </pre>
 </div>
@@ -104,7 +104,7 @@ Location.fromProxy(JsObject proxy): super.fromProxy(proxy);
 Coordinates get coords =&gt; _createCoordinates(proxy['coords']);
 </pre>
 <pre class="source">
-set coords(Coordinates value) =&gt; proxy['coords'] = value;
+set coords(Coordinates value) =&gt; proxy['coords'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -146,7 +146,7 @@ double         <strong>timestamp</strong> <a class="anchor-link"
 double get timestamp =&gt; proxy['timestamp'];
 </pre>
 <pre class="source">
-set timestamp(double value) =&gt; proxy['timestamp'] = value;
+set timestamp(double value) =&gt; proxy['timestamp'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -44,7 +44,7 @@ class GenericTransferInfo extends ChromeObject {
  GenericTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  Direction get direction =&gt; _createDirection(proxy['direction']);
- set direction(Direction value) =&gt; proxy['direction'] = value;
+ set direction(Direction value) =&gt; proxy['direction'] = jsify(value);
 
  int get endpoint =&gt; proxy['endpoint'];
  set endpoint(int value) =&gt; proxy['endpoint'] = value;
@@ -53,7 +53,7 @@ class GenericTransferInfo extends ChromeObject {
  set length(int value) =&gt; proxy['length'] = value;
 
  ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
- set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+ set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 }
 </pre>
 </div>
@@ -109,7 +109,7 @@ GenericTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
 </pre>
 <pre class="source">
-set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -124,7 +124,7 @@ set data(ArrayBuffer value) =&gt; proxy['data'] = value;
 Direction get direction =&gt; _createDirection(proxy['direction']);
 </pre>
 <pre class="source">
-set direction(Direction value) =&gt; proxy['direction'] = value;
+set direction(Direction value) =&gt; proxy['direction'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -55,19 +55,19 @@ class Rule extends ChromeObject {
   * Tags can be used to annotate rules and perform operations on sets of rules.
   */
  List&lt;String&gt; get tags =&gt; listify(proxy['tags']);
- set tags(List&lt;String&gt; value) =&gt; proxy['tags'] = value;
+ set tags(List&lt;String&gt; value) =&gt; proxy['tags'] = jsify(value);
 
  /**
   * List of conditions that can trigger the actions.
   */
  List&lt;dynamic&gt; get conditions =&gt; listify(proxy['conditions']);
- set conditions(List&lt;dynamic&gt; value) =&gt; proxy['conditions'] = value;
+ set conditions(List&lt;dynamic&gt; value) =&gt; proxy['conditions'] = jsify(value);
 
  /**
   * List of actions that are triggered if one of the condtions is fulfilled.
   */
  List&lt;dynamic&gt; get actions =&gt; listify(proxy['actions']);
- set actions(List&lt;dynamic&gt; value) =&gt; proxy['actions'] = value;
+ set actions(List&lt;dynamic&gt; value) =&gt; proxy['actions'] = jsify(value);
 
  /**
   * Optional priority of this rule. Defaults to 100.
@@ -131,7 +131,7 @@ List&lt;dynamic&gt;         <strong>actions</strong> <a class="anchor-link"
 List&lt;dynamic&gt; get actions =&gt; listify(proxy['actions']);
 </pre>
 <pre class="source">
-set actions(List&lt;dynamic&gt; value) =&gt; proxy['actions'] = value;
+set actions(List&lt;dynamic&gt; value) =&gt; proxy['actions'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -147,7 +147,7 @@ List&lt;dynamic&gt;         <strong>conditions</strong> <a class="anchor-link"
 List&lt;dynamic&gt; get conditions =&gt; listify(proxy['conditions']);
 </pre>
 <pre class="source">
-set conditions(List&lt;dynamic&gt; value) =&gt; proxy['conditions'] = value;
+set conditions(List&lt;dynamic&gt; value) =&gt; proxy['conditions'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -207,7 +207,7 @@ List&lt;String&gt;         <strong>tags</strong> <a class="anchor-link"
 List&lt;String&gt; get tags =&gt; listify(proxy['tags']);
 </pre>
 <pre class="source">
-set tags(List&lt;String&gt; value) =&gt; proxy['tags'] = value;
+set tags(List&lt;String&gt; value) =&gt; proxy['tags'] = jsify(value);
 </pre>
 </div>
 </div>

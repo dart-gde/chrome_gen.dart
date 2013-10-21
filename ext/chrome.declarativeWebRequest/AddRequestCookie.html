@@ -47,7 +47,7 @@ class AddRequestCookie extends ChromeObject {
   * Cookie to be added to the request. No field may be undefined.
   */
  RequestCookie get cookie =&gt; _createRequestCookie(proxy['cookie']);
- set cookie(RequestCookie value) =&gt; proxy['cookie'] = value;
+ set cookie(RequestCookie value) =&gt; proxy['cookie'] = jsify(value);
 }
 </pre>
 </div>
@@ -101,7 +101,7 @@ AddRequestCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 RequestCookie get cookie =&gt; _createRequestCookie(proxy['cookie']);
 </pre>
 <pre class="source">
-set cookie(RequestCookie value) =&gt; proxy['cookie'] = value;
+set cookie(RequestCookie value) =&gt; proxy['cookie'] = jsify(value);
 </pre>
 </div>
 </div>

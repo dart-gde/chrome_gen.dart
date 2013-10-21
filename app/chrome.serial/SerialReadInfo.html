@@ -45,7 +45,7 @@ class SerialReadInfo extends ChromeObject {
  set bytesRead(int value) =&gt; proxy['bytesRead'] = value;
 
  ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
- set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+ set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 }
 </pre>
 </div>
@@ -114,7 +114,7 @@ set bytesRead(int value) =&gt; proxy['bytesRead'] = value;
 ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
 </pre>
 <pre class="source">
-set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 </pre>
 </div>
 </div>

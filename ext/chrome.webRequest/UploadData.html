@@ -46,7 +46,7 @@ class UploadData extends ChromeObject {
   * An ArrayBuffer with a copy of the data.
   */
  dynamic get bytes =&gt; proxy['bytes'];
- set bytes(var value) =&gt; proxy['bytes'] = value;
+ set bytes(var value) =&gt; proxy['bytes'] = jsify(value);
 
  /**
   * A string with the file's path and name.
@@ -107,7 +107,7 @@ var         <strong>bytes</strong> <a class="anchor-link"
 dynamic get bytes =&gt; proxy['bytes'];
 </pre>
 <pre class="source">
-set bytes(var value) =&gt; proxy['bytes'] = value;
+set bytes(var value) =&gt; proxy['bytes'] = jsify(value);
 </pre>
 </div>
 </div>

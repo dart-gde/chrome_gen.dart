@@ -47,13 +47,13 @@ class OpenOptions extends ChromeObject {
  set bitrate(int value) =&gt; proxy['bitrate'] = value;
 
  DataBit get dataBit =&gt; _createDataBit(proxy['dataBit']);
- set dataBit(DataBit value) =&gt; proxy['dataBit'] = value;
+ set dataBit(DataBit value) =&gt; proxy['dataBit'] = jsify(value);
 
  ParityBit get parityBit =&gt; _createParityBit(proxy['parityBit']);
- set parityBit(ParityBit value) =&gt; proxy['parityBit'] = value;
+ set parityBit(ParityBit value) =&gt; proxy['parityBit'] = jsify(value);
 
  StopBit get stopBit =&gt; _createStopBit(proxy['stopBit']);
- set stopBit(StopBit value) =&gt; proxy['stopBit'] = value;
+ set stopBit(StopBit value) =&gt; proxy['stopBit'] = jsify(value);
 }
 </pre>
 </div>
@@ -124,7 +124,7 @@ set bitrate(int value) =&gt; proxy['bitrate'] = value;
 DataBit get dataBit =&gt; _createDataBit(proxy['dataBit']);
 </pre>
 <pre class="source">
-set dataBit(DataBit value) =&gt; proxy['dataBit'] = value;
+set dataBit(DataBit value) =&gt; proxy['dataBit'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -139,7 +139,7 @@ set dataBit(DataBit value) =&gt; proxy['dataBit'] = value;
 ParityBit get parityBit =&gt; _createParityBit(proxy['parityBit']);
 </pre>
 <pre class="source">
-set parityBit(ParityBit value) =&gt; proxy['parityBit'] = value;
+set parityBit(ParityBit value) =&gt; proxy['parityBit'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -166,7 +166,7 @@ final JsObject proxy
 StopBit get stopBit =&gt; _createStopBit(proxy['stopBit']);
 </pre>
 <pre class="source">
-set stopBit(StopBit value) =&gt; proxy['stopBit'] = value;
+set stopBit(StopBit value) =&gt; proxy['stopBit'] = jsify(value);
 </pre>
 </div>
 </div>

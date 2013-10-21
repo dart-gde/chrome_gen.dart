@@ -59,7 +59,7 @@ class Event extends ChromeObject {
  }
 
  bool hasListener(dynamic callback) {
-   return proxy.callMethod('hasListener', [callback]);
+   return proxy.callMethod('hasListener', [jsify(callback)]);
  }
 
  bool hasListeners() {
@@ -233,7 +233,7 @@ bool <strong>hasListener</strong>(callback) <a class="anchor-link" href="#hasLis
 <div class="doc">
 <pre class="source">
 bool hasListener(dynamic callback) {
- return proxy.callMethod('hasListener', [callback]);
+ return proxy.callMethod('hasListener', [jsify(callback)]);
 }
 </pre>
 </div>

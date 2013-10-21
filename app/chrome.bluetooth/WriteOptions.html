@@ -42,10 +42,10 @@ class WriteOptions extends ChromeObject {
  WriteOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  Socket get socket =&gt; _createSocket(proxy['socket']);
- set socket(Socket value) =&gt; proxy['socket'] = value;
+ set socket(Socket value) =&gt; proxy['socket'] = jsify(value);
 
  ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
- set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+ set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 }
 </pre>
 </div>
@@ -99,7 +99,7 @@ WriteOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
 </pre>
 <pre class="source">
-set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -126,7 +126,7 @@ final JsObject proxy
 Socket get socket =&gt; _createSocket(proxy['socket']);
 </pre>
 <pre class="source">
-set socket(Socket value) =&gt; proxy['socket'] = value;
+set socket(Socket value) =&gt; proxy['socket'] = jsify(value);
 </pre>
 </div>
 </div>

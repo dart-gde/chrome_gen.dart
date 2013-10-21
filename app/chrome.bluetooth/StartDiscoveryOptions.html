@@ -41,7 +41,7 @@ class StartDiscoveryOptions extends ChromeObject {
  StartDiscoveryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(proxy['deviceCallback']);
- set deviceCallback(BluetoothDeviceCallback value) =&gt; proxy['deviceCallback'] = value;
+ set deviceCallback(BluetoothDeviceCallback value) =&gt; proxy['deviceCallback'] = jsify(value);
 }
 </pre>
 </div>
@@ -94,7 +94,7 @@ StartDiscoveryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(proxy['deviceCallback']);
 </pre>
 <pre class="source">
-set deviceCallback(BluetoothDeviceCallback value) =&gt; proxy['deviceCallback'] = value;
+set deviceCallback(BluetoothDeviceCallback value) =&gt; proxy['deviceCallback'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -45,7 +45,7 @@ class FilenameSuggestion extends ChromeObject {
  set filename(String value) =&gt; proxy['filename'] = value;
 
  FilenameConflictAction get conflictAction =&gt; _createFilenameConflictAction(proxy['conflictAction']);
- set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = value;
+ set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = jsify(value);
 }
 </pre>
 </div>
@@ -99,7 +99,7 @@ FilenameSuggestion.fromProxy(JsObject proxy): super.fromProxy(proxy);
 FilenameConflictAction get conflictAction =&gt; _createFilenameConflictAction(proxy['conflictAction']);
 </pre>
 <pre class="source">
-set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = value;
+set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -50,10 +50,10 @@ class CaptureOptions extends ChromeObject {
  set video(bool value) =&gt; proxy['video'] = value;
 
  MediaStreamConstraint get audioConstraints =&gt; _createMediaStreamConstraint(proxy['audioConstraints']);
- set audioConstraints(MediaStreamConstraint value) =&gt; proxy['audioConstraints'] = value;
+ set audioConstraints(MediaStreamConstraint value) =&gt; proxy['audioConstraints'] = jsify(value);
 
  MediaStreamConstraint get videoConstraints =&gt; _createMediaStreamConstraint(proxy['videoConstraints']);
- set videoConstraints(MediaStreamConstraint value) =&gt; proxy['videoConstraints'] = value;
+ set videoConstraints(MediaStreamConstraint value) =&gt; proxy['videoConstraints'] = jsify(value);
 }
 </pre>
 </div>
@@ -124,7 +124,7 @@ set audio(bool value) =&gt; proxy['audio'] = value;
 MediaStreamConstraint get audioConstraints =&gt; _createMediaStreamConstraint(proxy['audioConstraints']);
 </pre>
 <pre class="source">
-set audioConstraints(MediaStreamConstraint value) =&gt; proxy['audioConstraints'] = value;
+set audioConstraints(MediaStreamConstraint value) =&gt; proxy['audioConstraints'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -166,7 +166,7 @@ set video(bool value) =&gt; proxy['video'] = value;
 MediaStreamConstraint get videoConstraints =&gt; _createMediaStreamConstraint(proxy['videoConstraints']);
 </pre>
 <pre class="source">
-set videoConstraints(MediaStreamConstraint value) =&gt; proxy['videoConstraints'] = value;
+set videoConstraints(MediaStreamConstraint value) =&gt; proxy['videoConstraints'] = jsify(value);
 </pre>
 </div>
 </div>

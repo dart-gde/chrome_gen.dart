@@ -85,20 +85,20 @@ class BookmarkTreeNode extends ChromeObject {
   * Date(dateAdded)`).
   */
  dynamic get dateAdded =&gt; proxy['dateAdded'];
- set dateAdded(var value) =&gt; proxy['dateAdded'] = value;
+ set dateAdded(var value) =&gt; proxy['dateAdded'] = jsify(value);
 
  /**
   * When the contents of this folder last changed, in milliseconds since the
   * epoch.
   */
  dynamic get dateGroupModified =&gt; proxy['dateGroupModified'];
- set dateGroupModified(var value) =&gt; proxy['dateGroupModified'] = value;
+ set dateGroupModified(var value) =&gt; proxy['dateGroupModified'] = jsify(value);
 
  /**
   * An ordered list of children of this node.
   */
  List&lt;BookmarkTreeNode&gt; get children =&gt; listify(proxy['children'], _createBookmarkTreeNode);
- set children(List&lt;BookmarkTreeNode&gt; value) =&gt; proxy['children'] = value;
+ set children(List&lt;BookmarkTreeNode&gt; value) =&gt; proxy['children'] = jsify(value);
 }
 </pre>
 </div>
@@ -159,7 +159,7 @@ List&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>
 List&lt;BookmarkTreeNode&gt; get children =&gt; listify(proxy['children'], _createBookmarkTreeNode);
 </pre>
 <pre class="source">
-set children(List&lt;BookmarkTreeNode&gt; value) =&gt; proxy['children'] = value;
+set children(List&lt;BookmarkTreeNode&gt; value) =&gt; proxy['children'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -176,7 +176,7 @@ Date(dateAdded)</code>).</p>
 dynamic get dateAdded =&gt; proxy['dateAdded'];
 </pre>
 <pre class="source">
-set dateAdded(var value) =&gt; proxy['dateAdded'] = value;
+set dateAdded(var value) =&gt; proxy['dateAdded'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -193,7 +193,7 @@ epoch.</p>
 dynamic get dateGroupModified =&gt; proxy['dateGroupModified'];
 </pre>
 <pre class="source">
-set dateGroupModified(var value) =&gt; proxy['dateGroupModified'] = value;
+set dateGroupModified(var value) =&gt; proxy['dateGroupModified'] = jsify(value);
 </pre>
 </div>
 </div>

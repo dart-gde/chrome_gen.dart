@@ -146,19 +146,19 @@ class ExtensionInfo extends ChromeObject {
   * documentation on icons](manifest/icons.html) for more details.
   */
  List&lt;IconInfo&gt; get icons =&gt; listify(proxy['icons'], _createIconInfo);
- set icons(List&lt;IconInfo&gt; value) =&gt; proxy['icons'] = value;
+ set icons(List&lt;IconInfo&gt; value) =&gt; proxy['icons'] = jsify(value);
 
  /**
   * Returns a list of API based permissions.
   */
  List&lt;String&gt; get permissions =&gt; listify(proxy['permissions']);
- set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = value;
+ set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = jsify(value);
 
  /**
   * Returns a list of host based permissions.
   */
  List&lt;String&gt; get hostPermissions =&gt; listify(proxy['hostPermissions']);
- set hostPermissions(List&lt;String&gt; value) =&gt; proxy['hostPermissions'] = value;
+ set hostPermissions(List&lt;String&gt; value) =&gt; proxy['hostPermissions'] = jsify(value);
 
  /**
   * How the extension was installed. One of&lt;br&gt;[admin]: The extension was
@@ -321,7 +321,7 @@ List&lt;String&gt;         <strong>hostPermissions</strong> <a class="anchor-lin
 List&lt;String&gt; get hostPermissions =&gt; listify(proxy['hostPermissions']);
 </pre>
 <pre class="source">
-set hostPermissions(List&lt;String&gt; value) =&gt; proxy['hostPermissions'] = value;
+set hostPermissions(List&lt;String&gt; value) =&gt; proxy['hostPermissions'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -341,7 +341,7 @@ documentation on icons</a> for more details.</p>
 List&lt;IconInfo&gt; get icons =&gt; listify(proxy['icons'], _createIconInfo);
 </pre>
 <pre class="source">
-set icons(List&lt;IconInfo&gt; value) =&gt; proxy['icons'] = value;
+set icons(List&lt;IconInfo&gt; value) =&gt; proxy['icons'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -459,7 +459,7 @@ List&lt;String&gt;         <strong>permissions</strong> <a class="anchor-link"
 List&lt;String&gt; get permissions =&gt; listify(proxy['permissions']);
 </pre>
 <pre class="source">
-set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = value;
+set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = jsify(value);
 </pre>
 </div>
 </div>

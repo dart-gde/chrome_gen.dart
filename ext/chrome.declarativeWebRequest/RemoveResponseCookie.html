@@ -46,7 +46,7 @@ class RemoveResponseCookie extends ChromeObject {
   * Filter for cookies that will be removed. All empty entries are ignored.
   */
  FilterResponseCookie get filter =&gt; _createFilterResponseCookie(proxy['filter']);
- set filter(FilterResponseCookie value) =&gt; proxy['filter'] = value;
+ set filter(FilterResponseCookie value) =&gt; proxy['filter'] = jsify(value);
 }
 </pre>
 </div>
@@ -100,7 +100,7 @@ RemoveResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 FilterResponseCookie get filter =&gt; _createFilterResponseCookie(proxy['filter']);
 </pre>
 <pre class="source">
-set filter(FilterResponseCookie value) =&gt; proxy['filter'] = value;
+set filter(FilterResponseCookie value) =&gt; proxy['filter'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -53,38 +53,38 @@ class ProxyRules extends ChromeObject {
   * and ftp).
   */
  ProxyServer get singleProxy =&gt; _createProxyServer(this.proxy['singleProxy']);
- set singleProxy(ProxyServer value) =&gt; this.proxy['singleProxy'] = value;
+ set singleProxy(ProxyServer value) =&gt; this.proxy['singleProxy'] = jsify(value);
 
  /**
   * The proxy server to be used for HTTP requests.
   */
  ProxyServer get proxyForHttp =&gt; _createProxyServer(this.proxy['proxyForHttp']);
- set proxyForHttp(ProxyServer value) =&gt; this.proxy['proxyForHttp'] = value;
+ set proxyForHttp(ProxyServer value) =&gt; this.proxy['proxyForHttp'] = jsify(value);
 
  /**
   * The proxy server to be used for HTTPS requests.
   */
  ProxyServer get proxyForHttps =&gt; _createProxyServer(this.proxy['proxyForHttps']);
- set proxyForHttps(ProxyServer value) =&gt; this.proxy['proxyForHttps'] = value;
+ set proxyForHttps(ProxyServer value) =&gt; this.proxy['proxyForHttps'] = jsify(value);
 
  /**
   * The proxy server to be used for FTP requests.
   */
  ProxyServer get proxyForFtp =&gt; _createProxyServer(this.proxy['proxyForFtp']);
- set proxyForFtp(ProxyServer value) =&gt; this.proxy['proxyForFtp'] = value;
+ set proxyForFtp(ProxyServer value) =&gt; this.proxy['proxyForFtp'] = jsify(value);
 
  /**
   * The proxy server to be used for everthing else or if any of the specific
   * proxyFor... is not specified.
   */
  ProxyServer get fallbackProxy =&gt; _createProxyServer(this.proxy['fallbackProxy']);
- set fallbackProxy(ProxyServer value) =&gt; this.proxy['fallbackProxy'] = value;
+ set fallbackProxy(ProxyServer value) =&gt; this.proxy['fallbackProxy'] = jsify(value);
 
  /**
   * List of servers to connect to without a proxy server.
   */
  List&lt;String&gt; get bypassList =&gt; listify(this.proxy['bypassList']);
- set bypassList(List&lt;String&gt; value) =&gt; this.proxy['bypassList'] = value;
+ set bypassList(List&lt;String&gt; value) =&gt; this.proxy['bypassList'] = jsify(value);
 }
 </pre>
 </div>
@@ -143,7 +143,7 @@ List&lt;String&gt;         <strong>bypassList</strong> <a class="anchor-link"
 List&lt;String&gt; get bypassList =&gt; listify(this.proxy['bypassList']);
 </pre>
 <pre class="source">
-set bypassList(List&lt;String&gt; value) =&gt; this.proxy['bypassList'] = value;
+set bypassList(List&lt;String&gt; value) =&gt; this.proxy['bypassList'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -160,7 +160,7 @@ proxyFor... is not specified.</p>
 ProxyServer get fallbackProxy =&gt; _createProxyServer(this.proxy['fallbackProxy']);
 </pre>
 <pre class="source">
-set fallbackProxy(ProxyServer value) =&gt; this.proxy['fallbackProxy'] = value;
+set fallbackProxy(ProxyServer value) =&gt; this.proxy['fallbackProxy'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -188,7 +188,7 @@ final JsObject proxy
 ProxyServer get proxyForFtp =&gt; _createProxyServer(this.proxy['proxyForFtp']);
 </pre>
 <pre class="source">
-set proxyForFtp(ProxyServer value) =&gt; this.proxy['proxyForFtp'] = value;
+set proxyForFtp(ProxyServer value) =&gt; this.proxy['proxyForFtp'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -204,7 +204,7 @@ set proxyForFtp(ProxyServer value) =&gt; this.proxy['proxyForFtp'] = value;
 ProxyServer get proxyForHttp =&gt; _createProxyServer(this.proxy['proxyForHttp']);
 </pre>
 <pre class="source">
-set proxyForHttp(ProxyServer value) =&gt; this.proxy['proxyForHttp'] = value;
+set proxyForHttp(ProxyServer value) =&gt; this.proxy['proxyForHttp'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -220,7 +220,7 @@ set proxyForHttp(ProxyServer value) =&gt; this.proxy['proxyForHttp'] = value;
 ProxyServer get proxyForHttps =&gt; _createProxyServer(this.proxy['proxyForHttps']);
 </pre>
 <pre class="source">
-set proxyForHttps(ProxyServer value) =&gt; this.proxy['proxyForHttps'] = value;
+set proxyForHttps(ProxyServer value) =&gt; this.proxy['proxyForHttps'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -237,7 +237,7 @@ and ftp).</p>
 ProxyServer get singleProxy =&gt; _createProxyServer(this.proxy['singleProxy']);
 </pre>
 <pre class="source">
-set singleProxy(ProxyServer value) =&gt; this.proxy['singleProxy'] = value;
+set singleProxy(ProxyServer value) =&gt; this.proxy['singleProxy'] = jsify(value);
 </pre>
 </div>
 </div>

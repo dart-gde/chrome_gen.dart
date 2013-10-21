@@ -53,7 +53,7 @@ class CookieStore extends ChromeObject {
   * Identifiers of all the browser tabs that share this cookie store.
   */
  List&lt;int&gt; get tabIds =&gt; listify(proxy['tabIds']);
- set tabIds(List&lt;int&gt; value) =&gt; proxy['tabIds'] = value;
+ set tabIds(List&lt;int&gt; value) =&gt; proxy['tabIds'] = jsify(value);
 }
 </pre>
 </div>
@@ -136,7 +136,7 @@ List&lt;int&gt;         <strong>tabIds</strong> <a class="anchor-link"
 List&lt;int&gt; get tabIds =&gt; listify(proxy['tabIds']);
 </pre>
 <pre class="source">
-set tabIds(List&lt;int&gt; value) =&gt; proxy['tabIds'] = value;
+set tabIds(List&lt;int&gt; value) =&gt; proxy['tabIds'] = jsify(value);
 </pre>
 </div>
 </div>

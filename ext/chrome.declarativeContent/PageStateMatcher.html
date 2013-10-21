@@ -47,7 +47,7 @@ class PageStateMatcher extends ChromeObject {
   * URL of the page.
   */
  UrlFilter get pageUrl =&gt; _createUrlFilter(proxy['pageUrl']);
- set pageUrl(UrlFilter value) =&gt; proxy['pageUrl'] = value;
+ set pageUrl(UrlFilter value) =&gt; proxy['pageUrl'] = jsify(value);
 
  /**
   * Matches if all of the CSS selectors in the array match in a frame with the
@@ -55,7 +55,7 @@ class PageStateMatcher extends ChromeObject {
   * selectors here can slow down web sites.
   */
  List&lt;String&gt; get css =&gt; listify(proxy['css']);
- set css(List&lt;String&gt; value) =&gt; proxy['css'] = value;
+ set css(List&lt;String&gt; value) =&gt; proxy['css'] = jsify(value);
 }
 </pre>
 </div>
@@ -112,7 +112,7 @@ selectors here can slow down web sites.</p>
 List&lt;String&gt; get css =&gt; listify(proxy['css']);
 </pre>
 <pre class="source">
-set css(List&lt;String&gt; value) =&gt; proxy['css'] = value;
+set css(List&lt;String&gt; value) =&gt; proxy['css'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -129,7 +129,7 @@ URL of the page.</p>
 UrlFilter get pageUrl =&gt; _createUrlFilter(proxy['pageUrl']);
 </pre>
 <pre class="source">
-set pageUrl(UrlFilter value) =&gt; proxy['pageUrl'] = value;
+set pageUrl(UrlFilter value) =&gt; proxy['pageUrl'] = jsify(value);
 </pre>
 </div>
 </div>

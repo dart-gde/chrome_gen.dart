@@ -40,13 +40,13 @@ class ArrayBuffer extends ChromeObject {
  ArrayBuffer.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  factory ArrayBuffer.fromBytes(List&lt;int&gt; data) {
-   var uint8Array = new JsObject(context['Uint8Array'], [jsify(data)]);
+   var uint8Array = new JsObject(context['Uint8Array'], [new JsObject.jsify(data)]);
 
    return new ArrayBuffer.fromProxy(uint8Array['buffer']);
  }
 
  factory ArrayBuffer.fromString(String str) {
-   var uint8Array = new JsObject(context['Uint8Array'], [jsify(str.codeUnits)]);
+   var uint8Array = new JsObject(context['Uint8Array'], [new JsObject.jsify(str.codeUnits)]);
 
    return new ArrayBuffer.fromProxy(uint8Array['buffer']);
  }
@@ -106,7 +106,7 @@ factory <strong>ArrayBuffer.fromBytes</strong>(List&lt;int&gt; data) <a class="a
 <div class="doc">
 <pre class="source">
 factory ArrayBuffer.fromBytes(List&lt;int&gt; data) {
- var uint8Array = new JsObject(context['Uint8Array'], [jsify(data)]);
+ var uint8Array = new JsObject(context['Uint8Array'], [new JsObject.jsify(data)]);
 
  return new ArrayBuffer.fromProxy(uint8Array['buffer']);
 }
@@ -134,7 +134,7 @@ factory <strong>ArrayBuffer.fromString</strong>(String str) <a class="anchor-lin
 <div class="doc">
 <pre class="source">
 factory ArrayBuffer.fromString(String str) {
- var uint8Array = new JsObject(context['Uint8Array'], [jsify(str.codeUnits)]);
+ var uint8Array = new JsObject(context['Uint8Array'], [new JsObject.jsify(str.codeUnits)]);
 
  return new ArrayBuffer.fromProxy(uint8Array['buffer']);
 }

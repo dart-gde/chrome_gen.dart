@@ -34,12 +34,11 @@
 <div class="doc">
 <p>The abstract superclass of Chrome enums.</p>
 <pre class="source">
-abstract class ChromeEnum implements Serializable&lt;String&gt; {
+abstract class ChromeEnum {
  final String value;
 
  const ChromeEnum(this.value);
 
- String toJs() =&gt; value;
  String toString() =&gt; value;
 }
 </pre>
@@ -47,9 +46,6 @@ abstract class ChromeEnum implements Serializable&lt;String&gt; {
 <h3>Subclasses</h3>
 <p>
 <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/DangerType.html">DangerType</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.system_storage/EjectDeviceResultCode.html">EjectDeviceResultCode</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/FilenameConflictAction.html">FilenameConflictAction</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/HttpMethod.html">HttpMethod</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/InterruptReason.html">InterruptReason</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.power/Level.html">Level</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.downloads/State.html">State</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.system_storage/StorageUnitType.html">StorageUnitType</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.tabCapture/TabCaptureState.html">TabCaptureState</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.notifications/TemplateType.html">TemplateType</a></span></p>
-<h3>Implements</h3>
-<p>
-<span class="type-box"><span class="icon-class"></span><a href="../dart_js/Serializable.html">Serializable&lt;String&gt;</a></span></p>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
@@ -86,16 +82,6 @@ final String value
 </div>
 <div>
 <h3>Methods</h3>
-<div class="method"><h4 id="toJs">
-<button class="show-code">Code</button>
-String <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
-              title="Permalink to ChromeEnum.toJs">#</a></h4>
-<div class="doc">
-<pre class="source">
-String toJs() =&gt; value;
-</pre>
-</div>
-</div>
 <div class="method"><h4 id="toString">
 <button class="show-code">Code</button>
 String <strong>toString</strong>() <a class="anchor-link" href="#toString"

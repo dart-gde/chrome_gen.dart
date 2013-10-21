@@ -56,7 +56,7 @@ class RequestMatcher extends ChromeObject {
   * request.
   */
  UrlFilter get url =&gt; _createUrlFilter(proxy['url']);
- set url(UrlFilter value) =&gt; proxy['url'] = value;
+ set url(UrlFilter value) =&gt; proxy['url'] = jsify(value);
 
  /**
   * Matches if the conditions of the UrlFilter are fulfilled for the 'first
@@ -65,56 +65,56 @@ class RequestMatcher extends ChromeObject {
   * is considered 'first party' for the sake of third-party checks for cookies.
   */
  UrlFilter get firstPartyForCookiesUrl =&gt; _createUrlFilter(proxy['firstPartyForCookiesUrl']);
- set firstPartyForCookiesUrl(UrlFilter value) =&gt; proxy['firstPartyForCookiesUrl'] = value;
+ set firstPartyForCookiesUrl(UrlFilter value) =&gt; proxy['firstPartyForCookiesUrl'] = jsify(value);
 
  /**
   * Matches if the request type of a request is contained in the list. Requests
   * that cannot match any of the types will be filtered out.
   */
  List&lt;String&gt; get resourceType =&gt; listify(proxy['resourceType']);
- set resourceType(List&lt;String&gt; value) =&gt; proxy['resourceType'] = value;
+ set resourceType(List&lt;String&gt; value) =&gt; proxy['resourceType'] = jsify(value);
 
  /**
   * Matches if the MIME media type of a response (from the HTTP Content-Type
   * header) is contained in the list.
   */
  List&lt;String&gt; get contentType =&gt; listify(proxy['contentType']);
- set contentType(List&lt;String&gt; value) =&gt; proxy['contentType'] = value;
+ set contentType(List&lt;String&gt; value) =&gt; proxy['contentType'] = jsify(value);
 
  /**
   * Matches if the MIME media type of a response (from the HTTP Content-Type
   * header) is _not_ contained in the list.
   */
  List&lt;String&gt; get excludeContentType =&gt; listify(proxy['excludeContentType']);
- set excludeContentType(List&lt;String&gt; value) =&gt; proxy['excludeContentType'] = value;
+ set excludeContentType(List&lt;String&gt; value) =&gt; proxy['excludeContentType'] = jsify(value);
 
  /**
   * Matches if some of the request headers is matched by one of the
   * HeaderFilters.
   */
  List&lt;HeaderFilter&gt; get requestHeaders =&gt; listify(proxy['requestHeaders'], _createHeaderFilter);
- set requestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['requestHeaders'] = value;
+ set requestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['requestHeaders'] = jsify(value);
 
  /**
   * Matches if none of the request headers is matched by any of the
   * HeaderFilters.
   */
  List&lt;HeaderFilter&gt; get excludeRequestHeaders =&gt; listify(proxy['excludeRequestHeaders'], _createHeaderFilter);
- set excludeRequestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeRequestHeaders'] = value;
+ set excludeRequestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeRequestHeaders'] = jsify(value);
 
  /**
   * Matches if some of the response headers is matched by one of the
   * HeaderFilters.
   */
  List&lt;HeaderFilter&gt; get responseHeaders =&gt; listify(proxy['responseHeaders'], _createHeaderFilter);
- set responseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['responseHeaders'] = value;
+ set responseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['responseHeaders'] = jsify(value);
 
  /**
   * Matches if none of the response headers is matched by any of the
   * HeaderFilters.
   */
  List&lt;HeaderFilter&gt; get excludeResponseHeaders =&gt; listify(proxy['excludeResponseHeaders'], _createHeaderFilter);
- set excludeResponseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeResponseHeaders'] = value;
+ set excludeResponseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeResponseHeaders'] = jsify(value);
 
  /**
   * If set to true, matches requests that are subject to third-party cookie
@@ -131,7 +131,7 @@ class RequestMatcher extends ChromeObject {
   * applicable in stages compatible with all attributes.
   */
  List&lt;String&gt; get stages =&gt; listify(proxy['stages']);
- set stages(List&lt;String&gt; value) =&gt; proxy['stages'] = value;
+ set stages(List&lt;String&gt; value) =&gt; proxy['stages'] = jsify(value);
 }
 </pre>
 </div>
@@ -196,7 +196,7 @@ header) is contained in the list.</p>
 List&lt;String&gt; get contentType =&gt; listify(proxy['contentType']);
 </pre>
 <pre class="source">
-set contentType(List&lt;String&gt; value) =&gt; proxy['contentType'] = value;
+set contentType(List&lt;String&gt; value) =&gt; proxy['contentType'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -213,7 +213,7 @@ header) is <em>not</em> contained in the list.</p>
 List&lt;String&gt; get excludeContentType =&gt; listify(proxy['excludeContentType']);
 </pre>
 <pre class="source">
-set excludeContentType(List&lt;String&gt; value) =&gt; proxy['excludeContentType'] = value;
+set excludeContentType(List&lt;String&gt; value) =&gt; proxy['excludeContentType'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -230,7 +230,7 @@ HeaderFilters.</p>
 List&lt;HeaderFilter&gt; get excludeRequestHeaders =&gt; listify(proxy['excludeRequestHeaders'], _createHeaderFilter);
 </pre>
 <pre class="source">
-set excludeRequestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeRequestHeaders'] = value;
+set excludeRequestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeRequestHeaders'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -247,7 +247,7 @@ HeaderFilters.</p>
 List&lt;HeaderFilter&gt; get excludeResponseHeaders =&gt; listify(proxy['excludeResponseHeaders'], _createHeaderFilter);
 </pre>
 <pre class="source">
-set excludeResponseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeResponseHeaders'] = value;
+set excludeResponseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['excludeResponseHeaders'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -266,7 +266,7 @@ is considered 'first party' for the sake of third-party checks for cookies.</p>
 UrlFilter get firstPartyForCookiesUrl =&gt; _createUrlFilter(proxy['firstPartyForCookiesUrl']);
 </pre>
 <pre class="source">
-set firstPartyForCookiesUrl(UrlFilter value) =&gt; proxy['firstPartyForCookiesUrl'] = value;
+set firstPartyForCookiesUrl(UrlFilter value) =&gt; proxy['firstPartyForCookiesUrl'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -295,7 +295,7 @@ HeaderFilters.</p>
 List&lt;HeaderFilter&gt; get requestHeaders =&gt; listify(proxy['requestHeaders'], _createHeaderFilter);
 </pre>
 <pre class="source">
-set requestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['requestHeaders'] = value;
+set requestHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['requestHeaders'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -312,7 +312,7 @@ that cannot match any of the types will be filtered out.</p>
 List&lt;String&gt; get resourceType =&gt; listify(proxy['resourceType']);
 </pre>
 <pre class="source">
-set resourceType(List&lt;String&gt; value) =&gt; proxy['resourceType'] = value;
+set resourceType(List&lt;String&gt; value) =&gt; proxy['resourceType'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -329,7 +329,7 @@ HeaderFilters.</p>
 List&lt;HeaderFilter&gt; get responseHeaders =&gt; listify(proxy['responseHeaders'], _createHeaderFilter);
 </pre>
 <pre class="source">
-set responseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['responseHeaders'] = value;
+set responseHeaders(List&lt;HeaderFilter&gt; value) =&gt; proxy['responseHeaders'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -349,7 +349,7 @@ applicable in stages compatible with all attributes.</p>
 List&lt;String&gt; get stages =&gt; listify(proxy['stages']);
 </pre>
 <pre class="source">
-set stages(List&lt;String&gt; value) =&gt; proxy['stages'] = value;
+set stages(List&lt;String&gt; value) =&gt; proxy['stages'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -383,7 +383,7 @@ request.</p>
 UrlFilter get url =&gt; _createUrlFilter(proxy['url']);
 </pre>
 <pre class="source">
-set url(UrlFilter value) =&gt; proxy['url'] = value;
+set url(UrlFilter value) =&gt; proxy['url'] = jsify(value);
 </pre>
 </div>
 </div>

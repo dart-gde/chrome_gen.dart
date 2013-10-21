@@ -45,13 +45,13 @@ class StorageChange extends ChromeObject {
   * The old value of the item, if there was an old value.
   */
  dynamic get oldValue =&gt; proxy['oldValue'];
- set oldValue(var value) =&gt; proxy['oldValue'] = value;
+ set oldValue(var value) =&gt; proxy['oldValue'] = jsify(value);
 
  /**
   * The new value of the item, if there is a new value.
   */
  dynamic get newValue =&gt; proxy['newValue'];
- set newValue(var value) =&gt; proxy['newValue'] = value;
+ set newValue(var value) =&gt; proxy['newValue'] = jsify(value);
 }
 </pre>
 </div>
@@ -106,7 +106,7 @@ var         <strong>newValue</strong> <a class="anchor-link"
 dynamic get newValue =&gt; proxy['newValue'];
 </pre>
 <pre class="source">
-set newValue(var value) =&gt; proxy['newValue'] = value;
+set newValue(var value) =&gt; proxy['newValue'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -122,7 +122,7 @@ var         <strong>oldValue</strong> <a class="anchor-link"
 dynamic get oldValue =&gt; proxy['oldValue'];
 </pre>
 <pre class="source">
-set oldValue(var value) =&gt; proxy['oldValue'] = value;
+set oldValue(var value) =&gt; proxy['oldValue'] = jsify(value);
 </pre>
 </div>
 </div>

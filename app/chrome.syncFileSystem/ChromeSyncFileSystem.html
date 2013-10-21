@@ -65,7 +65,7 @@ class ChromeSyncFileSystem {
   */
  Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
    var completer = new ChromeCompleter.noArgs();
-   _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
+   _syncFileSystem.callMethod('setConflictResolutionPolicy', [jsify(policy), completer.callback]);
    return completer.future;
  }
 
@@ -90,7 +90,7 @@ class ChromeSyncFileSystem {
   */
  Future&lt;StorageInfo&gt; getUsageAndQuota(FileSystem fileSystem) {
    var completer = new ChromeCompleter&lt;StorageInfo&gt;.oneArg(_createStorageInfo);
-   _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
+   _syncFileSystem.callMethod('getUsageAndQuota', [jsify(fileSystem), completer.callback]);
    return completer.future;
  }
 
@@ -105,7 +105,7 @@ class ChromeSyncFileSystem {
   */
  Future&lt;FileStatus&gt; getFileStatus(Entry fileEntry) {
    var completer = new ChromeCompleter&lt;FileStatus&gt;.oneArg(_createFileStatus);
-   _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
+   _syncFileSystem.callMethod('getFileStatus', [jsify(fileEntry), completer.callback]);
    return completer.future;
  }
 
@@ -118,7 +118,7 @@ class ChromeSyncFileSystem {
   */
  Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
    var completer = new ChromeCompleter&lt;FileStatusInfo&gt;.oneArg(_createFileStatusInfo);
-   _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
+   _syncFileSystem.callMethod('getFileStatuses', [jsify(fileEntries), completer.callback]);
    return completer.future;
  }
 
@@ -206,7 +206,7 @@ A callback type for getFileStatus.</p>
 <pre class="source">
 Future&lt;FileStatus&gt; getFileStatus(Entry fileEntry) {
  var completer = new ChromeCompleter&lt;FileStatus&gt;.oneArg(_createFileStatus);
- _syncFileSystem.callMethod('getFileStatus', [fileEntry, completer.callback]);
+ _syncFileSystem.callMethod('getFileStatus', [jsify(fileEntry), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -224,7 +224,7 @@ A callback type for getFileStatuses.</p>
 <pre class="source">
 Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
  var completer = new ChromeCompleter&lt;FileStatusInfo&gt;.oneArg(_createFileStatusInfo);
- _syncFileSystem.callMethod('getFileStatuses', [fileEntries, completer.callback]);
+ _syncFileSystem.callMethod('getFileStatuses', [jsify(fileEntries), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -259,7 +259,7 @@ A callback type for getUsageAndQuota.</p>
 <pre class="source">
 Future&lt;StorageInfo&gt; getUsageAndQuota(FileSystem fileSystem) {
  var completer = new ChromeCompleter&lt;StorageInfo&gt;.oneArg(_createStorageInfo);
- _syncFileSystem.callMethod('getUsageAndQuota', [fileSystem, completer.callback]);
+ _syncFileSystem.callMethod('getUsageAndQuota', [jsify(fileSystem), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -301,7 +301,7 @@ not.</p>
 <pre class="source">
 Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
  var completer = new ChromeCompleter.noArgs();
- _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
+ _syncFileSystem.callMethod('setConflictResolutionPolicy', [jsify(policy), completer.callback]);
  return completer.future;
 }
 </pre>

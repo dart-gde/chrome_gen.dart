@@ -41,7 +41,7 @@ class MediaFileSystemsDetails extends ChromeObject {
  MediaFileSystemsDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  GetMediaFileSystemsInteractivity get interactive =&gt; _createGetMediaFileSystemsInteractivity(proxy['interactive']);
- set interactive(GetMediaFileSystemsInteractivity value) =&gt; proxy['interactive'] = value;
+ set interactive(GetMediaFileSystemsInteractivity value) =&gt; proxy['interactive'] = jsify(value);
 }
 </pre>
 </div>
@@ -94,7 +94,7 @@ MediaFileSystemsDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 GetMediaFileSystemsInteractivity get interactive =&gt; _createGetMediaFileSystemsInteractivity(proxy['interactive']);
 </pre>
 <pre class="source">
-set interactive(GetMediaFileSystemsInteractivity value) =&gt; proxy['interactive'] = value;
+set interactive(GetMediaFileSystemsInteractivity value) =&gt; proxy['interactive'] = jsify(value);
 </pre>
 </div>
 </div>

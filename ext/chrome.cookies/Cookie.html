@@ -107,7 +107,7 @@ class Cookie extends ChromeObject {
   * epoch. Not provided for session cookies.
   */
  dynamic get expirationDate =&gt; proxy['expirationDate'];
- set expirationDate(var value) =&gt; proxy['expirationDate'] = value;
+ set expirationDate(var value) =&gt; proxy['expirationDate'] = jsify(value);
 
  /**
   * The ID of the cookie store containing this cookie, as provided in
@@ -194,7 +194,7 @@ epoch. Not provided for session cookies.</p>
 dynamic get expirationDate =&gt; proxy['expirationDate'];
 </pre>
 <pre class="source">
-set expirationDate(var value) =&gt; proxy['expirationDate'] = value;
+set expirationDate(var value) =&gt; proxy['expirationDate'] = jsify(value);
 </pre>
 </div>
 </div>

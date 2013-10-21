@@ -48,7 +48,7 @@ class AddResponseCookie extends ChromeObject {
   * specified.
   */
  ResponseCookie get cookie =&gt; _createResponseCookie(proxy['cookie']);
- set cookie(ResponseCookie value) =&gt; proxy['cookie'] = value;
+ set cookie(ResponseCookie value) =&gt; proxy['cookie'] = jsify(value);
 }
 </pre>
 </div>
@@ -103,7 +103,7 @@ specified.</p>
 ResponseCookie get cookie =&gt; _createResponseCookie(proxy['cookie']);
 </pre>
 <pre class="source">
-set cookie(ResponseCookie value) =&gt; proxy['cookie'] = value;
+set cookie(ResponseCookie value) =&gt; proxy['cookie'] = jsify(value);
 </pre>
 </div>
 </div>

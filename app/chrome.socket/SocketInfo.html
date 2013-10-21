@@ -46,7 +46,7 @@ class SocketInfo extends ChromeObject {
  SocketInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  SocketType get socketType =&gt; _createSocketType(proxy['socketType']);
- set socketType(SocketType value) =&gt; proxy['socketType'] = value;
+ set socketType(SocketType value) =&gt; proxy['socketType'] = jsify(value);
 
  bool get connected =&gt; proxy['connected'];
  set connected(bool value) =&gt; proxy['connected'] = value;
@@ -206,7 +206,7 @@ final JsObject proxy
 SocketType get socketType =&gt; _createSocketType(proxy['socketType']);
 </pre>
 <pre class="source">
-set socketType(SocketType value) =&gt; proxy['socketType'] = value;
+set socketType(SocketType value) =&gt; proxy['socketType'] = jsify(value);
 </pre>
 </div>
 </div>

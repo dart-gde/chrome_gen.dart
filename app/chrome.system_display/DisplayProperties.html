@@ -52,7 +52,7 @@ class DisplayProperties extends ChromeObject {
  set isPrimary(bool value) =&gt; proxy['isPrimary'] = value;
 
  Insets get overscan =&gt; _createInsets(proxy['overscan']);
- set overscan(Insets value) =&gt; proxy['overscan'] = value;
+ set overscan(Insets value) =&gt; proxy['overscan'] = jsify(value);
 
  int get rotation =&gt; proxy['rotation'];
  set rotation(int value) =&gt; proxy['rotation'] = value;
@@ -179,7 +179,7 @@ set mirroringSourceId(String value) =&gt; proxy['mirroringSourceId'] = value;
 Insets get overscan =&gt; _createInsets(proxy['overscan']);
 </pre>
 <pre class="source">
-set overscan(Insets value) =&gt; proxy['overscan'] = value;
+set overscan(Insets value) =&gt; proxy['overscan'] = jsify(value);
 </pre>
 </div>
 </div>

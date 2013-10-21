@@ -75,7 +75,7 @@ class TtsVoice extends ChromeObject {
   * All of the callback event types that this voice is capable of sending.
   */
  List&lt;String&gt; get eventTypes =&gt; listify(proxy['eventTypes']);
- set eventTypes(List&lt;String&gt; value) =&gt; proxy['eventTypes'] = value;
+ set eventTypes(List&lt;String&gt; value) =&gt; proxy['eventTypes'] = jsify(value);
 }
 </pre>
 </div>
@@ -133,7 +133,7 @@ List&lt;String&gt;         <strong>eventTypes</strong> <a class="anchor-link"
 List&lt;String&gt; get eventTypes =&gt; listify(proxy['eventTypes']);
 </pre>
 <pre class="source">
-set eventTypes(List&lt;String&gt; value) =&gt; proxy['eventTypes'] = value;
+set eventTypes(List&lt;String&gt; value) =&gt; proxy['eventTypes'] = jsify(value);
 </pre>
 </div>
 </div>

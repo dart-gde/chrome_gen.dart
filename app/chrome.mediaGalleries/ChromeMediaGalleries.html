@@ -44,7 +44,7 @@ class ChromeMediaGalleries {
   */
  Future&lt;FileSystem&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
    var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
-   _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
+   _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
    return completer.future;
  }
 
@@ -52,7 +52,7 @@ class ChromeMediaGalleries {
   * Get metadata about a specific media file system.
   */
  MediaFileSystemMetadata getMediaFileSystemMetadata(FileSystem mediaFileSystem) {
-   return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
+   return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [jsify(mediaFileSystem)]));
  }
 }
 </pre>
@@ -67,7 +67,7 @@ class ChromeMediaGalleries {
 <p>Get metadata about a specific media file system.</p>
 <pre class="source">
 MediaFileSystemMetadata getMediaFileSystemMetadata(FileSystem mediaFileSystem) {
- return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [mediaFileSystem]));
+ return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [jsify(mediaFileSystem)]));
 }
 </pre>
 </div>
@@ -82,7 +82,7 @@ configured or available, the callback will receive an empty array.</p>
 <pre class="source">
 Future&lt;FileSystem&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
  var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
- _mediaGalleries.callMethod('getMediaFileSystems', [details, completer.callback]);
+ _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
  return completer.future;
 }
 </pre>

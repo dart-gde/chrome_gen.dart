@@ -47,25 +47,25 @@ class Coordinates extends ChromeObject {
  Coordinates.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  double get latitude =&gt; proxy['latitude'];
- set latitude(double value) =&gt; proxy['latitude'] = value;
+ set latitude(double value) =&gt; proxy['latitude'] = jsify(value);
 
  double get longitude =&gt; proxy['longitude'];
- set longitude(double value) =&gt; proxy['longitude'] = value;
+ set longitude(double value) =&gt; proxy['longitude'] = jsify(value);
 
  double get altitude =&gt; proxy['altitude'];
- set altitude(double value) =&gt; proxy['altitude'] = value;
+ set altitude(double value) =&gt; proxy['altitude'] = jsify(value);
 
  double get accuracy =&gt; proxy['accuracy'];
- set accuracy(double value) =&gt; proxy['accuracy'] = value;
+ set accuracy(double value) =&gt; proxy['accuracy'] = jsify(value);
 
  double get altitudeAccuracy =&gt; proxy['altitudeAccuracy'];
- set altitudeAccuracy(double value) =&gt; proxy['altitudeAccuracy'] = value;
+ set altitudeAccuracy(double value) =&gt; proxy['altitudeAccuracy'] = jsify(value);
 
  double get heading =&gt; proxy['heading'];
- set heading(double value) =&gt; proxy['heading'] = value;
+ set heading(double value) =&gt; proxy['heading'] = jsify(value);
 
  double get speed =&gt; proxy['speed'];
- set speed(double value) =&gt; proxy['speed'] = value;
+ set speed(double value) =&gt; proxy['speed'] = jsify(value);
 }
 </pre>
 </div>
@@ -124,7 +124,7 @@ double         <strong>accuracy</strong> <a class="anchor-link"
 double get accuracy =&gt; proxy['accuracy'];
 </pre>
 <pre class="source">
-set accuracy(double value) =&gt; proxy['accuracy'] = value;
+set accuracy(double value) =&gt; proxy['accuracy'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -139,7 +139,7 @@ double         <strong>altitude</strong> <a class="anchor-link"
 double get altitude =&gt; proxy['altitude'];
 </pre>
 <pre class="source">
-set altitude(double value) =&gt; proxy['altitude'] = value;
+set altitude(double value) =&gt; proxy['altitude'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -154,7 +154,7 @@ double         <strong>altitudeAccuracy</strong> <a class="anchor-link"
 double get altitudeAccuracy =&gt; proxy['altitudeAccuracy'];
 </pre>
 <pre class="source">
-set altitudeAccuracy(double value) =&gt; proxy['altitudeAccuracy'] = value;
+set altitudeAccuracy(double value) =&gt; proxy['altitudeAccuracy'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -169,7 +169,7 @@ double         <strong>heading</strong> <a class="anchor-link"
 double get heading =&gt; proxy['heading'];
 </pre>
 <pre class="source">
-set heading(double value) =&gt; proxy['heading'] = value;
+set heading(double value) =&gt; proxy['heading'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -184,7 +184,7 @@ double         <strong>latitude</strong> <a class="anchor-link"
 double get latitude =&gt; proxy['latitude'];
 </pre>
 <pre class="source">
-set latitude(double value) =&gt; proxy['latitude'] = value;
+set latitude(double value) =&gt; proxy['latitude'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -199,7 +199,7 @@ double         <strong>longitude</strong> <a class="anchor-link"
 double get longitude =&gt; proxy['longitude'];
 </pre>
 <pre class="source">
-set longitude(double value) =&gt; proxy['longitude'] = value;
+set longitude(double value) =&gt; proxy['longitude'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -226,7 +226,7 @@ double         <strong>speed</strong> <a class="anchor-link"
 double get speed =&gt; proxy['speed'];
 </pre>
 <pre class="source">
-set speed(double value) =&gt; proxy['speed'] = value;
+set speed(double value) =&gt; proxy['speed'] = jsify(value);
 </pre>
 </div>
 </div>

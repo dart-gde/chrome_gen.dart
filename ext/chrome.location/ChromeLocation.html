@@ -46,7 +46,7 @@ class ChromeLocation {
   * [requestInfo]: Optional parameters for this request.
   */
  void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
-   _location.callMethod('watchLocation', [name, requestInfo]);
+   _location.callMethod('watchLocation', [name, jsify(requestInfo)]);
  }
 
  /**
@@ -129,7 +129,7 @@ string.
 <span class="param">requestInfo</span>: Optional parameters for this request.</p>
 <pre class="source">
 void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
- _location.callMethod('watchLocation', [name, requestInfo]);
+ _location.callMethod('watchLocation', [name, jsify(requestInfo)]);
 }
 </pre>
 </div>

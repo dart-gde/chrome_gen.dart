@@ -65,7 +65,7 @@ class InterfaceDescriptor extends ChromeObject {
  set description(String value) =&gt; proxy['description'] = value;
 
  EndpointDescriptor get endpoints =&gt; _createEndpointDescriptor(proxy['endpoints']);
- set endpoints(EndpointDescriptor value) =&gt; proxy['endpoints'] = value;
+ set endpoints(EndpointDescriptor value) =&gt; proxy['endpoints'] = jsify(value);
 }
 </pre>
 </div>
@@ -154,7 +154,7 @@ set description(String value) =&gt; proxy['description'] = value;
 EndpointDescriptor get endpoints =&gt; _createEndpointDescriptor(proxy['endpoints']);
 </pre>
 <pre class="source">
-set endpoints(EndpointDescriptor value) =&gt; proxy['endpoints'] = value;
+set endpoints(EndpointDescriptor value) =&gt; proxy['endpoints'] = jsify(value);
 </pre>
 </div>
 </div>

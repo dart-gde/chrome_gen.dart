@@ -47,13 +47,13 @@ class Cache extends ChromeObject {
   * The size of the cache, in bytes.
   */
  dynamic get size =&gt; proxy['size'];
- set size(var value) =&gt; proxy['size'] = value;
+ set size(var value) =&gt; proxy['size'] = jsify(value);
 
  /**
   * The part of the cache that is utilized, in bytes.
   */
  dynamic get liveSize =&gt; proxy['liveSize'];
- set liveSize(var value) =&gt; proxy['liveSize'] = value;
+ set liveSize(var value) =&gt; proxy['liveSize'] = jsify(value);
 }
 </pre>
 </div>
@@ -108,7 +108,7 @@ var         <strong>liveSize</strong> <a class="anchor-link"
 dynamic get liveSize =&gt; proxy['liveSize'];
 </pre>
 <pre class="source">
-set liveSize(var value) =&gt; proxy['liveSize'] = value;
+set liveSize(var value) =&gt; proxy['liveSize'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -136,7 +136,7 @@ var         <strong>size</strong> <a class="anchor-link"
 dynamic get size =&gt; proxy['size'];
 </pre>
 <pre class="source">
-set size(var value) =&gt; proxy['size'] = value;
+set size(var value) =&gt; proxy['size'] = jsify(value);
 </pre>
 </div>
 </div>

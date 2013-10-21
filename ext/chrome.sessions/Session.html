@@ -54,14 +54,14 @@ class Session extends ChromeObject {
   * [Session.window] will be set.
   */
  Tab get tab =&gt; _createTab(proxy['tab']);
- set tab(Tab value) =&gt; proxy['tab'] = value;
+ set tab(Tab value) =&gt; proxy['tab'] = jsify(value);
 
  /**
   * The [windows.Window], if this entry describes a window. Either this or
   * [Session.tab] will be set.
   */
  Window get window =&gt; _createWindow(proxy['window']);
- set window(Window value) =&gt; proxy['window'] = value;
+ set window(Window value) =&gt; proxy['window'] = jsify(value);
 }
 </pre>
 </div>
@@ -147,7 +147,7 @@ final JsObject proxy
 Tab get tab =&gt; _createTab(proxy['tab']);
 </pre>
 <pre class="source">
-set tab(Tab value) =&gt; proxy['tab'] = value;
+set tab(Tab value) =&gt; proxy['tab'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -164,7 +164,7 @@ set tab(Tab value) =&gt; proxy['tab'] = value;
 Window get window =&gt; _createWindow(proxy['window']);
 </pre>
 <pre class="source">
-set window(Window value) =&gt; proxy['window'] = value;
+set window(Window value) =&gt; proxy['window'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -41,7 +41,7 @@ class DisconnectOptions extends ChromeObject {
  DisconnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  Socket get socket =&gt; _createSocket(proxy['socket']);
- set socket(Socket value) =&gt; proxy['socket'] = value;
+ set socket(Socket value) =&gt; proxy['socket'] = jsify(value);
 }
 </pre>
 </div>
@@ -106,7 +106,7 @@ final JsObject proxy
 Socket get socket =&gt; _createSocket(proxy['socket']);
 </pre>
 <pre class="source">
-set socket(Socket value) =&gt; proxy['socket'] = value;
+set socket(Socket value) =&gt; proxy['socket'] = jsify(value);
 </pre>
 </div>
 </div>

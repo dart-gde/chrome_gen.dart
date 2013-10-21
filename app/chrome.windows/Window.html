@@ -102,7 +102,7 @@ class Window extends ChromeObject {
   * Array of [tabs.Tab] objects representing the current tabs in the window.
   */
  List&lt;Tab&gt; get tabs =&gt; listify(proxy['tabs'], _createTab);
- set tabs(List&lt;Tab&gt; value) =&gt; proxy['tabs'] = value;
+ set tabs(List&lt;Tab&gt; value) =&gt; proxy['tabs'] = jsify(value);
 
  /**
   * Whether the window is incognito.
@@ -355,7 +355,7 @@ List&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt;         <strong>tabs</stro
 List&lt;Tab&gt; get tabs =&gt; listify(proxy['tabs'], _createTab);
 </pre>
 <pre class="source">
-set tabs(List&lt;Tab&gt; value) =&gt; proxy['tabs'] = value;
+set tabs(List&lt;Tab&gt; value) =&gt; proxy['tabs'] = jsify(value);
 </pre>
 </div>
 </div>

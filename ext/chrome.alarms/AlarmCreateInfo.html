@@ -43,13 +43,13 @@ class AlarmCreateInfo extends ChromeObject {
  AlarmCreateInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  double get when =&gt; proxy['when'];
- set when(double value) =&gt; proxy['when'] = value;
+ set when(double value) =&gt; proxy['when'] = jsify(value);
 
  double get delayInMinutes =&gt; proxy['delayInMinutes'];
- set delayInMinutes(double value) =&gt; proxy['delayInMinutes'] = value;
+ set delayInMinutes(double value) =&gt; proxy['delayInMinutes'] = jsify(value);
 
  double get periodInMinutes =&gt; proxy['periodInMinutes'];
- set periodInMinutes(double value) =&gt; proxy['periodInMinutes'] = value;
+ set periodInMinutes(double value) =&gt; proxy['periodInMinutes'] = jsify(value);
 }
 </pre>
 </div>
@@ -104,7 +104,7 @@ double         <strong>delayInMinutes</strong> <a class="anchor-link"
 double get delayInMinutes =&gt; proxy['delayInMinutes'];
 </pre>
 <pre class="source">
-set delayInMinutes(double value) =&gt; proxy['delayInMinutes'] = value;
+set delayInMinutes(double value) =&gt; proxy['delayInMinutes'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -119,7 +119,7 @@ double         <strong>periodInMinutes</strong> <a class="anchor-link"
 double get periodInMinutes =&gt; proxy['periodInMinutes'];
 </pre>
 <pre class="source">
-set periodInMinutes(double value) =&gt; proxy['periodInMinutes'] = value;
+set periodInMinutes(double value) =&gt; proxy['periodInMinutes'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -146,7 +146,7 @@ double         <strong>when</strong> <a class="anchor-link"
 double get when =&gt; proxy['when'];
 </pre>
 <pre class="source">
-set when(double value) =&gt; proxy['when'] = value;
+set when(double value) =&gt; proxy['when'] = jsify(value);
 </pre>
 </div>
 </div>

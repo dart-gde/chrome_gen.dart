@@ -44,16 +44,16 @@ class FileInfo extends ChromeObject {
  FileInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  dynamic get fileEntry =&gt; proxy['fileEntry'];
- set fileEntry(var value) =&gt; proxy['fileEntry'] = value;
+ set fileEntry(var value) =&gt; proxy['fileEntry'] = jsify(value);
 
  FileStatus get status =&gt; _createFileStatus(proxy['status']);
- set status(FileStatus value) =&gt; proxy['status'] = value;
+ set status(FileStatus value) =&gt; proxy['status'] = jsify(value);
 
  SyncAction get action =&gt; _createSyncAction(proxy['action']);
- set action(SyncAction value) =&gt; proxy['action'] = value;
+ set action(SyncAction value) =&gt; proxy['action'] = jsify(value);
 
  SyncDirection get direction =&gt; _createSyncDirection(proxy['direction']);
- set direction(SyncDirection value) =&gt; proxy['direction'] = value;
+ set direction(SyncDirection value) =&gt; proxy['direction'] = jsify(value);
 }
 </pre>
 </div>
@@ -109,7 +109,7 @@ FileInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 SyncAction get action =&gt; _createSyncAction(proxy['action']);
 </pre>
 <pre class="source">
-set action(SyncAction value) =&gt; proxy['action'] = value;
+set action(SyncAction value) =&gt; proxy['action'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -124,7 +124,7 @@ set action(SyncAction value) =&gt; proxy['action'] = value;
 SyncDirection get direction =&gt; _createSyncDirection(proxy['direction']);
 </pre>
 <pre class="source">
-set direction(SyncDirection value) =&gt; proxy['direction'] = value;
+set direction(SyncDirection value) =&gt; proxy['direction'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -139,7 +139,7 @@ var         <strong>fileEntry</strong> <a class="anchor-link"
 dynamic get fileEntry =&gt; proxy['fileEntry'];
 </pre>
 <pre class="source">
-set fileEntry(var value) =&gt; proxy['fileEntry'] = value;
+set fileEntry(var value) =&gt; proxy['fileEntry'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -166,7 +166,7 @@ final JsObject proxy
 FileStatus get status =&gt; _createFileStatus(proxy['status']);
 </pre>
 <pre class="source">
-set status(FileStatus value) =&gt; proxy['status'] = value;
+set status(FileStatus value) =&gt; proxy['status'] = jsify(value);
 </pre>
 </div>
 </div>

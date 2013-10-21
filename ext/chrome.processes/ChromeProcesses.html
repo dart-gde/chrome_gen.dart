@@ -87,7 +87,7 @@ class ChromeProcesses {
   */
  Future&lt;Map&gt; getProcessInfo(dynamic processIds, bool includeMemory) {
    var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
-   _processes.callMethod('getProcessInfo', [processIds, includeMemory, completer.callback]);
+   _processes.callMethod('getProcessInfo', [jsify(processIds), includeMemory, completer.callback]);
    return completer.future;
  }
 
@@ -259,7 +259,7 @@ Process object.</p>
 <pre class="source">
 Future&lt;Map&gt; getProcessInfo(dynamic processIds, bool includeMemory) {
  var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
- _processes.callMethod('getProcessInfo', [processIds, includeMemory, completer.callback]);
+ _processes.callMethod('getProcessInfo', [jsify(processIds), includeMemory, completer.callback]);
  return completer.future;
 }
 </pre>

@@ -43,10 +43,10 @@ class WatchLocationRequestInfo extends ChromeObject {
  WatchLocationRequestInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  double get minDistanceInMeters =&gt; proxy['minDistanceInMeters'];
- set minDistanceInMeters(double value) =&gt; proxy['minDistanceInMeters'] = value;
+ set minDistanceInMeters(double value) =&gt; proxy['minDistanceInMeters'] = jsify(value);
 
  double get minTimeInMilliseconds =&gt; proxy['minTimeInMilliseconds'];
- set minTimeInMilliseconds(double value) =&gt; proxy['minTimeInMilliseconds'] = value;
+ set minTimeInMilliseconds(double value) =&gt; proxy['minTimeInMilliseconds'] = jsify(value);
 
  int get maximumAge =&gt; proxy['maximumAge'];
  set maximumAge(int value) =&gt; proxy['maximumAge'] = value;
@@ -119,7 +119,7 @@ double         <strong>minDistanceInMeters</strong> <a class="anchor-link"
 double get minDistanceInMeters =&gt; proxy['minDistanceInMeters'];
 </pre>
 <pre class="source">
-set minDistanceInMeters(double value) =&gt; proxy['minDistanceInMeters'] = value;
+set minDistanceInMeters(double value) =&gt; proxy['minDistanceInMeters'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -134,7 +134,7 @@ double         <strong>minTimeInMilliseconds</strong> <a class="anchor-link"
 double get minTimeInMilliseconds =&gt; proxy['minTimeInMilliseconds'];
 </pre>
 <pre class="source">
-set minTimeInMilliseconds(double value) =&gt; proxy['minTimeInMilliseconds'] = value;
+set minTimeInMilliseconds(double value) =&gt; proxy['minTimeInMilliseconds'] = jsify(value);
 </pre>
 </div>
 </div>

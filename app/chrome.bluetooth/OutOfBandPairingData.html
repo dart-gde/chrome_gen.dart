@@ -42,10 +42,10 @@ class OutOfBandPairingData extends ChromeObject {
  OutOfBandPairingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  ArrayBuffer get hash =&gt; _createArrayBuffer(proxy['hash']);
- set hash(ArrayBuffer value) =&gt; proxy['hash'] = value;
+ set hash(ArrayBuffer value) =&gt; proxy['hash'] = jsify(value);
 
  ArrayBuffer get randomizer =&gt; _createArrayBuffer(proxy['randomizer']);
- set randomizer(ArrayBuffer value) =&gt; proxy['randomizer'] = value;
+ set randomizer(ArrayBuffer value) =&gt; proxy['randomizer'] = jsify(value);
 }
 </pre>
 </div>
@@ -99,7 +99,7 @@ OutOfBandPairingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 ArrayBuffer get hash =&gt; _createArrayBuffer(proxy['hash']);
 </pre>
 <pre class="source">
-set hash(ArrayBuffer value) =&gt; proxy['hash'] = value;
+set hash(ArrayBuffer value) =&gt; proxy['hash'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -126,7 +126,7 @@ final JsObject proxy
 ArrayBuffer get randomizer =&gt; _createArrayBuffer(proxy['randomizer']);
 </pre>
 <pre class="source">
-set randomizer(ArrayBuffer value) =&gt; proxy['randomizer'] = value;
+set randomizer(ArrayBuffer value) =&gt; proxy['randomizer'] = jsify(value);
 </pre>
 </div>
 </div>

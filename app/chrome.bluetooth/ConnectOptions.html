@@ -42,10 +42,10 @@ class ConnectOptions extends ChromeObject {
  ConnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  BluetoothDevice get device =&gt; _createBluetoothDevice(proxy['device']);
- set device(BluetoothDevice value) =&gt; proxy['device'] = value;
+ set device(BluetoothDevice value) =&gt; proxy['device'] = jsify(value);
 
  Profile get profile =&gt; _createProfile(proxy['profile']);
- set profile(Profile value) =&gt; proxy['profile'] = value;
+ set profile(Profile value) =&gt; proxy['profile'] = jsify(value);
 }
 </pre>
 </div>
@@ -99,7 +99,7 @@ ConnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 BluetoothDevice get device =&gt; _createBluetoothDevice(proxy['device']);
 </pre>
 <pre class="source">
-set device(BluetoothDevice value) =&gt; proxy['device'] = value;
+set device(BluetoothDevice value) =&gt; proxy['device'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -114,7 +114,7 @@ set device(BluetoothDevice value) =&gt; proxy['device'] = value;
 Profile get profile =&gt; _createProfile(proxy['profile']);
 </pre>
 <pre class="source">
-set profile(Profile value) =&gt; proxy['profile'] = value;
+set profile(Profile value) =&gt; proxy['profile'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -48,13 +48,13 @@ class ControlTransferInfo extends ChromeObject {
  ControlTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  Direction get direction =&gt; _createDirection(proxy['direction']);
- set direction(Direction value) =&gt; proxy['direction'] = value;
+ set direction(Direction value) =&gt; proxy['direction'] = jsify(value);
 
  Recipient get recipient =&gt; _createRecipient(proxy['recipient']);
- set recipient(Recipient value) =&gt; proxy['recipient'] = value;
+ set recipient(Recipient value) =&gt; proxy['recipient'] = jsify(value);
 
  RequestType get requestType =&gt; _createRequestType(proxy['requestType']);
- set requestType(RequestType value) =&gt; proxy['requestType'] = value;
+ set requestType(RequestType value) =&gt; proxy['requestType'] = jsify(value);
 
  int get request =&gt; proxy['request'];
  set request(int value) =&gt; proxy['request'] = value;
@@ -69,7 +69,7 @@ class ControlTransferInfo extends ChromeObject {
  set length(int value) =&gt; proxy['length'] = value;
 
  ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
- set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+ set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 }
 </pre>
 </div>
@@ -129,7 +129,7 @@ ControlTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
 </pre>
 <pre class="source">
-set data(ArrayBuffer value) =&gt; proxy['data'] = value;
+set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -144,7 +144,7 @@ set data(ArrayBuffer value) =&gt; proxy['data'] = value;
 Direction get direction =&gt; _createDirection(proxy['direction']);
 </pre>
 <pre class="source">
-set direction(Direction value) =&gt; proxy['direction'] = value;
+set direction(Direction value) =&gt; proxy['direction'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -201,7 +201,7 @@ final JsObject proxy
 Recipient get recipient =&gt; _createRecipient(proxy['recipient']);
 </pre>
 <pre class="source">
-set recipient(Recipient value) =&gt; proxy['recipient'] = value;
+set recipient(Recipient value) =&gt; proxy['recipient'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -231,7 +231,7 @@ set request(int value) =&gt; proxy['request'] = value;
 RequestType get requestType =&gt; _createRequestType(proxy['requestType']);
 </pre>
 <pre class="source">
-set requestType(RequestType value) =&gt; proxy['requestType'] = value;
+set requestType(RequestType value) =&gt; proxy['requestType'] = jsify(value);
 </pre>
 </div>
 </div>

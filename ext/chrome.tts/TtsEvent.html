@@ -64,7 +64,7 @@ class TtsEvent extends ChromeObject {
   * The index of the current character in the utterance.
   */
  dynamic get charIndex =&gt; proxy['charIndex'];
- set charIndex(var value) =&gt; proxy['charIndex'] = value;
+ set charIndex(var value) =&gt; proxy['charIndex'] = jsify(value);
 
  /**
   * The error description, if the event type is 'error'.
@@ -126,7 +126,7 @@ var         <strong>charIndex</strong> <a class="anchor-link"
 dynamic get charIndex =&gt; proxy['charIndex'];
 </pre>
 <pre class="source">
-set charIndex(var value) =&gt; proxy['charIndex'] = value;
+set charIndex(var value) =&gt; proxy['charIndex'] = jsify(value);
 </pre>
 </div>
 </div>

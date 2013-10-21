@@ -66,7 +66,7 @@ class BlockingResponse extends ChromeObject {
   * request is made with these request headers instead.
   */
  HttpHeaders get requestHeaders =&gt; _createHttpHeaders(proxy['requestHeaders']);
- set requestHeaders(HttpHeaders value) =&gt; proxy['requestHeaders'] = value;
+ set requestHeaders(HttpHeaders value) =&gt; proxy['requestHeaders'] = jsify(value);
 
  /**
   * Only used as a response to the onHeadersReceived event. If set, the server
@@ -76,14 +76,14 @@ class BlockingResponse extends ChromeObject {
   * `responseHeaders` for each request).
   */
  HttpHeaders get responseHeaders =&gt; _createHttpHeaders(proxy['responseHeaders']);
- set responseHeaders(HttpHeaders value) =&gt; proxy['responseHeaders'] = value;
+ set responseHeaders(HttpHeaders value) =&gt; proxy['responseHeaders'] = jsify(value);
 
  /**
   * Only used as a response to the onAuthRequired event. If set, the request is
   * made using the supplied credentials.
   */
  Map get authCredentials =&gt; mapify(proxy['authCredentials']);
- set authCredentials(Map value) =&gt; proxy['authCredentials'] = value;
+ set authCredentials(Map value) =&gt; proxy['authCredentials'] = jsify(value);
 }
 </pre>
 </div>
@@ -142,7 +142,7 @@ made using the supplied credentials.</p>
 Map get authCredentials =&gt; mapify(proxy['authCredentials']);
 </pre>
 <pre class="source">
-set authCredentials(Map value) =&gt; proxy['authCredentials'] = value;
+set authCredentials(Map value) =&gt; proxy['authCredentials'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -206,7 +206,7 @@ request is made with these request headers instead.</p>
 HttpHeaders get requestHeaders =&gt; _createHttpHeaders(proxy['requestHeaders']);
 </pre>
 <pre class="source">
-set requestHeaders(HttpHeaders value) =&gt; proxy['requestHeaders'] = value;
+set requestHeaders(HttpHeaders value) =&gt; proxy['requestHeaders'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -226,7 +226,7 @@ to limit the number of conflicts (only one extension may modify
 HttpHeaders get responseHeaders =&gt; _createHttpHeaders(proxy['responseHeaders']);
 </pre>
 <pre class="source">
-set responseHeaders(HttpHeaders value) =&gt; proxy['responseHeaders'] = value;
+set responseHeaders(HttpHeaders value) =&gt; proxy['responseHeaders'] = jsify(value);
 </pre>
 </div>
 </div>

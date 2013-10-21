@@ -45,7 +45,7 @@ class LaunchData extends ChromeObject {
  set id(String value) =&gt; proxy['id'] = value;
 
  LaunchItem get items =&gt; _createLaunchItem(proxy['items']);
- set items(LaunchItem value) =&gt; proxy['items'] = value;
+ set items(LaunchItem value) =&gt; proxy['items'] = jsify(value);
 }
 </pre>
 </div>
@@ -114,7 +114,7 @@ set id(String value) =&gt; proxy['id'] = value;
 LaunchItem get items =&gt; _createLaunchItem(proxy['items']);
 </pre>
 <pre class="source">
-set items(LaunchItem value) =&gt; proxy['items'] = value;
+set items(LaunchItem value) =&gt; proxy['items'] = jsify(value);
 </pre>
 </div>
 </div>

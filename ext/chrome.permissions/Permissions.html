@@ -45,13 +45,13 @@ class Permissions extends ChromeObject {
   * List of named permissions (does not include hosts or origins).
   */
  List&lt;String&gt; get permissions =&gt; listify(proxy['permissions']);
- set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = value;
+ set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = jsify(value);
 
  /**
   * List of origin permissions.
   */
  List&lt;String&gt; get origins =&gt; listify(proxy['origins']);
- set origins(List&lt;String&gt; value) =&gt; proxy['origins'] = value;
+ set origins(List&lt;String&gt; value) =&gt; proxy['origins'] = jsify(value);
 }
 </pre>
 </div>
@@ -106,7 +106,7 @@ List&lt;String&gt;         <strong>origins</strong> <a class="anchor-link"
 List&lt;String&gt; get origins =&gt; listify(proxy['origins']);
 </pre>
 <pre class="source">
-set origins(List&lt;String&gt; value) =&gt; proxy['origins'] = value;
+set origins(List&lt;String&gt; value) =&gt; proxy['origins'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -122,7 +122,7 @@ List&lt;String&gt;         <strong>permissions</strong> <a class="anchor-link"
 List&lt;String&gt; get permissions =&gt; listify(proxy['permissions']);
 </pre>
 <pre class="source">
-set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = value;
+set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = jsify(value);
 </pre>
 </div>
 </div>

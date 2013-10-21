@@ -50,19 +50,19 @@ class EndpointDescriptor extends ChromeObject {
  set address(int value) =&gt; proxy['address'] = value;
 
  TransferType get type =&gt; _createTransferType(proxy['type']);
- set type(TransferType value) =&gt; proxy['type'] = value;
+ set type(TransferType value) =&gt; proxy['type'] = jsify(value);
 
  Direction get direction =&gt; _createDirection(proxy['direction']);
- set direction(Direction value) =&gt; proxy['direction'] = value;
+ set direction(Direction value) =&gt; proxy['direction'] = jsify(value);
 
  int get maximumPacketSize =&gt; proxy['maximumPacketSize'];
  set maximumPacketSize(int value) =&gt; proxy['maximumPacketSize'] = value;
 
  SynchronizationType get synchronization =&gt; _createSynchronizationType(proxy['synchronization']);
- set synchronization(SynchronizationType value) =&gt; proxy['synchronization'] = value;
+ set synchronization(SynchronizationType value) =&gt; proxy['synchronization'] = jsify(value);
 
  UsageType get usage =&gt; _createUsageType(proxy['usage']);
- set usage(UsageType value) =&gt; proxy['usage'] = value;
+ set usage(UsageType value) =&gt; proxy['usage'] = jsify(value);
 
  int get pollingInterval =&gt; proxy['pollingInterval'];
  set pollingInterval(int value) =&gt; proxy['pollingInterval'] = value;
@@ -139,7 +139,7 @@ set address(int value) =&gt; proxy['address'] = value;
 Direction get direction =&gt; _createDirection(proxy['direction']);
 </pre>
 <pre class="source">
-set direction(Direction value) =&gt; proxy['direction'] = value;
+set direction(Direction value) =&gt; proxy['direction'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -196,7 +196,7 @@ final JsObject proxy
 SynchronizationType get synchronization =&gt; _createSynchronizationType(proxy['synchronization']);
 </pre>
 <pre class="source">
-set synchronization(SynchronizationType value) =&gt; proxy['synchronization'] = value;
+set synchronization(SynchronizationType value) =&gt; proxy['synchronization'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -211,7 +211,7 @@ set synchronization(SynchronizationType value) =&gt; proxy['synchronization'] = 
 TransferType get type =&gt; _createTransferType(proxy['type']);
 </pre>
 <pre class="source">
-set type(TransferType value) =&gt; proxy['type'] = value;
+set type(TransferType value) =&gt; proxy['type'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -226,7 +226,7 @@ set type(TransferType value) =&gt; proxy['type'] = value;
 UsageType get usage =&gt; _createUsageType(proxy['usage']);
 </pre>
 <pre class="source">
-set usage(UsageType value) =&gt; proxy['usage'] = value;
+set usage(UsageType value) =&gt; proxy['usage'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -42,7 +42,7 @@ class ServiceInfo extends ChromeObject {
  ServiceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  ServiceStatus get state =&gt; _createServiceStatus(proxy['state']);
- set state(ServiceStatus value) =&gt; proxy['state'] = value;
+ set state(ServiceStatus value) =&gt; proxy['state'] = jsify(value);
 
  String get description =&gt; proxy['description'];
  set description(String value) =&gt; proxy['description'] = value;
@@ -126,7 +126,7 @@ final JsObject proxy
 ServiceStatus get state =&gt; _createServiceStatus(proxy['state']);
 </pre>
 <pre class="source">
-set state(ServiceStatus value) =&gt; proxy['state'] = value;
+set state(ServiceStatus value) =&gt; proxy['state'] = jsify(value);
 </pre>
 </div>
 </div>

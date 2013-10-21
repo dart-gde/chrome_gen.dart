@@ -59,7 +59,7 @@ class ChromeSystemDisplay {
   */
  Future setDisplayProperties(String id, DisplayProperties info) {
    var completer = new ChromeCompleter.noArgs();
-   _system_display.callMethod('setDisplayProperties', [id, info, completer.callback]);
+   _system_display.callMethod('setDisplayProperties', [id, jsify(info), completer.callback]);
    return completer.future;
  }
 
@@ -123,7 +123,7 @@ whether the function succeeded, <code>runtime.lastError</code> should be queried
 <pre class="source">
 Future setDisplayProperties(String id, DisplayProperties info) {
  var completer = new ChromeCompleter.noArgs();
- _system_display.callMethod('setDisplayProperties', [id, info, completer.callback]);
+ _system_display.callMethod('setDisplayProperties', [id, jsify(info), completer.callback]);
  return completer.future;
 }
 </pre>

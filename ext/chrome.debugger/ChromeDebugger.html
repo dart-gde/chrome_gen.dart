@@ -50,7 +50,7 @@ class ChromeDebugger {
   */
  Future attach(Debuggee target, String requiredVersion) {
    var completer = new ChromeCompleter.noArgs();
-   _debugger.callMethod('attach', [target, requiredVersion, completer.callback]);
+   _debugger.callMethod('attach', [jsify(target), requiredVersion, completer.callback]);
    return completer.future;
  }
 
@@ -61,7 +61,7 @@ class ChromeDebugger {
   */
  Future detach(Debuggee target) {
    var completer = new ChromeCompleter.noArgs();
-   _debugger.callMethod('detach', [target, completer.callback]);
+   _debugger.callMethod('detach', [jsify(target), completer.callback]);
    return completer.future;
  }
 
@@ -83,7 +83,7 @@ class ChromeDebugger {
   */
  Future&lt;Map&lt;String, dynamic&gt;&gt; sendCommand(Debuggee target, String method, [Map&lt;String, dynamic&gt; commandParams]) {
    var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
-   _debugger.callMethod('sendCommand', [target, method, jsify(commandParams), completer.callback]);
+   _debugger.callMethod('sendCommand', [jsify(target), method, jsify(commandParams), completer.callback]);
    return completer.future;
  }
 
@@ -168,7 +168,7 @@ minor version. List of the protocol versions can be obtained
 <pre class="source">
 Future attach(Debuggee target, String requiredVersion) {
  var completer = new ChromeCompleter.noArgs();
- _debugger.callMethod('attach', [target, requiredVersion, completer.callback]);
+ _debugger.callMethod('attach', [jsify(target), requiredVersion, completer.callback]);
  return completer.future;
 }
 </pre>
@@ -185,7 +185,7 @@ Future <strong>detach</strong>(<a href="../chrome.debugger/Debuggee.html">Debugg
 <pre class="source">
 Future detach(Debuggee target) {
  var completer = new ChromeCompleter.noArgs();
- _debugger.callMethod('detach', [target, completer.callback]);
+ _debugger.callMethod('detach', [jsify(target), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -229,7 +229,7 @@ on the method and is defined by the remote debugging protocol.</p>
 <pre class="source">
 Future&lt;Map&lt;String, dynamic&gt;&gt; sendCommand(Debuggee target, String method, [Map&lt;String, dynamic&gt; commandParams]) {
  var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
- _debugger.callMethod('sendCommand', [target, method, jsify(commandParams), completer.callback]);
+ _debugger.callMethod('sendCommand', [jsify(target), method, jsify(commandParams), completer.callback]);
  return completer.future;
 }
 </pre>

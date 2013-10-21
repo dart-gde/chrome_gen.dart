@@ -53,16 +53,16 @@ class DownloadOptions extends ChromeObject {
  set filename(String value) =&gt; proxy['filename'] = value;
 
  FilenameConflictAction get conflictAction =&gt; _createFilenameConflictAction(proxy['conflictAction']);
- set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = value;
+ set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = jsify(value);
 
  bool get saveAs =&gt; proxy['saveAs'];
  set saveAs(bool value) =&gt; proxy['saveAs'] = value;
 
  HttpMethod get method =&gt; _createHttpMethod(proxy['method']);
- set method(HttpMethod value) =&gt; proxy['method'] = value;
+ set method(HttpMethod value) =&gt; proxy['method'] = jsify(value);
 
  HeaderNameValuePair get headers =&gt; _createHeaderNameValuePair(proxy['headers']);
- set headers(HeaderNameValuePair value) =&gt; proxy['headers'] = value;
+ set headers(HeaderNameValuePair value) =&gt; proxy['headers'] = jsify(value);
 
  String get body =&gt; proxy['body'];
  set body(String value) =&gt; proxy['body'] = value;
@@ -139,7 +139,7 @@ set body(String value) =&gt; proxy['body'] = value;
 FilenameConflictAction get conflictAction =&gt; _createFilenameConflictAction(proxy['conflictAction']);
 </pre>
 <pre class="source">
-set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = value;
+set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -169,7 +169,7 @@ set filename(String value) =&gt; proxy['filename'] = value;
 HeaderNameValuePair get headers =&gt; _createHeaderNameValuePair(proxy['headers']);
 </pre>
 <pre class="source">
-set headers(HeaderNameValuePair value) =&gt; proxy['headers'] = value;
+set headers(HeaderNameValuePair value) =&gt; proxy['headers'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -184,7 +184,7 @@ set headers(HeaderNameValuePair value) =&gt; proxy['headers'] = value;
 HttpMethod get method =&gt; _createHttpMethod(proxy['method']);
 </pre>
 <pre class="source">
-set method(HttpMethod value) =&gt; proxy['method'] = value;
+set method(HttpMethod value) =&gt; proxy['method'] = jsify(value);
 </pre>
 </div>
 </div>

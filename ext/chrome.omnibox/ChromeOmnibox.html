@@ -57,7 +57,7 @@ class ChromeOmnibox {
   * parameter.
   */
  void setDefaultSuggestion(DefaultSuggestResult suggestion) {
-   _omnibox.callMethod('setDefaultSuggestion', [suggestion]);
+   _omnibox.callMethod('setDefaultSuggestion', [jsify(suggestion)]);
  }
 
  /**
@@ -184,7 +184,7 @@ underneath the URL bar.</p>
 parameter.</p>
 <pre class="source">
 void setDefaultSuggestion(DefaultSuggestResult suggestion) {
- _omnibox.callMethod('setDefaultSuggestion', [suggestion]);
+ _omnibox.callMethod('setDefaultSuggestion', [jsify(suggestion)]);
 }
 </pre>
 </div>

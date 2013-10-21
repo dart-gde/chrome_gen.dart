@@ -57,7 +57,7 @@ class InputDeviceInfo extends ChromeObject {
  set isMuted(bool value) =&gt; proxy['isMuted'] = value;
 
  double get gain =&gt; proxy['gain'];
- set gain(double value) =&gt; proxy['gain'] = value;
+ set gain(double value) =&gt; proxy['gain'] = jsify(value);
 }
 </pre>
 </div>
@@ -114,7 +114,7 @@ double         <strong>gain</strong> <a class="anchor-link"
 double get gain =&gt; proxy['gain'];
 </pre>
 <pre class="source">
-set gain(double value) =&gt; proxy['gain'] = value;
+set gain(double value) =&gt; proxy['gain'] = jsify(value);
 </pre>
 </div>
 </div>

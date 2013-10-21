@@ -49,7 +49,7 @@ class RemovalOptions extends ChromeObject {
   * data).
   */
  dynamic get since =&gt; proxy['since'];
- set since(var value) =&gt; proxy['since'] = value;
+ set since(var value) =&gt; proxy['since'] = jsify(value);
 
  /**
   * An object whose properties specify which origin types ought to be cleared.
@@ -58,7 +58,7 @@ class RemovalOptions extends ChromeObject {
   * before adding 'protectedWeb' or 'extensions'.
   */
  Map get originTypes =&gt; mapify(proxy['originTypes']);
- set originTypes(Map value) =&gt; proxy['originTypes'] = value;
+ set originTypes(Map value) =&gt; proxy['originTypes'] = jsify(value);
 }
 </pre>
 </div>
@@ -116,7 +116,7 @@ before adding 'protectedWeb' or 'extensions'.</p>
 Map get originTypes =&gt; mapify(proxy['originTypes']);
 </pre>
 <pre class="source">
-set originTypes(Map value) =&gt; proxy['originTypes'] = value;
+set originTypes(Map value) =&gt; proxy['originTypes'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -147,7 +147,7 @@ data).</p>
 dynamic get since =&gt; proxy['since'];
 </pre>
 <pre class="source">
-set since(var value) =&gt; proxy['since'] = value;
+set since(var value) =&gt; proxy['since'] = jsify(value);
 </pre>
 </div>
 </div>

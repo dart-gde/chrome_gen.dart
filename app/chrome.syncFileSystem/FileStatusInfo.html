@@ -43,10 +43,10 @@ class FileStatusInfo extends ChromeObject {
  FileStatusInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  dynamic get fileEntry =&gt; proxy['fileEntry'];
- set fileEntry(var value) =&gt; proxy['fileEntry'] = value;
+ set fileEntry(var value) =&gt; proxy['fileEntry'] = jsify(value);
 
  FileStatus get status =&gt; _createFileStatus(proxy['status']);
- set status(FileStatus value) =&gt; proxy['status'] = value;
+ set status(FileStatus value) =&gt; proxy['status'] = jsify(value);
 
  String get error =&gt; proxy['error'];
  set error(String value) =&gt; proxy['error'] = value;
@@ -119,7 +119,7 @@ var         <strong>fileEntry</strong> <a class="anchor-link"
 dynamic get fileEntry =&gt; proxy['fileEntry'];
 </pre>
 <pre class="source">
-set fileEntry(var value) =&gt; proxy['fileEntry'] = value;
+set fileEntry(var value) =&gt; proxy['fileEntry'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -146,7 +146,7 @@ final JsObject proxy
 FileStatus get status =&gt; _createFileStatus(proxy['status']);
 </pre>
 <pre class="source">
-set status(FileStatus value) =&gt; proxy['status'] = value;
+set status(FileStatus value) =&gt; proxy['status'] = jsify(value);
 </pre>
 </div>
 </div>

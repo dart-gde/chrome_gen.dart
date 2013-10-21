@@ -53,7 +53,7 @@ class ChromeDownloads {
   */
  Future&lt;int&gt; download(DownloadOptions options) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
-   _downloads.callMethod('download', [options, completer.callback]);
+   _downloads.callMethod('download', [jsify(options), completer.callback]);
    return completer.future;
  }
 
@@ -66,7 +66,7 @@ class ChromeDownloads {
   */
  Future&lt;DownloadItem&gt; search(DownloadQuery query) {
    var completer = new ChromeCompleter&lt;DownloadItem&gt;.oneArg(_createDownloadItem);
-   _downloads.callMethod('search', [query, completer.callback]);
+   _downloads.callMethod('search', [jsify(query), completer.callback]);
    return completer.future;
  }
 
@@ -123,7 +123,7 @@ class ChromeDownloads {
   */
  Future&lt;String&gt; getFileIcon(int downloadId, [GetFileIconOptions options]) {
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
-   _downloads.callMethod('getFileIcon', [downloadId, options, completer.callback]);
+   _downloads.callMethod('getFileIcon', [downloadId, jsify(options), completer.callback]);
    return completer.future;
  }
 
@@ -160,7 +160,7 @@ class ChromeDownloads {
   */
  Future&lt;int&gt; erase(DownloadQuery query) {
    var completer = new ChromeCompleter&lt;int&gt;.oneArg();
-   _downloads.callMethod('erase', [query, completer.callback]);
+   _downloads.callMethod('erase', [jsify(query), completer.callback]);
    return completer.future;
  }
 
@@ -349,7 +349,7 @@ remain backwards compatible between releases. Extensions must not parse it.
 <pre class="source">
 Future&lt;int&gt; download(DownloadOptions options) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
- _downloads.callMethod('download', [options, completer.callback]);
+ _downloads.callMethod('download', [jsify(options), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -380,7 +380,7 @@ file. An <a class="crossref" href="../chrome.downloads/ChromeDownloads.html#onEr
 <pre class="source">
 Future&lt;int&gt; erase(DownloadQuery query) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
- _downloads.callMethod('erase', [query, completer.callback]);
+ _downloads.callMethod('erase', [jsify(query), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -406,7 +406,7 @@ will contain an error message.
 <pre class="source">
 Future&lt;String&gt; getFileIcon(int downloadId, [GetFileIconOptions options]) {
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
- _downloads.callMethod('getFileIcon', [downloadId, options, completer.callback]);
+ _downloads.callMethod('getFileIcon', [downloadId, jsify(options), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -499,7 +499,7 @@ To page through a large number of items, set <code>orderBy: ['-startTime']</code
 <pre class="source">
 Future&lt;DownloadItem&gt; search(DownloadQuery query) {
  var completer = new ChromeCompleter&lt;DownloadItem&gt;.oneArg(_createDownloadItem);
- _downloads.callMethod('search', [query, completer.callback]);
+ _downloads.callMethod('search', [jsify(query), completer.callback]);
  return completer.future;
 }
 </pre>

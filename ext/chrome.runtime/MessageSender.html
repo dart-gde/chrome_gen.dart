@@ -50,7 +50,7 @@ class MessageSender extends ChromeObject {
   * content scripts), and *only* if the receiver is an extension, not an app.
   */
  Tab get tab =&gt; _createTab(proxy['tab']);
- set tab(Tab value) =&gt; proxy['tab'] = value;
+ set tab(Tab value) =&gt; proxy['tab'] = jsify(value);
 
  /**
   * The ID of the extension or app that opened the connection, if any.
@@ -150,7 +150,7 @@ content scripts), and <em>only</em> if the receiver is an extension, not an app.
 Tab get tab =&gt; _createTab(proxy['tab']);
 </pre>
 <pre class="source">
-set tab(Tab value) =&gt; proxy['tab'] = value;
+set tab(Tab value) =&gt; proxy['tab'] = jsify(value);
 </pre>
 </div>
 </div>
