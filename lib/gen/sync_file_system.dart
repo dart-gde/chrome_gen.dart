@@ -40,7 +40,7 @@ class ChromeSyncFileSystem {
    */
   Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
     var completer = new ChromeCompleter.noArgs();
-    _syncFileSystem.callMethod('setConflictResolutionPolicy', [policy, completer.callback]);
+    _syncFileSystem.callMethod('setConflictResolutionPolicy', [ChromeEnum.convert(policy), completer.callback]);
     return completer.future;
   }
 

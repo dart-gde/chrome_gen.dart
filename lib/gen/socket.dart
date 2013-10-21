@@ -21,7 +21,7 @@ class ChromeSocket {
    */
   Future<CreateInfo> create(SocketType type, [CreateOptions options]) {
     var completer = new ChromeCompleter<CreateInfo>.oneArg(_createCreateInfo);
-    _socket.callMethod('create', [type, options, completer.callback]);
+    _socket.callMethod('create', [ChromeEnum.convert(type), options, completer.callback]);
     return completer.future;
   }
 
