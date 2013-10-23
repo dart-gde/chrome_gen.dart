@@ -81,6 +81,13 @@ void main() {
   chrome.alarms.onAlarm.listen((e) {
     notes('onAlarm: ${e}');
   });
+
+  chrome.app_window.onFullscreened.listen((e) => print(e));
+  chrome.app_window.onBoundsChanged.listen((e) => print(e));
+  chrome.app_window.onClosed.listen((e) => print(e));
+  chrome.app_window.onMaximized.listen((e) => print(e));
+  chrome.app_window.onMinimized.listen((e) => print(e));
+  chrome.app_window.onRestored.listen((e) => print(e));
 }
 
 void label(String str) {
@@ -280,7 +287,7 @@ void handleFileRead() {
     summary("choose: ${entry.name}");
 
     entry.readText().then((String contents) {
-      summary("choose: ${entry.name}; contents.length=${contents.length}");
+      summary(contents);
     });
   });
 }
