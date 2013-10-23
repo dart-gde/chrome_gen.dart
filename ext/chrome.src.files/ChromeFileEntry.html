@@ -51,7 +51,7 @@ class ChromeFileEntry extends CrFileEntry {
      reader['onerror'] = (var domError) {
        completer.completeError(domError);
      };
-     reader.callMethod('readAsText', [file]);
+     reader.callMethod('readAsText', [(file as CrFile).proxy]);
 
      return completer.future;
    });
@@ -70,7 +70,7 @@ class ChromeFileEntry extends CrFileEntry {
 
      writer['onwrite'] = (var event) {
        writer['onwrite'] = null;
-       writer.callMethod('truncate', [writer['length']]);
+       writer.callMethod('truncate', [writer['position']]);
        completer.complete(this);
      };
      writer['onerror'] = (var event) {
@@ -268,6 +268,7 @@ Future&lt;Entry&gt; <strong>copyTo</strong>(DirectoryEntry parent, {String name}
 Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
  // TODO:
 
+ throw new UnimplementedError('Entry.copyTo');
 }
 </pre>
 </div>
@@ -281,6 +282,7 @@ Future&lt;FileWriter&gt; <strong>createWriter</strong>() <a class="anchor-link" 
 Future&lt;FileWriter&gt; createWriter() {
  // TODO:
 
+ throw new UnimplementedError('FileEntry.createWriter');
 }
 </pre>
 </div>
@@ -336,6 +338,7 @@ Future&lt;Entry&gt; <strong>moveTo</strong>(DirectoryEntry parent, {String name}
 Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
  // TODO:
 
+ throw new UnimplementedError('Entry.moveTo');
 }
 </pre>
 </div>
@@ -383,7 +386,7 @@ Future&lt;String&gt; readText() {
    reader['onerror'] = (var domError) {
      completer.completeError(domError);
    };
-   reader.callMethod('readAsText', [file]);
+   reader.callMethod('readAsText', [(file as CrFile).proxy]);
 
    return completer.future;
  });
@@ -400,6 +403,7 @@ Future <strong>remove</strong>() <a class="anchor-link" href="#remove"
 Future remove() {
  // TODO:
 
+ throw new UnimplementedError('Entry.remove');
 }
 </pre>
 </div>
@@ -418,12 +422,12 @@ JsObject toJs() =&gt; proxy;
 <button class="show-code">Code</button>
 String <strong>toString</strong>() <a class="anchor-link" href="#toString"
               title="Permalink to ChromeFileEntry.toString">#</a></h4>
-<div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <div class="inherited">
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; 'CrEntry ${name}';
 </pre>
 </div>
 </div>
@@ -454,7 +458,7 @@ Future writeText(String text) {
 
    writer['onwrite'] = (var event) {
      writer['onwrite'] = null;
-     writer.callMethod('truncate', [writer['length']]);
+     writer.callMethod('truncate', [writer['position']]);
      completer.complete(this);
    };
    writer['onerror'] = (var event) {

@@ -37,24 +37,31 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
  CrDirectoryEntry.fromProxy(JsObject proxy) : super._fromProxy(proxy);
 
  Future&lt;Entry&gt; createFile(String path, {bool exclusive: false}) {
-   // TODO:
-
+   var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
+   var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
+   proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+   return completer.future;
  }
 
  Future&lt;Entry&gt; createDirectory(String path, {bool exclusive: false}) {
-   // TODO:
-
+   var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
+   var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
+   proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+   return completer.future;
  }
 
  Future&lt;Entry&gt; getFile(String path) {
+   var options = new JsObject.jsify({'create': false});
    var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
-   proxy.callMethod('getFile', [path, completer.callback, completer.errorCallback]);
+   proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
    return completer.future;
  }
 
  Future&lt;Entry&gt; getDirectory(String path) {
-   // TODO:
-
+   var options = new JsObject.jsify({'create': false});
+   var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
+   proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+   return completer.future;
  }
 
  DirectoryReader createReader() {
@@ -64,6 +71,7 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
  Future removeRecursively() {
    // TODO:
 
+   throw new UnimplementedError('DirectoryEntry.removeRecursively');
  }
 
  bool operator==(Object other) =&gt; other is CrDirectoryEntry &amp;&amp;
@@ -254,6 +262,7 @@ Future&lt;Entry&gt; <strong>copyTo</strong>(DirectoryEntry parent, {String name}
 Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
  // TODO:
 
+ throw new UnimplementedError('Entry.copyTo');
 }
 </pre>
 </div>
@@ -270,8 +279,10 @@ exists with the specified <code>path</code>.</p>
 <div class="docs-inherited-from">docs inherited from DirectoryEntry </div></div>
 <pre class="source">
 Future&lt;Entry&gt; createDirectory(String path, {bool exclusive: false}) {
- // TODO:
-
+ var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
+ proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -288,8 +299,10 @@ exists at the specified <code>path</code>.</p>
 <div class="docs-inherited-from">docs inherited from DirectoryEntry </div></div>
 <pre class="source">
 Future&lt;Entry&gt; createFile(String path, {bool exclusive: false}) {
- // TODO:
-
+ var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
+ proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -318,8 +331,10 @@ at <code>path</code> is not a directory.</p>
 <div class="docs-inherited-from">docs inherited from DirectoryEntry </div></div>
 <pre class="source">
 Future&lt;Entry&gt; getDirectory(String path) {
- // TODO:
-
+ var options = new JsObject.jsify({'create': false});
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
+ proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -336,8 +351,9 @@ result in an error if a file at <code>path</code> does not exist or if the item 
 <div class="docs-inherited-from">docs inherited from DirectoryEntry </div></div>
 <pre class="source">
 Future&lt;Entry&gt; getFile(String path) {
+ var options = new JsObject.jsify({'create': false});
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
- proxy.callMethod('getFile', [path, completer.callback, completer.errorCallback]);
+ proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -380,6 +396,7 @@ Future&lt;Entry&gt; <strong>moveTo</strong>(DirectoryEntry parent, {String name}
 Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
  // TODO:
 
+ throw new UnimplementedError('Entry.moveTo');
 }
 </pre>
 </div>
@@ -418,6 +435,7 @@ Future <strong>remove</strong>() <a class="anchor-link" href="#remove"
 Future remove() {
  // TODO:
 
+ throw new UnimplementedError('Entry.remove');
 }
 </pre>
 </div>
@@ -431,6 +449,7 @@ Future <strong>removeRecursively</strong>() <a class="anchor-link" href="#remove
 Future removeRecursively() {
  // TODO:
 
+ throw new UnimplementedError('DirectoryEntry.removeRecursively');
 }
 </pre>
 </div>
@@ -449,12 +468,12 @@ JsObject toJs() =&gt; proxy;
 <button class="show-code">Code</button>
 String <strong>toString</strong>() <a class="anchor-link" href="#toString"
               title="Permalink to CrDirectoryEntry.toString">#</a></h4>
-<div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <div class="inherited">
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; 'CrEntry ${name}';
 </pre>
 </div>
 </div>

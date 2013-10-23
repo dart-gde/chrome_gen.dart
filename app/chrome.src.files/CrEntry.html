@@ -61,16 +61,19 @@ abstract class CrEntry extends ChromeObject implements Entry {
  Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
    // TODO:
 
+   throw new UnimplementedError('Entry.copyTo');
  }
 
  Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
    // TODO:
 
+   throw new UnimplementedError('Entry.moveTo');
  }
 
  Future remove() {
    // TODO:
 
+   throw new UnimplementedError('Entry.remove');
  }
 
  Future&lt;Metadata&gt; getMetadata() {
@@ -84,6 +87,8 @@ abstract class CrEntry extends ChromeObject implements Entry {
    proxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
    return completer.future;
  }
+
+ String toString() =&gt; 'CrEntry ${name}';
 }
 </pre>
 </div>
@@ -281,6 +286,7 @@ Future&lt;Entry&gt; <strong>copyTo</strong>(DirectoryEntry parent, {String name}
 Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
  // TODO:
 
+ throw new UnimplementedError('Entry.copyTo');
 }
 </pre>
 </div>
@@ -322,6 +328,7 @@ Future&lt;Entry&gt; <strong>moveTo</strong>(DirectoryEntry parent, {String name}
 Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
  // TODO:
 
+ throw new UnimplementedError('Entry.moveTo');
 }
 </pre>
 </div>
@@ -360,6 +367,7 @@ Future <strong>remove</strong>() <a class="anchor-link" href="#remove"
 Future remove() {
  // TODO:
 
+ throw new UnimplementedError('Entry.remove');
 }
 </pre>
 </div>
@@ -374,16 +382,16 @@ JsObject toJs() =&gt; proxy;
 </pre>
 </div>
 </div>
-<div class="method inherited"><h4 id="toString">
+<div class="method"><h4 id="toString">
 <button class="show-code">Code</button>
 String <strong>toString</strong>() <a class="anchor-link" href="#toString"
               title="Permalink to CrEntry.toString">#</a></h4>
-<div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<div class="doc">
 <div class="inherited">
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; 'CrEntry ${name}';
 </pre>
 </div>
 </div>

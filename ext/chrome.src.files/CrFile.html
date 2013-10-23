@@ -38,11 +38,12 @@ class CrFile extends CrBlob implements File {
 
  DateTime get lastModifiedDate {
    JsObject jsDateTime = proxy['lastModifiedDate'];
-   return new DateTime.fromMillisecondsSinceEpoch(
-       jsDateTime.callMethod('getTime()'));
+   return new DateTime.fromMillisecondsSinceEpoch(jsDateTime.callMethod('getTime'));
  }
  String get name =&gt; proxy['name'];
  String get relativePath =&gt; proxy['relativePath'];
+
+ String toString() =&gt; 'CrFile ${name}';
 }
 </pre>
 </div>
@@ -103,8 +104,7 @@ final DateTime         <strong>lastModifiedDate</strong> <a class="anchor-link"
 <pre class="source">
 DateTime get lastModifiedDate {
  JsObject jsDateTime = proxy['lastModifiedDate'];
- return new DateTime.fromMillisecondsSinceEpoch(
-     jsDateTime.callMethod('getTime()'));
+ return new DateTime.fromMillisecondsSinceEpoch(jsDateTime.callMethod('getTime'));
 }
 </pre>
 </div>
@@ -219,7 +219,7 @@ bool operator ==(other) =&gt; identical(this, other);
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
 <div class="method inherited"><h4 id="noSuchMethod">
 <button class="show-code">Code</button>
@@ -254,6 +254,8 @@ Blob <strong>slice</strong>([int start, int end, String contentType]) <a class="
 <pre class="source">
 Blob slice([int start, int end, String contentType]) {
  // TODO:
+
+ throw new UnimplementedError('Blob.slice');
 }
 </pre>
 </div>
@@ -268,16 +270,16 @@ JsObject toJs() =&gt; proxy;
 </pre>
 </div>
 </div>
-<div class="method inherited"><h4 id="toString">
+<div class="method"><h4 id="toString">
 <button class="show-code">Code</button>
 String <strong>toString</strong>() <a class="anchor-link" href="#toString"
               title="Permalink to CrFile.toString">#</a></h4>
-<div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<div class="doc">
 <div class="inherited">
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; 'CrFile ${name}';
 </pre>
 </div>
 </div>
