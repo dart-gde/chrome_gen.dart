@@ -60,16 +60,19 @@ abstract class CrEntry extends ChromeObject implements Entry {
   Future<Entry> copyTo(DirectoryEntry parent, {String name}) {
     // TODO:
 
+    throw new UnimplementedError('Entry.copyTo');
   }
 
   Future<Entry> moveTo(DirectoryEntry parent, {String name}) {
     // TODO:
 
+    throw new UnimplementedError('Entry.moveTo');
   }
 
   Future remove() {
     // TODO:
 
+    throw new UnimplementedError('Entry.remove');
   }
 
   Future<Metadata> getMetadata() {
@@ -83,30 +86,39 @@ abstract class CrEntry extends ChromeObject implements Entry {
     proxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
     return completer.future;
   }
+
+  String toString() => 'CrEntry ${name}';
 }
 
 class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
   CrDirectoryEntry.fromProxy(JsObject proxy) : super._fromProxy(proxy);
 
   Future<Entry> createFile(String path, {bool exclusive: false}) {
-    // TODO:
-
+    var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
+    var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrEntry.fromProxy(obj));
+    proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+    return completer.future;
   }
 
   Future<Entry> createDirectory(String path, {bool exclusive: false}) {
-    // TODO:
-
+    var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
+    var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrEntry.fromProxy(obj));
+    proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+    return completer.future;
   }
 
   Future<Entry> getFile(String path) {
+    var options = new JsObject.jsify({'create': false});
     var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrEntry.fromProxy(obj));
-    proxy.callMethod('getFile', [path, completer.callback, completer.errorCallback]);
+    proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
     return completer.future;
   }
 
   Future<Entry> getDirectory(String path) {
-    // TODO:
-
+    var options = new JsObject.jsify({'create': false});
+    var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrEntry.fromProxy(obj));
+    proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+    return completer.future;
   }
 
   DirectoryReader createReader() {
@@ -116,6 +128,7 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
   Future removeRecursively() {
     // TODO:
 
+    throw new UnimplementedError('DirectoryEntry.removeRecursively');
   }
 
   bool operator==(Object other) => other is CrDirectoryEntry &&
@@ -161,6 +174,7 @@ abstract class CrFileEntry extends CrEntry implements FileEntry {
   Future<FileWriter> createWriter() {
     // TODO:
 
+    throw new UnimplementedError('FileEntry.createWriter');
   }
 
   Future<File> file() {
@@ -195,7 +209,7 @@ class ChromeFileEntry extends CrFileEntry {
       reader['onerror'] = (var domError) {
         completer.completeError(domError);
       };
-      reader.callMethod('readAsText', [file]);
+      reader.callMethod('readAsText', [(file as CrFile).proxy]);
 
       return completer.future;
     });
@@ -214,7 +228,7 @@ class ChromeFileEntry extends CrFileEntry {
 
       writer['onwrite'] = (var event) {
         writer['onwrite'] = null;
-        writer.callMethod('truncate', [writer['length']]);
+        writer.callMethod('truncate', [writer['position']]);
         completer.complete(this);
       };
       writer['onerror'] = (var event) {
@@ -241,6 +255,8 @@ abstract class CrBlob extends ChromeObject implements Blob {
 
   Blob slice([int start, int end, String contentType]) {
     // TODO:
+
+    throw new UnimplementedError('Blob.slice');
   }
 }
 
@@ -249,11 +265,12 @@ class CrFile extends CrBlob implements File {
 
   DateTime get lastModifiedDate {
     JsObject jsDateTime = proxy['lastModifiedDate'];
-    return new DateTime.fromMillisecondsSinceEpoch(
-        jsDateTime.callMethod('getTime()'));
+    return new DateTime.fromMillisecondsSinceEpoch(jsDateTime.callMethod('getTime'));
   }
   String get name => proxy['name'];
   String get relativePath => proxy['relativePath'];
+
+  String toString() => 'CrFile ${name}';
 }
 
 //abstract class CrEventTarget extends ChromeObject implements EventTarget {

@@ -1,7 +1,7 @@
 name: chrome_gen
-version: 0.0.8-dev
+version: 0.0.8
 environment:
-  sdk: ">=0.8.4"
+  sdk: ">=0.8.5"
 authors:
 - Devon Carew <devoncarew@gmail.com>
 - Adam Singer <financeCoding@gmail.com>
