@@ -25,7 +25,7 @@ class ChromeRuntime {
   /**
    * This will be defined during an API method callback if there was an error
    */
-  Map get lastError => mapify(_runtime['lastError']);
+  LastErrorRuntime get lastError => _createLastErrorRuntime(_runtime['lastError']);
 
   /**
    * The ID of the extension/app.
@@ -354,6 +354,17 @@ class OnMessageExternalEvent {
   OnMessageExternalEvent(this.message, this.sender, this.sendResponse);
 }
 
+class LastErrorRuntime extends ChromeObject {
+  LastErrorRuntime();
+
+  LastErrorRuntime.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Details about the error which occurred.
+   */
+  String get message => proxy['message'];
+}
+
 /**
  * An object which allows two way communication with other pages.
  */
@@ -442,6 +453,7 @@ class RequestUpdateCheckResult {
   RequestUpdateCheckResult._(this.status, this.details);
 }
 
+LastErrorRuntime _createLastErrorRuntime(JsObject proxy) => proxy == null ? null : new LastErrorRuntime.fromProxy(proxy);
 Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
 Port _createPort(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);
 DirectoryEntry _createDirectoryEntry(JsObject proxy) => proxy == null ? null : new CrDirectoryEntry.fromProxy(proxy);

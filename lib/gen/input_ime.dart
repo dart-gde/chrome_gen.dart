@@ -425,6 +425,67 @@ class MenuItem extends ChromeObject {
   set enabled(bool value) => proxy['enabled'] = value;
 }
 
+class PropertiesInputIme extends ChromeObject {
+  PropertiesInputIme();
+
+  PropertiesInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * True to show the Candidate window, false to hide it.
+   */
+  bool get visible => proxy['visible'];
+
+  /**
+   * True to show the cursor, false to hide it.
+   */
+  bool get cursorVisible => proxy['cursorVisible'];
+
+  /**
+   * True if the candidate window should be rendered vertical, false to make it
+   * horizontal.
+   */
+  bool get vertical => proxy['vertical'];
+
+  /**
+   * The number of candidates to display per page.
+   */
+  int get pageSize => proxy['pageSize'];
+
+  /**
+   * Text that is shown at the bottom of the candidate window.
+   */
+  String get auxiliaryText => proxy['auxiliaryText'];
+
+  /**
+   * True to display the auxiliary text, false to hide it.
+   */
+  bool get auxiliaryTextVisible => proxy['auxiliaryTextVisible'];
+
+  /**
+   * Where to display the candidate window. If set to 'cursor', the window
+   * follows the cursor. If set to 'composition', the window is locked to the
+   * beginning of the composition.
+   * enum of `cursor`, `composition`
+   */
+  String get windowPosition => proxy['windowPosition'];
+}
+
+class UsageInputIme extends ChromeObject {
+  UsageInputIme();
+
+  UsageInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * The title string of details description.
+   */
+  String get title => proxy['title'];
+
+  /**
+   * The body string of detail description.
+   */
+  String get body => proxy['body'];
+}
+
 InputContext _createInputContext(JsObject proxy) => proxy == null ? null : new InputContext.fromProxy(proxy);
 OnKeyEventEvent _createOnKeyEventEvent(String engineID, JsObject keyData) =>
     new OnKeyEventEvent(engineID, _createKeyboardEvent(keyData));

@@ -53,6 +53,17 @@ class JsonProperty extends JsonObject {
   String get description => type.description;
   bool get nodoc => type.nodoc;
 
+  /// Returns whether this property itself defines properties.
+  bool get isComplexProperty => type.properties.isNotEmpty;
+
+  String getComplexClassName(String libName) {
+    if (type.ref == null) {
+      return '${titleCase(name)}${titleCase(libName)}';
+    } else {
+      return '${titleCase(name)}${type.ref}';
+    }
+  }
+
   String toString() => "${runtimeType.toString()} ${name}";
 }
 
@@ -187,6 +198,26 @@ class JsonConverter {
     property.documentation = convertHtmlToDartdoc(p.description);
     property.nodoc = p.nodoc;
 
+    if (p.isComplexProperty) {
+      String className = p.getComplexClassName(toCamelCase(library.name));
+
+      // define a new ChromeDeclaredType
+      if (!library.hasDeclaredType(className)) {
+        ChromeDeclaredType newType = new ChromeDeclaredType();
+        newType.name = className;
+        newType.noSetters = true;
+        if (p.type.ref != null) {
+          newType.superClassDef = p.type.ref;
+        }
+        newType.properties = property.type.properties;
+
+        library.types.add(newType);
+      }
+
+      // replace the type w/ a ref to the new type
+      property.type = new ChromeType(type: 'var', refName: className);
+    }
+
     return property;
   }
 
@@ -284,7 +315,7 @@ class JsonConverter {
     } else if (t.type == 'object' && t.isInstanceOf == null) {
       type.type = "Map";
       Map<String, dynamic> additionalProps = t.json['additionalProperties'];
-      if(additionalProps != null && additionalProps['type'] == 'any') {
+      if (additionalProps != null && additionalProps['type'] == 'any') {
         assert(t.parameters.isEmpty);
         type.parameters = [ChromeType.STRING, ChromeType.VAR];
       }
@@ -326,7 +357,7 @@ class JsonConverter {
 
     type.optional = t.optional;
 
-    if(t.parameters.isNotEmpty) {
+    if (t.parameters.isNotEmpty) {
       type.parameters = t.parameters.map(_convertType).toList();
     }
     type.properties = t.properties.map(_convertProperty).toList();
@@ -343,12 +374,10 @@ class JsonConverter {
 
 bool _isImplicitInt(JsonType t) {
   if (t is JsonParamType) {
-    JsonParamType type = t as JsonParamType;
-
-    return _isInt(type.value) || _isInt(type.maxLength);
+    return _isInt(t.value) || _isInt(t.maxLength);
+  } else {
+    return false;
   }
-
-  return false;
 }
 
 bool _isInt(var val) {

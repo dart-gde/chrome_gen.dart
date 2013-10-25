@@ -92,7 +92,6 @@ class _DefaultBackendContext {
     library.eventTypes.forEach(_printEventType);
     library.enumTypes.forEach(_printEnumType);
     library.types.forEach(_printDeclaredType);
-
     library.returnTypes.forEach(_printReturnType);
 
     if (_neededFactories.isNotEmpty) {
@@ -147,14 +146,14 @@ class _DefaultBackendContext {
     generator.writeln();
     generator.writeln("${className}._();");
 
-    library.filteredProperties.forEach((p) => _printProperty(p, contextReference));
+    library.filteredProperties.forEach((p) => _printPropertyRef(p, contextReference));
     library.methods.forEach(_printMethod);
     library.events.forEach(_printEvent);
 
     generator.writeln("}");
   }
 
-  void _printProperty(ChromeProperty property, String refString, [bool printSetter = false]) {
+  void _printPropertyRef(ChromeProperty property, String refString, [bool printSetter = false]) {
     String converter = getReturnConverter(property.type);
     String getterBody = "${refString}['${property.name}']";
 
@@ -336,10 +335,12 @@ class _DefaultBackendContext {
     List<ChromeProperty> props =
         type.filteredProperties.toList(growable: false);
 
+    String superName = type.superClassDef != null ? type.superClassDef : 'ChromeObject';
+
     generator.writeln();
     generator.writeDocs(type.documentation);
-    generator.writeln("class ${className} extends ChromeObject {");
-    if (props.isNotEmpty) {
+    generator.writeln("class ${className} extends ${superName} {");
+    if (props.isNotEmpty && !type.noSetters) {
       generator.write("${className}({");
       generator.write(props.map((p) => "${p.type} ${p.name}").join(', '));
       generator.writeln('}) {');
@@ -354,9 +355,9 @@ class _DefaultBackendContext {
     generator.writeln("${className}.fromProxy(JsObject proxy): super.fromProxy(proxy);");
 
     if (library.name != 'proxy') {
-      props.forEach((p) => _printProperty(p, 'proxy', true));
+      props.forEach((p) => _printPropertyRef(p, 'proxy', !type.noSetters));
     } else {
-      props.forEach((p) => _printProperty(p, 'this.proxy', true));
+      props.forEach((p) => _printPropertyRef(p, 'this.proxy', !type.noSetters));
     }
 
     type.methods.forEach((m) => _printMethod(m, 'proxy'));

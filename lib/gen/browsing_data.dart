@@ -150,11 +150,33 @@ class ChromeBrowsingData {
   }
 }
 
+class OriginTypesBrowsingData extends ChromeObject {
+  OriginTypesBrowsingData();
+
+  OriginTypesBrowsingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Normal websites.
+   */
+  bool get unprotectedWeb => proxy['unprotectedWeb'];
+
+  /**
+   * Websites that have been installed as hosted applications (be careful!).
+   */
+  bool get protectedWeb => proxy['protectedWeb'];
+
+  /**
+   * Extensions and packaged applications a user has installed (be _really_
+   * careful!).
+   */
+  bool get extension => proxy['extension'];
+}
+
 /**
  * Options that determine exactly what data will be removed.
  */
 class RemovalOptions extends ChromeObject {
-  RemovalOptions({var since, Map originTypes}) {
+  RemovalOptions({var since, OriginTypesBrowsingData originTypes}) {
     if (since != null) this.since = since;
     if (originTypes != null) this.originTypes = originTypes;
   }
@@ -176,8 +198,8 @@ class RemovalOptions extends ChromeObject {
    * origins. Please ensure that you _really_ want to remove application data
    * before adding 'protectedWeb' or 'extensions'.
    */
-  Map get originTypes => mapify(proxy['originTypes']);
-  set originTypes(Map value) => proxy['originTypes'] = jsify(value);
+  OriginTypesBrowsingData get originTypes => _createOriginTypesBrowsingData(proxy['originTypes']);
+  set originTypes(OriginTypesBrowsingData value) => proxy['originTypes'] = jsify(value);
 }
 
 /**
@@ -281,3 +303,5 @@ class DataTypeSet extends ChromeObject {
   bool get webSQL => proxy['webSQL'];
   set webSQL(bool value) => proxy['webSQL'] = value;
 }
+
+OriginTypesBrowsingData _createOriginTypesBrowsingData(JsObject proxy) => proxy == null ? null : new OriginTypesBrowsingData.fromProxy(proxy);

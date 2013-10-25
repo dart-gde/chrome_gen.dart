@@ -178,12 +178,22 @@ class HttpHeaders extends ChromeObject {
   HttpHeaders.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
+class AuthCredentialsWebRequest extends ChromeObject {
+  AuthCredentialsWebRequest();
+
+  AuthCredentialsWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get username => proxy['username'];
+
+  String get password => proxy['password'];
+}
+
 /**
  * Returns value for event handlers that have the 'blocking' extraInfoSpec
  * applied. Allows the event handler to modify network requests.
  */
 class BlockingResponse extends ChromeObject {
-  BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, HttpHeaders responseHeaders, Map authCredentials}) {
+  BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, HttpHeaders responseHeaders, AuthCredentialsWebRequest authCredentials}) {
     if (cancel != null) this.cancel = cancel;
     if (redirectUrl != null) this.redirectUrl = redirectUrl;
     if (requestHeaders != null) this.requestHeaders = requestHeaders;
@@ -229,8 +239,8 @@ class BlockingResponse extends ChromeObject {
    * Only used as a response to the onAuthRequired event. If set, the request is
    * made using the supplied credentials.
    */
-  Map get authCredentials => mapify(proxy['authCredentials']);
-  set authCredentials(Map value) => proxy['authCredentials'] = jsify(value);
+  AuthCredentialsWebRequest get authCredentials => _createAuthCredentialsWebRequest(proxy['authCredentials']);
+  set authCredentials(AuthCredentialsWebRequest value) => proxy['authCredentials'] = jsify(value);
 }
 
 /**
@@ -257,6 +267,46 @@ class UploadData extends ChromeObject {
   set file(String value) => proxy['file'] = value;
 }
 
+class RequestBodyWebRequest extends ChromeObject {
+  RequestBodyWebRequest();
+
+  RequestBodyWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Errors when obtaining request body data.
+   */
+  String get error => proxy['error'];
+
+  /**
+   * If the request method is POST and the body is a sequence of key-value pairs
+   * encoded in UTF8, encoded as either multipart/form-data, or
+   * application/x-www-form-urlencoded, this dictionary is present and for each
+   * key contains the list of all values for that key. If the data is of another
+   * media type, or if it is malformed, the dictionary is not present. An
+   * example value of this dictionary is {'key': ['value1', 'value2']}.
+   */
+  Map get formData => mapify(proxy['formData']);
+
+  /**
+   * If the request method is PUT or POST, and the body is not already parsed in
+   * formData, then the unparsed request body elements are contained in this
+   * array.
+   */
+  List<UploadData> get raw => listify(proxy['raw'], _createUploadData);
+}
+
+class ChallengerWebRequest extends ChromeObject {
+  ChallengerWebRequest();
+
+  ChallengerWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get host => proxy['host'];
+
+  int get port => proxy['port'];
+}
+
 OnAuthRequiredEvent _createOnAuthRequiredEvent(JsObject details, JsObject callback) =>
     new OnAuthRequiredEvent(mapify(details), callback);
 HttpHeaders _createHttpHeaders(JsObject proxy) => proxy == null ? null : new HttpHeaders.fromProxy(proxy);
+AuthCredentialsWebRequest _createAuthCredentialsWebRequest(JsObject proxy) => proxy == null ? null : new AuthCredentialsWebRequest.fromProxy(proxy);
+UploadData _createUploadData(JsObject proxy) => proxy == null ? null : new UploadData.fromProxy(proxy);

@@ -36,8 +36,9 @@ class ChromeLibrary extends ChromeElement {
   final List<ChromeEnumType> enumTypes = [];
   final List<ChromeDeclaredType> types = [];
   final List<ChromeReturnType> returnTypes = [];
-
   final List<String> imports = [];
+
+  bool hasDeclaredType(String name) => types.any((t) => t.name == name);
 
   void addImport(String str) {
     if (str != null && str != name && !imports.contains(str)) {
@@ -65,7 +66,7 @@ class ChromeLibrary extends ChromeElement {
 
 class ChromeProperty extends ChromeElement {
   final String name;
-  final ChromeType type;
+  ChromeType type;
 
   bool nodoc = false;
 
@@ -161,6 +162,8 @@ class ChromeDeclaredType extends ChromeType {
   /// For a class like 'declarativeWebRequest.EditRequestCookie', this
   /// represents the 'declarativeWebRequest' part.
   String qualifier;
+  String superClassDef;
+  bool noSetters = false;
   List<ChromeMethod> methods = [];
 
   String toString() => name;

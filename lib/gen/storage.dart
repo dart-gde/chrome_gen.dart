@@ -19,12 +19,12 @@ class ChromeStorage {
   /**
    * Items in the `sync` storage area are synced using Chrome Sync.
    */
-  StorageArea get sync => _createStorageArea(_storage['sync']);
+  SyncStorageArea get sync => _createSyncStorageArea(_storage['sync']);
 
   /**
    * Items in the `local` storage area are local to each machine.
    */
-  StorageArea get local => _createStorageArea(_storage['local']);
+  LocalStorageArea get local => _createLocalStorageArea(_storage['local']);
 
   /**
    * Fired when one or more items change.
@@ -50,6 +50,64 @@ class StorageOnChangedEvent {
   final String areaName;
 
   StorageOnChangedEvent(this.changes, this.areaName);
+}
+
+class SyncStorageArea extends StorageArea {
+  SyncStorageArea();
+
+  SyncStorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * The maximum total amount (in bytes) of data that can be stored in sync
+   * storage, as measured by the JSON stringification of every value plus every
+   * key's length. Updates that would cause this limit to be exceeded fail
+   * immediately and set [runtime.lastError.]
+   */
+  int get QUOTA_BYTES => proxy['QUOTA_BYTES'];
+
+  /**
+   * The maximum size (in bytes) of each individual item in sync storage, as
+   * measured by the JSON stringification of its value plus its key length.
+   * Updates containing items larger than this limit will fail immediately and
+   * set [runtime.lastError.]
+   */
+  int get QUOTA_BYTES_PER_ITEM => proxy['QUOTA_BYTES_PER_ITEM'];
+
+  /**
+   * The maximum number of items that can be stored in sync storage. Updates
+   * that would cause this limit to be exceeded will fail immediately and set
+   * [runtime.lastError.]
+   */
+  int get MAX_ITEMS => proxy['MAX_ITEMS'];
+
+  /**
+   * The maximum number of `set`, `remove`, or `clear` operations that can be
+   * performed each hour. Updates that would cause this limit to be exceeded
+   * fail immediately and set [runtime.lastError.]
+   */
+  int get MAX_WRITE_OPERATIONS_PER_HOUR => proxy['MAX_WRITE_OPERATIONS_PER_HOUR'];
+
+  /**
+   * The maximum number of `set`, `remove`, or `clear` operations that can be
+   * performed each minute, sustained over 10 minutes. Updates that would cause
+   * this limit to be exceeded fail immediately and set [runtime.lastError.]
+   */
+  int get MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE => proxy['MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE'];
+}
+
+class LocalStorageArea extends StorageArea {
+  LocalStorageArea();
+
+  LocalStorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * The maximum amount (in bytes) of data that can be stored in local storage,
+   * as measured by the JSON stringification of every value plus every key's
+   * length. This value will be ignored if the extension has the
+   * `unlimitedStorage` permission. Updates that would cause this limit to be
+   * exceeded fail immediately and set [runtime.lastError.]
+   */
+  int get QUOTA_BYTES => proxy['QUOTA_BYTES'];
 }
 
 class StorageChange extends ChromeObject {
@@ -144,6 +202,7 @@ class StorageArea extends ChromeObject {
   }
 }
 
-StorageArea _createStorageArea(JsObject proxy) => proxy == null ? null : new StorageArea.fromProxy(proxy);
+SyncStorageArea _createSyncStorageArea(JsObject proxy) => proxy == null ? null : new SyncStorageArea.fromProxy(proxy);
+LocalStorageArea _createLocalStorageArea(JsObject proxy) => proxy == null ? null : new LocalStorageArea.fromProxy(proxy);
 StorageOnChangedEvent _createStorageOnChangedEvent(JsObject changes, String areaName) =>
     new StorageOnChangedEvent(mapify(changes), areaName);

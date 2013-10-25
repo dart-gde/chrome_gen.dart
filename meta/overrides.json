@@ -31,7 +31,6 @@
 
     "syncFileSystem.DOMFileSystem": "FileSystem",
     "mediaGalleries.DOMFileSystem": "FileSystem"
-
   }
 
 }
