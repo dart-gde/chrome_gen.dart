@@ -12,7 +12,7 @@ h1, p {
 }
 
 #container_id {
-  height: 400px;
+  height: 500px;
   position: relative;
   border: 1px solid #ccc;
   background-color: #fff;
