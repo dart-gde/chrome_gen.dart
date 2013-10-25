@@ -2,19 +2,19 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>StorageArea class / chrome.storage Library / Dart Documentation</title>
+        <title>LocalStorageArea class / chrome.storage Library / Dart Documentation</title>
         <link rel="stylesheet" type="text/css"
             href="../styles.css">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
-        <body data-library="chrome.storage" data-type="StorageArea">
+        <body data-library="chrome.storage" data-type="LocalStorageArea">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
           <a href="../index.html">Dart Documentation</a>
-         &rsaquo; <a href="../chrome.storage.html">chrome.storage</a> &rsaquo; <a href="../chrome.storage/StorageArea.html">StorageArea</a>        <div id="search-box">
+         &rsaquo; <a href="../chrome.storage.html">chrome.storage</a> &rsaquo; <a href="../chrome.storage/LocalStorageArea.html">LocalStorageArea</a>        <div id="search-box">
           <input type="search" name="q" id="q" autocomplete="off"
               class="search-input" placeholder="Search API">
         </div>
@@ -26,129 +26,70 @@
         
 </div>
 <div class="content">
-        <h2><strong>StorageArea</strong>
+        <h2><strong>LocalStorageArea</strong>
           class
         </h2>
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class StorageArea extends ChromeObject {
- StorageArea();
+class LocalStorageArea extends StorageArea {
+ LocalStorageArea();
 
- StorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
-
- /**
-  * Gets one or more items from storage.
-  * 
-  * [keys] A single key to get, list of keys to get, or a dictionary specifying
-  * default values (see description of the object).  An empty list or object
-  * will return an empty result object.  Pass in `null` to get the entire
-  * contents of storage.
-  * 
-  * Returns:
-  * Object with items in their key-value mappings.
-  */
- Future&lt;Map&lt;String, dynamic&gt;&gt; get([dynamic keys]) {
-   var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
-   proxy.callMethod('get', [jsify(keys), completer.callback]);
-   return completer.future;
- }
+ LocalStorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  /**
-  * Gets the amount of space (in bytes) being used by one or more items.
-  * 
-  * [keys] A single key or list of keys to get the total usage for. An empty
-  * list will return 0. Pass in `null` to get the total usage of all of
-  * storage.
-  * 
-  * Returns:
-  * Amount of space being used in storage, in bytes.
+  * The maximum amount (in bytes) of data that can be stored in local storage,
+  * as measured by the JSON stringification of every value plus every key's
+  * length. This value will be ignored if the extension has the
+  * `unlimitedStorage` permission. Updates that would cause this limit to be
+  * exceeded fail immediately and set [runtime.lastError.]
   */
- Future&lt;int&gt; getBytesInUse([dynamic keys]) {
-   var completer = new ChromeCompleter&lt;int&gt;.oneArg();
-   proxy.callMethod('getBytesInUse', [jsify(keys), completer.callback]);
-   return completer.future;
- }
-
- /**
-  * Sets multiple items.
-  * 
-  * [items] Object specifying items to augment storage with. Values that cannot
-  * be serialized (functions, etc) will be ignored.
-  */
- Future set(Map&lt;String, dynamic&gt; items) {
-   var completer = new ChromeCompleter.noArgs();
-   proxy.callMethod('set', [jsify(items), completer.callback]);
-   return completer.future;
- }
-
- /**
-  * Removes one or more items from storage.
-  * 
-  * [keys] A single key or a list of keys for items to remove.
-  */
- Future remove(dynamic keys) {
-   var completer = new ChromeCompleter.noArgs();
-   proxy.callMethod('remove', [jsify(keys), completer.callback]);
-   return completer.future;
- }
-
- /**
-  * Removes all items from storage.
-  */
- Future clear() {
-   var completer = new ChromeCompleter.noArgs();
-   proxy.callMethod('clear', [completer.callback]);
-   return completer.future;
- }
+ int get QUOTA_BYTES =&gt; proxy['QUOTA_BYTES'];
 }
 </pre>
 </div>
 <h3>Extends</h3>
 <p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>StorageArea</strong></span></p>
-<h3>Subclasses</h3>
-<p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.storage/LocalStorageArea.html">LocalStorageArea</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../chrome.storage/SyncStorageArea.html">SyncStorageArea</a></span></p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><a href="../chrome.storage/StorageArea.html">StorageArea</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>LocalStorageArea</strong></span></p>
 <div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>StorageArea</strong>() <a class="anchor-link" href="#"
-              title="Permalink to StorageArea.StorageArea">#</a></h4>
+new <strong>LocalStorageArea</strong>() <a class="anchor-link" href="#"
+              title="Permalink to LocalStorageArea.LocalStorageArea">#</a></h4>
 <div class="doc">
 <div class="inherited">
 <p>Create a new instance of a <code>ChromeObject</code>, which creates and delegates to
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-StorageArea();
+LocalStorageArea();
 </pre>
 </div>
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>StorageArea.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
-              title="Permalink to StorageArea.StorageArea.fromProxy">#</a></h4>
+new <strong>LocalStorageArea.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+              title="Permalink to LocalStorageArea.LocalStorageArea.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
 <p>Create a new instance of a <code>ChromeObject</code>, which delegates to the given
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-StorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
+LocalStorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
 </pre>
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Properties</h3>
 <div class="field inherited"><h4 id="proxy">
 <button class="show-code">Code</button>
 final JsObject         <strong>proxy</strong> <a class="anchor-link"
             href="#proxy"
-            title="Permalink to StorageArea.proxy">#</a>
+            title="Permalink to LocalStorageArea.proxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
@@ -156,14 +97,31 @@ final JsObject proxy
 </pre>
 </div>
 </div>
+<div class="field"><h4 id="QUOTA_BYTES">
+<button class="show-code">Code</button>
+final int         <strong>QUOTA_BYTES</strong> <a class="anchor-link"
+            href="#QUOTA_BYTES"
+            title="Permalink to LocalStorageArea.QUOTA_BYTES">#</a>
+        </h4>
+        <div class="doc">
+<p>The maximum amount (in bytes) of data that can be stored in local storage,
+as measured by the JSON stringification of every value plus every key's
+length. This value will be ignored if the extension has the
+<code>unlimitedStorage</code> permission. Updates that would cause this limit to be
+exceeded fail immediately and set <code>runtime.lastError.</code></p>
+<pre class="source">
+int get QUOTA_BYTES =&gt; proxy['QUOTA_BYTES'];
+</pre>
 </div>
-<div>
+</div>
+</div>
+<div class="inherited">
 <h3>Methods</h3>
-<div class="method"><h4 id="clear">
+<div class="method inherited"><h4 id="clear">
 <button class="show-code">Code</button>
 Future <strong>clear</strong>() <a class="anchor-link" href="#clear"
-              title="Permalink to StorageArea.clear">#</a></h4>
-<div class="doc">
+              title="Permalink to LocalStorageArea.clear">#</a></h4>
+<div class="inherited-from">inherited from <a href="../chrome.storage/StorageArea.html">StorageArea</a> </div><div class="doc">
 <p>Removes all items from storage.</p>
 <pre class="source">
 Future clear() {
@@ -174,11 +132,11 @@ Future clear() {
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="get">
+<div class="method inherited"><h4 id="get">
 <button class="show-code">Code</button>
 Future&lt;Map&lt;String, dynamic&gt;&gt; <strong>get</strong>([keys]) <a class="anchor-link" href="#get"
-              title="Permalink to StorageArea.get">#</a></h4>
-<div class="doc">
+              title="Permalink to LocalStorageArea.get">#</a></h4>
+<div class="inherited-from">inherited from <a href="../chrome.storage/StorageArea.html">StorageArea</a> </div><div class="doc">
 <p>Gets one or more items from storage.</p>
 <p>
 <span class="param">keys</span> A single key to get, list of keys to get, or a dictionary specifying
@@ -196,11 +154,11 @@ Future&lt;Map&lt;String, dynamic&gt;&gt; get([dynamic keys]) {
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="getBytesInUse">
+<div class="method inherited"><h4 id="getBytesInUse">
 <button class="show-code">Code</button>
 Future&lt;int&gt; <strong>getBytesInUse</strong>([keys]) <a class="anchor-link" href="#getBytesInUse"
-              title="Permalink to StorageArea.getBytesInUse">#</a></h4>
-<div class="doc">
+              title="Permalink to LocalStorageArea.getBytesInUse">#</a></h4>
+<div class="inherited-from">inherited from <a href="../chrome.storage/StorageArea.html">StorageArea</a> </div><div class="doc">
 <p>Gets the amount of space (in bytes) being used by one or more items.</p>
 <p>
 <span class="param">keys</span> A single key or list of keys to get the total usage for. An empty
@@ -217,11 +175,11 @@ Future&lt;int&gt; getBytesInUse([dynamic keys]) {
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="remove">
+<div class="method inherited"><h4 id="remove">
 <button class="show-code">Code</button>
 Future <strong>remove</strong>(keys) <a class="anchor-link" href="#remove"
-              title="Permalink to StorageArea.remove">#</a></h4>
-<div class="doc">
+              title="Permalink to LocalStorageArea.remove">#</a></h4>
+<div class="inherited-from">inherited from <a href="../chrome.storage/StorageArea.html">StorageArea</a> </div><div class="doc">
 <p>Removes one or more items from storage.</p>
 <p>
 <span class="param">keys</span> A single key or a list of keys for items to remove.</p>
@@ -234,11 +192,11 @@ Future remove(dynamic keys) {
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="set">
+<div class="method inherited"><h4 id="set">
 <button class="show-code">Code</button>
 Future <strong>set</strong>(Map&lt;String, dynamic&gt; items) <a class="anchor-link" href="#set"
-              title="Permalink to StorageArea.set">#</a></h4>
-<div class="doc">
+              title="Permalink to LocalStorageArea.set">#</a></h4>
+<div class="inherited-from">inherited from <a href="../chrome.storage/StorageArea.html">StorageArea</a> </div><div class="doc">
 <p>Sets multiple items.</p>
 <p>
 <span class="param">items</span> Object specifying items to augment storage with. Values that cannot
@@ -255,7 +213,7 @@ Future set(Map&lt;String, dynamic&gt; items) {
 <div class="method inherited"><h4 id="toJs">
 <button class="show-code">Code</button>
 JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
-              title="Permalink to StorageArea.toJs">#</a></h4>
+              title="Permalink to LocalStorageArea.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
 JsObject toJs() =&gt; proxy;
@@ -265,7 +223,7 @@ JsObject toJs() =&gt; proxy;
 <div class="method inherited"><h4 id="toString">
 <button class="show-code">Code</button>
 String <strong>toString</strong>() <a class="anchor-link" href="#toString"
-              title="Permalink to StorageArea.toString">#</a></h4>
+              title="Permalink to LocalStorageArea.toString">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <div class="inherited">
 <p>Returns a string representation of this object.</p>

@@ -41,7 +41,7 @@ class ChromeRuntime {
  /**
   * This will be defined during an API method callback if there was an error
   */
- Map get lastError =&gt; mapify(_runtime['lastError']);
+ LastErrorRuntime get lastError =&gt; _createLastErrorRuntime(_runtime['lastError']);
 
  /**
   * The ID of the extension/app.
@@ -334,14 +334,14 @@ String get id =&gt; _runtime['id'];
 </div>
 <div class="field"><h4 id="lastError">
 <button class="show-code">Code</button>
-final Map         <strong>lastError</strong> <a class="anchor-link"
+final <a href="../chrome.runtime/LastErrorRuntime.html">LastErrorRuntime</a>         <strong>lastError</strong> <a class="anchor-link"
             href="#lastError"
             title="Permalink to ChromeRuntime.lastError">#</a>
         </h4>
         <div class="doc">
 <p>This will be defined during an API method callback if there was an error</p>
 <pre class="source">
-Map get lastError =&gt; mapify(_runtime['lastError']);
+LastErrorRuntime get lastError =&gt; _createLastErrorRuntime(_runtime['lastError']);
 </pre>
 </div>
 </div>

@@ -35,7 +35,7 @@
 <p>Options that determine exactly what data will be removed.</p>
 <pre class="source">
 class RemovalOptions extends ChromeObject {
- RemovalOptions({var since, Map originTypes}) {
+ RemovalOptions({var since, OriginTypesBrowsingData originTypes}) {
    if (since != null) this.since = since;
    if (originTypes != null) this.originTypes = originTypes;
  }
@@ -57,8 +57,8 @@ class RemovalOptions extends ChromeObject {
   * origins. Please ensure that you _really_ want to remove application data
   * before adding 'protectedWeb' or 'extensions'.
   */
- Map get originTypes =&gt; mapify(proxy['originTypes']);
- set originTypes(Map value) =&gt; proxy['originTypes'] = jsify(value);
+ OriginTypesBrowsingData get originTypes =&gt; _createOriginTypesBrowsingData(proxy['originTypes']);
+ set originTypes(OriginTypesBrowsingData value) =&gt; proxy['originTypes'] = jsify(value);
 }
 </pre>
 </div>
@@ -69,7 +69,7 @@ class RemovalOptions extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>RemovalOptions</strong>({since, Map originTypes}) <a class="anchor-link" href="#"
+new <strong>RemovalOptions</strong>({since, <a href="../chrome.browsingData/OriginTypesBrowsingData.html">OriginTypesBrowsingData</a> originTypes}) <a class="anchor-link" href="#"
               title="Permalink to RemovalOptions.RemovalOptions">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -77,7 +77,7 @@ new <strong>RemovalOptions</strong>({since, Map originTypes}) <a class="anchor-l
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-RemovalOptions({var since, Map originTypes}) {
+RemovalOptions({var since, OriginTypesBrowsingData originTypes}) {
  if (since != null) this.since = since;
  if (originTypes != null) this.originTypes = originTypes;
 }
@@ -103,7 +103,7 @@ RemovalOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="originTypes">
 <button class="show-code">Code</button>
-Map         <strong>originTypes</strong> <a class="anchor-link"
+<a href="../chrome.browsingData/OriginTypesBrowsingData.html">OriginTypesBrowsingData</a>         <strong>originTypes</strong> <a class="anchor-link"
             href="#originTypes"
             title="Permalink to RemovalOptions.originTypes">#</a>
         </h4>
@@ -113,10 +113,10 @@ If this object isn't specified, it defaults to clearing only "unprotected"
 origins. Please ensure that you <em>really</em> want to remove application data
 before adding 'protectedWeb' or 'extensions'.</p>
 <pre class="source">
-Map get originTypes =&gt; mapify(proxy['originTypes']);
+OriginTypesBrowsingData get originTypes =&gt; _createOriginTypesBrowsingData(proxy['originTypes']);
 </pre>
 <pre class="source">
-set originTypes(Map value) =&gt; proxy['originTypes'] = jsify(value);
+set originTypes(OriginTypesBrowsingData value) =&gt; proxy['originTypes'] = jsify(value);
 </pre>
 </div>
 </div>

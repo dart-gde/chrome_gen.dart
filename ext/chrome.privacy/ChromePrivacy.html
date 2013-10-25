@@ -42,19 +42,19 @@ class ChromePrivacy {
   * Settings that influence Chrome's handling of network connections in
   * general.
   */
- Map get network =&gt; mapify(_privacy['network']);
+ NetworkPrivacy get network =&gt; _createNetworkPrivacy(_privacy['network']);
 
  /**
   * Settings that enable or disable features that require third-party network
   * services provided by Google and your default search provider.
   */
- Map get services =&gt; mapify(_privacy['services']);
+ ServicesPrivacy get services =&gt; _createServicesPrivacy(_privacy['services']);
 
  /**
   * Settings that determine what information Chrome makes available to
   * websites.
   */
- Map get websites =&gt; mapify(_privacy['websites']);
+ WebsitesPrivacy get websites =&gt; _createWebsitesPrivacy(_privacy['websites']);
 }
 </pre>
 </div>
@@ -62,7 +62,7 @@ class ChromePrivacy {
 <h3>Properties</h3>
 <div class="field"><h4 id="network">
 <button class="show-code">Code</button>
-final Map         <strong>network</strong> <a class="anchor-link"
+final <a href="../chrome.privacy/NetworkPrivacy.html">NetworkPrivacy</a>         <strong>network</strong> <a class="anchor-link"
             href="#network"
             title="Permalink to ChromePrivacy.network">#</a>
         </h4>
@@ -70,13 +70,13 @@ final Map         <strong>network</strong> <a class="anchor-link"
 <p>Settings that influence Chrome's handling of network connections in
 general.</p>
 <pre class="source">
-Map get network =&gt; mapify(_privacy['network']);
+NetworkPrivacy get network =&gt; _createNetworkPrivacy(_privacy['network']);
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="services">
 <button class="show-code">Code</button>
-final Map         <strong>services</strong> <a class="anchor-link"
+final <a href="../chrome.privacy/ServicesPrivacy.html">ServicesPrivacy</a>         <strong>services</strong> <a class="anchor-link"
             href="#services"
             title="Permalink to ChromePrivacy.services">#</a>
         </h4>
@@ -84,13 +84,13 @@ final Map         <strong>services</strong> <a class="anchor-link"
 <p>Settings that enable or disable features that require third-party network
 services provided by Google and your default search provider.</p>
 <pre class="source">
-Map get services =&gt; mapify(_privacy['services']);
+ServicesPrivacy get services =&gt; _createServicesPrivacy(_privacy['services']);
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="websites">
 <button class="show-code">Code</button>
-final Map         <strong>websites</strong> <a class="anchor-link"
+final <a href="../chrome.privacy/WebsitesPrivacy.html">WebsitesPrivacy</a>         <strong>websites</strong> <a class="anchor-link"
             href="#websites"
             title="Permalink to ChromePrivacy.websites">#</a>
         </h4>
@@ -98,7 +98,7 @@ final Map         <strong>websites</strong> <a class="anchor-link"
 <p>Settings that determine what information Chrome makes available to
 websites.</p>
 <pre class="source">
-Map get websites =&gt; mapify(_privacy['websites']);
+WebsitesPrivacy get websites =&gt; _createWebsitesPrivacy(_privacy['websites']);
 </pre>
 </div>
 </div>

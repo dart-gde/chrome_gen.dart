@@ -43,7 +43,7 @@ class ChromeExtension {
   * resulted in an error. If no error has occured lastError will be
   * [undefined].
   */
- Map get lastError =&gt; mapify(_extension['lastError']);
+ LastErrorExtension get lastError =&gt; _createLastErrorExtension(_extension['lastError']);
 
  /**
   * True for content scripts running inside incognito tabs, and for extension
@@ -190,7 +190,7 @@ bool get inIncognitoContext =&gt; _extension['inIncognitoContext'];
 </div>
 <div class="field"><h4 id="lastError">
 <button class="show-code">Code</button>
-final Map         <strong>lastError</strong> <a class="anchor-link"
+final <a href="../chrome.extension/LastErrorExtension.html">LastErrorExtension</a>         <strong>lastError</strong> <a class="anchor-link"
             href="#lastError"
             title="Permalink to ChromeExtension.lastError">#</a>
         </h4>
@@ -199,7 +199,7 @@ final Map         <strong>lastError</strong> <a class="anchor-link"
 resulted in an error. If no error has occured lastError will be
 <code>undefined</code>.</p>
 <pre class="source">
-Map get lastError =&gt; mapify(_extension['lastError']);
+LastErrorExtension get lastError =&gt; _createLastErrorExtension(_extension['lastError']);
 </pre>
 </div>
 </div>

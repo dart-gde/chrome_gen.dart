@@ -36,7 +36,7 @@
 applied. Allows the event handler to modify network requests.</p>
 <pre class="source">
 class BlockingResponse extends ChromeObject {
- BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, HttpHeaders responseHeaders, Map authCredentials}) {
+ BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, HttpHeaders responseHeaders, AuthCredentialsWebRequest authCredentials}) {
    if (cancel != null) this.cancel = cancel;
    if (redirectUrl != null) this.redirectUrl = redirectUrl;
    if (requestHeaders != null) this.requestHeaders = requestHeaders;
@@ -82,8 +82,8 @@ class BlockingResponse extends ChromeObject {
   * Only used as a response to the onAuthRequired event. If set, the request is
   * made using the supplied credentials.
   */
- Map get authCredentials =&gt; mapify(proxy['authCredentials']);
- set authCredentials(Map value) =&gt; proxy['authCredentials'] = jsify(value);
+ AuthCredentialsWebRequest get authCredentials =&gt; _createAuthCredentialsWebRequest(proxy['authCredentials']);
+ set authCredentials(AuthCredentialsWebRequest value) =&gt; proxy['authCredentials'] = jsify(value);
 }
 </pre>
 </div>
@@ -94,7 +94,7 @@ class BlockingResponse extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>BlockingResponse</strong>({bool cancel, String redirectUrl, <a href="../chrome.webRequest/HttpHeaders.html">HttpHeaders</a> requestHeaders, <a href="../chrome.webRequest/HttpHeaders.html">HttpHeaders</a> responseHeaders, Map authCredentials}) <a class="anchor-link" href="#"
+new <strong>BlockingResponse</strong>({bool cancel, String redirectUrl, <a href="../chrome.webRequest/HttpHeaders.html">HttpHeaders</a> requestHeaders, <a href="../chrome.webRequest/HttpHeaders.html">HttpHeaders</a> responseHeaders, <a href="../chrome.webRequest/AuthCredentialsWebRequest.html">AuthCredentialsWebRequest</a> authCredentials}) <a class="anchor-link" href="#"
               title="Permalink to BlockingResponse.BlockingResponse">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -102,7 +102,7 @@ new <strong>BlockingResponse</strong>({bool cancel, String redirectUrl, <a href=
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, HttpHeaders responseHeaders, Map authCredentials}) {
+BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, HttpHeaders responseHeaders, AuthCredentialsWebRequest authCredentials}) {
  if (cancel != null) this.cancel = cancel;
  if (redirectUrl != null) this.redirectUrl = redirectUrl;
  if (requestHeaders != null) this.requestHeaders = requestHeaders;
@@ -131,7 +131,7 @@ BlockingResponse.fromProxy(JsObject proxy): super.fromProxy(proxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="authCredentials">
 <button class="show-code">Code</button>
-Map         <strong>authCredentials</strong> <a class="anchor-link"
+<a href="../chrome.webRequest/AuthCredentialsWebRequest.html">AuthCredentialsWebRequest</a>         <strong>authCredentials</strong> <a class="anchor-link"
             href="#authCredentials"
             title="Permalink to BlockingResponse.authCredentials">#</a>
         </h4>
@@ -139,10 +139,10 @@ Map         <strong>authCredentials</strong> <a class="anchor-link"
 <p>Only used as a response to the onAuthRequired event. If set, the request is
 made using the supplied credentials.</p>
 <pre class="source">
-Map get authCredentials =&gt; mapify(proxy['authCredentials']);
+AuthCredentialsWebRequest get authCredentials =&gt; _createAuthCredentialsWebRequest(proxy['authCredentials']);
 </pre>
 <pre class="source">
-set authCredentials(Map value) =&gt; proxy['authCredentials'] = jsify(value);
+set authCredentials(AuthCredentialsWebRequest value) =&gt; proxy['authCredentials'] = jsify(value);
 </pre>
 </div>
 </div>
