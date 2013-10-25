@@ -179,13 +179,18 @@ class HttpHeaders extends ChromeObject {
 }
 
 class AuthCredentialsWebRequest extends ChromeObject {
-  AuthCredentialsWebRequest();
+  AuthCredentialsWebRequest({String username, String password}) {
+    if (username != null) this.username = username;
+    if (password != null) this.password = password;
+  }
 
   AuthCredentialsWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get username => proxy['username'];
+  set username(String value) => proxy['username'] = value;
 
   String get password => proxy['password'];
+  set password(String value) => proxy['password'] = value;
 }
 
 /**
@@ -268,7 +273,11 @@ class UploadData extends ChromeObject {
 }
 
 class RequestBodyWebRequest extends ChromeObject {
-  RequestBodyWebRequest();
+  RequestBodyWebRequest({String error, Map formData, List<UploadData> raw}) {
+    if (error != null) this.error = error;
+    if (formData != null) this.formData = formData;
+    if (raw != null) this.raw = raw;
+  }
 
   RequestBodyWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -276,6 +285,7 @@ class RequestBodyWebRequest extends ChromeObject {
    * Errors when obtaining request body data.
    */
   String get error => proxy['error'];
+  set error(String value) => proxy['error'] = value;
 
   /**
    * If the request method is POST and the body is a sequence of key-value pairs
@@ -286,6 +296,7 @@ class RequestBodyWebRequest extends ChromeObject {
    * example value of this dictionary is {'key': ['value1', 'value2']}.
    */
   Map get formData => mapify(proxy['formData']);
+  set formData(Map value) => proxy['formData'] = jsify(value);
 
   /**
    * If the request method is PUT or POST, and the body is not already parsed in
@@ -293,16 +304,22 @@ class RequestBodyWebRequest extends ChromeObject {
    * array.
    */
   List<UploadData> get raw => listify(proxy['raw'], _createUploadData);
+  set raw(List<UploadData> value) => proxy['raw'] = jsify(value);
 }
 
 class ChallengerWebRequest extends ChromeObject {
-  ChallengerWebRequest();
+  ChallengerWebRequest({String host, int port}) {
+    if (host != null) this.host = host;
+    if (port != null) this.port = port;
+  }
 
   ChallengerWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get host => proxy['host'];
+  set host(String value) => proxy['host'] = value;
 
   int get port => proxy['port'];
+  set port(int value) => proxy['port'] = value;
 }
 
 OnAuthRequiredEvent _createOnAuthRequiredEvent(JsObject details, JsObject callback) =>

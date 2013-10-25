@@ -184,7 +184,7 @@ class JsonConverter {
   ChromeLibrary _convert(JsonNamespace namespace) {
     library.documentation = convertHtmlToDartdoc(namespace.description);
 
-    library.properties.addAll(namespace.properties.map(_convertProperty));
+    library.properties.addAll(namespace.properties.map((p) => _convertProperty(p, true)));
     library.types.addAll(namespace.types.map(_convertDeclaredType));
     library.methods.addAll(namespace.functions.map(_convertMethod));
     library.events.addAll(namespace.events.map(_convertEvent));
@@ -192,7 +192,7 @@ class JsonConverter {
     return library;
   }
 
-  ChromeProperty _convertProperty(JsonProperty p) {
+  ChromeProperty _convertProperty(JsonProperty p, [bool onlyReturnType = false]) {
     ChromeProperty property = new ChromeProperty(p.name, _convertType(p.type));
 
     property.documentation = convertHtmlToDartdoc(p.description);
@@ -205,7 +205,7 @@ class JsonConverter {
       if (!library.hasDeclaredType(className)) {
         ChromeDeclaredType newType = new ChromeDeclaredType();
         newType.name = className;
-        newType.noSetters = true;
+        newType.noSetters = onlyReturnType;
         if (p.type.ref != null) {
           newType.superClassDef = p.type.ref;
         }

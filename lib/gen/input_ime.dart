@@ -426,7 +426,15 @@ class MenuItem extends ChromeObject {
 }
 
 class PropertiesInputIme extends ChromeObject {
-  PropertiesInputIme();
+  PropertiesInputIme({bool visible, bool cursorVisible, bool vertical, int pageSize, String auxiliaryText, bool auxiliaryTextVisible, String windowPosition}) {
+    if (visible != null) this.visible = visible;
+    if (cursorVisible != null) this.cursorVisible = cursorVisible;
+    if (vertical != null) this.vertical = vertical;
+    if (pageSize != null) this.pageSize = pageSize;
+    if (auxiliaryText != null) this.auxiliaryText = auxiliaryText;
+    if (auxiliaryTextVisible != null) this.auxiliaryTextVisible = auxiliaryTextVisible;
+    if (windowPosition != null) this.windowPosition = windowPosition;
+  }
 
   PropertiesInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -434,32 +442,38 @@ class PropertiesInputIme extends ChromeObject {
    * True to show the Candidate window, false to hide it.
    */
   bool get visible => proxy['visible'];
+  set visible(bool value) => proxy['visible'] = value;
 
   /**
    * True to show the cursor, false to hide it.
    */
   bool get cursorVisible => proxy['cursorVisible'];
+  set cursorVisible(bool value) => proxy['cursorVisible'] = value;
 
   /**
    * True if the candidate window should be rendered vertical, false to make it
    * horizontal.
    */
   bool get vertical => proxy['vertical'];
+  set vertical(bool value) => proxy['vertical'] = value;
 
   /**
    * The number of candidates to display per page.
    */
   int get pageSize => proxy['pageSize'];
+  set pageSize(int value) => proxy['pageSize'] = value;
 
   /**
    * Text that is shown at the bottom of the candidate window.
    */
   String get auxiliaryText => proxy['auxiliaryText'];
+  set auxiliaryText(String value) => proxy['auxiliaryText'] = value;
 
   /**
    * True to display the auxiliary text, false to hide it.
    */
   bool get auxiliaryTextVisible => proxy['auxiliaryTextVisible'];
+  set auxiliaryTextVisible(bool value) => proxy['auxiliaryTextVisible'] = value;
 
   /**
    * Where to display the candidate window. If set to 'cursor', the window
@@ -468,10 +482,14 @@ class PropertiesInputIme extends ChromeObject {
    * enum of `cursor`, `composition`
    */
   String get windowPosition => proxy['windowPosition'];
+  set windowPosition(String value) => proxy['windowPosition'] = value;
 }
 
 class UsageInputIme extends ChromeObject {
-  UsageInputIme();
+  UsageInputIme({String title, String body}) {
+    if (title != null) this.title = title;
+    if (body != null) this.body = body;
+  }
 
   UsageInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -479,11 +497,13 @@ class UsageInputIme extends ChromeObject {
    * The title string of details description.
    */
   String get title => proxy['title'];
+  set title(String value) => proxy['title'] = value;
 
   /**
    * The body string of detail description.
    */
   String get body => proxy['body'];
+  set body(String value) => proxy['body'] = value;
 }
 
 InputContext _createInputContext(JsObject proxy) => proxy == null ? null : new InputContext.fromProxy(proxy);

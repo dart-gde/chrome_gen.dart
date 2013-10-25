@@ -151,7 +151,11 @@ class ChromeBrowsingData {
 }
 
 class OriginTypesBrowsingData extends ChromeObject {
-  OriginTypesBrowsingData();
+  OriginTypesBrowsingData({bool unprotectedWeb, bool protectedWeb, bool extension}) {
+    if (unprotectedWeb != null) this.unprotectedWeb = unprotectedWeb;
+    if (protectedWeb != null) this.protectedWeb = protectedWeb;
+    if (extension != null) this.extension = extension;
+  }
 
   OriginTypesBrowsingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -159,17 +163,20 @@ class OriginTypesBrowsingData extends ChromeObject {
    * Normal websites.
    */
   bool get unprotectedWeb => proxy['unprotectedWeb'];
+  set unprotectedWeb(bool value) => proxy['unprotectedWeb'] = value;
 
   /**
    * Websites that have been installed as hosted applications (be careful!).
    */
   bool get protectedWeb => proxy['protectedWeb'];
+  set protectedWeb(bool value) => proxy['protectedWeb'] = value;
 
   /**
    * Extensions and packaged applications a user has installed (be _really_
    * careful!).
    */
   bool get extension => proxy['extension'];
+  set extension(bool value) => proxy['extension'] = value;
 }
 
 /**
