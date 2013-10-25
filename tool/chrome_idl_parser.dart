@@ -270,6 +270,9 @@ class ChromeIDLParser extends LanguageParsers {
   Parser get enumBody => enumValue;
   Parser get enumValue => null;
 
+  /**
+   * Parse the attribute declaration.
+   */
   Parser get attributeDeclaration => null;
 
   /**
