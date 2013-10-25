@@ -112,7 +112,6 @@ class SuggestResult extends ChromeObject {
     if (content != null) this.content = content;
     if (description != null) this.description = description;
   }
-
   SuggestResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -140,7 +139,6 @@ class DefaultSuggestResult extends ChromeObject {
   DefaultSuggestResult({String description}) {
     if (description != null) this.description = description;
   }
-
   DefaultSuggestResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

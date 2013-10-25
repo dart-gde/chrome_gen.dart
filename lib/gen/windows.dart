@@ -148,7 +148,6 @@ class Window extends ChromeObject {
     if (alwaysOnTop != null) this.alwaysOnTop = alwaysOnTop;
     if (sessionId != null) this.sessionId = sessionId;
   }
-
   Window.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

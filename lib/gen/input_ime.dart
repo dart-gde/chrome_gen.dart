@@ -290,7 +290,6 @@ class KeyboardEvent extends ChromeObject {
     if (shiftKey != null) this.shiftKey = shiftKey;
     if (capsLock != null) this.capsLock = capsLock;
   }
-
   KeyboardEvent.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -352,7 +351,6 @@ class InputContext extends ChromeObject {
     if (contextID != null) this.contextID = contextID;
     if (type != null) this.type = type;
   }
-
   InputContext.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -383,7 +381,6 @@ class MenuItem extends ChromeObject {
     if (checked != null) this.checked = checked;
     if (enabled != null) this.enabled = enabled;
   }
-
   MenuItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -435,7 +432,6 @@ class PropertiesInputIme extends ChromeObject {
     if (auxiliaryTextVisible != null) this.auxiliaryTextVisible = auxiliaryTextVisible;
     if (windowPosition != null) this.windowPosition = windowPosition;
   }
-
   PropertiesInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -490,7 +486,6 @@ class UsageInputIme extends ChromeObject {
     if (title != null) this.title = title;
     if (body != null) this.body = body;
   }
-
   UsageInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

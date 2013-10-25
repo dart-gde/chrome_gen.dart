@@ -91,7 +91,6 @@ class Permissions extends ChromeObject {
     if (permissions != null) this.permissions = permissions;
     if (origins != null) this.origins = origins;
   }
-
   Permissions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

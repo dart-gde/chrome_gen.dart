@@ -156,7 +156,6 @@ class OriginTypesBrowsingData extends ChromeObject {
     if (protectedWeb != null) this.protectedWeb = protectedWeb;
     if (extension != null) this.extension = extension;
   }
-
   OriginTypesBrowsingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -187,7 +186,6 @@ class RemovalOptions extends ChromeObject {
     if (since != null) this.since = since;
     if (originTypes != null) this.originTypes = originTypes;
   }
-
   RemovalOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -228,7 +226,6 @@ class DataTypeSet extends ChromeObject {
     if (passwords != null) this.passwords = passwords;
     if (webSQL != null) this.webSQL = webSQL;
   }
-
   DataTypeSet.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

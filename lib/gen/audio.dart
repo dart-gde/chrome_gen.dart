@@ -57,7 +57,6 @@ class OutputDeviceInfo extends ChromeObject {
     if (isMuted != null) this.isMuted = isMuted;
     if (volume != null) this.volume = volume;
   }
-
   OutputDeviceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get id => proxy['id'];
@@ -84,7 +83,6 @@ class InputDeviceInfo extends ChromeObject {
     if (isMuted != null) this.isMuted = isMuted;
     if (gain != null) this.gain = gain;
   }
-
   InputDeviceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get id => proxy['id'];
@@ -109,7 +107,6 @@ class DeviceProperties extends ChromeObject {
     if (volume != null) this.volume = volume;
     if (gain != null) this.gain = gain;
   }
-
   DeviceProperties.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   bool get isMuted => proxy['isMuted'];

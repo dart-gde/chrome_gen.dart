@@ -54,7 +54,6 @@ class StorageOnChangedEvent {
 
 class SyncStorageArea extends StorageArea {
   SyncStorageArea();
-
   SyncStorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -97,7 +96,6 @@ class SyncStorageArea extends StorageArea {
 
 class LocalStorageArea extends StorageArea {
   LocalStorageArea();
-
   LocalStorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -115,7 +113,6 @@ class StorageChange extends ChromeObject {
     if (oldValue != null) this.oldValue = oldValue;
     if (newValue != null) this.newValue = newValue;
   }
-
   StorageChange.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -133,7 +130,6 @@ class StorageChange extends ChromeObject {
 
 class StorageArea extends ChromeObject {
   StorageArea();
-
   StorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

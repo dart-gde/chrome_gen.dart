@@ -73,7 +73,6 @@ class Filter extends ChromeObject {
   Filter({int maxResults}) {
     if (maxResults != null) this.maxResults = maxResults;
   }
-
   Filter.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -91,7 +90,6 @@ class Session extends ChromeObject {
     if (tab != null) this.tab = tab;
     if (window != null) this.window = window;
   }
-
   Session.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -121,7 +119,6 @@ class Device extends ChromeObject {
     if (info != null) this.info = info;
     if (sessions != null) this.sessions = sessions;
   }
-
   Device.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

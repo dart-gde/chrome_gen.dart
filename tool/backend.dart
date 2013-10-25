@@ -351,7 +351,6 @@ class _DefaultBackendContext {
     } else {
       generator.writeln("${className}();");
     }
-    generator.writeln();
     generator.writeln("${className}.fromProxy(JsObject proxy): super.fromProxy(proxy);");
 
     if (library.name != 'proxy') {

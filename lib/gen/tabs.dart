@@ -511,7 +511,6 @@ class Tab extends ChromeObject {
     if (height != null) this.height = height;
     if (sessionId != null) this.sessionId = sessionId;
   }
-
   Tab.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -626,7 +625,6 @@ class InjectDetails extends ChromeObject {
     if (allFrames != null) this.allFrames = allFrames;
     if (runAt != null) this.runAt = runAt;
   }
-
   InjectDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

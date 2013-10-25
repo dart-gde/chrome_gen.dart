@@ -42,7 +42,6 @@ class ProxyServer extends ChromeObject {
     if (host != null) this.host = host;
     if (port != null) this.port = port;
   }
-
   ProxyServer.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -81,7 +80,6 @@ class ProxyRules extends ChromeObject {
     if (fallbackProxy != null) this.fallbackProxy = fallbackProxy;
     if (bypassList != null) this.bypassList = bypassList;
   }
-
   ProxyRules.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -133,7 +131,6 @@ class PacScript extends ChromeObject {
     if (data != null) this.data = data;
     if (mandatory != null) this.mandatory = mandatory;
   }
-
   PacScript.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -165,7 +162,6 @@ class ProxyConfig extends ChromeObject {
     if (pacScript != null) this.pacScript = pacScript;
     if (mode != null) this.mode = mode;
   }
-
   ProxyConfig.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

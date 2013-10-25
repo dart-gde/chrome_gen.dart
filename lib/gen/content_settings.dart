@@ -77,7 +77,6 @@ class ResourceIdentifier extends ChromeObject {
     if (id != null) this.id = id;
     if (description != null) this.description = description;
   }
-
   ResourceIdentifier.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -95,7 +94,6 @@ class ResourceIdentifier extends ChromeObject {
 
 class ContentSetting extends ChromeObject {
   ContentSetting();
-
   ContentSetting.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

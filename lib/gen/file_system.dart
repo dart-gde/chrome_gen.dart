@@ -126,7 +126,6 @@ class AcceptOption extends ChromeObject {
     if (mimeTypes != null) this.mimeTypes = mimeTypes;
     if (extensions != null) this.extensions = extensions;
   }
-
   AcceptOption.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get description => proxy['description'];
@@ -147,7 +146,6 @@ class ChooseEntryOptions extends ChromeObject {
     if (acceptsAllTypes != null) this.acceptsAllTypes = acceptsAllTypes;
     if (acceptsMultiple != null) this.acceptsMultiple = acceptsMultiple;
   }
-
   ChooseEntryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   ChooseEntryType get type => _createChooseEntryType(proxy['type']);

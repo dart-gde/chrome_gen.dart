@@ -144,7 +144,6 @@ class OpenOptions extends ChromeObject {
     if (parityBit != null) this.parityBit = parityBit;
     if (stopBit != null) this.stopBit = stopBit;
   }
-
   OpenOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get bitrate => proxy['bitrate'];
@@ -164,7 +163,6 @@ class OpenInfo extends ChromeObject {
   OpenInfo({int connectionId}) {
     if (connectionId != null) this.connectionId = connectionId;
   }
-
   OpenInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get connectionId => proxy['connectionId'];
@@ -176,7 +174,6 @@ class SerialReadInfo extends ChromeObject {
     if (bytesRead != null) this.bytesRead = bytesRead;
     if (data != null) this.data = data;
   }
-
   SerialReadInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get bytesRead => proxy['bytesRead'];
@@ -190,7 +187,6 @@ class SerialWriteInfo extends ChromeObject {
   SerialWriteInfo({int bytesWritten}) {
     if (bytesWritten != null) this.bytesWritten = bytesWritten;
   }
-
   SerialWriteInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get bytesWritten => proxy['bytesWritten'];
@@ -204,7 +200,6 @@ class ControlSignalOptions extends ChromeObject {
     if (dcd != null) this.dcd = dcd;
     if (cts != null) this.cts = cts;
   }
-
   ControlSignalOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   bool get dtr => proxy['dtr'];

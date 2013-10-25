@@ -86,7 +86,6 @@ class Alarm extends ChromeObject {
     if (scheduledTime != null) this.scheduledTime = scheduledTime;
     if (periodInMinutes != null) this.periodInMinutes = periodInMinutes;
   }
-
   Alarm.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get name => proxy['name'];
@@ -105,7 +104,6 @@ class AlarmCreateInfo extends ChromeObject {
     if (delayInMinutes != null) this.delayInMinutes = delayInMinutes;
     if (periodInMinutes != null) this.periodInMinutes = periodInMinutes;
   }
-
   AlarmCreateInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   double get when => proxy['when'];

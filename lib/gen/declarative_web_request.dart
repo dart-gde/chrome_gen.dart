@@ -51,7 +51,6 @@ class HeaderFilter extends ChromeObject {
     if (valueContains != null) this.valueContains = valueContains;
     if (valueEquals != null) this.valueEquals = valueEquals;
   }
-
   HeaderFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -120,7 +119,6 @@ class RequestMatcher extends ChromeObject {
     if (thirdPartyForCookies != null) this.thirdPartyForCookies = thirdPartyForCookies;
     if (stages != null) this.stages = stages;
   }
-
   RequestMatcher.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -211,7 +209,6 @@ class RequestMatcher extends ChromeObject {
  */
 class CancelRequest extends ChromeObject {
   CancelRequest();
-
   CancelRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
@@ -222,7 +219,6 @@ class RedirectRequest extends ChromeObject {
   RedirectRequest({String redirectUrl}) {
     if (redirectUrl != null) this.redirectUrl = redirectUrl;
   }
-
   RedirectRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -238,7 +234,6 @@ class RedirectRequest extends ChromeObject {
  */
 class RedirectToTransparentImage extends ChromeObject {
   RedirectToTransparentImage();
-
   RedirectToTransparentImage.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
@@ -248,7 +243,6 @@ class RedirectToTransparentImage extends ChromeObject {
  */
 class RedirectToEmptyDocument extends ChromeObject {
   RedirectToEmptyDocument();
-
   RedirectToEmptyDocument.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
@@ -261,7 +255,6 @@ class RedirectByRegEx extends ChromeObject {
     if (from != null) this.from = from;
     if (to != null) this.to = to;
   }
-
   RedirectByRegEx.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -290,7 +283,6 @@ class SetRequestHeader extends ChromeObject {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
   }
-
   SetRequestHeader.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -315,7 +307,6 @@ class RemoveRequestHeader extends ChromeObject {
   RemoveRequestHeader({String name}) {
     if (name != null) this.name = name;
   }
-
   RemoveRequestHeader.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -335,7 +326,6 @@ class AddResponseHeader extends ChromeObject {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
   }
-
   AddResponseHeader.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -359,7 +349,6 @@ class RemoveResponseHeader extends ChromeObject {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
   }
-
   RemoveResponseHeader.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -383,7 +372,6 @@ class IgnoreRules extends ChromeObject {
     if (lowerPriorityThan != null) this.lowerPriorityThan = lowerPriorityThan;
     if (hasTag != null) this.hasTag = hasTag;
   }
-
   IgnoreRules.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -412,7 +400,6 @@ class SendMessageToExtension extends ChromeObject {
   SendMessageToExtension({String message}) {
     if (message != null) this.message = message;
   }
-
   SendMessageToExtension.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -431,7 +418,6 @@ class RequestCookie extends ChromeObject {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
   }
-
   RequestCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -461,7 +447,6 @@ class ResponseCookie extends ChromeObject {
     if (secure != null) this.secure = secure;
     if (httpOnly != null) this.httpOnly = httpOnly;
   }
-
   ResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -530,7 +515,6 @@ class FilterResponseCookie extends ChromeObject {
     if (ageLowerBound != null) this.ageLowerBound = ageLowerBound;
     if (sessionCookie != null) this.sessionCookie = sessionCookie;
   }
-
   FilterResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -621,7 +605,6 @@ class AddRequestCookie extends ChromeObject {
   AddRequestCookie({RequestCookie cookie}) {
     if (cookie != null) this.cookie = cookie;
   }
-
   AddRequestCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -640,7 +623,6 @@ class AddResponseCookie extends ChromeObject {
   AddResponseCookie({ResponseCookie cookie}) {
     if (cookie != null) this.cookie = cookie;
   }
-
   AddResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -660,7 +642,6 @@ class EditRequestCookie extends ChromeObject {
     if (filter != null) this.filter = filter;
     if (modification != null) this.modification = modification;
   }
-
   EditRequestCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -686,7 +667,6 @@ class EditResponseCookie extends ChromeObject {
     if (filter != null) this.filter = filter;
     if (modification != null) this.modification = modification;
   }
-
   EditResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -711,7 +691,6 @@ class RemoveRequestCookie extends ChromeObject {
   RemoveRequestCookie({RequestCookie filter}) {
     if (filter != null) this.filter = filter;
   }
-
   RemoveRequestCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -729,7 +708,6 @@ class RemoveResponseCookie extends ChromeObject {
   RemoveResponseCookie({FilterResponseCookie filter}) {
     if (filter != null) this.filter = filter;
   }
-
   RemoveResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

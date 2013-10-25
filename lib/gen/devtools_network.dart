@@ -52,7 +52,6 @@ class ChromeDevtoolsNetwork {
  */
 class Request extends ChromeObject {
   Request();
-
   Request.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

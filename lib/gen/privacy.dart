@@ -40,7 +40,6 @@ class ChromePrivacy {
 
 class NetworkPrivacy extends ChromeObject {
   NetworkPrivacy();
-
   NetworkPrivacy.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -54,7 +53,6 @@ class NetworkPrivacy extends ChromeObject {
 
 class ServicesPrivacy extends ChromeObject {
   ServicesPrivacy();
-
   ServicesPrivacy.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -98,7 +96,6 @@ class ServicesPrivacy extends ChromeObject {
 
 class WebsitesPrivacy extends ChromeObject {
   WebsitesPrivacy();
-
   WebsitesPrivacy.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

@@ -116,7 +116,6 @@ class OnClickData extends ChromeObject {
     if (wasChecked != null) this.wasChecked = wasChecked;
     if (checked != null) this.checked = checked;
   }
-
   OnClickData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

@@ -54,7 +54,6 @@ class MediaFileSystemsDetails extends ChromeObject {
   MediaFileSystemsDetails({GetMediaFileSystemsInteractivity interactive}) {
     if (interactive != null) this.interactive = interactive;
   }
-
   MediaFileSystemsDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   GetMediaFileSystemsInteractivity get interactive => _createGetMediaFileSystemsInteractivity(proxy['interactive']);
@@ -69,7 +68,6 @@ class MediaFileSystemMetadata extends ChromeObject {
     if (isRemovable != null) this.isRemovable = isRemovable;
     if (isMediaDevice != null) this.isMediaDevice = isMediaDevice;
   }
-
   MediaFileSystemMetadata.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get name => proxy['name'];

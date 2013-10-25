@@ -19,10 +19,10 @@ final log.Logger _logger = new log.Logger('chrome_gen');
 final JsObject _jsJSON = context['JSON'];
 
 final JsObject chrome = context['chrome'];
+final JsObject _runtime = context['chrome']['runtime'];
 
 String get lastError {
-  JsObject error = chrome['runtime']['lastError'];
-
+  JsObject error = _runtime['lastError'];
   return error != null ? error['message'] : null;
 }
 

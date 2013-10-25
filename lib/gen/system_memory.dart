@@ -27,7 +27,6 @@ class MemoryInfo extends ChromeObject {
     if (capacity != null) this.capacity = capacity;
     if (availableCapacity != null) this.availableCapacity = availableCapacity;
   }
-
   MemoryInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   double get capacity => proxy['capacity'];

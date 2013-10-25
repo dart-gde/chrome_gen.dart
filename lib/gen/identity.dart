@@ -70,7 +70,6 @@ class TokenDetails extends ChromeObject {
   TokenDetails({bool interactive}) {
     if (interactive != null) this.interactive = interactive;
   }
-
   TokenDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   bool get interactive => proxy['interactive'];
@@ -81,7 +80,6 @@ class InvalidTokenDetails extends ChromeObject {
   InvalidTokenDetails({String token}) {
     if (token != null) this.token = token;
   }
-
   InvalidTokenDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get token => proxy['token'];
@@ -93,7 +91,6 @@ class WebAuthFlowDetails extends ChromeObject {
     if (url != null) this.url = url;
     if (interactive != null) this.interactive = interactive;
   }
-
   WebAuthFlowDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get url => proxy['url'];

@@ -103,7 +103,6 @@ class TtsEvent extends ChromeObject {
     if (charIndex != null) this.charIndex = charIndex;
     if (errorMessage != null) this.errorMessage = errorMessage;
   }
-
   TtsEvent.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -147,7 +146,6 @@ class TtsVoice extends ChromeObject {
     if (extensionId != null) this.extensionId = extensionId;
     if (eventTypes != null) this.eventTypes = eventTypes;
   }
-
   TtsVoice.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

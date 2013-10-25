@@ -138,7 +138,6 @@ class CreateWindowOptions extends ChromeObject {
     if (resizable != null) this.resizable = resizable;
     if (singleton != null) this.singleton = singleton;
   }
-
   CreateWindowOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get id => proxy['id'];
@@ -209,7 +208,6 @@ class AppWindow extends ChromeObject {
   AppWindow({var contentWindow}) {
     if (contentWindow != null) this.contentWindow = contentWindow;
   }
-
   AppWindow.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get contentWindow => proxy['contentWindow'];

@@ -289,7 +289,6 @@ class BookmarkTreeNode extends ChromeObject {
     if (dateGroupModified != null) this.dateGroupModified = dateGroupModified;
     if (children != null) this.children = children;
   }
-
   BookmarkTreeNode.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

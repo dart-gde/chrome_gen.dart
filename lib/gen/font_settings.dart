@@ -185,7 +185,6 @@ class FontName extends ChromeObject {
     if (fontId != null) this.fontId = fontId;
     if (displayName != null) this.displayName = displayName;
   }
-
   FontName.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -224,7 +223,6 @@ class FontName extends ChromeObject {
  */
 class ScriptCode extends ChromeObject {
   ScriptCode();
-
   ScriptCode.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
@@ -234,7 +232,6 @@ class ScriptCode extends ChromeObject {
  */
 class GenericFamily extends ChromeObject {
   GenericFamily();
-
   GenericFamily.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
@@ -249,7 +246,6 @@ class GenericFamily extends ChromeObject {
  */
 class LevelOfControl extends ChromeObject {
   LevelOfControl();
-
   LevelOfControl.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 

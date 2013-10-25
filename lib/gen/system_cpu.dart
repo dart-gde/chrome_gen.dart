@@ -28,7 +28,6 @@ class CpuInfo extends ChromeObject {
     if (archName != null) this.archName = archName;
     if (modelName != null) this.modelName = modelName;
   }
-
   CpuInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get numOfProcessors => proxy['numOfProcessors'];

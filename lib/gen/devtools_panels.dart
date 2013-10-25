@@ -64,7 +64,6 @@ class ChromeDevtoolsPanels {
  */
 class ElementsPanel extends ChromeObject {
   ElementsPanel();
-
   ElementsPanel.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -87,7 +86,6 @@ class ElementsPanel extends ChromeObject {
  */
 class ExtensionPanel extends ChromeObject {
   ExtensionPanel();
-
   ExtensionPanel.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -113,7 +111,6 @@ class ExtensionPanel extends ChromeObject {
  */
 class ExtensionSidebarPane extends ChromeObject {
   ExtensionSidebarPane();
-
   ExtensionSidebarPane.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -170,7 +167,6 @@ class ExtensionSidebarPane extends ChromeObject {
  */
 class Button extends ChromeObject {
   Button();
-
   Button.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

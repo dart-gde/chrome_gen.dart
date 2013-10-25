@@ -31,7 +31,6 @@ class PageStateMatcher extends ChromeObject {
     if (pageUrl != null) this.pageUrl = pageUrl;
     if (css != null) this.css = css;
   }
-
   PageStateMatcher.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -59,7 +58,6 @@ class PageStateMatcher extends ChromeObject {
  */
 class ShowPageAction extends ChromeObject {
   ShowPageAction();
-
   ShowPageAction.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 

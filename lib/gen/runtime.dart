@@ -356,7 +356,6 @@ class OnMessageExternalEvent {
 
 class LastErrorRuntime extends ChromeObject {
   LastErrorRuntime();
-
   LastErrorRuntime.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -377,7 +376,6 @@ class Port extends ChromeObject {
     if (postMessage != null) this.postMessage = postMessage;
     if (sender != null) this.sender = sender;
   }
-
   Port.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get name => proxy['name'];
@@ -413,7 +411,6 @@ class MessageSender extends ChromeObject {
     if (id != null) this.id = id;
     if (url != null) this.url = url;
   }
-
   MessageSender.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

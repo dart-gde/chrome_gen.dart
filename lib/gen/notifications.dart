@@ -113,7 +113,6 @@ class NotificationItem extends ChromeObject {
     if (title != null) this.title = title;
     if (message != null) this.message = message;
   }
-
   NotificationItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get title => proxy['title'];
@@ -129,7 +128,6 @@ class NotificationBitmap extends ChromeObject {
     if (height != null) this.height = height;
     if (data != null) this.data = data;
   }
-
   NotificationBitmap.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get width => proxy['width'];
@@ -148,7 +146,6 @@ class NotificationButton extends ChromeObject {
     if (iconUrl != null) this.iconUrl = iconUrl;
     if (iconBitmap != null) this.iconBitmap = iconBitmap;
   }
-
   NotificationButton.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get title => proxy['title'];
@@ -178,7 +175,6 @@ class NotificationOptions extends ChromeObject {
     if (items != null) this.items = items;
     if (progress != null) this.progress = progress;
   }
-
   NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   TemplateType get type => _createTemplateType(proxy['type']);

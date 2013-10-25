@@ -27,7 +27,6 @@ class Rule extends ChromeObject {
     if (actions != null) this.actions = actions;
     if (priority != null) this.priority = priority;
   }
-
   Rule.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -67,7 +66,6 @@ class Rule extends ChromeObject {
  */
 class Event extends ChromeObject {
   Event();
-
   Event.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -172,7 +170,6 @@ class UrlFilter extends ChromeObject {
     if (schemes != null) this.schemes = schemes;
     if (ports != null) this.ports = ports;
   }
-
   UrlFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

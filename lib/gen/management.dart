@@ -149,7 +149,6 @@ class IconInfo extends ChromeObject {
     if (size != null) this.size = size;
     if (url != null) this.url = url;
   }
-
   IconInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -191,7 +190,6 @@ class ExtensionInfo extends ChromeObject {
     if (hostPermissions != null) this.hostPermissions = hostPermissions;
     if (installType != null) this.installType = installType;
   }
-
   ExtensionInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

@@ -50,7 +50,6 @@ class Insets extends ChromeObject {
     if (right != null) this.right = right;
     if (bottom != null) this.bottom = bottom;
   }
-
   Insets.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get left => proxy['left'];
@@ -81,7 +80,6 @@ class DisplayUnitInfo extends ChromeObject {
     if (overscan != null) this.overscan = overscan;
     if (workArea != null) this.workArea = workArea;
   }
-
   DisplayUnitInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get id => proxy['id'];
@@ -130,7 +128,6 @@ class DisplayProperties extends ChromeObject {
     if (boundsOriginX != null) this.boundsOriginX = boundsOriginX;
     if (boundsOriginY != null) this.boundsOriginY = boundsOriginY;
   }
-
   DisplayProperties.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get mirroringSourceId => proxy['mirroringSourceId'];

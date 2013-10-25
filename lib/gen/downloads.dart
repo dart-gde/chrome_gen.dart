@@ -315,7 +315,6 @@ class HeaderNameValuePair extends ChromeObject {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
   }
-
   HeaderNameValuePair.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get name => proxy['name'];
@@ -330,7 +329,6 @@ class FilenameSuggestion extends ChromeObject {
     if (filename != null) this.filename = filename;
     if (conflictAction != null) this.conflictAction = conflictAction;
   }
-
   FilenameSuggestion.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get filename => proxy['filename'];
@@ -350,7 +348,6 @@ class DownloadOptions extends ChromeObject {
     if (headers != null) this.headers = headers;
     if (body != null) this.body = body;
   }
-
   DownloadOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get url => proxy['url'];
@@ -398,7 +395,6 @@ class DownloadItem extends ChromeObject {
     if (byExtensionId != null) this.byExtensionId = byExtensionId;
     if (byExtensionName != null) this.byExtensionName = byExtensionName;
   }
-
   DownloadItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get id => proxy['id'];
@@ -490,7 +486,6 @@ class DownloadQuery extends ChromeObject {
     if (fileSize != null) this.fileSize = fileSize;
     if (exists != null) this.exists = exists;
   }
-
   DownloadQuery.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get query => proxy['query'];
@@ -574,7 +569,6 @@ class StringDelta extends ChromeObject {
     if (previous != null) this.previous = previous;
     if (current != null) this.current = current;
   }
-
   StringDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get previous => proxy['previous'];
@@ -589,7 +583,6 @@ class LongDelta extends ChromeObject {
     if (previous != null) this.previous = previous;
     if (current != null) this.current = current;
   }
-
   LongDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get previous => proxy['previous'];
@@ -604,7 +597,6 @@ class BooleanDelta extends ChromeObject {
     if (previous != null) this.previous = previous;
     if (current != null) this.current = current;
   }
-
   BooleanDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   bool get previous => proxy['previous'];
@@ -631,7 +623,6 @@ class DownloadDelta extends ChromeObject {
     if (fileSize != null) this.fileSize = fileSize;
     if (exists != null) this.exists = exists;
   }
-
   DownloadDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get id => proxy['id'];
@@ -681,7 +672,6 @@ class GetFileIconOptions extends ChromeObject {
   GetFileIconOptions({int size}) {
     if (size != null) this.size = size;
   }
-
   GetFileIconOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get size => proxy['size'];

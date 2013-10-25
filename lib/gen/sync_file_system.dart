@@ -205,7 +205,6 @@ class FileInfo extends ChromeObject {
     if (action != null) this.action = action;
     if (direction != null) this.direction = direction;
   }
-
   FileInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get fileEntry => proxy['fileEntry'];
@@ -227,7 +226,6 @@ class FileStatusInfo extends ChromeObject {
     if (status != null) this.status = status;
     if (error != null) this.error = error;
   }
-
   FileStatusInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get fileEntry => proxy['fileEntry'];
@@ -245,7 +243,6 @@ class StorageInfo extends ChromeObject {
     if (usageBytes != null) this.usageBytes = usageBytes;
     if (quotaBytes != null) this.quotaBytes = quotaBytes;
   }
-
   StorageInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get usageBytes => proxy['usageBytes'];
@@ -260,7 +257,6 @@ class ServiceInfo extends ChromeObject {
     if (state != null) this.state = state;
     if (description != null) this.description = description;
   }
-
   ServiceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   ServiceStatus get state => _createServiceStatus(proxy['state']);

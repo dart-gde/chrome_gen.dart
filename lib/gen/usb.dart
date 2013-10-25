@@ -291,7 +291,6 @@ class Device extends ChromeObject {
     if (vendorId != null) this.vendorId = vendorId;
     if (productId != null) this.productId = productId;
   }
-
   Device.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get device => proxy['device'];
@@ -310,7 +309,6 @@ class ConnectionHandle extends ChromeObject {
     if (vendorId != null) this.vendorId = vendorId;
     if (productId != null) this.productId = productId;
   }
-
   ConnectionHandle.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get handle => proxy['handle'];
@@ -333,7 +331,6 @@ class EndpointDescriptor extends ChromeObject {
     if (usage != null) this.usage = usage;
     if (pollingInterval != null) this.pollingInterval = pollingInterval;
   }
-
   EndpointDescriptor.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get address => proxy['address'];
@@ -368,7 +365,6 @@ class InterfaceDescriptor extends ChromeObject {
     if (description != null) this.description = description;
     if (endpoints != null) this.endpoints = endpoints;
   }
-
   InterfaceDescriptor.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get interfaceNumber => proxy['interfaceNumber'];
@@ -404,7 +400,6 @@ class ControlTransferInfo extends ChromeObject {
     if (length != null) this.length = length;
     if (data != null) this.data = data;
   }
-
   ControlTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   Direction get direction => _createDirection(proxy['direction']);
@@ -439,7 +434,6 @@ class GenericTransferInfo extends ChromeObject {
     if (length != null) this.length = length;
     if (data != null) this.data = data;
   }
-
   GenericTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   Direction get direction => _createDirection(proxy['direction']);
@@ -461,7 +455,6 @@ class IsochronousTransferInfo extends ChromeObject {
     if (packets != null) this.packets = packets;
     if (packetLength != null) this.packetLength = packetLength;
   }
-
   IsochronousTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   GenericTransferInfo get transferInfo => _createGenericTransferInfo(proxy['transferInfo']);
@@ -479,7 +472,6 @@ class TransferResultInfo extends ChromeObject {
     if (resultCode != null) this.resultCode = resultCode;
     if (data != null) this.data = data;
   }
-
   TransferResultInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get resultCode => proxy['resultCode'];
@@ -494,7 +486,6 @@ class EnumerateDevicesOptions extends ChromeObject {
     if (vendorId != null) this.vendorId = vendorId;
     if (productId != null) this.productId = productId;
   }
-
   EnumerateDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get vendorId => proxy['vendorId'];
@@ -510,7 +501,6 @@ class EnumerateDevicesAndRequestAccessOptions extends ChromeObject {
     if (productId != null) this.productId = productId;
     if (interfaceId != null) this.interfaceId = interfaceId;
   }
-
   EnumerateDevicesAndRequestAccessOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get vendorId => proxy['vendorId'];

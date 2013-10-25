@@ -129,7 +129,6 @@ class ChromeBrowserAction {
 
 class ColorArray extends ChromeObject {
   ColorArray();
-
   ColorArray.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
@@ -139,7 +138,6 @@ class ColorArray extends ChromeObject {
  */
 class ImageDataType extends ChromeObject {
   ImageDataType();
-
   ImageDataType.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 

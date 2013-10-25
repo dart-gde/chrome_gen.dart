@@ -36,7 +36,6 @@ class Message extends ChromeObject {
     if (subchannelId != null) this.subchannelId = subchannelId;
     if (payload != null) this.payload = payload;
   }
-
   Message.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get subchannelId => proxy['subchannelId'];
@@ -50,7 +49,6 @@ class ChannelIdResult extends ChromeObject {
   ChannelIdResult({String channelId}) {
     if (channelId != null) this.channelId = channelId;
   }
-
   ChannelIdResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get channelId => proxy['channelId'];

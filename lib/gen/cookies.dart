@@ -125,7 +125,6 @@ class Cookie extends ChromeObject {
     if (expirationDate != null) this.expirationDate = expirationDate;
     if (storeId != null) this.storeId = storeId;
   }
-
   Cookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -204,7 +203,6 @@ class CookieStore extends ChromeObject {
     if (id != null) this.id = id;
     if (tabIds != null) this.tabIds = tabIds;
   }
-
   CookieStore.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

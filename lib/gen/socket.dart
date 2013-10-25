@@ -306,7 +306,6 @@ class SocketType extends ChromeEnum {
 
 class CreateOptions extends ChromeObject {
   CreateOptions();
-
   CreateOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
@@ -314,7 +313,6 @@ class CreateInfo extends ChromeObject {
   CreateInfo({int socketId}) {
     if (socketId != null) this.socketId = socketId;
   }
-
   CreateInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get socketId => proxy['socketId'];
@@ -326,7 +324,6 @@ class AcceptInfo extends ChromeObject {
     if (resultCode != null) this.resultCode = resultCode;
     if (socketId != null) this.socketId = socketId;
   }
-
   AcceptInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get resultCode => proxy['resultCode'];
@@ -341,7 +338,6 @@ class SocketReadInfo extends ChromeObject {
     if (resultCode != null) this.resultCode = resultCode;
     if (data != null) this.data = data;
   }
-
   SocketReadInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get resultCode => proxy['resultCode'];
@@ -355,7 +351,6 @@ class SocketWriteInfo extends ChromeObject {
   SocketWriteInfo({int bytesWritten}) {
     if (bytesWritten != null) this.bytesWritten = bytesWritten;
   }
-
   SocketWriteInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get bytesWritten => proxy['bytesWritten'];
@@ -369,7 +364,6 @@ class RecvFromInfo extends ChromeObject {
     if (address != null) this.address = address;
     if (port != null) this.port = port;
   }
-
   RecvFromInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get resultCode => proxy['resultCode'];
@@ -394,7 +388,6 @@ class SocketInfo extends ChromeObject {
     if (localAddress != null) this.localAddress = localAddress;
     if (localPort != null) this.localPort = localPort;
   }
-
   SocketInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   SocketType get socketType => _createSocketType(proxy['socketType']);
@@ -421,7 +414,6 @@ class NetworkInterface extends ChromeObject {
     if (name != null) this.name = name;
     if (address != null) this.address = address;
   }
-
   NetworkInterface.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get name => proxy['name'];

@@ -187,7 +187,6 @@ class AdapterState extends ChromeObject {
     if (available != null) this.available = available;
     if (discovering != null) this.discovering = discovering;
   }
-
   AdapterState.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get address => proxy['address'];
@@ -213,7 +212,6 @@ class BluetoothDevice extends ChromeObject {
     if (paired != null) this.paired = paired;
     if (connected != null) this.connected = connected;
   }
-
   BluetoothDevice.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get address => proxy['address'];
@@ -241,7 +239,6 @@ class Profile extends ChromeObject {
     if (version != null) this.version = version;
     if (features != null) this.features = features;
   }
-
   Profile.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get uuid => proxy['uuid'];
@@ -277,7 +274,6 @@ class ServiceRecord extends ChromeObject {
     if (name != null) this.name = name;
     if (uuid != null) this.uuid = uuid;
   }
-
   ServiceRecord.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get name => proxy['name'];
@@ -293,7 +289,6 @@ class Socket extends ChromeObject {
     if (profile != null) this.profile = profile;
     if (id != null) this.id = id;
   }
-
   Socket.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   BluetoothDevice get device => _createBluetoothDevice(proxy['device']);
@@ -311,7 +306,6 @@ class OutOfBandPairingData extends ChromeObject {
     if (hash != null) this.hash = hash;
     if (randomizer != null) this.randomizer = randomizer;
   }
-
   OutOfBandPairingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   ArrayBuffer get hash => _createArrayBuffer(proxy['hash']);
@@ -326,7 +320,6 @@ class GetBluetoothDevicesOptions extends ChromeObject {
     if (profile != null) this.profile = profile;
     if (deviceCallback != null) this.deviceCallback = deviceCallback;
   }
-
   GetBluetoothDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   Profile get profile => _createProfile(proxy['profile']);
@@ -340,7 +333,6 @@ class GetProfilesOptions extends ChromeObject {
   GetProfilesOptions({BluetoothDevice device}) {
     if (device != null) this.device = device;
   }
-
   GetProfilesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   BluetoothDevice get device => _createBluetoothDevice(proxy['device']);
@@ -351,7 +343,6 @@ class GetServicesOptions extends ChromeObject {
   GetServicesOptions({String deviceAddress}) {
     if (deviceAddress != null) this.deviceAddress = deviceAddress;
   }
-
   GetServicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get deviceAddress => proxy['deviceAddress'];
@@ -363,7 +354,6 @@ class ConnectOptions extends ChromeObject {
     if (device != null) this.device = device;
     if (profile != null) this.profile = profile;
   }
-
   ConnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   BluetoothDevice get device => _createBluetoothDevice(proxy['device']);
@@ -377,7 +367,6 @@ class DisconnectOptions extends ChromeObject {
   DisconnectOptions({Socket socket}) {
     if (socket != null) this.socket = socket;
   }
-
   DisconnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   Socket get socket => _createSocket(proxy['socket']);
@@ -388,7 +377,6 @@ class ReadOptions extends ChromeObject {
   ReadOptions({Socket socket}) {
     if (socket != null) this.socket = socket;
   }
-
   ReadOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   Socket get socket => _createSocket(proxy['socket']);
@@ -400,7 +388,6 @@ class WriteOptions extends ChromeObject {
     if (socket != null) this.socket = socket;
     if (data != null) this.data = data;
   }
-
   WriteOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   Socket get socket => _createSocket(proxy['socket']);
@@ -415,7 +402,6 @@ class SetOutOfBandPairingDataOptions extends ChromeObject {
     if (address != null) this.address = address;
     if (data != null) this.data = data;
   }
-
   SetOutOfBandPairingDataOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get address => proxy['address'];
@@ -429,7 +415,6 @@ class StartDiscoveryOptions extends ChromeObject {
   StartDiscoveryOptions({BluetoothDeviceCallback deviceCallback}) {
     if (deviceCallback != null) this.deviceCallback = deviceCallback;
   }
-
   StartDiscoveryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   BluetoothDeviceCallback get deviceCallback => _createBluetoothDeviceCallback(proxy['deviceCallback']);

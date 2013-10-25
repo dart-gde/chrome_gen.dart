@@ -107,7 +107,6 @@ class HistoryItem extends ChromeObject {
     if (visitCount != null) this.visitCount = visitCount;
     if (typedCount != null) this.typedCount = typedCount;
   }
-
   HistoryItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -160,7 +159,6 @@ class VisitItem extends ChromeObject {
     if (referringVisitId != null) this.referringVisitId = referringVisitId;
     if (transition != null) this.transition = transition;
   }
-
   VisitItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

@@ -198,7 +198,6 @@ class OnRequestExternalEvent {
 
 class LastErrorExtension extends ChromeObject {
   LastErrorExtension();
-
   LastErrorExtension.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

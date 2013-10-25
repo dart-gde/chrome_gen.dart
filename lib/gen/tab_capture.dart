@@ -68,7 +68,6 @@ class CaptureInfo extends ChromeObject {
     if (status != null) this.status = status;
     if (fullscreen != null) this.fullscreen = fullscreen;
   }
-
   CaptureInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   int get tabId => proxy['tabId'];
@@ -85,7 +84,6 @@ class MediaStreamConstraint extends ChromeObject {
   MediaStreamConstraint({var mandatory}) {
     if (mandatory != null) this.mandatory = mandatory;
   }
-
   MediaStreamConstraint.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get mandatory => proxy['mandatory'];
@@ -99,7 +97,6 @@ class CaptureOptions extends ChromeObject {
     if (audioConstraints != null) this.audioConstraints = audioConstraints;
     if (videoConstraints != null) this.videoConstraints = videoConstraints;
   }
-
   CaptureOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   bool get audio => proxy['audio'];

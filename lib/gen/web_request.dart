@@ -144,7 +144,6 @@ class RequestFilter extends ChromeObject {
     if (tabId != null) this.tabId = tabId;
     if (windowId != null) this.windowId = windowId;
   }
-
   RequestFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -174,7 +173,6 @@ class RequestFilter extends ChromeObject {
  */
 class HttpHeaders extends ChromeObject {
   HttpHeaders();
-
   HttpHeaders.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }
 
@@ -183,7 +181,6 @@ class AuthCredentialsWebRequest extends ChromeObject {
     if (username != null) this.username = username;
     if (password != null) this.password = password;
   }
-
   AuthCredentialsWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get username => proxy['username'];
@@ -205,7 +202,6 @@ class BlockingResponse extends ChromeObject {
     if (responseHeaders != null) this.responseHeaders = responseHeaders;
     if (authCredentials != null) this.authCredentials = authCredentials;
   }
-
   BlockingResponse.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -256,7 +252,6 @@ class UploadData extends ChromeObject {
     if (bytes != null) this.bytes = bytes;
     if (file != null) this.file = file;
   }
-
   UploadData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -278,7 +273,6 @@ class RequestBodyWebRequest extends ChromeObject {
     if (formData != null) this.formData = formData;
     if (raw != null) this.raw = raw;
   }
-
   RequestBodyWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -312,7 +306,6 @@ class ChallengerWebRequest extends ChromeObject {
     if (host != null) this.host = host;
     if (port != null) this.port = port;
   }
-
   ChallengerWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get host => proxy['host'];

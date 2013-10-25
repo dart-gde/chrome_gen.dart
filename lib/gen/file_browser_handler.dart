@@ -69,7 +69,6 @@ class FileHandlerExecuteEventDetails extends ChromeObject {
     if (entries != null) this.entries = entries;
     if (tab_id != null) this.tab_id = tab_id;
   }
-
   FileHandlerExecuteEventDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

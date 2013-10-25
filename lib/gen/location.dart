@@ -53,7 +53,6 @@ class Coordinates extends ChromeObject {
     if (heading != null) this.heading = heading;
     if (speed != null) this.speed = speed;
   }
-
   Coordinates.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   double get latitude => proxy['latitude'];
@@ -84,7 +83,6 @@ class Location extends ChromeObject {
     if (coords != null) this.coords = coords;
     if (timestamp != null) this.timestamp = timestamp;
   }
-
   Location.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get name => proxy['name'];
@@ -103,7 +101,6 @@ class WatchLocationRequestInfo extends ChromeObject {
     if (minTimeInMilliseconds != null) this.minTimeInMilliseconds = minTimeInMilliseconds;
     if (maximumAge != null) this.maximumAge = maximumAge;
   }
-
   WatchLocationRequestInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   double get minDistanceInMeters => proxy['minDistanceInMeters'];

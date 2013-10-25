@@ -159,7 +159,6 @@ class Process extends ChromeObject {
     if (scriptCache != null) this.scriptCache = scriptCache;
     if (cssCache != null) this.cssCache = cssCache;
   }
-
   Process.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -285,7 +284,6 @@ class Cache extends ChromeObject {
     if (size != null) this.size = size;
     if (liveSize != null) this.liveSize = liveSize;
   }
-
   Cache.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

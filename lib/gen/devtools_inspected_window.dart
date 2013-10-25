@@ -101,7 +101,6 @@ class Resource extends ChromeObject {
   Resource({String url}) {
     if (url != null) this.url = url;
   }
-
   Resource.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

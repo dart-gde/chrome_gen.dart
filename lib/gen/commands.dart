@@ -42,7 +42,6 @@ class Command extends ChromeObject {
     if (description != null) this.description = description;
     if (shortcut != null) this.shortcut = shortcut;
   }
-
   Command.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

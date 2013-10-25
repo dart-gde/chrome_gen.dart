@@ -156,7 +156,6 @@ class Debuggee extends ChromeObject {
     if (extensionId != null) this.extensionId = extensionId;
     if (targetId != null) this.targetId = targetId;
   }
-
   Debuggee.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**
@@ -194,7 +193,6 @@ class TargetInfo extends ChromeObject {
     if (url != null) this.url = url;
     if (faviconUrl != null) this.faviconUrl = faviconUrl;
   }
-
   TargetInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   /**

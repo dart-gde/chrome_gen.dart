@@ -28,7 +28,6 @@ class LaunchItem extends ChromeObject {
     if (entry != null) this.entry = entry;
     if (type != null) this.type = type;
   }
-
   LaunchItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get entry => proxy['entry'];
@@ -43,7 +42,6 @@ class LaunchData extends ChromeObject {
     if (id != null) this.id = id;
     if (items != null) this.items = items;
   }
-
   LaunchData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   String get id => proxy['id'];
