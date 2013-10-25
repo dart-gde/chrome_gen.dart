@@ -25,7 +25,7 @@ class ChromeExtension {
    * resulted in an error. If no error has occured lastError will be
    * [undefined].
    */
-  Map get lastError => mapify(_extension['lastError']);
+  LastErrorExtension get lastError => _createLastErrorExtension(_extension['lastError']);
 
   /**
    * True for content scripts running inside incognito tabs, and for extension
@@ -196,6 +196,18 @@ class OnRequestExternalEvent {
   OnRequestExternalEvent(this.request, this.sender, this.sendResponse);
 }
 
+class LastErrorExtension extends ChromeObject {
+  LastErrorExtension();
+
+  LastErrorExtension.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  /**
+   * Description of the error that has taken place.
+   */
+  String get message => proxy['message'];
+}
+
+LastErrorExtension _createLastErrorExtension(JsObject proxy) => proxy == null ? null : new LastErrorExtension.fromProxy(proxy);
 Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
 OnRequestEvent _createOnRequestEvent(JsObject request, JsObject sender, JsObject sendResponse) =>
     new OnRequestEvent(request, _createMessageSender(sender), sendResponse);
