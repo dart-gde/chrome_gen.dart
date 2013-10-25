@@ -1,4 +1,5 @@
 
+import 'dart:async';
 import 'dart:html';
 
 import 'package:chrome_gen/chrome_app.dart' as chrome;
@@ -21,14 +22,23 @@ void main() {
 
   label('files');
   action("read contents", handleFileRead);
-  action("write contents", handleFileWrite);
+  action("read contents (bytes)", handleFileReadBytes);
   action("get file", handleDirGetFile);
   action("dir info", handleDirInfo);
   action("dir listings", handleDirListings);
   br();
 
+  label('files - modify');
+  action("create", handleFileCreate);
+  action("write", handleFileWrite);
+  action("write (bytes)", handleFileWriteBytes);
+  action("rename", handleFileRename);
+  action("delete", handleFileDelete);
+  br();
+
   label('fileSystem');
-  action("chooseEntry()", handleChooseEntry);
+  action("chooseEntry", handleChooseEntry);
+  action("chooseEntry (directory)", handleChooseEntryDir);
   br();
 
   label('i18n');
@@ -101,19 +111,27 @@ void action(String name, Function callback) {
   button.text = name;
   button.onClick.listen((e) => callback());
 
-  query('#container_id').children.add(button);
+  querySelector('#container_id').children.add(button);
 }
 
 void br() {
-  query('#container_id').children.add(new BRElement());
+  querySelector('#container_id').children.add(new BRElement());
 }
 
 void summary(String str) {
-  query("#summary").text = "[${str}]";
+  querySelector("#summary").text = "[${str}]";
+}
+
+void summaryFuture(Future future) {
+  future.then((result) {
+    summary('${result}');
+  }).catchError((e) {
+    summary('error: ${e}');
+  });
 }
 
 void notes(String str) {
-  query("#notes").text = str;
+  querySelector("#notes").text = str;
 }
 
 // actions
@@ -270,6 +288,14 @@ void handleChooseEntry() {
   });
 }
 
+void handleChooseEntryDir() {
+  // this will fail on older versions of chrome
+  chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_DIRECTORY);
+  chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    summary("result: ${result}, ${result.entry}, name=${result.entry.name}, fullPath=${result.entry.fullPath}");
+  });
+}
+
 void handleRequestFileSystem() {
   chrome.syncFileSystem.requestFileSystem().then((FileSystem fs) {
     summary("result: ${fs}");
@@ -277,35 +303,27 @@ void handleRequestFileSystem() {
 }
 
 void handleFileRead() {
-  // choose a file
-  chrome.ChromeFileEntry entry;
-
   chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_WRITABLE_FILE);
-  chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
-    entry = result.entry;
 
-    summary("choose: ${entry.name}");
-
-    entry.readText().then((String contents) {
-      summary(contents);
-    });
+  Future f = chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    chrome.ChromeFileEntry entry = result.entry;
+    return entry.readText();
   });
+
+  summaryFuture(f);
 }
 
-void handleFileWrite() {
-  // choose a file
-  chrome.ChromeFileEntry entry;
-
+void handleFileReadBytes() {
   chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_WRITABLE_FILE);
-  chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
-    entry = result.entry;
 
-    summary("choose: ${entry.name}");
-
-    entry.writeText("foo bar baz").then((_) {
-      summary("choose: ${entry.name}; written successfully");
+  Future f = chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    chrome.ChromeFileEntry entry = result.entry;
+    return entry.readBytes().then((chrome.ArrayBuffer buf) {
+      return "read ${buf.getBytes().length} bytes";
     });
   });
+
+  summaryFuture(f);
 }
 
 void handleDirInfo() {
@@ -338,3 +356,76 @@ void handleDirListings() {
   });
 }
 
+void handleFileCreate() {
+  chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_DIRECTORY);
+
+  Future f = chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    chrome.DirectoryEntry entry = result.entry;
+
+    return entry.createFile("myfoofile.txt").then((Entry fileEntry) {
+      return "created ${fileEntry.name}, ${fileEntry.fullPath}";
+    });
+  });
+
+  summaryFuture(f);
+}
+
+void handleFileWrite() {
+  chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_WRITABLE_FILE);
+
+  Future f = chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    chrome.ChromeFileEntry entry = result.entry;
+
+    return entry.writeText("foo bar baz").then((_) {
+      return "choose: ${entry.name}; written successfully";
+    });
+  });
+
+  summaryFuture(f);
+}
+
+void handleFileWriteBytes() {
+  chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_WRITABLE_FILE);
+
+  Future f = chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    chrome.ChromeFileEntry entry = result.entry;
+    chrome.ArrayBuffer buf = new chrome.ArrayBuffer.fromBytes([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+    List<int> data = buf.getBytes();
+    print(data);
+
+    return entry.writeBytes(buf).then((_) {
+      return "choose: ${entry.name}; written successfully";
+    });
+  });
+
+  summaryFuture(f);
+}
+
+void handleFileRename() {
+  chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_WRITABLE_FILE);
+
+  Future f = chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    chrome.ChromeFileEntry entry = result.entry;
+
+    return entry.getParent().then((Entry parent) {
+      return entry.moveTo(parent, name: entry.name + ".new");
+    });
+  });
+
+  summaryFuture(f);
+}
+
+void handleFileDelete() {
+  chrome.ChooseEntryOptions options = new chrome.ChooseEntryOptions(type: chrome.ChooseEntryType.OPEN_WRITABLE_FILE);
+
+  Future f = chrome.fileSystem.chooseEntry(options).then((chrome.ChooseEntryResult result) {
+    chrome.ChromeFileEntry entry = result.entry;
+
+    return entry.remove().then((_) {
+      return "delete successful";
+    });
+  });
+
+  summaryFuture(f);
+}

@@ -343,9 +343,7 @@ class JsonConverter {
 
 bool _isImplicitInt(JsonType t) {
   if (t is JsonParamType) {
-    JsonParamType type = t as JsonParamType;
-
-    return _isInt(type.value) || _isInt(type.maxLength);
+    return _isInt(t.value) || _isInt(t.maxLength);
   }
 
   return false;
