@@ -43,7 +43,7 @@ class CrFile extends CrBlob implements File {
  String get name =&gt; proxy['name'];
  String get relativePath =&gt; proxy['relativePath'];
 
- String toString() =&gt; 'CrFile ${name}';
+ String toString() =&gt; name;
 }
 </pre>
 </div>
@@ -279,7 +279,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; 'CrFile ${name}';
+String toString() =&gt; name;
 </pre>
 </div>
 </div>

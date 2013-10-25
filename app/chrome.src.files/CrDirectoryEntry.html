@@ -69,15 +69,16 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
  }
 
  Future removeRecursively() {
-   // TODO:
-
-   throw new UnimplementedError('DirectoryEntry.removeRecursively');
+   var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.noArgs();
+   proxy.callMethod('removeRecursively', [completer.callback, completer.errorCallback]);
+   return completer.future;
  }
 
- bool operator==(Object other) =&gt; other is CrDirectoryEntry &amp;&amp;
-     (other as CrDirectoryEntry).proxy == proxy;
+ bool operator==(Object other) =&gt;
+     other is CrDirectoryEntry &amp;&amp; other.proxy == proxy;
 
  int get hashCode =&gt; proxy.hashCode;
+ String toString() =&gt; '${name}/';
 }
 </pre>
 </div>
@@ -245,8 +246,8 @@ was modified.</p>
 the <a class="crossref" href="../chrome.src.files/CrDirectoryEntry.html#hashCode">hashCode</a> method as well to maintain consistency.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-bool operator==(Object other) =&gt; other is CrDirectoryEntry &amp;&amp;
-   (other as CrDirectoryEntry).proxy == proxy;
+bool operator==(Object other) =&gt;
+   other is CrDirectoryEntry &amp;&amp; other.proxy == proxy;
 </pre>
 </div>
 </div>
@@ -260,9 +261,9 @@ Future&lt;Entry&gt; <strong>copyTo</strong>(DirectoryEntry parent, {String name}
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
- // TODO:
-
- throw new UnimplementedError('Entry.copyTo');
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+ proxy.callMethod('copyTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -394,9 +395,9 @@ Future&lt;Entry&gt; <strong>moveTo</strong>(DirectoryEntry parent, {String name}
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
- // TODO:
-
- throw new UnimplementedError('Entry.moveTo');
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+ proxy.callMethod('moveTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -433,9 +434,9 @@ Future <strong>remove</strong>() <a class="anchor-link" href="#remove"
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future remove() {
- // TODO:
-
- throw new UnimplementedError('Entry.remove');
+ var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.noArgs();
+ proxy.callMethod('remove', [completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -447,9 +448,9 @@ Future <strong>removeRecursively</strong>() <a class="anchor-link" href="#remove
 <div class="doc">
 <pre class="source">
 Future removeRecursively() {
- // TODO:
-
- throw new UnimplementedError('DirectoryEntry.removeRecursively');
+ var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.noArgs();
+ proxy.callMethod('removeRecursively', [completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -464,16 +465,16 @@ JsObject toJs() =&gt; proxy;
 </pre>
 </div>
 </div>
-<div class="method inherited"><h4 id="toString">
+<div class="method"><h4 id="toString">
 <button class="show-code">Code</button>
 String <strong>toString</strong>() <a class="anchor-link" href="#toString"
               title="Permalink to CrDirectoryEntry.toString">#</a></h4>
-<div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
+<div class="doc">
 <div class="inherited">
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; 'CrEntry ${name}';
+String toString() =&gt; '${name}/';
 </pre>
 </div>
 </div>

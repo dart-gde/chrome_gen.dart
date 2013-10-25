@@ -36,12 +36,9 @@
 abstract class CrEntry extends ChromeObject implements Entry {
  // This factory returns either a FileEntry or a DirectoryEntry.
  factory CrEntry.fromProxy(JsObject proxy) {
-   // TODO: the toString() hack below is unfortunate :(. I would like to use:
-   // proxy.instanceof(context['DirectoryEntry'])
-
    if (proxy == null) {
      return null;
-   } else if (proxy.toString().contains('FileEntry]')) {
+   } else if (proxy['isFile']) {
      return new ChromeFileEntry.fromProxy(proxy);
    } else {
      return new CrDirectoryEntry.fromProxy(proxy);
@@ -59,21 +56,21 @@ abstract class CrEntry extends ChromeObject implements Entry {
  String toUrl() =&gt; this.proxy.callMethod('toURL');
 
  Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
-   // TODO:
-
-   throw new UnimplementedError('Entry.copyTo');
+   var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+   proxy.callMethod('copyTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+   return completer.future;
  }
 
  Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
-   // TODO:
-
-   throw new UnimplementedError('Entry.moveTo');
+   var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+   proxy.callMethod('moveTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+   return completer.future;
  }
 
  Future remove() {
-   // TODO:
-
-   throw new UnimplementedError('Entry.remove');
+   var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.noArgs();
+   proxy.callMethod('remove', [completer.callback, completer.errorCallback]);
+   return completer.future;
  }
 
  Future&lt;Metadata&gt; getMetadata() {
@@ -88,7 +85,7 @@ abstract class CrEntry extends ChromeObject implements Entry {
    return completer.future;
  }
 
- String toString() =&gt; 'CrEntry ${name}';
+ String toString() =&gt; name;
 }
 </pre>
 </div>
@@ -114,12 +111,9 @@ JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
 factory CrEntry.fromProxy(JsObject proxy) {
- // TODO: the toString() hack below is unfortunate :(. I would like to use:
- // proxy.instanceof(context['DirectoryEntry'])
-
  if (proxy == null) {
    return null;
- } else if (proxy.toString().contains('FileEntry]')) {
+ } else if (proxy['isFile']) {
    return new ChromeFileEntry.fromProxy(proxy);
  } else {
    return new CrDirectoryEntry.fromProxy(proxy);
@@ -284,9 +278,9 @@ Future&lt;Entry&gt; <strong>copyTo</strong>(DirectoryEntry parent, {String name}
 <div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
- // TODO:
-
- throw new UnimplementedError('Entry.copyTo');
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+ proxy.callMethod('copyTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -326,9 +320,9 @@ Future&lt;Entry&gt; <strong>moveTo</strong>(DirectoryEntry parent, {String name}
 <div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
- // TODO:
-
- throw new UnimplementedError('Entry.moveTo');
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+ proxy.callMethod('moveTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -365,9 +359,9 @@ Future <strong>remove</strong>() <a class="anchor-link" href="#remove"
 <div class="doc">
 <pre class="source">
 Future remove() {
- // TODO:
-
- throw new UnimplementedError('Entry.remove');
+ var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.noArgs();
+ proxy.callMethod('remove', [completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -391,7 +385,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; 'CrEntry ${name}';
+String toString() =&gt; name;
 </pre>
 </div>
 </div>

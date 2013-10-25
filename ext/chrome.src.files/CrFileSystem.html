@@ -40,10 +40,11 @@ class CrFileSystem extends ChromeObject implements FileSystem {
 
  DirectoryEntry get root =&gt; new CrDirectoryEntry.fromProxy(proxy['root']);
 
- bool operator==(Object other) =&gt; other is CrFileSystem &amp;&amp;
-     (other as CrFileSystem).proxy == proxy;
+ bool operator==(Object other) =&gt;
+     other is CrFileSystem &amp;&amp; other.proxy == proxy;
 
  int get hashCode =&gt; proxy.hashCode;
+ String toString() =&gt; name;
 }
 </pre>
 </div>
@@ -175,13 +176,13 @@ was modified.</p>
 the <a class="crossref" href="../chrome.src.files/CrFileSystem.html#hashCode">hashCode</a> method as well to maintain consistency.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-bool operator==(Object other) =&gt; other is CrFileSystem &amp;&amp;
-   (other as CrFileSystem).proxy == proxy;
+bool operator==(Object other) =&gt;
+   other is CrFileSystem &amp;&amp; other.proxy == proxy;
 </pre>
 </div>
 </div>
 </div>
-<div class="inherited">
+<div>
 <h3>Methods</h3>
 <div class="method inherited"><h4 id="noSuchMethod">
 <button class="show-code">Code</button>
@@ -218,16 +219,16 @@ JsObject toJs() =&gt; proxy;
 </pre>
 </div>
 </div>
-<div class="method inherited"><h4 id="toString">
+<div class="method"><h4 id="toString">
 <button class="show-code">Code</button>
 String <strong>toString</strong>() <a class="anchor-link" href="#toString"
               title="Permalink to CrFileSystem.toString">#</a></h4>
-<div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<div class="doc">
 <div class="inherited">
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; name;
 </pre>
 </div>
 </div>

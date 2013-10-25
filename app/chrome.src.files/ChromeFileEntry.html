@@ -58,6 +58,27 @@ class ChromeFileEntry extends CrFileEntry {
  }
 
  /**
+  * Return the contents of the file as a byte array.
+  */
+ Future&lt;ArrayBuffer&gt; readBytes() {
+   // readAsArrayBuffer
+   return file().then((File file) {
+     Completer&lt;ArrayBuffer&gt; completer = new Completer();
+
+     var reader = new JsObject(context['FileReader']);
+     reader['onload'] = (var event) {
+       completer.complete(new ArrayBuffer.fromProxy(reader['result']));
+     };
+     reader['onerror'] = (var domError) {
+       completer.completeError(domError);
+     };
+     reader.callMethod('readAsArrayBuffer', [(file as CrFile).proxy]);
+
+     return completer.future;
+   });
+ }
+
+ /**
   * Write out the given String to the file.
   */
  Future writeText(String text) {
@@ -66,7 +87,8 @@ class ChromeFileEntry extends CrFileEntry {
 
      Completer&lt;FileEntry&gt; completer = new Completer();
 
-     JsObject blob = new JsObject(context['Blob'], [new JsObject.jsify([text])]);
+     JsObject blob = new JsObject(
+         context['Blob'], [new JsObject.jsify([text])]);
 
      writer['onwrite'] = (var event) {
        writer['onwrite'] = null;
@@ -76,7 +98,38 @@ class ChromeFileEntry extends CrFileEntry {
      writer['onerror'] = (var event) {
        completer.completeError(event);
      };
-     writer.callMethod('write', [blob, new JsObject.jsify({'type': 'text/plain'})]);
+     writer.callMethod(
+         'write', [blob, new JsObject.jsify({'type': 'text/plain'})]);
+
+     return completer.future;
+   });
+ }
+
+ /**
+  * Write out the given ArrayBuffer to the file.
+  */
+ Future writeBytes(ArrayBuffer data) {
+   return _createWriter().then((ChromeObject _writer) {
+     JsObject writer = _writer.proxy;
+
+     Completer&lt;FileEntry&gt; completer = new Completer();
+
+     // TODO: work around a bug on jsify, where toString() is called on
+     // data.proxy, inserting '1, 2, 3, 4, ...' into the blob instead of a list
+     // of ints
+     JsObject args = new JsObject.jsify([null]);
+     args[0] = data.proxy;
+     JsObject blob = new JsObject(context['Blob'], [args]);
+
+     writer['onwrite'] = (var event) {
+       writer['onwrite'] = null;
+       writer.callMethod('truncate', [writer['position']]);
+       completer.complete(this);
+     };
+     writer['onerror'] = (var event) {
+       completer.completeError(event);
+     };
+     writer.callMethod('write', [blob]);
 
      return completer.future;
    });
@@ -251,8 +304,8 @@ was modified.</p>
 the <a class="crossref" href="../chrome.src.files/CrFileEntry.html#hashCode">hashCode</a> method as well to maintain consistency.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-bool operator==(Object other) =&gt; other is CrDirectoryEntry &amp;&amp;
-   (other as CrDirectoryEntry).proxy == proxy;
+bool operator==(Object other) =&gt;
+   other is CrDirectoryEntry &amp;&amp; other.proxy == proxy;
 </pre>
 </div>
 </div>
@@ -266,9 +319,9 @@ Future&lt;Entry&gt; <strong>copyTo</strong>(DirectoryEntry parent, {String name}
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
- // TODO:
-
- throw new UnimplementedError('Entry.copyTo');
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+ proxy.callMethod('copyTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -336,9 +389,9 @@ Future&lt;Entry&gt; <strong>moveTo</strong>(DirectoryEntry parent, {String name}
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
- // TODO:
-
- throw new UnimplementedError('Entry.moveTo');
+ var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
+ proxy.callMethod('moveTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -364,6 +417,33 @@ dynamic noSuchMethod(Invocation invocation) {
      invocation.memberName,
      invocation.positionalArguments,
      invocation.namedArguments);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="readBytes">
+<button class="show-code">Code</button>
+Future&lt;<a href="../chrome.src.common_exp/ArrayBuffer.html">ArrayBuffer</a>&gt; <strong>readBytes</strong>() <a class="anchor-link" href="#readBytes"
+              title="Permalink to ChromeFileEntry.readBytes">#</a></h4>
+<div class="doc">
+<p>Return the contents of the file as a byte array.</p>
+<pre class="source">
+Future&lt;ArrayBuffer&gt; readBytes() {
+ // readAsArrayBuffer
+ return file().then((File file) {
+   Completer&lt;ArrayBuffer&gt; completer = new Completer();
+
+   var reader = new JsObject(context['FileReader']);
+   reader['onload'] = (var event) {
+     completer.complete(new ArrayBuffer.fromProxy(reader['result']));
+   };
+   reader['onerror'] = (var domError) {
+     completer.completeError(domError);
+   };
+   reader.callMethod('readAsArrayBuffer', [(file as CrFile).proxy]);
+
+   return completer.future;
+ });
 }
 </pre>
 </div>
@@ -401,9 +481,9 @@ Future <strong>remove</strong>() <a class="anchor-link" href="#remove"
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 Future remove() {
- // TODO:
-
- throw new UnimplementedError('Entry.remove');
+ var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.noArgs();
+ proxy.callMethod('remove', [completer.callback, completer.errorCallback]);
+ return completer.future;
 }
 </pre>
 </div>
@@ -427,7 +507,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; 'CrEntry ${name}';
+String toString() =&gt; name;
 </pre>
 </div>
 </div>
@@ -438,6 +518,42 @@ String <strong>toUrl</strong>() <a class="anchor-link" href="#toUrl"
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
 String toUrl() =&gt; this.proxy.callMethod('toURL');
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="writeBytes">
+<button class="show-code">Code</button>
+Future <strong>writeBytes</strong>(<a href="../chrome.src.common_exp/ArrayBuffer.html">ArrayBuffer</a> data) <a class="anchor-link" href="#writeBytes"
+              title="Permalink to ChromeFileEntry.writeBytes">#</a></h4>
+<div class="doc">
+<p>Write out the given ArrayBuffer to the file.</p>
+<pre class="source">
+Future writeBytes(ArrayBuffer data) {
+ return _createWriter().then((ChromeObject _writer) {
+   JsObject writer = _writer.proxy;
+
+   Completer&lt;FileEntry&gt; completer = new Completer();
+
+   // TODO: work around a bug on jsify, where toString() is called on
+   // data.proxy, inserting '1, 2, 3, 4, ...' into the blob instead of a list
+   // of ints
+   JsObject args = new JsObject.jsify([null]);
+   args[0] = data.proxy;
+   JsObject blob = new JsObject(context['Blob'], [args]);
+
+   writer['onwrite'] = (var event) {
+     writer['onwrite'] = null;
+     writer.callMethod('truncate', [writer['position']]);
+     completer.complete(this);
+   };
+   writer['onerror'] = (var event) {
+     completer.completeError(event);
+   };
+   writer.callMethod('write', [blob]);
+
+   return completer.future;
+ });
+}
 </pre>
 </div>
 </div>
@@ -454,7 +570,8 @@ Future writeText(String text) {
 
    Completer&lt;FileEntry&gt; completer = new Completer();
 
-   JsObject blob = new JsObject(context['Blob'], [new JsObject.jsify([text])]);
+   JsObject blob = new JsObject(
+       context['Blob'], [new JsObject.jsify([text])]);
 
    writer['onwrite'] = (var event) {
      writer['onwrite'] = null;
@@ -464,7 +581,8 @@ Future writeText(String text) {
    writer['onerror'] = (var event) {
      completer.completeError(event);
    };
-   writer.callMethod('write', [blob, new JsObject.jsify({'type': 'text/plain'})]);
+   writer.callMethod(
+       'write', [blob, new JsObject.jsify({'type': 'text/plain'})]);
 
    return completer.future;
  });
