@@ -70,6 +70,11 @@ void main() {
   action('read() error', handleSocketReadError);
   br();
 
+  label('storage');
+  action("store / get", handleStorageStore);
+  action("read prop", handleStorageProp);
+  br();
+
   label('syncFileSystem');
   action("requestFileSystem()", handleRequestFileSystem);
   br();
@@ -279,6 +284,16 @@ void handleSocketReadError() {
   }).catchError((e) {
     summary("error: ${e}");
   });
+}
+
+void handleStorageStore() {
+  summaryFuture(chrome.storage.local.set({'foo': 'bar'}).then((_) {
+    return chrome.storage.local.get(['foo']);
+  }));
+}
+
+void handleStorageProp() {
+  summary('max ops per minute = ' + chrome.storage.sync.MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE.toString());
 }
 
 void handleChooseEntry() {

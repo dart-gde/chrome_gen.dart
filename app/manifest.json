@@ -17,6 +17,7 @@
     "audio",
     { "fileSystem": ["write", "retainEntries", "directory"] },
     "idle",
+    "storage",
     "syncFileSystem",
     "system.cpu",
     "system.memory",
