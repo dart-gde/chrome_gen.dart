@@ -39,7 +39,6 @@ class NotificationBitmap extends ChromeObject {
    if (height != null) this.height = height;
    if (data != null) this.data = data;
  }
-
  NotificationBitmap.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get width =&gt; proxy['width'];

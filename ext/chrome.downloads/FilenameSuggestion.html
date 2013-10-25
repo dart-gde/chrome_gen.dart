@@ -38,7 +38,6 @@ class FilenameSuggestion extends ChromeObject {
    if (filename != null) this.filename = filename;
    if (conflictAction != null) this.conflictAction = conflictAction;
  }
-
  FilenameSuggestion.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get filename =&gt; proxy['filename'];

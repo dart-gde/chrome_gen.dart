@@ -38,7 +38,6 @@ class LaunchData extends ChromeObject {
    if (id != null) this.id = id;
    if (items != null) this.items = items;
  }
-
  LaunchData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get id =&gt; proxy['id'];

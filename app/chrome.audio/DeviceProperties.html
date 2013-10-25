@@ -39,7 +39,6 @@ class DeviceProperties extends ChromeObject {
    if (volume != null) this.volume = volume;
    if (gain != null) this.gain = gain;
  }
-
  DeviceProperties.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  bool get isMuted =&gt; proxy['isMuted'];

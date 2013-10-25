@@ -45,7 +45,6 @@ class Profile extends ChromeObject {
    if (version != null) this.version = version;
    if (features != null) this.features = features;
  }
-
  Profile.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get uuid =&gt; proxy['uuid'];

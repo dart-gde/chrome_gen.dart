@@ -50,7 +50,6 @@ class DownloadDelta extends ChromeObject {
    if (fileSize != null) this.fileSize = fileSize;
    if (exists != null) this.exists = exists;
  }
-
  DownloadDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get id =&gt; proxy['id'];

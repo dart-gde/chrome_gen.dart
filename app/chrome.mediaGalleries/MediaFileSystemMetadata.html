@@ -41,7 +41,6 @@ class MediaFileSystemMetadata extends ChromeObject {
    if (isRemovable != null) this.isRemovable = isRemovable;
    if (isMediaDevice != null) this.isMediaDevice = isMediaDevice;
  }
-
  MediaFileSystemMetadata.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get name =&gt; proxy['name'];

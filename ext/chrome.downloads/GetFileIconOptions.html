@@ -37,7 +37,6 @@ class GetFileIconOptions extends ChromeObject {
  GetFileIconOptions({int size}) {
    if (size != null) this.size = size;
  }
-
  GetFileIconOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get size =&gt; proxy['size'];

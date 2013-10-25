@@ -38,7 +38,6 @@ class ServiceInfo extends ChromeObject {
    if (state != null) this.state = state;
    if (description != null) this.description = description;
  }
-
  ServiceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  ServiceStatus get state =&gt; _createServiceStatus(proxy['state']);

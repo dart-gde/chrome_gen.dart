@@ -39,7 +39,6 @@ class Socket extends ChromeObject {
    if (profile != null) this.profile = profile;
    if (id != null) this.id = id;
  }
-
  Socket.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  BluetoothDevice get device =&gt; _createBluetoothDevice(proxy['device']);

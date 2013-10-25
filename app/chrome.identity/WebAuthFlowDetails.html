@@ -38,7 +38,6 @@ class WebAuthFlowDetails extends ChromeObject {
    if (url != null) this.url = url;
    if (interactive != null) this.interactive = interactive;
  }
-
  WebAuthFlowDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get url =&gt; proxy['url'];

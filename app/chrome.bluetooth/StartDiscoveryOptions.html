@@ -37,7 +37,6 @@ class StartDiscoveryOptions extends ChromeObject {
  StartDiscoveryOptions({BluetoothDeviceCallback deviceCallback}) {
    if (deviceCallback != null) this.deviceCallback = deviceCallback;
  }
-
  StartDiscoveryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(proxy['deviceCallback']);

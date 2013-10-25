@@ -43,7 +43,6 @@ class DownloadOptions extends ChromeObject {
    if (headers != null) this.headers = headers;
    if (body != null) this.body = body;
  }
-
  DownloadOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get url =&gt; proxy['url'];

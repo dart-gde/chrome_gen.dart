@@ -38,7 +38,6 @@ class HeaderNameValuePair extends ChromeObject {
    if (name != null) this.name = name;
    if (value != null) this.value = value;
  }
-
  HeaderNameValuePair.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get name =&gt; proxy['name'];

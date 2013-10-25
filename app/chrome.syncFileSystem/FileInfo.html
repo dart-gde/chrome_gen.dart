@@ -40,7 +40,6 @@ class FileInfo extends ChromeObject {
    if (action != null) this.action = action;
    if (direction != null) this.direction = direction;
  }
-
  FileInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  dynamic get fileEntry =&gt; proxy['fileEntry'];

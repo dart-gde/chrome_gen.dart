@@ -37,7 +37,6 @@ class SerialWriteInfo extends ChromeObject {
  SerialWriteInfo({int bytesWritten}) {
    if (bytesWritten != null) this.bytesWritten = bytesWritten;
  }
-
  SerialWriteInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get bytesWritten =&gt; proxy['bytesWritten'];

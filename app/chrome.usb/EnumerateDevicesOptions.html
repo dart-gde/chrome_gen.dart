@@ -38,7 +38,6 @@ class EnumerateDevicesOptions extends ChromeObject {
    if (vendorId != null) this.vendorId = vendorId;
    if (productId != null) this.productId = productId;
  }
-
  EnumerateDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get vendorId =&gt; proxy['vendorId'];

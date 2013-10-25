@@ -39,7 +39,6 @@ class Device extends ChromeObject {
    if (vendorId != null) this.vendorId = vendorId;
    if (productId != null) this.productId = productId;
  }
-
  Device.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get device =&gt; proxy['device'];

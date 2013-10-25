@@ -37,7 +37,6 @@ class GetServicesOptions extends ChromeObject {
  GetServicesOptions({String deviceAddress}) {
    if (deviceAddress != null) this.deviceAddress = deviceAddress;
  }
-
  GetServicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get deviceAddress =&gt; proxy['deviceAddress'];

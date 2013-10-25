@@ -38,7 +38,6 @@ class ConnectOptions extends ChromeObject {
    if (device != null) this.device = device;
    if (profile != null) this.profile = profile;
  }
-
  ConnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  BluetoothDevice get device =&gt; _createBluetoothDevice(proxy['device']);

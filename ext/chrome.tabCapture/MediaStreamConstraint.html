@@ -37,7 +37,6 @@ class MediaStreamConstraint extends ChromeObject {
  MediaStreamConstraint({var mandatory}) {
    if (mandatory != null) this.mandatory = mandatory;
  }
-
  MediaStreamConstraint.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  dynamic get mandatory =&gt; proxy['mandatory'];

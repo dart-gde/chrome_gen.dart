@@ -43,7 +43,6 @@ class Coordinates extends ChromeObject {
    if (heading != null) this.heading = heading;
    if (speed != null) this.speed = speed;
  }
-
  Coordinates.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  double get latitude =&gt; proxy['latitude'];

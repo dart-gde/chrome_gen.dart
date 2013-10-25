@@ -42,7 +42,6 @@ class DisplayProperties extends ChromeObject {
    if (boundsOriginX != null) this.boundsOriginX = boundsOriginX;
    if (boundsOriginY != null) this.boundsOriginY = boundsOriginY;
  }
-
  DisplayProperties.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get mirroringSourceId =&gt; proxy['mirroringSourceId'];

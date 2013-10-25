@@ -39,7 +39,6 @@ class WatchLocationRequestInfo extends ChromeObject {
    if (minTimeInMilliseconds != null) this.minTimeInMilliseconds = minTimeInMilliseconds;
    if (maximumAge != null) this.maximumAge = maximumAge;
  }
-
  WatchLocationRequestInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  double get minDistanceInMeters =&gt; proxy['minDistanceInMeters'];

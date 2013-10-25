@@ -61,7 +61,6 @@ class DownloadQuery extends ChromeObject {
    if (fileSize != null) this.fileSize = fileSize;
    if (exists != null) this.exists = exists;
  }
-
  DownloadQuery.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get query =&gt; proxy['query'];

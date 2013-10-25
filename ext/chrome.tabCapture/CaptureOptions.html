@@ -40,7 +40,6 @@ class CaptureOptions extends ChromeObject {
    if (audioConstraints != null) this.audioConstraints = audioConstraints;
    if (videoConstraints != null) this.videoConstraints = videoConstraints;
  }
-
  CaptureOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  bool get audio =&gt; proxy['audio'];

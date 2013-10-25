@@ -37,7 +37,6 @@ class MediaFileSystemsDetails extends ChromeObject {
  MediaFileSystemsDetails({GetMediaFileSystemsInteractivity interactive}) {
    if (interactive != null) this.interactive = interactive;
  }
-
  MediaFileSystemsDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  GetMediaFileSystemsInteractivity get interactive =&gt; _createGetMediaFileSystemsInteractivity(proxy['interactive']);

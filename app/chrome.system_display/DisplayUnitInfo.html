@@ -48,7 +48,6 @@ class DisplayUnitInfo extends ChromeObject {
    if (overscan != null) this.overscan = overscan;
    if (workArea != null) this.workArea = workArea;
  }
-
  DisplayUnitInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get id =&gt; proxy['id'];

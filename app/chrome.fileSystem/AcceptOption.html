@@ -39,7 +39,6 @@ class AcceptOption extends ChromeObject {
    if (mimeTypes != null) this.mimeTypes = mimeTypes;
    if (extensions != null) this.extensions = extensions;
  }
-
  AcceptOption.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get description =&gt; proxy['description'];

@@ -39,7 +39,6 @@ class NotificationButton extends ChromeObject {
    if (iconUrl != null) this.iconUrl = iconUrl;
    if (iconBitmap != null) this.iconBitmap = iconBitmap;
  }
-
  NotificationButton.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get title =&gt; proxy['title'];

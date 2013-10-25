@@ -38,7 +38,6 @@ class WriteOptions extends ChromeObject {
    if (socket != null) this.socket = socket;
    if (data != null) this.data = data;
  }
-
  WriteOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  Socket get socket =&gt; _createSocket(proxy['socket']);

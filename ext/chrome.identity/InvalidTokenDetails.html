@@ -37,7 +37,6 @@ class InvalidTokenDetails extends ChromeObject {
  InvalidTokenDetails({String token}) {
    if (token != null) this.token = token;
  }
-
  InvalidTokenDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get token =&gt; proxy['token'];

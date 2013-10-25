@@ -40,7 +40,6 @@ class StorageUnitInfo extends ChromeObject {
    if (type != null) this.type = type;
    if (capacity != null) this.capacity = capacity;
  }
-
  StorageUnitInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get id =&gt; proxy['id'];

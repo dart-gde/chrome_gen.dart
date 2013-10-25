@@ -40,7 +40,6 @@ class GenericTransferInfo extends ChromeObject {
    if (length != null) this.length = length;
    if (data != null) this.data = data;
  }
-
  GenericTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  Direction get direction =&gt; _createDirection(proxy['direction']);

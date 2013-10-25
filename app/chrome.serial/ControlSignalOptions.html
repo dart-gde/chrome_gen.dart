@@ -40,7 +40,6 @@ class ControlSignalOptions extends ChromeObject {
    if (dcd != null) this.dcd = dcd;
    if (cts != null) this.cts = cts;
  }
-
  ControlSignalOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  bool get dtr =&gt; proxy['dtr'];

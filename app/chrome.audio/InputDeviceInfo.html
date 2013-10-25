@@ -41,7 +41,6 @@ class InputDeviceInfo extends ChromeObject {
    if (isMuted != null) this.isMuted = isMuted;
    if (gain != null) this.gain = gain;
  }
-
  InputDeviceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get id =&gt; proxy['id'];

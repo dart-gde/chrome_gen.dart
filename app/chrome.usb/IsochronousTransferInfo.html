@@ -39,7 +39,6 @@ class IsochronousTransferInfo extends ChromeObject {
    if (packets != null) this.packets = packets;
    if (packetLength != null) this.packetLength = packetLength;
  }
-
  IsochronousTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  GenericTransferInfo get transferInfo =&gt; _createGenericTransferInfo(proxy['transferInfo']);

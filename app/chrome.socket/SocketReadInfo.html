@@ -38,7 +38,6 @@ class SocketReadInfo extends ChromeObject {
    if (resultCode != null) this.resultCode = resultCode;
    if (data != null) this.data = data;
  }
-
  SocketReadInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get resultCode =&gt; proxy['resultCode'];

@@ -38,7 +38,6 @@ class NotificationItem extends ChromeObject {
    if (title != null) this.title = title;
    if (message != null) this.message = message;
  }
-
  NotificationItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get title =&gt; proxy['title'];

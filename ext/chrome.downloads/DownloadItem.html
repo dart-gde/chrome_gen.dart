@@ -56,7 +56,6 @@ class DownloadItem extends ChromeObject {
    if (byExtensionId != null) this.byExtensionId = byExtensionId;
    if (byExtensionName != null) this.byExtensionName = byExtensionName;
  }
-
  DownloadItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get id =&gt; proxy['id'];

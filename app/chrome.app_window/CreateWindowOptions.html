@@ -57,7 +57,6 @@ class CreateWindowOptions extends ChromeObject {
    if (resizable != null) this.resizable = resizable;
    if (singleton != null) this.singleton = singleton;
  }
-
  CreateWindowOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get id =&gt; proxy['id'];

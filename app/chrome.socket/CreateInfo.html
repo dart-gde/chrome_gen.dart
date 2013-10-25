@@ -37,7 +37,6 @@ class CreateInfo extends ChromeObject {
  CreateInfo({int socketId}) {
    if (socketId != null) this.socketId = socketId;
  }
-
  CreateInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get socketId =&gt; proxy['socketId'];

@@ -40,7 +40,6 @@ class BluetoothDevice extends ChromeObject {
    if (paired != null) this.paired = paired;
    if (connected != null) this.connected = connected;
  }
-
  BluetoothDevice.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get address =&gt; proxy['address'];

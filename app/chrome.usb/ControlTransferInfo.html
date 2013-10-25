@@ -44,7 +44,6 @@ class ControlTransferInfo extends ChromeObject {
    if (length != null) this.length = length;
    if (data != null) this.data = data;
  }
-
  ControlTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  Direction get direction =&gt; _createDirection(proxy['direction']);

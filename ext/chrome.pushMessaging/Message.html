@@ -38,7 +38,6 @@ class Message extends ChromeObject {
    if (subchannelId != null) this.subchannelId = subchannelId;
    if (payload != null) this.payload = payload;
  }
-
  Message.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get subchannelId =&gt; proxy['subchannelId'];

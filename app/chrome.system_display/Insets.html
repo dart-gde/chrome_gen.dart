@@ -40,7 +40,6 @@ class Insets extends ChromeObject {
    if (right != null) this.right = right;
    if (bottom != null) this.bottom = bottom;
  }
-
  Insets.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get left =&gt; proxy['left'];

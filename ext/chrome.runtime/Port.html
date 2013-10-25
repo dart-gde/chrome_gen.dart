@@ -43,7 +43,6 @@ class Port extends ChromeObject {
    if (postMessage != null) this.postMessage = postMessage;
    if (sender != null) this.sender = sender;
  }
-
  Port.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get name =&gt; proxy['name'];

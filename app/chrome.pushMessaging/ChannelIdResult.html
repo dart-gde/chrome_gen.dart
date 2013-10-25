@@ -37,7 +37,6 @@ class ChannelIdResult extends ChromeObject {
  ChannelIdResult({String channelId}) {
    if (channelId != null) this.channelId = channelId;
  }
-
  ChannelIdResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get channelId =&gt; proxy['channelId'];

@@ -39,7 +39,6 @@ class CaptureInfo extends ChromeObject {
    if (status != null) this.status = status;
    if (fullscreen != null) this.fullscreen = fullscreen;
  }
-
  CaptureInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get tabId =&gt; proxy['tabId'];

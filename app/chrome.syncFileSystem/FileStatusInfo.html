@@ -39,7 +39,6 @@ class FileStatusInfo extends ChromeObject {
    if (status != null) this.status = status;
    if (error != null) this.error = error;
  }
-
  FileStatusInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  dynamic get fileEntry =&gt; proxy['fileEntry'];

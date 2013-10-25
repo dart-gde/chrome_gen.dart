@@ -38,7 +38,6 @@ class SetOutOfBandPairingDataOptions extends ChromeObject {
    if (address != null) this.address = address;
    if (data != null) this.data = data;
  }
-
  SetOutOfBandPairingDataOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get address =&gt; proxy['address'];

@@ -38,7 +38,6 @@ class NetworkInterface extends ChromeObject {
    if (name != null) this.name = name;
    if (address != null) this.address = address;
  }
-
  NetworkInterface.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get name =&gt; proxy['name'];

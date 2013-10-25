@@ -39,7 +39,6 @@ class ConnectionHandle extends ChromeObject {
    if (vendorId != null) this.vendorId = vendorId;
    if (productId != null) this.productId = productId;
  }
-
  ConnectionHandle.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get handle =&gt; proxy['handle'];

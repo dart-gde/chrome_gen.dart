@@ -43,7 +43,6 @@ class EndpointDescriptor extends ChromeObject {
    if (usage != null) this.usage = usage;
    if (pollingInterval != null) this.pollingInterval = pollingInterval;
  }
-
  EndpointDescriptor.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get address =&gt; proxy['address'];

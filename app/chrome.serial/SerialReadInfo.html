@@ -38,7 +38,6 @@ class SerialReadInfo extends ChromeObject {
    if (bytesRead != null) this.bytesRead = bytesRead;
    if (data != null) this.data = data;
  }
-
  SerialReadInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get bytesRead =&gt; proxy['bytesRead'];

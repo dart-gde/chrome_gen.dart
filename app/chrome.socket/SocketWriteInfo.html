@@ -37,7 +37,6 @@ class SocketWriteInfo extends ChromeObject {
  SocketWriteInfo({int bytesWritten}) {
    if (bytesWritten != null) this.bytesWritten = bytesWritten;
  }
-
  SocketWriteInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get bytesWritten =&gt; proxy['bytesWritten'];

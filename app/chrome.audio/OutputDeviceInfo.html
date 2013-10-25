@@ -41,7 +41,6 @@ class OutputDeviceInfo extends ChromeObject {
    if (isMuted != null) this.isMuted = isMuted;
    if (volume != null) this.volume = volume;
  }
-
  OutputDeviceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get id =&gt; proxy['id'];

@@ -42,7 +42,6 @@ class SocketInfo extends ChromeObject {
    if (localAddress != null) this.localAddress = localAddress;
    if (localPort != null) this.localPort = localPort;
  }
-
  SocketInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  SocketType get socketType =&gt; _createSocketType(proxy['socketType']);

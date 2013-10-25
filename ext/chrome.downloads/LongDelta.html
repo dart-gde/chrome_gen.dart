@@ -38,7 +38,6 @@ class LongDelta extends ChromeObject {
    if (previous != null) this.previous = previous;
    if (current != null) this.current = current;
  }
-
  LongDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get previous =&gt; proxy['previous'];

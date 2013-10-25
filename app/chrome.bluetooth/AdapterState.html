@@ -41,7 +41,6 @@ class AdapterState extends ChromeObject {
    if (available != null) this.available = available;
    if (discovering != null) this.discovering = discovering;
  }
-
  AdapterState.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  String get address =&gt; proxy['address'];

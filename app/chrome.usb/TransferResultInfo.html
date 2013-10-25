@@ -38,7 +38,6 @@ class TransferResultInfo extends ChromeObject {
    if (resultCode != null) this.resultCode = resultCode;
    if (data != null) this.data = data;
  }
-
  TransferResultInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get resultCode =&gt; proxy['resultCode'];

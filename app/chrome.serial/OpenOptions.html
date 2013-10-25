@@ -40,7 +40,6 @@ class OpenOptions extends ChromeObject {
    if (parityBit != null) this.parityBit = parityBit;
    if (stopBit != null) this.stopBit = stopBit;
  }
-
  OpenOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get bitrate =&gt; proxy['bitrate'];

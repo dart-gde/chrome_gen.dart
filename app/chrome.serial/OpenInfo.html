@@ -37,7 +37,6 @@ class OpenInfo extends ChromeObject {
  OpenInfo({int connectionId}) {
    if (connectionId != null) this.connectionId = connectionId;
  }
-
  OpenInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get connectionId =&gt; proxy['connectionId'];

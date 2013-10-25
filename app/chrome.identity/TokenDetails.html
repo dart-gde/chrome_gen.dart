@@ -37,7 +37,6 @@ class TokenDetails extends ChromeObject {
  TokenDetails({bool interactive}) {
    if (interactive != null) this.interactive = interactive;
  }
-
  TokenDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  bool get interactive =&gt; proxy['interactive'];

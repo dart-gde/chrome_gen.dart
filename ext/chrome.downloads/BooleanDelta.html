@@ -38,7 +38,6 @@ class BooleanDelta extends ChromeObject {
    if (previous != null) this.previous = previous;
    if (current != null) this.current = current;
  }
-
  BooleanDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  bool get previous =&gt; proxy['previous'];

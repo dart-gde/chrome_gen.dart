@@ -50,7 +50,6 @@ class NotificationOptions extends ChromeObject {
    if (items != null) this.items = items;
    if (progress != null) this.progress = progress;
  }
-
  NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  TemplateType get type =&gt; _createTemplateType(proxy['type']);

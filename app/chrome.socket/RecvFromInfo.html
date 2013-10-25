@@ -40,7 +40,6 @@ class RecvFromInfo extends ChromeObject {
    if (address != null) this.address = address;
    if (port != null) this.port = port;
  }
-
  RecvFromInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get resultCode =&gt; proxy['resultCode'];

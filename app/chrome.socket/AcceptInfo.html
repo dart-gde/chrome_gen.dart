@@ -38,7 +38,6 @@ class AcceptInfo extends ChromeObject {
    if (resultCode != null) this.resultCode = resultCode;
    if (socketId != null) this.socketId = socketId;
  }
-
  AcceptInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get resultCode =&gt; proxy['resultCode'];

@@ -38,7 +38,6 @@ class StorageInfo extends ChromeObject {
    if (usageBytes != null) this.usageBytes = usageBytes;
    if (quotaBytes != null) this.quotaBytes = quotaBytes;
  }
-
  StorageInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  int get usageBytes =&gt; proxy['usageBytes'];

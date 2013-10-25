@@ -38,7 +38,6 @@ class GetBluetoothDevicesOptions extends ChromeObject {
    if (profile != null) this.profile = profile;
    if (deviceCallback != null) this.deviceCallback = deviceCallback;
  }
-
  GetBluetoothDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  Profile get profile =&gt; _createProfile(proxy['profile']);

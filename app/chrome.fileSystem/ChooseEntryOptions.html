@@ -41,7 +41,6 @@ class ChooseEntryOptions extends ChromeObject {
    if (acceptsAllTypes != null) this.acceptsAllTypes = acceptsAllTypes;
    if (acceptsMultiple != null) this.acceptsMultiple = acceptsMultiple;
  }
-
  ChooseEntryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  ChooseEntryType get type =&gt; _createChooseEntryType(proxy['type']);
