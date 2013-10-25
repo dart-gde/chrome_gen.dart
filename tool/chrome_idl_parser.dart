@@ -11,13 +11,33 @@ final typeMapping = {};
 
 // namespace
 class IDLNamespaceDeclaration {
+  /**
+   * [name] of the declared namespace.
+   */
   final String name;
-  // The body will contain one of the above list of types.
-  final List body;
-  final List<String> documentation;
-  IDLNamespaceDeclaration(this.name, this.body, this.documentation);
 
-  String toString() => "";
+  /**
+   *
+   */
+  final IDLAttributeDeclaration attribute;
+
+  /**
+   * The body will contain one of the following types:
+   * IDLFunctionDeclaration, List<IDLTypeDeclaration>,
+   * IDLEventDeclaration, List<IDLCallbackDeclaration>,
+   * List<IDLEnumDeclaration>.
+   */
+  final List body;
+
+  /**
+   * Namespace documentation
+   */
+  final List<String> documentation;
+  IDLNamespaceDeclaration(this.name, this.attribute, this.body,
+      this.documentation);
+
+  String toString() =>
+      "IDLNamespaceDeclaration($name, $attribute, $body, $documentation)";
 }
 
 // interface Functions
@@ -25,14 +45,14 @@ class IDLFunctionDeclaration {
   final String name = "Functions";
   final List<IDLMethod> methods;
   final List<String> documentation;
-  String toString() => "";
+  String toString() => "IDLFunctionDeclaration()";
 }
 
 // dictionary definition
 class IDLTypeDeclaration {
   final List<IDLMember> members;
   final List<String> documentation;
-  String toString() => "";
+  String toString() => "IDLTypeDeclaration()";
 }
 
 // interface Events
@@ -40,7 +60,7 @@ class IDLEventDeclaration {
   final String name = "Events";
   final List<IDLMethod> methods;
   final List<String> documentation;
-  String toString() => "";
+  String toString() => "IDLEventDeclaration()";
 }
 
 // callback definition
@@ -48,7 +68,7 @@ class IDLCallbackDeclaration {
   final String name;
   // TODO: fill out the rest of the callback signature
   final List<String> documentation;
-  String toString() => "";
+  String toString() => "IDLCallbackDeclaration()";
 }
 
 // enum definition
@@ -56,12 +76,12 @@ class IDLEnumDeclaration {
   final String name;
   final List<IDLEnumValue> values;
   final List<String> documentation;
-  String toString() => "";
+  String toString() => "IDLEnumDeclaration()";
 }
 
 class IDLAttributeDeclaration {
   final List<IDLAttribute> values;
-  String toString() => "";
+  String toString() => "IDLAttributeDeclaration()";
 }
 
 class IDLMethod {
@@ -69,14 +89,14 @@ class IDLMethod {
   final List<IDLParameter> parameters;
   final IDLType returnType;
   final List<String> documentation;
-  String toString() => "";
+  String toString() => "IDLMethod()";
 }
 
 class IDLMember {
   final String name;
   final IDLType type;
   final List<String> documentation;
-  String toString() => "";
+  String toString() => "IDLMember()";
 }
 
 class IDLParameter {
@@ -84,7 +104,7 @@ class IDLParameter {
   final IDLType type;
   final bool optional;
   final bool isArray;
-  String toString() => "";
+  String toString() => "IDLParameter()";
 }
 
 // Enumeration of the different types
@@ -97,42 +117,61 @@ class IDLAttributeTypeEnum {
   const IDLAttributeTypeEnum._(this.type);
 
   /**
-   * [instanceOf=Window]
+   * Example:
+   *
+   *  [instanceOf=Window]
    */
   static const INSTANCE_OF = const IDLAttributeTypeEnum._("instanceOf");
 
   /**
-   * [supportsFilters=true]
+   * Example:
+   *
+   *   [supportsFilters=true]
    */
-  static const SUPPORTS_FILTER = const IDLAttributeTypeEnum._("supportsFilters");
+  static const SUPPORTS_FILTER =
+      const IDLAttributeTypeEnum._("supportsFilters");
 
   /**
-   * [inline_doc]
+   * Example:
+   *
+   *   [inline_doc]
    */
   static const INLINE_DOC = const IDLAttributeTypeEnum._("inline_doc");
 
   /**
-   * [nodoc]
+   * Example:
+   *
+   *   [nodoc]
    */
   static const NODOC = const IDLAttributeTypeEnum._("nodoc");
 
   /**
-   * [nocompile] also sometimes paired with [nocompile, nodoc]
+   * Example:
+   *
+   *   [nocompile]
+   *
+   * also sometimes paired with [nocompile, nodoc]
    */
   static const NOCOMPILE = const IDLAttributeTypeEnum._("nocompile");
 
   /**
-   * [legalValues=(16,32)]
+   * Example:
+   *
+   *   [legalValues=(16,32)]
    */
   static const LEGAL_VALUES = const IDLAttributeTypeEnum._("legalValues");
 
   /**
-   * [permissions=downloads]
+   * Example:
+   *
+   *   [permissions=downloads]
    */
   static const PERMISSIONS = const IDLAttributeTypeEnum._("permissions");
 
   /**
-   * [maxListeners=1]
+   * Example:
+   *
+   *   [maxListeners=1]
    */
   static const MAX_LISTENERS = const IDLAttributeTypeEnum._("maxListeners");
 }
@@ -147,46 +186,50 @@ class IDLAttribute {
    */
   final String attributeValue;
 
-  String toString() => "";
+  String toString() => "IDLAttribute()";
 }
 
 class IDLEnumValue {
   final String name;
   final String value;
 
-  String toString() => "";
+  String toString() => "IDLEnumValue()";
 }
 
 class IDLType {
   final String name;
-  String toString() => "";
+  String toString() => "IDLType()";
 }
 
 
-// todo: create methods that return each of the above
-// type when a parser match is found. see mini_ast.dart mapping section
-IDLNamespaceDeclaration idlNamespaceDeclarationMapping(List<String> doc, _,
-                                                       String name, List body,
-                                                       __) =>
-new IDLNamespaceDeclaration(name, body, doc);
+/**
+ * Map the namespace declaration parse to a [IDLNamespaceDeclaration]
+ */
+IDLNamespaceDeclaration idlNamespaceDeclarationMapping(
+  List<String> doc, attribute, _, String name, List body, __) =>
+new IDLNamespaceDeclaration(name, attribute, body, doc);
 
 class ChromeIDLParser extends LanguageParsers {
   ChromeIDLParser() : super(reservedNames: reservedNames,
-                      // Dont handle comments
+                      /**
+                       * Dont handle comments, instead let the parser
+                       * hande them with [docString]
+                       */
                       commentStart: "",
                       commentEnd: "",
                       commentLine: "");
 
-  // Parse the namespace
+  /**
+   * Parse the namespace
+   */
   Parser get namespaceDeclaration =>
-      // todo: does namespace come with annotation?
       docString
+      + attributeDeclaration
       + reserved["namespace"]
       + identifier
       + braces(namespaceBody)
       + semi
       ^ idlNamespaceDeclarationMapping;
-
 
   Parser get namespaceBody => _namespaceBody.many;
 
@@ -196,26 +239,38 @@ class ChromeIDLParser extends LanguageParsers {
                              | callbackDeclaration
                              | enumDeclaration;
 
-  // Parse the interface Functions
+  /**
+   * Parse the interface Functions
+   */
   Parser get functionDeclaration => methods.many;
   Parser get methods => _methods;
   Parser get _methods => null;
 
-  // Parse the dictionary definitions
+  /**
+   * Parse the dictionary definitions
+   */
   Parser get typeDeclaration => null;
   Parser get typeBody => fieldDeclared.many;
   Parser get fieldDeclared => null;
 
-  // Parse the interface Events
+  /**
+   * Parse the interface Events
+   */
   Parser get eventDeclaration => methods.many;
 
-  // Parse the callback definitions
+  /**
+   * Parse the callback definitions
+   */
   Parser get callbackDeclaration => null;
 
-  // Parse the enum declarations
+  /**
+   * Parse the enum declarations
+   */
   Parser get enumDeclaration => null;
   Parser get enumBody => enumValue;
   Parser get enumValue => null;
+
+  Parser get attributeDeclaration => null;
 
   /**
    * Parser all documentation strings and spaces between.
@@ -223,14 +278,9 @@ class ChromeIDLParser extends LanguageParsers {
   Parser get docString => lexeme(_docString.many);
   Parser get _docString =>
         everythingBetween(string('//'), string('\n'))
-      | everythingBetween(string('/*'), string('*/'), nested: true)
-      | everythingBetween(string('/**'), string('*/'), nested: true);
+      | everythingBetween(string('/**'), string('*/'))
+      | everythingBetween(string('/*'), string('*/'));
 
   Parser get parameter => null;
   Parser type() => null;
-}
-
-
-void main() {
-  print("yay dart!");
 }
