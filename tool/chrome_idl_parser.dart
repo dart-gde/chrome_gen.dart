@@ -3,9 +3,10 @@ library chrome_idl_parser;
 // TODO: create seperate model file.
 
 import 'package:parsers/parsers.dart';
+import 'package:persistent/persistent.dart';
 
 // note: choose between using reserved names or keywords
-final reservedNames = [];
+final reservedNames = ["enum", "callback", "void", "optional", "object"];
 final keywords = [];
 final typeMapping = {};
 
@@ -65,20 +66,34 @@ class IDLEventDeclaration {
   String toString() => "IDLEventDeclaration()";
 }
 
-// callback definition
+/**
+ * callback definition
+ */
 class IDLCallbackDeclaration {
   final String name;
-  // TODO: fill out the rest of the callback signature
+  final List<IDLParameter> parameters;
   final List<String> documentation;
-  String toString() => "IDLCallbackDeclaration()";
+
+  IDLCallbackDeclaration(this.name, this.parameters, {this.documentation});
+
+  String toString() =>
+      "IDLCallbackDeclaration($name, $parameters, $documentation)";
 }
 
-// enum definition
+/**
+ * enum definition
+ */
 class IDLEnumDeclaration {
   final String name;
+  final IDLAttributeDeclaration attribute;
   final List<IDLEnumValue> enums;
   final List<String> documentation;
-  String toString() => "IDLEnumDeclaration()";
+
+  IDLEnumDeclaration(this.name, this.enums, {this.attribute,
+    this.documentation});
+
+  String toString() =>
+      "IDLEnumDeclaration($name, $enums, $attribute, $documentation)";
 }
 
 class IDLAttributeDeclaration {
@@ -102,12 +117,25 @@ class IDLMember {
   String toString() => "IDLMember()";
 }
 
+/**
+ * Parameter
+ */
 class IDLParameter {
   final String name;
   final IDLType type;
-  final bool optional;
-  final bool isArray;
-  String toString() => "IDLParameter()";
+  final bool isOptional;
+  final IDLAttributeDeclaration attribute;
+
+  // This is known by the convention used in chrome idl
+  //   static void create(DOMString url, optional CreateWindowOptions options,
+  //     optional CreateWindowCallback callback);
+  final bool isCallback;
+
+  IDLParameter(this.name, this.type,
+      {this.attribute, this.isOptional: false, this.isCallback: false});
+
+  String toString() =>
+      "IDLParameter($name, $type, $attribute, $isOptional, $isCallback)";
 }
 
 /**
@@ -206,23 +234,63 @@ class IDLAttribute {
 
 class IDLEnumValue {
   final String name;
-  final String value;
+  final List<String> documentation;
 
-  String toString() => "IDLEnumValue()";
+  IDLEnumValue(this.name, {this.documentation});
+
+  String toString() => "IDLEnumValue($name, $documentation)";
 }
 
 class IDLType {
   final String name;
-  String toString() => "IDLType()";
+  final bool isArray;
+  IDLType(this.name, {this.isArray: false});
+  String toString() => "IDLType($name, $isArray)";
 }
-
 
 /**
  * Map the namespace declaration parse to a [IDLNamespaceDeclaration]
  */
+// TODO: not finished mapping.
 IDLNamespaceDeclaration idlNamespaceDeclarationMapping(
   List<String> doc, attribute, _, String name, List body, __) =>
 new IDLNamespaceDeclaration(name, attribute, body, doc);
+
+/**
+ * Mapping of callback declaration.
+ */
+IDLCallbackDeclaration idlCallbackDeclarationMapping(
+  List<String> documentation, _, String name, __,
+  List<IDLParameter> parameters, ___) =>
+    new IDLCallbackDeclaration(name, parameters, documentation: documentation);
+
+/**
+ * Mapping of callback parameter with optional flag.
+ */
+IDLParameter idlCallbackParameterMapping(String name, IDLType type,
+  bool isOptional) =>
+    new IDLParameter(name, type, isOptional: isOptional);
+
+/**
+ * Mapping of callback parameter with attribute based type specificed.
+ */
+IDLParameter idlCallbackParameterAttributeBasedTypeMapping(String name,
+  IDLAttributeDeclaration attribute) {
+  if (attribute.attributes[0].attributeType != IDLAttributeTypeEnum.INSTANCE_OF) {
+    throw new ArgumentError(
+        "attribute was not IDLAttributeTypeEnum.INSTANCE_OF");
+  }
+
+  return new IDLParameter(name,
+      new IDLType(attribute.attributes[0].attributeValue),
+      attribute: attribute);
+}
+
+/**
+ * Mapping of callback parameter type.
+ */
+IDLType idlCallbackParameterTypeMapping(String name, bool isArray) =>
+    new IDLType(name, isArray: isArray);
 
 /**
  * Method to help find IDLAttributeTypeEnum by String name.
@@ -241,9 +309,24 @@ IDLAttributeTypeEnum _resolveEnum(String name) {
 }
 
 /**
+ * Enum declaration
+ */
+IDLEnumDeclaration idlEnumDeclarationMapping(List<String> documentation,
+  Option attribute, _, String name, List<IDLEnumValue> enumValues, __) =>
+      new IDLEnumDeclaration(name, enumValues,
+          attribute: attribute.isDefined ? attribute.value : null,
+          documentation: documentation);
+
+/**
+ * Enum value
+ */
+IDLEnumValue idlEnumValueMapping(List<String> documentation, String name) =>
+    new IDLEnumValue(name, documentation: documentation);
+
+/**
  * Attribute declaration
  */
-IDLAttributeDeclaration attributeDeclarationMapping(List attributes) =>
+IDLAttributeDeclaration idlAttributeDeclarationMapping(List attributes) =>
   new IDLAttributeDeclaration(attributes);
 
 /**
@@ -276,7 +359,7 @@ class ChromeIDLParser extends LanguageParsers {
                       commentLine: "");
 
   /**
-   * Parse the namespace
+   * Parse the namespace.
    */
   Parser get namespaceDeclaration =>
       docString
@@ -300,44 +383,95 @@ class ChromeIDLParser extends LanguageParsers {
                              | enumDeclaration;
 
   /**
-   * Parse the interface Functions
+   * Parse the interface Functions.
    */
   Parser get functionDeclaration => methods.many;
   Parser get methods => _methods;
   Parser get _methods => null;
 
   /**
-   * Parse the dictionary definitions
+   * Parse the dictionary definitions.
    */
   Parser get typeDeclaration => null;
   Parser get typeBody => fieldDeclared.many;
   Parser get fieldDeclared => null;
 
   /**
-   * Parse the interface Events
+   * Parse the interface Events.
    */
   Parser get eventDeclaration => methods.many;
 
   /**
-   * Parse the callback definitions
+   * Parse the callback definitions.
    */
-  Parser get callbackDeclaration => null;
+  Parser get callbackDeclaration => _callbackDeclaration.many;
 
   /**
-   * Parse the enum declarations
+   * Parse a callback definition.
    */
-  Parser get enumDeclaration => null;
-  Parser get enumBody => enumValue;
-  Parser get enumValue => null;
+  Parser get _callbackDeclaration =>
+      docString
+      + reserved["callback"]
+      + identifier
+      + symbol("=")
+      + callbackMethod
+      + semi ^ idlCallbackDeclarationMapping;
+
+  Parser get callbackMethod =>
+      // TODO: rename callbackParameters to callbackParameter?
+      // void (StorageUnitInfo[] info)
+      reserved["void"] + parens(callbackParameters.sepBy(comma))
+      ^ (_, parameters) => parameters;
+
+  Parser get callbackParameters =>
+      // [instanceOf=Entry] object entry
+      (attributeDeclaration + reserved["object"] + identifier
+          ^ (attribute, __, name) =>
+              idlCallbackParameterAttributeBasedTypeMapping(name, attribute))
+      |
+      // optional DOMString responseUrl
+      (reserved["optional"] + callbackParameterType + identifier
+          ^ (_, type, name) => idlCallbackParameterMapping(name, type, true))
+      |
+      //  Device device or Device[] result
+      (callbackParameterType + identifier
+          ^ (type, name) => idlCallbackParameterMapping(name, type, false));
+
+  Parser get callbackParameterType =>
+      // Device[]
+      (identifier + symbol('[') + symbol(']') ^ (name,__,___) =>
+          idlCallbackParameterTypeMapping(name, true))
+      |
+      // Device
+      (identifier ^ (name) => idlCallbackParameterTypeMapping(name, false));
+
+
+  /**
+   * Parse the enum declarations.
+   */
+  Parser get enumDeclaration =>
+      docString
+      + attributeDeclaration.maybe
+      + reserved["enum"]
+      + identifier
+      + braces(enumBody.sepBy(comma))
+      + semi
+      ^ idlEnumDeclarationMapping;
+
+  /**
+   * Parse the enum values.
+   */
+  Parser get enumBody =>
+      docString + identifier ^ idlEnumValueMapping;
 
   /**
    * Parse the attribute declaration.
    */
   Parser get attributeDeclaration =>
-      brackets(attribute.sepBy(comma)) ^ attributeDeclarationMapping;
+      brackets(attribute.sepBy(comma)) ^ idlAttributeDeclarationMapping;
 
   /**
-   * Parse the attribute
+   * Parse the attribute.
    */
   Parser get attribute =>
       // Attribute where name=value
