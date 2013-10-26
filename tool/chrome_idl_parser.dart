@@ -23,8 +23,10 @@ class IDLNamespaceDeclaration {
 
   /**
    * The body will contain one of the following types:
-   * IDLFunctionDeclaration, List<IDLTypeDeclaration>,
-   * IDLEventDeclaration, List<IDLCallbackDeclaration>,
+   * IDLFunctionDeclaration,
+   * List<IDLTypeDeclaration>,
+   * IDLEventDeclaration,
+   * List<IDLCallbackDeclaration>,
    * List<IDLEnumDeclaration>.
    */
   final List body;
@@ -74,14 +76,15 @@ class IDLCallbackDeclaration {
 // enum definition
 class IDLEnumDeclaration {
   final String name;
-  final List<IDLEnumValue> values;
+  final List<IDLEnumValue> enums;
   final List<String> documentation;
   String toString() => "IDLEnumDeclaration()";
 }
 
 class IDLAttributeDeclaration {
-  final List<IDLAttribute> values;
-  String toString() => "IDLAttributeDeclaration()";
+  final List<IDLAttribute> attributes;
+  IDLAttributeDeclaration(this.attributes);
+  String toString() => "IDLAttributeDeclaration($attributes)";
 }
 
 class IDLMethod {
@@ -107,14 +110,18 @@ class IDLParameter {
   String toString() => "IDLParameter()";
 }
 
-// Enumeration of the different types
-// of attributes used in the google
-// apps idls.
+/**
+ * Enumeration of the different types of attributes used in the chrome apps
+ * idls.
+ */
 class IDLAttributeTypeEnum {
 
   final String type;
 
   const IDLAttributeTypeEnum._(this.type);
+
+  static List<IDLAttributeTypeEnum> get values => [INSTANCE_OF, SUPPORTS_FILTER,
+    INLINE_DOC, NODOC, NOCOMPILE, LEGAL_VALUES, PERMISSIONS, MAX_LISTENERS];
 
   /**
    * Example:
@@ -186,6 +193,13 @@ class IDLAttribute {
    */
   final String attributeValue;
 
+  /**
+   * The possible [List] of values used on assignment to the attribute.
+   */
+  final List attributeValues;
+
+  IDLAttribute(this.attributeType, {this.attributeValue, this.attributeValues});
+
   String toString() => "IDLAttribute()";
 }
 
@@ -209,6 +223,47 @@ IDLNamespaceDeclaration idlNamespaceDeclarationMapping(
   List<String> doc, attribute, _, String name, List body, __) =>
 new IDLNamespaceDeclaration(name, attribute, body, doc);
 
+/**
+ * Method to help find IDLAttributeTypeEnum by String name.
+ */
+IDLAttributeTypeEnum _resolveEnum(String name) {
+  var attributeEnum = IDLAttributeTypeEnum.values.firstWhere(
+      (IDLAttributeTypeEnum e) {
+        return e.type == name;
+      });
+
+  if (attributeEnum == null) {
+    throw new ArgumentError("$name cannot be resolved IDLAttributeTypeEnum");
+  }
+
+  return attributeEnum;
+}
+
+/**
+ * Attribute declaration
+ */
+IDLAttributeDeclaration attributeDeclarationMapping(List attributes) =>
+  new IDLAttributeDeclaration(attributes);
+
+/**
+ *  Attribute where [name=value]
+ */
+IDLAttribute idlAttributeAssignedValueMapping(String name, _, String value) =>
+    new IDLAttribute(_resolveEnum(name), attributeValue: value);
+
+/**
+ *  Attribute where [name=(1,2)]
+ */
+IDLAttribute idlAttributeAssignedMultiValueMapping(
+                                           String name, _, List<int> values) =>
+    new IDLAttribute(_resolveEnum(name), attributeValues: values);
+
+/**
+ * Attribute where [name]
+ */
+IDLAttribute idlAttributeMapping(String name) =>
+    new IDLAttribute(_resolveEnum(name));
+
 class ChromeIDLParser extends LanguageParsers {
   ChromeIDLParser() : super(reservedNames: reservedNames,
                       /**
@@ -231,6 +286,10 @@ class ChromeIDLParser extends LanguageParsers {
       + semi
       ^ idlNamespaceDeclarationMapping;
 
+  /**
+   * The body of the namespace. This could include function, type, event,
+   * callback and enum declarations.
+   */
   Parser get namespaceBody => _namespaceBody.many;
 
   Parser get _namespaceBody => functionDeclaration
@@ -273,7 +332,21 @@ class ChromeIDLParser extends LanguageParsers {
   /**
    * Parse the attribute declaration.
    */
-  Parser get attributeDeclaration => null;
+  Parser get attributeDeclaration =>
+      brackets(attribute.sepBy(comma)) ^ attributeDeclarationMapping;
+
+  /**
+   * Parse the attribute
+   */
+  Parser get attribute =>
+      // Attribute where name=value
+      (identifier + symbol('=') + identifier
+      ^ idlAttributeAssignedValueMapping)
+      // Attribute where [name=(1,2)]
+      | (identifier + symbol('=') + parens(intLiteral.sepBy(comma))
+      ^ idlAttributeAssignedMultiValueMapping)
+      // Attribute where [name]
+      | (identifier ^ idlAttributeMapping);
 
   /**
    * Parser all documentation strings and spaces between.
