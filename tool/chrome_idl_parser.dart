@@ -120,8 +120,9 @@ class IDLAttributeTypeEnum {
 
   const IDLAttributeTypeEnum._(this.type);
 
-  static List<IDLAttributeTypeEnum> get values => [INSTANCE_OF, SUPPORTS_FILTER,
-    INLINE_DOC, NODOC, NOCOMPILE, LEGAL_VALUES, PERMISSIONS, MAX_LISTENERS];
+  static const List<IDLAttributeTypeEnum> values = const [INSTANCE_OF,
+    SUPPORTS_FILTER, INLINE_DOC, NODOC, NOCOMPILE, LEGAL_VALUES, PERMISSIONS,
+    MAX_LISTENERS];
 
   /**
    * Example:
@@ -227,7 +228,7 @@ new IDLNamespaceDeclaration(name, attribute, body, doc);
  * Method to help find IDLAttributeTypeEnum by String name.
  */
 IDLAttributeTypeEnum _resolveEnum(String name) {
-  var attributeEnum = IDLAttributeTypeEnum.values.firstWhere(
+  var attributeEnum = IDLAttributeTypeEnum.values.singleWhere(
       (IDLAttributeTypeEnum e) {
         return e.type == name;
       });
