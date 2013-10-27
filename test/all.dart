@@ -21,8 +21,9 @@ import 'web_idl_nullable_test.dart' as test_web_idl_nullable;
 import 'web_idl_optional_parameters_test.dart' as test_web_idl_optional_parameters;
 import 'web_idl_sequences_test.dart' as test_web_idl_sequences;
 import 'web_idl_typedefs_test.dart' as test_web_idl_typedefs;
+import 'chrome_idl_test.dart' as test_chrome_idl;
 
-main() {
+void main() {
   model_json_test.main();
   model_idl_test.main();
   src_gen_test.main();
@@ -43,4 +44,5 @@ main() {
   test_web_idl_optional_parameters.main();
   test_web_idl_sequences.main();
   test_web_idl_typedefs.main();
+  test_chrome_idl.main();
 }
