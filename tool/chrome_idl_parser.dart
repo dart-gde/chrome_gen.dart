@@ -276,7 +276,8 @@ IDLParameter idlCallbackParameterMapping(String name, IDLType type,
  */
 IDLParameter idlCallbackParameterAttributeBasedTypeMapping(String name,
   IDLAttributeDeclaration attribute) {
-  if (attribute.attributes[0].attributeType != IDLAttributeTypeEnum.INSTANCE_OF) {
+  IDLAttributeTypeEnum t = attribute.attributes[0].attributeType;
+  if (t != IDLAttributeTypeEnum.INSTANCE_OF) {
     throw new ArgumentError(
         "attribute was not IDLAttributeTypeEnum.INSTANCE_OF");
   }

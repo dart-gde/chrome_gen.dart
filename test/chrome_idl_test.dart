@@ -97,8 +97,8 @@ void chromeIDLParserDocStringTests() {
 void chromeIDLParserAttributeDeclarationTests() {
   test('attribute with [instanceOf=Window]', () {
     ChromeIDLParser chromeIDLParser = new ChromeIDLParser();
-    IDLAttributeDeclaration attributeDeclaration = chromeIDLParser.attributeDeclaration
-        .parse("[instanceOf=Window]");
+    IDLAttributeDeclaration attributeDeclaration =
+        chromeIDLParser.attributeDeclaration.parse("[instanceOf=Window]");
 
     expect(attributeDeclaration, isNotNull);
     List<IDLAttribute> attributes = attributeDeclaration.attributes;
@@ -111,8 +111,8 @@ void chromeIDLParserAttributeDeclarationTests() {
 
   test('attribute with [nodoc]', () {
     ChromeIDLParser chromeIDLParser = new ChromeIDLParser();
-    IDLAttributeDeclaration attributeDeclaration = chromeIDLParser.attributeDeclaration
-        .parse("[nodoc]");
+    IDLAttributeDeclaration attributeDeclaration =
+        chromeIDLParser.attributeDeclaration.parse("[nodoc]");
 
     expect(attributeDeclaration, isNotNull);
     List<IDLAttribute> attributes = attributeDeclaration.attributes;
@@ -124,8 +124,8 @@ void chromeIDLParserAttributeDeclarationTests() {
 
   test('attribute with [legalValues=(16,32)]', () {
     ChromeIDLParser chromeIDLParser = new ChromeIDLParser();
-    IDLAttributeDeclaration attributeDeclaration = chromeIDLParser.attributeDeclaration
-        .parse("[legalValues=(16,32)]");
+    IDLAttributeDeclaration attributeDeclaration =
+        chromeIDLParser.attributeDeclaration.parse("[legalValues=(16,32)]");
 
     expect(attributeDeclaration, isNotNull);
     List<IDLAttribute> attributes = attributeDeclaration.attributes;
@@ -140,8 +140,8 @@ void chromeIDLParserAttributeDeclarationTests() {
 
   test('attribute with [nocompile, nodoc]', () {
     ChromeIDLParser chromeIDLParser = new ChromeIDLParser();
-    IDLAttributeDeclaration attributeDeclaration = chromeIDLParser.attributeDeclaration
-        .parse("[nocompile, nodoc]");
+    IDLAttributeDeclaration attributeDeclaration =
+        chromeIDLParser.attributeDeclaration.parse("[nocompile, nodoc]");
 
     expect(attributeDeclaration, isNotNull);
     List<IDLAttribute> attributes = attributeDeclaration.attributes;
@@ -402,7 +402,8 @@ void chromeIDLParserCallbackParameterTests() {
 void chromeIDLParserCallbackMethodTests() {
   test('with no parameters', () {
     ChromeIDLParser chromeIDLParser = new ChromeIDLParser();
-    List<IDLParameter> parameters = chromeIDLParser.callbackMethod.parse("void()");
+    List<IDLParameter> parameters = chromeIDLParser.callbackMethod
+        .parse("void()");
 
     expect(parameters, isNotNull);
     expect(parameters.length, equals(0));
