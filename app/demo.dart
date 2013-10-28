@@ -9,11 +9,11 @@ void main() {
   action("create()", handleAlarmsCreate);
   br();
 
-  label('app_window');
+  label('app.window');
   action("create()", handleAppWindowCreate);
   action("create.options()", handleAppWindowCreateOptions);
-  action("close()", () => chrome.app_window.current().close());
-  action("fullscreen()", () => chrome.app_window.current().fullscreen());
+  action("close()", () => chrome.app.window.current().close());
+  action("fullscreen()", () => chrome.app.window.current().fullscreen());
   br();
 
   label('audio');
@@ -97,12 +97,12 @@ void main() {
     notes('onAlarm: ${e}');
   });
 
-  chrome.app_window.onFullscreened.listen((e) => print(e));
-  chrome.app_window.onBoundsChanged.listen((e) => print(e));
-  chrome.app_window.onClosed.listen((e) => print(e));
-  chrome.app_window.onMaximized.listen((e) => print(e));
-  chrome.app_window.onMinimized.listen((e) => print(e));
-  chrome.app_window.onRestored.listen((e) => print(e));
+  chrome.app.window.onFullscreened.listen((e) => print(e));
+  chrome.app.window.onBoundsChanged.listen((e) => print(e));
+  chrome.app.window.onClosed.listen((e) => print(e));
+  chrome.app.window.onMaximized.listen((e) => print(e));
+  chrome.app.window.onMinimized.listen((e) => print(e));
+  chrome.app.window.onRestored.listen((e) => print(e));
 }
 
 void label(String str) {
@@ -222,22 +222,22 @@ void handleAudioGetInfo() {
 }
 
 void handleAppWindowCreate() {
-  chrome.app_window.create('demo.html');
+  chrome.app.window.create('demo.html');
 }
 
 void handleAppWindowCreateOptions() {
-  chrome.app_window.create('demo.html',
+  chrome.app.window.create('demo.html',
       new chrome.CreateWindowOptions(width: 1200, height: 200));
 }
 
 void handleSystemCpu() {
-  chrome.system_cpu.getInfo().then((chrome.CpuInfo info) {
+  chrome.system.cpu.getInfo().then((chrome.CpuInfo info) {
     summary('${info.archName}: ${info.numOfProcessors} processors');
   });
 }
 
 void handleSystemMemory() {
-  chrome.system_memory.getInfo().then((chrome.MemoryInfo info) {
+  chrome.system.memory.getInfo().then((chrome.MemoryInfo info) {
     summary('${info.capacity} bytes');
   });
 }

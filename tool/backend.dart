@@ -11,29 +11,22 @@ import 'src/utils.dart';
  * into source code.
  */
 abstract class Backend {
+  final ChromeLibrary library;
   final Overrides overrides;
 
-  Backend(this.overrides);
+  Backend(this.library, this.overrides);
 
-  factory Backend.createDefault(Overrides overrides) {
-    return new DefaultBackend(overrides);
+  factory Backend.createDefault(ChromeLibrary library, Overrides overrides, [DartGenerator generator]) {
+    return new DefaultBackend(library, overrides, generator);
   }
 
-  String generate(ChromeLibrary library, {String license, String sourceFileName});
+  void generateAccessor();
+  void generateContent(bool printClassDocs, Set createdFactories);
+
+  String generate({String license, String sourceFileName});
 }
 
 class DefaultBackend extends Backend {
-  DefaultBackend(Overrides overrides): super(overrides);
-
-  String generate(ChromeLibrary library, {String license, String sourceFileName}) {
-    var context = new _DefaultBackendContext(new DartGenerator(),
-        library, overrides);
-
-    return context.generate(license: license, sourceFileName: sourceFileName);
-  }
-}
-
-class _DefaultBackendContext {
   /**
    * Used to be able to construct specific subclasses of a given type.
    */
@@ -44,13 +37,29 @@ class _DefaultBackendContext {
     "FileEntry": "ChromeFileEntry"
   };
 
-  final DartGenerator generator;
-  final ChromeLibrary library;
-  final Overrides overrides;
+  DartGenerator generator;
 
   final Set<String> _neededFactories = new Set<String>();
 
-  _DefaultBackendContext(this.generator, this.library, this.overrides);
+  DefaultBackend(ChromeLibrary library, Overrides overrides, [this.generator]): super(library, overrides) {
+    if (generator == null) {
+      generator = new DartGenerator();
+    }
+  }
+
+  void generateAccessor() {
+    String shortAccessorName = libraryName;
+    if (shortAccessorName.contains('_')) {
+      shortAccessorName = shortAccessorName.substring(shortAccessorName.indexOf('_') + 1);
+    }
+
+    // final ChromeI18N i18n = ChromeI18N._i18n == null ? null : new ChromeI18N._();
+    generator.writeDocs("Accessor for the `chrome.${library.name}` namespace.",
+        preferSingle: true);
+    generator.writeln("final ${className} ${shortAccessorName} = ${className}.${contextReference} == null ? "
+        "apiNotAvailable('chrome.${library.name}') : new ${className}._();");
+    generator.writeln();
+  }
 
   String generate({String license, String sourceFileName}) {
     if (license != null) {
@@ -80,13 +89,17 @@ class _DefaultBackendContext {
     generator.writeln("import '../src/common.dart';");
     generator.writeln();
 
-    // final ChromeI18N i18n = ChromeI18N._i18n == null ? null : new ChromeI18N._();
-    generator.writeDocs("Accessor for the `chrome.${library.name}` namespace.",
-        preferSingle: true);
-    generator.writeln("final ${className} ${libraryName} = ${className}.${contextReference} == null ? "
-        "apiNotAvailable('chrome.${library.name}') : new ${className}._();");
-    generator.writeln();
+    generateAccessor();
 
+    generateContent(false, new Set<String>());
+
+    return generator.toString();
+  }
+
+  void generateContent(bool printClassDocs, Set createdFactories) {
+    if (printClassDocs) {
+      generator.writeDocs(library.documentation);
+    }
     _printClass();
 
     library.eventTypes.forEach(_printEventType);
@@ -97,15 +110,13 @@ class _DefaultBackendContext {
     if (_neededFactories.isNotEmpty) {
       generator.writeln();
 
-      var created = new Set<String>();
-
-      while(_neededFactories.isNotEmpty) {
+      while (_neededFactories.isNotEmpty) {
         var factoryType = _neededFactories.first;
         _neededFactories.remove(factoryType);
 
-        if(!created.contains(factoryType)) {
+        if (!createdFactories.contains(factoryType)) {
           _writeFactory(factoryType);
-          created.add(factoryType);
+          createdFactories.add(factoryType);
         }
       }
     }
@@ -113,8 +124,6 @@ class _DefaultBackendContext {
     overrides.classRenamesFor(library.name).forEach((List<String> renamePair) {
       generator.renameSymbol(renamePair[0], renamePair[1]);
     });
-
-    return generator.toString();
   }
 
   String get libraryName {

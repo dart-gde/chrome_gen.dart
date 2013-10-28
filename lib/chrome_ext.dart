@@ -1,6 +1,8 @@
 /* This file has been generated - do not edit */
 
-/// A library to expose the Chrome ext APIs.
+/**
+ * A library to expose the Chrome ext APIs.
+ */
 library chrome_ext;
 
 export 'gen/alarms.dart';
@@ -15,9 +17,7 @@ export 'gen/debugger.dart';
 export 'gen/declarative_content.dart';
 export 'gen/declarative_web_request.dart';
 export 'gen/desktop_capture.dart';
-export 'gen/devtools_inspected_window.dart';
-export 'gen/devtools_network.dart';
-export 'gen/devtools_panels.dart';
+export 'gen/devtools.dart';
 export 'gen/downloads.dart';
 export 'gen/events.dart';
 export 'gen/extension.dart';
@@ -28,7 +28,7 @@ export 'gen/i18n.dart';
 export 'gen/identity.dart';
 export 'gen/idle.dart';
 export 'gen/infobars.dart';
-export 'gen/input_ime.dart';
+export 'gen/input.dart';
 export 'gen/location.dart';
 export 'gen/management.dart';
 export 'gen/notifications.dart';
@@ -45,9 +45,7 @@ export 'gen/runtime.dart';
 export 'gen/script_badge.dart';
 export 'gen/sessions.dart';
 export 'gen/storage.dart';
-export 'gen/system_cpu.dart';
-export 'gen/system_memory.dart';
-export 'gen/system_storage.dart';
+export 'gen/system.dart';
 export 'gen/tab_capture.dart';
 export 'gen/tabs.dart';
 export 'gen/top_sites.dart';

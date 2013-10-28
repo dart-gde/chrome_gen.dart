@@ -1,12 +1,88 @@
-/* This file has been generated from system_storage.idl - do not edit */
+/* This file has been generated - do not edit */
 
-library chrome.system_storage;
+library chrome.system;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.system.storage` namespace.
-final ChromeSystemStorage system_storage = ChromeSystemStorage._system_storage == null ? apiNotAvailable('chrome.system.storage') : new ChromeSystemStorage._();
+final ChromeSystem system = new ChromeSystem._();
 
+class ChromeSystem {
+  /// Accessor for the `chrome.system.cpu` namespace.
+  final ChromeSystemCpu cpu = ChromeSystemCpu._system_cpu == null ? apiNotAvailable('chrome.system.cpu') : new ChromeSystemCpu._();
+
+  /// Accessor for the `chrome.system.memory` namespace.
+  final ChromeSystemMemory memory = ChromeSystemMemory._system_memory == null ? apiNotAvailable('chrome.system.memory') : new ChromeSystemMemory._();
+
+  /// Accessor for the `chrome.system.storage` namespace.
+  final ChromeSystemStorage storage = ChromeSystemStorage._system_storage == null ? apiNotAvailable('chrome.system.storage') : new ChromeSystemStorage._();
+
+  ChromeSystem._();
+}
+
+class ChromeSystemCpu {
+  static final JsObject _system_cpu = chrome['system']['cpu'];
+
+  ChromeSystemCpu._();
+
+  /**
+   * Queries basic CPU information of the system.
+   */
+  Future<CpuInfo> getInfo() {
+    var completer = new ChromeCompleter<CpuInfo>.oneArg(_createCpuInfo);
+    _system_cpu.callMethod('getInfo', [completer.callback]);
+    return completer.future;
+  }
+}
+
+class CpuInfo extends ChromeObject {
+  CpuInfo({int numOfProcessors, String archName, String modelName}) {
+    if (numOfProcessors != null) this.numOfProcessors = numOfProcessors;
+    if (archName != null) this.archName = archName;
+    if (modelName != null) this.modelName = modelName;
+  }
+  CpuInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  int get numOfProcessors => proxy['numOfProcessors'];
+  set numOfProcessors(int value) => proxy['numOfProcessors'] = value;
+
+  String get archName => proxy['archName'];
+  set archName(String value) => proxy['archName'] = value;
+
+  String get modelName => proxy['modelName'];
+  set modelName(String value) => proxy['modelName'] = value;
+}
+
+CpuInfo _createCpuInfo(JsObject proxy) => proxy == null ? null : new CpuInfo.fromProxy(proxy);
+class ChromeSystemMemory {
+  static final JsObject _system_memory = chrome['system']['memory'];
+
+  ChromeSystemMemory._();
+
+  /**
+   * Get physical memory information.
+   */
+  Future<MemoryInfo> getInfo() {
+    var completer = new ChromeCompleter<MemoryInfo>.oneArg(_createMemoryInfo);
+    _system_memory.callMethod('getInfo', [completer.callback]);
+    return completer.future;
+  }
+}
+
+class MemoryInfo extends ChromeObject {
+  MemoryInfo({double capacity, double availableCapacity}) {
+    if (capacity != null) this.capacity = capacity;
+    if (availableCapacity != null) this.availableCapacity = availableCapacity;
+  }
+  MemoryInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  double get capacity => proxy['capacity'];
+  set capacity(double value) => proxy['capacity'] = jsify(value);
+
+  double get availableCapacity => proxy['availableCapacity'];
+  set availableCapacity(double value) => proxy['availableCapacity'] = jsify(value);
+}
+
+MemoryInfo _createMemoryInfo(JsObject proxy) => proxy == null ? null : new MemoryInfo.fromProxy(proxy);
 class ChromeSystemStorage {
   static final JsObject _system_storage = chrome['system']['storage'];
 

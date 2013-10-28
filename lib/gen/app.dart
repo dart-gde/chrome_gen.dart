@@ -1,12 +1,67 @@
-/* This file has been generated from app_window.idl - do not edit */
+/* This file has been generated - do not edit */
 
-library chrome.app_window;
+library chrome.app;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.app.window` namespace.
-final ChromeAppWindow app_window = ChromeAppWindow._app_window == null ? apiNotAvailable('chrome.app.window') : new ChromeAppWindow._();
+final ChromeApp app = new ChromeApp._();
 
+class ChromeApp {
+  /// Accessor for the `chrome.app.runtime` namespace.
+  final ChromeAppRuntime runtime = ChromeAppRuntime._app_runtime == null ? apiNotAvailable('chrome.app.runtime') : new ChromeAppRuntime._();
+
+  /// Accessor for the `chrome.app.window` namespace.
+  final ChromeAppWindow window = ChromeAppWindow._app_window == null ? apiNotAvailable('chrome.app.window') : new ChromeAppWindow._();
+
+  ChromeApp._();
+}
+
+class ChromeAppRuntime {
+  static final JsObject _app_runtime = chrome['app']['runtime'];
+
+  ChromeAppRuntime._();
+
+  Stream<LaunchData> get onLaunched => _onLaunched.stream;
+
+  final ChromeStreamController<LaunchData> _onLaunched =
+      new ChromeStreamController<LaunchData>.oneArg(_app_runtime['onLaunched'], _createLaunchData);
+
+  Stream get onRestarted => _onRestarted.stream;
+
+  final ChromeStreamController _onRestarted =
+      new ChromeStreamController.noArgs(_app_runtime['onRestarted']);
+}
+
+class LaunchItem extends ChromeObject {
+  LaunchItem({var entry, String type}) {
+    if (entry != null) this.entry = entry;
+    if (type != null) this.type = type;
+  }
+  LaunchItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  dynamic get entry => proxy['entry'];
+  set entry(var value) => proxy['entry'] = jsify(value);
+
+  String get type => proxy['type'];
+  set type(String value) => proxy['type'] = value;
+}
+
+class LaunchData extends ChromeObject {
+  LaunchData({String id, LaunchItem items}) {
+    if (id != null) this.id = id;
+    if (items != null) this.items = items;
+  }
+  LaunchData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
+
+  LaunchItem get items => _createLaunchItem(proxy['items']);
+  set items(LaunchItem value) => proxy['items'] = jsify(value);
+}
+
+LaunchData _createLaunchData(JsObject proxy) => proxy == null ? null : new LaunchData.fromProxy(proxy);
+LaunchItem _createLaunchItem(JsObject proxy) => proxy == null ? null : new LaunchItem.fromProxy(proxy);
 class ChromeAppWindow {
   static final JsObject _app_window = chrome['app']['window'];
 
@@ -33,9 +88,14 @@ class ChromeAppWindow {
    * Returns:
    * Called in the creating window (parent) before the load event is called in
    * the created window (child). The parent can set fields or functions on the
-   * child usable from onload. E.g. background.js:<br> `function(created_window)
-   * { created_window.contentWindow.foo = function () { }; };`
-   * <br>window.js:<br> `window.onload = function () { foo(); }`
+   * child usable from onload. E.g. background.js:
+   * 
+   * `function(created_window) { created_window.contentWindow.foo = function ()
+   * { }; };`
+   * 
+   * window.js:
+   * 
+   *  `window.onload = function () { foo(); }`
    */
   Future<AppWindow> create(String url, [CreateWindowOptions options]) {
     var completer = new ChromeCompleter<AppWindow>.oneArg(_createAppWindow);

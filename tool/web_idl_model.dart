@@ -677,6 +677,8 @@ String cleanDocComments(String str) {
   str = str.replaceAll(new RegExp('\n+'), '\n\n');
   str = str.replaceAll(new RegExp('(\n )+'), '\n');
 
+  str = str.replaceAll('<br>', '\n\n');
+
   // |foo| ==> [foo]
   str = str.replaceAllMapped(
       new RegExp(r"\|([\.\w]*)\|\s*:"),
