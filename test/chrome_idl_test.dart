@@ -7,6 +7,35 @@ import '../tool/chrome_idl_model.dart';
 
 ChromeIDLParser chromeIDLParser;
 
+void main() {
+  setUp(() {
+    chromeIDLParser = new ChromeIDLParser();
+  });
+
+  group('ChromeIDLParser.docString.parse', chromeIDLParserDocStringTests);
+  group('ChromeIDLParser.attributeDeclaration.parse',
+      chromeIDLParserAttributeDeclarationTests);
+  group('ChromeIDLParser.enumBody.parse', chromeIDLParserEnumBodyTests);
+  group('ChromeIDLParser.enumDeclaration.parse',
+      chromeIDLParserEnumDeclarationTests);
+  group('ChromeIDLParser.callbackParameterType.parse',
+      chromeIDLParserCallbackParameterTypeTests);
+  group('ChromeIDLParser.callbackParameters.parse',
+      chromeIDLParserCallbackParameterTests);
+  group('ChromeIDLParser.callbackMethod.parse',
+        chromeIDLParserCallbackMethodTests);
+  group('ChromeIDLParser.callbackDeclaration.parse',
+        chromeIDLParserCallbackDeclarationTests);
+  group('ChromeIDLParser.fieldType.parse',
+        chromeIDLParserFieldTypeTests);
+  group('ChromeIDLParser.fieldMethodParameters.parse',
+        chromeIDLParserFieldMethodParametersTests);
+  group('ChromeIDLParser.typeBody.parse',
+        chromeIDLParserTypeBodyTests);
+  group('ChromeIDLParser.typeDeclaration.parse',
+        chromeIDLParserTypeDeclarationTests);
+}
+
 void chromeIDLParserDocStringTests() {
   test('comment with **', () {
 
@@ -997,31 +1026,3 @@ dictionary GetServicesOptions {
   });
 }
 
-void main() {
-  setUp(() {
-    chromeIDLParser = new ChromeIDLParser();
-  });
-
-  group('ChromeIDLParser.docString.parse', chromeIDLParserDocStringTests);
-  group('ChromeIDLParser.attributeDeclaration.parse',
-      chromeIDLParserAttributeDeclarationTests);
-  group('ChromeIDLParser.enumBody.parse', chromeIDLParserEnumBodyTests);
-  group('ChromeIDLParser.enumDeclaration.parse',
-      chromeIDLParserEnumDeclarationTests);
-  group('ChromeIDLParser.callbackParameterType.parse',
-      chromeIDLParserCallbackParameterTypeTests);
-  group('ChromeIDLParser.callbackParameters.parse',
-      chromeIDLParserCallbackParameterTests);
-  group('ChromeIDLParser.callbackMethod.parse',
-        chromeIDLParserCallbackMethodTests);
-  group('ChromeIDLParser.callbackDeclaration.parse',
-        chromeIDLParserCallbackDeclarationTests);
-  group('ChromeIDLParser.fieldType.parse',
-        chromeIDLParserFieldTypeTests);
-  group('ChromeIDLParser.fieldMethodParameters.parse',
-        chromeIDLParserFieldMethodParametersTests);
-  group('ChromeIDLParser.typeBody.parse',
-        chromeIDLParserTypeBodyTests);
-  group('ChromeIDLParser.typeDeclaration.parse',
-        chromeIDLParserTypeDeclarationTests);
-}
