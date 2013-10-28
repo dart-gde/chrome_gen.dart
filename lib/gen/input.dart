@@ -1,17 +1,23 @@
-/* This file has been generated from input_ime.json - do not edit */
+/* This file has been generated - do not edit */
+
+library chrome.input;
+
+import '../src/common.dart';
+
+final ChromeInput input = new ChromeInput._();
+
+class ChromeInput {
+  /// Accessor for the `chrome.input.ime` namespace.
+  final ChromeInputIme ime = ChromeInputIme._input_ime == null ? apiNotAvailable('chrome.input.ime') : new ChromeInputIme._();
+
+  ChromeInput._();
+}
 
 /**
  * Use the `chrome.input.ime` API to implement a custom IME for Chrome OS. This
  * allows your extension to handle keystrokes, set the composition, and manage
  * the candidate window.
  */
-library chrome.input_ime;
-
-import '../src/common.dart';
-
-/// Accessor for the `chrome.input.ime` namespace.
-final ChromeInputIme input_ime = ChromeInputIme._input_ime == null ? apiNotAvailable('chrome.input.ime') : new ChromeInputIme._();
-
 class ChromeInputIme {
   static final JsObject _input_ime = chrome['input']['ime'];
 

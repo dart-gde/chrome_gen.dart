@@ -1,11 +1,12 @@
 /* This file has been generated - do not edit */
 
-/// A library to expose the Chrome app APIs.
+/**
+ * A library to expose the Chrome app APIs.
+ */
 library chrome_app;
 
 export 'gen/alarms.dart';
-export 'gen/app_runtime.dart';
-export 'gen/app_window.dart';
+export 'gen/app.dart';
 export 'gen/audio.dart';
 export 'gen/bluetooth.dart';
 export 'gen/context_menus.dart';
@@ -25,10 +26,7 @@ export 'gen/serial.dart';
 export 'gen/socket.dart';
 export 'gen/storage.dart';
 export 'gen/sync_file_system.dart';
-export 'gen/system_cpu.dart';
-export 'gen/system_display.dart';
-export 'gen/system_memory.dart';
-export 'gen/system_storage.dart';
+export 'gen/system.dart';
 export 'gen/tts.dart';
 export 'gen/types.dart';
 export 'gen/usb.dart';

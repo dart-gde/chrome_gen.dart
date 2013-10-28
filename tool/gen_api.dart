@@ -10,6 +10,7 @@ import 'json_parser.dart' as json_parser;
 import 'web_idl_model.dart' as model_idl;
 import 'overrides.dart';
 import 'web_idl_parser.dart';
+import 'src/src_gen.dart';
 import 'src/utils.dart';
 
 void main() {
@@ -21,14 +22,14 @@ void main() {
     return;
   }
 
-  if(results['out'] == null) {
+  if (results['out'] == null) {
     print("You must provide a value for 'out'.");
     _printUsage(parser);
     return;
   }
 
   Overrides overrides = null;
-  if(results['overrides'] != null) {
+  if (results['overrides'] != null) {
     var overridesFile = new File(results['overrides']);
     overrides = new Overrides.fromFile(overridesFile);
   }
@@ -37,46 +38,55 @@ void main() {
     print(record.message);
   });
 
-  GenApiFile generator = new GenApiFile(
-      new File(results.rest.first), new File(results['out']), overrides);
-  generator.generate();
+  GenApiFile generator = new GenApiFile(new File(results.rest.first), overrides);
+  generator.generate(new File(results['out']));
 }
 
 class GenApiFile {
   final File inFile;
-  final File outFile;
   final Overrides overrides;
 
-  GenApiFile(this.inFile, this.outFile, [Overrides overrides]) :
-    this.overrides = (overrides == null) ? new Overrides() : overrides {
+  ChromeLibrary _chromeLib;
+  Backend _backend;
+
+  GenApiFile(this.inFile, [Overrides overrides, DartGenerator generator]) :
+      this.overrides = (overrides == null) ? new Overrides() : overrides {
     if (!inFile.path.endsWith(".json") && !inFile.path.endsWith(".idl")) {
       throw new Exception('format not understood: ${inFile.path}');
     }
-  }
-
-  void generate() {
-    _logger.info("parsing ${inFile.path}...");
-
-    ChromeLibrary chromeLib;
-
-    String fileName = getFileName(inFile);
 
     if (inFile.path.endsWith(".json")) {
       json_model.JsonNamespace namespace = json_parser.parse(
           inFile.readAsStringSync());
-      chromeLib = json_model.convert(namespace);
+      _chromeLib = json_model.convert(namespace);
     } else if (inFile.path.endsWith(".idl")) {
       WebIdlParser webIdlParser = new WebIdlParser.withCollector(
           new model_idl.IDLCollectorChrome());
       webIdlParser.start.parse(inFile.readAsStringSync());
-      chromeLib = model_idl.convert(webIdlParser.collector);
+      _chromeLib = model_idl.convert(webIdlParser.collector);
+    } else {
+      throw new ArgumentError('file type unsupported: ${inFile}');
     }
 
-    outFile.directory.createSync();
+    _backend = new Backend.createDefault(_chromeLib, overrides, generator);
+  }
 
-    Backend backend = new Backend.createDefault(overrides);
-    outFile.writeAsStringSync(
-        backend.generate(chromeLib, sourceFileName: fileName));
+  void generate(File outFile) {
+    _logger.info("parsing ${inFile.path}...");
+
+    String fileName = getFileName(inFile);
+
+    outFile.parent.createSync();
+
+    outFile.writeAsStringSync(_backend.generate(sourceFileName: fileName));
+  }
+
+  void generateAccessor() {
+    _backend.generateAccessor();
+  }
+
+  void generateContent(bool printClassDocs, Set createdFactories) {
+    _backend.generateContent(printClassDocs, createdFactories);
   }
 }
 

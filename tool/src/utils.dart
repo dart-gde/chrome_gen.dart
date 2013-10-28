@@ -21,17 +21,6 @@ class Pair<E, F> {
   int get hashCode => first.hashCode ^ last.hashCode;
 }
 
-String convertJSLibNameToFileName(String jsLibName) {
-  jsLibName = jsLibName.replaceAll('devtools.', 'devtools_');
-  jsLibName = jsLibName.replaceAll('.', '_');
-
-  jsLibName = jsLibName.replaceAllMapped(
-      new RegExp(r"[A-Z]"),
-      (Match m) => "_${m.group(0).toLowerCase()}");
-
-  return jsLibName;
-}
-
 /// foo.bar ==> fooBar
 String toCamelCase(String str) {
   return str.replaceAllMapped(
