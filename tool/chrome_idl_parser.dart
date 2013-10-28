@@ -339,7 +339,7 @@ class ChromeIDLParser extends LanguageParsers {
   /**
    * Parser all documentation strings and spaces between.
    */
-  Parser get docString => lexeme(_docString.many);
+  Parser get docString => lexeme(_docString).many;
   Parser get _docString =>
         everythingBetween(string('//'), string('\n'))
       | everythingBetween(string('/**'), string('*/'))

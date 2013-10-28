@@ -889,8 +889,8 @@ void chromeIDLParserTypeDeclarationTests() {
     IDLTypeDeclaration typeDeclaration = chromeIDLParser.typeDeclaration
         .parse("""// Options for the getServices function.
 dictionary GetServicesOptions {
-  // The address of the device to inquire about. |deviceAddress| should be
-// blahlbah
+  // The address of the remote device that the data should be associated
+  // with. |deviceAddress| should be in the format 'XX:XX:XX:XX:XX:XX'.
   DOMString deviceAddress;
 };
 """);
