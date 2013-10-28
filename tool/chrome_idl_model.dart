@@ -26,11 +26,12 @@ class IDLNamespaceDeclaration {
    * Namespace documentation
    */
   final List<String> documentation;
-  IDLNamespaceDeclaration(this.name, this.attribute, this.body,
-      this.documentation);
+
+  IDLNamespaceDeclaration(this.name, this.body, {this.attribute,
+      this.documentation});
 
   String toString() =>
-      "IDLNamespaceDeclaration($name, $attribute, $body, $documentation)";
+      "IDLNamespaceDeclaration($name, $body, $attribute, $documentation)";
 }
 
 // interface Functions
@@ -39,6 +40,7 @@ class IDLFunctionDeclaration {
   final IDLAttributeDeclaration attribute;
   final List<IDLMethod> methods;
   final List<String> documentation;
+  IDLFunctionDeclaration(this.methods, {this.attribute, this.documentation});
   String toString() => "IDLFunctionDeclaration()";
 }
 
@@ -63,6 +65,7 @@ class IDLEventDeclaration {
   final IDLAttributeDeclaration attribute;
   final List<IDLMethod> methods;
   final List<String> documentation;
+  IDLEventDeclaration(this.methods, {this.attribute, this.documentation});
   String toString() => "IDLEventDeclaration()";
 }
 

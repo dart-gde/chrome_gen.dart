@@ -1,152 +1,11 @@
 library chrome_idl_parser;
 
 import 'package:parsers/parsers.dart';
-import 'package:persistent/persistent.dart';
 
-import 'chrome_idl_model.dart';
+import 'chrome_idl_mapping.dart';
 
-final reservedNames = ["enum", "callback", "optional", "object",
-                       "static", "dictionary"];
-
-/**
- * Map the namespace declaration parse to a [IDLNamespaceDeclaration]
- */
-// TODO: not finished mapping.
-IDLNamespaceDeclaration idlNamespaceDeclarationMapping(
-  List<String> doc, attribute, _, String name, List body, __) =>
-    new IDLNamespaceDeclaration(name, attribute, body, doc);
-
-/**
- * Mapping of callback declaration.
- */
-IDLCallbackDeclaration idlCallbackDeclarationMapping(
-  List<String> documentation, _, String name, __,
-  List<IDLParameter> parameters, ___) =>
-    new IDLCallbackDeclaration(name, parameters, documentation: documentation);
-
-IDLTypeDeclaration idlTypeDeclarationMapping(List<String> documentation,
-  Option attributeMaybe, _, String name, List body, __)  {
-  IDLAttributeDeclaration attribute =
-      attributeMaybe.isDefined ? attributeMaybe.value : null;
-  final List<IDLField> members = body.where((e) => e is IDLField).toList();
-  final List<IDLMethod> methods = body.where((e) => e is IDLMethod).toList();
-  return new IDLTypeDeclaration(name, members, methods: methods,
-      attribute: attribute, documentation: documentation);
-}
-
-IDLMethod idlMethodParameterMapping(List<String> documentation,
-  Option<IDLAttributeDeclaration> attribute, _, IDLType type, String name,
-  List<IDLParameter> parameters, ___) =>
-    new IDLMethod(name, type, parameters,
-        attribute: attribute.isDefined ? attribute.value : null,
-        documentation: documentation);
-
-/**
- * Mapping of parameter with optional flag.
- */
-IDLParameter idlParameterMapping(String name, IDLType type,
-  bool isOptional) =>
-    new IDLParameter(name, type, isOptional: isOptional);
-
-/*
- * Mapping the type of an attribute.
- */
-IDLType _idlAttributeTypeMapping(IDLAttributeDeclaration attribute) {
-  IDLAttributeTypeEnum t = attribute.attributes[0].attributeType;
-  if (t != IDLAttributeTypeEnum.INSTANCE_OF) {
-    throw new ArgumentError(
-        "attribute was not IDLAttributeTypeEnum.INSTANCE_OF");
-  }
-  return new IDLType(attribute.attributes[0].attributeValue);
-}
-
-/**
- * Mapping of parameter with attribute based type specificed.
- */
-IDLParameter idlParameterAttributeBasedTypeMapping(String name,
-  IDLAttributeDeclaration attribute) {
-  return new IDLParameter(name,
-      _idlAttributeTypeMapping(attribute),
-      attribute: attribute);
-}
-
-/**
- * Mapping of field based type specificed.
- */
-IDLField idlFieldBasedTypeMapping(List<String> documentation,
-  Option attributeMaybe, IDLType type, Option<String> optional, String name,
-  _) => new IDLField(name, type, isOptional: optional.isDefined,
-        documentation: documentation,
-        attribute: attributeMaybe.isDefined ? attributeMaybe.value : null);
-
-/**
- * Mapping of field with attribute based type specificed.
- */
-IDLField idlFieldAttributeBasedTypeMapping(List<String> documentation,
-  IDLAttributeDeclaration attribute, __, String name, ___) =>
-      new IDLField(name, _idlAttributeTypeMapping(attribute),
-          attribute: attribute, documentation: documentation);
-/**
- * Mapping of type.
- */
-IDLType idlTypeMapping(String name, bool isArray) =>
-    new IDLType(name, isArray: isArray);
-
-/**
- * Method to help find IDLAttributeTypeEnum by String name.
- */
-IDLAttributeTypeEnum _resolveEnum(String name) {
-  var attributeEnum = IDLAttributeTypeEnum.values.singleWhere(
-      (IDLAttributeTypeEnum e) {
-        return e.type == name;
-      });
-
-  if (attributeEnum == null) {
-    throw new ArgumentError("$name cannot be resolved IDLAttributeTypeEnum");
-  }
-
-  return attributeEnum;
-}
-
-/**
- * Enum declaration
- */
-IDLEnumDeclaration idlEnumDeclarationMapping(List<String> documentation,
-  Option attribute, _, String name, List<IDLEnumValue> enumValues, __) =>
-      new IDLEnumDeclaration(name, enumValues,
-          attribute: attribute.isDefined ? attribute.value : null,
-          documentation: documentation);
-
-/**
- * Enum value
- */
-IDLEnumValue idlEnumValueMapping(List<String> documentation, String name) =>
-    new IDLEnumValue(name, documentation: documentation);
-
-/**
- * Attribute declaration
- */
-IDLAttributeDeclaration idlAttributeDeclarationMapping(List attributes) =>
-  new IDLAttributeDeclaration(attributes);
-
-/**
- *  Attribute where [name=value]
- */
-IDLAttribute idlAttributeAssignedValueMapping(String name, _, String value) =>
-    new IDLAttribute(_resolveEnum(name), attributeValue: value);
-
-/**
- *  Attribute where [name=(1,2)]
- */
-IDLAttribute idlAttributeAssignedMultiValueMapping(
-                                           String name, _, List<int> values) =>
-    new IDLAttribute(_resolveEnum(name), attributeValues: values);
-
-/**
- * Attribute where [name]
- */
-IDLAttribute idlAttributeMapping(String name) =>
-    new IDLAttribute(_resolveEnum(name));
+final reservedNames = ["enum", "callback", "optional", "object", "static",
+                       "dictionary", "interface", "namespace"];
 
 class ChromeIDLParser extends LanguageParsers {
   ChromeIDLParser() : super(reservedNames: reservedNames,
@@ -158,14 +17,15 @@ class ChromeIDLParser extends LanguageParsers {
                       commentEnd: "",
                       commentLine: "");
 
+  Parser get namespaceIdentifier => identifier.sepBy(dot) | identifier;
   /**
    * Parse the namespace.
    */
   Parser get namespaceDeclaration =>
       docString
-      + attributeDeclaration
+      + attributeDeclaration.maybe
       + reserved["namespace"]
-      + identifier
+      + namespaceIdentifier
       + braces(namespaceBody)
       + semi
       ^ idlNamespaceDeclarationMapping;
@@ -177,22 +37,48 @@ class ChromeIDLParser extends LanguageParsers {
   Parser get namespaceBody => _namespaceBody.many;
 
   Parser get _namespaceBody => functionDeclaration
-                             | typeDeclaration
-                             | eventDeclaration
-                             | callbackDeclaration
+                               | typeDeclaration
+                               | eventDeclaration
+                               | _callbackDeclaration
+                               // TODO: remove _callbackDeclaration.many
+                               // it causes inf rec.
+//                                | callbackDeclaration;
                              | enumDeclaration;
 
   /**
    * Parse the interface Functions.
    */
-  Parser get functionDeclaration => methods.many;
-  Parser get methods => _methods;
-  Parser get _methods => null;
+  Parser get functionDeclaration =>
+      (docString
+      + attributeDeclaration.maybe
+      + reserved["interface"]
+      + symbol("Functions")
+      + braces(methods)
+      + semi ^ idlFunctionDeclarationMapping);
+
+  Parser get methods => _methods.many;
+
+  // TODO: merge _methods with _typeBody implementation
+  Parser get _methods =>
+      (docString
+      + attributeDeclaration.maybe
+      + reserved["static"]
+      + fieldType
+      + identifier
+      + parens(fieldMethodParameters.sepBy(comma))
+      + semi
+      ^ idlMethodParameterMapping);
 
   /**
    * Parse the interface Events.
    */
-  Parser get eventDeclaration => methods.many;
+  Parser get eventDeclaration =>
+      (docString
+      + attributeDeclaration.maybe
+      + reserved["interface"]
+      + symbol("Events")
+      + braces(methods)
+      + semi ^ idlEventDeclarationMapping);
 
   /**
    * Parse the dictionary definitions.
@@ -239,9 +125,23 @@ class ChromeIDLParser extends LanguageParsers {
         ^ (attribute, _, name) =>
             idlParameterAttributeBasedTypeMapping(name, attribute))
         |
+        // GetResourcesCallback callback
+        // TODO: we could use this to resolve the callback later on
+        // via symbol table if needed.
+        (fieldType + reserved["callback"] ^ (type, name) =>
+            idlParameterMapping(name, type, false, true))
+        |
+        // optional ResultCallback callback
+        (reserved["optional"] + fieldType + reserved["callback"]
+            ^ (_, type, name) => idlParameterMapping(name, type, true, true))
+        |
+        // optional DOMString responseUrl
+        (reserved["optional"] + fieldType + identifier
+            ^ (_, type, name) => idlParameterMapping(name, type, true, false))
+        |
         // DOMString responseUrl or DOMString[] urls
         (fieldType + identifier ^ (type, name) =>
-            idlParameterMapping(name, type, false));
+            idlParameterMapping(name, type, false, false));
 
   // TODO: refactor with callbackParameterType
   Parser get fieldType =>
@@ -249,8 +149,17 @@ class ChromeIDLParser extends LanguageParsers {
       (identifier + symbol('[') + symbol(']') ^ (name, __, ___) =>
           idlTypeMapping(name, true))
       |
+      //static void getFileStatuses(object[] fileEntries,
+      //                            GetFileStatusesCallback callback);
+      (reserved["object"] + symbol('[') + symbol(']') ^ (name, __, ___) =>
+          idlTypeMapping(name, true))
+      |
       // Device
-      (identifier ^ (name) => idlTypeMapping(name, false));
+      (identifier ^ (name) => idlTypeMapping(name, false))
+      |
+      // object
+      (reserved["object"] ^ (name) => idlTypeMapping(name, false));
+
 
   /**
    * Parse the callback definitions.
@@ -283,21 +192,35 @@ class ChromeIDLParser extends LanguageParsers {
           ^ (attribute, __, name) =>
               idlParameterAttributeBasedTypeMapping(name, attribute))
       |
+      (attributeDeclaration
+      + reserved["optional"]
+      + callbackParameterType
+      + identifier
+      ^ idlOptionalParameterAttributeRemapTypeMapping)
+      |
       // optional DOMString responseUrl
       (reserved["optional"] + callbackParameterType + identifier
-          ^ (_, type, name) => idlParameterMapping(name, type, true))
+          ^ (_, type, name) => idlParameterMapping(name, type, true, false))
       |
       //  Device device or Device[] result
       (callbackParameterType + identifier
-          ^ (type, name) => idlParameterMapping(name, type, false));
+          ^ (type, name) => idlParameterMapping(name, type, false, false));
 
   Parser get callbackParameterType =>
       // Device[]
       (identifier + symbol('[') + symbol(']') ^ (name, __, ___) =>
           idlTypeMapping(name, true))
       |
+      //static void getFileStatuses(object[] fileEntries,
+      //                            GetFileStatusesCallback callback);
+      (reserved["object"] + symbol('[') + symbol(']') ^ (name, __, ___) =>
+          idlTypeMapping(name, true))
+      |
       // Device
-      (identifier ^ (name) => idlTypeMapping(name, false));
+      (identifier ^ (name) => idlTypeMapping(name, false))
+      |
+      // object
+      (reserved["object"] ^ (name) => idlTypeMapping(name, false));
 
   /**
    * Parse the enum declarations.
@@ -330,6 +253,10 @@ class ChromeIDLParser extends LanguageParsers {
       // Attribute where name=value
       (identifier + symbol('=') + identifier
       ^ idlAttributeAssignedValueMapping)
+      // Attribute where [maxListeners=1]
+      | (identifier + symbol('=') + natural
+      ^ (name, _, number) =>
+          idlAttributeAssignedValueMapping(name, _, number.toString()))
       // Attribute where [name=(1,2)]
       | (identifier + symbol('=') + parens(intLiteral.sepBy(comma))
       ^ idlAttributeAssignedMultiValueMapping)
