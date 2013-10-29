@@ -20,7 +20,7 @@ void modelIdlParseTests() {
 
     for (File file in idlFiles) {
       // skip '_*.idl' idl files
-      if (!file.path.contains('/_')) {
+      if (!file.path.contains('/_') && !file.path.contains('test_presubmit')) {
         test(file.path, () {
           WebIdlParser webIdlParser =
               new WebIdlParser.withCollector(new model_idl.IDLCollectorChrome());
@@ -207,11 +207,11 @@ void modelIdlDictionaryTypeTests() {
     var chromeLibrary = model_idl.convert(webIdlParser.collector);
     expect(chromeLibrary, isNotNull);
 
-    // Test that AppWindow type has 18 functions. Count could change
+    // Test that AppWindow type has 20 functions. Count could change
     // if app_window.idl is updated.
     model_idl.IDLDeclaredType appWindowType =
         idlNamespace.declaredTypes.singleWhere((e) => e.name == "AppWindow");
-    expect(appWindowType.functions.length, 18);
+    expect(appWindowType.functions.length, 20);
   });
 }
 

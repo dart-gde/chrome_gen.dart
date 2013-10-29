@@ -1,7 +1,12 @@
-/* This file has been generated from desktop_capture.idl - do not edit */
+/* This file has been generated from desktop_capture.json - do not edit */
 
+/**
+ * Desktop Capture API that can be used to capture content of screen, individual
+ * windows or tabs.
+ */
 library chrome.desktopCapture;
 
+import 'tabs.dart';
 import '../src/common.dart';
 
 /// Accessor for the `chrome.desktopCapture` namespace.
@@ -15,40 +20,37 @@ class ChromeDesktopCapture {
   /**
    * Shows desktop media picker UI with the specified set of sources.
    * 
-   * [sources]: Set of sources that should be shown to the user.
+   * [sources] Set of sources that should be shown to the user.
    * 
-   * [origin]: Optional origin of the page for which the stream is created. If
-   * not specified then the resulting stream can be used only the calling
-   * extension, otherwise the stream can be used only by a page with the
-   * specified origin.
+   * [targetTab] Optional tab for which the stream is created. If not specified
+   * then the resulting stream can be used only by the calling extension,
+   * otherwise the stream can be used only by the specified tab. If the tab's
+   * security origin changes before this function returns, the call may fail.
    * 
    * Returns:
-   * 
-   * [streamId]: An opaque string that can be passed to `getUserMedia()` API to
-   * generate media stream that corresponds to the source selected by the user.
-   * If user didn't select any source (i.e. canceled the prompt) then the
-   * callback is called with an empty `streamId`.
+   * An id that can be passed to cancelChooseDesktopMedia() in case the prompt
+   * need to be canceled.
    */
-  Future<String> chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
-    var completer = new ChromeCompleter<String>.oneArg();
-    _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), origin, completer.callback]);
-    return completer.future;
+  int chooseDesktopMedia(List<DesktopCaptureSourceType> sources, dynamic callback, [Tab targetTab]) {
+    return _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), jsify(callback)]);
+  }
+
+  /**
+   * Hides desktop media picker dialog shown by chooseDesktopMedia().
+   * 
+   * [desktopMediaRequestId] Id returned by chooseDesktopMedia()
+   */
+  void cancelChooseDesktopMedia(int desktopMediaRequestId) {
+    _desktopCapture.callMethod('cancelChooseDesktopMedia', [desktopMediaRequestId]);
   }
 }
 
 /**
- * Copyright 2013 The Chromium Authors. All rights reserved. Use of this source
- * code is governed by a BSD-style license that can be found in the LICENSE
- * file. Desktop Capture API that can be used to capture content of screen or
- * individual windows or tabs. Enum used to define set of desktop media sources
- * used in chooseDesktopMedia().
+ * Enum used to define set of desktop media sources used in
+ * chooseDesktopMedia().
+ * enum of `screen`, `window`, `tab`
  */
-class DesktopCaptureSourceType extends ChromeEnum {
-  static const DesktopCaptureSourceType SCREEN = const DesktopCaptureSourceType._('screen');
-  static const DesktopCaptureSourceType WINDOW = const DesktopCaptureSourceType._('window');
-  static const DesktopCaptureSourceType TAB = const DesktopCaptureSourceType._('tab');
-
-  static const List<DesktopCaptureSourceType> VALUES = const[SCREEN, WINDOW, TAB];
-
-  const DesktopCaptureSourceType._(String str): super(str);
+class DesktopCaptureSourceType extends ChromeObject {
+  DesktopCaptureSourceType();
+  DesktopCaptureSourceType.fromProxy(JsObject proxy): super.fromProxy(proxy);
 }

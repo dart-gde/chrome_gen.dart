@@ -64,6 +64,18 @@ class ChromeIdentity {
     _identity.callMethod('launchWebAuthFlow', [jsify(details), completer.callback]);
     return completer.future;
   }
+
+  Stream<OnSignInChangedEvent> get onSignInChanged => _onSignInChanged.stream;
+
+  final ChromeStreamController<OnSignInChangedEvent> _onSignInChanged =
+      new ChromeStreamController<OnSignInChangedEvent>.twoArgs(_identity['onSignInChanged'], _createOnSignInChangedEvent);
+}
+
+class OnSignInChangedEvent {
+  final AccountInfo account;
+  final bool signedIn;
+
+  OnSignInChangedEvent(this.account, this.signedIn);
 }
 
 class TokenDetails extends ChromeObject {
@@ -99,3 +111,17 @@ class WebAuthFlowDetails extends ChromeObject {
   bool get interactive => proxy['interactive'];
   set interactive(bool value) => proxy['interactive'] = value;
 }
+
+class AccountInfo extends ChromeObject {
+  AccountInfo({String id}) {
+    if (id != null) this.id = id;
+  }
+  AccountInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
+}
+
+OnSignInChangedEvent _createOnSignInChangedEvent(JsObject account, bool signedIn) =>
+    new OnSignInChangedEvent(_createAccountInfo(account), signedIn);
+AccountInfo _createAccountInfo(JsObject proxy) => proxy == null ? null : new AccountInfo.fromProxy(proxy);

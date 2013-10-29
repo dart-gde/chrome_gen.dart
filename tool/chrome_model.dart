@@ -65,12 +65,21 @@ class ChromeLibrary extends ChromeElement {
 }
 
 class ChromeProperty extends ChromeElement {
-  final String name;
+  String name;
+  /// This is generally always [name], except in the case where the idl name
+  /// starts with an underscore.
+  String idlName;
+
   ChromeType type;
 
   bool nodoc = false;
 
-  ChromeProperty(this.name, this.type);
+  ChromeProperty(this.name, this.type) {
+    idlName = name;
+    if (name.startsWith('_')) {
+      name = name.substring(1);
+    }
+  }
 
   String getDescription() {
     if (documentation == null) {
