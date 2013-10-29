@@ -50,7 +50,7 @@ class ChromeExtension extends ChromeApi {
    * no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendRequest(dynamic request, [String extensionId]) {
-    if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+    if (_extension == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _extension.callMethod('sendRequest', [extensionId, jsify(request), completer.callback]);
@@ -68,7 +68,7 @@ class ChromeExtension extends ChromeApi {
    * The fully-qualified URL to the resource.
    */
   String getURL(String path) {
-    if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+    if (_extension == null) _throwNotAvailable();
 
     return _extension.callMethod('getURL', [path]);
   }
@@ -81,7 +81,7 @@ class ChromeExtension extends ChromeApi {
    * Array of global objects
    */
   List<Window> getViews([Map fetchProperties]) {
-    if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+    if (_extension == null) _throwNotAvailable();
 
     var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
     return ret;
@@ -93,7 +93,7 @@ class ChromeExtension extends ChromeApi {
    * background page.
    */
   Window getBackgroundPage() {
-    if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+    if (_extension == null) _throwNotAvailable();
 
     return _createWindow(_extension.callMethod('getBackgroundPage'));
   }
@@ -108,7 +108,7 @@ class ChromeExtension extends ChromeApi {
    * Array of global window objects
    */
   List<Window> getExtensionTabs([int windowId]) {
-    if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+    if (_extension == null) _throwNotAvailable();
 
     var ret = _extension.callMethod('getExtensionTabs', [windowId]);
     return ret;
@@ -122,7 +122,7 @@ class ChromeExtension extends ChromeApi {
    * True if the extension has access to Incognito mode, false otherwise.
    */
   Future<bool> isAllowedIncognitoAccess() {
-    if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+    if (_extension == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
@@ -137,7 +137,7 @@ class ChromeExtension extends ChromeApi {
    * True if the extension can access the 'file://' scheme, false otherwise.
    */
   Future<bool> isAllowedFileSchemeAccess() {
-    if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+    if (_extension == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
@@ -150,7 +150,7 @@ class ChromeExtension extends ChromeApi {
    * Extension Gallery.
    */
   void setUpdateUrlData(String data) {
-    if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+    if (_extension == null) _throwNotAvailable();
 
     _extension.callMethod('setUpdateUrlData', [data]);
   }
@@ -170,6 +170,10 @@ class ChromeExtension extends ChromeApi {
 
   final ChromeStreamController<OnRequestExternalEvent> _onRequestExternal =
       new ChromeStreamController<OnRequestExternalEvent>.threeArgs(_extension, 'onRequestExternal', _createOnRequestExternalEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.extension' is not available");
+  }
 }
 
 /**

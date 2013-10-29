@@ -24,7 +24,7 @@ class ChromeAudio extends ChromeApi {
    * [inputInfo] null
    */
   Future<GetInfoResult> getInfo() {
-    if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+    if (_audio == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<GetInfoResult>.twoArgs(GetInfoResult._create);
     _audio.callMethod('getInfo', [completer.callback]);
@@ -35,7 +35,7 @@ class ChromeAudio extends ChromeApi {
    * Select a subset of audio devices as active.
    */
   Future setActiveDevices(String ids) {
-    if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+    if (_audio == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _audio.callMethod('setActiveDevices', [ids, completer.callback]);
@@ -46,7 +46,7 @@ class ChromeAudio extends ChromeApi {
    * Sets the properties for the input or output device.
    */
   Future setProperties(String id, DeviceProperties properties) {
-    if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+    if (_audio == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _audio.callMethod('setProperties', [id, jsify(properties), completer.callback]);
@@ -57,6 +57,10 @@ class ChromeAudio extends ChromeApi {
 
   final ChromeStreamController _onDeviceChanged =
       new ChromeStreamController.noArgs(_audio, 'onDeviceChanged');
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.audio' is not available");
+  }
 }
 
 class OutputDeviceInfo extends ChromeObject {

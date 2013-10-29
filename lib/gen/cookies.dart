@@ -33,7 +33,7 @@ class ChromeCookies extends ChromeApi {
    * was found.
    */
   Future<Cookie> get(Map details) {
-    if (_cookies == null) throw new UnsupportedError("'chrome.cookies' is not available");
+    if (_cookies == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Cookie>.oneArg(_createCookie);
     _cookies.callMethod('get', [jsify(details), completer.callback]);
@@ -52,7 +52,7 @@ class ChromeCookies extends ChromeApi {
    * All the existing, unexpired cookies that match the given cookie info.
    */
   Future<List<Cookie>> getAll(Map details) {
-    if (_cookies == null) throw new UnsupportedError("'chrome.cookies' is not available");
+    if (_cookies == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Cookie>>.oneArg((e) => listify(e, _createCookie));
     _cookies.callMethod('getAll', [jsify(details), completer.callback]);
@@ -71,7 +71,7 @@ class ChromeCookies extends ChromeApi {
    * set.
    */
   Future<Cookie> set(Map details) {
-    if (_cookies == null) throw new UnsupportedError("'chrome.cookies' is not available");
+    if (_cookies == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Cookie>.oneArg(_createCookie);
     _cookies.callMethod('set', [jsify(details), completer.callback]);
@@ -89,7 +89,7 @@ class ChromeCookies extends ChromeApi {
    * set.
    */
   Future<Map> remove(Map details) {
-    if (_cookies == null) throw new UnsupportedError("'chrome.cookies' is not available");
+    if (_cookies == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _cookies.callMethod('remove', [jsify(details), completer.callback]);
@@ -103,7 +103,7 @@ class ChromeCookies extends ChromeApi {
    * All the existing cookie stores.
    */
   Future<List<CookieStore>> getAllCookieStores() {
-    if (_cookies == null) throw new UnsupportedError("'chrome.cookies' is not available");
+    if (_cookies == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<CookieStore>>.oneArg((e) => listify(e, _createCookieStore));
     _cookies.callMethod('getAllCookieStores', [completer.callback]);
@@ -121,6 +121,10 @@ class ChromeCookies extends ChromeApi {
 
   final ChromeStreamController<Map> _onChanged =
       new ChromeStreamController<Map>.oneArg(_cookies, 'onChanged', mapify);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.cookies' is not available");
+  }
 }
 
 /**

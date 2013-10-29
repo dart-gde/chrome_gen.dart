@@ -33,7 +33,7 @@ class ChromeTtsEngine extends ChromeApi {
    * status of this utterance.
    */
   void sendTtsEvent(int requestId, TtsEvent event) {
-    if (_ttsEngine == null) throw new UnsupportedError("'chrome.ttsEngine' is not available");
+    if (_ttsEngine == null) _throwNotAvailable();
 
     _ttsEngine.callMethod('sendTtsEvent', [requestId, jsify(event)]);
   }
@@ -77,6 +77,10 @@ class ChromeTtsEngine extends ChromeApi {
 
   final ChromeStreamController _onResume =
       new ChromeStreamController.noArgs(_ttsEngine, 'onResume');
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.ttsEngine' is not available");
+  }
 }
 
 /**

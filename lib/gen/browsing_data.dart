@@ -27,7 +27,7 @@ class ChromeBrowsingData extends ChromeApi {
    * one data type listed here.
    */
   Future<Map> settings() {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _browsingData.callMethod('settings', [completer.callback]);
@@ -40,7 +40,7 @@ class ChromeBrowsingData extends ChromeApi {
    * [dataToRemove] The set of data types to remove.
    */
   Future remove(RemovalOptions options, DataTypeSet dataToRemove) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('remove', [jsify(options), jsify(dataToRemove), completer.callback]);
@@ -51,7 +51,7 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears websites' appcache data.
    */
   Future removeAppcache(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeAppcache', [jsify(options), completer.callback]);
@@ -62,7 +62,7 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears the browser's cache.
    */
   Future removeCache(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeCache', [jsify(options), completer.callback]);
@@ -74,7 +74,7 @@ class ChromeBrowsingData extends ChromeApi {
    * a particular timeframe.
    */
   Future removeCookies(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeCookies', [jsify(options), completer.callback]);
@@ -86,7 +86,7 @@ class ChromeBrowsingData extends ChromeApi {
    * themselves).
    */
   Future removeDownloads(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeDownloads', [jsify(options), completer.callback]);
@@ -97,7 +97,7 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears websites' file system data.
    */
   Future removeFileSystems(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeFileSystems', [jsify(options), completer.callback]);
@@ -108,7 +108,7 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears the browser's stored form data (autofill).
    */
   Future removeFormData(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeFormData', [jsify(options), completer.callback]);
@@ -119,7 +119,7 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears the browser's history.
    */
   Future removeHistory(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeHistory', [jsify(options), completer.callback]);
@@ -130,7 +130,7 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears websites' IndexedDB data.
    */
   Future removeIndexedDB(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeIndexedDB', [jsify(options), completer.callback]);
@@ -141,7 +141,7 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears websites' local storage data.
    */
   Future removeLocalStorage(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeLocalStorage', [jsify(options), completer.callback]);
@@ -152,7 +152,7 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears plugins' data.
    */
   Future removePluginData(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removePluginData', [jsify(options), completer.callback]);
@@ -163,7 +163,7 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears the browser's stored passwords.
    */
   Future removePasswords(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removePasswords', [jsify(options), completer.callback]);
@@ -174,11 +174,15 @@ class ChromeBrowsingData extends ChromeApi {
    * Clears websites' WebSQL data.
    */
   Future removeWebSQL(RemovalOptions options) {
-    if (_browsingData == null) throw new UnsupportedError("'chrome.browsingData' is not available");
+    if (_browsingData == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeWebSQL', [jsify(options), completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.browsingData' is not available");
   }
 }
 

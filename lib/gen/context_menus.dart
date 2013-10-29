@@ -35,7 +35,7 @@ class ChromeContextMenus extends ChromeApi {
    * The ID of the newly created item.
    */
   dynamic create(Map createProperties, [dynamic callback]) {
-    if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+    if (_contextMenus == null) _throwNotAvailable();
 
     return _contextMenus.callMethod('create', [jsify(createProperties), jsify(callback)]);
   }
@@ -49,7 +49,7 @@ class ChromeContextMenus extends ChromeApi {
    * create function.
    */
   Future update(dynamic id, Map updateProperties) {
-    if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+    if (_contextMenus == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('update', [jsify(id), jsify(updateProperties), completer.callback]);
@@ -62,7 +62,7 @@ class ChromeContextMenus extends ChromeApi {
    * [menuItemId] The ID of the context menu item to remove.
    */
   Future remove(dynamic menuItemId) {
-    if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+    if (_contextMenus == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('remove', [jsify(menuItemId), completer.callback]);
@@ -73,7 +73,7 @@ class ChromeContextMenus extends ChromeApi {
    * Removes all context menu items added by this extension.
    */
   Future removeAll() {
-    if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+    if (_contextMenus == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _contextMenus.callMethod('removeAll', [completer.callback]);
@@ -87,6 +87,10 @@ class ChromeContextMenus extends ChromeApi {
 
   final ChromeStreamController<OnClickedEvent> _onClicked =
       new ChromeStreamController<OnClickedEvent>.twoArgs(_contextMenus, 'onClicked', _createOnClickedEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.contextMenus' is not available");
+  }
 }
 
 /**

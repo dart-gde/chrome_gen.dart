@@ -27,7 +27,7 @@ class ChromeOmnibox extends ChromeApi {
    * [suggestResults] An array of suggest results
    */
   void sendSuggestions(int requestId, List<SuggestResult> suggestResults) {
-    if (_omnibox == null) throw new UnsupportedError("'chrome.omnibox' is not available");
+    if (_omnibox == null) _throwNotAvailable();
 
     _omnibox.callMethod('sendSuggestions', [requestId, jsify(suggestResults)]);
   }
@@ -41,7 +41,7 @@ class ChromeOmnibox extends ChromeApi {
    * parameter.
    */
   void setDefaultSuggestion(DefaultSuggestResult suggestion) {
-    if (_omnibox == null) throw new UnsupportedError("'chrome.omnibox' is not available");
+    if (_omnibox == null) _throwNotAvailable();
 
     _omnibox.callMethod('setDefaultSuggestion', [jsify(suggestion)]);
   }
@@ -79,6 +79,10 @@ class ChromeOmnibox extends ChromeApi {
 
   final ChromeStreamController _onInputCancelled =
       new ChromeStreamController.noArgs(_omnibox, 'onInputCancelled');
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.omnibox' is not available");
+  }
 }
 
 /**

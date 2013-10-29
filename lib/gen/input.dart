@@ -32,7 +32,7 @@ class ChromeInputIme extends ChromeApi {
    * this fails.
    */
   Future<bool> setComposition(Map parameters) {
-    if (_input_ime == null) throw new UnsupportedError("'chrome.input.ime' is not available");
+    if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setComposition', [jsify(parameters), completer.callback]);
@@ -44,7 +44,7 @@ class ChromeInputIme extends ChromeApi {
    * IME, this fails.
    */
   Future<bool> clearComposition(Map parameters) {
-    if (_input_ime == null) throw new UnsupportedError("'chrome.input.ime' is not available");
+    if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('clearComposition', [jsify(parameters), completer.callback]);
@@ -55,7 +55,7 @@ class ChromeInputIme extends ChromeApi {
    * Commits the provided text to the current input.
    */
   Future<bool> commitText(Map parameters) {
-    if (_input_ime == null) throw new UnsupportedError("'chrome.input.ime' is not available");
+    if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('commitText', [jsify(parameters), completer.callback]);
@@ -67,7 +67,7 @@ class ChromeInputIme extends ChromeApi {
    * doesn’t own the active IME
    */
   Future<bool> setCandidateWindowProperties(Map parameters) {
-    if (_input_ime == null) throw new UnsupportedError("'chrome.input.ime' is not available");
+    if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setCandidateWindowProperties', [jsify(parameters), completer.callback]);
@@ -79,7 +79,7 @@ class ChromeInputIme extends ChromeApi {
    * the active IME
    */
   Future<bool> setCandidates(Map parameters) {
-    if (_input_ime == null) throw new UnsupportedError("'chrome.input.ime' is not available");
+    if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setCandidates', [jsify(parameters), completer.callback]);
@@ -91,7 +91,7 @@ class ChromeInputIme extends ChromeApi {
    * this extension does not own the active IME.
    */
   Future<bool> setCursorPosition(Map parameters) {
-    if (_input_ime == null) throw new UnsupportedError("'chrome.input.ime' is not available");
+    if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _input_ime.callMethod('setCursorPosition', [jsify(parameters), completer.callback]);
@@ -102,7 +102,7 @@ class ChromeInputIme extends ChromeApi {
    * Adds the provided menu items to the language menu when this IME is active.
    */
   Future setMenuItems(Map parameters) {
-    if (_input_ime == null) throw new UnsupportedError("'chrome.input.ime' is not available");
+    if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _input_ime.callMethod('setMenuItems', [jsify(parameters), completer.callback]);
@@ -113,7 +113,7 @@ class ChromeInputIme extends ChromeApi {
    * Updates the state of the MenuItems specified
    */
   Future updateMenuItems(Map parameters) {
-    if (_input_ime == null) throw new UnsupportedError("'chrome.input.ime' is not available");
+    if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _input_ime.callMethod('updateMenuItems', [jsify(parameters), completer.callback]);
@@ -124,7 +124,7 @@ class ChromeInputIme extends ChromeApi {
    * Deletes the text around the caret.
    */
   Future deleteSurroundingText(Map parameters) {
-    if (_input_ime == null) throw new UnsupportedError("'chrome.input.ime' is not available");
+    if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _input_ime.callMethod('deleteSurroundingText', [jsify(parameters), completer.callback]);
@@ -141,7 +141,7 @@ class ChromeInputIme extends ChromeApi {
    * [response] True if the keystroke was handled, false if not
    */
   void keyEventHandled(String requestId, bool response) {
-    if (_input_ime == null) throw new UnsupportedError("'chrome.input.ime' is not available");
+    if (_input_ime == null) _throwNotAvailable();
 
     _input_ime.callMethod('keyEventHandled', [requestId, response]);
   }
@@ -233,6 +233,10 @@ class ChromeInputIme extends ChromeApi {
 
   final ChromeStreamController<String> _onReset =
       new ChromeStreamController<String>.oneArg(_input_ime, 'onReset', selfConverter);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.input.ime' is not available");
+  }
 }
 
 /**

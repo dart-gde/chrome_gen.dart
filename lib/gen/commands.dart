@@ -26,7 +26,7 @@ class ChromeCommands extends ChromeApi {
    * shortcut (if active).
    */
   Future<List<Command>> getAll() {
-    if (_commands == null) throw new UnsupportedError("'chrome.commands' is not available");
+    if (_commands == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Command>>.oneArg((e) => listify(e, _createCommand));
     _commands.callMethod('getAll', [completer.callback]);
@@ -40,6 +40,10 @@ class ChromeCommands extends ChromeApi {
 
   final ChromeStreamController<String> _onCommand =
       new ChromeStreamController<String>.oneArg(_commands, 'onCommand', selfConverter);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.commands' is not available");
+  }
 }
 
 class Command extends ChromeObject {

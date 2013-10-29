@@ -24,7 +24,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called when the socket has been created.
    */
   Future<CreateInfo> create(SocketType type, [CreateOptions options]) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<CreateInfo>.oneArg(_createCreateInfo);
     _socket.callMethod('create', [jsify(type), jsify(options), completer.callback]);
@@ -36,7 +36,7 @@ class ChromeSocket extends ChromeApi {
    * [socketId]: The socketId.
    */
   void destroy(int socketId) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     _socket.callMethod('destroy', [socketId]);
   }
@@ -51,7 +51,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called when the connection attempt is complete.
    */
   Future<int> connect(int socketId, String hostname, int port) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('connect', [socketId, hostname, port, completer.callback]);
@@ -67,7 +67,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called when the bind attempt is complete.
    */
   Future<int> bind(int socketId, String address, int port) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('bind', [socketId, address, port, completer.callback]);
@@ -80,7 +80,7 @@ class ChromeSocket extends ChromeApi {
    * [socketId]: The socketId.
    */
   void disconnect(int socketId) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     _socket.callMethod('disconnect', [socketId]);
   }
@@ -92,7 +92,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Delivers data that was available to be read without blocking.
    */
   Future<SocketReadInfo> read(int socketId, [int bufferSize]) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<SocketReadInfo>.oneArg(_createSocketReadInfo);
     _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
@@ -107,7 +107,7 @@ class ChromeSocket extends ChromeApi {
    * an error occurs.
    */
   Future<SocketWriteInfo> write(int socketId, ArrayBuffer data) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createSocketWriteInfo);
     _socket.callMethod('write', [socketId, jsify(data), completer.callback]);
@@ -121,7 +121,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Returns result of the recvFrom operation.
    */
   Future<RecvFromInfo> recvFrom(int socketId, [int bufferSize]) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<RecvFromInfo>.oneArg(_createRecvFromInfo);
     _socket.callMethod('recvFrom', [socketId, bufferSize, completer.callback]);
@@ -138,7 +138,7 @@ class ChromeSocket extends ChromeApi {
    * error occurs.
    */
   Future<SocketWriteInfo> sendTo(int socketId, ArrayBuffer data, String address, int port) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createSocketWriteInfo);
     _socket.callMethod('sendTo', [socketId, jsify(data), address, port, completer.callback]);
@@ -157,7 +157,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called when listen operation completes.
    */
   Future<int> listen(int socketId, String address, int port, [int backlog]) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('listen', [socketId, address, port, backlog, completer.callback]);
@@ -173,7 +173,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: The callback is invoked when a new socket is accepted.
    */
   Future<AcceptInfo> accept(int socketId) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<AcceptInfo>.oneArg(_createAcceptInfo);
     _socket.callMethod('accept', [socketId, completer.callback]);
@@ -189,7 +189,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called when the setKeepAlive attempt is complete.
    */
   Future<bool> setKeepAlive(int socketId, bool enable, [int delay]) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _socket.callMethod('setKeepAlive', [socketId, enable, delay, completer.callback]);
@@ -204,7 +204,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called when the setNoDelay attempt is complete.
    */
   Future<bool> setNoDelay(int socketId, bool noDelay) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _socket.callMethod('setNoDelay', [socketId, noDelay, completer.callback]);
@@ -217,7 +217,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called when the state is available.
    */
   Future<SocketInfo> getInfo(int socketId) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<SocketInfo>.oneArg(_createSocketInfo);
     _socket.callMethod('getInfo', [socketId, completer.callback]);
@@ -229,7 +229,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called when local adapter information is available.
    */
   Future<NetworkInterface> getNetworkList() {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<NetworkInterface>.oneArg(_createNetworkInterface);
     _socket.callMethod('getNetworkList', [completer.callback]);
@@ -246,7 +246,7 @@ class ChromeSocket extends ChromeApi {
    * parameter indicating the platform-independent error code.
    */
   Future<int> joinGroup(int socketId, String address) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('joinGroup', [socketId, address, completer.callback]);
@@ -268,7 +268,7 @@ class ChromeSocket extends ChromeApi {
    * parameter indicating the platform-independent error code.
    */
   Future<int> leaveGroup(int socketId, String address) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('leaveGroup', [socketId, address, completer.callback]);
@@ -285,7 +285,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called when the configuration operation is done.
    */
   Future<int> setMulticastTimeToLive(int socketId, int ttl) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('setMulticastTimeToLive', [socketId, ttl, completer.callback]);
@@ -312,7 +312,7 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called when the configuration operation is done.
    */
   Future<int> setMulticastLoopbackMode(int socketId, bool enabled) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _socket.callMethod('setMulticastLoopbackMode', [socketId, enabled, completer.callback]);
@@ -325,11 +325,15 @@ class ChromeSocket extends ChromeApi {
    * [callback]: Called with an array of strings of the result.
    */
   Future<String> getJoinedGroups(int socketId) {
-    if (_socket == null) throw new UnsupportedError("'chrome.socket' is not available");
+    if (_socket == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _socket.callMethod('getJoinedGroups', [socketId, completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.socket' is not available");
   }
 }
 

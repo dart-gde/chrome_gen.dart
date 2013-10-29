@@ -25,7 +25,7 @@ class ChromeManagement extends ChromeApi {
    * Returns a list of information about installed extensions and apps.
    */
   Future<List<ExtensionInfo>> getAll() {
-    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+    if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<ExtensionInfo>>.oneArg((e) => listify(e, _createExtensionInfo));
     _management.callMethod('getAll', [completer.callback]);
@@ -39,7 +39,7 @@ class ChromeManagement extends ChromeApi {
    * [id] The ID from an item of [ExtensionInfo.]
    */
   Future<ExtensionInfo> get(String id) {
-    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+    if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<ExtensionInfo>.oneArg(_createExtensionInfo);
     _management.callMethod('get', [id, completer.callback]);
@@ -53,7 +53,7 @@ class ChromeManagement extends ChromeApi {
    * [id] The ID of an already installed extension.
    */
   Future<List<String>> getPermissionWarningsById(String id) {
-    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+    if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _management.callMethod('getPermissionWarningsById', [id, completer.callback]);
@@ -68,7 +68,7 @@ class ChromeManagement extends ChromeApi {
    * [manifestStr] Extension manifest JSON string.
    */
   Future<List<String>> getPermissionWarningsByManifest(String manifestStr) {
-    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+    if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _management.callMethod('getPermissionWarningsByManifest', [manifestStr, completer.callback]);
@@ -83,7 +83,7 @@ class ChromeManagement extends ChromeApi {
    * [enabled] Whether this item should be enabled or disabled.
    */
   Future setEnabled(String id, bool enabled) {
-    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+    if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('setEnabled', [id, enabled, completer.callback]);
@@ -96,7 +96,7 @@ class ChromeManagement extends ChromeApi {
    * [id] This should be the id from an item of [ExtensionInfo.]
    */
   Future uninstall(String id, [Map options]) {
-    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+    if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('uninstall', [id, jsify(options), completer.callback]);
@@ -108,7 +108,7 @@ class ChromeManagement extends ChromeApi {
    * requesting the 'management' permission in the manifest.
    */
   Future uninstallSelf([Map options]) {
-    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+    if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('uninstallSelf', [jsify(options), completer.callback]);
@@ -121,7 +121,7 @@ class ChromeManagement extends ChromeApi {
    * [id] The extension id of the application.
    */
   Future launchApp(String id) {
-    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+    if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('launchApp', [id, completer.callback]);
@@ -159,6 +159,10 @@ class ChromeManagement extends ChromeApi {
 
   final ChromeStreamController<ExtensionInfo> _onDisabled =
       new ChromeStreamController<ExtensionInfo>.oneArg(_management, 'onDisabled', _createExtensionInfo);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.management' is not available");
+  }
 }
 
 /**

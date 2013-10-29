@@ -26,10 +26,14 @@ class ChromePageCapture extends ChromeApi {
    * The MHTML data as a Blob.
    */
   Future<dynamic> saveAsMHTML(Map details) {
-    if (_pageCapture == null) throw new UnsupportedError("'chrome.pageCapture' is not available");
+    if (_pageCapture == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _pageCapture.callMethod('saveAsMHTML', [jsify(details), completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.pageCapture' is not available");
   }
 }

@@ -30,7 +30,7 @@ class ChromeIdentity extends ChromeApi {
    * manifest, or undefined if there was an error.
    */
   Future<String> getAuthToken([TokenDetails details]) {
-    if (_identity == null) throw new UnsupportedError("'chrome.identity' is not available");
+    if (_identity == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _identity.callMethod('getAuthToken', [jsify(details), completer.callback]);
@@ -48,7 +48,7 @@ class ChromeIdentity extends ChromeApi {
    * [callback]: Called when the token has been removed from the cache.
    */
   Future removeCachedAuthToken(InvalidTokenDetails details) {
-    if (_identity == null) throw new UnsupportedError("'chrome.identity' is not available");
+    if (_identity == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _identity.callMethod('removeCachedAuthToken', [jsify(details), completer.callback]);
@@ -68,11 +68,15 @@ class ChromeIdentity extends ChromeApi {
    * [callback]: Called with the URL redirected back to your application.
    */
   Future<String> launchWebAuthFlow(WebAuthFlowDetails details) {
-    if (_identity == null) throw new UnsupportedError("'chrome.identity' is not available");
+    if (_identity == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _identity.callMethod('launchWebAuthFlow', [jsify(details), completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.identity' is not available");
   }
 }
 

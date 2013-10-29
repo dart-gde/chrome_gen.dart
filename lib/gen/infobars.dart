@@ -30,11 +30,15 @@ class ChromeInfobars extends ChromeApi {
    * Contains details about the window in which the infobar was created.
    */
   Future<Window> show(Map details) {
-    if (_infobars == null) throw new UnsupportedError("'chrome.infobars' is not available");
+    if (_infobars == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _infobars.callMethod('show', [jsify(details), completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.infobars' is not available");
   }
 }
 

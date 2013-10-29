@@ -18,6 +18,10 @@ class ChromeEvents extends ChromeApi {
   ChromeEvents._();
 
   bool get available => _events != null;
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.events' is not available");
+  }
 }
 
 /**

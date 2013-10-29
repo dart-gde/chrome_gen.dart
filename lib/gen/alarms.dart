@@ -41,7 +41,7 @@ class ChromeAlarms extends ChromeApi {
    * [delayInMinutes].
    */
   void create(AlarmCreateInfo alarmInfo, [String name]) {
-    if (_alarms == null) throw new UnsupportedError("'chrome.alarms' is not available");
+    if (_alarms == null) _throwNotAvailable();
 
     _alarms.callMethod('create', [name, jsify(alarmInfo)]);
   }
@@ -51,7 +51,7 @@ class ChromeAlarms extends ChromeApi {
    * [name]: The name of the alarm to get. Defaults to the empty string.
    */
   Future<Alarm> get([String name]) {
-    if (_alarms == null) throw new UnsupportedError("'chrome.alarms' is not available");
+    if (_alarms == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Alarm>.oneArg(_createAlarm);
     _alarms.callMethod('get', [name, completer.callback]);
@@ -62,7 +62,7 @@ class ChromeAlarms extends ChromeApi {
    * Gets an array of all the alarms.
    */
   Future<Alarm> getAll() {
-    if (_alarms == null) throw new UnsupportedError("'chrome.alarms' is not available");
+    if (_alarms == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Alarm>.oneArg(_createAlarm);
     _alarms.callMethod('getAll', [completer.callback]);
@@ -74,7 +74,7 @@ class ChromeAlarms extends ChromeApi {
    * [name]: The name of the alarm to clear. Defaults to the empty string.
    */
   void clear([String name]) {
-    if (_alarms == null) throw new UnsupportedError("'chrome.alarms' is not available");
+    if (_alarms == null) _throwNotAvailable();
 
     _alarms.callMethod('clear', [name]);
   }
@@ -83,7 +83,7 @@ class ChromeAlarms extends ChromeApi {
    * Clears all alarms.
    */
   void clearAll() {
-    if (_alarms == null) throw new UnsupportedError("'chrome.alarms' is not available");
+    if (_alarms == null) _throwNotAvailable();
 
     _alarms.callMethod('clearAll');
   }
@@ -92,6 +92,10 @@ class ChromeAlarms extends ChromeApi {
 
   final ChromeStreamController<Alarm> _onAlarm =
       new ChromeStreamController<Alarm>.oneArg(_alarms, 'onAlarm', _createAlarm);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.alarms' is not available");
+  }
 }
 
 class Alarm extends ChromeObject {

@@ -29,7 +29,7 @@ class ChromeProcesses extends ChromeApi {
    * True if terminating the process was successful, otherwise false.
    */
   Future<bool> terminate(int processId) {
-    if (_processes == null) throw new UnsupportedError("'chrome.processes' is not available");
+    if (_processes == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _processes.callMethod('terminate', [processId, completer.callback]);
@@ -46,7 +46,7 @@ class ChromeProcesses extends ChromeApi {
    * Process ID of the tab's renderer process.
    */
   Future<int> getProcessIdForTab(int tabId) {
-    if (_processes == null) throw new UnsupportedError("'chrome.processes' is not available");
+    if (_processes == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _processes.callMethod('getProcessIdForTab', [tabId, completer.callback]);
@@ -71,7 +71,7 @@ class ChromeProcesses extends ChromeApi {
    * Process object.
    */
   Future<Map> getProcessInfo(dynamic processIds, bool includeMemory) {
-    if (_processes == null) throw new UnsupportedError("'chrome.processes' is not available");
+    if (_processes == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _processes.callMethod('getProcessInfo', [jsify(processIds), includeMemory, completer.callback]);
@@ -124,6 +124,10 @@ class ChromeProcesses extends ChromeApi {
 
   final ChromeStreamController<OnExitedEvent> _onExited =
       new ChromeStreamController<OnExitedEvent>.threeArgs(_processes, 'onExited', _createOnExitedEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.processes' is not available");
+  }
 }
 
 /**

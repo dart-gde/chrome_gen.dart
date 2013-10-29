@@ -22,7 +22,7 @@ class ChromeMediaGalleries extends ChromeApi {
    * configured or available, the callback will receive an empty array.
    */
   Future<FileSystem> getMediaFileSystems([MediaFileSystemsDetails details]) {
-    if (_mediaGalleries == null) throw new UnsupportedError("'chrome.mediaGalleries' is not available");
+    if (_mediaGalleries == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<FileSystem>.oneArg(_createFileSystem);
     _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
@@ -33,9 +33,13 @@ class ChromeMediaGalleries extends ChromeApi {
    * Get metadata about a specific media file system.
    */
   MediaFileSystemMetadata getMediaFileSystemMetadata(FileSystem mediaFileSystem) {
-    if (_mediaGalleries == null) throw new UnsupportedError("'chrome.mediaGalleries' is not available");
+    if (_mediaGalleries == null) _throwNotAvailable();
 
     return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [jsify(mediaFileSystem)]));
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.mediaGalleries' is not available");
   }
 }
 

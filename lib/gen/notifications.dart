@@ -25,7 +25,7 @@ class ChromeNotifications extends ChromeApi {
    * supplied or generated) that represents the created notification.
    */
   Future<String> create(String notificationId, NotificationOptions options) {
-    if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+    if (_notifications == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _notifications.callMethod('create', [notificationId, jsify(options), completer.callback]);
@@ -38,7 +38,7 @@ class ChromeNotifications extends ChromeApi {
    * existed.
    */
   Future<bool> update(String notificationId, NotificationOptions options) {
-    if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+    if (_notifications == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _notifications.callMethod('update', [notificationId, jsify(options), completer.callback]);
@@ -51,7 +51,7 @@ class ChromeNotifications extends ChromeApi {
    * notification existed.
    */
   Future<bool> clear(String notificationId) {
-    if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+    if (_notifications == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _notifications.callMethod('clear', [notificationId, completer.callback]);
@@ -63,7 +63,7 @@ class ChromeNotifications extends ChromeApi {
    * system.
    */
   Future<dynamic> getAll() {
-    if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+    if (_notifications == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _notifications.callMethod('getAll', [completer.callback]);
@@ -84,6 +84,10 @@ class ChromeNotifications extends ChromeApi {
 
   final ChromeStreamController<OnButtonClickedEvent> _onButtonClicked =
       new ChromeStreamController<OnButtonClickedEvent>.twoArgs(_notifications, 'onButtonClicked', _createOnButtonClickedEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.notifications' is not available");
+  }
 }
 
 class OnClosedEvent {

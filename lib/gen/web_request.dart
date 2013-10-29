@@ -33,7 +33,7 @@ class ChromeWebRequest extends ChromeApi {
    * expensive. Don't call it often.
    */
   Future handlerBehaviorChanged() {
-    if (_webRequest == null) throw new UnsupportedError("'chrome.webRequest' is not available");
+    if (_webRequest == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _webRequest.callMethod('handlerBehaviorChanged', [completer.callback]);
@@ -121,6 +121,10 @@ class ChromeWebRequest extends ChromeApi {
 
   final ChromeStreamController<Map> _onErrorOccurred =
       new ChromeStreamController<Map>.oneArg(_webRequest, 'onErrorOccurred', mapify);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.webRequest' is not available");
+  }
 }
 
 /**

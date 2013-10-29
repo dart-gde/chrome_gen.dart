@@ -23,7 +23,7 @@ class ChromeFileSystem extends ChromeApi {
    * made more readable for display purposes.
    */
   Future<String> getDisplayPath(Entry entry) {
-    if (_fileSystem == null) throw new UnsupportedError("'chrome.fileSystem' is not available");
+    if (_fileSystem == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _fileSystem.callMethod('getDisplayPath', [jsify(entry), completer.callback]);
@@ -37,7 +37,7 @@ class ChromeFileSystem extends ChromeApi {
    * have the 'directory' permission under 'fileSystem'.
    */
   Future<Entry> getWritableEntry(Entry entry) {
-    if (_fileSystem == null) throw new UnsupportedError("'chrome.fileSystem' is not available");
+    if (_fileSystem == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Entry>.oneArg(_createEntry);
     _fileSystem.callMethod('getWritableEntry', [jsify(entry), completer.callback]);
@@ -48,7 +48,7 @@ class ChromeFileSystem extends ChromeApi {
    * Gets whether this Entry is writable or not.
    */
   Future<bool> isWritableEntry(Entry entry) {
-    if (_fileSystem == null) throw new UnsupportedError("'chrome.fileSystem' is not available");
+    if (_fileSystem == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _fileSystem.callMethod('isWritableEntry', [jsify(entry), completer.callback]);
@@ -63,7 +63,7 @@ class ChromeFileSystem extends ChromeApi {
    * [fileEntries] null
    */
   Future<ChooseEntryResult> chooseEntry([ChooseEntryOptions options]) {
-    if (_fileSystem == null) throw new UnsupportedError("'chrome.fileSystem' is not available");
+    if (_fileSystem == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<ChooseEntryResult>.twoArgs(ChooseEntryResult._create);
     _fileSystem.callMethod('chooseEntry', [jsify(options), completer.callback]);
@@ -75,7 +75,7 @@ class ChromeFileSystem extends ChromeApi {
    * will fail otherwise. This method is new in Chrome 30.
    */
   Future<Entry> restoreEntry(String id) {
-    if (_fileSystem == null) throw new UnsupportedError("'chrome.fileSystem' is not available");
+    if (_fileSystem == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Entry>.oneArg(_createEntry);
     _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
@@ -88,7 +88,7 @@ class ChromeFileSystem extends ChromeApi {
    * 30.
    */
   Future<bool> isRestorable(String id) {
-    if (_fileSystem == null) throw new UnsupportedError("'chrome.fileSystem' is not available");
+    if (_fileSystem == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _fileSystem.callMethod('isRestorable', [id, completer.callback]);
@@ -105,9 +105,13 @@ class ChromeFileSystem extends ChromeApi {
    * new in Chrome 30.
    */
   String retainEntry(Entry entry) {
-    if (_fileSystem == null) throw new UnsupportedError("'chrome.fileSystem' is not available");
+    if (_fileSystem == null) _throwNotAvailable();
 
     return _fileSystem.callMethod('retainEntry', [jsify(entry)]);
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.fileSystem' is not available");
   }
 }
 

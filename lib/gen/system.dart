@@ -36,11 +36,15 @@ class ChromeSystemCpu extends ChromeApi {
    * Queries basic CPU information of the system.
    */
   Future<CpuInfo> getInfo() {
-    if (_system_cpu == null) throw new UnsupportedError("'chrome.system.cpu' is not available");
+    if (_system_cpu == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<CpuInfo>.oneArg(_createCpuInfo);
     _system_cpu.callMethod('getInfo', [completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.system.cpu' is not available");
   }
 }
 
@@ -75,11 +79,15 @@ class ChromeSystemMemory extends ChromeApi {
    * Get physical memory information.
    */
   Future<MemoryInfo> getInfo() {
-    if (_system_memory == null) throw new UnsupportedError("'chrome.system.memory' is not available");
+    if (_system_memory == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<MemoryInfo>.oneArg(_createMemoryInfo);
     _system_memory.callMethod('getInfo', [completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.system.memory' is not available");
   }
 }
 
@@ -111,7 +119,7 @@ class ChromeSystemStorage extends ChromeApi {
    * callback is an array of StorageUnitInfo objects.
    */
   Future<StorageUnitInfo> getInfo() {
-    if (_system_storage == null) throw new UnsupportedError("'chrome.system.storage' is not available");
+    if (_system_storage == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<StorageUnitInfo>.oneArg(_createStorageUnitInfo);
     _system_storage.callMethod('getInfo', [completer.callback]);
@@ -122,7 +130,7 @@ class ChromeSystemStorage extends ChromeApi {
    * Ejects a removable storage device.
    */
   Future<EjectDeviceResultCode> ejectDevice(String id) {
-    if (_system_storage == null) throw new UnsupportedError("'chrome.system.storage' is not available");
+    if (_system_storage == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<EjectDeviceResultCode>.oneArg(_createEjectDeviceResultCode);
     _system_storage.callMethod('ejectDevice', [id, completer.callback]);
@@ -138,6 +146,10 @@ class ChromeSystemStorage extends ChromeApi {
 
   final ChromeStreamController<String> _onDetached =
       new ChromeStreamController<String>.oneArg(_system_storage, 'onDetached', selfConverter);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.system.storage' is not available");
+  }
 }
 
 /**

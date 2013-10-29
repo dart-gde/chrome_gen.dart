@@ -159,6 +159,11 @@ class DefaultBackend extends Backend {
     library.methods.forEach(_printMethod);
     library.events.forEach(_printEvent);
 
+    generator.writeln();
+    generator.writeln('void _throwNotAvailable() {');
+    generator.writeln('throw new UnsupportedError("\'chrome.${library.name}\' is not available");');
+    generator.writeln("}");
+
     generator.writeln("}");
   }
 
@@ -203,8 +208,7 @@ class DefaultBackend extends Backend {
     }
     generator.writeln(") {");
     if (checkApi) {
-      generator.writeln('if (${contextReference} == null) '
-          'throw new UnsupportedError("\'chrome.${library.name}\' is not available");');
+      generator.writeln('if (${contextReference} == null) _throwNotAvailable();');
       generator.writeln();
     }
     if (method.usesCallback) {

@@ -35,7 +35,7 @@ class ChromeFileBrowserHandler extends ChromeApi {
    * Result of the method.
    */
   Future<Map> selectFile(Map selectionParams) {
-    if (_fileBrowserHandler == null) throw new UnsupportedError("'chrome.fileBrowserHandler' is not available");
+    if (_fileBrowserHandler == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _fileBrowserHandler.callMethod('selectFile', [jsify(selectionParams), completer.callback]);
@@ -49,6 +49,10 @@ class ChromeFileBrowserHandler extends ChromeApi {
 
   final ChromeStreamController<OnExecuteEvent> _onExecute =
       new ChromeStreamController<OnExecuteEvent>.twoArgs(_fileBrowserHandler, 'onExecute', _createOnExecuteEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.fileBrowserHandler' is not available");
+  }
 }
 
 /**

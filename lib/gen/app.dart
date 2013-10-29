@@ -36,6 +36,10 @@ class ChromeAppRuntime extends ChromeApi {
 
   final ChromeStreamController _onRestarted =
       new ChromeStreamController.noArgs(_app_runtime, 'onRestarted');
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.app.runtime' is not available");
+  }
 }
 
 class LaunchItem extends ChromeObject {
@@ -107,7 +111,7 @@ class ChromeAppWindow extends ChromeApi {
    *  `window.onload = function () { foo(); }`
    */
   Future<AppWindow> create(String url, [CreateWindowOptions options]) {
-    if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+    if (_app_window == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<AppWindow>.oneArg(_createAppWindow);
     _app_window.callMethod('create', [url, jsify(options), completer.callback]);
@@ -120,13 +124,13 @@ class ChromeAppWindow extends ChromeApi {
    * for another page, for example: otherWindow.chrome.app.window.current().
    */
   AppWindow current() {
-    if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+    if (_app_window == null) _throwNotAvailable();
 
     return _createAppWindow(_app_window.callMethod('current'));
   }
 
   void initializeAppWindow(dynamic state) {
-    if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+    if (_app_window == null) _throwNotAvailable();
 
     _app_window.callMethod('initializeAppWindow', [jsify(state)]);
   }
@@ -160,6 +164,10 @@ class ChromeAppWindow extends ChromeApi {
 
   final ChromeStreamController _onRestored =
       new ChromeStreamController.noArgs(_app_window, 'onRestored');
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.app.window' is not available");
+  }
 }
 
 /**

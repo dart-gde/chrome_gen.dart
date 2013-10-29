@@ -30,7 +30,7 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: Called with the id of the new [DownloadItem].
    */
   Future<int> download(DownloadOptions options) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _downloads.callMethod('download', [jsify(options), completer.callback]);
@@ -45,7 +45,7 @@ class ChromeDownloads extends ChromeApi {
    * `startTime` of the last item from the last page.
    */
   Future<DownloadItem> search(DownloadQuery query) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<DownloadItem>.oneArg(_createDownloadItem);
     _downloads.callMethod('search', [jsify(query), completer.callback]);
@@ -60,7 +60,7 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: Called when the pause request is completed.
    */
   Future pause(int downloadId) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('pause', [downloadId, completer.callback]);
@@ -75,7 +75,7 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: Called when the resume request is completed.
    */
   Future resume(int downloadId) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('resume', [downloadId, completer.callback]);
@@ -89,7 +89,7 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: Called when the cancel request is completed.
    */
   Future cancel(int downloadId) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('cancel', [downloadId, completer.callback]);
@@ -110,7 +110,7 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: A URL to an image that represents the download.
    */
   Future<String> getFileIcon(int downloadId, [GetFileIconOptions options]) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _downloads.callMethod('getFileIcon', [downloadId, jsify(options), completer.callback]);
@@ -125,7 +125,7 @@ class ChromeDownloads extends ChromeApi {
    * [downloadId]: The identifier for the downloaded file.
    */
   void open(int downloadId) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     _downloads.callMethod('open', [downloadId]);
   }
@@ -135,7 +135,7 @@ class ChromeDownloads extends ChromeApi {
    * [downloadId]: The identifier for the downloaded file.
    */
   void show(int downloadId) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     _downloads.callMethod('show', [downloadId]);
   }
@@ -144,7 +144,7 @@ class ChromeDownloads extends ChromeApi {
    * Show the default Downloads folder in a file manager.
    */
   void showDefaultFolder() {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     _downloads.callMethod('showDefaultFolder');
   }
@@ -155,7 +155,7 @@ class ChromeDownloads extends ChromeApi {
    * `query`, then `callback` will be called.
    */
   Future<int> erase(DownloadQuery query) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _downloads.callMethod('erase', [jsify(query), completer.callback]);
@@ -167,7 +167,7 @@ class ChromeDownloads extends ChromeApi {
    * otherwise return an error through [runtime.lastError].
    */
   Future removeFile(int downloadId) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('removeFile', [downloadId, completer.callback]);
@@ -186,7 +186,7 @@ class ChromeDownloads extends ChromeApi {
    * [callback]: Called when the danger prompt dialog closes.
    */
   Future acceptDanger(int downloadId) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('acceptDanger', [downloadId, completer.callback]);
@@ -198,7 +198,7 @@ class ChromeDownloads extends ChromeApi {
    * javascript `ondragstart` handler.
    */
   void drag(int downloadId) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     _downloads.callMethod('drag', [downloadId]);
   }
@@ -212,7 +212,7 @@ class ChromeDownloads extends ChromeApi {
    * addition to the `"downloads"` permission.
    */
   void setShelfEnabled(bool enabled) {
-    if (_downloads == null) throw new UnsupportedError("'chrome.downloads' is not available");
+    if (_downloads == null) _throwNotAvailable();
 
     _downloads.callMethod('setShelfEnabled', [enabled]);
   }
@@ -236,6 +236,10 @@ class ChromeDownloads extends ChromeApi {
 
   final ChromeStreamController<OnDeterminingFilenameEvent> _onDeterminingFilename =
       new ChromeStreamController<OnDeterminingFilenameEvent>.twoArgs(_downloads, 'onDeterminingFilename', _createOnDeterminingFilenameEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.downloads' is not available");
+  }
 }
 
 class OnDeterminingFilenameEvent {

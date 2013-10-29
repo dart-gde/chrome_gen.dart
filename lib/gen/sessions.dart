@@ -36,7 +36,7 @@ class ChromeSessions extends ChromeApi {
    * either tabs or windows.
    */
   Future<List<Session>> getRecentlyClosed([Filter filter]) {
-    if (_sessions == null) throw new UnsupportedError("'chrome.sessions' is not available");
+    if (_sessions == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Session>>.oneArg((e) => listify(e, _createSession));
     _sessions.callMethod('getRecentlyClosed', [jsify(filter), completer.callback]);
@@ -53,7 +53,7 @@ class ChromeSessions extends ChromeApi {
    * [windows.Window] of the [Session] objects.
    */
   Future<List<Device>> getDevices([Filter filter]) {
-    if (_sessions == null) throw new UnsupportedError("'chrome.sessions' is not available");
+    if (_sessions == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Device>>.oneArg((e) => listify(e, _createDevice));
     _sessions.callMethod('getDevices', [jsify(filter), completer.callback]);
@@ -71,11 +71,15 @@ class ChromeSessions extends ChromeApi {
    * A [Session] containing the restored [windows.Window] or [tabs.Tab] object.
    */
   Future<Session> restore([String sessionId]) {
-    if (_sessions == null) throw new UnsupportedError("'chrome.sessions' is not available");
+    if (_sessions == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Session>.oneArg(_createSession);
     _sessions.callMethod('restore', [sessionId, completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.sessions' is not available");
   }
 }
 

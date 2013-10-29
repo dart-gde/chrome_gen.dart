@@ -26,7 +26,7 @@ class ChromeTabs extends ChromeApi {
    * Retrieves details about the specified tab.
    */
   Future<Tab> get(int tabId) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('get', [tabId, completer.callback]);
@@ -39,7 +39,7 @@ class ChromeTabs extends ChromeApi {
    * view).
    */
   Future<Tab> getCurrent() {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('getCurrent', [completer.callback]);
@@ -58,7 +58,7 @@ class ChromeTabs extends ChromeApi {
    * closes or does not exist.
    */
   Port connect(int tabId, [Map connectInfo]) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     return _createPort(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
   }
@@ -72,7 +72,7 @@ class ChromeTabs extends ChromeApi {
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendRequest(int tabId, dynamic request) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _tabs.callMethod('sendRequest', [tabId, jsify(request), completer.callback]);
@@ -91,7 +91,7 @@ class ChromeTabs extends ChromeApi {
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendMessage(int tabId, dynamic message) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _tabs.callMethod('sendMessage', [tabId, jsify(message), completer.callback]);
@@ -105,7 +105,7 @@ class ChromeTabs extends ChromeApi {
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
   Future<Tab> getSelected([int windowId]) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('getSelected', [windowId, completer.callback]);
@@ -119,7 +119,7 @@ class ChromeTabs extends ChromeApi {
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
   Future<List<Tab>> getAllInWindow([int windowId]) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, _createTab));
     _tabs.callMethod('getAllInWindow', [windowId, completer.callback]);
@@ -133,7 +133,7 @@ class ChromeTabs extends ChromeApi {
    * Details about the created tab. Will contain the ID of the new tab.
    */
   Future<Tab> create(Map createProperties) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('create', [jsify(createProperties), completer.callback]);
@@ -151,7 +151,7 @@ class ChromeTabs extends ChromeApi {
    * requested.
    */
   Future<Tab> duplicate(int tabId) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('duplicate', [tabId, completer.callback]);
@@ -163,7 +163,7 @@ class ChromeTabs extends ChromeApi {
    * properties are specified.
    */
   Future<List<Tab>> query(Map queryInfo) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, _createTab));
     _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
@@ -177,7 +177,7 @@ class ChromeTabs extends ChromeApi {
    * Contains details about the window whose tabs were highlighted.
    */
   Future<Window> highlight(Map highlightInfo) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _tabs.callMethod('highlight', [jsify(highlightInfo), completer.callback]);
@@ -196,7 +196,7 @@ class ChromeTabs extends ChromeApi {
    * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
    */
   Future<Tab> update(Map updateProperties, [int tabId]) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('update', [tabId, jsify(updateProperties), completer.callback]);
@@ -214,7 +214,7 @@ class ChromeTabs extends ChromeApi {
    * Details about the moved tabs.
    */
   Future<dynamic> move(dynamic tabIds, Map moveProperties) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _tabs.callMethod('move', [jsify(tabIds), jsify(moveProperties), completer.callback]);
@@ -228,7 +228,7 @@ class ChromeTabs extends ChromeApi {
    * current window.
    */
   Future reload([int tabId, Map reloadProperties]) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _tabs.callMethod('reload', [tabId, jsify(reloadProperties), completer.callback]);
@@ -241,7 +241,7 @@ class ChromeTabs extends ChromeApi {
    * [tabIds] The tab or list of tabs to close.
    */
   Future remove(dynamic tabIds) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _tabs.callMethod('remove', [jsify(tabIds), completer.callback]);
@@ -263,7 +263,7 @@ class ChromeTabs extends ChromeApi {
    * For an unknown language, `und` will be returned.
    */
   Future<String> detectLanguage([int tabId]) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _tabs.callMethod('detectLanguage', [tabId, completer.callback]);
@@ -286,7 +286,7 @@ class ChromeTabs extends ChromeApi {
    * May be assigned to the 'src' property of an HTML Image element for display.
    */
   Future<String> captureVisibleTab([int windowId, Map options]) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _tabs.callMethod('captureVisibleTab', [windowId, jsify(options), completer.callback]);
@@ -306,7 +306,7 @@ class ChromeTabs extends ChromeApi {
    * The result of the script in every injected frame.
    */
   Future<List<dynamic>> executeScript(InjectDetails details, [int tabId]) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<dynamic>>.oneArg(listify);
     _tabs.callMethod('executeScript', [tabId, jsify(details), completer.callback]);
@@ -323,7 +323,7 @@ class ChromeTabs extends ChromeApi {
    * [details] Details of the CSS text to insert.
    */
   Future insertCSS(InjectDetails details, [int tabId]) {
-    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+    if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _tabs.callMethod('insertCSS', [tabId, jsify(details), completer.callback]);
@@ -435,6 +435,10 @@ class ChromeTabs extends ChromeApi {
 
   final ChromeStreamController<OnReplacedEvent> _onReplaced =
       new ChromeStreamController<OnReplacedEvent>.twoArgs(_tabs, 'onReplaced', _createOnReplacedEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.tabs' is not available");
+  }
 }
 
 /**

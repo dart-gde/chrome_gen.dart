@@ -28,7 +28,7 @@ class ChromeI18N extends ChromeApi {
    * Array of the accept languages of the browser, such as en-US,en,zh-CN
    */
   Future<List<String>> getAcceptLanguages() {
-    if (_i18n == null) throw new UnsupportedError("'chrome.i18n' is not available");
+    if (_i18n == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _i18n.callMethod('getAcceptLanguages', [completer.callback]);
@@ -51,8 +51,12 @@ class ChromeI18N extends ChromeApi {
    * Message localized for current locale.
    */
   String getMessage(String messageName, [dynamic substitutions]) {
-    if (_i18n == null) throw new UnsupportedError("'chrome.i18n' is not available");
+    if (_i18n == null) _throwNotAvailable();
 
     return _i18n.callMethod('getMessage', [messageName, jsify(substitutions)]);
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.i18n' is not available");
   }
 }

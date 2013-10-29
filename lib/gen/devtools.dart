@@ -57,7 +57,7 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
    * expression.
    */
   Future<EvalResult> eval(String expression) {
-    if (_devtools_inspectedWindow == null) throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+    if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<EvalResult>.twoArgs(EvalResult._create);
     _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
@@ -68,7 +68,7 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
    * Reloads the inspected page.
    */
   void reload([Map reloadOptions]) {
-    if (_devtools_inspectedWindow == null) throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+    if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
     _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
   }
@@ -80,7 +80,7 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
    * The resources within the page.
    */
   Future<List<Resource>> getResources() {
-    if (_devtools_inspectedWindow == null) throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+    if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Resource>>.oneArg((e) => listify(e, _createResource));
     _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
@@ -103,6 +103,10 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
 
   final ChromeStreamController<OnResourceContentCommittedEvent> _onResourceContentCommitted =
       new ChromeStreamController<OnResourceContentCommittedEvent>.twoArgs(_devtools_inspectedWindow, 'onResourceContentCommitted', _createOnResourceContentCommittedEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+  }
 }
 
 /**
@@ -220,7 +224,7 @@ class ChromeDevtoolsNetwork extends ChromeApi {
    * A HAR log. See HAR specification for details.
    */
   Future<Map<String, dynamic>> getHAR() {
-    if (_devtools_network == null) throw new UnsupportedError("'chrome.devtools.network' is not available");
+    if (_devtools_network == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
     _devtools_network.callMethod('getHAR', [completer.callback]);
@@ -243,6 +247,10 @@ class ChromeDevtoolsNetwork extends ChromeApi {
 
   final ChromeStreamController<String> _onNavigated =
       new ChromeStreamController<String>.oneArg(_devtools_network, 'onNavigated', selfConverter);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.devtools.network' is not available");
+  }
 }
 
 /**
@@ -316,7 +324,7 @@ class ChromeDevtoolsPanels extends ChromeApi {
    * An ExtensionPanel object representing the created panel.
    */
   Future<ExtensionPanel> create(String title, String iconPath, String pagePath) {
-    if (_devtools_panels == null) throw new UnsupportedError("'chrome.devtools.panels' is not available");
+    if (_devtools_panels == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<ExtensionPanel>.oneArg(_createExtensionPanel);
     _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
@@ -333,11 +341,15 @@ class ChromeDevtoolsPanels extends ChromeApi {
    * clicked.
    */
   Future<Resource> setOpenResourceHandler() {
-    if (_devtools_panels == null) throw new UnsupportedError("'chrome.devtools.panels' is not available");
+    if (_devtools_panels == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Resource>.oneArg(_createResource);
     _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.devtools.panels' is not available");
   }
 }
 

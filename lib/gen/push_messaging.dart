@@ -24,7 +24,7 @@ class ChromePushMessaging extends ChromeApi {
    * when they are not already logged in.
    */
   Future<ChannelIdResult> getChannelId([bool interactive]) {
-    if (_pushMessaging == null) throw new UnsupportedError("'chrome.pushMessaging' is not available");
+    if (_pushMessaging == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<ChannelIdResult>.oneArg(_createChannelIdResult);
     _pushMessaging.callMethod('getChannelId', [interactive, completer.callback]);
@@ -35,6 +35,10 @@ class ChromePushMessaging extends ChromeApi {
 
   final ChromeStreamController<Message> _onMessage =
       new ChromeStreamController<Message>.oneArg(_pushMessaging, 'onMessage', _createMessage);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.pushMessaging' is not available");
+  }
 }
 
 class Message extends ChromeObject {

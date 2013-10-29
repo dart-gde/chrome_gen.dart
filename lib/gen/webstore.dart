@@ -21,8 +21,12 @@ class ChromeWebstore extends ChromeApi {
   bool get available => _webstore != null;
 
   void install([String url, dynamic successCallback, dynamic failureCallback]) {
-    if (_webstore == null) throw new UnsupportedError("'chrome.webstore' is not available");
+    if (_webstore == null) _throwNotAvailable();
 
     _webstore.callMethod('install', [url, jsify(successCallback), jsify(failureCallback)]);
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.webstore' is not available");
   }
 }

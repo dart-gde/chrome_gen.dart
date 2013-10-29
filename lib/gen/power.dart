@@ -23,7 +23,7 @@ class ChromePower extends ChromeApi {
    * new request.
    */
   void requestKeepAwake(Level level) {
-    if (_power == null) throw new UnsupportedError("'chrome.power' is not available");
+    if (_power == null) _throwNotAvailable();
 
     _power.callMethod('requestKeepAwake', [jsify(level)]);
   }
@@ -32,9 +32,13 @@ class ChromePower extends ChromeApi {
    * Releases a request previously made via requestKeepAwake().
    */
   void releaseKeepAwake() {
-    if (_power == null) throw new UnsupportedError("'chrome.power' is not available");
+    if (_power == null) _throwNotAvailable();
 
     _power.callMethod('releaseKeepAwake');
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.power' is not available");
   }
 }
 

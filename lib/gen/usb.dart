@@ -22,7 +22,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked with a list of [Device]s on complete.
    */
   Future<Device> getDevices(EnumerateDevicesOptions options) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Device>.oneArg(_createDevice);
     _usb.callMethod('getDevices', [jsify(options), completer.callback]);
@@ -38,7 +38,7 @@ class ChromeUsb extends ChromeApi {
    * [interfaceId]:
    */
   Future<bool> requestAccess(Device device, int interfaceId) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _usb.callMethod('requestAccess', [jsify(device), interfaceId, completer.callback]);
@@ -51,7 +51,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked with the created ConnectionHandle on complete.
    */
   Future<ConnectionHandle> openDevice(Device device) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
     _usb.callMethod('openDevice', [jsify(device), completer.callback]);
@@ -77,7 +77,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked with the opened ConnectionHandle on complete.
    */
   Future<ConnectionHandle> findDevices(EnumerateDevicesAndRequestAccessOptions options) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
     _usb.callMethod('findDevices', [jsify(options), completer.callback]);
@@ -91,7 +91,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: The callback to invoke once the device is closed.
    */
   Future closeDevice(ConnectionHandle handle) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _usb.callMethod('closeDevice', [jsify(handle), completer.callback]);
@@ -104,7 +104,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: The callback to invoke when the interfaces are enumerated.
    */
   Future<InterfaceDescriptor> listInterfaces(ConnectionHandle handle) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<InterfaceDescriptor>.oneArg(_createInterfaceDescriptor);
     _usb.callMethod('listInterfaces', [jsify(handle), completer.callback]);
@@ -124,7 +124,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: The callback to invoke once the interface is claimed.
    */
   Future claimInterface(ConnectionHandle handle, int interfaceNumber) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _usb.callMethod('claimInterface', [jsify(handle), interfaceNumber, completer.callback]);
@@ -138,7 +138,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: The callback to invoke once the interface is released.
    */
   Future releaseInterface(ConnectionHandle handle, int interfaceNumber) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _usb.callMethod('releaseInterface', [jsify(handle), interfaceNumber, completer.callback]);
@@ -153,7 +153,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: The callback to invoke once the interface setting is set.
    */
   Future setInterfaceAlternateSetting(ConnectionHandle handle, int interfaceNumber, int alternateSetting) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _usb.callMethod('setInterfaceAlternateSetting', [jsify(handle), interfaceNumber, alternateSetting, completer.callback]);
@@ -173,7 +173,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked once the transfer has completed.
    */
   Future<TransferResultInfo> controlTransfer(ConnectionHandle handle, ControlTransferInfo transferInfo) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('controlTransfer', [jsify(handle), jsify(transferInfo), completer.callback]);
@@ -187,7 +187,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked once the transfer has completed.
    */
   Future<TransferResultInfo> bulkTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('bulkTransfer', [jsify(handle), jsify(transferInfo), completer.callback]);
@@ -201,7 +201,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked once the transfer has completed.
    */
   Future<TransferResultInfo> interruptTransfer(ConnectionHandle handle, GenericTransferInfo transferInfo) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('interruptTransfer', [jsify(handle), jsify(transferInfo), completer.callback]);
@@ -216,7 +216,7 @@ class ChromeUsb extends ChromeApi {
    * [callback]: Invoked once the transfer has been completed.
    */
   Future<TransferResultInfo> isochronousTransfer(ConnectionHandle handle, IsochronousTransferInfo transferInfo) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<TransferResultInfo>.oneArg(_createTransferResultInfo);
     _usb.callMethod('isochronousTransfer', [jsify(handle), jsify(transferInfo), completer.callback]);
@@ -234,11 +234,15 @@ class ChromeUsb extends ChromeApi {
    * whether the reset is completed successfully.
    */
   Future<bool> resetDevice(ConnectionHandle handle) {
-    if (_usb == null) throw new UnsupportedError("'chrome.usb' is not available");
+    if (_usb == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
     _usb.callMethod('resetDevice', [jsify(handle), completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.usb' is not available");
   }
 }
 

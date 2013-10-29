@@ -32,7 +32,7 @@ class ChromeIdle extends ChromeApi {
    * enum of `active`, `idle`, `locked`
    */
   Future<String> queryState(int detectionIntervalInSeconds) {
-    if (_idle == null) throw new UnsupportedError("'chrome.idle' is not available");
+    if (_idle == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _idle.callMethod('queryState', [detectionIntervalInSeconds, completer.callback]);
@@ -47,7 +47,7 @@ class ChromeIdle extends ChromeApi {
    * system is in an idle state.
    */
   void setDetectionInterval(int intervalInSeconds) {
-    if (_idle == null) throw new UnsupportedError("'chrome.idle' is not available");
+    if (_idle == null) _throwNotAvailable();
 
     _idle.callMethod('setDetectionInterval', [intervalInSeconds]);
   }
@@ -63,4 +63,8 @@ class ChromeIdle extends ChromeApi {
 
   final ChromeStreamController<String> _onStateChanged =
       new ChromeStreamController<String>.oneArg(_idle, 'onStateChanged', selfConverter);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.idle' is not available");
+  }
 }

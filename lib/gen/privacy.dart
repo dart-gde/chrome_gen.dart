@@ -40,6 +40,10 @@ class ChromePrivacy extends ChromeApi {
    * websites.
    */
   WebsitesPrivacy get websites => _createWebsitesPrivacy(_privacy['websites']);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.privacy' is not available");
+  }
 }
 
 class NetworkPrivacy extends ChromeObject {

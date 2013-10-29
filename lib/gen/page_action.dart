@@ -29,7 +29,7 @@ class ChromePageAction extends ChromeApi {
    * [tabId] The id of the tab for which you want to modify the page action.
    */
   void show(int tabId) {
-    if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+    if (_pageAction == null) _throwNotAvailable();
 
     _pageAction.callMethod('show', [tabId]);
   }
@@ -40,7 +40,7 @@ class ChromePageAction extends ChromeApi {
    * [tabId] The id of the tab for which you want to modify the page action.
    */
   void hide(int tabId) {
-    if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+    if (_pageAction == null) _throwNotAvailable();
 
     _pageAction.callMethod('hide', [tabId]);
   }
@@ -50,7 +50,7 @@ class ChromePageAction extends ChromeApi {
    * page action.
    */
   void setTitle(Map details) {
-    if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+    if (_pageAction == null) _throwNotAvailable();
 
     _pageAction.callMethod('setTitle', [jsify(details)]);
   }
@@ -59,7 +59,7 @@ class ChromePageAction extends ChromeApi {
    * Gets the title of the page action.
    */
   Future<String> getTitle(Map details) {
-    if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+    if (_pageAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
@@ -73,7 +73,7 @@ class ChromePageAction extends ChromeApi {
    * <b>imageData</b> property must be specified.
    */
   Future setIcon(Map details) {
-    if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+    if (_pageAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
@@ -85,7 +85,7 @@ class ChromePageAction extends ChromeApi {
    * page action's icon.
    */
   void setPopup(Map details) {
-    if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+    if (_pageAction == null) _throwNotAvailable();
 
     _pageAction.callMethod('setPopup', [jsify(details)]);
   }
@@ -94,7 +94,7 @@ class ChromePageAction extends ChromeApi {
    * Gets the html document set as the popup for this page action.
    */
   Future<String> getPopup(Map details) {
-    if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+    if (_pageAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
@@ -109,6 +109,10 @@ class ChromePageAction extends ChromeApi {
 
   final ChromeStreamController<Tab> _onClicked =
       new ChromeStreamController<Tab>.oneArg(_pageAction, 'onClicked', _createTab);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.pageAction' is not available");
+  }
 }
 
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

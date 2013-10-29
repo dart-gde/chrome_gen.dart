@@ -25,7 +25,7 @@ class ChromeTabCapture extends ChromeApi {
    * [callback]: Callback with either the stream returned or null.
    */
   Future<LocalMediaStream> capture(CaptureOptions options) {
-    if (_tabCapture == null) throw new UnsupportedError("'chrome.tabCapture' is not available");
+    if (_tabCapture == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<LocalMediaStream>.oneArg(_createLocalMediaStream);
     _tabCapture.callMethod('capture', [jsify(options), completer.callback]);
@@ -40,7 +40,7 @@ class ChromeTabCapture extends ChromeApi {
    * same tab).
    */
   Future<CaptureInfo> getCapturedTabs() {
-    if (_tabCapture == null) throw new UnsupportedError("'chrome.tabCapture' is not available");
+    if (_tabCapture == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<CaptureInfo>.oneArg(_createCaptureInfo);
     _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
@@ -51,6 +51,10 @@ class ChromeTabCapture extends ChromeApi {
 
   final ChromeStreamController<CaptureInfo> _onStatusChanged =
       new ChromeStreamController<CaptureInfo>.oneArg(_tabCapture, 'onStatusChanged', _createCaptureInfo);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.tabCapture' is not available");
+  }
 }
 
 /**

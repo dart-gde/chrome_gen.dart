@@ -36,7 +36,7 @@ class ChromeDebugger extends ChromeApi {
    * [here](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
    */
   Future attach(Debuggee target, String requiredVersion) {
-    if (_debugger == null) throw new UnsupportedError("'chrome.debugger' is not available");
+    if (_debugger == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _debugger.callMethod('attach', [jsify(target), requiredVersion, completer.callback]);
@@ -49,7 +49,7 @@ class ChromeDebugger extends ChromeApi {
    * [target] Debugging target from which you want to detach.
    */
   Future detach(Debuggee target) {
-    if (_debugger == null) throw new UnsupportedError("'chrome.debugger' is not available");
+    if (_debugger == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _debugger.callMethod('detach', [jsify(target), completer.callback]);
@@ -73,7 +73,7 @@ class ChromeDebugger extends ChromeApi {
    * on the method and is defined by the remote debugging protocol.
    */
   Future<Map<String, dynamic>> sendCommand(Debuggee target, String method, [Map<String, dynamic> commandParams]) {
-    if (_debugger == null) throw new UnsupportedError("'chrome.debugger' is not available");
+    if (_debugger == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
     _debugger.callMethod('sendCommand', [jsify(target), method, jsify(commandParams), completer.callback]);
@@ -87,7 +87,7 @@ class ChromeDebugger extends ChromeApi {
    * Array of TargetInfo objects corresponding to the available debug targets.
    */
   Future<List<TargetInfo>> getTargets() {
-    if (_debugger == null) throw new UnsupportedError("'chrome.debugger' is not available");
+    if (_debugger == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<TargetInfo>>.oneArg((e) => listify(e, _createTargetInfo));
     _debugger.callMethod('getTargets', [completer.callback]);
@@ -111,6 +111,10 @@ class ChromeDebugger extends ChromeApi {
 
   final ChromeStreamController<OnDetachEvent> _onDetach =
       new ChromeStreamController<OnDetachEvent>.twoArgs(_debugger, 'onDetach', _createOnDetachEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.debugger' is not available");
+  }
 }
 
 /**

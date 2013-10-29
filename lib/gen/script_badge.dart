@@ -26,7 +26,7 @@ class ChromeScriptBadge extends ChromeApi {
    * script badge's icon.
    */
   void setPopup(Map details) {
-    if (_scriptBadge == null) throw new UnsupportedError("'chrome.scriptBadge' is not available");
+    if (_scriptBadge == null) _throwNotAvailable();
 
     _scriptBadge.callMethod('setPopup', [jsify(details)]);
   }
@@ -35,7 +35,7 @@ class ChromeScriptBadge extends ChromeApi {
    * Gets the html document set as the popup for this script badge.
    */
   Future<String> getPopup(Map details) {
-    if (_scriptBadge == null) throw new UnsupportedError("'chrome.scriptBadge' is not available");
+    if (_scriptBadge == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _scriptBadge.callMethod('getPopup', [jsify(details), completer.callback]);
@@ -50,7 +50,7 @@ class ChromeScriptBadge extends ChromeApi {
    * has already run on this tab, this call does nothing.
    */
   void getAttention(Map details) {
-    if (_scriptBadge == null) throw new UnsupportedError("'chrome.scriptBadge' is not available");
+    if (_scriptBadge == null) _throwNotAvailable();
 
     _scriptBadge.callMethod('getAttention', [jsify(details)]);
   }
@@ -63,6 +63,10 @@ class ChromeScriptBadge extends ChromeApi {
 
   final ChromeStreamController<Tab> _onClicked =
       new ChromeStreamController<Tab>.oneArg(_scriptBadge, 'onClicked', _createTab);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.scriptBadge' is not available");
+  }
 }
 
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

@@ -23,7 +23,7 @@ class ChromeBluetooth extends ChromeApi {
    * and GATT tables and advertised to other devices.
    */
   Future addProfile(Profile profile) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _bluetooth.callMethod('addProfile', [jsify(profile), completer.callback]);
@@ -35,7 +35,7 @@ class ChromeBluetooth extends ChromeApi {
    * Profile; only the uuid field of the Profile object is used.
    */
   Future removeProfile(Profile profile) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _bluetooth.callMethod('removeProfile', [jsify(profile), completer.callback]);
@@ -48,7 +48,7 @@ class ChromeBluetooth extends ChromeApi {
    * state.
    */
   Future<AdapterState> getAdapterState() {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<AdapterState>.oneArg(_createAdapterState);
     _bluetooth.callMethod('getAdapterState', [completer.callback]);
@@ -64,7 +64,7 @@ class ChromeBluetooth extends ChromeApi {
    * will not be called after [callback] has been called.
    */
   Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _bluetooth.callMethod('getBluetoothDevices', [jsify(options), completer.callback]);
@@ -76,7 +76,7 @@ class ChromeBluetooth extends ChromeApi {
    * This function will not initiate a connection to the remote device.
    */
   Future<Profile> getProfiles(GetProfilesOptions options) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Profile>.oneArg(_createProfile);
     _bluetooth.callMethod('getProfiles', [jsify(options), completer.callback]);
@@ -87,7 +87,7 @@ class ChromeBluetooth extends ChromeApi {
    * Get a list of services provided by a device.
    */
   Future<ServiceRecord> getServices(GetServicesOptions options) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<ServiceRecord>.oneArg(_createServiceRecord);
     _bluetooth.callMethod('getServices', [jsify(options), completer.callback]);
@@ -100,7 +100,7 @@ class ChromeBluetooth extends ChromeApi {
    * [callback]: Called to indicate success or failure.
    */
   Future connect(ConnectOptions options) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _bluetooth.callMethod('connect', [jsify(options), completer.callback]);
@@ -113,7 +113,7 @@ class ChromeBluetooth extends ChromeApi {
    * [callback]: Called to indicate success or failure.
    */
   Future disconnect(DisconnectOptions options) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _bluetooth.callMethod('disconnect', [jsify(options), completer.callback]);
@@ -126,7 +126,7 @@ class ChromeBluetooth extends ChromeApi {
    * [callback]: Called with the data when it is available.
    */
   Future<ArrayBuffer> read(ReadOptions options) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<ArrayBuffer>.oneArg(_createArrayBuffer);
     _bluetooth.callMethod('read', [jsify(options), completer.callback]);
@@ -139,7 +139,7 @@ class ChromeBluetooth extends ChromeApi {
    * [callback]: Called with the number of bytes written.
    */
   Future<int> write(WriteOptions options) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<int>.oneArg();
     _bluetooth.callMethod('write', [jsify(options), completer.callback]);
@@ -151,7 +151,7 @@ class ChromeBluetooth extends ChromeApi {
    * [callback]: Called with the data.
    */
   Future<OutOfBandPairingData> getLocalOutOfBandPairingData() {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<OutOfBandPairingData>.oneArg(_createOutOfBandPairingData);
     _bluetooth.callMethod('getLocalOutOfBandPairingData', [completer.callback]);
@@ -165,7 +165,7 @@ class ChromeBluetooth extends ChromeApi {
    * [callback]: Called to indicate success or failure.
    */
   Future setOutOfBandPairingData(SetOutOfBandPairingDataOptions options) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _bluetooth.callMethod('setOutOfBandPairingData', [jsify(options), completer.callback]);
@@ -181,7 +181,7 @@ class ChromeBluetooth extends ChromeApi {
    * [callback]: Called to indicate success or failure.
    */
   Future startDiscovery(StartDiscoveryOptions options) {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _bluetooth.callMethod('startDiscovery', [jsify(options), completer.callback]);
@@ -193,7 +193,7 @@ class ChromeBluetooth extends ChromeApi {
    * [callback]: Called to indicate success or failure.
    */
   Future stopDiscovery() {
-    if (_bluetooth == null) throw new UnsupportedError("'chrome.bluetooth' is not available");
+    if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
     _bluetooth.callMethod('stopDiscovery', [completer.callback]);
@@ -209,6 +209,10 @@ class ChromeBluetooth extends ChromeApi {
 
   final ChromeStreamController<Socket> _onConnection =
       new ChromeStreamController<Socket>.oneArg(_bluetooth, 'onConnection', _createSocket);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.bluetooth' is not available");
+  }
 }
 
 class AdapterState extends ChromeObject {

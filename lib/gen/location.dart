@@ -24,7 +24,7 @@ class ChromeLocation extends ChromeApi {
    * [requestInfo]: Optional parameters for this request.
    */
   void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
-    if (_location == null) throw new UnsupportedError("'chrome.location' is not available");
+    if (_location == null) _throwNotAvailable();
 
     _location.callMethod('watchLocation', [name, jsify(requestInfo)]);
   }
@@ -35,7 +35,7 @@ class ChromeLocation extends ChromeApi {
    * empty string.
    */
   void clearWatch(String name) {
-    if (_location == null) throw new UnsupportedError("'chrome.location' is not available");
+    if (_location == null) _throwNotAvailable();
 
     _location.callMethod('clearWatch', [name]);
   }
@@ -49,6 +49,10 @@ class ChromeLocation extends ChromeApi {
 
   final ChromeStreamController<String> _onLocationError =
       new ChromeStreamController<String>.oneArg(_location, 'onLocationError', selfConverter);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.location' is not available");
+  }
 }
 
 class Coordinates extends ChromeObject {

@@ -32,7 +32,7 @@ class ChromeWebNavigation extends ChromeApi {
    * and/or tab ID are invalid.
    */
   Future<Map> getFrame(Map details) {
-    if (_webNavigation == null) throw new UnsupportedError("'chrome.webNavigation' is not available");
+    if (_webNavigation == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _webNavigation.callMethod('getFrame', [jsify(details), completer.callback]);
@@ -48,7 +48,7 @@ class ChromeWebNavigation extends ChromeApi {
    * A list of frames in the given tab, null if the specified tab ID is invalid.
    */
   Future<List<Map>> getAllFrames(Map details) {
-    if (_webNavigation == null) throw new UnsupportedError("'chrome.webNavigation' is not available");
+    if (_webNavigation == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Map>>.oneArg((e) => listify(e, mapify));
     _webNavigation.callMethod('getAllFrames', [jsify(details), completer.callback]);
@@ -136,4 +136,8 @@ class ChromeWebNavigation extends ChromeApi {
 
   final ChromeStreamController<Map> _onHistoryStateUpdated =
       new ChromeStreamController<Map>.oneArg(_webNavigation, 'onHistoryStateUpdated', mapify);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.webNavigation' is not available");
+  }
 }

@@ -34,11 +34,15 @@ class ChromeDesktopCapture extends ChromeApi {
    * callback is called with an empty `streamId`.
    */
   Future<String> chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
-    if (_desktopCapture == null) throw new UnsupportedError("'chrome.desktopCapture' is not available");
+    if (_desktopCapture == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
     _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), origin, completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.desktopCapture' is not available");
   }
 }
 
