@@ -34,9 +34,12 @@
 <div class="doc">
 <pre class="source">
 class LaunchData extends ChromeObject {
- LaunchData({String id, LaunchItem items}) {
+ LaunchData({String id, LaunchItem items, String url, String referrerUrl, bool isKioskSession}) {
    if (id != null) this.id = id;
    if (items != null) this.items = items;
+   if (url != null) this.url = url;
+   if (referrerUrl != null) this.referrerUrl = referrerUrl;
+   if (isKioskSession != null) this.isKioskSession = isKioskSession;
  }
  LaunchData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -45,6 +48,15 @@ class LaunchData extends ChromeObject {
 
  LaunchItem get items =&gt; _createLaunchItem(proxy['items']);
  set items(LaunchItem value) =&gt; proxy['items'] = jsify(value);
+
+ String get url =&gt; proxy['url'];
+ set url(String value) =&gt; proxy['url'] = value;
+
+ String get referrerUrl =&gt; proxy['referrerUrl'];
+ set referrerUrl(String value) =&gt; proxy['referrerUrl'] = value;
+
+ bool get isKioskSession =&gt; proxy['isKioskSession'];
+ set isKioskSession(bool value) =&gt; proxy['isKioskSession'] = value;
 }
 </pre>
 </div>
@@ -55,7 +67,7 @@ class LaunchData extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>LaunchData</strong>({String id, <a href="../chrome.app/LaunchItem.html">LaunchItem</a> items}) <a class="anchor-link" href="#"
+new <strong>LaunchData</strong>({String id, <a href="../chrome.app/LaunchItem.html">LaunchItem</a> items, String url, String referrerUrl, bool isKioskSession}) <a class="anchor-link" href="#"
               title="Permalink to LaunchData.LaunchData">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -63,9 +75,12 @@ new <strong>LaunchData</strong>({String id, <a href="../chrome.app/LaunchItem.ht
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-LaunchData({String id, LaunchItem items}) {
+LaunchData({String id, LaunchItem items, String url, String referrerUrl, bool isKioskSession}) {
  if (id != null) this.id = id;
  if (items != null) this.items = items;
+ if (url != null) this.url = url;
+ if (referrerUrl != null) this.referrerUrl = referrerUrl;
+ if (isKioskSession != null) this.isKioskSession = isKioskSession;
 }
 </pre>
 </div>
@@ -102,6 +117,21 @@ set id(String value) =&gt; proxy['id'] = value;
 </pre>
 </div>
 </div>
+<div class="field"><h4 id="isKioskSession">
+<button class="show-code">Code</button>
+bool         <strong>isKioskSession</strong> <a class="anchor-link"
+            href="#isKioskSession"
+            title="Permalink to LaunchData.isKioskSession">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+bool get isKioskSession =&gt; proxy['isKioskSession'];
+</pre>
+<pre class="source">
+set isKioskSession(bool value) =&gt; proxy['isKioskSession'] = value;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="items">
 <button class="show-code">Code</button>
 <a href="../chrome.app/LaunchItem.html">LaunchItem</a>         <strong>items</strong> <a class="anchor-link"
@@ -126,6 +156,36 @@ final JsObject         <strong>proxy</strong> <a class="anchor-link"
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
 final JsObject proxy
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="referrerUrl">
+<button class="show-code">Code</button>
+String         <strong>referrerUrl</strong> <a class="anchor-link"
+            href="#referrerUrl"
+            title="Permalink to LaunchData.referrerUrl">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get referrerUrl =&gt; proxy['referrerUrl'];
+</pre>
+<pre class="source">
+set referrerUrl(String value) =&gt; proxy['referrerUrl'] = value;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="url">
+<button class="show-code">Code</button>
+String         <strong>url</strong> <a class="anchor-link"
+            href="#url"
+            title="Permalink to LaunchData.url">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get url =&gt; proxy['url'];
+</pre>
+<pre class="source">
+set url(String value) =&gt; proxy['url'] = value;
 </pre>
 </div>
 </div>

@@ -63,6 +63,18 @@ class ChromeSystemStorage extends ChromeApi {
    return completer.future;
  }
 
+ /**
+  * Get the available capacity of a specified [id] storage device. The [id] is
+  * the transient device ID from StorageUnitInfo.
+  */
+ Future&lt;StorageAvailableCapacityInfo&gt; getAvailableCapacity(String id) {
+   if (_system_storage == null) _throwNotAvailable();
+
+   var completer = new ChromeCompleter&lt;StorageAvailableCapacityInfo&gt;.oneArg(_createStorageAvailableCapacityInfo);
+   _system_storage.callMethod('getAvailableCapacity', [id, completer.callback]);
+   return completer.future;
+ }
+
  Stream&lt;StorageUnitInfo&gt; get onAttached =&gt; _onAttached.stream;
 
  final ChromeStreamController&lt;StorageUnitInfo&gt; _onAttached =
@@ -139,6 +151,26 @@ Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
 
  var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(_createEjectDeviceResultCode);
  _system_storage.callMethod('ejectDevice', [id, completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getAvailableCapacity">
+<button class="show-code">Code</button>
+Future&lt;<a href="../chrome.system/StorageAvailableCapacityInfo.html">StorageAvailableCapacityInfo</a>&gt; <strong>getAvailableCapacity</strong>(String id) <a class="anchor-link" href="#getAvailableCapacity"
+              title="Permalink to ChromeSystemStorage.getAvailableCapacity">#</a></h4>
+<div class="doc">
+<p>Get the available capacity of a specified 
+<span class="param">id</span> storage device. The 
+<span class="param">id</span> is
+the transient device ID from StorageUnitInfo.</p>
+<pre class="source">
+Future&lt;StorageAvailableCapacityInfo&gt; getAvailableCapacity(String id) {
+ if (_system_storage == null) _throwNotAvailable();
+
+ var completer = new ChromeCompleter&lt;StorageAvailableCapacityInfo&gt;.oneArg(_createStorageAvailableCapacityInfo);
+ _system_storage.callMethod('getAvailableCapacity', [id, completer.callback]);
  return completer.future;
 }
 </pre>

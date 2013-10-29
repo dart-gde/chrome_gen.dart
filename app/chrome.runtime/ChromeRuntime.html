@@ -134,6 +134,16 @@ class ChromeRuntime extends ChromeApi {
  }
 
  /**
+  * Restart the ChromeOS device when the app runs in kiosk mode. Otherwise,
+  * it's no-op.
+  */
+ void restart() {
+   if (_runtime == null) _throwNotAvailable();
+
+   _runtime.callMethod('restart');
+ }
+
+ /**
   * Attempts to connect to other listeners within the extension/app (such as
   * the background page), or other extensions/apps. This is useful for content
   * scripts connecting to their extension processes. Note that this does not
@@ -184,11 +194,11 @@ class ChromeRuntime extends ChromeApi {
   * occurs while connecting to the extension, the callback will be called with
   * no arguments and [runtime.lastError] will be set to the error message.
   */
- Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId]) {
+ Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId, Map options]) {
    if (_runtime == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
-   _runtime.callMethod('sendMessage', [extensionId, jsify(message), completer.callback]);
+   _runtime.callMethod('sendMessage', [extensionId, jsify(message), jsify(options), completer.callback]);
    return completer.future;
  }
 
@@ -736,9 +746,25 @@ Future&lt;RequestUpdateCheckResult&gt; requestUpdateCheck() {
 </pre>
 </div>
 </div>
+<div class="method"><h4 id="restart">
+<button class="show-code">Code</button>
+void <strong>restart</strong>() <a class="anchor-link" href="#restart"
+              title="Permalink to ChromeRuntime.restart">#</a></h4>
+<div class="doc">
+<p>Restart the ChromeOS device when the app runs in kiosk mode. Otherwise,
+it's no-op.</p>
+<pre class="source">
+void restart() {
+ if (_runtime == null) _throwNotAvailable();
+
+ _runtime.callMethod('restart');
+}
+</pre>
+</div>
+</div>
 <div class="method"><h4 id="sendMessage">
 <button class="show-code">Code</button>
-Future&lt;dynamic&gt; <strong>sendMessage</strong>(message, [String extensionId]) <a class="anchor-link" href="#sendMessage"
+Future&lt;dynamic&gt; <strong>sendMessage</strong>(message, [String extensionId, Map options]) <a class="anchor-link" href="#sendMessage"
               title="Permalink to ChromeRuntime.sendMessage">#</a></h4>
 <div class="doc">
 <p>Sends a single message to onMessage event listeners within the extension
@@ -755,11 +781,11 @@ The JSON response object sent by the handler of the message. If an error
 occurs while connecting to the extension, the callback will be called with
 no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
-Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId]) {
+Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId, Map options]) {
  if (_runtime == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
- _runtime.callMethod('sendMessage', [extensionId, jsify(message), completer.callback]);
+ _runtime.callMethod('sendMessage', [extensionId, jsify(message), jsify(options), completer.callback]);
  return completer.future;
 }
 </pre>

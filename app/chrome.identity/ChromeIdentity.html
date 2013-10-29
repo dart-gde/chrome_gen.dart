@@ -99,6 +99,11 @@ class ChromeIdentity extends ChromeApi {
    return completer.future;
  }
 
+ Stream&lt;OnSignInChangedEvent&gt; get onSignInChanged =&gt; _onSignInChanged.stream;
+
+ final ChromeStreamController&lt;OnSignInChangedEvent&gt; _onSignInChanged =
+     new ChromeStreamController&lt;OnSignInChangedEvent&gt;.twoArgs(_identity, 'onSignInChanged', _createOnSignInChangedEvent);
+
  void _throwNotAvailable() {
    throw new UnsupportedError("'chrome.identity' is not available");
  }
@@ -123,6 +128,18 @@ avilable are:</p><ul><li>a permission is missing in the application's manifest.j
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
 <pre class="source">
 bool get available =&gt; _identity != null;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onSignInChanged">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.identity/OnSignInChangedEvent.html">OnSignInChangedEvent</a>&gt;         <strong>onSignInChanged</strong> <a class="anchor-link"
+            href="#onSignInChanged"
+            title="Permalink to ChromeIdentity.onSignInChanged">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;OnSignInChangedEvent&gt; get onSignInChanged =&gt; _onSignInChanged.stream;
 </pre>
 </div>
 </div>

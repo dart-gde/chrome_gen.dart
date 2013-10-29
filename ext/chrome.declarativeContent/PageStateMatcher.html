@@ -49,9 +49,12 @@ class PageStateMatcher extends ChromeObject {
  set pageUrl(UrlFilter value) =&gt; proxy['pageUrl'] = jsify(value);
 
  /**
-  * Matches if all of the CSS selectors in the array match in a frame with the
-  * same origin as the page's main frame.  Note that listing hundreds of CSS
-  * selectors here can slow down web sites.
+  * Matches if all of the CSS selectors in the array match displayed elements
+  * in a frame with the same origin as the page's main frame.  All selectors in
+  * this array must be [compound
+  * selectors](http://www.w3.org/TR/selectors4/#compound) to speed up matching.
+  * Note that listing hundreds of CSS selectors or CSS selectors that match
+  * hundreds of times per page can still slow down web sites.
   */
  List&lt;String&gt; get css =&gt; listify(proxy['css']);
  set css(List&lt;String&gt; value) =&gt; proxy['css'] = jsify(value);
@@ -104,9 +107,12 @@ List&lt;String&gt;         <strong>css</strong> <a class="anchor-link"
             title="Permalink to PageStateMatcher.css">#</a>
         </h4>
         <div class="doc">
-<p>Matches if all of the CSS selectors in the array match in a frame with the
-same origin as the page's main frame.  Note that listing hundreds of CSS
-selectors here can slow down web sites.</p>
+<p>Matches if all of the CSS selectors in the array match displayed elements
+in a frame with the same origin as the page's main frame.  All selectors in
+this array must be <a href="http://www.w3.org/TR/selectors4/#compound">compound
+selectors</a> to speed up matching.
+Note that listing hundreds of CSS selectors or CSS selectors that match
+hundreds of times per page can still slow down web sites.</p>
 <pre class="source">
 List&lt;String&gt; get css =&gt; listify(proxy['css']);
 </pre>

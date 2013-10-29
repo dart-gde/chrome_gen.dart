@@ -169,6 +169,21 @@ class AppWindow extends ChromeObject {
  void setIcon(String icon_url) {
    proxy.callMethod('setIcon', [icon_url]);
  }
+
+ /**
+  * Is the window always on top? Currently available in the Dev channel only.
+  */
+ bool isAlwaysOnTop() {
+   return proxy.callMethod('isAlwaysOnTop');
+ }
+
+ /**
+  * Set whether the window should stay above most other windows. Currently
+  * available in the Dev channel only.
+  */
+ void setAlwaysOnTop(bool always_on_top) {
+   proxy.callMethod('setAlwaysOnTop', [always_on_top]);
+ }
 }
 </pre>
 </div>
@@ -331,6 +346,19 @@ void hide() {
 </pre>
 </div>
 </div>
+<div class="method"><h4 id="isAlwaysOnTop">
+<button class="show-code">Code</button>
+bool <strong>isAlwaysOnTop</strong>() <a class="anchor-link" href="#isAlwaysOnTop"
+              title="Permalink to AppWindow.isAlwaysOnTop">#</a></h4>
+<div class="doc">
+<p>Is the window always on top? Currently available in the Dev channel only.</p>
+<pre class="source">
+bool isAlwaysOnTop() {
+ return proxy.callMethod('isAlwaysOnTop');
+}
+</pre>
+</div>
+</div>
 <div class="method"><h4 id="isFullscreen">
 <button class="show-code">Code</button>
 bool <strong>isFullscreen</strong>() <a class="anchor-link" href="#isFullscreen"
@@ -435,6 +463,20 @@ void <strong>restore</strong>() <a class="anchor-link" href="#restore"
 <pre class="source">
 void restore() {
  proxy.callMethod('restore');
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setAlwaysOnTop">
+<button class="show-code">Code</button>
+void <strong>setAlwaysOnTop</strong>(bool always_on_top) <a class="anchor-link" href="#setAlwaysOnTop"
+              title="Permalink to AppWindow.setAlwaysOnTop">#</a></h4>
+<div class="doc">
+<p>Set whether the window should stay above most other windows. Currently
+available in the Dev channel only.</p>
+<pre class="source">
+void setAlwaysOnTop(bool always_on_top) {
+ proxy.callMethod('setAlwaysOnTop', [always_on_top]);
 }
 </pre>
 </div>

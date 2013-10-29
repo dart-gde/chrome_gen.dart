@@ -41,12 +41,13 @@ class ChromeNotifications extends ChromeApi {
  bool get available =&gt; _notifications != null;
 
  /**
-  * Creates and displays a notification having the contents in [options],
-  * identified by the id [notificationId]. If [notificationId] is empty,
-  * [create] generates an id. If [notificationId] matches an existing
-  * notification, [create] first clears that notification before proceeding
-  * with the create operation. [callback] returns the notification id (either
-  * supplied or generated) that represents the created notification.
+  * Creates and displays a notification.
+  * [notificationId]: Identifier of the notification. If it is empty, this
+  * method generates an id. If it matches an existing notification, this method
+  * first clears that notification before proceeding with the create operation.
+  * [options]: Contents of the notification.
+  * [callback]: Returns the notification id (either supplied or generated) that
+  * represents the created notification.
   */
  Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
    if (_notifications == null) _throwNotAvailable();
@@ -57,9 +58,11 @@ class ChromeNotifications extends ChromeApi {
  }
 
  /**
-  * Updates an existing notification having the id [notificationId] and the
-  * options [options]. [callback] indicates whether a matching notification
-  * existed.
+  * Updates an existing notification.
+  * [notificationId]: The id of the notification to be updated. This is
+  * returned by [notifications.create] method.
+  * [options]: Contents of the notification to update to.
+  * [callback]: Called to indicate whether a matching notification existed.
   */
  Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
    if (_notifications == null) _throwNotAvailable();
@@ -70,9 +73,10 @@ class ChromeNotifications extends ChromeApi {
  }
 
  /**
-  * Given a [notificationId] returned by the [create] method, clears the
-  * corresponding notification. [callback] indicates whether a matching
-  * notification existed.
+  * Clears the specified notification.
+  * [notificationId]: The id of the notification to be cleared. This is
+  * returned by [notifications.create] method.
+  * [callback]: Called to indicate whether a matching notification existed.
   */
  Future&lt;bool&gt; clear(String notificationId) {
    if (_notifications == null) _throwNotAvailable();
@@ -83,14 +87,27 @@ class ChromeNotifications extends ChromeApi {
  }
 
  /**
-  * [callback] is executed with the set of notification_ids currently in the
-  * system.
+  * Retrieves all the notifications.
+  * [callback]: Returns the set of notification_ids currently in the system.
   */
  Future&lt;dynamic&gt; getAll() {
    if (_notifications == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _notifications.callMethod('getAll', [completer.callback]);
+   return completer.future;
+ }
+
+ /**
+  * Retrieves whether the user has enabled notifications from this app or
+  * extension.
+  * [callback]: Returns the current permission level.
+  */
+ Future&lt;PermissionLevel&gt; getPermissionLevel() {
+   if (_notifications == null) _throwNotAvailable();
+
+   var completer = new ChromeCompleter&lt;PermissionLevel&gt;.oneArg(_createPermissionLevel);
+   _notifications.callMethod('getPermissionLevel', [completer.callback]);
    return completer.future;
  }
 
@@ -108,6 +125,11 @@ class ChromeNotifications extends ChromeApi {
 
  final ChromeStreamController&lt;OnButtonClickedEvent&gt; _onButtonClicked =
      new ChromeStreamController&lt;OnButtonClickedEvent&gt;.twoArgs(_notifications, 'onButtonClicked', _createOnButtonClickedEvent);
+
+ Stream&lt;PermissionLevel&gt; get onPermissionLevelChanged =&gt; _onPermissionLevelChanged.stream;
+
+ final ChromeStreamController&lt;PermissionLevel&gt; _onPermissionLevelChanged =
+     new ChromeStreamController&lt;PermissionLevel&gt;.oneArg(_notifications, 'onPermissionLevelChanged', _createPermissionLevel);
 
  void _throwNotAvailable() {
    throw new UnsupportedError("'chrome.notifications' is not available");
@@ -172,6 +194,18 @@ Stream&lt;OnClosedEvent&gt; get onClosed =&gt; _onClosed.stream;
 </pre>
 </div>
 </div>
+<div class="field"><h4 id="onPermissionLevelChanged">
+<button class="show-code">Code</button>
+final Stream&lt;<a href="../chrome.notifications/PermissionLevel.html">PermissionLevel</a>&gt;         <strong>onPermissionLevelChanged</strong> <a class="anchor-link"
+            href="#onPermissionLevelChanged"
+            title="Permalink to ChromeNotifications.onPermissionLevelChanged">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Stream&lt;PermissionLevel&gt; get onPermissionLevelChanged =&gt; _onPermissionLevelChanged.stream;
+</pre>
+</div>
+</div>
 </div>
 <div>
 <h3>Methods</h3>
@@ -180,10 +214,11 @@ Stream&lt;OnClosedEvent&gt; get onClosed =&gt; _onClosed.stream;
 Future&lt;bool&gt; <strong>clear</strong>(String notificationId) <a class="anchor-link" href="#clear"
               title="Permalink to ChromeNotifications.clear">#</a></h4>
 <div class="doc">
-<p>Given a 
-<span class="param">notificationId</span> returned by the <a class="crossref" href="../chrome.notifications/ChromeNotifications.html#create">create</a> method, clears the
-corresponding notification. <code>callback</code> indicates whether a matching
-notification existed.</p>
+<p>Clears the specified notification.
+
+<span class="param">notificationId</span>: The id of the notification to be cleared. This is
+returned by <code>notifications.create</code> method.
+<code>callback</code>: Called to indicate whether a matching notification existed.</p>
 <pre class="source">
 Future&lt;bool&gt; clear(String notificationId) {
  if (_notifications == null) _throwNotAvailable();
@@ -200,16 +235,15 @@ Future&lt;bool&gt; clear(String notificationId) {
 Future&lt;String&gt; <strong>create</strong>(String notificationId, <a href="../chrome.notifications/NotificationOptions.html">NotificationOptions</a> options) <a class="anchor-link" href="#create"
               title="Permalink to ChromeNotifications.create">#</a></h4>
 <div class="doc">
-<p>Creates and displays a notification having the contents in 
-<span class="param">options</span>,
-identified by the id 
-<span class="param">notificationId</span>. If 
-<span class="param">notificationId</span> is empty,
-<a class="crossref" href="../chrome.notifications/ChromeNotifications.html#create">create</a> generates an id. If 
-<span class="param">notificationId</span> matches an existing
-notification, <a class="crossref" href="../chrome.notifications/ChromeNotifications.html#create">create</a> first clears that notification before proceeding
-with the create operation. <code>callback</code> returns the notification id (either
-supplied or generated) that represents the created notification.</p>
+<p>Creates and displays a notification.
+
+<span class="param">notificationId</span>: Identifier of the notification. If it is empty, this
+method generates an id. If it matches an existing notification, this method
+first clears that notification before proceeding with the create operation.
+
+<span class="param">options</span>: Contents of the notification.
+<code>callback</code>: Returns the notification id (either supplied or generated) that
+represents the created notification.</p>
 <pre class="source">
 Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
  if (_notifications == null) _throwNotAvailable();
@@ -226,8 +260,8 @@ Future&lt;String&gt; create(String notificationId, NotificationOptions options) 
 Future&lt;dynamic&gt; <strong>getAll</strong>() <a class="anchor-link" href="#getAll"
               title="Permalink to ChromeNotifications.getAll">#</a></h4>
 <div class="doc">
-<p><code>callback</code> is executed with the set of notification_ids currently in the
-system.</p>
+<p>Retrieves all the notifications.
+<code>callback</code>: Returns the set of notification_ids currently in the system.</p>
 <pre class="source">
 Future&lt;dynamic&gt; getAll() {
  if (_notifications == null) _throwNotAvailable();
@@ -239,16 +273,37 @@ Future&lt;dynamic&gt; getAll() {
 </pre>
 </div>
 </div>
+<div class="method"><h4 id="getPermissionLevel">
+<button class="show-code">Code</button>
+Future&lt;<a href="../chrome.notifications/PermissionLevel.html">PermissionLevel</a>&gt; <strong>getPermissionLevel</strong>() <a class="anchor-link" href="#getPermissionLevel"
+              title="Permalink to ChromeNotifications.getPermissionLevel">#</a></h4>
+<div class="doc">
+<p>Retrieves whether the user has enabled notifications from this app or
+extension.
+<code>callback</code>: Returns the current permission level.</p>
+<pre class="source">
+Future&lt;PermissionLevel&gt; getPermissionLevel() {
+ if (_notifications == null) _throwNotAvailable();
+
+ var completer = new ChromeCompleter&lt;PermissionLevel&gt;.oneArg(_createPermissionLevel);
+ _notifications.callMethod('getPermissionLevel', [completer.callback]);
+ return completer.future;
+}
+</pre>
+</div>
+</div>
 <div class="method"><h4 id="update">
 <button class="show-code">Code</button>
 Future&lt;bool&gt; <strong>update</strong>(String notificationId, <a href="../chrome.notifications/NotificationOptions.html">NotificationOptions</a> options) <a class="anchor-link" href="#update"
               title="Permalink to ChromeNotifications.update">#</a></h4>
 <div class="doc">
-<p>Updates an existing notification having the id 
-<span class="param">notificationId</span> and the
-options 
-<span class="param">options</span>. <code>callback</code> indicates whether a matching notification
-existed.</p>
+<p>Updates an existing notification.
+
+<span class="param">notificationId</span>: The id of the notification to be updated. This is
+returned by <code>notifications.create</code> method.
+
+<span class="param">options</span>: Contents of the notification to update to.
+<code>callback</code>: Called to indicate whether a matching notification existed.</p>
 <pre class="source">
 Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
  if (_notifications == null) _throwNotAvailable();

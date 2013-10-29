@@ -34,13 +34,17 @@
 <div class="doc">
 <pre class="source">
 class MediaStreamConstraint extends ChromeObject {
- MediaStreamConstraint({var mandatory}) {
+ MediaStreamConstraint({var mandatory, var optional}) {
    if (mandatory != null) this.mandatory = mandatory;
+   if (optional != null) this.optional = optional;
  }
  MediaStreamConstraint.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
  dynamic get mandatory =&gt; proxy['mandatory'];
  set mandatory(var value) =&gt; proxy['mandatory'] = jsify(value);
+
+ dynamic get optional =&gt; proxy['_optional'];
+ set optional(var value) =&gt; proxy['_optional'] = jsify(value);
 }
 </pre>
 </div>
@@ -51,7 +55,7 @@ class MediaStreamConstraint extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>MediaStreamConstraint</strong>({mandatory}) <a class="anchor-link" href="#"
+new <strong>MediaStreamConstraint</strong>({mandatory, optional}) <a class="anchor-link" href="#"
               title="Permalink to MediaStreamConstraint.MediaStreamConstraint">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -59,8 +63,9 @@ new <strong>MediaStreamConstraint</strong>({mandatory}) <a class="anchor-link" h
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-MediaStreamConstraint({var mandatory}) {
+MediaStreamConstraint({var mandatory, var optional}) {
  if (mandatory != null) this.mandatory = mandatory;
+ if (optional != null) this.optional = optional;
 }
 </pre>
 </div>
@@ -94,6 +99,21 @@ dynamic get mandatory =&gt; proxy['mandatory'];
 </pre>
 <pre class="source">
 set mandatory(var value) =&gt; proxy['mandatory'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="optional">
+<button class="show-code">Code</button>
+var         <strong>optional</strong> <a class="anchor-link"
+            href="#optional"
+            title="Permalink to MediaStreamConstraint.optional">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+dynamic get optional =&gt; proxy['_optional'];
+</pre>
+<pre class="source">
+set optional(var value) =&gt; proxy['_optional'] = jsify(value);
 </pre>
 </div>
 </div>
