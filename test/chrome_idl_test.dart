@@ -34,6 +34,15 @@ void main() {
         chromeIDLParserTypeBodyTests);
   group('ChromeIDLParser.typeDeclaration.parse',
         chromeIDLParserTypeDeclarationTests);
+  group('ChromeIDLParser.methods.parser', chromeIDLParserMethodsTests);
+  group('ChromeIDLParser.functionDeclaration.parser',
+      chromeIDLParserFunctionDeclarationTests);
+  group('ChromeIDLParser.eventDeclaration.parser',
+      chromeIDLParserEventDeclarationTests);
+  group('ChromeIDLParser.namespaceDeclaration.parser',
+      chromeIDLParserNamespaceDeclarationTests);
+
+  group('ChromeIDLParser misc parsing tests', miscParsingTests);
 }
 
 void chromeIDLParserDocStringTests() {
@@ -1025,4 +1034,703 @@ dictionary GetServicesOptions {
     expect(typeDeclaration.methods.length, equals(7));
   });
 }
+
+void chromeIDLParserMethodsTests() {
+  test('simple method defined', () {
+    List<IDLMethod> methods = chromeIDLParser.methods
+        .parse("static Sizes[] resizeTo(long width, long height);");
+
+    expect(methods, isNotNull);
+    expect(methods.length, 1);
+    expect(methods[0].name, equals("resizeTo"));
+    expect(methods[0].parameters.length, 2);
+    IDLParameter parameter = methods[0].parameters[0];
+    expect(parameter.name, equals("width"));
+    expect(parameter.type.name, equals("long"));
+    parameter = methods[0].parameters[1];
+    expect(parameter.name, equals("height"));
+    expect(parameter.type.name, equals("long"));
+    expect(methods[0].attribute, isNull);
+    expect(methods[0].returnType.name, equals("Sizes"));
+    expect(methods[0].returnType.isArray, isTrue);
+    expect(methods[0].documentation, isEmpty);
+
+  });
+}
+
+void chromeIDLParserFunctionDeclarationTests() {
+  test('test Functions declaration single function', () {
+    IDLFunctionDeclaration functionDeclaration = chromeIDLParser.functionDeclaration
+        .parse("""interface Functions {
+    // Gets resources required to render the API.
+    //
+    static void getResources(GetResourcesCallback callback);
+  };
+""");
+
+    expect(functionDeclaration, isNotNull);
+    expect(functionDeclaration.name, equals("Functions"));
+    expect(functionDeclaration.methods.length, equals(1));
+    expect(functionDeclaration.methods[0].name, equals("getResources"));
+  });
+}
+
+void chromeIDLParserEventDeclarationTests() {
+  test('test Events declaration single event', () {
+    IDLEventDeclaration eventDeclaration = chromeIDLParser.eventDeclaration
+        .parse("""interface Events {
+    // Fired when a web flow dialog should be displayed.
+    static void onWebFlowRequest(DOMString key, DOMString url, DOMString mode);
+  };
+""");
+
+    expect(eventDeclaration, isNotNull);
+    expect(eventDeclaration.name, equals("Events"));
+    expect(eventDeclaration.methods.length, equals(1));
+    expect(eventDeclaration.methods[0].name, equals("onWebFlowRequest"));
+    expect(eventDeclaration.methods[0].parameters.length, equals(3));
+  });
+}
+
+void chromeIDLParserNamespaceBodyTests() {
+  test('single dictionary in body', () {
+    List namespaceBody = chromeIDLParser.namespaceBody
+        .parse("""
+      dictionary AdapterState {
+    // The address of the adapter, in the format 'XX:XX:XX:XX:XX:XX'.
+    DOMString address;
+
+    // The human-readable name of the adapter.
+    DOMString name;
+
+    // Indicates whether or not the adapter has power.
+    boolean powered;
+
+    // Indicates whether or not the adapter is available (i.e. enabled).
+    boolean available;
+
+    // Indicates whether or not the adapter is currently discovering.
+    boolean discovering;
+  };
+""");
+
+    expect(namespaceBody, isNotNull);
+    expect(namespaceBody.length, equals(1));
+    expect(namespaceBody[0] is IDLTypeDeclaration, isTrue);
+    expect(namespaceBody[0].name, equals("AdapterState"));
+    expect((namespaceBody[0] as IDLTypeDeclaration).members.length, equals(5));
+  });
+
+  test('multiple dictionary in body', () {
+    List namespaceBody = chromeIDLParser.namespaceBody
+        .parse("""dictionary AdapterState {
+    // The address of the adapter, in the format 'XX:XX:XX:XX:XX:XX'.
+    DOMString address;
+
+    // The human-readable name of the adapter.
+    DOMString name;
+
+    // Indicates whether or not the adapter has power.
+    boolean powered;
+
+    // Indicates whether or not the adapter is available (i.e. enabled).
+    boolean available;
+
+    // Indicates whether or not the adapter is currently discovering.
+    boolean discovering;
+  };
+
+  dictionary Device {
+    // The address of the device, in the format 'XX:XX:XX:XX:XX:XX'.
+    DOMString address;
+
+    // The human-readable name of the device.
+    DOMString? name;
+
+    // Indicates whether or not the device is paired with the system.
+    boolean? paired;
+
+    // Indicates whether the device is currently connected to the system.
+    boolean? connected;
+  };
+};
+""");
+
+    expect(namespaceBody, isNotNull);
+    expect(namespaceBody.length, equals(2));
+    expect(namespaceBody[0] is IDLTypeDeclaration, isTrue);
+    expect(namespaceBody[0].name, equals("AdapterState"));
+    expect((namespaceBody[0] as IDLTypeDeclaration).members.length, equals(5));
+    expect(namespaceBody[1] is IDLTypeDeclaration, isTrue);
+    expect(namespaceBody[1].name, equals("AdapterState"));
+    expect((namespaceBody[1] as IDLTypeDeclaration).members.length, equals(4));
+  });
+
+  test('single interface in body', () {
+    List namespaceBody = chromeIDLParser.namespaceBody
+        .parse("""
+  // These functions all report failures via chrome.runtime.lastError.
+  interface Functions {
+    // Registers the JavaScript application as an implementation for the given
+    // Profile; if a channel or PSM is specified, the profile will be exported
+    // in the host's SDP and GATT tables and advertised to other devices.
+    static void addProfile(Profile profile, ResultCallback callback);
+};
+""");
+
+    expect(namespaceBody, isNotNull);
+    expect(namespaceBody.length, equals(1));
+    expect(namespaceBody[0] is IDLFunctionDeclaration, isTrue);
+    expect(namespaceBody[0].name, equals("Functions"));
+    expect((namespaceBody[0] as IDLFunctionDeclaration).methods.length, equals(1));
+  });
+
+  test('multiple interface in body', () {
+    List namespaceBody = chromeIDLParser.namespaceBody
+        .parse("""
+  // These functions all report failures via chrome.runtime.lastError.
+  interface Functions {
+    // Registers the JavaScript application as an implementation for the given
+    // Profile; if a channel or PSM is specified, the profile will be exported
+    // in the host's SDP and GATT tables and advertised to other devices.
+    static void addProfile(Profile profile, ResultCallback callback);
+  };
+
+
+  interface Events {
+    // Fired when the state of the Bluetooth adapter changes.
+    // |state| : The new state of the adapter.
+    static void onAdapterStateChanged(AdapterState state);
+
+    // Fired when a connection has been made for a registered profile.
+    // |socket| : The socket for the connection.
+    static void onConnection(Socket socket);
+  };
+""");
+
+    expect(namespaceBody, isNotNull);
+    expect(namespaceBody.length, equals(2));
+    expect(namespaceBody[0] is IDLFunctionDeclaration, isTrue);
+    expect(namespaceBody[0].name, equals("Functions"));
+    expect((namespaceBody[0] as IDLFunctionDeclaration).methods.length, equals(1));
+    expect(namespaceBody[1] is IDLEventDeclaration, isTrue);
+    expect(namespaceBody[1].name, equals("Events"));
+    expect((namespaceBody[1] as IDLEventDeclaration).methods.length, equals(2));
+  });
+
+  test('single enum in body', () {
+    List namespaceBody = chromeIDLParser.namespaceBody
+        .parse("""
+  enum SocketType {
+    tcp,
+    udp
+  };
+""");
+
+    expect(namespaceBody, isNotNull);
+    expect(namespaceBody.length, equals(1));
+    expect(namespaceBody[0] is IDLEnumDeclaration, isTrue);
+    expect(namespaceBody[0].name, equals("SocketType"));
+    expect((namespaceBody[0] as IDLEnumDeclaration).enums.length, equals(2));
+  });
+
+  test('multiple enum in body', () {
+    List namespaceBody = chromeIDLParser.namespaceBody
+        .parse("""
+  enum DataBit { sevenbit, eightbit };
+  enum ParityBit { noparity, oddparity, evenparity };
+  enum StopBit { onestopbit, twostopbit };
+""");
+
+    expect(namespaceBody, isNotNull);
+    expect(namespaceBody.length, equals(3));
+    expect(namespaceBody[0] is IDLEnumDeclaration, isTrue);
+    expect(namespaceBody[0].name, equals("DataBit"));
+    expect((namespaceBody[0] as IDLEnumDeclaration).enums.length, equals(2));
+
+    expect(namespaceBody[1] is IDLEnumDeclaration, isTrue);
+    expect(namespaceBody[1].name, equals("ParityBit"));
+    expect((namespaceBody[1] as IDLEnumDeclaration).enums.length, equals(3));
+
+    expect(namespaceBody[2] is IDLEnumDeclaration, isTrue);
+    expect(namespaceBody[2].name, equals("StopBit"));
+    expect((namespaceBody[2] as IDLEnumDeclaration).enums.length, equals(2));
+  });
+
+  test('single callback in body', () {
+    List namespaceBody = chromeIDLParser.namespaceBody
+        .parse("""
+callback OpenCallback = void (OpenInfo openInfo);
+""");
+
+    expect(namespaceBody, isNotNull);
+    expect(namespaceBody.length, equals(1));
+    expect(namespaceBody[0] is IDLCallbackDeclaration, isTrue);
+    expect(namespaceBody[0].name, equals("OpenCallback"));
+    expect((namespaceBody[0] as IDLCallbackDeclaration).parameters.length,
+        equals(2));
+  });
+
+  test('multiple callback in body', () {
+    List namespaceBody = chromeIDLParser.namespaceBody
+        .parse("""
+  callback OpenCallback = void (OpenInfo openInfo);
+
+  // Returns true if operation was successful.
+  callback CloseCallback = void (boolean result);
+""");
+
+    expect(namespaceBody, isNotNull);
+    expect(namespaceBody.length, equals(1));
+    expect(namespaceBody[0] is IDLCallbackDeclaration, isTrue);
+    expect(namespaceBody[0].name, equals("OpenCallback"));
+    expect((namespaceBody[0] as IDLCallbackDeclaration).parameters.length,
+        equals(1));
+
+    expect(namespaceBody[1] is IDLCallbackDeclaration, isTrue);
+    expect(namespaceBody[1].name, equals("CloseCallback"));
+    expect((namespaceBody[1] as IDLCallbackDeclaration).parameters.length,
+        equals(1));
+  });
+
+  test('mixed body', () {
+    List namespaceBody = chromeIDLParser.namespaceBody
+        .parse("""
+  callback GetPortsCallback = void (DOMString[] ports);
+
+  enum DataBit { sevenbit, eightbit };
+  enum ParityBit { noparity, oddparity, evenparity };
+  enum StopBit { onestopbit, twostopbit };
+
+  dictionary OpenOptions {
+    // The requested bitrate of the connection to be opened. For compatibility
+    // with the widest range of hardware, this number should match one of
+    // commonly-available bitrates, such as 110, 300, 1200, 2400, 4800, 9600,
+    // 14400, 19200, 38400, 57600, 115200. There is no guarantee, of course,
+    // that the device connected to the serial port will support the requested
+    // bitrate, even if the port itself supports that bitrate. <code>9600</code>
+    // will be passed by default.
+    long? bitrate;
+    // <code>"eightbit"</code> will be passed by default.
+    DataBit? dataBit;
+    // <code>"noparity"</code> will be passed by default.
+    ParityBit? parityBit;
+    // <code>"onestopbit"</code> will be passed by default.
+    StopBit? stopBit;
+  };
+
+  dictionary OpenInfo {
+    // The id of the opened connection.
+    long connectionId;
+  };
+
+  callback OpenCallback = void (OpenInfo openInfo);
+
+  // Returns true if operation was successful.
+  callback CloseCallback = void (boolean result);
+
+  dictionary ReadInfo {
+    // The number of bytes received, or a negative number if an error occurred.
+    // This number will be smaller than the number of bytes requested in the
+    // original read call if the call would need to block to read that number
+    // of bytes.
+    long bytesRead;
+
+    // The data received.
+    ArrayBuffer data;
+  };
+
+  callback ReadCallback = void (ReadInfo readInfo);
+
+  dictionary WriteInfo {
+    // The number of bytes written.
+    long bytesWritten;
+  };
+
+  callback WriteCallback = void (WriteInfo writeInfo);
+
+  // Returns true if operation was successful.
+  callback FlushCallback = void (boolean result);
+
+  // Boolean true = mark signal (negative serial voltage).
+  // Boolean false = space signal (positive serial voltage).
+  //
+  // For SetControlSignals, include the sendable signals that you wish to
+  // change. Signals not included in the dictionary will be left unchanged.
+  //
+  // GetControlSignals includes all receivable signals.
+  dictionary ControlSignalOptions {
+    // Serial control signals that your machine can send. Missing fields will
+    // be set to false.
+    boolean? dtr;
+    boolean? rts;
+
+    // Serial control signals that your machine can receive. If a get operation
+    // fails, success will be false, and these fields will be absent.
+    //
+    // DCD (Data Carrier Detect) is equivalent to RLSD (Receive Line Signal
+    // Detect) on some platforms.
+    boolean? dcd;
+    boolean? cts;
+  };
+
+  // Returns a snapshot of current control signals.
+  callback GetControlSignalsCallback = void (ControlSignalOptions options);
+
+  // Returns true if operation was successful.
+  callback SetControlSignalsCallback = void (boolean result);
+
+  interface Functions {
+    // Returns names of valid ports on this machine, each of which is likely to
+    // be valid to pass as the port argument to open(). The list is regenerated
+    // each time this method is called, as port validity is dynamic.
+    //
+    // |callback| : Called with the list of ports.
+    static void getPorts(GetPortsCallback callback);
+
+    // Opens a connection to the given serial port.
+    // |port| : The name of the serial port to open.
+    // |options| : Connection options.
+    // |callback| : Called when the connection has been opened.
+    static void open(DOMString port,
+                     optional OpenOptions options,
+                     OpenCallback callback);
+
+    // Closes an open connection.
+    // |connectionId| : The id of the opened connection.
+    // |callback| : Called when the connection has been closed.
+    static void close(long connectionId,
+                      CloseCallback callback);
+
+    // Reads a byte from the given connection.
+    // |connectionId| : The id of the connection.
+    // |bytesToRead| : The number of bytes to read.
+    // |callback| : Called when all the requested bytes have been read or
+    //              when the read blocks.
+    static void read(long connectionId,
+                     long bytesToRead,
+                     ReadCallback callback);
+
+    // Writes a string to the given connection.
+    // |connectionId| : The id of the connection.
+    // |data| : The string to write.
+    // |callback| : Called when the string has been written.
+    static void write(long connectionId,
+                      ArrayBuffer data,
+                      WriteCallback callback);
+
+    // Flushes all bytes in the given connection's input and output buffers.
+    // |connectionId| : The id of the connection.
+    // |callback| : Called when the flush is complete.
+    static void flush(long connectionId,
+                      FlushCallback callback);
+
+    static void getControlSignals(long connectionId,
+                                  GetControlSignalsCallback callback);
+
+    static void setControlSignals(long connectionId,
+                                  ControlSignalOptions options,
+                                  SetControlSignalsCallback callback);
+  };
+""");
+
+    expect(namespaceBody, isNotNull);
+    expect(namespaceBody.length, equals(17));
+  });
+}
+
+void chromeIDLParserNamespaceDeclarationTests() {
+  test('complete namespace test', () {
+    IDLNamespaceDeclaration namespaceDeclaration = chromeIDLParser
+        .namespaceDeclaration.parse("""// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// Use the <code>chrome.syncFileSystem</code> API to save and synchronize data
+// on Google Drive. This API is NOT for accessing arbitrary user docs stored in
+// Google Drive. It provides app-specific syncable storage for offline and
+// caching usage so that the same data can be available across different
+// clients. Read <a href="app_storage.html">Manage Data</a> for more on using
+// this API.
+namespace syncFileSystem {
+  enum SyncAction {
+    added, updated, deleted
+  };
+
+  enum ServiceStatus {
+    // The sync service is being initialized (e.g. restoring data from the
+    // database, checking connectivity and authenticating to the service etc).
+    initializing,
+
+    // The sync service is up and running.
+    running,
+
+    // The sync service is not synchronizing files because the remote service
+    // needs to be authenticated by the user to proceed.
+    authentication_required,
+
+    // The sync service is not synchronizing files because the remote service
+    // is (temporarily) unavailable due to some recoverable errors, e.g.
+    // network is offline, the remote service is down or not
+    // reachable etc. More details should be given by |description| parameter
+    // in OnServiceInfoUpdated (which could contain service-specific details).
+    temporary_unavailable,
+
+    // The sync service is disabled and the content will never sync.
+    // (E.g. this could happen when the user has no account on
+    // the remote service or the sync service has had an unrecoverable
+    // error.)
+    disabled
+  };
+
+  enum FileStatus {
+    // Not conflicting and has no pending local changes.
+    synced,
+
+    // Has one or more pending local changes that haven't been synchronized.
+    pending,
+
+    // File conflicts with remote version and must be resolved manually.
+    conflicting
+  };
+
+  enum SyncDirection {
+    local_to_remote, remote_to_local
+  };
+
+  enum ConflictResolutionPolicy {
+    last_write_win, manual
+  };
+
+  dictionary FileInfo {
+    // <code>fileEntry</code> for the target file whose status has changed.
+    // Contains name and path information of synchronized file.
+    // On file deletion,
+    // <code>fileEntry</code> information will still be available
+    // but file will no longer exist.
+    [instanceOf=Entry] object fileEntry;
+
+    // Resulting file status after \$ref:onFileStatusChanged event.
+    // The status value can be <code>'synced'</code>,
+    // <code>'pending'</code> or <code>'conflicting'</code>.
+    FileStatus status;
+
+    // Sync action taken to fire \$ref:onFileStatusChanged event.
+    // The action value can be
+    // <code>'added'</code>, <code>'updated'</code> or <code>'deleted'</code>.
+    // Only applies if status is <code>'synced'</code>.
+    SyncAction? action;
+
+    // Sync direction for the \$ref:onFileStatusChanged event.
+    // Sync direction value can be
+    // <code>'local_to_remote'</code> or <code>'remote_to_local'</code>.
+    // Only applies if status is <code>'synced'</code>.
+    SyncDirection? direction;
+  };
+
+  dictionary FileStatusInfo {
+    // One of the Entry's originally given to getFileStatuses.
+    [instanceOf=Entry] object fileEntry;
+
+    // The status value can be <code>'synced'</code>,
+    // <code>'pending'</code> or <code>'conflicting'</code>.
+    FileStatus status;
+
+    // Optional error that is only returned if there was a problem retrieving
+    // the FileStatus for the given file.
+    DOMString? error;
+  };
+
+  dictionary StorageInfo {
+    long usageBytes;
+    long quotaBytes;
+  };
+
+  dictionary ServiceInfo {
+    ServiceStatus state;
+    DOMString description;
+  };
+
+  // A callback type for requestFileSystem.
+  callback GetFileSystemCallback =
+      void ([instanceOf=DOMFileSystem] object fileSystem);
+
+  // A callback type for getUsageAndQuota.
+  callback QuotaAndUsageCallback = void (StorageInfo info);
+
+  // Returns true if operation was successful.
+  callback DeleteFileSystemCallback = void (boolean result);
+
+  // A callback type for getFileStatus.
+  callback GetFileStatusCallback = void (FileStatus status);
+
+  // A callback type for getFileStatuses.
+  callback GetFileStatusesCallback = void (FileStatusInfo[] status);
+
+  // A callback type for getServiceStatus.
+  callback GetServiceStatusCallback = void (ServiceStatus status);
+
+  // A callback type for getConflictResolutionPolicy.
+  callback GetConflictResolutionPolicyCallback =
+      void (ConflictResolutionPolicy policy);
+
+  // A generic result callback to indicate success or failure.
+  callback ResultCallback = void ();
+
+  interface Functions {
+    // Returns a syncable filesystem backed by Google Drive.
+    // The returned <code>DOMFileSystem</code> instance can be operated on
+    // in the same way as the Temporary and Persistant file systems (see
+    // <a href="http://www.w3.org/TR/file-system-api/">http://www.w3.org/TR/file-system-api/</a>).
+    // Calling this multiple times from
+    // the same app will return the same handle to the same file system.
+    static void requestFileSystem(GetFileSystemCallback callback);
+
+    // Sets the default conflict resolution policy
+    // for the <code>'syncable'</code> file storage for the app.
+    // By default it is set to <code>'last_write_win'</code>.
+    // When conflict resolution policy is set to <code>'last_write_win'</code>
+    // conflicts for existing files are automatically resolved next time
+    // the file is updated.
+    // |callback| can be optionally given to know if the request has
+    // succeeded or not.
+    static void setConflictResolutionPolicy(
+        ConflictResolutionPolicy policy,
+        optional ResultCallback callback);
+
+    // Gets the current conflict resolution policy.
+    static void getConflictResolutionPolicy(
+        GetConflictResolutionPolicyCallback callback);
+
+    // Returns the current usage and quota in bytes
+    // for the <code>'syncable'</code> file storage for the app.
+    static void getUsageAndQuota([instanceOf=DOMFileSystem] object fileSystem,
+                                 QuotaAndUsageCallback callback);
+
+    // Returns the \$ref:FileStatus for the given <code>fileEntry</code>.
+    // The status value can be <code>'synced'</code>,
+    // <code>'pending'</code> or <code>'conflicting'</code>.
+    // Note that <code>'conflicting'</code> state only happens when
+    // the service's conflict resolution policy is set to <code>'manual'</code>.
+    static void getFileStatus([instanceOf=Entry] object fileEntry,
+                              GetFileStatusCallback callback);
+
+    // Returns each \$ref:FileStatus for the given <code>fileEntry</code> array.
+    // Typically called with the result from dirReader.readEntries().
+    static void getFileStatuses(object[] fileEntries,
+                                GetFileStatusesCallback callback);
+
+    // Returns the current sync backend status.
+    static void getServiceStatus(GetServiceStatusCallback callback);
+  };
+
+  interface Events {
+    // Fired when an error or other status change has happened in the
+    // sync backend (for example, when the sync is temporarily disabled due to
+    // network or authentication error).
+    static void onServiceStatusChanged(ServiceInfo detail);
+
+    // Fired when a file has been updated by the background sync service.
+    static void onFileStatusChanged(FileInfo detail);
+  };
+
+};""");
+
+    expect(namespaceDeclaration, isNotNull);
+    expect(namespaceDeclaration.name, equals("syncFileSystem"));
+  });
+}
+
+void miscParsingTests() {
+
+  test('object used in dictionary', () {
+    String testData = """dictionary MediaStreamConstraint {
+    object mandatory;
+};
+""";
+
+    var result = chromeIDLParser.typeDeclaration
+      .parse(testData);
+
+    expect(result, isNotNull);
+  });
+
+  test('object used in callback', () {
+    String testData =
+        """callback GetAllCallback = void (object notifications); """;
+
+    var result = chromeIDLParser.callbackDeclaration
+      .parse(testData);
+
+    expect(result, isNotNull);
+    expect(result, hasLength(1));
+  });
+
+  test('optional object array with type attribute defined instanceOf callback', () {
+    String testData = """callback MediaFileSystemsCallback =
+      void ([instanceOf=DOMFileSystem] optional object[] mediaFileSystems);""";
+
+    var result = chromeIDLParser.callbackDeclaration
+      .parse(testData);
+
+    expect(result, isNotNull);
+    expect(result, hasLength(1));
+    IDLCallbackDeclaration r = result[0];
+    expect(r.name, equals("MediaFileSystemsCallback"));
+    expect(r.parameters, hasLength(1));
+    expect(r.parameters[0].name, equals("mediaFileSystems"));
+    expect(r.parameters[0].isOptional, isTrue);
+    expect(r.parameters[0].isCallback, isFalse);
+    expect(r.parameters[0].type.isArray, isTrue);
+    expect(r.parameters[0].type.name, equals("DOMFileSystem"));
+  });
+
+  test('object optional by ? with attribute defined instanceOf', () {
+    String testData = """dictionary AttachedFile {
+    DOMString name;
+    [instanceOf=Blob] object? data;
+  }; 
+""";
+
+    var result = chromeIDLParser.typeDeclaration
+      .parse(testData);
+
+    expect(result, isNotNull);
+  });
+
+  test('attribute with name=1', () {
+    String testData = """[maxListeners=1] static void onDeterminingFilename(
+DownloadItem downloadItem, SuggestFilenameCallback suggest); 
+""";
+
+    var result = chromeIDLParser.methods
+      .parse(testData);
+
+    expect(result, isNotNull);
+    expect(result, hasLength(1));
+  });
+
+  test('object passed as method parameter', () {
+    String testData = """interface Functions {
+[nocompile, nodoc] static void initializeAppWindow(object state);
+  };""";
+
+    var result = chromeIDLParser.functionDeclaration
+        .parse(testData);
+
+    expect(result, isNotNull);
+  });
+
+
+  test('object as parameter for callback', () {
+    String testData = """callback GetStringsCallback = void (object result);""";
+
+    var result = chromeIDLParser.callbackDeclaration
+        .parse(testData);
+
+    expect(result, isNotNull);
+    expect(result, hasLength(1));
+  });
+}
+
 

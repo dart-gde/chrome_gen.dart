@@ -22,6 +22,7 @@ import 'web_idl_optional_parameters_test.dart' as test_web_idl_optional_paramete
 import 'web_idl_sequences_test.dart' as test_web_idl_sequences;
 import 'web_idl_typedefs_test.dart' as test_web_idl_typedefs;
 import 'chrome_idl_test.dart' as test_chrome_idl;
+import 'chrome_idl_files_test.dart' as test_chrome_idl_files;
 
 void main() {
   model_json_test.main();
@@ -45,4 +46,5 @@ void main() {
   test_web_idl_sequences.main();
   test_web_idl_typedefs.main();
   test_chrome_idl.main();
+  test_chrome_idl_files.main();
 }
