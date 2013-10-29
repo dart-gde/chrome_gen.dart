@@ -7,13 +7,21 @@ library chrome.types;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.types` namespace.
-final ChromeTypes types = ChromeTypes._types == null ? apiNotAvailable('chrome.types') : new ChromeTypes._();
+/**
+ * Accessor for the `chrome.types` namespace.
+ */
+final ChromeTypes types = new ChromeTypes._();
 
-class ChromeTypes {
+class ChromeTypes extends ChromeApi {
   static final JsObject _types = chrome['types'];
 
   ChromeTypes._();
+
+  bool get available => _types != null;
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.types' is not available");
+  }
 }
 
 /**

@@ -9,13 +9,17 @@ library chrome.desktopCapture;
 import 'tabs.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.desktopCapture` namespace.
-final ChromeDesktopCapture desktopCapture = ChromeDesktopCapture._desktopCapture == null ? apiNotAvailable('chrome.desktopCapture') : new ChromeDesktopCapture._();
+/**
+ * Accessor for the `chrome.desktopCapture` namespace.
+ */
+final ChromeDesktopCapture desktopCapture = new ChromeDesktopCapture._();
 
-class ChromeDesktopCapture {
+class ChromeDesktopCapture extends ChromeApi {
   static final JsObject _desktopCapture = chrome['desktopCapture'];
 
   ChromeDesktopCapture._();
+
+  bool get available => _desktopCapture != null;
 
   /**
    * Shows desktop media picker UI with the specified set of sources.
@@ -32,6 +36,8 @@ class ChromeDesktopCapture {
    * need to be canceled.
    */
   int chooseDesktopMedia(List<DesktopCaptureSourceType> sources, dynamic callback, [Tab targetTab]) {
+    if (_desktopCapture == null) _throwNotAvailable();
+
     return _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), jsify(callback)]);
   }
 
@@ -41,7 +47,13 @@ class ChromeDesktopCapture {
    * [desktopMediaRequestId] Id returned by chooseDesktopMedia()
    */
   void cancelChooseDesktopMedia(int desktopMediaRequestId) {
+    if (_desktopCapture == null) _throwNotAvailable();
+
     _desktopCapture.callMethod('cancelChooseDesktopMedia', [desktopMediaRequestId]);
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.desktopCapture' is not available");
   }
 }
 

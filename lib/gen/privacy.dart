@@ -11,13 +11,17 @@ library chrome.privacy;
 import 'types.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.privacy` namespace.
-final ChromePrivacy privacy = ChromePrivacy._privacy == null ? apiNotAvailable('chrome.privacy') : new ChromePrivacy._();
+/**
+ * Accessor for the `chrome.privacy` namespace.
+ */
+final ChromePrivacy privacy = new ChromePrivacy._();
 
-class ChromePrivacy {
+class ChromePrivacy extends ChromeApi {
   static final JsObject _privacy = chrome['privacy'];
 
   ChromePrivacy._();
+
+  bool get available => _privacy != null;
 
   /**
    * Settings that influence Chrome's handling of network connections in
@@ -36,6 +40,10 @@ class ChromePrivacy {
    * websites.
    */
   WebsitesPrivacy get websites => _createWebsitesPrivacy(_privacy['websites']);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.privacy' is not available");
+  }
 }
 
 class NetworkPrivacy extends ChromeObject {

@@ -12,13 +12,17 @@ import 'runtime.dart';
 import 'windows.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.extension` namespace.
-final ChromeExtension extension = ChromeExtension._extension == null ? apiNotAvailable('chrome.extension') : new ChromeExtension._();
+/**
+ * Accessor for the `chrome.extension` namespace.
+ */
+final ChromeExtension extension = new ChromeExtension._();
 
-class ChromeExtension {
+class ChromeExtension extends ChromeApi {
   static final JsObject _extension = chrome['extension'];
 
   ChromeExtension._();
+
+  bool get available => _extension != null;
 
   /**
    * Set for the lifetime of a callback if an ansychronous extension api has
@@ -46,6 +50,8 @@ class ChromeExtension {
    * no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendRequest(dynamic request, [String extensionId]) {
+    if (_extension == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _extension.callMethod('sendRequest', [extensionId, jsify(request), completer.callback]);
     return completer.future;
@@ -62,6 +68,8 @@ class ChromeExtension {
    * The fully-qualified URL to the resource.
    */
   String getURL(String path) {
+    if (_extension == null) _throwNotAvailable();
+
     return _extension.callMethod('getURL', [path]);
   }
 
@@ -73,6 +81,8 @@ class ChromeExtension {
    * Array of global objects
    */
   List<Window> getViews([Map fetchProperties]) {
+    if (_extension == null) _throwNotAvailable();
+
     var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
     return ret;
   }
@@ -83,6 +93,8 @@ class ChromeExtension {
    * background page.
    */
   Window getBackgroundPage() {
+    if (_extension == null) _throwNotAvailable();
+
     return _createWindow(_extension.callMethod('getBackgroundPage'));
   }
 
@@ -96,6 +108,8 @@ class ChromeExtension {
    * Array of global window objects
    */
   List<Window> getExtensionTabs([int windowId]) {
+    if (_extension == null) _throwNotAvailable();
+
     var ret = _extension.callMethod('getExtensionTabs', [windowId]);
     return ret;
   }
@@ -108,6 +122,8 @@ class ChromeExtension {
    * True if the extension has access to Incognito mode, false otherwise.
    */
   Future<bool> isAllowedIncognitoAccess() {
+    if (_extension == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
     return completer.future;
@@ -121,6 +137,8 @@ class ChromeExtension {
    * True if the extension can access the 'file://' scheme, false otherwise.
    */
   Future<bool> isAllowedFileSchemeAccess() {
+    if (_extension == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
     return completer.future;
@@ -132,6 +150,8 @@ class ChromeExtension {
    * Extension Gallery.
    */
   void setUpdateUrlData(String data) {
+    if (_extension == null) _throwNotAvailable();
+
     _extension.callMethod('setUpdateUrlData', [data]);
   }
 
@@ -141,7 +161,7 @@ class ChromeExtension {
   Stream<OnRequestEvent> get onRequest => _onRequest.stream;
 
   final ChromeStreamController<OnRequestEvent> _onRequest =
-      new ChromeStreamController<OnRequestEvent>.threeArgs(_extension['onRequest'], _createOnRequestEvent);
+      new ChromeStreamController<OnRequestEvent>.threeArgs(_extension, 'onRequest', _createOnRequestEvent);
 
   /**
    * Deprecated: please use onMessageExternal.
@@ -149,7 +169,11 @@ class ChromeExtension {
   Stream<OnRequestExternalEvent> get onRequestExternal => _onRequestExternal.stream;
 
   final ChromeStreamController<OnRequestExternalEvent> _onRequestExternal =
-      new ChromeStreamController<OnRequestExternalEvent>.threeArgs(_extension['onRequestExternal'], _createOnRequestExternalEvent);
+      new ChromeStreamController<OnRequestExternalEvent>.threeArgs(_extension, 'onRequestExternal', _createOnRequestExternalEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.extension' is not available");
+  }
 }
 
 /**

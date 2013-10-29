@@ -5,13 +5,17 @@ library chrome.fileSystem;
 import '../src/files.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.fileSystem` namespace.
-final ChromeFileSystem fileSystem = ChromeFileSystem._fileSystem == null ? apiNotAvailable('chrome.fileSystem') : new ChromeFileSystem._();
+/**
+ * Accessor for the `chrome.fileSystem` namespace.
+ */
+final ChromeFileSystem fileSystem = new ChromeFileSystem._();
 
-class ChromeFileSystem {
+class ChromeFileSystem extends ChromeApi {
   static final JsObject _fileSystem = chrome['fileSystem'];
 
   ChromeFileSystem._();
+
+  bool get available => _fileSystem != null;
 
   /**
    * Get the display path of an Entry object. The display path is based on the
@@ -19,6 +23,8 @@ class ChromeFileSystem {
    * made more readable for display purposes.
    */
   Future<String> getDisplayPath(Entry entry) {
+    if (_fileSystem == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _fileSystem.callMethod('getDisplayPath', [jsify(entry), completer.callback]);
     return completer.future;
@@ -31,6 +37,8 @@ class ChromeFileSystem {
    * application does not have the 'directory' permission under 'fileSystem'.
    */
   Future<Entry> getWritableEntry(Entry entry) {
+    if (_fileSystem == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Entry>.oneArg(_createEntry);
     _fileSystem.callMethod('getWritableEntry', [jsify(entry), completer.callback]);
     return completer.future;
@@ -40,6 +48,8 @@ class ChromeFileSystem {
    * Gets whether this Entry is writable or not.
    */
   Future<bool> isWritableEntry(Entry entry) {
+    if (_fileSystem == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _fileSystem.callMethod('isWritableEntry', [jsify(entry), completer.callback]);
     return completer.future;
@@ -53,6 +63,8 @@ class ChromeFileSystem {
    * [fileEntries] null
    */
   Future<ChooseEntryResult> chooseEntry([ChooseEntryOptions options]) {
+    if (_fileSystem == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<ChooseEntryResult>.twoArgs(ChooseEntryResult._create);
     _fileSystem.callMethod('chooseEntry', [jsify(options), completer.callback]);
     return completer.future;
@@ -63,6 +75,8 @@ class ChromeFileSystem {
    * will fail with a runtime error otherwise. This method is new in Chrome 31.
    */
   Future<Entry> restoreEntry(String id) {
+    if (_fileSystem == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Entry>.oneArg(_createEntry);
     _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
     return completer.future;
@@ -73,6 +87,8 @@ class ChromeFileSystem {
    * id. This method is new in Chrome 31.
    */
   Future<bool> isRestorable(String id) {
+    if (_fileSystem == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _fileSystem.callMethod('isRestorable', [id, completer.callback]);
     return completer.future;
@@ -87,7 +103,13 @@ class ChromeFileSystem {
    * and across restarts. This method is new in Chrome 31.
    */
   String retainEntry(Entry entry) {
+    if (_fileSystem == null) _throwNotAvailable();
+
     return _fileSystem.callMethod('retainEntry', [jsify(entry)]);
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.fileSystem' is not available");
   }
 }
 

@@ -10,13 +10,17 @@ library chrome.permissions;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.permissions` namespace.
-final ChromePermissions permissions = ChromePermissions._permissions == null ? apiNotAvailable('chrome.permissions') : new ChromePermissions._();
+/**
+ * Accessor for the `chrome.permissions` namespace.
+ */
+final ChromePermissions permissions = new ChromePermissions._();
 
-class ChromePermissions {
+class ChromePermissions extends ChromeApi {
   static final JsObject _permissions = chrome['permissions'];
 
   ChromePermissions._();
+
+  bool get available => _permissions != null;
 
   /**
    * Gets the extension's current set of permissions.
@@ -25,6 +29,8 @@ class ChromePermissions {
    * The extension's active permissions.
    */
   Future<Permissions> getAll() {
+    if (_permissions == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Permissions>.oneArg(_createPermissions);
     _permissions.callMethod('getAll', [completer.callback]);
     return completer.future;
@@ -37,6 +43,8 @@ class ChromePermissions {
    * True if the extension has the specified permissions.
    */
   Future<bool> contains(Permissions permissions) {
+    if (_permissions == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _permissions.callMethod('contains', [jsify(permissions), completer.callback]);
     return completer.future;
@@ -51,6 +59,8 @@ class ChromePermissions {
    * True if the user granted the specified permissions.
    */
   Future<bool> request(Permissions permissions) {
+    if (_permissions == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _permissions.callMethod('request', [jsify(permissions), completer.callback]);
     return completer.future;
@@ -64,6 +74,8 @@ class ChromePermissions {
    * True if the permissions were removed.
    */
   Future<bool> remove(Permissions permissions) {
+    if (_permissions == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _permissions.callMethod('remove', [jsify(permissions), completer.callback]);
     return completer.future;
@@ -75,7 +87,7 @@ class ChromePermissions {
   Stream<Permissions> get onAdded => _onAdded.stream;
 
   final ChromeStreamController<Permissions> _onAdded =
-      new ChromeStreamController<Permissions>.oneArg(_permissions['onAdded'], _createPermissions);
+      new ChromeStreamController<Permissions>.oneArg(_permissions, 'onAdded', _createPermissions);
 
   /**
    * Fired when access to permissions has been removed from the extension.
@@ -83,7 +95,11 @@ class ChromePermissions {
   Stream<Permissions> get onRemoved => _onRemoved.stream;
 
   final ChromeStreamController<Permissions> _onRemoved =
-      new ChromeStreamController<Permissions>.oneArg(_permissions['onRemoved'], _createPermissions);
+      new ChromeStreamController<Permissions>.oneArg(_permissions, 'onRemoved', _createPermissions);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.permissions' is not available");
+  }
 }
 
 class Permissions extends ChromeObject {

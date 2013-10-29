@@ -8,13 +8,17 @@ library chrome.webNavigation;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.webNavigation` namespace.
-final ChromeWebNavigation webNavigation = ChromeWebNavigation._webNavigation == null ? apiNotAvailable('chrome.webNavigation') : new ChromeWebNavigation._();
+/**
+ * Accessor for the `chrome.webNavigation` namespace.
+ */
+final ChromeWebNavigation webNavigation = new ChromeWebNavigation._();
 
-class ChromeWebNavigation {
+class ChromeWebNavigation extends ChromeApi {
   static final JsObject _webNavigation = chrome['webNavigation'];
 
   ChromeWebNavigation._();
+
+  bool get available => _webNavigation != null;
 
   /**
    * Retrieves information about the given frame. A frame refers to an
@@ -28,6 +32,8 @@ class ChromeWebNavigation {
    * and/or tab ID are invalid.
    */
   Future<Map> getFrame(Map details) {
+    if (_webNavigation == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _webNavigation.callMethod('getFrame', [jsify(details), completer.callback]);
     return completer.future;
@@ -42,6 +48,8 @@ class ChromeWebNavigation {
    * A list of frames in the given tab, null if the specified tab ID is invalid.
    */
   Future<List<Map>> getAllFrames(Map details) {
+    if (_webNavigation == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<List<Map>>.oneArg((e) => listify(e, mapify));
     _webNavigation.callMethod('getAllFrames', [jsify(details), completer.callback]);
     return completer.future;
@@ -53,7 +61,7 @@ class ChromeWebNavigation {
   Stream<Map> get onBeforeNavigate => _onBeforeNavigate.stream;
 
   final ChromeStreamController<Map> _onBeforeNavigate =
-      new ChromeStreamController<Map>.oneArg(_webNavigation['onBeforeNavigate'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webNavigation, 'onBeforeNavigate', mapify);
 
   /**
    * Fired when a navigation is committed. The document (and the resources it
@@ -64,7 +72,7 @@ class ChromeWebNavigation {
   Stream<Map> get onCommitted => _onCommitted.stream;
 
   final ChromeStreamController<Map> _onCommitted =
-      new ChromeStreamController<Map>.oneArg(_webNavigation['onCommitted'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webNavigation, 'onCommitted', mapify);
 
   /**
    * Fired when the page's DOM is fully constructed, but the referenced
@@ -73,7 +81,7 @@ class ChromeWebNavigation {
   Stream<Map> get onDOMContentLoaded => _onDOMContentLoaded.stream;
 
   final ChromeStreamController<Map> _onDOMContentLoaded =
-      new ChromeStreamController<Map>.oneArg(_webNavigation['onDOMContentLoaded'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webNavigation, 'onDOMContentLoaded', mapify);
 
   /**
    * Fired when a document, including the resources it refers to, is completely
@@ -82,7 +90,7 @@ class ChromeWebNavigation {
   Stream<Map> get onCompleted => _onCompleted.stream;
 
   final ChromeStreamController<Map> _onCompleted =
-      new ChromeStreamController<Map>.oneArg(_webNavigation['onCompleted'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webNavigation, 'onCompleted', mapify);
 
   /**
    * Fired when an error occurs and the navigation is aborted. This can happen
@@ -91,7 +99,7 @@ class ChromeWebNavigation {
   Stream<Map> get onErrorOccurred => _onErrorOccurred.stream;
 
   final ChromeStreamController<Map> _onErrorOccurred =
-      new ChromeStreamController<Map>.oneArg(_webNavigation['onErrorOccurred'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webNavigation, 'onErrorOccurred', mapify);
 
   /**
    * Fired when a new window, or a new tab in an existing window, is created to
@@ -100,7 +108,7 @@ class ChromeWebNavigation {
   Stream<Map> get onCreatedNavigationTarget => _onCreatedNavigationTarget.stream;
 
   final ChromeStreamController<Map> _onCreatedNavigationTarget =
-      new ChromeStreamController<Map>.oneArg(_webNavigation['onCreatedNavigationTarget'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webNavigation, 'onCreatedNavigationTarget', mapify);
 
   /**
    * Fired when the reference fragment of a frame was updated. All future events
@@ -109,7 +117,7 @@ class ChromeWebNavigation {
   Stream<Map> get onReferenceFragmentUpdated => _onReferenceFragmentUpdated.stream;
 
   final ChromeStreamController<Map> _onReferenceFragmentUpdated =
-      new ChromeStreamController<Map>.oneArg(_webNavigation['onReferenceFragmentUpdated'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webNavigation, 'onReferenceFragmentUpdated', mapify);
 
   /**
    * Fired when the contents of the tab is replaced by a different (usually
@@ -118,7 +126,7 @@ class ChromeWebNavigation {
   Stream<Map> get onTabReplaced => _onTabReplaced.stream;
 
   final ChromeStreamController<Map> _onTabReplaced =
-      new ChromeStreamController<Map>.oneArg(_webNavigation['onTabReplaced'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webNavigation, 'onTabReplaced', mapify);
 
   /**
    * Fired when the frame's history was updated to a new URL. All future events
@@ -127,5 +135,9 @@ class ChromeWebNavigation {
   Stream<Map> get onHistoryStateUpdated => _onHistoryStateUpdated.stream;
 
   final ChromeStreamController<Map> _onHistoryStateUpdated =
-      new ChromeStreamController<Map>.oneArg(_webNavigation['onHistoryStateUpdated'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webNavigation, 'onHistoryStateUpdated', mapify);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.webNavigation' is not available");
+  }
 }

@@ -9,19 +9,25 @@ library chrome.commands;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.commands` namespace.
-final ChromeCommands commands = ChromeCommands._commands == null ? apiNotAvailable('chrome.commands') : new ChromeCommands._();
+/**
+ * Accessor for the `chrome.commands` namespace.
+ */
+final ChromeCommands commands = new ChromeCommands._();
 
-class ChromeCommands {
+class ChromeCommands extends ChromeApi {
   static final JsObject _commands = chrome['commands'];
 
   ChromeCommands._();
+
+  bool get available => _commands != null;
 
   /**
    * Returns all the registered extension commands for this extension and their
    * shortcut (if active).
    */
   Future<List<Command>> getAll() {
+    if (_commands == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<List<Command>>.oneArg((e) => listify(e, _createCommand));
     _commands.callMethod('getAll', [completer.callback]);
     return completer.future;
@@ -33,7 +39,11 @@ class ChromeCommands {
   Stream<String> get onCommand => _onCommand.stream;
 
   final ChromeStreamController<String> _onCommand =
-      new ChromeStreamController<String>.oneArg(_commands['onCommand'], selfConverter);
+      new ChromeStreamController<String>.oneArg(_commands, 'onCommand', selfConverter);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.commands' is not available");
+  }
 }
 
 class Command extends ChromeObject {

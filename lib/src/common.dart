@@ -9,12 +9,8 @@ export 'dart:async';
 import 'dart:js';
 export 'dart:js';
 
-import 'package:logging/logging.dart' as log;
-
 import 'common_exp.dart';
 export 'common_exp.dart';
-
-final log.Logger _logger = new log.Logger('chrome_gen');
 
 final JsObject _jsJSON = context['JSON'];
 
@@ -66,17 +62,6 @@ dynamic jsify(dynamic obj) {
 
 dynamic selfConverter(var obj) => obj;
 
-dynamic apiNotAvailable(String apiName) {
-  // TODO: we need a bit more warning then this - if people aren't using
-  // logging, they won't see a message.
-  _logger.warning('${apiName} not available.');
-  _logger.info('This could be caused by a missing manifest.json permission or by running on an older version of Chrome.');
-
-  return null;
-}
-
-// TODO: some chrome APIs use lastError, and some don't
-
 /**
  * An object for handling completion callbacks that are common in the chrome.*
  * APIs.
@@ -127,12 +112,13 @@ class ChromeCompleter<T> {
 }
 
 class ChromeStreamController<T> {
-  final JsObject _event;
+  final JsObject _api;
+  final String _eventName;
   StreamController<T> _controller = new StreamController<T>.broadcast();
   bool _handlerAdded = false;
   Function _listener;
 
-  ChromeStreamController.noArgs(this._event) {
+  ChromeStreamController.noArgs(this._api, this._eventName) {
     _controller = new StreamController<T>.broadcast(
         onListen: _ensureHandlerAdded, onCancel: _removeHandler);
     _listener = () {
@@ -140,7 +126,7 @@ class ChromeStreamController<T> {
     };
   }
 
-  ChromeStreamController.oneArg(this._event, Function transformer, [returnVal])  {
+  ChromeStreamController.oneArg(this._api, this._eventName, Function transformer, [returnVal])  {
     _controller = new StreamController<T>.broadcast(
         onListen: _ensureHandlerAdded, onCancel: _removeHandler);
     _listener = ([arg1]) {
@@ -149,7 +135,7 @@ class ChromeStreamController<T> {
     };
   }
 
-  ChromeStreamController.twoArgs(this._event, Function transformer, [returnVal]) {
+  ChromeStreamController.twoArgs(this._api, this._eventName, Function transformer, [returnVal]) {
     _controller = new StreamController<T>.broadcast(
         onListen: _ensureHandlerAdded, onCancel: _removeHandler);
     _listener = ([arg1, arg2]) {
@@ -158,7 +144,7 @@ class ChromeStreamController<T> {
     };
   }
 
-  ChromeStreamController.threeArgs(this._event, Function transformer, [returnVal]) {
+  ChromeStreamController.threeArgs(this._api, this._eventName, Function transformer, [returnVal]) {
     _controller = new StreamController<T>.broadcast(
         onListen: _ensureHandlerAdded, onCancel: _removeHandler);
     _listener = ([arg1, arg2, arg3]) {
@@ -175,14 +161,14 @@ class ChromeStreamController<T> {
 
   void _ensureHandlerAdded() {
     if (!_handlerAdded) {
-      _event.callMethod('addListener', [_listener]);
+      _api[_eventName].callMethod('addListener', [_listener]);
       _handlerAdded = true;
     }
   }
 
   void _removeHandler() {
     if (_handlerAdded) {
-      _event.callMethod('removeListener', [_listener]);
+      _api[_eventName].callMethod('removeListener', [_listener]);
       _handlerAdded = false;
     }
   }

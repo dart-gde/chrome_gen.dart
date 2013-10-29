@@ -27,6 +27,20 @@ class ChromeObject {
 }
 
 /**
+ * A common super class for the Chrome APIs.
+ */
+abstract class ChromeApi {
+  /**
+   * Returns true if the API is available. The common causes of an API not being
+   * avilable are:
+   *
+   *  * a permission is missing in the application's manifest.json file
+   *  * the API is defined on a newer version of Chrome then the current runtime
+   */
+  bool get available;
+}
+
+/**
  * The abstract superclass of Chrome enums.
  */
 abstract class ChromeEnum {
