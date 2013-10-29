@@ -9,18 +9,24 @@ library chrome.management;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.management` namespace.
-final ChromeManagement management = ChromeManagement._management == null ? apiNotAvailable('chrome.management') : new ChromeManagement._();
+/**
+ * Accessor for the `chrome.management` namespace.
+ */
+final ChromeManagement management = new ChromeManagement._();
 
-class ChromeManagement {
+class ChromeManagement extends ChromeApi {
   static final JsObject _management = chrome['management'];
 
   ChromeManagement._();
+
+  bool get available => _management != null;
 
   /**
    * Returns a list of information about installed extensions and apps.
    */
   Future<List<ExtensionInfo>> getAll() {
+    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+
     var completer = new ChromeCompleter<List<ExtensionInfo>>.oneArg((e) => listify(e, _createExtensionInfo));
     _management.callMethod('getAll', [completer.callback]);
     return completer.future;
@@ -33,6 +39,8 @@ class ChromeManagement {
    * [id] The ID from an item of [ExtensionInfo.]
    */
   Future<ExtensionInfo> get(String id) {
+    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+
     var completer = new ChromeCompleter<ExtensionInfo>.oneArg(_createExtensionInfo);
     _management.callMethod('get', [id, completer.callback]);
     return completer.future;
@@ -45,6 +53,8 @@ class ChromeManagement {
    * [id] The ID of an already installed extension.
    */
   Future<List<String>> getPermissionWarningsById(String id) {
+    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+
     var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _management.callMethod('getPermissionWarningsById', [id, completer.callback]);
     return completer.future;
@@ -58,6 +68,8 @@ class ChromeManagement {
    * [manifestStr] Extension manifest JSON string.
    */
   Future<List<String>> getPermissionWarningsByManifest(String manifestStr) {
+    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+
     var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _management.callMethod('getPermissionWarningsByManifest', [manifestStr, completer.callback]);
     return completer.future;
@@ -71,6 +83,8 @@ class ChromeManagement {
    * [enabled] Whether this item should be enabled or disabled.
    */
   Future setEnabled(String id, bool enabled) {
+    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('setEnabled', [id, enabled, completer.callback]);
     return completer.future;
@@ -82,6 +96,8 @@ class ChromeManagement {
    * [id] This should be the id from an item of [ExtensionInfo.]
    */
   Future uninstall(String id, [Map options]) {
+    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('uninstall', [id, jsify(options), completer.callback]);
     return completer.future;
@@ -92,6 +108,8 @@ class ChromeManagement {
    * requesting the 'management' permission in the manifest.
    */
   Future uninstallSelf([Map options]) {
+    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('uninstallSelf', [jsify(options), completer.callback]);
     return completer.future;
@@ -103,6 +121,8 @@ class ChromeManagement {
    * [id] The extension id of the application.
    */
   Future launchApp(String id) {
+    if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _management.callMethod('launchApp', [id, completer.callback]);
     return completer.future;
@@ -114,7 +134,7 @@ class ChromeManagement {
   Stream<ExtensionInfo> get onInstalled => _onInstalled.stream;
 
   final ChromeStreamController<ExtensionInfo> _onInstalled =
-      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onInstalled'], _createExtensionInfo);
+      new ChromeStreamController<ExtensionInfo>.oneArg(_management, 'onInstalled', _createExtensionInfo);
 
   /**
    * Fired when an app or extension has been uninstalled.
@@ -122,7 +142,7 @@ class ChromeManagement {
   Stream<String> get onUninstalled => _onUninstalled.stream;
 
   final ChromeStreamController<String> _onUninstalled =
-      new ChromeStreamController<String>.oneArg(_management['onUninstalled'], selfConverter);
+      new ChromeStreamController<String>.oneArg(_management, 'onUninstalled', selfConverter);
 
   /**
    * Fired when an app or extension has been enabled.
@@ -130,7 +150,7 @@ class ChromeManagement {
   Stream<ExtensionInfo> get onEnabled => _onEnabled.stream;
 
   final ChromeStreamController<ExtensionInfo> _onEnabled =
-      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onEnabled'], _createExtensionInfo);
+      new ChromeStreamController<ExtensionInfo>.oneArg(_management, 'onEnabled', _createExtensionInfo);
 
   /**
    * Fired when an app or extension has been disabled.
@@ -138,7 +158,7 @@ class ChromeManagement {
   Stream<ExtensionInfo> get onDisabled => _onDisabled.stream;
 
   final ChromeStreamController<ExtensionInfo> _onDisabled =
-      new ChromeStreamController<ExtensionInfo>.oneArg(_management['onDisabled'], _createExtensionInfo);
+      new ChromeStreamController<ExtensionInfo>.oneArg(_management, 'onDisabled', _createExtensionInfo);
 }
 
 /**

@@ -4,13 +4,17 @@ library chrome.notifications;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.notifications` namespace.
-final ChromeNotifications notifications = ChromeNotifications._notifications == null ? apiNotAvailable('chrome.notifications') : new ChromeNotifications._();
+/**
+ * Accessor for the `chrome.notifications` namespace.
+ */
+final ChromeNotifications notifications = new ChromeNotifications._();
 
-class ChromeNotifications {
+class ChromeNotifications extends ChromeApi {
   static final JsObject _notifications = chrome['notifications'];
 
   ChromeNotifications._();
+
+  bool get available => _notifications != null;
 
   /**
    * Creates and displays a notification having the contents in [options],
@@ -21,6 +25,8 @@ class ChromeNotifications {
    * supplied or generated) that represents the created notification.
    */
   Future<String> create(String notificationId, NotificationOptions options) {
+    if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
     var completer = new ChromeCompleter<String>.oneArg();
     _notifications.callMethod('create', [notificationId, jsify(options), completer.callback]);
     return completer.future;
@@ -32,6 +38,8 @@ class ChromeNotifications {
    * existed.
    */
   Future<bool> update(String notificationId, NotificationOptions options) {
+    if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _notifications.callMethod('update', [notificationId, jsify(options), completer.callback]);
     return completer.future;
@@ -43,6 +51,8 @@ class ChromeNotifications {
    * notification existed.
    */
   Future<bool> clear(String notificationId) {
+    if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _notifications.callMethod('clear', [notificationId, completer.callback]);
     return completer.future;
@@ -53,6 +63,8 @@ class ChromeNotifications {
    * system.
    */
   Future<dynamic> getAll() {
+    if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _notifications.callMethod('getAll', [completer.callback]);
     return completer.future;
@@ -61,17 +73,17 @@ class ChromeNotifications {
   Stream<OnClosedEvent> get onClosed => _onClosed.stream;
 
   final ChromeStreamController<OnClosedEvent> _onClosed =
-      new ChromeStreamController<OnClosedEvent>.twoArgs(_notifications['onClosed'], _createOnClosedEvent);
+      new ChromeStreamController<OnClosedEvent>.twoArgs(_notifications, 'onClosed', _createOnClosedEvent);
 
   Stream<String> get onClicked => _onClicked.stream;
 
   final ChromeStreamController<String> _onClicked =
-      new ChromeStreamController<String>.oneArg(_notifications['onClicked'], selfConverter);
+      new ChromeStreamController<String>.oneArg(_notifications, 'onClicked', selfConverter);
 
   Stream<OnButtonClickedEvent> get onButtonClicked => _onButtonClicked.stream;
 
   final ChromeStreamController<OnButtonClickedEvent> _onButtonClicked =
-      new ChromeStreamController<OnButtonClickedEvent>.twoArgs(_notifications['onButtonClicked'], _createOnButtonClickedEvent);
+      new ChromeStreamController<OnButtonClickedEvent>.twoArgs(_notifications, 'onButtonClicked', _createOnButtonClickedEvent);
 }
 
 class OnClosedEvent {

@@ -54,11 +54,9 @@ class DefaultBackend extends Backend {
     }
 
     // final ChromeI18N i18n = ChromeI18N._i18n == null ? null : new ChromeI18N._();
-    generator.writeDocs("Accessor for the `chrome.${library.name}` namespace.",
-        preferSingle: true);
-    generator.writeln("final ${className} ${shortAccessorName} = ${className}.${contextReference} == null ? "
-        "apiNotAvailable('chrome.${library.name}') : new ${className}._();");
     generator.writeln();
+    generator.writeDocs("Accessor for the `chrome.${library.name}` namespace.");
+    generator.writeln("final ${className} ${shortAccessorName} = new ${className}._();");
   }
 
   String generate({String license, String sourceFileName}) {
@@ -87,7 +85,6 @@ class DefaultBackend extends Backend {
       }
     });
     generator.writeln("import '../src/common.dart';");
-    generator.writeln();
 
     generateAccessor();
 
@@ -97,6 +94,7 @@ class DefaultBackend extends Backend {
   }
 
   void generateContent(bool printClassDocs, Set createdFactories) {
+    generator.writeln();
     if (printClassDocs) {
       generator.writeDocs(library.documentation);
     }
@@ -149,11 +147,13 @@ class DefaultBackend extends Backend {
   void _printClass() {
     List sections = library.name.split('.');
 
-    generator.writeln("class ${className} {");
+    generator.writeln("class ${className} extends ChromeApi {");
     generator.write("static final JsObject ${contextReference} = ");
     generator.writeln("chrome['${sections.join('\'][\'')}'];");
     generator.writeln();
     generator.writeln("${className}._();");
+    generator.writeln();
+    generator.writeln("bool get available => ${contextReference} != null;");
 
     library.filteredProperties.forEach((p) => _printPropertyRef(p, contextReference));
     library.methods.forEach(_printMethod);
@@ -184,7 +184,7 @@ class DefaultBackend extends Backend {
    * represent the `this` object. It wil default to the chrome. namespace
    * reference (e.g., `_app_window`).
    */
-  void _printMethod(ChromeMethod method, [String thisOverride]) {
+  void _printMethod(ChromeMethod method, {String thisOverride, bool checkApi: true}) {
     if (thisOverride == null) {
       thisOverride = contextReference;
     }
@@ -202,6 +202,11 @@ class DefaultBackend extends Backend {
       generator.write(']');
     }
     generator.writeln(") {");
+    if (checkApi) {
+      generator.writeln('if (${contextReference} == null) '
+          'throw new UnsupportedError("\'chrome.${library.name}\' is not available");');
+      generator.writeln();
+    }
     if (method.usesCallback) {
       ChromeType future = method.returns;
       var returnType = future.getReturnStringTypeParams();
@@ -281,11 +286,11 @@ class DefaultBackend extends Backend {
 
       String argCallArity = ['noArgs', 'oneArg', 'twoArgs', 'threeArgs'][type.arity];
       generator.writeln("    new ChromeStreamController<${typeName}>.${argCallArity}("
-          "${contextReference}['${event.name}'], ${converter});");
+          "${contextReference}, '${event.name}', ${converter});");
     } else {
       generator.writeln("final ChromeStreamController _${event.name} =");
       generator.writeln("    new ChromeStreamController.noArgs("
-          "${contextReference}['${event.name}']);");
+          "${contextReference}, '${event.name}');");
     }
   }
 
@@ -368,7 +373,8 @@ class DefaultBackend extends Backend {
       props.forEach((p) => _printPropertyRef(p, 'this.proxy', !type.noSetters));
     }
 
-    type.methods.forEach((m) => _printMethod(m, 'proxy'));
+    type.methods.forEach((m) => _printMethod(
+        m, thisOverride: 'proxy', checkApi: false));
 
     generator.writeln("}");
   }

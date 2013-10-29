@@ -10,13 +10,17 @@ library chrome.tts;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.tts` namespace.
-final ChromeTts tts = ChromeTts._tts == null ? apiNotAvailable('chrome.tts') : new ChromeTts._();
+/**
+ * Accessor for the `chrome.tts` namespace.
+ */
+final ChromeTts tts = new ChromeTts._();
 
-class ChromeTts {
+class ChromeTts extends ChromeApi {
   static final JsObject _tts = chrome['tts'];
 
   ChromeTts._();
+
+  bool get available => _tts != null;
 
   /**
    * Speaks text using a text-to-speech engine.
@@ -29,6 +33,8 @@ class ChromeTts {
    * [options] The speech options.
    */
   Future speak(String utterance, [Map options]) {
+    if (_tts == null) throw new UnsupportedError("'chrome.tts' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _tts.callMethod('speak', [utterance, jsify(options), completer.callback]);
     return completer.future;
@@ -40,6 +46,8 @@ class ChromeTts {
    * call to speak.
    */
   void stop() {
+    if (_tts == null) throw new UnsupportedError("'chrome.tts' is not available");
+
     _tts.callMethod('stop');
   }
 
@@ -48,6 +56,8 @@ class ChromeTts {
    * to resume or stop will un-pause speech.
    */
   void pause() {
+    if (_tts == null) throw new UnsupportedError("'chrome.tts' is not available");
+
     _tts.callMethod('pause');
   }
 
@@ -55,6 +65,8 @@ class ChromeTts {
    * If speech was paused, resumes speaking where it left off.
    */
   void resume() {
+    if (_tts == null) throw new UnsupportedError("'chrome.tts' is not available");
+
     _tts.callMethod('resume');
   }
 
@@ -67,6 +79,8 @@ class ChromeTts {
    * True if speaking, false otherwise.
    */
   Future<bool> isSpeaking() {
+    if (_tts == null) throw new UnsupportedError("'chrome.tts' is not available");
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _tts.callMethod('isSpeaking', [completer.callback]);
     return completer.future;
@@ -80,6 +94,8 @@ class ChromeTts {
    * synthesis.
    */
   Future<List<TtsVoice>> getVoices() {
+    if (_tts == null) throw new UnsupportedError("'chrome.tts' is not available");
+
     var completer = new ChromeCompleter<List<TtsVoice>>.oneArg((e) => listify(e, _createTtsVoice));
     _tts.callMethod('getVoices', [completer.callback]);
     return completer.future;
@@ -91,7 +107,7 @@ class ChromeTts {
   Stream<TtsEvent> get onEvent => _onEvent.stream;
 
   final ChromeStreamController<TtsEvent> _onEvent =
-      new ChromeStreamController<TtsEvent>.oneArg(_tts['onEvent'], _createTtsEvent);
+      new ChromeStreamController<TtsEvent>.oneArg(_tts, 'onEvent', _createTtsEvent);
 }
 
 /**

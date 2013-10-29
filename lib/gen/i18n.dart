@@ -8,13 +8,17 @@ library chrome.i18n;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.i18n` namespace.
-final ChromeI18N i18n = ChromeI18N._i18n == null ? apiNotAvailable('chrome.i18n') : new ChromeI18N._();
+/**
+ * Accessor for the `chrome.i18n` namespace.
+ */
+final ChromeI18N i18n = new ChromeI18N._();
 
-class ChromeI18N {
+class ChromeI18N extends ChromeApi {
   static final JsObject _i18n = chrome['i18n'];
 
   ChromeI18N._();
+
+  bool get available => _i18n != null;
 
   /**
    * Gets the accept-languages of the browser. This is different from the locale
@@ -24,6 +28,8 @@ class ChromeI18N {
    * Array of the accept languages of the browser, such as en-US,en,zh-CN
    */
   Future<List<String>> getAcceptLanguages() {
+    if (_i18n == null) throw new UnsupportedError("'chrome.i18n' is not available");
+
     var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _i18n.callMethod('getAcceptLanguages', [completer.callback]);
     return completer.future;
@@ -45,6 +51,8 @@ class ChromeI18N {
    * Message localized for current locale.
    */
   String getMessage(String messageName, [dynamic substitutions]) {
+    if (_i18n == null) throw new UnsupportedError("'chrome.i18n' is not available");
+
     return _i18n.callMethod('getMessage', [messageName, jsify(substitutions)]);
   }
 }

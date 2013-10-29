@@ -8,13 +8,17 @@ library chrome.omnibox;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.omnibox` namespace.
-final ChromeOmnibox omnibox = ChromeOmnibox._omnibox == null ? apiNotAvailable('chrome.omnibox') : new ChromeOmnibox._();
+/**
+ * Accessor for the `chrome.omnibox` namespace.
+ */
+final ChromeOmnibox omnibox = new ChromeOmnibox._();
 
-class ChromeOmnibox {
+class ChromeOmnibox extends ChromeApi {
   static final JsObject _omnibox = chrome['omnibox'];
 
   ChromeOmnibox._();
+
+  bool get available => _omnibox != null;
 
   /**
    * A callback passed to the onInputChanged event used for sending suggestions
@@ -23,6 +27,8 @@ class ChromeOmnibox {
    * [suggestResults] An array of suggest results
    */
   void sendSuggestions(int requestId, List<SuggestResult> suggestResults) {
+    if (_omnibox == null) throw new UnsupportedError("'chrome.omnibox' is not available");
+
     _omnibox.callMethod('sendSuggestions', [requestId, jsify(suggestResults)]);
   }
 
@@ -35,6 +41,8 @@ class ChromeOmnibox {
    * parameter.
    */
   void setDefaultSuggestion(DefaultSuggestResult suggestion) {
+    if (_omnibox == null) throw new UnsupportedError("'chrome.omnibox' is not available");
+
     _omnibox.callMethod('setDefaultSuggestion', [jsify(suggestion)]);
   }
 
@@ -46,7 +54,7 @@ class ChromeOmnibox {
   Stream get onInputStarted => _onInputStarted.stream;
 
   final ChromeStreamController _onInputStarted =
-      new ChromeStreamController.noArgs(_omnibox['onInputStarted']);
+      new ChromeStreamController.noArgs(_omnibox, 'onInputStarted');
 
   /**
    * User has changed what is typed into the omnibox.
@@ -54,7 +62,7 @@ class ChromeOmnibox {
   Stream<OnInputChangedEvent> get onInputChanged => _onInputChanged.stream;
 
   final ChromeStreamController<OnInputChangedEvent> _onInputChanged =
-      new ChromeStreamController<OnInputChangedEvent>.twoArgs(_omnibox['onInputChanged'], _createOnInputChangedEvent);
+      new ChromeStreamController<OnInputChangedEvent>.twoArgs(_omnibox, 'onInputChanged', _createOnInputChangedEvent);
 
   /**
    * User has accepted what is typed into the omnibox.
@@ -62,7 +70,7 @@ class ChromeOmnibox {
   Stream<OnInputEnteredEvent> get onInputEntered => _onInputEntered.stream;
 
   final ChromeStreamController<OnInputEnteredEvent> _onInputEntered =
-      new ChromeStreamController<OnInputEnteredEvent>.twoArgs(_omnibox['onInputEntered'], _createOnInputEnteredEvent);
+      new ChromeStreamController<OnInputEnteredEvent>.twoArgs(_omnibox, 'onInputEntered', _createOnInputEnteredEvent);
 
   /**
    * User has ended the keyword input session without accepting the input.
@@ -70,7 +78,7 @@ class ChromeOmnibox {
   Stream get onInputCancelled => _onInputCancelled.stream;
 
   final ChromeStreamController _onInputCancelled =
-      new ChromeStreamController.noArgs(_omnibox['onInputCancelled']);
+      new ChromeStreamController.noArgs(_omnibox, 'onInputCancelled');
 }
 
 /**

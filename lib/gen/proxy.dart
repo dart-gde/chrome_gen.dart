@@ -10,13 +10,17 @@ library chrome.proxy;
 import 'types.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.proxy` namespace.
-final ChromeProxy proxy = ChromeProxy._proxy == null ? apiNotAvailable('chrome.proxy') : new ChromeProxy._();
+/**
+ * Accessor for the `chrome.proxy` namespace.
+ */
+final ChromeProxy proxy = new ChromeProxy._();
 
-class ChromeProxy {
+class ChromeProxy extends ChromeApi {
   static final JsObject _proxy = chrome['proxy'];
 
   ChromeProxy._();
+
+  bool get available => _proxy != null;
 
   /**
    * Proxy settings to be used. The value of this setting is a ProxyConfig
@@ -30,7 +34,7 @@ class ChromeProxy {
   Stream<Map> get onProxyError => _onProxyError.stream;
 
   final ChromeStreamController<Map> _onProxyError =
-      new ChromeStreamController<Map>.oneArg(_proxy['onProxyError'], mapify);
+      new ChromeStreamController<Map>.oneArg(_proxy, 'onProxyError', mapify);
 }
 
 /**

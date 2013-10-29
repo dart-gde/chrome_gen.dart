@@ -47,7 +47,6 @@ class GenApis {
     }
   }
 
-
   void generate() {
     _logger.info("reading ${apisFile.path}...");
 
@@ -157,10 +156,9 @@ class GenApis {
     generator.writeln();
 
     generator.writeln("class ${className} {");
-    apis.forEach((api) => api.generateAccessor());
     generator.writeln("${className}._();");
+    apis.forEach((api) => api.generateAccessor());
     generator.writeln("}");
-    generator.writeln();
     var createdFactories = new Set<String>();
     apis.forEach((api) => api.generateContent(true, createdFactories));
 

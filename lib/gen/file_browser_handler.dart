@@ -9,13 +9,17 @@ library chrome.fileBrowserHandler;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.fileBrowserHandler` namespace.
-final ChromeFileBrowserHandler fileBrowserHandler = ChromeFileBrowserHandler._fileBrowserHandler == null ? apiNotAvailable('chrome.fileBrowserHandler') : new ChromeFileBrowserHandler._();
+/**
+ * Accessor for the `chrome.fileBrowserHandler` namespace.
+ */
+final ChromeFileBrowserHandler fileBrowserHandler = new ChromeFileBrowserHandler._();
 
-class ChromeFileBrowserHandler {
+class ChromeFileBrowserHandler extends ChromeApi {
   static final JsObject _fileBrowserHandler = chrome['fileBrowserHandler'];
 
   ChromeFileBrowserHandler._();
+
+  bool get available => _fileBrowserHandler != null;
 
   /**
    * Prompts user to select file path under which file should be saved. When the
@@ -31,6 +35,8 @@ class ChromeFileBrowserHandler {
    * Result of the method.
    */
   Future<Map> selectFile(Map selectionParams) {
+    if (_fileBrowserHandler == null) throw new UnsupportedError("'chrome.fileBrowserHandler' is not available");
+
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _fileBrowserHandler.callMethod('selectFile', [jsify(selectionParams), completer.callback]);
     return completer.future;
@@ -42,7 +48,7 @@ class ChromeFileBrowserHandler {
   Stream<OnExecuteEvent> get onExecute => _onExecute.stream;
 
   final ChromeStreamController<OnExecuteEvent> _onExecute =
-      new ChromeStreamController<OnExecuteEvent>.twoArgs(_fileBrowserHandler['onExecute'], _createOnExecuteEvent);
+      new ChromeStreamController<OnExecuteEvent>.twoArgs(_fileBrowserHandler, 'onExecute', _createOnExecuteEvent);
 }
 
 /**

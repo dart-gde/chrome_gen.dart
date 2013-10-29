@@ -13,13 +13,17 @@ library chrome.debugger;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.debugger` namespace.
-final ChromeDebugger debugger = ChromeDebugger._debugger == null ? apiNotAvailable('chrome.debugger') : new ChromeDebugger._();
+/**
+ * Accessor for the `chrome.debugger` namespace.
+ */
+final ChromeDebugger debugger = new ChromeDebugger._();
 
-class ChromeDebugger {
+class ChromeDebugger extends ChromeApi {
   static final JsObject _debugger = chrome['debugger'];
 
   ChromeDebugger._();
+
+  bool get available => _debugger != null;
 
   /**
    * Attaches debugger to the given target.
@@ -32,6 +36,8 @@ class ChromeDebugger {
    * [here](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
    */
   Future attach(Debuggee target, String requiredVersion) {
+    if (_debugger == null) throw new UnsupportedError("'chrome.debugger' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _debugger.callMethod('attach', [jsify(target), requiredVersion, completer.callback]);
     return completer.future;
@@ -43,6 +49,8 @@ class ChromeDebugger {
    * [target] Debugging target from which you want to detach.
    */
   Future detach(Debuggee target) {
+    if (_debugger == null) throw new UnsupportedError("'chrome.debugger' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _debugger.callMethod('detach', [jsify(target), completer.callback]);
     return completer.future;
@@ -65,6 +73,8 @@ class ChromeDebugger {
    * on the method and is defined by the remote debugging protocol.
    */
   Future<Map<String, dynamic>> sendCommand(Debuggee target, String method, [Map<String, dynamic> commandParams]) {
+    if (_debugger == null) throw new UnsupportedError("'chrome.debugger' is not available");
+
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
     _debugger.callMethod('sendCommand', [jsify(target), method, jsify(commandParams), completer.callback]);
     return completer.future;
@@ -77,6 +87,8 @@ class ChromeDebugger {
    * Array of TargetInfo objects corresponding to the available debug targets.
    */
   Future<List<TargetInfo>> getTargets() {
+    if (_debugger == null) throw new UnsupportedError("'chrome.debugger' is not available");
+
     var completer = new ChromeCompleter<List<TargetInfo>>.oneArg((e) => listify(e, _createTargetInfo));
     _debugger.callMethod('getTargets', [completer.callback]);
     return completer.future;
@@ -88,7 +100,7 @@ class ChromeDebugger {
   Stream<OnEventEvent> get onEvent => _onEvent.stream;
 
   final ChromeStreamController<OnEventEvent> _onEvent =
-      new ChromeStreamController<OnEventEvent>.threeArgs(_debugger['onEvent'], _createOnEventEvent);
+      new ChromeStreamController<OnEventEvent>.threeArgs(_debugger, 'onEvent', _createOnEventEvent);
 
   /**
    * Fired when browser terminates debugging session for the tab. This happens
@@ -98,7 +110,7 @@ class ChromeDebugger {
   Stream<OnDetachEvent> get onDetach => _onDetach.stream;
 
   final ChromeStreamController<OnDetachEvent> _onDetach =
-      new ChromeStreamController<OnDetachEvent>.twoArgs(_debugger['onDetach'], _createOnDetachEvent);
+      new ChromeStreamController<OnDetachEvent>.twoArgs(_debugger, 'onDetach', _createOnDetachEvent);
 }
 
 /**

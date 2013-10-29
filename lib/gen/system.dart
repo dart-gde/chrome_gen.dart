@@ -7,27 +7,37 @@ import '../src/common.dart';
 final ChromeSystem system = new ChromeSystem._();
 
 class ChromeSystem {
-  /// Accessor for the `chrome.system.cpu` namespace.
-  final ChromeSystemCpu cpu = ChromeSystemCpu._system_cpu == null ? apiNotAvailable('chrome.system.cpu') : new ChromeSystemCpu._();
-
-  /// Accessor for the `chrome.system.memory` namespace.
-  final ChromeSystemMemory memory = ChromeSystemMemory._system_memory == null ? apiNotAvailable('chrome.system.memory') : new ChromeSystemMemory._();
-
-  /// Accessor for the `chrome.system.storage` namespace.
-  final ChromeSystemStorage storage = ChromeSystemStorage._system_storage == null ? apiNotAvailable('chrome.system.storage') : new ChromeSystemStorage._();
-
   ChromeSystem._();
+
+  /**
+   * Accessor for the `chrome.system.cpu` namespace.
+   */
+  final ChromeSystemCpu cpu = new ChromeSystemCpu._();
+
+  /**
+   * Accessor for the `chrome.system.memory` namespace.
+   */
+  final ChromeSystemMemory memory = new ChromeSystemMemory._();
+
+  /**
+   * Accessor for the `chrome.system.storage` namespace.
+   */
+  final ChromeSystemStorage storage = new ChromeSystemStorage._();
 }
 
-class ChromeSystemCpu {
+class ChromeSystemCpu extends ChromeApi {
   static final JsObject _system_cpu = chrome['system']['cpu'];
 
   ChromeSystemCpu._();
+
+  bool get available => _system_cpu != null;
 
   /**
    * Queries basic CPU information of the system.
    */
   Future<CpuInfo> getInfo() {
+    if (_system_cpu == null) throw new UnsupportedError("'chrome.system.cpu' is not available");
+
     var completer = new ChromeCompleter<CpuInfo>.oneArg(_createCpuInfo);
     _system_cpu.callMethod('getInfo', [completer.callback]);
     return completer.future;
@@ -53,15 +63,20 @@ class CpuInfo extends ChromeObject {
 }
 
 CpuInfo _createCpuInfo(JsObject proxy) => proxy == null ? null : new CpuInfo.fromProxy(proxy);
-class ChromeSystemMemory {
+
+class ChromeSystemMemory extends ChromeApi {
   static final JsObject _system_memory = chrome['system']['memory'];
 
   ChromeSystemMemory._();
+
+  bool get available => _system_memory != null;
 
   /**
    * Get physical memory information.
    */
   Future<MemoryInfo> getInfo() {
+    if (_system_memory == null) throw new UnsupportedError("'chrome.system.memory' is not available");
+
     var completer = new ChromeCompleter<MemoryInfo>.oneArg(_createMemoryInfo);
     _system_memory.callMethod('getInfo', [completer.callback]);
     return completer.future;
@@ -83,16 +98,21 @@ class MemoryInfo extends ChromeObject {
 }
 
 MemoryInfo _createMemoryInfo(JsObject proxy) => proxy == null ? null : new MemoryInfo.fromProxy(proxy);
-class ChromeSystemStorage {
+
+class ChromeSystemStorage extends ChromeApi {
   static final JsObject _system_storage = chrome['system']['storage'];
 
   ChromeSystemStorage._();
+
+  bool get available => _system_storage != null;
 
   /**
    * Get the storage information from the system. The argument passed to the
    * callback is an array of StorageUnitInfo objects.
    */
   Future<StorageUnitInfo> getInfo() {
+    if (_system_storage == null) throw new UnsupportedError("'chrome.system.storage' is not available");
+
     var completer = new ChromeCompleter<StorageUnitInfo>.oneArg(_createStorageUnitInfo);
     _system_storage.callMethod('getInfo', [completer.callback]);
     return completer.future;
@@ -102,6 +122,8 @@ class ChromeSystemStorage {
    * Ejects a removable storage device.
    */
   Future<EjectDeviceResultCode> ejectDevice(String id) {
+    if (_system_storage == null) throw new UnsupportedError("'chrome.system.storage' is not available");
+
     var completer = new ChromeCompleter<EjectDeviceResultCode>.oneArg(_createEjectDeviceResultCode);
     _system_storage.callMethod('ejectDevice', [id, completer.callback]);
     return completer.future;
@@ -110,12 +132,12 @@ class ChromeSystemStorage {
   Stream<StorageUnitInfo> get onAttached => _onAttached.stream;
 
   final ChromeStreamController<StorageUnitInfo> _onAttached =
-      new ChromeStreamController<StorageUnitInfo>.oneArg(_system_storage['onAttached'], _createStorageUnitInfo);
+      new ChromeStreamController<StorageUnitInfo>.oneArg(_system_storage, 'onAttached', _createStorageUnitInfo);
 
   Stream<String> get onDetached => _onDetached.stream;
 
   final ChromeStreamController<String> _onDetached =
-      new ChromeStreamController<String>.oneArg(_system_storage['onDetached'], selfConverter);
+      new ChromeStreamController<String>.oneArg(_system_storage, 'onDetached', selfConverter);
 }
 
 /**

@@ -4,13 +4,17 @@ library chrome.tabCapture;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.tabCapture` namespace.
-final ChromeTabCapture tabCapture = ChromeTabCapture._tabCapture == null ? apiNotAvailable('chrome.tabCapture') : new ChromeTabCapture._();
+/**
+ * Accessor for the `chrome.tabCapture` namespace.
+ */
+final ChromeTabCapture tabCapture = new ChromeTabCapture._();
 
-class ChromeTabCapture {
+class ChromeTabCapture extends ChromeApi {
   static final JsObject _tabCapture = chrome['tabCapture'];
 
   ChromeTabCapture._();
+
+  bool get available => _tabCapture != null;
 
   /**
    * Captures the visible area of the currently active tab. This method can only
@@ -21,6 +25,8 @@ class ChromeTabCapture {
    * [callback]: Callback with either the stream returned or null.
    */
   Future<LocalMediaStream> capture(CaptureOptions options) {
+    if (_tabCapture == null) throw new UnsupportedError("'chrome.tabCapture' is not available");
+
     var completer = new ChromeCompleter<LocalMediaStream>.oneArg(_createLocalMediaStream);
     _tabCapture.callMethod('capture', [jsify(options), completer.callback]);
     return completer.future;
@@ -34,6 +40,8 @@ class ChromeTabCapture {
    * same tab).
    */
   Future<CaptureInfo> getCapturedTabs() {
+    if (_tabCapture == null) throw new UnsupportedError("'chrome.tabCapture' is not available");
+
     var completer = new ChromeCompleter<CaptureInfo>.oneArg(_createCaptureInfo);
     _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
     return completer.future;
@@ -42,7 +50,7 @@ class ChromeTabCapture {
   Stream<CaptureInfo> get onStatusChanged => _onStatusChanged.stream;
 
   final ChromeStreamController<CaptureInfo> _onStatusChanged =
-      new ChromeStreamController<CaptureInfo>.oneArg(_tabCapture['onStatusChanged'], _createCaptureInfo);
+      new ChromeStreamController<CaptureInfo>.oneArg(_tabCapture, 'onStatusChanged', _createCaptureInfo);
 }
 
 /**

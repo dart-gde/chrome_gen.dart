@@ -9,19 +9,25 @@ library chrome.scriptBadge;
 import 'tabs.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.scriptBadge` namespace.
-final ChromeScriptBadge scriptBadge = ChromeScriptBadge._scriptBadge == null ? apiNotAvailable('chrome.scriptBadge') : new ChromeScriptBadge._();
+/**
+ * Accessor for the `chrome.scriptBadge` namespace.
+ */
+final ChromeScriptBadge scriptBadge = new ChromeScriptBadge._();
 
-class ChromeScriptBadge {
+class ChromeScriptBadge extends ChromeApi {
   static final JsObject _scriptBadge = chrome['scriptBadge'];
 
   ChromeScriptBadge._();
+
+  bool get available => _scriptBadge != null;
 
   /**
    * Sets the html document to be opened as a popup when the user clicks on the
    * script badge's icon.
    */
   void setPopup(Map details) {
+    if (_scriptBadge == null) throw new UnsupportedError("'chrome.scriptBadge' is not available");
+
     _scriptBadge.callMethod('setPopup', [jsify(details)]);
   }
 
@@ -29,6 +35,8 @@ class ChromeScriptBadge {
    * Gets the html document set as the popup for this script badge.
    */
   Future<String> getPopup(Map details) {
+    if (_scriptBadge == null) throw new UnsupportedError("'chrome.scriptBadge' is not available");
+
     var completer = new ChromeCompleter<String>.oneArg();
     _scriptBadge.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
@@ -42,6 +50,8 @@ class ChromeScriptBadge {
    * has already run on this tab, this call does nothing.
    */
   void getAttention(Map details) {
+    if (_scriptBadge == null) throw new UnsupportedError("'chrome.scriptBadge' is not available");
+
     _scriptBadge.callMethod('getAttention', [jsify(details)]);
   }
 
@@ -52,7 +62,7 @@ class ChromeScriptBadge {
   Stream<Tab> get onClicked => _onClicked.stream;
 
   final ChromeStreamController<Tab> _onClicked =
-      new ChromeStreamController<Tab>.oneArg(_scriptBadge['onClicked'], _createTab);
+      new ChromeStreamController<Tab>.oneArg(_scriptBadge, 'onClicked', _createTab);
 }
 
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

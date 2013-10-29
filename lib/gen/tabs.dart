@@ -10,18 +10,24 @@ import 'runtime.dart';
 import 'windows.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.tabs` namespace.
-final ChromeTabs tabs = ChromeTabs._tabs == null ? apiNotAvailable('chrome.tabs') : new ChromeTabs._();
+/**
+ * Accessor for the `chrome.tabs` namespace.
+ */
+final ChromeTabs tabs = new ChromeTabs._();
 
-class ChromeTabs {
+class ChromeTabs extends ChromeApi {
   static final JsObject _tabs = chrome['tabs'];
 
   ChromeTabs._();
+
+  bool get available => _tabs != null;
 
   /**
    * Retrieves details about the specified tab.
    */
   Future<Tab> get(int tabId) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('get', [tabId, completer.callback]);
     return completer.future;
@@ -33,6 +39,8 @@ class ChromeTabs {
    * view).
    */
   Future<Tab> getCurrent() {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('getCurrent', [completer.callback]);
     return completer.future;
@@ -50,6 +58,8 @@ class ChromeTabs {
    * closes or does not exist.
    */
   Port connect(int tabId, [Map connectInfo]) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     return _createPort(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
   }
 
@@ -62,6 +72,8 @@ class ChromeTabs {
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendRequest(int tabId, dynamic request) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _tabs.callMethod('sendRequest', [tabId, jsify(request), completer.callback]);
     return completer.future;
@@ -79,6 +91,8 @@ class ChromeTabs {
    * with no arguments and [runtime.lastError] will be set to the error message.
    */
   Future<dynamic> sendMessage(int tabId, dynamic message) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _tabs.callMethod('sendMessage', [tabId, jsify(message), completer.callback]);
     return completer.future;
@@ -91,6 +105,8 @@ class ChromeTabs {
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
   Future<Tab> getSelected([int windowId]) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('getSelected', [windowId, completer.callback]);
     return completer.future;
@@ -103,6 +119,8 @@ class ChromeTabs {
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
   Future<List<Tab>> getAllInWindow([int windowId]) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, _createTab));
     _tabs.callMethod('getAllInWindow', [windowId, completer.callback]);
     return completer.future;
@@ -115,6 +133,8 @@ class ChromeTabs {
    * Details about the created tab. Will contain the ID of the new tab.
    */
   Future<Tab> create(Map createProperties) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('create', [jsify(createProperties), completer.callback]);
     return completer.future;
@@ -131,6 +151,8 @@ class ChromeTabs {
    * requested.
    */
   Future<Tab> duplicate(int tabId) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('duplicate', [tabId, completer.callback]);
     return completer.future;
@@ -141,6 +163,8 @@ class ChromeTabs {
    * properties are specified.
    */
   Future<List<Tab>> query(Map queryInfo) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, _createTab));
     _tabs.callMethod('query', [jsify(queryInfo), completer.callback]);
     return completer.future;
@@ -153,6 +177,8 @@ class ChromeTabs {
    * Contains details about the window whose tabs were highlighted.
    */
   Future<Window> highlight(Map highlightInfo) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _tabs.callMethod('highlight', [jsify(highlightInfo), completer.callback]);
     return completer.future;
@@ -170,6 +196,8 @@ class ChromeTabs {
    * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
    */
   Future<Tab> update(Map updateProperties, [int tabId]) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
     _tabs.callMethod('update', [tabId, jsify(updateProperties), completer.callback]);
     return completer.future;
@@ -186,6 +214,8 @@ class ChromeTabs {
    * Details about the moved tabs.
    */
   Future<dynamic> move(dynamic tabIds, Map moveProperties) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _tabs.callMethod('move', [jsify(tabIds), jsify(moveProperties), completer.callback]);
     return completer.future;
@@ -198,6 +228,8 @@ class ChromeTabs {
    * current window.
    */
   Future reload([int tabId, Map reloadProperties]) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _tabs.callMethod('reload', [tabId, jsify(reloadProperties), completer.callback]);
     return completer.future;
@@ -209,6 +241,8 @@ class ChromeTabs {
    * [tabIds] The tab or list of tabs to close.
    */
   Future remove(dynamic tabIds) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _tabs.callMethod('remove', [jsify(tabIds), completer.callback]);
     return completer.future;
@@ -229,6 +263,8 @@ class ChromeTabs {
    * For an unknown language, `und` will be returned.
    */
   Future<String> detectLanguage([int tabId]) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<String>.oneArg();
     _tabs.callMethod('detectLanguage', [tabId, completer.callback]);
     return completer.future;
@@ -250,6 +286,8 @@ class ChromeTabs {
    * May be assigned to the 'src' property of an HTML Image element for display.
    */
   Future<String> captureVisibleTab([int windowId, Map options]) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<String>.oneArg();
     _tabs.callMethod('captureVisibleTab', [windowId, jsify(options), completer.callback]);
     return completer.future;
@@ -268,6 +306,8 @@ class ChromeTabs {
    * The result of the script in every injected frame.
    */
   Future<List<dynamic>> executeScript(InjectDetails details, [int tabId]) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter<List<dynamic>>.oneArg(listify);
     _tabs.callMethod('executeScript', [tabId, jsify(details), completer.callback]);
     return completer.future;
@@ -283,6 +323,8 @@ class ChromeTabs {
    * [details] Details of the CSS text to insert.
    */
   Future insertCSS(InjectDetails details, [int tabId]) {
+    if (_tabs == null) throw new UnsupportedError("'chrome.tabs' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _tabs.callMethod('insertCSS', [tabId, jsify(details), completer.callback]);
     return completer.future;
@@ -296,7 +338,7 @@ class ChromeTabs {
   Stream<Tab> get onCreated => _onCreated.stream;
 
   final ChromeStreamController<Tab> _onCreated =
-      new ChromeStreamController<Tab>.oneArg(_tabs['onCreated'], _createTab);
+      new ChromeStreamController<Tab>.oneArg(_tabs, 'onCreated', _createTab);
 
   /**
    * Fired when a tab is updated.
@@ -304,7 +346,7 @@ class ChromeTabs {
   Stream<OnUpdatedEvent> get onUpdated => _onUpdated.stream;
 
   final ChromeStreamController<OnUpdatedEvent> _onUpdated =
-      new ChromeStreamController<OnUpdatedEvent>.threeArgs(_tabs['onUpdated'], _createOnUpdatedEvent);
+      new ChromeStreamController<OnUpdatedEvent>.threeArgs(_tabs, 'onUpdated', _createOnUpdatedEvent);
 
   /**
    * Fired when a tab is moved within a window. Only one move event is fired,
@@ -315,7 +357,7 @@ class ChromeTabs {
   Stream<TabsOnMovedEvent> get onMoved => _onMoved.stream;
 
   final ChromeStreamController<TabsOnMovedEvent> _onMoved =
-      new ChromeStreamController<TabsOnMovedEvent>.twoArgs(_tabs['onMoved'], _createTabsOnMovedEvent);
+      new ChromeStreamController<TabsOnMovedEvent>.twoArgs(_tabs, 'onMoved', _createTabsOnMovedEvent);
 
   /**
    * Deprecated. Please use onActivated.
@@ -323,7 +365,7 @@ class ChromeTabs {
   Stream<OnSelectionChangedEvent> get onSelectionChanged => _onSelectionChanged.stream;
 
   final ChromeStreamController<OnSelectionChangedEvent> _onSelectionChanged =
-      new ChromeStreamController<OnSelectionChangedEvent>.twoArgs(_tabs['onSelectionChanged'], _createOnSelectionChangedEvent);
+      new ChromeStreamController<OnSelectionChangedEvent>.twoArgs(_tabs, 'onSelectionChanged', _createOnSelectionChangedEvent);
 
   /**
    * Deprecated. Please use onActivated.
@@ -331,7 +373,7 @@ class ChromeTabs {
   Stream<OnActiveChangedEvent> get onActiveChanged => _onActiveChanged.stream;
 
   final ChromeStreamController<OnActiveChangedEvent> _onActiveChanged =
-      new ChromeStreamController<OnActiveChangedEvent>.twoArgs(_tabs['onActiveChanged'], _createOnActiveChangedEvent);
+      new ChromeStreamController<OnActiveChangedEvent>.twoArgs(_tabs, 'onActiveChanged', _createOnActiveChangedEvent);
 
   /**
    * Fires when the active tab in a window changes. Note that the tab's URL may
@@ -341,7 +383,7 @@ class ChromeTabs {
   Stream<Map> get onActivated => _onActivated.stream;
 
   final ChromeStreamController<Map> _onActivated =
-      new ChromeStreamController<Map>.oneArg(_tabs['onActivated'], mapify);
+      new ChromeStreamController<Map>.oneArg(_tabs, 'onActivated', mapify);
 
   /**
    * Deprecated. Please use onHighlighted.
@@ -349,7 +391,7 @@ class ChromeTabs {
   Stream<Map> get onHighlightChanged => _onHighlightChanged.stream;
 
   final ChromeStreamController<Map> _onHighlightChanged =
-      new ChromeStreamController<Map>.oneArg(_tabs['onHighlightChanged'], mapify);
+      new ChromeStreamController<Map>.oneArg(_tabs, 'onHighlightChanged', mapify);
 
   /**
    * Fired when the highlighted or selected tabs in a window changes.
@@ -357,7 +399,7 @@ class ChromeTabs {
   Stream<Map> get onHighlighted => _onHighlighted.stream;
 
   final ChromeStreamController<Map> _onHighlighted =
-      new ChromeStreamController<Map>.oneArg(_tabs['onHighlighted'], mapify);
+      new ChromeStreamController<Map>.oneArg(_tabs, 'onHighlighted', mapify);
 
   /**
    * Fired when a tab is detached from a window, for example because it is being
@@ -366,7 +408,7 @@ class ChromeTabs {
   Stream<OnDetachedEvent> get onDetached => _onDetached.stream;
 
   final ChromeStreamController<OnDetachedEvent> _onDetached =
-      new ChromeStreamController<OnDetachedEvent>.twoArgs(_tabs['onDetached'], _createOnDetachedEvent);
+      new ChromeStreamController<OnDetachedEvent>.twoArgs(_tabs, 'onDetached', _createOnDetachedEvent);
 
   /**
    * Fired when a tab is attached to a window, for example because it was moved
@@ -375,7 +417,7 @@ class ChromeTabs {
   Stream<OnAttachedEvent> get onAttached => _onAttached.stream;
 
   final ChromeStreamController<OnAttachedEvent> _onAttached =
-      new ChromeStreamController<OnAttachedEvent>.twoArgs(_tabs['onAttached'], _createOnAttachedEvent);
+      new ChromeStreamController<OnAttachedEvent>.twoArgs(_tabs, 'onAttached', _createOnAttachedEvent);
 
   /**
    * Fired when a tab is closed.
@@ -383,7 +425,7 @@ class ChromeTabs {
   Stream<TabsOnRemovedEvent> get onRemoved => _onRemoved.stream;
 
   final ChromeStreamController<TabsOnRemovedEvent> _onRemoved =
-      new ChromeStreamController<TabsOnRemovedEvent>.twoArgs(_tabs['onRemoved'], _createTabsOnRemovedEvent);
+      new ChromeStreamController<TabsOnRemovedEvent>.twoArgs(_tabs, 'onRemoved', _createTabsOnRemovedEvent);
 
   /**
    * Fired when a tab is replaced with another tab due to prerendering or
@@ -392,7 +434,7 @@ class ChromeTabs {
   Stream<OnReplacedEvent> get onReplaced => _onReplaced.stream;
 
   final ChromeStreamController<OnReplacedEvent> _onReplaced =
-      new ChromeStreamController<OnReplacedEvent>.twoArgs(_tabs['onReplaced'], _createOnReplacedEvent);
+      new ChromeStreamController<OnReplacedEvent>.twoArgs(_tabs, 'onReplaced', _createOnReplacedEvent);
 }
 
 /**

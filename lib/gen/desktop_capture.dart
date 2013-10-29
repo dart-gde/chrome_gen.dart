@@ -4,13 +4,17 @@ library chrome.desktopCapture;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.desktopCapture` namespace.
-final ChromeDesktopCapture desktopCapture = ChromeDesktopCapture._desktopCapture == null ? apiNotAvailable('chrome.desktopCapture') : new ChromeDesktopCapture._();
+/**
+ * Accessor for the `chrome.desktopCapture` namespace.
+ */
+final ChromeDesktopCapture desktopCapture = new ChromeDesktopCapture._();
 
-class ChromeDesktopCapture {
+class ChromeDesktopCapture extends ChromeApi {
   static final JsObject _desktopCapture = chrome['desktopCapture'];
 
   ChromeDesktopCapture._();
+
+  bool get available => _desktopCapture != null;
 
   /**
    * Shows desktop media picker UI with the specified set of sources.
@@ -30,6 +34,8 @@ class ChromeDesktopCapture {
    * callback is called with an empty `streamId`.
    */
   Future<String> chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
+    if (_desktopCapture == null) throw new UnsupportedError("'chrome.desktopCapture' is not available");
+
     var completer = new ChromeCompleter<String>.oneArg();
     _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), origin, completer.callback]);
     return completer.future;

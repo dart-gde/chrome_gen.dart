@@ -12,18 +12,22 @@ library chrome.declarativeWebRequest;
 import 'events.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.declarativeWebRequest` namespace.
-final ChromeDeclarativeWebRequest declarativeWebRequest = ChromeDeclarativeWebRequest._declarativeWebRequest == null ? apiNotAvailable('chrome.declarativeWebRequest') : new ChromeDeclarativeWebRequest._();
+/**
+ * Accessor for the `chrome.declarativeWebRequest` namespace.
+ */
+final ChromeDeclarativeWebRequest declarativeWebRequest = new ChromeDeclarativeWebRequest._();
 
-class ChromeDeclarativeWebRequest {
+class ChromeDeclarativeWebRequest extends ChromeApi {
   static final JsObject _declarativeWebRequest = chrome['declarativeWebRequest'];
 
   ChromeDeclarativeWebRequest._();
 
+  bool get available => _declarativeWebRequest != null;
+
   Stream get onRequest => _onRequest.stream;
 
   final ChromeStreamController _onRequest =
-      new ChromeStreamController.noArgs(_declarativeWebRequest['onRequest']);
+      new ChromeStreamController.noArgs(_declarativeWebRequest, 'onRequest');
 
   /**
    * Fired when a message is sent via
@@ -33,7 +37,7 @@ class ChromeDeclarativeWebRequest {
   Stream<Map> get onMessage => _onMessage.stream;
 
   final ChromeStreamController<Map> _onMessage =
-      new ChromeStreamController<Map>.oneArg(_declarativeWebRequest['onMessage'], mapify);
+      new ChromeStreamController<Map>.oneArg(_declarativeWebRequest, 'onMessage', mapify);
 }
 
 /**

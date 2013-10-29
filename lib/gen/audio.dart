@@ -4,13 +4,17 @@ library chrome.audio;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.audio` namespace.
-final ChromeAudio audio = ChromeAudio._audio == null ? apiNotAvailable('chrome.audio') : new ChromeAudio._();
+/**
+ * Accessor for the `chrome.audio` namespace.
+ */
+final ChromeAudio audio = new ChromeAudio._();
 
-class ChromeAudio {
+class ChromeAudio extends ChromeApi {
   static final JsObject _audio = chrome['audio'];
 
   ChromeAudio._();
+
+  bool get available => _audio != null;
 
   /**
    * Get the information of all audio output and input devices.
@@ -20,6 +24,8 @@ class ChromeAudio {
    * [inputInfo] null
    */
   Future<GetInfoResult> getInfo() {
+    if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+
     var completer = new ChromeCompleter<GetInfoResult>.twoArgs(GetInfoResult._create);
     _audio.callMethod('getInfo', [completer.callback]);
     return completer.future;
@@ -29,6 +35,8 @@ class ChromeAudio {
    * Select a subset of audio devices as active.
    */
   Future setActiveDevices(String ids) {
+    if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _audio.callMethod('setActiveDevices', [ids, completer.callback]);
     return completer.future;
@@ -38,6 +46,8 @@ class ChromeAudio {
    * Sets the properties for the input or output device.
    */
   Future setProperties(String id, DeviceProperties properties) {
+    if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+
     var completer = new ChromeCompleter.noArgs();
     _audio.callMethod('setProperties', [id, jsify(properties), completer.callback]);
     return completer.future;
@@ -46,7 +56,7 @@ class ChromeAudio {
   Stream get onDeviceChanged => _onDeviceChanged.stream;
 
   final ChromeStreamController _onDeviceChanged =
-      new ChromeStreamController.noArgs(_audio['onDeviceChanged']);
+      new ChromeStreamController.noArgs(_audio, 'onDeviceChanged');
 }
 
 class OutputDeviceInfo extends ChromeObject {

@@ -4,13 +4,17 @@ library chrome.alarms;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.alarms` namespace.
-final ChromeAlarms alarms = ChromeAlarms._alarms == null ? apiNotAvailable('chrome.alarms') : new ChromeAlarms._();
+/**
+ * Accessor for the `chrome.alarms` namespace.
+ */
+final ChromeAlarms alarms = new ChromeAlarms._();
 
-class ChromeAlarms {
+class ChromeAlarms extends ChromeApi {
   static final JsObject _alarms = chrome['alarms'];
 
   ChromeAlarms._();
+
+  bool get available => _alarms != null;
 
   /**
    * Creates an alarm. Near the time(s) specified by [alarmInfo], the `onAlarm`
@@ -37,6 +41,8 @@ class ChromeAlarms {
    * [delayInMinutes].
    */
   void create(AlarmCreateInfo alarmInfo, [String name]) {
+    if (_alarms == null) throw new UnsupportedError("'chrome.alarms' is not available");
+
     _alarms.callMethod('create', [name, jsify(alarmInfo)]);
   }
 
@@ -45,6 +51,8 @@ class ChromeAlarms {
    * [name]: The name of the alarm to get. Defaults to the empty string.
    */
   Future<Alarm> get([String name]) {
+    if (_alarms == null) throw new UnsupportedError("'chrome.alarms' is not available");
+
     var completer = new ChromeCompleter<Alarm>.oneArg(_createAlarm);
     _alarms.callMethod('get', [name, completer.callback]);
     return completer.future;
@@ -54,6 +62,8 @@ class ChromeAlarms {
    * Gets an array of all the alarms.
    */
   Future<Alarm> getAll() {
+    if (_alarms == null) throw new UnsupportedError("'chrome.alarms' is not available");
+
     var completer = new ChromeCompleter<Alarm>.oneArg(_createAlarm);
     _alarms.callMethod('getAll', [completer.callback]);
     return completer.future;
@@ -64,6 +74,8 @@ class ChromeAlarms {
    * [name]: The name of the alarm to clear. Defaults to the empty string.
    */
   void clear([String name]) {
+    if (_alarms == null) throw new UnsupportedError("'chrome.alarms' is not available");
+
     _alarms.callMethod('clear', [name]);
   }
 
@@ -71,13 +83,15 @@ class ChromeAlarms {
    * Clears all alarms.
    */
   void clearAll() {
+    if (_alarms == null) throw new UnsupportedError("'chrome.alarms' is not available");
+
     _alarms.callMethod('clearAll');
   }
 
   Stream<Alarm> get onAlarm => _onAlarm.stream;
 
   final ChromeStreamController<Alarm> _onAlarm =
-      new ChromeStreamController<Alarm>.oneArg(_alarms['onAlarm'], _createAlarm);
+      new ChromeStreamController<Alarm>.oneArg(_alarms, 'onAlarm', _createAlarm);
 }
 
 class Alarm extends ChromeObject {

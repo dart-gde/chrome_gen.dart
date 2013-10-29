@@ -14,13 +14,17 @@ library chrome.ttsEngine;
 import 'tts.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.ttsEngine` namespace.
-final ChromeTtsEngine ttsEngine = ChromeTtsEngine._ttsEngine == null ? apiNotAvailable('chrome.ttsEngine') : new ChromeTtsEngine._();
+/**
+ * Accessor for the `chrome.ttsEngine` namespace.
+ */
+final ChromeTtsEngine ttsEngine = new ChromeTtsEngine._();
 
-class ChromeTtsEngine {
+class ChromeTtsEngine extends ChromeApi {
   static final JsObject _ttsEngine = chrome['ttsEngine'];
 
   ChromeTtsEngine._();
+
+  bool get available => _ttsEngine != null;
 
   /**
    * Routes a TTS event from a speech engine to a client.
@@ -29,6 +33,8 @@ class ChromeTtsEngine {
    * status of this utterance.
    */
   void sendTtsEvent(int requestId, TtsEvent event) {
+    if (_ttsEngine == null) throw new UnsupportedError("'chrome.ttsEngine' is not available");
+
     _ttsEngine.callMethod('sendTtsEvent', [requestId, jsify(event)]);
   }
 
@@ -39,7 +45,7 @@ class ChromeTtsEngine {
   Stream<OnSpeakEvent> get onSpeak => _onSpeak.stream;
 
   final ChromeStreamController<OnSpeakEvent> _onSpeak =
-      new ChromeStreamController<OnSpeakEvent>.threeArgs(_ttsEngine['onSpeak'], _createOnSpeakEvent);
+      new ChromeStreamController<OnSpeakEvent>.threeArgs(_ttsEngine, 'onSpeak', _createOnSpeakEvent);
 
   /**
    * Fired when a call is made to tts.stop and this extension may be in the
@@ -50,7 +56,7 @@ class ChromeTtsEngine {
   Stream get onStop => _onStop.stream;
 
   final ChromeStreamController _onStop =
-      new ChromeStreamController.noArgs(_ttsEngine['onStop']);
+      new ChromeStreamController.noArgs(_ttsEngine, 'onStop');
 
   /**
    * Optional: if an engine supports the pause event, it should pause the
@@ -60,7 +66,7 @@ class ChromeTtsEngine {
   Stream get onPause => _onPause.stream;
 
   final ChromeStreamController _onPause =
-      new ChromeStreamController.noArgs(_ttsEngine['onPause']);
+      new ChromeStreamController.noArgs(_ttsEngine, 'onPause');
 
   /**
    * Optional: if an engine supports the pause event, it should also support the
@@ -70,7 +76,7 @@ class ChromeTtsEngine {
   Stream get onResume => _onResume.stream;
 
   final ChromeStreamController _onResume =
-      new ChromeStreamController.noArgs(_ttsEngine['onResume']);
+      new ChromeStreamController.noArgs(_ttsEngine, 'onResume');
 }
 
 /**
