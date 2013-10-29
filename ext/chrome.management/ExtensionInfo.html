@@ -35,10 +35,9 @@
 <p>Information about an installed extension, app, or theme.</p>
 <pre class="source">
 class ExtensionInfo extends ChromeObject {
- ExtensionInfo({String id, String name, String shortName, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List&lt;IconInfo&gt; icons, List&lt;String&gt; permissions, List&lt;String&gt; hostPermissions, String installType}) {
+ ExtensionInfo({String id, String name, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List&lt;IconInfo&gt; icons, List&lt;String&gt; permissions, List&lt;String&gt; hostPermissions, String installType}) {
    if (id != null) this.id = id;
    if (name != null) this.name = name;
-   if (shortName != null) this.shortName = shortName;
    if (description != null) this.description = description;
    if (version != null) this.version = version;
    if (mayDisable != null) this.mayDisable = mayDisable;
@@ -68,12 +67,6 @@ class ExtensionInfo extends ChromeObject {
   */
  String get name =&gt; proxy['name'];
  set name(String value) =&gt; proxy['name'] = value;
-
- /**
-  * A short version of the name of this extension, app, or theme.
-  */
- String get shortName =&gt; proxy['shortName'];
- set shortName(String value) =&gt; proxy['shortName'] = value;
 
  /**
   * The description of this extension, app, or theme.
@@ -187,7 +180,7 @@ class ExtensionInfo extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>ExtensionInfo</strong>({String id, String name, String shortName, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List&lt;<a href="../chrome.management/IconInfo.html">IconInfo</a>&gt; icons, List&lt;String&gt; permissions, List&lt;String&gt; hostPermissions, String installType}) <a class="anchor-link" href="#"
+new <strong>ExtensionInfo</strong>({String id, String name, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List&lt;<a href="../chrome.management/IconInfo.html">IconInfo</a>&gt; icons, List&lt;String&gt; permissions, List&lt;String&gt; hostPermissions, String installType}) <a class="anchor-link" href="#"
               title="Permalink to ExtensionInfo.ExtensionInfo">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -195,10 +188,9 @@ new <strong>ExtensionInfo</strong>({String id, String name, String shortName, St
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ExtensionInfo({String id, String name, String shortName, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List&lt;IconInfo&gt; icons, List&lt;String&gt; permissions, List&lt;String&gt; hostPermissions, String installType}) {
+ExtensionInfo({String id, String name, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List&lt;IconInfo&gt; icons, List&lt;String&gt; permissions, List&lt;String&gt; hostPermissions, String installType}) {
  if (id != null) this.id = id;
  if (name != null) this.name = name;
- if (shortName != null) this.shortName = shortName;
  if (description != null) this.description = description;
  if (version != null) this.version = version;
  if (mayDisable != null) this.mayDisable = mayDisable;
@@ -479,22 +471,6 @@ final JsObject         <strong>proxy</strong> <a class="anchor-link"
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
 final JsObject proxy
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="shortName">
-<button class="show-code">Code</button>
-String         <strong>shortName</strong> <a class="anchor-link"
-            href="#shortName"
-            title="Permalink to ExtensionInfo.shortName">#</a>
-        </h4>
-        <div class="doc">
-<p>A short version of the name of this extension, app, or theme.</p>
-<pre class="source">
-String get shortName =&gt; proxy['shortName'];
-</pre>
-<pre class="source">
-set shortName(String value) =&gt; proxy['shortName'] = value;
 </pre>
 </div>
 </div>

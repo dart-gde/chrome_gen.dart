@@ -36,11 +36,10 @@
 or request.</p>
 <pre class="source">
 class MessageSender extends ChromeObject {
- MessageSender({Tab tab, String id, String url, String tlsChannelId}) {
+ MessageSender({Tab tab, String id, String url}) {
    if (tab != null) this.tab = tab;
    if (id != null) this.id = id;
    if (url != null) this.url = url;
-   if (tlsChannelId != null) this.tlsChannelId = tlsChannelId;
  }
  MessageSender.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -65,13 +64,6 @@ class MessageSender extends ChromeObject {
   */
  String get url =&gt; proxy['url'];
  set url(String value) =&gt; proxy['url'] = value;
-
- /**
-  * The TLS channel ID of the web page that opened the connection, if requested
-  * by the extension or app, and if available.
-  */
- String get tlsChannelId =&gt; proxy['tlsChannelId'];
- set tlsChannelId(String value) =&gt; proxy['tlsChannelId'] = value;
 }
 </pre>
 </div>
@@ -82,7 +74,7 @@ class MessageSender extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>MessageSender</strong>({<a href="../chrome.tabs/Tab.html">Tab</a> tab, String id, String url, String tlsChannelId}) <a class="anchor-link" href="#"
+new <strong>MessageSender</strong>({<a href="../chrome.tabs/Tab.html">Tab</a> tab, String id, String url}) <a class="anchor-link" href="#"
               title="Permalink to MessageSender.MessageSender">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -90,11 +82,10 @@ new <strong>MessageSender</strong>({<a href="../chrome.tabs/Tab.html">Tab</a> ta
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-MessageSender({Tab tab, String id, String url, String tlsChannelId}) {
+MessageSender({Tab tab, String id, String url}) {
  if (tab != null) this.tab = tab;
  if (id != null) this.id = id;
  if (url != null) this.url = url;
- if (tlsChannelId != null) this.tlsChannelId = tlsChannelId;
 }
 </pre>
 </div>
@@ -159,23 +150,6 @@ Tab get tab =&gt; _createTab(proxy['tab']);
 </pre>
 <pre class="source">
 set tab(Tab value) =&gt; proxy['tab'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="tlsChannelId">
-<button class="show-code">Code</button>
-String         <strong>tlsChannelId</strong> <a class="anchor-link"
-            href="#tlsChannelId"
-            title="Permalink to MessageSender.tlsChannelId">#</a>
-        </h4>
-        <div class="doc">
-<p>The TLS channel ID of the web page that opened the connection, if requested
-by the extension or app, and if available.</p>
-<pre class="source">
-String get tlsChannelId =&gt; proxy['tlsChannelId'];
-</pre>
-<pre class="source">
-set tlsChannelId(String value) =&gt; proxy['tlsChannelId'] = value;
 </pre>
 </div>
 </div>

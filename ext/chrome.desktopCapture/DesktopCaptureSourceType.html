@@ -32,87 +32,104 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>Enum used to define set of desktop media sources used in
-chooseDesktopMedia().
-enum of <code>screen</code>, <code>window</code>, <code>tab</code></p>
+<p>Copyright 2013 The Chromium Authors. All rights reserved. Use of this source
+code is governed by a BSD-style license that can be found in the LICENSE
+file. Desktop Capture API that can be used to capture content of screen or
+individual windows or tabs. Enum used to define set of desktop media sources
+used in chooseDesktopMedia().</p>
 <pre class="source">
-class DesktopCaptureSourceType extends ChromeObject {
- DesktopCaptureSourceType();
- DesktopCaptureSourceType.fromProxy(JsObject proxy): super.fromProxy(proxy);
+class DesktopCaptureSourceType extends ChromeEnum {
+ static const DesktopCaptureSourceType SCREEN = const DesktopCaptureSourceType._('screen');
+ static const DesktopCaptureSourceType WINDOW = const DesktopCaptureSourceType._('window');
+ static const DesktopCaptureSourceType TAB = const DesktopCaptureSourceType._('tab');
+
+ static const List&lt;DesktopCaptureSourceType&gt; VALUES = const[SCREEN, WINDOW, TAB];
+
+ const DesktopCaptureSourceType._(String str): super(str);
 }
 </pre>
 </div>
 <h3>Extends</h3>
 <p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>DesktopCaptureSourceType</strong></span></p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeEnum.html">ChromeEnum</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>DesktopCaptureSourceType</strong></span></p>
 <div>
-<h3>Constructors</h3>
-<div class="method"><h4 id="">
+<h3>Static Properties</h3>
+<div class="field"><h4 id="SCREEN">
 <button class="show-code">Code</button>
-new <strong>DesktopCaptureSourceType</strong>() <a class="anchor-link" href="#"
-              title="Permalink to DesktopCaptureSourceType.DesktopCaptureSourceType">#</a></h4>
-<div class="doc">
-<div class="inherited">
-<p>Create a new instance of a <code>ChromeObject</code>, which creates and delegates to
-a JsObject proxy.</p>
-<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
+const <a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>         <strong>SCREEN</strong> <a class="anchor-link"
+            href="#SCREEN"
+            title="Permalink to DesktopCaptureSourceType.SCREEN">#</a>
+        </h4>
+        <div class="doc">
 <pre class="source">
-DesktopCaptureSourceType();
+static const DesktopCaptureSourceType SCREEN = const DesktopCaptureSourceType._('screen')
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="fromProxy">
+<div class="field"><h4 id="TAB">
 <button class="show-code">Code</button>
-new <strong>DesktopCaptureSourceType.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
-              title="Permalink to DesktopCaptureSourceType.DesktopCaptureSourceType.fromProxy">#</a></h4>
-<div class="doc">
-<div class="inherited">
-<p>Create a new instance of a <code>ChromeObject</code>, which delegates to the given
-JsObject proxy.</p>
-<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
+const <a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>         <strong>TAB</strong> <a class="anchor-link"
+            href="#TAB"
+            title="Permalink to DesktopCaptureSourceType.TAB">#</a>
+        </h4>
+        <div class="doc">
 <pre class="source">
-DesktopCaptureSourceType.fromProxy(JsObject proxy): super.fromProxy(proxy);
+static const DesktopCaptureSourceType TAB = const DesktopCaptureSourceType._('tab')
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="VALUES">
+<button class="show-code">Code</button>
+const List&lt;<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>&gt;         <strong>VALUES</strong> <a class="anchor-link"
+            href="#VALUES"
+            title="Permalink to DesktopCaptureSourceType.VALUES">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const List&lt;DesktopCaptureSourceType&gt; VALUES = const[SCREEN, WINDOW, TAB]
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="WINDOW">
+<button class="show-code">Code</button>
+const <a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>         <strong>WINDOW</strong> <a class="anchor-link"
+            href="#WINDOW"
+            title="Permalink to DesktopCaptureSourceType.WINDOW">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const DesktopCaptureSourceType WINDOW = const DesktopCaptureSourceType._('window')
 </pre>
 </div>
 </div>
 </div>
 <div class="inherited">
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="value">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to DesktopCaptureSourceType.proxy">#</a>
+final String         <strong>value</strong> <a class="anchor-link"
+            href="#value"
+            title="Permalink to DesktopCaptureSourceType.value">#</a>
         </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeEnum.html">ChromeEnum</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final String value
 </pre>
 </div>
 </div>
 </div>
 <div class="inherited">
 <h3>Methods</h3>
-<div class="method inherited"><h4 id="toJs">
-<button class="show-code">Code</button>
-JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
-              title="Permalink to DesktopCaptureSourceType.toJs">#</a></h4>
-<div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-JsObject toJs() =&gt; proxy;
-</pre>
-</div>
-</div>
 <div class="method inherited"><h4 id="toString">
 <button class="show-code">Code</button>
 String <strong>toString</strong>() <a class="anchor-link" href="#toString"
               title="Permalink to DesktopCaptureSourceType.toString">#</a></h4>
-<div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeEnum.html">ChromeEnum</a> </div><div class="doc">
 <div class="inherited">
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; value;
 </pre>
 </div>
 </div>

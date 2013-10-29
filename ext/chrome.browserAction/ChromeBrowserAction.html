@@ -137,20 +137,6 @@ class ChromeBrowserAction {
  }
 
  /**
-  * Opens the extension popup window in the active window but does not grant
-  * tab permissions.
-  * 
-  * Returns:
-  * JavaScript 'window' object for the popup window if it was succesfully
-  * opened.
-  */
- Future&lt;Map&lt;String, dynamic&gt;&gt; openPopup() {
-   var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
-   _browserAction.callMethod('openPopup', [completer.callback]);
-   return completer.future;
- }
-
- /**
   * Fired when a browser action icon is clicked.  This event will not fire if
   * the browser action has a popup.
   */
@@ -267,25 +253,6 @@ Future&lt;String&gt; <strong>getTitle</strong>(Map details) <a class="anchor-lin
 Future&lt;String&gt; getTitle(Map details) {
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _browserAction.callMethod('getTitle', [jsify(details), completer.callback]);
- return completer.future;
-}
-</pre>
-</div>
-</div>
-<div class="method"><h4 id="openPopup">
-<button class="show-code">Code</button>
-Future&lt;Map&lt;String, dynamic&gt;&gt; <strong>openPopup</strong>() <a class="anchor-link" href="#openPopup"
-              title="Permalink to ChromeBrowserAction.openPopup">#</a></h4>
-<div class="doc">
-<p>Opens the extension popup window in the active window but does not grant
-tab permissions.</p>
-<p>Returns:
-JavaScript 'window' object for the popup window if it was succesfully
-opened.</p>
-<pre class="source">
-Future&lt;Map&lt;String, dynamic&gt;&gt; openPopup() {
- var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
- _browserAction.callMethod('openPopup', [completer.callback]);
  return completer.future;
 }
 </pre>

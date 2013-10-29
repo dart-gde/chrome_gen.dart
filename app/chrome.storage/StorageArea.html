@@ -73,12 +73,8 @@ class StorageArea extends ChromeObject {
  /**
   * Sets multiple items.
   * 
-  * [items] &lt;p&gt;An object which gives each key/value pair to update storage
-  * with. Any other key/value pairs in storage will not be
-  * affected.&lt;/p&gt;&lt;p&gt;Primitive values such as numbers will serialize as
-  * expected. Values with a `typeof` `"object"` and `"function"` will typically
-  * serialize to `{}`, with the exception of `Array` (serializes as expected),
-  * `Date`, and `Regex` (serialize using their `String` representation).&lt;/p&gt;
+  * [items] Object specifying items to augment storage with. Values that cannot
+  * be serialized (functions, etc) will be ignored.
   */
  Future set(Map&lt;String, dynamic&gt; items) {
    var completer = new ChromeCompleter.noArgs();
@@ -244,12 +240,8 @@ Future <strong>set</strong>(Map&lt;String, dynamic&gt; items) <a class="anchor-l
 <div class="doc">
 <p>Sets multiple items.</p>
 <p>
-<span class="param">items</span> &lt;p>An object which gives each key/value pair to update storage
-with. Any other key/value pairs in storage will not be
-affected.&lt;/p>&lt;p>Primitive values such as numbers will serialize as
-expected. Values with a <code>typeof</code> <code>"object"</code> and <code>"function"</code> will typically
-serialize to <code>{}</code>, with the exception of <code>Array</code> (serializes as expected),
-<code>Date</code>, and <code>Regex</code> (serialize using their <code>String</code> representation).&lt;/p></p>
+<span class="param">items</span> Object specifying items to augment storage with. Values that cannot
+be serialized (functions, etc) will be ignored.</p>
 <pre class="source">
 Future set(Map&lt;String, dynamic&gt; items) {
  var completer = new ChromeCompleter.noArgs();

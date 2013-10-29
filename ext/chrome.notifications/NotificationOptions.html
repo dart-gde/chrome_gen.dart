@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class NotificationOptions extends ChromeObject {
- NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress, bool isClickable}) {
+ NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress}) {
    if (type != null) this.type = type;
    if (iconUrl != null) this.iconUrl = iconUrl;
    if (iconBitmap != null) this.iconBitmap = iconBitmap;
@@ -49,7 +49,6 @@ class NotificationOptions extends ChromeObject {
    if (imageBitmap != null) this.imageBitmap = imageBitmap;
    if (items != null) this.items = items;
    if (progress != null) this.progress = progress;
-   if (isClickable != null) this.isClickable = isClickable;
  }
  NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -94,9 +93,6 @@ class NotificationOptions extends ChromeObject {
 
  int get progress =&gt; proxy['progress'];
  set progress(int value) =&gt; proxy['progress'] = value;
-
- bool get isClickable =&gt; proxy['isClickable'];
- set isClickable(bool value) =&gt; proxy['isClickable'] = value;
 }
 </pre>
 </div>
@@ -107,7 +103,7 @@ class NotificationOptions extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>NotificationOptions</strong>({<a href="../chrome.notifications/TemplateType.html">TemplateType</a> type, String iconUrl, <a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a> iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, <a href="../chrome.notifications/NotificationButton.html">NotificationButton</a> buttons, String expandedMessage, String imageUrl, <a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a> imageBitmap, <a href="../chrome.notifications/NotificationItem.html">NotificationItem</a> items, int progress, bool isClickable}) <a class="anchor-link" href="#"
+new <strong>NotificationOptions</strong>({<a href="../chrome.notifications/TemplateType.html">TemplateType</a> type, String iconUrl, <a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a> iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, <a href="../chrome.notifications/NotificationButton.html">NotificationButton</a> buttons, String expandedMessage, String imageUrl, <a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a> imageBitmap, <a href="../chrome.notifications/NotificationItem.html">NotificationItem</a> items, int progress}) <a class="anchor-link" href="#"
               title="Permalink to NotificationOptions.NotificationOptions">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -115,7 +111,7 @@ new <strong>NotificationOptions</strong>({<a href="../chrome.notifications/Templ
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress, bool isClickable}) {
+NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress}) {
  if (type != null) this.type = type;
  if (iconUrl != null) this.iconUrl = iconUrl;
  if (iconBitmap != null) this.iconBitmap = iconBitmap;
@@ -130,7 +126,6 @@ NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconB
  if (imageBitmap != null) this.imageBitmap = imageBitmap;
  if (items != null) this.items = items;
  if (progress != null) this.progress = progress;
- if (isClickable != null) this.isClickable = isClickable;
 }
 </pre>
 </div>
@@ -269,21 +264,6 @@ String get imageUrl =&gt; proxy['imageUrl'];
 </pre>
 <pre class="source">
 set imageUrl(String value) =&gt; proxy['imageUrl'] = value;
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="isClickable">
-<button class="show-code">Code</button>
-bool         <strong>isClickable</strong> <a class="anchor-link"
-            href="#isClickable"
-            title="Permalink to NotificationOptions.isClickable">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-bool get isClickable =&gt; proxy['isClickable'];
-</pre>
-<pre class="source">
-set isClickable(bool value) =&gt; proxy['isClickable'] = value;
 </pre>
 </div>
 </div>

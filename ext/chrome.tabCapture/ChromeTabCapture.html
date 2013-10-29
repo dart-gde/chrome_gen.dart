@@ -42,7 +42,7 @@ class ChromeTabCapture {
   * Captures the visible area of the currently active tab. This method can only
   * be used on the currently active page after the extension has been
   * _invoked_, similar to the way that &lt;a href="activeTab.html"&gt;activeTab&lt;/a&gt;
-  * works.
+  * works. Note that Chrome internal pages cannot be captured.
   * [options]: Configures the returned media stream.
   * [callback]: Callback with either the stream returned or null.
   */
@@ -97,7 +97,7 @@ Future&lt;<a href="../chrome.src.common_exp/LocalMediaStream.html">LocalMediaStr
 <p>Captures the visible area of the currently active tab. This method can only
 be used on the currently active page after the extension has been
 <em>invoked</em>, similar to the way that &lt;a href="activeTab.html">activeTab&lt;/a>
-works.
+works. Note that Chrome internal pages cannot be captured.
 
 <span class="param">options</span>: Configures the returned media stream.
 <code>callback</code>: Callback with either the stream returned or null.</p>

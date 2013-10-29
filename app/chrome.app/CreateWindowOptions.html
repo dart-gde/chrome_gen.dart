@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class CreateWindowOptions extends ChromeObject {
- CreateWindowOptions({String id, int defaultWidth, int defaultHeight, int defaultLeft, int defaultTop, int width, int height, int left, int top, int minWidth, int minHeight, int maxWidth, int maxHeight, WindowType type, String frame, Bounds bounds, bool transparentBackground, State state, bool hidden, bool resizable, bool singleton, bool alwaysOnTop}) {
+ CreateWindowOptions({String id, int defaultWidth, int defaultHeight, int defaultLeft, int defaultTop, int width, int height, int left, int top, int minWidth, int minHeight, int maxWidth, int maxHeight, WindowType type, String frame, Bounds bounds, bool transparentBackground, State state, bool hidden, bool resizable, bool singleton}) {
    if (id != null) this.id = id;
    if (defaultWidth != null) this.defaultWidth = defaultWidth;
    if (defaultHeight != null) this.defaultHeight = defaultHeight;
@@ -56,7 +56,6 @@ class CreateWindowOptions extends ChromeObject {
    if (hidden != null) this.hidden = hidden;
    if (resizable != null) this.resizable = resizable;
    if (singleton != null) this.singleton = singleton;
-   if (alwaysOnTop != null) this.alwaysOnTop = alwaysOnTop;
  }
  CreateWindowOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -122,9 +121,6 @@ class CreateWindowOptions extends ChromeObject {
 
  bool get singleton =&gt; proxy['singleton'];
  set singleton(bool value) =&gt; proxy['singleton'] = value;
-
- bool get alwaysOnTop =&gt; proxy['alwaysOnTop'];
- set alwaysOnTop(bool value) =&gt; proxy['alwaysOnTop'] = value;
 }
 </pre>
 </div>
@@ -135,7 +131,7 @@ class CreateWindowOptions extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>CreateWindowOptions</strong>({String id, int defaultWidth, int defaultHeight, int defaultLeft, int defaultTop, int width, int height, int left, int top, int minWidth, int minHeight, int maxWidth, int maxHeight, <a href="../chrome.app/WindowType.html">WindowType</a> type, String frame, <a href="../chrome.src.common_exp/Bounds.html">Bounds</a> bounds, bool transparentBackground, <a href="../chrome.app/State.html">State</a> state, bool hidden, bool resizable, bool singleton, bool alwaysOnTop}) <a class="anchor-link" href="#"
+new <strong>CreateWindowOptions</strong>({String id, int defaultWidth, int defaultHeight, int defaultLeft, int defaultTop, int width, int height, int left, int top, int minWidth, int minHeight, int maxWidth, int maxHeight, <a href="../chrome.app/WindowType.html">WindowType</a> type, String frame, <a href="../chrome.src.common_exp/Bounds.html">Bounds</a> bounds, bool transparentBackground, <a href="../chrome.app/State.html">State</a> state, bool hidden, bool resizable, bool singleton}) <a class="anchor-link" href="#"
               title="Permalink to CreateWindowOptions.CreateWindowOptions">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -143,7 +139,7 @@ new <strong>CreateWindowOptions</strong>({String id, int defaultWidth, int defau
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-CreateWindowOptions({String id, int defaultWidth, int defaultHeight, int defaultLeft, int defaultTop, int width, int height, int left, int top, int minWidth, int minHeight, int maxWidth, int maxHeight, WindowType type, String frame, Bounds bounds, bool transparentBackground, State state, bool hidden, bool resizable, bool singleton, bool alwaysOnTop}) {
+CreateWindowOptions({String id, int defaultWidth, int defaultHeight, int defaultLeft, int defaultTop, int width, int height, int left, int top, int minWidth, int minHeight, int maxWidth, int maxHeight, WindowType type, String frame, Bounds bounds, bool transparentBackground, State state, bool hidden, bool resizable, bool singleton}) {
  if (id != null) this.id = id;
  if (defaultWidth != null) this.defaultWidth = defaultWidth;
  if (defaultHeight != null) this.defaultHeight = defaultHeight;
@@ -165,7 +161,6 @@ CreateWindowOptions({String id, int defaultWidth, int defaultHeight, int default
  if (hidden != null) this.hidden = hidden;
  if (resizable != null) this.resizable = resizable;
  if (singleton != null) this.singleton = singleton;
- if (alwaysOnTop != null) this.alwaysOnTop = alwaysOnTop;
 }
 </pre>
 </div>
@@ -187,21 +182,6 @@ CreateWindowOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 </div>
 <div>
 <h3>Properties</h3>
-<div class="field"><h4 id="alwaysOnTop">
-<button class="show-code">Code</button>
-bool         <strong>alwaysOnTop</strong> <a class="anchor-link"
-            href="#alwaysOnTop"
-            title="Permalink to CreateWindowOptions.alwaysOnTop">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-bool get alwaysOnTop =&gt; proxy['alwaysOnTop'];
-</pre>
-<pre class="source">
-set alwaysOnTop(bool value) =&gt; proxy['alwaysOnTop'] = value;
-</pre>
-</div>
-</div>
 <div class="field"><h4 id="bounds">
 <button class="show-code">Code</button>
 <a href="../chrome.src.common_exp/Bounds.html">Bounds</a>         <strong>bounds</strong> <a class="anchor-link"
