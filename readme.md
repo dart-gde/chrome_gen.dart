@@ -1,19 +1,17 @@
-chrome_gen.dart
-==============
+# chrome_gen.dart
 
-An experimental library for accessing the Chrome APIs in a packaged app or
-extension.
+An library for accessing the Chrome APIs in a packaged app or extension.
 
 [![Build Status](https://drone.io/github.com/dart-gde/chrome_gen.dart/status.png)](https://drone.io/github.com/dart-gde/chrome_gen.dart/latest)
 
-### Installing
+## Installing
 
 Add this to your package's pubspec.yaml file:
 
     dependencies:
       chrome_gen: any
 
-### Using the library
+## Using the library
 
     import 'package:chrome_gen/chrome_app.dart' as chrome_gen;
 
@@ -23,13 +21,13 @@ Add this to your package's pubspec.yaml file:
       });
     }
 
-### Documentation
+## Documentation
 Documentation is available at:
 
 * [Chrome Apps API](http://dart-gde.github.io/chrome_gen.dart/app/)
 * [Chrome Extensions API](http://dart-gde.github.io/chrome_gen.dart/ext/)
 
-### Re-generating the library
+## Re-generating the library
 From the project directory, run:
 
 `dart tool/gen_apis.dart`

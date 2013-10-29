@@ -9,12 +9,8 @@ export 'dart:async';
 import 'dart:js';
 export 'dart:js';
 
-import 'package:logging/logging.dart' as log;
-
 import 'common_exp.dart';
 export 'common_exp.dart';
-
-final log.Logger _logger = new log.Logger('chrome_gen');
 
 final JsObject _jsJSON = context['JSON'];
 
