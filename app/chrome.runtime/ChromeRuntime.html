@@ -33,12 +33,10 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeRuntime extends ChromeApi {
+class ChromeRuntime {
  static final JsObject _runtime = chrome['runtime'];
 
  ChromeRuntime._();
-
- bool get available =&gt; _runtime != null;
 
  /**
   * This will be defined during an API method callback if there was an error
@@ -60,8 +58,6 @@ class ChromeRuntime extends ChromeApi {
   * The JavaScript 'window' object for the background page.
   */
  Future&lt;Window&gt; getBackgroundPage() {
-   if (_runtime == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
    _runtime.callMethod('getBackgroundPage', [completer.callback]);
    return completer.future;
@@ -75,8 +71,6 @@ class ChromeRuntime extends ChromeApi {
   * The manifest details.
   */
  Map&lt;String, dynamic&gt; getManifest() {
-   if (_runtime == null) _throwNotAvailable();
-
    return mapify(_runtime.callMethod('getManifest'));
  }
 
@@ -91,8 +85,6 @@ class ChromeRuntime extends ChromeApi {
   * The fully-qualified URL to the resource.
   */
  String getURL(String path) {
-   if (_runtime == null) _throwNotAvailable();
-
    return _runtime.callMethod('getURL', [path]);
  }
 
@@ -102,8 +94,6 @@ class ChromeRuntime extends ChromeApi {
   * characters.
   */
  void setUninstallUrl(String url) {
-   if (_runtime == null) _throwNotAvailable();
-
    _runtime.callMethod('setUninstallUrl', [url]);
  }
 
@@ -111,8 +101,6 @@ class ChromeRuntime extends ChromeApi {
   * Reloads the app or extension.
   */
  void reload() {
-   if (_runtime == null) _throwNotAvailable();
-
    _runtime.callMethod('reload');
  }
 
@@ -126,11 +114,17 @@ class ChromeRuntime extends ChromeApi {
   * the available update.
   */
  Future&lt;RequestUpdateCheckResult&gt; requestUpdateCheck() {
-   if (_runtime == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;RequestUpdateCheckResult&gt;.twoArgs(RequestUpdateCheckResult._create);
    _runtime.callMethod('requestUpdateCheck', [completer.callback]);
    return completer.future;
+ }
+
+ /**
+  * Restart the ChromeOS device when the app runs in kiosk mode. Otherwise,
+  * it's no-op.
+  */
+ void restart() {
+   _runtime.callMethod('restart');
  }
 
  /**
@@ -149,8 +143,6 @@ class ChromeRuntime extends ChromeApi {
   * exist.
   */
  Port connect([String extensionId, Map connectInfo]) {
-   if (_runtime == null) _throwNotAvailable();
-
    return _createPort(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
  }
 
@@ -163,8 +155,6 @@ class ChromeRuntime extends ChromeApi {
   * Port through which messages can be sent and received with the application
   */
  Port connectNative(String application) {
-   if (_runtime == null) _throwNotAvailable();
-
    return _createPort(_runtime.callMethod('connectNative', [application]));
  }
 
@@ -184,11 +174,9 @@ class ChromeRuntime extends ChromeApi {
   * occurs while connecting to the extension, the callback will be called with
   * no arguments and [runtime.lastError] will be set to the error message.
   */
- Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId]) {
-   if (_runtime == null) _throwNotAvailable();
-
+ Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId, Map options]) {
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
-   _runtime.callMethod('sendMessage', [extensionId, jsify(message), completer.callback]);
+   _runtime.callMethod('sendMessage', [extensionId, jsify(message), jsify(options), completer.callback]);
    return completer.future;
  }
 
@@ -205,8 +193,6 @@ class ChromeRuntime extends ChromeApi {
   * with no arguments and [runtime.lastError] will be set to the error message.
   */
  Future&lt;dynamic&gt; sendNativeMessage(String application, Map&lt;String, dynamic&gt; message) {
-   if (_runtime == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
    return completer.future;
@@ -216,8 +202,6 @@ class ChromeRuntime extends ChromeApi {
   * Returns information about the current platform.
   */
  Future&lt;Map&gt; getPlatformInfo() {
-   if (_runtime == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    _runtime.callMethod('getPlatformInfo', [completer.callback]);
    return completer.future;
@@ -227,8 +211,6 @@ class ChromeRuntime extends ChromeApi {
   * Returns a DirectoryEntry for the package directory.
   */
  Future&lt;DirectoryEntry&gt; getPackageDirectoryEntry() {
-   if (_runtime == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;DirectoryEntry&gt;.oneArg(_createDirectoryEntry);
    _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
    return completer.future;
@@ -242,7 +224,7 @@ class ChromeRuntime extends ChromeApi {
  Stream get onStartup =&gt; _onStartup.stream;
 
  final ChromeStreamController _onStartup =
-     new ChromeStreamController.noArgs(_runtime, 'onStartup');
+     new ChromeStreamController.noArgs(_runtime['onStartup']);
 
  /**
   * Fired when the extension is first installed, when the extension is updated
@@ -251,7 +233,7 @@ class ChromeRuntime extends ChromeApi {
  Stream&lt;Map&gt; get onInstalled =&gt; _onInstalled.stream;
 
  final ChromeStreamController&lt;Map&gt; _onInstalled =
-     new ChromeStreamController&lt;Map&gt;.oneArg(_runtime, 'onInstalled', mapify);
+     new ChromeStreamController&lt;Map&gt;.oneArg(_runtime['onInstalled'], mapify);
 
  /**
   * Sent to the event page just before it is unloaded. This gives the extension
@@ -264,7 +246,7 @@ class ChromeRuntime extends ChromeApi {
  Stream get onSuspend =&gt; _onSuspend.stream;
 
  final ChromeStreamController _onSuspend =
-     new ChromeStreamController.noArgs(_runtime, 'onSuspend');
+     new ChromeStreamController.noArgs(_runtime['onSuspend']);
 
  /**
   * Sent after onSuspend to indicate that the app won't be unloaded after all.
@@ -272,7 +254,7 @@ class ChromeRuntime extends ChromeApi {
  Stream get onSuspendCanceled =&gt; _onSuspendCanceled.stream;
 
  final ChromeStreamController _onSuspendCanceled =
-     new ChromeStreamController.noArgs(_runtime, 'onSuspendCanceled');
+     new ChromeStreamController.noArgs(_runtime['onSuspendCanceled']);
 
  /**
   * Fired when an update is available, but isn't installed immediately because
@@ -283,7 +265,7 @@ class ChromeRuntime extends ChromeApi {
  Stream&lt;Map&lt;String, dynamic&gt;&gt; get onUpdateAvailable =&gt; _onUpdateAvailable.stream;
 
  final ChromeStreamController&lt;Map&lt;String, dynamic&gt;&gt; _onUpdateAvailable =
-     new ChromeStreamController&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(_runtime, 'onUpdateAvailable', mapify);
+     new ChromeStreamController&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(_runtime['onUpdateAvailable'], mapify);
 
  /**
   * Fired when a Chrome update is available, but isn't installed immediately
@@ -292,7 +274,7 @@ class ChromeRuntime extends ChromeApi {
  Stream get onBrowserUpdateAvailable =&gt; _onBrowserUpdateAvailable.stream;
 
  final ChromeStreamController _onBrowserUpdateAvailable =
-     new ChromeStreamController.noArgs(_runtime, 'onBrowserUpdateAvailable');
+     new ChromeStreamController.noArgs(_runtime['onBrowserUpdateAvailable']);
 
  /**
   * Fired when a connection is made from either an extension process or a
@@ -301,7 +283,7 @@ class ChromeRuntime extends ChromeApi {
  Stream&lt;Port&gt; get onConnect =&gt; _onConnect.stream;
 
  final ChromeStreamController&lt;Port&gt; _onConnect =
-     new ChromeStreamController&lt;Port&gt;.oneArg(_runtime, 'onConnect', _createPort);
+     new ChromeStreamController&lt;Port&gt;.oneArg(_runtime['onConnect'], _createPort);
 
  /**
   * Fired when a connection is made from another extension.
@@ -309,7 +291,7 @@ class ChromeRuntime extends ChromeApi {
  Stream&lt;Port&gt; get onConnectExternal =&gt; _onConnectExternal.stream;
 
  final ChromeStreamController&lt;Port&gt; _onConnectExternal =
-     new ChromeStreamController&lt;Port&gt;.oneArg(_runtime, 'onConnectExternal', _createPort);
+     new ChromeStreamController&lt;Port&gt;.oneArg(_runtime['onConnectExternal'], _createPort);
 
  /**
   * Fired when a message is sent from either an extension process or a content
@@ -318,7 +300,7 @@ class ChromeRuntime extends ChromeApi {
  Stream&lt;OnMessageEvent&gt; get onMessage =&gt; _onMessage.stream;
 
  final ChromeStreamController&lt;OnMessageEvent&gt; _onMessage =
-     new ChromeStreamController&lt;OnMessageEvent&gt;.threeArgs(_runtime, 'onMessage', _createOnMessageEvent);
+     new ChromeStreamController&lt;OnMessageEvent&gt;.threeArgs(_runtime['onMessage'], _createOnMessageEvent);
 
  /**
   * Fired when a message is sent from another extension/app. Cannot be used in
@@ -327,7 +309,7 @@ class ChromeRuntime extends ChromeApi {
  Stream&lt;OnMessageExternalEvent&gt; get onMessageExternal =&gt; _onMessageExternal.stream;
 
  final ChromeStreamController&lt;OnMessageExternalEvent&gt; _onMessageExternal =
-     new ChromeStreamController&lt;OnMessageExternalEvent&gt;.threeArgs(_runtime, 'onMessageExternal', _createOnMessageExternalEvent);
+     new ChromeStreamController&lt;OnMessageExternalEvent&gt;.threeArgs(_runtime['onMessageExternal'], _createOnMessageExternalEvent);
 
  /**
   * Fired when an app or the device that it runs on needs to be restarted. The
@@ -339,35 +321,12 @@ class ChromeRuntime extends ChromeApi {
  Stream&lt;String&gt; get onRestartRequired =&gt; _onRestartRequired.stream;
 
  final ChromeStreamController&lt;String&gt; _onRestartRequired =
-     new ChromeStreamController&lt;String&gt;.oneArg(_runtime, 'onRestartRequired', selfConverter);
-
- void _throwNotAvailable() {
-   throw new UnsupportedError("'chrome.runtime' is not available");
- }
+     new ChromeStreamController&lt;String&gt;.oneArg(_runtime['onRestartRequired'], selfConverter);
 }
 </pre>
 </div>
-<h3>Extends</h3>
-<p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeRuntime</strong></span></p>
 <div>
 <h3>Properties</h3>
-<div class="field"><h4 id="available">
-<button class="show-code">Code</button>
-final bool         <strong>available</strong> <a class="anchor-link"
-            href="#available"
-            title="Permalink to ChromeRuntime.available">#</a>
-        </h4>
-        <div class="doc">
-<div class="inherited">
-<p>Returns true if the API is available. The common causes of an API not being
-avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
-<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
-<pre class="source">
-bool get available =&gt; _runtime != null;
-</pre>
-</div>
-</div>
 <div class="field"><h4 id="id">
 <button class="show-code">Code</button>
 final String         <strong>id</strong> <a class="anchor-link"
@@ -578,8 +537,6 @@ Port through which messages can be sent and received. The port's
 exist.</p>
 <pre class="source">
 Port connect([String extensionId, Map connectInfo]) {
- if (_runtime == null) _throwNotAvailable();
-
  return _createPort(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
 }
 </pre>
@@ -597,8 +554,6 @@ Port connect([String extensionId, Map connectInfo]) {
 Port through which messages can be sent and received with the application</p>
 <pre class="source">
 Port connectNative(String application) {
- if (_runtime == null) _throwNotAvailable();
-
  return _createPort(_runtime.callMethod('connectNative', [application]));
 }
 </pre>
@@ -617,8 +572,6 @@ is no background page, an error is set.</p>
 The JavaScript 'window' object for the background page.</p>
 <pre class="source">
 Future&lt;Window&gt; getBackgroundPage() {
- if (_runtime == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
  _runtime.callMethod('getBackgroundPage', [completer.callback]);
  return completer.future;
@@ -637,8 +590,6 @@ returned is a serialization of the full <a href="manifest.html">manifest file</a
 The manifest details.</p>
 <pre class="source">
 Map&lt;String, dynamic&gt; getManifest() {
- if (_runtime == null) _throwNotAvailable();
-
  return mapify(_runtime.callMethod('getManifest'));
 }
 </pre>
@@ -652,8 +603,6 @@ Future&lt;DirectoryEntry&gt; <strong>getPackageDirectoryEntry</strong>() <a clas
 <p>Returns a DirectoryEntry for the package directory.</p>
 <pre class="source">
 Future&lt;DirectoryEntry&gt; getPackageDirectoryEntry() {
- if (_runtime == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;DirectoryEntry&gt;.oneArg(_createDirectoryEntry);
  _runtime.callMethod('getPackageDirectoryEntry', [completer.callback]);
  return completer.future;
@@ -669,8 +618,6 @@ Future&lt;Map&gt; <strong>getPlatformInfo</strong>() <a class="anchor-link" href
 <p>Returns information about the current platform.</p>
 <pre class="source">
 Future&lt;Map&gt; getPlatformInfo() {
- if (_runtime == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  _runtime.callMethod('getPlatformInfo', [completer.callback]);
  return completer.future;
@@ -692,8 +639,6 @@ its install directory.</p>
 The fully-qualified URL to the resource.</p>
 <pre class="source">
 String getURL(String path) {
- if (_runtime == null) _throwNotAvailable();
-
  return _runtime.callMethod('getURL', [path]);
 }
 </pre>
@@ -707,8 +652,6 @@ void <strong>reload</strong>() <a class="anchor-link" href="#reload"
 <p>Reloads the app or extension.</p>
 <pre class="source">
 void reload() {
- if (_runtime == null) _throwNotAvailable();
-
  _runtime.callMethod('reload');
 }
 </pre>
@@ -727,8 +670,6 @@ enum of <code>throttled</code>, <code>no_update</code>, <code>update_available</
 the available update.</p>
 <pre class="source">
 Future&lt;RequestUpdateCheckResult&gt; requestUpdateCheck() {
- if (_runtime == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;RequestUpdateCheckResult&gt;.twoArgs(RequestUpdateCheckResult._create);
  _runtime.callMethod('requestUpdateCheck', [completer.callback]);
  return completer.future;
@@ -736,9 +677,23 @@ Future&lt;RequestUpdateCheckResult&gt; requestUpdateCheck() {
 </pre>
 </div>
 </div>
+<div class="method"><h4 id="restart">
+<button class="show-code">Code</button>
+void <strong>restart</strong>() <a class="anchor-link" href="#restart"
+              title="Permalink to ChromeRuntime.restart">#</a></h4>
+<div class="doc">
+<p>Restart the ChromeOS device when the app runs in kiosk mode. Otherwise,
+it's no-op.</p>
+<pre class="source">
+void restart() {
+ _runtime.callMethod('restart');
+}
+</pre>
+</div>
+</div>
 <div class="method"><h4 id="sendMessage">
 <button class="show-code">Code</button>
-Future&lt;dynamic&gt; <strong>sendMessage</strong>(message, [String extensionId]) <a class="anchor-link" href="#sendMessage"
+Future&lt;dynamic&gt; <strong>sendMessage</strong>(message, [String extensionId, Map options]) <a class="anchor-link" href="#sendMessage"
               title="Permalink to ChromeRuntime.sendMessage">#</a></h4>
 <div class="doc">
 <p>Sends a single message to onMessage event listeners within the extension
@@ -755,11 +710,9 @@ The JSON response object sent by the handler of the message. If an error
 occurs while connecting to the extension, the callback will be called with
 no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
-Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId]) {
- if (_runtime == null) _throwNotAvailable();
-
+Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId, Map options]) {
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
- _runtime.callMethod('sendMessage', [extensionId, jsify(message), completer.callback]);
+ _runtime.callMethod('sendMessage', [extensionId, jsify(message), jsify(options), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -781,8 +734,6 @@ while connecting to the native messaging host, the callback will be called
 with no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
 Future&lt;dynamic&gt; sendNativeMessage(String application, Map&lt;String, dynamic&gt; message) {
- if (_runtime == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _runtime.callMethod('sendNativeMessage', [application, jsify(message), completer.callback]);
  return completer.future;
@@ -800,8 +751,6 @@ up server-side data, do analytics, and implement surveys. Maximum 255
 characters.</p>
 <pre class="source">
 void setUninstallUrl(String url) {
- if (_runtime == null) _throwNotAvailable();
-
  _runtime.callMethod('setUninstallUrl', [url]);
 }
 </pre>

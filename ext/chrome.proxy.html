@@ -41,7 +41,7 @@ final <a href="chrome.proxy/ChromeProxy.html">ChromeProxy</a>         <strong>pr
         <div class="doc">
 <p>Accessor for the <code>chrome.proxy</code> namespace.</p>
 <pre class="source">
-final ChromeProxy proxy = new ChromeProxy._()
+final ChromeProxy proxy = ChromeProxy._proxy == null ? apiNotAvailable('chrome.proxy') : new ChromeProxy._()
 </pre>
 </div>
 </div>

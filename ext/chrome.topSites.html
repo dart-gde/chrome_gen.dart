@@ -40,7 +40,7 @@ final <a href="chrome.topSites/ChromeTopSites.html">ChromeTopSites</a>         <
         <div class="doc">
 <p>Accessor for the <code>chrome.topSites</code> namespace.</p>
 <pre class="source">
-final ChromeTopSites topSites = new ChromeTopSites._()
+final ChromeTopSites topSites = ChromeTopSites._topSites == null ? apiNotAvailable('chrome.topSites') : new ChromeTopSites._()
 </pre>
 </div>
 </div>

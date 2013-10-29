@@ -27,6 +27,8 @@
 </div>
 <div class="content">
 <h2><strong>chrome.desktopCapture</strong> library</h2>
+<div class="doc"><p>Desktop Capture API that can be used to capture content of screen, individual
+windows or tabs.</p></div>
 <div>
 <h3>Properties</h3>
 <div class="field"><h4 id="desktopCapture">
@@ -38,7 +40,7 @@ final <a href="chrome.desktopCapture/ChromeDesktopCapture.html">ChromeDesktopCap
         <div class="doc">
 <p>Accessor for the <code>chrome.desktopCapture</code> namespace.</p>
 <pre class="source">
-final ChromeDesktopCapture desktopCapture = new ChromeDesktopCapture._()
+final ChromeDesktopCapture desktopCapture = ChromeDesktopCapture._desktopCapture == null ? apiNotAvailable('chrome.desktopCapture') : new ChromeDesktopCapture._()
 </pre>
 </div>
 </div>

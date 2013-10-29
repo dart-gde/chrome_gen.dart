@@ -41,7 +41,7 @@ final <a href="chrome.management/ChromeManagement.html">ChromeManagement</a>    
         <div class="doc">
 <p>Accessor for the <code>chrome.management</code> namespace.</p>
 <pre class="source">
-final ChromeManagement management = new ChromeManagement._()
+final ChromeManagement management = ChromeManagement._management == null ? apiNotAvailable('chrome.management') : new ChromeManagement._()
 </pre>
 </div>
 </div>

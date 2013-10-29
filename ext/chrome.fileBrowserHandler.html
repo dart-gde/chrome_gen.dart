@@ -41,7 +41,7 @@ final <a href="chrome.fileBrowserHandler/ChromeFileBrowserHandler.html">ChromeFi
         <div class="doc">
 <p>Accessor for the <code>chrome.fileBrowserHandler</code> namespace.</p>
 <pre class="source">
-final ChromeFileBrowserHandler fileBrowserHandler = new ChromeFileBrowserHandler._()
+final ChromeFileBrowserHandler fileBrowserHandler = ChromeFileBrowserHandler._fileBrowserHandler == null ? apiNotAvailable('chrome.fileBrowserHandler') : new ChromeFileBrowserHandler._()
 </pre>
 </div>
 </div>

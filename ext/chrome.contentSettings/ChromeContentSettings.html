@@ -33,12 +33,10 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeContentSettings extends ChromeApi {
+class ChromeContentSettings {
  static final JsObject _contentSettings = chrome['contentSettings'];
 
  ChromeContentSettings._();
-
- bool get available =&gt; _contentSettings != null;
 
  /**
   * Whether to allow cookies and other local data to be set by websites. One
@@ -87,34 +85,11 @@ class ChromeContentSettings extends ChromeApi {
   * URL. The secondary URL is not used.
   */
  ContentSetting get notifications =&gt; _createContentSetting(_contentSettings['notifications']);
-
- void _throwNotAvailable() {
-   throw new UnsupportedError("'chrome.contentSettings' is not available");
- }
 }
 </pre>
 </div>
-<h3>Extends</h3>
-<p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeContentSettings</strong></span></p>
 <div>
 <h3>Properties</h3>
-<div class="field"><h4 id="available">
-<button class="show-code">Code</button>
-final bool         <strong>available</strong> <a class="anchor-link"
-            href="#available"
-            title="Permalink to ChromeContentSettings.available">#</a>
-        </h4>
-        <div class="doc">
-<div class="inherited">
-<p>Returns true if the API is available. The common causes of an API not being
-avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
-<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
-<pre class="source">
-bool get available =&gt; _contentSettings != null;
-</pre>
-</div>
-</div>
 <div class="field"><h4 id="cookies">
 <button class="show-code">Code</button>
 final <a href="../chrome.contentSettings/ContentSetting.html">ContentSetting</a>         <strong>cookies</strong> <a class="anchor-link"

@@ -34,22 +34,16 @@
 <div class="doc">
 <pre class="source">
 class ChromeDevtools {
+ /// Accessor for the `chrome.devtools.inspectedWindow` namespace.
+ final ChromeDevtoolsInspectedWindow inspectedWindow = ChromeDevtoolsInspectedWindow._devtools_inspectedWindow == null ? apiNotAvailable('chrome.devtools.inspectedWindow') : new ChromeDevtoolsInspectedWindow._();
+
+ /// Accessor for the `chrome.devtools.network` namespace.
+ final ChromeDevtoolsNetwork network = ChromeDevtoolsNetwork._devtools_network == null ? apiNotAvailable('chrome.devtools.network') : new ChromeDevtoolsNetwork._();
+
+ /// Accessor for the `chrome.devtools.panels` namespace.
+ final ChromeDevtoolsPanels panels = ChromeDevtoolsPanels._devtools_panels == null ? apiNotAvailable('chrome.devtools.panels') : new ChromeDevtoolsPanels._();
+
  ChromeDevtools._();
-
- /**
-  * Accessor for the `chrome.devtools.inspectedWindow` namespace.
-  */
- final ChromeDevtoolsInspectedWindow inspectedWindow = new ChromeDevtoolsInspectedWindow._();
-
- /**
-  * Accessor for the `chrome.devtools.network` namespace.
-  */
- final ChromeDevtoolsNetwork network = new ChromeDevtoolsNetwork._();
-
- /**
-  * Accessor for the `chrome.devtools.panels` namespace.
-  */
- final ChromeDevtoolsPanels panels = new ChromeDevtoolsPanels._();
 }
 </pre>
 </div>
@@ -64,7 +58,7 @@ final <a href="../chrome.devtools/ChromeDevtoolsInspectedWindow.html">ChromeDevt
         <div class="doc">
 <p>Accessor for the <code>chrome.devtools.inspectedWindow</code> namespace.</p>
 <pre class="source">
-final ChromeDevtoolsInspectedWindow inspectedWindow = new ChromeDevtoolsInspectedWindow._()
+final ChromeDevtoolsInspectedWindow inspectedWindow = ChromeDevtoolsInspectedWindow._devtools_inspectedWindow == null ? apiNotAvailable('chrome.devtools.inspectedWindow') : new ChromeDevtoolsInspectedWindow._()
 </pre>
 </div>
 </div>
@@ -77,7 +71,7 @@ final <a href="../chrome.devtools/ChromeDevtoolsNetwork.html">ChromeDevtoolsNetw
         <div class="doc">
 <p>Accessor for the <code>chrome.devtools.network</code> namespace.</p>
 <pre class="source">
-final ChromeDevtoolsNetwork network = new ChromeDevtoolsNetwork._()
+final ChromeDevtoolsNetwork network = ChromeDevtoolsNetwork._devtools_network == null ? apiNotAvailable('chrome.devtools.network') : new ChromeDevtoolsNetwork._()
 </pre>
 </div>
 </div>
@@ -90,7 +84,7 @@ final <a href="../chrome.devtools/ChromeDevtoolsPanels.html">ChromeDevtoolsPanel
         <div class="doc">
 <p>Accessor for the <code>chrome.devtools.panels</code> namespace.</p>
 <pre class="source">
-final ChromeDevtoolsPanels panels = new ChromeDevtoolsPanels._()
+final ChromeDevtoolsPanels panels = ChromeDevtoolsPanels._devtools_panels == null ? apiNotAvailable('chrome.devtools.panels') : new ChromeDevtoolsPanels._()
 </pre>
 </div>
 </div>

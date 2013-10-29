@@ -34,17 +34,13 @@
 <div class="doc">
 <pre class="source">
 class ChromeApp {
+ /// Accessor for the `chrome.app.runtime` namespace.
+ final ChromeAppRuntime runtime = ChromeAppRuntime._app_runtime == null ? apiNotAvailable('chrome.app.runtime') : new ChromeAppRuntime._();
+
+ /// Accessor for the `chrome.app.window` namespace.
+ final ChromeAppWindow window = ChromeAppWindow._app_window == null ? apiNotAvailable('chrome.app.window') : new ChromeAppWindow._();
+
  ChromeApp._();
-
- /**
-  * Accessor for the `chrome.app.runtime` namespace.
-  */
- final ChromeAppRuntime runtime = new ChromeAppRuntime._();
-
- /**
-  * Accessor for the `chrome.app.window` namespace.
-  */
- final ChromeAppWindow window = new ChromeAppWindow._();
 }
 </pre>
 </div>
@@ -59,7 +55,7 @@ final <a href="../chrome.app/ChromeAppRuntime.html">ChromeAppRuntime</a>        
         <div class="doc">
 <p>Accessor for the <code>chrome.app.runtime</code> namespace.</p>
 <pre class="source">
-final ChromeAppRuntime runtime = new ChromeAppRuntime._()
+final ChromeAppRuntime runtime = ChromeAppRuntime._app_runtime == null ? apiNotAvailable('chrome.app.runtime') : new ChromeAppRuntime._()
 </pre>
 </div>
 </div>
@@ -72,7 +68,7 @@ final <a href="../chrome.app/ChromeAppWindow.html">ChromeAppWindow</a>         <
         <div class="doc">
 <p>Accessor for the <code>chrome.app.window</code> namespace.</p>
 <pre class="source">
-final ChromeAppWindow window = new ChromeAppWindow._()
+final ChromeAppWindow window = ChromeAppWindow._app_window == null ? apiNotAvailable('chrome.app.window') : new ChromeAppWindow._()
 </pre>
 </div>
 </div>

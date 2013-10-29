@@ -33,93 +33,76 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeDesktopCapture extends ChromeApi {
+class ChromeDesktopCapture {
  static final JsObject _desktopCapture = chrome['desktopCapture'];
 
  ChromeDesktopCapture._();
 
- bool get available =&gt; _desktopCapture != null;
-
  /**
   * Shows desktop media picker UI with the specified set of sources.
   * 
-  * [sources]: Set of sources that should be shown to the user.
+  * [sources] Set of sources that should be shown to the user.
   * 
-  * [origin]: Optional origin of the page for which the stream is created. If
-  * not specified then the resulting stream can be used only the calling
-  * extension, otherwise the stream can be used only by a page with the
-  * specified origin.
+  * [targetTab] Optional tab for which the stream is created. If not specified
+  * then the resulting stream can be used only by the calling extension,
+  * otherwise the stream can be used only by the specified tab. If the tab's
+  * security origin changes before this function returns, the call may fail.
   * 
   * Returns:
-  * 
-  * [streamId]: An opaque string that can be passed to `getUserMedia()` API to
-  * generate media stream that corresponds to the source selected by the user.
-  * If user didn't select any source (i.e. canceled the prompt) then the
-  * callback is called with an empty `streamId`.
+  * An id that can be passed to cancelChooseDesktopMedia() in case the prompt
+  * need to be canceled.
   */
- Future&lt;String&gt; chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
-   if (_desktopCapture == null) _throwNotAvailable();
-
-   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
-   _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), origin, completer.callback]);
-   return completer.future;
+ int chooseDesktopMedia(List&lt;DesktopCaptureSourceType&gt; sources, dynamic callback, [Tab targetTab]) {
+   return _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), jsify(callback)]);
  }
 
- void _throwNotAvailable() {
-   throw new UnsupportedError("'chrome.desktopCapture' is not available");
+ /**
+  * Hides desktop media picker dialog shown by chooseDesktopMedia().
+  * 
+  * [desktopMediaRequestId] Id returned by chooseDesktopMedia()
+  */
+ void cancelChooseDesktopMedia(int desktopMediaRequestId) {
+   _desktopCapture.callMethod('cancelChooseDesktopMedia', [desktopMediaRequestId]);
  }
 }
 </pre>
 </div>
-<h3>Extends</h3>
-<p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeDesktopCapture</strong></span></p>
 <div>
-<h3>Properties</h3>
-<div class="field"><h4 id="available">
+<h3>Methods</h3>
+<div class="method"><h4 id="cancelChooseDesktopMedia">
 <button class="show-code">Code</button>
-final bool         <strong>available</strong> <a class="anchor-link"
-            href="#available"
-            title="Permalink to ChromeDesktopCapture.available">#</a>
-        </h4>
-        <div class="doc">
-<div class="inherited">
-<p>Returns true if the API is available. The common causes of an API not being
-avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
-<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+void <strong>cancelChooseDesktopMedia</strong>(int desktopMediaRequestId) <a class="anchor-link" href="#cancelChooseDesktopMedia"
+              title="Permalink to ChromeDesktopCapture.cancelChooseDesktopMedia">#</a></h4>
+<div class="doc">
+<p>Hides desktop media picker dialog shown by chooseDesktopMedia().</p>
+<p>
+<span class="param">desktopMediaRequestId</span> Id returned by chooseDesktopMedia()</p>
 <pre class="source">
-bool get available =&gt; _desktopCapture != null;
+void cancelChooseDesktopMedia(int desktopMediaRequestId) {
+ _desktopCapture.callMethod('cancelChooseDesktopMedia', [desktopMediaRequestId]);
+}
 </pre>
 </div>
 </div>
-</div>
-<div>
-<h3>Methods</h3>
 <div class="method"><h4 id="chooseDesktopMedia">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>chooseDesktopMedia</strong>(<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a> sources, [String origin]) <a class="anchor-link" href="#chooseDesktopMedia"
+int <strong>chooseDesktopMedia</strong>(List&lt;<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>&gt; sources, callback, [<a href="../chrome.tabs/Tab.html">Tab</a> targetTab]) <a class="anchor-link" href="#chooseDesktopMedia"
               title="Permalink to ChromeDesktopCapture.chooseDesktopMedia">#</a></h4>
 <div class="doc">
 <p>Shows desktop media picker UI with the specified set of sources.</p>
 <p>
-<span class="param">sources</span>: Set of sources that should be shown to the user.</p>
+<span class="param">sources</span> Set of sources that should be shown to the user.</p>
 <p>
-<span class="param">origin</span>: Optional origin of the page for which the stream is created. If
-not specified then the resulting stream can be used only the calling
-extension, otherwise the stream can be used only by a page with the
-specified origin.</p>
-<p>Returns:</p>
-<p><code>streamId</code>: An opaque string that can be passed to <code>getUserMedia()</code> API to
-generate media stream that corresponds to the source selected by the user.
-If user didn't select any source (i.e. canceled the prompt) then the
-callback is called with an empty <code>streamId</code>.</p>
+<span class="param">targetTab</span> Optional tab for which the stream is created. If not specified
+then the resulting stream can be used only by the calling extension,
+otherwise the stream can be used only by the specified tab. If the tab's
+security origin changes before this function returns, the call may fail.</p>
+<p>Returns:
+An id that can be passed to cancelChooseDesktopMedia() in case the prompt
+need to be canceled.</p>
 <pre class="source">
-Future&lt;String&gt; chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
- if (_desktopCapture == null) _throwNotAvailable();
-
- var completer = new ChromeCompleter&lt;String&gt;.oneArg();
- _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), origin, completer.callback]);
- return completer.future;
+int chooseDesktopMedia(List&lt;DesktopCaptureSourceType&gt; sources, dynamic callback, [Tab targetTab]) {
+ return _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), jsify(callback)]);
 }
 </pre>
 </div>

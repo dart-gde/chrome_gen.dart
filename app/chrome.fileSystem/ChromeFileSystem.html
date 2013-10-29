@@ -33,12 +33,10 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeFileSystem extends ChromeApi {
+class ChromeFileSystem {
  static final JsObject _fileSystem = chrome['fileSystem'];
 
  ChromeFileSystem._();
-
- bool get available =&gt; _fileSystem != null;
 
  /**
   * Get the display path of an Entry object. The display path is based on the
@@ -46,22 +44,18 @@ class ChromeFileSystem extends ChromeApi {
   * made more readable for display purposes.
   */
  Future&lt;String&gt; getDisplayPath(Entry entry) {
-   if (_fileSystem == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _fileSystem.callMethod('getDisplayPath', [jsify(entry), completer.callback]);
    return completer.future;
  }
 
  /**
-  * Get a writable Entry from another Entry. This call will fail if the
-  * application does not have the 'write' permission under 'fileSystem'. If
-  * entry is a DirectoryEntry, this call will fail if the application does not
-  * have the 'directory' permission under 'fileSystem'.
+  * Get a writable Entry from another Entry. This call will fail with a runtime
+  * error if the application does not have the 'write' permission under
+  * 'fileSystem'. If entry is a DirectoryEntry, this call will fail if the
+  * application does not have the 'directory' permission under 'fileSystem'.
   */
  Future&lt;Entry&gt; getWritableEntry(Entry entry) {
-   if (_fileSystem == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;Entry&gt;.oneArg(_createEntry);
    _fileSystem.callMethod('getWritableEntry', [jsify(entry), completer.callback]);
    return completer.future;
@@ -71,8 +65,6 @@ class ChromeFileSystem extends ChromeApi {
   * Gets whether this Entry is writable or not.
   */
  Future&lt;bool&gt; isWritableEntry(Entry entry) {
-   if (_fileSystem == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _fileSystem.callMethod('isWritableEntry', [jsify(entry), completer.callback]);
    return completer.future;
@@ -86,8 +78,6 @@ class ChromeFileSystem extends ChromeApi {
   * [fileEntries] null
   */
  Future&lt;ChooseEntryResult&gt; chooseEntry([ChooseEntryOptions options]) {
-   if (_fileSystem == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;ChooseEntryResult&gt;.twoArgs(ChooseEntryResult._create);
    _fileSystem.callMethod('chooseEntry', [jsify(options), completer.callback]);
    return completer.future;
@@ -95,24 +85,19 @@ class ChromeFileSystem extends ChromeApi {
 
  /**
   * Returns the file entry with the given id if it can be restored. This call
-  * will fail otherwise. This method is new in Chrome 30.
+  * will fail with a runtime error otherwise. This method is new in Chrome 31.
   */
  Future&lt;Entry&gt; restoreEntry(String id) {
-   if (_fileSystem == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;Entry&gt;.oneArg(_createEntry);
    _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
    return completer.future;
  }
 
  /**
-  * Returns whether a file entry for the given id can be restored, i.e. whether
-  * restoreEntry would succeed with this id now. This method is new in Chrome
-  * 30.
+  * Returns whether the app has permission to restore the entry with the given
+  * id. This method is new in Chrome 31.
   */
  Future&lt;bool&gt; isRestorable(String id) {
-   if (_fileSystem == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _fileSystem.callMethod('isRestorable', [id, completer.callback]);
    return completer.future;
@@ -122,44 +107,15 @@ class ChromeFileSystem extends ChromeApi {
   * Returns an id that can be passed to restoreEntry to regain access to a
   * given file entry. Only the 500 most recently used entries are retained,
   * where calls to retainEntry and restoreEntry count as use. If the app has
-  * the 'retainEntries' permission under 'fileSystem' (currently restricted to
-  * dev channel), entries are retained indefinitely. Otherwise, entries are
-  * retained only while the app is running and across restarts. This method is
-  * new in Chrome 30.
+  * the 'retainEntries' permission under 'fileSystem', entries are retained
+  * indefinitely. Otherwise, entries are retained only while the app is running
+  * and across restarts. This method is new in Chrome 31.
   */
  String retainEntry(Entry entry) {
-   if (_fileSystem == null) _throwNotAvailable();
-
    return _fileSystem.callMethod('retainEntry', [jsify(entry)]);
- }
-
- void _throwNotAvailable() {
-   throw new UnsupportedError("'chrome.fileSystem' is not available");
  }
 }
 </pre>
-</div>
-<h3>Extends</h3>
-<p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeFileSystem</strong></span></p>
-<div>
-<h3>Properties</h3>
-<div class="field"><h4 id="available">
-<button class="show-code">Code</button>
-final bool         <strong>available</strong> <a class="anchor-link"
-            href="#available"
-            title="Permalink to ChromeFileSystem.available">#</a>
-        </h4>
-        <div class="doc">
-<div class="inherited">
-<p>Returns true if the API is available. The common causes of an API not being
-avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
-<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
-<pre class="source">
-bool get available =&gt; _fileSystem != null;
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Methods</h3>
@@ -174,8 +130,6 @@ Future&lt;<a href="../chrome.fileSystem/ChooseEntryResult.html">ChooseEntryResul
 <code>fileEntries</code> null</p>
 <pre class="source">
 Future&lt;ChooseEntryResult&gt; chooseEntry([ChooseEntryOptions options]) {
- if (_fileSystem == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;ChooseEntryResult&gt;.twoArgs(ChooseEntryResult._create);
  _fileSystem.callMethod('chooseEntry', [jsify(options), completer.callback]);
  return completer.future;
@@ -193,8 +147,6 @@ full path of the file or directory on the local file system, but may be
 made more readable for display purposes.</p>
 <pre class="source">
 Future&lt;String&gt; getDisplayPath(Entry entry) {
- if (_fileSystem == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _fileSystem.callMethod('getDisplayPath', [jsify(entry), completer.callback]);
  return completer.future;
@@ -207,14 +159,12 @@ Future&lt;String&gt; getDisplayPath(Entry entry) {
 Future&lt;Entry&gt; <strong>getWritableEntry</strong>(Entry entry) <a class="anchor-link" href="#getWritableEntry"
               title="Permalink to ChromeFileSystem.getWritableEntry">#</a></h4>
 <div class="doc">
-<p>Get a writable Entry from another Entry. This call will fail if the
-application does not have the 'write' permission under 'fileSystem'. If
-entry is a DirectoryEntry, this call will fail if the application does not
-have the 'directory' permission under 'fileSystem'.</p>
+<p>Get a writable Entry from another Entry. This call will fail with a runtime
+error if the application does not have the 'write' permission under
+'fileSystem'. If entry is a DirectoryEntry, this call will fail if the
+application does not have the 'directory' permission under 'fileSystem'.</p>
 <pre class="source">
 Future&lt;Entry&gt; getWritableEntry(Entry entry) {
- if (_fileSystem == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;Entry&gt;.oneArg(_createEntry);
  _fileSystem.callMethod('getWritableEntry', [jsify(entry), completer.callback]);
  return completer.future;
@@ -227,13 +177,10 @@ Future&lt;Entry&gt; getWritableEntry(Entry entry) {
 Future&lt;bool&gt; <strong>isRestorable</strong>(String id) <a class="anchor-link" href="#isRestorable"
               title="Permalink to ChromeFileSystem.isRestorable">#</a></h4>
 <div class="doc">
-<p>Returns whether a file entry for the given id can be restored, i.e. whether
-restoreEntry would succeed with this id now. This method is new in Chrome
-30.</p>
+<p>Returns whether the app has permission to restore the entry with the given
+id. This method is new in Chrome 31.</p>
 <pre class="source">
 Future&lt;bool&gt; isRestorable(String id) {
- if (_fileSystem == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _fileSystem.callMethod('isRestorable', [id, completer.callback]);
  return completer.future;
@@ -249,8 +196,6 @@ Future&lt;bool&gt; <strong>isWritableEntry</strong>(Entry entry) <a class="ancho
 <p>Gets whether this Entry is writable or not.</p>
 <pre class="source">
 Future&lt;bool&gt; isWritableEntry(Entry entry) {
- if (_fileSystem == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _fileSystem.callMethod('isWritableEntry', [jsify(entry), completer.callback]);
  return completer.future;
@@ -264,11 +209,9 @@ Future&lt;Entry&gt; <strong>restoreEntry</strong>(String id) <a class="anchor-li
               title="Permalink to ChromeFileSystem.restoreEntry">#</a></h4>
 <div class="doc">
 <p>Returns the file entry with the given id if it can be restored. This call
-will fail otherwise. This method is new in Chrome 30.</p>
+will fail with a runtime error otherwise. This method is new in Chrome 31.</p>
 <pre class="source">
 Future&lt;Entry&gt; restoreEntry(String id) {
- if (_fileSystem == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;Entry&gt;.oneArg(_createEntry);
  _fileSystem.callMethod('restoreEntry', [id, completer.callback]);
  return completer.future;
@@ -284,14 +227,11 @@ String <strong>retainEntry</strong>(Entry entry) <a class="anchor-link" href="#r
 <p>Returns an id that can be passed to restoreEntry to regain access to a
 given file entry. Only the 500 most recently used entries are retained,
 where calls to retainEntry and restoreEntry count as use. If the app has
-the 'retainEntries' permission under 'fileSystem' (currently restricted to
-dev channel), entries are retained indefinitely. Otherwise, entries are
-retained only while the app is running and across restarts. This method is
-new in Chrome 30.</p>
+the 'retainEntries' permission under 'fileSystem', entries are retained
+indefinitely. Otherwise, entries are retained only while the app is running
+and across restarts. This method is new in Chrome 31.</p>
 <pre class="source">
 String retainEntry(Entry entry) {
- if (_fileSystem == null) _throwNotAvailable();
-
  return _fileSystem.callMethod('retainEntry', [jsify(entry)]);
 }
 </pre>

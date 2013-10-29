@@ -33,24 +33,20 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeTabCapture extends ChromeApi {
+class ChromeTabCapture {
  static final JsObject _tabCapture = chrome['tabCapture'];
 
  ChromeTabCapture._();
-
- bool get available =&gt; _tabCapture != null;
 
  /**
   * Captures the visible area of the currently active tab. This method can only
   * be used on the currently active page after the extension has been
   * _invoked_, similar to the way that &lt;a href="activeTab.html"&gt;activeTab&lt;/a&gt;
-  * works. Note that Chrome internal pages cannot be captured.
+  * works.
   * [options]: Configures the returned media stream.
   * [callback]: Callback with either the stream returned or null.
   */
  Future&lt;LocalMediaStream&gt; capture(CaptureOptions options) {
-   if (_tabCapture == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;LocalMediaStream&gt;.oneArg(_createLocalMediaStream);
    _tabCapture.callMethod('capture', [jsify(options), completer.callback]);
    return completer.future;
@@ -64,8 +60,6 @@ class ChromeTabCapture extends ChromeApi {
   * same tab).
   */
  Future&lt;CaptureInfo&gt; getCapturedTabs() {
-   if (_tabCapture == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;CaptureInfo&gt;.oneArg(_createCaptureInfo);
    _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
    return completer.future;
@@ -74,35 +68,12 @@ class ChromeTabCapture extends ChromeApi {
  Stream&lt;CaptureInfo&gt; get onStatusChanged =&gt; _onStatusChanged.stream;
 
  final ChromeStreamController&lt;CaptureInfo&gt; _onStatusChanged =
-     new ChromeStreamController&lt;CaptureInfo&gt;.oneArg(_tabCapture, 'onStatusChanged', _createCaptureInfo);
-
- void _throwNotAvailable() {
-   throw new UnsupportedError("'chrome.tabCapture' is not available");
- }
+     new ChromeStreamController&lt;CaptureInfo&gt;.oneArg(_tabCapture['onStatusChanged'], _createCaptureInfo);
 }
 </pre>
 </div>
-<h3>Extends</h3>
-<p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeTabCapture</strong></span></p>
 <div>
 <h3>Properties</h3>
-<div class="field"><h4 id="available">
-<button class="show-code">Code</button>
-final bool         <strong>available</strong> <a class="anchor-link"
-            href="#available"
-            title="Permalink to ChromeTabCapture.available">#</a>
-        </h4>
-        <div class="doc">
-<div class="inherited">
-<p>Returns true if the API is available. The common causes of an API not being
-avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
-<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
-<pre class="source">
-bool get available =&gt; _tabCapture != null;
-</pre>
-</div>
-</div>
 <div class="field"><h4 id="onStatusChanged">
 <button class="show-code">Code</button>
 final Stream&lt;<a href="../chrome.tabCapture/CaptureInfo.html">CaptureInfo</a>&gt;         <strong>onStatusChanged</strong> <a class="anchor-link"
@@ -126,14 +97,12 @@ Future&lt;<a href="../chrome.src.common_exp/LocalMediaStream.html">LocalMediaStr
 <p>Captures the visible area of the currently active tab. This method can only
 be used on the currently active page after the extension has been
 <em>invoked</em>, similar to the way that &lt;a href="activeTab.html">activeTab&lt;/a>
-works. Note that Chrome internal pages cannot be captured.
+works.
 
 <span class="param">options</span>: Configures the returned media stream.
 <code>callback</code>: Callback with either the stream returned or null.</p>
 <pre class="source">
 Future&lt;LocalMediaStream&gt; capture(CaptureOptions options) {
- if (_tabCapture == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;LocalMediaStream&gt;.oneArg(_createLocalMediaStream);
  _tabCapture.callMethod('capture', [jsify(options), completer.callback]);
  return completer.future;
@@ -153,8 +122,6 @@ new tab capture from succeeding (or to prevent redundant requests for the
 same tab).</p>
 <pre class="source">
 Future&lt;CaptureInfo&gt; getCapturedTabs() {
- if (_tabCapture == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;CaptureInfo&gt;.oneArg(_createCaptureInfo);
  _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
  return completer.future;

@@ -33,12 +33,10 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeTts extends ChromeApi {
+class ChromeTts {
  static final JsObject _tts = chrome['tts'];
 
  ChromeTts._();
-
- bool get available =&gt; _tts != null;
 
  /**
   * Speaks text using a text-to-speech engine.
@@ -51,8 +49,6 @@ class ChromeTts extends ChromeApi {
   * [options] The speech options.
   */
  Future speak(String utterance, [Map options]) {
-   if (_tts == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter.noArgs();
    _tts.callMethod('speak', [utterance, jsify(options), completer.callback]);
    return completer.future;
@@ -64,8 +60,6 @@ class ChromeTts extends ChromeApi {
   * call to speak.
   */
  void stop() {
-   if (_tts == null) _throwNotAvailable();
-
    _tts.callMethod('stop');
  }
 
@@ -74,8 +68,6 @@ class ChromeTts extends ChromeApi {
   * to resume or stop will un-pause speech.
   */
  void pause() {
-   if (_tts == null) _throwNotAvailable();
-
    _tts.callMethod('pause');
  }
 
@@ -83,8 +75,6 @@ class ChromeTts extends ChromeApi {
   * If speech was paused, resumes speaking where it left off.
   */
  void resume() {
-   if (_tts == null) _throwNotAvailable();
-
    _tts.callMethod('resume');
  }
 
@@ -97,8 +87,6 @@ class ChromeTts extends ChromeApi {
   * True if speaking, false otherwise.
   */
  Future&lt;bool&gt; isSpeaking() {
-   if (_tts == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _tts.callMethod('isSpeaking', [completer.callback]);
    return completer.future;
@@ -112,8 +100,6 @@ class ChromeTts extends ChromeApi {
   * synthesis.
   */
  Future&lt;List&lt;TtsVoice&gt;&gt; getVoices() {
-   if (_tts == null) _throwNotAvailable();
-
    var completer = new ChromeCompleter&lt;List&lt;TtsVoice&gt;&gt;.oneArg((e) =&gt; listify(e, _createTtsVoice));
    _tts.callMethod('getVoices', [completer.callback]);
    return completer.future;
@@ -125,35 +111,12 @@ class ChromeTts extends ChromeApi {
  Stream&lt;TtsEvent&gt; get onEvent =&gt; _onEvent.stream;
 
  final ChromeStreamController&lt;TtsEvent&gt; _onEvent =
-     new ChromeStreamController&lt;TtsEvent&gt;.oneArg(_tts, 'onEvent', _createTtsEvent);
-
- void _throwNotAvailable() {
-   throw new UnsupportedError("'chrome.tts' is not available");
- }
+     new ChromeStreamController&lt;TtsEvent&gt;.oneArg(_tts['onEvent'], _createTtsEvent);
 }
 </pre>
 </div>
-<h3>Extends</h3>
-<p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeTts</strong></span></p>
 <div>
 <h3>Properties</h3>
-<div class="field"><h4 id="available">
-<button class="show-code">Code</button>
-final bool         <strong>available</strong> <a class="anchor-link"
-            href="#available"
-            title="Permalink to ChromeTts.available">#</a>
-        </h4>
-        <div class="doc">
-<div class="inherited">
-<p>Returns true if the API is available. The common causes of an API not being
-avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
-<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
-<pre class="source">
-bool get available =&gt; _tts != null;
-</pre>
-</div>
-</div>
 <div class="field"><h4 id="onEvent">
 <button class="show-code">Code</button>
 final Stream&lt;<a href="../chrome.tts/TtsEvent.html">TtsEvent</a>&gt;         <strong>onEvent</strong> <a class="anchor-link"
@@ -181,8 +144,6 @@ Array of <a class="crossref" href="../chrome.tts/TtsVoice.html">TtsVoice</a> obj
 synthesis.</p>
 <pre class="source">
 Future&lt;List&lt;TtsVoice&gt;&gt; getVoices() {
- if (_tts == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;List&lt;TtsVoice&gt;&gt;.oneArg((e) =&gt; listify(e, _createTtsVoice));
  _tts.callMethod('getVoices', [completer.callback]);
  return completer.future;
@@ -202,8 +163,6 @@ wasn't initiated by Chrome.</p>
 True if speaking, false otherwise.</p>
 <pre class="source">
 Future&lt;bool&gt; isSpeaking() {
- if (_tts == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _tts.callMethod('isSpeaking', [completer.callback]);
  return completer.future;
@@ -220,8 +179,6 @@ void <strong>pause</strong>() <a class="anchor-link" href="#pause"
 to resume or stop will un-pause speech.</p>
 <pre class="source">
 void pause() {
- if (_tts == null) _throwNotAvailable();
-
  _tts.callMethod('pause');
 }
 </pre>
@@ -235,8 +192,6 @@ void <strong>resume</strong>() <a class="anchor-link" href="#resume"
 <p>If speech was paused, resumes speaking where it left off.</p>
 <pre class="source">
 void resume() {
- if (_tts == null) _throwNotAvailable();
-
  _tts.callMethod('resume');
 }
 </pre>
@@ -257,8 +212,6 @@ characters.</p>
 <span class="param">options</span> The speech options.</p>
 <pre class="source">
 Future speak(String utterance, [Map options]) {
- if (_tts == null) _throwNotAvailable();
-
  var completer = new ChromeCompleter.noArgs();
  _tts.callMethod('speak', [utterance, jsify(options), completer.callback]);
  return completer.future;
@@ -276,8 +229,6 @@ In addition, if speech was paused, it will now be un-paused for the next
 call to speak.</p>
 <pre class="source">
 void stop() {
- if (_tts == null) _throwNotAvailable();
-
  _tts.callMethod('stop');
 }
 </pre>

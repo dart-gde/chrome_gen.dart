@@ -40,7 +40,7 @@ final <a href="chrome.cookies/ChromeCookies.html">ChromeCookies</a>         <str
         <div class="doc">
 <p>Accessor for the <code>chrome.cookies</code> namespace.</p>
 <pre class="source">
-final ChromeCookies cookies = new ChromeCookies._()
+final ChromeCookies cookies = ChromeCookies._cookies == null ? apiNotAvailable('chrome.cookies') : new ChromeCookies._()
 </pre>
 </div>
 </div>

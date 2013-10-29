@@ -38,7 +38,7 @@ final <a href="chrome.notifications/ChromeNotifications.html">ChromeNotification
         <div class="doc">
 <p>Accessor for the <code>chrome.notifications</code> namespace.</p>
 <pre class="source">
-final ChromeNotifications notifications = new ChromeNotifications._()
+final ChromeNotifications notifications = ChromeNotifications._notifications == null ? apiNotAvailable('chrome.notifications') : new ChromeNotifications._()
 </pre>
 </div>
 </div>
@@ -84,6 +84,12 @@ final ChromeNotifications notifications = new ChromeNotifications._()
           <div class="type">
           <h4>
             <a href="chrome.notifications/OnClosedEvent.html"><strong>OnClosedEvent</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="chrome.notifications/PermissionLevel.html"><strong>PermissionLevel</strong></a>
           </h4>
           </div>
           

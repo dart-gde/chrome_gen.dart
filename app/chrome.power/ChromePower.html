@@ -33,12 +33,10 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromePower extends ChromeApi {
+class ChromePower {
  static final JsObject _power = chrome['power'];
 
  ChromePower._();
-
- bool get available =&gt; _power != null;
 
  /**
   * Requests that power management be temporarily disabled. [level] describes
@@ -47,8 +45,6 @@ class ChromePower extends ChromeApi {
   * new request.
   */
  void requestKeepAwake(Level level) {
-   if (_power == null) _throwNotAvailable();
-
    _power.callMethod('requestKeepAwake', [jsify(level)]);
  }
 
@@ -56,38 +52,10 @@ class ChromePower extends ChromeApi {
   * Releases a request previously made via requestKeepAwake().
   */
  void releaseKeepAwake() {
-   if (_power == null) _throwNotAvailable();
-
    _power.callMethod('releaseKeepAwake');
- }
-
- void _throwNotAvailable() {
-   throw new UnsupportedError("'chrome.power' is not available");
  }
 }
 </pre>
-</div>
-<h3>Extends</h3>
-<p>
-<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromePower</strong></span></p>
-<div>
-<h3>Properties</h3>
-<div class="field"><h4 id="available">
-<button class="show-code">Code</button>
-final bool         <strong>available</strong> <a class="anchor-link"
-            href="#available"
-            title="Permalink to ChromePower.available">#</a>
-        </h4>
-        <div class="doc">
-<div class="inherited">
-<p>Returns true if the API is available. The common causes of an API not being
-avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
-<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
-<pre class="source">
-bool get available =&gt; _power != null;
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Methods</h3>
@@ -99,8 +67,6 @@ void <strong>releaseKeepAwake</strong>() <a class="anchor-link" href="#releaseKe
 <p>Releases a request previously made via requestKeepAwake().</p>
 <pre class="source">
 void releaseKeepAwake() {
- if (_power == null) _throwNotAvailable();
-
  _power.callMethod('releaseKeepAwake');
 }
 </pre>
@@ -118,8 +84,6 @@ previously made by the same app is still active, it will be replaced by the
 new request.</p>
 <pre class="source">
 void requestKeepAwake(Level level) {
- if (_power == null) _throwNotAvailable();
-
  _power.callMethod('requestKeepAwake', [jsify(level)]);
 }
 </pre>

@@ -42,7 +42,7 @@ final <a href="chrome.tts/ChromeTts.html">ChromeTts</a>         <strong>tts</str
         <div class="doc">
 <p>Accessor for the <code>chrome.tts</code> namespace.</p>
 <pre class="source">
-final ChromeTts tts = new ChromeTts._()
+final ChromeTts tts = ChromeTts._tts == null ? apiNotAvailable('chrome.tts') : new ChromeTts._()
 </pre>
 </div>
 </div>

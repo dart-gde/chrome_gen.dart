@@ -40,7 +40,7 @@ final <a href="chrome.infobars/ChromeInfobars.html">ChromeInfobars</a>         <
         <div class="doc">
 <p>Accessor for the <code>chrome.infobars</code> namespace.</p>
 <pre class="source">
-final ChromeInfobars infobars = new ChromeInfobars._()
+final ChromeInfobars infobars = ChromeInfobars._infobars == null ? apiNotAvailable('chrome.infobars') : new ChromeInfobars._()
 </pre>
 </div>
 </div>

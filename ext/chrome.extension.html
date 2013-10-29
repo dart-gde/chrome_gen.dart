@@ -42,7 +42,7 @@ final <a href="chrome.extension/ChromeExtension.html">ChromeExtension</a>       
         <div class="doc">
 <p>Accessor for the <code>chrome.extension</code> namespace.</p>
 <pre class="source">
-final ChromeExtension extension = new ChromeExtension._()
+final ChromeExtension extension = ChromeExtension._extension == null ? apiNotAvailable('chrome.extension') : new ChromeExtension._()
 </pre>
 </div>
 </div>

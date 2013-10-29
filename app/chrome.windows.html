@@ -40,7 +40,7 @@ final <a href="chrome.windows/ChromeWindows.html">ChromeWindows</a>         <str
         <div class="doc">
 <p>Accessor for the <code>chrome.windows</code> namespace.</p>
 <pre class="source">
-final ChromeWindows windows = new ChromeWindows._()
+final ChromeWindows windows = ChromeWindows._windows == null ? apiNotAvailable('chrome.windows') : new ChromeWindows._()
 </pre>
 </div>
 </div>

@@ -41,7 +41,7 @@ final <a href="chrome.pageAction/ChromePageAction.html">ChromePageAction</a>    
         <div class="doc">
 <p>Accessor for the <code>chrome.pageAction</code> namespace.</p>
 <pre class="source">
-final ChromePageAction pageAction = new ChromePageAction._()
+final ChromePageAction pageAction = ChromePageAction._pageAction == null ? apiNotAvailable('chrome.pageAction') : new ChromePageAction._()
 </pre>
 </div>
 </div>

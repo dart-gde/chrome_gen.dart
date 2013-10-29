@@ -38,7 +38,7 @@ final <a href="chrome.pushMessaging/ChromePushMessaging.html">ChromePushMessagin
         <div class="doc">
 <p>Accessor for the <code>chrome.pushMessaging</code> namespace.</p>
 <pre class="source">
-final ChromePushMessaging pushMessaging = new ChromePushMessaging._()
+final ChromePushMessaging pushMessaging = ChromePushMessaging._pushMessaging == null ? apiNotAvailable('chrome.pushMessaging') : new ChromePushMessaging._()
 </pre>
 </div>
 </div>
