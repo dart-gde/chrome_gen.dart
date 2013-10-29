@@ -33,10 +33,12 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeAppWindow {
+class ChromeAppWindow extends ChromeApi {
  static final JsObject _app_window = chrome['app']['window'];
 
  ChromeAppWindow._();
+
+ bool get available =&gt; _app_window != null;
 
  /**
   * The size and position of a window can be specified in a number of different
@@ -69,6 +71,8 @@ class ChromeAppWindow {
   *  `window.onload = function () { foo(); }`
   */
  Future&lt;AppWindow&gt; create(String url, [CreateWindowOptions options]) {
+   if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+
    var completer = new ChromeCompleter&lt;AppWindow&gt;.oneArg(_createAppWindow);
    _app_window.callMethod('create', [url, jsify(options), completer.callback]);
    return completer.future;
@@ -80,47 +84,70 @@ class ChromeAppWindow {
   * for another page, for example: otherWindow.chrome.app.window.current().
   */
  AppWindow current() {
+   if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+
    return _createAppWindow(_app_window.callMethod('current'));
  }
 
  void initializeAppWindow(dynamic state) {
+   if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+
    _app_window.callMethod('initializeAppWindow', [jsify(state)]);
  }
 
  Stream get onBoundsChanged =&gt; _onBoundsChanged.stream;
 
  final ChromeStreamController _onBoundsChanged =
-     new ChromeStreamController.noArgs(_app_window['onBoundsChanged']);
+     new ChromeStreamController.noArgs(_app_window, 'onBoundsChanged');
 
  Stream get onClosed =&gt; _onClosed.stream;
 
  final ChromeStreamController _onClosed =
-     new ChromeStreamController.noArgs(_app_window['onClosed']);
+     new ChromeStreamController.noArgs(_app_window, 'onClosed');
 
  Stream get onFullscreened =&gt; _onFullscreened.stream;
 
  final ChromeStreamController _onFullscreened =
-     new ChromeStreamController.noArgs(_app_window['onFullscreened']);
+     new ChromeStreamController.noArgs(_app_window, 'onFullscreened');
 
  Stream get onMaximized =&gt; _onMaximized.stream;
 
  final ChromeStreamController _onMaximized =
-     new ChromeStreamController.noArgs(_app_window['onMaximized']);
+     new ChromeStreamController.noArgs(_app_window, 'onMaximized');
 
  Stream get onMinimized =&gt; _onMinimized.stream;
 
  final ChromeStreamController _onMinimized =
-     new ChromeStreamController.noArgs(_app_window['onMinimized']);
+     new ChromeStreamController.noArgs(_app_window, 'onMinimized');
 
  Stream get onRestored =&gt; _onRestored.stream;
 
  final ChromeStreamController _onRestored =
-     new ChromeStreamController.noArgs(_app_window['onRestored']);
+     new ChromeStreamController.noArgs(_app_window, 'onRestored');
 }
 </pre>
 </div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeAppWindow</strong></span></p>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromeAppWindow.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _app_window != null;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="onBoundsChanged">
 <button class="show-code">Code</button>
 final Stream         <strong>onBoundsChanged</strong> <a class="anchor-link"
@@ -225,6 +252,8 @@ child usable from onload. E.g. background.js:</p>
 <p> <code>window.onload = function () { foo(); }</code></p>
 <pre class="source">
 Future&lt;AppWindow&gt; create(String url, [CreateWindowOptions options]) {
+ if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+
  var completer = new ChromeCompleter&lt;AppWindow&gt;.oneArg(_createAppWindow);
  _app_window.callMethod('create', [url, jsify(options), completer.callback]);
  return completer.future;
@@ -242,6 +271,8 @@ Future&lt;AppWindow&gt; create(String url, [CreateWindowOptions options]) {
 for another page, for example: otherWindow.chrome.app.window.current().</p>
 <pre class="source">
 AppWindow current() {
+ if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+
  return _createAppWindow(_app_window.callMethod('current'));
 }
 </pre>
@@ -254,6 +285,8 @@ void <strong>initializeAppWindow</strong>(state) <a class="anchor-link" href="#i
 <div class="doc">
 <pre class="source">
 void initializeAppWindow(dynamic state) {
+ if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+
  _app_window.callMethod('initializeAppWindow', [jsify(state)]);
 }
 </pre>

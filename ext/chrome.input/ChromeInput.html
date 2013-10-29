@@ -34,10 +34,12 @@
 <div class="doc">
 <pre class="source">
 class ChromeInput {
- /// Accessor for the `chrome.input.ime` namespace.
- final ChromeInputIme ime = ChromeInputIme._input_ime == null ? apiNotAvailable('chrome.input.ime') : new ChromeInputIme._();
-
  ChromeInput._();
+
+ /**
+  * Accessor for the `chrome.input.ime` namespace.
+  */
+ final ChromeInputIme ime = new ChromeInputIme._();
 }
 </pre>
 </div>
@@ -52,7 +54,7 @@ final <a href="../chrome.input/ChromeInputIme.html">ChromeInputIme</a>         <
         <div class="doc">
 <p>Accessor for the <code>chrome.input.ime</code> namespace.</p>
 <pre class="source">
-final ChromeInputIme ime = ChromeInputIme._input_ime == null ? apiNotAvailable('chrome.input.ime') : new ChromeInputIme._()
+final ChromeInputIme ime = new ChromeInputIme._()
 </pre>
 </div>
 </div>

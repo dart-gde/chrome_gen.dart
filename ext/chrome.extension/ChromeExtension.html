@@ -33,10 +33,12 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeExtension {
+class ChromeExtension extends ChromeApi {
  static final JsObject _extension = chrome['extension'];
 
  ChromeExtension._();
+
+ bool get available =&gt; _extension != null;
 
  /**
   * Set for the lifetime of a callback if an ansychronous extension api has
@@ -64,6 +66,8 @@ class ChromeExtension {
   * no arguments and [runtime.lastError] will be set to the error message.
   */
  Future&lt;dynamic&gt; sendRequest(dynamic request, [String extensionId]) {
+   if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _extension.callMethod('sendRequest', [extensionId, jsify(request), completer.callback]);
    return completer.future;
@@ -80,6 +84,8 @@ class ChromeExtension {
   * The fully-qualified URL to the resource.
   */
  String getURL(String path) {
+   if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
    return _extension.callMethod('getURL', [path]);
  }
 
@@ -91,6 +97,8 @@ class ChromeExtension {
   * Array of global objects
   */
  List&lt;Window&gt; getViews([Map fetchProperties]) {
+   if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
    var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
    return ret;
  }
@@ -101,6 +109,8 @@ class ChromeExtension {
   * background page.
   */
  Window getBackgroundPage() {
+   if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
    return _createWindow(_extension.callMethod('getBackgroundPage'));
  }
 
@@ -114,6 +124,8 @@ class ChromeExtension {
   * Array of global window objects
   */
  List&lt;Window&gt; getExtensionTabs([int windowId]) {
+   if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
    var ret = _extension.callMethod('getExtensionTabs', [windowId]);
    return ret;
  }
@@ -126,6 +138,8 @@ class ChromeExtension {
   * True if the extension has access to Incognito mode, false otherwise.
   */
  Future&lt;bool&gt; isAllowedIncognitoAccess() {
+   if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
    return completer.future;
@@ -139,6 +153,8 @@ class ChromeExtension {
   * True if the extension can access the 'file://' scheme, false otherwise.
   */
  Future&lt;bool&gt; isAllowedFileSchemeAccess() {
+   if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
    return completer.future;
@@ -150,6 +166,8 @@ class ChromeExtension {
   * Extension Gallery.
   */
  void setUpdateUrlData(String data) {
+   if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
    _extension.callMethod('setUpdateUrlData', [data]);
  }
 
@@ -159,7 +177,7 @@ class ChromeExtension {
  Stream&lt;OnRequestEvent&gt; get onRequest =&gt; _onRequest.stream;
 
  final ChromeStreamController&lt;OnRequestEvent&gt; _onRequest =
-     new ChromeStreamController&lt;OnRequestEvent&gt;.threeArgs(_extension['onRequest'], _createOnRequestEvent);
+     new ChromeStreamController&lt;OnRequestEvent&gt;.threeArgs(_extension, 'onRequest', _createOnRequestEvent);
 
  /**
   * Deprecated: please use onMessageExternal.
@@ -167,12 +185,31 @@ class ChromeExtension {
  Stream&lt;OnRequestExternalEvent&gt; get onRequestExternal =&gt; _onRequestExternal.stream;
 
  final ChromeStreamController&lt;OnRequestExternalEvent&gt; _onRequestExternal =
-     new ChromeStreamController&lt;OnRequestExternalEvent&gt;.threeArgs(_extension['onRequestExternal'], _createOnRequestExternalEvent);
+     new ChromeStreamController&lt;OnRequestExternalEvent&gt;.threeArgs(_extension, 'onRequestExternal', _createOnRequestExternalEvent);
 }
 </pre>
 </div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeExtension</strong></span></p>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromeExtension.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _extension != null;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="inIncognitoContext">
 <button class="show-code">Code</button>
 final bool         <strong>inIncognitoContext</strong> <a class="anchor-link"
@@ -242,6 +279,8 @@ inside the current extension. Returns null if the extension has no
 background page.</p>
 <pre class="source">
 Window getBackgroundPage() {
+ if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
  return _createWindow(_extension.callMethod('getBackgroundPage'));
 }
 </pre>
@@ -260,6 +299,8 @@ tabs attached to the specified window.</p>
 Array of global window objects</p>
 <pre class="source">
 List&lt;Window&gt; getExtensionTabs([int windowId]) {
+ if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
  var ret = _extension.callMethod('getExtensionTabs', [windowId]);
  return ret;
 }
@@ -280,6 +321,8 @@ install directory.</p>
 The fully-qualified URL to the resource.</p>
 <pre class="source">
 String getURL(String path) {
+ if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
  return _extension.callMethod('getURL', [path]);
 }
 </pre>
@@ -296,6 +339,8 @@ running inside the current extension.</p>
 Array of global objects</p>
 <pre class="source">
 List&lt;Window&gt; getViews([Map fetchProperties]) {
+ if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
  var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
  return ret;
 }
@@ -313,6 +358,8 @@ determined by the user-controlled 'Allow access to File URLs' checkbox.</p>
 True if the extension can access the 'file://' scheme, false otherwise.</p>
 <pre class="source">
 Future&lt;bool&gt; isAllowedFileSchemeAccess() {
+ if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _extension.callMethod('isAllowedFileSchemeAccess', [completer.callback]);
  return completer.future;
@@ -331,6 +378,8 @@ determined by the user-controlled 'Allowed in Incognito' checkbox.</p>
 True if the extension has access to Incognito mode, false otherwise.</p>
 <pre class="source">
 Future&lt;bool&gt; isAllowedIncognitoAccess() {
+ if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _extension.callMethod('isAllowedIncognitoAccess', [completer.callback]);
  return completer.future;
@@ -353,6 +402,8 @@ occurs while connecting to the extension, the callback will be called with
 no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
 Future&lt;dynamic&gt; sendRequest(dynamic request, [String extensionId]) {
+ if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _extension.callMethod('sendRequest', [extensionId, jsify(request), completer.callback]);
  return completer.future;
@@ -370,6 +421,8 @@ This value is ignored for extensions that are hosted in the Chrome
 Extension Gallery.</p>
 <pre class="source">
 void setUpdateUrlData(String data) {
+ if (_extension == null) throw new UnsupportedError("'chrome.extension' is not available");
+
  _extension.callMethod('setUpdateUrlData', [data]);
 }
 </pre>

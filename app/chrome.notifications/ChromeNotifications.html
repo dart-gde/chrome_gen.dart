@@ -33,10 +33,12 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeNotifications {
+class ChromeNotifications extends ChromeApi {
  static final JsObject _notifications = chrome['notifications'];
 
  ChromeNotifications._();
+
+ bool get available =&gt; _notifications != null;
 
  /**
   * Creates and displays a notification having the contents in [options],
@@ -47,6 +49,8 @@ class ChromeNotifications {
   * supplied or generated) that represents the created notification.
   */
  Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
+   if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _notifications.callMethod('create', [notificationId, jsify(options), completer.callback]);
    return completer.future;
@@ -58,6 +62,8 @@ class ChromeNotifications {
   * existed.
   */
  Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
+   if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _notifications.callMethod('update', [notificationId, jsify(options), completer.callback]);
    return completer.future;
@@ -69,6 +75,8 @@ class ChromeNotifications {
   * notification existed.
   */
  Future&lt;bool&gt; clear(String notificationId) {
+   if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _notifications.callMethod('clear', [notificationId, completer.callback]);
    return completer.future;
@@ -79,6 +87,8 @@ class ChromeNotifications {
   * system.
   */
  Future&lt;dynamic&gt; getAll() {
+   if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _notifications.callMethod('getAll', [completer.callback]);
    return completer.future;
@@ -87,22 +97,41 @@ class ChromeNotifications {
  Stream&lt;OnClosedEvent&gt; get onClosed =&gt; _onClosed.stream;
 
  final ChromeStreamController&lt;OnClosedEvent&gt; _onClosed =
-     new ChromeStreamController&lt;OnClosedEvent&gt;.twoArgs(_notifications['onClosed'], _createOnClosedEvent);
+     new ChromeStreamController&lt;OnClosedEvent&gt;.twoArgs(_notifications, 'onClosed', _createOnClosedEvent);
 
  Stream&lt;String&gt; get onClicked =&gt; _onClicked.stream;
 
  final ChromeStreamController&lt;String&gt; _onClicked =
-     new ChromeStreamController&lt;String&gt;.oneArg(_notifications['onClicked'], selfConverter);
+     new ChromeStreamController&lt;String&gt;.oneArg(_notifications, 'onClicked', selfConverter);
 
  Stream&lt;OnButtonClickedEvent&gt; get onButtonClicked =&gt; _onButtonClicked.stream;
 
  final ChromeStreamController&lt;OnButtonClickedEvent&gt; _onButtonClicked =
-     new ChromeStreamController&lt;OnButtonClickedEvent&gt;.twoArgs(_notifications['onButtonClicked'], _createOnButtonClickedEvent);
+     new ChromeStreamController&lt;OnButtonClickedEvent&gt;.twoArgs(_notifications, 'onButtonClicked', _createOnButtonClickedEvent);
 }
 </pre>
 </div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeNotifications</strong></span></p>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromeNotifications.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _notifications != null;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="onButtonClicked">
 <button class="show-code">Code</button>
 final Stream&lt;<a href="../chrome.notifications/OnButtonClickedEvent.html">OnButtonClickedEvent</a>&gt;         <strong>onButtonClicked</strong> <a class="anchor-link"
@@ -153,6 +182,8 @@ corresponding notification. <code>callback</code> indicates whether a matching
 notification existed.</p>
 <pre class="source">
 Future&lt;bool&gt; clear(String notificationId) {
+ if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _notifications.callMethod('clear', [notificationId, completer.callback]);
  return completer.future;
@@ -177,6 +208,8 @@ with the create operation. <code>callback</code> returns the notification id (ei
 supplied or generated) that represents the created notification.</p>
 <pre class="source">
 Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
+ if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _notifications.callMethod('create', [notificationId, jsify(options), completer.callback]);
  return completer.future;
@@ -193,6 +226,8 @@ Future&lt;dynamic&gt; <strong>getAll</strong>() <a class="anchor-link" href="#ge
 system.</p>
 <pre class="source">
 Future&lt;dynamic&gt; getAll() {
+ if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _notifications.callMethod('getAll', [completer.callback]);
  return completer.future;
@@ -212,6 +247,8 @@ options
 existed.</p>
 <pre class="source">
 Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
+ if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _notifications.callMethod('update', [notificationId, jsify(options), completer.callback]);
  return completer.future;
