@@ -8,13 +8,17 @@ library chrome.webRequest;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.webRequest` namespace.
-final ChromeWebRequest webRequest = ChromeWebRequest._webRequest == null ? apiNotAvailable('chrome.webRequest') : new ChromeWebRequest._();
+/**
+ * Accessor for the `chrome.webRequest` namespace.
+ */
+final ChromeWebRequest webRequest = new ChromeWebRequest._();
 
-class ChromeWebRequest {
+class ChromeWebRequest extends ChromeApi {
   static final JsObject _webRequest = chrome['webRequest'];
 
   ChromeWebRequest._();
+
+  bool get available => _webRequest != null;
 
   /**
    * The maximum number of times that `handlerBehaviorChanged` can be called per
@@ -29,6 +33,8 @@ class ChromeWebRequest {
    * expensive. Don't call it often.
    */
   Future handlerBehaviorChanged() {
+    if (_webRequest == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _webRequest.callMethod('handlerBehaviorChanged', [completer.callback]);
     return completer.future;
@@ -40,7 +46,7 @@ class ChromeWebRequest {
   Stream<Map> get onBeforeRequest => _onBeforeRequest.stream;
 
   final ChromeStreamController<Map> _onBeforeRequest =
-      new ChromeStreamController<Map>.oneArg(_webRequest['onBeforeRequest'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webRequest, 'onBeforeRequest', mapify);
 
   /**
    * Fired before sending an HTTP request, once the request headers are
@@ -50,7 +56,7 @@ class ChromeWebRequest {
   Stream<Map> get onBeforeSendHeaders => _onBeforeSendHeaders.stream;
 
   final ChromeStreamController<Map> _onBeforeSendHeaders =
-      new ChromeStreamController<Map>.oneArg(_webRequest['onBeforeSendHeaders'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webRequest, 'onBeforeSendHeaders', mapify);
 
   /**
    * Fired just before a request is going to be sent to the server
@@ -60,7 +66,7 @@ class ChromeWebRequest {
   Stream<Map> get onSendHeaders => _onSendHeaders.stream;
 
   final ChromeStreamController<Map> _onSendHeaders =
-      new ChromeStreamController<Map>.oneArg(_webRequest['onSendHeaders'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webRequest, 'onSendHeaders', mapify);
 
   /**
    * Fired when HTTP response headers of a request have been received.
@@ -68,7 +74,7 @@ class ChromeWebRequest {
   Stream<Map> get onHeadersReceived => _onHeadersReceived.stream;
 
   final ChromeStreamController<Map> _onHeadersReceived =
-      new ChromeStreamController<Map>.oneArg(_webRequest['onHeadersReceived'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webRequest, 'onHeadersReceived', mapify);
 
   /**
    * Fired when an authentication failure is received. The listener has three
@@ -80,7 +86,7 @@ class ChromeWebRequest {
   Stream<OnAuthRequiredEvent> get onAuthRequired => _onAuthRequired.stream;
 
   final ChromeStreamController<OnAuthRequiredEvent> _onAuthRequired =
-      new ChromeStreamController<OnAuthRequiredEvent>.twoArgs(_webRequest['onAuthRequired'], _createOnAuthRequiredEvent);
+      new ChromeStreamController<OnAuthRequiredEvent>.twoArgs(_webRequest, 'onAuthRequired', _createOnAuthRequiredEvent);
 
   /**
    * Fired when the first byte of the response body is received. For HTTP
@@ -90,7 +96,7 @@ class ChromeWebRequest {
   Stream<Map> get onResponseStarted => _onResponseStarted.stream;
 
   final ChromeStreamController<Map> _onResponseStarted =
-      new ChromeStreamController<Map>.oneArg(_webRequest['onResponseStarted'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webRequest, 'onResponseStarted', mapify);
 
   /**
    * Fired when a server-initiated redirect is about to occur.
@@ -98,7 +104,7 @@ class ChromeWebRequest {
   Stream<Map> get onBeforeRedirect => _onBeforeRedirect.stream;
 
   final ChromeStreamController<Map> _onBeforeRedirect =
-      new ChromeStreamController<Map>.oneArg(_webRequest['onBeforeRedirect'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webRequest, 'onBeforeRedirect', mapify);
 
   /**
    * Fired when a request is completed.
@@ -106,7 +112,7 @@ class ChromeWebRequest {
   Stream<Map> get onCompleted => _onCompleted.stream;
 
   final ChromeStreamController<Map> _onCompleted =
-      new ChromeStreamController<Map>.oneArg(_webRequest['onCompleted'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webRequest, 'onCompleted', mapify);
 
   /**
    * Fired when an error occurs.
@@ -114,7 +120,11 @@ class ChromeWebRequest {
   Stream<Map> get onErrorOccurred => _onErrorOccurred.stream;
 
   final ChromeStreamController<Map> _onErrorOccurred =
-      new ChromeStreamController<Map>.oneArg(_webRequest['onErrorOccurred'], mapify);
+      new ChromeStreamController<Map>.oneArg(_webRequest, 'onErrorOccurred', mapify);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.webRequest' is not available");
+  }
 }
 
 /**

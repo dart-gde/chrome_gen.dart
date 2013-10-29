@@ -7,13 +7,17 @@ library chrome.processes;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.processes` namespace.
-final ChromeProcesses processes = ChromeProcesses._processes == null ? apiNotAvailable('chrome.processes') : new ChromeProcesses._();
+/**
+ * Accessor for the `chrome.processes` namespace.
+ */
+final ChromeProcesses processes = new ChromeProcesses._();
 
-class ChromeProcesses {
+class ChromeProcesses extends ChromeApi {
   static final JsObject _processes = chrome['processes'];
 
   ChromeProcesses._();
+
+  bool get available => _processes != null;
 
   /**
    * Terminates the specified renderer process. Equivalent to visiting
@@ -25,6 +29,8 @@ class ChromeProcesses {
    * True if terminating the process was successful, otherwise false.
    */
   Future<bool> terminate(int processId) {
+    if (_processes == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<bool>.oneArg();
     _processes.callMethod('terminate', [processId, completer.callback]);
     return completer.future;
@@ -40,6 +46,8 @@ class ChromeProcesses {
    * Process ID of the tab's renderer process.
    */
   Future<int> getProcessIdForTab(int tabId) {
+    if (_processes == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<int>.oneArg();
     _processes.callMethod('getProcessIdForTab', [tabId, completer.callback]);
     return completer.future;
@@ -63,6 +71,8 @@ class ChromeProcesses {
    * Process object.
    */
   Future<Map> getProcessInfo(dynamic processIds, bool includeMemory) {
+    if (_processes == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _processes.callMethod('getProcessInfo', [jsify(processIds), includeMemory, completer.callback]);
     return completer.future;
@@ -75,7 +85,7 @@ class ChromeProcesses {
   Stream<Map> get onUpdated => _onUpdated.stream;
 
   final ChromeStreamController<Map> _onUpdated =
-      new ChromeStreamController<Map>.oneArg(_processes['onUpdated'], mapify);
+      new ChromeStreamController<Map>.oneArg(_processes, 'onUpdated', mapify);
 
   /**
    * Fired each time the Task Manager updates its process statistics, providing
@@ -87,7 +97,7 @@ class ChromeProcesses {
   Stream<Map> get onUpdatedWithMemory => _onUpdatedWithMemory.stream;
 
   final ChromeStreamController<Map> _onUpdatedWithMemory =
-      new ChromeStreamController<Map>.oneArg(_processes['onUpdatedWithMemory'], mapify);
+      new ChromeStreamController<Map>.oneArg(_processes, 'onUpdatedWithMemory', mapify);
 
   /**
    * Fired each time a process is created, providing the corrseponding Process
@@ -96,7 +106,7 @@ class ChromeProcesses {
   Stream<Process> get onCreated => _onCreated.stream;
 
   final ChromeStreamController<Process> _onCreated =
-      new ChromeStreamController<Process>.oneArg(_processes['onCreated'], _createProcess);
+      new ChromeStreamController<Process>.oneArg(_processes, 'onCreated', _createProcess);
 
   /**
    * Fired each time a process becomes unresponsive, providing the corrseponding
@@ -105,7 +115,7 @@ class ChromeProcesses {
   Stream<Process> get onUnresponsive => _onUnresponsive.stream;
 
   final ChromeStreamController<Process> _onUnresponsive =
-      new ChromeStreamController<Process>.oneArg(_processes['onUnresponsive'], _createProcess);
+      new ChromeStreamController<Process>.oneArg(_processes, 'onUnresponsive', _createProcess);
 
   /**
    * Fired each time a process is terminated, providing the type of exit.
@@ -113,7 +123,11 @@ class ChromeProcesses {
   Stream<OnExitedEvent> get onExited => _onExited.stream;
 
   final ChromeStreamController<OnExitedEvent> _onExited =
-      new ChromeStreamController<OnExitedEvent>.threeArgs(_processes['onExited'], _createOnExitedEvent);
+      new ChromeStreamController<OnExitedEvent>.threeArgs(_processes, 'onExited', _createOnExitedEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.processes' is not available");
+  }
 }
 
 /**

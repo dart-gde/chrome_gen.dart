@@ -9,13 +9,17 @@ library chrome.windows;
 import 'tabs.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.windows` namespace.
-final ChromeWindows windows = ChromeWindows._windows == null ? apiNotAvailable('chrome.windows') : new ChromeWindows._();
+/**
+ * Accessor for the `chrome.windows` namespace.
+ */
+final ChromeWindows windows = new ChromeWindows._();
 
-class ChromeWindows {
+class ChromeWindows extends ChromeApi {
   static final JsObject _windows = chrome['windows'];
 
   ChromeWindows._();
+
+  bool get available => _windows != null;
 
   /**
    * The windowId value that represents the absence of a chrome browser window.
@@ -34,6 +38,8 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> get(int windowId, [Map getInfo]) {
+    if (_windows == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('get', [windowId, jsify(getInfo), completer.callback]);
     return completer.future;
@@ -45,6 +51,8 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> getCurrent([Map getInfo]) {
+    if (_windows == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('getCurrent', [jsify(getInfo), completer.callback]);
     return completer.future;
@@ -57,6 +65,8 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<Window> getLastFocused([Map getInfo]) {
+    if (_windows == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('getLastFocused', [jsify(getInfo), completer.callback]);
     return completer.future;
@@ -68,6 +78,8 @@ class ChromeWindows {
    * [getInfo]
    */
   Future<List<Window>> getAll([Map getInfo]) {
+    if (_windows == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<List<Window>>.oneArg((e) => listify(e, _createWindow));
     _windows.callMethod('getAll', [jsify(getInfo), completer.callback]);
     return completer.future;
@@ -81,6 +93,8 @@ class ChromeWindows {
    * Contains details about the created window.
    */
   Future<Window> create([Map createData]) {
+    if (_windows == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('create', [jsify(createData), completer.callback]);
     return completer.future;
@@ -91,6 +105,8 @@ class ChromeWindows {
    * want to change; unspecified properties will be left unchanged.
    */
   Future<Window> update(int windowId, Map updateInfo) {
+    if (_windows == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
     _windows.callMethod('update', [windowId, jsify(updateInfo), completer.callback]);
     return completer.future;
@@ -100,6 +116,8 @@ class ChromeWindows {
    * Removes (closes) a window, and all the tabs inside it.
    */
   Future remove(int windowId) {
+    if (_windows == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _windows.callMethod('remove', [windowId, completer.callback]);
     return completer.future;
@@ -111,7 +129,7 @@ class ChromeWindows {
   Stream<Window> get onCreated => _onCreated.stream;
 
   final ChromeStreamController<Window> _onCreated =
-      new ChromeStreamController<Window>.oneArg(_windows['onCreated'], _createWindow);
+      new ChromeStreamController<Window>.oneArg(_windows, 'onCreated', _createWindow);
 
   /**
    * Fired when a window is removed (closed).
@@ -119,7 +137,7 @@ class ChromeWindows {
   Stream<int> get onRemoved => _onRemoved.stream;
 
   final ChromeStreamController<int> _onRemoved =
-      new ChromeStreamController<int>.oneArg(_windows['onRemoved'], selfConverter);
+      new ChromeStreamController<int>.oneArg(_windows, 'onRemoved', selfConverter);
 
   /**
    * Fired when the currently focused window changes. Will be
@@ -130,7 +148,11 @@ class ChromeWindows {
   Stream<int> get onFocusChanged => _onFocusChanged.stream;
 
   final ChromeStreamController<int> _onFocusChanged =
-      new ChromeStreamController<int>.oneArg(_windows['onFocusChanged'], selfConverter);
+      new ChromeStreamController<int>.oneArg(_windows, 'onFocusChanged', selfConverter);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.windows' is not available");
+  }
 }
 
 class Window extends ChromeObject {

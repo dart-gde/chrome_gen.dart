@@ -4,13 +4,17 @@ library chrome.downloads;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.downloads` namespace.
-final ChromeDownloads downloads = ChromeDownloads._downloads == null ? apiNotAvailable('chrome.downloads') : new ChromeDownloads._();
+/**
+ * Accessor for the `chrome.downloads` namespace.
+ */
+final ChromeDownloads downloads = new ChromeDownloads._();
 
-class ChromeDownloads {
+class ChromeDownloads extends ChromeApi {
   static final JsObject _downloads = chrome['downloads'];
 
   ChromeDownloads._();
+
+  bool get available => _downloads != null;
 
   /**
    * Download a URL. If the URL uses the HTTP[S] protocol, then the request will
@@ -26,6 +30,8 @@ class ChromeDownloads {
    * [callback]: Called with the id of the new [DownloadItem].
    */
   Future<int> download(DownloadOptions options) {
+    if (_downloads == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<int>.oneArg();
     _downloads.callMethod('download', [jsify(options), completer.callback]);
     return completer.future;
@@ -39,6 +45,8 @@ class ChromeDownloads {
    * `startTime` of the last item from the last page.
    */
   Future<DownloadItem> search(DownloadQuery query) {
+    if (_downloads == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<DownloadItem>.oneArg(_createDownloadItem);
     _downloads.callMethod('search', [jsify(query), completer.callback]);
     return completer.future;
@@ -52,6 +60,8 @@ class ChromeDownloads {
    * [callback]: Called when the pause request is completed.
    */
   Future pause(int downloadId) {
+    if (_downloads == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('pause', [downloadId, completer.callback]);
     return completer.future;
@@ -65,6 +75,8 @@ class ChromeDownloads {
    * [callback]: Called when the resume request is completed.
    */
   Future resume(int downloadId) {
+    if (_downloads == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('resume', [downloadId, completer.callback]);
     return completer.future;
@@ -77,6 +89,8 @@ class ChromeDownloads {
    * [callback]: Called when the cancel request is completed.
    */
   Future cancel(int downloadId) {
+    if (_downloads == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('cancel', [downloadId, completer.callback]);
     return completer.future;
@@ -96,6 +110,8 @@ class ChromeDownloads {
    * [callback]: A URL to an image that represents the download.
    */
   Future<String> getFileIcon(int downloadId, [GetFileIconOptions options]) {
+    if (_downloads == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _downloads.callMethod('getFileIcon', [downloadId, jsify(options), completer.callback]);
     return completer.future;
@@ -109,6 +125,8 @@ class ChromeDownloads {
    * [downloadId]: The identifier for the downloaded file.
    */
   void open(int downloadId) {
+    if (_downloads == null) _throwNotAvailable();
+
     _downloads.callMethod('open', [downloadId]);
   }
 
@@ -117,6 +135,8 @@ class ChromeDownloads {
    * [downloadId]: The identifier for the downloaded file.
    */
   void show(int downloadId) {
+    if (_downloads == null) _throwNotAvailable();
+
     _downloads.callMethod('show', [downloadId]);
   }
 
@@ -124,6 +144,8 @@ class ChromeDownloads {
    * Show the default Downloads folder in a file manager.
    */
   void showDefaultFolder() {
+    if (_downloads == null) _throwNotAvailable();
+
     _downloads.callMethod('showDefaultFolder');
   }
 
@@ -133,6 +155,8 @@ class ChromeDownloads {
    * `query`, then `callback` will be called.
    */
   Future<int> erase(DownloadQuery query) {
+    if (_downloads == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<int>.oneArg();
     _downloads.callMethod('erase', [jsify(query), completer.callback]);
     return completer.future;
@@ -143,6 +167,8 @@ class ChromeDownloads {
    * otherwise return an error through [runtime.lastError].
    */
   Future removeFile(int downloadId) {
+    if (_downloads == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('removeFile', [downloadId, completer.callback]);
     return completer.future;
@@ -160,6 +186,8 @@ class ChromeDownloads {
    * [callback]: Called when the danger prompt dialog closes.
    */
   Future acceptDanger(int downloadId) {
+    if (_downloads == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _downloads.callMethod('acceptDanger', [downloadId, completer.callback]);
     return completer.future;
@@ -170,6 +198,8 @@ class ChromeDownloads {
    * javascript `ondragstart` handler.
    */
   void drag(int downloadId) {
+    if (_downloads == null) _throwNotAvailable();
+
     _downloads.callMethod('drag', [downloadId]);
   }
 
@@ -182,28 +212,34 @@ class ChromeDownloads {
    * addition to the `"downloads"` permission.
    */
   void setShelfEnabled(bool enabled) {
+    if (_downloads == null) _throwNotAvailable();
+
     _downloads.callMethod('setShelfEnabled', [enabled]);
   }
 
   Stream<DownloadItem> get onCreated => _onCreated.stream;
 
   final ChromeStreamController<DownloadItem> _onCreated =
-      new ChromeStreamController<DownloadItem>.oneArg(_downloads['onCreated'], _createDownloadItem);
+      new ChromeStreamController<DownloadItem>.oneArg(_downloads, 'onCreated', _createDownloadItem);
 
   Stream<int> get onErased => _onErased.stream;
 
   final ChromeStreamController<int> _onErased =
-      new ChromeStreamController<int>.oneArg(_downloads['onErased'], selfConverter);
+      new ChromeStreamController<int>.oneArg(_downloads, 'onErased', selfConverter);
 
   Stream<DownloadDelta> get onChanged => _onChanged.stream;
 
   final ChromeStreamController<DownloadDelta> _onChanged =
-      new ChromeStreamController<DownloadDelta>.oneArg(_downloads['onChanged'], _createDownloadDelta);
+      new ChromeStreamController<DownloadDelta>.oneArg(_downloads, 'onChanged', _createDownloadDelta);
 
   Stream<OnDeterminingFilenameEvent> get onDeterminingFilename => _onDeterminingFilename.stream;
 
   final ChromeStreamController<OnDeterminingFilenameEvent> _onDeterminingFilename =
-      new ChromeStreamController<OnDeterminingFilenameEvent>.twoArgs(_downloads['onDeterminingFilename'], _createOnDeterminingFilenameEvent);
+      new ChromeStreamController<OnDeterminingFilenameEvent>.twoArgs(_downloads, 'onDeterminingFilename', _createOnDeterminingFilenameEvent);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.downloads' is not available");
+  }
 }
 
 class OnDeterminingFilenameEvent {

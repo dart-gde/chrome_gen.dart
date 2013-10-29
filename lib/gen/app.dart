@@ -7,29 +7,39 @@ import '../src/common.dart';
 final ChromeApp app = new ChromeApp._();
 
 class ChromeApp {
-  /// Accessor for the `chrome.app.runtime` namespace.
-  final ChromeAppRuntime runtime = ChromeAppRuntime._app_runtime == null ? apiNotAvailable('chrome.app.runtime') : new ChromeAppRuntime._();
-
-  /// Accessor for the `chrome.app.window` namespace.
-  final ChromeAppWindow window = ChromeAppWindow._app_window == null ? apiNotAvailable('chrome.app.window') : new ChromeAppWindow._();
-
   ChromeApp._();
+
+  /**
+   * Accessor for the `chrome.app.runtime` namespace.
+   */
+  final ChromeAppRuntime runtime = new ChromeAppRuntime._();
+
+  /**
+   * Accessor for the `chrome.app.window` namespace.
+   */
+  final ChromeAppWindow window = new ChromeAppWindow._();
 }
 
-class ChromeAppRuntime {
+class ChromeAppRuntime extends ChromeApi {
   static final JsObject _app_runtime = chrome['app']['runtime'];
 
   ChromeAppRuntime._();
 
+  bool get available => _app_runtime != null;
+
   Stream<LaunchData> get onLaunched => _onLaunched.stream;
 
   final ChromeStreamController<LaunchData> _onLaunched =
-      new ChromeStreamController<LaunchData>.oneArg(_app_runtime['onLaunched'], _createLaunchData);
+      new ChromeStreamController<LaunchData>.oneArg(_app_runtime, 'onLaunched', _createLaunchData);
 
   Stream get onRestarted => _onRestarted.stream;
 
   final ChromeStreamController _onRestarted =
-      new ChromeStreamController.noArgs(_app_runtime['onRestarted']);
+      new ChromeStreamController.noArgs(_app_runtime, 'onRestarted');
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.app.runtime' is not available");
+  }
 }
 
 class LaunchItem extends ChromeObject {
@@ -62,10 +72,13 @@ class LaunchData extends ChromeObject {
 
 LaunchData _createLaunchData(JsObject proxy) => proxy == null ? null : new LaunchData.fromProxy(proxy);
 LaunchItem _createLaunchItem(JsObject proxy) => proxy == null ? null : new LaunchItem.fromProxy(proxy);
-class ChromeAppWindow {
+
+class ChromeAppWindow extends ChromeApi {
   static final JsObject _app_window = chrome['app']['window'];
 
   ChromeAppWindow._();
+
+  bool get available => _app_window != null;
 
   /**
    * The size and position of a window can be specified in a number of different
@@ -98,6 +111,8 @@ class ChromeAppWindow {
    *  `window.onload = function () { foo(); }`
    */
   Future<AppWindow> create(String url, [CreateWindowOptions options]) {
+    if (_app_window == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<AppWindow>.oneArg(_createAppWindow);
     _app_window.callMethod('create', [url, jsify(options), completer.callback]);
     return completer.future;
@@ -109,42 +124,50 @@ class ChromeAppWindow {
    * for another page, for example: otherWindow.chrome.app.window.current().
    */
   AppWindow current() {
+    if (_app_window == null) _throwNotAvailable();
+
     return _createAppWindow(_app_window.callMethod('current'));
   }
 
   void initializeAppWindow(dynamic state) {
+    if (_app_window == null) _throwNotAvailable();
+
     _app_window.callMethod('initializeAppWindow', [jsify(state)]);
   }
 
   Stream get onBoundsChanged => _onBoundsChanged.stream;
 
   final ChromeStreamController _onBoundsChanged =
-      new ChromeStreamController.noArgs(_app_window['onBoundsChanged']);
+      new ChromeStreamController.noArgs(_app_window, 'onBoundsChanged');
 
   Stream get onClosed => _onClosed.stream;
 
   final ChromeStreamController _onClosed =
-      new ChromeStreamController.noArgs(_app_window['onClosed']);
+      new ChromeStreamController.noArgs(_app_window, 'onClosed');
 
   Stream get onFullscreened => _onFullscreened.stream;
 
   final ChromeStreamController _onFullscreened =
-      new ChromeStreamController.noArgs(_app_window['onFullscreened']);
+      new ChromeStreamController.noArgs(_app_window, 'onFullscreened');
 
   Stream get onMaximized => _onMaximized.stream;
 
   final ChromeStreamController _onMaximized =
-      new ChromeStreamController.noArgs(_app_window['onMaximized']);
+      new ChromeStreamController.noArgs(_app_window, 'onMaximized');
 
   Stream get onMinimized => _onMinimized.stream;
 
   final ChromeStreamController _onMinimized =
-      new ChromeStreamController.noArgs(_app_window['onMinimized']);
+      new ChromeStreamController.noArgs(_app_window, 'onMinimized');
 
   Stream get onRestored => _onRestored.stream;
 
   final ChromeStreamController _onRestored =
-      new ChromeStreamController.noArgs(_app_window['onRestored']);
+      new ChromeStreamController.noArgs(_app_window, 'onRestored');
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.app.window' is not available");
+  }
 }
 
 /**

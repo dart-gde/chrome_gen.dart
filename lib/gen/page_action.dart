@@ -10,13 +10,17 @@ library chrome.pageAction;
 import 'tabs.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.pageAction` namespace.
-final ChromePageAction pageAction = ChromePageAction._pageAction == null ? apiNotAvailable('chrome.pageAction') : new ChromePageAction._();
+/**
+ * Accessor for the `chrome.pageAction` namespace.
+ */
+final ChromePageAction pageAction = new ChromePageAction._();
 
-class ChromePageAction {
+class ChromePageAction extends ChromeApi {
   static final JsObject _pageAction = chrome['pageAction'];
 
   ChromePageAction._();
+
+  bool get available => _pageAction != null;
 
   /**
    * Shows the page action. The page action is shown whenever the tab is
@@ -25,6 +29,8 @@ class ChromePageAction {
    * [tabId] The id of the tab for which you want to modify the page action.
    */
   void show(int tabId) {
+    if (_pageAction == null) _throwNotAvailable();
+
     _pageAction.callMethod('show', [tabId]);
   }
 
@@ -34,6 +40,8 @@ class ChromePageAction {
    * [tabId] The id of the tab for which you want to modify the page action.
    */
   void hide(int tabId) {
+    if (_pageAction == null) _throwNotAvailable();
+
     _pageAction.callMethod('hide', [tabId]);
   }
 
@@ -42,6 +50,8 @@ class ChromePageAction {
    * page action.
    */
   void setTitle(Map details) {
+    if (_pageAction == null) _throwNotAvailable();
+
     _pageAction.callMethod('setTitle', [jsify(details)]);
   }
 
@@ -49,6 +59,8 @@ class ChromePageAction {
    * Gets the title of the page action.
    */
   Future<String> getTitle(Map details) {
+    if (_pageAction == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
     return completer.future;
@@ -61,6 +73,8 @@ class ChromePageAction {
    * <b>imageData</b> property must be specified.
    */
   Future setIcon(Map details) {
+    if (_pageAction == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
     return completer.future;
@@ -71,6 +85,8 @@ class ChromePageAction {
    * page action's icon.
    */
   void setPopup(Map details) {
+    if (_pageAction == null) _throwNotAvailable();
+
     _pageAction.callMethod('setPopup', [jsify(details)]);
   }
 
@@ -78,6 +94,8 @@ class ChromePageAction {
    * Gets the html document set as the popup for this page action.
    */
   Future<String> getPopup(Map details) {
+    if (_pageAction == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<String>.oneArg();
     _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
     return completer.future;
@@ -90,7 +108,11 @@ class ChromePageAction {
   Stream<Tab> get onClicked => _onClicked.stream;
 
   final ChromeStreamController<Tab> _onClicked =
-      new ChromeStreamController<Tab>.oneArg(_pageAction['onClicked'], _createTab);
+      new ChromeStreamController<Tab>.oneArg(_pageAction, 'onClicked', _createTab);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.pageAction' is not available");
+  }
 }
 
 Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);

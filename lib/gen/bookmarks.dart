@@ -9,13 +9,17 @@ library chrome.bookmarks;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.bookmarks` namespace.
-final ChromeBookmarks bookmarks = ChromeBookmarks._bookmarks == null ? apiNotAvailable('chrome.bookmarks') : new ChromeBookmarks._();
+/**
+ * Accessor for the `chrome.bookmarks` namespace.
+ */
+final ChromeBookmarks bookmarks = new ChromeBookmarks._();
 
-class ChromeBookmarks {
+class ChromeBookmarks extends ChromeApi {
   static final JsObject _bookmarks = chrome['bookmarks'];
 
   ChromeBookmarks._();
+
+  bool get available => _bookmarks != null;
 
   /**
    * The maximum number of `move`, `update`, `create`, or `remove` operations
@@ -37,6 +41,8 @@ class ChromeBookmarks {
    * [idOrIdList] A single string-valued id, or an array of string-valued ids
    */
   Future<List<BookmarkTreeNode>> get(dynamic idOrIdList) {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('get', [jsify(idOrIdList), completer.callback]);
     return completer.future;
@@ -46,6 +52,8 @@ class ChromeBookmarks {
    * Retrieves the children of the specified BookmarkTreeNode id.
    */
   Future<List<BookmarkTreeNode>> getChildren(String id) {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('getChildren', [id, completer.callback]);
     return completer.future;
@@ -57,6 +65,8 @@ class ChromeBookmarks {
    * [numberOfItems] The maximum number of items to return.
    */
   Future<List<BookmarkTreeNode>> getRecent(int numberOfItems) {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('getRecent', [numberOfItems, completer.callback]);
     return completer.future;
@@ -66,6 +76,8 @@ class ChromeBookmarks {
    * Retrieves the entire Bookmarks hierarchy.
    */
   Future<List<BookmarkTreeNode>> getTree() {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('getTree', [completer.callback]);
     return completer.future;
@@ -77,6 +89,8 @@ class ChromeBookmarks {
    * [id] The ID of the root of the subtree to retrieve.
    */
   Future<List<BookmarkTreeNode>> getSubTree(String id) {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('getSubTree', [id, completer.callback]);
     return completer.future;
@@ -86,6 +100,8 @@ class ChromeBookmarks {
    * Searches for BookmarkTreeNodes matching the given query.
    */
   Future<List<BookmarkTreeNode>> search(String query) {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<List<BookmarkTreeNode>>.oneArg((e) => listify(e, _createBookmarkTreeNode));
     _bookmarks.callMethod('search', [query, completer.callback]);
     return completer.future;
@@ -96,6 +112,8 @@ class ChromeBookmarks {
    * or missing, it will be a folder.
    */
   Future<BookmarkTreeNode> create(Map bookmark) {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
     _bookmarks.callMethod('create', [jsify(bookmark), completer.callback]);
     return completer.future;
@@ -105,6 +123,8 @@ class ChromeBookmarks {
    * Moves the specified BookmarkTreeNode to the provided location.
    */
   Future<BookmarkTreeNode> move(String id, Map destination) {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
     _bookmarks.callMethod('move', [id, jsify(destination), completer.callback]);
     return completer.future;
@@ -116,6 +136,8 @@ class ChromeBookmarks {
    * <b>Note:</b> Currently, only 'title' and 'url' are supported.
    */
   Future<BookmarkTreeNode> update(String id, Map changes) {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
     _bookmarks.callMethod('update', [id, jsify(changes), completer.callback]);
     return completer.future;
@@ -125,6 +147,8 @@ class ChromeBookmarks {
    * Removes a bookmark or an empty bookmark folder.
    */
   Future remove(String id) {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('remove', [id, completer.callback]);
     return completer.future;
@@ -134,6 +158,8 @@ class ChromeBookmarks {
    * Recursively removes a bookmark folder.
    */
   Future removeTree(String id) {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('removeTree', [id, completer.callback]);
     return completer.future;
@@ -143,6 +169,8 @@ class ChromeBookmarks {
    * Imports bookmarks from a chrome html bookmark file
    */
   Future import() {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('import', [completer.callback]);
     return completer.future;
@@ -152,6 +180,8 @@ class ChromeBookmarks {
    * Exports bookmarks to a chrome html bookmark file
    */
   Future export() {
+    if (_bookmarks == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _bookmarks.callMethod('export', [completer.callback]);
     return completer.future;
@@ -163,7 +193,7 @@ class ChromeBookmarks {
   Stream<OnCreatedEvent> get onCreated => _onCreated.stream;
 
   final ChromeStreamController<OnCreatedEvent> _onCreated =
-      new ChromeStreamController<OnCreatedEvent>.twoArgs(_bookmarks['onCreated'], _createOnCreatedEvent);
+      new ChromeStreamController<OnCreatedEvent>.twoArgs(_bookmarks, 'onCreated', _createOnCreatedEvent);
 
   /**
    * Fired when a bookmark or folder is removed.  When a folder is removed
@@ -173,7 +203,7 @@ class ChromeBookmarks {
   Stream<BookmarksOnRemovedEvent> get onRemoved => _onRemoved.stream;
 
   final ChromeStreamController<BookmarksOnRemovedEvent> _onRemoved =
-      new ChromeStreamController<BookmarksOnRemovedEvent>.twoArgs(_bookmarks['onRemoved'], _createBookmarksOnRemovedEvent);
+      new ChromeStreamController<BookmarksOnRemovedEvent>.twoArgs(_bookmarks, 'onRemoved', _createBookmarksOnRemovedEvent);
 
   /**
    * Fired when a bookmark or folder changes.  <b>Note:</b> Currently, only
@@ -182,7 +212,7 @@ class ChromeBookmarks {
   Stream<BookmarksOnChangedEvent> get onChanged => _onChanged.stream;
 
   final ChromeStreamController<BookmarksOnChangedEvent> _onChanged =
-      new ChromeStreamController<BookmarksOnChangedEvent>.twoArgs(_bookmarks['onChanged'], _createBookmarksOnChangedEvent);
+      new ChromeStreamController<BookmarksOnChangedEvent>.twoArgs(_bookmarks, 'onChanged', _createBookmarksOnChangedEvent);
 
   /**
    * Fired when a bookmark or folder is moved to a different parent folder.
@@ -190,7 +220,7 @@ class ChromeBookmarks {
   Stream<BookmarksOnMovedEvent> get onMoved => _onMoved.stream;
 
   final ChromeStreamController<BookmarksOnMovedEvent> _onMoved =
-      new ChromeStreamController<BookmarksOnMovedEvent>.twoArgs(_bookmarks['onMoved'], _createBookmarksOnMovedEvent);
+      new ChromeStreamController<BookmarksOnMovedEvent>.twoArgs(_bookmarks, 'onMoved', _createBookmarksOnMovedEvent);
 
   /**
    * Fired when the children of a folder have changed their order due to the
@@ -199,7 +229,7 @@ class ChromeBookmarks {
   Stream<OnChildrenReorderedEvent> get onChildrenReordered => _onChildrenReordered.stream;
 
   final ChromeStreamController<OnChildrenReorderedEvent> _onChildrenReordered =
-      new ChromeStreamController<OnChildrenReorderedEvent>.twoArgs(_bookmarks['onChildrenReordered'], _createOnChildrenReorderedEvent);
+      new ChromeStreamController<OnChildrenReorderedEvent>.twoArgs(_bookmarks, 'onChildrenReordered', _createOnChildrenReorderedEvent);
 
   /**
    * Fired when a bookmark import session is begun.  Expensive observers should
@@ -209,7 +239,7 @@ class ChromeBookmarks {
   Stream get onImportBegan => _onImportBegan.stream;
 
   final ChromeStreamController _onImportBegan =
-      new ChromeStreamController.noArgs(_bookmarks['onImportBegan']);
+      new ChromeStreamController.noArgs(_bookmarks, 'onImportBegan');
 
   /**
    * Fired when a bookmark import session is ended.
@@ -217,7 +247,11 @@ class ChromeBookmarks {
   Stream get onImportEnded => _onImportEnded.stream;
 
   final ChromeStreamController _onImportEnded =
-      new ChromeStreamController.noArgs(_bookmarks['onImportEnded']);
+      new ChromeStreamController.noArgs(_bookmarks, 'onImportEnded');
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.bookmarks' is not available");
+  }
 }
 
 /**

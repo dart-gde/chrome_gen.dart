@@ -4,13 +4,17 @@ library chrome.location;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.location` namespace.
-final ChromeLocation location = ChromeLocation._location == null ? apiNotAvailable('chrome.location') : new ChromeLocation._();
+/**
+ * Accessor for the `chrome.location` namespace.
+ */
+final ChromeLocation location = new ChromeLocation._();
 
-class ChromeLocation {
+class ChromeLocation extends ChromeApi {
   static final JsObject _location = chrome['location'];
 
   ChromeLocation._();
+
+  bool get available => _location != null;
 
   /**
    * todo(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
@@ -20,6 +24,8 @@ class ChromeLocation {
    * [requestInfo]: Optional parameters for this request.
    */
   void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
+    if (_location == null) _throwNotAvailable();
+
     _location.callMethod('watchLocation', [name, jsify(requestInfo)]);
   }
 
@@ -29,18 +35,24 @@ class ChromeLocation {
    * empty string.
    */
   void clearWatch(String name) {
+    if (_location == null) _throwNotAvailable();
+
     _location.callMethod('clearWatch', [name]);
   }
 
   Stream<Location> get onLocationUpdate => _onLocationUpdate.stream;
 
   final ChromeStreamController<Location> _onLocationUpdate =
-      new ChromeStreamController<Location>.oneArg(_location['onLocationUpdate'], _createLocation);
+      new ChromeStreamController<Location>.oneArg(_location, 'onLocationUpdate', _createLocation);
 
   Stream<String> get onLocationError => _onLocationError.stream;
 
   final ChromeStreamController<String> _onLocationError =
-      new ChromeStreamController<String>.oneArg(_location['onLocationError'], selfConverter);
+      new ChromeStreamController<String>.oneArg(_location, 'onLocationError', selfConverter);
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.location' is not available");
+  }
 }
 
 class Coordinates extends ChromeObject {

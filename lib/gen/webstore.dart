@@ -8,15 +8,25 @@ library chrome.webstore;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.webstore` namespace.
-final ChromeWebstore webstore = ChromeWebstore._webstore == null ? apiNotAvailable('chrome.webstore') : new ChromeWebstore._();
+/**
+ * Accessor for the `chrome.webstore` namespace.
+ */
+final ChromeWebstore webstore = new ChromeWebstore._();
 
-class ChromeWebstore {
+class ChromeWebstore extends ChromeApi {
   static final JsObject _webstore = chrome['webstore'];
 
   ChromeWebstore._();
 
+  bool get available => _webstore != null;
+
   void install([String url, dynamic successCallback, dynamic failureCallback]) {
+    if (_webstore == null) _throwNotAvailable();
+
     _webstore.callMethod('install', [url, jsify(successCallback), jsify(failureCallback)]);
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.webstore' is not available");
   }
 }

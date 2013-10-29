@@ -5,13 +5,11 @@
 
 library chrome.src.socket;
 
-import 'package:logging/logging.dart';
-
 import 'common.dart';
 import '../gen/socket.dart';
 
 class TcpClient {
-  Logger _logger = new Logger("TcpClient");
+  //Logger _logger = new Logger("TcpClient");
 
   String host;
   int port;
@@ -54,7 +52,7 @@ class TcpClient {
     var completer = new Completer();
     _socketType = SocketType.TCP;
     socket.create(_socketType).then((CreateInfo createInfo) {
-      _logger.fine("Socket.create.then = ${createInfo}");
+      //_logger.fine("Socket.create.then = ${createInfo}");
       _createInfo = createInfo;
       socket.connect(_createInfo.socketId, host, port).then((int result) {
         if (result < 0) {

@@ -1,7 +1,7 @@
 {
   "name": "Demo app",
   "version": "1",
-
+  "minimum_chrome_version": "30",
   "manifest_version": 2,
 
   "icons": {"128": "dart_icon.png"},
@@ -14,7 +14,6 @@
 
   "permissions": [
     "alarms",
-    "audio",
     { "fileSystem": ["write", "retainEntries", "directory"] },
     "idle",
     "storage",

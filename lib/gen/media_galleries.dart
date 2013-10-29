@@ -5,19 +5,25 @@ library chrome.mediaGalleries;
 import '../src/files.dart';
 import '../src/common.dart';
 
-/// Accessor for the `chrome.mediaGalleries` namespace.
-final ChromeMediaGalleries mediaGalleries = ChromeMediaGalleries._mediaGalleries == null ? apiNotAvailable('chrome.mediaGalleries') : new ChromeMediaGalleries._();
+/**
+ * Accessor for the `chrome.mediaGalleries` namespace.
+ */
+final ChromeMediaGalleries mediaGalleries = new ChromeMediaGalleries._();
 
-class ChromeMediaGalleries {
+class ChromeMediaGalleries extends ChromeApi {
   static final JsObject _mediaGalleries = chrome['mediaGalleries'];
 
   ChromeMediaGalleries._();
+
+  bool get available => _mediaGalleries != null;
 
   /**
    * Get the media galleries configured in this user agent. If none are
    * configured or available, the callback will receive an empty array.
    */
   Future<FileSystem> getMediaFileSystems([MediaFileSystemsDetails details]) {
+    if (_mediaGalleries == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<FileSystem>.oneArg(_createFileSystem);
     _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
     return completer.future;
@@ -27,7 +33,13 @@ class ChromeMediaGalleries {
    * Get metadata about a specific media file system.
    */
   MediaFileSystemMetadata getMediaFileSystemMetadata(FileSystem mediaFileSystem) {
+    if (_mediaGalleries == null) _throwNotAvailable();
+
     return _createMediaFileSystemMetadata(_mediaGalleries.callMethod('getMediaFileSystemMetadata', [jsify(mediaFileSystem)]));
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.mediaGalleries' is not available");
   }
 }
 

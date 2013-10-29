@@ -8,13 +8,17 @@ library chrome.browsingData;
 
 import '../src/common.dart';
 
-/// Accessor for the `chrome.browsingData` namespace.
-final ChromeBrowsingData browsingData = ChromeBrowsingData._browsingData == null ? apiNotAvailable('chrome.browsingData') : new ChromeBrowsingData._();
+/**
+ * Accessor for the `chrome.browsingData` namespace.
+ */
+final ChromeBrowsingData browsingData = new ChromeBrowsingData._();
 
-class ChromeBrowsingData {
+class ChromeBrowsingData extends ChromeApi {
   static final JsObject _browsingData = chrome['browsingData'];
 
   ChromeBrowsingData._();
+
+  bool get available => _browsingData != null;
 
   /**
    * Reports which types of data are currently selected in the 'Clear browsing
@@ -23,6 +27,8 @@ class ChromeBrowsingData {
    * one data type listed here.
    */
   Future<Map> settings() {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     _browsingData.callMethod('settings', [completer.callback]);
     return completer.future;
@@ -34,6 +40,8 @@ class ChromeBrowsingData {
    * [dataToRemove] The set of data types to remove.
    */
   Future remove(RemovalOptions options, DataTypeSet dataToRemove) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('remove', [jsify(options), jsify(dataToRemove), completer.callback]);
     return completer.future;
@@ -43,6 +51,8 @@ class ChromeBrowsingData {
    * Clears websites' appcache data.
    */
   Future removeAppcache(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeAppcache', [jsify(options), completer.callback]);
     return completer.future;
@@ -52,6 +62,8 @@ class ChromeBrowsingData {
    * Clears the browser's cache.
    */
   Future removeCache(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeCache', [jsify(options), completer.callback]);
     return completer.future;
@@ -62,6 +74,8 @@ class ChromeBrowsingData {
    * a particular timeframe.
    */
   Future removeCookies(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeCookies', [jsify(options), completer.callback]);
     return completer.future;
@@ -72,6 +86,8 @@ class ChromeBrowsingData {
    * themselves).
    */
   Future removeDownloads(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeDownloads', [jsify(options), completer.callback]);
     return completer.future;
@@ -81,6 +97,8 @@ class ChromeBrowsingData {
    * Clears websites' file system data.
    */
   Future removeFileSystems(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeFileSystems', [jsify(options), completer.callback]);
     return completer.future;
@@ -90,6 +108,8 @@ class ChromeBrowsingData {
    * Clears the browser's stored form data (autofill).
    */
   Future removeFormData(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeFormData', [jsify(options), completer.callback]);
     return completer.future;
@@ -99,6 +119,8 @@ class ChromeBrowsingData {
    * Clears the browser's history.
    */
   Future removeHistory(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeHistory', [jsify(options), completer.callback]);
     return completer.future;
@@ -108,6 +130,8 @@ class ChromeBrowsingData {
    * Clears websites' IndexedDB data.
    */
   Future removeIndexedDB(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeIndexedDB', [jsify(options), completer.callback]);
     return completer.future;
@@ -117,6 +141,8 @@ class ChromeBrowsingData {
    * Clears websites' local storage data.
    */
   Future removeLocalStorage(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeLocalStorage', [jsify(options), completer.callback]);
     return completer.future;
@@ -126,6 +152,8 @@ class ChromeBrowsingData {
    * Clears plugins' data.
    */
   Future removePluginData(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removePluginData', [jsify(options), completer.callback]);
     return completer.future;
@@ -135,6 +163,8 @@ class ChromeBrowsingData {
    * Clears the browser's stored passwords.
    */
   Future removePasswords(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removePasswords', [jsify(options), completer.callback]);
     return completer.future;
@@ -144,9 +174,15 @@ class ChromeBrowsingData {
    * Clears websites' WebSQL data.
    */
   Future removeWebSQL(RemovalOptions options) {
+    if (_browsingData == null) _throwNotAvailable();
+
     var completer = new ChromeCompleter.noArgs();
     _browsingData.callMethod('removeWebSQL', [jsify(options), completer.callback]);
     return completer.future;
+  }
+
+  void _throwNotAvailable() {
+    throw new UnsupportedError("'chrome.browsingData' is not available");
   }
 }
 

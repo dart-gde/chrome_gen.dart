@@ -9,11 +9,10 @@ authors:
 description: >
   An library for accessing the Chrome APIs in a packaged app or extension.
 homepage: https://github.com/dart-gde/chrome_gen.dart
-dependencies:
-  logging: any
 dev_dependencies:
   args: any
   browser: any
+  logging: any
   parsers: any
   path: any
   unittest: any
