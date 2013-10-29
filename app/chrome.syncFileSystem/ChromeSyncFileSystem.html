@@ -33,10 +33,12 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeSyncFileSystem {
+class ChromeSyncFileSystem extends ChromeApi {
  static final JsObject _syncFileSystem = chrome['syncFileSystem'];
 
  ChromeSyncFileSystem._();
+
+ bool get available =&gt; _syncFileSystem != null;
 
  /**
   * Returns a syncable filesystem backed by Google Drive. The returned
@@ -50,6 +52,8 @@ class ChromeSyncFileSystem {
   * A callback type for requestFileSystem.
   */
  Future&lt;FileSystem&gt; requestFileSystem() {
+   if (_syncFileSystem == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
    _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
    return completer.future;
@@ -64,6 +68,8 @@ class ChromeSyncFileSystem {
   * not.
   */
  Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
+   if (_syncFileSystem == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter.noArgs();
    _syncFileSystem.callMethod('setConflictResolutionPolicy', [jsify(policy), completer.callback]);
    return completer.future;
@@ -76,6 +82,8 @@ class ChromeSyncFileSystem {
   * A callback type for getConflictResolutionPolicy.
   */
  Future&lt;ConflictResolutionPolicy&gt; getConflictResolutionPolicy() {
+   if (_syncFileSystem == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;ConflictResolutionPolicy&gt;.oneArg(_createConflictResolutionPolicy);
    _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
    return completer.future;
@@ -89,6 +97,8 @@ class ChromeSyncFileSystem {
   * A callback type for getUsageAndQuota.
   */
  Future&lt;StorageInfo&gt; getUsageAndQuota(FileSystem fileSystem) {
+   if (_syncFileSystem == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;StorageInfo&gt;.oneArg(_createStorageInfo);
    _syncFileSystem.callMethod('getUsageAndQuota', [jsify(fileSystem), completer.callback]);
    return completer.future;
@@ -104,6 +114,8 @@ class ChromeSyncFileSystem {
   * A callback type for getFileStatus.
   */
  Future&lt;FileStatus&gt; getFileStatus(Entry fileEntry) {
+   if (_syncFileSystem == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;FileStatus&gt;.oneArg(_createFileStatus);
    _syncFileSystem.callMethod('getFileStatus', [jsify(fileEntry), completer.callback]);
    return completer.future;
@@ -117,6 +129,8 @@ class ChromeSyncFileSystem {
   * A callback type for getFileStatuses.
   */
  Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
+   if (_syncFileSystem == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;FileStatusInfo&gt;.oneArg(_createFileStatusInfo);
    _syncFileSystem.callMethod('getFileStatuses', [jsify(fileEntries), completer.callback]);
    return completer.future;
@@ -129,6 +143,8 @@ class ChromeSyncFileSystem {
   * A callback type for getServiceStatus.
   */
  Future&lt;ServiceStatus&gt; getServiceStatus() {
+   if (_syncFileSystem == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;ServiceStatus&gt;.oneArg(_createServiceStatus);
    _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
    return completer.future;
@@ -137,17 +153,40 @@ class ChromeSyncFileSystem {
  Stream&lt;ServiceInfo&gt; get onServiceStatusChanged =&gt; _onServiceStatusChanged.stream;
 
  final ChromeStreamController&lt;ServiceInfo&gt; _onServiceStatusChanged =
-     new ChromeStreamController&lt;ServiceInfo&gt;.oneArg(_syncFileSystem['onServiceStatusChanged'], _createServiceInfo);
+     new ChromeStreamController&lt;ServiceInfo&gt;.oneArg(_syncFileSystem, 'onServiceStatusChanged', _createServiceInfo);
 
  Stream&lt;FileInfo&gt; get onFileStatusChanged =&gt; _onFileStatusChanged.stream;
 
  final ChromeStreamController&lt;FileInfo&gt; _onFileStatusChanged =
-     new ChromeStreamController&lt;FileInfo&gt;.oneArg(_syncFileSystem['onFileStatusChanged'], _createFileInfo);
+     new ChromeStreamController&lt;FileInfo&gt;.oneArg(_syncFileSystem, 'onFileStatusChanged', _createFileInfo);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.syncFileSystem' is not available");
+ }
 }
 </pre>
 </div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeSyncFileSystem</strong></span></p>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromeSyncFileSystem.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _syncFileSystem != null;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="onFileStatusChanged">
 <button class="show-code">Code</button>
 final Stream&lt;<a href="../chrome.syncFileSystem/FileInfo.html">FileInfo</a>&gt;         <strong>onFileStatusChanged</strong> <a class="anchor-link"
@@ -185,6 +224,8 @@ Future&lt;<a href="../chrome.syncFileSystem/ConflictResolutionPolicy.html">Confl
 A callback type for getConflictResolutionPolicy.</p>
 <pre class="source">
 Future&lt;ConflictResolutionPolicy&gt; getConflictResolutionPolicy() {
+ if (_syncFileSystem == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;ConflictResolutionPolicy&gt;.oneArg(_createConflictResolutionPolicy);
  _syncFileSystem.callMethod('getConflictResolutionPolicy', [completer.callback]);
  return completer.future;
@@ -205,6 +246,8 @@ only happens when the service's conflict resolution policy is set to
 A callback type for getFileStatus.</p>
 <pre class="source">
 Future&lt;FileStatus&gt; getFileStatus(Entry fileEntry) {
+ if (_syncFileSystem == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;FileStatus&gt;.oneArg(_createFileStatus);
  _syncFileSystem.callMethod('getFileStatus', [jsify(fileEntry), completer.callback]);
  return completer.future;
@@ -223,6 +266,8 @@ with the result from dirReader.readEntries().</p>
 A callback type for getFileStatuses.</p>
 <pre class="source">
 Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
+ if (_syncFileSystem == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;FileStatusInfo&gt;.oneArg(_createFileStatusInfo);
  _syncFileSystem.callMethod('getFileStatuses', [jsify(fileEntries), completer.callback]);
  return completer.future;
@@ -240,6 +285,8 @@ Future&lt;<a href="../chrome.syncFileSystem/ServiceStatus.html">ServiceStatus</a
 A callback type for getServiceStatus.</p>
 <pre class="source">
 Future&lt;ServiceStatus&gt; getServiceStatus() {
+ if (_syncFileSystem == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;ServiceStatus&gt;.oneArg(_createServiceStatus);
  _syncFileSystem.callMethod('getServiceStatus', [completer.callback]);
  return completer.future;
@@ -258,6 +305,8 @@ storage for the app.</p>
 A callback type for getUsageAndQuota.</p>
 <pre class="source">
 Future&lt;StorageInfo&gt; getUsageAndQuota(FileSystem fileSystem) {
+ if (_syncFileSystem == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;StorageInfo&gt;.oneArg(_createStorageInfo);
  _syncFileSystem.callMethod('getUsageAndQuota', [jsify(fileSystem), completer.callback]);
  return completer.future;
@@ -280,6 +329,8 @@ to the same file system.</p>
 A callback type for requestFileSystem.</p>
 <pre class="source">
 Future&lt;FileSystem&gt; requestFileSystem() {
+ if (_syncFileSystem == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
  _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
  return completer.future;
@@ -300,6 +351,8 @@ existing files are automatically resolved next time the file is updated.
 not.</p>
 <pre class="source">
 Future setConflictResolutionPolicy(ConflictResolutionPolicy policy) {
+ if (_syncFileSystem == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter.noArgs();
  _syncFileSystem.callMethod('setConflictResolutionPolicy', [jsify(policy), completer.callback]);
  return completer.future;

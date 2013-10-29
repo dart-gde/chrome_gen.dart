@@ -33,10 +33,12 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeAlarms {
+class ChromeAlarms extends ChromeApi {
  static final JsObject _alarms = chrome['alarms'];
 
  ChromeAlarms._();
+
+ bool get available =&gt; _alarms != null;
 
  /**
   * Creates an alarm. Near the time(s) specified by [alarmInfo], the `onAlarm`
@@ -63,6 +65,8 @@ class ChromeAlarms {
   * [delayInMinutes].
   */
  void create(AlarmCreateInfo alarmInfo, [String name]) {
+   if (_alarms == null) _throwNotAvailable();
+
    _alarms.callMethod('create', [name, jsify(alarmInfo)]);
  }
 
@@ -71,6 +75,8 @@ class ChromeAlarms {
   * [name]: The name of the alarm to get. Defaults to the empty string.
   */
  Future&lt;Alarm&gt; get([String name]) {
+   if (_alarms == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(_createAlarm);
    _alarms.callMethod('get', [name, completer.callback]);
    return completer.future;
@@ -80,6 +86,8 @@ class ChromeAlarms {
   * Gets an array of all the alarms.
   */
  Future&lt;Alarm&gt; getAll() {
+   if (_alarms == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(_createAlarm);
    _alarms.callMethod('getAll', [completer.callback]);
    return completer.future;
@@ -90,6 +98,8 @@ class ChromeAlarms {
   * [name]: The name of the alarm to clear. Defaults to the empty string.
   */
  void clear([String name]) {
+   if (_alarms == null) _throwNotAvailable();
+
    _alarms.callMethod('clear', [name]);
  }
 
@@ -97,18 +107,43 @@ class ChromeAlarms {
   * Clears all alarms.
   */
  void clearAll() {
+   if (_alarms == null) _throwNotAvailable();
+
    _alarms.callMethod('clearAll');
  }
 
  Stream&lt;Alarm&gt; get onAlarm =&gt; _onAlarm.stream;
 
  final ChromeStreamController&lt;Alarm&gt; _onAlarm =
-     new ChromeStreamController&lt;Alarm&gt;.oneArg(_alarms['onAlarm'], _createAlarm);
+     new ChromeStreamController&lt;Alarm&gt;.oneArg(_alarms, 'onAlarm', _createAlarm);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.alarms' is not available");
+ }
 }
 </pre>
 </div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeAlarms</strong></span></p>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromeAlarms.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _alarms != null;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="onAlarm">
 <button class="show-code">Code</button>
 final Stream&lt;<a href="../chrome.alarms/Alarm.html">Alarm</a>&gt;         <strong>onAlarm</strong> <a class="anchor-link"
@@ -134,6 +169,8 @@ void <strong>clear</strong>([String name]) <a class="anchor-link" href="#clear"
 <span class="param">name</span>: The name of the alarm to clear. Defaults to the empty string.</p>
 <pre class="source">
 void clear([String name]) {
+ if (_alarms == null) _throwNotAvailable();
+
  _alarms.callMethod('clear', [name]);
 }
 </pre>
@@ -147,6 +184,8 @@ void <strong>clearAll</strong>() <a class="anchor-link" href="#clearAll"
 <p>Clears all alarms.</p>
 <pre class="source">
 void clearAll() {
+ if (_alarms == null) _throwNotAvailable();
+
  _alarms.callMethod('clearAll');
 }
 </pre>
@@ -180,6 +219,8 @@ set for a repeating alarm, <code>periodInMinutes</code> is used as the default f
 <code>delayInMinutes</code>.</p>
 <pre class="source">
 void create(AlarmCreateInfo alarmInfo, [String name]) {
+ if (_alarms == null) _throwNotAvailable();
+
  _alarms.callMethod('create', [name, jsify(alarmInfo)]);
 }
 </pre>
@@ -195,6 +236,8 @@ Future&lt;<a href="../chrome.alarms/Alarm.html">Alarm</a>&gt; <strong>get</stron
 <span class="param">name</span>: The name of the alarm to get. Defaults to the empty string.</p>
 <pre class="source">
 Future&lt;Alarm&gt; get([String name]) {
+ if (_alarms == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(_createAlarm);
  _alarms.callMethod('get', [name, completer.callback]);
  return completer.future;
@@ -210,6 +253,8 @@ Future&lt;<a href="../chrome.alarms/Alarm.html">Alarm</a>&gt; <strong>getAll</st
 <p>Gets an array of all the alarms.</p>
 <pre class="source">
 Future&lt;Alarm&gt; getAll() {
+ if (_alarms == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(_createAlarm);
  _alarms.callMethod('getAll', [completer.callback]);
  return completer.future;

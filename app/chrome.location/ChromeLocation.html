@@ -33,10 +33,12 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeLocation {
+class ChromeLocation extends ChromeApi {
  static final JsObject _location = chrome['location'];
 
  ChromeLocation._();
+
+ bool get available =&gt; _location != null;
 
  /**
   * todo(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
@@ -46,6 +48,8 @@ class ChromeLocation {
   * [requestInfo]: Optional parameters for this request.
   */
  void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
+   if (_location == null) _throwNotAvailable();
+
    _location.callMethod('watchLocation', [name, jsify(requestInfo)]);
  }
 
@@ -55,23 +59,48 @@ class ChromeLocation {
   * empty string.
   */
  void clearWatch(String name) {
+   if (_location == null) _throwNotAvailable();
+
    _location.callMethod('clearWatch', [name]);
  }
 
  Stream&lt;Location&gt; get onLocationUpdate =&gt; _onLocationUpdate.stream;
 
  final ChromeStreamController&lt;Location&gt; _onLocationUpdate =
-     new ChromeStreamController&lt;Location&gt;.oneArg(_location['onLocationUpdate'], _createLocation);
+     new ChromeStreamController&lt;Location&gt;.oneArg(_location, 'onLocationUpdate', _createLocation);
 
  Stream&lt;String&gt; get onLocationError =&gt; _onLocationError.stream;
 
  final ChromeStreamController&lt;String&gt; _onLocationError =
-     new ChromeStreamController&lt;String&gt;.oneArg(_location['onLocationError'], selfConverter);
+     new ChromeStreamController&lt;String&gt;.oneArg(_location, 'onLocationError', selfConverter);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.location' is not available");
+ }
 }
 </pre>
 </div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeLocation</strong></span></p>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromeLocation.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _location != null;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="onLocationError">
 <button class="show-code">Code</button>
 final Stream&lt;String&gt;         <strong>onLocationError</strong> <a class="anchor-link"
@@ -110,6 +139,8 @@ void <strong>clearWatch</strong>(String name) <a class="anchor-link" href="#clea
 empty string.</p>
 <pre class="source">
 void clearWatch(String name) {
+ if (_location == null) _throwNotAvailable();
+
  _location.callMethod('clearWatch', [name]);
 }
 </pre>
@@ -129,6 +160,8 @@ string.
 <span class="param">requestInfo</span>: Optional parameters for this request.</p>
 <pre class="source">
 void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
+ if (_location == null) _throwNotAvailable();
+
  _location.callMethod('watchLocation', [name, jsify(requestInfo)]);
 }
 </pre>

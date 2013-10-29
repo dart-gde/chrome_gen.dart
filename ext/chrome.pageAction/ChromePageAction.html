@@ -33,10 +33,12 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromePageAction {
+class ChromePageAction extends ChromeApi {
  static final JsObject _pageAction = chrome['pageAction'];
 
  ChromePageAction._();
+
+ bool get available =&gt; _pageAction != null;
 
  /**
   * Shows the page action. The page action is shown whenever the tab is
@@ -45,6 +47,8 @@ class ChromePageAction {
   * [tabId] The id of the tab for which you want to modify the page action.
   */
  void show(int tabId) {
+   if (_pageAction == null) _throwNotAvailable();
+
    _pageAction.callMethod('show', [tabId]);
  }
 
@@ -54,6 +58,8 @@ class ChromePageAction {
   * [tabId] The id of the tab for which you want to modify the page action.
   */
  void hide(int tabId) {
+   if (_pageAction == null) _throwNotAvailable();
+
    _pageAction.callMethod('hide', [tabId]);
  }
 
@@ -62,6 +68,8 @@ class ChromePageAction {
   * page action.
   */
  void setTitle(Map details) {
+   if (_pageAction == null) _throwNotAvailable();
+
    _pageAction.callMethod('setTitle', [jsify(details)]);
  }
 
@@ -69,6 +77,8 @@ class ChromePageAction {
   * Gets the title of the page action.
   */
  Future&lt;String&gt; getTitle(Map details) {
+   if (_pageAction == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
    return completer.future;
@@ -81,6 +91,8 @@ class ChromePageAction {
   * &lt;b&gt;imageData&lt;/b&gt; property must be specified.
   */
  Future setIcon(Map details) {
+   if (_pageAction == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter.noArgs();
    _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
    return completer.future;
@@ -91,6 +103,8 @@ class ChromePageAction {
   * page action's icon.
   */
  void setPopup(Map details) {
+   if (_pageAction == null) _throwNotAvailable();
+
    _pageAction.callMethod('setPopup', [jsify(details)]);
  }
 
@@ -98,6 +112,8 @@ class ChromePageAction {
   * Gets the html document set as the popup for this page action.
   */
  Future&lt;String&gt; getPopup(Map details) {
+   if (_pageAction == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
    return completer.future;
@@ -110,12 +126,35 @@ class ChromePageAction {
  Stream&lt;Tab&gt; get onClicked =&gt; _onClicked.stream;
 
  final ChromeStreamController&lt;Tab&gt; _onClicked =
-     new ChromeStreamController&lt;Tab&gt;.oneArg(_pageAction['onClicked'], _createTab);
+     new ChromeStreamController&lt;Tab&gt;.oneArg(_pageAction, 'onClicked', _createTab);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.pageAction' is not available");
+ }
 }
 </pre>
 </div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromePageAction</strong></span></p>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromePageAction.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _pageAction != null;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="onClicked">
 <button class="show-code">Code</button>
 final Stream&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt;         <strong>onClicked</strong> <a class="anchor-link"
@@ -141,6 +180,8 @@ Future&lt;String&gt; <strong>getPopup</strong>(Map details) <a class="anchor-lin
 <p>Gets the html document set as the popup for this page action.</p>
 <pre class="source">
 Future&lt;String&gt; getPopup(Map details) {
+ if (_pageAction == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
  return completer.future;
@@ -156,6 +197,8 @@ Future&lt;String&gt; <strong>getTitle</strong>(Map details) <a class="anchor-lin
 <p>Gets the title of the page action.</p>
 <pre class="source">
 Future&lt;String&gt; getTitle(Map details) {
+ if (_pageAction == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
  return completer.future;
@@ -173,6 +216,8 @@ void <strong>hide</strong>(int tabId) <a class="anchor-link" href="#hide"
 <span class="param">tabId</span> The id of the tab for which you want to modify the page action.</p>
 <pre class="source">
 void hide(int tabId) {
+ if (_pageAction == null) _throwNotAvailable();
+
  _pageAction.callMethod('hide', [tabId]);
 }
 </pre>
@@ -189,6 +234,8 @@ dictionary of either one of those. Either the &lt;b>path&lt;/b> or the
 &lt;b>imageData&lt;/b> property must be specified.</p>
 <pre class="source">
 Future setIcon(Map details) {
+ if (_pageAction == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter.noArgs();
  _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
  return completer.future;
@@ -205,6 +252,8 @@ void <strong>setPopup</strong>(Map details) <a class="anchor-link" href="#setPop
 page action's icon.</p>
 <pre class="source">
 void setPopup(Map details) {
+ if (_pageAction == null) _throwNotAvailable();
+
  _pageAction.callMethod('setPopup', [jsify(details)]);
 }
 </pre>
@@ -219,6 +268,8 @@ void <strong>setTitle</strong>(Map details) <a class="anchor-link" href="#setTit
 page action.</p>
 <pre class="source">
 void setTitle(Map details) {
+ if (_pageAction == null) _throwNotAvailable();
+
  _pageAction.callMethod('setTitle', [jsify(details)]);
 }
 </pre>
@@ -235,6 +286,8 @@ selected.</p>
 <span class="param">tabId</span> The id of the tab for which you want to modify the page action.</p>
 <pre class="source">
 void show(int tabId) {
+ if (_pageAction == null) _throwNotAvailable();
+
  _pageAction.callMethod('show', [tabId]);
 }
 </pre>

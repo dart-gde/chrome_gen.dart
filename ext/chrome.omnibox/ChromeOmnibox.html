@@ -33,10 +33,12 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeOmnibox {
+class ChromeOmnibox extends ChromeApi {
  static final JsObject _omnibox = chrome['omnibox'];
 
  ChromeOmnibox._();
+
+ bool get available =&gt; _omnibox != null;
 
  /**
   * A callback passed to the onInputChanged event used for sending suggestions
@@ -45,6 +47,8 @@ class ChromeOmnibox {
   * [suggestResults] An array of suggest results
   */
  void sendSuggestions(int requestId, List&lt;SuggestResult&gt; suggestResults) {
+   if (_omnibox == null) _throwNotAvailable();
+
    _omnibox.callMethod('sendSuggestions', [requestId, jsify(suggestResults)]);
  }
 
@@ -57,6 +61,8 @@ class ChromeOmnibox {
   * parameter.
   */
  void setDefaultSuggestion(DefaultSuggestResult suggestion) {
+   if (_omnibox == null) _throwNotAvailable();
+
    _omnibox.callMethod('setDefaultSuggestion', [jsify(suggestion)]);
  }
 
@@ -68,7 +74,7 @@ class ChromeOmnibox {
  Stream get onInputStarted =&gt; _onInputStarted.stream;
 
  final ChromeStreamController _onInputStarted =
-     new ChromeStreamController.noArgs(_omnibox['onInputStarted']);
+     new ChromeStreamController.noArgs(_omnibox, 'onInputStarted');
 
  /**
   * User has changed what is typed into the omnibox.
@@ -76,7 +82,7 @@ class ChromeOmnibox {
  Stream&lt;OnInputChangedEvent&gt; get onInputChanged =&gt; _onInputChanged.stream;
 
  final ChromeStreamController&lt;OnInputChangedEvent&gt; _onInputChanged =
-     new ChromeStreamController&lt;OnInputChangedEvent&gt;.twoArgs(_omnibox['onInputChanged'], _createOnInputChangedEvent);
+     new ChromeStreamController&lt;OnInputChangedEvent&gt;.twoArgs(_omnibox, 'onInputChanged', _createOnInputChangedEvent);
 
  /**
   * User has accepted what is typed into the omnibox.
@@ -84,7 +90,7 @@ class ChromeOmnibox {
  Stream&lt;OnInputEnteredEvent&gt; get onInputEntered =&gt; _onInputEntered.stream;
 
  final ChromeStreamController&lt;OnInputEnteredEvent&gt; _onInputEntered =
-     new ChromeStreamController&lt;OnInputEnteredEvent&gt;.twoArgs(_omnibox['onInputEntered'], _createOnInputEnteredEvent);
+     new ChromeStreamController&lt;OnInputEnteredEvent&gt;.twoArgs(_omnibox, 'onInputEntered', _createOnInputEnteredEvent);
 
  /**
   * User has ended the keyword input session without accepting the input.
@@ -92,12 +98,35 @@ class ChromeOmnibox {
  Stream get onInputCancelled =&gt; _onInputCancelled.stream;
 
  final ChromeStreamController _onInputCancelled =
-     new ChromeStreamController.noArgs(_omnibox['onInputCancelled']);
+     new ChromeStreamController.noArgs(_omnibox, 'onInputCancelled');
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.omnibox' is not available");
+ }
 }
 </pre>
 </div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeOmnibox</strong></span></p>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromeOmnibox.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _omnibox != null;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="onInputCancelled">
 <button class="show-code">Code</button>
 final Stream         <strong>onInputCancelled</strong> <a class="anchor-link"
@@ -166,6 +195,8 @@ back to the browser.</p>
 <span class="param">suggestResults</span> An array of suggest results</p>
 <pre class="source">
 void sendSuggestions(int requestId, List&lt;SuggestResult&gt; suggestResults) {
+ if (_omnibox == null) _throwNotAvailable();
+
  _omnibox.callMethod('sendSuggestions', [requestId, jsify(suggestResults)]);
 }
 </pre>
@@ -184,6 +215,8 @@ underneath the URL bar.</p>
 parameter.</p>
 <pre class="source">
 void setDefaultSuggestion(DefaultSuggestResult suggestion) {
+ if (_omnibox == null) _throwNotAvailable();
+
  _omnibox.callMethod('setDefaultSuggestion', [jsify(suggestion)]);
 }
 </pre>

@@ -33,10 +33,12 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeDebugger {
+class ChromeDebugger extends ChromeApi {
  static final JsObject _debugger = chrome['debugger'];
 
  ChromeDebugger._();
+
+ bool get available =&gt; _debugger != null;
 
  /**
   * Attaches debugger to the given target.
@@ -49,6 +51,8 @@ class ChromeDebugger {
   * [here](http://code.google.com/chrome/devtools/docs/remote-debugging.html).
   */
  Future attach(Debuggee target, String requiredVersion) {
+   if (_debugger == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter.noArgs();
    _debugger.callMethod('attach', [jsify(target), requiredVersion, completer.callback]);
    return completer.future;
@@ -60,6 +64,8 @@ class ChromeDebugger {
   * [target] Debugging target from which you want to detach.
   */
  Future detach(Debuggee target) {
+   if (_debugger == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter.noArgs();
    _debugger.callMethod('detach', [jsify(target), completer.callback]);
    return completer.future;
@@ -82,6 +88,8 @@ class ChromeDebugger {
   * on the method and is defined by the remote debugging protocol.
   */
  Future&lt;Map&lt;String, dynamic&gt;&gt; sendCommand(Debuggee target, String method, [Map&lt;String, dynamic&gt; commandParams]) {
+   if (_debugger == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
    _debugger.callMethod('sendCommand', [jsify(target), method, jsify(commandParams), completer.callback]);
    return completer.future;
@@ -94,6 +102,8 @@ class ChromeDebugger {
   * Array of TargetInfo objects corresponding to the available debug targets.
   */
  Future&lt;List&lt;TargetInfo&gt;&gt; getTargets() {
+   if (_debugger == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;List&lt;TargetInfo&gt;&gt;.oneArg((e) =&gt; listify(e, _createTargetInfo));
    _debugger.callMethod('getTargets', [completer.callback]);
    return completer.future;
@@ -105,7 +115,7 @@ class ChromeDebugger {
  Stream&lt;OnEventEvent&gt; get onEvent =&gt; _onEvent.stream;
 
  final ChromeStreamController&lt;OnEventEvent&gt; _onEvent =
-     new ChromeStreamController&lt;OnEventEvent&gt;.threeArgs(_debugger['onEvent'], _createOnEventEvent);
+     new ChromeStreamController&lt;OnEventEvent&gt;.threeArgs(_debugger, 'onEvent', _createOnEventEvent);
 
  /**
   * Fired when browser terminates debugging session for the tab. This happens
@@ -115,12 +125,35 @@ class ChromeDebugger {
  Stream&lt;OnDetachEvent&gt; get onDetach =&gt; _onDetach.stream;
 
  final ChromeStreamController&lt;OnDetachEvent&gt; _onDetach =
-     new ChromeStreamController&lt;OnDetachEvent&gt;.twoArgs(_debugger['onDetach'], _createOnDetachEvent);
+     new ChromeStreamController&lt;OnDetachEvent&gt;.twoArgs(_debugger, 'onDetach', _createOnDetachEvent);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.debugger' is not available");
+ }
 }
 </pre>
 </div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeDebugger</strong></span></p>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromeDebugger.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _debugger != null;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="onDetach">
 <button class="show-code">Code</button>
 final Stream&lt;<a href="../chrome.debugger/OnDetachEvent.html">OnDetachEvent</a>&gt;         <strong>onDetach</strong> <a class="anchor-link"
@@ -167,6 +200,8 @@ minor version. List of the protocol versions can be obtained
 <a href="http://code.google.com/chrome/devtools/docs/remote-debugging.html">here</a>.</p>
 <pre class="source">
 Future attach(Debuggee target, String requiredVersion) {
+ if (_debugger == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter.noArgs();
  _debugger.callMethod('attach', [jsify(target), requiredVersion, completer.callback]);
  return completer.future;
@@ -184,6 +219,8 @@ Future <strong>detach</strong>(<a href="../chrome.debugger/Debuggee.html">Debugg
 <span class="param">target</span> Debugging target from which you want to detach.</p>
 <pre class="source">
 Future detach(Debuggee target) {
+ if (_debugger == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter.noArgs();
  _debugger.callMethod('detach', [jsify(target), completer.callback]);
  return completer.future;
@@ -201,6 +238,8 @@ Future&lt;List&lt;<a href="../chrome.debugger/TargetInfo.html">TargetInfo</a>&gt
 Array of TargetInfo objects corresponding to the available debug targets.</p>
 <pre class="source">
 Future&lt;List&lt;TargetInfo&gt;&gt; getTargets() {
+ if (_debugger == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;List&lt;TargetInfo&gt;&gt;.oneArg((e) =&gt; listify(e, _createTargetInfo));
  _debugger.callMethod('getTargets', [completer.callback]);
  return completer.future;
@@ -228,6 +267,8 @@ JSON object with the response. Structure of the response varies depending
 on the method and is defined by the remote debugging protocol.</p>
 <pre class="source">
 Future&lt;Map&lt;String, dynamic&gt;&gt; sendCommand(Debuggee target, String method, [Map&lt;String, dynamic&gt; commandParams]) {
+ if (_debugger == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
  _debugger.callMethod('sendCommand', [jsify(target), method, jsify(commandParams), completer.callback]);
  return completer.future;

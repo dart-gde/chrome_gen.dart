@@ -33,16 +33,46 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeWebstore {
+class ChromeWebstore extends ChromeApi {
  static final JsObject _webstore = chrome['webstore'];
 
  ChromeWebstore._();
 
+ bool get available =&gt; _webstore != null;
+
  void install([String url, dynamic successCallback, dynamic failureCallback]) {
+   if (_webstore == null) _throwNotAvailable();
+
    _webstore.callMethod('install', [url, jsify(successCallback), jsify(failureCallback)]);
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.webstore' is not available");
  }
 }
 </pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeWebstore</strong></span></p>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromeWebstore.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _webstore != null;
+</pre>
+</div>
+</div>
 </div>
 <div>
 <h3>Methods</h3>
@@ -53,6 +83,8 @@ void <strong>install</strong>([String url, successCallback, failureCallback]) <a
 <div class="doc">
 <pre class="source">
 void install([String url, dynamic successCallback, dynamic failureCallback]) {
+ if (_webstore == null) _throwNotAvailable();
+
  _webstore.callMethod('install', [url, jsify(successCallback), jsify(failureCallback)]);
 }
 </pre>

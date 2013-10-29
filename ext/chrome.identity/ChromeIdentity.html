@@ -33,10 +33,12 @@
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
 <pre class="source">
-class ChromeIdentity {
+class ChromeIdentity extends ChromeApi {
  static final JsObject _identity = chrome['identity'];
 
  ChromeIdentity._();
+
+ bool get available =&gt; _identity != null;
 
  /**
   * Gets an OAuth2 access token using the client ID and scopes specified in the
@@ -52,6 +54,8 @@ class ChromeIdentity {
   * manifest, or undefined if there was an error.
   */
  Future&lt;String&gt; getAuthToken([TokenDetails details]) {
+   if (_identity == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _identity.callMethod('getAuthToken', [jsify(details), completer.callback]);
    return completer.future;
@@ -68,6 +72,8 @@ class ChromeIdentity {
   * [callback]: Called when the token has been removed from the cache.
   */
  Future removeCachedAuthToken(InvalidTokenDetails details) {
+   if (_identity == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter.noArgs();
    _identity.callMethod('removeCachedAuthToken', [jsify(details), completer.callback]);
    return completer.future;
@@ -86,12 +92,40 @@ class ChromeIdentity {
   * [callback]: Called with the URL redirected back to your application.
   */
  Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
+   if (_identity == null) _throwNotAvailable();
+
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _identity.callMethod('launchWebAuthFlow', [jsify(details), completer.callback]);
    return completer.future;
  }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.identity' is not available");
+ }
 }
 </pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>ChromeIdentity</strong></span></p>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="available">
+<button class="show-code">Code</button>
+final bool         <strong>available</strong> <a class="anchor-link"
+            href="#available"
+            title="Permalink to ChromeIdentity.available">#</a>
+        </h4>
+        <div class="doc">
+<div class="inherited">
+<p>Returns true if the API is available. The common causes of an API not being
+avilable are:</p><ul><li>a permission is missing in the application's manifest.json file</li><li>the API is defined on a newer version of Chrome then the current runtime</li></ul>
+<div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeApi.html">ChromeApi</a> </div></div>
+<pre class="source">
+bool get available =&gt; _identity != null;
+</pre>
+</div>
+</div>
 </div>
 <div>
 <h3>Methods</h3>
@@ -112,6 +146,8 @@ handles expiration.</p>
 manifest, or undefined if there was an error.</p>
 <pre class="source">
 Future&lt;String&gt; getAuthToken([TokenDetails details]) {
+ if (_identity == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _identity.callMethod('getAuthToken', [jsify(details), completer.callback]);
  return completer.future;
@@ -135,6 +171,8 @@ final redirect URL will be passed to the <code>callback</code> function.</p>
 <code>callback</code>: Called with the URL redirected back to your application.</p>
 <pre class="source">
 Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
+ if (_identity == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _identity.callMethod('launchWebAuthFlow', [jsify(details), completer.callback]);
  return completer.future;
@@ -156,6 +194,8 @@ retrieve a fresh token with <code>getAuthToken</code>.</p>
 <code>callback</code>: Called when the token has been removed from the cache.</p>
 <pre class="source">
 Future removeCachedAuthToken(InvalidTokenDetails details) {
+ if (_identity == null) _throwNotAvailable();
+
  var completer = new ChromeCompleter.noArgs();
  _identity.callMethod('removeCachedAuthToken', [jsify(details), completer.callback]);
  return completer.future;
