@@ -63,7 +63,7 @@ class ChromeDevtoolsPanels extends ChromeApi {
   * An ExtensionPanel object representing the created panel.
   */
  Future&lt;ExtensionPanel&gt; create(String title, String iconPath, String pagePath) {
-   if (_devtools_panels == null) throw new UnsupportedError("'chrome.devtools.panels' is not available");
+   if (_devtools_panels == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;ExtensionPanel&gt;.oneArg(_createExtensionPanel);
    _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
@@ -80,11 +80,15 @@ class ChromeDevtoolsPanels extends ChromeApi {
   * clicked.
   */
  Future&lt;Resource&gt; setOpenResourceHandler() {
-   if (_devtools_panels == null) throw new UnsupportedError("'chrome.devtools.panels' is not available");
+   if (_devtools_panels == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Resource&gt;.oneArg(_createResource);
    _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);
    return completer.future;
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.devtools.panels' is not available");
  }
 }
 </pre>
@@ -144,7 +148,7 @@ directory.</p>
 An ExtensionPanel object representing the created panel.</p>
 <pre class="source">
 Future&lt;ExtensionPanel&gt; create(String title, String iconPath, String pagePath) {
- if (_devtools_panels == null) throw new UnsupportedError("'chrome.devtools.panels' is not available");
+ if (_devtools_panels == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;ExtensionPanel&gt;.oneArg(_createExtensionPanel);
  _devtools_panels.callMethod('create', [title, iconPath, pagePath, completer.callback]);
@@ -166,7 +170,7 @@ A <code>devtools.inspectedWindow.Resource</code> object for the resource that wa
 clicked.</p>
 <pre class="source">
 Future&lt;Resource&gt; setOpenResourceHandler() {
- if (_devtools_panels == null) throw new UnsupportedError("'chrome.devtools.panels' is not available");
+ if (_devtools_panels == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Resource&gt;.oneArg(_createResource);
  _devtools_panels.callMethod('setOpenResourceHandler', [completer.callback]);

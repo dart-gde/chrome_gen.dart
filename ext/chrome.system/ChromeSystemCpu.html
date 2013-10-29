@@ -44,11 +44,15 @@ class ChromeSystemCpu extends ChromeApi {
   * Queries basic CPU information of the system.
   */
  Future&lt;CpuInfo&gt; getInfo() {
-   if (_system_cpu == null) throw new UnsupportedError("'chrome.system.cpu' is not available");
+   if (_system_cpu == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;CpuInfo&gt;.oneArg(_createCpuInfo);
    _system_cpu.callMethod('getInfo', [completer.callback]);
    return completer.future;
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.system.cpu' is not available");
  }
 }
 </pre>
@@ -85,7 +89,7 @@ Future&lt;<a href="../chrome.system/CpuInfo.html">CpuInfo</a>&gt; <strong>getInf
 <p>Queries basic CPU information of the system.</p>
 <pre class="source">
 Future&lt;CpuInfo&gt; getInfo() {
- if (_system_cpu == null) throw new UnsupportedError("'chrome.system.cpu' is not available");
+ if (_system_cpu == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;CpuInfo&gt;.oneArg(_createCpuInfo);
  _system_cpu.callMethod('getInfo', [completer.callback]);

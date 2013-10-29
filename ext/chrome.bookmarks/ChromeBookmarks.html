@@ -60,7 +60,7 @@ class ChromeBookmarks extends ChromeApi {
   * [idOrIdList] A single string-valued id, or an array of string-valued ids
   */
  Future&lt;List&lt;BookmarkTreeNode&gt;&gt; get(dynamic idOrIdList) {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
    _bookmarks.callMethod('get', [jsify(idOrIdList), completer.callback]);
@@ -71,7 +71,7 @@ class ChromeBookmarks extends ChromeApi {
   * Retrieves the children of the specified BookmarkTreeNode id.
   */
  Future&lt;List&lt;BookmarkTreeNode&gt;&gt; getChildren(String id) {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
    _bookmarks.callMethod('getChildren', [id, completer.callback]);
@@ -84,7 +84,7 @@ class ChromeBookmarks extends ChromeApi {
   * [numberOfItems] The maximum number of items to return.
   */
  Future&lt;List&lt;BookmarkTreeNode&gt;&gt; getRecent(int numberOfItems) {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
    _bookmarks.callMethod('getRecent', [numberOfItems, completer.callback]);
@@ -95,7 +95,7 @@ class ChromeBookmarks extends ChromeApi {
   * Retrieves the entire Bookmarks hierarchy.
   */
  Future&lt;List&lt;BookmarkTreeNode&gt;&gt; getTree() {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
    _bookmarks.callMethod('getTree', [completer.callback]);
@@ -108,7 +108,7 @@ class ChromeBookmarks extends ChromeApi {
   * [id] The ID of the root of the subtree to retrieve.
   */
  Future&lt;List&lt;BookmarkTreeNode&gt;&gt; getSubTree(String id) {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
    _bookmarks.callMethod('getSubTree', [id, completer.callback]);
@@ -119,7 +119,7 @@ class ChromeBookmarks extends ChromeApi {
   * Searches for BookmarkTreeNodes matching the given query.
   */
  Future&lt;List&lt;BookmarkTreeNode&gt;&gt; search(String query) {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
    _bookmarks.callMethod('search', [query, completer.callback]);
@@ -131,7 +131,7 @@ class ChromeBookmarks extends ChromeApi {
   * or missing, it will be a folder.
   */
  Future&lt;BookmarkTreeNode&gt; create(Map bookmark) {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
    _bookmarks.callMethod('create', [jsify(bookmark), completer.callback]);
@@ -142,7 +142,7 @@ class ChromeBookmarks extends ChromeApi {
   * Moves the specified BookmarkTreeNode to the provided location.
   */
  Future&lt;BookmarkTreeNode&gt; move(String id, Map destination) {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
    _bookmarks.callMethod('move', [id, jsify(destination), completer.callback]);
@@ -155,7 +155,7 @@ class ChromeBookmarks extends ChromeApi {
   * &lt;b&gt;Note:&lt;/b&gt; Currently, only 'title' and 'url' are supported.
   */
  Future&lt;BookmarkTreeNode&gt; update(String id, Map changes) {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
    _bookmarks.callMethod('update', [id, jsify(changes), completer.callback]);
@@ -166,7 +166,7 @@ class ChromeBookmarks extends ChromeApi {
   * Removes a bookmark or an empty bookmark folder.
   */
  Future remove(String id) {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _bookmarks.callMethod('remove', [id, completer.callback]);
@@ -177,7 +177,7 @@ class ChromeBookmarks extends ChromeApi {
   * Recursively removes a bookmark folder.
   */
  Future removeTree(String id) {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _bookmarks.callMethod('removeTree', [id, completer.callback]);
@@ -188,7 +188,7 @@ class ChromeBookmarks extends ChromeApi {
   * Imports bookmarks from a chrome html bookmark file
   */
  Future import() {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _bookmarks.callMethod('import', [completer.callback]);
@@ -199,7 +199,7 @@ class ChromeBookmarks extends ChromeApi {
   * Exports bookmarks to a chrome html bookmark file
   */
  Future export() {
-   if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+   if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _bookmarks.callMethod('export', [completer.callback]);
@@ -267,6 +267,10 @@ class ChromeBookmarks extends ChromeApi {
 
  final ChromeStreamController _onImportEnded =
      new ChromeStreamController.noArgs(_bookmarks, 'onImportEnded');
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.bookmarks' is not available");
+ }
 }
 </pre>
 </div>
@@ -430,7 +434,7 @@ Future&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</
 or missing, it will be a folder.</p>
 <pre class="source">
 Future&lt;BookmarkTreeNode&gt; create(Map bookmark) {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
  _bookmarks.callMethod('create', [jsify(bookmark), completer.callback]);
@@ -447,7 +451,7 @@ Future <strong>export</strong>() <a class="anchor-link" href="#export"
 <p>Exports bookmarks to a chrome html bookmark file</p>
 <pre class="source">
 Future export() {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _bookmarks.callMethod('export', [completer.callback]);
@@ -466,7 +470,7 @@ Future&lt;List&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTr
 <span class="param">idOrIdList</span> A single string-valued id, or an array of string-valued ids</p>
 <pre class="source">
 Future&lt;List&lt;BookmarkTreeNode&gt;&gt; get(dynamic idOrIdList) {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
  _bookmarks.callMethod('get', [jsify(idOrIdList), completer.callback]);
@@ -483,7 +487,7 @@ Future&lt;List&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTr
 <p>Retrieves the children of the specified BookmarkTreeNode id.</p>
 <pre class="source">
 Future&lt;List&lt;BookmarkTreeNode&gt;&gt; getChildren(String id) {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
  _bookmarks.callMethod('getChildren', [id, completer.callback]);
@@ -502,7 +506,7 @@ Future&lt;List&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTr
 <span class="param">numberOfItems</span> The maximum number of items to return.</p>
 <pre class="source">
 Future&lt;List&lt;BookmarkTreeNode&gt;&gt; getRecent(int numberOfItems) {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
  _bookmarks.callMethod('getRecent', [numberOfItems, completer.callback]);
@@ -521,7 +525,7 @@ Future&lt;List&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTr
 <span class="param">id</span> The ID of the root of the subtree to retrieve.</p>
 <pre class="source">
 Future&lt;List&lt;BookmarkTreeNode&gt;&gt; getSubTree(String id) {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
  _bookmarks.callMethod('getSubTree', [id, completer.callback]);
@@ -538,7 +542,7 @@ Future&lt;List&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTr
 <p>Retrieves the entire Bookmarks hierarchy.</p>
 <pre class="source">
 Future&lt;List&lt;BookmarkTreeNode&gt;&gt; getTree() {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
  _bookmarks.callMethod('getTree', [completer.callback]);
@@ -555,7 +559,7 @@ Future <strong>import</strong>() <a class="anchor-link" href="#import"
 <p>Imports bookmarks from a chrome html bookmark file</p>
 <pre class="source">
 Future import() {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _bookmarks.callMethod('import', [completer.callback]);
@@ -572,7 +576,7 @@ Future&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</
 <p>Moves the specified BookmarkTreeNode to the provided location.</p>
 <pre class="source">
 Future&lt;BookmarkTreeNode&gt; move(String id, Map destination) {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
  _bookmarks.callMethod('move', [id, jsify(destination), completer.callback]);
@@ -589,7 +593,7 @@ Future <strong>remove</strong>(String id) <a class="anchor-link" href="#remove"
 <p>Removes a bookmark or an empty bookmark folder.</p>
 <pre class="source">
 Future remove(String id) {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _bookmarks.callMethod('remove', [id, completer.callback]);
@@ -606,7 +610,7 @@ Future <strong>removeTree</strong>(String id) <a class="anchor-link" href="#remo
 <p>Recursively removes a bookmark folder.</p>
 <pre class="source">
 Future removeTree(String id) {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _bookmarks.callMethod('removeTree', [id, completer.callback]);
@@ -623,7 +627,7 @@ Future&lt;List&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTr
 <p>Searches for BookmarkTreeNodes matching the given query.</p>
 <pre class="source">
 Future&lt;List&lt;BookmarkTreeNode&gt;&gt; search(String query) {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;BookmarkTreeNode&gt;&gt;.oneArg((e) =&gt; listify(e, _createBookmarkTreeNode));
  _bookmarks.callMethod('search', [query, completer.callback]);
@@ -642,7 +646,7 @@ that you want to change; unspecified properties will be left unchanged.
 &lt;b>Note:&lt;/b> Currently, only 'title' and 'url' are supported.</p>
 <pre class="source">
 Future&lt;BookmarkTreeNode&gt; update(String id, Map changes) {
- if (_bookmarks == null) throw new UnsupportedError("'chrome.bookmarks' is not available");
+ if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
  _bookmarks.callMethod('update', [id, jsify(changes), completer.callback]);

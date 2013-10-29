@@ -54,7 +54,7 @@ class ChromeIdentity extends ChromeApi {
   * manifest, or undefined if there was an error.
   */
  Future&lt;String&gt; getAuthToken([TokenDetails details]) {
-   if (_identity == null) throw new UnsupportedError("'chrome.identity' is not available");
+   if (_identity == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _identity.callMethod('getAuthToken', [jsify(details), completer.callback]);
@@ -72,7 +72,7 @@ class ChromeIdentity extends ChromeApi {
   * [callback]: Called when the token has been removed from the cache.
   */
  Future removeCachedAuthToken(InvalidTokenDetails details) {
-   if (_identity == null) throw new UnsupportedError("'chrome.identity' is not available");
+   if (_identity == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _identity.callMethod('removeCachedAuthToken', [jsify(details), completer.callback]);
@@ -92,11 +92,15 @@ class ChromeIdentity extends ChromeApi {
   * [callback]: Called with the URL redirected back to your application.
   */
  Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
-   if (_identity == null) throw new UnsupportedError("'chrome.identity' is not available");
+   if (_identity == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _identity.callMethod('launchWebAuthFlow', [jsify(details), completer.callback]);
    return completer.future;
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.identity' is not available");
  }
 }
 </pre>
@@ -142,7 +146,7 @@ handles expiration.</p>
 manifest, or undefined if there was an error.</p>
 <pre class="source">
 Future&lt;String&gt; getAuthToken([TokenDetails details]) {
- if (_identity == null) throw new UnsupportedError("'chrome.identity' is not available");
+ if (_identity == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _identity.callMethod('getAuthToken', [jsify(details), completer.callback]);
@@ -167,7 +171,7 @@ final redirect URL will be passed to the <code>callback</code> function.</p>
 <code>callback</code>: Called with the URL redirected back to your application.</p>
 <pre class="source">
 Future&lt;String&gt; launchWebAuthFlow(WebAuthFlowDetails details) {
- if (_identity == null) throw new UnsupportedError("'chrome.identity' is not available");
+ if (_identity == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _identity.callMethod('launchWebAuthFlow', [jsify(details), completer.callback]);
@@ -190,7 +194,7 @@ retrieve a fresh token with <code>getAuthToken</code>.</p>
 <code>callback</code>: Called when the token has been removed from the cache.</p>
 <pre class="source">
 Future removeCachedAuthToken(InvalidTokenDetails details) {
- if (_identity == null) throw new UnsupportedError("'chrome.identity' is not available");
+ if (_identity == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _identity.callMethod('removeCachedAuthToken', [jsify(details), completer.callback]);

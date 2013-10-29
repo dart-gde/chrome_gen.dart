@@ -44,11 +44,15 @@ class ChromeSystemMemory extends ChromeApi {
   * Get physical memory information.
   */
  Future&lt;MemoryInfo&gt; getInfo() {
-   if (_system_memory == null) throw new UnsupportedError("'chrome.system.memory' is not available");
+   if (_system_memory == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;MemoryInfo&gt;.oneArg(_createMemoryInfo);
    _system_memory.callMethod('getInfo', [completer.callback]);
    return completer.future;
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.system.memory' is not available");
  }
 }
 </pre>
@@ -85,7 +89,7 @@ Future&lt;<a href="../chrome.system/MemoryInfo.html">MemoryInfo</a>&gt; <strong>
 <p>Get physical memory information.</p>
 <pre class="source">
 Future&lt;MemoryInfo&gt; getInfo() {
- if (_system_memory == null) throw new UnsupportedError("'chrome.system.memory' is not available");
+ if (_system_memory == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;MemoryInfo&gt;.oneArg(_createMemoryInfo);
  _system_memory.callMethod('getInfo', [completer.callback]);

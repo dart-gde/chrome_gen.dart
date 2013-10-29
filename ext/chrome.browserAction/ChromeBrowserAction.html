@@ -44,7 +44,7 @@ class ChromeBrowserAction extends ChromeApi {
   * Sets the title of the browser action. This shows up in the tooltip.
   */
  void setTitle(Map details) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    _browserAction.callMethod('setTitle', [jsify(details)]);
  }
@@ -53,7 +53,7 @@ class ChromeBrowserAction extends ChromeApi {
   * Gets the title of the browser action.
   */
  Future&lt;String&gt; getTitle(Map details) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _browserAction.callMethod('getTitle', [jsify(details), completer.callback]);
@@ -67,7 +67,7 @@ class ChromeBrowserAction extends ChromeApi {
   * &lt;b&gt;imageData&lt;/b&gt; property must be specified.
   */
  Future setIcon(Map details) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _browserAction.callMethod('setIcon', [jsify(details), completer.callback]);
@@ -79,7 +79,7 @@ class ChromeBrowserAction extends ChromeApi {
   * browser action's icon.
   */
  void setPopup(Map details) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    _browserAction.callMethod('setPopup', [jsify(details)]);
  }
@@ -88,7 +88,7 @@ class ChromeBrowserAction extends ChromeApi {
   * Gets the html document set as the popup for this browser action.
   */
  Future&lt;String&gt; getPopup(Map details) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _browserAction.callMethod('getPopup', [jsify(details), completer.callback]);
@@ -100,7 +100,7 @@ class ChromeBrowserAction extends ChromeApi {
   * of the icon.
   */
  void setBadgeText(Map details) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    _browserAction.callMethod('setBadgeText', [jsify(details)]);
  }
@@ -110,7 +110,7 @@ class ChromeBrowserAction extends ChromeApi {
   * non-tab-specific badge text is returned.
   */
  Future&lt;String&gt; getBadgeText(Map details) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _browserAction.callMethod('getBadgeText', [jsify(details), completer.callback]);
@@ -121,7 +121,7 @@ class ChromeBrowserAction extends ChromeApi {
   * Sets the background color for the badge.
   */
  void setBadgeBackgroundColor(Map details) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    _browserAction.callMethod('setBadgeBackgroundColor', [jsify(details)]);
  }
@@ -130,7 +130,7 @@ class ChromeBrowserAction extends ChromeApi {
   * Gets the background color of the browser action.
   */
  Future&lt;ColorArray&gt; getBadgeBackgroundColor(Map details) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;ColorArray&gt;.oneArg(_createColorArray);
    _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
@@ -144,7 +144,7 @@ class ChromeBrowserAction extends ChromeApi {
   * [tabId] The id of the tab for which you want to modify the browser action.
   */
  void enable([int tabId]) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    _browserAction.callMethod('enable', [tabId]);
  }
@@ -155,7 +155,7 @@ class ChromeBrowserAction extends ChromeApi {
   * [tabId] The id of the tab for which you want to modify the browser action.
   */
  void disable([int tabId]) {
-   if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+   if (_browserAction == null) _throwNotAvailable();
 
    _browserAction.callMethod('disable', [tabId]);
  }
@@ -168,6 +168,10 @@ class ChromeBrowserAction extends ChromeApi {
 
  final ChromeStreamController&lt;Tab&gt; _onClicked =
      new ChromeStreamController&lt;Tab&gt;.oneArg(_browserAction, 'onClicked', _createTab);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.browserAction' is not available");
+ }
 }
 </pre>
 </div>
@@ -219,7 +223,7 @@ void <strong>disable</strong>([int tabId]) <a class="anchor-link" href="#disable
 <span class="param">tabId</span> The id of the tab for which you want to modify the browser action.</p>
 <pre class="source">
 void disable([int tabId]) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  _browserAction.callMethod('disable', [tabId]);
 }
@@ -237,7 +241,7 @@ enabled.</p>
 <span class="param">tabId</span> The id of the tab for which you want to modify the browser action.</p>
 <pre class="source">
 void enable([int tabId]) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  _browserAction.callMethod('enable', [tabId]);
 }
@@ -252,7 +256,7 @@ Future&lt;<a href="../chrome.browserAction/ColorArray.html">ColorArray</a>&gt; <
 <p>Gets the background color of the browser action.</p>
 <pre class="source">
 Future&lt;ColorArray&gt; getBadgeBackgroundColor(Map details) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;ColorArray&gt;.oneArg(_createColorArray);
  _browserAction.callMethod('getBadgeBackgroundColor', [jsify(details), completer.callback]);
@@ -270,7 +274,7 @@ Future&lt;String&gt; <strong>getBadgeText</strong>(Map details) <a class="anchor
 non-tab-specific badge text is returned.</p>
 <pre class="source">
 Future&lt;String&gt; getBadgeText(Map details) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _browserAction.callMethod('getBadgeText', [jsify(details), completer.callback]);
@@ -287,7 +291,7 @@ Future&lt;String&gt; <strong>getPopup</strong>(Map details) <a class="anchor-lin
 <p>Gets the html document set as the popup for this browser action.</p>
 <pre class="source">
 Future&lt;String&gt; getPopup(Map details) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _browserAction.callMethod('getPopup', [jsify(details), completer.callback]);
@@ -304,7 +308,7 @@ Future&lt;String&gt; <strong>getTitle</strong>(Map details) <a class="anchor-lin
 <p>Gets the title of the browser action.</p>
 <pre class="source">
 Future&lt;String&gt; getTitle(Map details) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _browserAction.callMethod('getTitle', [jsify(details), completer.callback]);
@@ -321,7 +325,7 @@ void <strong>setBadgeBackgroundColor</strong>(Map details) <a class="anchor-link
 <p>Sets the background color for the badge.</p>
 <pre class="source">
 void setBadgeBackgroundColor(Map details) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  _browserAction.callMethod('setBadgeBackgroundColor', [jsify(details)]);
 }
@@ -337,7 +341,7 @@ void <strong>setBadgeText</strong>(Map details) <a class="anchor-link" href="#se
 of the icon.</p>
 <pre class="source">
 void setBadgeText(Map details) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  _browserAction.callMethod('setBadgeText', [jsify(details)]);
 }
@@ -355,7 +359,7 @@ dictionary of either one of those. Either the &lt;b>path&lt;/b> or the
 &lt;b>imageData&lt;/b> property must be specified.</p>
 <pre class="source">
 Future setIcon(Map details) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _browserAction.callMethod('setIcon', [jsify(details), completer.callback]);
@@ -373,7 +377,7 @@ void <strong>setPopup</strong>(Map details) <a class="anchor-link" href="#setPop
 browser action's icon.</p>
 <pre class="source">
 void setPopup(Map details) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  _browserAction.callMethod('setPopup', [jsify(details)]);
 }
@@ -388,7 +392,7 @@ void <strong>setTitle</strong>(Map details) <a class="anchor-link" href="#setTit
 <p>Sets the title of the browser action. This shows up in the tooltip.</p>
 <pre class="source">
 void setTitle(Map details) {
- if (_browserAction == null) throw new UnsupportedError("'chrome.browserAction' is not available");
+ if (_browserAction == null) _throwNotAvailable();
 
  _browserAction.callMethod('setTitle', [jsify(details)]);
 }

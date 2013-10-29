@@ -44,6 +44,10 @@ class ChromeDeclarativeContent extends ChromeApi {
 
  final ChromeStreamController _onPageChanged =
      new ChromeStreamController.noArgs(_declarativeContent, 'onPageChanged');
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.declarativeContent' is not available");
+ }
 }
 </pre>
 </div>

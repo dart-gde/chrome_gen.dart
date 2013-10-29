@@ -53,7 +53,7 @@ class ChromeContextMenus extends ChromeApi {
   * The ID of the newly created item.
   */
  dynamic create(Map createProperties, [dynamic callback]) {
-   if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+   if (_contextMenus == null) _throwNotAvailable();
 
    return _contextMenus.callMethod('create', [jsify(createProperties), jsify(callback)]);
  }
@@ -67,7 +67,7 @@ class ChromeContextMenus extends ChromeApi {
   * create function.
   */
  Future update(dynamic id, Map updateProperties) {
-   if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+   if (_contextMenus == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _contextMenus.callMethod('update', [jsify(id), jsify(updateProperties), completer.callback]);
@@ -80,7 +80,7 @@ class ChromeContextMenus extends ChromeApi {
   * [menuItemId] The ID of the context menu item to remove.
   */
  Future remove(dynamic menuItemId) {
-   if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+   if (_contextMenus == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _contextMenus.callMethod('remove', [jsify(menuItemId), completer.callback]);
@@ -91,7 +91,7 @@ class ChromeContextMenus extends ChromeApi {
   * Removes all context menu items added by this extension.
   */
  Future removeAll() {
-   if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+   if (_contextMenus == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _contextMenus.callMethod('removeAll', [completer.callback]);
@@ -105,6 +105,10 @@ class ChromeContextMenus extends ChromeApi {
 
  final ChromeStreamController&lt;OnClickedEvent&gt; _onClicked =
      new ChromeStreamController&lt;OnClickedEvent&gt;.twoArgs(_contextMenus, 'onClicked', _createOnClickedEvent);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.contextMenus' is not available");
+ }
 }
 </pre>
 </div>
@@ -161,7 +165,7 @@ chrome.runtime.lastError.</p>
 The ID of the newly created item.</p>
 <pre class="source">
 dynamic create(Map createProperties, [dynamic callback]) {
- if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+ if (_contextMenus == null) _throwNotAvailable();
 
  return _contextMenus.callMethod('create', [jsify(createProperties), jsify(callback)]);
 }
@@ -178,7 +182,7 @@ Future <strong>remove</strong>(menuItemId) <a class="anchor-link" href="#remove"
 <span class="param">menuItemId</span> The ID of the context menu item to remove.</p>
 <pre class="source">
 Future remove(dynamic menuItemId) {
- if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+ if (_contextMenus == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _contextMenus.callMethod('remove', [jsify(menuItemId), completer.callback]);
@@ -195,7 +199,7 @@ Future <strong>removeAll</strong>() <a class="anchor-link" href="#removeAll"
 <p>Removes all context menu items added by this extension.</p>
 <pre class="source">
 Future removeAll() {
- if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+ if (_contextMenus == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _contextMenus.callMethod('removeAll', [completer.callback]);
@@ -217,7 +221,7 @@ Future <strong>update</strong>(id, Map updateProperties) <a class="anchor-link" 
 create function.</p>
 <pre class="source">
 Future update(dynamic id, Map updateProperties) {
- if (_contextMenus == null) throw new UnsupportedError("'chrome.contextMenus' is not available");
+ if (_contextMenus == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _contextMenus.callMethod('update', [jsify(id), jsify(updateProperties), completer.callback]);

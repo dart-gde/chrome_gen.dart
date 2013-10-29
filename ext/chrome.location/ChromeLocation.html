@@ -48,7 +48,7 @@ class ChromeLocation extends ChromeApi {
   * [requestInfo]: Optional parameters for this request.
   */
  void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
-   if (_location == null) throw new UnsupportedError("'chrome.location' is not available");
+   if (_location == null) _throwNotAvailable();
 
    _location.callMethod('watchLocation', [name, jsify(requestInfo)]);
  }
@@ -59,7 +59,7 @@ class ChromeLocation extends ChromeApi {
   * empty string.
   */
  void clearWatch(String name) {
-   if (_location == null) throw new UnsupportedError("'chrome.location' is not available");
+   if (_location == null) _throwNotAvailable();
 
    _location.callMethod('clearWatch', [name]);
  }
@@ -73,6 +73,10 @@ class ChromeLocation extends ChromeApi {
 
  final ChromeStreamController&lt;String&gt; _onLocationError =
      new ChromeStreamController&lt;String&gt;.oneArg(_location, 'onLocationError', selfConverter);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.location' is not available");
+ }
 }
 </pre>
 </div>
@@ -135,7 +139,7 @@ void <strong>clearWatch</strong>(String name) <a class="anchor-link" href="#clea
 empty string.</p>
 <pre class="source">
 void clearWatch(String name) {
- if (_location == null) throw new UnsupportedError("'chrome.location' is not available");
+ if (_location == null) _throwNotAvailable();
 
  _location.callMethod('clearWatch', [name]);
 }
@@ -156,7 +160,7 @@ string.
 <span class="param">requestInfo</span>: Optional parameters for this request.</p>
 <pre class="source">
 void watchLocation(String name, WatchLocationRequestInfo requestInfo) {
- if (_location == null) throw new UnsupportedError("'chrome.location' is not available");
+ if (_location == null) _throwNotAvailable();
 
  _location.callMethod('watchLocation', [name, jsify(requestInfo)]);
 }

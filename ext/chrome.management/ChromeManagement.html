@@ -44,7 +44,7 @@ class ChromeManagement extends ChromeApi {
   * Returns a list of information about installed extensions and apps.
   */
  Future&lt;List&lt;ExtensionInfo&gt;&gt; getAll() {
-   if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+   if (_management == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;ExtensionInfo&gt;&gt;.oneArg((e) =&gt; listify(e, _createExtensionInfo));
    _management.callMethod('getAll', [completer.callback]);
@@ -58,7 +58,7 @@ class ChromeManagement extends ChromeApi {
   * [id] The ID from an item of [ExtensionInfo.]
   */
  Future&lt;ExtensionInfo&gt; get(String id) {
-   if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+   if (_management == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;ExtensionInfo&gt;.oneArg(_createExtensionInfo);
    _management.callMethod('get', [id, completer.callback]);
@@ -72,7 +72,7 @@ class ChromeManagement extends ChromeApi {
   * [id] The ID of an already installed extension.
   */
  Future&lt;List&lt;String&gt;&gt; getPermissionWarningsById(String id) {
-   if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+   if (_management == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
    _management.callMethod('getPermissionWarningsById', [id, completer.callback]);
@@ -87,7 +87,7 @@ class ChromeManagement extends ChromeApi {
   * [manifestStr] Extension manifest JSON string.
   */
  Future&lt;List&lt;String&gt;&gt; getPermissionWarningsByManifest(String manifestStr) {
-   if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+   if (_management == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
    _management.callMethod('getPermissionWarningsByManifest', [manifestStr, completer.callback]);
@@ -102,7 +102,7 @@ class ChromeManagement extends ChromeApi {
   * [enabled] Whether this item should be enabled or disabled.
   */
  Future setEnabled(String id, bool enabled) {
-   if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+   if (_management == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _management.callMethod('setEnabled', [id, enabled, completer.callback]);
@@ -115,7 +115,7 @@ class ChromeManagement extends ChromeApi {
   * [id] This should be the id from an item of [ExtensionInfo.]
   */
  Future uninstall(String id, [Map options]) {
-   if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+   if (_management == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _management.callMethod('uninstall', [id, jsify(options), completer.callback]);
@@ -127,7 +127,7 @@ class ChromeManagement extends ChromeApi {
   * requesting the 'management' permission in the manifest.
   */
  Future uninstallSelf([Map options]) {
-   if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+   if (_management == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _management.callMethod('uninstallSelf', [jsify(options), completer.callback]);
@@ -140,7 +140,7 @@ class ChromeManagement extends ChromeApi {
   * [id] The extension id of the application.
   */
  Future launchApp(String id) {
-   if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+   if (_management == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _management.callMethod('launchApp', [id, completer.callback]);
@@ -178,6 +178,10 @@ class ChromeManagement extends ChromeApi {
 
  final ChromeStreamController&lt;ExtensionInfo&gt; _onDisabled =
      new ChromeStreamController&lt;ExtensionInfo&gt;.oneArg(_management, 'onDisabled', _createExtensionInfo);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.management' is not available");
+ }
 }
 </pre>
 </div>
@@ -268,7 +272,7 @@ the given ID.</p>
 <span class="param">id</span> The ID from an item of <a class="crossref" href="../chrome.management/ExtensionInfo.html#">ExtensionInfo.</a></p>
 <pre class="source">
 Future&lt;ExtensionInfo&gt; get(String id) {
- if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+ if (_management == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;ExtensionInfo&gt;.oneArg(_createExtensionInfo);
  _management.callMethod('get', [id, completer.callback]);
@@ -285,7 +289,7 @@ Future&lt;List&lt;<a href="../chrome.management/ExtensionInfo.html">ExtensionInf
 <p>Returns a list of information about installed extensions and apps.</p>
 <pre class="source">
 Future&lt;List&lt;ExtensionInfo&gt;&gt; getAll() {
- if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+ if (_management == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;ExtensionInfo&gt;&gt;.oneArg((e) =&gt; listify(e, _createExtensionInfo));
  _management.callMethod('getAll', [completer.callback]);
@@ -305,7 +309,7 @@ given extension id.</p>
 <span class="param">id</span> The ID of an already installed extension.</p>
 <pre class="source">
 Future&lt;List&lt;String&gt;&gt; getPermissionWarningsById(String id) {
- if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+ if (_management == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
  _management.callMethod('getPermissionWarningsById', [id, completer.callback]);
@@ -326,7 +330,7 @@ requesting the 'management' permission in the manifest.</p>
 <span class="param">manifestStr</span> Extension manifest JSON string.</p>
 <pre class="source">
 Future&lt;List&lt;String&gt;&gt; getPermissionWarningsByManifest(String manifestStr) {
- if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+ if (_management == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
  _management.callMethod('getPermissionWarningsByManifest', [manifestStr, completer.callback]);
@@ -345,7 +349,7 @@ Future <strong>launchApp</strong>(String id) <a class="anchor-link" href="#launc
 <span class="param">id</span> The extension id of the application.</p>
 <pre class="source">
 Future launchApp(String id) {
- if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+ if (_management == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _management.callMethod('launchApp', [id, completer.callback]);
@@ -366,7 +370,7 @@ Future <strong>setEnabled</strong>(String id, bool enabled) <a class="anchor-lin
 <span class="param">enabled</span> Whether this item should be enabled or disabled.</p>
 <pre class="source">
 Future setEnabled(String id, bool enabled) {
- if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+ if (_management == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _management.callMethod('setEnabled', [id, enabled, completer.callback]);
@@ -385,7 +389,7 @@ Future <strong>uninstall</strong>(String id, [Map options]) <a class="anchor-lin
 <span class="param">id</span> This should be the id from an item of <a class="crossref" href="../chrome.management/ExtensionInfo.html#">ExtensionInfo.</a></p>
 <pre class="source">
 Future uninstall(String id, [Map options]) {
- if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+ if (_management == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _management.callMethod('uninstall', [id, jsify(options), completer.callback]);
@@ -403,7 +407,7 @@ Future <strong>uninstallSelf</strong>([Map options]) <a class="anchor-link" href
 requesting the 'management' permission in the manifest.</p>
 <pre class="source">
 Future uninstallSelf([Map options]) {
- if (_management == null) throw new UnsupportedError("'chrome.management' is not available");
+ if (_management == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _management.callMethod('uninstallSelf', [jsify(options), completer.callback]);

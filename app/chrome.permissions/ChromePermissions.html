@@ -47,7 +47,7 @@ class ChromePermissions extends ChromeApi {
   * The extension's active permissions.
   */
  Future&lt;Permissions&gt; getAll() {
-   if (_permissions == null) throw new UnsupportedError("'chrome.permissions' is not available");
+   if (_permissions == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Permissions&gt;.oneArg(_createPermissions);
    _permissions.callMethod('getAll', [completer.callback]);
@@ -61,7 +61,7 @@ class ChromePermissions extends ChromeApi {
   * True if the extension has the specified permissions.
   */
  Future&lt;bool&gt; contains(Permissions permissions) {
-   if (_permissions == null) throw new UnsupportedError("'chrome.permissions' is not available");
+   if (_permissions == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _permissions.callMethod('contains', [jsify(permissions), completer.callback]);
@@ -77,7 +77,7 @@ class ChromePermissions extends ChromeApi {
   * True if the user granted the specified permissions.
   */
  Future&lt;bool&gt; request(Permissions permissions) {
-   if (_permissions == null) throw new UnsupportedError("'chrome.permissions' is not available");
+   if (_permissions == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _permissions.callMethod('request', [jsify(permissions), completer.callback]);
@@ -92,7 +92,7 @@ class ChromePermissions extends ChromeApi {
   * True if the permissions were removed.
   */
  Future&lt;bool&gt; remove(Permissions permissions) {
-   if (_permissions == null) throw new UnsupportedError("'chrome.permissions' is not available");
+   if (_permissions == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _permissions.callMethod('remove', [jsify(permissions), completer.callback]);
@@ -114,6 +114,10 @@ class ChromePermissions extends ChromeApi {
 
  final ChromeStreamController&lt;Permissions&gt; _onRemoved =
      new ChromeStreamController&lt;Permissions&gt;.oneArg(_permissions, 'onRemoved', _createPermissions);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.permissions' is not available");
+ }
 }
 </pre>
 </div>
@@ -177,7 +181,7 @@ Future&lt;bool&gt; <strong>contains</strong>(<a href="../chrome.permissions/Perm
 True if the extension has the specified permissions.</p>
 <pre class="source">
 Future&lt;bool&gt; contains(Permissions permissions) {
- if (_permissions == null) throw new UnsupportedError("'chrome.permissions' is not available");
+ if (_permissions == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _permissions.callMethod('contains', [jsify(permissions), completer.callback]);
@@ -196,7 +200,7 @@ Future&lt;<a href="../chrome.permissions/Permissions.html">Permissions</a>&gt; <
 The extension's active permissions.</p>
 <pre class="source">
 Future&lt;Permissions&gt; getAll() {
- if (_permissions == null) throw new UnsupportedError("'chrome.permissions' is not available");
+ if (_permissions == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Permissions&gt;.oneArg(_createPermissions);
  _permissions.callMethod('getAll', [completer.callback]);
@@ -216,7 +220,7 @@ removing the permissions, <code>runtime.lastError</code> will be set.</p>
 True if the permissions were removed.</p>
 <pre class="source">
 Future&lt;bool&gt; remove(Permissions permissions) {
- if (_permissions == null) throw new UnsupportedError("'chrome.permissions' is not available");
+ if (_permissions == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _permissions.callMethod('remove', [jsify(permissions), completer.callback]);
@@ -237,7 +241,7 @@ problems requesting the permissions, <code>runtime.lastError</code> will be set.
 True if the user granted the specified permissions.</p>
 <pre class="source">
 Future&lt;bool&gt; request(Permissions permissions) {
- if (_permissions == null) throw new UnsupportedError("'chrome.permissions' is not available");
+ if (_permissions == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _permissions.callMethod('request', [jsify(permissions), completer.callback]);

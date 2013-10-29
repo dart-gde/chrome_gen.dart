@@ -54,7 +54,7 @@ class ChromeFileBrowserHandler extends ChromeApi {
   * Result of the method.
   */
  Future&lt;Map&gt; selectFile(Map selectionParams) {
-   if (_fileBrowserHandler == null) throw new UnsupportedError("'chrome.fileBrowserHandler' is not available");
+   if (_fileBrowserHandler == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    _fileBrowserHandler.callMethod('selectFile', [jsify(selectionParams), completer.callback]);
@@ -68,6 +68,10 @@ class ChromeFileBrowserHandler extends ChromeApi {
 
  final ChromeStreamController&lt;OnExecuteEvent&gt; _onExecute =
      new ChromeStreamController&lt;OnExecuteEvent&gt;.twoArgs(_fileBrowserHandler, 'onExecute', _createOnExecuteEvent);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.fileBrowserHandler' is not available");
+ }
 }
 </pre>
 </div>
@@ -125,7 +129,7 @@ gesture.</p>
 Result of the method.</p>
 <pre class="source">
 Future&lt;Map&gt; selectFile(Map selectionParams) {
- if (_fileBrowserHandler == null) throw new UnsupportedError("'chrome.fileBrowserHandler' is not available");
+ if (_fileBrowserHandler == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  _fileBrowserHandler.callMethod('selectFile', [jsify(selectionParams), completer.callback]);

@@ -47,7 +47,7 @@ class ChromePower extends ChromeApi {
   * new request.
   */
  void requestKeepAwake(Level level) {
-   if (_power == null) throw new UnsupportedError("'chrome.power' is not available");
+   if (_power == null) _throwNotAvailable();
 
    _power.callMethod('requestKeepAwake', [jsify(level)]);
  }
@@ -56,9 +56,13 @@ class ChromePower extends ChromeApi {
   * Releases a request previously made via requestKeepAwake().
   */
  void releaseKeepAwake() {
-   if (_power == null) throw new UnsupportedError("'chrome.power' is not available");
+   if (_power == null) _throwNotAvailable();
 
    _power.callMethod('releaseKeepAwake');
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.power' is not available");
  }
 }
 </pre>
@@ -95,7 +99,7 @@ void <strong>releaseKeepAwake</strong>() <a class="anchor-link" href="#releaseKe
 <p>Releases a request previously made via requestKeepAwake().</p>
 <pre class="source">
 void releaseKeepAwake() {
- if (_power == null) throw new UnsupportedError("'chrome.power' is not available");
+ if (_power == null) _throwNotAvailable();
 
  _power.callMethod('releaseKeepAwake');
 }
@@ -114,7 +118,7 @@ previously made by the same app is still active, it will be replaced by the
 new request.</p>
 <pre class="source">
 void requestKeepAwake(Level level) {
- if (_power == null) throw new UnsupportedError("'chrome.power' is not available");
+ if (_power == null) _throwNotAvailable();
 
  _power.callMethod('requestKeepAwake', [jsify(level)]);
 }

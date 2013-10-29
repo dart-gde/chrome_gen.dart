@@ -49,7 +49,7 @@ class ChromeNotifications extends ChromeApi {
   * supplied or generated) that represents the created notification.
   */
  Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
-   if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+   if (_notifications == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _notifications.callMethod('create', [notificationId, jsify(options), completer.callback]);
@@ -62,7 +62,7 @@ class ChromeNotifications extends ChromeApi {
   * existed.
   */
  Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
-   if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+   if (_notifications == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _notifications.callMethod('update', [notificationId, jsify(options), completer.callback]);
@@ -75,7 +75,7 @@ class ChromeNotifications extends ChromeApi {
   * notification existed.
   */
  Future&lt;bool&gt; clear(String notificationId) {
-   if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+   if (_notifications == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _notifications.callMethod('clear', [notificationId, completer.callback]);
@@ -87,7 +87,7 @@ class ChromeNotifications extends ChromeApi {
   * system.
   */
  Future&lt;dynamic&gt; getAll() {
-   if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+   if (_notifications == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
    _notifications.callMethod('getAll', [completer.callback]);
@@ -108,6 +108,10 @@ class ChromeNotifications extends ChromeApi {
 
  final ChromeStreamController&lt;OnButtonClickedEvent&gt; _onButtonClicked =
      new ChromeStreamController&lt;OnButtonClickedEvent&gt;.twoArgs(_notifications, 'onButtonClicked', _createOnButtonClickedEvent);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.notifications' is not available");
+ }
 }
 </pre>
 </div>
@@ -182,7 +186,7 @@ corresponding notification. <code>callback</code> indicates whether a matching
 notification existed.</p>
 <pre class="source">
 Future&lt;bool&gt; clear(String notificationId) {
- if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+ if (_notifications == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _notifications.callMethod('clear', [notificationId, completer.callback]);
@@ -208,7 +212,7 @@ with the create operation. <code>callback</code> returns the notification id (ei
 supplied or generated) that represents the created notification.</p>
 <pre class="source">
 Future&lt;String&gt; create(String notificationId, NotificationOptions options) {
- if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+ if (_notifications == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _notifications.callMethod('create', [notificationId, jsify(options), completer.callback]);
@@ -226,7 +230,7 @@ Future&lt;dynamic&gt; <strong>getAll</strong>() <a class="anchor-link" href="#ge
 system.</p>
 <pre class="source">
 Future&lt;dynamic&gt; getAll() {
- if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+ if (_notifications == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
  _notifications.callMethod('getAll', [completer.callback]);
@@ -247,7 +251,7 @@ options
 existed.</p>
 <pre class="source">
 Future&lt;bool&gt; update(String notificationId, NotificationOptions options) {
- if (_notifications == null) throw new UnsupportedError("'chrome.notifications' is not available");
+ if (_notifications == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _notifications.callMethod('update', [notificationId, jsify(options), completer.callback]);

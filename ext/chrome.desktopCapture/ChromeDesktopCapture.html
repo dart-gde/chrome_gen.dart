@@ -58,11 +58,15 @@ class ChromeDesktopCapture extends ChromeApi {
   * callback is called with an empty `streamId`.
   */
  Future&lt;String&gt; chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
-   if (_desktopCapture == null) throw new UnsupportedError("'chrome.desktopCapture' is not available");
+   if (_desktopCapture == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), origin, completer.callback]);
    return completer.future;
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.desktopCapture' is not available");
  }
 }
 </pre>
@@ -111,7 +115,7 @@ If user didn't select any source (i.e. canceled the prompt) then the
 callback is called with an empty <code>streamId</code>.</p>
 <pre class="source">
 Future&lt;String&gt; chooseDesktopMedia(DesktopCaptureSourceType sources, [String origin]) {
- if (_desktopCapture == null) throw new UnsupportedError("'chrome.desktopCapture' is not available");
+ if (_desktopCapture == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), origin, completer.callback]);

@@ -44,11 +44,15 @@ class ChromeTopSites extends ChromeApi {
   * Gets a list of top sites.
   */
  Future&lt;List&lt;MostVisitedURL&gt;&gt; get() {
-   if (_topSites == null) throw new UnsupportedError("'chrome.topSites' is not available");
+   if (_topSites == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;MostVisitedURL&gt;&gt;.oneArg((e) =&gt; listify(e, _createMostVisitedURL));
    _topSites.callMethod('get', [completer.callback]);
    return completer.future;
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.topSites' is not available");
  }
 }
 </pre>
@@ -85,7 +89,7 @@ Future&lt;List&lt;<a href="../chrome.topSites/MostVisitedURL.html">MostVisitedUR
 <p>Gets a list of top sites.</p>
 <pre class="source">
 Future&lt;List&lt;MostVisitedURL&gt;&gt; get() {
- if (_topSites == null) throw new UnsupportedError("'chrome.topSites' is not available");
+ if (_topSites == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;MostVisitedURL&gt;&gt;.oneArg((e) =&gt; listify(e, _createMostVisitedURL));
  _topSites.callMethod('get', [completer.callback]);

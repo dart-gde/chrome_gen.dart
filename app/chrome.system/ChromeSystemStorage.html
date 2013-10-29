@@ -45,7 +45,7 @@ class ChromeSystemStorage extends ChromeApi {
   * callback is an array of StorageUnitInfo objects.
   */
  Future&lt;StorageUnitInfo&gt; getInfo() {
-   if (_system_storage == null) throw new UnsupportedError("'chrome.system.storage' is not available");
+   if (_system_storage == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(_createStorageUnitInfo);
    _system_storage.callMethod('getInfo', [completer.callback]);
@@ -56,7 +56,7 @@ class ChromeSystemStorage extends ChromeApi {
   * Ejects a removable storage device.
   */
  Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
-   if (_system_storage == null) throw new UnsupportedError("'chrome.system.storage' is not available");
+   if (_system_storage == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(_createEjectDeviceResultCode);
    _system_storage.callMethod('ejectDevice', [id, completer.callback]);
@@ -72,6 +72,10 @@ class ChromeSystemStorage extends ChromeApi {
 
  final ChromeStreamController&lt;String&gt; _onDetached =
      new ChromeStreamController&lt;String&gt;.oneArg(_system_storage, 'onDetached', selfConverter);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.system.storage' is not available");
+ }
 }
 </pre>
 </div>
@@ -131,7 +135,7 @@ Future&lt;<a href="../chrome.system/EjectDeviceResultCode.html">EjectDeviceResul
 <p>Ejects a removable storage device.</p>
 <pre class="source">
 Future&lt;EjectDeviceResultCode&gt; ejectDevice(String id) {
- if (_system_storage == null) throw new UnsupportedError("'chrome.system.storage' is not available");
+ if (_system_storage == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;EjectDeviceResultCode&gt;.oneArg(_createEjectDeviceResultCode);
  _system_storage.callMethod('ejectDevice', [id, completer.callback]);
@@ -149,7 +153,7 @@ Future&lt;<a href="../chrome.system/StorageUnitInfo.html">StorageUnitInfo</a>&gt
 callback is an array of StorageUnitInfo objects.</p>
 <pre class="source">
 Future&lt;StorageUnitInfo&gt; getInfo() {
- if (_system_storage == null) throw new UnsupportedError("'chrome.system.storage' is not available");
+ if (_system_storage == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(_createStorageUnitInfo);
  _system_storage.callMethod('getInfo', [completer.callback]);

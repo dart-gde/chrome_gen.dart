@@ -54,6 +54,10 @@ class ChromeDeclarativeWebRequest extends ChromeApi {
 
  final ChromeStreamController&lt;Map&gt; _onMessage =
      new ChromeStreamController&lt;Map&gt;.oneArg(_declarativeWebRequest, 'onMessage', mapify);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.declarativeWebRequest' is not available");
+ }
 }
 </pre>
 </div>

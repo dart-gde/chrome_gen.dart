@@ -54,7 +54,7 @@ class ChromeSerial extends ChromeApi {
   * device connected to a serial port.
   */
  Future&lt;String&gt; getPorts() {
-   if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+   if (_serial == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _serial.callMethod('getPorts', [completer.callback]);
@@ -68,7 +68,7 @@ class ChromeSerial extends ChromeApi {
   * [callback]: Called when the connection has been opened.
   */
  Future&lt;OpenInfo&gt; open(String port, [OpenOptions options]) {
-   if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+   if (_serial == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;OpenInfo&gt;.oneArg(_createOpenInfo);
    _serial.callMethod('open', [port, jsify(options), completer.callback]);
@@ -84,7 +84,7 @@ class ChromeSerial extends ChromeApi {
   * Returns true if operation was successful.
   */
  Future&lt;bool&gt; close(int connectionId) {
-   if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+   if (_serial == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _serial.callMethod('close', [connectionId, completer.callback]);
@@ -99,7 +99,7 @@ class ChromeSerial extends ChromeApi {
   * read blocks.
   */
  Future&lt;SerialReadInfo&gt; read(int connectionId, int bytesToRead) {
-   if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+   if (_serial == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;SerialReadInfo&gt;.oneArg(_createSerialReadInfo);
    _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
@@ -113,7 +113,7 @@ class ChromeSerial extends ChromeApi {
   * [callback]: Called when the string has been written.
   */
  Future&lt;SerialWriteInfo&gt; write(int connectionId, ArrayBuffer data) {
-   if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+   if (_serial == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;SerialWriteInfo&gt;.oneArg(_createSerialWriteInfo);
    _serial.callMethod('write', [connectionId, jsify(data), completer.callback]);
@@ -129,7 +129,7 @@ class ChromeSerial extends ChromeApi {
   * Returns true if operation was successful.
   */
  Future&lt;bool&gt; flush(int connectionId) {
-   if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+   if (_serial == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _serial.callMethod('flush', [connectionId, completer.callback]);
@@ -137,7 +137,7 @@ class ChromeSerial extends ChromeApi {
  }
 
  Future&lt;ControlSignalOptions&gt; getControlSignals(int connectionId) {
-   if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+   if (_serial == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;ControlSignalOptions&gt;.oneArg(_createControlSignalOptions);
    _serial.callMethod('getControlSignals', [connectionId, completer.callback]);
@@ -145,11 +145,15 @@ class ChromeSerial extends ChromeApi {
  }
 
  Future&lt;bool&gt; setControlSignals(int connectionId, ControlSignalOptions options) {
-   if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+   if (_serial == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
    _serial.callMethod('setControlSignals', [connectionId, jsify(options), completer.callback]);
    return completer.future;
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.serial' is not available");
  }
 }
 </pre>
@@ -191,7 +195,7 @@ Future&lt;bool&gt; <strong>close</strong>(int connectionId) <a class="anchor-lin
 Returns true if operation was successful.</p>
 <pre class="source">
 Future&lt;bool&gt; close(int connectionId) {
- if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+ if (_serial == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _serial.callMethod('close', [connectionId, completer.callback]);
@@ -213,7 +217,7 @@ Future&lt;bool&gt; <strong>flush</strong>(int connectionId) <a class="anchor-lin
 Returns true if operation was successful.</p>
 <pre class="source">
 Future&lt;bool&gt; flush(int connectionId) {
- if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+ if (_serial == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _serial.callMethod('flush', [connectionId, completer.callback]);
@@ -229,7 +233,7 @@ Future&lt;<a href="../chrome.serial/ControlSignalOptions.html">ControlSignalOpti
 <div class="doc">
 <pre class="source">
 Future&lt;ControlSignalOptions&gt; getControlSignals(int connectionId) {
- if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+ if (_serial == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;ControlSignalOptions&gt;.oneArg(_createControlSignalOptions);
  _serial.callMethod('getControlSignals', [connectionId, completer.callback]);
@@ -254,7 +258,7 @@ LICENSE file. Use the <code>chrome.serial</code> API to read from and write to a
 device connected to a serial port.</p>
 <pre class="source">
 Future&lt;String&gt; getPorts() {
- if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+ if (_serial == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _serial.callMethod('getPorts', [completer.callback]);
@@ -276,7 +280,7 @@ Future&lt;<a href="../chrome.serial/OpenInfo.html">OpenInfo</a>&gt; <strong>open
 <code>callback</code>: Called when the connection has been opened.</p>
 <pre class="source">
 Future&lt;OpenInfo&gt; open(String port, [OpenOptions options]) {
- if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+ if (_serial == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;OpenInfo&gt;.oneArg(_createOpenInfo);
  _serial.callMethod('open', [port, jsify(options), completer.callback]);
@@ -299,7 +303,7 @@ Future&lt;<a href="../chrome.serial/SerialReadInfo.html">SerialReadInfo</a>&gt; 
 read blocks.</p>
 <pre class="source">
 Future&lt;SerialReadInfo&gt; read(int connectionId, int bytesToRead) {
- if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+ if (_serial == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;SerialReadInfo&gt;.oneArg(_createSerialReadInfo);
  _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
@@ -315,7 +319,7 @@ Future&lt;bool&gt; <strong>setControlSignals</strong>(int connectionId, <a href=
 <div class="doc">
 <pre class="source">
 Future&lt;bool&gt; setControlSignals(int connectionId, ControlSignalOptions options) {
- if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+ if (_serial == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;bool&gt;.oneArg();
  _serial.callMethod('setControlSignals', [connectionId, jsify(options), completer.callback]);
@@ -337,7 +341,7 @@ Future&lt;<a href="../chrome.serial/SerialWriteInfo.html">SerialWriteInfo</a>&gt
 <code>callback</code>: Called when the string has been written.</p>
 <pre class="source">
 Future&lt;SerialWriteInfo&gt; write(int connectionId, ArrayBuffer data) {
- if (_serial == null) throw new UnsupportedError("'chrome.serial' is not available");
+ if (_serial == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;SerialWriteInfo&gt;.oneArg(_createSerialWriteInfo);
  _serial.callMethod('write', [connectionId, jsify(data), completer.callback]);

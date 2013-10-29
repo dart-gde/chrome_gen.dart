@@ -47,7 +47,7 @@ class ChromePageAction extends ChromeApi {
   * [tabId] The id of the tab for which you want to modify the page action.
   */
  void show(int tabId) {
-   if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+   if (_pageAction == null) _throwNotAvailable();
 
    _pageAction.callMethod('show', [tabId]);
  }
@@ -58,7 +58,7 @@ class ChromePageAction extends ChromeApi {
   * [tabId] The id of the tab for which you want to modify the page action.
   */
  void hide(int tabId) {
-   if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+   if (_pageAction == null) _throwNotAvailable();
 
    _pageAction.callMethod('hide', [tabId]);
  }
@@ -68,7 +68,7 @@ class ChromePageAction extends ChromeApi {
   * page action.
   */
  void setTitle(Map details) {
-   if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+   if (_pageAction == null) _throwNotAvailable();
 
    _pageAction.callMethod('setTitle', [jsify(details)]);
  }
@@ -77,7 +77,7 @@ class ChromePageAction extends ChromeApi {
   * Gets the title of the page action.
   */
  Future&lt;String&gt; getTitle(Map details) {
-   if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+   if (_pageAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
@@ -91,7 +91,7 @@ class ChromePageAction extends ChromeApi {
   * &lt;b&gt;imageData&lt;/b&gt; property must be specified.
   */
  Future setIcon(Map details) {
-   if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+   if (_pageAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
@@ -103,7 +103,7 @@ class ChromePageAction extends ChromeApi {
   * page action's icon.
   */
  void setPopup(Map details) {
-   if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+   if (_pageAction == null) _throwNotAvailable();
 
    _pageAction.callMethod('setPopup', [jsify(details)]);
  }
@@ -112,7 +112,7 @@ class ChromePageAction extends ChromeApi {
   * Gets the html document set as the popup for this page action.
   */
  Future&lt;String&gt; getPopup(Map details) {
-   if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+   if (_pageAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
    _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
@@ -127,6 +127,10 @@ class ChromePageAction extends ChromeApi {
 
  final ChromeStreamController&lt;Tab&gt; _onClicked =
      new ChromeStreamController&lt;Tab&gt;.oneArg(_pageAction, 'onClicked', _createTab);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.pageAction' is not available");
+ }
 }
 </pre>
 </div>
@@ -176,7 +180,7 @@ Future&lt;String&gt; <strong>getPopup</strong>(Map details) <a class="anchor-lin
 <p>Gets the html document set as the popup for this page action.</p>
 <pre class="source">
 Future&lt;String&gt; getPopup(Map details) {
- if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+ if (_pageAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _pageAction.callMethod('getPopup', [jsify(details), completer.callback]);
@@ -193,7 +197,7 @@ Future&lt;String&gt; <strong>getTitle</strong>(Map details) <a class="anchor-lin
 <p>Gets the title of the page action.</p>
 <pre class="source">
 Future&lt;String&gt; getTitle(Map details) {
- if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+ if (_pageAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
  _pageAction.callMethod('getTitle', [jsify(details), completer.callback]);
@@ -212,7 +216,7 @@ void <strong>hide</strong>(int tabId) <a class="anchor-link" href="#hide"
 <span class="param">tabId</span> The id of the tab for which you want to modify the page action.</p>
 <pre class="source">
 void hide(int tabId) {
- if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+ if (_pageAction == null) _throwNotAvailable();
 
  _pageAction.callMethod('hide', [tabId]);
 }
@@ -230,7 +234,7 @@ dictionary of either one of those. Either the &lt;b>path&lt;/b> or the
 &lt;b>imageData&lt;/b> property must be specified.</p>
 <pre class="source">
 Future setIcon(Map details) {
- if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+ if (_pageAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _pageAction.callMethod('setIcon', [jsify(details), completer.callback]);
@@ -248,7 +252,7 @@ void <strong>setPopup</strong>(Map details) <a class="anchor-link" href="#setPop
 page action's icon.</p>
 <pre class="source">
 void setPopup(Map details) {
- if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+ if (_pageAction == null) _throwNotAvailable();
 
  _pageAction.callMethod('setPopup', [jsify(details)]);
 }
@@ -264,7 +268,7 @@ void <strong>setTitle</strong>(Map details) <a class="anchor-link" href="#setTit
 page action.</p>
 <pre class="source">
 void setTitle(Map details) {
- if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+ if (_pageAction == null) _throwNotAvailable();
 
  _pageAction.callMethod('setTitle', [jsify(details)]);
 }
@@ -282,7 +286,7 @@ selected.</p>
 <span class="param">tabId</span> The id of the tab for which you want to modify the page action.</p>
 <pre class="source">
 void show(int tabId) {
- if (_pageAction == null) throw new UnsupportedError("'chrome.pageAction' is not available");
+ if (_pageAction == null) _throwNotAvailable();
 
  _pageAction.callMethod('show', [tabId]);
 }

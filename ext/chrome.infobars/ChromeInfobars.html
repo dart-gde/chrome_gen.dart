@@ -49,11 +49,15 @@ class ChromeInfobars extends ChromeApi {
   * Contains details about the window in which the infobar was created.
   */
  Future&lt;Window&gt; show(Map details) {
-   if (_infobars == null) throw new UnsupportedError("'chrome.infobars' is not available");
+   if (_infobars == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
    _infobars.callMethod('show', [jsify(details), completer.callback]);
    return completer.future;
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.infobars' is not available");
  }
 }
 </pre>
@@ -94,7 +98,7 @@ infobar before then.</p>
 Contains details about the window in which the infobar was created.</p>
 <pre class="source">
 Future&lt;Window&gt; show(Map details) {
- if (_infobars == null) throw new UnsupportedError("'chrome.infobars' is not available");
+ if (_infobars == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
  _infobars.callMethod('show', [jsify(details), completer.callback]);

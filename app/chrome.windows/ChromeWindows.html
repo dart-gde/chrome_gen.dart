@@ -57,7 +57,7 @@ class ChromeWindows extends ChromeApi {
   * [getInfo]
   */
  Future&lt;Window&gt; get(int windowId, [Map getInfo]) {
-   if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+   if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
    _windows.callMethod('get', [windowId, jsify(getInfo), completer.callback]);
@@ -70,7 +70,7 @@ class ChromeWindows extends ChromeApi {
   * [getInfo]
   */
  Future&lt;Window&gt; getCurrent([Map getInfo]) {
-   if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+   if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
    _windows.callMethod('getCurrent', [jsify(getInfo), completer.callback]);
@@ -84,7 +84,7 @@ class ChromeWindows extends ChromeApi {
   * [getInfo]
   */
  Future&lt;Window&gt; getLastFocused([Map getInfo]) {
-   if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+   if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
    _windows.callMethod('getLastFocused', [jsify(getInfo), completer.callback]);
@@ -97,7 +97,7 @@ class ChromeWindows extends ChromeApi {
   * [getInfo]
   */
  Future&lt;List&lt;Window&gt;&gt; getAll([Map getInfo]) {
-   if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+   if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Window&gt;&gt;.oneArg((e) =&gt; listify(e, _createWindow));
    _windows.callMethod('getAll', [jsify(getInfo), completer.callback]);
@@ -112,7 +112,7 @@ class ChromeWindows extends ChromeApi {
   * Contains details about the created window.
   */
  Future&lt;Window&gt; create([Map createData]) {
-   if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+   if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
    _windows.callMethod('create', [jsify(createData), completer.callback]);
@@ -124,7 +124,7 @@ class ChromeWindows extends ChromeApi {
   * want to change; unspecified properties will be left unchanged.
   */
  Future&lt;Window&gt; update(int windowId, Map updateInfo) {
-   if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+   if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
    _windows.callMethod('update', [windowId, jsify(updateInfo), completer.callback]);
@@ -135,7 +135,7 @@ class ChromeWindows extends ChromeApi {
   * Removes (closes) a window, and all the tabs inside it.
   */
  Future remove(int windowId) {
-   if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+   if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _windows.callMethod('remove', [windowId, completer.callback]);
@@ -168,6 +168,10 @@ class ChromeWindows extends ChromeApi {
 
  final ChromeStreamController&lt;int&gt; _onFocusChanged =
      new ChromeStreamController&lt;int&gt;.oneArg(_windows, 'onFocusChanged', selfConverter);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.windows' is not available");
+ }
 }
 </pre>
 </div>
@@ -275,7 +279,7 @@ URL provided.</p>
 Contains details about the created window.</p>
 <pre class="source">
 Future&lt;Window&gt; create([Map createData]) {
- if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+ if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
  _windows.callMethod('create', [jsify(createData), completer.callback]);
@@ -294,7 +298,7 @@ Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>get</st
 <span class="param">getInfo</span></p>
 <pre class="source">
 Future&lt;Window&gt; get(int windowId, [Map getInfo]) {
- if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+ if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
  _windows.callMethod('get', [windowId, jsify(getInfo), completer.callback]);
@@ -313,7 +317,7 @@ Future&lt;List&lt;<a href="../chrome.windows/Window.html">Window</a>&gt;&gt; <st
 <span class="param">getInfo</span></p>
 <pre class="source">
 Future&lt;List&lt;Window&gt;&gt; getAll([Map getInfo]) {
- if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+ if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Window&gt;&gt;.oneArg((e) =&gt; listify(e, _createWindow));
  _windows.callMethod('getAll', [jsify(getInfo), completer.callback]);
@@ -332,7 +336,7 @@ Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>getCurr
 <span class="param">getInfo</span></p>
 <pre class="source">
 Future&lt;Window&gt; getCurrent([Map getInfo]) {
- if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+ if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
  _windows.callMethod('getCurrent', [jsify(getInfo), completer.callback]);
@@ -352,7 +356,7 @@ top'.</p>
 <span class="param">getInfo</span></p>
 <pre class="source">
 Future&lt;Window&gt; getLastFocused([Map getInfo]) {
- if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+ if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
  _windows.callMethod('getLastFocused', [jsify(getInfo), completer.callback]);
@@ -369,7 +373,7 @@ Future <strong>remove</strong>(int windowId) <a class="anchor-link" href="#remov
 <p>Removes (closes) a window, and all the tabs inside it.</p>
 <pre class="source">
 Future remove(int windowId) {
- if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+ if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _windows.callMethod('remove', [windowId, completer.callback]);
@@ -387,7 +391,7 @@ Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>update<
 want to change; unspecified properties will be left unchanged.</p>
 <pre class="source">
 Future&lt;Window&gt; update(int windowId, Map updateInfo) {
- if (_windows == null) throw new UnsupportedError("'chrome.windows' is not available");
+ if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
  _windows.callMethod('update', [windowId, jsify(updateInfo), completer.callback]);

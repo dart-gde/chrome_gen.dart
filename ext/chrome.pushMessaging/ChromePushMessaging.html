@@ -48,7 +48,7 @@ class ChromePushMessaging extends ChromeApi {
   * when they are not already logged in.
   */
  Future&lt;ChannelIdResult&gt; getChannelId([bool interactive]) {
-   if (_pushMessaging == null) throw new UnsupportedError("'chrome.pushMessaging' is not available");
+   if (_pushMessaging == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;ChannelIdResult&gt;.oneArg(_createChannelIdResult);
    _pushMessaging.callMethod('getChannelId', [interactive, completer.callback]);
@@ -59,6 +59,10 @@ class ChromePushMessaging extends ChromeApi {
 
  final ChromeStreamController&lt;Message&gt; _onMessage =
      new ChromeStreamController&lt;Message&gt;.oneArg(_pushMessaging, 'onMessage', _createMessage);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.pushMessaging' is not available");
+ }
 }
 </pre>
 </div>
@@ -110,7 +114,7 @@ extension. If the interactive flag is set, we will ask the user to log in
 when they are not already logged in.</p>
 <pre class="source">
 Future&lt;ChannelIdResult&gt; getChannelId([bool interactive]) {
- if (_pushMessaging == null) throw new UnsupportedError("'chrome.pushMessaging' is not available");
+ if (_pushMessaging == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;ChannelIdResult&gt;.oneArg(_createChannelIdResult);
  _pushMessaging.callMethod('getChannelId', [interactive, completer.callback]);

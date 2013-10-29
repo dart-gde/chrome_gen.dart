@@ -53,6 +53,10 @@ class ChromeProxy extends ChromeApi {
 
  final ChromeStreamController&lt;Map&gt; _onProxyError =
      new ChromeStreamController&lt;Map&gt;.oneArg(_proxy, 'onProxyError', mapify);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.proxy' is not available");
+ }
 }
 </pre>
 </div>

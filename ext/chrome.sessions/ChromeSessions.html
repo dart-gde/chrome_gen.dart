@@ -54,7 +54,7 @@ class ChromeSessions extends ChromeApi {
   * either tabs or windows.
   */
  Future&lt;List&lt;Session&gt;&gt; getRecentlyClosed([Filter filter]) {
-   if (_sessions == null) throw new UnsupportedError("'chrome.sessions' is not available");
+   if (_sessions == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Session&gt;&gt;.oneArg((e) =&gt; listify(e, _createSession));
    _sessions.callMethod('getRecentlyClosed', [jsify(filter), completer.callback]);
@@ -71,7 +71,7 @@ class ChromeSessions extends ChromeApi {
   * [windows.Window] of the [Session] objects.
   */
  Future&lt;List&lt;Device&gt;&gt; getDevices([Filter filter]) {
-   if (_sessions == null) throw new UnsupportedError("'chrome.sessions' is not available");
+   if (_sessions == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Device&gt;&gt;.oneArg((e) =&gt; listify(e, _createDevice));
    _sessions.callMethod('getDevices', [jsify(filter), completer.callback]);
@@ -89,11 +89,15 @@ class ChromeSessions extends ChromeApi {
   * A [Session] containing the restored [windows.Window] or [tabs.Tab] object.
   */
  Future&lt;Session&gt; restore([String sessionId]) {
-   if (_sessions == null) throw new UnsupportedError("'chrome.sessions' is not available");
+   if (_sessions == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Session&gt;.oneArg(_createSession);
    _sessions.callMethod('restore', [sessionId, completer.callback]);
    return completer.future;
+ }
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.sessions' is not available");
  }
 }
 </pre>
@@ -148,7 +152,7 @@ modified session. <code>tabs.Tab</code> objects are sorted by recency in the
 <code>windows.Window</code> of the <a class="crossref" href="../chrome.sessions/Session.html">Session</a> objects.</p>
 <pre class="source">
 Future&lt;List&lt;Device&gt;&gt; getDevices([Filter filter]) {
- if (_sessions == null) throw new UnsupportedError("'chrome.sessions' is not available");
+ if (_sessions == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Device&gt;&gt;.oneArg((e) =&gt; listify(e, _createDevice));
  _sessions.callMethod('getDevices', [jsify(filter), completer.callback]);
@@ -169,7 +173,7 @@ recently closed tab or window will be at index <code>0</code>).The entries may c
 either tabs or windows.</p>
 <pre class="source">
 Future&lt;List&lt;Session&gt;&gt; getRecentlyClosed([Filter filter]) {
- if (_sessions == null) throw new UnsupportedError("'chrome.sessions' is not available");
+ if (_sessions == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Session&gt;&gt;.oneArg((e) =&gt; listify(e, _createSession));
  _sessions.callMethod('getRecentlyClosed', [jsify(filter), completer.callback]);
@@ -192,7 +196,7 @@ restore.</p>
 A <a class="crossref" href="../chrome.sessions/Session.html">Session</a> containing the restored <code>windows.Window</code> or <code>tabs.Tab</code> object.</p>
 <pre class="source">
 Future&lt;Session&gt; restore([String sessionId]) {
- if (_sessions == null) throw new UnsupportedError("'chrome.sessions' is not available");
+ if (_sessions == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Session&gt;.oneArg(_createSession);
  _sessions.callMethod('restore', [sessionId, completer.callback]);

@@ -71,7 +71,7 @@ class ChromeAppWindow extends ChromeApi {
   *  `window.onload = function () { foo(); }`
   */
  Future&lt;AppWindow&gt; create(String url, [CreateWindowOptions options]) {
-   if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+   if (_app_window == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;AppWindow&gt;.oneArg(_createAppWindow);
    _app_window.callMethod('create', [url, jsify(options), completer.callback]);
@@ -84,13 +84,13 @@ class ChromeAppWindow extends ChromeApi {
   * for another page, for example: otherWindow.chrome.app.window.current().
   */
  AppWindow current() {
-   if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+   if (_app_window == null) _throwNotAvailable();
 
    return _createAppWindow(_app_window.callMethod('current'));
  }
 
  void initializeAppWindow(dynamic state) {
-   if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+   if (_app_window == null) _throwNotAvailable();
 
    _app_window.callMethod('initializeAppWindow', [jsify(state)]);
  }
@@ -124,6 +124,10 @@ class ChromeAppWindow extends ChromeApi {
 
  final ChromeStreamController _onRestored =
      new ChromeStreamController.noArgs(_app_window, 'onRestored');
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.app.window' is not available");
+ }
 }
 </pre>
 </div>
@@ -252,7 +256,7 @@ child usable from onload. E.g. background.js:</p>
 <p> <code>window.onload = function () { foo(); }</code></p>
 <pre class="source">
 Future&lt;AppWindow&gt; create(String url, [CreateWindowOptions options]) {
- if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+ if (_app_window == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;AppWindow&gt;.oneArg(_createAppWindow);
  _app_window.callMethod('create', [url, jsify(options), completer.callback]);
@@ -271,7 +275,7 @@ Future&lt;AppWindow&gt; create(String url, [CreateWindowOptions options]) {
 for another page, for example: otherWindow.chrome.app.window.current().</p>
 <pre class="source">
 AppWindow current() {
- if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+ if (_app_window == null) _throwNotAvailable();
 
  return _createAppWindow(_app_window.callMethod('current'));
 }
@@ -285,7 +289,7 @@ void <strong>initializeAppWindow</strong>(state) <a class="anchor-link" href="#i
 <div class="doc">
 <pre class="source">
 void initializeAppWindow(dynamic state) {
- if (_app_window == null) throw new UnsupportedError("'chrome.app.window' is not available");
+ if (_app_window == null) _throwNotAvailable();
 
  _app_window.callMethod('initializeAppWindow', [jsify(state)]);
 }

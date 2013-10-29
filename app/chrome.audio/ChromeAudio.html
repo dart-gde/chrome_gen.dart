@@ -48,7 +48,7 @@ class ChromeAudio extends ChromeApi {
   * [inputInfo] null
   */
  Future&lt;GetInfoResult&gt; getInfo() {
-   if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+   if (_audio == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;GetInfoResult&gt;.twoArgs(GetInfoResult._create);
    _audio.callMethod('getInfo', [completer.callback]);
@@ -59,7 +59,7 @@ class ChromeAudio extends ChromeApi {
   * Select a subset of audio devices as active.
   */
  Future setActiveDevices(String ids) {
-   if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+   if (_audio == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _audio.callMethod('setActiveDevices', [ids, completer.callback]);
@@ -70,7 +70,7 @@ class ChromeAudio extends ChromeApi {
   * Sets the properties for the input or output device.
   */
  Future setProperties(String id, DeviceProperties properties) {
-   if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+   if (_audio == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
    _audio.callMethod('setProperties', [id, jsify(properties), completer.callback]);
@@ -81,6 +81,10 @@ class ChromeAudio extends ChromeApi {
 
  final ChromeStreamController _onDeviceChanged =
      new ChromeStreamController.noArgs(_audio, 'onDeviceChanged');
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.audio' is not available");
+ }
 }
 </pre>
 </div>
@@ -131,7 +135,7 @@ Future&lt;<a href="../chrome.audio/GetInfoResult.html">GetInfoResult</a>&gt; <st
 <code>inputInfo</code> null</p>
 <pre class="source">
 Future&lt;GetInfoResult&gt; getInfo() {
- if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+ if (_audio == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;GetInfoResult&gt;.twoArgs(GetInfoResult._create);
  _audio.callMethod('getInfo', [completer.callback]);
@@ -148,7 +152,7 @@ Future <strong>setActiveDevices</strong>(String ids) <a class="anchor-link" href
 <p>Select a subset of audio devices as active.</p>
 <pre class="source">
 Future setActiveDevices(String ids) {
- if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+ if (_audio == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _audio.callMethod('setActiveDevices', [ids, completer.callback]);
@@ -165,7 +169,7 @@ Future <strong>setProperties</strong>(String id, <a href="../chrome.audio/Device
 <p>Sets the properties for the input or output device.</p>
 <pre class="source">
 Future setProperties(String id, DeviceProperties properties) {
- if (_audio == null) throw new UnsupportedError("'chrome.audio' is not available");
+ if (_audio == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
  _audio.callMethod('setProperties', [id, jsify(properties), completer.callback]);

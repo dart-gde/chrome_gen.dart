@@ -63,7 +63,7 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
   * expression.
   */
  Future&lt;EvalResult&gt; eval(String expression) {
-   if (_devtools_inspectedWindow == null) throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+   if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;EvalResult&gt;.twoArgs(EvalResult._create);
    _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
@@ -74,7 +74,7 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
   * Reloads the inspected page.
   */
  void reload([Map reloadOptions]) {
-   if (_devtools_inspectedWindow == null) throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+   if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
    _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
  }
@@ -86,7 +86,7 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
   * The resources within the page.
   */
  Future&lt;List&lt;Resource&gt;&gt; getResources() {
-   if (_devtools_inspectedWindow == null) throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+   if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Resource&gt;&gt;.oneArg((e) =&gt; listify(e, _createResource));
    _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
@@ -109,6 +109,10 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
 
  final ChromeStreamController&lt;OnResourceContentCommittedEvent&gt; _onResourceContentCommitted =
      new ChromeStreamController&lt;OnResourceContentCommittedEvent&gt;.twoArgs(_devtools_inspectedWindow, 'onResourceContentCommitted', _createOnResourceContentCommittedEvent);
+
+ void _throwNotAvailable() {
+   throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+ }
 }
 </pre>
 </div>
@@ -193,7 +197,7 @@ otherwise an exception is thrown.</p>
 expression.</p>
 <pre class="source">
 Future&lt;EvalResult&gt; eval(String expression) {
- if (_devtools_inspectedWindow == null) throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+ if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;EvalResult&gt;.twoArgs(EvalResult._create);
  _devtools_inspectedWindow.callMethod('eval', [expression, completer.callback]);
@@ -212,7 +216,7 @@ Future&lt;List&lt;<a href="../chrome.devtools/Resource.html">Resource</a>&gt;&gt
 The resources within the page.</p>
 <pre class="source">
 Future&lt;List&lt;Resource&gt;&gt; getResources() {
- if (_devtools_inspectedWindow == null) throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+ if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Resource&gt;&gt;.oneArg((e) =&gt; listify(e, _createResource));
  _devtools_inspectedWindow.callMethod('getResources', [completer.callback]);
@@ -229,7 +233,7 @@ void <strong>reload</strong>([Map reloadOptions]) <a class="anchor-link" href="#
 <p>Reloads the inspected page.</p>
 <pre class="source">
 void reload([Map reloadOptions]) {
- if (_devtools_inspectedWindow == null) throw new UnsupportedError("'chrome.devtools.inspectedWindow' is not available");
+ if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
  _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
 }
