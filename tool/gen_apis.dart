@@ -41,7 +41,6 @@ class GenApis {
     overridesFile = new File('meta/overrides.json'),
     idlDir = new Directory('idl') {
 
-
     if (!idlDir.existsSync()) {
       throw new Exception('${idlDir.path} not found');
     }
@@ -132,9 +131,11 @@ class GenApis {
       File idlFile = new File("${idlDir.path}/${locateName}.idl");
 
       if (jsonFile.existsSync()) {
-        return new GenApiFile(jsonFile, overrides, generator);
+        return new GenApiFile(jsonFile, overrides: overrides,
+            generator: generator);
       } else if (idlFile.existsSync()) {
-        return new GenApiFile(idlFile, overrides, generator);
+        return new GenApiFile(idlFile, overrides: overrides,
+            generator: generator);
       } else {
         throw new UnsupportedError("Unable to locate idl or json file for '${locateName}'.");
       }
@@ -175,10 +176,10 @@ class GenApis {
     File outFile = new File(pathos.join(outDirPath, 'gen', "${fileName}.dart"));
 
     if (jsonFile.existsSync()) {
-      GenApiFile apiGen = new GenApiFile(jsonFile, overrides);
+      GenApiFile apiGen = new GenApiFile(jsonFile, overrides: overrides);
       apiGen.generate(outFile);
     } else if (idlFile.existsSync()) {
-      GenApiFile apiGen = new GenApiFile(idlFile, overrides);
+      GenApiFile apiGen = new GenApiFile(idlFile, overrides: overrides);
       apiGen.generate(outFile);
     } else {
       throw new UnsupportedError("Unable to locate idl or json file for '${jsLibName}'.");

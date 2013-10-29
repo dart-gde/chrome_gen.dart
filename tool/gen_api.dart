@@ -8,6 +8,9 @@ import 'chrome_model.dart';
 import 'json_model.dart' as json_model;
 import 'json_parser.dart' as json_parser;
 import 'web_idl_model.dart' as model_idl;
+import 'chrome_idl_parser.dart' as chrome_idl_parser;
+import 'chrome_idl_convert.dart' as chrome_idl_convert;
+import 'chrome_idl_model.dart' as chrome_idl_model;
 import 'overrides.dart';
 import 'web_idl_parser.dart';
 import 'src/src_gen.dart';
@@ -38,7 +41,8 @@ void main() {
     print(record.message);
   });
 
-  GenApiFile generator = new GenApiFile(new File(results.rest.first), overrides);
+  GenApiFile generator = new GenApiFile(new File(results.rest.first),
+      overrides: overrides);
   generator.generate(new File(results['out']));
 }
 
@@ -49,7 +53,7 @@ class GenApiFile {
   ChromeLibrary _chromeLib;
   Backend _backend;
 
-  GenApiFile(this.inFile, [Overrides overrides, DartGenerator generator]) :
+  GenApiFile(this.inFile, {Overrides overrides, DartGenerator generator}) :
       this.overrides = (overrides == null) ? new Overrides() : overrides {
     if (!inFile.path.endsWith(".json") && !inFile.path.endsWith(".idl")) {
       throw new Exception('format not understood: ${inFile.path}');
@@ -60,10 +64,20 @@ class GenApiFile {
           inFile.readAsStringSync());
       _chromeLib = json_model.convert(namespace);
     } else if (inFile.path.endsWith(".idl")) {
-      WebIdlParser webIdlParser = new WebIdlParser.withCollector(
-          new model_idl.IDLCollectorChrome());
-      webIdlParser.start.parse(inFile.readAsStringSync());
-      _chromeLib = model_idl.convert(webIdlParser.collector);
+      if (overrides.useChromeIDLParser) {
+        _logger.info("using ChromeIDLParser");
+        chrome_idl_parser.ChromeIDLParser chromeIdlParser =
+            new chrome_idl_parser.ChromeIDLParser();
+        chrome_idl_model.IDLNamespaceDeclaration idlNamespaceDeclaration =
+            chromeIdlParser.namespaceDeclaration.parse(inFile.readAsStringSync());
+        _chromeLib = chrome_idl_convert.convert(idlNamespaceDeclaration);
+      } else {
+        _logger.info("using WebIdlParser");
+        WebIdlParser webIdlParser = new WebIdlParser.withCollector(
+            new model_idl.IDLCollectorChrome());
+        webIdlParser.start.parse(inFile.readAsStringSync());
+        _chromeLib = model_idl.convert(webIdlParser.collector);
+      }
     } else {
       throw new ArgumentError('file type unsupported: ${inFile}');
     }
