@@ -49,9 +49,12 @@ class PageStateMatcher extends ChromeObject {
   set pageUrl(UrlFilter value) => proxy['pageUrl'] = jsify(value);
 
   /**
-   * Matches if all of the CSS selectors in the array match in a frame with the
-   * same origin as the page's main frame.  Note that listing hundreds of CSS
-   * selectors here can slow down web sites.
+   * Matches if all of the CSS selectors in the array match displayed elements
+   * in a frame with the same origin as the page's main frame.  All selectors in
+   * this array must be [compound
+   * selectors](http://www.w3.org/TR/selectors4/#compound) to speed up matching.
+   * Note that listing hundreds of CSS selectors or CSS selectors that match
+   * hundreds of times per page can still slow down web sites.
    */
   List<String> get css => listify(proxy['css']);
   set css(List<String> value) => proxy['css'] = jsify(value);
@@ -60,9 +63,10 @@ class PageStateMatcher extends ChromeObject {
 /**
  * Declarative event action that shows the extension's [][pageAction page
  * action] while the corresponding conditions are met.  This action can be used
- * without [host permissions](declare_permissions.html#host-permission).  If the
- * extension takes the [activeTab](activeTab.html) permission, a click on the
- * page action will grant access to the active tab.
+ * without [host permissions](declare_permissions.html#host-permission), but the
+ * extension must have a page action.  If the extension takes the
+ * [activeTab](activeTab.html) permission, a click on the page action will grant
+ * access to the active tab.
  */
 class ShowPageAction extends ChromeObject {
   ShowPageAction();

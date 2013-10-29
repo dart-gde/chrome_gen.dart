@@ -195,9 +195,10 @@ class IconInfo extends ChromeObject {
  * Information about an installed extension, app, or theme.
  */
 class ExtensionInfo extends ChromeObject {
-  ExtensionInfo({String id, String name, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List<IconInfo> icons, List<String> permissions, List<String> hostPermissions, String installType}) {
+  ExtensionInfo({String id, String name, String shortName, String description, String version, bool mayDisable, bool enabled, String disabledReason, String type, String appLaunchUrl, String homepageUrl, String updateUrl, bool offlineEnabled, String optionsUrl, List<IconInfo> icons, List<String> permissions, List<String> hostPermissions, String installType}) {
     if (id != null) this.id = id;
     if (name != null) this.name = name;
+    if (shortName != null) this.shortName = shortName;
     if (description != null) this.description = description;
     if (version != null) this.version = version;
     if (mayDisable != null) this.mayDisable = mayDisable;
@@ -227,6 +228,12 @@ class ExtensionInfo extends ChromeObject {
    */
   String get name => proxy['name'];
   set name(String value) => proxy['name'] = value;
+
+  /**
+   * A short version of the name of this extension, app, or theme.
+   */
+  String get shortName => proxy['shortName'];
+  set shortName(String value) => proxy['shortName'] = value;
 
   /**
    * The description of this extension, app, or theme.

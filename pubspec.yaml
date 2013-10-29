@@ -13,6 +13,6 @@ dev_dependencies:
   args: any
   browser: any
   logging: any
-  parsers: any
+  parsers: ">=0.13.7"
   path: any
   unittest: any

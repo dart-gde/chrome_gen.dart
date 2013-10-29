@@ -169,7 +169,7 @@ class DefaultBackend extends Backend {
 
   void _printPropertyRef(ChromeProperty property, String refString, [bool printSetter = false]) {
     String converter = getReturnConverter(property.type);
-    String getterBody = "${refString}['${property.name}']";
+    String getterBody = "${refString}['${property.idlName}']";
 
     generator.writeln();
     generator.writeDocs(property.getDescription());

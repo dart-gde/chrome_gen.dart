@@ -120,6 +120,16 @@ class ChromeRuntime extends ChromeApi {
   }
 
   /**
+   * Restart the ChromeOS device when the app runs in kiosk mode. Otherwise,
+   * it's no-op.
+   */
+  void restart() {
+    if (_runtime == null) _throwNotAvailable();
+
+    _runtime.callMethod('restart');
+  }
+
+  /**
    * Attempts to connect to other listeners within the extension/app (such as
    * the background page), or other extensions/apps. This is useful for content
    * scripts connecting to their extension processes. Note that this does not
@@ -170,11 +180,11 @@ class ChromeRuntime extends ChromeApi {
    * occurs while connecting to the extension, the callback will be called with
    * no arguments and [runtime.lastError] will be set to the error message.
    */
-  Future<dynamic> sendMessage(dynamic message, [String extensionId]) {
+  Future<dynamic> sendMessage(dynamic message, [String extensionId, Map options]) {
     if (_runtime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
-    _runtime.callMethod('sendMessage', [extensionId, jsify(message), completer.callback]);
+    _runtime.callMethod('sendMessage', [extensionId, jsify(message), jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -438,10 +448,11 @@ class Port extends ChromeObject {
  * or request.
  */
 class MessageSender extends ChromeObject {
-  MessageSender({Tab tab, String id, String url}) {
+  MessageSender({Tab tab, String id, String url, String tlsChannelId}) {
     if (tab != null) this.tab = tab;
     if (id != null) this.id = id;
     if (url != null) this.url = url;
+    if (tlsChannelId != null) this.tlsChannelId = tlsChannelId;
   }
   MessageSender.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -466,6 +477,13 @@ class MessageSender extends ChromeObject {
    */
   String get url => proxy['url'];
   set url(String value) => proxy['url'] = value;
+
+  /**
+   * The TLS channel ID of the web page that opened the connection, if requested
+   * by the extension or app, and if available.
+   */
+  String get tlsChannelId => proxy['tlsChannelId'];
+  set tlsChannelId(String value) => proxy['tlsChannelId'] = value;
 }
 
 /**

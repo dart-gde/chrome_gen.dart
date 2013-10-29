@@ -21,7 +21,7 @@ main() {
 
       for (File file in jsonFiles) {
         // skip _api_features.json, _manifest_features.json, _permission_features.json
-        if (!file.path.contains('/_')) {
+        if (!file.path.contains('/_') && !file.path.contains('test_presubmit')) {
           test(file.path, () {
             json_model.JsonNamespace namespace = json_parser.parse(file.readAsStringSync());
             expect(namespace.namespace, isNotNull);

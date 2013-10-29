@@ -137,6 +137,18 @@ class ChromeSystemStorage extends ChromeApi {
     return completer.future;
   }
 
+  /**
+   * Get the available capacity of a specified [id] storage device. The [id] is
+   * the transient device ID from StorageUnitInfo.
+   */
+  Future<StorageAvailableCapacityInfo> getAvailableCapacity(String id) {
+    if (_system_storage == null) _throwNotAvailable();
+
+    var completer = new ChromeCompleter<StorageAvailableCapacityInfo>.oneArg(_createStorageAvailableCapacityInfo);
+    _system_storage.callMethod('getAvailableCapacity', [id, completer.callback]);
+    return completer.future;
+  }
+
   Stream<StorageUnitInfo> get onAttached => _onAttached.stream;
 
   final ChromeStreamController<StorageUnitInfo> _onAttached =
@@ -210,6 +222,21 @@ class StorageUnitInfo extends ChromeObject {
   set capacity(double value) => proxy['capacity'] = jsify(value);
 }
 
+class StorageAvailableCapacityInfo extends ChromeObject {
+  StorageAvailableCapacityInfo({String id, double availableCapacity}) {
+    if (id != null) this.id = id;
+    if (availableCapacity != null) this.availableCapacity = availableCapacity;
+  }
+  StorageAvailableCapacityInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+
+  String get id => proxy['id'];
+  set id(String value) => proxy['id'] = value;
+
+  double get availableCapacity => proxy['availableCapacity'];
+  set availableCapacity(double value) => proxy['availableCapacity'] = jsify(value);
+}
+
 StorageUnitInfo _createStorageUnitInfo(JsObject proxy) => proxy == null ? null : new StorageUnitInfo.fromProxy(proxy);
 EjectDeviceResultCode _createEjectDeviceResultCode(String value) => EjectDeviceResultCode.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+StorageAvailableCapacityInfo _createStorageAvailableCapacityInfo(JsObject proxy) => proxy == null ? null : new StorageAvailableCapacityInfo.fromProxy(proxy);
 StorageUnitType _createStorageUnitType(String value) => StorageUnitType.VALUES.singleWhere((ChromeEnum e) => e.value == value);

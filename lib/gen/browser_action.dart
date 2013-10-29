@@ -144,6 +144,22 @@ class ChromeBrowserAction extends ChromeApi {
   }
 
   /**
+   * Opens the extension popup window in the active window but does not grant
+   * tab permissions.
+   * 
+   * Returns:
+   * JavaScript 'window' object for the popup window if it was succesfully
+   * opened.
+   */
+  Future<Map<String, dynamic>> openPopup() {
+    if (_browserAction == null) _throwNotAvailable();
+
+    var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
+    _browserAction.callMethod('openPopup', [completer.callback]);
+    return completer.future;
+  }
+
+  /**
    * Fired when a browser action icon is clicked.  This event will not fire if
    * the browser action has a popup.
    */

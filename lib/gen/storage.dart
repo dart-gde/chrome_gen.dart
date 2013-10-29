@@ -176,8 +176,12 @@ class StorageArea extends ChromeObject {
   /**
    * Sets multiple items.
    * 
-   * [items] Object specifying items to augment storage with. Values that cannot
-   * be serialized (functions, etc) will be ignored.
+   * [items] <p>An object which gives each key/value pair to update storage
+   * with. Any other key/value pairs in storage will not be
+   * affected.</p><p>Primitive values such as numbers will serialize as
+   * expected. Values with a `typeof` `"object"` and `"function"` will typically
+   * serialize to `{}`, with the exception of `Array` (serializes as expected),
+   * `Date`, and `Regex` (serialize using their `String` representation).</p>
    */
   Future set(Map<String, dynamic> items) {
     var completer = new ChromeCompleter.noArgs();

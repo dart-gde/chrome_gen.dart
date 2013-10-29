@@ -18,7 +18,9 @@ class ChromeLocation extends ChromeApi {
 
   /**
    * todo(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
-   * location watching request.
+   * location watching request. If there is another location watching request
+   * with the same name (or no name if none is specified), it will be cancelled
+   * and replaced by this request.
    * [name]: Optional name to identify this request. Defaults to the empty
    * string.
    * [requestInfo]: Optional parameters for this request.

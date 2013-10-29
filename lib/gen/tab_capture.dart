@@ -20,7 +20,7 @@ class ChromeTabCapture extends ChromeApi {
    * Captures the visible area of the currently active tab. This method can only
    * be used on the currently active page after the extension has been
    * _invoked_, similar to the way that <a href="activeTab.html">activeTab</a>
-   * works. Note that Chrome internal pages cannot be captured.
+   * works.
    * [options]: Configures the returned media stream.
    * [callback]: Callback with either the stream returned or null.
    */
@@ -93,13 +93,17 @@ class CaptureInfo extends ChromeObject {
 }
 
 class MediaStreamConstraint extends ChromeObject {
-  MediaStreamConstraint({var mandatory}) {
+  MediaStreamConstraint({var mandatory, var optional}) {
     if (mandatory != null) this.mandatory = mandatory;
+    if (optional != null) this.optional = optional;
   }
   MediaStreamConstraint.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
   dynamic get mandatory => proxy['mandatory'];
   set mandatory(var value) => proxy['mandatory'] = jsify(value);
+
+  dynamic get optional => proxy['_optional'];
+  set optional(var value) => proxy['_optional'] = jsify(value);
 }
 
 class CaptureOptions extends ChromeObject {

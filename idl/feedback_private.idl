@@ -39,14 +39,18 @@ namespace feedbackPrivate {
     // Screenshot to send with this feedback.
     [instanceOf=Blob] object? screenshot;
 
+    // Optional id for performance trace data that can be included in this
+    // report.
+    long? traceId;
+
     // An array of key/value pairs providing system information for this
     // feedback report.
     SystemInformation[]? systemInformation;
 
     // TODO(rkc): Remove these once we have bindings to send blobs to Chrome.
-    // Used internally to store the blob Url after parameter customization.
-    DOMString? attachedFileBlobUrl;
-    DOMString? screenshotBlobUrl;
+    // Used internally to store the blob uuid after parameter customization.
+    DOMString? attachedFileBlobUuid;
+    DOMString? screenshotBlobUuid;
   };
 
   // Status of the sending of a feedback report.

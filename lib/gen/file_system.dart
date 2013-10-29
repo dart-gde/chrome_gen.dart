@@ -31,10 +31,10 @@ class ChromeFileSystem extends ChromeApi {
   }
 
   /**
-   * Get a writable Entry from another Entry. This call will fail if the
-   * application does not have the 'write' permission under 'fileSystem'. If
-   * entry is a DirectoryEntry, this call will fail if the application does not
-   * have the 'directory' permission under 'fileSystem'.
+   * Get a writable Entry from another Entry. This call will fail with a runtime
+   * error if the application does not have the 'write' permission under
+   * 'fileSystem'. If entry is a DirectoryEntry, this call will fail if the
+   * application does not have the 'directory' permission under 'fileSystem'.
    */
   Future<Entry> getWritableEntry(Entry entry) {
     if (_fileSystem == null) _throwNotAvailable();
@@ -72,7 +72,7 @@ class ChromeFileSystem extends ChromeApi {
 
   /**
    * Returns the file entry with the given id if it can be restored. This call
-   * will fail otherwise. This method is new in Chrome 30.
+   * will fail with a runtime error otherwise. This method is new in Chrome 31.
    */
   Future<Entry> restoreEntry(String id) {
     if (_fileSystem == null) _throwNotAvailable();
@@ -83,9 +83,8 @@ class ChromeFileSystem extends ChromeApi {
   }
 
   /**
-   * Returns whether a file entry for the given id can be restored, i.e. whether
-   * restoreEntry would succeed with this id now. This method is new in Chrome
-   * 30.
+   * Returns whether the app has permission to restore the entry with the given
+   * id. This method is new in Chrome 31.
    */
   Future<bool> isRestorable(String id) {
     if (_fileSystem == null) _throwNotAvailable();
@@ -99,10 +98,9 @@ class ChromeFileSystem extends ChromeApi {
    * Returns an id that can be passed to restoreEntry to regain access to a
    * given file entry. Only the 500 most recently used entries are retained,
    * where calls to retainEntry and restoreEntry count as use. If the app has
-   * the 'retainEntries' permission under 'fileSystem' (currently restricted to
-   * dev channel), entries are retained indefinitely. Otherwise, entries are
-   * retained only while the app is running and across restarts. This method is
-   * new in Chrome 30.
+   * the 'retainEntries' permission under 'fileSystem', entries are retained
+   * indefinitely. Otherwise, entries are retained only while the app is running
+   * and across restarts. This method is new in Chrome 31.
    */
   String retainEntry(Entry entry) {
     if (_fileSystem == null) _throwNotAvailable();
@@ -120,16 +118,17 @@ class ChromeFileSystem extends ChromeApi {
  * From Chrome 31 onwards, the FileEntry will be writable if the application has
  * the 'write' permission under 'fileSystem'; otherwise, the FileEntry will be
  * read-only. Prompts the user to open an existing file and returns a writable
- * FileEntry on success. Calls using this type will fail unless the application
- * has the 'write' permission under 'fileSystem'. Prompts the user to open an
- * existing file or a new file and returns a writable FileEntry on success.
- * Calls using this type will fail unless the application has the 'write'
- * permission under 'fileSystem'. Prompts the user to open a directory and
- * returns a DirectoryEntry on success. Calls using this type will fail unless
- * the application has the 'directory' permission under 'fileSystem'. If the
- * application has the 'write' permission under 'fileSystem', the returned
- * DirectoryEntry will be writable; otherwise it will be read-only. New in
- * Chrome 31.
+ * FileEntry on success. Calls using this type will fail with a runtime error if
+ * the application doesn't have the 'write' permission under 'fileSystem'.
+ * Prompts the user to open an existing file or a new file and returns a
+ * writable FileEntry on success. Calls using this type will fail with a runtime
+ * error if the application doesn't have the 'write' permission under
+ * 'fileSystem'. Prompts the user to open a directory and returns a
+ * DirectoryEntry on success. Calls using this type will fail with a runtime
+ * error if the application doesn't have the 'directory' permission under
+ * 'fileSystem'. If the application has the 'write' permission under
+ * 'fileSystem', the returned DirectoryEntry will be writable; otherwise it will
+ * be read-only. New in Chrome 31.
  */
 class ChooseEntryType extends ChromeEnum {
   static const ChooseEntryType OPEN_FILE = const ChooseEntryType._('openFile');

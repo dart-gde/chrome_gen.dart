@@ -57,9 +57,12 @@ class LaunchItem extends ChromeObject {
 }
 
 class LaunchData extends ChromeObject {
-  LaunchData({String id, LaunchItem items}) {
+  LaunchData({String id, LaunchItem items, String url, String referrerUrl, bool isKioskSession}) {
     if (id != null) this.id = id;
     if (items != null) this.items = items;
+    if (url != null) this.url = url;
+    if (referrerUrl != null) this.referrerUrl = referrerUrl;
+    if (isKioskSession != null) this.isKioskSession = isKioskSession;
   }
   LaunchData.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -68,6 +71,15 @@ class LaunchData extends ChromeObject {
 
   LaunchItem get items => _createLaunchItem(proxy['items']);
   set items(LaunchItem value) => proxy['items'] = jsify(value);
+
+  String get url => proxy['url'];
+  set url(String value) => proxy['url'] = value;
+
+  String get referrerUrl => proxy['referrerUrl'];
+  set referrerUrl(String value) => proxy['referrerUrl'] = value;
+
+  bool get isKioskSession => proxy['isKioskSession'];
+  set isKioskSession(bool value) => proxy['isKioskSession'] = value;
 }
 
 LaunchData _createLaunchData(JsObject proxy) => proxy == null ? null : new LaunchData.fromProxy(proxy);
@@ -198,7 +210,7 @@ class WindowType extends ChromeEnum {
 }
 
 class CreateWindowOptions extends ChromeObject {
-  CreateWindowOptions({String id, int defaultWidth, int defaultHeight, int defaultLeft, int defaultTop, int width, int height, int left, int top, int minWidth, int minHeight, int maxWidth, int maxHeight, WindowType type, String frame, Bounds bounds, bool transparentBackground, State state, bool hidden, bool resizable, bool singleton}) {
+  CreateWindowOptions({String id, int defaultWidth, int defaultHeight, int defaultLeft, int defaultTop, int width, int height, int left, int top, int minWidth, int minHeight, int maxWidth, int maxHeight, WindowType type, String frame, Bounds bounds, bool transparentBackground, State state, bool hidden, bool resizable, bool singleton, bool alwaysOnTop}) {
     if (id != null) this.id = id;
     if (defaultWidth != null) this.defaultWidth = defaultWidth;
     if (defaultHeight != null) this.defaultHeight = defaultHeight;
@@ -220,6 +232,7 @@ class CreateWindowOptions extends ChromeObject {
     if (hidden != null) this.hidden = hidden;
     if (resizable != null) this.resizable = resizable;
     if (singleton != null) this.singleton = singleton;
+    if (alwaysOnTop != null) this.alwaysOnTop = alwaysOnTop;
   }
   CreateWindowOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -285,6 +298,9 @@ class CreateWindowOptions extends ChromeObject {
 
   bool get singleton => proxy['singleton'];
   set singleton(bool value) => proxy['singleton'] = value;
+
+  bool get alwaysOnTop => proxy['alwaysOnTop'];
+  set alwaysOnTop(bool value) => proxy['alwaysOnTop'] = value;
 }
 
 class AppWindow extends ChromeObject {
@@ -422,6 +438,21 @@ class AppWindow extends ChromeObject {
    */
   void setIcon(String icon_url) {
     proxy.callMethod('setIcon', [icon_url]);
+  }
+
+  /**
+   * Is the window always on top? Currently available in the Dev channel only.
+   */
+  bool isAlwaysOnTop() {
+    return proxy.callMethod('isAlwaysOnTop');
+  }
+
+  /**
+   * Set whether the window should stay above most other windows. Currently
+   * available in the Dev channel only.
+   */
+  void setAlwaysOnTop(bool always_on_top) {
+    proxy.callMethod('setAlwaysOnTop', [always_on_top]);
   }
 }
 

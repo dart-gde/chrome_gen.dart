@@ -17,12 +17,13 @@ class ChromeNotifications extends ChromeApi {
   bool get available => _notifications != null;
 
   /**
-   * Creates and displays a notification having the contents in [options],
-   * identified by the id [notificationId]. If [notificationId] is empty,
-   * [create] generates an id. If [notificationId] matches an existing
-   * notification, [create] first clears that notification before proceeding
-   * with the create operation. [callback] returns the notification id (either
-   * supplied or generated) that represents the created notification.
+   * Creates and displays a notification.
+   * [notificationId]: Identifier of the notification. If it is empty, this
+   * method generates an id. If it matches an existing notification, this method
+   * first clears that notification before proceeding with the create operation.
+   * [options]: Contents of the notification.
+   * [callback]: Returns the notification id (either supplied or generated) that
+   * represents the created notification.
    */
   Future<String> create(String notificationId, NotificationOptions options) {
     if (_notifications == null) _throwNotAvailable();
@@ -33,9 +34,11 @@ class ChromeNotifications extends ChromeApi {
   }
 
   /**
-   * Updates an existing notification having the id [notificationId] and the
-   * options [options]. [callback] indicates whether a matching notification
-   * existed.
+   * Updates an existing notification.
+   * [notificationId]: The id of the notification to be updated. This is
+   * returned by [notifications.create] method.
+   * [options]: Contents of the notification to update to.
+   * [callback]: Called to indicate whether a matching notification existed.
    */
   Future<bool> update(String notificationId, NotificationOptions options) {
     if (_notifications == null) _throwNotAvailable();
@@ -46,9 +49,10 @@ class ChromeNotifications extends ChromeApi {
   }
 
   /**
-   * Given a [notificationId] returned by the [create] method, clears the
-   * corresponding notification. [callback] indicates whether a matching
-   * notification existed.
+   * Clears the specified notification.
+   * [notificationId]: The id of the notification to be cleared. This is
+   * returned by [notifications.create] method.
+   * [callback]: Called to indicate whether a matching notification existed.
    */
   Future<bool> clear(String notificationId) {
     if (_notifications == null) _throwNotAvailable();
@@ -59,14 +63,27 @@ class ChromeNotifications extends ChromeApi {
   }
 
   /**
-   * [callback] is executed with the set of notification_ids currently in the
-   * system.
+   * Retrieves all the notifications.
+   * [callback]: Returns the set of notification_ids currently in the system.
    */
   Future<dynamic> getAll() {
     if (_notifications == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
     _notifications.callMethod('getAll', [completer.callback]);
+    return completer.future;
+  }
+
+  /**
+   * Retrieves whether the user has enabled notifications from this app or
+   * extension.
+   * [callback]: Returns the current permission level.
+   */
+  Future<PermissionLevel> getPermissionLevel() {
+    if (_notifications == null) _throwNotAvailable();
+
+    var completer = new ChromeCompleter<PermissionLevel>.oneArg(_createPermissionLevel);
+    _notifications.callMethod('getPermissionLevel', [completer.callback]);
     return completer.future;
   }
 
@@ -84,6 +101,11 @@ class ChromeNotifications extends ChromeApi {
 
   final ChromeStreamController<OnButtonClickedEvent> _onButtonClicked =
       new ChromeStreamController<OnButtonClickedEvent>.twoArgs(_notifications, 'onButtonClicked', _createOnButtonClickedEvent);
+
+  Stream<PermissionLevel> get onPermissionLevelChanged => _onPermissionLevelChanged.stream;
+
+  final ChromeStreamController<PermissionLevel> _onPermissionLevelChanged =
+      new ChromeStreamController<PermissionLevel>.oneArg(_notifications, 'onPermissionLevelChanged', _createPermissionLevel);
 
   void _throwNotAvailable() {
     throw new UnsupportedError("'chrome.notifications' is not available");
@@ -122,6 +144,20 @@ class TemplateType extends ChromeEnum {
   static const List<TemplateType> VALUES = const[BASIC, IMAGE, LIST, PROGRESS];
 
   const TemplateType._(String str): super(str);
+}
+
+/**
+ * User has elected to show notifications from the app or extension. This is the
+ * default at install time. User has elected not to show notifications from the
+ * app or extension.
+ */
+class PermissionLevel extends ChromeEnum {
+  static const PermissionLevel GRANTED = const PermissionLevel._('granted');
+  static const PermissionLevel DENIED = const PermissionLevel._('denied');
+
+  static const List<PermissionLevel> VALUES = const[GRANTED, DENIED];
+
+  const PermissionLevel._(String str): super(str);
 }
 
 class NotificationItem extends ChromeObject {
@@ -175,7 +211,7 @@ class NotificationButton extends ChromeObject {
 }
 
 class NotificationOptions extends ChromeObject {
-  NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress}) {
+  NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress, bool isClickable}) {
     if (type != null) this.type = type;
     if (iconUrl != null) this.iconUrl = iconUrl;
     if (iconBitmap != null) this.iconBitmap = iconBitmap;
@@ -190,6 +226,7 @@ class NotificationOptions extends ChromeObject {
     if (imageBitmap != null) this.imageBitmap = imageBitmap;
     if (items != null) this.items = items;
     if (progress != null) this.progress = progress;
+    if (isClickable != null) this.isClickable = isClickable;
   }
   NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
 
@@ -234,8 +271,12 @@ class NotificationOptions extends ChromeObject {
 
   int get progress => proxy['progress'];
   set progress(int value) => proxy['progress'] = value;
+
+  bool get isClickable => proxy['isClickable'];
+  set isClickable(bool value) => proxy['isClickable'] = value;
 }
 
+PermissionLevel _createPermissionLevel(String value) => PermissionLevel.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 OnClosedEvent _createOnClosedEvent(String notificationId, bool byUser) =>
     new OnClosedEvent(notificationId, byUser);
 OnButtonClickedEvent _createOnButtonClickedEvent(String notificationId, int buttonIndex) =>
