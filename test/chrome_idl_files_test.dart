@@ -1,7 +1,7 @@
 library test_chrome_idl_files;
 
 import 'dart:io';
-import 'dart:platform';
+
 import 'package:unittest/unittest.dart';
 
 import '../tool/chrome_idl_parser.dart';
@@ -9,7 +9,7 @@ import '../tool/chrome_idl_parser.dart';
 void main() {
   group('ChromeIDLParser', () {
     String testDirStr =
-        script.path.substring(0, script.path.lastIndexOf('/'));
+        Platform.script.substring(0, Platform.script.lastIndexOf('/'));
     Directory testDir = new Directory(testDirStr);
 
     bool idlFileExtTest(FileSystemEntity file) => file.path.endsWith('.idl');
