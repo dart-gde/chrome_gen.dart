@@ -82,15 +82,16 @@ class IDLConverter {
     chromeMethod.returns = _convertType(idlMethod.returnType);
     chromeMethod.params = idlMethod.parameters.map(_convertParameter).toList();
 
-    if (chromeMethod.returns == null) {
-      if (!idlMethod.parameters.isEmpty &&
-          idlMethod.parameters.last.isCallback) {
-        ChromeType chromeType = chromeMethod.params.removeLast();
-        chromeMethod.returns = _convertToFuture(chromeMethod, chromeType);
-      } else {
+    if (!idlMethod.parameters.isEmpty &&
+        idlMethod.parameters.last.isCallback) {
+      ChromeType chromeType = chromeMethod.params.removeLast();
+      chromeMethod.returns = _convertToFuture(chromeMethod, chromeType);
+    } else {
+      if (chromeMethod.returns == null) {
         chromeMethod.returns = ChromeType.VOID;
       }
     }
+
 
     return chromeMethod;
   }
@@ -166,6 +167,8 @@ class IDLConverter {
   ChromeType _convertType(IDLType idlType) {
     if (idlType == null) {
       return null;
+    } else if (idlType.name == "void") {
+      return ChromeType.VOID;
     } else {
       ChromeType chromeType = new ChromeType();
       chromeType.type = idlToDartType(idlType.name);

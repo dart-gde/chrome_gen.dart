@@ -1073,6 +1073,41 @@ void chromeIDLParserFunctionDeclarationTests() {
     expect(functionDeclaration.methods.length, equals(1));
     expect(functionDeclaration.methods[0].name, equals("getResources"));
   });
+
+  test('test Functions parameters are callbacks', () {
+    IDLFunctionDeclaration functionDeclaration = chromeIDLParser.functionDeclaration
+        .parse("""interface Functions {
+    // Get the media galleries configured in this user agent. If none are
+    // configured or available, the callback will receive an empty array.
+    static void getMediaFileSystems(optional MediaFileSystemsDetails details,
+                                    MediaFileSystemsCallback callback);
+
+    // Get metadata about a specific media file system.
+    [nocompile] static MediaFileSystemMetadata getMediaFileSystemMetadata(
+        [instanceOf=DOMFileSystem] object mediaFileSystem);
+  };
+""");
+
+    expect(functionDeclaration, isNotNull);
+    expect(functionDeclaration.name, equals("Functions"));
+    expect(functionDeclaration.methods.length, equals(2));
+    expect(functionDeclaration.methods[0].name, equals("getMediaFileSystems"));
+    expect(functionDeclaration.methods[0].parameters, hasLength(2));
+    expect(functionDeclaration.methods[0].parameters[0].name,
+        equals("details"));
+    expect(functionDeclaration.methods[0].parameters[0].type.name,
+        equals("MediaFileSystemsDetails"));
+    expect(functionDeclaration.methods[0].parameters[1].type.name,
+        equals("MediaFileSystemsCallback"));
+    expect(functionDeclaration.methods[0].parameters[1].name,
+        equals("callback"));
+    expect(functionDeclaration.methods[0].parameters[1].isCallback,
+        isTrue);
+    expect(functionDeclaration.methods[1].parameters[0].name,
+        equals("mediaFileSystem"));
+    expect(functionDeclaration.methods[1].parameters[0].type.name,
+        equals("DOMFileSystem"));
+  });
 }
 
 void chromeIDLParserEventDeclarationTests() {

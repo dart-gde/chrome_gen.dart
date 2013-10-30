@@ -79,8 +79,16 @@ IDLMethod idlMethodParameterMapping(List<String> documentation,
  * Mapping of parameter with optional flag.
  */
 IDLParameter idlParameterMapping(String name, IDLType type,
-  bool isOptional, bool isCallback) =>
-    new IDLParameter(name, type, isOptional: isOptional);
+  bool isOptional, bool isCallback) {
+
+  // Check if its a callback by name.
+  if (!isCallback) {
+    isCallback = name == 'callback' || name == 'responseCallback';
+  }
+
+  return new IDLParameter(name, type, isOptional: isOptional,
+        isCallback: isCallback);
+}
 
 /*
  * Mapping the type of an attribute.
@@ -99,17 +107,25 @@ IDLType _idlAttributeTypeMapping(IDLAttributeDeclaration attribute) {
  */
 IDLParameter idlParameterAttributeBasedTypeMapping(String name,
   IDLAttributeDeclaration attribute) {
+
+  // Check if its a callback by name.
+  bool isCallback = name == 'callback' || name == 'responseCallback';
+
   return new IDLParameter(name,
       _idlAttributeTypeMapping(attribute),
-      attribute: attribute);
+      attribute: attribute, isCallback: isCallback);
 }
 
 IDLParameter idlOptionalParameterAttributeRemapTypeMapping(
   IDLAttributeDeclaration attribute, _, IDLType type, name) {
   IDLType t = _idlAttributeTypeMapping(attribute);
   IDLType mixedType = new IDLType(t.name, isArray: type.isArray);
+
+  // Check if its a callback by name.
+  bool isCallback = name == 'callback' || name == 'responseCallback';
+
   return new IDLParameter(name, mixedType, attribute: attribute,
-      isOptional: true);
+      isOptional: true, isCallback: isCallback);
 }
 
 /**
