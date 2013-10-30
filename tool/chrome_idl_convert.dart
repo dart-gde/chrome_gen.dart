@@ -82,15 +82,14 @@ class IDLConverter {
     chromeMethod.returns = _convertType(idlMethod.returnType);
     chromeMethod.params = idlMethod.parameters.map(_convertParameter).toList();
 
-    if (chromeMethod.returns == null) {
-      if (!idlMethod.parameters.isEmpty &&
-          idlMethod.parameters.last.isCallback) {
-        ChromeType chromeType = chromeMethod.params.removeLast();
-        chromeMethod.returns = _convertToFuture(chromeMethod, chromeType);
-      } else {
-        chromeMethod.returns = ChromeType.VOID;
-      }
+    if (!idlMethod.parameters.isEmpty &&
+        idlMethod.parameters.last.isCallback) {
+      ChromeType chromeType = chromeMethod.params.removeLast();
+      chromeMethod.returns = _convertToFuture(chromeMethod, chromeType);
+    } else {
+      chromeMethod.returns = ChromeType.VOID;
     }
+
 
     return chromeMethod;
   }
