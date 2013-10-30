@@ -1,5 +1,11 @@
 /* This file has been generated from power.idl - do not edit */
 
+/**
+ * Copyright (c) 2013 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.power` API to override the system's power
+ * management features.
+ */
 library chrome.power;
 
 import '../src/common.dart';
@@ -42,14 +48,6 @@ class ChromePower extends ChromeApi {
   }
 }
 
-/**
- * Copyright (c) 2013 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.power` API to override the system's power
- * management features. Prevent the system from sleeping in response to user
- * inactivity. Prevent the display from being turned off or dimmed or the system
- * from sleeping in response to user inactivity.
- */
 class Level extends ChromeEnum {
   static const Level SYSTEM = const Level._('system');
   static const Level DISPLAY = const Level._('display');

@@ -41,7 +41,7 @@ class ChromeLibrary extends ChromeElement {
   bool hasDeclaredType(String name) => types.any((t) => t.name == name);
 
   void addImport(String str) {
-    if (str != null && str != name && !imports.contains(str)) {
+    if (str != null && str != name && !imports.contains(str) && !str.startsWith('devtools')) {
       imports.add(str);
       imports.sort();
     }

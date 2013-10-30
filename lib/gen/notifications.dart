@@ -1,5 +1,11 @@
 /* This file has been generated from notifications.idl - do not edit */
 
+/**
+ * Copyright (c) 2013 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.notifications` API to create rich notifications
+ * using templates and show these notifications to users in the system tray.
+ */
 library chrome.notifications;
 
 import '../src/common.dart';
@@ -126,15 +132,6 @@ class OnButtonClickedEvent {
   OnButtonClickedEvent(this.notificationId, this.buttonIndex);
 }
 
-/**
- * Copyright (c) 2013 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.notifications` API to create rich notifications
- * using templates and show these notifications to users in the system tray.
- * icon, title, message, expandedMessage, up to two buttons icon, title,
- * message, expandedMessage, image, up to two buttons icon, title, message,
- * items, up to two buttons icon, title, message, progress, up to two buttons
- */
 class TemplateType extends ChromeEnum {
   static const TemplateType BASIC = const TemplateType._('basic');
   static const TemplateType IMAGE = const TemplateType._('image');
@@ -146,11 +143,6 @@ class TemplateType extends ChromeEnum {
   const TemplateType._(String str): super(str);
 }
 
-/**
- * User has elected to show notifications from the app or extension. This is the
- * default at install time. User has elected not to show notifications from the
- * app or extension.
- */
 class PermissionLevel extends ChromeEnum {
   static const PermissionLevel GRANTED = const PermissionLevel._('granted');
   static const PermissionLevel DENIED = const PermissionLevel._('denied');

@@ -1,5 +1,11 @@
 /* This file has been generated from downloads.idl - do not edit */
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.downloads` API to programmatically initiate,
+ * monitor, manipulate, and search for downloads.
+ */
 library chrome.downloads;
 
 import '../src/common.dart';
@@ -408,6 +414,9 @@ class DownloadOptions extends ChromeObject {
   set body(String value) => jsProxy['body'] = value;
 }
 
+/**
+ * The state of the process of downloading a file.
+ */
 class DownloadItem extends ChromeObject {
   DownloadItem({int id, String url, String referrer, String filename, bool incognito, DangerType danger, String mime, String startTime, String endTime, String estimatedEndTime, State state, bool paused, bool canResume, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists, String byExtensionId, String byExtensionName}) {
     if (id != null) this.id = id;
@@ -642,6 +651,9 @@ class BooleanDelta extends ChromeObject {
   set current(bool value) => jsProxy['current'] = value;
 }
 
+/**
+ * Encapsulates a change in a DownloadItem.
+ */
 class DownloadDelta extends ChromeObject {
   DownloadDelta({int id, StringDelta url, StringDelta filename, StringDelta danger, StringDelta mime, StringDelta startTime, StringDelta endTime, StringDelta state, BooleanDelta canResume, BooleanDelta paused, StringDelta error, LongDelta totalBytes, LongDelta fileSize, BooleanDelta exists}) {
     if (id != null) this.id = id;

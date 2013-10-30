@@ -1,5 +1,15 @@
 /* This file has been generated from sync_file_system.idl - do not edit */
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.syncFileSystem` API to save and synchronize
+ * data on Google Drive. This API is NOT for accessing arbitrary user docs
+ * stored in Google Drive. It provides app-specific syncable storage for offline
+ * and caching usage so that the same data can be available across different
+ * clients. Read <a href="app_storage.html">Manage Data</a> for more on using
+ * this API.
+ */
 library chrome.syncFileSystem;
 
 import '../src/files.dart';
@@ -142,16 +152,6 @@ class ChromeSyncFileSystem extends ChromeApi {
   }
 }
 
-/**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.syncFileSystem` API to save and synchronize
- * data on Google Drive. This API is NOT for accessing arbitrary user docs
- * stored in Google Drive. It provides app-specific syncable storage for offline
- * and caching usage so that the same data can be available across different
- * clients. Read <a href="app_storage.html">Manage Data</a> for more on using
- * this API.
- */
 class SyncAction extends ChromeEnum {
   static const SyncAction ADDED = const SyncAction._('added');
   static const SyncAction UPDATED = const SyncAction._('updated');
@@ -162,19 +162,6 @@ class SyncAction extends ChromeEnum {
   const SyncAction._(String str): super(str);
 }
 
-/**
- * The sync service is being initialized (e.g. restoring data from the database,
- * checking connectivity and authenticating to the service etc). The sync
- * service is up and running. The sync service is not synchronizing files
- * because the remote service needs to be authenticated by the user to proceed.
- * The sync service is not synchronizing files because the remote service is
- * (temporarily) unavailable due to some recoverable errors, e.g. network is
- * offline, the remote service is down or not reachable etc. More details should
- * be given by [description] parameter in OnServiceInfoUpdated (which could
- * contain service-specific details). The sync service is disabled and the
- * content will never sync. (E.g. this could happen when the user has no account
- * on the remote service or the sync service has had an unrecoverable error.)
- */
 class ServiceStatus extends ChromeEnum {
   static const ServiceStatus INITIALIZING = const ServiceStatus._('initializing');
   static const ServiceStatus RUNNING = const ServiceStatus._('running');
@@ -187,11 +174,6 @@ class ServiceStatus extends ChromeEnum {
   const ServiceStatus._(String str): super(str);
 }
 
-/**
- * Not conflicting and has no pending local changes. Has one or more pending
- * local changes that haven't been synchronized. File conflicts with remote
- * version and must be resolved manually.
- */
 class FileStatus extends ChromeEnum {
   static const FileStatus SYNCED = const FileStatus._('synced');
   static const FileStatus PENDING = const FileStatus._('pending');
@@ -221,7 +203,7 @@ class ConflictResolutionPolicy extends ChromeEnum {
 }
 
 class FileInfo extends ChromeObject {
-  FileInfo({var fileEntry, FileStatus status, SyncAction action, SyncDirection direction}) {
+  FileInfo({Entry fileEntry, FileStatus status, SyncAction action, SyncDirection direction}) {
     if (fileEntry != null) this.fileEntry = fileEntry;
     if (status != null) this.status = status;
     if (action != null) this.action = action;
@@ -229,8 +211,8 @@ class FileInfo extends ChromeObject {
   }
   FileInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  dynamic get fileEntry => jsProxy['fileEntry'];
-  set fileEntry(var value) => jsProxy['fileEntry'] = jsify(value);
+  Entry get fileEntry => _createEntry(jsProxy['fileEntry']);
+  set fileEntry(Entry value) => jsProxy['fileEntry'] = jsify(value);
 
   FileStatus get status => _createFileStatus(jsProxy['status']);
   set status(FileStatus value) => jsProxy['status'] = jsify(value);
@@ -243,15 +225,15 @@ class FileInfo extends ChromeObject {
 }
 
 class FileStatusInfo extends ChromeObject {
-  FileStatusInfo({var fileEntry, FileStatus status, String error}) {
+  FileStatusInfo({Entry fileEntry, FileStatus status, String error}) {
     if (fileEntry != null) this.fileEntry = fileEntry;
     if (status != null) this.status = status;
     if (error != null) this.error = error;
   }
   FileStatusInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  dynamic get fileEntry => jsProxy['fileEntry'];
-  set fileEntry(var value) => jsProxy['fileEntry'] = jsify(value);
+  Entry get fileEntry => _createEntry(jsProxy['fileEntry']);
+  set fileEntry(Entry value) => jsProxy['fileEntry'] = jsify(value);
 
   FileStatus get status => _createFileStatus(jsProxy['status']);
   set status(FileStatus value) => jsProxy['status'] = jsify(value);
@@ -296,5 +278,6 @@ FileStatusInfo _createFileStatusInfo(JsObject jsProxy) => jsProxy == null ? null
 ServiceStatus _createServiceStatus(String value) => ServiceStatus.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 ServiceInfo _createServiceInfo(JsObject jsProxy) => jsProxy == null ? null : new ServiceInfo.fromProxy(jsProxy);
 FileInfo _createFileInfo(JsObject jsProxy) => jsProxy == null ? null : new FileInfo.fromProxy(jsProxy);
+Entry _createEntry(JsObject jsProxy) => jsProxy == null ? null : new CrEntry.fromProxy(jsProxy);
 SyncAction _createSyncAction(String value) => SyncAction.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 SyncDirection _createSyncDirection(String value) => SyncDirection.VALUES.singleWhere((ChromeEnum e) => e.value == value);

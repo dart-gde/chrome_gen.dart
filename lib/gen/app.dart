@@ -3,6 +3,8 @@
 library chrome.app;
 
 import '../src/common.dart';
+import '../src/files.dart';
+import 'windows.dart';
 
 final ChromeApp app = new ChromeApp._();
 
@@ -20,6 +22,13 @@ class ChromeApp {
   final ChromeAppWindow window = new ChromeAppWindow._();
 }
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.app.runtime` API to manage the app lifecycle.
+ * The app runtime manages app installation, controls the event page, and can
+ * shut down the app at anytime.
+ */
 class ChromeAppRuntime extends ChromeApi {
   static final JsObject _app_runtime = chrome['app']['runtime'];
 
@@ -43,19 +52,23 @@ class ChromeAppRuntime extends ChromeApi {
 }
 
 class LaunchItem extends ChromeObject {
-  LaunchItem({var entry, String type}) {
+  LaunchItem({FileEntry entry, String type}) {
     if (entry != null) this.entry = entry;
     if (type != null) this.type = type;
   }
   LaunchItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  dynamic get entry => jsProxy['entry'];
-  set entry(var value) => jsProxy['entry'] = jsify(value);
+  FileEntry get entry => _createFileEntry(jsProxy['entry']);
+  set entry(FileEntry value) => jsProxy['entry'] = jsify(value);
 
   String get type => jsProxy['type'];
   set type(String value) => jsProxy['type'] = value;
 }
 
+/**
+ * Optional data for the launch. Either `items`, or the pair (`url,
+ * referrerUrl`) can be present for any given launch.
+ */
 class LaunchData extends ChromeObject {
   LaunchData({String id, LaunchItem items, String url, String referrerUrl, bool isKioskSession}) {
     if (id != null) this.id = id;
@@ -83,8 +96,16 @@ class LaunchData extends ChromeObject {
 }
 
 LaunchData _createLaunchData(JsObject jsProxy) => jsProxy == null ? null : new LaunchData.fromProxy(jsProxy);
+FileEntry _createFileEntry(JsObject jsProxy) => jsProxy == null ? null : new ChromeFileEntry.fromProxy(jsProxy);
 LaunchItem _createLaunchItem(JsObject jsProxy) => jsProxy == null ? null : new LaunchItem.fromProxy(jsProxy);
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.app.window` API to create windows. Windows have
+ * an optional frame with title bar and size controls. They are not associated
+ * with any Chrome browser windows.
+ */
 class ChromeAppWindow extends ChromeApi {
   static final JsObject _app_window = chrome['app']['window'];
 
@@ -95,20 +116,18 @@ class ChromeAppWindow extends ChromeApi {
   /**
    * The size and position of a window can be specified in a number of different
    * ways. The most simple option is not specifying anything at all, in which
-   * case a default size and platform dependent position will be used.
-   * 
-   * Another option is to use the bounds property, which will put the window at
-   * the specified coordinates with the specified size. If the window has a
-   * frame, it's total size will be the size given plus the size of the frame;
-   * that is, the size in bounds is the content size, not the window size.
-   * 
-   * To automatically remember the positions of windows you can give them ids.
-   * If a window has an id, This id is used to remember the size and position of
-   * the window whenever it is moved or resized. This size and position is then
-   * used instead of the specified bounds on subsequent opening of a window with
-   * the same id. If you need to open a window with an id at a location other
-   * than the remembered default, you can create it hidden, move it to the
-   * desired location, then show it.
+   * case a default size and platform dependent position will be used. Another
+   * option is to use the bounds property, which will put the window at the
+   * specified coordinates with the specified size. If the window has a frame,
+   * it's total size will be the size given plus the size of the frame; that is,
+   * the size in bounds is the content size, not the window size. To
+   * automatically remember the positions of windows you can give them ids. If a
+   * window has an id, This id is used to remember the size and position of the
+   * window whenever it is moved or resized. This size and position is then used
+   * instead of the specified bounds on subsequent opening of a window with the
+   * same id. If you need to open a window with an id at a location other than
+   * the remembered default, you can create it hidden, move it to the desired
+   * location, then show it.
    * 
    * Returns:
    * Called in the creating window (parent) before the load event is called in
@@ -304,13 +323,13 @@ class CreateWindowOptions extends ChromeObject {
 }
 
 class AppWindow extends ChromeObject {
-  AppWindow({var contentWindow}) {
+  AppWindow({Window contentWindow}) {
     if (contentWindow != null) this.contentWindow = contentWindow;
   }
   AppWindow.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  dynamic get contentWindow => jsProxy['contentWindow'];
-  set contentWindow(var value) => jsProxy['contentWindow'] = jsify(value);
+  Window get contentWindow => _createWindow(jsProxy['contentWindow']);
+  set contentWindow(Window value) => jsProxy['contentWindow'] = jsify(value);
 
   /**
    * Focus the window.
@@ -460,3 +479,4 @@ AppWindow _createAppWindow(JsObject jsProxy) => jsProxy == null ? null : new App
 WindowType _createWindowType(String value) => WindowType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 Bounds _createBounds(JsObject jsProxy) => jsProxy == null ? null : new Bounds.fromProxy(jsProxy);
 State _createState(String value) => State.VALUES.singleWhere((ChromeEnum e) => e.value == value);
+Window _createWindow(JsObject jsProxy) => jsProxy == null ? null : new Window.fromProxy(jsProxy);
