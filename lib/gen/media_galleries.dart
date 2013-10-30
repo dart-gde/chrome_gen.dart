@@ -1,5 +1,11 @@
 /* This file has been generated from media_galleries.idl - do not edit */
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.mediaGalleries` API to access media files
+ * (images, video, audio) from the user's local disks (with the user's consent).
+ */
 library chrome.mediaGalleries;
 
 import '../src/files.dart';
@@ -43,15 +49,6 @@ class ChromeMediaGalleries extends ChromeApi {
   }
 }
 
-/**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.mediaGalleries` API to access media files
- * (images, video, audio) from the user's local disks (with the user's consent).
- * Do not act interactively. Ask the user to manage permitted media galleries.
- * Ask the user to manage permitted galleries only if the return set would
- * otherwise be empty.
- */
 class GetMediaFileSystemsInteractivity extends ChromeEnum {
   static const GetMediaFileSystemsInteractivity NO = const GetMediaFileSystemsInteractivity._('no');
   static const GetMediaFileSystemsInteractivity YES = const GetMediaFileSystemsInteractivity._('yes');

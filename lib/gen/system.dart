@@ -25,6 +25,11 @@ class ChromeSystem {
   final ChromeSystemStorage storage = new ChromeSystemStorage._();
 }
 
+/**
+ * Copyright 2013 The Chromium Authors. All rights reserved. Use of this source
+ * code is governed by a BSD-style license that can be found in the LICENSE
+ * file. Use the `system.cpu` API to query CPU metadata.
+ */
 class ChromeSystemCpu extends ChromeApi {
   static final JsObject _system_cpu = chrome['system']['cpu'];
 
@@ -68,6 +73,11 @@ class CpuInfo extends ChromeObject {
 
 CpuInfo _createCpuInfo(JsObject jsProxy) => jsProxy == null ? null : new CpuInfo.fromProxy(jsProxy);
 
+/**
+ * Copyright 2013 The Chromium Authors. All rights reserved. Use of this source
+ * code is governed by a BSD-style license that can be found in the LICENSE
+ * file. The `chrome.system.memory` API.
+ */
 class ChromeSystemMemory extends ChromeApi {
   static final JsObject _system_memory = chrome['system']['memory'];
 
@@ -107,6 +117,12 @@ class MemoryInfo extends ChromeObject {
 
 MemoryInfo _createMemoryInfo(JsObject jsProxy) => jsProxy == null ? null : new MemoryInfo.fromProxy(jsProxy);
 
+/**
+ * Copyright 2013 The Chromium Authors. All rights reserved. Use of this source
+ * code is governed by a BSD-style license that can be found in the LICENSE
+ * file. Use the `chrome.system.storage` API to query storage device information
+ * and be notified when a removable storage device is attached and detached.
+ */
 class ChromeSystemStorage extends ChromeApi {
   static final JsObject _system_storage = chrome['system']['storage'];
 
@@ -164,14 +180,6 @@ class ChromeSystemStorage extends ChromeApi {
   }
 }
 
-/**
- * Copyright 2013 The Chromium Authors. All rights reserved. Use of this source
- * code is governed by a BSD-style license that can be found in the LICENSE
- * file. Use the `chrome.system.storage` API to query storage device information
- * and be notified when a removable storage device is attached and detached. The
- * storage has fixed media, e.g. hard disk or SSD. The storage is removable,
- * e.g. USB flash drive. The storage type is unknown.
- */
 class StorageUnitType extends ChromeEnum {
   static const StorageUnitType FIXED = const StorageUnitType._('fixed');
   static const StorageUnitType REMOVABLE = const StorageUnitType._('removable');
@@ -182,13 +190,6 @@ class StorageUnitType extends ChromeEnum {
   const StorageUnitType._(String str): super(str);
 }
 
-/**
- * The ejection command is successful -- the application can prompt the user to
- * remove the device. The device is in use by another application. The ejection
- * did not succeed; the user should not remove the device until the other
- * application is done with the device. There is no such device known. The
- * ejection command failed.
- */
 class EjectDeviceResultCode extends ChromeEnum {
   static const EjectDeviceResultCode SUCCESS = const EjectDeviceResultCode._('success');
   static const EjectDeviceResultCode IN_USE = const EjectDeviceResultCode._('in_use');

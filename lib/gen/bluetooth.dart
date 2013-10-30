@@ -1,5 +1,11 @@
 /* This file has been generated from bluetooth.idl - do not edit */
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.bluetooth` API to connect to a Bluetooth
+ * device.
+ */
 library chrome.bluetooth;
 
 import '../src/common.dart';
@@ -17,10 +23,9 @@ class ChromeBluetooth extends ChromeApi {
   bool get available => _bluetooth != null;
 
   /**
-   * These functions all report failures via chrome.runtime.lastError. Registers
-   * the JavaScript application as an implementation for the given Profile; if a
-   * channel or PSM is specified, the profile will be exported in the host's SDP
-   * and GATT tables and advertised to other devices.
+   * Registers the JavaScript application as an implementation for the given
+   * Profile; if a channel or PSM is specified, the profile will be exported in
+   * the host's SDP and GATT tables and advertised to other devices.
    */
   Future addProfile(Profile profile) {
     if (_bluetooth == null) _throwNotAvailable();
@@ -351,6 +356,10 @@ class OutOfBandPairingData extends ChromeObject {
   set randomizer(ArrayBuffer value) => jsProxy['randomizer'] = jsify(value);
 }
 
+/**
+ * Options for the getBluetoothDevices function. If [profile] is not provided, all
+ * devices known to the system are returned.
+ */
 class GetBluetoothDevicesOptions extends ChromeObject {
   GetBluetoothDevicesOptions({Profile profile, BluetoothDeviceCallback deviceCallback}) {
     if (profile != null) this.profile = profile;
@@ -365,6 +374,9 @@ class GetBluetoothDevicesOptions extends ChromeObject {
   set deviceCallback(BluetoothDeviceCallback value) => jsProxy['deviceCallback'] = jsify(value);
 }
 
+/**
+ * Options for the getProfiles function.
+ */
 class GetProfilesOptions extends ChromeObject {
   GetProfilesOptions({BluetoothDevice device}) {
     if (device != null) this.device = device;
@@ -375,6 +387,9 @@ class GetProfilesOptions extends ChromeObject {
   set device(BluetoothDevice value) => jsProxy['device'] = jsify(value);
 }
 
+/**
+ * Options for the getServices function.
+ */
 class GetServicesOptions extends ChromeObject {
   GetServicesOptions({String deviceAddress}) {
     if (deviceAddress != null) this.deviceAddress = deviceAddress;
@@ -385,6 +400,9 @@ class GetServicesOptions extends ChromeObject {
   set deviceAddress(String value) => jsProxy['deviceAddress'] = value;
 }
 
+/**
+ * Options for the connect function.
+ */
 class ConnectOptions extends ChromeObject {
   ConnectOptions({BluetoothDevice device, Profile profile}) {
     if (device != null) this.device = device;
@@ -399,6 +417,9 @@ class ConnectOptions extends ChromeObject {
   set profile(Profile value) => jsProxy['profile'] = jsify(value);
 }
 
+/**
+ * Options for the disconnect function.
+ */
 class DisconnectOptions extends ChromeObject {
   DisconnectOptions({Socket socket}) {
     if (socket != null) this.socket = socket;
@@ -409,6 +430,9 @@ class DisconnectOptions extends ChromeObject {
   set socket(Socket value) => jsProxy['socket'] = jsify(value);
 }
 
+/**
+ * Options for the read function.
+ */
 class ReadOptions extends ChromeObject {
   ReadOptions({Socket socket}) {
     if (socket != null) this.socket = socket;
@@ -419,6 +443,9 @@ class ReadOptions extends ChromeObject {
   set socket(Socket value) => jsProxy['socket'] = jsify(value);
 }
 
+/**
+ * Options for the write function.
+ */
 class WriteOptions extends ChromeObject {
   WriteOptions({Socket socket, ArrayBuffer data}) {
     if (socket != null) this.socket = socket;
@@ -433,6 +460,9 @@ class WriteOptions extends ChromeObject {
   set data(ArrayBuffer value) => jsProxy['data'] = jsify(value);
 }
 
+/**
+ * Options for the setOutOfBandPairingData function.
+ */
 class SetOutOfBandPairingDataOptions extends ChromeObject {
   SetOutOfBandPairingDataOptions({String address, OutOfBandPairingData data}) {
     if (address != null) this.address = address;
@@ -447,6 +477,9 @@ class SetOutOfBandPairingDataOptions extends ChromeObject {
   set data(OutOfBandPairingData value) => jsProxy['data'] = jsify(value);
 }
 
+/**
+ * Options for the startDiscovery function.
+ */
 class StartDiscoveryOptions extends ChromeObject {
   StartDiscoveryOptions({BluetoothDeviceCallback deviceCallback}) {
     if (deviceCallback != null) this.deviceCallback = deviceCallback;

@@ -1,5 +1,14 @@
 /* This file has been generated from location.idl - do not edit */
 
+/**
+ * Copyright (c) 2013 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. todo(vadimt): Consider reusing WebKit/Blink types, if this is
+ * possible. Use the `chrome.location` API to retrieve the geographic location
+ * of the host machine. This API is a version of the <a
+ * href="http://dev.w3.org/geo/api/spec-source.html">HTML Geolocation API</a>
+ * that is compatible with event pages.
+ */
 library chrome.location;
 
 import '../src/common.dart';
@@ -17,10 +26,9 @@ class ChromeLocation extends ChromeApi {
   bool get available => _location != null;
 
   /**
-   * todo(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
-   * location watching request. If there is another location watching request
-   * with the same name (or no name if none is specified), it will be cancelled
-   * and replaced by this request.
+   * Starts a location watching request. If there is another location watching
+   * request with the same name (or no name if none is specified), it will be
+   * cancelled and replaced by this request.
    * [name]: Optional name to identify this request. Defaults to the empty
    * string.
    * [requestInfo]: Optional parameters for this request.
@@ -57,6 +65,9 @@ class ChromeLocation extends ChromeApi {
   }
 }
 
+/**
+ * Coordinates part of the Location object.
+ */
 class Coordinates extends ChromeObject {
   Coordinates({double latitude, double longitude, double altitude, double accuracy, double altitudeAccuracy, double heading, double speed}) {
     if (latitude != null) this.latitude = latitude;
@@ -91,6 +102,9 @@ class Coordinates extends ChromeObject {
   set speed(double value) => jsProxy['speed'] = jsify(value);
 }
 
+/**
+ * Parameter of onLocationUpdate event's listener.
+ */
 class Location extends ChromeObject {
   Location({String name, Coordinates coords, double timestamp}) {
     if (name != null) this.name = name;
@@ -109,6 +123,9 @@ class Location extends ChromeObject {
   set timestamp(double value) => jsProxy['timestamp'] = jsify(value);
 }
 
+/**
+ * Parameter of watchLocation call.
+ */
 class WatchLocationRequestInfo extends ChromeObject {
   WatchLocationRequestInfo({double minDistanceInMeters, double minTimeInMilliseconds, int maximumAge}) {
     if (minDistanceInMeters != null) this.minDistanceInMeters = minDistanceInMeters;

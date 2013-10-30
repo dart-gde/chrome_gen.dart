@@ -1,5 +1,11 @@
 /* This file has been generated from tab_capture.idl - do not edit */
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.tabCapture` API to interact with tab media
+ * streams.
+ */
 library chrome.tabCapture;
 
 import '../src/common.dart';
@@ -57,12 +63,6 @@ class ChromeTabCapture extends ChromeApi {
   }
 }
 
-/**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.tabCapture` API to interact with tab media
- * streams.
- */
 class TabCaptureState extends ChromeEnum {
   static const TabCaptureState PENDING = const TabCaptureState._('pending');
   static const TabCaptureState ACTIVE = const TabCaptureState._('active');
@@ -92,6 +92,11 @@ class CaptureInfo extends ChromeObject {
   set fullscreen(bool value) => jsProxy['fullscreen'] = value;
 }
 
+/**
+ * MediaTrackConstraints for the media streams that will be passed to WebRTC.
+ * See section on MediaTrackConstraints:
+ * http://dev.w3.org/2011/webrtc/editor/getusermedia.html
+ */
 class MediaStreamConstraint extends ChromeObject {
   MediaStreamConstraint({var mandatory, var optional}) {
     if (mandatory != null) this.mandatory = mandatory;
@@ -106,6 +111,10 @@ class MediaStreamConstraint extends ChromeObject {
   set optional(var value) => jsProxy['_optional'] = jsify(value);
 }
 
+/**
+ * Whether we are requesting tab video and/or audio and the
+ * MediaTrackConstraints that should be set for these streams.
+ */
 class CaptureOptions extends ChromeObject {
   CaptureOptions({bool audio, bool video, MediaStreamConstraint audioConstraints, MediaStreamConstraint videoConstraints}) {
     if (audio != null) this.audio = audio;

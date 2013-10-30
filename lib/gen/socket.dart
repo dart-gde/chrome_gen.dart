@@ -1,5 +1,11 @@
 /* This file has been generated from socket.idl - do not edit */
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.socket` API to send and receive data over the
+ * network using TCP and UDP connections.
+ */
 library chrome.socket;
 
 import '../src/common.dart';
@@ -256,12 +262,9 @@ class ChromeSocket extends ChromeApi {
   /**
    * Leave the multicast group previously joined using `joinGroup`. It's not
    * necessary to leave the multicast group before destroying the socket or
-   * exiting. This is automatically called by the OS.
-   * 
-   * Leaving the group will prevent the router from sending multicast datagrams
-   * to the local host, presuming no other process on the host is still joined
-   * to the group.
-   * 
+   * exiting. This is automatically called by the OS. Leaving the group will
+   * prevent the router from sending multicast datagrams to the local host,
+   * presuming no other process on the host is still joined to the group.
    * [socketId]: The socketId.
    * [address]: The group address to leave. Domain names are not supported.
    * [callback]: Called when the leave group operation is done with an integer
@@ -277,9 +280,7 @@ class ChromeSocket extends ChromeApi {
 
   /**
    * Set the time-to-live of multicast packets sent to the multicast group.
-   * 
    * Calling this method does not require multicast permissions.
-   * 
    * [socketId]: The socketId.
    * [ttl]: The time-to-live value.
    * [callback]: Called when the configuration operation is done.
@@ -294,19 +295,16 @@ class ChromeSocket extends ChromeApi {
 
   /**
    * Set whether multicast packets sent from the host to the multicast group
-   * will be looped back to the host.
-   * 
-   * Note: the behavior of `setMulticastLoopbackMode` is slightly different
-   * between Windows and Unix-like systems. The inconsistency happens only when
-   * there is more than one application on the same host joined to the same
-   * multicast group while having different settings on multicast loopback mode.
-   * On Windows, the applications with loopback off will not RECEIVE the
-   * loopback packets; while on Unix-like systems, the applications with
-   * loopback off will not SEND the loopback packets to other applications on
-   * the same host. See MSDN: http://goo.gl/6vqbj
-   * 
-   * Calling this method does not require multicast permissions.
-   * 
+   * will be looped back to the host. Note: the behavior of
+   * `setMulticastLoopbackMode` is slightly different between Windows and
+   * Unix-like systems. The inconsistency happens only when there is more than
+   * one application on the same host joined to the same multicast group while
+   * having different settings on multicast loopback mode. On Windows, the
+   * applications with loopback off will not RECEIVE the loopback packets; while
+   * on Unix-like systems, the applications with loopback off will not SEND the
+   * loopback packets to other applications on the same host. See MSDN:
+   * http://goo.gl/6vqbj Calling this method does not require multicast
+   * permissions.
    * [socketId]: The socketId.
    * [enabled]: Indicate whether to enable loopback mode.
    * [callback]: Called when the configuration operation is done.
@@ -337,12 +335,6 @@ class ChromeSocket extends ChromeApi {
   }
 }
 
-/**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.socket` API to send and receive data over the
- * network using TCP and UDP connections.
- */
 class SocketType extends ChromeEnum {
   static const SocketType TCP = const SocketType._('tcp');
   static const SocketType UDP = const SocketType._('udp');
@@ -352,6 +344,9 @@ class SocketType extends ChromeEnum {
   const SocketType._(String str): super(str);
 }
 
+/**
+ * The socket options.
+ */
 class CreateOptions extends ChromeObject {
   CreateOptions();
   CreateOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);

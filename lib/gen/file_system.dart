@@ -1,5 +1,14 @@
 /* This file has been generated from file_system.idl - do not edit */
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.fileSystem` API to create, read, navigate, and
+ * write to a sandboxed section of the user's local file system. With this API,
+ * Chrome Apps can read and write to a user-selected location. For example, a
+ * text editor app can use the API to read and write local documents. All
+ * failures are notified via chrome.runtime.lastError.
+ */
 library chrome.fileSystem;
 
 import '../src/files.dart';
@@ -113,23 +122,6 @@ class ChromeFileSystem extends ChromeApi {
   }
 }
 
-/**
- * Prompts the user to open an existing file and returns a FileEntry on success.
- * From Chrome 31 onwards, the FileEntry will be writable if the application has
- * the 'write' permission under 'fileSystem'; otherwise, the FileEntry will be
- * read-only. Prompts the user to open an existing file and returns a writable
- * FileEntry on success. Calls using this type will fail with a runtime error if
- * the application doesn't have the 'write' permission under 'fileSystem'.
- * Prompts the user to open an existing file or a new file and returns a
- * writable FileEntry on success. Calls using this type will fail with a runtime
- * error if the application doesn't have the 'write' permission under
- * 'fileSystem'. Prompts the user to open a directory and returns a
- * DirectoryEntry on success. Calls using this type will fail with a runtime
- * error if the application doesn't have the 'directory' permission under
- * 'fileSystem'. If the application has the 'write' permission under
- * 'fileSystem', the returned DirectoryEntry will be writable; otherwise it will
- * be read-only. New in Chrome 31.
- */
 class ChooseEntryType extends ChromeEnum {
   static const ChooseEntryType OPEN_FILE = const ChooseEntryType._('openFile');
   static const ChooseEntryType OPEN_WRITABLE_FILE = const ChooseEntryType._('openWritableFile');

@@ -148,6 +148,16 @@ class GenApis {
     generator.writeln();
 
     generator.writeln("import '../src/common.dart';");
+    Set<String> imports = new Set();
+    apis.forEach((api) => imports.addAll(api.getImports()));
+    imports.forEach((String str) {
+      if (str.endsWith('.dart')) {
+        generator.writeln("import '${str}';");
+      } else {
+        str = fromCamelCase(str.replaceAll('.', '_'));
+        generator.writeln("import '${str}.dart';");
+      }
+    });
     generator.writeln();
 
     // create the combined reference

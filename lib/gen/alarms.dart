@@ -1,5 +1,11 @@
 /* This file has been generated from alarms.idl - do not edit */
 
+/**
+ * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file. Use the `chrome.alarms` API to schedule code to run
+ * periodically or at a specified time in the future.
+ */
 library chrome.alarms;
 
 import '../src/common.dart';
@@ -19,20 +25,16 @@ class ChromeAlarms extends ChromeApi {
   /**
    * Creates an alarm. Near the time(s) specified by [alarmInfo], the `onAlarm`
    * event is fired. If there is another alarm with the same name (or no name if
-   * none is specified), it will be cancelled and replaced by this alarm.
-   * 
-   * In order to reduce the load on the user's machine, Chrome limits alarms to
-   * at most once every 1 minute but may delay them an arbitrary amount more.
-   * That is, setting `delayInMinutes` or `periodInMinutes` to less than `1`
-   * will not be honored and will cause a warning. `when` can be set to less
-   * than 1 minute after "now" without warning but won't actually cause the
-   * alarm to fire for at least 1 minute.
-   * 
-   * To help you debug your app or extension, when you've loaded it unpacked,
-   * there's no limit to how often the alarm can fire.
-   * 
+   * none is specified), it will be cancelled and replaced by this alarm. In
+   * order to reduce the load on the user's machine, Chrome limits alarms to at
+   * most once every 1 minute but may delay them an arbitrary amount more. That
+   * is, setting `delayInMinutes` or `periodInMinutes` to less than `1` will not
+   * be honored and will cause a warning. `when` can be set to less than 1
+   * minute after "now" without warning but won't actually cause the alarm to
+   * fire for at least 1 minute. To help you debug your app or extension, when
+   * you've loaded it unpacked, there's no limit to how often the alarm can
+   * fire.
    * [name]: Optional name to identify this alarm. Defaults to the empty string.
-   * 
    * [alarmInfo]: Describes when the alarm should fire. The initial time must be
    * specified by either [when] or [delayInMinutes] (but not both). If
    * [periodInMinutes] is set, the alarm will repeat every [periodInMinutes]
@@ -116,6 +118,9 @@ class Alarm extends ChromeObject {
   set periodInMinutes(double value) => jsProxy['periodInMinutes'] = jsify(value);
 }
 
+/**
+ * todo(mpcomplete): rename to CreateInfo when http://crbug.com/123073 is fixed.
+ */
 class AlarmCreateInfo extends ChromeObject {
   AlarmCreateInfo({double when, double delayInMinutes, double periodInMinutes}) {
     if (when != null) this.when = when;

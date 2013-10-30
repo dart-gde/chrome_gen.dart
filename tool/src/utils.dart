@@ -88,6 +88,7 @@ String getFileName(FileSystemEntity entity) {
 Map _importMap = const {
   'DirectoryEntry': '../src/files.dart',
   'Entry': '../src/files.dart',
+  'FileEntry': '../src/files.dart',
   'DOMFileSystem': '../src/files.dart',
   'Window': 'windows'
 };
