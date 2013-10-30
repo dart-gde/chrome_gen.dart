@@ -21,7 +21,7 @@ class IDLConverter {
 
     library = new ChromeLibrary(namespace.name);
 
-    library.documentation = _cleanDocComments(namespace.documentation.join());
+    library.documentation = _cleanDocComments(namespace.documentation.join('\n'));
 
     if (namespace.typeDeclarations != null) {
       library.types.addAll(
@@ -52,7 +52,7 @@ class IDLConverter {
 
     chromeDeclaredType.name = typeDeclaration.name;
     chromeDeclaredType.documentation =
-        _cleanDocComments(typeDeclaration.documentation.join());
+        _cleanDocComments(typeDeclaration.documentation.join('\n'));
     chromeDeclaredType.properties =
         typeDeclaration.members.map(_convertProperty).toList();
     chromeDeclaredType.methods =
@@ -78,7 +78,7 @@ class IDLConverter {
     ChromeMethod chromeMethod = new ChromeMethod();
     chromeMethod.name = idlMethod.name;
     chromeMethod.documentation =
-        _cleanDocComments(idlMethod.documentation.join());
+        _cleanDocComments(idlMethod.documentation.join('\n'));
     chromeMethod.returns = _convertType(idlMethod.returnType);
     chromeMethod.params = idlMethod.parameters.map(_convertParameter).toList();
 
@@ -111,7 +111,7 @@ class IDLConverter {
 
     if (params.length == 1) {
       future.parameters.add(params.first);
-      future.documentation = _cleanDocComments(callback.documentation.join());
+      future.documentation = _cleanDocComments(callback.documentation.join('\n'));
     } else if (params.length == 2) {
       ChromeType type = new ChromeType(type: 'var',
           refName: "${titleCase(method.name)}Result");
@@ -155,7 +155,7 @@ class IDLConverter {
     ChromeEnumType chromeEnumType = new ChromeEnumType();
     chromeEnumType.name = idlEnumDeclaration.name;
     chromeEnumType.documentation =
-        _cleanDocComments(idlEnumDeclaration.documentation.join());
+        _cleanDocComments(idlEnumDeclaration.documentation.join('\n'));
     idlEnumDeclaration.enums.forEach((IDLEnumValue value) {
       ChromeEnumEntry chromeEnumEntry = new ChromeEnumEntry();
       chromeEnumEntry.name = value.name;
