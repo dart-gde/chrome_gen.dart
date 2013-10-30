@@ -165,13 +165,13 @@ class NotificationItem extends ChromeObject {
     if (title != null) this.title = title;
     if (message != null) this.message = message;
   }
-  NotificationItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  NotificationItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get title => proxy['title'];
-  set title(String value) => proxy['title'] = value;
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
 
-  String get message => proxy['message'];
-  set message(String value) => proxy['message'] = value;
+  String get message => jsProxy['message'];
+  set message(String value) => jsProxy['message'] = value;
 }
 
 class NotificationBitmap extends ChromeObject {
@@ -180,16 +180,16 @@ class NotificationBitmap extends ChromeObject {
     if (height != null) this.height = height;
     if (data != null) this.data = data;
   }
-  NotificationBitmap.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  NotificationBitmap.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get width => proxy['width'];
-  set width(int value) => proxy['width'] = value;
+  int get width => jsProxy['width'];
+  set width(int value) => jsProxy['width'] = value;
 
-  int get height => proxy['height'];
-  set height(int value) => proxy['height'] = value;
+  int get height => jsProxy['height'];
+  set height(int value) => jsProxy['height'] = value;
 
-  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
+  ArrayBuffer get data => _createArrayBuffer(jsProxy['data']);
+  set data(ArrayBuffer value) => jsProxy['data'] = jsify(value);
 }
 
 class NotificationButton extends ChromeObject {
@@ -198,16 +198,16 @@ class NotificationButton extends ChromeObject {
     if (iconUrl != null) this.iconUrl = iconUrl;
     if (iconBitmap != null) this.iconBitmap = iconBitmap;
   }
-  NotificationButton.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  NotificationButton.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get title => proxy['title'];
-  set title(String value) => proxy['title'] = value;
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
 
-  String get iconUrl => proxy['iconUrl'];
-  set iconUrl(String value) => proxy['iconUrl'] = value;
+  String get iconUrl => jsProxy['iconUrl'];
+  set iconUrl(String value) => jsProxy['iconUrl'] = value;
 
-  NotificationBitmap get iconBitmap => _createNotificationBitmap(proxy['iconBitmap']);
-  set iconBitmap(NotificationBitmap value) => proxy['iconBitmap'] = jsify(value);
+  NotificationBitmap get iconBitmap => _createNotificationBitmap(jsProxy['iconBitmap']);
+  set iconBitmap(NotificationBitmap value) => jsProxy['iconBitmap'] = jsify(value);
 }
 
 class NotificationOptions extends ChromeObject {
@@ -228,52 +228,52 @@ class NotificationOptions extends ChromeObject {
     if (progress != null) this.progress = progress;
     if (isClickable != null) this.isClickable = isClickable;
   }
-  NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  NotificationOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  TemplateType get type => _createTemplateType(proxy['type']);
-  set type(TemplateType value) => proxy['type'] = jsify(value);
+  TemplateType get type => _createTemplateType(jsProxy['type']);
+  set type(TemplateType value) => jsProxy['type'] = jsify(value);
 
-  String get iconUrl => proxy['iconUrl'];
-  set iconUrl(String value) => proxy['iconUrl'] = value;
+  String get iconUrl => jsProxy['iconUrl'];
+  set iconUrl(String value) => jsProxy['iconUrl'] = value;
 
-  NotificationBitmap get iconBitmap => _createNotificationBitmap(proxy['iconBitmap']);
-  set iconBitmap(NotificationBitmap value) => proxy['iconBitmap'] = jsify(value);
+  NotificationBitmap get iconBitmap => _createNotificationBitmap(jsProxy['iconBitmap']);
+  set iconBitmap(NotificationBitmap value) => jsProxy['iconBitmap'] = jsify(value);
 
-  String get title => proxy['title'];
-  set title(String value) => proxy['title'] = value;
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
 
-  String get message => proxy['message'];
-  set message(String value) => proxy['message'] = value;
+  String get message => jsProxy['message'];
+  set message(String value) => jsProxy['message'] = value;
 
-  String get contextMessage => proxy['contextMessage'];
-  set contextMessage(String value) => proxy['contextMessage'] = value;
+  String get contextMessage => jsProxy['contextMessage'];
+  set contextMessage(String value) => jsProxy['contextMessage'] = value;
 
-  int get priority => proxy['priority'];
-  set priority(int value) => proxy['priority'] = value;
+  int get priority => jsProxy['priority'];
+  set priority(int value) => jsProxy['priority'] = value;
 
-  double get eventTime => proxy['eventTime'];
-  set eventTime(double value) => proxy['eventTime'] = jsify(value);
+  double get eventTime => jsProxy['eventTime'];
+  set eventTime(double value) => jsProxy['eventTime'] = jsify(value);
 
-  NotificationButton get buttons => _createNotificationButton(proxy['buttons']);
-  set buttons(NotificationButton value) => proxy['buttons'] = jsify(value);
+  NotificationButton get buttons => _createNotificationButton(jsProxy['buttons']);
+  set buttons(NotificationButton value) => jsProxy['buttons'] = jsify(value);
 
-  String get expandedMessage => proxy['expandedMessage'];
-  set expandedMessage(String value) => proxy['expandedMessage'] = value;
+  String get expandedMessage => jsProxy['expandedMessage'];
+  set expandedMessage(String value) => jsProxy['expandedMessage'] = value;
 
-  String get imageUrl => proxy['imageUrl'];
-  set imageUrl(String value) => proxy['imageUrl'] = value;
+  String get imageUrl => jsProxy['imageUrl'];
+  set imageUrl(String value) => jsProxy['imageUrl'] = value;
 
-  NotificationBitmap get imageBitmap => _createNotificationBitmap(proxy['imageBitmap']);
-  set imageBitmap(NotificationBitmap value) => proxy['imageBitmap'] = jsify(value);
+  NotificationBitmap get imageBitmap => _createNotificationBitmap(jsProxy['imageBitmap']);
+  set imageBitmap(NotificationBitmap value) => jsProxy['imageBitmap'] = jsify(value);
 
-  NotificationItem get items => _createNotificationItem(proxy['items']);
-  set items(NotificationItem value) => proxy['items'] = jsify(value);
+  NotificationItem get items => _createNotificationItem(jsProxy['items']);
+  set items(NotificationItem value) => jsProxy['items'] = jsify(value);
 
-  int get progress => proxy['progress'];
-  set progress(int value) => proxy['progress'] = value;
+  int get progress => jsProxy['progress'];
+  set progress(int value) => jsProxy['progress'] = value;
 
-  bool get isClickable => proxy['isClickable'];
-  set isClickable(bool value) => proxy['isClickable'] = value;
+  bool get isClickable => jsProxy['isClickable'];
+  set isClickable(bool value) => jsProxy['isClickable'] = value;
 }
 
 PermissionLevel _createPermissionLevel(String value) => PermissionLevel.VALUES.singleWhere((ChromeEnum e) => e.value == value);
@@ -281,8 +281,8 @@ OnClosedEvent _createOnClosedEvent(String notificationId, bool byUser) =>
     new OnClosedEvent(notificationId, byUser);
 OnButtonClickedEvent _createOnButtonClickedEvent(String notificationId, int buttonIndex) =>
     new OnButtonClickedEvent(notificationId, buttonIndex);
-ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);
-NotificationBitmap _createNotificationBitmap(JsObject proxy) => proxy == null ? null : new NotificationBitmap.fromProxy(proxy);
+ArrayBuffer _createArrayBuffer(JsObject jsProxy) => jsProxy == null ? null : new ArrayBuffer.fromProxy(jsProxy);
+NotificationBitmap _createNotificationBitmap(JsObject jsProxy) => jsProxy == null ? null : new NotificationBitmap.fromProxy(jsProxy);
 TemplateType _createTemplateType(String value) => TemplateType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-NotificationButton _createNotificationButton(JsObject proxy) => proxy == null ? null : new NotificationButton.fromProxy(proxy);
-NotificationItem _createNotificationItem(JsObject proxy) => proxy == null ? null : new NotificationItem.fromProxy(proxy);
+NotificationButton _createNotificationButton(JsObject jsProxy) => jsProxy == null ? null : new NotificationButton.fromProxy(jsProxy);
+NotificationItem _createNotificationItem(JsObject jsProxy) => jsProxy == null ? null : new NotificationItem.fromProxy(jsProxy);

@@ -178,7 +178,7 @@ class DefaultBackend extends Backend {
     generator.writeln("${converter.replaceFirst('%s', getterBody)};");
 
     if (printSetter) {
-      // set periodInMinutes(double value) => proxy['periodInMinutes'] = value;
+      // set periodInMinutes(double value) => jsProxy['periodInMinutes'] = value;
       generator.writeln("set ${property.name}(${property.type} value) => "
           "${getterBody} = ${getSetterConverter(property.type, 'value')};");
     }
@@ -369,16 +369,16 @@ class DefaultBackend extends Backend {
     } else {
       generator.writeln("${className}();");
     }
-    generator.writeln("${className}.fromProxy(JsObject proxy): super.fromProxy(proxy);");
+    generator.writeln("${className}.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);");
 
     if (library.name != 'proxy') {
-      props.forEach((p) => _printPropertyRef(p, 'proxy', !type.noSetters));
+      props.forEach((p) => _printPropertyRef(p, 'jsProxy', !type.noSetters));
     } else {
-      props.forEach((p) => _printPropertyRef(p, 'this.proxy', !type.noSetters));
+      props.forEach((p) => _printPropertyRef(p, 'this.jsProxy', !type.noSetters));
     }
 
     type.methods.forEach((m) => _printMethod(
-        m, thisOverride: 'proxy', checkApi: false));
+        m, thisOverride: 'jsProxy', checkApi: false));
 
     generator.writeln("}");
   }
@@ -443,7 +443,7 @@ class DefaultBackend extends Backend {
     if (enumType != null) {
       creatorTemplate = "%s _create%s(String value) => %s.VALUES.singleWhere((ChromeEnum e) => e.value == value);";
     } else {
-      creatorTemplate = "%s _create%s(JsObject proxy) => proxy == null ? null : new %t.fromProxy(proxy);";
+      creatorTemplate = "%s _create%s(JsObject jsProxy) => jsProxy == null ? null : new %t.fromProxy(jsProxy);";
     }
 
     String altCreator =

@@ -45,19 +45,19 @@ class MostVisitedURL extends ChromeObject {
     if (url != null) this.url = url;
     if (title != null) this.title = title;
   }
-  MostVisitedURL.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  MostVisitedURL.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The most visited URL.
    */
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
   /**
    * The title of the page
    */
-  String get title => proxy['title'];
-  set title(String value) => proxy['title'] = value;
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
 }
 
-MostVisitedURL _createMostVisitedURL(JsObject proxy) => proxy == null ? null : new MostVisitedURL.fromProxy(proxy);
+MostVisitedURL _createMostVisitedURL(JsObject jsProxy) => jsProxy == null ? null : new MostVisitedURL.fromProxy(jsProxy);

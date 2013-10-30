@@ -59,55 +59,55 @@ class HeaderFilter extends ChromeObject {
     if (valueContains != null) this.valueContains = valueContains;
     if (valueEquals != null) this.valueEquals = valueEquals;
   }
-  HeaderFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  HeaderFilter.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Matches if the header name starts with the specified string.
    */
-  String get namePrefix => proxy['namePrefix'];
-  set namePrefix(String value) => proxy['namePrefix'] = value;
+  String get namePrefix => jsProxy['namePrefix'];
+  set namePrefix(String value) => jsProxy['namePrefix'] = value;
 
   /**
    * Matches if the header name ends with the specified string.
    */
-  String get nameSuffix => proxy['nameSuffix'];
-  set nameSuffix(String value) => proxy['nameSuffix'] = value;
+  String get nameSuffix => jsProxy['nameSuffix'];
+  set nameSuffix(String value) => jsProxy['nameSuffix'] = value;
 
   /**
    * Matches if the header name contains all of the specified strings.
    */
-  dynamic get nameContains => proxy['nameContains'];
-  set nameContains(var value) => proxy['nameContains'] = jsify(value);
+  dynamic get nameContains => jsProxy['nameContains'];
+  set nameContains(var value) => jsProxy['nameContains'] = jsify(value);
 
   /**
    * Matches if the header name is equal to the specified string.
    */
-  String get nameEquals => proxy['nameEquals'];
-  set nameEquals(String value) => proxy['nameEquals'] = value;
+  String get nameEquals => jsProxy['nameEquals'];
+  set nameEquals(String value) => jsProxy['nameEquals'] = value;
 
   /**
    * Matches if the header value starts with the specified string.
    */
-  String get valuePrefix => proxy['valuePrefix'];
-  set valuePrefix(String value) => proxy['valuePrefix'] = value;
+  String get valuePrefix => jsProxy['valuePrefix'];
+  set valuePrefix(String value) => jsProxy['valuePrefix'] = value;
 
   /**
    * Matches if the header value ends with the specified string.
    */
-  String get valueSuffix => proxy['valueSuffix'];
-  set valueSuffix(String value) => proxy['valueSuffix'] = value;
+  String get valueSuffix => jsProxy['valueSuffix'];
+  set valueSuffix(String value) => jsProxy['valueSuffix'] = value;
 
   /**
    * Matches if the header value contains all of the specified strings.
    */
-  dynamic get valueContains => proxy['valueContains'];
-  set valueContains(var value) => proxy['valueContains'] = jsify(value);
+  dynamic get valueContains => jsProxy['valueContains'];
+  set valueContains(var value) => jsProxy['valueContains'] = jsify(value);
 
   /**
    * Matches if the header value is equal to the specified string.
    */
-  String get valueEquals => proxy['valueEquals'];
-  set valueEquals(String value) => proxy['valueEquals'] = value;
+  String get valueEquals => jsProxy['valueEquals'];
+  set valueEquals(String value) => jsProxy['valueEquals'] = value;
 }
 
 /**
@@ -127,14 +127,14 @@ class RequestMatcher extends ChromeObject {
     if (thirdPartyForCookies != null) this.thirdPartyForCookies = thirdPartyForCookies;
     if (stages != null) this.stages = stages;
   }
-  RequestMatcher.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RequestMatcher.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Matches if the conditions of the UrlFilter are fulfilled for the URL of the
    * request.
    */
-  UrlFilter get url => _createUrlFilter(proxy['url']);
-  set url(UrlFilter value) => proxy['url'] = jsify(value);
+  UrlFilter get url => _createUrlFilter(jsProxy['url']);
+  set url(UrlFilter value) => jsProxy['url'] = jsify(value);
 
   /**
    * Matches if the conditions of the UrlFilter are fulfilled for the 'first
@@ -142,64 +142,64 @@ class RequestMatcher extends ChromeObject {
    * present, can be different from the request's target URL, and describes what
    * is considered 'first party' for the sake of third-party checks for cookies.
    */
-  UrlFilter get firstPartyForCookiesUrl => _createUrlFilter(proxy['firstPartyForCookiesUrl']);
-  set firstPartyForCookiesUrl(UrlFilter value) => proxy['firstPartyForCookiesUrl'] = jsify(value);
+  UrlFilter get firstPartyForCookiesUrl => _createUrlFilter(jsProxy['firstPartyForCookiesUrl']);
+  set firstPartyForCookiesUrl(UrlFilter value) => jsProxy['firstPartyForCookiesUrl'] = jsify(value);
 
   /**
    * Matches if the request type of a request is contained in the list. Requests
    * that cannot match any of the types will be filtered out.
    */
-  List<String> get resourceType => listify(proxy['resourceType']);
-  set resourceType(List<String> value) => proxy['resourceType'] = jsify(value);
+  List<String> get resourceType => listify(jsProxy['resourceType']);
+  set resourceType(List<String> value) => jsProxy['resourceType'] = jsify(value);
 
   /**
    * Matches if the MIME media type of a response (from the HTTP Content-Type
    * header) is contained in the list.
    */
-  List<String> get contentType => listify(proxy['contentType']);
-  set contentType(List<String> value) => proxy['contentType'] = jsify(value);
+  List<String> get contentType => listify(jsProxy['contentType']);
+  set contentType(List<String> value) => jsProxy['contentType'] = jsify(value);
 
   /**
    * Matches if the MIME media type of a response (from the HTTP Content-Type
    * header) is _not_ contained in the list.
    */
-  List<String> get excludeContentType => listify(proxy['excludeContentType']);
-  set excludeContentType(List<String> value) => proxy['excludeContentType'] = jsify(value);
+  List<String> get excludeContentType => listify(jsProxy['excludeContentType']);
+  set excludeContentType(List<String> value) => jsProxy['excludeContentType'] = jsify(value);
 
   /**
    * Matches if some of the request headers is matched by one of the
    * HeaderFilters.
    */
-  List<HeaderFilter> get requestHeaders => listify(proxy['requestHeaders'], _createHeaderFilter);
-  set requestHeaders(List<HeaderFilter> value) => proxy['requestHeaders'] = jsify(value);
+  List<HeaderFilter> get requestHeaders => listify(jsProxy['requestHeaders'], _createHeaderFilter);
+  set requestHeaders(List<HeaderFilter> value) => jsProxy['requestHeaders'] = jsify(value);
 
   /**
    * Matches if none of the request headers is matched by any of the
    * HeaderFilters.
    */
-  List<HeaderFilter> get excludeRequestHeaders => listify(proxy['excludeRequestHeaders'], _createHeaderFilter);
-  set excludeRequestHeaders(List<HeaderFilter> value) => proxy['excludeRequestHeaders'] = jsify(value);
+  List<HeaderFilter> get excludeRequestHeaders => listify(jsProxy['excludeRequestHeaders'], _createHeaderFilter);
+  set excludeRequestHeaders(List<HeaderFilter> value) => jsProxy['excludeRequestHeaders'] = jsify(value);
 
   /**
    * Matches if some of the response headers is matched by one of the
    * HeaderFilters.
    */
-  List<HeaderFilter> get responseHeaders => listify(proxy['responseHeaders'], _createHeaderFilter);
-  set responseHeaders(List<HeaderFilter> value) => proxy['responseHeaders'] = jsify(value);
+  List<HeaderFilter> get responseHeaders => listify(jsProxy['responseHeaders'], _createHeaderFilter);
+  set responseHeaders(List<HeaderFilter> value) => jsProxy['responseHeaders'] = jsify(value);
 
   /**
    * Matches if none of the response headers is matched by any of the
    * HeaderFilters.
    */
-  List<HeaderFilter> get excludeResponseHeaders => listify(proxy['excludeResponseHeaders'], _createHeaderFilter);
-  set excludeResponseHeaders(List<HeaderFilter> value) => proxy['excludeResponseHeaders'] = jsify(value);
+  List<HeaderFilter> get excludeResponseHeaders => listify(jsProxy['excludeResponseHeaders'], _createHeaderFilter);
+  set excludeResponseHeaders(List<HeaderFilter> value) => jsProxy['excludeResponseHeaders'] = jsify(value);
 
   /**
    * If set to true, matches requests that are subject to third-party cookie
    * policies. If set to false, matches all other requests.
    */
-  bool get thirdPartyForCookies => proxy['thirdPartyForCookies'];
-  set thirdPartyForCookies(bool value) => proxy['thirdPartyForCookies'] = value;
+  bool get thirdPartyForCookies => jsProxy['thirdPartyForCookies'];
+  set thirdPartyForCookies(bool value) => jsProxy['thirdPartyForCookies'] = value;
 
   /**
    * Contains a list of strings describing stages. Allowed values are
@@ -208,8 +208,8 @@ class RequestMatcher extends ChromeObject {
    * applicable stages to those listed. Note that the whole condition is only
    * applicable in stages compatible with all attributes.
    */
-  List<String> get stages => listify(proxy['stages']);
-  set stages(List<String> value) => proxy['stages'] = jsify(value);
+  List<String> get stages => listify(jsProxy['stages']);
+  set stages(List<String> value) => jsProxy['stages'] = jsify(value);
 }
 
 /**
@@ -217,7 +217,7 @@ class RequestMatcher extends ChromeObject {
  */
 class CancelRequest extends ChromeObject {
   CancelRequest();
-  CancelRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  CancelRequest.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
 /**
@@ -227,13 +227,13 @@ class RedirectRequest extends ChromeObject {
   RedirectRequest({String redirectUrl}) {
     if (redirectUrl != null) this.redirectUrl = redirectUrl;
   }
-  RedirectRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RedirectRequest.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Destination to where the request is redirected.
    */
-  String get redirectUrl => proxy['redirectUrl'];
-  set redirectUrl(String value) => proxy['redirectUrl'] = value;
+  String get redirectUrl => jsProxy['redirectUrl'];
+  set redirectUrl(String value) => jsProxy['redirectUrl'] = value;
 }
 
 /**
@@ -242,7 +242,7 @@ class RedirectRequest extends ChromeObject {
  */
 class RedirectToTransparentImage extends ChromeObject {
   RedirectToTransparentImage();
-  RedirectToTransparentImage.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RedirectToTransparentImage.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
 /**
@@ -251,7 +251,7 @@ class RedirectToTransparentImage extends ChromeObject {
  */
 class RedirectToEmptyDocument extends ChromeObject {
   RedirectToEmptyDocument();
-  RedirectToEmptyDocument.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RedirectToEmptyDocument.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
 /**
@@ -263,21 +263,21 @@ class RedirectByRegEx extends ChromeObject {
     if (from != null) this.from = from;
     if (to != null) this.to = to;
   }
-  RedirectByRegEx.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RedirectByRegEx.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * A match pattern that may contain capture groups. Capture groups are
    * referenced in the Perl syntax ($1, $2, ...) instead of the RE2 syntax (\1,
    * \2, ...) in order to be closer to JavaScript Regular Expressions.
    */
-  String get from => proxy['from'];
-  set from(String value) => proxy['from'] = value;
+  String get from => jsProxy['from'];
+  set from(String value) => jsProxy['from'] = value;
 
   /**
    * Destination pattern.
    */
-  String get to => proxy['to'];
-  set to(String value) => proxy['to'] = value;
+  String get to => jsProxy['to'];
+  set to(String value) => jsProxy['to'] = value;
 }
 
 /**
@@ -291,19 +291,19 @@ class SetRequestHeader extends ChromeObject {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
   }
-  SetRequestHeader.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  SetRequestHeader.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * HTTP request header name.
    */
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
   /**
    * HTTP request header value.
    */
-  String get value => proxy['value'];
-  set value(String value) => proxy['value'] = value;
+  String get value => jsProxy['value'];
+  set value(String value) => jsProxy['value'] = value;
 }
 
 /**
@@ -315,13 +315,13 @@ class RemoveRequestHeader extends ChromeObject {
   RemoveRequestHeader({String name}) {
     if (name != null) this.name = name;
   }
-  RemoveRequestHeader.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RemoveRequestHeader.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * HTTP request header name (case-insensitive).
    */
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 }
 
 /**
@@ -334,19 +334,19 @@ class AddResponseHeader extends ChromeObject {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
   }
-  AddResponseHeader.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  AddResponseHeader.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * HTTP response header name.
    */
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
   /**
    * HTTP response header value.
    */
-  String get value => proxy['value'];
-  set value(String value) => proxy['value'] = value;
+  String get value => jsProxy['value'];
+  set value(String value) => jsProxy['value'] = value;
 }
 
 /**
@@ -357,19 +357,19 @@ class RemoveResponseHeader extends ChromeObject {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
   }
-  RemoveResponseHeader.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RemoveResponseHeader.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * HTTP request header name (case-insensitive).
    */
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
   /**
    * HTTP request header value (case-insensitive).
    */
-  String get value => proxy['value'];
-  set value(String value) => proxy['value'] = value;
+  String get value => jsProxy['value'];
+  set value(String value) => jsProxy['value'] = value;
 }
 
 /**
@@ -380,15 +380,15 @@ class IgnoreRules extends ChromeObject {
     if (lowerPriorityThan != null) this.lowerPriorityThan = lowerPriorityThan;
     if (hasTag != null) this.hasTag = hasTag;
   }
-  IgnoreRules.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  IgnoreRules.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * If set, rules with a lower priority than the specified value are ignored.
    * This boundary is not persisted, it affects only rules and their actions of
    * the same network request stage.
    */
-  int get lowerPriorityThan => proxy['lowerPriorityThan'];
-  set lowerPriorityThan(int value) => proxy['lowerPriorityThan'] = value;
+  int get lowerPriorityThan => jsProxy['lowerPriorityThan'];
+  set lowerPriorityThan(int value) => jsProxy['lowerPriorityThan'] = value;
 
   /**
    * If set, rules with the specified tag are ignored. This ignoring is not
@@ -397,8 +397,8 @@ class IgnoreRules extends ChromeObject {
    * priorities. This action affects rules of lower priority than the current
    * rule. Rules with the same priority may or may not be ignored.
    */
-  String get hasTag => proxy['hasTag'];
-  set hasTag(String value) => proxy['hasTag'] = value;
+  String get hasTag => jsProxy['hasTag'];
+  set hasTag(String value) => jsProxy['hasTag'] = value;
 }
 
 /**
@@ -408,14 +408,14 @@ class SendMessageToExtension extends ChromeObject {
   SendMessageToExtension({String message}) {
     if (message != null) this.message = message;
   }
-  SendMessageToExtension.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  SendMessageToExtension.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The value that will be passed in the `message` attribute of the dictionary
    * that is passed to the event handler.
    */
-  String get message => proxy['message'];
-  set message(String value) => proxy['message'] = value;
+  String get message => jsProxy['message'];
+  set message(String value) => jsProxy['message'] = value;
 }
 
 /**
@@ -426,19 +426,19 @@ class RequestCookie extends ChromeObject {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
   }
-  RequestCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RequestCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Name of a cookie.
    */
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
   /**
    * Value of a cookie, may be padded in double-quotes.
    */
-  String get value => proxy['value'];
-  set value(String value) => proxy['value'] = value;
+  String get value => jsProxy['value'];
+  set value(String value) => jsProxy['value'] = value;
 }
 
 /**
@@ -455,55 +455,55 @@ class ResponseCookie extends ChromeObject {
     if (secure != null) this.secure = secure;
     if (httpOnly != null) this.httpOnly = httpOnly;
   }
-  ResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Name of a cookie.
    */
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
   /**
    * Value of a cookie, may be padded in double-quotes.
    */
-  String get value => proxy['value'];
-  set value(String value) => proxy['value'] = value;
+  String get value => jsProxy['value'];
+  set value(String value) => jsProxy['value'] = value;
 
   /**
    * Value of the Expires cookie attribute.
    */
-  String get expires => proxy['expires'];
-  set expires(String value) => proxy['expires'] = value;
+  String get expires => jsProxy['expires'];
+  set expires(String value) => jsProxy['expires'] = value;
 
   /**
    * Value of the Max-Age cookie attribute
    */
-  dynamic get maxAge => proxy['maxAge'];
-  set maxAge(var value) => proxy['maxAge'] = jsify(value);
+  dynamic get maxAge => jsProxy['maxAge'];
+  set maxAge(var value) => jsProxy['maxAge'] = jsify(value);
 
   /**
    * Value of the Domain cookie attribute.
    */
-  String get domain => proxy['domain'];
-  set domain(String value) => proxy['domain'] = value;
+  String get domain => jsProxy['domain'];
+  set domain(String value) => jsProxy['domain'] = value;
 
   /**
    * Value of the Path cookie attribute.
    */
-  String get path => proxy['path'];
-  set path(String value) => proxy['path'] = value;
+  String get path => jsProxy['path'];
+  set path(String value) => jsProxy['path'] = value;
 
   /**
    * Existence of the Secure cookie attribute.
    */
-  String get secure => proxy['secure'];
-  set secure(String value) => proxy['secure'] = value;
+  String get secure => jsProxy['secure'];
+  set secure(String value) => jsProxy['secure'] = value;
 
   /**
    * Existence of the HttpOnly cookie attribute.
    */
-  String get httpOnly => proxy['httpOnly'];
-  set httpOnly(String value) => proxy['httpOnly'] = value;
+  String get httpOnly => jsProxy['httpOnly'];
+  set httpOnly(String value) => jsProxy['httpOnly'] = value;
 }
 
 /**
@@ -523,55 +523,55 @@ class FilterResponseCookie extends ChromeObject {
     if (ageLowerBound != null) this.ageLowerBound = ageLowerBound;
     if (sessionCookie != null) this.sessionCookie = sessionCookie;
   }
-  FilterResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  FilterResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Name of a cookie.
    */
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
   /**
    * Value of a cookie, may be padded in double-quotes.
    */
-  String get value => proxy['value'];
-  set value(String value) => proxy['value'] = value;
+  String get value => jsProxy['value'];
+  set value(String value) => jsProxy['value'] = value;
 
   /**
    * Value of the Expires cookie attribute.
    */
-  String get expires => proxy['expires'];
-  set expires(String value) => proxy['expires'] = value;
+  String get expires => jsProxy['expires'];
+  set expires(String value) => jsProxy['expires'] = value;
 
   /**
    * Value of the Max-Age cookie attribute
    */
-  dynamic get maxAge => proxy['maxAge'];
-  set maxAge(var value) => proxy['maxAge'] = jsify(value);
+  dynamic get maxAge => jsProxy['maxAge'];
+  set maxAge(var value) => jsProxy['maxAge'] = jsify(value);
 
   /**
    * Value of the Domain cookie attribute.
    */
-  String get domain => proxy['domain'];
-  set domain(String value) => proxy['domain'] = value;
+  String get domain => jsProxy['domain'];
+  set domain(String value) => jsProxy['domain'] = value;
 
   /**
    * Value of the Path cookie attribute.
    */
-  String get path => proxy['path'];
-  set path(String value) => proxy['path'] = value;
+  String get path => jsProxy['path'];
+  set path(String value) => jsProxy['path'] = value;
 
   /**
    * Existence of the Secure cookie attribute.
    */
-  String get secure => proxy['secure'];
-  set secure(String value) => proxy['secure'] = value;
+  String get secure => jsProxy['secure'];
+  set secure(String value) => jsProxy['secure'] = value;
 
   /**
    * Existence of the HttpOnly cookie attribute.
    */
-  String get httpOnly => proxy['httpOnly'];
-  set httpOnly(String value) => proxy['httpOnly'] = value;
+  String get httpOnly => jsProxy['httpOnly'];
+  set httpOnly(String value) => jsProxy['httpOnly'] = value;
 
   /**
    * Inclusive upper bound on the cookie lifetime (specified in seconds after
@@ -582,8 +582,8 @@ class FilterResponseCookie extends ChromeObject {
    * 'expires' cookie attributes. If both are specified, 'max-age' is used to
    * calculate the cookie lifetime.
    */
-  int get ageUpperBound => proxy['ageUpperBound'];
-  set ageUpperBound(int value) => proxy['ageUpperBound'] = value;
+  int get ageUpperBound => jsProxy['ageUpperBound'];
+  set ageUpperBound(int value) => jsProxy['ageUpperBound'] = value;
 
   /**
    * Inclusive lower bound on the cookie lifetime (specified in seconds after
@@ -593,15 +593,15 @@ class FilterResponseCookie extends ChromeObject {
    * 'max-age' or 'expires' cookie attributes. If both are specified, 'max-age'
    * is used to calculate the cookie lifetime.
    */
-  int get ageLowerBound => proxy['ageLowerBound'];
-  set ageLowerBound(int value) => proxy['ageLowerBound'] = value;
+  int get ageLowerBound => jsProxy['ageLowerBound'];
+  set ageLowerBound(int value) => jsProxy['ageLowerBound'] = value;
 
   /**
    * Filters session cookies. Session cookies have no lifetime specified in any
    * of 'max-age' or 'expires' attributes.
    */
-  bool get sessionCookie => proxy['sessionCookie'];
-  set sessionCookie(bool value) => proxy['sessionCookie'] = value;
+  bool get sessionCookie => jsProxy['sessionCookie'];
+  set sessionCookie(bool value) => jsProxy['sessionCookie'] = value;
 }
 
 /**
@@ -613,13 +613,13 @@ class AddRequestCookie extends ChromeObject {
   AddRequestCookie({RequestCookie cookie}) {
     if (cookie != null) this.cookie = cookie;
   }
-  AddRequestCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  AddRequestCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Cookie to be added to the request. No field may be undefined.
    */
-  RequestCookie get cookie => _createRequestCookie(proxy['cookie']);
-  set cookie(RequestCookie value) => proxy['cookie'] = jsify(value);
+  RequestCookie get cookie => _createRequestCookie(jsProxy['cookie']);
+  set cookie(RequestCookie value) => jsProxy['cookie'] = jsify(value);
 }
 
 /**
@@ -631,14 +631,14 @@ class AddResponseCookie extends ChromeObject {
   AddResponseCookie({ResponseCookie cookie}) {
     if (cookie != null) this.cookie = cookie;
   }
-  AddResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  AddResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Cookie to be added to the response. The name and value need to be
    * specified.
    */
-  ResponseCookie get cookie => _createResponseCookie(proxy['cookie']);
-  set cookie(ResponseCookie value) => proxy['cookie'] = jsify(value);
+  ResponseCookie get cookie => _createResponseCookie(jsProxy['cookie']);
+  set cookie(ResponseCookie value) => jsProxy['cookie'] = jsify(value);
 }
 
 /**
@@ -650,20 +650,20 @@ class EditRequestCookie extends ChromeObject {
     if (filter != null) this.filter = filter;
     if (modification != null) this.modification = modification;
   }
-  EditRequestCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  EditRequestCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Filter for cookies that will be modified. All empty entries are ignored.
    */
-  RequestCookie get filter => _createRequestCookie(proxy['filter']);
-  set filter(RequestCookie value) => proxy['filter'] = jsify(value);
+  RequestCookie get filter => _createRequestCookie(jsProxy['filter']);
+  set filter(RequestCookie value) => jsProxy['filter'] = jsify(value);
 
   /**
    * Attributes that shall be overridden in cookies that machted the filter.
    * Attributes that are set to an empty string are removed.
    */
-  RequestCookie get modification => _createRequestCookie(proxy['modification']);
-  set modification(RequestCookie value) => proxy['modification'] = jsify(value);
+  RequestCookie get modification => _createRequestCookie(jsProxy['modification']);
+  set modification(RequestCookie value) => jsProxy['modification'] = jsify(value);
 }
 
 /**
@@ -675,20 +675,20 @@ class EditResponseCookie extends ChromeObject {
     if (filter != null) this.filter = filter;
     if (modification != null) this.modification = modification;
   }
-  EditResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  EditResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Filter for cookies that will be modified. All empty entries are ignored.
    */
-  FilterResponseCookie get filter => _createFilterResponseCookie(proxy['filter']);
-  set filter(FilterResponseCookie value) => proxy['filter'] = jsify(value);
+  FilterResponseCookie get filter => _createFilterResponseCookie(jsProxy['filter']);
+  set filter(FilterResponseCookie value) => jsProxy['filter'] = jsify(value);
 
   /**
    * Attributes that shall be overridden in cookies that machted the filter.
    * Attributes that are set to an empty string are removed.
    */
-  ResponseCookie get modification => _createResponseCookie(proxy['modification']);
-  set modification(ResponseCookie value) => proxy['modification'] = jsify(value);
+  ResponseCookie get modification => _createResponseCookie(jsProxy['modification']);
+  set modification(ResponseCookie value) => jsProxy['modification'] = jsify(value);
 }
 
 /**
@@ -699,13 +699,13 @@ class RemoveRequestCookie extends ChromeObject {
   RemoveRequestCookie({RequestCookie filter}) {
     if (filter != null) this.filter = filter;
   }
-  RemoveRequestCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RemoveRequestCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Filter for cookies that will be removed. All empty entries are ignored.
    */
-  RequestCookie get filter => _createRequestCookie(proxy['filter']);
-  set filter(RequestCookie value) => proxy['filter'] = jsify(value);
+  RequestCookie get filter => _createRequestCookie(jsProxy['filter']);
+  set filter(RequestCookie value) => jsProxy['filter'] = jsify(value);
 }
 
 /**
@@ -716,17 +716,17 @@ class RemoveResponseCookie extends ChromeObject {
   RemoveResponseCookie({FilterResponseCookie filter}) {
     if (filter != null) this.filter = filter;
   }
-  RemoveResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RemoveResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Filter for cookies that will be removed. All empty entries are ignored.
    */
-  FilterResponseCookie get filter => _createFilterResponseCookie(proxy['filter']);
-  set filter(FilterResponseCookie value) => proxy['filter'] = jsify(value);
+  FilterResponseCookie get filter => _createFilterResponseCookie(jsProxy['filter']);
+  set filter(FilterResponseCookie value) => jsProxy['filter'] = jsify(value);
 }
 
-UrlFilter _createUrlFilter(JsObject proxy) => proxy == null ? null : new UrlFilter.fromProxy(proxy);
-HeaderFilter _createHeaderFilter(JsObject proxy) => proxy == null ? null : new HeaderFilter.fromProxy(proxy);
-RequestCookie _createRequestCookie(JsObject proxy) => proxy == null ? null : new RequestCookie.fromProxy(proxy);
-ResponseCookie _createResponseCookie(JsObject proxy) => proxy == null ? null : new ResponseCookie.fromProxy(proxy);
-FilterResponseCookie _createFilterResponseCookie(JsObject proxy) => proxy == null ? null : new FilterResponseCookie.fromProxy(proxy);
+UrlFilter _createUrlFilter(JsObject jsProxy) => jsProxy == null ? null : new UrlFilter.fromProxy(jsProxy);
+HeaderFilter _createHeaderFilter(JsObject jsProxy) => jsProxy == null ? null : new HeaderFilter.fromProxy(jsProxy);
+RequestCookie _createRequestCookie(JsObject jsProxy) => jsProxy == null ? null : new RequestCookie.fromProxy(jsProxy);
+ResponseCookie _createResponseCookie(JsObject jsProxy) => jsProxy == null ? null : new ResponseCookie.fromProxy(jsProxy);
+FilterResponseCookie _createFilterResponseCookie(JsObject jsProxy) => jsProxy == null ? null : new FilterResponseCookie.fromProxy(jsProxy);

@@ -127,45 +127,45 @@ class HistoryItem extends ChromeObject {
     if (visitCount != null) this.visitCount = visitCount;
     if (typedCount != null) this.typedCount = typedCount;
   }
-  HistoryItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  HistoryItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The unique identifier for the item.
    */
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
   /**
    * The URL navigated to by a user.
    */
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
   /**
    * The title of the page when it was last loaded.
    */
-  String get title => proxy['title'];
-  set title(String value) => proxy['title'] = value;
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
 
   /**
    * When this page was last loaded, represented in milliseconds since the
    * epoch.
    */
-  dynamic get lastVisitTime => proxy['lastVisitTime'];
-  set lastVisitTime(var value) => proxy['lastVisitTime'] = jsify(value);
+  dynamic get lastVisitTime => jsProxy['lastVisitTime'];
+  set lastVisitTime(var value) => jsProxy['lastVisitTime'] = jsify(value);
 
   /**
    * The number of times the user has navigated to this page.
    */
-  int get visitCount => proxy['visitCount'];
-  set visitCount(int value) => proxy['visitCount'] = value;
+  int get visitCount => jsProxy['visitCount'];
+  set visitCount(int value) => jsProxy['visitCount'] = value;
 
   /**
    * The number of times the user has navigated to this page by typing in the
    * address.
    */
-  int get typedCount => proxy['typedCount'];
-  set typedCount(int value) => proxy['typedCount'] = value;
+  int get typedCount => jsProxy['typedCount'];
+  set typedCount(int value) => jsProxy['typedCount'] = value;
 }
 
 /**
@@ -179,31 +179,31 @@ class VisitItem extends ChromeObject {
     if (referringVisitId != null) this.referringVisitId = referringVisitId;
     if (transition != null) this.transition = transition;
   }
-  VisitItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  VisitItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The unique identifier for the item.
    */
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
   /**
    * The unique identifier for this visit.
    */
-  String get visitId => proxy['visitId'];
-  set visitId(String value) => proxy['visitId'] = value;
+  String get visitId => jsProxy['visitId'];
+  set visitId(String value) => jsProxy['visitId'] = value;
 
   /**
    * When this visit occurred, represented in milliseconds since the epoch.
    */
-  dynamic get visitTime => proxy['visitTime'];
-  set visitTime(var value) => proxy['visitTime'] = jsify(value);
+  dynamic get visitTime => jsProxy['visitTime'];
+  set visitTime(var value) => jsProxy['visitTime'] = jsify(value);
 
   /**
    * The visit ID of the referrer.
    */
-  String get referringVisitId => proxy['referringVisitId'];
-  set referringVisitId(String value) => proxy['referringVisitId'] = value;
+  String get referringVisitId => jsProxy['referringVisitId'];
+  set referringVisitId(String value) => jsProxy['referringVisitId'] = value;
 
   /**
    * The [transition type](#transition_types) for this visit from its referrer.
@@ -211,9 +211,9 @@ class VisitItem extends ChromeObject {
    * `manual_subframe`, `generated`, `auto_toplevel`, `form_submit`, `reload`,
    * `keyword`, `keyword_generated`
    */
-  String get transition => proxy['transition'];
-  set transition(String value) => proxy['transition'] = value;
+  String get transition => jsProxy['transition'];
+  set transition(String value) => jsProxy['transition'] = value;
 }
 
-HistoryItem _createHistoryItem(JsObject proxy) => proxy == null ? null : new HistoryItem.fromProxy(proxy);
-VisitItem _createVisitItem(JsObject proxy) => proxy == null ? null : new VisitItem.fromProxy(proxy);
+HistoryItem _createHistoryItem(JsObject jsProxy) => jsProxy == null ? null : new HistoryItem.fromProxy(jsProxy);
+VisitItem _createVisitItem(JsObject jsProxy) => jsProxy == null ? null : new VisitItem.fromProxy(jsProxy);

@@ -175,7 +175,7 @@ class ChromeBrowserAction extends ChromeApi {
 
 class ColorArray extends ChromeObject {
   ColorArray();
-  ColorArray.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ColorArray.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
 /**
@@ -184,8 +184,8 @@ class ColorArray extends ChromeObject {
  */
 class ImageDataType extends ChromeObject {
   ImageDataType();
-  ImageDataType.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ImageDataType.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-ColorArray _createColorArray(JsObject proxy) => proxy == null ? null : new ColorArray.fromProxy(proxy);
-Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
+ColorArray _createColorArray(JsObject jsProxy) => jsProxy == null ? null : new ColorArray.fromProxy(jsProxy);
+Tab _createTab(JsObject jsProxy) => jsProxy == null ? null : new Tab.fromProxy(jsProxy);

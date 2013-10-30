@@ -80,16 +80,16 @@ class CaptureInfo extends ChromeObject {
     if (status != null) this.status = status;
     if (fullscreen != null) this.fullscreen = fullscreen;
   }
-  CaptureInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  CaptureInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get tabId => proxy['tabId'];
-  set tabId(int value) => proxy['tabId'] = value;
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
 
-  TabCaptureState get status => _createTabCaptureState(proxy['status']);
-  set status(TabCaptureState value) => proxy['status'] = jsify(value);
+  TabCaptureState get status => _createTabCaptureState(jsProxy['status']);
+  set status(TabCaptureState value) => jsProxy['status'] = jsify(value);
 
-  bool get fullscreen => proxy['fullscreen'];
-  set fullscreen(bool value) => proxy['fullscreen'] = value;
+  bool get fullscreen => jsProxy['fullscreen'];
+  set fullscreen(bool value) => jsProxy['fullscreen'] = value;
 }
 
 class MediaStreamConstraint extends ChromeObject {
@@ -97,13 +97,13 @@ class MediaStreamConstraint extends ChromeObject {
     if (mandatory != null) this.mandatory = mandatory;
     if (optional != null) this.optional = optional;
   }
-  MediaStreamConstraint.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  MediaStreamConstraint.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  dynamic get mandatory => proxy['mandatory'];
-  set mandatory(var value) => proxy['mandatory'] = jsify(value);
+  dynamic get mandatory => jsProxy['mandatory'];
+  set mandatory(var value) => jsProxy['mandatory'] = jsify(value);
 
-  dynamic get optional => proxy['_optional'];
-  set optional(var value) => proxy['_optional'] = jsify(value);
+  dynamic get optional => jsProxy['_optional'];
+  set optional(var value) => jsProxy['_optional'] = jsify(value);
 }
 
 class CaptureOptions extends ChromeObject {
@@ -113,22 +113,22 @@ class CaptureOptions extends ChromeObject {
     if (audioConstraints != null) this.audioConstraints = audioConstraints;
     if (videoConstraints != null) this.videoConstraints = videoConstraints;
   }
-  CaptureOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  CaptureOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  bool get audio => proxy['audio'];
-  set audio(bool value) => proxy['audio'] = value;
+  bool get audio => jsProxy['audio'];
+  set audio(bool value) => jsProxy['audio'] = value;
 
-  bool get video => proxy['video'];
-  set video(bool value) => proxy['video'] = value;
+  bool get video => jsProxy['video'];
+  set video(bool value) => jsProxy['video'] = value;
 
-  MediaStreamConstraint get audioConstraints => _createMediaStreamConstraint(proxy['audioConstraints']);
-  set audioConstraints(MediaStreamConstraint value) => proxy['audioConstraints'] = jsify(value);
+  MediaStreamConstraint get audioConstraints => _createMediaStreamConstraint(jsProxy['audioConstraints']);
+  set audioConstraints(MediaStreamConstraint value) => jsProxy['audioConstraints'] = jsify(value);
 
-  MediaStreamConstraint get videoConstraints => _createMediaStreamConstraint(proxy['videoConstraints']);
-  set videoConstraints(MediaStreamConstraint value) => proxy['videoConstraints'] = jsify(value);
+  MediaStreamConstraint get videoConstraints => _createMediaStreamConstraint(jsProxy['videoConstraints']);
+  set videoConstraints(MediaStreamConstraint value) => jsProxy['videoConstraints'] = jsify(value);
 }
 
-LocalMediaStream _createLocalMediaStream(JsObject proxy) => proxy == null ? null : new LocalMediaStream.fromProxy(proxy);
-CaptureInfo _createCaptureInfo(JsObject proxy) => proxy == null ? null : new CaptureInfo.fromProxy(proxy);
+LocalMediaStream _createLocalMediaStream(JsObject jsProxy) => jsProxy == null ? null : new LocalMediaStream.fromProxy(jsProxy);
+CaptureInfo _createCaptureInfo(JsObject jsProxy) => jsProxy == null ? null : new CaptureInfo.fromProxy(jsProxy);
 TabCaptureState _createTabCaptureState(String value) => TabCaptureState.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-MediaStreamConstraint _createMediaStreamConstraint(JsObject proxy) => proxy == null ? null : new MediaStreamConstraint.fromProxy(proxy);
+MediaStreamConstraint _createMediaStreamConstraint(JsObject jsProxy) => jsProxy == null ? null : new MediaStreamConstraint.fromProxy(jsProxy);

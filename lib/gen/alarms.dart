@@ -104,16 +104,16 @@ class Alarm extends ChromeObject {
     if (scheduledTime != null) this.scheduledTime = scheduledTime;
     if (periodInMinutes != null) this.periodInMinutes = periodInMinutes;
   }
-  Alarm.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Alarm.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
-  double get scheduledTime => proxy['scheduledTime'];
-  set scheduledTime(double value) => proxy['scheduledTime'] = jsify(value);
+  double get scheduledTime => jsProxy['scheduledTime'];
+  set scheduledTime(double value) => jsProxy['scheduledTime'] = jsify(value);
 
-  double get periodInMinutes => proxy['periodInMinutes'];
-  set periodInMinutes(double value) => proxy['periodInMinutes'] = jsify(value);
+  double get periodInMinutes => jsProxy['periodInMinutes'];
+  set periodInMinutes(double value) => jsProxy['periodInMinutes'] = jsify(value);
 }
 
 class AlarmCreateInfo extends ChromeObject {
@@ -122,16 +122,16 @@ class AlarmCreateInfo extends ChromeObject {
     if (delayInMinutes != null) this.delayInMinutes = delayInMinutes;
     if (periodInMinutes != null) this.periodInMinutes = periodInMinutes;
   }
-  AlarmCreateInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  AlarmCreateInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  double get when => proxy['when'];
-  set when(double value) => proxy['when'] = jsify(value);
+  double get when => jsProxy['when'];
+  set when(double value) => jsProxy['when'] = jsify(value);
 
-  double get delayInMinutes => proxy['delayInMinutes'];
-  set delayInMinutes(double value) => proxy['delayInMinutes'] = jsify(value);
+  double get delayInMinutes => jsProxy['delayInMinutes'];
+  set delayInMinutes(double value) => jsProxy['delayInMinutes'] = jsify(value);
 
-  double get periodInMinutes => proxy['periodInMinutes'];
-  set periodInMinutes(double value) => proxy['periodInMinutes'] = jsify(value);
+  double get periodInMinutes => jsProxy['periodInMinutes'];
+  set periodInMinutes(double value) => jsProxy['periodInMinutes'] = jsify(value);
 }
 
-Alarm _createAlarm(JsObject proxy) => proxy == null ? null : new Alarm.fromProxy(proxy);
+Alarm _createAlarm(JsObject jsProxy) => jsProxy == null ? null : new Alarm.fromProxy(jsProxy);

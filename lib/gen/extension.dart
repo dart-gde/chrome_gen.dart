@@ -222,18 +222,18 @@ class OnRequestExternalEvent {
 
 class LastErrorExtension extends ChromeObject {
   LastErrorExtension();
-  LastErrorExtension.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  LastErrorExtension.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Description of the error that has taken place.
    */
-  String get message => proxy['message'];
+  String get message => jsProxy['message'];
 }
 
-LastErrorExtension _createLastErrorExtension(JsObject proxy) => proxy == null ? null : new LastErrorExtension.fromProxy(proxy);
-Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
+LastErrorExtension _createLastErrorExtension(JsObject jsProxy) => jsProxy == null ? null : new LastErrorExtension.fromProxy(jsProxy);
+Window _createWindow(JsObject jsProxy) => jsProxy == null ? null : new Window.fromProxy(jsProxy);
 OnRequestEvent _createOnRequestEvent(JsObject request, JsObject sender, JsObject sendResponse) =>
     new OnRequestEvent(request, _createMessageSender(sender), sendResponse);
 OnRequestExternalEvent _createOnRequestExternalEvent(JsObject request, JsObject sender, JsObject sendResponse) =>
     new OnRequestExternalEvent(request, _createMessageSender(sender), sendResponse);
-MessageSender _createMessageSender(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);
+MessageSender _createMessageSender(JsObject jsProxy) => jsProxy == null ? null : new MessageSender.fromProxy(jsProxy);

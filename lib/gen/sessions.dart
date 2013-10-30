@@ -87,15 +87,15 @@ class Filter extends ChromeObject {
   Filter({int maxResults}) {
     if (maxResults != null) this.maxResults = maxResults;
   }
-  Filter.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Filter.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The maximum number of entries to be fetched in the requested list. Omit
    * this parameter to fetch the maximum number of entries
    * ([MAX_SESSION_RESULTS]).
    */
-  int get maxResults => proxy['maxResults'];
-  set maxResults(int value) => proxy['maxResults'] = value;
+  int get maxResults => jsProxy['maxResults'];
+  set maxResults(int value) => jsProxy['maxResults'] = value;
 }
 
 class Session extends ChromeObject {
@@ -104,28 +104,28 @@ class Session extends ChromeObject {
     if (tab != null) this.tab = tab;
     if (window != null) this.window = window;
   }
-  Session.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Session.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The time when the window or tab was closed or modified, represented in
    * milliseconds since the epoch.
    */
-  int get lastModified => proxy['lastModified'];
-  set lastModified(int value) => proxy['lastModified'] = value;
+  int get lastModified => jsProxy['lastModified'];
+  set lastModified(int value) => jsProxy['lastModified'] = value;
 
   /**
    * The [tabs.Tab], if this entry describes a tab. Either this or
    * [Session.window] will be set.
    */
-  Tab get tab => _createTab(proxy['tab']);
-  set tab(Tab value) => proxy['tab'] = jsify(value);
+  Tab get tab => _createTab(jsProxy['tab']);
+  set tab(Tab value) => jsProxy['tab'] = jsify(value);
 
   /**
    * The [windows.Window], if this entry describes a window. Either this or
    * [Session.tab] will be set.
    */
-  Window get window => _createWindow(proxy['window']);
-  set window(Window value) => proxy['window'] = jsify(value);
+  Window get window => _createWindow(jsProxy['window']);
+  set window(Window value) => jsProxy['window'] = jsify(value);
 }
 
 class Device extends ChromeObject {
@@ -133,23 +133,23 @@ class Device extends ChromeObject {
     if (info != null) this.info = info;
     if (sessions != null) this.sessions = sessions;
   }
-  Device.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Device.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Represents all information about a foreign device.
    */
-  String get info => proxy['info'];
-  set info(String value) => proxy['info'] = value;
+  String get info => jsProxy['info'];
+  set info(String value) => jsProxy['info'] = value;
 
   /**
    * A list of open window sessions for the foreign device, sorted from most
    * recently to least recently modified session.
    */
-  List<Session> get sessions => listify(proxy['sessions'], _createSession);
-  set sessions(List<Session> value) => proxy['sessions'] = jsify(value);
+  List<Session> get sessions => listify(jsProxy['sessions'], _createSession);
+  set sessions(List<Session> value) => jsProxy['sessions'] = jsify(value);
 }
 
-Session _createSession(JsObject proxy) => proxy == null ? null : new Session.fromProxy(proxy);
-Device _createDevice(JsObject proxy) => proxy == null ? null : new Device.fromProxy(proxy);
-Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
-Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
+Session _createSession(JsObject jsProxy) => jsProxy == null ? null : new Session.fromProxy(jsProxy);
+Device _createDevice(JsObject jsProxy) => jsProxy == null ? null : new Device.fromProxy(jsProxy);
+Tab _createTab(JsObject jsProxy) => jsProxy == null ? null : new Tab.fromProxy(jsProxy);
+Window _createWindow(JsObject jsProxy) => jsProxy == null ? null : new Window.fromProxy(jsProxy);

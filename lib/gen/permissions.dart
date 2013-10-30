@@ -107,19 +107,19 @@ class Permissions extends ChromeObject {
     if (permissions != null) this.permissions = permissions;
     if (origins != null) this.origins = origins;
   }
-  Permissions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Permissions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * List of named permissions (does not include hosts or origins).
    */
-  List<String> get permissions => listify(proxy['permissions']);
-  set permissions(List<String> value) => proxy['permissions'] = jsify(value);
+  List<String> get permissions => listify(jsProxy['permissions']);
+  set permissions(List<String> value) => jsProxy['permissions'] = jsify(value);
 
   /**
    * List of origin permissions.
    */
-  List<String> get origins => listify(proxy['origins']);
-  set origins(List<String> value) => proxy['origins'] = jsify(value);
+  List<String> get origins => listify(jsProxy['origins']);
+  set origins(List<String> value) => jsProxy['origins'] = jsify(value);
 }
 
-Permissions _createPermissions(JsObject proxy) => proxy == null ? null : new Permissions.fromProxy(proxy);
+Permissions _createPermissions(JsObject jsProxy) => jsProxy == null ? null : new Permissions.fromProxy(jsProxy);

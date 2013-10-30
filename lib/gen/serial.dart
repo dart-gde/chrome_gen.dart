@@ -168,29 +168,29 @@ class OpenOptions extends ChromeObject {
     if (parityBit != null) this.parityBit = parityBit;
     if (stopBit != null) this.stopBit = stopBit;
   }
-  OpenOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  OpenOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get bitrate => proxy['bitrate'];
-  set bitrate(int value) => proxy['bitrate'] = value;
+  int get bitrate => jsProxy['bitrate'];
+  set bitrate(int value) => jsProxy['bitrate'] = value;
 
-  DataBit get dataBit => _createDataBit(proxy['dataBit']);
-  set dataBit(DataBit value) => proxy['dataBit'] = jsify(value);
+  DataBit get dataBit => _createDataBit(jsProxy['dataBit']);
+  set dataBit(DataBit value) => jsProxy['dataBit'] = jsify(value);
 
-  ParityBit get parityBit => _createParityBit(proxy['parityBit']);
-  set parityBit(ParityBit value) => proxy['parityBit'] = jsify(value);
+  ParityBit get parityBit => _createParityBit(jsProxy['parityBit']);
+  set parityBit(ParityBit value) => jsProxy['parityBit'] = jsify(value);
 
-  StopBit get stopBit => _createStopBit(proxy['stopBit']);
-  set stopBit(StopBit value) => proxy['stopBit'] = jsify(value);
+  StopBit get stopBit => _createStopBit(jsProxy['stopBit']);
+  set stopBit(StopBit value) => jsProxy['stopBit'] = jsify(value);
 }
 
 class OpenInfo extends ChromeObject {
   OpenInfo({int connectionId}) {
     if (connectionId != null) this.connectionId = connectionId;
   }
-  OpenInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  OpenInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get connectionId => proxy['connectionId'];
-  set connectionId(int value) => proxy['connectionId'] = value;
+  int get connectionId => jsProxy['connectionId'];
+  set connectionId(int value) => jsProxy['connectionId'] = value;
 }
 
 class SerialReadInfo extends ChromeObject {
@@ -198,23 +198,23 @@ class SerialReadInfo extends ChromeObject {
     if (bytesRead != null) this.bytesRead = bytesRead;
     if (data != null) this.data = data;
   }
-  SerialReadInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  SerialReadInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get bytesRead => proxy['bytesRead'];
-  set bytesRead(int value) => proxy['bytesRead'] = value;
+  int get bytesRead => jsProxy['bytesRead'];
+  set bytesRead(int value) => jsProxy['bytesRead'] = value;
 
-  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
+  ArrayBuffer get data => _createArrayBuffer(jsProxy['data']);
+  set data(ArrayBuffer value) => jsProxy['data'] = jsify(value);
 }
 
 class SerialWriteInfo extends ChromeObject {
   SerialWriteInfo({int bytesWritten}) {
     if (bytesWritten != null) this.bytesWritten = bytesWritten;
   }
-  SerialWriteInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  SerialWriteInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get bytesWritten => proxy['bytesWritten'];
-  set bytesWritten(int value) => proxy['bytesWritten'] = value;
+  int get bytesWritten => jsProxy['bytesWritten'];
+  set bytesWritten(int value) => jsProxy['bytesWritten'] = value;
 }
 
 class ControlSignalOptions extends ChromeObject {
@@ -224,26 +224,26 @@ class ControlSignalOptions extends ChromeObject {
     if (dcd != null) this.dcd = dcd;
     if (cts != null) this.cts = cts;
   }
-  ControlSignalOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ControlSignalOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  bool get dtr => proxy['dtr'];
-  set dtr(bool value) => proxy['dtr'] = value;
+  bool get dtr => jsProxy['dtr'];
+  set dtr(bool value) => jsProxy['dtr'] = value;
 
-  bool get rts => proxy['rts'];
-  set rts(bool value) => proxy['rts'] = value;
+  bool get rts => jsProxy['rts'];
+  set rts(bool value) => jsProxy['rts'] = value;
 
-  bool get dcd => proxy['dcd'];
-  set dcd(bool value) => proxy['dcd'] = value;
+  bool get dcd => jsProxy['dcd'];
+  set dcd(bool value) => jsProxy['dcd'] = value;
 
-  bool get cts => proxy['cts'];
-  set cts(bool value) => proxy['cts'] = value;
+  bool get cts => jsProxy['cts'];
+  set cts(bool value) => jsProxy['cts'] = value;
 }
 
-OpenInfo _createOpenInfo(JsObject proxy) => proxy == null ? null : new OpenInfo.fromProxy(proxy);
-SerialReadInfo _createSerialReadInfo(JsObject proxy) => proxy == null ? null : new SerialReadInfo.fromProxy(proxy);
-SerialWriteInfo _createSerialWriteInfo(JsObject proxy) => proxy == null ? null : new SerialWriteInfo.fromProxy(proxy);
-ControlSignalOptions _createControlSignalOptions(JsObject proxy) => proxy == null ? null : new ControlSignalOptions.fromProxy(proxy);
+OpenInfo _createOpenInfo(JsObject jsProxy) => jsProxy == null ? null : new OpenInfo.fromProxy(jsProxy);
+SerialReadInfo _createSerialReadInfo(JsObject jsProxy) => jsProxy == null ? null : new SerialReadInfo.fromProxy(jsProxy);
+SerialWriteInfo _createSerialWriteInfo(JsObject jsProxy) => jsProxy == null ? null : new SerialWriteInfo.fromProxy(jsProxy);
+ControlSignalOptions _createControlSignalOptions(JsObject jsProxy) => jsProxy == null ? null : new ControlSignalOptions.fromProxy(jsProxy);
 DataBit _createDataBit(String value) => DataBit.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 ParityBit _createParityBit(String value) => ParityBit.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 StopBit _createStopBit(String value) => StopBit.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);
+ArrayBuffer _createArrayBuffer(JsObject jsProxy) => jsProxy == null ? null : new ArrayBuffer.fromProxy(jsProxy);

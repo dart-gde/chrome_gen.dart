@@ -172,27 +172,27 @@ class Debuggee extends ChromeObject {
     if (extensionId != null) this.extensionId = extensionId;
     if (targetId != null) this.targetId = targetId;
   }
-  Debuggee.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Debuggee.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The id of the tab which you intend to debug.
    */
-  int get tabId => proxy['tabId'];
-  set tabId(int value) => proxy['tabId'] = value;
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
 
   /**
    * The id of the extension which you intend to debug. Attaching to an
    * extension background page is only possible when 'enable-silent-debugging'
    * flag is enabled on the target browser.
    */
-  String get extensionId => proxy['extensionId'];
-  set extensionId(String value) => proxy['extensionId'] = value;
+  String get extensionId => jsProxy['extensionId'];
+  set extensionId(String value) => jsProxy['extensionId'] = value;
 
   /**
    * The opaque id of the debug target.
    */
-  String get targetId => proxy['targetId'];
-  set targetId(String value) => proxy['targetId'] = value;
+  String get targetId => jsProxy['targetId'];
+  set targetId(String value) => jsProxy['targetId'] = value;
 }
 
 /**
@@ -209,61 +209,61 @@ class TargetInfo extends ChromeObject {
     if (url != null) this.url = url;
     if (faviconUrl != null) this.faviconUrl = faviconUrl;
   }
-  TargetInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  TargetInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Target type.
    * enum of `page`, `background_page`, `worker`, `other`
    */
-  String get type => proxy['type'];
-  set type(String value) => proxy['type'] = value;
+  String get type => jsProxy['type'];
+  set type(String value) => jsProxy['type'] = value;
 
   /**
    * Target id.
    */
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
   /**
    * The tab id, defined if type == 'page'.
    */
-  int get tabId => proxy['tabId'];
-  set tabId(int value) => proxy['tabId'] = value;
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
 
   /**
    * The extension id, defined if type = 'background_page'.
    */
-  String get extensionId => proxy['extensionId'];
-  set extensionId(String value) => proxy['extensionId'] = value;
+  String get extensionId => jsProxy['extensionId'];
+  set extensionId(String value) => jsProxy['extensionId'] = value;
 
   /**
    * True if debugger is already attached.
    */
-  bool get attached => proxy['attached'];
-  set attached(bool value) => proxy['attached'] = value;
+  bool get attached => jsProxy['attached'];
+  set attached(bool value) => jsProxy['attached'] = value;
 
   /**
    * Target page title.
    */
-  String get title => proxy['title'];
-  set title(String value) => proxy['title'] = value;
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
 
   /**
    * Target URL.
    */
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
   /**
    * Target favicon URL.
    */
-  String get faviconUrl => proxy['faviconUrl'];
-  set faviconUrl(String value) => proxy['faviconUrl'] = value;
+  String get faviconUrl => jsProxy['faviconUrl'];
+  set faviconUrl(String value) => jsProxy['faviconUrl'] = value;
 }
 
-TargetInfo _createTargetInfo(JsObject proxy) => proxy == null ? null : new TargetInfo.fromProxy(proxy);
+TargetInfo _createTargetInfo(JsObject jsProxy) => jsProxy == null ? null : new TargetInfo.fromProxy(jsProxy);
 OnEventEvent _createOnEventEvent(JsObject source, String method, JsObject params) =>
     new OnEventEvent(_createDebuggee(source), method, mapify(params));
 OnDetachEvent _createOnDetachEvent(JsObject source, String reason) =>
     new OnDetachEvent(_createDebuggee(source), reason);
-Debuggee _createDebuggee(JsObject proxy) => proxy == null ? null : new Debuggee.fromProxy(proxy);
+Debuggee _createDebuggee(JsObject jsProxy) => jsProxy == null ? null : new Debuggee.fromProxy(jsProxy);

@@ -132,83 +132,83 @@ class OnClickData extends ChromeObject {
     if (wasChecked != null) this.wasChecked = wasChecked;
     if (checked != null) this.checked = checked;
   }
-  OnClickData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  OnClickData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The ID of the menu item that was clicked.
    */
-  dynamic get menuItemId => proxy['menuItemId'];
-  set menuItemId(var value) => proxy['menuItemId'] = jsify(value);
+  dynamic get menuItemId => jsProxy['menuItemId'];
+  set menuItemId(var value) => jsProxy['menuItemId'] = jsify(value);
 
   /**
    * The parent ID, if any, for the item clicked.
    */
-  dynamic get parentMenuItemId => proxy['parentMenuItemId'];
-  set parentMenuItemId(var value) => proxy['parentMenuItemId'] = jsify(value);
+  dynamic get parentMenuItemId => jsProxy['parentMenuItemId'];
+  set parentMenuItemId(var value) => jsProxy['parentMenuItemId'] = jsify(value);
 
   /**
    * One of 'image', 'video', or 'audio' if the context menu was activated on
    * one of these types of elements.
    */
-  String get mediaType => proxy['mediaType'];
-  set mediaType(String value) => proxy['mediaType'] = value;
+  String get mediaType => jsProxy['mediaType'];
+  set mediaType(String value) => jsProxy['mediaType'] = value;
 
   /**
    * If the element is a link, the URL it points to.
    */
-  String get linkUrl => proxy['linkUrl'];
-  set linkUrl(String value) => proxy['linkUrl'] = value;
+  String get linkUrl => jsProxy['linkUrl'];
+  set linkUrl(String value) => jsProxy['linkUrl'] = value;
 
   /**
    * Will be present for elements with a 'src' URL.
    */
-  String get srcUrl => proxy['srcUrl'];
-  set srcUrl(String value) => proxy['srcUrl'] = value;
+  String get srcUrl => jsProxy['srcUrl'];
+  set srcUrl(String value) => jsProxy['srcUrl'] = value;
 
   /**
    * The URL of the page where the menu item was clicked. This property is not
    * set if the click occured in a context where there is no current page, such
    * as in a launcher context menu.
    */
-  String get pageUrl => proxy['pageUrl'];
-  set pageUrl(String value) => proxy['pageUrl'] = value;
+  String get pageUrl => jsProxy['pageUrl'];
+  set pageUrl(String value) => jsProxy['pageUrl'] = value;
 
   /**
    * The URL of the frame of the element where the context menu was clicked, if
    * it was in a frame.
    */
-  String get frameUrl => proxy['frameUrl'];
-  set frameUrl(String value) => proxy['frameUrl'] = value;
+  String get frameUrl => jsProxy['frameUrl'];
+  set frameUrl(String value) => jsProxy['frameUrl'] = value;
 
   /**
    * The text for the context selection, if any.
    */
-  String get selectionText => proxy['selectionText'];
-  set selectionText(String value) => proxy['selectionText'] = value;
+  String get selectionText => jsProxy['selectionText'];
+  set selectionText(String value) => jsProxy['selectionText'] = value;
 
   /**
    * A flag indicating whether the element is editable (text input, textarea,
    * etc.).
    */
-  bool get editable => proxy['editable'];
-  set editable(bool value) => proxy['editable'] = value;
+  bool get editable => jsProxy['editable'];
+  set editable(bool value) => jsProxy['editable'] = value;
 
   /**
    * A flag indicating the state of a checkbox or radio item before it was
    * clicked.
    */
-  bool get wasChecked => proxy['wasChecked'];
-  set wasChecked(bool value) => proxy['wasChecked'] = value;
+  bool get wasChecked => jsProxy['wasChecked'];
+  set wasChecked(bool value) => jsProxy['wasChecked'] = value;
 
   /**
    * A flag indicating the state of a checkbox or radio item after it is
    * clicked.
    */
-  bool get checked => proxy['checked'];
-  set checked(bool value) => proxy['checked'] = value;
+  bool get checked => jsProxy['checked'];
+  set checked(bool value) => jsProxy['checked'] = value;
 }
 
 OnClickedEvent _createOnClickedEvent(JsObject info, JsObject tab) =>
     new OnClickedEvent(_createOnClickData(info), _createTab(tab));
-OnClickData _createOnClickData(JsObject proxy) => proxy == null ? null : new OnClickData.fromProxy(proxy);
-Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
+OnClickData _createOnClickData(JsObject jsProxy) => jsProxy == null ? null : new OnClickData.fromProxy(jsProxy);
+Tab _createTab(JsObject jsProxy) => jsProxy == null ? null : new Tab.fromProxy(jsProxy);

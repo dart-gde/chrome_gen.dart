@@ -170,7 +170,7 @@ class Window extends ChromeObject {
     if (alwaysOnTop != null) this.alwaysOnTop = alwaysOnTop;
     if (sessionId != null) this.sessionId = sessionId;
   }
-  Window.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Window.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The ID of the window. Window IDs are unique within a browser session. Under
@@ -178,58 +178,58 @@ class Window extends ChromeObject {
    * querying windows using the [sessions] API, in which case a session ID may
    * be present.
    */
-  int get id => proxy['id'];
-  set id(int value) => proxy['id'] = value;
+  int get id => jsProxy['id'];
+  set id(int value) => jsProxy['id'] = value;
 
   /**
    * Whether the window is currently the focused window.
    */
-  bool get focused => proxy['focused'];
-  set focused(bool value) => proxy['focused'] = value;
+  bool get focused => jsProxy['focused'];
+  set focused(bool value) => jsProxy['focused'] = value;
 
   /**
    * The offset of the window from the top edge of the screen in pixels. Under
    * some circumstances a Window may not be assigned top property, for example
    * when querying closed windows from the [sessions] API.
    */
-  int get top => proxy['top'];
-  set top(int value) => proxy['top'] = value;
+  int get top => jsProxy['top'];
+  set top(int value) => jsProxy['top'] = value;
 
   /**
    * The offset of the window from the left edge of the screen in pixels. Under
    * some circumstances a Window may not be assigned left property, for example
    * when querying closed windows from the [sessions] API.
    */
-  int get left => proxy['left'];
-  set left(int value) => proxy['left'] = value;
+  int get left => jsProxy['left'];
+  set left(int value) => jsProxy['left'] = value;
 
   /**
    * The width of the window, including the frame, in pixels. Under some
    * circumstances a Window may not be assigned width property, for example when
    * querying closed windows from the [sessions] API.
    */
-  int get width => proxy['width'];
-  set width(int value) => proxy['width'] = value;
+  int get width => jsProxy['width'];
+  set width(int value) => jsProxy['width'] = value;
 
   /**
    * The height of the window, including the frame, in pixels. Under some
    * circumstances a Window may not be assigned height property, for example
    * when querying closed windows from the [sessions] API.
    */
-  int get height => proxy['height'];
-  set height(int value) => proxy['height'] = value;
+  int get height => jsProxy['height'];
+  set height(int value) => jsProxy['height'] = value;
 
   /**
    * Array of [tabs.Tab] objects representing the current tabs in the window.
    */
-  List<Tab> get tabs => listify(proxy['tabs'], _createTab);
-  set tabs(List<Tab> value) => proxy['tabs'] = jsify(value);
+  List<Tab> get tabs => listify(jsProxy['tabs'], _createTab);
+  set tabs(List<Tab> value) => jsProxy['tabs'] = jsify(value);
 
   /**
    * Whether the window is incognito.
    */
-  bool get incognito => proxy['incognito'];
-  set incognito(bool value) => proxy['incognito'] = value;
+  bool get incognito => jsProxy['incognito'];
+  set incognito(bool value) => jsProxy['incognito'] = value;
 
   /**
    * The type of browser window this is. Under some circumstances a Window may
@@ -237,8 +237,8 @@ class Window extends ChromeObject {
    * from the [sessions] API.
    * enum of `normal`, `popup`, `panel`, `app`
    */
-  String get type => proxy['type'];
-  set type(String value) => proxy['type'] = value;
+  String get type => jsProxy['type'];
+  set type(String value) => jsProxy['type'] = value;
 
   /**
    * The state of this browser window. Under some circumstances a Window may not
@@ -246,22 +246,22 @@ class Window extends ChromeObject {
    * the [sessions] API.
    * enum of `normal`, `minimized`, `maximized`, `fullscreen`
    */
-  String get state => proxy['state'];
-  set state(String value) => proxy['state'] = value;
+  String get state => jsProxy['state'];
+  set state(String value) => jsProxy['state'] = value;
 
   /**
    * Whether the window is set to be always on top.
    */
-  bool get alwaysOnTop => proxy['alwaysOnTop'];
-  set alwaysOnTop(bool value) => proxy['alwaysOnTop'] = value;
+  bool get alwaysOnTop => jsProxy['alwaysOnTop'];
+  set alwaysOnTop(bool value) => jsProxy['alwaysOnTop'] = value;
 
   /**
    * The session ID used to uniquely identify a Window obtained from the
    * [sessions] API.
    */
-  String get sessionId => proxy['sessionId'];
-  set sessionId(String value) => proxy['sessionId'] = value;
+  String get sessionId => jsProxy['sessionId'];
+  set sessionId(String value) => jsProxy['sessionId'] = value;
 }
 
-Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
-Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
+Window _createWindow(JsObject jsProxy) => jsProxy == null ? null : new Window.fromProxy(jsProxy);
+Tab _createTab(JsObject jsProxy) => jsProxy == null ? null : new Tab.fromProxy(jsProxy);

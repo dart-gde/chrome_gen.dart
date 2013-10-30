@@ -124,14 +124,14 @@ class SuggestResult extends ChromeObject {
     if (content != null) this.content = content;
     if (description != null) this.description = description;
   }
-  SuggestResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  SuggestResult.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The text that is put into the URL bar, and that is sent to the extension
    * when the user chooses this entry.
    */
-  String get content => proxy['content'];
-  set content(String value) => proxy['content'] = value;
+  String get content => jsProxy['content'];
+  set content(String value) => jsProxy['content'] = value;
 
   /**
    * The text that is displayed in the URL dropdown. Can contain XML-style
@@ -140,8 +140,8 @@ class SuggestResult extends ChromeObject {
    * 'dim' (for dim helper text). The styles can be nested, eg.
    * <dim><match>dimmed match</match></dim>.
    */
-  String get description => proxy['description'];
-  set description(String value) => proxy['description'] = value;
+  String get description => jsProxy['description'];
+  set description(String value) => jsProxy['description'] = value;
 }
 
 /**
@@ -151,7 +151,7 @@ class DefaultSuggestResult extends ChromeObject {
   DefaultSuggestResult({String description}) {
     if (description != null) this.description = description;
   }
-  DefaultSuggestResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  DefaultSuggestResult.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The text that is displayed in the URL dropdown. Can contain XML-style
@@ -160,8 +160,8 @@ class DefaultSuggestResult extends ChromeObject {
    * 'dim' (for dim helper text). The styles can be nested, eg.
    * <dim><match>dimmed match</match></dim>.
    */
-  String get description => proxy['description'];
-  set description(String value) => proxy['description'] = value;
+  String get description => jsProxy['description'];
+  set description(String value) => jsProxy['description'] = value;
 }
 
 OnInputChangedEvent _createOnInputChangedEvent(String text, JsObject suggest) =>

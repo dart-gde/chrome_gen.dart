@@ -35,37 +35,37 @@ class Rule extends ChromeObject {
     if (actions != null) this.actions = actions;
     if (priority != null) this.priority = priority;
   }
-  Rule.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Rule.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Optional identifier that allows referencing this rule.
    */
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
   /**
    * Tags can be used to annotate rules and perform operations on sets of rules.
    */
-  List<String> get tags => listify(proxy['tags']);
-  set tags(List<String> value) => proxy['tags'] = jsify(value);
+  List<String> get tags => listify(jsProxy['tags']);
+  set tags(List<String> value) => jsProxy['tags'] = jsify(value);
 
   /**
    * List of conditions that can trigger the actions.
    */
-  List<dynamic> get conditions => listify(proxy['conditions']);
-  set conditions(List<dynamic> value) => proxy['conditions'] = jsify(value);
+  List<dynamic> get conditions => listify(jsProxy['conditions']);
+  set conditions(List<dynamic> value) => jsProxy['conditions'] = jsify(value);
 
   /**
    * List of actions that are triggered if one of the condtions is fulfilled.
    */
-  List<dynamic> get actions => listify(proxy['actions']);
-  set actions(List<dynamic> value) => proxy['actions'] = jsify(value);
+  List<dynamic> get actions => listify(jsProxy['actions']);
+  set actions(List<dynamic> value) => jsProxy['actions'] = jsify(value);
 
   /**
    * Optional priority of this rule. Defaults to 100.
    */
-  int get priority => proxy['priority'];
-  set priority(int value) => proxy['priority'] = value;
+  int get priority => jsProxy['priority'];
+  set priority(int value) => jsProxy['priority'] = value;
 }
 
 /**
@@ -74,14 +74,14 @@ class Rule extends ChromeObject {
  */
 class Event extends ChromeObject {
   Event();
-  Event.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Event.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Registers an event listener _callback_ to an event.
    */
   Future addListener() {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('addListener', [completer.callback]);
+    jsProxy.callMethod('addListener', [completer.callback]);
     return completer.future;
   }
 
@@ -90,16 +90,16 @@ class Event extends ChromeObject {
    */
   Future removeListener() {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('removeListener', [completer.callback]);
+    jsProxy.callMethod('removeListener', [completer.callback]);
     return completer.future;
   }
 
   bool hasListener(dynamic callback) {
-    return proxy.callMethod('hasListener', [jsify(callback)]);
+    return jsProxy.callMethod('hasListener', [jsify(callback)]);
   }
 
   bool hasListeners() {
-    return proxy.callMethod('hasListeners');
+    return jsProxy.callMethod('hasListeners');
   }
 
   /**
@@ -115,7 +115,7 @@ class Event extends ChromeObject {
    */
   Future<List<Rule>> addRules(String eventName, List<Rule> rules) {
     var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, _createRule));
-    proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
+    jsProxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
     return completer.future;
   }
 
@@ -132,7 +132,7 @@ class Event extends ChromeObject {
    */
   Future<List<Rule>> getRules(String eventName, [List<String> ruleIdentifiers]) {
     var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, _createRule));
-    proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
+    jsProxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
     return completer.future;
   }
 
@@ -146,7 +146,7 @@ class Event extends ChromeObject {
    */
   Future removeRules(String eventName, [List<String> ruleIdentifiers]) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
+    jsProxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
     return completer.future;
   }
 }
@@ -178,7 +178,7 @@ class UrlFilter extends ChromeObject {
     if (schemes != null) this.schemes = schemes;
     if (ports != null) this.ports = ports;
   }
-  UrlFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  UrlFilter.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Matches if the host name of the URL contains a specified string. To test
@@ -190,90 +190,90 @@ class UrlFilter extends ChromeObject {
    * components need to be done separately using hostSuffix, because no implicit
    * dot is added at the end of the host name.
    */
-  String get hostContains => proxy['hostContains'];
-  set hostContains(String value) => proxy['hostContains'] = value;
+  String get hostContains => jsProxy['hostContains'];
+  set hostContains(String value) => jsProxy['hostContains'] = value;
 
   /**
    * Matches if the host name of the URL is equal to a specified string.
    */
-  String get hostEquals => proxy['hostEquals'];
-  set hostEquals(String value) => proxy['hostEquals'] = value;
+  String get hostEquals => jsProxy['hostEquals'];
+  set hostEquals(String value) => jsProxy['hostEquals'] = value;
 
   /**
    * Matches if the host name of the URL starts with a specified string.
    */
-  String get hostPrefix => proxy['hostPrefix'];
-  set hostPrefix(String value) => proxy['hostPrefix'] = value;
+  String get hostPrefix => jsProxy['hostPrefix'];
+  set hostPrefix(String value) => jsProxy['hostPrefix'] = value;
 
   /**
    * Matches if the host name of the URL ends with a specified string.
    */
-  String get hostSuffix => proxy['hostSuffix'];
-  set hostSuffix(String value) => proxy['hostSuffix'] = value;
+  String get hostSuffix => jsProxy['hostSuffix'];
+  set hostSuffix(String value) => jsProxy['hostSuffix'] = value;
 
   /**
    * Matches if the path segment of the URL contains a specified string.
    */
-  String get pathContains => proxy['pathContains'];
-  set pathContains(String value) => proxy['pathContains'] = value;
+  String get pathContains => jsProxy['pathContains'];
+  set pathContains(String value) => jsProxy['pathContains'] = value;
 
   /**
    * Matches if the path segment of the URL is equal to a specified string.
    */
-  String get pathEquals => proxy['pathEquals'];
-  set pathEquals(String value) => proxy['pathEquals'] = value;
+  String get pathEquals => jsProxy['pathEquals'];
+  set pathEquals(String value) => jsProxy['pathEquals'] = value;
 
   /**
    * Matches if the path segment of the URL starts with a specified string.
    */
-  String get pathPrefix => proxy['pathPrefix'];
-  set pathPrefix(String value) => proxy['pathPrefix'] = value;
+  String get pathPrefix => jsProxy['pathPrefix'];
+  set pathPrefix(String value) => jsProxy['pathPrefix'] = value;
 
   /**
    * Matches if the path segment of the URL ends with a specified string.
    */
-  String get pathSuffix => proxy['pathSuffix'];
-  set pathSuffix(String value) => proxy['pathSuffix'] = value;
+  String get pathSuffix => jsProxy['pathSuffix'];
+  set pathSuffix(String value) => jsProxy['pathSuffix'] = value;
 
   /**
    * Matches if the query segment of the URL contains a specified string.
    */
-  String get queryContains => proxy['queryContains'];
-  set queryContains(String value) => proxy['queryContains'] = value;
+  String get queryContains => jsProxy['queryContains'];
+  set queryContains(String value) => jsProxy['queryContains'] = value;
 
   /**
    * Matches if the query segment of the URL is equal to a specified string.
    */
-  String get queryEquals => proxy['queryEquals'];
-  set queryEquals(String value) => proxy['queryEquals'] = value;
+  String get queryEquals => jsProxy['queryEquals'];
+  set queryEquals(String value) => jsProxy['queryEquals'] = value;
 
   /**
    * Matches if the query segment of the URL starts with a specified string.
    */
-  String get queryPrefix => proxy['queryPrefix'];
-  set queryPrefix(String value) => proxy['queryPrefix'] = value;
+  String get queryPrefix => jsProxy['queryPrefix'];
+  set queryPrefix(String value) => jsProxy['queryPrefix'] = value;
 
   /**
    * Matches if the query segment of the URL ends with a specified string.
    */
-  String get querySuffix => proxy['querySuffix'];
-  set querySuffix(String value) => proxy['querySuffix'] = value;
+  String get querySuffix => jsProxy['querySuffix'];
+  set querySuffix(String value) => jsProxy['querySuffix'] = value;
 
   /**
    * Matches if the URL (without fragment identifier) contains a specified
    * string. Port numbers are stripped from the URL if they match the default
    * port number.
    */
-  String get urlContains => proxy['urlContains'];
-  set urlContains(String value) => proxy['urlContains'] = value;
+  String get urlContains => jsProxy['urlContains'];
+  set urlContains(String value) => jsProxy['urlContains'] = value;
 
   /**
    * Matches if the URL (without fragment identifier) is equal to a specified
    * string. Port numbers are stripped from the URL if they match the default
    * port number.
    */
-  String get urlEquals => proxy['urlEquals'];
-  set urlEquals(String value) => proxy['urlEquals'] = value;
+  String get urlEquals => jsProxy['urlEquals'];
+  set urlEquals(String value) => jsProxy['urlEquals'] = value;
 
   /**
    * Matches if the URL (without fragment identifier) matches a specified
@@ -281,8 +281,8 @@ class UrlFilter extends ChromeObject {
    * the default port number. The regular expressions use the [RE2
    * syntax](http://code.google.com/p/re2/wiki/Syntax).
    */
-  String get urlMatches => proxy['urlMatches'];
-  set urlMatches(String value) => proxy['urlMatches'] = value;
+  String get urlMatches => jsProxy['urlMatches'];
+  set urlMatches(String value) => jsProxy['urlMatches'] = value;
 
   /**
    * Matches if the URL without query segment and fragment identifier matches a
@@ -290,39 +290,39 @@ class UrlFilter extends ChromeObject {
    * they match the default port number. The regular expressions use the [RE2
    * syntax](http://code.google.com/p/re2/wiki/Syntax).
    */
-  String get originAndPathMatches => proxy['originAndPathMatches'];
-  set originAndPathMatches(String value) => proxy['originAndPathMatches'] = value;
+  String get originAndPathMatches => jsProxy['originAndPathMatches'];
+  set originAndPathMatches(String value) => jsProxy['originAndPathMatches'] = value;
 
   /**
    * Matches if the URL (without fragment identifier) starts with a specified
    * string. Port numbers are stripped from the URL if they match the default
    * port number.
    */
-  String get urlPrefix => proxy['urlPrefix'];
-  set urlPrefix(String value) => proxy['urlPrefix'] = value;
+  String get urlPrefix => jsProxy['urlPrefix'];
+  set urlPrefix(String value) => jsProxy['urlPrefix'] = value;
 
   /**
    * Matches if the URL (without fragment identifier) ends with a specified
    * string. Port numbers are stripped from the URL if they match the default
    * port number.
    */
-  String get urlSuffix => proxy['urlSuffix'];
-  set urlSuffix(String value) => proxy['urlSuffix'] = value;
+  String get urlSuffix => jsProxy['urlSuffix'];
+  set urlSuffix(String value) => jsProxy['urlSuffix'] = value;
 
   /**
    * Matches if the scheme of the URL is equal to any of the schemes specified
    * in the array.
    */
-  List<String> get schemes => listify(proxy['schemes']);
-  set schemes(List<String> value) => proxy['schemes'] = jsify(value);
+  List<String> get schemes => listify(jsProxy['schemes']);
+  set schemes(List<String> value) => jsProxy['schemes'] = jsify(value);
 
   /**
    * Matches if the port of the URL is contained in any of the specified port
    * lists. For example `[80, 443, [1000, 1200]]` matches all requests on port
    * 80, 443 and in the range 1000-1200.
    */
-  List<dynamic> get ports => listify(proxy['ports']);
-  set ports(List<dynamic> value) => proxy['ports'] = jsify(value);
+  List<dynamic> get ports => listify(jsProxy['ports']);
+  set ports(List<dynamic> value) => jsProxy['ports'] = jsify(value);
 }
 
-Rule _createRule(JsObject proxy) => proxy == null ? null : new Rule.fromProxy(proxy);
+Rule _createRule(JsObject jsProxy) => jsProxy == null ? null : new Rule.fromProxy(jsProxy);

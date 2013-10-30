@@ -62,7 +62,7 @@ class StorageOnChangedEvent {
 
 class SyncStorageArea extends StorageArea {
   SyncStorageArea();
-  SyncStorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  SyncStorageArea.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The maximum total amount (in bytes) of data that can be stored in sync
@@ -70,7 +70,7 @@ class SyncStorageArea extends StorageArea {
    * key's length. Updates that would cause this limit to be exceeded fail
    * immediately and set [runtime.lastError.]
    */
-  int get QUOTA_BYTES => proxy['QUOTA_BYTES'];
+  int get QUOTA_BYTES => jsProxy['QUOTA_BYTES'];
 
   /**
    * The maximum size (in bytes) of each individual item in sync storage, as
@@ -78,33 +78,33 @@ class SyncStorageArea extends StorageArea {
    * Updates containing items larger than this limit will fail immediately and
    * set [runtime.lastError.]
    */
-  int get QUOTA_BYTES_PER_ITEM => proxy['QUOTA_BYTES_PER_ITEM'];
+  int get QUOTA_BYTES_PER_ITEM => jsProxy['QUOTA_BYTES_PER_ITEM'];
 
   /**
    * The maximum number of items that can be stored in sync storage. Updates
    * that would cause this limit to be exceeded will fail immediately and set
    * [runtime.lastError.]
    */
-  int get MAX_ITEMS => proxy['MAX_ITEMS'];
+  int get MAX_ITEMS => jsProxy['MAX_ITEMS'];
 
   /**
    * The maximum number of `set`, `remove`, or `clear` operations that can be
    * performed each hour. Updates that would cause this limit to be exceeded
    * fail immediately and set [runtime.lastError.]
    */
-  int get MAX_WRITE_OPERATIONS_PER_HOUR => proxy['MAX_WRITE_OPERATIONS_PER_HOUR'];
+  int get MAX_WRITE_OPERATIONS_PER_HOUR => jsProxy['MAX_WRITE_OPERATIONS_PER_HOUR'];
 
   /**
    * The maximum number of `set`, `remove`, or `clear` operations that can be
    * performed each minute, sustained over 10 minutes. Updates that would cause
    * this limit to be exceeded fail immediately and set [runtime.lastError.]
    */
-  int get MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE => proxy['MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE'];
+  int get MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE => jsProxy['MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE'];
 }
 
 class LocalStorageArea extends StorageArea {
   LocalStorageArea();
-  LocalStorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  LocalStorageArea.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The maximum amount (in bytes) of data that can be stored in local storage,
@@ -113,7 +113,7 @@ class LocalStorageArea extends StorageArea {
    * `unlimitedStorage` permission. Updates that would cause this limit to be
    * exceeded fail immediately and set [runtime.lastError.]
    */
-  int get QUOTA_BYTES => proxy['QUOTA_BYTES'];
+  int get QUOTA_BYTES => jsProxy['QUOTA_BYTES'];
 }
 
 class StorageChange extends ChromeObject {
@@ -121,24 +121,24 @@ class StorageChange extends ChromeObject {
     if (oldValue != null) this.oldValue = oldValue;
     if (newValue != null) this.newValue = newValue;
   }
-  StorageChange.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  StorageChange.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The old value of the item, if there was an old value.
    */
-  dynamic get oldValue => proxy['oldValue'];
-  set oldValue(var value) => proxy['oldValue'] = jsify(value);
+  dynamic get oldValue => jsProxy['oldValue'];
+  set oldValue(var value) => jsProxy['oldValue'] = jsify(value);
 
   /**
    * The new value of the item, if there is a new value.
    */
-  dynamic get newValue => proxy['newValue'];
-  set newValue(var value) => proxy['newValue'] = jsify(value);
+  dynamic get newValue => jsProxy['newValue'];
+  set newValue(var value) => jsProxy['newValue'] = jsify(value);
 }
 
 class StorageArea extends ChromeObject {
   StorageArea();
-  StorageArea.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  StorageArea.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Gets one or more items from storage.
@@ -153,7 +153,7 @@ class StorageArea extends ChromeObject {
    */
   Future<Map<String, dynamic>> get([dynamic keys]) {
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
-    proxy.callMethod('get', [jsify(keys), completer.callback]);
+    jsProxy.callMethod('get', [jsify(keys), completer.callback]);
     return completer.future;
   }
 
@@ -169,7 +169,7 @@ class StorageArea extends ChromeObject {
    */
   Future<int> getBytesInUse([dynamic keys]) {
     var completer = new ChromeCompleter<int>.oneArg();
-    proxy.callMethod('getBytesInUse', [jsify(keys), completer.callback]);
+    jsProxy.callMethod('getBytesInUse', [jsify(keys), completer.callback]);
     return completer.future;
   }
 
@@ -185,7 +185,7 @@ class StorageArea extends ChromeObject {
    */
   Future set(Map<String, dynamic> items) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('set', [jsify(items), completer.callback]);
+    jsProxy.callMethod('set', [jsify(items), completer.callback]);
     return completer.future;
   }
 
@@ -196,7 +196,7 @@ class StorageArea extends ChromeObject {
    */
   Future remove(dynamic keys) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('remove', [jsify(keys), completer.callback]);
+    jsProxy.callMethod('remove', [jsify(keys), completer.callback]);
     return completer.future;
   }
 
@@ -205,12 +205,12 @@ class StorageArea extends ChromeObject {
    */
   Future clear() {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('clear', [completer.callback]);
+    jsProxy.callMethod('clear', [completer.callback]);
     return completer.future;
   }
 }
 
-SyncStorageArea _createSyncStorageArea(JsObject proxy) => proxy == null ? null : new SyncStorageArea.fromProxy(proxy);
-LocalStorageArea _createLocalStorageArea(JsObject proxy) => proxy == null ? null : new LocalStorageArea.fromProxy(proxy);
+SyncStorageArea _createSyncStorageArea(JsObject jsProxy) => jsProxy == null ? null : new SyncStorageArea.fromProxy(jsProxy);
+LocalStorageArea _createLocalStorageArea(JsObject jsProxy) => jsProxy == null ? null : new LocalStorageArea.fromProxy(jsProxy);
 StorageOnChangedEvent _createStorageOnChangedEvent(JsObject changes, String areaName) =>
     new StorageOnChangedEvent(mapify(changes), areaName);

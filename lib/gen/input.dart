@@ -324,57 +324,57 @@ class KeyboardEvent extends ChromeObject {
     if (shiftKey != null) this.shiftKey = shiftKey;
     if (capsLock != null) this.capsLock = capsLock;
   }
-  KeyboardEvent.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  KeyboardEvent.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * One of keyup or keydown.
    * enum of `keyup`, `keydown`
    */
-  String get type => proxy['type'];
-  set type(String value) => proxy['type'] = value;
+  String get type => jsProxy['type'];
+  set type(String value) => jsProxy['type'] = value;
 
   /**
    * The ID of the request.
    */
-  String get requestId => proxy['requestId'];
-  set requestId(String value) => proxy['requestId'] = value;
+  String get requestId => jsProxy['requestId'];
+  set requestId(String value) => jsProxy['requestId'] = value;
 
   /**
    * Value of the key being pressed
    */
-  String get key => proxy['key'];
-  set key(String value) => proxy['key'] = value;
+  String get key => jsProxy['key'];
+  set key(String value) => jsProxy['key'] = value;
 
   /**
    * Value of the physical key being pressed. The value is not affected by
    * current keyboard layout or modifier state.
    */
-  String get code => proxy['code'];
-  set code(String value) => proxy['code'] = value;
+  String get code => jsProxy['code'];
+  set code(String value) => jsProxy['code'] = value;
 
   /**
    * Whether or not the ALT key is pressed.
    */
-  bool get altKey => proxy['altKey'];
-  set altKey(bool value) => proxy['altKey'] = value;
+  bool get altKey => jsProxy['altKey'];
+  set altKey(bool value) => jsProxy['altKey'] = value;
 
   /**
    * Whether or not the CTRL key is pressed.
    */
-  bool get ctrlKey => proxy['ctrlKey'];
-  set ctrlKey(bool value) => proxy['ctrlKey'] = value;
+  bool get ctrlKey => jsProxy['ctrlKey'];
+  set ctrlKey(bool value) => jsProxy['ctrlKey'] = value;
 
   /**
    * Whether or not the SHIFT key is pressed.
    */
-  bool get shiftKey => proxy['shiftKey'];
-  set shiftKey(bool value) => proxy['shiftKey'] = value;
+  bool get shiftKey => jsProxy['shiftKey'];
+  set shiftKey(bool value) => jsProxy['shiftKey'] = value;
 
   /**
    * Whether or not the CAPS_LOCK is enabled.
    */
-  bool get capsLock => proxy['capsLock'];
-  set capsLock(bool value) => proxy['capsLock'] = value;
+  bool get capsLock => jsProxy['capsLock'];
+  set capsLock(bool value) => jsProxy['capsLock'] = value;
 }
 
 /**
@@ -385,21 +385,21 @@ class InputContext extends ChromeObject {
     if (contextID != null) this.contextID = contextID;
     if (type != null) this.type = type;
   }
-  InputContext.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  InputContext.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * This is used to specify targets of text field operations.  This ID becomes
    * invalid as soon as onBlur is called.
    */
-  int get contextID => proxy['contextID'];
-  set contextID(int value) => proxy['contextID'] = value;
+  int get contextID => jsProxy['contextID'];
+  set contextID(int value) => jsProxy['contextID'] = value;
 
   /**
    * Type of value this text field edits, (Text, Number, Password, etc)
    * enum of `text`, `number`, `password`
    */
-  String get type => proxy['type'];
-  set type(String value) => proxy['type'] = value;
+  String get type => jsProxy['type'];
+  set type(String value) => jsProxy['type'] = value;
 }
 
 /**
@@ -415,45 +415,45 @@ class MenuItem extends ChromeObject {
     if (checked != null) this.checked = checked;
     if (enabled != null) this.enabled = enabled;
   }
-  MenuItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  MenuItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * String that will be passed to callbacks referencing this MenuItem.
    */
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
   /**
    * Text displayed in the menu for this item.
    */
-  String get label => proxy['label'];
-  set label(String value) => proxy['label'] = value;
+  String get label => jsProxy['label'];
+  set label(String value) => jsProxy['label'] = value;
 
   /**
    * Enum representing if this item is: check, radio, or a separator.  Radio
    * buttons between separators are considered grouped.
    * enum of `check`, `radio`, `separator`
    */
-  String get style => proxy['style'];
-  set style(String value) => proxy['style'] = value;
+  String get style => jsProxy['style'];
+  set style(String value) => jsProxy['style'] = value;
 
   /**
    * Indicates this item is visible.
    */
-  bool get visible => proxy['visible'];
-  set visible(bool value) => proxy['visible'] = value;
+  bool get visible => jsProxy['visible'];
+  set visible(bool value) => jsProxy['visible'] = value;
 
   /**
    * Indicates this item should be drawn with a check.
    */
-  bool get checked => proxy['checked'];
-  set checked(bool value) => proxy['checked'] = value;
+  bool get checked => jsProxy['checked'];
+  set checked(bool value) => jsProxy['checked'] = value;
 
   /**
    * Indicates this item is enabled.
    */
-  bool get enabled => proxy['enabled'];
-  set enabled(bool value) => proxy['enabled'] = value;
+  bool get enabled => jsProxy['enabled'];
+  set enabled(bool value) => jsProxy['enabled'] = value;
 }
 
 class PropertiesInputIme extends ChromeObject {
@@ -466,44 +466,44 @@ class PropertiesInputIme extends ChromeObject {
     if (auxiliaryTextVisible != null) this.auxiliaryTextVisible = auxiliaryTextVisible;
     if (windowPosition != null) this.windowPosition = windowPosition;
   }
-  PropertiesInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  PropertiesInputIme.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * True to show the Candidate window, false to hide it.
    */
-  bool get visible => proxy['visible'];
-  set visible(bool value) => proxy['visible'] = value;
+  bool get visible => jsProxy['visible'];
+  set visible(bool value) => jsProxy['visible'] = value;
 
   /**
    * True to show the cursor, false to hide it.
    */
-  bool get cursorVisible => proxy['cursorVisible'];
-  set cursorVisible(bool value) => proxy['cursorVisible'] = value;
+  bool get cursorVisible => jsProxy['cursorVisible'];
+  set cursorVisible(bool value) => jsProxy['cursorVisible'] = value;
 
   /**
    * True if the candidate window should be rendered vertical, false to make it
    * horizontal.
    */
-  bool get vertical => proxy['vertical'];
-  set vertical(bool value) => proxy['vertical'] = value;
+  bool get vertical => jsProxy['vertical'];
+  set vertical(bool value) => jsProxy['vertical'] = value;
 
   /**
    * The number of candidates to display per page.
    */
-  int get pageSize => proxy['pageSize'];
-  set pageSize(int value) => proxy['pageSize'] = value;
+  int get pageSize => jsProxy['pageSize'];
+  set pageSize(int value) => jsProxy['pageSize'] = value;
 
   /**
    * Text that is shown at the bottom of the candidate window.
    */
-  String get auxiliaryText => proxy['auxiliaryText'];
-  set auxiliaryText(String value) => proxy['auxiliaryText'] = value;
+  String get auxiliaryText => jsProxy['auxiliaryText'];
+  set auxiliaryText(String value) => jsProxy['auxiliaryText'] = value;
 
   /**
    * True to display the auxiliary text, false to hide it.
    */
-  bool get auxiliaryTextVisible => proxy['auxiliaryTextVisible'];
-  set auxiliaryTextVisible(bool value) => proxy['auxiliaryTextVisible'] = value;
+  bool get auxiliaryTextVisible => jsProxy['auxiliaryTextVisible'];
+  set auxiliaryTextVisible(bool value) => jsProxy['auxiliaryTextVisible'] = value;
 
   /**
    * Where to display the candidate window. If set to 'cursor', the window
@@ -511,8 +511,8 @@ class PropertiesInputIme extends ChromeObject {
    * beginning of the composition.
    * enum of `cursor`, `composition`
    */
-  String get windowPosition => proxy['windowPosition'];
-  set windowPosition(String value) => proxy['windowPosition'] = value;
+  String get windowPosition => jsProxy['windowPosition'];
+  set windowPosition(String value) => jsProxy['windowPosition'] = value;
 }
 
 class UsageInputIme extends ChromeObject {
@@ -520,22 +520,22 @@ class UsageInputIme extends ChromeObject {
     if (title != null) this.title = title;
     if (body != null) this.body = body;
   }
-  UsageInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  UsageInputIme.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The title string of details description.
    */
-  String get title => proxy['title'];
-  set title(String value) => proxy['title'] = value;
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
 
   /**
    * The body string of detail description.
    */
-  String get body => proxy['body'];
-  set body(String value) => proxy['body'] = value;
+  String get body => jsProxy['body'];
+  set body(String value) => jsProxy['body'] = value;
 }
 
-InputContext _createInputContext(JsObject proxy) => proxy == null ? null : new InputContext.fromProxy(proxy);
+InputContext _createInputContext(JsObject jsProxy) => jsProxy == null ? null : new InputContext.fromProxy(jsProxy);
 OnKeyEventEvent _createOnKeyEventEvent(String engineID, JsObject keyData) =>
     new OnKeyEventEvent(engineID, _createKeyboardEvent(keyData));
 OnCandidateClickedEvent _createOnCandidateClickedEvent(String engineID, int candidateID, String button) =>
@@ -544,4 +544,4 @@ OnMenuItemActivatedEvent _createOnMenuItemActivatedEvent(String engineID, String
     new OnMenuItemActivatedEvent(engineID, name);
 OnSurroundingTextChangedEvent _createOnSurroundingTextChangedEvent(String engineID, JsObject surroundingInfo) =>
     new OnSurroundingTextChangedEvent(engineID, mapify(surroundingInfo));
-KeyboardEvent _createKeyboardEvent(JsObject proxy) => proxy == null ? null : new KeyboardEvent.fromProxy(proxy);
+KeyboardEvent _createKeyboardEvent(JsObject jsProxy) => jsProxy == null ? null : new KeyboardEvent.fromProxy(jsProxy);

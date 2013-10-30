@@ -96,20 +96,20 @@ class TokenDetails extends ChromeObject {
   TokenDetails({bool interactive}) {
     if (interactive != null) this.interactive = interactive;
   }
-  TokenDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  TokenDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  bool get interactive => proxy['interactive'];
-  set interactive(bool value) => proxy['interactive'] = value;
+  bool get interactive => jsProxy['interactive'];
+  set interactive(bool value) => jsProxy['interactive'] = value;
 }
 
 class InvalidTokenDetails extends ChromeObject {
   InvalidTokenDetails({String token}) {
     if (token != null) this.token = token;
   }
-  InvalidTokenDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  InvalidTokenDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get token => proxy['token'];
-  set token(String value) => proxy['token'] = value;
+  String get token => jsProxy['token'];
+  set token(String value) => jsProxy['token'] = value;
 }
 
 class WebAuthFlowDetails extends ChromeObject {
@@ -117,25 +117,25 @@ class WebAuthFlowDetails extends ChromeObject {
     if (url != null) this.url = url;
     if (interactive != null) this.interactive = interactive;
   }
-  WebAuthFlowDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  WebAuthFlowDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
-  bool get interactive => proxy['interactive'];
-  set interactive(bool value) => proxy['interactive'] = value;
+  bool get interactive => jsProxy['interactive'];
+  set interactive(bool value) => jsProxy['interactive'] = value;
 }
 
 class AccountInfo extends ChromeObject {
   AccountInfo({String id}) {
     if (id != null) this.id = id;
   }
-  AccountInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  AccountInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 }
 
 OnSignInChangedEvent _createOnSignInChangedEvent(JsObject account, bool signedIn) =>
     new OnSignInChangedEvent(_createAccountInfo(account), signedIn);
-AccountInfo _createAccountInfo(JsObject proxy) => proxy == null ? null : new AccountInfo.fromProxy(proxy);
+AccountInfo _createAccountInfo(JsObject jsProxy) => jsProxy == null ? null : new AccountInfo.fromProxy(jsProxy);

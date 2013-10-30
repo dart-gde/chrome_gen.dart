@@ -66,10 +66,10 @@ class MediaFileSystemsDetails extends ChromeObject {
   MediaFileSystemsDetails({GetMediaFileSystemsInteractivity interactive}) {
     if (interactive != null) this.interactive = interactive;
   }
-  MediaFileSystemsDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  MediaFileSystemsDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  GetMediaFileSystemsInteractivity get interactive => _createGetMediaFileSystemsInteractivity(proxy['interactive']);
-  set interactive(GetMediaFileSystemsInteractivity value) => proxy['interactive'] = jsify(value);
+  GetMediaFileSystemsInteractivity get interactive => _createGetMediaFileSystemsInteractivity(jsProxy['interactive']);
+  set interactive(GetMediaFileSystemsInteractivity value) => jsProxy['interactive'] = jsify(value);
 }
 
 class MediaFileSystemMetadata extends ChromeObject {
@@ -80,24 +80,24 @@ class MediaFileSystemMetadata extends ChromeObject {
     if (isRemovable != null) this.isRemovable = isRemovable;
     if (isMediaDevice != null) this.isMediaDevice = isMediaDevice;
   }
-  MediaFileSystemMetadata.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  MediaFileSystemMetadata.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
-  String get galleryId => proxy['galleryId'];
-  set galleryId(String value) => proxy['galleryId'] = value;
+  String get galleryId => jsProxy['galleryId'];
+  set galleryId(String value) => jsProxy['galleryId'] = value;
 
-  String get deviceId => proxy['deviceId'];
-  set deviceId(String value) => proxy['deviceId'] = value;
+  String get deviceId => jsProxy['deviceId'];
+  set deviceId(String value) => jsProxy['deviceId'] = value;
 
-  bool get isRemovable => proxy['isRemovable'];
-  set isRemovable(bool value) => proxy['isRemovable'] = value;
+  bool get isRemovable => jsProxy['isRemovable'];
+  set isRemovable(bool value) => jsProxy['isRemovable'] = value;
 
-  bool get isMediaDevice => proxy['isMediaDevice'];
-  set isMediaDevice(bool value) => proxy['isMediaDevice'] = value;
+  bool get isMediaDevice => jsProxy['isMediaDevice'];
+  set isMediaDevice(bool value) => jsProxy['isMediaDevice'] = value;
 }
 
-FileSystem _createFileSystem(JsObject proxy) => proxy == null ? null : new CrFileSystem.fromProxy(proxy);
-MediaFileSystemMetadata _createMediaFileSystemMetadata(JsObject proxy) => proxy == null ? null : new MediaFileSystemMetadata.fromProxy(proxy);
+FileSystem _createFileSystem(JsObject jsProxy) => jsProxy == null ? null : new CrFileSystem.fromProxy(jsProxy);
+MediaFileSystemMetadata _createMediaFileSystemMetadata(JsObject jsProxy) => jsProxy == null ? null : new MediaFileSystemMetadata.fromProxy(jsProxy);
 GetMediaFileSystemsInteractivity _createGetMediaFileSystemsInteractivity(String value) => GetMediaFileSystemsInteractivity.VALUES.singleWhere((ChromeEnum e) => e.value == value);

@@ -227,19 +227,19 @@ class FileInfo extends ChromeObject {
     if (action != null) this.action = action;
     if (direction != null) this.direction = direction;
   }
-  FileInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  FileInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  dynamic get fileEntry => proxy['fileEntry'];
-  set fileEntry(var value) => proxy['fileEntry'] = jsify(value);
+  dynamic get fileEntry => jsProxy['fileEntry'];
+  set fileEntry(var value) => jsProxy['fileEntry'] = jsify(value);
 
-  FileStatus get status => _createFileStatus(proxy['status']);
-  set status(FileStatus value) => proxy['status'] = jsify(value);
+  FileStatus get status => _createFileStatus(jsProxy['status']);
+  set status(FileStatus value) => jsProxy['status'] = jsify(value);
 
-  SyncAction get action => _createSyncAction(proxy['action']);
-  set action(SyncAction value) => proxy['action'] = jsify(value);
+  SyncAction get action => _createSyncAction(jsProxy['action']);
+  set action(SyncAction value) => jsProxy['action'] = jsify(value);
 
-  SyncDirection get direction => _createSyncDirection(proxy['direction']);
-  set direction(SyncDirection value) => proxy['direction'] = jsify(value);
+  SyncDirection get direction => _createSyncDirection(jsProxy['direction']);
+  set direction(SyncDirection value) => jsProxy['direction'] = jsify(value);
 }
 
 class FileStatusInfo extends ChromeObject {
@@ -248,16 +248,16 @@ class FileStatusInfo extends ChromeObject {
     if (status != null) this.status = status;
     if (error != null) this.error = error;
   }
-  FileStatusInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  FileStatusInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  dynamic get fileEntry => proxy['fileEntry'];
-  set fileEntry(var value) => proxy['fileEntry'] = jsify(value);
+  dynamic get fileEntry => jsProxy['fileEntry'];
+  set fileEntry(var value) => jsProxy['fileEntry'] = jsify(value);
 
-  FileStatus get status => _createFileStatus(proxy['status']);
-  set status(FileStatus value) => proxy['status'] = jsify(value);
+  FileStatus get status => _createFileStatus(jsProxy['status']);
+  set status(FileStatus value) => jsProxy['status'] = jsify(value);
 
-  String get error => proxy['error'];
-  set error(String value) => proxy['error'] = value;
+  String get error => jsProxy['error'];
+  set error(String value) => jsProxy['error'] = value;
 }
 
 class StorageInfo extends ChromeObject {
@@ -265,13 +265,13 @@ class StorageInfo extends ChromeObject {
     if (usageBytes != null) this.usageBytes = usageBytes;
     if (quotaBytes != null) this.quotaBytes = quotaBytes;
   }
-  StorageInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  StorageInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get usageBytes => proxy['usageBytes'];
-  set usageBytes(int value) => proxy['usageBytes'] = value;
+  int get usageBytes => jsProxy['usageBytes'];
+  set usageBytes(int value) => jsProxy['usageBytes'] = value;
 
-  int get quotaBytes => proxy['quotaBytes'];
-  set quotaBytes(int value) => proxy['quotaBytes'] = value;
+  int get quotaBytes => jsProxy['quotaBytes'];
+  set quotaBytes(int value) => jsProxy['quotaBytes'] = value;
 }
 
 class ServiceInfo extends ChromeObject {
@@ -279,22 +279,22 @@ class ServiceInfo extends ChromeObject {
     if (state != null) this.state = state;
     if (description != null) this.description = description;
   }
-  ServiceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ServiceInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  ServiceStatus get state => _createServiceStatus(proxy['state']);
-  set state(ServiceStatus value) => proxy['state'] = jsify(value);
+  ServiceStatus get state => _createServiceStatus(jsProxy['state']);
+  set state(ServiceStatus value) => jsProxy['state'] = jsify(value);
 
-  String get description => proxy['description'];
-  set description(String value) => proxy['description'] = value;
+  String get description => jsProxy['description'];
+  set description(String value) => jsProxy['description'] = value;
 }
 
-FileSystem _createFileSystem(JsObject proxy) => proxy == null ? null : new CrFileSystem.fromProxy(proxy);
+FileSystem _createFileSystem(JsObject jsProxy) => jsProxy == null ? null : new CrFileSystem.fromProxy(jsProxy);
 ConflictResolutionPolicy _createConflictResolutionPolicy(String value) => ConflictResolutionPolicy.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-StorageInfo _createStorageInfo(JsObject proxy) => proxy == null ? null : new StorageInfo.fromProxy(proxy);
+StorageInfo _createStorageInfo(JsObject jsProxy) => jsProxy == null ? null : new StorageInfo.fromProxy(jsProxy);
 FileStatus _createFileStatus(String value) => FileStatus.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-FileStatusInfo _createFileStatusInfo(JsObject proxy) => proxy == null ? null : new FileStatusInfo.fromProxy(proxy);
+FileStatusInfo _createFileStatusInfo(JsObject jsProxy) => jsProxy == null ? null : new FileStatusInfo.fromProxy(jsProxy);
 ServiceStatus _createServiceStatus(String value) => ServiceStatus.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-ServiceInfo _createServiceInfo(JsObject proxy) => proxy == null ? null : new ServiceInfo.fromProxy(proxy);
-FileInfo _createFileInfo(JsObject proxy) => proxy == null ? null : new FileInfo.fromProxy(proxy);
+ServiceInfo _createServiceInfo(JsObject jsProxy) => jsProxy == null ? null : new ServiceInfo.fromProxy(jsProxy);
+FileInfo _createFileInfo(JsObject jsProxy) => jsProxy == null ? null : new FileInfo.fromProxy(jsProxy);
 SyncAction _createSyncAction(String value) => SyncAction.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 SyncDirection _createSyncDirection(String value) => SyncDirection.VALUES.singleWhere((ChromeEnum e) => e.value == value);

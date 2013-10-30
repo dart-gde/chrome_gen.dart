@@ -54,19 +54,19 @@ class CpuInfo extends ChromeObject {
     if (archName != null) this.archName = archName;
     if (modelName != null) this.modelName = modelName;
   }
-  CpuInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  CpuInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get numOfProcessors => proxy['numOfProcessors'];
-  set numOfProcessors(int value) => proxy['numOfProcessors'] = value;
+  int get numOfProcessors => jsProxy['numOfProcessors'];
+  set numOfProcessors(int value) => jsProxy['numOfProcessors'] = value;
 
-  String get archName => proxy['archName'];
-  set archName(String value) => proxy['archName'] = value;
+  String get archName => jsProxy['archName'];
+  set archName(String value) => jsProxy['archName'] = value;
 
-  String get modelName => proxy['modelName'];
-  set modelName(String value) => proxy['modelName'] = value;
+  String get modelName => jsProxy['modelName'];
+  set modelName(String value) => jsProxy['modelName'] = value;
 }
 
-CpuInfo _createCpuInfo(JsObject proxy) => proxy == null ? null : new CpuInfo.fromProxy(proxy);
+CpuInfo _createCpuInfo(JsObject jsProxy) => jsProxy == null ? null : new CpuInfo.fromProxy(jsProxy);
 
 class ChromeSystemMemory extends ChromeApi {
   static final JsObject _system_memory = chrome['system']['memory'];
@@ -96,16 +96,16 @@ class MemoryInfo extends ChromeObject {
     if (capacity != null) this.capacity = capacity;
     if (availableCapacity != null) this.availableCapacity = availableCapacity;
   }
-  MemoryInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  MemoryInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  double get capacity => proxy['capacity'];
-  set capacity(double value) => proxy['capacity'] = jsify(value);
+  double get capacity => jsProxy['capacity'];
+  set capacity(double value) => jsProxy['capacity'] = jsify(value);
 
-  double get availableCapacity => proxy['availableCapacity'];
-  set availableCapacity(double value) => proxy['availableCapacity'] = jsify(value);
+  double get availableCapacity => jsProxy['availableCapacity'];
+  set availableCapacity(double value) => jsProxy['availableCapacity'] = jsify(value);
 }
 
-MemoryInfo _createMemoryInfo(JsObject proxy) => proxy == null ? null : new MemoryInfo.fromProxy(proxy);
+MemoryInfo _createMemoryInfo(JsObject jsProxy) => jsProxy == null ? null : new MemoryInfo.fromProxy(jsProxy);
 
 class ChromeSystemStorage extends ChromeApi {
   static final JsObject _system_storage = chrome['system']['storage'];
@@ -207,19 +207,19 @@ class StorageUnitInfo extends ChromeObject {
     if (type != null) this.type = type;
     if (capacity != null) this.capacity = capacity;
   }
-  StorageUnitInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  StorageUnitInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
-  StorageUnitType get type => _createStorageUnitType(proxy['type']);
-  set type(StorageUnitType value) => proxy['type'] = jsify(value);
+  StorageUnitType get type => _createStorageUnitType(jsProxy['type']);
+  set type(StorageUnitType value) => jsProxy['type'] = jsify(value);
 
-  double get capacity => proxy['capacity'];
-  set capacity(double value) => proxy['capacity'] = jsify(value);
+  double get capacity => jsProxy['capacity'];
+  set capacity(double value) => jsProxy['capacity'] = jsify(value);
 }
 
 class StorageAvailableCapacityInfo extends ChromeObject {
@@ -227,16 +227,16 @@ class StorageAvailableCapacityInfo extends ChromeObject {
     if (id != null) this.id = id;
     if (availableCapacity != null) this.availableCapacity = availableCapacity;
   }
-  StorageAvailableCapacityInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  StorageAvailableCapacityInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
-  double get availableCapacity => proxy['availableCapacity'];
-  set availableCapacity(double value) => proxy['availableCapacity'] = jsify(value);
+  double get availableCapacity => jsProxy['availableCapacity'];
+  set availableCapacity(double value) => jsProxy['availableCapacity'] = jsify(value);
 }
 
-StorageUnitInfo _createStorageUnitInfo(JsObject proxy) => proxy == null ? null : new StorageUnitInfo.fromProxy(proxy);
+StorageUnitInfo _createStorageUnitInfo(JsObject jsProxy) => jsProxy == null ? null : new StorageUnitInfo.fromProxy(jsProxy);
 EjectDeviceResultCode _createEjectDeviceResultCode(String value) => EjectDeviceResultCode.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-StorageAvailableCapacityInfo _createStorageAvailableCapacityInfo(JsObject proxy) => proxy == null ? null : new StorageAvailableCapacityInfo.fromProxy(proxy);
+StorageAvailableCapacityInfo _createStorageAvailableCapacityInfo(JsObject jsProxy) => jsProxy == null ? null : new StorageAvailableCapacityInfo.fromProxy(jsProxy);
 StorageUnitType _createStorageUnitType(String value) => StorageUnitType.VALUES.singleWhere((ChromeEnum e) => e.value == value);

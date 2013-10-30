@@ -30,7 +30,7 @@ class ChromeTypes extends ChromeApi {
  */
 class ChromeSetting extends ChromeObject {
   ChromeSetting();
-  ChromeSetting.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ChromeSetting.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Gets the value of a setting.
@@ -42,7 +42,7 @@ class ChromeSetting extends ChromeObject {
    */
   Future<Map> get(Map details) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
-    proxy.callMethod('get', [jsify(details), completer.callback]);
+    jsProxy.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -53,7 +53,7 @@ class ChromeSetting extends ChromeObject {
    */
   Future set(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('set', [jsify(details), completer.callback]);
+    jsProxy.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -64,7 +64,7 @@ class ChromeSetting extends ChromeObject {
    */
   Future clear(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('clear', [jsify(details), completer.callback]);
+    jsProxy.callMethod('clear', [jsify(details), completer.callback]);
     return completer.future;
   }
 }

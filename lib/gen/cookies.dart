@@ -143,73 +143,73 @@ class Cookie extends ChromeObject {
     if (expirationDate != null) this.expirationDate = expirationDate;
     if (storeId != null) this.storeId = storeId;
   }
-  Cookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Cookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The name of the cookie.
    */
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
   /**
    * The value of the cookie.
    */
-  String get value => proxy['value'];
-  set value(String value) => proxy['value'] = value;
+  String get value => jsProxy['value'];
+  set value(String value) => jsProxy['value'] = value;
 
   /**
    * The domain of the cookie (e.g. "www.google.com", "example.com").
    */
-  String get domain => proxy['domain'];
-  set domain(String value) => proxy['domain'] = value;
+  String get domain => jsProxy['domain'];
+  set domain(String value) => jsProxy['domain'] = value;
 
   /**
    * True if the cookie is a host-only cookie (i.e. a request's host must
    * exactly match the domain of the cookie).
    */
-  bool get hostOnly => proxy['hostOnly'];
-  set hostOnly(bool value) => proxy['hostOnly'] = value;
+  bool get hostOnly => jsProxy['hostOnly'];
+  set hostOnly(bool value) => jsProxy['hostOnly'] = value;
 
   /**
    * The path of the cookie.
    */
-  String get path => proxy['path'];
-  set path(String value) => proxy['path'] = value;
+  String get path => jsProxy['path'];
+  set path(String value) => jsProxy['path'] = value;
 
   /**
    * True if the cookie is marked as Secure (i.e. its scope is limited to secure
    * channels, typically HTTPS).
    */
-  bool get secure => proxy['secure'];
-  set secure(bool value) => proxy['secure'] = value;
+  bool get secure => jsProxy['secure'];
+  set secure(bool value) => jsProxy['secure'] = value;
 
   /**
    * True if the cookie is marked as HttpOnly (i.e. the cookie is inaccessible
    * to client-side scripts).
    */
-  bool get httpOnly => proxy['httpOnly'];
-  set httpOnly(bool value) => proxy['httpOnly'] = value;
+  bool get httpOnly => jsProxy['httpOnly'];
+  set httpOnly(bool value) => jsProxy['httpOnly'] = value;
 
   /**
    * True if the cookie is a session cookie, as opposed to a persistent cookie
    * with an expiration date.
    */
-  bool get session => proxy['session'];
-  set session(bool value) => proxy['session'] = value;
+  bool get session => jsProxy['session'];
+  set session(bool value) => jsProxy['session'] = value;
 
   /**
    * The expiration date of the cookie as the number of seconds since the UNIX
    * epoch. Not provided for session cookies.
    */
-  dynamic get expirationDate => proxy['expirationDate'];
-  set expirationDate(var value) => proxy['expirationDate'] = jsify(value);
+  dynamic get expirationDate => jsProxy['expirationDate'];
+  set expirationDate(var value) => jsProxy['expirationDate'] = jsify(value);
 
   /**
    * The ID of the cookie store containing this cookie, as provided in
    * getAllCookieStores().
    */
-  String get storeId => proxy['storeId'];
-  set storeId(String value) => proxy['storeId'] = value;
+  String get storeId => jsProxy['storeId'];
+  set storeId(String value) => jsProxy['storeId'] = value;
 }
 
 /**
@@ -221,20 +221,20 @@ class CookieStore extends ChromeObject {
     if (id != null) this.id = id;
     if (tabIds != null) this.tabIds = tabIds;
   }
-  CookieStore.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  CookieStore.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The unique identifier for the cookie store.
    */
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
   /**
    * Identifiers of all the browser tabs that share this cookie store.
    */
-  List<int> get tabIds => listify(proxy['tabIds']);
-  set tabIds(List<int> value) => proxy['tabIds'] = jsify(value);
+  List<int> get tabIds => listify(jsProxy['tabIds']);
+  set tabIds(List<int> value) => jsProxy['tabIds'] = jsify(value);
 }
 
-Cookie _createCookie(JsObject proxy) => proxy == null ? null : new Cookie.fromProxy(proxy);
-CookieStore _createCookieStore(JsObject proxy) => proxy == null ? null : new CookieStore.fromProxy(proxy);
+Cookie _createCookie(JsObject jsProxy) => jsProxy == null ? null : new Cookie.fromProxy(jsProxy);
+CookieStore _createCookieStore(JsObject jsProxy) => jsProxy == null ? null : new CookieStore.fromProxy(jsProxy);

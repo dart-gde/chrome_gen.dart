@@ -69,4 +69,4 @@ class ChromeScriptBadge extends ChromeApi {
   }
 }
 
-Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
+Tab _createTab(JsObject jsProxy) => jsProxy == null ? null : new Tab.fromProxy(jsProxy);

@@ -85,31 +85,31 @@ class ResourceIdentifier extends ChromeObject {
     if (id != null) this.id = id;
     if (description != null) this.description = description;
   }
-  ResourceIdentifier.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ResourceIdentifier.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The resource identifier for the given content type.
    */
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
   /**
    * A human readable description of the resource.
    */
-  String get description => proxy['description'];
-  set description(String value) => proxy['description'] = value;
+  String get description => jsProxy['description'];
+  set description(String value) => jsProxy['description'] = value;
 }
 
 class ContentSetting extends ChromeObject {
   ContentSetting();
-  ContentSetting.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ContentSetting.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Clear all content setting rules set by this extension.
    */
   Future clear(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('clear', [jsify(details), completer.callback]);
+    jsProxy.callMethod('clear', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -118,7 +118,7 @@ class ContentSetting extends ChromeObject {
    */
   Future<Map> get(Map details) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
-    proxy.callMethod('get', [jsify(details), completer.callback]);
+    jsProxy.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -127,7 +127,7 @@ class ContentSetting extends ChromeObject {
    */
   Future set(Map details) {
     var completer = new ChromeCompleter.noArgs();
-    proxy.callMethod('set', [jsify(details), completer.callback]);
+    jsProxy.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
   }
 
@@ -138,10 +138,10 @@ class ContentSetting extends ChromeObject {
    */
   Future<List<ResourceIdentifier>> getResourceIdentifiers() {
     var completer = new ChromeCompleter<List<ResourceIdentifier>>.oneArg((e) => listify(e, _createResourceIdentifier));
-    proxy.callMethod('getResourceIdentifiers', [completer.callback]);
+    jsProxy.callMethod('getResourceIdentifiers', [completer.callback]);
     return completer.future;
   }
 }
 
-ContentSetting _createContentSetting(JsObject proxy) => proxy == null ? null : new ContentSetting.fromProxy(proxy);
-ResourceIdentifier _createResourceIdentifier(JsObject proxy) => proxy == null ? null : new ResourceIdentifier.fromProxy(proxy);
+ContentSetting _createContentSetting(JsObject jsProxy) => jsProxy == null ? null : new ContentSetting.fromProxy(jsProxy);
+ResourceIdentifier _createResourceIdentifier(JsObject jsProxy) => jsProxy == null ? null : new ResourceIdentifier.fromProxy(jsProxy);

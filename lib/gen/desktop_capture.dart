@@ -64,5 +64,5 @@ class ChromeDesktopCapture extends ChromeApi {
  */
 class DesktopCaptureSourceType extends ChromeObject {
   DesktopCaptureSourceType();
-  DesktopCaptureSourceType.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  DesktopCaptureSourceType.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }

@@ -7,23 +7,23 @@ import 'dart:js';
  * The abstract superclass of objects that can hold [JsObject] proxies.
  */
 class ChromeObject {
-  final JsObject proxy;
+  final JsObject jsProxy;
 
   /**
    * Create a new instance of a `ChromeObject`, which creates and delegates to
    * a JsObject proxy.
    */
-  ChromeObject() : proxy = new JsObject(context['Object']);
+  ChromeObject() : jsProxy = new JsObject(context['Object']);
 
   /**
    * Create a new instance of a `ChromeObject`, which delegates to the given
    * JsObject proxy.
    */
-  ChromeObject.fromProxy(this.proxy);
+  ChromeObject.fromProxy(this.jsProxy);
 
-  JsObject toJs() => proxy;
+  JsObject toJs() => jsProxy;
 
-  String toString() => proxy.toString();
+  String toString() => jsProxy.toString();
 }
 
 /**
@@ -53,29 +53,29 @@ abstract class ChromeEnum {
 
 // This is chared in common by app.window and system.display.
 class Bounds extends ChromeObject {
-  static Bounds create(JsObject proxy) => proxy == null ? null : new Bounds.fromProxy(proxy);
+  static Bounds create(JsObject jsProxy) => jsProxy == null ? null : new Bounds.fromProxy(jsProxy);
 
   Bounds();
-  Bounds.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Bounds.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get left => proxy['left'];
-  set left(int value) => proxy['left'] = value;
+  int get left => jsProxy['left'];
+  set left(int value) => jsProxy['left'] = value;
 
-  int get top => proxy['top'];
-  set top(int value) => proxy['top'] = value;
+  int get top => jsProxy['top'];
+  set top(int value) => jsProxy['top'] = value;
 
-  int get width => proxy['width'];
-  set width(int value) => proxy['width'] = value;
+  int get width => jsProxy['width'];
+  set width(int value) => jsProxy['width'] = value;
 
-  int get height => proxy['height'];
-  set height(int value) => proxy['height'] = value;
+  int get height => jsProxy['height'];
+  set height(int value) => jsProxy['height'] = value;
 }
 
 class ArrayBuffer extends ChromeObject {
-  static ArrayBuffer create(JsObject proxy) => new ArrayBuffer.fromProxy(proxy);
+  static ArrayBuffer create(JsObject jsProxy) => new ArrayBuffer.fromProxy(jsProxy);
 
   ArrayBuffer();
-  ArrayBuffer.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ArrayBuffer.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   factory ArrayBuffer.fromBytes(List<int> data) {
     var uint8Array = new JsObject(context['Uint8Array'], [new JsObject.jsify(data)]);
@@ -90,7 +90,7 @@ class ArrayBuffer extends ChromeObject {
   }
 
   List<int> getBytes() {
-    var int8View = new JsObject(context['Uint8Array'], [proxy]);
+    var int8View = new JsObject(context['Uint8Array'], [jsProxy]);
 
     List<int> result = new List<int>(int8View['length']);
 
@@ -106,18 +106,18 @@ class ArrayBuffer extends ChromeObject {
 
 // TODO: this is a hack, to eliminate analysis warnings. remove as soon as possible
 class BluetoothDeviceCallback {
-  BluetoothDeviceCallback.fromProxy(JsObject proxy);
+  BluetoothDeviceCallback.fromProxy(JsObject jsProxy);
 }
 
 // TODO: this is a hack, to eliminate analysis warnings. remove as soon as possible
 class SuggestFilenameCallback {
-  SuggestFilenameCallback.fromProxy(JsObject proxy);
+  SuggestFilenameCallback.fromProxy(JsObject jsProxy);
 }
 
 // TODO:
 class LocalMediaStream extends ChromeObject {
-  static LocalMediaStream create(JsObject proxy) => new LocalMediaStream.fromProxy(proxy);
+  static LocalMediaStream create(JsObject jsProxy) => new LocalMediaStream.fromProxy(jsProxy);
 
   LocalMediaStream();
-  LocalMediaStream.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  LocalMediaStream.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
