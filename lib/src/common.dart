@@ -48,7 +48,7 @@ dynamic jsify(dynamic obj) {
   if (obj == null) {
     return null;
   } else if (obj is ChromeObject) {
-    return (obj as ChromeObject).proxy;
+    return (obj as ChromeObject).jsProxy;
   } else if (obj is ChromeEnum) {
     return (obj as ChromeEnum).value;
   } else if (obj is Map) {

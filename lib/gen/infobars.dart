@@ -42,4 +42,4 @@ class ChromeInfobars extends ChromeApi {
   }
 }
 
-Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
+Window _createWindow(JsObject jsProxy) => jsProxy == null ? null : new Window.fromProxy(jsProxy);

@@ -327,16 +327,16 @@ class Device extends ChromeObject {
     if (vendorId != null) this.vendorId = vendorId;
     if (productId != null) this.productId = productId;
   }
-  Device.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Device.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get device => proxy['device'];
-  set device(int value) => proxy['device'] = value;
+  int get device => jsProxy['device'];
+  set device(int value) => jsProxy['device'] = value;
 
-  int get vendorId => proxy['vendorId'];
-  set vendorId(int value) => proxy['vendorId'] = value;
+  int get vendorId => jsProxy['vendorId'];
+  set vendorId(int value) => jsProxy['vendorId'] = value;
 
-  int get productId => proxy['productId'];
-  set productId(int value) => proxy['productId'] = value;
+  int get productId => jsProxy['productId'];
+  set productId(int value) => jsProxy['productId'] = value;
 }
 
 class ConnectionHandle extends ChromeObject {
@@ -345,16 +345,16 @@ class ConnectionHandle extends ChromeObject {
     if (vendorId != null) this.vendorId = vendorId;
     if (productId != null) this.productId = productId;
   }
-  ConnectionHandle.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ConnectionHandle.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get handle => proxy['handle'];
-  set handle(int value) => proxy['handle'] = value;
+  int get handle => jsProxy['handle'];
+  set handle(int value) => jsProxy['handle'] = value;
 
-  int get vendorId => proxy['vendorId'];
-  set vendorId(int value) => proxy['vendorId'] = value;
+  int get vendorId => jsProxy['vendorId'];
+  set vendorId(int value) => jsProxy['vendorId'] = value;
 
-  int get productId => proxy['productId'];
-  set productId(int value) => proxy['productId'] = value;
+  int get productId => jsProxy['productId'];
+  set productId(int value) => jsProxy['productId'] = value;
 }
 
 class EndpointDescriptor extends ChromeObject {
@@ -367,28 +367,28 @@ class EndpointDescriptor extends ChromeObject {
     if (usage != null) this.usage = usage;
     if (pollingInterval != null) this.pollingInterval = pollingInterval;
   }
-  EndpointDescriptor.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  EndpointDescriptor.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get address => proxy['address'];
-  set address(int value) => proxy['address'] = value;
+  int get address => jsProxy['address'];
+  set address(int value) => jsProxy['address'] = value;
 
-  TransferType get type => _createTransferType(proxy['type']);
-  set type(TransferType value) => proxy['type'] = jsify(value);
+  TransferType get type => _createTransferType(jsProxy['type']);
+  set type(TransferType value) => jsProxy['type'] = jsify(value);
 
-  Direction get direction => _createDirection(proxy['direction']);
-  set direction(Direction value) => proxy['direction'] = jsify(value);
+  Direction get direction => _createDirection(jsProxy['direction']);
+  set direction(Direction value) => jsProxy['direction'] = jsify(value);
 
-  int get maximumPacketSize => proxy['maximumPacketSize'];
-  set maximumPacketSize(int value) => proxy['maximumPacketSize'] = value;
+  int get maximumPacketSize => jsProxy['maximumPacketSize'];
+  set maximumPacketSize(int value) => jsProxy['maximumPacketSize'] = value;
 
-  SynchronizationType get synchronization => _createSynchronizationType(proxy['synchronization']);
-  set synchronization(SynchronizationType value) => proxy['synchronization'] = jsify(value);
+  SynchronizationType get synchronization => _createSynchronizationType(jsProxy['synchronization']);
+  set synchronization(SynchronizationType value) => jsProxy['synchronization'] = jsify(value);
 
-  UsageType get usage => _createUsageType(proxy['usage']);
-  set usage(UsageType value) => proxy['usage'] = jsify(value);
+  UsageType get usage => _createUsageType(jsProxy['usage']);
+  set usage(UsageType value) => jsProxy['usage'] = jsify(value);
 
-  int get pollingInterval => proxy['pollingInterval'];
-  set pollingInterval(int value) => proxy['pollingInterval'] = value;
+  int get pollingInterval => jsProxy['pollingInterval'];
+  set pollingInterval(int value) => jsProxy['pollingInterval'] = value;
 }
 
 class InterfaceDescriptor extends ChromeObject {
@@ -401,28 +401,28 @@ class InterfaceDescriptor extends ChromeObject {
     if (description != null) this.description = description;
     if (endpoints != null) this.endpoints = endpoints;
   }
-  InterfaceDescriptor.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  InterfaceDescriptor.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get interfaceNumber => proxy['interfaceNumber'];
-  set interfaceNumber(int value) => proxy['interfaceNumber'] = value;
+  int get interfaceNumber => jsProxy['interfaceNumber'];
+  set interfaceNumber(int value) => jsProxy['interfaceNumber'] = value;
 
-  int get alternateSetting => proxy['alternateSetting'];
-  set alternateSetting(int value) => proxy['alternateSetting'] = value;
+  int get alternateSetting => jsProxy['alternateSetting'];
+  set alternateSetting(int value) => jsProxy['alternateSetting'] = value;
 
-  int get interfaceClass => proxy['interfaceClass'];
-  set interfaceClass(int value) => proxy['interfaceClass'] = value;
+  int get interfaceClass => jsProxy['interfaceClass'];
+  set interfaceClass(int value) => jsProxy['interfaceClass'] = value;
 
-  int get interfaceSubclass => proxy['interfaceSubclass'];
-  set interfaceSubclass(int value) => proxy['interfaceSubclass'] = value;
+  int get interfaceSubclass => jsProxy['interfaceSubclass'];
+  set interfaceSubclass(int value) => jsProxy['interfaceSubclass'] = value;
 
-  int get interfaceProtocol => proxy['interfaceProtocol'];
-  set interfaceProtocol(int value) => proxy['interfaceProtocol'] = value;
+  int get interfaceProtocol => jsProxy['interfaceProtocol'];
+  set interfaceProtocol(int value) => jsProxy['interfaceProtocol'] = value;
 
-  String get description => proxy['description'];
-  set description(String value) => proxy['description'] = value;
+  String get description => jsProxy['description'];
+  set description(String value) => jsProxy['description'] = value;
 
-  EndpointDescriptor get endpoints => _createEndpointDescriptor(proxy['endpoints']);
-  set endpoints(EndpointDescriptor value) => proxy['endpoints'] = jsify(value);
+  EndpointDescriptor get endpoints => _createEndpointDescriptor(jsProxy['endpoints']);
+  set endpoints(EndpointDescriptor value) => jsProxy['endpoints'] = jsify(value);
 }
 
 class ControlTransferInfo extends ChromeObject {
@@ -436,31 +436,31 @@ class ControlTransferInfo extends ChromeObject {
     if (length != null) this.length = length;
     if (data != null) this.data = data;
   }
-  ControlTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ControlTransferInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  Direction get direction => _createDirection(proxy['direction']);
-  set direction(Direction value) => proxy['direction'] = jsify(value);
+  Direction get direction => _createDirection(jsProxy['direction']);
+  set direction(Direction value) => jsProxy['direction'] = jsify(value);
 
-  Recipient get recipient => _createRecipient(proxy['recipient']);
-  set recipient(Recipient value) => proxy['recipient'] = jsify(value);
+  Recipient get recipient => _createRecipient(jsProxy['recipient']);
+  set recipient(Recipient value) => jsProxy['recipient'] = jsify(value);
 
-  RequestType get requestType => _createRequestType(proxy['requestType']);
-  set requestType(RequestType value) => proxy['requestType'] = jsify(value);
+  RequestType get requestType => _createRequestType(jsProxy['requestType']);
+  set requestType(RequestType value) => jsProxy['requestType'] = jsify(value);
 
-  int get request => proxy['request'];
-  set request(int value) => proxy['request'] = value;
+  int get request => jsProxy['request'];
+  set request(int value) => jsProxy['request'] = value;
 
-  int get value => proxy['value'];
-  set value(int value) => proxy['value'] = value;
+  int get value => jsProxy['value'];
+  set value(int value) => jsProxy['value'] = value;
 
-  int get index => proxy['index'];
-  set index(int value) => proxy['index'] = value;
+  int get index => jsProxy['index'];
+  set index(int value) => jsProxy['index'] = value;
 
-  int get length => proxy['length'];
-  set length(int value) => proxy['length'] = value;
+  int get length => jsProxy['length'];
+  set length(int value) => jsProxy['length'] = value;
 
-  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
+  ArrayBuffer get data => _createArrayBuffer(jsProxy['data']);
+  set data(ArrayBuffer value) => jsProxy['data'] = jsify(value);
 }
 
 class GenericTransferInfo extends ChromeObject {
@@ -470,19 +470,19 @@ class GenericTransferInfo extends ChromeObject {
     if (length != null) this.length = length;
     if (data != null) this.data = data;
   }
-  GenericTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  GenericTransferInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  Direction get direction => _createDirection(proxy['direction']);
-  set direction(Direction value) => proxy['direction'] = jsify(value);
+  Direction get direction => _createDirection(jsProxy['direction']);
+  set direction(Direction value) => jsProxy['direction'] = jsify(value);
 
-  int get endpoint => proxy['endpoint'];
-  set endpoint(int value) => proxy['endpoint'] = value;
+  int get endpoint => jsProxy['endpoint'];
+  set endpoint(int value) => jsProxy['endpoint'] = value;
 
-  int get length => proxy['length'];
-  set length(int value) => proxy['length'] = value;
+  int get length => jsProxy['length'];
+  set length(int value) => jsProxy['length'] = value;
 
-  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
+  ArrayBuffer get data => _createArrayBuffer(jsProxy['data']);
+  set data(ArrayBuffer value) => jsProxy['data'] = jsify(value);
 }
 
 class IsochronousTransferInfo extends ChromeObject {
@@ -491,16 +491,16 @@ class IsochronousTransferInfo extends ChromeObject {
     if (packets != null) this.packets = packets;
     if (packetLength != null) this.packetLength = packetLength;
   }
-  IsochronousTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  IsochronousTransferInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  GenericTransferInfo get transferInfo => _createGenericTransferInfo(proxy['transferInfo']);
-  set transferInfo(GenericTransferInfo value) => proxy['transferInfo'] = jsify(value);
+  GenericTransferInfo get transferInfo => _createGenericTransferInfo(jsProxy['transferInfo']);
+  set transferInfo(GenericTransferInfo value) => jsProxy['transferInfo'] = jsify(value);
 
-  int get packets => proxy['packets'];
-  set packets(int value) => proxy['packets'] = value;
+  int get packets => jsProxy['packets'];
+  set packets(int value) => jsProxy['packets'] = value;
 
-  int get packetLength => proxy['packetLength'];
-  set packetLength(int value) => proxy['packetLength'] = value;
+  int get packetLength => jsProxy['packetLength'];
+  set packetLength(int value) => jsProxy['packetLength'] = value;
 }
 
 class TransferResultInfo extends ChromeObject {
@@ -508,13 +508,13 @@ class TransferResultInfo extends ChromeObject {
     if (resultCode != null) this.resultCode = resultCode;
     if (data != null) this.data = data;
   }
-  TransferResultInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  TransferResultInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get resultCode => proxy['resultCode'];
-  set resultCode(int value) => proxy['resultCode'] = value;
+  int get resultCode => jsProxy['resultCode'];
+  set resultCode(int value) => jsProxy['resultCode'] = value;
 
-  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
+  ArrayBuffer get data => _createArrayBuffer(jsProxy['data']);
+  set data(ArrayBuffer value) => jsProxy['data'] = jsify(value);
 }
 
 class EnumerateDevicesOptions extends ChromeObject {
@@ -522,13 +522,13 @@ class EnumerateDevicesOptions extends ChromeObject {
     if (vendorId != null) this.vendorId = vendorId;
     if (productId != null) this.productId = productId;
   }
-  EnumerateDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  EnumerateDevicesOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get vendorId => proxy['vendorId'];
-  set vendorId(int value) => proxy['vendorId'] = value;
+  int get vendorId => jsProxy['vendorId'];
+  set vendorId(int value) => jsProxy['vendorId'] = value;
 
-  int get productId => proxy['productId'];
-  set productId(int value) => proxy['productId'] = value;
+  int get productId => jsProxy['productId'];
+  set productId(int value) => jsProxy['productId'] = value;
 }
 
 class EnumerateDevicesAndRequestAccessOptions extends ChromeObject {
@@ -537,28 +537,28 @@ class EnumerateDevicesAndRequestAccessOptions extends ChromeObject {
     if (productId != null) this.productId = productId;
     if (interfaceId != null) this.interfaceId = interfaceId;
   }
-  EnumerateDevicesAndRequestAccessOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  EnumerateDevicesAndRequestAccessOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get vendorId => proxy['vendorId'];
-  set vendorId(int value) => proxy['vendorId'] = value;
+  int get vendorId => jsProxy['vendorId'];
+  set vendorId(int value) => jsProxy['vendorId'] = value;
 
-  int get productId => proxy['productId'];
-  set productId(int value) => proxy['productId'] = value;
+  int get productId => jsProxy['productId'];
+  set productId(int value) => jsProxy['productId'] = value;
 
-  int get interfaceId => proxy['interfaceId'];
-  set interfaceId(int value) => proxy['interfaceId'] = value;
+  int get interfaceId => jsProxy['interfaceId'];
+  set interfaceId(int value) => jsProxy['interfaceId'] = value;
 }
 
-Device _createDevice(JsObject proxy) => proxy == null ? null : new Device.fromProxy(proxy);
-ConnectionHandle _createConnectionHandle(JsObject proxy) => proxy == null ? null : new ConnectionHandle.fromProxy(proxy);
-InterfaceDescriptor _createInterfaceDescriptor(JsObject proxy) => proxy == null ? null : new InterfaceDescriptor.fromProxy(proxy);
-TransferResultInfo _createTransferResultInfo(JsObject proxy) => proxy == null ? null : new TransferResultInfo.fromProxy(proxy);
+Device _createDevice(JsObject jsProxy) => jsProxy == null ? null : new Device.fromProxy(jsProxy);
+ConnectionHandle _createConnectionHandle(JsObject jsProxy) => jsProxy == null ? null : new ConnectionHandle.fromProxy(jsProxy);
+InterfaceDescriptor _createInterfaceDescriptor(JsObject jsProxy) => jsProxy == null ? null : new InterfaceDescriptor.fromProxy(jsProxy);
+TransferResultInfo _createTransferResultInfo(JsObject jsProxy) => jsProxy == null ? null : new TransferResultInfo.fromProxy(jsProxy);
 TransferType _createTransferType(String value) => TransferType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 Direction _createDirection(String value) => Direction.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 SynchronizationType _createSynchronizationType(String value) => SynchronizationType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 UsageType _createUsageType(String value) => UsageType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-EndpointDescriptor _createEndpointDescriptor(JsObject proxy) => proxy == null ? null : new EndpointDescriptor.fromProxy(proxy);
+EndpointDescriptor _createEndpointDescriptor(JsObject jsProxy) => jsProxy == null ? null : new EndpointDescriptor.fromProxy(jsProxy);
 Recipient _createRecipient(String value) => Recipient.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 RequestType _createRequestType(String value) => RequestType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);
-GenericTransferInfo _createGenericTransferInfo(JsObject proxy) => proxy == null ? null : new GenericTransferInfo.fromProxy(proxy);
+ArrayBuffer _createArrayBuffer(JsObject jsProxy) => jsProxy == null ? null : new ArrayBuffer.fromProxy(jsProxy);
+GenericTransferInfo _createGenericTransferInfo(JsObject jsProxy) => jsProxy == null ? null : new GenericTransferInfo.fromProxy(jsProxy);

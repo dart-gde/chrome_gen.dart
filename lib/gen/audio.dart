@@ -71,22 +71,22 @@ class OutputDeviceInfo extends ChromeObject {
     if (isMuted != null) this.isMuted = isMuted;
     if (volume != null) this.volume = volume;
   }
-  OutputDeviceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  OutputDeviceInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
-  bool get isActive => proxy['isActive'];
-  set isActive(bool value) => proxy['isActive'] = value;
+  bool get isActive => jsProxy['isActive'];
+  set isActive(bool value) => jsProxy['isActive'] = value;
 
-  bool get isMuted => proxy['isMuted'];
-  set isMuted(bool value) => proxy['isMuted'] = value;
+  bool get isMuted => jsProxy['isMuted'];
+  set isMuted(bool value) => jsProxy['isMuted'] = value;
 
-  double get volume => proxy['volume'];
-  set volume(double value) => proxy['volume'] = jsify(value);
+  double get volume => jsProxy['volume'];
+  set volume(double value) => jsProxy['volume'] = jsify(value);
 }
 
 class InputDeviceInfo extends ChromeObject {
@@ -97,22 +97,22 @@ class InputDeviceInfo extends ChromeObject {
     if (isMuted != null) this.isMuted = isMuted;
     if (gain != null) this.gain = gain;
   }
-  InputDeviceInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  InputDeviceInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
-  bool get isActive => proxy['isActive'];
-  set isActive(bool value) => proxy['isActive'] = value;
+  bool get isActive => jsProxy['isActive'];
+  set isActive(bool value) => jsProxy['isActive'] = value;
 
-  bool get isMuted => proxy['isMuted'];
-  set isMuted(bool value) => proxy['isMuted'] = value;
+  bool get isMuted => jsProxy['isMuted'];
+  set isMuted(bool value) => jsProxy['isMuted'] = value;
 
-  double get gain => proxy['gain'];
-  set gain(double value) => proxy['gain'] = jsify(value);
+  double get gain => jsProxy['gain'];
+  set gain(double value) => jsProxy['gain'] = jsify(value);
 }
 
 class DeviceProperties extends ChromeObject {
@@ -121,16 +121,16 @@ class DeviceProperties extends ChromeObject {
     if (volume != null) this.volume = volume;
     if (gain != null) this.gain = gain;
   }
-  DeviceProperties.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  DeviceProperties.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  bool get isMuted => proxy['isMuted'];
-  set isMuted(bool value) => proxy['isMuted'] = value;
+  bool get isMuted => jsProxy['isMuted'];
+  set isMuted(bool value) => jsProxy['isMuted'] = value;
 
-  double get volume => proxy['volume'];
-  set volume(double value) => proxy['volume'] = jsify(value);
+  double get volume => jsProxy['volume'];
+  set volume(double value) => jsProxy['volume'] = jsify(value);
 
-  double get gain => proxy['gain'];
-  set gain(double value) => proxy['gain'] = jsify(value);
+  double get gain => jsProxy['gain'];
+  set gain(double value) => jsProxy['gain'] = jsify(value);
 }
 
 /**
@@ -147,5 +147,5 @@ class GetInfoResult {
   GetInfoResult._(this.outputInfo, this.inputInfo);
 }
 
-OutputDeviceInfo _createOutputDeviceInfo(JsObject proxy) => proxy == null ? null : new OutputDeviceInfo.fromProxy(proxy);
-InputDeviceInfo _createInputDeviceInfo(JsObject proxy) => proxy == null ? null : new InputDeviceInfo.fromProxy(proxy);
+OutputDeviceInfo _createOutputDeviceInfo(JsObject jsProxy) => jsProxy == null ? null : new OutputDeviceInfo.fromProxy(jsProxy);
+InputDeviceInfo _createInputDeviceInfo(JsObject jsProxy) => jsProxy == null ? null : new InputDeviceInfo.fromProxy(jsProxy);

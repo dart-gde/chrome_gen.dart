@@ -67,28 +67,28 @@ class Coordinates extends ChromeObject {
     if (heading != null) this.heading = heading;
     if (speed != null) this.speed = speed;
   }
-  Coordinates.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Coordinates.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  double get latitude => proxy['latitude'];
-  set latitude(double value) => proxy['latitude'] = jsify(value);
+  double get latitude => jsProxy['latitude'];
+  set latitude(double value) => jsProxy['latitude'] = jsify(value);
 
-  double get longitude => proxy['longitude'];
-  set longitude(double value) => proxy['longitude'] = jsify(value);
+  double get longitude => jsProxy['longitude'];
+  set longitude(double value) => jsProxy['longitude'] = jsify(value);
 
-  double get altitude => proxy['altitude'];
-  set altitude(double value) => proxy['altitude'] = jsify(value);
+  double get altitude => jsProxy['altitude'];
+  set altitude(double value) => jsProxy['altitude'] = jsify(value);
 
-  double get accuracy => proxy['accuracy'];
-  set accuracy(double value) => proxy['accuracy'] = jsify(value);
+  double get accuracy => jsProxy['accuracy'];
+  set accuracy(double value) => jsProxy['accuracy'] = jsify(value);
 
-  double get altitudeAccuracy => proxy['altitudeAccuracy'];
-  set altitudeAccuracy(double value) => proxy['altitudeAccuracy'] = jsify(value);
+  double get altitudeAccuracy => jsProxy['altitudeAccuracy'];
+  set altitudeAccuracy(double value) => jsProxy['altitudeAccuracy'] = jsify(value);
 
-  double get heading => proxy['heading'];
-  set heading(double value) => proxy['heading'] = jsify(value);
+  double get heading => jsProxy['heading'];
+  set heading(double value) => jsProxy['heading'] = jsify(value);
 
-  double get speed => proxy['speed'];
-  set speed(double value) => proxy['speed'] = jsify(value);
+  double get speed => jsProxy['speed'];
+  set speed(double value) => jsProxy['speed'] = jsify(value);
 }
 
 class Location extends ChromeObject {
@@ -97,16 +97,16 @@ class Location extends ChromeObject {
     if (coords != null) this.coords = coords;
     if (timestamp != null) this.timestamp = timestamp;
   }
-  Location.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Location.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
-  Coordinates get coords => _createCoordinates(proxy['coords']);
-  set coords(Coordinates value) => proxy['coords'] = jsify(value);
+  Coordinates get coords => _createCoordinates(jsProxy['coords']);
+  set coords(Coordinates value) => jsProxy['coords'] = jsify(value);
 
-  double get timestamp => proxy['timestamp'];
-  set timestamp(double value) => proxy['timestamp'] = jsify(value);
+  double get timestamp => jsProxy['timestamp'];
+  set timestamp(double value) => jsProxy['timestamp'] = jsify(value);
 }
 
 class WatchLocationRequestInfo extends ChromeObject {
@@ -115,17 +115,17 @@ class WatchLocationRequestInfo extends ChromeObject {
     if (minTimeInMilliseconds != null) this.minTimeInMilliseconds = minTimeInMilliseconds;
     if (maximumAge != null) this.maximumAge = maximumAge;
   }
-  WatchLocationRequestInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  WatchLocationRequestInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  double get minDistanceInMeters => proxy['minDistanceInMeters'];
-  set minDistanceInMeters(double value) => proxy['minDistanceInMeters'] = jsify(value);
+  double get minDistanceInMeters => jsProxy['minDistanceInMeters'];
+  set minDistanceInMeters(double value) => jsProxy['minDistanceInMeters'] = jsify(value);
 
-  double get minTimeInMilliseconds => proxy['minTimeInMilliseconds'];
-  set minTimeInMilliseconds(double value) => proxy['minTimeInMilliseconds'] = jsify(value);
+  double get minTimeInMilliseconds => jsProxy['minTimeInMilliseconds'];
+  set minTimeInMilliseconds(double value) => jsProxy['minTimeInMilliseconds'] = jsify(value);
 
-  int get maximumAge => proxy['maximumAge'];
-  set maximumAge(int value) => proxy['maximumAge'] = value;
+  int get maximumAge => jsProxy['maximumAge'];
+  set maximumAge(int value) => jsProxy['maximumAge'] = value;
 }
 
-Location _createLocation(JsObject proxy) => proxy == null ? null : new Location.fromProxy(proxy);
-Coordinates _createCoordinates(JsObject proxy) => proxy == null ? null : new Coordinates.fromProxy(proxy);
+Location _createLocation(JsObject jsProxy) => jsProxy == null ? null : new Location.fromProxy(jsProxy);
+Coordinates _createCoordinates(JsObject jsProxy) => jsProxy == null ? null : new Coordinates.fromProxy(jsProxy);

@@ -154,27 +154,27 @@ class RequestFilter extends ChromeObject {
     if (tabId != null) this.tabId = tabId;
     if (windowId != null) this.windowId = windowId;
   }
-  RequestFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RequestFilter.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * A list of URLs or URL patterns. Requests that cannot match any of the URLs
    * will be filtered out.
    */
-  List<String> get urls => listify(proxy['urls']);
-  set urls(List<String> value) => proxy['urls'] = jsify(value);
+  List<String> get urls => listify(jsProxy['urls']);
+  set urls(List<String> value) => jsProxy['urls'] = jsify(value);
 
   /**
    * A list of request types. Requests that cannot match any of the types will
    * be filtered out.
    */
-  List<String> get types => listify(proxy['types']);
-  set types(List<String> value) => proxy['types'] = jsify(value);
+  List<String> get types => listify(jsProxy['types']);
+  set types(List<String> value) => jsProxy['types'] = jsify(value);
 
-  int get tabId => proxy['tabId'];
-  set tabId(int value) => proxy['tabId'] = value;
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
 
-  int get windowId => proxy['windowId'];
-  set windowId(int value) => proxy['windowId'] = value;
+  int get windowId => jsProxy['windowId'];
+  set windowId(int value) => jsProxy['windowId'] = value;
 }
 
 /**
@@ -183,7 +183,7 @@ class RequestFilter extends ChromeObject {
  */
 class HttpHeaders extends ChromeObject {
   HttpHeaders();
-  HttpHeaders.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  HttpHeaders.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
 class AuthCredentialsWebRequest extends ChromeObject {
@@ -191,13 +191,13 @@ class AuthCredentialsWebRequest extends ChromeObject {
     if (username != null) this.username = username;
     if (password != null) this.password = password;
   }
-  AuthCredentialsWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  AuthCredentialsWebRequest.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get username => proxy['username'];
-  set username(String value) => proxy['username'] = value;
+  String get username => jsProxy['username'];
+  set username(String value) => jsProxy['username'] = value;
 
-  String get password => proxy['password'];
-  set password(String value) => proxy['password'] = value;
+  String get password => jsProxy['password'];
+  set password(String value) => jsProxy['password'] = value;
 }
 
 /**
@@ -212,29 +212,29 @@ class BlockingResponse extends ChromeObject {
     if (responseHeaders != null) this.responseHeaders = responseHeaders;
     if (authCredentials != null) this.authCredentials = authCredentials;
   }
-  BlockingResponse.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  BlockingResponse.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * If true, the request is cancelled. Used in onBeforeRequest, this prevents
    * the request from being sent.
    */
-  bool get cancel => proxy['cancel'];
-  set cancel(bool value) => proxy['cancel'] = value;
+  bool get cancel => jsProxy['cancel'];
+  set cancel(bool value) => jsProxy['cancel'] = value;
 
   /**
    * Only used as a response to the onBeforeRequest event. If set, the original
    * request is prevented from being sent and is instead redirected to the given
    * URL.
    */
-  String get redirectUrl => proxy['redirectUrl'];
-  set redirectUrl(String value) => proxy['redirectUrl'] = value;
+  String get redirectUrl => jsProxy['redirectUrl'];
+  set redirectUrl(String value) => jsProxy['redirectUrl'] = value;
 
   /**
    * Only used as a response to the onBeforeSendHeaders event. If set, the
    * request is made with these request headers instead.
    */
-  HttpHeaders get requestHeaders => _createHttpHeaders(proxy['requestHeaders']);
-  set requestHeaders(HttpHeaders value) => proxy['requestHeaders'] = jsify(value);
+  HttpHeaders get requestHeaders => _createHttpHeaders(jsProxy['requestHeaders']);
+  set requestHeaders(HttpHeaders value) => jsProxy['requestHeaders'] = jsify(value);
 
   /**
    * Only used as a response to the onHeadersReceived event. If set, the server
@@ -243,15 +243,15 @@ class BlockingResponse extends ChromeObject {
    * to limit the number of conflicts (only one extension may modify
    * `responseHeaders` for each request).
    */
-  HttpHeaders get responseHeaders => _createHttpHeaders(proxy['responseHeaders']);
-  set responseHeaders(HttpHeaders value) => proxy['responseHeaders'] = jsify(value);
+  HttpHeaders get responseHeaders => _createHttpHeaders(jsProxy['responseHeaders']);
+  set responseHeaders(HttpHeaders value) => jsProxy['responseHeaders'] = jsify(value);
 
   /**
    * Only used as a response to the onAuthRequired event. If set, the request is
    * made using the supplied credentials.
    */
-  AuthCredentialsWebRequest get authCredentials => _createAuthCredentialsWebRequest(proxy['authCredentials']);
-  set authCredentials(AuthCredentialsWebRequest value) => proxy['authCredentials'] = jsify(value);
+  AuthCredentialsWebRequest get authCredentials => _createAuthCredentialsWebRequest(jsProxy['authCredentials']);
+  set authCredentials(AuthCredentialsWebRequest value) => jsProxy['authCredentials'] = jsify(value);
 }
 
 /**
@@ -262,19 +262,19 @@ class UploadData extends ChromeObject {
     if (bytes != null) this.bytes = bytes;
     if (file != null) this.file = file;
   }
-  UploadData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  UploadData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * An ArrayBuffer with a copy of the data.
    */
-  dynamic get bytes => proxy['bytes'];
-  set bytes(var value) => proxy['bytes'] = jsify(value);
+  dynamic get bytes => jsProxy['bytes'];
+  set bytes(var value) => jsProxy['bytes'] = jsify(value);
 
   /**
    * A string with the file's path and name.
    */
-  String get file => proxy['file'];
-  set file(String value) => proxy['file'] = value;
+  String get file => jsProxy['file'];
+  set file(String value) => jsProxy['file'] = value;
 }
 
 class RequestBodyWebRequest extends ChromeObject {
@@ -283,13 +283,13 @@ class RequestBodyWebRequest extends ChromeObject {
     if (formData != null) this.formData = formData;
     if (raw != null) this.raw = raw;
   }
-  RequestBodyWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RequestBodyWebRequest.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Errors when obtaining request body data.
    */
-  String get error => proxy['error'];
-  set error(String value) => proxy['error'] = value;
+  String get error => jsProxy['error'];
+  set error(String value) => jsProxy['error'] = value;
 
   /**
    * If the request method is POST and the body is a sequence of key-value pairs
@@ -299,16 +299,16 @@ class RequestBodyWebRequest extends ChromeObject {
    * media type, or if it is malformed, the dictionary is not present. An
    * example value of this dictionary is {'key': ['value1', 'value2']}.
    */
-  Map get formData => mapify(proxy['formData']);
-  set formData(Map value) => proxy['formData'] = jsify(value);
+  Map get formData => mapify(jsProxy['formData']);
+  set formData(Map value) => jsProxy['formData'] = jsify(value);
 
   /**
    * If the request method is PUT or POST, and the body is not already parsed in
    * formData, then the unparsed request body elements are contained in this
    * array.
    */
-  List<UploadData> get raw => listify(proxy['raw'], _createUploadData);
-  set raw(List<UploadData> value) => proxy['raw'] = jsify(value);
+  List<UploadData> get raw => listify(jsProxy['raw'], _createUploadData);
+  set raw(List<UploadData> value) => jsProxy['raw'] = jsify(value);
 }
 
 class ChallengerWebRequest extends ChromeObject {
@@ -316,17 +316,17 @@ class ChallengerWebRequest extends ChromeObject {
     if (host != null) this.host = host;
     if (port != null) this.port = port;
   }
-  ChallengerWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ChallengerWebRequest.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get host => proxy['host'];
-  set host(String value) => proxy['host'] = value;
+  String get host => jsProxy['host'];
+  set host(String value) => jsProxy['host'] = value;
 
-  int get port => proxy['port'];
-  set port(int value) => proxy['port'] = value;
+  int get port => jsProxy['port'];
+  set port(int value) => jsProxy['port'] = value;
 }
 
 OnAuthRequiredEvent _createOnAuthRequiredEvent(JsObject details, JsObject callback) =>
     new OnAuthRequiredEvent(mapify(details), callback);
-HttpHeaders _createHttpHeaders(JsObject proxy) => proxy == null ? null : new HttpHeaders.fromProxy(proxy);
-AuthCredentialsWebRequest _createAuthCredentialsWebRequest(JsObject proxy) => proxy == null ? null : new AuthCredentialsWebRequest.fromProxy(proxy);
-UploadData _createUploadData(JsObject proxy) => proxy == null ? null : new UploadData.fromProxy(proxy);
+HttpHeaders _createHttpHeaders(JsObject jsProxy) => jsProxy == null ? null : new HttpHeaders.fromProxy(jsProxy);
+AuthCredentialsWebRequest _createAuthCredentialsWebRequest(JsObject jsProxy) => jsProxy == null ? null : new AuthCredentialsWebRequest.fromProxy(jsProxy);
+UploadData _createUploadData(JsObject jsProxy) => jsProxy == null ? null : new UploadData.fromProxy(jsProxy);

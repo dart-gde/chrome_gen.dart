@@ -39,14 +39,14 @@ class PageStateMatcher extends ChromeObject {
     if (pageUrl != null) this.pageUrl = pageUrl;
     if (css != null) this.css = css;
   }
-  PageStateMatcher.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  PageStateMatcher.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Matches if the condition of the UrlFilter are fulfilled for the top-level
    * URL of the page.
    */
-  UrlFilter get pageUrl => _createUrlFilter(proxy['pageUrl']);
-  set pageUrl(UrlFilter value) => proxy['pageUrl'] = jsify(value);
+  UrlFilter get pageUrl => _createUrlFilter(jsProxy['pageUrl']);
+  set pageUrl(UrlFilter value) => jsProxy['pageUrl'] = jsify(value);
 
   /**
    * Matches if all of the CSS selectors in the array match displayed elements
@@ -56,8 +56,8 @@ class PageStateMatcher extends ChromeObject {
    * Note that listing hundreds of CSS selectors or CSS selectors that match
    * hundreds of times per page can still slow down web sites.
    */
-  List<String> get css => listify(proxy['css']);
-  set css(List<String> value) => proxy['css'] = jsify(value);
+  List<String> get css => listify(jsProxy['css']);
+  set css(List<String> value) => jsProxy['css'] = jsify(value);
 }
 
 /**
@@ -70,7 +70,7 @@ class PageStateMatcher extends ChromeObject {
  */
 class ShowPageAction extends ChromeObject {
   ShowPageAction();
-  ShowPageAction.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ShowPageAction.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-UrlFilter _createUrlFilter(JsObject proxy) => proxy == null ? null : new UrlFilter.fromProxy(proxy);
+UrlFilter _createUrlFilter(JsObject jsProxy) => jsProxy == null ? null : new UrlFilter.fromProxy(jsProxy);

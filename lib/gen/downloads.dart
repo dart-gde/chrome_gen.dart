@@ -351,13 +351,13 @@ class HeaderNameValuePair extends ChromeObject {
     if (name != null) this.name = name;
     if (value != null) this.value = value;
   }
-  HeaderNameValuePair.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  HeaderNameValuePair.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
-  String get value => proxy['value'];
-  set value(String value) => proxy['value'] = value;
+  String get value => jsProxy['value'];
+  set value(String value) => jsProxy['value'] = value;
 }
 
 class FilenameSuggestion extends ChromeObject {
@@ -365,13 +365,13 @@ class FilenameSuggestion extends ChromeObject {
     if (filename != null) this.filename = filename;
     if (conflictAction != null) this.conflictAction = conflictAction;
   }
-  FilenameSuggestion.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  FilenameSuggestion.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get filename => proxy['filename'];
-  set filename(String value) => proxy['filename'] = value;
+  String get filename => jsProxy['filename'];
+  set filename(String value) => jsProxy['filename'] = value;
 
-  FilenameConflictAction get conflictAction => _createFilenameConflictAction(proxy['conflictAction']);
-  set conflictAction(FilenameConflictAction value) => proxy['conflictAction'] = jsify(value);
+  FilenameConflictAction get conflictAction => _createFilenameConflictAction(jsProxy['conflictAction']);
+  set conflictAction(FilenameConflictAction value) => jsProxy['conflictAction'] = jsify(value);
 }
 
 class DownloadOptions extends ChromeObject {
@@ -384,28 +384,28 @@ class DownloadOptions extends ChromeObject {
     if (headers != null) this.headers = headers;
     if (body != null) this.body = body;
   }
-  DownloadOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  DownloadOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
-  String get filename => proxy['filename'];
-  set filename(String value) => proxy['filename'] = value;
+  String get filename => jsProxy['filename'];
+  set filename(String value) => jsProxy['filename'] = value;
 
-  FilenameConflictAction get conflictAction => _createFilenameConflictAction(proxy['conflictAction']);
-  set conflictAction(FilenameConflictAction value) => proxy['conflictAction'] = jsify(value);
+  FilenameConflictAction get conflictAction => _createFilenameConflictAction(jsProxy['conflictAction']);
+  set conflictAction(FilenameConflictAction value) => jsProxy['conflictAction'] = jsify(value);
 
-  bool get saveAs => proxy['saveAs'];
-  set saveAs(bool value) => proxy['saveAs'] = value;
+  bool get saveAs => jsProxy['saveAs'];
+  set saveAs(bool value) => jsProxy['saveAs'] = value;
 
-  HttpMethod get method => _createHttpMethod(proxy['method']);
-  set method(HttpMethod value) => proxy['method'] = jsify(value);
+  HttpMethod get method => _createHttpMethod(jsProxy['method']);
+  set method(HttpMethod value) => jsProxy['method'] = jsify(value);
 
-  HeaderNameValuePair get headers => _createHeaderNameValuePair(proxy['headers']);
-  set headers(HeaderNameValuePair value) => proxy['headers'] = jsify(value);
+  HeaderNameValuePair get headers => _createHeaderNameValuePair(jsProxy['headers']);
+  set headers(HeaderNameValuePair value) => jsProxy['headers'] = jsify(value);
 
-  String get body => proxy['body'];
-  set body(String value) => proxy['body'] = value;
+  String get body => jsProxy['body'];
+  set body(String value) => jsProxy['body'] = value;
 }
 
 class DownloadItem extends ChromeObject {
@@ -431,67 +431,67 @@ class DownloadItem extends ChromeObject {
     if (byExtensionId != null) this.byExtensionId = byExtensionId;
     if (byExtensionName != null) this.byExtensionName = byExtensionName;
   }
-  DownloadItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  DownloadItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get id => proxy['id'];
-  set id(int value) => proxy['id'] = value;
+  int get id => jsProxy['id'];
+  set id(int value) => jsProxy['id'] = value;
 
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
-  String get referrer => proxy['referrer'];
-  set referrer(String value) => proxy['referrer'] = value;
+  String get referrer => jsProxy['referrer'];
+  set referrer(String value) => jsProxy['referrer'] = value;
 
-  String get filename => proxy['filename'];
-  set filename(String value) => proxy['filename'] = value;
+  String get filename => jsProxy['filename'];
+  set filename(String value) => jsProxy['filename'] = value;
 
-  bool get incognito => proxy['incognito'];
-  set incognito(bool value) => proxy['incognito'] = value;
+  bool get incognito => jsProxy['incognito'];
+  set incognito(bool value) => jsProxy['incognito'] = value;
 
-  DangerType get danger => _createDangerType(proxy['danger']);
-  set danger(DangerType value) => proxy['danger'] = jsify(value);
+  DangerType get danger => _createDangerType(jsProxy['danger']);
+  set danger(DangerType value) => jsProxy['danger'] = jsify(value);
 
-  String get mime => proxy['mime'];
-  set mime(String value) => proxy['mime'] = value;
+  String get mime => jsProxy['mime'];
+  set mime(String value) => jsProxy['mime'] = value;
 
-  String get startTime => proxy['startTime'];
-  set startTime(String value) => proxy['startTime'] = value;
+  String get startTime => jsProxy['startTime'];
+  set startTime(String value) => jsProxy['startTime'] = value;
 
-  String get endTime => proxy['endTime'];
-  set endTime(String value) => proxy['endTime'] = value;
+  String get endTime => jsProxy['endTime'];
+  set endTime(String value) => jsProxy['endTime'] = value;
 
-  String get estimatedEndTime => proxy['estimatedEndTime'];
-  set estimatedEndTime(String value) => proxy['estimatedEndTime'] = value;
+  String get estimatedEndTime => jsProxy['estimatedEndTime'];
+  set estimatedEndTime(String value) => jsProxy['estimatedEndTime'] = value;
 
-  State get state => _createState(proxy['state']);
-  set state(State value) => proxy['state'] = jsify(value);
+  State get state => _createState(jsProxy['state']);
+  set state(State value) => jsProxy['state'] = jsify(value);
 
-  bool get paused => proxy['paused'];
-  set paused(bool value) => proxy['paused'] = value;
+  bool get paused => jsProxy['paused'];
+  set paused(bool value) => jsProxy['paused'] = value;
 
-  bool get canResume => proxy['canResume'];
-  set canResume(bool value) => proxy['canResume'] = value;
+  bool get canResume => jsProxy['canResume'];
+  set canResume(bool value) => jsProxy['canResume'] = value;
 
-  InterruptReason get error => _createInterruptReason(proxy['error']);
-  set error(InterruptReason value) => proxy['error'] = jsify(value);
+  InterruptReason get error => _createInterruptReason(jsProxy['error']);
+  set error(InterruptReason value) => jsProxy['error'] = jsify(value);
 
-  int get bytesReceived => proxy['bytesReceived'];
-  set bytesReceived(int value) => proxy['bytesReceived'] = value;
+  int get bytesReceived => jsProxy['bytesReceived'];
+  set bytesReceived(int value) => jsProxy['bytesReceived'] = value;
 
-  int get totalBytes => proxy['totalBytes'];
-  set totalBytes(int value) => proxy['totalBytes'] = value;
+  int get totalBytes => jsProxy['totalBytes'];
+  set totalBytes(int value) => jsProxy['totalBytes'] = value;
 
-  int get fileSize => proxy['fileSize'];
-  set fileSize(int value) => proxy['fileSize'] = value;
+  int get fileSize => jsProxy['fileSize'];
+  set fileSize(int value) => jsProxy['fileSize'] = value;
 
-  bool get exists => proxy['exists'];
-  set exists(bool value) => proxy['exists'] = value;
+  bool get exists => jsProxy['exists'];
+  set exists(bool value) => jsProxy['exists'] = value;
 
-  String get byExtensionId => proxy['byExtensionId'];
-  set byExtensionId(String value) => proxy['byExtensionId'] = value;
+  String get byExtensionId => jsProxy['byExtensionId'];
+  set byExtensionId(String value) => jsProxy['byExtensionId'] = value;
 
-  String get byExtensionName => proxy['byExtensionName'];
-  set byExtensionName(String value) => proxy['byExtensionName'] = value;
+  String get byExtensionName => jsProxy['byExtensionName'];
+  set byExtensionName(String value) => jsProxy['byExtensionName'] = value;
 }
 
 class DownloadQuery extends ChromeObject {
@@ -522,82 +522,82 @@ class DownloadQuery extends ChromeObject {
     if (fileSize != null) this.fileSize = fileSize;
     if (exists != null) this.exists = exists;
   }
-  DownloadQuery.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  DownloadQuery.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get query => proxy['query'];
-  set query(String value) => proxy['query'] = value;
+  String get query => jsProxy['query'];
+  set query(String value) => jsProxy['query'] = value;
 
-  String get startedBefore => proxy['startedBefore'];
-  set startedBefore(String value) => proxy['startedBefore'] = value;
+  String get startedBefore => jsProxy['startedBefore'];
+  set startedBefore(String value) => jsProxy['startedBefore'] = value;
 
-  String get startedAfter => proxy['startedAfter'];
-  set startedAfter(String value) => proxy['startedAfter'] = value;
+  String get startedAfter => jsProxy['startedAfter'];
+  set startedAfter(String value) => jsProxy['startedAfter'] = value;
 
-  String get endedBefore => proxy['endedBefore'];
-  set endedBefore(String value) => proxy['endedBefore'] = value;
+  String get endedBefore => jsProxy['endedBefore'];
+  set endedBefore(String value) => jsProxy['endedBefore'] = value;
 
-  String get endedAfter => proxy['endedAfter'];
-  set endedAfter(String value) => proxy['endedAfter'] = value;
+  String get endedAfter => jsProxy['endedAfter'];
+  set endedAfter(String value) => jsProxy['endedAfter'] = value;
 
-  int get totalBytesGreater => proxy['totalBytesGreater'];
-  set totalBytesGreater(int value) => proxy['totalBytesGreater'] = value;
+  int get totalBytesGreater => jsProxy['totalBytesGreater'];
+  set totalBytesGreater(int value) => jsProxy['totalBytesGreater'] = value;
 
-  int get totalBytesLess => proxy['totalBytesLess'];
-  set totalBytesLess(int value) => proxy['totalBytesLess'] = value;
+  int get totalBytesLess => jsProxy['totalBytesLess'];
+  set totalBytesLess(int value) => jsProxy['totalBytesLess'] = value;
 
-  String get filenameRegex => proxy['filenameRegex'];
-  set filenameRegex(String value) => proxy['filenameRegex'] = value;
+  String get filenameRegex => jsProxy['filenameRegex'];
+  set filenameRegex(String value) => jsProxy['filenameRegex'] = value;
 
-  String get urlRegex => proxy['urlRegex'];
-  set urlRegex(String value) => proxy['urlRegex'] = value;
+  String get urlRegex => jsProxy['urlRegex'];
+  set urlRegex(String value) => jsProxy['urlRegex'] = value;
 
-  int get limit => proxy['limit'];
-  set limit(int value) => proxy['limit'] = value;
+  int get limit => jsProxy['limit'];
+  set limit(int value) => jsProxy['limit'] = value;
 
-  String get orderBy => proxy['orderBy'];
-  set orderBy(String value) => proxy['orderBy'] = value;
+  String get orderBy => jsProxy['orderBy'];
+  set orderBy(String value) => jsProxy['orderBy'] = value;
 
-  int get id => proxy['id'];
-  set id(int value) => proxy['id'] = value;
+  int get id => jsProxy['id'];
+  set id(int value) => jsProxy['id'] = value;
 
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
-  String get filename => proxy['filename'];
-  set filename(String value) => proxy['filename'] = value;
+  String get filename => jsProxy['filename'];
+  set filename(String value) => jsProxy['filename'] = value;
 
-  DangerType get danger => _createDangerType(proxy['danger']);
-  set danger(DangerType value) => proxy['danger'] = jsify(value);
+  DangerType get danger => _createDangerType(jsProxy['danger']);
+  set danger(DangerType value) => jsProxy['danger'] = jsify(value);
 
-  String get mime => proxy['mime'];
-  set mime(String value) => proxy['mime'] = value;
+  String get mime => jsProxy['mime'];
+  set mime(String value) => jsProxy['mime'] = value;
 
-  String get startTime => proxy['startTime'];
-  set startTime(String value) => proxy['startTime'] = value;
+  String get startTime => jsProxy['startTime'];
+  set startTime(String value) => jsProxy['startTime'] = value;
 
-  String get endTime => proxy['endTime'];
-  set endTime(String value) => proxy['endTime'] = value;
+  String get endTime => jsProxy['endTime'];
+  set endTime(String value) => jsProxy['endTime'] = value;
 
-  State get state => _createState(proxy['state']);
-  set state(State value) => proxy['state'] = jsify(value);
+  State get state => _createState(jsProxy['state']);
+  set state(State value) => jsProxy['state'] = jsify(value);
 
-  bool get paused => proxy['paused'];
-  set paused(bool value) => proxy['paused'] = value;
+  bool get paused => jsProxy['paused'];
+  set paused(bool value) => jsProxy['paused'] = value;
 
-  InterruptReason get error => _createInterruptReason(proxy['error']);
-  set error(InterruptReason value) => proxy['error'] = jsify(value);
+  InterruptReason get error => _createInterruptReason(jsProxy['error']);
+  set error(InterruptReason value) => jsProxy['error'] = jsify(value);
 
-  int get bytesReceived => proxy['bytesReceived'];
-  set bytesReceived(int value) => proxy['bytesReceived'] = value;
+  int get bytesReceived => jsProxy['bytesReceived'];
+  set bytesReceived(int value) => jsProxy['bytesReceived'] = value;
 
-  int get totalBytes => proxy['totalBytes'];
-  set totalBytes(int value) => proxy['totalBytes'] = value;
+  int get totalBytes => jsProxy['totalBytes'];
+  set totalBytes(int value) => jsProxy['totalBytes'] = value;
 
-  int get fileSize => proxy['fileSize'];
-  set fileSize(int value) => proxy['fileSize'] = value;
+  int get fileSize => jsProxy['fileSize'];
+  set fileSize(int value) => jsProxy['fileSize'] = value;
 
-  bool get exists => proxy['exists'];
-  set exists(bool value) => proxy['exists'] = value;
+  bool get exists => jsProxy['exists'];
+  set exists(bool value) => jsProxy['exists'] = value;
 }
 
 class StringDelta extends ChromeObject {
@@ -605,13 +605,13 @@ class StringDelta extends ChromeObject {
     if (previous != null) this.previous = previous;
     if (current != null) this.current = current;
   }
-  StringDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  StringDelta.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get previous => proxy['previous'];
-  set previous(String value) => proxy['previous'] = value;
+  String get previous => jsProxy['previous'];
+  set previous(String value) => jsProxy['previous'] = value;
 
-  String get current => proxy['current'];
-  set current(String value) => proxy['current'] = value;
+  String get current => jsProxy['current'];
+  set current(String value) => jsProxy['current'] = value;
 }
 
 class LongDelta extends ChromeObject {
@@ -619,13 +619,13 @@ class LongDelta extends ChromeObject {
     if (previous != null) this.previous = previous;
     if (current != null) this.current = current;
   }
-  LongDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  LongDelta.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get previous => proxy['previous'];
-  set previous(int value) => proxy['previous'] = value;
+  int get previous => jsProxy['previous'];
+  set previous(int value) => jsProxy['previous'] = value;
 
-  int get current => proxy['current'];
-  set current(int value) => proxy['current'] = value;
+  int get current => jsProxy['current'];
+  set current(int value) => jsProxy['current'] = value;
 }
 
 class BooleanDelta extends ChromeObject {
@@ -633,13 +633,13 @@ class BooleanDelta extends ChromeObject {
     if (previous != null) this.previous = previous;
     if (current != null) this.current = current;
   }
-  BooleanDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  BooleanDelta.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  bool get previous => proxy['previous'];
-  set previous(bool value) => proxy['previous'] = value;
+  bool get previous => jsProxy['previous'];
+  set previous(bool value) => jsProxy['previous'] = value;
 
-  bool get current => proxy['current'];
-  set current(bool value) => proxy['current'] = value;
+  bool get current => jsProxy['current'];
+  set current(bool value) => jsProxy['current'] = value;
 }
 
 class DownloadDelta extends ChromeObject {
@@ -659,72 +659,72 @@ class DownloadDelta extends ChromeObject {
     if (fileSize != null) this.fileSize = fileSize;
     if (exists != null) this.exists = exists;
   }
-  DownloadDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  DownloadDelta.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get id => proxy['id'];
-  set id(int value) => proxy['id'] = value;
+  int get id => jsProxy['id'];
+  set id(int value) => jsProxy['id'] = value;
 
-  StringDelta get url => _createStringDelta(proxy['url']);
-  set url(StringDelta value) => proxy['url'] = jsify(value);
+  StringDelta get url => _createStringDelta(jsProxy['url']);
+  set url(StringDelta value) => jsProxy['url'] = jsify(value);
 
-  StringDelta get filename => _createStringDelta(proxy['filename']);
-  set filename(StringDelta value) => proxy['filename'] = jsify(value);
+  StringDelta get filename => _createStringDelta(jsProxy['filename']);
+  set filename(StringDelta value) => jsProxy['filename'] = jsify(value);
 
-  StringDelta get danger => _createStringDelta(proxy['danger']);
-  set danger(StringDelta value) => proxy['danger'] = jsify(value);
+  StringDelta get danger => _createStringDelta(jsProxy['danger']);
+  set danger(StringDelta value) => jsProxy['danger'] = jsify(value);
 
-  StringDelta get mime => _createStringDelta(proxy['mime']);
-  set mime(StringDelta value) => proxy['mime'] = jsify(value);
+  StringDelta get mime => _createStringDelta(jsProxy['mime']);
+  set mime(StringDelta value) => jsProxy['mime'] = jsify(value);
 
-  StringDelta get startTime => _createStringDelta(proxy['startTime']);
-  set startTime(StringDelta value) => proxy['startTime'] = jsify(value);
+  StringDelta get startTime => _createStringDelta(jsProxy['startTime']);
+  set startTime(StringDelta value) => jsProxy['startTime'] = jsify(value);
 
-  StringDelta get endTime => _createStringDelta(proxy['endTime']);
-  set endTime(StringDelta value) => proxy['endTime'] = jsify(value);
+  StringDelta get endTime => _createStringDelta(jsProxy['endTime']);
+  set endTime(StringDelta value) => jsProxy['endTime'] = jsify(value);
 
-  StringDelta get state => _createStringDelta(proxy['state']);
-  set state(StringDelta value) => proxy['state'] = jsify(value);
+  StringDelta get state => _createStringDelta(jsProxy['state']);
+  set state(StringDelta value) => jsProxy['state'] = jsify(value);
 
-  BooleanDelta get canResume => _createBooleanDelta(proxy['canResume']);
-  set canResume(BooleanDelta value) => proxy['canResume'] = jsify(value);
+  BooleanDelta get canResume => _createBooleanDelta(jsProxy['canResume']);
+  set canResume(BooleanDelta value) => jsProxy['canResume'] = jsify(value);
 
-  BooleanDelta get paused => _createBooleanDelta(proxy['paused']);
-  set paused(BooleanDelta value) => proxy['paused'] = jsify(value);
+  BooleanDelta get paused => _createBooleanDelta(jsProxy['paused']);
+  set paused(BooleanDelta value) => jsProxy['paused'] = jsify(value);
 
-  StringDelta get error => _createStringDelta(proxy['error']);
-  set error(StringDelta value) => proxy['error'] = jsify(value);
+  StringDelta get error => _createStringDelta(jsProxy['error']);
+  set error(StringDelta value) => jsProxy['error'] = jsify(value);
 
-  LongDelta get totalBytes => _createLongDelta(proxy['totalBytes']);
-  set totalBytes(LongDelta value) => proxy['totalBytes'] = jsify(value);
+  LongDelta get totalBytes => _createLongDelta(jsProxy['totalBytes']);
+  set totalBytes(LongDelta value) => jsProxy['totalBytes'] = jsify(value);
 
-  LongDelta get fileSize => _createLongDelta(proxy['fileSize']);
-  set fileSize(LongDelta value) => proxy['fileSize'] = jsify(value);
+  LongDelta get fileSize => _createLongDelta(jsProxy['fileSize']);
+  set fileSize(LongDelta value) => jsProxy['fileSize'] = jsify(value);
 
-  BooleanDelta get exists => _createBooleanDelta(proxy['exists']);
-  set exists(BooleanDelta value) => proxy['exists'] = jsify(value);
+  BooleanDelta get exists => _createBooleanDelta(jsProxy['exists']);
+  set exists(BooleanDelta value) => jsProxy['exists'] = jsify(value);
 }
 
 class GetFileIconOptions extends ChromeObject {
   GetFileIconOptions({int size}) {
     if (size != null) this.size = size;
   }
-  GetFileIconOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  GetFileIconOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get size => proxy['size'];
-  set size(int value) => proxy['size'] = value;
+  int get size => jsProxy['size'];
+  set size(int value) => jsProxy['size'] = value;
 }
 
-DownloadItem _createDownloadItem(JsObject proxy) => proxy == null ? null : new DownloadItem.fromProxy(proxy);
-DownloadDelta _createDownloadDelta(JsObject proxy) => proxy == null ? null : new DownloadDelta.fromProxy(proxy);
+DownloadItem _createDownloadItem(JsObject jsProxy) => jsProxy == null ? null : new DownloadItem.fromProxy(jsProxy);
+DownloadDelta _createDownloadDelta(JsObject jsProxy) => jsProxy == null ? null : new DownloadDelta.fromProxy(jsProxy);
 OnDeterminingFilenameEvent _createOnDeterminingFilenameEvent(JsObject downloadItem, JsObject suggest) =>
     new OnDeterminingFilenameEvent(_createDownloadItem(downloadItem), _createSuggestFilenameCallback(suggest));
 FilenameConflictAction _createFilenameConflictAction(String value) => FilenameConflictAction.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 HttpMethod _createHttpMethod(String value) => HttpMethod.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-HeaderNameValuePair _createHeaderNameValuePair(JsObject proxy) => proxy == null ? null : new HeaderNameValuePair.fromProxy(proxy);
+HeaderNameValuePair _createHeaderNameValuePair(JsObject jsProxy) => jsProxy == null ? null : new HeaderNameValuePair.fromProxy(jsProxy);
 DangerType _createDangerType(String value) => DangerType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 State _createState(String value) => State.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 InterruptReason _createInterruptReason(String value) => InterruptReason.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-StringDelta _createStringDelta(JsObject proxy) => proxy == null ? null : new StringDelta.fromProxy(proxy);
-BooleanDelta _createBooleanDelta(JsObject proxy) => proxy == null ? null : new BooleanDelta.fromProxy(proxy);
-LongDelta _createLongDelta(JsObject proxy) => proxy == null ? null : new LongDelta.fromProxy(proxy);
-SuggestFilenameCallback _createSuggestFilenameCallback(JsObject proxy) => proxy == null ? null : new SuggestFilenameCallback.fromProxy(proxy);
+StringDelta _createStringDelta(JsObject jsProxy) => jsProxy == null ? null : new StringDelta.fromProxy(jsProxy);
+BooleanDelta _createBooleanDelta(JsObject jsProxy) => jsProxy == null ? null : new BooleanDelta.fromProxy(jsProxy);
+LongDelta _createLongDelta(JsObject jsProxy) => jsProxy == null ? null : new LongDelta.fromProxy(jsProxy);
+SuggestFilenameCallback _createSuggestFilenameCallback(JsObject jsProxy) => jsProxy == null ? null : new SuggestFilenameCallback.fromProxy(jsProxy);

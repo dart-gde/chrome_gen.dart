@@ -50,28 +50,28 @@ class ProxyServer extends ChromeObject {
     if (host != null) this.host = host;
     if (port != null) this.port = port;
   }
-  ProxyServer.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ProxyServer.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The scheme (protocol) of the proxy server itself. Defaults to 'http'.
    * enum of `http`, `https`, `socks4`, `socks5`
    */
-  String get scheme => this.proxy['scheme'];
-  set scheme(String value) => this.proxy['scheme'] = value;
+  String get scheme => this.jsProxy['scheme'];
+  set scheme(String value) => this.jsProxy['scheme'] = value;
 
   /**
    * The URI of the proxy server. This must be an ASCII hostname (in Punycode
    * format). IDNA is not supported, yet.
    */
-  String get host => this.proxy['host'];
-  set host(String value) => this.proxy['host'] = value;
+  String get host => this.jsProxy['host'];
+  set host(String value) => this.jsProxy['host'] = value;
 
   /**
    * The port of the proxy server. Defaults to a port that depends on the
    * scheme.
    */
-  int get port => this.proxy['port'];
-  set port(int value) => this.proxy['port'] = value;
+  int get port => this.jsProxy['port'];
+  set port(int value) => this.jsProxy['port'] = value;
 }
 
 /**
@@ -88,45 +88,45 @@ class ProxyRules extends ChromeObject {
     if (fallbackProxy != null) this.fallbackProxy = fallbackProxy;
     if (bypassList != null) this.bypassList = bypassList;
   }
-  ProxyRules.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ProxyRules.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The proxy server to be used for all per-URL requests (that is http, https,
    * and ftp).
    */
-  ProxyServer get singleProxy => _createProxyServer(this.proxy['singleProxy']);
-  set singleProxy(ProxyServer value) => this.proxy['singleProxy'] = jsify(value);
+  ProxyServer get singleProxy => _createProxyServer(this.jsProxy['singleProxy']);
+  set singleProxy(ProxyServer value) => this.jsProxy['singleProxy'] = jsify(value);
 
   /**
    * The proxy server to be used for HTTP requests.
    */
-  ProxyServer get proxyForHttp => _createProxyServer(this.proxy['proxyForHttp']);
-  set proxyForHttp(ProxyServer value) => this.proxy['proxyForHttp'] = jsify(value);
+  ProxyServer get proxyForHttp => _createProxyServer(this.jsProxy['proxyForHttp']);
+  set proxyForHttp(ProxyServer value) => this.jsProxy['proxyForHttp'] = jsify(value);
 
   /**
    * The proxy server to be used for HTTPS requests.
    */
-  ProxyServer get proxyForHttps => _createProxyServer(this.proxy['proxyForHttps']);
-  set proxyForHttps(ProxyServer value) => this.proxy['proxyForHttps'] = jsify(value);
+  ProxyServer get proxyForHttps => _createProxyServer(this.jsProxy['proxyForHttps']);
+  set proxyForHttps(ProxyServer value) => this.jsProxy['proxyForHttps'] = jsify(value);
 
   /**
    * The proxy server to be used for FTP requests.
    */
-  ProxyServer get proxyForFtp => _createProxyServer(this.proxy['proxyForFtp']);
-  set proxyForFtp(ProxyServer value) => this.proxy['proxyForFtp'] = jsify(value);
+  ProxyServer get proxyForFtp => _createProxyServer(this.jsProxy['proxyForFtp']);
+  set proxyForFtp(ProxyServer value) => this.jsProxy['proxyForFtp'] = jsify(value);
 
   /**
    * The proxy server to be used for everthing else or if any of the specific
    * proxyFor... is not specified.
    */
-  ProxyServer get fallbackProxy => _createProxyServer(this.proxy['fallbackProxy']);
-  set fallbackProxy(ProxyServer value) => this.proxy['fallbackProxy'] = jsify(value);
+  ProxyServer get fallbackProxy => _createProxyServer(this.jsProxy['fallbackProxy']);
+  set fallbackProxy(ProxyServer value) => this.jsProxy['fallbackProxy'] = jsify(value);
 
   /**
    * List of servers to connect to without a proxy server.
    */
-  List<String> get bypassList => listify(this.proxy['bypassList']);
-  set bypassList(List<String> value) => this.proxy['bypassList'] = jsify(value);
+  List<String> get bypassList => listify(this.jsProxy['bypassList']);
+  set bypassList(List<String> value) => this.jsProxy['bypassList'] = jsify(value);
 }
 
 /**
@@ -139,26 +139,26 @@ class PacScript extends ChromeObject {
     if (data != null) this.data = data;
     if (mandatory != null) this.mandatory = mandatory;
   }
-  PacScript.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  PacScript.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * URL of the PAC file to be used.
    */
-  String get url => this.proxy['url'];
-  set url(String value) => this.proxy['url'] = value;
+  String get url => this.jsProxy['url'];
+  set url(String value) => this.jsProxy['url'] = value;
 
   /**
    * A PAC script.
    */
-  String get data => this.proxy['data'];
-  set data(String value) => this.proxy['data'] = value;
+  String get data => this.jsProxy['data'];
+  set data(String value) => this.jsProxy['data'] = value;
 
   /**
    * If true, an invalid PAC script will prevent the network stack from falling
    * back to direct connections. Defaults to false.
    */
-  bool get mandatory => this.proxy['mandatory'];
-  set mandatory(bool value) => this.proxy['mandatory'] = value;
+  bool get mandatory => this.jsProxy['mandatory'];
+  set mandatory(bool value) => this.jsProxy['mandatory'] = value;
 }
 
 /**
@@ -170,21 +170,21 @@ class ProxyConfig extends ChromeObject {
     if (pacScript != null) this.pacScript = pacScript;
     if (mode != null) this.mode = mode;
   }
-  ProxyConfig.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ProxyConfig.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The proxy rules describing this configuration. Use this for 'fixed_servers'
    * mode.
    */
-  ProxyRules get rules => _createProxyRules(this.proxy['rules']);
-  set rules(ProxyRules value) => this.proxy['rules'] = jsify(value);
+  ProxyRules get rules => _createProxyRules(this.jsProxy['rules']);
+  set rules(ProxyRules value) => this.jsProxy['rules'] = jsify(value);
 
   /**
    * The proxy auto-config (PAC) script for this configuration. Use this for
    * 'pac_script' mode.
    */
-  PacScript get pacScript => _createPacScript(this.proxy['pacScript']);
-  set pacScript(PacScript value) => this.proxy['pacScript'] = jsify(value);
+  PacScript get pacScript => _createPacScript(this.jsProxy['pacScript']);
+  set pacScript(PacScript value) => this.jsProxy['pacScript'] = jsify(value);
 
   /**
    * 'direct' = Never use a proxy<br>'auto_detect' = Auto detect proxy
@@ -192,11 +192,11 @@ class ProxyConfig extends ChromeObject {
    * Manually specify proxy servers<br>'system' = Use system proxy settings
    * enum of `direct`, `auto_detect`, `pac_script`, `fixed_servers`, `system`
    */
-  String get mode => this.proxy['mode'];
-  set mode(String value) => this.proxy['mode'] = value;
+  String get mode => this.jsProxy['mode'];
+  set mode(String value) => this.jsProxy['mode'] = value;
 }
 
-ChromeSetting _createChromeSetting(JsObject proxy) => proxy == null ? null : new ChromeSetting.fromProxy(proxy);
-ProxyServer _createProxyServer(JsObject proxy) => proxy == null ? null : new ProxyServer.fromProxy(proxy);
-ProxyRules _createProxyRules(JsObject proxy) => proxy == null ? null : new ProxyRules.fromProxy(proxy);
-PacScript _createPacScript(JsObject proxy) => proxy == null ? null : new PacScript.fromProxy(proxy);
+ChromeSetting _createChromeSetting(JsObject jsProxy) => jsProxy == null ? null : new ChromeSetting.fromProxy(jsProxy);
+ProxyServer _createProxyServer(JsObject jsProxy) => jsProxy == null ? null : new ProxyServer.fromProxy(jsProxy);
+ProxyRules _createProxyRules(JsObject jsProxy) => jsProxy == null ? null : new ProxyRules.fromProxy(jsProxy);
+PacScript _createPacScript(JsObject jsProxy) => jsProxy == null ? null : new PacScript.fromProxy(jsProxy);

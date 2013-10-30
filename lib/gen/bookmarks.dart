@@ -323,61 +323,61 @@ class BookmarkTreeNode extends ChromeObject {
     if (dateGroupModified != null) this.dateGroupModified = dateGroupModified;
     if (children != null) this.children = children;
   }
-  BookmarkTreeNode.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  BookmarkTreeNode.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The unique identifier for the node. IDs are unique within the current
    * profile, and they remain valid even after the browser is restarted.
    */
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
   /**
    * The `id` of the parent folder.  Omitted for the root node.
    */
-  String get parentId => proxy['parentId'];
-  set parentId(String value) => proxy['parentId'] = value;
+  String get parentId => jsProxy['parentId'];
+  set parentId(String value) => jsProxy['parentId'] = value;
 
   /**
    * The 0-based position of this node within its parent folder.
    */
-  int get index => proxy['index'];
-  set index(int value) => proxy['index'] = value;
+  int get index => jsProxy['index'];
+  set index(int value) => jsProxy['index'] = value;
 
   /**
    * The URL navigated to when a user clicks the bookmark. Omitted for folders.
    */
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
   /**
    * The text displayed for the node.
    */
-  String get title => proxy['title'];
-  set title(String value) => proxy['title'] = value;
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
 
   /**
    * When this node was created, in milliseconds since the epoch (`new
    * Date(dateAdded)`).
    */
-  dynamic get dateAdded => proxy['dateAdded'];
-  set dateAdded(var value) => proxy['dateAdded'] = jsify(value);
+  dynamic get dateAdded => jsProxy['dateAdded'];
+  set dateAdded(var value) => jsProxy['dateAdded'] = jsify(value);
 
   /**
    * When the contents of this folder last changed, in milliseconds since the
    * epoch.
    */
-  dynamic get dateGroupModified => proxy['dateGroupModified'];
-  set dateGroupModified(var value) => proxy['dateGroupModified'] = jsify(value);
+  dynamic get dateGroupModified => jsProxy['dateGroupModified'];
+  set dateGroupModified(var value) => jsProxy['dateGroupModified'] = jsify(value);
 
   /**
    * An ordered list of children of this node.
    */
-  List<BookmarkTreeNode> get children => listify(proxy['children'], _createBookmarkTreeNode);
-  set children(List<BookmarkTreeNode> value) => proxy['children'] = jsify(value);
+  List<BookmarkTreeNode> get children => listify(jsProxy['children'], _createBookmarkTreeNode);
+  set children(List<BookmarkTreeNode> value) => jsProxy['children'] = jsify(value);
 }
 
-BookmarkTreeNode _createBookmarkTreeNode(JsObject proxy) => proxy == null ? null : new BookmarkTreeNode.fromProxy(proxy);
+BookmarkTreeNode _createBookmarkTreeNode(JsObject jsProxy) => jsProxy == null ? null : new BookmarkTreeNode.fromProxy(jsProxy);
 OnCreatedEvent _createOnCreatedEvent(String id, JsObject bookmark) =>
     new OnCreatedEvent(id, _createBookmarkTreeNode(bookmark));
 BookmarksOnRemovedEvent _createBookmarksOnRemovedEvent(String id, JsObject removeInfo) =>

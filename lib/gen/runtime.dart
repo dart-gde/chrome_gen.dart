@@ -398,12 +398,12 @@ class OnMessageExternalEvent {
 
 class LastErrorRuntime extends ChromeObject {
   LastErrorRuntime();
-  LastErrorRuntime.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  LastErrorRuntime.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Details about the error which occurred.
    */
-  String get message => proxy['message'];
+  String get message => jsProxy['message'];
 }
 
 /**
@@ -418,29 +418,29 @@ class Port extends ChromeObject {
     if (postMessage != null) this.postMessage = postMessage;
     if (sender != null) this.sender = sender;
   }
-  Port.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Port.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
-  dynamic get disconnect => proxy['disconnect'];
-  set disconnect(var value) => proxy['disconnect'] = jsify(value);
+  dynamic get disconnect => jsProxy['disconnect'];
+  set disconnect(var value) => jsProxy['disconnect'] = jsify(value);
 
-  Event get onDisconnect => _createEvent(proxy['onDisconnect']);
-  set onDisconnect(Event value) => proxy['onDisconnect'] = jsify(value);
+  Event get onDisconnect => _createEvent(jsProxy['onDisconnect']);
+  set onDisconnect(Event value) => jsProxy['onDisconnect'] = jsify(value);
 
-  Event get onMessage => _createEvent(proxy['onMessage']);
-  set onMessage(Event value) => proxy['onMessage'] = jsify(value);
+  Event get onMessage => _createEvent(jsProxy['onMessage']);
+  set onMessage(Event value) => jsProxy['onMessage'] = jsify(value);
 
-  dynamic get postMessage => proxy['postMessage'];
-  set postMessage(var value) => proxy['postMessage'] = jsify(value);
+  dynamic get postMessage => jsProxy['postMessage'];
+  set postMessage(var value) => jsProxy['postMessage'] = jsify(value);
 
   /**
    * This property will <b>only</b> be present on ports passed to
    * onConnect/onConnectExternal listeners.
    */
-  MessageSender get sender => _createMessageSender(proxy['sender']);
-  set sender(MessageSender value) => proxy['sender'] = jsify(value);
+  MessageSender get sender => _createMessageSender(jsProxy['sender']);
+  set sender(MessageSender value) => jsProxy['sender'] = jsify(value);
 }
 
 /**
@@ -454,36 +454,36 @@ class MessageSender extends ChromeObject {
     if (url != null) this.url = url;
     if (tlsChannelId != null) this.tlsChannelId = tlsChannelId;
   }
-  MessageSender.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  MessageSender.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The [tabs.Tab] which opened the connection, if any. This property will
    * *only* be present when the connection was opened from a tab (including
    * content scripts), and *only* if the receiver is an extension, not an app.
    */
-  Tab get tab => _createTab(proxy['tab']);
-  set tab(Tab value) => proxy['tab'] = jsify(value);
+  Tab get tab => _createTab(jsProxy['tab']);
+  set tab(Tab value) => jsProxy['tab'] = jsify(value);
 
   /**
    * The ID of the extension or app that opened the connection, if any.
    */
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
   /**
    * The URL of the page or frame that opened the connection, if any. This
    * property will *only* be present when the connection was opened from a tab
    * or content script.
    */
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
   /**
    * The TLS channel ID of the web page that opened the connection, if requested
    * by the extension or app, and if available.
    */
-  String get tlsChannelId => proxy['tlsChannelId'];
-  set tlsChannelId(String value) => proxy['tlsChannelId'] = value;
+  String get tlsChannelId => jsProxy['tlsChannelId'];
+  set tlsChannelId(String value) => jsProxy['tlsChannelId'] = value;
 }
 
 /**
@@ -500,14 +500,14 @@ class RequestUpdateCheckResult {
   RequestUpdateCheckResult._(this.status, this.details);
 }
 
-LastErrorRuntime _createLastErrorRuntime(JsObject proxy) => proxy == null ? null : new LastErrorRuntime.fromProxy(proxy);
-Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
-Port _createPort(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);
-DirectoryEntry _createDirectoryEntry(JsObject proxy) => proxy == null ? null : new CrDirectoryEntry.fromProxy(proxy);
+LastErrorRuntime _createLastErrorRuntime(JsObject jsProxy) => jsProxy == null ? null : new LastErrorRuntime.fromProxy(jsProxy);
+Window _createWindow(JsObject jsProxy) => jsProxy == null ? null : new Window.fromProxy(jsProxy);
+Port _createPort(JsObject jsProxy) => jsProxy == null ? null : new Port.fromProxy(jsProxy);
+DirectoryEntry _createDirectoryEntry(JsObject jsProxy) => jsProxy == null ? null : new CrDirectoryEntry.fromProxy(jsProxy);
 OnMessageEvent _createOnMessageEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
     new OnMessageEvent(message, _createMessageSender(sender), sendResponse);
 OnMessageExternalEvent _createOnMessageExternalEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
     new OnMessageExternalEvent(message, _createMessageSender(sender), sendResponse);
-Event _createEvent(JsObject proxy) => proxy == null ? null : new Event.fromProxy(proxy);
-MessageSender _createMessageSender(JsObject proxy) => proxy == null ? null : new MessageSender.fromProxy(proxy);
-Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
+Event _createEvent(JsObject jsProxy) => jsProxy == null ? null : new Event.fromProxy(jsProxy);
+MessageSender _createMessageSender(JsObject jsProxy) => jsProxy == null ? null : new MessageSender.fromProxy(jsProxy);
+Tab _createTab(JsObject jsProxy) => jsProxy == null ? null : new Tab.fromProxy(jsProxy);

@@ -557,7 +557,7 @@ class Tab extends ChromeObject {
     if (height != null) this.height = height;
     if (sessionId != null) this.sessionId = sessionId;
   }
-  Tab.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Tab.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The ID of the tab. Tab IDs are unique within a browser session. Under some
@@ -565,99 +565,99 @@ class Tab extends ChromeObject {
    * foreign tabs using the [sessions] API, in which case a session ID may be
    * present.
    */
-  int get id => proxy['id'];
-  set id(int value) => proxy['id'] = value;
+  int get id => jsProxy['id'];
+  set id(int value) => jsProxy['id'] = value;
 
   /**
    * The zero-based index of the tab within its window.
    */
-  int get index => proxy['index'];
-  set index(int value) => proxy['index'] = value;
+  int get index => jsProxy['index'];
+  set index(int value) => jsProxy['index'] = value;
 
   /**
    * The ID of the window the tab is contained within.
    */
-  int get windowId => proxy['windowId'];
-  set windowId(int value) => proxy['windowId'] = value;
+  int get windowId => jsProxy['windowId'];
+  set windowId(int value) => jsProxy['windowId'] = value;
 
   /**
    * The ID of the tab that opened this tab, if any. This property is only
    * present if the opener tab still exists.
    */
-  int get openerTabId => proxy['openerTabId'];
-  set openerTabId(int value) => proxy['openerTabId'] = value;
+  int get openerTabId => jsProxy['openerTabId'];
+  set openerTabId(int value) => jsProxy['openerTabId'] = value;
 
   /**
    * Whether the tab is highlighted.
    */
-  bool get highlighted => proxy['highlighted'];
-  set highlighted(bool value) => proxy['highlighted'] = value;
+  bool get highlighted => jsProxy['highlighted'];
+  set highlighted(bool value) => jsProxy['highlighted'] = value;
 
   /**
    * Whether the tab is active in its window. (Does not necessarily mean the
    * window is focused.)
    */
-  bool get active => proxy['active'];
-  set active(bool value) => proxy['active'] = value;
+  bool get active => jsProxy['active'];
+  set active(bool value) => jsProxy['active'] = value;
 
   /**
    * Whether the tab is pinned.
    */
-  bool get pinned => proxy['pinned'];
-  set pinned(bool value) => proxy['pinned'] = value;
+  bool get pinned => jsProxy['pinned'];
+  set pinned(bool value) => jsProxy['pinned'] = value;
 
   /**
    * The URL the tab is displaying. This property is only present if the
    * extension's manifest includes the `"tabs"` permission.
    */
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
   /**
    * The title of the tab. This property is only present if the extension's
    * manifest includes the `"tabs"` permission.
    */
-  String get title => proxy['title'];
-  set title(String value) => proxy['title'] = value;
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
 
   /**
    * The URL of the tab's favicon. This property is only present if the
    * extension's manifest includes the `"tabs"` permission. It may also be an
    * empty string if the tab is loading.
    */
-  String get favIconUrl => proxy['favIconUrl'];
-  set favIconUrl(String value) => proxy['favIconUrl'] = value;
+  String get favIconUrl => jsProxy['favIconUrl'];
+  set favIconUrl(String value) => jsProxy['favIconUrl'] = value;
 
   /**
    * Either _loading_ or _complete_.
    */
-  String get status => proxy['status'];
-  set status(String value) => proxy['status'] = value;
+  String get status => jsProxy['status'];
+  set status(String value) => jsProxy['status'] = value;
 
   /**
    * Whether the tab is in an incognito window.
    */
-  bool get incognito => proxy['incognito'];
-  set incognito(bool value) => proxy['incognito'] = value;
+  bool get incognito => jsProxy['incognito'];
+  set incognito(bool value) => jsProxy['incognito'] = value;
 
   /**
    * The width of the tab in pixels.
    */
-  int get width => proxy['width'];
-  set width(int value) => proxy['width'] = value;
+  int get width => jsProxy['width'];
+  set width(int value) => jsProxy['width'] = value;
 
   /**
    * The height of the tab in pixels.
    */
-  int get height => proxy['height'];
-  set height(int value) => proxy['height'] = value;
+  int get height => jsProxy['height'];
+  set height(int value) => jsProxy['height'] = value;
 
   /**
    * The session ID used to uniquely identify a Tab obtained from the [sessions]
    * API.
    */
-  String get sessionId => proxy['sessionId'];
-  set sessionId(String value) => proxy['sessionId'] = value;
+  String get sessionId => jsProxy['sessionId'];
+  set sessionId(String value) => jsProxy['sessionId'] = value;
 }
 
 /**
@@ -671,40 +671,40 @@ class InjectDetails extends ChromeObject {
     if (allFrames != null) this.allFrames = allFrames;
     if (runAt != null) this.runAt = runAt;
   }
-  InjectDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  InjectDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * JavaScript or CSS code to inject.
    */
-  String get code => proxy['code'];
-  set code(String value) => proxy['code'] = value;
+  String get code => jsProxy['code'];
+  set code(String value) => jsProxy['code'] = value;
 
   /**
    * JavaScript or CSS file to inject.
    */
-  String get file => proxy['file'];
-  set file(String value) => proxy['file'] = value;
+  String get file => jsProxy['file'];
+  set file(String value) => jsProxy['file'] = value;
 
   /**
    * If allFrames is `true`, implies that the JavaScript or CSS should be
    * injected into all frames of current page. By default, it's `false` and is
    * only injected into the top frame.
    */
-  bool get allFrames => proxy['allFrames'];
-  set allFrames(bool value) => proxy['allFrames'] = value;
+  bool get allFrames => jsProxy['allFrames'];
+  set allFrames(bool value) => jsProxy['allFrames'] = value;
 
   /**
    * The soonest that the JavaScript or CSS will be injected into the tab.
    * Defaults to "document_idle".
    * enum of `document_start`, `document_end`, `document_idle`
    */
-  String get runAt => proxy['runAt'];
-  set runAt(String value) => proxy['runAt'] = value;
+  String get runAt => jsProxy['runAt'];
+  set runAt(String value) => jsProxy['runAt'] = value;
 }
 
-Tab _createTab(JsObject proxy) => proxy == null ? null : new Tab.fromProxy(proxy);
-Port _createPort(JsObject proxy) => proxy == null ? null : new Port.fromProxy(proxy);
-Window _createWindow(JsObject proxy) => proxy == null ? null : new Window.fromProxy(proxy);
+Tab _createTab(JsObject jsProxy) => jsProxy == null ? null : new Tab.fromProxy(jsProxy);
+Port _createPort(JsObject jsProxy) => jsProxy == null ? null : new Port.fromProxy(jsProxy);
+Window _createWindow(JsObject jsProxy) => jsProxy == null ? null : new Window.fromProxy(jsProxy);
 OnUpdatedEvent _createOnUpdatedEvent(int tabId, JsObject changeInfo, JsObject tab) =>
     new OnUpdatedEvent(tabId, mapify(changeInfo), _createTab(tab));
 TabsOnMovedEvent _createTabsOnMovedEvent(int tabId, JsObject moveInfo) =>

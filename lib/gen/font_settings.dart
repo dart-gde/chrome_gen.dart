@@ -219,19 +219,19 @@ class FontName extends ChromeObject {
     if (fontId != null) this.fontId = fontId;
     if (displayName != null) this.displayName = displayName;
   }
-  FontName.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  FontName.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The font ID.
    */
-  String get fontId => proxy['fontId'];
-  set fontId(String value) => proxy['fontId'] = value;
+  String get fontId => jsProxy['fontId'];
+  set fontId(String value) => jsProxy['fontId'] = value;
 
   /**
    * The display name of the font.
    */
-  String get displayName => proxy['displayName'];
-  set displayName(String value) => proxy['displayName'] = value;
+  String get displayName => jsProxy['displayName'];
+  set displayName(String value) => jsProxy['displayName'] = value;
 }
 
 /**
@@ -257,7 +257,7 @@ class FontName extends ChromeObject {
  */
 class ScriptCode extends ChromeObject {
   ScriptCode();
-  ScriptCode.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ScriptCode.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
 /**
@@ -266,7 +266,7 @@ class ScriptCode extends ChromeObject {
  */
 class GenericFamily extends ChromeObject {
   GenericFamily();
-  GenericFamily.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  GenericFamily.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
 /**
@@ -280,7 +280,7 @@ class GenericFamily extends ChromeObject {
  */
 class LevelOfControl extends ChromeObject {
   LevelOfControl();
-  LevelOfControl.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  LevelOfControl.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-FontName _createFontName(JsObject proxy) => proxy == null ? null : new FontName.fromProxy(proxy);
+FontName _createFontName(JsObject jsProxy) => jsProxy == null ? null : new FontName.fromProxy(jsProxy);

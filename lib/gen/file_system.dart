@@ -147,16 +147,16 @@ class AcceptOption extends ChromeObject {
     if (mimeTypes != null) this.mimeTypes = mimeTypes;
     if (extensions != null) this.extensions = extensions;
   }
-  AcceptOption.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  AcceptOption.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get description => proxy['description'];
-  set description(String value) => proxy['description'] = value;
+  String get description => jsProxy['description'];
+  set description(String value) => jsProxy['description'] = value;
 
-  String get mimeTypes => proxy['mimeTypes'];
-  set mimeTypes(String value) => proxy['mimeTypes'] = value;
+  String get mimeTypes => jsProxy['mimeTypes'];
+  set mimeTypes(String value) => jsProxy['mimeTypes'] = value;
 
-  String get extensions => proxy['extensions'];
-  set extensions(String value) => proxy['extensions'] = value;
+  String get extensions => jsProxy['extensions'];
+  set extensions(String value) => jsProxy['extensions'] = value;
 }
 
 class ChooseEntryOptions extends ChromeObject {
@@ -167,22 +167,22 @@ class ChooseEntryOptions extends ChromeObject {
     if (acceptsAllTypes != null) this.acceptsAllTypes = acceptsAllTypes;
     if (acceptsMultiple != null) this.acceptsMultiple = acceptsMultiple;
   }
-  ChooseEntryOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ChooseEntryOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  ChooseEntryType get type => _createChooseEntryType(proxy['type']);
-  set type(ChooseEntryType value) => proxy['type'] = jsify(value);
+  ChooseEntryType get type => _createChooseEntryType(jsProxy['type']);
+  set type(ChooseEntryType value) => jsProxy['type'] = jsify(value);
 
-  String get suggestedName => proxy['suggestedName'];
-  set suggestedName(String value) => proxy['suggestedName'] = value;
+  String get suggestedName => jsProxy['suggestedName'];
+  set suggestedName(String value) => jsProxy['suggestedName'] = value;
 
-  AcceptOption get accepts => _createAcceptOption(proxy['accepts']);
-  set accepts(AcceptOption value) => proxy['accepts'] = jsify(value);
+  AcceptOption get accepts => _createAcceptOption(jsProxy['accepts']);
+  set accepts(AcceptOption value) => jsProxy['accepts'] = jsify(value);
 
-  bool get acceptsAllTypes => proxy['acceptsAllTypes'];
-  set acceptsAllTypes(bool value) => proxy['acceptsAllTypes'] = value;
+  bool get acceptsAllTypes => jsProxy['acceptsAllTypes'];
+  set acceptsAllTypes(bool value) => jsProxy['acceptsAllTypes'] = value;
 
-  bool get acceptsMultiple => proxy['acceptsMultiple'];
-  set acceptsMultiple(bool value) => proxy['acceptsMultiple'] = value;
+  bool get acceptsMultiple => jsProxy['acceptsMultiple'];
+  set acceptsMultiple(bool value) => jsProxy['acceptsMultiple'] = value;
 }
 
 /**
@@ -199,7 +199,7 @@ class ChooseEntryResult {
   ChooseEntryResult._(this.entry, this.fileEntries);
 }
 
-Entry _createEntry(JsObject proxy) => proxy == null ? null : new CrEntry.fromProxy(proxy);
+Entry _createEntry(JsObject jsProxy) => jsProxy == null ? null : new CrEntry.fromProxy(jsProxy);
 ChooseEntryType _createChooseEntryType(String value) => ChooseEntryType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-AcceptOption _createAcceptOption(JsObject proxy) => proxy == null ? null : new AcceptOption.fromProxy(proxy);
-FileEntry _createFileEntry(JsObject proxy) => proxy == null ? null : new ChromeFileEntry.fromProxy(proxy);
+AcceptOption _createAcceptOption(JsObject jsProxy) => jsProxy == null ? null : new AcceptOption.fromProxy(jsProxy);
+FileEntry _createFileEntry(JsObject jsProxy) => jsProxy == null ? null : new ChromeFileEntry.fromProxy(jsProxy);

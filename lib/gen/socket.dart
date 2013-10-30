@@ -354,17 +354,17 @@ class SocketType extends ChromeEnum {
 
 class CreateOptions extends ChromeObject {
   CreateOptions();
-  CreateOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  CreateOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
 class CreateInfo extends ChromeObject {
   CreateInfo({int socketId}) {
     if (socketId != null) this.socketId = socketId;
   }
-  CreateInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  CreateInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get socketId => proxy['socketId'];
-  set socketId(int value) => proxy['socketId'] = value;
+  int get socketId => jsProxy['socketId'];
+  set socketId(int value) => jsProxy['socketId'] = value;
 }
 
 class AcceptInfo extends ChromeObject {
@@ -372,13 +372,13 @@ class AcceptInfo extends ChromeObject {
     if (resultCode != null) this.resultCode = resultCode;
     if (socketId != null) this.socketId = socketId;
   }
-  AcceptInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  AcceptInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get resultCode => proxy['resultCode'];
-  set resultCode(int value) => proxy['resultCode'] = value;
+  int get resultCode => jsProxy['resultCode'];
+  set resultCode(int value) => jsProxy['resultCode'] = value;
 
-  int get socketId => proxy['socketId'];
-  set socketId(int value) => proxy['socketId'] = value;
+  int get socketId => jsProxy['socketId'];
+  set socketId(int value) => jsProxy['socketId'] = value;
 }
 
 class SocketReadInfo extends ChromeObject {
@@ -386,23 +386,23 @@ class SocketReadInfo extends ChromeObject {
     if (resultCode != null) this.resultCode = resultCode;
     if (data != null) this.data = data;
   }
-  SocketReadInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  SocketReadInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get resultCode => proxy['resultCode'];
-  set resultCode(int value) => proxy['resultCode'] = value;
+  int get resultCode => jsProxy['resultCode'];
+  set resultCode(int value) => jsProxy['resultCode'] = value;
 
-  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
+  ArrayBuffer get data => _createArrayBuffer(jsProxy['data']);
+  set data(ArrayBuffer value) => jsProxy['data'] = jsify(value);
 }
 
 class SocketWriteInfo extends ChromeObject {
   SocketWriteInfo({int bytesWritten}) {
     if (bytesWritten != null) this.bytesWritten = bytesWritten;
   }
-  SocketWriteInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  SocketWriteInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get bytesWritten => proxy['bytesWritten'];
-  set bytesWritten(int value) => proxy['bytesWritten'] = value;
+  int get bytesWritten => jsProxy['bytesWritten'];
+  set bytesWritten(int value) => jsProxy['bytesWritten'] = value;
 }
 
 class RecvFromInfo extends ChromeObject {
@@ -412,19 +412,19 @@ class RecvFromInfo extends ChromeObject {
     if (address != null) this.address = address;
     if (port != null) this.port = port;
   }
-  RecvFromInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  RecvFromInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get resultCode => proxy['resultCode'];
-  set resultCode(int value) => proxy['resultCode'] = value;
+  int get resultCode => jsProxy['resultCode'];
+  set resultCode(int value) => jsProxy['resultCode'] = value;
 
-  ArrayBuffer get data => _createArrayBuffer(proxy['data']);
-  set data(ArrayBuffer value) => proxy['data'] = jsify(value);
+  ArrayBuffer get data => _createArrayBuffer(jsProxy['data']);
+  set data(ArrayBuffer value) => jsProxy['data'] = jsify(value);
 
-  String get address => proxy['address'];
-  set address(String value) => proxy['address'] = value;
+  String get address => jsProxy['address'];
+  set address(String value) => jsProxy['address'] = value;
 
-  int get port => proxy['port'];
-  set port(int value) => proxy['port'] = value;
+  int get port => jsProxy['port'];
+  set port(int value) => jsProxy['port'] = value;
 }
 
 class SocketInfo extends ChromeObject {
@@ -436,25 +436,25 @@ class SocketInfo extends ChromeObject {
     if (localAddress != null) this.localAddress = localAddress;
     if (localPort != null) this.localPort = localPort;
   }
-  SocketInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  SocketInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  SocketType get socketType => _createSocketType(proxy['socketType']);
-  set socketType(SocketType value) => proxy['socketType'] = jsify(value);
+  SocketType get socketType => _createSocketType(jsProxy['socketType']);
+  set socketType(SocketType value) => jsProxy['socketType'] = jsify(value);
 
-  bool get connected => proxy['connected'];
-  set connected(bool value) => proxy['connected'] = value;
+  bool get connected => jsProxy['connected'];
+  set connected(bool value) => jsProxy['connected'] = value;
 
-  String get peerAddress => proxy['peerAddress'];
-  set peerAddress(String value) => proxy['peerAddress'] = value;
+  String get peerAddress => jsProxy['peerAddress'];
+  set peerAddress(String value) => jsProxy['peerAddress'] = value;
 
-  int get peerPort => proxy['peerPort'];
-  set peerPort(int value) => proxy['peerPort'] = value;
+  int get peerPort => jsProxy['peerPort'];
+  set peerPort(int value) => jsProxy['peerPort'] = value;
 
-  String get localAddress => proxy['localAddress'];
-  set localAddress(String value) => proxy['localAddress'] = value;
+  String get localAddress => jsProxy['localAddress'];
+  set localAddress(String value) => jsProxy['localAddress'] = value;
 
-  int get localPort => proxy['localPort'];
-  set localPort(int value) => proxy['localPort'] = value;
+  int get localPort => jsProxy['localPort'];
+  set localPort(int value) => jsProxy['localPort'] = value;
 }
 
 class NetworkInterface extends ChromeObject {
@@ -462,21 +462,21 @@ class NetworkInterface extends ChromeObject {
     if (name != null) this.name = name;
     if (address != null) this.address = address;
   }
-  NetworkInterface.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  NetworkInterface.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
-  String get address => proxy['address'];
-  set address(String value) => proxy['address'] = value;
+  String get address => jsProxy['address'];
+  set address(String value) => jsProxy['address'] = value;
 }
 
-CreateInfo _createCreateInfo(JsObject proxy) => proxy == null ? null : new CreateInfo.fromProxy(proxy);
-SocketReadInfo _createSocketReadInfo(JsObject proxy) => proxy == null ? null : new SocketReadInfo.fromProxy(proxy);
-SocketWriteInfo _createSocketWriteInfo(JsObject proxy) => proxy == null ? null : new SocketWriteInfo.fromProxy(proxy);
-RecvFromInfo _createRecvFromInfo(JsObject proxy) => proxy == null ? null : new RecvFromInfo.fromProxy(proxy);
-AcceptInfo _createAcceptInfo(JsObject proxy) => proxy == null ? null : new AcceptInfo.fromProxy(proxy);
-SocketInfo _createSocketInfo(JsObject proxy) => proxy == null ? null : new SocketInfo.fromProxy(proxy);
-NetworkInterface _createNetworkInterface(JsObject proxy) => proxy == null ? null : new NetworkInterface.fromProxy(proxy);
-ArrayBuffer _createArrayBuffer(JsObject proxy) => proxy == null ? null : new ArrayBuffer.fromProxy(proxy);
+CreateInfo _createCreateInfo(JsObject jsProxy) => jsProxy == null ? null : new CreateInfo.fromProxy(jsProxy);
+SocketReadInfo _createSocketReadInfo(JsObject jsProxy) => jsProxy == null ? null : new SocketReadInfo.fromProxy(jsProxy);
+SocketWriteInfo _createSocketWriteInfo(JsObject jsProxy) => jsProxy == null ? null : new SocketWriteInfo.fromProxy(jsProxy);
+RecvFromInfo _createRecvFromInfo(JsObject jsProxy) => jsProxy == null ? null : new RecvFromInfo.fromProxy(jsProxy);
+AcceptInfo _createAcceptInfo(JsObject jsProxy) => jsProxy == null ? null : new AcceptInfo.fromProxy(jsProxy);
+SocketInfo _createSocketInfo(JsObject jsProxy) => jsProxy == null ? null : new SocketInfo.fromProxy(jsProxy);
+NetworkInterface _createNetworkInterface(JsObject jsProxy) => jsProxy == null ? null : new NetworkInterface.fromProxy(jsProxy);
+ArrayBuffer _createArrayBuffer(JsObject jsProxy) => jsProxy == null ? null : new ArrayBuffer.fromProxy(jsProxy);
 SocketType _createSocketType(String value) => SocketType.VALUES.singleWhere((ChromeEnum e) => e.value == value);

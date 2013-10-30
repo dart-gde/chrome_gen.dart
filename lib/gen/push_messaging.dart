@@ -46,24 +46,24 @@ class Message extends ChromeObject {
     if (subchannelId != null) this.subchannelId = subchannelId;
     if (payload != null) this.payload = payload;
   }
-  Message.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  Message.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  int get subchannelId => proxy['subchannelId'];
-  set subchannelId(int value) => proxy['subchannelId'] = value;
+  int get subchannelId => jsProxy['subchannelId'];
+  set subchannelId(int value) => jsProxy['subchannelId'] = value;
 
-  String get payload => proxy['payload'];
-  set payload(String value) => proxy['payload'] = value;
+  String get payload => jsProxy['payload'];
+  set payload(String value) => jsProxy['payload'] = value;
 }
 
 class ChannelIdResult extends ChromeObject {
   ChannelIdResult({String channelId}) {
     if (channelId != null) this.channelId = channelId;
   }
-  ChannelIdResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ChannelIdResult.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get channelId => proxy['channelId'];
-  set channelId(String value) => proxy['channelId'] = value;
+  String get channelId => jsProxy['channelId'];
+  set channelId(String value) => jsProxy['channelId'] = value;
 }
 
-ChannelIdResult _createChannelIdResult(JsObject proxy) => proxy == null ? null : new ChannelIdResult.fromProxy(proxy);
-Message _createMessage(JsObject proxy) => proxy == null ? null : new Message.fromProxy(proxy);
+ChannelIdResult _createChannelIdResult(JsObject jsProxy) => jsProxy == null ? null : new ChannelIdResult.fromProxy(jsProxy);
+Message _createMessage(JsObject jsProxy) => jsProxy == null ? null : new Message.fromProxy(jsProxy);

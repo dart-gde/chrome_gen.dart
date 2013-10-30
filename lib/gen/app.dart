@@ -47,13 +47,13 @@ class LaunchItem extends ChromeObject {
     if (entry != null) this.entry = entry;
     if (type != null) this.type = type;
   }
-  LaunchItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  LaunchItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  dynamic get entry => proxy['entry'];
-  set entry(var value) => proxy['entry'] = jsify(value);
+  dynamic get entry => jsProxy['entry'];
+  set entry(var value) => jsProxy['entry'] = jsify(value);
 
-  String get type => proxy['type'];
-  set type(String value) => proxy['type'] = value;
+  String get type => jsProxy['type'];
+  set type(String value) => jsProxy['type'] = value;
 }
 
 class LaunchData extends ChromeObject {
@@ -64,26 +64,26 @@ class LaunchData extends ChromeObject {
     if (referrerUrl != null) this.referrerUrl = referrerUrl;
     if (isKioskSession != null) this.isKioskSession = isKioskSession;
   }
-  LaunchData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  LaunchData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
-  LaunchItem get items => _createLaunchItem(proxy['items']);
-  set items(LaunchItem value) => proxy['items'] = jsify(value);
+  LaunchItem get items => _createLaunchItem(jsProxy['items']);
+  set items(LaunchItem value) => jsProxy['items'] = jsify(value);
 
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 
-  String get referrerUrl => proxy['referrerUrl'];
-  set referrerUrl(String value) => proxy['referrerUrl'] = value;
+  String get referrerUrl => jsProxy['referrerUrl'];
+  set referrerUrl(String value) => jsProxy['referrerUrl'] = value;
 
-  bool get isKioskSession => proxy['isKioskSession'];
-  set isKioskSession(bool value) => proxy['isKioskSession'] = value;
+  bool get isKioskSession => jsProxy['isKioskSession'];
+  set isKioskSession(bool value) => jsProxy['isKioskSession'] = value;
 }
 
-LaunchData _createLaunchData(JsObject proxy) => proxy == null ? null : new LaunchData.fromProxy(proxy);
-LaunchItem _createLaunchItem(JsObject proxy) => proxy == null ? null : new LaunchItem.fromProxy(proxy);
+LaunchData _createLaunchData(JsObject jsProxy) => jsProxy == null ? null : new LaunchData.fromProxy(jsProxy);
+LaunchItem _createLaunchItem(JsObject jsProxy) => jsProxy == null ? null : new LaunchItem.fromProxy(jsProxy);
 
 class ChromeAppWindow extends ChromeApi {
   static final JsObject _app_window = chrome['app']['window'];
@@ -234,201 +234,201 @@ class CreateWindowOptions extends ChromeObject {
     if (singleton != null) this.singleton = singleton;
     if (alwaysOnTop != null) this.alwaysOnTop = alwaysOnTop;
   }
-  CreateWindowOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  CreateWindowOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
-  int get defaultWidth => proxy['defaultWidth'];
-  set defaultWidth(int value) => proxy['defaultWidth'] = value;
+  int get defaultWidth => jsProxy['defaultWidth'];
+  set defaultWidth(int value) => jsProxy['defaultWidth'] = value;
 
-  int get defaultHeight => proxy['defaultHeight'];
-  set defaultHeight(int value) => proxy['defaultHeight'] = value;
+  int get defaultHeight => jsProxy['defaultHeight'];
+  set defaultHeight(int value) => jsProxy['defaultHeight'] = value;
 
-  int get defaultLeft => proxy['defaultLeft'];
-  set defaultLeft(int value) => proxy['defaultLeft'] = value;
+  int get defaultLeft => jsProxy['defaultLeft'];
+  set defaultLeft(int value) => jsProxy['defaultLeft'] = value;
 
-  int get defaultTop => proxy['defaultTop'];
-  set defaultTop(int value) => proxy['defaultTop'] = value;
+  int get defaultTop => jsProxy['defaultTop'];
+  set defaultTop(int value) => jsProxy['defaultTop'] = value;
 
-  int get width => proxy['width'];
-  set width(int value) => proxy['width'] = value;
+  int get width => jsProxy['width'];
+  set width(int value) => jsProxy['width'] = value;
 
-  int get height => proxy['height'];
-  set height(int value) => proxy['height'] = value;
+  int get height => jsProxy['height'];
+  set height(int value) => jsProxy['height'] = value;
 
-  int get left => proxy['left'];
-  set left(int value) => proxy['left'] = value;
+  int get left => jsProxy['left'];
+  set left(int value) => jsProxy['left'] = value;
 
-  int get top => proxy['top'];
-  set top(int value) => proxy['top'] = value;
+  int get top => jsProxy['top'];
+  set top(int value) => jsProxy['top'] = value;
 
-  int get minWidth => proxy['minWidth'];
-  set minWidth(int value) => proxy['minWidth'] = value;
+  int get minWidth => jsProxy['minWidth'];
+  set minWidth(int value) => jsProxy['minWidth'] = value;
 
-  int get minHeight => proxy['minHeight'];
-  set minHeight(int value) => proxy['minHeight'] = value;
+  int get minHeight => jsProxy['minHeight'];
+  set minHeight(int value) => jsProxy['minHeight'] = value;
 
-  int get maxWidth => proxy['maxWidth'];
-  set maxWidth(int value) => proxy['maxWidth'] = value;
+  int get maxWidth => jsProxy['maxWidth'];
+  set maxWidth(int value) => jsProxy['maxWidth'] = value;
 
-  int get maxHeight => proxy['maxHeight'];
-  set maxHeight(int value) => proxy['maxHeight'] = value;
+  int get maxHeight => jsProxy['maxHeight'];
+  set maxHeight(int value) => jsProxy['maxHeight'] = value;
 
-  WindowType get type => _createWindowType(proxy['type']);
-  set type(WindowType value) => proxy['type'] = jsify(value);
+  WindowType get type => _createWindowType(jsProxy['type']);
+  set type(WindowType value) => jsProxy['type'] = jsify(value);
 
-  String get frame => proxy['frame'];
-  set frame(String value) => proxy['frame'] = value;
+  String get frame => jsProxy['frame'];
+  set frame(String value) => jsProxy['frame'] = value;
 
-  Bounds get bounds => _createBounds(proxy['bounds']);
-  set bounds(Bounds value) => proxy['bounds'] = jsify(value);
+  Bounds get bounds => _createBounds(jsProxy['bounds']);
+  set bounds(Bounds value) => jsProxy['bounds'] = jsify(value);
 
-  bool get transparentBackground => proxy['transparentBackground'];
-  set transparentBackground(bool value) => proxy['transparentBackground'] = value;
+  bool get transparentBackground => jsProxy['transparentBackground'];
+  set transparentBackground(bool value) => jsProxy['transparentBackground'] = value;
 
-  State get state => _createState(proxy['state']);
-  set state(State value) => proxy['state'] = jsify(value);
+  State get state => _createState(jsProxy['state']);
+  set state(State value) => jsProxy['state'] = jsify(value);
 
-  bool get hidden => proxy['hidden'];
-  set hidden(bool value) => proxy['hidden'] = value;
+  bool get hidden => jsProxy['hidden'];
+  set hidden(bool value) => jsProxy['hidden'] = value;
 
-  bool get resizable => proxy['resizable'];
-  set resizable(bool value) => proxy['resizable'] = value;
+  bool get resizable => jsProxy['resizable'];
+  set resizable(bool value) => jsProxy['resizable'] = value;
 
-  bool get singleton => proxy['singleton'];
-  set singleton(bool value) => proxy['singleton'] = value;
+  bool get singleton => jsProxy['singleton'];
+  set singleton(bool value) => jsProxy['singleton'] = value;
 
-  bool get alwaysOnTop => proxy['alwaysOnTop'];
-  set alwaysOnTop(bool value) => proxy['alwaysOnTop'] = value;
+  bool get alwaysOnTop => jsProxy['alwaysOnTop'];
+  set alwaysOnTop(bool value) => jsProxy['alwaysOnTop'] = value;
 }
 
 class AppWindow extends ChromeObject {
   AppWindow({var contentWindow}) {
     if (contentWindow != null) this.contentWindow = contentWindow;
   }
-  AppWindow.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  AppWindow.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  dynamic get contentWindow => proxy['contentWindow'];
-  set contentWindow(var value) => proxy['contentWindow'] = jsify(value);
+  dynamic get contentWindow => jsProxy['contentWindow'];
+  set contentWindow(var value) => jsProxy['contentWindow'] = jsify(value);
 
   /**
    * Focus the window.
    */
   void focus() {
-    proxy.callMethod('focus');
+    jsProxy.callMethod('focus');
   }
 
   /**
    * Fullscreens the window.
    */
   void fullscreen() {
-    proxy.callMethod('fullscreen');
+    jsProxy.callMethod('fullscreen');
   }
 
   /**
    * Is the window fullscreen?
    */
   bool isFullscreen() {
-    return proxy.callMethod('isFullscreen');
+    return jsProxy.callMethod('isFullscreen');
   }
 
   /**
    * Minimize the window.
    */
   void minimize() {
-    proxy.callMethod('minimize');
+    jsProxy.callMethod('minimize');
   }
 
   /**
    * Is the window minimized?
    */
   bool isMinimized() {
-    return proxy.callMethod('isMinimized');
+    return jsProxy.callMethod('isMinimized');
   }
 
   /**
    * Maximize the window.
    */
   void maximize() {
-    proxy.callMethod('maximize');
+    jsProxy.callMethod('maximize');
   }
 
   /**
    * Is the window maximized?
    */
   bool isMaximized() {
-    return proxy.callMethod('isMaximized');
+    return jsProxy.callMethod('isMaximized');
   }
 
   /**
    * Restore the window, exiting a maximized, minimized, or fullscreen state.
    */
   void restore() {
-    proxy.callMethod('restore');
+    jsProxy.callMethod('restore');
   }
 
   /**
    * Move the window to the position ([left], [top]).
    */
   void moveTo(int left, int top) {
-    proxy.callMethod('moveTo', [left, top]);
+    jsProxy.callMethod('moveTo', [left, top]);
   }
 
   /**
    * Resize the window to [width]x[height] pixels in size.
    */
   void resizeTo(int width, int height) {
-    proxy.callMethod('resizeTo', [width, height]);
+    jsProxy.callMethod('resizeTo', [width, height]);
   }
 
   /**
    * Draw attention to the window.
    */
   void drawAttention() {
-    proxy.callMethod('drawAttention');
+    jsProxy.callMethod('drawAttention');
   }
 
   /**
    * Clear attention to the window.
    */
   void clearAttention() {
-    proxy.callMethod('clearAttention');
+    jsProxy.callMethod('clearAttention');
   }
 
   /**
    * Close the window.
    */
   void close() {
-    proxy.callMethod('close');
+    jsProxy.callMethod('close');
   }
 
   /**
    * Show the window. Does nothing if the window is already visible.
    */
   void show() {
-    proxy.callMethod('show');
+    jsProxy.callMethod('show');
   }
 
   /**
    * Hide the window. Does nothing if the window is already hidden.
    */
   void hide() {
-    proxy.callMethod('hide');
+    jsProxy.callMethod('hide');
   }
 
   /**
    * Get the window's bounds as a [Bounds] object.
    */
   Bounds getBounds() {
-    return _createBounds(proxy.callMethod('getBounds'));
+    return _createBounds(jsProxy.callMethod('getBounds'));
   }
 
   /**
    * Set the window's bounds.
    */
   void setBounds(Bounds bounds) {
-    proxy.callMethod('setBounds', [jsify(bounds)]);
+    jsProxy.callMethod('setBounds', [jsify(bounds)]);
   }
 
   /**
@@ -437,14 +437,14 @@ class AppWindow extends ChromeObject {
    * Windows and OSX.
    */
   void setIcon(String icon_url) {
-    proxy.callMethod('setIcon', [icon_url]);
+    jsProxy.callMethod('setIcon', [icon_url]);
   }
 
   /**
    * Is the window always on top? Currently available in the Dev channel only.
    */
   bool isAlwaysOnTop() {
-    return proxy.callMethod('isAlwaysOnTop');
+    return jsProxy.callMethod('isAlwaysOnTop');
   }
 
   /**
@@ -452,11 +452,11 @@ class AppWindow extends ChromeObject {
    * available in the Dev channel only.
    */
   void setAlwaysOnTop(bool always_on_top) {
-    proxy.callMethod('setAlwaysOnTop', [always_on_top]);
+    jsProxy.callMethod('setAlwaysOnTop', [always_on_top]);
   }
 }
 
-AppWindow _createAppWindow(JsObject proxy) => proxy == null ? null : new AppWindow.fromProxy(proxy);
+AppWindow _createAppWindow(JsObject jsProxy) => jsProxy == null ? null : new AppWindow.fromProxy(jsProxy);
 WindowType _createWindowType(String value) => WindowType.VALUES.singleWhere((ChromeEnum e) => e.value == value);
-Bounds _createBounds(JsObject proxy) => proxy == null ? null : new Bounds.fromProxy(proxy);
+Bounds _createBounds(JsObject jsProxy) => jsProxy == null ? null : new Bounds.fromProxy(jsProxy);
 State _createState(String value) => State.VALUES.singleWhere((ChromeEnum e) => e.value == value);

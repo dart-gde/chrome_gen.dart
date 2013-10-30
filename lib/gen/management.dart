@@ -173,22 +173,22 @@ class IconInfo extends ChromeObject {
     if (size != null) this.size = size;
     if (url != null) this.url = url;
   }
-  IconInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  IconInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * A number representing the width and height of the icon. Likely values
    * include (but are not limited to) 128, 48, 24, and 16.
    */
-  int get size => proxy['size'];
-  set size(int value) => proxy['size'] = value;
+  int get size => jsProxy['size'];
+  set size(int value) => jsProxy['size'] = value;
 
   /**
    * The URL for this icon image. To display a grayscale version of the icon (to
    * indicate that an extension is disabled, for example), append
    * `?grayscale=true` to the URL.
    */
-  String get url => proxy['url'];
-  set url(String value) => proxy['url'] = value;
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 }
 
 /**
@@ -215,94 +215,94 @@ class ExtensionInfo extends ChromeObject {
     if (hostPermissions != null) this.hostPermissions = hostPermissions;
     if (installType != null) this.installType = installType;
   }
-  ExtensionInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+  ExtensionInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The extension's unique identifier.
    */
-  String get id => proxy['id'];
-  set id(String value) => proxy['id'] = value;
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
 
   /**
    * The name of this extension, app, or theme.
    */
-  String get name => proxy['name'];
-  set name(String value) => proxy['name'] = value;
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
 
   /**
    * A short version of the name of this extension, app, or theme.
    */
-  String get shortName => proxy['shortName'];
-  set shortName(String value) => proxy['shortName'] = value;
+  String get shortName => jsProxy['shortName'];
+  set shortName(String value) => jsProxy['shortName'] = value;
 
   /**
    * The description of this extension, app, or theme.
    */
-  String get description => proxy['description'];
-  set description(String value) => proxy['description'] = value;
+  String get description => jsProxy['description'];
+  set description(String value) => jsProxy['description'] = value;
 
   /**
    * The [version](manifest/version.html) of this extension, app, or theme.
    */
-  String get version => proxy['version'];
-  set version(String value) => proxy['version'] = value;
+  String get version => jsProxy['version'];
+  set version(String value) => jsProxy['version'] = value;
 
   /**
    * Whether this extension can be disabled or uninstalled by the user.
    */
-  bool get mayDisable => proxy['mayDisable'];
-  set mayDisable(bool value) => proxy['mayDisable'] = value;
+  bool get mayDisable => jsProxy['mayDisable'];
+  set mayDisable(bool value) => jsProxy['mayDisable'] = value;
 
   /**
    * Whether it is currently enabled or disabled.
    */
-  bool get enabled => proxy['enabled'];
-  set enabled(bool value) => proxy['enabled'] = value;
+  bool get enabled => jsProxy['enabled'];
+  set enabled(bool value) => jsProxy['enabled'] = value;
 
   /**
    * A reason the item is disabled.
    * enum of `unknown`, `permissions_increase`
    */
-  String get disabledReason => proxy['disabledReason'];
-  set disabledReason(String value) => proxy['disabledReason'] = value;
+  String get disabledReason => jsProxy['disabledReason'];
+  set disabledReason(String value) => jsProxy['disabledReason'] = value;
 
   /**
    * The type of this extension, app, or theme.
    * enum of `extension`, `hosted_app`, `packaged_app`, `legacy_packaged_app`,
    * `theme`
    */
-  String get type => proxy['type'];
-  set type(String value) => proxy['type'] = value;
+  String get type => jsProxy['type'];
+  set type(String value) => jsProxy['type'] = value;
 
   /**
    * The launch url (only present for apps).
    */
-  String get appLaunchUrl => proxy['appLaunchUrl'];
-  set appLaunchUrl(String value) => proxy['appLaunchUrl'] = value;
+  String get appLaunchUrl => jsProxy['appLaunchUrl'];
+  set appLaunchUrl(String value) => jsProxy['appLaunchUrl'] = value;
 
   /**
    * The URL of the homepage of this extension, app, or theme.
    */
-  String get homepageUrl => proxy['homepageUrl'];
-  set homepageUrl(String value) => proxy['homepageUrl'] = value;
+  String get homepageUrl => jsProxy['homepageUrl'];
+  set homepageUrl(String value) => jsProxy['homepageUrl'] = value;
 
   /**
    * The update URL of this extension, app, or theme.
    */
-  String get updateUrl => proxy['updateUrl'];
-  set updateUrl(String value) => proxy['updateUrl'] = value;
+  String get updateUrl => jsProxy['updateUrl'];
+  set updateUrl(String value) => jsProxy['updateUrl'] = value;
 
   /**
    * Whether the extension, app, or theme declares that it supports offline.
    */
-  bool get offlineEnabled => proxy['offlineEnabled'];
-  set offlineEnabled(bool value) => proxy['offlineEnabled'] = value;
+  bool get offlineEnabled => jsProxy['offlineEnabled'];
+  set offlineEnabled(bool value) => jsProxy['offlineEnabled'] = value;
 
   /**
    * The url for the item's options page, if it has one.
    */
-  String get optionsUrl => proxy['optionsUrl'];
-  set optionsUrl(String value) => proxy['optionsUrl'] = value;
+  String get optionsUrl => jsProxy['optionsUrl'];
+  set optionsUrl(String value) => jsProxy['optionsUrl'] = value;
 
   /**
    * A list of icon information. Note that this just reflects what was declared
@@ -311,20 +311,20 @@ class ExtensionInfo extends ChromeObject {
    * height attributes on img tags referencing these images. See the [manifest
    * documentation on icons](manifest/icons.html) for more details.
    */
-  List<IconInfo> get icons => listify(proxy['icons'], _createIconInfo);
-  set icons(List<IconInfo> value) => proxy['icons'] = jsify(value);
+  List<IconInfo> get icons => listify(jsProxy['icons'], _createIconInfo);
+  set icons(List<IconInfo> value) => jsProxy['icons'] = jsify(value);
 
   /**
    * Returns a list of API based permissions.
    */
-  List<String> get permissions => listify(proxy['permissions']);
-  set permissions(List<String> value) => proxy['permissions'] = jsify(value);
+  List<String> get permissions => listify(jsProxy['permissions']);
+  set permissions(List<String> value) => jsProxy['permissions'] = jsify(value);
 
   /**
    * Returns a list of host based permissions.
    */
-  List<String> get hostPermissions => listify(proxy['hostPermissions']);
-  set hostPermissions(List<String> value) => proxy['hostPermissions'] = jsify(value);
+  List<String> get hostPermissions => listify(jsProxy['hostPermissions']);
+  set hostPermissions(List<String> value) => jsProxy['hostPermissions'] = jsify(value);
 
   /**
    * How the extension was installed. One of<br>[admin]: The extension was
@@ -335,9 +335,9 @@ class ExtensionInfo extends ChromeObject {
    * installed by other means.
    * enum of `admin`, `development`, `normal`, `sideload`, `other`
    */
-  String get installType => proxy['installType'];
-  set installType(String value) => proxy['installType'] = value;
+  String get installType => jsProxy['installType'];
+  set installType(String value) => jsProxy['installType'] = value;
 }
 
-ExtensionInfo _createExtensionInfo(JsObject proxy) => proxy == null ? null : new ExtensionInfo.fromProxy(proxy);
-IconInfo _createIconInfo(JsObject proxy) => proxy == null ? null : new IconInfo.fromProxy(proxy);
+ExtensionInfo _createExtensionInfo(JsObject jsProxy) => jsProxy == null ? null : new ExtensionInfo.fromProxy(jsProxy);
+IconInfo _createIconInfo(JsObject jsProxy) => jsProxy == null ? null : new IconInfo.fromProxy(jsProxy);
