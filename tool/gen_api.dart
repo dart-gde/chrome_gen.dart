@@ -65,14 +65,12 @@ class GenApiFile {
       _chromeLib = json_model.convert(namespace);
     } else if (inFile.path.endsWith(".idl")) {
       if (overrides.useChromeIDLParser) {
-        _logger.info("using ChromeIDLParser");
         chrome_idl_parser.ChromeIDLParser chromeIdlParser =
             new chrome_idl_parser.ChromeIDLParser();
         chrome_idl_model.IDLNamespaceDeclaration idlNamespaceDeclaration =
             chromeIdlParser.namespaceDeclaration.parse(inFile.readAsStringSync());
         _chromeLib = chrome_idl_convert.convert(idlNamespaceDeclaration);
       } else {
-        _logger.info("using WebIdlParser");
         WebIdlParser webIdlParser = new WebIdlParser.withCollector(
             new model_idl.IDLCollectorChrome());
         webIdlParser.start.parse(inFile.readAsStringSync());
