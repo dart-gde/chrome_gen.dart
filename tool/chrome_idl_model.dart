@@ -11,27 +11,23 @@ class IDLNamespaceDeclaration {
    *
    */
   final IDLAttributeDeclaration attribute;
-
-  /**
-   * The body will contain one of the following types:
-   * IDLFunctionDeclaration,
-   * List<IDLTypeDeclaration>,
-   * IDLEventDeclaration,
-   * List<IDLCallbackDeclaration>,
-   * List<IDLEnumDeclaration>.
-   */
-  final List body;
+  final IDLFunctionDeclaration functionDeclaration;
+  final List<IDLTypeDeclaration> typeDeclarations;
+  final IDLEventDeclaration eventDeclaration;
+  final List<IDLCallbackDeclaration> callbackDeclarations;
+  final List<IDLEnumDeclaration> enumDeclarations;
 
   /**
    * Namespace documentation
    */
   final List<String> documentation;
 
-  IDLNamespaceDeclaration(this.name, this.body, {this.attribute,
-      this.documentation});
+  IDLNamespaceDeclaration(this.name, {this.functionDeclaration,
+      this.typeDeclarations, this.eventDeclaration, this.callbackDeclarations,
+      this.enumDeclarations, this.attribute, this.documentation});
 
   String toString() =>
-      "IDLNamespaceDeclaration($name, $body, $attribute, $documentation)";
+      "IDLNamespaceDeclaration($name, $attribute, $documentation)";
 }
 
 // interface Functions
@@ -41,7 +37,8 @@ class IDLFunctionDeclaration {
   final List<IDLMethod> methods;
   final List<String> documentation;
   IDLFunctionDeclaration(this.methods, {this.attribute, this.documentation});
-  String toString() => "IDLFunctionDeclaration()";
+  String toString() =>
+      "IDLFunctionDeclaration($name, $attribute, $methods, $documentation)";
 }
 
 // dictionary definition
@@ -66,7 +63,8 @@ class IDLEventDeclaration {
   final List<IDLMethod> methods;
   final List<String> documentation;
   IDLEventDeclaration(this.methods, {this.attribute, this.documentation});
-  String toString() => "IDLEventDeclaration()";
+  String toString() =>
+      "IDLEventDeclaration($name, $attribute, $methods, $documentation)";
 }
 
 /**
@@ -89,7 +87,7 @@ class IDLCallbackDeclaration {
 class IDLEnumDeclaration {
   final String name;
   final IDLAttributeDeclaration attribute;
-  final List<IDLEnumValue> enums;
+  final List<IDLEnumValue> enums; // TODO: rename enumValue
   final List<String> documentation;
 
   IDLEnumDeclaration(this.name, this.enums, {this.attribute,
@@ -118,13 +116,6 @@ class IDLMethod {
   String toString() =>
       "IDLMethod($name, $returnType, $parameters, $attribute, $documentation})";
 }
-
-//class IDLMember {
-//  final String name;
-//  final IDLType type;
-//  final List<String> documentation;
-//  String toString() => "IDLMember()";
-//}
 
 /**
  * Field
@@ -265,7 +256,8 @@ class IDLAttribute {
 
   IDLAttribute(this.attributeType, {this.attributeValue, this.attributeValues});
 
-  String toString() => "IDLAttribute()";
+  String toString() =>
+      "IDLAttribute($attributeType, $attributeValue, $attributeValues)";
 }
 
 class IDLEnumValue {

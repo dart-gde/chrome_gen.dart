@@ -7,18 +7,35 @@ import 'chrome_idl_model.dart';
 /**
  * Map the namespace declaration parse to a [IDLNamespaceDeclaration]
  */
-// TODO: not finished mapping, think about segragating the different type
-// of list types here. body will contain function, type, callback, event, and
-// enum declarations.
 IDLNamespaceDeclaration idlNamespaceDeclarationMapping(
   List<String> documentation, Option attributeMaybe, _, List<String> name, List body,
   __) {
 
   String nameDotNotation = name.join(".");
 
-  return new IDLNamespaceDeclaration(nameDotNotation, body,
-        attribute: attributeMaybe.isDefined ? attributeMaybe.value : null,
-        documentation: documentation);
+  IDLFunctionDeclaration functionDeclaration =
+      body.firstWhere((e) => e is IDLFunctionDeclaration, orElse: () => null);
+
+  List<IDLTypeDeclaration> typeDeclarations =
+      body.where((e) => e is IDLTypeDeclaration).toList();
+
+  IDLEventDeclaration eventDeclaration =
+      body.firstWhere((e) => e is IDLEventDeclaration, orElse: () => null);
+
+  List<IDLCallbackDeclaration> callbackDeclarations =
+      body.where((e) => e is IDLCallbackDeclaration).toList();
+
+  List<IDLEnumDeclaration> enumDeclarations =
+      body.where((e) => e is IDLEnumDeclaration).toList();
+
+  return new IDLNamespaceDeclaration(nameDotNotation,
+      functionDeclaration: functionDeclaration,
+      typeDeclarations: typeDeclarations,
+      eventDeclaration: eventDeclaration,
+      callbackDeclarations: callbackDeclarations,
+      enumDeclarations: enumDeclarations,
+      attribute: attributeMaybe.isDefined ? attributeMaybe.value : null,
+      documentation: documentation);
 }
 
 /**

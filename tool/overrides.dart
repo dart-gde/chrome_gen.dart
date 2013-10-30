@@ -9,6 +9,8 @@ import 'dart:convert';
 import 'dart:io';
 
 class Overrides {
+  bool useChromeIDLParser = false;
+
   Map renameNamespaceMap;
 
   List<String> suppressClassList;
@@ -36,6 +38,11 @@ class Overrides {
     renameClassMap = m['renameClass'];
     if (renameClassMap == null) {
       renameClassMap = {};
+    }
+
+    useChromeIDLParser = m['useChromeIDLParser'];
+    if (useChromeIDLParser == null) {
+      useChromeIDLParser = false;
     }
   }
 
