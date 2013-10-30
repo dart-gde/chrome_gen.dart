@@ -42,39 +42,39 @@ class TtsVoice extends ChromeObject {
    if (extensionId != null) this.extensionId = extensionId;
    if (eventTypes != null) this.eventTypes = eventTypes;
  }
- TtsVoice.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ TtsVoice.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The name of the voice.
   */
- String get voiceName =&gt; proxy['voiceName'];
- set voiceName(String value) =&gt; proxy['voiceName'] = value;
+ String get voiceName =&gt; jsProxy['voiceName'];
+ set voiceName(String value) =&gt; jsProxy['voiceName'] = value;
 
  /**
   * The language that this voice supports, in the form _language_-_region_.
   * Examples: 'en', 'en-US', 'en-GB', 'zh-CN'.
   */
- String get lang =&gt; proxy['lang'];
- set lang(String value) =&gt; proxy['lang'] = value;
+ String get lang =&gt; jsProxy['lang'];
+ set lang(String value) =&gt; jsProxy['lang'] = value;
 
  /**
   * This voice's gender.
   * enum of `male`, `female`
   */
- String get gender =&gt; proxy['gender'];
- set gender(String value) =&gt; proxy['gender'] = value;
+ String get gender =&gt; jsProxy['gender'];
+ set gender(String value) =&gt; jsProxy['gender'] = value;
 
  /**
   * The ID of the extension providing this voice.
   */
- String get extensionId =&gt; proxy['extensionId'];
- set extensionId(String value) =&gt; proxy['extensionId'] = value;
+ String get extensionId =&gt; jsProxy['extensionId'];
+ set extensionId(String value) =&gt; jsProxy['extensionId'] = value;
 
  /**
   * All of the callback event types that this voice is capable of sending.
   */
- List&lt;String&gt; get eventTypes =&gt; listify(proxy['eventTypes']);
- set eventTypes(List&lt;String&gt; value) =&gt; proxy['eventTypes'] = jsify(value);
+ List&lt;String&gt; get eventTypes =&gt; listify(jsProxy['eventTypes']);
+ set eventTypes(List&lt;String&gt; value) =&gt; jsProxy['eventTypes'] = jsify(value);
 }
 </pre>
 </div>
@@ -105,7 +105,7 @@ TtsVoice({String voiceName, String lang, String gender, String extensionId, List
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>TtsVoice.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>TtsVoice.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to TtsVoice.TtsVoice.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -113,7 +113,7 @@ new <strong>TtsVoice.fromProxy</strong>(JsObject proxy) <a class="anchor-link" h
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-TtsVoice.fromProxy(JsObject proxy): super.fromProxy(proxy);
+TtsVoice.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -129,10 +129,10 @@ List&lt;String&gt;         <strong>eventTypes</strong> <a class="anchor-link"
         <div class="doc">
 <p>All of the callback event types that this voice is capable of sending.</p>
 <pre class="source">
-List&lt;String&gt; get eventTypes =&gt; listify(proxy['eventTypes']);
+List&lt;String&gt; get eventTypes =&gt; listify(jsProxy['eventTypes']);
 </pre>
 <pre class="source">
-set eventTypes(List&lt;String&gt; value) =&gt; proxy['eventTypes'] = jsify(value);
+set eventTypes(List&lt;String&gt; value) =&gt; jsProxy['eventTypes'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -145,10 +145,10 @@ String         <strong>extensionId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The ID of the extension providing this voice.</p>
 <pre class="source">
-String get extensionId =&gt; proxy['extensionId'];
+String get extensionId =&gt; jsProxy['extensionId'];
 </pre>
 <pre class="source">
-set extensionId(String value) =&gt; proxy['extensionId'] = value;
+set extensionId(String value) =&gt; jsProxy['extensionId'] = value;
 </pre>
 </div>
 </div>
@@ -162,10 +162,22 @@ String         <strong>gender</strong> <a class="anchor-link"
 <p>This voice's gender.
 enum of <code>male</code>, <code>female</code></p>
 <pre class="source">
-String get gender =&gt; proxy['gender'];
+String get gender =&gt; jsProxy['gender'];
 </pre>
 <pre class="source">
-set gender(String value) =&gt; proxy['gender'] = value;
+set gender(String value) =&gt; jsProxy['gender'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to TtsVoice.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -179,22 +191,10 @@ String         <strong>lang</strong> <a class="anchor-link"
 <p>The language that this voice supports, in the form <em>language</em>-<em>region</em>.
 Examples: 'en', 'en-US', 'en-GB', 'zh-CN'.</p>
 <pre class="source">
-String get lang =&gt; proxy['lang'];
+String get lang =&gt; jsProxy['lang'];
 </pre>
 <pre class="source">
-set lang(String value) =&gt; proxy['lang'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to TtsVoice.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set lang(String value) =&gt; jsProxy['lang'] = value;
 </pre>
 </div>
 </div>
@@ -207,10 +207,10 @@ String         <strong>voiceName</strong> <a class="anchor-link"
         <div class="doc">
 <p>The name of the voice.</p>
 <pre class="source">
-String get voiceName =&gt; proxy['voiceName'];
+String get voiceName =&gt; jsProxy['voiceName'];
 </pre>
 <pre class="source">
-set voiceName(String value) =&gt; proxy['voiceName'] = value;
+set voiceName(String value) =&gt; jsProxy['voiceName'] = value;
 </pre>
 </div>
 </div>
@@ -223,7 +223,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to TtsVoice.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -236,7 +236,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

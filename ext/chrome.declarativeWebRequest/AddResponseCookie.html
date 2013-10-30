@@ -40,14 +40,14 @@ class AddResponseCookie extends ChromeObject {
  AddResponseCookie({ResponseCookie cookie}) {
    if (cookie != null) this.cookie = cookie;
  }
- AddResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ AddResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Cookie to be added to the response. The name and value need to be
   * specified.
   */
- ResponseCookie get cookie =&gt; _createResponseCookie(proxy['cookie']);
- set cookie(ResponseCookie value) =&gt; proxy['cookie'] = jsify(value);
+ ResponseCookie get cookie =&gt; _createResponseCookie(jsProxy['cookie']);
+ set cookie(ResponseCookie value) =&gt; jsProxy['cookie'] = jsify(value);
 }
 </pre>
 </div>
@@ -74,7 +74,7 @@ AddResponseCookie({ResponseCookie cookie}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>AddResponseCookie.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>AddResponseCookie.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to AddResponseCookie.AddResponseCookie.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -82,7 +82,7 @@ new <strong>AddResponseCookie.fromProxy</strong>(JsObject proxy) <a class="ancho
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-AddResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+AddResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -99,22 +99,22 @@ AddResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
 <p>Cookie to be added to the response. The name and value need to be
 specified.</p>
 <pre class="source">
-ResponseCookie get cookie =&gt; _createResponseCookie(proxy['cookie']);
+ResponseCookie get cookie =&gt; _createResponseCookie(jsProxy['cookie']);
 </pre>
 <pre class="source">
-set cookie(ResponseCookie value) =&gt; proxy['cookie'] = jsify(value);
+set cookie(ResponseCookie value) =&gt; jsProxy['cookie'] = jsify(value);
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to AddResponseCookie.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to AddResponseCookie.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -127,7 +127,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to AddResponseCookie.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -140,7 +140,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

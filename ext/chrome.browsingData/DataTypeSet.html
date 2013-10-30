@@ -50,86 +50,86 @@ class DataTypeSet extends ChromeObject {
    if (passwords != null) this.passwords = passwords;
    if (webSQL != null) this.webSQL = webSQL;
  }
- DataTypeSet.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ DataTypeSet.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Websites' appcaches.
   */
- bool get appcache =&gt; proxy['appcache'];
- set appcache(bool value) =&gt; proxy['appcache'] = value;
+ bool get appcache =&gt; jsProxy['appcache'];
+ set appcache(bool value) =&gt; jsProxy['appcache'] = value;
 
  /**
   * The browser's cache. Note: when removing data, this clears the _entire_
   * cache: it is not limited to the range you specify.
   */
- bool get cache =&gt; proxy['cache'];
- set cache(bool value) =&gt; proxy['cache'] = value;
+ bool get cache =&gt; jsProxy['cache'];
+ set cache(bool value) =&gt; jsProxy['cache'] = value;
 
  /**
   * The browser's cookies.
   */
- bool get cookies =&gt; proxy['cookies'];
- set cookies(bool value) =&gt; proxy['cookies'] = value;
+ bool get cookies =&gt; jsProxy['cookies'];
+ set cookies(bool value) =&gt; jsProxy['cookies'] = value;
 
  /**
   * The browser's download list.
   */
- bool get downloads =&gt; proxy['downloads'];
- set downloads(bool value) =&gt; proxy['downloads'] = value;
+ bool get downloads =&gt; jsProxy['downloads'];
+ set downloads(bool value) =&gt; jsProxy['downloads'] = value;
 
  /**
   * Websites' file systems.
   */
- bool get fileSystems =&gt; proxy['fileSystems'];
- set fileSystems(bool value) =&gt; proxy['fileSystems'] = value;
+ bool get fileSystems =&gt; jsProxy['fileSystems'];
+ set fileSystems(bool value) =&gt; jsProxy['fileSystems'] = value;
 
  /**
   * The browser's stored form data.
   */
- bool get formData =&gt; proxy['formData'];
- set formData(bool value) =&gt; proxy['formData'] = value;
+ bool get formData =&gt; jsProxy['formData'];
+ set formData(bool value) =&gt; jsProxy['formData'] = value;
 
  /**
   * The browser's history.
   */
- bool get history =&gt; proxy['history'];
- set history(bool value) =&gt; proxy['history'] = value;
+ bool get history =&gt; jsProxy['history'];
+ set history(bool value) =&gt; jsProxy['history'] = value;
 
  /**
   * Websites' IndexedDB data.
   */
- bool get indexedDB =&gt; proxy['indexedDB'];
- set indexedDB(bool value) =&gt; proxy['indexedDB'] = value;
+ bool get indexedDB =&gt; jsProxy['indexedDB'];
+ set indexedDB(bool value) =&gt; jsProxy['indexedDB'] = value;
 
  /**
   * Websites' local storage data.
   */
- bool get localStorage =&gt; proxy['localStorage'];
- set localStorage(bool value) =&gt; proxy['localStorage'] = value;
+ bool get localStorage =&gt; jsProxy['localStorage'];
+ set localStorage(bool value) =&gt; jsProxy['localStorage'] = value;
 
  /**
   * Server-bound certificates.
   */
- bool get serverBoundCertificates =&gt; proxy['serverBoundCertificates'];
- set serverBoundCertificates(bool value) =&gt; proxy['serverBoundCertificates'] = value;
+ bool get serverBoundCertificates =&gt; jsProxy['serverBoundCertificates'];
+ set serverBoundCertificates(bool value) =&gt; jsProxy['serverBoundCertificates'] = value;
 
  /**
   * Plugins' data.
   */
- bool get pluginData =&gt; proxy['pluginData'];
- set pluginData(bool value) =&gt; proxy['pluginData'] = value;
+ bool get pluginData =&gt; jsProxy['pluginData'];
+ set pluginData(bool value) =&gt; jsProxy['pluginData'] = value;
 
  /**
   * Stored passwords.
   */
- bool get passwords =&gt; proxy['passwords'];
- set passwords(bool value) =&gt; proxy['passwords'] = value;
+ bool get passwords =&gt; jsProxy['passwords'];
+ set passwords(bool value) =&gt; jsProxy['passwords'] = value;
 
  /**
   * Websites' WebSQL data.
   */
- bool get webSQL =&gt; proxy['webSQL'];
- set webSQL(bool value) =&gt; proxy['webSQL'] = value;
+ bool get webSQL =&gt; jsProxy['webSQL'];
+ set webSQL(bool value) =&gt; jsProxy['webSQL'] = value;
 }
 </pre>
 </div>
@@ -168,7 +168,7 @@ DataTypeSet({bool appcache, bool cache, bool cookies, bool downloads, bool fileS
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>DataTypeSet.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>DataTypeSet.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to DataTypeSet.DataTypeSet.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -176,7 +176,7 @@ new <strong>DataTypeSet.fromProxy</strong>(JsObject proxy) <a class="anchor-link
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-DataTypeSet.fromProxy(JsObject proxy): super.fromProxy(proxy);
+DataTypeSet.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -192,10 +192,10 @@ bool         <strong>appcache</strong> <a class="anchor-link"
         <div class="doc">
 <p>Websites' appcaches.</p>
 <pre class="source">
-bool get appcache =&gt; proxy['appcache'];
+bool get appcache =&gt; jsProxy['appcache'];
 </pre>
 <pre class="source">
-set appcache(bool value) =&gt; proxy['appcache'] = value;
+set appcache(bool value) =&gt; jsProxy['appcache'] = value;
 </pre>
 </div>
 </div>
@@ -209,10 +209,10 @@ bool         <strong>cache</strong> <a class="anchor-link"
 <p>The browser's cache. Note: when removing data, this clears the <em>entire</em>
 cache: it is not limited to the range you specify.</p>
 <pre class="source">
-bool get cache =&gt; proxy['cache'];
+bool get cache =&gt; jsProxy['cache'];
 </pre>
 <pre class="source">
-set cache(bool value) =&gt; proxy['cache'] = value;
+set cache(bool value) =&gt; jsProxy['cache'] = value;
 </pre>
 </div>
 </div>
@@ -225,10 +225,10 @@ bool         <strong>cookies</strong> <a class="anchor-link"
         <div class="doc">
 <p>The browser's cookies.</p>
 <pre class="source">
-bool get cookies =&gt; proxy['cookies'];
+bool get cookies =&gt; jsProxy['cookies'];
 </pre>
 <pre class="source">
-set cookies(bool value) =&gt; proxy['cookies'] = value;
+set cookies(bool value) =&gt; jsProxy['cookies'] = value;
 </pre>
 </div>
 </div>
@@ -241,10 +241,10 @@ bool         <strong>downloads</strong> <a class="anchor-link"
         <div class="doc">
 <p>The browser's download list.</p>
 <pre class="source">
-bool get downloads =&gt; proxy['downloads'];
+bool get downloads =&gt; jsProxy['downloads'];
 </pre>
 <pre class="source">
-set downloads(bool value) =&gt; proxy['downloads'] = value;
+set downloads(bool value) =&gt; jsProxy['downloads'] = value;
 </pre>
 </div>
 </div>
@@ -257,10 +257,10 @@ bool         <strong>fileSystems</strong> <a class="anchor-link"
         <div class="doc">
 <p>Websites' file systems.</p>
 <pre class="source">
-bool get fileSystems =&gt; proxy['fileSystems'];
+bool get fileSystems =&gt; jsProxy['fileSystems'];
 </pre>
 <pre class="source">
-set fileSystems(bool value) =&gt; proxy['fileSystems'] = value;
+set fileSystems(bool value) =&gt; jsProxy['fileSystems'] = value;
 </pre>
 </div>
 </div>
@@ -273,10 +273,10 @@ bool         <strong>formData</strong> <a class="anchor-link"
         <div class="doc">
 <p>The browser's stored form data.</p>
 <pre class="source">
-bool get formData =&gt; proxy['formData'];
+bool get formData =&gt; jsProxy['formData'];
 </pre>
 <pre class="source">
-set formData(bool value) =&gt; proxy['formData'] = value;
+set formData(bool value) =&gt; jsProxy['formData'] = value;
 </pre>
 </div>
 </div>
@@ -289,10 +289,10 @@ bool         <strong>history</strong> <a class="anchor-link"
         <div class="doc">
 <p>The browser's history.</p>
 <pre class="source">
-bool get history =&gt; proxy['history'];
+bool get history =&gt; jsProxy['history'];
 </pre>
 <pre class="source">
-set history(bool value) =&gt; proxy['history'] = value;
+set history(bool value) =&gt; jsProxy['history'] = value;
 </pre>
 </div>
 </div>
@@ -305,10 +305,22 @@ bool         <strong>indexedDB</strong> <a class="anchor-link"
         <div class="doc">
 <p>Websites' IndexedDB data.</p>
 <pre class="source">
-bool get indexedDB =&gt; proxy['indexedDB'];
+bool get indexedDB =&gt; jsProxy['indexedDB'];
 </pre>
 <pre class="source">
-set indexedDB(bool value) =&gt; proxy['indexedDB'] = value;
+set indexedDB(bool value) =&gt; jsProxy['indexedDB'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to DataTypeSet.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -321,10 +333,10 @@ bool         <strong>localStorage</strong> <a class="anchor-link"
         <div class="doc">
 <p>Websites' local storage data.</p>
 <pre class="source">
-bool get localStorage =&gt; proxy['localStorage'];
+bool get localStorage =&gt; jsProxy['localStorage'];
 </pre>
 <pre class="source">
-set localStorage(bool value) =&gt; proxy['localStorage'] = value;
+set localStorage(bool value) =&gt; jsProxy['localStorage'] = value;
 </pre>
 </div>
 </div>
@@ -337,10 +349,10 @@ bool         <strong>passwords</strong> <a class="anchor-link"
         <div class="doc">
 <p>Stored passwords.</p>
 <pre class="source">
-bool get passwords =&gt; proxy['passwords'];
+bool get passwords =&gt; jsProxy['passwords'];
 </pre>
 <pre class="source">
-set passwords(bool value) =&gt; proxy['passwords'] = value;
+set passwords(bool value) =&gt; jsProxy['passwords'] = value;
 </pre>
 </div>
 </div>
@@ -353,22 +365,10 @@ bool         <strong>pluginData</strong> <a class="anchor-link"
         <div class="doc">
 <p>Plugins' data.</p>
 <pre class="source">
-bool get pluginData =&gt; proxy['pluginData'];
+bool get pluginData =&gt; jsProxy['pluginData'];
 </pre>
 <pre class="source">
-set pluginData(bool value) =&gt; proxy['pluginData'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to DataTypeSet.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set pluginData(bool value) =&gt; jsProxy['pluginData'] = value;
 </pre>
 </div>
 </div>
@@ -381,10 +381,10 @@ bool         <strong>serverBoundCertificates</strong> <a class="anchor-link"
         <div class="doc">
 <p>Server-bound certificates.</p>
 <pre class="source">
-bool get serverBoundCertificates =&gt; proxy['serverBoundCertificates'];
+bool get serverBoundCertificates =&gt; jsProxy['serverBoundCertificates'];
 </pre>
 <pre class="source">
-set serverBoundCertificates(bool value) =&gt; proxy['serverBoundCertificates'] = value;
+set serverBoundCertificates(bool value) =&gt; jsProxy['serverBoundCertificates'] = value;
 </pre>
 </div>
 </div>
@@ -397,10 +397,10 @@ bool         <strong>webSQL</strong> <a class="anchor-link"
         <div class="doc">
 <p>Websites' WebSQL data.</p>
 <pre class="source">
-bool get webSQL =&gt; proxy['webSQL'];
+bool get webSQL =&gt; jsProxy['webSQL'];
 </pre>
 <pre class="source">
-set webSQL(bool value) =&gt; proxy['webSQL'] = value;
+set webSQL(bool value) =&gt; jsProxy['webSQL'] = value;
 </pre>
 </div>
 </div>
@@ -413,7 +413,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to DataTypeSet.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -426,7 +426,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

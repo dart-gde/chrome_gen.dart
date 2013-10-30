@@ -46,58 +46,58 @@ class BookmarkTreeNode extends ChromeObject {
    if (dateGroupModified != null) this.dateGroupModified = dateGroupModified;
    if (children != null) this.children = children;
  }
- BookmarkTreeNode.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ BookmarkTreeNode.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The unique identifier for the node. IDs are unique within the current
   * profile, and they remain valid even after the browser is restarted.
   */
- String get id =&gt; proxy['id'];
- set id(String value) =&gt; proxy['id'] = value;
+ String get id =&gt; jsProxy['id'];
+ set id(String value) =&gt; jsProxy['id'] = value;
 
  /**
   * The `id` of the parent folder.  Omitted for the root node.
   */
- String get parentId =&gt; proxy['parentId'];
- set parentId(String value) =&gt; proxy['parentId'] = value;
+ String get parentId =&gt; jsProxy['parentId'];
+ set parentId(String value) =&gt; jsProxy['parentId'] = value;
 
  /**
   * The 0-based position of this node within its parent folder.
   */
- int get index =&gt; proxy['index'];
- set index(int value) =&gt; proxy['index'] = value;
+ int get index =&gt; jsProxy['index'];
+ set index(int value) =&gt; jsProxy['index'] = value;
 
  /**
   * The URL navigated to when a user clicks the bookmark. Omitted for folders.
   */
- String get url =&gt; proxy['url'];
- set url(String value) =&gt; proxy['url'] = value;
+ String get url =&gt; jsProxy['url'];
+ set url(String value) =&gt; jsProxy['url'] = value;
 
  /**
   * The text displayed for the node.
   */
- String get title =&gt; proxy['title'];
- set title(String value) =&gt; proxy['title'] = value;
+ String get title =&gt; jsProxy['title'];
+ set title(String value) =&gt; jsProxy['title'] = value;
 
  /**
   * When this node was created, in milliseconds since the epoch (`new
   * Date(dateAdded)`).
   */
- dynamic get dateAdded =&gt; proxy['dateAdded'];
- set dateAdded(var value) =&gt; proxy['dateAdded'] = jsify(value);
+ dynamic get dateAdded =&gt; jsProxy['dateAdded'];
+ set dateAdded(var value) =&gt; jsProxy['dateAdded'] = jsify(value);
 
  /**
   * When the contents of this folder last changed, in milliseconds since the
   * epoch.
   */
- dynamic get dateGroupModified =&gt; proxy['dateGroupModified'];
- set dateGroupModified(var value) =&gt; proxy['dateGroupModified'] = jsify(value);
+ dynamic get dateGroupModified =&gt; jsProxy['dateGroupModified'];
+ set dateGroupModified(var value) =&gt; jsProxy['dateGroupModified'] = jsify(value);
 
  /**
   * An ordered list of children of this node.
   */
- List&lt;BookmarkTreeNode&gt; get children =&gt; listify(proxy['children'], _createBookmarkTreeNode);
- set children(List&lt;BookmarkTreeNode&gt; value) =&gt; proxy['children'] = jsify(value);
+ List&lt;BookmarkTreeNode&gt; get children =&gt; listify(jsProxy['children'], _createBookmarkTreeNode);
+ set children(List&lt;BookmarkTreeNode&gt; value) =&gt; jsProxy['children'] = jsify(value);
 }
 </pre>
 </div>
@@ -131,7 +131,7 @@ BookmarkTreeNode({String id, String parentId, int index, String url, String titl
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>BookmarkTreeNode.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>BookmarkTreeNode.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to BookmarkTreeNode.BookmarkTreeNode.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -139,7 +139,7 @@ new <strong>BookmarkTreeNode.fromProxy</strong>(JsObject proxy) <a class="anchor
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-BookmarkTreeNode.fromProxy(JsObject proxy): super.fromProxy(proxy);
+BookmarkTreeNode.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -155,10 +155,10 @@ List&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>
         <div class="doc">
 <p>An ordered list of children of this node.</p>
 <pre class="source">
-List&lt;BookmarkTreeNode&gt; get children =&gt; listify(proxy['children'], _createBookmarkTreeNode);
+List&lt;BookmarkTreeNode&gt; get children =&gt; listify(jsProxy['children'], _createBookmarkTreeNode);
 </pre>
 <pre class="source">
-set children(List&lt;BookmarkTreeNode&gt; value) =&gt; proxy['children'] = jsify(value);
+set children(List&lt;BookmarkTreeNode&gt; value) =&gt; jsProxy['children'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -172,10 +172,10 @@ var         <strong>dateAdded</strong> <a class="anchor-link"
 <p>When this node was created, in milliseconds since the epoch (<code>new
 Date(dateAdded)</code>).</p>
 <pre class="source">
-dynamic get dateAdded =&gt; proxy['dateAdded'];
+dynamic get dateAdded =&gt; jsProxy['dateAdded'];
 </pre>
 <pre class="source">
-set dateAdded(var value) =&gt; proxy['dateAdded'] = jsify(value);
+set dateAdded(var value) =&gt; jsProxy['dateAdded'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -189,10 +189,10 @@ var         <strong>dateGroupModified</strong> <a class="anchor-link"
 <p>When the contents of this folder last changed, in milliseconds since the
 epoch.</p>
 <pre class="source">
-dynamic get dateGroupModified =&gt; proxy['dateGroupModified'];
+dynamic get dateGroupModified =&gt; jsProxy['dateGroupModified'];
 </pre>
 <pre class="source">
-set dateGroupModified(var value) =&gt; proxy['dateGroupModified'] = jsify(value);
+set dateGroupModified(var value) =&gt; jsProxy['dateGroupModified'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -206,10 +206,10 @@ String         <strong>id</strong> <a class="anchor-link"
 <p>The unique identifier for the node. IDs are unique within the current
 profile, and they remain valid even after the browser is restarted.</p>
 <pre class="source">
-String get id =&gt; proxy['id'];
+String get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(String value) =&gt; proxy['id'] = value;
+set id(String value) =&gt; jsProxy['id'] = value;
 </pre>
 </div>
 </div>
@@ -222,10 +222,22 @@ int         <strong>index</strong> <a class="anchor-link"
         <div class="doc">
 <p>The 0-based position of this node within its parent folder.</p>
 <pre class="source">
-int get index =&gt; proxy['index'];
+int get index =&gt; jsProxy['index'];
 </pre>
 <pre class="source">
-set index(int value) =&gt; proxy['index'] = value;
+set index(int value) =&gt; jsProxy['index'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to BookmarkTreeNode.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -238,22 +250,10 @@ String         <strong>parentId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The <code>id</code> of the parent folder.  Omitted for the root node.</p>
 <pre class="source">
-String get parentId =&gt; proxy['parentId'];
+String get parentId =&gt; jsProxy['parentId'];
 </pre>
 <pre class="source">
-set parentId(String value) =&gt; proxy['parentId'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to BookmarkTreeNode.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set parentId(String value) =&gt; jsProxy['parentId'] = value;
 </pre>
 </div>
 </div>
@@ -266,10 +266,10 @@ String         <strong>title</strong> <a class="anchor-link"
         <div class="doc">
 <p>The text displayed for the node.</p>
 <pre class="source">
-String get title =&gt; proxy['title'];
+String get title =&gt; jsProxy['title'];
 </pre>
 <pre class="source">
-set title(String value) =&gt; proxy['title'] = value;
+set title(String value) =&gt; jsProxy['title'] = value;
 </pre>
 </div>
 </div>
@@ -282,10 +282,10 @@ String         <strong>url</strong> <a class="anchor-link"
         <div class="doc">
 <p>The URL navigated to when a user clicks the bookmark. Omitted for folders.</p>
 <pre class="source">
-String get url =&gt; proxy['url'];
+String get url =&gt; jsProxy['url'];
 </pre>
 <pre class="source">
-set url(String value) =&gt; proxy['url'] = value;
+set url(String value) =&gt; jsProxy['url'] = value;
 </pre>
 </div>
 </div>
@@ -298,7 +298,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to BookmarkTreeNode.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -311,7 +311,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

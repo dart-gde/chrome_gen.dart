@@ -40,28 +40,28 @@ class ProxyServer extends ChromeObject {
    if (host != null) this.host = host;
    if (port != null) this.port = port;
  }
- ProxyServer.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ ProxyServer.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The scheme (protocol) of the proxy server itself. Defaults to 'http'.
   * enum of `http`, `https`, `socks4`, `socks5`
   */
- String get scheme =&gt; this.proxy['scheme'];
- set scheme(String value) =&gt; this.proxy['scheme'] = value;
+ String get scheme =&gt; this.jsProxy['scheme'];
+ set scheme(String value) =&gt; this.jsProxy['scheme'] = value;
 
  /**
   * The URI of the proxy server. This must be an ASCII hostname (in Punycode
   * format). IDNA is not supported, yet.
   */
- String get host =&gt; this.proxy['host'];
- set host(String value) =&gt; this.proxy['host'] = value;
+ String get host =&gt; this.jsProxy['host'];
+ set host(String value) =&gt; this.jsProxy['host'] = value;
 
  /**
   * The port of the proxy server. Defaults to a port that depends on the
   * scheme.
   */
- int get port =&gt; this.proxy['port'];
- set port(int value) =&gt; this.proxy['port'] = value;
+ int get port =&gt; this.jsProxy['port'];
+ set port(int value) =&gt; this.jsProxy['port'] = value;
 }
 </pre>
 </div>
@@ -90,7 +90,7 @@ ProxyServer({String scheme, String host, int port}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ProxyServer.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ProxyServer.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ProxyServer.ProxyServer.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -98,7 +98,7 @@ new <strong>ProxyServer.fromProxy</strong>(JsObject proxy) <a class="anchor-link
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ProxyServer.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ProxyServer.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -115,10 +115,22 @@ String         <strong>host</strong> <a class="anchor-link"
 <p>The URI of the proxy server. This must be an ASCII hostname (in Punycode
 format). IDNA is not supported, yet.</p>
 <pre class="source">
-String get host =&gt; this.proxy['host'];
+String get host =&gt; this.jsProxy['host'];
 </pre>
 <pre class="source">
-set host(String value) =&gt; this.proxy['host'] = value;
+set host(String value) =&gt; this.jsProxy['host'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to ProxyServer.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -132,22 +144,10 @@ int         <strong>port</strong> <a class="anchor-link"
 <p>The port of the proxy server. Defaults to a port that depends on the
 scheme.</p>
 <pre class="source">
-int get port =&gt; this.proxy['port'];
+int get port =&gt; this.jsProxy['port'];
 </pre>
 <pre class="source">
-set port(int value) =&gt; this.proxy['port'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to ProxyServer.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set port(int value) =&gt; this.jsProxy['port'] = value;
 </pre>
 </div>
 </div>
@@ -161,10 +161,10 @@ String         <strong>scheme</strong> <a class="anchor-link"
 <p>The scheme (protocol) of the proxy server itself. Defaults to 'http'.
 enum of <code>http</code>, <code>https</code>, <code>socks4</code>, <code>socks5</code></p>
 <pre class="source">
-String get scheme =&gt; this.proxy['scheme'];
+String get scheme =&gt; this.jsProxy['scheme'];
 </pre>
 <pre class="source">
-set scheme(String value) =&gt; this.proxy['scheme'] = value;
+set scheme(String value) =&gt; this.jsProxy['scheme'] = value;
 </pre>
 </div>
 </div>
@@ -177,7 +177,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to ProxyServer.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -190,7 +190,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

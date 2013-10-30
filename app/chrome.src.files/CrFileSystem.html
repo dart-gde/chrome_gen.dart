@@ -34,16 +34,16 @@
 <div class="doc">
 <pre class="source">
 class CrFileSystem extends ChromeObject implements FileSystem {
- CrFileSystem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ CrFileSystem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get name =&gt; proxy['name'];
+ String get name =&gt; jsProxy['name'];
 
- DirectoryEntry get root =&gt; new CrDirectoryEntry.fromProxy(proxy['root']);
+ DirectoryEntry get root =&gt; new CrDirectoryEntry.fromProxy(jsProxy['root']);
 
  bool operator==(Object other) =&gt;
-     other is CrFileSystem &amp;&amp; other.proxy == proxy;
+     other is CrFileSystem &amp;&amp; other.jsProxy == jsProxy;
 
- int get hashCode =&gt; proxy.hashCode;
+ int get hashCode =&gt; jsProxy.hashCode;
  String toString() =&gt; name;
 }
 </pre>
@@ -58,7 +58,7 @@ class CrFileSystem extends ChromeObject implements FileSystem {
 <h3>Constructors</h3>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>CrFileSystem.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>CrFileSystem.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to CrFileSystem.CrFileSystem.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -66,7 +66,7 @@ new <strong>CrFileSystem.fromProxy</strong>(JsObject proxy) <a class="anchor-lin
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-CrFileSystem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+CrFileSystem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -91,7 +91,19 @@ there are no distribution guarantees.</p>
 equality operator as well to maintain consistency.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-int get hashCode =&gt; proxy.hashCode;
+int get hashCode =&gt; jsProxy.hashCode;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to CrFileSystem.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -104,18 +116,6 @@ final String         <strong>name</strong> <a class="anchor-link"
         <div class="inherited-from">inherited from FileSystem </div><div class="doc">
 <pre class="source">
 final String name
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to CrFileSystem.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
 </pre>
 </div>
 </div>
@@ -177,7 +177,7 @@ the <a class="crossref" href="../chrome.src.files/CrFileSystem.html#hashCode">ha
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
 bool operator==(Object other) =&gt;
-   other is CrFileSystem &amp;&amp; other.proxy == proxy;
+   other is CrFileSystem &amp;&amp; other.jsProxy == jsProxy;
 </pre>
 </div>
 </div>
@@ -215,7 +215,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to CrFileSystem.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>

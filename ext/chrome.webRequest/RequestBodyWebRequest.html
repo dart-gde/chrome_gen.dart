@@ -39,13 +39,13 @@ class RequestBodyWebRequest extends ChromeObject {
    if (formData != null) this.formData = formData;
    if (raw != null) this.raw = raw;
  }
- RequestBodyWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ RequestBodyWebRequest.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Errors when obtaining request body data.
   */
- String get error =&gt; proxy['error'];
- set error(String value) =&gt; proxy['error'] = value;
+ String get error =&gt; jsProxy['error'];
+ set error(String value) =&gt; jsProxy['error'] = value;
 
  /**
   * If the request method is POST and the body is a sequence of key-value pairs
@@ -55,16 +55,16 @@ class RequestBodyWebRequest extends ChromeObject {
   * media type, or if it is malformed, the dictionary is not present. An
   * example value of this dictionary is {'key': ['value1', 'value2']}.
   */
- Map get formData =&gt; mapify(proxy['formData']);
- set formData(Map value) =&gt; proxy['formData'] = jsify(value);
+ Map get formData =&gt; mapify(jsProxy['formData']);
+ set formData(Map value) =&gt; jsProxy['formData'] = jsify(value);
 
  /**
   * If the request method is PUT or POST, and the body is not already parsed in
   * formData, then the unparsed request body elements are contained in this
   * array.
   */
- List&lt;UploadData&gt; get raw =&gt; listify(proxy['raw'], _createUploadData);
- set raw(List&lt;UploadData&gt; value) =&gt; proxy['raw'] = jsify(value);
+ List&lt;UploadData&gt; get raw =&gt; listify(jsProxy['raw'], _createUploadData);
+ set raw(List&lt;UploadData&gt; value) =&gt; jsProxy['raw'] = jsify(value);
 }
 </pre>
 </div>
@@ -93,7 +93,7 @@ RequestBodyWebRequest({String error, Map formData, List&lt;UploadData&gt; raw}) 
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>RequestBodyWebRequest.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>RequestBodyWebRequest.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to RequestBodyWebRequest.RequestBodyWebRequest.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -101,7 +101,7 @@ new <strong>RequestBodyWebRequest.fromProxy</strong>(JsObject proxy) <a class="a
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-RequestBodyWebRequest.fromProxy(JsObject proxy): super.fromProxy(proxy);
+RequestBodyWebRequest.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -117,10 +117,10 @@ String         <strong>error</strong> <a class="anchor-link"
         <div class="doc">
 <p>Errors when obtaining request body data.</p>
 <pre class="source">
-String get error =&gt; proxy['error'];
+String get error =&gt; jsProxy['error'];
 </pre>
 <pre class="source">
-set error(String value) =&gt; proxy['error'] = value;
+set error(String value) =&gt; jsProxy['error'] = value;
 </pre>
 </div>
 </div>
@@ -138,22 +138,22 @@ key contains the list of all values for that key. If the data is of another
 media type, or if it is malformed, the dictionary is not present. An
 example value of this dictionary is {'key': <code>'value1', 'value2'</code>}.</p>
 <pre class="source">
-Map get formData =&gt; mapify(proxy['formData']);
+Map get formData =&gt; mapify(jsProxy['formData']);
 </pre>
 <pre class="source">
-set formData(Map value) =&gt; proxy['formData'] = jsify(value);
+set formData(Map value) =&gt; jsProxy['formData'] = jsify(value);
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to RequestBodyWebRequest.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to RequestBodyWebRequest.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -168,10 +168,10 @@ List&lt;<a href="../chrome.webRequest/UploadData.html">UploadData</a>&gt;       
 formData, then the unparsed request body elements are contained in this
 array.</p>
 <pre class="source">
-List&lt;UploadData&gt; get raw =&gt; listify(proxy['raw'], _createUploadData);
+List&lt;UploadData&gt; get raw =&gt; listify(jsProxy['raw'], _createUploadData);
 </pre>
 <pre class="source">
-set raw(List&lt;UploadData&gt; value) =&gt; proxy['raw'] = jsify(value);
+set raw(List&lt;UploadData&gt; value) =&gt; jsProxy['raw'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -184,7 +184,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to RequestBodyWebRequest.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -197,7 +197,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

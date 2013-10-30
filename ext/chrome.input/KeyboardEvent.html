@@ -45,57 +45,57 @@ class KeyboardEvent extends ChromeObject {
    if (shiftKey != null) this.shiftKey = shiftKey;
    if (capsLock != null) this.capsLock = capsLock;
  }
- KeyboardEvent.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ KeyboardEvent.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * One of keyup or keydown.
   * enum of `keyup`, `keydown`
   */
- String get type =&gt; proxy['type'];
- set type(String value) =&gt; proxy['type'] = value;
+ String get type =&gt; jsProxy['type'];
+ set type(String value) =&gt; jsProxy['type'] = value;
 
  /**
   * The ID of the request.
   */
- String get requestId =&gt; proxy['requestId'];
- set requestId(String value) =&gt; proxy['requestId'] = value;
+ String get requestId =&gt; jsProxy['requestId'];
+ set requestId(String value) =&gt; jsProxy['requestId'] = value;
 
  /**
   * Value of the key being pressed
   */
- String get key =&gt; proxy['key'];
- set key(String value) =&gt; proxy['key'] = value;
+ String get key =&gt; jsProxy['key'];
+ set key(String value) =&gt; jsProxy['key'] = value;
 
  /**
   * Value of the physical key being pressed. The value is not affected by
   * current keyboard layout or modifier state.
   */
- String get code =&gt; proxy['code'];
- set code(String value) =&gt; proxy['code'] = value;
+ String get code =&gt; jsProxy['code'];
+ set code(String value) =&gt; jsProxy['code'] = value;
 
  /**
   * Whether or not the ALT key is pressed.
   */
- bool get altKey =&gt; proxy['altKey'];
- set altKey(bool value) =&gt; proxy['altKey'] = value;
+ bool get altKey =&gt; jsProxy['altKey'];
+ set altKey(bool value) =&gt; jsProxy['altKey'] = value;
 
  /**
   * Whether or not the CTRL key is pressed.
   */
- bool get ctrlKey =&gt; proxy['ctrlKey'];
- set ctrlKey(bool value) =&gt; proxy['ctrlKey'] = value;
+ bool get ctrlKey =&gt; jsProxy['ctrlKey'];
+ set ctrlKey(bool value) =&gt; jsProxy['ctrlKey'] = value;
 
  /**
   * Whether or not the SHIFT key is pressed.
   */
- bool get shiftKey =&gt; proxy['shiftKey'];
- set shiftKey(bool value) =&gt; proxy['shiftKey'] = value;
+ bool get shiftKey =&gt; jsProxy['shiftKey'];
+ set shiftKey(bool value) =&gt; jsProxy['shiftKey'] = value;
 
  /**
   * Whether or not the CAPS_LOCK is enabled.
   */
- bool get capsLock =&gt; proxy['capsLock'];
- set capsLock(bool value) =&gt; proxy['capsLock'] = value;
+ bool get capsLock =&gt; jsProxy['capsLock'];
+ set capsLock(bool value) =&gt; jsProxy['capsLock'] = value;
 }
 </pre>
 </div>
@@ -129,7 +129,7 @@ KeyboardEvent({String type, String requestId, String key, String code, bool altK
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>KeyboardEvent.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>KeyboardEvent.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to KeyboardEvent.KeyboardEvent.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -137,7 +137,7 @@ new <strong>KeyboardEvent.fromProxy</strong>(JsObject proxy) <a class="anchor-li
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-KeyboardEvent.fromProxy(JsObject proxy): super.fromProxy(proxy);
+KeyboardEvent.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -153,10 +153,10 @@ bool         <strong>altKey</strong> <a class="anchor-link"
         <div class="doc">
 <p>Whether or not the ALT key is pressed.</p>
 <pre class="source">
-bool get altKey =&gt; proxy['altKey'];
+bool get altKey =&gt; jsProxy['altKey'];
 </pre>
 <pre class="source">
-set altKey(bool value) =&gt; proxy['altKey'] = value;
+set altKey(bool value) =&gt; jsProxy['altKey'] = value;
 </pre>
 </div>
 </div>
@@ -169,10 +169,10 @@ bool         <strong>capsLock</strong> <a class="anchor-link"
         <div class="doc">
 <p>Whether or not the CAPS_LOCK is enabled.</p>
 <pre class="source">
-bool get capsLock =&gt; proxy['capsLock'];
+bool get capsLock =&gt; jsProxy['capsLock'];
 </pre>
 <pre class="source">
-set capsLock(bool value) =&gt; proxy['capsLock'] = value;
+set capsLock(bool value) =&gt; jsProxy['capsLock'] = value;
 </pre>
 </div>
 </div>
@@ -186,10 +186,10 @@ String         <strong>code</strong> <a class="anchor-link"
 <p>Value of the physical key being pressed. The value is not affected by
 current keyboard layout or modifier state.</p>
 <pre class="source">
-String get code =&gt; proxy['code'];
+String get code =&gt; jsProxy['code'];
 </pre>
 <pre class="source">
-set code(String value) =&gt; proxy['code'] = value;
+set code(String value) =&gt; jsProxy['code'] = value;
 </pre>
 </div>
 </div>
@@ -202,10 +202,22 @@ bool         <strong>ctrlKey</strong> <a class="anchor-link"
         <div class="doc">
 <p>Whether or not the CTRL key is pressed.</p>
 <pre class="source">
-bool get ctrlKey =&gt; proxy['ctrlKey'];
+bool get ctrlKey =&gt; jsProxy['ctrlKey'];
 </pre>
 <pre class="source">
-set ctrlKey(bool value) =&gt; proxy['ctrlKey'] = value;
+set ctrlKey(bool value) =&gt; jsProxy['ctrlKey'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to KeyboardEvent.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -218,22 +230,10 @@ String         <strong>key</strong> <a class="anchor-link"
         <div class="doc">
 <p>Value of the key being pressed</p>
 <pre class="source">
-String get key =&gt; proxy['key'];
+String get key =&gt; jsProxy['key'];
 </pre>
 <pre class="source">
-set key(String value) =&gt; proxy['key'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to KeyboardEvent.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set key(String value) =&gt; jsProxy['key'] = value;
 </pre>
 </div>
 </div>
@@ -246,10 +246,10 @@ String         <strong>requestId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The ID of the request.</p>
 <pre class="source">
-String get requestId =&gt; proxy['requestId'];
+String get requestId =&gt; jsProxy['requestId'];
 </pre>
 <pre class="source">
-set requestId(String value) =&gt; proxy['requestId'] = value;
+set requestId(String value) =&gt; jsProxy['requestId'] = value;
 </pre>
 </div>
 </div>
@@ -262,10 +262,10 @@ bool         <strong>shiftKey</strong> <a class="anchor-link"
         <div class="doc">
 <p>Whether or not the SHIFT key is pressed.</p>
 <pre class="source">
-bool get shiftKey =&gt; proxy['shiftKey'];
+bool get shiftKey =&gt; jsProxy['shiftKey'];
 </pre>
 <pre class="source">
-set shiftKey(bool value) =&gt; proxy['shiftKey'] = value;
+set shiftKey(bool value) =&gt; jsProxy['shiftKey'] = value;
 </pre>
 </div>
 </div>
@@ -279,10 +279,10 @@ String         <strong>type</strong> <a class="anchor-link"
 <p>One of keyup or keydown.
 enum of <code>keyup</code>, <code>keydown</code></p>
 <pre class="source">
-String get type =&gt; proxy['type'];
+String get type =&gt; jsProxy['type'];
 </pre>
 <pre class="source">
-set type(String value) =&gt; proxy['type'] = value;
+set type(String value) =&gt; jsProxy['type'] = value;
 </pre>
 </div>
 </div>
@@ -295,7 +295,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to KeyboardEvent.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -308,7 +308,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

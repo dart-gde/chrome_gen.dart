@@ -39,19 +39,19 @@ class FontName extends ChromeObject {
    if (fontId != null) this.fontId = fontId;
    if (displayName != null) this.displayName = displayName;
  }
- FontName.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ FontName.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The font ID.
   */
- String get fontId =&gt; proxy['fontId'];
- set fontId(String value) =&gt; proxy['fontId'] = value;
+ String get fontId =&gt; jsProxy['fontId'];
+ set fontId(String value) =&gt; jsProxy['fontId'] = value;
 
  /**
   * The display name of the font.
   */
- String get displayName =&gt; proxy['displayName'];
- set displayName(String value) =&gt; proxy['displayName'] = value;
+ String get displayName =&gt; jsProxy['displayName'];
+ set displayName(String value) =&gt; jsProxy['displayName'] = value;
 }
 </pre>
 </div>
@@ -79,7 +79,7 @@ FontName({String fontId, String displayName}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>FontName.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>FontName.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to FontName.FontName.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -87,7 +87,7 @@ new <strong>FontName.fromProxy</strong>(JsObject proxy) <a class="anchor-link" h
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-FontName.fromProxy(JsObject proxy): super.fromProxy(proxy);
+FontName.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -103,10 +103,10 @@ String         <strong>displayName</strong> <a class="anchor-link"
         <div class="doc">
 <p>The display name of the font.</p>
 <pre class="source">
-String get displayName =&gt; proxy['displayName'];
+String get displayName =&gt; jsProxy['displayName'];
 </pre>
 <pre class="source">
-set displayName(String value) =&gt; proxy['displayName'] = value;
+set displayName(String value) =&gt; jsProxy['displayName'] = value;
 </pre>
 </div>
 </div>
@@ -119,22 +119,22 @@ String         <strong>fontId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The font ID.</p>
 <pre class="source">
-String get fontId =&gt; proxy['fontId'];
+String get fontId =&gt; jsProxy['fontId'];
 </pre>
 <pre class="source">
-set fontId(String value) =&gt; proxy['fontId'] = value;
+set fontId(String value) =&gt; jsProxy['fontId'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to FontName.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to FontName.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -147,7 +147,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to FontName.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -160,7 +160,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

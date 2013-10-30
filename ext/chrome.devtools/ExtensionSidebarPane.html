@@ -36,7 +36,7 @@
 <pre class="source">
 class ExtensionSidebarPane extends ChromeObject {
  ExtensionSidebarPane();
- ExtensionSidebarPane.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ ExtensionSidebarPane.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Sets the height of the sidebar.
@@ -44,7 +44,7 @@ class ExtensionSidebarPane extends ChromeObject {
   * [height] A CSS-like size specification, such as `'100px'` or `'12ex'`.
   */
  void setHeight(String height) {
-   proxy.callMethod('setHeight', [height]);
+   jsProxy.callMethod('setHeight', [height]);
  }
 
  /**
@@ -59,7 +59,7 @@ class ExtensionSidebarPane extends ChromeObject {
   */
  Future setExpression(String expression, [String rootTitle]) {
    var completer = new ChromeCompleter.noArgs();
-   proxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
+   jsProxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
    return completer.future;
  }
 
@@ -73,7 +73,7 @@ class ExtensionSidebarPane extends ChromeObject {
   */
  Future setObject(String jsonObject, [String rootTitle]) {
    var completer = new ChromeCompleter.noArgs();
-   proxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
+   jsProxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
    return completer.future;
  }
 
@@ -83,7 +83,7 @@ class ExtensionSidebarPane extends ChromeObject {
   * [path] Relative path of an extension page to display within the sidebar.
   */
  void setPage(String path) {
-   proxy.callMethod('setPage', [path]);
+   jsProxy.callMethod('setPage', [path]);
  }
 }
 </pre>
@@ -109,7 +109,7 @@ ExtensionSidebarPane();
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ExtensionSidebarPane.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ExtensionSidebarPane.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ExtensionSidebarPane.ExtensionSidebarPane.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -117,22 +117,22 @@ new <strong>ExtensionSidebarPane.fromProxy</strong>(JsObject proxy) <a class="an
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ExtensionSidebarPane.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ExtensionSidebarPane.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div class="inherited">
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to ExtensionSidebarPane.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to ExtensionSidebarPane.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -155,7 +155,7 @@ similar to the console/watch.</p>
 <pre class="source">
 Future setExpression(String expression, [String rootTitle]) {
  var completer = new ChromeCompleter.noArgs();
- proxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
+ jsProxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
  return completer.future;
 }
 </pre>
@@ -171,7 +171,7 @@ void <strong>setHeight</strong>(String height) <a class="anchor-link" href="#set
 <span class="param">height</span> A CSS-like size specification, such as <code>'100px'</code> or <code>'12ex'</code>.</p>
 <pre class="source">
 void setHeight(String height) {
- proxy.callMethod('setHeight', [height]);
+ jsProxy.callMethod('setHeight', [height]);
 }
 </pre>
 </div>
@@ -190,7 +190,7 @@ Evaluated in the context of the caller (API client).</p>
 <pre class="source">
 Future setObject(String jsonObject, [String rootTitle]) {
  var completer = new ChromeCompleter.noArgs();
- proxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
+ jsProxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
  return completer.future;
 }
 </pre>
@@ -206,7 +206,7 @@ void <strong>setPage</strong>(String path) <a class="anchor-link" href="#setPage
 <span class="param">path</span> Relative path of an extension page to display within the sidebar.</p>
 <pre class="source">
 void setPage(String path) {
- proxy.callMethod('setPage', [path]);
+ jsProxy.callMethod('setPage', [path]);
 }
 </pre>
 </div>
@@ -217,7 +217,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to ExtensionSidebarPane.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -230,7 +230,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

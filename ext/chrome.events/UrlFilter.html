@@ -58,7 +58,7 @@ class UrlFilter extends ChromeObject {
    if (schemes != null) this.schemes = schemes;
    if (ports != null) this.ports = ports;
  }
- UrlFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ UrlFilter.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Matches if the host name of the URL contains a specified string. To test
@@ -70,90 +70,90 @@ class UrlFilter extends ChromeObject {
   * components need to be done separately using hostSuffix, because no implicit
   * dot is added at the end of the host name.
   */
- String get hostContains =&gt; proxy['hostContains'];
- set hostContains(String value) =&gt; proxy['hostContains'] = value;
+ String get hostContains =&gt; jsProxy['hostContains'];
+ set hostContains(String value) =&gt; jsProxy['hostContains'] = value;
 
  /**
   * Matches if the host name of the URL is equal to a specified string.
   */
- String get hostEquals =&gt; proxy['hostEquals'];
- set hostEquals(String value) =&gt; proxy['hostEquals'] = value;
+ String get hostEquals =&gt; jsProxy['hostEquals'];
+ set hostEquals(String value) =&gt; jsProxy['hostEquals'] = value;
 
  /**
   * Matches if the host name of the URL starts with a specified string.
   */
- String get hostPrefix =&gt; proxy['hostPrefix'];
- set hostPrefix(String value) =&gt; proxy['hostPrefix'] = value;
+ String get hostPrefix =&gt; jsProxy['hostPrefix'];
+ set hostPrefix(String value) =&gt; jsProxy['hostPrefix'] = value;
 
  /**
   * Matches if the host name of the URL ends with a specified string.
   */
- String get hostSuffix =&gt; proxy['hostSuffix'];
- set hostSuffix(String value) =&gt; proxy['hostSuffix'] = value;
+ String get hostSuffix =&gt; jsProxy['hostSuffix'];
+ set hostSuffix(String value) =&gt; jsProxy['hostSuffix'] = value;
 
  /**
   * Matches if the path segment of the URL contains a specified string.
   */
- String get pathContains =&gt; proxy['pathContains'];
- set pathContains(String value) =&gt; proxy['pathContains'] = value;
+ String get pathContains =&gt; jsProxy['pathContains'];
+ set pathContains(String value) =&gt; jsProxy['pathContains'] = value;
 
  /**
   * Matches if the path segment of the URL is equal to a specified string.
   */
- String get pathEquals =&gt; proxy['pathEquals'];
- set pathEquals(String value) =&gt; proxy['pathEquals'] = value;
+ String get pathEquals =&gt; jsProxy['pathEquals'];
+ set pathEquals(String value) =&gt; jsProxy['pathEquals'] = value;
 
  /**
   * Matches if the path segment of the URL starts with a specified string.
   */
- String get pathPrefix =&gt; proxy['pathPrefix'];
- set pathPrefix(String value) =&gt; proxy['pathPrefix'] = value;
+ String get pathPrefix =&gt; jsProxy['pathPrefix'];
+ set pathPrefix(String value) =&gt; jsProxy['pathPrefix'] = value;
 
  /**
   * Matches if the path segment of the URL ends with a specified string.
   */
- String get pathSuffix =&gt; proxy['pathSuffix'];
- set pathSuffix(String value) =&gt; proxy['pathSuffix'] = value;
+ String get pathSuffix =&gt; jsProxy['pathSuffix'];
+ set pathSuffix(String value) =&gt; jsProxy['pathSuffix'] = value;
 
  /**
   * Matches if the query segment of the URL contains a specified string.
   */
- String get queryContains =&gt; proxy['queryContains'];
- set queryContains(String value) =&gt; proxy['queryContains'] = value;
+ String get queryContains =&gt; jsProxy['queryContains'];
+ set queryContains(String value) =&gt; jsProxy['queryContains'] = value;
 
  /**
   * Matches if the query segment of the URL is equal to a specified string.
   */
- String get queryEquals =&gt; proxy['queryEquals'];
- set queryEquals(String value) =&gt; proxy['queryEquals'] = value;
+ String get queryEquals =&gt; jsProxy['queryEquals'];
+ set queryEquals(String value) =&gt; jsProxy['queryEquals'] = value;
 
  /**
   * Matches if the query segment of the URL starts with a specified string.
   */
- String get queryPrefix =&gt; proxy['queryPrefix'];
- set queryPrefix(String value) =&gt; proxy['queryPrefix'] = value;
+ String get queryPrefix =&gt; jsProxy['queryPrefix'];
+ set queryPrefix(String value) =&gt; jsProxy['queryPrefix'] = value;
 
  /**
   * Matches if the query segment of the URL ends with a specified string.
   */
- String get querySuffix =&gt; proxy['querySuffix'];
- set querySuffix(String value) =&gt; proxy['querySuffix'] = value;
+ String get querySuffix =&gt; jsProxy['querySuffix'];
+ set querySuffix(String value) =&gt; jsProxy['querySuffix'] = value;
 
  /**
   * Matches if the URL (without fragment identifier) contains a specified
   * string. Port numbers are stripped from the URL if they match the default
   * port number.
   */
- String get urlContains =&gt; proxy['urlContains'];
- set urlContains(String value) =&gt; proxy['urlContains'] = value;
+ String get urlContains =&gt; jsProxy['urlContains'];
+ set urlContains(String value) =&gt; jsProxy['urlContains'] = value;
 
  /**
   * Matches if the URL (without fragment identifier) is equal to a specified
   * string. Port numbers are stripped from the URL if they match the default
   * port number.
   */
- String get urlEquals =&gt; proxy['urlEquals'];
- set urlEquals(String value) =&gt; proxy['urlEquals'] = value;
+ String get urlEquals =&gt; jsProxy['urlEquals'];
+ set urlEquals(String value) =&gt; jsProxy['urlEquals'] = value;
 
  /**
   * Matches if the URL (without fragment identifier) matches a specified
@@ -161,8 +161,8 @@ class UrlFilter extends ChromeObject {
   * the default port number. The regular expressions use the [RE2
   * syntax](http://code.google.com/p/re2/wiki/Syntax).
   */
- String get urlMatches =&gt; proxy['urlMatches'];
- set urlMatches(String value) =&gt; proxy['urlMatches'] = value;
+ String get urlMatches =&gt; jsProxy['urlMatches'];
+ set urlMatches(String value) =&gt; jsProxy['urlMatches'] = value;
 
  /**
   * Matches if the URL without query segment and fragment identifier matches a
@@ -170,39 +170,39 @@ class UrlFilter extends ChromeObject {
   * they match the default port number. The regular expressions use the [RE2
   * syntax](http://code.google.com/p/re2/wiki/Syntax).
   */
- String get originAndPathMatches =&gt; proxy['originAndPathMatches'];
- set originAndPathMatches(String value) =&gt; proxy['originAndPathMatches'] = value;
+ String get originAndPathMatches =&gt; jsProxy['originAndPathMatches'];
+ set originAndPathMatches(String value) =&gt; jsProxy['originAndPathMatches'] = value;
 
  /**
   * Matches if the URL (without fragment identifier) starts with a specified
   * string. Port numbers are stripped from the URL if they match the default
   * port number.
   */
- String get urlPrefix =&gt; proxy['urlPrefix'];
- set urlPrefix(String value) =&gt; proxy['urlPrefix'] = value;
+ String get urlPrefix =&gt; jsProxy['urlPrefix'];
+ set urlPrefix(String value) =&gt; jsProxy['urlPrefix'] = value;
 
  /**
   * Matches if the URL (without fragment identifier) ends with a specified
   * string. Port numbers are stripped from the URL if they match the default
   * port number.
   */
- String get urlSuffix =&gt; proxy['urlSuffix'];
- set urlSuffix(String value) =&gt; proxy['urlSuffix'] = value;
+ String get urlSuffix =&gt; jsProxy['urlSuffix'];
+ set urlSuffix(String value) =&gt; jsProxy['urlSuffix'] = value;
 
  /**
   * Matches if the scheme of the URL is equal to any of the schemes specified
   * in the array.
   */
- List&lt;String&gt; get schemes =&gt; listify(proxy['schemes']);
- set schemes(List&lt;String&gt; value) =&gt; proxy['schemes'] = jsify(value);
+ List&lt;String&gt; get schemes =&gt; listify(jsProxy['schemes']);
+ set schemes(List&lt;String&gt; value) =&gt; jsProxy['schemes'] = jsify(value);
 
  /**
   * Matches if the port of the URL is contained in any of the specified port
   * lists. For example `[80, 443, [1000, 1200]]` matches all requests on port
   * 80, 443 and in the range 1000-1200.
   */
- List&lt;dynamic&gt; get ports =&gt; listify(proxy['ports']);
- set ports(List&lt;dynamic&gt; value) =&gt; proxy['ports'] = jsify(value);
+ List&lt;dynamic&gt; get ports =&gt; listify(jsProxy['ports']);
+ set ports(List&lt;dynamic&gt; value) =&gt; jsProxy['ports'] = jsify(value);
 }
 </pre>
 </div>
@@ -248,7 +248,7 @@ UrlFilter({String hostContains, String hostEquals, String hostPrefix, String hos
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>UrlFilter.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>UrlFilter.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to UrlFilter.UrlFilter.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -256,7 +256,7 @@ new <strong>UrlFilter.fromProxy</strong>(JsObject proxy) <a class="anchor-link" 
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-UrlFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
+UrlFilter.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -279,10 +279,10 @@ against components ('.foo.'). Suffix- and exact-matching for the last
 components need to be done separately using hostSuffix, because no implicit
 dot is added at the end of the host name.</p>
 <pre class="source">
-String get hostContains =&gt; proxy['hostContains'];
+String get hostContains =&gt; jsProxy['hostContains'];
 </pre>
 <pre class="source">
-set hostContains(String value) =&gt; proxy['hostContains'] = value;
+set hostContains(String value) =&gt; jsProxy['hostContains'] = value;
 </pre>
 </div>
 </div>
@@ -295,10 +295,10 @@ String         <strong>hostEquals</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the host name of the URL is equal to a specified string.</p>
 <pre class="source">
-String get hostEquals =&gt; proxy['hostEquals'];
+String get hostEquals =&gt; jsProxy['hostEquals'];
 </pre>
 <pre class="source">
-set hostEquals(String value) =&gt; proxy['hostEquals'] = value;
+set hostEquals(String value) =&gt; jsProxy['hostEquals'] = value;
 </pre>
 </div>
 </div>
@@ -311,10 +311,10 @@ String         <strong>hostPrefix</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the host name of the URL starts with a specified string.</p>
 <pre class="source">
-String get hostPrefix =&gt; proxy['hostPrefix'];
+String get hostPrefix =&gt; jsProxy['hostPrefix'];
 </pre>
 <pre class="source">
-set hostPrefix(String value) =&gt; proxy['hostPrefix'] = value;
+set hostPrefix(String value) =&gt; jsProxy['hostPrefix'] = value;
 </pre>
 </div>
 </div>
@@ -327,10 +327,22 @@ String         <strong>hostSuffix</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the host name of the URL ends with a specified string.</p>
 <pre class="source">
-String get hostSuffix =&gt; proxy['hostSuffix'];
+String get hostSuffix =&gt; jsProxy['hostSuffix'];
 </pre>
 <pre class="source">
-set hostSuffix(String value) =&gt; proxy['hostSuffix'] = value;
+set hostSuffix(String value) =&gt; jsProxy['hostSuffix'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to UrlFilter.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -346,10 +358,10 @@ specified regular expression. Port numbers are stripped from the URL if
 they match the default port number. The regular expressions use the <a href="http://code.google.com/p/re2/wiki/Syntax">RE2
 syntax</a>.</p>
 <pre class="source">
-String get originAndPathMatches =&gt; proxy['originAndPathMatches'];
+String get originAndPathMatches =&gt; jsProxy['originAndPathMatches'];
 </pre>
 <pre class="source">
-set originAndPathMatches(String value) =&gt; proxy['originAndPathMatches'] = value;
+set originAndPathMatches(String value) =&gt; jsProxy['originAndPathMatches'] = value;
 </pre>
 </div>
 </div>
@@ -362,10 +374,10 @@ String         <strong>pathContains</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the path segment of the URL contains a specified string.</p>
 <pre class="source">
-String get pathContains =&gt; proxy['pathContains'];
+String get pathContains =&gt; jsProxy['pathContains'];
 </pre>
 <pre class="source">
-set pathContains(String value) =&gt; proxy['pathContains'] = value;
+set pathContains(String value) =&gt; jsProxy['pathContains'] = value;
 </pre>
 </div>
 </div>
@@ -378,10 +390,10 @@ String         <strong>pathEquals</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the path segment of the URL is equal to a specified string.</p>
 <pre class="source">
-String get pathEquals =&gt; proxy['pathEquals'];
+String get pathEquals =&gt; jsProxy['pathEquals'];
 </pre>
 <pre class="source">
-set pathEquals(String value) =&gt; proxy['pathEquals'] = value;
+set pathEquals(String value) =&gt; jsProxy['pathEquals'] = value;
 </pre>
 </div>
 </div>
@@ -394,10 +406,10 @@ String         <strong>pathPrefix</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the path segment of the URL starts with a specified string.</p>
 <pre class="source">
-String get pathPrefix =&gt; proxy['pathPrefix'];
+String get pathPrefix =&gt; jsProxy['pathPrefix'];
 </pre>
 <pre class="source">
-set pathPrefix(String value) =&gt; proxy['pathPrefix'] = value;
+set pathPrefix(String value) =&gt; jsProxy['pathPrefix'] = value;
 </pre>
 </div>
 </div>
@@ -410,10 +422,10 @@ String         <strong>pathSuffix</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the path segment of the URL ends with a specified string.</p>
 <pre class="source">
-String get pathSuffix =&gt; proxy['pathSuffix'];
+String get pathSuffix =&gt; jsProxy['pathSuffix'];
 </pre>
 <pre class="source">
-set pathSuffix(String value) =&gt; proxy['pathSuffix'] = value;
+set pathSuffix(String value) =&gt; jsProxy['pathSuffix'] = value;
 </pre>
 </div>
 </div>
@@ -428,22 +440,10 @@ List&lt;dynamic&gt;         <strong>ports</strong> <a class="anchor-link"
 lists. For example <code>[80, 443, [1000, 1200]]</code> matches all requests on port
 80, 443 and in the range 1000-1200.</p>
 <pre class="source">
-List&lt;dynamic&gt; get ports =&gt; listify(proxy['ports']);
+List&lt;dynamic&gt; get ports =&gt; listify(jsProxy['ports']);
 </pre>
 <pre class="source">
-set ports(List&lt;dynamic&gt; value) =&gt; proxy['ports'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to UrlFilter.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set ports(List&lt;dynamic&gt; value) =&gt; jsProxy['ports'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -456,10 +456,10 @@ String         <strong>queryContains</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the query segment of the URL contains a specified string.</p>
 <pre class="source">
-String get queryContains =&gt; proxy['queryContains'];
+String get queryContains =&gt; jsProxy['queryContains'];
 </pre>
 <pre class="source">
-set queryContains(String value) =&gt; proxy['queryContains'] = value;
+set queryContains(String value) =&gt; jsProxy['queryContains'] = value;
 </pre>
 </div>
 </div>
@@ -472,10 +472,10 @@ String         <strong>queryEquals</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the query segment of the URL is equal to a specified string.</p>
 <pre class="source">
-String get queryEquals =&gt; proxy['queryEquals'];
+String get queryEquals =&gt; jsProxy['queryEquals'];
 </pre>
 <pre class="source">
-set queryEquals(String value) =&gt; proxy['queryEquals'] = value;
+set queryEquals(String value) =&gt; jsProxy['queryEquals'] = value;
 </pre>
 </div>
 </div>
@@ -488,10 +488,10 @@ String         <strong>queryPrefix</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the query segment of the URL starts with a specified string.</p>
 <pre class="source">
-String get queryPrefix =&gt; proxy['queryPrefix'];
+String get queryPrefix =&gt; jsProxy['queryPrefix'];
 </pre>
 <pre class="source">
-set queryPrefix(String value) =&gt; proxy['queryPrefix'] = value;
+set queryPrefix(String value) =&gt; jsProxy['queryPrefix'] = value;
 </pre>
 </div>
 </div>
@@ -504,10 +504,10 @@ String         <strong>querySuffix</strong> <a class="anchor-link"
         <div class="doc">
 <p>Matches if the query segment of the URL ends with a specified string.</p>
 <pre class="source">
-String get querySuffix =&gt; proxy['querySuffix'];
+String get querySuffix =&gt; jsProxy['querySuffix'];
 </pre>
 <pre class="source">
-set querySuffix(String value) =&gt; proxy['querySuffix'] = value;
+set querySuffix(String value) =&gt; jsProxy['querySuffix'] = value;
 </pre>
 </div>
 </div>
@@ -521,10 +521,10 @@ List&lt;String&gt;         <strong>schemes</strong> <a class="anchor-link"
 <p>Matches if the scheme of the URL is equal to any of the schemes specified
 in the array.</p>
 <pre class="source">
-List&lt;String&gt; get schemes =&gt; listify(proxy['schemes']);
+List&lt;String&gt; get schemes =&gt; listify(jsProxy['schemes']);
 </pre>
 <pre class="source">
-set schemes(List&lt;String&gt; value) =&gt; proxy['schemes'] = jsify(value);
+set schemes(List&lt;String&gt; value) =&gt; jsProxy['schemes'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -539,10 +539,10 @@ String         <strong>urlContains</strong> <a class="anchor-link"
 string. Port numbers are stripped from the URL if they match the default
 port number.</p>
 <pre class="source">
-String get urlContains =&gt; proxy['urlContains'];
+String get urlContains =&gt; jsProxy['urlContains'];
 </pre>
 <pre class="source">
-set urlContains(String value) =&gt; proxy['urlContains'] = value;
+set urlContains(String value) =&gt; jsProxy['urlContains'] = value;
 </pre>
 </div>
 </div>
@@ -557,10 +557,10 @@ String         <strong>urlEquals</strong> <a class="anchor-link"
 string. Port numbers are stripped from the URL if they match the default
 port number.</p>
 <pre class="source">
-String get urlEquals =&gt; proxy['urlEquals'];
+String get urlEquals =&gt; jsProxy['urlEquals'];
 </pre>
 <pre class="source">
-set urlEquals(String value) =&gt; proxy['urlEquals'] = value;
+set urlEquals(String value) =&gt; jsProxy['urlEquals'] = value;
 </pre>
 </div>
 </div>
@@ -576,10 +576,10 @@ regular expression. Port numbers are stripped from the URL if they match
 the default port number. The regular expressions use the <a href="http://code.google.com/p/re2/wiki/Syntax">RE2
 syntax</a>.</p>
 <pre class="source">
-String get urlMatches =&gt; proxy['urlMatches'];
+String get urlMatches =&gt; jsProxy['urlMatches'];
 </pre>
 <pre class="source">
-set urlMatches(String value) =&gt; proxy['urlMatches'] = value;
+set urlMatches(String value) =&gt; jsProxy['urlMatches'] = value;
 </pre>
 </div>
 </div>
@@ -594,10 +594,10 @@ String         <strong>urlPrefix</strong> <a class="anchor-link"
 string. Port numbers are stripped from the URL if they match the default
 port number.</p>
 <pre class="source">
-String get urlPrefix =&gt; proxy['urlPrefix'];
+String get urlPrefix =&gt; jsProxy['urlPrefix'];
 </pre>
 <pre class="source">
-set urlPrefix(String value) =&gt; proxy['urlPrefix'] = value;
+set urlPrefix(String value) =&gt; jsProxy['urlPrefix'] = value;
 </pre>
 </div>
 </div>
@@ -612,10 +612,10 @@ String         <strong>urlSuffix</strong> <a class="anchor-link"
 string. Port numbers are stripped from the URL if they match the default
 port number.</p>
 <pre class="source">
-String get urlSuffix =&gt; proxy['urlSuffix'];
+String get urlSuffix =&gt; jsProxy['urlSuffix'];
 </pre>
 <pre class="source">
-set urlSuffix(String value) =&gt; proxy['urlSuffix'] = value;
+set urlSuffix(String value) =&gt; jsProxy['urlSuffix'] = value;
 </pre>
 </div>
 </div>
@@ -628,7 +628,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to UrlFilter.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -641,7 +641,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

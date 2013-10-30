@@ -39,15 +39,15 @@ class IgnoreRules extends ChromeObject {
    if (lowerPriorityThan != null) this.lowerPriorityThan = lowerPriorityThan;
    if (hasTag != null) this.hasTag = hasTag;
  }
- IgnoreRules.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ IgnoreRules.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * If set, rules with a lower priority than the specified value are ignored.
   * This boundary is not persisted, it affects only rules and their actions of
   * the same network request stage.
   */
- int get lowerPriorityThan =&gt; proxy['lowerPriorityThan'];
- set lowerPriorityThan(int value) =&gt; proxy['lowerPriorityThan'] = value;
+ int get lowerPriorityThan =&gt; jsProxy['lowerPriorityThan'];
+ set lowerPriorityThan(int value) =&gt; jsProxy['lowerPriorityThan'] = value;
 
  /**
   * If set, rules with the specified tag are ignored. This ignoring is not
@@ -56,8 +56,8 @@ class IgnoreRules extends ChromeObject {
   * priorities. This action affects rules of lower priority than the current
   * rule. Rules with the same priority may or may not be ignored.
   */
- String get hasTag =&gt; proxy['hasTag'];
- set hasTag(String value) =&gt; proxy['hasTag'] = value;
+ String get hasTag =&gt; jsProxy['hasTag'];
+ set hasTag(String value) =&gt; jsProxy['hasTag'] = value;
 }
 </pre>
 </div>
@@ -85,7 +85,7 @@ IgnoreRules({int lowerPriorityThan, String hasTag}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>IgnoreRules.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>IgnoreRules.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to IgnoreRules.IgnoreRules.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -93,7 +93,7 @@ new <strong>IgnoreRules.fromProxy</strong>(JsObject proxy) <a class="anchor-link
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-IgnoreRules.fromProxy(JsObject proxy): super.fromProxy(proxy);
+IgnoreRules.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -113,10 +113,22 @@ request stage. Note that rules are executed in descending order of their
 priorities. This action affects rules of lower priority than the current
 rule. Rules with the same priority may or may not be ignored.</p>
 <pre class="source">
-String get hasTag =&gt; proxy['hasTag'];
+String get hasTag =&gt; jsProxy['hasTag'];
 </pre>
 <pre class="source">
-set hasTag(String value) =&gt; proxy['hasTag'] = value;
+set hasTag(String value) =&gt; jsProxy['hasTag'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to IgnoreRules.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -131,22 +143,10 @@ int         <strong>lowerPriorityThan</strong> <a class="anchor-link"
 This boundary is not persisted, it affects only rules and their actions of
 the same network request stage.</p>
 <pre class="source">
-int get lowerPriorityThan =&gt; proxy['lowerPriorityThan'];
+int get lowerPriorityThan =&gt; jsProxy['lowerPriorityThan'];
 </pre>
 <pre class="source">
-set lowerPriorityThan(int value) =&gt; proxy['lowerPriorityThan'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to IgnoreRules.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set lowerPriorityThan(int value) =&gt; jsProxy['lowerPriorityThan'] = value;
 </pre>
 </div>
 </div>
@@ -159,7 +159,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to IgnoreRules.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -172,7 +172,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

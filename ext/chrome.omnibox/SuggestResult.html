@@ -39,14 +39,14 @@ class SuggestResult extends ChromeObject {
    if (content != null) this.content = content;
    if (description != null) this.description = description;
  }
- SuggestResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ SuggestResult.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The text that is put into the URL bar, and that is sent to the extension
   * when the user chooses this entry.
   */
- String get content =&gt; proxy['content'];
- set content(String value) =&gt; proxy['content'] = value;
+ String get content =&gt; jsProxy['content'];
+ set content(String value) =&gt; jsProxy['content'] = value;
 
  /**
   * The text that is displayed in the URL dropdown. Can contain XML-style
@@ -55,8 +55,8 @@ class SuggestResult extends ChromeObject {
   * 'dim' (for dim helper text). The styles can be nested, eg.
   * &lt;dim&gt;&lt;match&gt;dimmed match&lt;/match&gt;&lt;/dim&gt;.
   */
- String get description =&gt; proxy['description'];
- set description(String value) =&gt; proxy['description'] = value;
+ String get description =&gt; jsProxy['description'];
+ set description(String value) =&gt; jsProxy['description'] = value;
 }
 </pre>
 </div>
@@ -84,7 +84,7 @@ SuggestResult({String content, String description}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>SuggestResult.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>SuggestResult.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to SuggestResult.SuggestResult.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -92,7 +92,7 @@ new <strong>SuggestResult.fromProxy</strong>(JsObject proxy) <a class="anchor-li
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-SuggestResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
+SuggestResult.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -109,10 +109,10 @@ String         <strong>content</strong> <a class="anchor-link"
 <p>The text that is put into the URL bar, and that is sent to the extension
 when the user chooses this entry.</p>
 <pre class="source">
-String get content =&gt; proxy['content'];
+String get content =&gt; jsProxy['content'];
 </pre>
 <pre class="source">
-set content(String value) =&gt; proxy['content'] = value;
+set content(String value) =&gt; jsProxy['content'] = value;
 </pre>
 </div>
 </div>
@@ -129,22 +129,22 @@ markup for styling. The supported tags are 'url' (for a literal URL),
 'dim' (for dim helper text). The styles can be nested, eg.
 &lt;dim>&lt;match>dimmed match&lt;/match>&lt;/dim>.</p>
 <pre class="source">
-String get description =&gt; proxy['description'];
+String get description =&gt; jsProxy['description'];
 </pre>
 <pre class="source">
-set description(String value) =&gt; proxy['description'] = value;
+set description(String value) =&gt; jsProxy['description'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to SuggestResult.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to SuggestResult.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -157,7 +157,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to SuggestResult.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -170,7 +170,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

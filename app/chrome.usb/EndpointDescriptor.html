@@ -43,28 +43,28 @@ class EndpointDescriptor extends ChromeObject {
    if (usage != null) this.usage = usage;
    if (pollingInterval != null) this.pollingInterval = pollingInterval;
  }
- EndpointDescriptor.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ EndpointDescriptor.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get address =&gt; proxy['address'];
- set address(int value) =&gt; proxy['address'] = value;
+ int get address =&gt; jsProxy['address'];
+ set address(int value) =&gt; jsProxy['address'] = value;
 
- TransferType get type =&gt; _createTransferType(proxy['type']);
- set type(TransferType value) =&gt; proxy['type'] = jsify(value);
+ TransferType get type =&gt; _createTransferType(jsProxy['type']);
+ set type(TransferType value) =&gt; jsProxy['type'] = jsify(value);
 
- Direction get direction =&gt; _createDirection(proxy['direction']);
- set direction(Direction value) =&gt; proxy['direction'] = jsify(value);
+ Direction get direction =&gt; _createDirection(jsProxy['direction']);
+ set direction(Direction value) =&gt; jsProxy['direction'] = jsify(value);
 
- int get maximumPacketSize =&gt; proxy['maximumPacketSize'];
- set maximumPacketSize(int value) =&gt; proxy['maximumPacketSize'] = value;
+ int get maximumPacketSize =&gt; jsProxy['maximumPacketSize'];
+ set maximumPacketSize(int value) =&gt; jsProxy['maximumPacketSize'] = value;
 
- SynchronizationType get synchronization =&gt; _createSynchronizationType(proxy['synchronization']);
- set synchronization(SynchronizationType value) =&gt; proxy['synchronization'] = jsify(value);
+ SynchronizationType get synchronization =&gt; _createSynchronizationType(jsProxy['synchronization']);
+ set synchronization(SynchronizationType value) =&gt; jsProxy['synchronization'] = jsify(value);
 
- UsageType get usage =&gt; _createUsageType(proxy['usage']);
- set usage(UsageType value) =&gt; proxy['usage'] = jsify(value);
+ UsageType get usage =&gt; _createUsageType(jsProxy['usage']);
+ set usage(UsageType value) =&gt; jsProxy['usage'] = jsify(value);
 
- int get pollingInterval =&gt; proxy['pollingInterval'];
- set pollingInterval(int value) =&gt; proxy['pollingInterval'] = value;
+ int get pollingInterval =&gt; jsProxy['pollingInterval'];
+ set pollingInterval(int value) =&gt; jsProxy['pollingInterval'] = value;
 }
 </pre>
 </div>
@@ -97,7 +97,7 @@ EndpointDescriptor({int address, TransferType type, Direction direction, int max
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>EndpointDescriptor.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>EndpointDescriptor.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to EndpointDescriptor.EndpointDescriptor.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -105,7 +105,7 @@ new <strong>EndpointDescriptor.fromProxy</strong>(JsObject proxy) <a class="anch
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-EndpointDescriptor.fromProxy(JsObject proxy): super.fromProxy(proxy);
+EndpointDescriptor.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -120,10 +120,10 @@ int         <strong>address</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get address =&gt; proxy['address'];
+int get address =&gt; jsProxy['address'];
 </pre>
 <pre class="source">
-set address(int value) =&gt; proxy['address'] = value;
+set address(int value) =&gt; jsProxy['address'] = value;
 </pre>
 </div>
 </div>
@@ -135,10 +135,22 @@ set address(int value) =&gt; proxy['address'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-Direction get direction =&gt; _createDirection(proxy['direction']);
+Direction get direction =&gt; _createDirection(jsProxy['direction']);
 </pre>
 <pre class="source">
-set direction(Direction value) =&gt; proxy['direction'] = jsify(value);
+set direction(Direction value) =&gt; jsProxy['direction'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to EndpointDescriptor.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -150,10 +162,10 @@ int         <strong>maximumPacketSize</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get maximumPacketSize =&gt; proxy['maximumPacketSize'];
+int get maximumPacketSize =&gt; jsProxy['maximumPacketSize'];
 </pre>
 <pre class="source">
-set maximumPacketSize(int value) =&gt; proxy['maximumPacketSize'] = value;
+set maximumPacketSize(int value) =&gt; jsProxy['maximumPacketSize'] = value;
 </pre>
 </div>
 </div>
@@ -165,22 +177,10 @@ int         <strong>pollingInterval</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get pollingInterval =&gt; proxy['pollingInterval'];
+int get pollingInterval =&gt; jsProxy['pollingInterval'];
 </pre>
 <pre class="source">
-set pollingInterval(int value) =&gt; proxy['pollingInterval'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to EndpointDescriptor.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set pollingInterval(int value) =&gt; jsProxy['pollingInterval'] = value;
 </pre>
 </div>
 </div>
@@ -192,10 +192,10 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-SynchronizationType get synchronization =&gt; _createSynchronizationType(proxy['synchronization']);
+SynchronizationType get synchronization =&gt; _createSynchronizationType(jsProxy['synchronization']);
 </pre>
 <pre class="source">
-set synchronization(SynchronizationType value) =&gt; proxy['synchronization'] = jsify(value);
+set synchronization(SynchronizationType value) =&gt; jsProxy['synchronization'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -207,10 +207,10 @@ set synchronization(SynchronizationType value) =&gt; proxy['synchronization'] = 
         </h4>
         <div class="doc">
 <pre class="source">
-TransferType get type =&gt; _createTransferType(proxy['type']);
+TransferType get type =&gt; _createTransferType(jsProxy['type']);
 </pre>
 <pre class="source">
-set type(TransferType value) =&gt; proxy['type'] = jsify(value);
+set type(TransferType value) =&gt; jsProxy['type'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -222,10 +222,10 @@ set type(TransferType value) =&gt; proxy['type'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-UsageType get usage =&gt; _createUsageType(proxy['usage']);
+UsageType get usage =&gt; _createUsageType(jsProxy['usage']);
 </pre>
 <pre class="source">
-set usage(UsageType value) =&gt; proxy['usage'] = jsify(value);
+set usage(UsageType value) =&gt; jsProxy['usage'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -238,7 +238,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to EndpointDescriptor.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -251,7 +251,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

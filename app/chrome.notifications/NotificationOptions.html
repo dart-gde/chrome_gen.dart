@@ -51,52 +51,52 @@ class NotificationOptions extends ChromeObject {
    if (progress != null) this.progress = progress;
    if (isClickable != null) this.isClickable = isClickable;
  }
- NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ NotificationOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- TemplateType get type =&gt; _createTemplateType(proxy['type']);
- set type(TemplateType value) =&gt; proxy['type'] = jsify(value);
+ TemplateType get type =&gt; _createTemplateType(jsProxy['type']);
+ set type(TemplateType value) =&gt; jsProxy['type'] = jsify(value);
 
- String get iconUrl =&gt; proxy['iconUrl'];
- set iconUrl(String value) =&gt; proxy['iconUrl'] = value;
+ String get iconUrl =&gt; jsProxy['iconUrl'];
+ set iconUrl(String value) =&gt; jsProxy['iconUrl'] = value;
 
- NotificationBitmap get iconBitmap =&gt; _createNotificationBitmap(proxy['iconBitmap']);
- set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = jsify(value);
+ NotificationBitmap get iconBitmap =&gt; _createNotificationBitmap(jsProxy['iconBitmap']);
+ set iconBitmap(NotificationBitmap value) =&gt; jsProxy['iconBitmap'] = jsify(value);
 
- String get title =&gt; proxy['title'];
- set title(String value) =&gt; proxy['title'] = value;
+ String get title =&gt; jsProxy['title'];
+ set title(String value) =&gt; jsProxy['title'] = value;
 
- String get message =&gt; proxy['message'];
- set message(String value) =&gt; proxy['message'] = value;
+ String get message =&gt; jsProxy['message'];
+ set message(String value) =&gt; jsProxy['message'] = value;
 
- String get contextMessage =&gt; proxy['contextMessage'];
- set contextMessage(String value) =&gt; proxy['contextMessage'] = value;
+ String get contextMessage =&gt; jsProxy['contextMessage'];
+ set contextMessage(String value) =&gt; jsProxy['contextMessage'] = value;
 
- int get priority =&gt; proxy['priority'];
- set priority(int value) =&gt; proxy['priority'] = value;
+ int get priority =&gt; jsProxy['priority'];
+ set priority(int value) =&gt; jsProxy['priority'] = value;
 
- double get eventTime =&gt; proxy['eventTime'];
- set eventTime(double value) =&gt; proxy['eventTime'] = jsify(value);
+ double get eventTime =&gt; jsProxy['eventTime'];
+ set eventTime(double value) =&gt; jsProxy['eventTime'] = jsify(value);
 
- NotificationButton get buttons =&gt; _createNotificationButton(proxy['buttons']);
- set buttons(NotificationButton value) =&gt; proxy['buttons'] = jsify(value);
+ NotificationButton get buttons =&gt; _createNotificationButton(jsProxy['buttons']);
+ set buttons(NotificationButton value) =&gt; jsProxy['buttons'] = jsify(value);
 
- String get expandedMessage =&gt; proxy['expandedMessage'];
- set expandedMessage(String value) =&gt; proxy['expandedMessage'] = value;
+ String get expandedMessage =&gt; jsProxy['expandedMessage'];
+ set expandedMessage(String value) =&gt; jsProxy['expandedMessage'] = value;
 
- String get imageUrl =&gt; proxy['imageUrl'];
- set imageUrl(String value) =&gt; proxy['imageUrl'] = value;
+ String get imageUrl =&gt; jsProxy['imageUrl'];
+ set imageUrl(String value) =&gt; jsProxy['imageUrl'] = value;
 
- NotificationBitmap get imageBitmap =&gt; _createNotificationBitmap(proxy['imageBitmap']);
- set imageBitmap(NotificationBitmap value) =&gt; proxy['imageBitmap'] = jsify(value);
+ NotificationBitmap get imageBitmap =&gt; _createNotificationBitmap(jsProxy['imageBitmap']);
+ set imageBitmap(NotificationBitmap value) =&gt; jsProxy['imageBitmap'] = jsify(value);
 
- NotificationItem get items =&gt; _createNotificationItem(proxy['items']);
- set items(NotificationItem value) =&gt; proxy['items'] = jsify(value);
+ NotificationItem get items =&gt; _createNotificationItem(jsProxy['items']);
+ set items(NotificationItem value) =&gt; jsProxy['items'] = jsify(value);
 
- int get progress =&gt; proxy['progress'];
- set progress(int value) =&gt; proxy['progress'] = value;
+ int get progress =&gt; jsProxy['progress'];
+ set progress(int value) =&gt; jsProxy['progress'] = value;
 
- bool get isClickable =&gt; proxy['isClickable'];
- set isClickable(bool value) =&gt; proxy['isClickable'] = value;
+ bool get isClickable =&gt; jsProxy['isClickable'];
+ set isClickable(bool value) =&gt; jsProxy['isClickable'] = value;
 }
 </pre>
 </div>
@@ -137,7 +137,7 @@ NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconB
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>NotificationOptions.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>NotificationOptions.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to NotificationOptions.NotificationOptions.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -145,7 +145,7 @@ new <strong>NotificationOptions.fromProxy</strong>(JsObject proxy) <a class="anc
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+NotificationOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -160,10 +160,10 @@ NotificationOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-NotificationButton get buttons =&gt; _createNotificationButton(proxy['buttons']);
+NotificationButton get buttons =&gt; _createNotificationButton(jsProxy['buttons']);
 </pre>
 <pre class="source">
-set buttons(NotificationButton value) =&gt; proxy['buttons'] = jsify(value);
+set buttons(NotificationButton value) =&gt; jsProxy['buttons'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -175,10 +175,10 @@ String         <strong>contextMessage</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get contextMessage =&gt; proxy['contextMessage'];
+String get contextMessage =&gt; jsProxy['contextMessage'];
 </pre>
 <pre class="source">
-set contextMessage(String value) =&gt; proxy['contextMessage'] = value;
+set contextMessage(String value) =&gt; jsProxy['contextMessage'] = value;
 </pre>
 </div>
 </div>
@@ -190,10 +190,10 @@ double         <strong>eventTime</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-double get eventTime =&gt; proxy['eventTime'];
+double get eventTime =&gt; jsProxy['eventTime'];
 </pre>
 <pre class="source">
-set eventTime(double value) =&gt; proxy['eventTime'] = jsify(value);
+set eventTime(double value) =&gt; jsProxy['eventTime'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -205,10 +205,10 @@ String         <strong>expandedMessage</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get expandedMessage =&gt; proxy['expandedMessage'];
+String get expandedMessage =&gt; jsProxy['expandedMessage'];
 </pre>
 <pre class="source">
-set expandedMessage(String value) =&gt; proxy['expandedMessage'] = value;
+set expandedMessage(String value) =&gt; jsProxy['expandedMessage'] = value;
 </pre>
 </div>
 </div>
@@ -220,10 +220,10 @@ set expandedMessage(String value) =&gt; proxy['expandedMessage'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-NotificationBitmap get iconBitmap =&gt; _createNotificationBitmap(proxy['iconBitmap']);
+NotificationBitmap get iconBitmap =&gt; _createNotificationBitmap(jsProxy['iconBitmap']);
 </pre>
 <pre class="source">
-set iconBitmap(NotificationBitmap value) =&gt; proxy['iconBitmap'] = jsify(value);
+set iconBitmap(NotificationBitmap value) =&gt; jsProxy['iconBitmap'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -235,10 +235,10 @@ String         <strong>iconUrl</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get iconUrl =&gt; proxy['iconUrl'];
+String get iconUrl =&gt; jsProxy['iconUrl'];
 </pre>
 <pre class="source">
-set iconUrl(String value) =&gt; proxy['iconUrl'] = value;
+set iconUrl(String value) =&gt; jsProxy['iconUrl'] = value;
 </pre>
 </div>
 </div>
@@ -250,10 +250,10 @@ set iconUrl(String value) =&gt; proxy['iconUrl'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-NotificationBitmap get imageBitmap =&gt; _createNotificationBitmap(proxy['imageBitmap']);
+NotificationBitmap get imageBitmap =&gt; _createNotificationBitmap(jsProxy['imageBitmap']);
 </pre>
 <pre class="source">
-set imageBitmap(NotificationBitmap value) =&gt; proxy['imageBitmap'] = jsify(value);
+set imageBitmap(NotificationBitmap value) =&gt; jsProxy['imageBitmap'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -265,10 +265,10 @@ String         <strong>imageUrl</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get imageUrl =&gt; proxy['imageUrl'];
+String get imageUrl =&gt; jsProxy['imageUrl'];
 </pre>
 <pre class="source">
-set imageUrl(String value) =&gt; proxy['imageUrl'] = value;
+set imageUrl(String value) =&gt; jsProxy['imageUrl'] = value;
 </pre>
 </div>
 </div>
@@ -280,10 +280,10 @@ bool         <strong>isClickable</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get isClickable =&gt; proxy['isClickable'];
+bool get isClickable =&gt; jsProxy['isClickable'];
 </pre>
 <pre class="source">
-set isClickable(bool value) =&gt; proxy['isClickable'] = value;
+set isClickable(bool value) =&gt; jsProxy['isClickable'] = value;
 </pre>
 </div>
 </div>
@@ -295,10 +295,22 @@ set isClickable(bool value) =&gt; proxy['isClickable'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-NotificationItem get items =&gt; _createNotificationItem(proxy['items']);
+NotificationItem get items =&gt; _createNotificationItem(jsProxy['items']);
 </pre>
 <pre class="source">
-set items(NotificationItem value) =&gt; proxy['items'] = jsify(value);
+set items(NotificationItem value) =&gt; jsProxy['items'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to NotificationOptions.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -310,10 +322,10 @@ String         <strong>message</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get message =&gt; proxy['message'];
+String get message =&gt; jsProxy['message'];
 </pre>
 <pre class="source">
-set message(String value) =&gt; proxy['message'] = value;
+set message(String value) =&gt; jsProxy['message'] = value;
 </pre>
 </div>
 </div>
@@ -325,10 +337,10 @@ int         <strong>priority</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get priority =&gt; proxy['priority'];
+int get priority =&gt; jsProxy['priority'];
 </pre>
 <pre class="source">
-set priority(int value) =&gt; proxy['priority'] = value;
+set priority(int value) =&gt; jsProxy['priority'] = value;
 </pre>
 </div>
 </div>
@@ -340,22 +352,10 @@ int         <strong>progress</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get progress =&gt; proxy['progress'];
+int get progress =&gt; jsProxy['progress'];
 </pre>
 <pre class="source">
-set progress(int value) =&gt; proxy['progress'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to NotificationOptions.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set progress(int value) =&gt; jsProxy['progress'] = value;
 </pre>
 </div>
 </div>
@@ -367,10 +367,10 @@ String         <strong>title</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get title =&gt; proxy['title'];
+String get title =&gt; jsProxy['title'];
 </pre>
 <pre class="source">
-set title(String value) =&gt; proxy['title'] = value;
+set title(String value) =&gt; jsProxy['title'] = value;
 </pre>
 </div>
 </div>
@@ -382,10 +382,10 @@ set title(String value) =&gt; proxy['title'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-TemplateType get type =&gt; _createTemplateType(proxy['type']);
+TemplateType get type =&gt; _createTemplateType(jsProxy['type']);
 </pre>
 <pre class="source">
-set type(TemplateType value) =&gt; proxy['type'] = jsify(value);
+set type(TemplateType value) =&gt; jsProxy['type'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -398,7 +398,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to NotificationOptions.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -411,7 +411,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

@@ -48,7 +48,7 @@ class Window extends ChromeObject {
    if (alwaysOnTop != null) this.alwaysOnTop = alwaysOnTop;
    if (sessionId != null) this.sessionId = sessionId;
  }
- Window.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Window.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The ID of the window. Window IDs are unique within a browser session. Under
@@ -56,58 +56,58 @@ class Window extends ChromeObject {
   * querying windows using the [sessions] API, in which case a session ID may
   * be present.
   */
- int get id =&gt; proxy['id'];
- set id(int value) =&gt; proxy['id'] = value;
+ int get id =&gt; jsProxy['id'];
+ set id(int value) =&gt; jsProxy['id'] = value;
 
  /**
   * Whether the window is currently the focused window.
   */
- bool get focused =&gt; proxy['focused'];
- set focused(bool value) =&gt; proxy['focused'] = value;
+ bool get focused =&gt; jsProxy['focused'];
+ set focused(bool value) =&gt; jsProxy['focused'] = value;
 
  /**
   * The offset of the window from the top edge of the screen in pixels. Under
   * some circumstances a Window may not be assigned top property, for example
   * when querying closed windows from the [sessions] API.
   */
- int get top =&gt; proxy['top'];
- set top(int value) =&gt; proxy['top'] = value;
+ int get top =&gt; jsProxy['top'];
+ set top(int value) =&gt; jsProxy['top'] = value;
 
  /**
   * The offset of the window from the left edge of the screen in pixels. Under
   * some circumstances a Window may not be assigned left property, for example
   * when querying closed windows from the [sessions] API.
   */
- int get left =&gt; proxy['left'];
- set left(int value) =&gt; proxy['left'] = value;
+ int get left =&gt; jsProxy['left'];
+ set left(int value) =&gt; jsProxy['left'] = value;
 
  /**
   * The width of the window, including the frame, in pixels. Under some
   * circumstances a Window may not be assigned width property, for example when
   * querying closed windows from the [sessions] API.
   */
- int get width =&gt; proxy['width'];
- set width(int value) =&gt; proxy['width'] = value;
+ int get width =&gt; jsProxy['width'];
+ set width(int value) =&gt; jsProxy['width'] = value;
 
  /**
   * The height of the window, including the frame, in pixels. Under some
   * circumstances a Window may not be assigned height property, for example
   * when querying closed windows from the [sessions] API.
   */
- int get height =&gt; proxy['height'];
- set height(int value) =&gt; proxy['height'] = value;
+ int get height =&gt; jsProxy['height'];
+ set height(int value) =&gt; jsProxy['height'] = value;
 
  /**
   * Array of [tabs.Tab] objects representing the current tabs in the window.
   */
- List&lt;Tab&gt; get tabs =&gt; listify(proxy['tabs'], _createTab);
- set tabs(List&lt;Tab&gt; value) =&gt; proxy['tabs'] = jsify(value);
+ List&lt;Tab&gt; get tabs =&gt; listify(jsProxy['tabs'], _createTab);
+ set tabs(List&lt;Tab&gt; value) =&gt; jsProxy['tabs'] = jsify(value);
 
  /**
   * Whether the window is incognito.
   */
- bool get incognito =&gt; proxy['incognito'];
- set incognito(bool value) =&gt; proxy['incognito'] = value;
+ bool get incognito =&gt; jsProxy['incognito'];
+ set incognito(bool value) =&gt; jsProxy['incognito'] = value;
 
  /**
   * The type of browser window this is. Under some circumstances a Window may
@@ -115,8 +115,8 @@ class Window extends ChromeObject {
   * from the [sessions] API.
   * enum of `normal`, `popup`, `panel`, `app`
   */
- String get type =&gt; proxy['type'];
- set type(String value) =&gt; proxy['type'] = value;
+ String get type =&gt; jsProxy['type'];
+ set type(String value) =&gt; jsProxy['type'] = value;
 
  /**
   * The state of this browser window. Under some circumstances a Window may not
@@ -124,21 +124,21 @@ class Window extends ChromeObject {
   * the [sessions] API.
   * enum of `normal`, `minimized`, `maximized`, `fullscreen`
   */
- String get state =&gt; proxy['state'];
- set state(String value) =&gt; proxy['state'] = value;
+ String get state =&gt; jsProxy['state'];
+ set state(String value) =&gt; jsProxy['state'] = value;
 
  /**
   * Whether the window is set to be always on top.
   */
- bool get alwaysOnTop =&gt; proxy['alwaysOnTop'];
- set alwaysOnTop(bool value) =&gt; proxy['alwaysOnTop'] = value;
+ bool get alwaysOnTop =&gt; jsProxy['alwaysOnTop'];
+ set alwaysOnTop(bool value) =&gt; jsProxy['alwaysOnTop'] = value;
 
  /**
   * The session ID used to uniquely identify a Window obtained from the
   * [sessions] API.
   */
- String get sessionId =&gt; proxy['sessionId'];
- set sessionId(String value) =&gt; proxy['sessionId'] = value;
+ String get sessionId =&gt; jsProxy['sessionId'];
+ set sessionId(String value) =&gt; jsProxy['sessionId'] = value;
 }
 </pre>
 </div>
@@ -176,7 +176,7 @@ Window({int id, bool focused, int top, int left, int width, int height, List&lt;
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Window.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Window.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Window.Window.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -184,7 +184,7 @@ new <strong>Window.fromProxy</strong>(JsObject proxy) <a class="anchor-link" hre
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Window.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Window.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -200,10 +200,10 @@ bool         <strong>alwaysOnTop</strong> <a class="anchor-link"
         <div class="doc">
 <p>Whether the window is set to be always on top.</p>
 <pre class="source">
-bool get alwaysOnTop =&gt; proxy['alwaysOnTop'];
+bool get alwaysOnTop =&gt; jsProxy['alwaysOnTop'];
 </pre>
 <pre class="source">
-set alwaysOnTop(bool value) =&gt; proxy['alwaysOnTop'] = value;
+set alwaysOnTop(bool value) =&gt; jsProxy['alwaysOnTop'] = value;
 </pre>
 </div>
 </div>
@@ -216,10 +216,10 @@ bool         <strong>focused</strong> <a class="anchor-link"
         <div class="doc">
 <p>Whether the window is currently the focused window.</p>
 <pre class="source">
-bool get focused =&gt; proxy['focused'];
+bool get focused =&gt; jsProxy['focused'];
 </pre>
 <pre class="source">
-set focused(bool value) =&gt; proxy['focused'] = value;
+set focused(bool value) =&gt; jsProxy['focused'] = value;
 </pre>
 </div>
 </div>
@@ -234,10 +234,10 @@ int         <strong>height</strong> <a class="anchor-link"
 circumstances a Window may not be assigned height property, for example
 when querying closed windows from the <code>sessions</code> API.</p>
 <pre class="source">
-int get height =&gt; proxy['height'];
+int get height =&gt; jsProxy['height'];
 </pre>
 <pre class="source">
-set height(int value) =&gt; proxy['height'] = value;
+set height(int value) =&gt; jsProxy['height'] = value;
 </pre>
 </div>
 </div>
@@ -253,10 +253,10 @@ some circumstances a Window may not be assigned an ID, for example when
 querying windows using the <code>sessions</code> API, in which case a session ID may
 be present.</p>
 <pre class="source">
-int get id =&gt; proxy['id'];
+int get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(int value) =&gt; proxy['id'] = value;
+set id(int value) =&gt; jsProxy['id'] = value;
 </pre>
 </div>
 </div>
@@ -269,10 +269,22 @@ bool         <strong>incognito</strong> <a class="anchor-link"
         <div class="doc">
 <p>Whether the window is incognito.</p>
 <pre class="source">
-bool get incognito =&gt; proxy['incognito'];
+bool get incognito =&gt; jsProxy['incognito'];
 </pre>
 <pre class="source">
-set incognito(bool value) =&gt; proxy['incognito'] = value;
+set incognito(bool value) =&gt; jsProxy['incognito'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Window.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -287,22 +299,10 @@ int         <strong>left</strong> <a class="anchor-link"
 some circumstances a Window may not be assigned left property, for example
 when querying closed windows from the <code>sessions</code> API.</p>
 <pre class="source">
-int get left =&gt; proxy['left'];
+int get left =&gt; jsProxy['left'];
 </pre>
 <pre class="source">
-set left(int value) =&gt; proxy['left'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Window.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set left(int value) =&gt; jsProxy['left'] = value;
 </pre>
 </div>
 </div>
@@ -316,10 +316,10 @@ String         <strong>sessionId</strong> <a class="anchor-link"
 <p>The session ID used to uniquely identify a Window obtained from the
 <code>sessions</code> API.</p>
 <pre class="source">
-String get sessionId =&gt; proxy['sessionId'];
+String get sessionId =&gt; jsProxy['sessionId'];
 </pre>
 <pre class="source">
-set sessionId(String value) =&gt; proxy['sessionId'] = value;
+set sessionId(String value) =&gt; jsProxy['sessionId'] = value;
 </pre>
 </div>
 </div>
@@ -335,10 +335,10 @@ be assigned state property, for example when querying closed windows from
 the <code>sessions</code> API.
 enum of <code>normal</code>, <code>minimized</code>, <code>maximized</code>, <code>fullscreen</code></p>
 <pre class="source">
-String get state =&gt; proxy['state'];
+String get state =&gt; jsProxy['state'];
 </pre>
 <pre class="source">
-set state(String value) =&gt; proxy['state'] = value;
+set state(String value) =&gt; jsProxy['state'] = value;
 </pre>
 </div>
 </div>
@@ -351,10 +351,10 @@ List&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt;         <strong>tabs</stro
         <div class="doc">
 <p>Array of <code>tabs.Tab</code> objects representing the current tabs in the window.</p>
 <pre class="source">
-List&lt;Tab&gt; get tabs =&gt; listify(proxy['tabs'], _createTab);
+List&lt;Tab&gt; get tabs =&gt; listify(jsProxy['tabs'], _createTab);
 </pre>
 <pre class="source">
-set tabs(List&lt;Tab&gt; value) =&gt; proxy['tabs'] = jsify(value);
+set tabs(List&lt;Tab&gt; value) =&gt; jsProxy['tabs'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -369,10 +369,10 @@ int         <strong>top</strong> <a class="anchor-link"
 some circumstances a Window may not be assigned top property, for example
 when querying closed windows from the <code>sessions</code> API.</p>
 <pre class="source">
-int get top =&gt; proxy['top'];
+int get top =&gt; jsProxy['top'];
 </pre>
 <pre class="source">
-set top(int value) =&gt; proxy['top'] = value;
+set top(int value) =&gt; jsProxy['top'] = value;
 </pre>
 </div>
 </div>
@@ -388,10 +388,10 @@ not be assigned type property, for example when querying closed windows
 from the <code>sessions</code> API.
 enum of <code>normal</code>, <code>popup</code>, <code>panel</code>, <code>app</code></p>
 <pre class="source">
-String get type =&gt; proxy['type'];
+String get type =&gt; jsProxy['type'];
 </pre>
 <pre class="source">
-set type(String value) =&gt; proxy['type'] = value;
+set type(String value) =&gt; jsProxy['type'] = value;
 </pre>
 </div>
 </div>
@@ -406,10 +406,10 @@ int         <strong>width</strong> <a class="anchor-link"
 circumstances a Window may not be assigned width property, for example when
 querying closed windows from the <code>sessions</code> API.</p>
 <pre class="source">
-int get width =&gt; proxy['width'];
+int get width =&gt; jsProxy['width'];
 </pre>
 <pre class="source">
-set width(int value) =&gt; proxy['width'] = value;
+set width(int value) =&gt; jsProxy['width'] = value;
 </pre>
 </div>
 </div>
@@ -422,7 +422,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Window.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -435,7 +435,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

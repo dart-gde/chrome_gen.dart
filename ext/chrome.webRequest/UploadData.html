@@ -39,19 +39,19 @@ class UploadData extends ChromeObject {
    if (bytes != null) this.bytes = bytes;
    if (file != null) this.file = file;
  }
- UploadData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ UploadData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * An ArrayBuffer with a copy of the data.
   */
- dynamic get bytes =&gt; proxy['bytes'];
- set bytes(var value) =&gt; proxy['bytes'] = jsify(value);
+ dynamic get bytes =&gt; jsProxy['bytes'];
+ set bytes(var value) =&gt; jsProxy['bytes'] = jsify(value);
 
  /**
   * A string with the file's path and name.
   */
- String get file =&gt; proxy['file'];
- set file(String value) =&gt; proxy['file'] = value;
+ String get file =&gt; jsProxy['file'];
+ set file(String value) =&gt; jsProxy['file'] = value;
 }
 </pre>
 </div>
@@ -79,7 +79,7 @@ UploadData({var bytes, String file}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>UploadData.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>UploadData.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to UploadData.UploadData.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -87,7 +87,7 @@ new <strong>UploadData.fromProxy</strong>(JsObject proxy) <a class="anchor-link"
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-UploadData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+UploadData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -103,10 +103,10 @@ var         <strong>bytes</strong> <a class="anchor-link"
         <div class="doc">
 <p>An ArrayBuffer with a copy of the data.</p>
 <pre class="source">
-dynamic get bytes =&gt; proxy['bytes'];
+dynamic get bytes =&gt; jsProxy['bytes'];
 </pre>
 <pre class="source">
-set bytes(var value) =&gt; proxy['bytes'] = jsify(value);
+set bytes(var value) =&gt; jsProxy['bytes'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -119,22 +119,22 @@ String         <strong>file</strong> <a class="anchor-link"
         <div class="doc">
 <p>A string with the file's path and name.</p>
 <pre class="source">
-String get file =&gt; proxy['file'];
+String get file =&gt; jsProxy['file'];
 </pre>
 <pre class="source">
-set file(String value) =&gt; proxy['file'] = value;
+set file(String value) =&gt; jsProxy['file'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to UploadData.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to UploadData.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -147,7 +147,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to UploadData.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -160,7 +160,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

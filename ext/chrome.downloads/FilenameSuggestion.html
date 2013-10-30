@@ -38,13 +38,13 @@ class FilenameSuggestion extends ChromeObject {
    if (filename != null) this.filename = filename;
    if (conflictAction != null) this.conflictAction = conflictAction;
  }
- FilenameSuggestion.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ FilenameSuggestion.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get filename =&gt; proxy['filename'];
- set filename(String value) =&gt; proxy['filename'] = value;
+ String get filename =&gt; jsProxy['filename'];
+ set filename(String value) =&gt; jsProxy['filename'] = value;
 
- FilenameConflictAction get conflictAction =&gt; _createFilenameConflictAction(proxy['conflictAction']);
- set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = jsify(value);
+ FilenameConflictAction get conflictAction =&gt; _createFilenameConflictAction(jsProxy['conflictAction']);
+ set conflictAction(FilenameConflictAction value) =&gt; jsProxy['conflictAction'] = jsify(value);
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ FilenameSuggestion({String filename, FilenameConflictAction conflictAction}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>FilenameSuggestion.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>FilenameSuggestion.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to FilenameSuggestion.FilenameSuggestion.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,7 +80,7 @@ new <strong>FilenameSuggestion.fromProxy</strong>(JsObject proxy) <a class="anch
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-FilenameSuggestion.fromProxy(JsObject proxy): super.fromProxy(proxy);
+FilenameSuggestion.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -95,10 +95,10 @@ FilenameSuggestion.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-FilenameConflictAction get conflictAction =&gt; _createFilenameConflictAction(proxy['conflictAction']);
+FilenameConflictAction get conflictAction =&gt; _createFilenameConflictAction(jsProxy['conflictAction']);
 </pre>
 <pre class="source">
-set conflictAction(FilenameConflictAction value) =&gt; proxy['conflictAction'] = jsify(value);
+set conflictAction(FilenameConflictAction value) =&gt; jsProxy['conflictAction'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -110,22 +110,22 @@ String         <strong>filename</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get filename =&gt; proxy['filename'];
+String get filename =&gt; jsProxy['filename'];
 </pre>
 <pre class="source">
-set filename(String value) =&gt; proxy['filename'] = value;
+set filename(String value) =&gt; jsProxy['filename'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to FilenameSuggestion.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to FilenameSuggestion.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -138,7 +138,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to FilenameSuggestion.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

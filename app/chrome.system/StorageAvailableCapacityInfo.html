@@ -38,13 +38,13 @@ class StorageAvailableCapacityInfo extends ChromeObject {
    if (id != null) this.id = id;
    if (availableCapacity != null) this.availableCapacity = availableCapacity;
  }
- StorageAvailableCapacityInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ StorageAvailableCapacityInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get id =&gt; proxy['id'];
- set id(String value) =&gt; proxy['id'] = value;
+ String get id =&gt; jsProxy['id'];
+ set id(String value) =&gt; jsProxy['id'] = value;
 
- double get availableCapacity =&gt; proxy['availableCapacity'];
- set availableCapacity(double value) =&gt; proxy['availableCapacity'] = jsify(value);
+ double get availableCapacity =&gt; jsProxy['availableCapacity'];
+ set availableCapacity(double value) =&gt; jsProxy['availableCapacity'] = jsify(value);
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ StorageAvailableCapacityInfo({String id, double availableCapacity}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>StorageAvailableCapacityInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>StorageAvailableCapacityInfo.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to StorageAvailableCapacityInfo.StorageAvailableCapacityInfo.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,7 +80,7 @@ new <strong>StorageAvailableCapacityInfo.fromProxy</strong>(JsObject proxy) <a c
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-StorageAvailableCapacityInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+StorageAvailableCapacityInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -95,10 +95,10 @@ double         <strong>availableCapacity</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-double get availableCapacity =&gt; proxy['availableCapacity'];
+double get availableCapacity =&gt; jsProxy['availableCapacity'];
 </pre>
 <pre class="source">
-set availableCapacity(double value) =&gt; proxy['availableCapacity'] = jsify(value);
+set availableCapacity(double value) =&gt; jsProxy['availableCapacity'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -110,22 +110,22 @@ String         <strong>id</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get id =&gt; proxy['id'];
+String get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(String value) =&gt; proxy['id'] = value;
+set id(String value) =&gt; jsProxy['id'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to StorageAvailableCapacityInfo.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to StorageAvailableCapacityInfo.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -138,7 +138,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to StorageAvailableCapacityInfo.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

@@ -43,28 +43,28 @@ class Coordinates extends ChromeObject {
    if (heading != null) this.heading = heading;
    if (speed != null) this.speed = speed;
  }
- Coordinates.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Coordinates.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- double get latitude =&gt; proxy['latitude'];
- set latitude(double value) =&gt; proxy['latitude'] = jsify(value);
+ double get latitude =&gt; jsProxy['latitude'];
+ set latitude(double value) =&gt; jsProxy['latitude'] = jsify(value);
 
- double get longitude =&gt; proxy['longitude'];
- set longitude(double value) =&gt; proxy['longitude'] = jsify(value);
+ double get longitude =&gt; jsProxy['longitude'];
+ set longitude(double value) =&gt; jsProxy['longitude'] = jsify(value);
 
- double get altitude =&gt; proxy['altitude'];
- set altitude(double value) =&gt; proxy['altitude'] = jsify(value);
+ double get altitude =&gt; jsProxy['altitude'];
+ set altitude(double value) =&gt; jsProxy['altitude'] = jsify(value);
 
- double get accuracy =&gt; proxy['accuracy'];
- set accuracy(double value) =&gt; proxy['accuracy'] = jsify(value);
+ double get accuracy =&gt; jsProxy['accuracy'];
+ set accuracy(double value) =&gt; jsProxy['accuracy'] = jsify(value);
 
- double get altitudeAccuracy =&gt; proxy['altitudeAccuracy'];
- set altitudeAccuracy(double value) =&gt; proxy['altitudeAccuracy'] = jsify(value);
+ double get altitudeAccuracy =&gt; jsProxy['altitudeAccuracy'];
+ set altitudeAccuracy(double value) =&gt; jsProxy['altitudeAccuracy'] = jsify(value);
 
- double get heading =&gt; proxy['heading'];
- set heading(double value) =&gt; proxy['heading'] = jsify(value);
+ double get heading =&gt; jsProxy['heading'];
+ set heading(double value) =&gt; jsProxy['heading'] = jsify(value);
 
- double get speed =&gt; proxy['speed'];
- set speed(double value) =&gt; proxy['speed'] = jsify(value);
+ double get speed =&gt; jsProxy['speed'];
+ set speed(double value) =&gt; jsProxy['speed'] = jsify(value);
 }
 </pre>
 </div>
@@ -97,7 +97,7 @@ Coordinates({double latitude, double longitude, double altitude, double accuracy
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Coordinates.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Coordinates.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Coordinates.Coordinates.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -105,7 +105,7 @@ new <strong>Coordinates.fromProxy</strong>(JsObject proxy) <a class="anchor-link
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Coordinates.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Coordinates.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -120,10 +120,10 @@ double         <strong>accuracy</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-double get accuracy =&gt; proxy['accuracy'];
+double get accuracy =&gt; jsProxy['accuracy'];
 </pre>
 <pre class="source">
-set accuracy(double value) =&gt; proxy['accuracy'] = jsify(value);
+set accuracy(double value) =&gt; jsProxy['accuracy'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -135,10 +135,10 @@ double         <strong>altitude</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-double get altitude =&gt; proxy['altitude'];
+double get altitude =&gt; jsProxy['altitude'];
 </pre>
 <pre class="source">
-set altitude(double value) =&gt; proxy['altitude'] = jsify(value);
+set altitude(double value) =&gt; jsProxy['altitude'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -150,10 +150,10 @@ double         <strong>altitudeAccuracy</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-double get altitudeAccuracy =&gt; proxy['altitudeAccuracy'];
+double get altitudeAccuracy =&gt; jsProxy['altitudeAccuracy'];
 </pre>
 <pre class="source">
-set altitudeAccuracy(double value) =&gt; proxy['altitudeAccuracy'] = jsify(value);
+set altitudeAccuracy(double value) =&gt; jsProxy['altitudeAccuracy'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -165,10 +165,22 @@ double         <strong>heading</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-double get heading =&gt; proxy['heading'];
+double get heading =&gt; jsProxy['heading'];
 </pre>
 <pre class="source">
-set heading(double value) =&gt; proxy['heading'] = jsify(value);
+set heading(double value) =&gt; jsProxy['heading'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Coordinates.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -180,10 +192,10 @@ double         <strong>latitude</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-double get latitude =&gt; proxy['latitude'];
+double get latitude =&gt; jsProxy['latitude'];
 </pre>
 <pre class="source">
-set latitude(double value) =&gt; proxy['latitude'] = jsify(value);
+set latitude(double value) =&gt; jsProxy['latitude'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -195,22 +207,10 @@ double         <strong>longitude</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-double get longitude =&gt; proxy['longitude'];
+double get longitude =&gt; jsProxy['longitude'];
 </pre>
 <pre class="source">
-set longitude(double value) =&gt; proxy['longitude'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Coordinates.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set longitude(double value) =&gt; jsProxy['longitude'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -222,10 +222,10 @@ double         <strong>speed</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-double get speed =&gt; proxy['speed'];
+double get speed =&gt; jsProxy['speed'];
 </pre>
 <pre class="source">
-set speed(double value) =&gt; proxy['speed'] = jsify(value);
+set speed(double value) =&gt; jsProxy['speed'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -238,7 +238,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Coordinates.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -251,7 +251,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

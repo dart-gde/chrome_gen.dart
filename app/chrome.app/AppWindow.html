@@ -37,128 +37,128 @@ class AppWindow extends ChromeObject {
  AppWindow({var contentWindow}) {
    if (contentWindow != null) this.contentWindow = contentWindow;
  }
- AppWindow.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ AppWindow.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- dynamic get contentWindow =&gt; proxy['contentWindow'];
- set contentWindow(var value) =&gt; proxy['contentWindow'] = jsify(value);
+ dynamic get contentWindow =&gt; jsProxy['contentWindow'];
+ set contentWindow(var value) =&gt; jsProxy['contentWindow'] = jsify(value);
 
  /**
   * Focus the window.
   */
  void focus() {
-   proxy.callMethod('focus');
+   jsProxy.callMethod('focus');
  }
 
  /**
   * Fullscreens the window.
   */
  void fullscreen() {
-   proxy.callMethod('fullscreen');
+   jsProxy.callMethod('fullscreen');
  }
 
  /**
   * Is the window fullscreen?
   */
  bool isFullscreen() {
-   return proxy.callMethod('isFullscreen');
+   return jsProxy.callMethod('isFullscreen');
  }
 
  /**
   * Minimize the window.
   */
  void minimize() {
-   proxy.callMethod('minimize');
+   jsProxy.callMethod('minimize');
  }
 
  /**
   * Is the window minimized?
   */
  bool isMinimized() {
-   return proxy.callMethod('isMinimized');
+   return jsProxy.callMethod('isMinimized');
  }
 
  /**
   * Maximize the window.
   */
  void maximize() {
-   proxy.callMethod('maximize');
+   jsProxy.callMethod('maximize');
  }
 
  /**
   * Is the window maximized?
   */
  bool isMaximized() {
-   return proxy.callMethod('isMaximized');
+   return jsProxy.callMethod('isMaximized');
  }
 
  /**
   * Restore the window, exiting a maximized, minimized, or fullscreen state.
   */
  void restore() {
-   proxy.callMethod('restore');
+   jsProxy.callMethod('restore');
  }
 
  /**
   * Move the window to the position ([left], [top]).
   */
  void moveTo(int left, int top) {
-   proxy.callMethod('moveTo', [left, top]);
+   jsProxy.callMethod('moveTo', [left, top]);
  }
 
  /**
   * Resize the window to [width]x[height] pixels in size.
   */
  void resizeTo(int width, int height) {
-   proxy.callMethod('resizeTo', [width, height]);
+   jsProxy.callMethod('resizeTo', [width, height]);
  }
 
  /**
   * Draw attention to the window.
   */
  void drawAttention() {
-   proxy.callMethod('drawAttention');
+   jsProxy.callMethod('drawAttention');
  }
 
  /**
   * Clear attention to the window.
   */
  void clearAttention() {
-   proxy.callMethod('clearAttention');
+   jsProxy.callMethod('clearAttention');
  }
 
  /**
   * Close the window.
   */
  void close() {
-   proxy.callMethod('close');
+   jsProxy.callMethod('close');
  }
 
  /**
   * Show the window. Does nothing if the window is already visible.
   */
  void show() {
-   proxy.callMethod('show');
+   jsProxy.callMethod('show');
  }
 
  /**
   * Hide the window. Does nothing if the window is already hidden.
   */
  void hide() {
-   proxy.callMethod('hide');
+   jsProxy.callMethod('hide');
  }
 
  /**
   * Get the window's bounds as a [Bounds] object.
   */
  Bounds getBounds() {
-   return _createBounds(proxy.callMethod('getBounds'));
+   return _createBounds(jsProxy.callMethod('getBounds'));
  }
 
  /**
   * Set the window's bounds.
   */
  void setBounds(Bounds bounds) {
-   proxy.callMethod('setBounds', [jsify(bounds)]);
+   jsProxy.callMethod('setBounds', [jsify(bounds)]);
  }
 
  /**
@@ -167,14 +167,14 @@ class AppWindow extends ChromeObject {
   * Windows and OSX.
   */
  void setIcon(String icon_url) {
-   proxy.callMethod('setIcon', [icon_url]);
+   jsProxy.callMethod('setIcon', [icon_url]);
  }
 
  /**
   * Is the window always on top? Currently available in the Dev channel only.
   */
  bool isAlwaysOnTop() {
-   return proxy.callMethod('isAlwaysOnTop');
+   return jsProxy.callMethod('isAlwaysOnTop');
  }
 
  /**
@@ -182,7 +182,7 @@ class AppWindow extends ChromeObject {
   * available in the Dev channel only.
   */
  void setAlwaysOnTop(bool always_on_top) {
-   proxy.callMethod('setAlwaysOnTop', [always_on_top]);
+   jsProxy.callMethod('setAlwaysOnTop', [always_on_top]);
  }
 }
 </pre>
@@ -210,7 +210,7 @@ AppWindow({var contentWindow}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>AppWindow.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>AppWindow.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to AppWindow.AppWindow.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -218,7 +218,7 @@ new <strong>AppWindow.fromProxy</strong>(JsObject proxy) <a class="anchor-link" 
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-AppWindow.fromProxy(JsObject proxy): super.fromProxy(proxy);
+AppWindow.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -233,22 +233,22 @@ var         <strong>contentWindow</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-dynamic get contentWindow =&gt; proxy['contentWindow'];
+dynamic get contentWindow =&gt; jsProxy['contentWindow'];
 </pre>
 <pre class="source">
-set contentWindow(var value) =&gt; proxy['contentWindow'] = jsify(value);
+set contentWindow(var value) =&gt; jsProxy['contentWindow'] = jsify(value);
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to AppWindow.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to AppWindow.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -263,7 +263,7 @@ void <strong>clearAttention</strong>() <a class="anchor-link" href="#clearAttent
 <p>Clear attention to the window.</p>
 <pre class="source">
 void clearAttention() {
- proxy.callMethod('clearAttention');
+ jsProxy.callMethod('clearAttention');
 }
 </pre>
 </div>
@@ -276,7 +276,7 @@ void <strong>close</strong>() <a class="anchor-link" href="#close"
 <p>Close the window.</p>
 <pre class="source">
 void close() {
- proxy.callMethod('close');
+ jsProxy.callMethod('close');
 }
 </pre>
 </div>
@@ -289,7 +289,7 @@ void <strong>drawAttention</strong>() <a class="anchor-link" href="#drawAttentio
 <p>Draw attention to the window.</p>
 <pre class="source">
 void drawAttention() {
- proxy.callMethod('drawAttention');
+ jsProxy.callMethod('drawAttention');
 }
 </pre>
 </div>
@@ -302,7 +302,7 @@ void <strong>focus</strong>() <a class="anchor-link" href="#focus"
 <p>Focus the window.</p>
 <pre class="source">
 void focus() {
- proxy.callMethod('focus');
+ jsProxy.callMethod('focus');
 }
 </pre>
 </div>
@@ -315,7 +315,7 @@ void <strong>fullscreen</strong>() <a class="anchor-link" href="#fullscreen"
 <p>Fullscreens the window.</p>
 <pre class="source">
 void fullscreen() {
- proxy.callMethod('fullscreen');
+ jsProxy.callMethod('fullscreen');
 }
 </pre>
 </div>
@@ -328,7 +328,7 @@ void fullscreen() {
 <p>Get the window's bounds as a <a class="crossref" href="../chrome.src.common_exp/Bounds.html">Bounds</a> object.</p>
 <pre class="source">
 Bounds getBounds() {
- return _createBounds(proxy.callMethod('getBounds'));
+ return _createBounds(jsProxy.callMethod('getBounds'));
 }
 </pre>
 </div>
@@ -341,7 +341,7 @@ void <strong>hide</strong>() <a class="anchor-link" href="#hide"
 <p>Hide the window. Does nothing if the window is already hidden.</p>
 <pre class="source">
 void hide() {
- proxy.callMethod('hide');
+ jsProxy.callMethod('hide');
 }
 </pre>
 </div>
@@ -354,7 +354,7 @@ bool <strong>isAlwaysOnTop</strong>() <a class="anchor-link" href="#isAlwaysOnTo
 <p>Is the window always on top? Currently available in the Dev channel only.</p>
 <pre class="source">
 bool isAlwaysOnTop() {
- return proxy.callMethod('isAlwaysOnTop');
+ return jsProxy.callMethod('isAlwaysOnTop');
 }
 </pre>
 </div>
@@ -367,7 +367,7 @@ bool <strong>isFullscreen</strong>() <a class="anchor-link" href="#isFullscreen"
 <p>Is the window fullscreen?</p>
 <pre class="source">
 bool isFullscreen() {
- return proxy.callMethod('isFullscreen');
+ return jsProxy.callMethod('isFullscreen');
 }
 </pre>
 </div>
@@ -380,7 +380,7 @@ bool <strong>isMaximized</strong>() <a class="anchor-link" href="#isMaximized"
 <p>Is the window maximized?</p>
 <pre class="source">
 bool isMaximized() {
- return proxy.callMethod('isMaximized');
+ return jsProxy.callMethod('isMaximized');
 }
 </pre>
 </div>
@@ -393,7 +393,7 @@ bool <strong>isMinimized</strong>() <a class="anchor-link" href="#isMinimized"
 <p>Is the window minimized?</p>
 <pre class="source">
 bool isMinimized() {
- return proxy.callMethod('isMinimized');
+ return jsProxy.callMethod('isMinimized');
 }
 </pre>
 </div>
@@ -406,7 +406,7 @@ void <strong>maximize</strong>() <a class="anchor-link" href="#maximize"
 <p>Maximize the window.</p>
 <pre class="source">
 void maximize() {
- proxy.callMethod('maximize');
+ jsProxy.callMethod('maximize');
 }
 </pre>
 </div>
@@ -419,7 +419,7 @@ void <strong>minimize</strong>() <a class="anchor-link" href="#minimize"
 <p>Minimize the window.</p>
 <pre class="source">
 void minimize() {
- proxy.callMethod('minimize');
+ jsProxy.callMethod('minimize');
 }
 </pre>
 </div>
@@ -434,7 +434,7 @@ void <strong>moveTo</strong>(int left, int top) <a class="anchor-link" href="#mo
 <span class="param">top</span>).</p>
 <pre class="source">
 void moveTo(int left, int top) {
- proxy.callMethod('moveTo', [left, top]);
+ jsProxy.callMethod('moveTo', [left, top]);
 }
 </pre>
 </div>
@@ -449,7 +449,7 @@ void <strong>resizeTo</strong>(int width, int height) <a class="anchor-link" hre
 <span class="param">height</span> pixels in size.</p>
 <pre class="source">
 void resizeTo(int width, int height) {
- proxy.callMethod('resizeTo', [width, height]);
+ jsProxy.callMethod('resizeTo', [width, height]);
 }
 </pre>
 </div>
@@ -462,7 +462,7 @@ void <strong>restore</strong>() <a class="anchor-link" href="#restore"
 <p>Restore the window, exiting a maximized, minimized, or fullscreen state.</p>
 <pre class="source">
 void restore() {
- proxy.callMethod('restore');
+ jsProxy.callMethod('restore');
 }
 </pre>
 </div>
@@ -476,7 +476,7 @@ void <strong>setAlwaysOnTop</strong>(bool always_on_top) <a class="anchor-link" 
 available in the Dev channel only.</p>
 <pre class="source">
 void setAlwaysOnTop(bool always_on_top) {
- proxy.callMethod('setAlwaysOnTop', [always_on_top]);
+ jsProxy.callMethod('setAlwaysOnTop', [always_on_top]);
 }
 </pre>
 </div>
@@ -489,7 +489,7 @@ void <strong>setBounds</strong>(<a href="../chrome.src.common_exp/Bounds.html">B
 <p>Set the window's bounds.</p>
 <pre class="source">
 void setBounds(Bounds bounds) {
- proxy.callMethod('setBounds', [jsify(bounds)]);
+ jsProxy.callMethod('setBounds', [jsify(bounds)]);
 }
 </pre>
 </div>
@@ -504,7 +504,7 @@ being implemented on Ash. todo(stevenjb): Investigate implementing this on
 Windows and OSX.</p>
 <pre class="source">
 void setIcon(String icon_url) {
- proxy.callMethod('setIcon', [icon_url]);
+ jsProxy.callMethod('setIcon', [icon_url]);
 }
 </pre>
 </div>
@@ -517,7 +517,7 @@ void <strong>show</strong>() <a class="anchor-link" href="#show"
 <p>Show the window. Does nothing if the window is already visible.</p>
 <pre class="source">
 void show() {
- proxy.callMethod('show');
+ jsProxy.callMethod('show');
 }
 </pre>
 </div>
@@ -528,7 +528,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to AppWindow.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -541,7 +541,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

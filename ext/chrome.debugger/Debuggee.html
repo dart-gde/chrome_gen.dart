@@ -40,27 +40,27 @@ class Debuggee extends ChromeObject {
    if (extensionId != null) this.extensionId = extensionId;
    if (targetId != null) this.targetId = targetId;
  }
- Debuggee.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Debuggee.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The id of the tab which you intend to debug.
   */
- int get tabId =&gt; proxy['tabId'];
- set tabId(int value) =&gt; proxy['tabId'] = value;
+ int get tabId =&gt; jsProxy['tabId'];
+ set tabId(int value) =&gt; jsProxy['tabId'] = value;
 
  /**
   * The id of the extension which you intend to debug. Attaching to an
   * extension background page is only possible when 'enable-silent-debugging'
   * flag is enabled on the target browser.
   */
- String get extensionId =&gt; proxy['extensionId'];
- set extensionId(String value) =&gt; proxy['extensionId'] = value;
+ String get extensionId =&gt; jsProxy['extensionId'];
+ set extensionId(String value) =&gt; jsProxy['extensionId'] = value;
 
  /**
   * The opaque id of the debug target.
   */
- String get targetId =&gt; proxy['targetId'];
- set targetId(String value) =&gt; proxy['targetId'] = value;
+ String get targetId =&gt; jsProxy['targetId'];
+ set targetId(String value) =&gt; jsProxy['targetId'] = value;
 }
 </pre>
 </div>
@@ -89,7 +89,7 @@ Debuggee({int tabId, String extensionId, String targetId}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Debuggee.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Debuggee.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Debuggee.Debuggee.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -97,7 +97,7 @@ new <strong>Debuggee.fromProxy</strong>(JsObject proxy) <a class="anchor-link" h
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Debuggee.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Debuggee.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -115,22 +115,22 @@ String         <strong>extensionId</strong> <a class="anchor-link"
 extension background page is only possible when 'enable-silent-debugging'
 flag is enabled on the target browser.</p>
 <pre class="source">
-String get extensionId =&gt; proxy['extensionId'];
+String get extensionId =&gt; jsProxy['extensionId'];
 </pre>
 <pre class="source">
-set extensionId(String value) =&gt; proxy['extensionId'] = value;
+set extensionId(String value) =&gt; jsProxy['extensionId'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Debuggee.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Debuggee.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -143,10 +143,10 @@ int         <strong>tabId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The id of the tab which you intend to debug.</p>
 <pre class="source">
-int get tabId =&gt; proxy['tabId'];
+int get tabId =&gt; jsProxy['tabId'];
 </pre>
 <pre class="source">
-set tabId(int value) =&gt; proxy['tabId'] = value;
+set tabId(int value) =&gt; jsProxy['tabId'] = value;
 </pre>
 </div>
 </div>
@@ -159,10 +159,10 @@ String         <strong>targetId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The opaque id of the debug target.</p>
 <pre class="source">
-String get targetId =&gt; proxy['targetId'];
+String get targetId =&gt; jsProxy['targetId'];
 </pre>
 <pre class="source">
-set targetId(String value) =&gt; proxy['targetId'] = value;
+set targetId(String value) =&gt; jsProxy['targetId'] = value;
 </pre>
 </div>
 </div>
@@ -175,7 +175,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Debuggee.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -188,7 +188,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

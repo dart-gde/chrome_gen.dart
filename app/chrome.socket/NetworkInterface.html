@@ -38,13 +38,13 @@ class NetworkInterface extends ChromeObject {
    if (name != null) this.name = name;
    if (address != null) this.address = address;
  }
- NetworkInterface.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ NetworkInterface.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get name =&gt; proxy['name'];
- set name(String value) =&gt; proxy['name'] = value;
+ String get name =&gt; jsProxy['name'];
+ set name(String value) =&gt; jsProxy['name'] = value;
 
- String get address =&gt; proxy['address'];
- set address(String value) =&gt; proxy['address'] = value;
+ String get address =&gt; jsProxy['address'];
+ set address(String value) =&gt; jsProxy['address'] = value;
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ NetworkInterface({String name, String address}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>NetworkInterface.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>NetworkInterface.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to NetworkInterface.NetworkInterface.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,7 +80,7 @@ new <strong>NetworkInterface.fromProxy</strong>(JsObject proxy) <a class="anchor
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-NetworkInterface.fromProxy(JsObject proxy): super.fromProxy(proxy);
+NetworkInterface.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -95,10 +95,22 @@ String         <strong>address</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get address =&gt; proxy['address'];
+String get address =&gt; jsProxy['address'];
 </pre>
 <pre class="source">
-set address(String value) =&gt; proxy['address'] = value;
+set address(String value) =&gt; jsProxy['address'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to NetworkInterface.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -110,22 +122,10 @@ String         <strong>name</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get name =&gt; proxy['name'];
+String get name =&gt; jsProxy['name'];
 </pre>
 <pre class="source">
-set name(String value) =&gt; proxy['name'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to NetworkInterface.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set name(String value) =&gt; jsProxy['name'] = value;
 </pre>
 </div>
 </div>
@@ -138,7 +138,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to NetworkInterface.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

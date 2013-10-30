@@ -37,10 +37,10 @@ class InvalidTokenDetails extends ChromeObject {
  InvalidTokenDetails({String token}) {
    if (token != null) this.token = token;
  }
- InvalidTokenDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ InvalidTokenDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get token =&gt; proxy['token'];
- set token(String value) =&gt; proxy['token'] = value;
+ String get token =&gt; jsProxy['token'];
+ set token(String value) =&gt; jsProxy['token'] = value;
 }
 </pre>
 </div>
@@ -67,7 +67,7 @@ InvalidTokenDetails({String token}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>InvalidTokenDetails.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>InvalidTokenDetails.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to InvalidTokenDetails.InvalidTokenDetails.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -75,22 +75,22 @@ new <strong>InvalidTokenDetails.fromProxy</strong>(JsObject proxy) <a class="anc
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-InvalidTokenDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+InvalidTokenDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to InvalidTokenDetails.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to InvalidTokenDetails.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -102,10 +102,10 @@ String         <strong>token</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get token =&gt; proxy['token'];
+String get token =&gt; jsProxy['token'];
 </pre>
 <pre class="source">
-set token(String value) =&gt; proxy['token'] = value;
+set token(String value) =&gt; jsProxy['token'] = value;
 </pre>
 </div>
 </div>
@@ -118,7 +118,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to InvalidTokenDetails.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -131,7 +131,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

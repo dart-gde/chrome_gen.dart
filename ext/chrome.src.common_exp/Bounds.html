@@ -34,22 +34,22 @@
 <div class="doc">
 <pre class="source">
 class Bounds extends ChromeObject {
- static Bounds create(JsObject proxy) =&gt; proxy == null ? null : new Bounds.fromProxy(proxy);
+ static Bounds create(JsObject jsProxy) =&gt; jsProxy == null ? null : new Bounds.fromProxy(jsProxy);
 
  Bounds();
- Bounds.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Bounds.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get left =&gt; proxy['left'];
- set left(int value) =&gt; proxy['left'] = value;
+ int get left =&gt; jsProxy['left'];
+ set left(int value) =&gt; jsProxy['left'] = value;
 
- int get top =&gt; proxy['top'];
- set top(int value) =&gt; proxy['top'] = value;
+ int get top =&gt; jsProxy['top'];
+ set top(int value) =&gt; jsProxy['top'] = value;
 
- int get width =&gt; proxy['width'];
- set width(int value) =&gt; proxy['width'] = value;
+ int get width =&gt; jsProxy['width'];
+ set width(int value) =&gt; jsProxy['width'] = value;
 
- int get height =&gt; proxy['height'];
- set height(int value) =&gt; proxy['height'] = value;
+ int get height =&gt; jsProxy['height'];
+ set height(int value) =&gt; jsProxy['height'] = value;
 }
 </pre>
 </div>
@@ -60,11 +60,11 @@ class Bounds extends ChromeObject {
 <h3>Static Methods</h3>
 <div class="method"><h4 id="create">
 <button class="show-code">Code</button>
-<a href="../chrome.src.common_exp/Bounds.html">Bounds</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
+<a href="../chrome.src.common_exp/Bounds.html">Bounds</a> <strong>create</strong>(JsObject jsProxy) <a class="anchor-link" href="#create"
               title="Permalink to Bounds.create">#</a></h4>
 <div class="doc">
 <pre class="source">
-static Bounds create(JsObject proxy) =&gt; proxy == null ? null : new Bounds.fromProxy(proxy);
+static Bounds create(JsObject jsProxy) =&gt; jsProxy == null ? null : new Bounds.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -87,7 +87,7 @@ Bounds();
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Bounds.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Bounds.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Bounds.Bounds.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -95,7 +95,7 @@ new <strong>Bounds.fromProxy</strong>(JsObject proxy) <a class="anchor-link" hre
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Bounds.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Bounds.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -110,10 +110,22 @@ int         <strong>height</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get height =&gt; proxy['height'];
+int get height =&gt; jsProxy['height'];
 </pre>
 <pre class="source">
-set height(int value) =&gt; proxy['height'] = value;
+set height(int value) =&gt; jsProxy['height'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Bounds.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -125,22 +137,10 @@ int         <strong>left</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get left =&gt; proxy['left'];
+int get left =&gt; jsProxy['left'];
 </pre>
 <pre class="source">
-set left(int value) =&gt; proxy['left'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Bounds.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set left(int value) =&gt; jsProxy['left'] = value;
 </pre>
 </div>
 </div>
@@ -152,10 +152,10 @@ int         <strong>top</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get top =&gt; proxy['top'];
+int get top =&gt; jsProxy['top'];
 </pre>
 <pre class="source">
-set top(int value) =&gt; proxy['top'] = value;
+set top(int value) =&gt; jsProxy['top'] = value;
 </pre>
 </div>
 </div>
@@ -167,10 +167,10 @@ int         <strong>width</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get width =&gt; proxy['width'];
+int get width =&gt; jsProxy['width'];
 </pre>
 <pre class="source">
-set width(int value) =&gt; proxy['width'] = value;
+set width(int value) =&gt; jsProxy['width'] = value;
 </pre>
 </div>
 </div>
@@ -183,7 +183,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Bounds.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -196,7 +196,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

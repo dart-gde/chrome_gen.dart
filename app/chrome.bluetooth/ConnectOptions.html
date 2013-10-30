@@ -38,13 +38,13 @@ class ConnectOptions extends ChromeObject {
    if (device != null) this.device = device;
    if (profile != null) this.profile = profile;
  }
- ConnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ ConnectOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- BluetoothDevice get device =&gt; _createBluetoothDevice(proxy['device']);
- set device(BluetoothDevice value) =&gt; proxy['device'] = jsify(value);
+ BluetoothDevice get device =&gt; _createBluetoothDevice(jsProxy['device']);
+ set device(BluetoothDevice value) =&gt; jsProxy['device'] = jsify(value);
 
- Profile get profile =&gt; _createProfile(proxy['profile']);
- set profile(Profile value) =&gt; proxy['profile'] = jsify(value);
+ Profile get profile =&gt; _createProfile(jsProxy['profile']);
+ set profile(Profile value) =&gt; jsProxy['profile'] = jsify(value);
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ ConnectOptions({BluetoothDevice device, Profile profile}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ConnectOptions.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ConnectOptions.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ConnectOptions.ConnectOptions.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,7 +80,7 @@ new <strong>ConnectOptions.fromProxy</strong>(JsObject proxy) <a class="anchor-l
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ConnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ConnectOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -95,10 +95,22 @@ ConnectOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-BluetoothDevice get device =&gt; _createBluetoothDevice(proxy['device']);
+BluetoothDevice get device =&gt; _createBluetoothDevice(jsProxy['device']);
 </pre>
 <pre class="source">
-set device(BluetoothDevice value) =&gt; proxy['device'] = jsify(value);
+set device(BluetoothDevice value) =&gt; jsProxy['device'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to ConnectOptions.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -110,22 +122,10 @@ set device(BluetoothDevice value) =&gt; proxy['device'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-Profile get profile =&gt; _createProfile(proxy['profile']);
+Profile get profile =&gt; _createProfile(jsProxy['profile']);
 </pre>
 <pre class="source">
-set profile(Profile value) =&gt; proxy['profile'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to ConnectOptions.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set profile(Profile value) =&gt; jsProxy['profile'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -138,7 +138,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to ConnectOptions.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

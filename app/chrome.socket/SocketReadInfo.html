@@ -38,13 +38,13 @@ class SocketReadInfo extends ChromeObject {
    if (resultCode != null) this.resultCode = resultCode;
    if (data != null) this.data = data;
  }
- SocketReadInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ SocketReadInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get resultCode =&gt; proxy['resultCode'];
- set resultCode(int value) =&gt; proxy['resultCode'] = value;
+ int get resultCode =&gt; jsProxy['resultCode'];
+ set resultCode(int value) =&gt; jsProxy['resultCode'] = value;
 
- ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
- set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
+ ArrayBuffer get data =&gt; _createArrayBuffer(jsProxy['data']);
+ set data(ArrayBuffer value) =&gt; jsProxy['data'] = jsify(value);
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ SocketReadInfo({int resultCode, ArrayBuffer data}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>SocketReadInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>SocketReadInfo.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to SocketReadInfo.SocketReadInfo.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,7 +80,7 @@ new <strong>SocketReadInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-l
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-SocketReadInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+SocketReadInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -95,22 +95,22 @@ SocketReadInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
+ArrayBuffer get data =&gt; _createArrayBuffer(jsProxy['data']);
 </pre>
 <pre class="source">
-set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
+set data(ArrayBuffer value) =&gt; jsProxy['data'] = jsify(value);
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to SocketReadInfo.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to SocketReadInfo.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -122,10 +122,10 @@ int         <strong>resultCode</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get resultCode =&gt; proxy['resultCode'];
+int get resultCode =&gt; jsProxy['resultCode'];
 </pre>
 <pre class="source">
-set resultCode(int value) =&gt; proxy['resultCode'] = value;
+set resultCode(int value) =&gt; jsProxy['resultCode'] = value;
 </pre>
 </div>
 </div>
@@ -138,7 +138,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to SocketReadInfo.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

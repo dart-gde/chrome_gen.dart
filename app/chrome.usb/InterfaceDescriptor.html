@@ -43,28 +43,28 @@ class InterfaceDescriptor extends ChromeObject {
    if (description != null) this.description = description;
    if (endpoints != null) this.endpoints = endpoints;
  }
- InterfaceDescriptor.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ InterfaceDescriptor.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get interfaceNumber =&gt; proxy['interfaceNumber'];
- set interfaceNumber(int value) =&gt; proxy['interfaceNumber'] = value;
+ int get interfaceNumber =&gt; jsProxy['interfaceNumber'];
+ set interfaceNumber(int value) =&gt; jsProxy['interfaceNumber'] = value;
 
- int get alternateSetting =&gt; proxy['alternateSetting'];
- set alternateSetting(int value) =&gt; proxy['alternateSetting'] = value;
+ int get alternateSetting =&gt; jsProxy['alternateSetting'];
+ set alternateSetting(int value) =&gt; jsProxy['alternateSetting'] = value;
 
- int get interfaceClass =&gt; proxy['interfaceClass'];
- set interfaceClass(int value) =&gt; proxy['interfaceClass'] = value;
+ int get interfaceClass =&gt; jsProxy['interfaceClass'];
+ set interfaceClass(int value) =&gt; jsProxy['interfaceClass'] = value;
 
- int get interfaceSubclass =&gt; proxy['interfaceSubclass'];
- set interfaceSubclass(int value) =&gt; proxy['interfaceSubclass'] = value;
+ int get interfaceSubclass =&gt; jsProxy['interfaceSubclass'];
+ set interfaceSubclass(int value) =&gt; jsProxy['interfaceSubclass'] = value;
 
- int get interfaceProtocol =&gt; proxy['interfaceProtocol'];
- set interfaceProtocol(int value) =&gt; proxy['interfaceProtocol'] = value;
+ int get interfaceProtocol =&gt; jsProxy['interfaceProtocol'];
+ set interfaceProtocol(int value) =&gt; jsProxy['interfaceProtocol'] = value;
 
- String get description =&gt; proxy['description'];
- set description(String value) =&gt; proxy['description'] = value;
+ String get description =&gt; jsProxy['description'];
+ set description(String value) =&gt; jsProxy['description'] = value;
 
- EndpointDescriptor get endpoints =&gt; _createEndpointDescriptor(proxy['endpoints']);
- set endpoints(EndpointDescriptor value) =&gt; proxy['endpoints'] = jsify(value);
+ EndpointDescriptor get endpoints =&gt; _createEndpointDescriptor(jsProxy['endpoints']);
+ set endpoints(EndpointDescriptor value) =&gt; jsProxy['endpoints'] = jsify(value);
 }
 </pre>
 </div>
@@ -97,7 +97,7 @@ InterfaceDescriptor({int interfaceNumber, int alternateSetting, int interfaceCla
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>InterfaceDescriptor.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>InterfaceDescriptor.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to InterfaceDescriptor.InterfaceDescriptor.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -105,7 +105,7 @@ new <strong>InterfaceDescriptor.fromProxy</strong>(JsObject proxy) <a class="anc
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-InterfaceDescriptor.fromProxy(JsObject proxy): super.fromProxy(proxy);
+InterfaceDescriptor.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -120,10 +120,10 @@ int         <strong>alternateSetting</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get alternateSetting =&gt; proxy['alternateSetting'];
+int get alternateSetting =&gt; jsProxy['alternateSetting'];
 </pre>
 <pre class="source">
-set alternateSetting(int value) =&gt; proxy['alternateSetting'] = value;
+set alternateSetting(int value) =&gt; jsProxy['alternateSetting'] = value;
 </pre>
 </div>
 </div>
@@ -135,10 +135,10 @@ String         <strong>description</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get description =&gt; proxy['description'];
+String get description =&gt; jsProxy['description'];
 </pre>
 <pre class="source">
-set description(String value) =&gt; proxy['description'] = value;
+set description(String value) =&gt; jsProxy['description'] = value;
 </pre>
 </div>
 </div>
@@ -150,10 +150,10 @@ set description(String value) =&gt; proxy['description'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-EndpointDescriptor get endpoints =&gt; _createEndpointDescriptor(proxy['endpoints']);
+EndpointDescriptor get endpoints =&gt; _createEndpointDescriptor(jsProxy['endpoints']);
 </pre>
 <pre class="source">
-set endpoints(EndpointDescriptor value) =&gt; proxy['endpoints'] = jsify(value);
+set endpoints(EndpointDescriptor value) =&gt; jsProxy['endpoints'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -165,10 +165,10 @@ int         <strong>interfaceClass</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get interfaceClass =&gt; proxy['interfaceClass'];
+int get interfaceClass =&gt; jsProxy['interfaceClass'];
 </pre>
 <pre class="source">
-set interfaceClass(int value) =&gt; proxy['interfaceClass'] = value;
+set interfaceClass(int value) =&gt; jsProxy['interfaceClass'] = value;
 </pre>
 </div>
 </div>
@@ -180,10 +180,10 @@ int         <strong>interfaceNumber</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get interfaceNumber =&gt; proxy['interfaceNumber'];
+int get interfaceNumber =&gt; jsProxy['interfaceNumber'];
 </pre>
 <pre class="source">
-set interfaceNumber(int value) =&gt; proxy['interfaceNumber'] = value;
+set interfaceNumber(int value) =&gt; jsProxy['interfaceNumber'] = value;
 </pre>
 </div>
 </div>
@@ -195,10 +195,10 @@ int         <strong>interfaceProtocol</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get interfaceProtocol =&gt; proxy['interfaceProtocol'];
+int get interfaceProtocol =&gt; jsProxy['interfaceProtocol'];
 </pre>
 <pre class="source">
-set interfaceProtocol(int value) =&gt; proxy['interfaceProtocol'] = value;
+set interfaceProtocol(int value) =&gt; jsProxy['interfaceProtocol'] = value;
 </pre>
 </div>
 </div>
@@ -210,22 +210,22 @@ int         <strong>interfaceSubclass</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get interfaceSubclass =&gt; proxy['interfaceSubclass'];
+int get interfaceSubclass =&gt; jsProxy['interfaceSubclass'];
 </pre>
 <pre class="source">
-set interfaceSubclass(int value) =&gt; proxy['interfaceSubclass'] = value;
+set interfaceSubclass(int value) =&gt; jsProxy['interfaceSubclass'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to InterfaceDescriptor.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to InterfaceDescriptor.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -238,7 +238,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to InterfaceDescriptor.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -251,7 +251,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

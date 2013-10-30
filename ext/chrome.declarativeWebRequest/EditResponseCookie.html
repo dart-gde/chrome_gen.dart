@@ -40,20 +40,20 @@ class EditResponseCookie extends ChromeObject {
    if (filter != null) this.filter = filter;
    if (modification != null) this.modification = modification;
  }
- EditResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ EditResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Filter for cookies that will be modified. All empty entries are ignored.
   */
- FilterResponseCookie get filter =&gt; _createFilterResponseCookie(proxy['filter']);
- set filter(FilterResponseCookie value) =&gt; proxy['filter'] = jsify(value);
+ FilterResponseCookie get filter =&gt; _createFilterResponseCookie(jsProxy['filter']);
+ set filter(FilterResponseCookie value) =&gt; jsProxy['filter'] = jsify(value);
 
  /**
   * Attributes that shall be overridden in cookies that machted the filter.
   * Attributes that are set to an empty string are removed.
   */
- ResponseCookie get modification =&gt; _createResponseCookie(proxy['modification']);
- set modification(ResponseCookie value) =&gt; proxy['modification'] = jsify(value);
+ ResponseCookie get modification =&gt; _createResponseCookie(jsProxy['modification']);
+ set modification(ResponseCookie value) =&gt; jsProxy['modification'] = jsify(value);
 }
 </pre>
 </div>
@@ -81,7 +81,7 @@ EditResponseCookie({FilterResponseCookie filter, ResponseCookie modification}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>EditResponseCookie.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>EditResponseCookie.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to EditResponseCookie.EditResponseCookie.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -89,7 +89,7 @@ new <strong>EditResponseCookie.fromProxy</strong>(JsObject proxy) <a class="anch
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-EditResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+EditResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -105,10 +105,22 @@ EditResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
         <div class="doc">
 <p>Filter for cookies that will be modified. All empty entries are ignored.</p>
 <pre class="source">
-FilterResponseCookie get filter =&gt; _createFilterResponseCookie(proxy['filter']);
+FilterResponseCookie get filter =&gt; _createFilterResponseCookie(jsProxy['filter']);
 </pre>
 <pre class="source">
-set filter(FilterResponseCookie value) =&gt; proxy['filter'] = jsify(value);
+set filter(FilterResponseCookie value) =&gt; jsProxy['filter'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to EditResponseCookie.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -122,22 +134,10 @@ set filter(FilterResponseCookie value) =&gt; proxy['filter'] = jsify(value);
 <p>Attributes that shall be overridden in cookies that machted the filter.
 Attributes that are set to an empty string are removed.</p>
 <pre class="source">
-ResponseCookie get modification =&gt; _createResponseCookie(proxy['modification']);
+ResponseCookie get modification =&gt; _createResponseCookie(jsProxy['modification']);
 </pre>
 <pre class="source">
-set modification(ResponseCookie value) =&gt; proxy['modification'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to EditResponseCookie.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set modification(ResponseCookie value) =&gt; jsProxy['modification'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -150,7 +150,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to EditResponseCookie.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -163,7 +163,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

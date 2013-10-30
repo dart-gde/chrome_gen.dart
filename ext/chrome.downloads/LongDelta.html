@@ -38,13 +38,13 @@ class LongDelta extends ChromeObject {
    if (previous != null) this.previous = previous;
    if (current != null) this.current = current;
  }
- LongDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ LongDelta.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get previous =&gt; proxy['previous'];
- set previous(int value) =&gt; proxy['previous'] = value;
+ int get previous =&gt; jsProxy['previous'];
+ set previous(int value) =&gt; jsProxy['previous'] = value;
 
- int get current =&gt; proxy['current'];
- set current(int value) =&gt; proxy['current'] = value;
+ int get current =&gt; jsProxy['current'];
+ set current(int value) =&gt; jsProxy['current'] = value;
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ LongDelta({int previous, int current}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>LongDelta.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>LongDelta.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to LongDelta.LongDelta.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,7 +80,7 @@ new <strong>LongDelta.fromProxy</strong>(JsObject proxy) <a class="anchor-link" 
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-LongDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
+LongDelta.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -95,10 +95,22 @@ int         <strong>current</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get current =&gt; proxy['current'];
+int get current =&gt; jsProxy['current'];
 </pre>
 <pre class="source">
-set current(int value) =&gt; proxy['current'] = value;
+set current(int value) =&gt; jsProxy['current'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to LongDelta.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -110,22 +122,10 @@ int         <strong>previous</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get previous =&gt; proxy['previous'];
+int get previous =&gt; jsProxy['previous'];
 </pre>
 <pre class="source">
-set previous(int value) =&gt; proxy['previous'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to LongDelta.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set previous(int value) =&gt; jsProxy['previous'] = value;
 </pre>
 </div>
 </div>
@@ -138,7 +138,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to LongDelta.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

@@ -44,45 +44,45 @@ class MenuItem extends ChromeObject {
    if (checked != null) this.checked = checked;
    if (enabled != null) this.enabled = enabled;
  }
- MenuItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ MenuItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * String that will be passed to callbacks referencing this MenuItem.
   */
- String get id =&gt; proxy['id'];
- set id(String value) =&gt; proxy['id'] = value;
+ String get id =&gt; jsProxy['id'];
+ set id(String value) =&gt; jsProxy['id'] = value;
 
  /**
   * Text displayed in the menu for this item.
   */
- String get label =&gt; proxy['label'];
- set label(String value) =&gt; proxy['label'] = value;
+ String get label =&gt; jsProxy['label'];
+ set label(String value) =&gt; jsProxy['label'] = value;
 
  /**
   * Enum representing if this item is: check, radio, or a separator.  Radio
   * buttons between separators are considered grouped.
   * enum of `check`, `radio`, `separator`
   */
- String get style =&gt; proxy['style'];
- set style(String value) =&gt; proxy['style'] = value;
+ String get style =&gt; jsProxy['style'];
+ set style(String value) =&gt; jsProxy['style'] = value;
 
  /**
   * Indicates this item is visible.
   */
- bool get visible =&gt; proxy['visible'];
- set visible(bool value) =&gt; proxy['visible'] = value;
+ bool get visible =&gt; jsProxy['visible'];
+ set visible(bool value) =&gt; jsProxy['visible'] = value;
 
  /**
   * Indicates this item should be drawn with a check.
   */
- bool get checked =&gt; proxy['checked'];
- set checked(bool value) =&gt; proxy['checked'] = value;
+ bool get checked =&gt; jsProxy['checked'];
+ set checked(bool value) =&gt; jsProxy['checked'] = value;
 
  /**
   * Indicates this item is enabled.
   */
- bool get enabled =&gt; proxy['enabled'];
- set enabled(bool value) =&gt; proxy['enabled'] = value;
+ bool get enabled =&gt; jsProxy['enabled'];
+ set enabled(bool value) =&gt; jsProxy['enabled'] = value;
 }
 </pre>
 </div>
@@ -114,7 +114,7 @@ MenuItem({String id, String label, String style, bool visible, bool checked, boo
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>MenuItem.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>MenuItem.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to MenuItem.MenuItem.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -122,7 +122,7 @@ new <strong>MenuItem.fromProxy</strong>(JsObject proxy) <a class="anchor-link" h
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-MenuItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+MenuItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -138,10 +138,10 @@ bool         <strong>checked</strong> <a class="anchor-link"
         <div class="doc">
 <p>Indicates this item should be drawn with a check.</p>
 <pre class="source">
-bool get checked =&gt; proxy['checked'];
+bool get checked =&gt; jsProxy['checked'];
 </pre>
 <pre class="source">
-set checked(bool value) =&gt; proxy['checked'] = value;
+set checked(bool value) =&gt; jsProxy['checked'] = value;
 </pre>
 </div>
 </div>
@@ -154,10 +154,10 @@ bool         <strong>enabled</strong> <a class="anchor-link"
         <div class="doc">
 <p>Indicates this item is enabled.</p>
 <pre class="source">
-bool get enabled =&gt; proxy['enabled'];
+bool get enabled =&gt; jsProxy['enabled'];
 </pre>
 <pre class="source">
-set enabled(bool value) =&gt; proxy['enabled'] = value;
+set enabled(bool value) =&gt; jsProxy['enabled'] = value;
 </pre>
 </div>
 </div>
@@ -170,10 +170,22 @@ String         <strong>id</strong> <a class="anchor-link"
         <div class="doc">
 <p>String that will be passed to callbacks referencing this MenuItem.</p>
 <pre class="source">
-String get id =&gt; proxy['id'];
+String get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(String value) =&gt; proxy['id'] = value;
+set id(String value) =&gt; jsProxy['id'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to MenuItem.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -186,22 +198,10 @@ String         <strong>label</strong> <a class="anchor-link"
         <div class="doc">
 <p>Text displayed in the menu for this item.</p>
 <pre class="source">
-String get label =&gt; proxy['label'];
+String get label =&gt; jsProxy['label'];
 </pre>
 <pre class="source">
-set label(String value) =&gt; proxy['label'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to MenuItem.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set label(String value) =&gt; jsProxy['label'] = value;
 </pre>
 </div>
 </div>
@@ -216,10 +216,10 @@ String         <strong>style</strong> <a class="anchor-link"
 buttons between separators are considered grouped.
 enum of <code>check</code>, <code>radio</code>, <code>separator</code></p>
 <pre class="source">
-String get style =&gt; proxy['style'];
+String get style =&gt; jsProxy['style'];
 </pre>
 <pre class="source">
-set style(String value) =&gt; proxy['style'] = value;
+set style(String value) =&gt; jsProxy['style'] = value;
 </pre>
 </div>
 </div>
@@ -232,10 +232,10 @@ bool         <strong>visible</strong> <a class="anchor-link"
         <div class="doc">
 <p>Indicates this item is visible.</p>
 <pre class="source">
-bool get visible =&gt; proxy['visible'];
+bool get visible =&gt; jsProxy['visible'];
 </pre>
 <pre class="source">
-set visible(bool value) =&gt; proxy['visible'] = value;
+set visible(bool value) =&gt; jsProxy['visible'] = value;
 </pre>
 </div>
 </div>
@@ -248,7 +248,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to MenuItem.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -261,7 +261,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

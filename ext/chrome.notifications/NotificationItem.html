@@ -38,13 +38,13 @@ class NotificationItem extends ChromeObject {
    if (title != null) this.title = title;
    if (message != null) this.message = message;
  }
- NotificationItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ NotificationItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get title =&gt; proxy['title'];
- set title(String value) =&gt; proxy['title'] = value;
+ String get title =&gt; jsProxy['title'];
+ set title(String value) =&gt; jsProxy['title'] = value;
 
- String get message =&gt; proxy['message'];
- set message(String value) =&gt; proxy['message'] = value;
+ String get message =&gt; jsProxy['message'];
+ set message(String value) =&gt; jsProxy['message'] = value;
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ NotificationItem({String title, String message}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>NotificationItem.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>NotificationItem.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to NotificationItem.NotificationItem.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,13 +80,25 @@ new <strong>NotificationItem.fromProxy</strong>(JsObject proxy) <a class="anchor
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-NotificationItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+NotificationItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to NotificationItem.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="message">
 <button class="show-code">Code</button>
 String         <strong>message</strong> <a class="anchor-link"
@@ -95,22 +107,10 @@ String         <strong>message</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get message =&gt; proxy['message'];
+String get message =&gt; jsProxy['message'];
 </pre>
 <pre class="source">
-set message(String value) =&gt; proxy['message'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to NotificationItem.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set message(String value) =&gt; jsProxy['message'] = value;
 </pre>
 </div>
 </div>
@@ -122,10 +122,10 @@ String         <strong>title</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get title =&gt; proxy['title'];
+String get title =&gt; jsProxy['title'];
 </pre>
 <pre class="source">
-set title(String value) =&gt; proxy['title'] = value;
+set title(String value) =&gt; jsProxy['title'] = value;
 </pre>
 </div>
 </div>
@@ -138,7 +138,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to NotificationItem.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

@@ -38,19 +38,19 @@ class Permissions extends ChromeObject {
    if (permissions != null) this.permissions = permissions;
    if (origins != null) this.origins = origins;
  }
- Permissions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Permissions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * List of named permissions (does not include hosts or origins).
   */
- List&lt;String&gt; get permissions =&gt; listify(proxy['permissions']);
- set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = jsify(value);
+ List&lt;String&gt; get permissions =&gt; listify(jsProxy['permissions']);
+ set permissions(List&lt;String&gt; value) =&gt; jsProxy['permissions'] = jsify(value);
 
  /**
   * List of origin permissions.
   */
- List&lt;String&gt; get origins =&gt; listify(proxy['origins']);
- set origins(List&lt;String&gt; value) =&gt; proxy['origins'] = jsify(value);
+ List&lt;String&gt; get origins =&gt; listify(jsProxy['origins']);
+ set origins(List&lt;String&gt; value) =&gt; jsProxy['origins'] = jsify(value);
 }
 </pre>
 </div>
@@ -78,7 +78,7 @@ Permissions({List&lt;String&gt; permissions, List&lt;String&gt; origins}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Permissions.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Permissions.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Permissions.Permissions.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -86,13 +86,25 @@ new <strong>Permissions.fromProxy</strong>(JsObject proxy) <a class="anchor-link
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Permissions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Permissions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Permissions.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="origins">
 <button class="show-code">Code</button>
 List&lt;String&gt;         <strong>origins</strong> <a class="anchor-link"
@@ -102,10 +114,10 @@ List&lt;String&gt;         <strong>origins</strong> <a class="anchor-link"
         <div class="doc">
 <p>List of origin permissions.</p>
 <pre class="source">
-List&lt;String&gt; get origins =&gt; listify(proxy['origins']);
+List&lt;String&gt; get origins =&gt; listify(jsProxy['origins']);
 </pre>
 <pre class="source">
-set origins(List&lt;String&gt; value) =&gt; proxy['origins'] = jsify(value);
+set origins(List&lt;String&gt; value) =&gt; jsProxy['origins'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -118,22 +130,10 @@ List&lt;String&gt;         <strong>permissions</strong> <a class="anchor-link"
         <div class="doc">
 <p>List of named permissions (does not include hosts or origins).</p>
 <pre class="source">
-List&lt;String&gt; get permissions =&gt; listify(proxy['permissions']);
+List&lt;String&gt; get permissions =&gt; listify(jsProxy['permissions']);
 </pre>
 <pre class="source">
-set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Permissions.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set permissions(List&lt;String&gt; value) =&gt; jsProxy['permissions'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -146,7 +146,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Permissions.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -159,7 +159,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

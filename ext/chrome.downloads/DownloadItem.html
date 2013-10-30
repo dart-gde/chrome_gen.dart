@@ -56,67 +56,67 @@ class DownloadItem extends ChromeObject {
    if (byExtensionId != null) this.byExtensionId = byExtensionId;
    if (byExtensionName != null) this.byExtensionName = byExtensionName;
  }
- DownloadItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ DownloadItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get id =&gt; proxy['id'];
- set id(int value) =&gt; proxy['id'] = value;
+ int get id =&gt; jsProxy['id'];
+ set id(int value) =&gt; jsProxy['id'] = value;
 
- String get url =&gt; proxy['url'];
- set url(String value) =&gt; proxy['url'] = value;
+ String get url =&gt; jsProxy['url'];
+ set url(String value) =&gt; jsProxy['url'] = value;
 
- String get referrer =&gt; proxy['referrer'];
- set referrer(String value) =&gt; proxy['referrer'] = value;
+ String get referrer =&gt; jsProxy['referrer'];
+ set referrer(String value) =&gt; jsProxy['referrer'] = value;
 
- String get filename =&gt; proxy['filename'];
- set filename(String value) =&gt; proxy['filename'] = value;
+ String get filename =&gt; jsProxy['filename'];
+ set filename(String value) =&gt; jsProxy['filename'] = value;
 
- bool get incognito =&gt; proxy['incognito'];
- set incognito(bool value) =&gt; proxy['incognito'] = value;
+ bool get incognito =&gt; jsProxy['incognito'];
+ set incognito(bool value) =&gt; jsProxy['incognito'] = value;
 
- DangerType get danger =&gt; _createDangerType(proxy['danger']);
- set danger(DangerType value) =&gt; proxy['danger'] = jsify(value);
+ DangerType get danger =&gt; _createDangerType(jsProxy['danger']);
+ set danger(DangerType value) =&gt; jsProxy['danger'] = jsify(value);
 
- String get mime =&gt; proxy['mime'];
- set mime(String value) =&gt; proxy['mime'] = value;
+ String get mime =&gt; jsProxy['mime'];
+ set mime(String value) =&gt; jsProxy['mime'] = value;
 
- String get startTime =&gt; proxy['startTime'];
- set startTime(String value) =&gt; proxy['startTime'] = value;
+ String get startTime =&gt; jsProxy['startTime'];
+ set startTime(String value) =&gt; jsProxy['startTime'] = value;
 
- String get endTime =&gt; proxy['endTime'];
- set endTime(String value) =&gt; proxy['endTime'] = value;
+ String get endTime =&gt; jsProxy['endTime'];
+ set endTime(String value) =&gt; jsProxy['endTime'] = value;
 
- String get estimatedEndTime =&gt; proxy['estimatedEndTime'];
- set estimatedEndTime(String value) =&gt; proxy['estimatedEndTime'] = value;
+ String get estimatedEndTime =&gt; jsProxy['estimatedEndTime'];
+ set estimatedEndTime(String value) =&gt; jsProxy['estimatedEndTime'] = value;
 
- State get state =&gt; _createState(proxy['state']);
- set state(State value) =&gt; proxy['state'] = jsify(value);
+ State get state =&gt; _createState(jsProxy['state']);
+ set state(State value) =&gt; jsProxy['state'] = jsify(value);
 
- bool get paused =&gt; proxy['paused'];
- set paused(bool value) =&gt; proxy['paused'] = value;
+ bool get paused =&gt; jsProxy['paused'];
+ set paused(bool value) =&gt; jsProxy['paused'] = value;
 
- bool get canResume =&gt; proxy['canResume'];
- set canResume(bool value) =&gt; proxy['canResume'] = value;
+ bool get canResume =&gt; jsProxy['canResume'];
+ set canResume(bool value) =&gt; jsProxy['canResume'] = value;
 
- InterruptReason get error =&gt; _createInterruptReason(proxy['error']);
- set error(InterruptReason value) =&gt; proxy['error'] = jsify(value);
+ InterruptReason get error =&gt; _createInterruptReason(jsProxy['error']);
+ set error(InterruptReason value) =&gt; jsProxy['error'] = jsify(value);
 
- int get bytesReceived =&gt; proxy['bytesReceived'];
- set bytesReceived(int value) =&gt; proxy['bytesReceived'] = value;
+ int get bytesReceived =&gt; jsProxy['bytesReceived'];
+ set bytesReceived(int value) =&gt; jsProxy['bytesReceived'] = value;
 
- int get totalBytes =&gt; proxy['totalBytes'];
- set totalBytes(int value) =&gt; proxy['totalBytes'] = value;
+ int get totalBytes =&gt; jsProxy['totalBytes'];
+ set totalBytes(int value) =&gt; jsProxy['totalBytes'] = value;
 
- int get fileSize =&gt; proxy['fileSize'];
- set fileSize(int value) =&gt; proxy['fileSize'] = value;
+ int get fileSize =&gt; jsProxy['fileSize'];
+ set fileSize(int value) =&gt; jsProxy['fileSize'] = value;
 
- bool get exists =&gt; proxy['exists'];
- set exists(bool value) =&gt; proxy['exists'] = value;
+ bool get exists =&gt; jsProxy['exists'];
+ set exists(bool value) =&gt; jsProxy['exists'] = value;
 
- String get byExtensionId =&gt; proxy['byExtensionId'];
- set byExtensionId(String value) =&gt; proxy['byExtensionId'] = value;
+ String get byExtensionId =&gt; jsProxy['byExtensionId'];
+ set byExtensionId(String value) =&gt; jsProxy['byExtensionId'] = value;
 
- String get byExtensionName =&gt; proxy['byExtensionName'];
- set byExtensionName(String value) =&gt; proxy['byExtensionName'] = value;
+ String get byExtensionName =&gt; jsProxy['byExtensionName'];
+ set byExtensionName(String value) =&gt; jsProxy['byExtensionName'] = value;
 }
 </pre>
 </div>
@@ -162,7 +162,7 @@ DownloadItem({int id, String url, String referrer, String filename, bool incogni
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>DownloadItem.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>DownloadItem.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to DownloadItem.DownloadItem.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -170,7 +170,7 @@ new <strong>DownloadItem.fromProxy</strong>(JsObject proxy) <a class="anchor-lin
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-DownloadItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+DownloadItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -185,10 +185,10 @@ String         <strong>byExtensionId</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get byExtensionId =&gt; proxy['byExtensionId'];
+String get byExtensionId =&gt; jsProxy['byExtensionId'];
 </pre>
 <pre class="source">
-set byExtensionId(String value) =&gt; proxy['byExtensionId'] = value;
+set byExtensionId(String value) =&gt; jsProxy['byExtensionId'] = value;
 </pre>
 </div>
 </div>
@@ -200,10 +200,10 @@ String         <strong>byExtensionName</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get byExtensionName =&gt; proxy['byExtensionName'];
+String get byExtensionName =&gt; jsProxy['byExtensionName'];
 </pre>
 <pre class="source">
-set byExtensionName(String value) =&gt; proxy['byExtensionName'] = value;
+set byExtensionName(String value) =&gt; jsProxy['byExtensionName'] = value;
 </pre>
 </div>
 </div>
@@ -215,10 +215,10 @@ int         <strong>bytesReceived</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get bytesReceived =&gt; proxy['bytesReceived'];
+int get bytesReceived =&gt; jsProxy['bytesReceived'];
 </pre>
 <pre class="source">
-set bytesReceived(int value) =&gt; proxy['bytesReceived'] = value;
+set bytesReceived(int value) =&gt; jsProxy['bytesReceived'] = value;
 </pre>
 </div>
 </div>
@@ -230,10 +230,10 @@ bool         <strong>canResume</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get canResume =&gt; proxy['canResume'];
+bool get canResume =&gt; jsProxy['canResume'];
 </pre>
 <pre class="source">
-set canResume(bool value) =&gt; proxy['canResume'] = value;
+set canResume(bool value) =&gt; jsProxy['canResume'] = value;
 </pre>
 </div>
 </div>
@@ -245,10 +245,10 @@ set canResume(bool value) =&gt; proxy['canResume'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-DangerType get danger =&gt; _createDangerType(proxy['danger']);
+DangerType get danger =&gt; _createDangerType(jsProxy['danger']);
 </pre>
 <pre class="source">
-set danger(DangerType value) =&gt; proxy['danger'] = jsify(value);
+set danger(DangerType value) =&gt; jsProxy['danger'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -260,10 +260,10 @@ String         <strong>endTime</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get endTime =&gt; proxy['endTime'];
+String get endTime =&gt; jsProxy['endTime'];
 </pre>
 <pre class="source">
-set endTime(String value) =&gt; proxy['endTime'] = value;
+set endTime(String value) =&gt; jsProxy['endTime'] = value;
 </pre>
 </div>
 </div>
@@ -275,10 +275,10 @@ set endTime(String value) =&gt; proxy['endTime'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-InterruptReason get error =&gt; _createInterruptReason(proxy['error']);
+InterruptReason get error =&gt; _createInterruptReason(jsProxy['error']);
 </pre>
 <pre class="source">
-set error(InterruptReason value) =&gt; proxy['error'] = jsify(value);
+set error(InterruptReason value) =&gt; jsProxy['error'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -290,10 +290,10 @@ String         <strong>estimatedEndTime</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get estimatedEndTime =&gt; proxy['estimatedEndTime'];
+String get estimatedEndTime =&gt; jsProxy['estimatedEndTime'];
 </pre>
 <pre class="source">
-set estimatedEndTime(String value) =&gt; proxy['estimatedEndTime'] = value;
+set estimatedEndTime(String value) =&gt; jsProxy['estimatedEndTime'] = value;
 </pre>
 </div>
 </div>
@@ -305,10 +305,10 @@ bool         <strong>exists</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get exists =&gt; proxy['exists'];
+bool get exists =&gt; jsProxy['exists'];
 </pre>
 <pre class="source">
-set exists(bool value) =&gt; proxy['exists'] = value;
+set exists(bool value) =&gt; jsProxy['exists'] = value;
 </pre>
 </div>
 </div>
@@ -320,10 +320,10 @@ String         <strong>filename</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get filename =&gt; proxy['filename'];
+String get filename =&gt; jsProxy['filename'];
 </pre>
 <pre class="source">
-set filename(String value) =&gt; proxy['filename'] = value;
+set filename(String value) =&gt; jsProxy['filename'] = value;
 </pre>
 </div>
 </div>
@@ -335,10 +335,10 @@ int         <strong>fileSize</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get fileSize =&gt; proxy['fileSize'];
+int get fileSize =&gt; jsProxy['fileSize'];
 </pre>
 <pre class="source">
-set fileSize(int value) =&gt; proxy['fileSize'] = value;
+set fileSize(int value) =&gt; jsProxy['fileSize'] = value;
 </pre>
 </div>
 </div>
@@ -350,10 +350,10 @@ int         <strong>id</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get id =&gt; proxy['id'];
+int get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(int value) =&gt; proxy['id'] = value;
+set id(int value) =&gt; jsProxy['id'] = value;
 </pre>
 </div>
 </div>
@@ -365,10 +365,22 @@ bool         <strong>incognito</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get incognito =&gt; proxy['incognito'];
+bool get incognito =&gt; jsProxy['incognito'];
 </pre>
 <pre class="source">
-set incognito(bool value) =&gt; proxy['incognito'] = value;
+set incognito(bool value) =&gt; jsProxy['incognito'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to DownloadItem.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -380,10 +392,10 @@ String         <strong>mime</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get mime =&gt; proxy['mime'];
+String get mime =&gt; jsProxy['mime'];
 </pre>
 <pre class="source">
-set mime(String value) =&gt; proxy['mime'] = value;
+set mime(String value) =&gt; jsProxy['mime'] = value;
 </pre>
 </div>
 </div>
@@ -395,22 +407,10 @@ bool         <strong>paused</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get paused =&gt; proxy['paused'];
+bool get paused =&gt; jsProxy['paused'];
 </pre>
 <pre class="source">
-set paused(bool value) =&gt; proxy['paused'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to DownloadItem.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set paused(bool value) =&gt; jsProxy['paused'] = value;
 </pre>
 </div>
 </div>
@@ -422,10 +422,10 @@ String         <strong>referrer</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get referrer =&gt; proxy['referrer'];
+String get referrer =&gt; jsProxy['referrer'];
 </pre>
 <pre class="source">
-set referrer(String value) =&gt; proxy['referrer'] = value;
+set referrer(String value) =&gt; jsProxy['referrer'] = value;
 </pre>
 </div>
 </div>
@@ -437,10 +437,10 @@ String         <strong>startTime</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get startTime =&gt; proxy['startTime'];
+String get startTime =&gt; jsProxy['startTime'];
 </pre>
 <pre class="source">
-set startTime(String value) =&gt; proxy['startTime'] = value;
+set startTime(String value) =&gt; jsProxy['startTime'] = value;
 </pre>
 </div>
 </div>
@@ -452,10 +452,10 @@ set startTime(String value) =&gt; proxy['startTime'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-State get state =&gt; _createState(proxy['state']);
+State get state =&gt; _createState(jsProxy['state']);
 </pre>
 <pre class="source">
-set state(State value) =&gt; proxy['state'] = jsify(value);
+set state(State value) =&gt; jsProxy['state'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -467,10 +467,10 @@ int         <strong>totalBytes</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get totalBytes =&gt; proxy['totalBytes'];
+int get totalBytes =&gt; jsProxy['totalBytes'];
 </pre>
 <pre class="source">
-set totalBytes(int value) =&gt; proxy['totalBytes'] = value;
+set totalBytes(int value) =&gt; jsProxy['totalBytes'] = value;
 </pre>
 </div>
 </div>
@@ -482,10 +482,10 @@ String         <strong>url</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get url =&gt; proxy['url'];
+String get url =&gt; jsProxy['url'];
 </pre>
 <pre class="source">
-set url(String value) =&gt; proxy['url'] = value;
+set url(String value) =&gt; jsProxy['url'] = value;
 </pre>
 </div>
 </div>
@@ -498,7 +498,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to DownloadItem.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -511,7 +511,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

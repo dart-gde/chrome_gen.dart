@@ -38,13 +38,13 @@ class GetBluetoothDevicesOptions extends ChromeObject {
    if (profile != null) this.profile = profile;
    if (deviceCallback != null) this.deviceCallback = deviceCallback;
  }
- GetBluetoothDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ GetBluetoothDevicesOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- Profile get profile =&gt; _createProfile(proxy['profile']);
- set profile(Profile value) =&gt; proxy['profile'] = jsify(value);
+ Profile get profile =&gt; _createProfile(jsProxy['profile']);
+ set profile(Profile value) =&gt; jsProxy['profile'] = jsify(value);
 
- BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(proxy['deviceCallback']);
- set deviceCallback(BluetoothDeviceCallback value) =&gt; proxy['deviceCallback'] = jsify(value);
+ BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(jsProxy['deviceCallback']);
+ set deviceCallback(BluetoothDeviceCallback value) =&gt; jsProxy['deviceCallback'] = jsify(value);
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ GetBluetoothDevicesOptions({Profile profile, BluetoothDeviceCallback deviceCallb
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>GetBluetoothDevicesOptions.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>GetBluetoothDevicesOptions.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to GetBluetoothDevicesOptions.GetBluetoothDevicesOptions.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,7 +80,7 @@ new <strong>GetBluetoothDevicesOptions.fromProxy</strong>(JsObject proxy) <a cla
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-GetBluetoothDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+GetBluetoothDevicesOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -95,10 +95,22 @@ GetBluetoothDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(proxy['deviceCallback']);
+BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(jsProxy['deviceCallback']);
 </pre>
 <pre class="source">
-set deviceCallback(BluetoothDeviceCallback value) =&gt; proxy['deviceCallback'] = jsify(value);
+set deviceCallback(BluetoothDeviceCallback value) =&gt; jsProxy['deviceCallback'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to GetBluetoothDevicesOptions.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -110,22 +122,10 @@ set deviceCallback(BluetoothDeviceCallback value) =&gt; proxy['deviceCallback'] 
         </h4>
         <div class="doc">
 <pre class="source">
-Profile get profile =&gt; _createProfile(proxy['profile']);
+Profile get profile =&gt; _createProfile(jsProxy['profile']);
 </pre>
 <pre class="source">
-set profile(Profile value) =&gt; proxy['profile'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to GetBluetoothDevicesOptions.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set profile(Profile value) =&gt; jsProxy['profile'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -138,7 +138,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to GetBluetoothDevicesOptions.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

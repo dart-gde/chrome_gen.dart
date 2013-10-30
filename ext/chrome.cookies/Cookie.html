@@ -47,73 +47,73 @@ class Cookie extends ChromeObject {
    if (expirationDate != null) this.expirationDate = expirationDate;
    if (storeId != null) this.storeId = storeId;
  }
- Cookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Cookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The name of the cookie.
   */
- String get name =&gt; proxy['name'];
- set name(String value) =&gt; proxy['name'] = value;
+ String get name =&gt; jsProxy['name'];
+ set name(String value) =&gt; jsProxy['name'] = value;
 
  /**
   * The value of the cookie.
   */
- String get value =&gt; proxy['value'];
- set value(String value) =&gt; proxy['value'] = value;
+ String get value =&gt; jsProxy['value'];
+ set value(String value) =&gt; jsProxy['value'] = value;
 
  /**
   * The domain of the cookie (e.g. "www.google.com", "example.com").
   */
- String get domain =&gt; proxy['domain'];
- set domain(String value) =&gt; proxy['domain'] = value;
+ String get domain =&gt; jsProxy['domain'];
+ set domain(String value) =&gt; jsProxy['domain'] = value;
 
  /**
   * True if the cookie is a host-only cookie (i.e. a request's host must
   * exactly match the domain of the cookie).
   */
- bool get hostOnly =&gt; proxy['hostOnly'];
- set hostOnly(bool value) =&gt; proxy['hostOnly'] = value;
+ bool get hostOnly =&gt; jsProxy['hostOnly'];
+ set hostOnly(bool value) =&gt; jsProxy['hostOnly'] = value;
 
  /**
   * The path of the cookie.
   */
- String get path =&gt; proxy['path'];
- set path(String value) =&gt; proxy['path'] = value;
+ String get path =&gt; jsProxy['path'];
+ set path(String value) =&gt; jsProxy['path'] = value;
 
  /**
   * True if the cookie is marked as Secure (i.e. its scope is limited to secure
   * channels, typically HTTPS).
   */
- bool get secure =&gt; proxy['secure'];
- set secure(bool value) =&gt; proxy['secure'] = value;
+ bool get secure =&gt; jsProxy['secure'];
+ set secure(bool value) =&gt; jsProxy['secure'] = value;
 
  /**
   * True if the cookie is marked as HttpOnly (i.e. the cookie is inaccessible
   * to client-side scripts).
   */
- bool get httpOnly =&gt; proxy['httpOnly'];
- set httpOnly(bool value) =&gt; proxy['httpOnly'] = value;
+ bool get httpOnly =&gt; jsProxy['httpOnly'];
+ set httpOnly(bool value) =&gt; jsProxy['httpOnly'] = value;
 
  /**
   * True if the cookie is a session cookie, as opposed to a persistent cookie
   * with an expiration date.
   */
- bool get session =&gt; proxy['session'];
- set session(bool value) =&gt; proxy['session'] = value;
+ bool get session =&gt; jsProxy['session'];
+ set session(bool value) =&gt; jsProxy['session'] = value;
 
  /**
   * The expiration date of the cookie as the number of seconds since the UNIX
   * epoch. Not provided for session cookies.
   */
- dynamic get expirationDate =&gt; proxy['expirationDate'];
- set expirationDate(var value) =&gt; proxy['expirationDate'] = jsify(value);
+ dynamic get expirationDate =&gt; jsProxy['expirationDate'];
+ set expirationDate(var value) =&gt; jsProxy['expirationDate'] = jsify(value);
 
  /**
   * The ID of the cookie store containing this cookie, as provided in
   * getAllCookieStores().
   */
- String get storeId =&gt; proxy['storeId'];
- set storeId(String value) =&gt; proxy['storeId'] = value;
+ String get storeId =&gt; jsProxy['storeId'];
+ set storeId(String value) =&gt; jsProxy['storeId'] = value;
 }
 </pre>
 </div>
@@ -149,7 +149,7 @@ Cookie({String name, String value, String domain, bool hostOnly, String path, bo
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Cookie.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Cookie.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Cookie.Cookie.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -157,7 +157,7 @@ new <strong>Cookie.fromProxy</strong>(JsObject proxy) <a class="anchor-link" hre
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Cookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Cookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -173,10 +173,10 @@ String         <strong>domain</strong> <a class="anchor-link"
         <div class="doc">
 <p>The domain of the cookie (e.g. "www.google.com", "example.com").</p>
 <pre class="source">
-String get domain =&gt; proxy['domain'];
+String get domain =&gt; jsProxy['domain'];
 </pre>
 <pre class="source">
-set domain(String value) =&gt; proxy['domain'] = value;
+set domain(String value) =&gt; jsProxy['domain'] = value;
 </pre>
 </div>
 </div>
@@ -190,10 +190,10 @@ var         <strong>expirationDate</strong> <a class="anchor-link"
 <p>The expiration date of the cookie as the number of seconds since the UNIX
 epoch. Not provided for session cookies.</p>
 <pre class="source">
-dynamic get expirationDate =&gt; proxy['expirationDate'];
+dynamic get expirationDate =&gt; jsProxy['expirationDate'];
 </pre>
 <pre class="source">
-set expirationDate(var value) =&gt; proxy['expirationDate'] = jsify(value);
+set expirationDate(var value) =&gt; jsProxy['expirationDate'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -207,10 +207,10 @@ bool         <strong>hostOnly</strong> <a class="anchor-link"
 <p>True if the cookie is a host-only cookie (i.e. a request's host must
 exactly match the domain of the cookie).</p>
 <pre class="source">
-bool get hostOnly =&gt; proxy['hostOnly'];
+bool get hostOnly =&gt; jsProxy['hostOnly'];
 </pre>
 <pre class="source">
-set hostOnly(bool value) =&gt; proxy['hostOnly'] = value;
+set hostOnly(bool value) =&gt; jsProxy['hostOnly'] = value;
 </pre>
 </div>
 </div>
@@ -224,10 +224,22 @@ bool         <strong>httpOnly</strong> <a class="anchor-link"
 <p>True if the cookie is marked as HttpOnly (i.e. the cookie is inaccessible
 to client-side scripts).</p>
 <pre class="source">
-bool get httpOnly =&gt; proxy['httpOnly'];
+bool get httpOnly =&gt; jsProxy['httpOnly'];
 </pre>
 <pre class="source">
-set httpOnly(bool value) =&gt; proxy['httpOnly'] = value;
+set httpOnly(bool value) =&gt; jsProxy['httpOnly'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Cookie.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -240,10 +252,10 @@ String         <strong>name</strong> <a class="anchor-link"
         <div class="doc">
 <p>The name of the cookie.</p>
 <pre class="source">
-String get name =&gt; proxy['name'];
+String get name =&gt; jsProxy['name'];
 </pre>
 <pre class="source">
-set name(String value) =&gt; proxy['name'] = value;
+set name(String value) =&gt; jsProxy['name'] = value;
 </pre>
 </div>
 </div>
@@ -256,22 +268,10 @@ String         <strong>path</strong> <a class="anchor-link"
         <div class="doc">
 <p>The path of the cookie.</p>
 <pre class="source">
-String get path =&gt; proxy['path'];
+String get path =&gt; jsProxy['path'];
 </pre>
 <pre class="source">
-set path(String value) =&gt; proxy['path'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Cookie.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set path(String value) =&gt; jsProxy['path'] = value;
 </pre>
 </div>
 </div>
@@ -285,10 +285,10 @@ bool         <strong>secure</strong> <a class="anchor-link"
 <p>True if the cookie is marked as Secure (i.e. its scope is limited to secure
 channels, typically HTTPS).</p>
 <pre class="source">
-bool get secure =&gt; proxy['secure'];
+bool get secure =&gt; jsProxy['secure'];
 </pre>
 <pre class="source">
-set secure(bool value) =&gt; proxy['secure'] = value;
+set secure(bool value) =&gt; jsProxy['secure'] = value;
 </pre>
 </div>
 </div>
@@ -302,10 +302,10 @@ bool         <strong>session</strong> <a class="anchor-link"
 <p>True if the cookie is a session cookie, as opposed to a persistent cookie
 with an expiration date.</p>
 <pre class="source">
-bool get session =&gt; proxy['session'];
+bool get session =&gt; jsProxy['session'];
 </pre>
 <pre class="source">
-set session(bool value) =&gt; proxy['session'] = value;
+set session(bool value) =&gt; jsProxy['session'] = value;
 </pre>
 </div>
 </div>
@@ -319,10 +319,10 @@ String         <strong>storeId</strong> <a class="anchor-link"
 <p>The ID of the cookie store containing this cookie, as provided in
 getAllCookieStores().</p>
 <pre class="source">
-String get storeId =&gt; proxy['storeId'];
+String get storeId =&gt; jsProxy['storeId'];
 </pre>
 <pre class="source">
-set storeId(String value) =&gt; proxy['storeId'] = value;
+set storeId(String value) =&gt; jsProxy['storeId'] = value;
 </pre>
 </div>
 </div>
@@ -335,10 +335,10 @@ String         <strong>value</strong> <a class="anchor-link"
         <div class="doc">
 <p>The value of the cookie.</p>
 <pre class="source">
-String get value =&gt; proxy['value'];
+String get value =&gt; jsProxy['value'];
 </pre>
 <pre class="source">
-set value(String value) =&gt; proxy['value'] = value;
+set value(String value) =&gt; jsProxy['value'] = value;
 </pre>
 </div>
 </div>
@@ -351,7 +351,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Cookie.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -364,7 +364,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

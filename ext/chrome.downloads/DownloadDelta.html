@@ -50,49 +50,49 @@ class DownloadDelta extends ChromeObject {
    if (fileSize != null) this.fileSize = fileSize;
    if (exists != null) this.exists = exists;
  }
- DownloadDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ DownloadDelta.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get id =&gt; proxy['id'];
- set id(int value) =&gt; proxy['id'] = value;
+ int get id =&gt; jsProxy['id'];
+ set id(int value) =&gt; jsProxy['id'] = value;
 
- StringDelta get url =&gt; _createStringDelta(proxy['url']);
- set url(StringDelta value) =&gt; proxy['url'] = jsify(value);
+ StringDelta get url =&gt; _createStringDelta(jsProxy['url']);
+ set url(StringDelta value) =&gt; jsProxy['url'] = jsify(value);
 
- StringDelta get filename =&gt; _createStringDelta(proxy['filename']);
- set filename(StringDelta value) =&gt; proxy['filename'] = jsify(value);
+ StringDelta get filename =&gt; _createStringDelta(jsProxy['filename']);
+ set filename(StringDelta value) =&gt; jsProxy['filename'] = jsify(value);
 
- StringDelta get danger =&gt; _createStringDelta(proxy['danger']);
- set danger(StringDelta value) =&gt; proxy['danger'] = jsify(value);
+ StringDelta get danger =&gt; _createStringDelta(jsProxy['danger']);
+ set danger(StringDelta value) =&gt; jsProxy['danger'] = jsify(value);
 
- StringDelta get mime =&gt; _createStringDelta(proxy['mime']);
- set mime(StringDelta value) =&gt; proxy['mime'] = jsify(value);
+ StringDelta get mime =&gt; _createStringDelta(jsProxy['mime']);
+ set mime(StringDelta value) =&gt; jsProxy['mime'] = jsify(value);
 
- StringDelta get startTime =&gt; _createStringDelta(proxy['startTime']);
- set startTime(StringDelta value) =&gt; proxy['startTime'] = jsify(value);
+ StringDelta get startTime =&gt; _createStringDelta(jsProxy['startTime']);
+ set startTime(StringDelta value) =&gt; jsProxy['startTime'] = jsify(value);
 
- StringDelta get endTime =&gt; _createStringDelta(proxy['endTime']);
- set endTime(StringDelta value) =&gt; proxy['endTime'] = jsify(value);
+ StringDelta get endTime =&gt; _createStringDelta(jsProxy['endTime']);
+ set endTime(StringDelta value) =&gt; jsProxy['endTime'] = jsify(value);
 
- StringDelta get state =&gt; _createStringDelta(proxy['state']);
- set state(StringDelta value) =&gt; proxy['state'] = jsify(value);
+ StringDelta get state =&gt; _createStringDelta(jsProxy['state']);
+ set state(StringDelta value) =&gt; jsProxy['state'] = jsify(value);
 
- BooleanDelta get canResume =&gt; _createBooleanDelta(proxy['canResume']);
- set canResume(BooleanDelta value) =&gt; proxy['canResume'] = jsify(value);
+ BooleanDelta get canResume =&gt; _createBooleanDelta(jsProxy['canResume']);
+ set canResume(BooleanDelta value) =&gt; jsProxy['canResume'] = jsify(value);
 
- BooleanDelta get paused =&gt; _createBooleanDelta(proxy['paused']);
- set paused(BooleanDelta value) =&gt; proxy['paused'] = jsify(value);
+ BooleanDelta get paused =&gt; _createBooleanDelta(jsProxy['paused']);
+ set paused(BooleanDelta value) =&gt; jsProxy['paused'] = jsify(value);
 
- StringDelta get error =&gt; _createStringDelta(proxy['error']);
- set error(StringDelta value) =&gt; proxy['error'] = jsify(value);
+ StringDelta get error =&gt; _createStringDelta(jsProxy['error']);
+ set error(StringDelta value) =&gt; jsProxy['error'] = jsify(value);
 
- LongDelta get totalBytes =&gt; _createLongDelta(proxy['totalBytes']);
- set totalBytes(LongDelta value) =&gt; proxy['totalBytes'] = jsify(value);
+ LongDelta get totalBytes =&gt; _createLongDelta(jsProxy['totalBytes']);
+ set totalBytes(LongDelta value) =&gt; jsProxy['totalBytes'] = jsify(value);
 
- LongDelta get fileSize =&gt; _createLongDelta(proxy['fileSize']);
- set fileSize(LongDelta value) =&gt; proxy['fileSize'] = jsify(value);
+ LongDelta get fileSize =&gt; _createLongDelta(jsProxy['fileSize']);
+ set fileSize(LongDelta value) =&gt; jsProxy['fileSize'] = jsify(value);
 
- BooleanDelta get exists =&gt; _createBooleanDelta(proxy['exists']);
- set exists(BooleanDelta value) =&gt; proxy['exists'] = jsify(value);
+ BooleanDelta get exists =&gt; _createBooleanDelta(jsProxy['exists']);
+ set exists(BooleanDelta value) =&gt; jsProxy['exists'] = jsify(value);
 }
 </pre>
 </div>
@@ -132,7 +132,7 @@ DownloadDelta({int id, StringDelta url, StringDelta filename, StringDelta danger
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>DownloadDelta.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>DownloadDelta.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to DownloadDelta.DownloadDelta.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -140,7 +140,7 @@ new <strong>DownloadDelta.fromProxy</strong>(JsObject proxy) <a class="anchor-li
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-DownloadDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
+DownloadDelta.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -155,10 +155,10 @@ DownloadDelta.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-BooleanDelta get canResume =&gt; _createBooleanDelta(proxy['canResume']);
+BooleanDelta get canResume =&gt; _createBooleanDelta(jsProxy['canResume']);
 </pre>
 <pre class="source">
-set canResume(BooleanDelta value) =&gt; proxy['canResume'] = jsify(value);
+set canResume(BooleanDelta value) =&gt; jsProxy['canResume'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -170,10 +170,10 @@ set canResume(BooleanDelta value) =&gt; proxy['canResume'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-StringDelta get danger =&gt; _createStringDelta(proxy['danger']);
+StringDelta get danger =&gt; _createStringDelta(jsProxy['danger']);
 </pre>
 <pre class="source">
-set danger(StringDelta value) =&gt; proxy['danger'] = jsify(value);
+set danger(StringDelta value) =&gt; jsProxy['danger'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -185,10 +185,10 @@ set danger(StringDelta value) =&gt; proxy['danger'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-StringDelta get endTime =&gt; _createStringDelta(proxy['endTime']);
+StringDelta get endTime =&gt; _createStringDelta(jsProxy['endTime']);
 </pre>
 <pre class="source">
-set endTime(StringDelta value) =&gt; proxy['endTime'] = jsify(value);
+set endTime(StringDelta value) =&gt; jsProxy['endTime'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -200,10 +200,10 @@ set endTime(StringDelta value) =&gt; proxy['endTime'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-StringDelta get error =&gt; _createStringDelta(proxy['error']);
+StringDelta get error =&gt; _createStringDelta(jsProxy['error']);
 </pre>
 <pre class="source">
-set error(StringDelta value) =&gt; proxy['error'] = jsify(value);
+set error(StringDelta value) =&gt; jsProxy['error'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -215,10 +215,10 @@ set error(StringDelta value) =&gt; proxy['error'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-BooleanDelta get exists =&gt; _createBooleanDelta(proxy['exists']);
+BooleanDelta get exists =&gt; _createBooleanDelta(jsProxy['exists']);
 </pre>
 <pre class="source">
-set exists(BooleanDelta value) =&gt; proxy['exists'] = jsify(value);
+set exists(BooleanDelta value) =&gt; jsProxy['exists'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -230,10 +230,10 @@ set exists(BooleanDelta value) =&gt; proxy['exists'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-StringDelta get filename =&gt; _createStringDelta(proxy['filename']);
+StringDelta get filename =&gt; _createStringDelta(jsProxy['filename']);
 </pre>
 <pre class="source">
-set filename(StringDelta value) =&gt; proxy['filename'] = jsify(value);
+set filename(StringDelta value) =&gt; jsProxy['filename'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -245,10 +245,10 @@ set filename(StringDelta value) =&gt; proxy['filename'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-LongDelta get fileSize =&gt; _createLongDelta(proxy['fileSize']);
+LongDelta get fileSize =&gt; _createLongDelta(jsProxy['fileSize']);
 </pre>
 <pre class="source">
-set fileSize(LongDelta value) =&gt; proxy['fileSize'] = jsify(value);
+set fileSize(LongDelta value) =&gt; jsProxy['fileSize'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -260,10 +260,22 @@ int         <strong>id</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get id =&gt; proxy['id'];
+int get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(int value) =&gt; proxy['id'] = value;
+set id(int value) =&gt; jsProxy['id'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to DownloadDelta.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -275,10 +287,10 @@ set id(int value) =&gt; proxy['id'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-StringDelta get mime =&gt; _createStringDelta(proxy['mime']);
+StringDelta get mime =&gt; _createStringDelta(jsProxy['mime']);
 </pre>
 <pre class="source">
-set mime(StringDelta value) =&gt; proxy['mime'] = jsify(value);
+set mime(StringDelta value) =&gt; jsProxy['mime'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -290,22 +302,10 @@ set mime(StringDelta value) =&gt; proxy['mime'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-BooleanDelta get paused =&gt; _createBooleanDelta(proxy['paused']);
+BooleanDelta get paused =&gt; _createBooleanDelta(jsProxy['paused']);
 </pre>
 <pre class="source">
-set paused(BooleanDelta value) =&gt; proxy['paused'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to DownloadDelta.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set paused(BooleanDelta value) =&gt; jsProxy['paused'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -317,10 +317,10 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-StringDelta get startTime =&gt; _createStringDelta(proxy['startTime']);
+StringDelta get startTime =&gt; _createStringDelta(jsProxy['startTime']);
 </pre>
 <pre class="source">
-set startTime(StringDelta value) =&gt; proxy['startTime'] = jsify(value);
+set startTime(StringDelta value) =&gt; jsProxy['startTime'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -332,10 +332,10 @@ set startTime(StringDelta value) =&gt; proxy['startTime'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-StringDelta get state =&gt; _createStringDelta(proxy['state']);
+StringDelta get state =&gt; _createStringDelta(jsProxy['state']);
 </pre>
 <pre class="source">
-set state(StringDelta value) =&gt; proxy['state'] = jsify(value);
+set state(StringDelta value) =&gt; jsProxy['state'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -347,10 +347,10 @@ set state(StringDelta value) =&gt; proxy['state'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-LongDelta get totalBytes =&gt; _createLongDelta(proxy['totalBytes']);
+LongDelta get totalBytes =&gt; _createLongDelta(jsProxy['totalBytes']);
 </pre>
 <pre class="source">
-set totalBytes(LongDelta value) =&gt; proxy['totalBytes'] = jsify(value);
+set totalBytes(LongDelta value) =&gt; jsProxy['totalBytes'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -362,10 +362,10 @@ set totalBytes(LongDelta value) =&gt; proxy['totalBytes'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-StringDelta get url =&gt; _createStringDelta(proxy['url']);
+StringDelta get url =&gt; _createStringDelta(jsProxy['url']);
 </pre>
 <pre class="source">
-set url(StringDelta value) =&gt; proxy['url'] = jsify(value);
+set url(StringDelta value) =&gt; jsProxy['url'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -378,7 +378,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to DownloadDelta.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -391,7 +391,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

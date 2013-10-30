@@ -37,7 +37,7 @@ on). See HAR Specification for reference.</p>
 <pre class="source">
 class Request extends ChromeObject {
  Request();
- Request.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Request.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Returns content of the response body.
@@ -49,7 +49,7 @@ class Request extends ChromeObject {
   */
  Future&lt;GetRequestContentResult&gt; getContent() {
    var completer = new ChromeCompleter&lt;GetRequestContentResult&gt;.twoArgs(GetRequestContentResult._create);
-   proxy.callMethod('getContent', [completer.callback]);
+   jsProxy.callMethod('getContent', [completer.callback]);
    return completer.future;
  }
 }
@@ -76,7 +76,7 @@ Request();
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Request.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Request.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Request.Request.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -84,22 +84,22 @@ new <strong>Request.fromProxy</strong>(JsObject proxy) <a class="anchor-link" hr
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Request.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Request.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div class="inherited">
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Request.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Request.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -119,7 +119,7 @@ Currently, only base64 is supported.</p>
 <pre class="source">
 Future&lt;GetRequestContentResult&gt; getContent() {
  var completer = new ChromeCompleter&lt;GetRequestContentResult&gt;.twoArgs(GetRequestContentResult._create);
- proxy.callMethod('getContent', [completer.callback]);
+ jsProxy.callMethod('getContent', [completer.callback]);
  return completer.future;
 }
 </pre>
@@ -131,7 +131,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Request.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -144,7 +144,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

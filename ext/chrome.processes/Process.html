@@ -52,120 +52,120 @@ class Process extends ChromeObject {
    if (scriptCache != null) this.scriptCache = scriptCache;
    if (cssCache != null) this.cssCache = cssCache;
  }
- Process.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Process.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Unique ID of the process provided by the browser.
   */
- int get id =&gt; proxy['id'];
- set id(int value) =&gt; proxy['id'] = value;
+ int get id =&gt; jsProxy['id'];
+ set id(int value) =&gt; jsProxy['id'] = value;
 
  /**
   * The ID of the process, as provided by the OS.
   */
- int get osProcessId =&gt; proxy['osProcessId'];
- set osProcessId(int value) =&gt; proxy['osProcessId'] = value;
+ int get osProcessId =&gt; jsProxy['osProcessId'];
+ set osProcessId(int value) =&gt; jsProxy['osProcessId'] = value;
 
  /**
   * The type of process.
   * enum of `browser`, `renderer`, `extension`, `notification`, `plugin`,
   * `worker`, `nacl`, `utility`, `gpu`, `other`
   */
- String get type =&gt; proxy['type'];
- set type(String value) =&gt; proxy['type'] = value;
+ String get type =&gt; jsProxy['type'];
+ set type(String value) =&gt; jsProxy['type'] = value;
 
  /**
   * The profile which the process is associated with.
   */
- String get profile =&gt; proxy['profile'];
- set profile(String value) =&gt; proxy['profile'] = value;
+ String get profile =&gt; jsProxy['profile'];
+ set profile(String value) =&gt; jsProxy['profile'] = value;
 
  /**
   * Array of Tab IDs that have a page rendered by this process. The list will
   * be non-empty for renderer processes only.
   */
- List&lt;int&gt; get tabs =&gt; listify(proxy['tabs']);
- set tabs(List&lt;int&gt; value) =&gt; proxy['tabs'] = jsify(value);
+ List&lt;int&gt; get tabs =&gt; listify(jsProxy['tabs']);
+ set tabs(List&lt;int&gt; value) =&gt; jsProxy['tabs'] = jsify(value);
 
  /**
   * The most recent measurement of the process CPU usage, between 0 and 100%.
   * Only available when receiving the object as part of a callback from
   * onUpdated or onUpdatedWithMemory.
   */
- dynamic get cpu =&gt; proxy['cpu'];
- set cpu(var value) =&gt; proxy['cpu'] = jsify(value);
+ dynamic get cpu =&gt; jsProxy['cpu'];
+ set cpu(var value) =&gt; jsProxy['cpu'] = jsify(value);
 
  /**
   * The most recent measurement of the process network usage, in bytes per
   * second. Only available when receiving the object as part of a callback from
   * onUpdated or onUpdatedWithMemory.
   */
- dynamic get network =&gt; proxy['network'];
- set network(var value) =&gt; proxy['network'] = jsify(value);
+ dynamic get network =&gt; jsProxy['network'];
+ set network(var value) =&gt; jsProxy['network'] = jsify(value);
 
  /**
   * The most recent measurement of the process private memory usage, in bytes.
   * Only available when receiving the object as part of a callback from
   * onUpdatedWithMemory or getProcessInfo with the includeMemory flag.
   */
- dynamic get privateMemory =&gt; proxy['privateMemory'];
- set privateMemory(var value) =&gt; proxy['privateMemory'] = jsify(value);
+ dynamic get privateMemory =&gt; jsProxy['privateMemory'];
+ set privateMemory(var value) =&gt; jsProxy['privateMemory'] = jsify(value);
 
  /**
   * The most recent measurement of the process JavaScript allocated memory, in
   * bytes. Only available when receiving the object as part of a callback from
   * onUpdated or onUpdatedWithMemory.
   */
- dynamic get jsMemoryAllocated =&gt; proxy['jsMemoryAllocated'];
- set jsMemoryAllocated(var value) =&gt; proxy['jsMemoryAllocated'] = jsify(value);
+ dynamic get jsMemoryAllocated =&gt; jsProxy['jsMemoryAllocated'];
+ set jsMemoryAllocated(var value) =&gt; jsProxy['jsMemoryAllocated'] = jsify(value);
 
  /**
   * The most recent measurement of the process JavaScript memory used, in
   * bytes. Only available when receiving the object as part of a callback from
   * onUpdated or onUpdatedWithMemory.
   */
- dynamic get jsMemoryUsed =&gt; proxy['jsMemoryUsed'];
- set jsMemoryUsed(var value) =&gt; proxy['jsMemoryUsed'] = jsify(value);
+ dynamic get jsMemoryUsed =&gt; jsProxy['jsMemoryUsed'];
+ set jsMemoryUsed(var value) =&gt; jsProxy['jsMemoryUsed'] = jsify(value);
 
  /**
   * The most recent measurement of the process’s SQLite memory usage, in bytes.
   * Only available when receiving the object as part of a callback from
   * onUpdated or onUpdatedWithMemory.
   */
- dynamic get sqliteMemory =&gt; proxy['sqliteMemory'];
- set sqliteMemory(var value) =&gt; proxy['sqliteMemory'] = jsify(value);
+ dynamic get sqliteMemory =&gt; jsProxy['sqliteMemory'];
+ set sqliteMemory(var value) =&gt; jsProxy['sqliteMemory'] = jsify(value);
 
  /**
   * The most recent measurement of the process frames per second. Only
   * available when receiving the object as part of a callback from onUpdated or
   * onUpdatedWithMemory.
   */
- dynamic get fps =&gt; proxy['fps'];
- set fps(var value) =&gt; proxy['fps'] = jsify(value);
+ dynamic get fps =&gt; jsProxy['fps'];
+ set fps(var value) =&gt; jsProxy['fps'] = jsify(value);
 
  /**
   * The most recent information about the image cache for the process. Only
   * available when receiving the object as part of a callback from onUpdated or
   * onUpdatedWithMemory.
   */
- Cache get imageCache =&gt; _createCache(proxy['imageCache']);
- set imageCache(Cache value) =&gt; proxy['imageCache'] = jsify(value);
+ Cache get imageCache =&gt; _createCache(jsProxy['imageCache']);
+ set imageCache(Cache value) =&gt; jsProxy['imageCache'] = jsify(value);
 
  /**
   * The most recent information about the script cache for the process. Only
   * available when receiving the object as part of a callback from onUpdated or
   * onUpdatedWithMemory.
   */
- Cache get scriptCache =&gt; _createCache(proxy['scriptCache']);
- set scriptCache(Cache value) =&gt; proxy['scriptCache'] = jsify(value);
+ Cache get scriptCache =&gt; _createCache(jsProxy['scriptCache']);
+ set scriptCache(Cache value) =&gt; jsProxy['scriptCache'] = jsify(value);
 
  /**
   * The most recent information about the CSS cache for the process. Only
   * available when receiving the object as part of a callback from onUpdated or
   * onUpdatedWithMemory.
   */
- Cache get cssCache =&gt; _createCache(proxy['cssCache']);
- set cssCache(Cache value) =&gt; proxy['cssCache'] = jsify(value);
+ Cache get cssCache =&gt; _createCache(jsProxy['cssCache']);
+ set cssCache(Cache value) =&gt; jsProxy['cssCache'] = jsify(value);
 }
 </pre>
 </div>
@@ -206,7 +206,7 @@ Process({int id, int osProcessId, String type, String profile, List&lt;int&gt; t
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Process.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Process.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Process.Process.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -214,7 +214,7 @@ new <strong>Process.fromProxy</strong>(JsObject proxy) <a class="anchor-link" hr
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Process.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Process.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -232,10 +232,10 @@ var         <strong>cpu</strong> <a class="anchor-link"
 Only available when receiving the object as part of a callback from
 onUpdated or onUpdatedWithMemory.</p>
 <pre class="source">
-dynamic get cpu =&gt; proxy['cpu'];
+dynamic get cpu =&gt; jsProxy['cpu'];
 </pre>
 <pre class="source">
-set cpu(var value) =&gt; proxy['cpu'] = jsify(value);
+set cpu(var value) =&gt; jsProxy['cpu'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -250,10 +250,10 @@ set cpu(var value) =&gt; proxy['cpu'] = jsify(value);
 available when receiving the object as part of a callback from onUpdated or
 onUpdatedWithMemory.</p>
 <pre class="source">
-Cache get cssCache =&gt; _createCache(proxy['cssCache']);
+Cache get cssCache =&gt; _createCache(jsProxy['cssCache']);
 </pre>
 <pre class="source">
-set cssCache(Cache value) =&gt; proxy['cssCache'] = jsify(value);
+set cssCache(Cache value) =&gt; jsProxy['cssCache'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -268,10 +268,10 @@ var         <strong>fps</strong> <a class="anchor-link"
 available when receiving the object as part of a callback from onUpdated or
 onUpdatedWithMemory.</p>
 <pre class="source">
-dynamic get fps =&gt; proxy['fps'];
+dynamic get fps =&gt; jsProxy['fps'];
 </pre>
 <pre class="source">
-set fps(var value) =&gt; proxy['fps'] = jsify(value);
+set fps(var value) =&gt; jsProxy['fps'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -284,10 +284,10 @@ int         <strong>id</strong> <a class="anchor-link"
         <div class="doc">
 <p>Unique ID of the process provided by the browser.</p>
 <pre class="source">
-int get id =&gt; proxy['id'];
+int get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(int value) =&gt; proxy['id'] = value;
+set id(int value) =&gt; jsProxy['id'] = value;
 </pre>
 </div>
 </div>
@@ -302,10 +302,10 @@ set id(int value) =&gt; proxy['id'] = value;
 available when receiving the object as part of a callback from onUpdated or
 onUpdatedWithMemory.</p>
 <pre class="source">
-Cache get imageCache =&gt; _createCache(proxy['imageCache']);
+Cache get imageCache =&gt; _createCache(jsProxy['imageCache']);
 </pre>
 <pre class="source">
-set imageCache(Cache value) =&gt; proxy['imageCache'] = jsify(value);
+set imageCache(Cache value) =&gt; jsProxy['imageCache'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -320,10 +320,10 @@ var         <strong>jsMemoryAllocated</strong> <a class="anchor-link"
 bytes. Only available when receiving the object as part of a callback from
 onUpdated or onUpdatedWithMemory.</p>
 <pre class="source">
-dynamic get jsMemoryAllocated =&gt; proxy['jsMemoryAllocated'];
+dynamic get jsMemoryAllocated =&gt; jsProxy['jsMemoryAllocated'];
 </pre>
 <pre class="source">
-set jsMemoryAllocated(var value) =&gt; proxy['jsMemoryAllocated'] = jsify(value);
+set jsMemoryAllocated(var value) =&gt; jsProxy['jsMemoryAllocated'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -338,10 +338,22 @@ var         <strong>jsMemoryUsed</strong> <a class="anchor-link"
 bytes. Only available when receiving the object as part of a callback from
 onUpdated or onUpdatedWithMemory.</p>
 <pre class="source">
-dynamic get jsMemoryUsed =&gt; proxy['jsMemoryUsed'];
+dynamic get jsMemoryUsed =&gt; jsProxy['jsMemoryUsed'];
 </pre>
 <pre class="source">
-set jsMemoryUsed(var value) =&gt; proxy['jsMemoryUsed'] = jsify(value);
+set jsMemoryUsed(var value) =&gt; jsProxy['jsMemoryUsed'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Process.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -356,10 +368,10 @@ var         <strong>network</strong> <a class="anchor-link"
 second. Only available when receiving the object as part of a callback from
 onUpdated or onUpdatedWithMemory.</p>
 <pre class="source">
-dynamic get network =&gt; proxy['network'];
+dynamic get network =&gt; jsProxy['network'];
 </pre>
 <pre class="source">
-set network(var value) =&gt; proxy['network'] = jsify(value);
+set network(var value) =&gt; jsProxy['network'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -372,10 +384,10 @@ int         <strong>osProcessId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The ID of the process, as provided by the OS.</p>
 <pre class="source">
-int get osProcessId =&gt; proxy['osProcessId'];
+int get osProcessId =&gt; jsProxy['osProcessId'];
 </pre>
 <pre class="source">
-set osProcessId(int value) =&gt; proxy['osProcessId'] = value;
+set osProcessId(int value) =&gt; jsProxy['osProcessId'] = value;
 </pre>
 </div>
 </div>
@@ -390,10 +402,10 @@ var         <strong>privateMemory</strong> <a class="anchor-link"
 Only available when receiving the object as part of a callback from
 onUpdatedWithMemory or getProcessInfo with the includeMemory flag.</p>
 <pre class="source">
-dynamic get privateMemory =&gt; proxy['privateMemory'];
+dynamic get privateMemory =&gt; jsProxy['privateMemory'];
 </pre>
 <pre class="source">
-set privateMemory(var value) =&gt; proxy['privateMemory'] = jsify(value);
+set privateMemory(var value) =&gt; jsProxy['privateMemory'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -406,22 +418,10 @@ String         <strong>profile</strong> <a class="anchor-link"
         <div class="doc">
 <p>The profile which the process is associated with.</p>
 <pre class="source">
-String get profile =&gt; proxy['profile'];
+String get profile =&gt; jsProxy['profile'];
 </pre>
 <pre class="source">
-set profile(String value) =&gt; proxy['profile'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Process.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set profile(String value) =&gt; jsProxy['profile'] = value;
 </pre>
 </div>
 </div>
@@ -436,10 +436,10 @@ final JsObject proxy
 available when receiving the object as part of a callback from onUpdated or
 onUpdatedWithMemory.</p>
 <pre class="source">
-Cache get scriptCache =&gt; _createCache(proxy['scriptCache']);
+Cache get scriptCache =&gt; _createCache(jsProxy['scriptCache']);
 </pre>
 <pre class="source">
-set scriptCache(Cache value) =&gt; proxy['scriptCache'] = jsify(value);
+set scriptCache(Cache value) =&gt; jsProxy['scriptCache'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -454,10 +454,10 @@ var         <strong>sqliteMemory</strong> <a class="anchor-link"
 Only available when receiving the object as part of a callback from
 onUpdated or onUpdatedWithMemory.</p>
 <pre class="source">
-dynamic get sqliteMemory =&gt; proxy['sqliteMemory'];
+dynamic get sqliteMemory =&gt; jsProxy['sqliteMemory'];
 </pre>
 <pre class="source">
-set sqliteMemory(var value) =&gt; proxy['sqliteMemory'] = jsify(value);
+set sqliteMemory(var value) =&gt; jsProxy['sqliteMemory'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -471,10 +471,10 @@ List&lt;int&gt;         <strong>tabs</strong> <a class="anchor-link"
 <p>Array of Tab IDs that have a page rendered by this process. The list will
 be non-empty for renderer processes only.</p>
 <pre class="source">
-List&lt;int&gt; get tabs =&gt; listify(proxy['tabs']);
+List&lt;int&gt; get tabs =&gt; listify(jsProxy['tabs']);
 </pre>
 <pre class="source">
-set tabs(List&lt;int&gt; value) =&gt; proxy['tabs'] = jsify(value);
+set tabs(List&lt;int&gt; value) =&gt; jsProxy['tabs'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -489,10 +489,10 @@ String         <strong>type</strong> <a class="anchor-link"
 enum of <code>browser</code>, <code>renderer</code>, <code>extension</code>, <code>notification</code>, <code>plugin</code>,
 <code>worker</code>, <code>nacl</code>, <code>utility</code>, <code>gpu</code>, <code>other</code></p>
 <pre class="source">
-String get type =&gt; proxy['type'];
+String get type =&gt; jsProxy['type'];
 </pre>
 <pre class="source">
-set type(String value) =&gt; proxy['type'] = value;
+set type(String value) =&gt; jsProxy['type'] = value;
 </pre>
 </div>
 </div>
@@ -505,7 +505,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Process.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -518,7 +518,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

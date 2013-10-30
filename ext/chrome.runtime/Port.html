@@ -43,29 +43,29 @@ class Port extends ChromeObject {
    if (postMessage != null) this.postMessage = postMessage;
    if (sender != null) this.sender = sender;
  }
- Port.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Port.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get name =&gt; proxy['name'];
- set name(String value) =&gt; proxy['name'] = value;
+ String get name =&gt; jsProxy['name'];
+ set name(String value) =&gt; jsProxy['name'] = value;
 
- dynamic get disconnect =&gt; proxy['disconnect'];
- set disconnect(var value) =&gt; proxy['disconnect'] = jsify(value);
+ dynamic get disconnect =&gt; jsProxy['disconnect'];
+ set disconnect(var value) =&gt; jsProxy['disconnect'] = jsify(value);
 
- Event get onDisconnect =&gt; _createEvent(proxy['onDisconnect']);
- set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = jsify(value);
+ Event get onDisconnect =&gt; _createEvent(jsProxy['onDisconnect']);
+ set onDisconnect(Event value) =&gt; jsProxy['onDisconnect'] = jsify(value);
 
- Event get onMessage =&gt; _createEvent(proxy['onMessage']);
- set onMessage(Event value) =&gt; proxy['onMessage'] = jsify(value);
+ Event get onMessage =&gt; _createEvent(jsProxy['onMessage']);
+ set onMessage(Event value) =&gt; jsProxy['onMessage'] = jsify(value);
 
- dynamic get postMessage =&gt; proxy['postMessage'];
- set postMessage(var value) =&gt; proxy['postMessage'] = jsify(value);
+ dynamic get postMessage =&gt; jsProxy['postMessage'];
+ set postMessage(var value) =&gt; jsProxy['postMessage'] = jsify(value);
 
  /**
   * This property will &lt;b&gt;only&lt;/b&gt; be present on ports passed to
   * onConnect/onConnectExternal listeners.
   */
- MessageSender get sender =&gt; _createMessageSender(proxy['sender']);
- set sender(MessageSender value) =&gt; proxy['sender'] = jsify(value);
+ MessageSender get sender =&gt; _createMessageSender(jsProxy['sender']);
+ set sender(MessageSender value) =&gt; jsProxy['sender'] = jsify(value);
 }
 </pre>
 </div>
@@ -97,7 +97,7 @@ Port({String name, var disconnect, Event onDisconnect, Event onMessage, var post
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Port.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Port.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Port.Port.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -105,7 +105,7 @@ new <strong>Port.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href=
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Port.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Port.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -120,10 +120,22 @@ var         <strong>disconnect</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-dynamic get disconnect =&gt; proxy['disconnect'];
+dynamic get disconnect =&gt; jsProxy['disconnect'];
 </pre>
 <pre class="source">
-set disconnect(var value) =&gt; proxy['disconnect'] = jsify(value);
+set disconnect(var value) =&gt; jsProxy['disconnect'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Port.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -135,10 +147,10 @@ String         <strong>name</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get name =&gt; proxy['name'];
+String get name =&gt; jsProxy['name'];
 </pre>
 <pre class="source">
-set name(String value) =&gt; proxy['name'] = value;
+set name(String value) =&gt; jsProxy['name'] = value;
 </pre>
 </div>
 </div>
@@ -150,10 +162,10 @@ set name(String value) =&gt; proxy['name'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-Event get onDisconnect =&gt; _createEvent(proxy['onDisconnect']);
+Event get onDisconnect =&gt; _createEvent(jsProxy['onDisconnect']);
 </pre>
 <pre class="source">
-set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = jsify(value);
+set onDisconnect(Event value) =&gt; jsProxy['onDisconnect'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -165,10 +177,10 @@ set onDisconnect(Event value) =&gt; proxy['onDisconnect'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-Event get onMessage =&gt; _createEvent(proxy['onMessage']);
+Event get onMessage =&gt; _createEvent(jsProxy['onMessage']);
 </pre>
 <pre class="source">
-set onMessage(Event value) =&gt; proxy['onMessage'] = jsify(value);
+set onMessage(Event value) =&gt; jsProxy['onMessage'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -180,22 +192,10 @@ var         <strong>postMessage</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-dynamic get postMessage =&gt; proxy['postMessage'];
+dynamic get postMessage =&gt; jsProxy['postMessage'];
 </pre>
 <pre class="source">
-set postMessage(var value) =&gt; proxy['postMessage'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Port.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set postMessage(var value) =&gt; jsProxy['postMessage'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -209,10 +209,10 @@ final JsObject proxy
 <p>This property will &lt;b>only&lt;/b> be present on ports passed to
 onConnect/onConnectExternal listeners.</p>
 <pre class="source">
-MessageSender get sender =&gt; _createMessageSender(proxy['sender']);
+MessageSender get sender =&gt; _createMessageSender(jsProxy['sender']);
 </pre>
 <pre class="source">
-set sender(MessageSender value) =&gt; proxy['sender'] = jsify(value);
+set sender(MessageSender value) =&gt; jsProxy['sender'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -225,7 +225,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Port.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -238,7 +238,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

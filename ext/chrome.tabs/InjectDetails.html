@@ -42,35 +42,35 @@ class InjectDetails extends ChromeObject {
    if (allFrames != null) this.allFrames = allFrames;
    if (runAt != null) this.runAt = runAt;
  }
- InjectDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ InjectDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * JavaScript or CSS code to inject.
   */
- String get code =&gt; proxy['code'];
- set code(String value) =&gt; proxy['code'] = value;
+ String get code =&gt; jsProxy['code'];
+ set code(String value) =&gt; jsProxy['code'] = value;
 
  /**
   * JavaScript or CSS file to inject.
   */
- String get file =&gt; proxy['file'];
- set file(String value) =&gt; proxy['file'] = value;
+ String get file =&gt; jsProxy['file'];
+ set file(String value) =&gt; jsProxy['file'] = value;
 
  /**
   * If allFrames is `true`, implies that the JavaScript or CSS should be
   * injected into all frames of current page. By default, it's `false` and is
   * only injected into the top frame.
   */
- bool get allFrames =&gt; proxy['allFrames'];
- set allFrames(bool value) =&gt; proxy['allFrames'] = value;
+ bool get allFrames =&gt; jsProxy['allFrames'];
+ set allFrames(bool value) =&gt; jsProxy['allFrames'] = value;
 
  /**
   * The soonest that the JavaScript or CSS will be injected into the tab.
   * Defaults to "document_idle".
   * enum of `document_start`, `document_end`, `document_idle`
   */
- String get runAt =&gt; proxy['runAt'];
- set runAt(String value) =&gt; proxy['runAt'] = value;
+ String get runAt =&gt; jsProxy['runAt'];
+ set runAt(String value) =&gt; jsProxy['runAt'] = value;
 }
 </pre>
 </div>
@@ -100,7 +100,7 @@ InjectDetails({String code, String file, bool allFrames, String runAt}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>InjectDetails.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>InjectDetails.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to InjectDetails.InjectDetails.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -108,7 +108,7 @@ new <strong>InjectDetails.fromProxy</strong>(JsObject proxy) <a class="anchor-li
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-InjectDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+InjectDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -126,10 +126,10 @@ bool         <strong>allFrames</strong> <a class="anchor-link"
 injected into all frames of current page. By default, it's <code>false</code> and is
 only injected into the top frame.</p>
 <pre class="source">
-bool get allFrames =&gt; proxy['allFrames'];
+bool get allFrames =&gt; jsProxy['allFrames'];
 </pre>
 <pre class="source">
-set allFrames(bool value) =&gt; proxy['allFrames'] = value;
+set allFrames(bool value) =&gt; jsProxy['allFrames'] = value;
 </pre>
 </div>
 </div>
@@ -142,10 +142,10 @@ String         <strong>code</strong> <a class="anchor-link"
         <div class="doc">
 <p>JavaScript or CSS code to inject.</p>
 <pre class="source">
-String get code =&gt; proxy['code'];
+String get code =&gt; jsProxy['code'];
 </pre>
 <pre class="source">
-set code(String value) =&gt; proxy['code'] = value;
+set code(String value) =&gt; jsProxy['code'] = value;
 </pre>
 </div>
 </div>
@@ -158,22 +158,22 @@ String         <strong>file</strong> <a class="anchor-link"
         <div class="doc">
 <p>JavaScript or CSS file to inject.</p>
 <pre class="source">
-String get file =&gt; proxy['file'];
+String get file =&gt; jsProxy['file'];
 </pre>
 <pre class="source">
-set file(String value) =&gt; proxy['file'] = value;
+set file(String value) =&gt; jsProxy['file'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to InjectDetails.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to InjectDetails.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -188,10 +188,10 @@ String         <strong>runAt</strong> <a class="anchor-link"
 Defaults to "document_idle".
 enum of <code>document_start</code>, <code>document_end</code>, <code>document_idle</code></p>
 <pre class="source">
-String get runAt =&gt; proxy['runAt'];
+String get runAt =&gt; jsProxy['runAt'];
 </pre>
 <pre class="source">
-set runAt(String value) =&gt; proxy['runAt'] = value;
+set runAt(String value) =&gt; jsProxy['runAt'] = value;
 </pre>
 </div>
 </div>
@@ -204,7 +204,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to InjectDetails.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -217,7 +217,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

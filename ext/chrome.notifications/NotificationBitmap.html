@@ -39,16 +39,16 @@ class NotificationBitmap extends ChromeObject {
    if (height != null) this.height = height;
    if (data != null) this.data = data;
  }
- NotificationBitmap.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ NotificationBitmap.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get width =&gt; proxy['width'];
- set width(int value) =&gt; proxy['width'] = value;
+ int get width =&gt; jsProxy['width'];
+ set width(int value) =&gt; jsProxy['width'] = value;
 
- int get height =&gt; proxy['height'];
- set height(int value) =&gt; proxy['height'] = value;
+ int get height =&gt; jsProxy['height'];
+ set height(int value) =&gt; jsProxy['height'] = value;
 
- ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
- set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
+ ArrayBuffer get data =&gt; _createArrayBuffer(jsProxy['data']);
+ set data(ArrayBuffer value) =&gt; jsProxy['data'] = jsify(value);
 }
 </pre>
 </div>
@@ -77,7 +77,7 @@ NotificationBitmap({int width, int height, ArrayBuffer data}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>NotificationBitmap.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>NotificationBitmap.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to NotificationBitmap.NotificationBitmap.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -85,7 +85,7 @@ new <strong>NotificationBitmap.fromProxy</strong>(JsObject proxy) <a class="anch
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-NotificationBitmap.fromProxy(JsObject proxy): super.fromProxy(proxy);
+NotificationBitmap.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -100,10 +100,10 @@ NotificationBitmap.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
+ArrayBuffer get data =&gt; _createArrayBuffer(jsProxy['data']);
 </pre>
 <pre class="source">
-set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
+set data(ArrayBuffer value) =&gt; jsProxy['data'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -115,22 +115,22 @@ int         <strong>height</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get height =&gt; proxy['height'];
+int get height =&gt; jsProxy['height'];
 </pre>
 <pre class="source">
-set height(int value) =&gt; proxy['height'] = value;
+set height(int value) =&gt; jsProxy['height'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to NotificationBitmap.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to NotificationBitmap.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -142,10 +142,10 @@ int         <strong>width</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get width =&gt; proxy['width'];
+int get width =&gt; jsProxy['width'];
 </pre>
 <pre class="source">
-set width(int value) =&gt; proxy['width'] = value;
+set width(int value) =&gt; jsProxy['width'] = value;
 </pre>
 </div>
 </div>
@@ -158,7 +158,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to NotificationBitmap.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -171,7 +171,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

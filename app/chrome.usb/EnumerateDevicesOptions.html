@@ -38,13 +38,13 @@ class EnumerateDevicesOptions extends ChromeObject {
    if (vendorId != null) this.vendorId = vendorId;
    if (productId != null) this.productId = productId;
  }
- EnumerateDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ EnumerateDevicesOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get vendorId =&gt; proxy['vendorId'];
- set vendorId(int value) =&gt; proxy['vendorId'] = value;
+ int get vendorId =&gt; jsProxy['vendorId'];
+ set vendorId(int value) =&gt; jsProxy['vendorId'] = value;
 
- int get productId =&gt; proxy['productId'];
- set productId(int value) =&gt; proxy['productId'] = value;
+ int get productId =&gt; jsProxy['productId'];
+ set productId(int value) =&gt; jsProxy['productId'] = value;
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ EnumerateDevicesOptions({int vendorId, int productId}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>EnumerateDevicesOptions.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>EnumerateDevicesOptions.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to EnumerateDevicesOptions.EnumerateDevicesOptions.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,13 +80,25 @@ new <strong>EnumerateDevicesOptions.fromProxy</strong>(JsObject proxy) <a class=
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-EnumerateDevicesOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+EnumerateDevicesOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to EnumerateDevicesOptions.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="productId">
 <button class="show-code">Code</button>
 int         <strong>productId</strong> <a class="anchor-link"
@@ -95,22 +107,10 @@ int         <strong>productId</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get productId =&gt; proxy['productId'];
+int get productId =&gt; jsProxy['productId'];
 </pre>
 <pre class="source">
-set productId(int value) =&gt; proxy['productId'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to EnumerateDevicesOptions.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set productId(int value) =&gt; jsProxy['productId'] = value;
 </pre>
 </div>
 </div>
@@ -122,10 +122,10 @@ int         <strong>vendorId</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get vendorId =&gt; proxy['vendorId'];
+int get vendorId =&gt; jsProxy['vendorId'];
 </pre>
 <pre class="source">
-set vendorId(int value) =&gt; proxy['vendorId'] = value;
+set vendorId(int value) =&gt; jsProxy['vendorId'] = value;
 </pre>
 </div>
 </div>
@@ -138,7 +138,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to EnumerateDevicesOptions.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

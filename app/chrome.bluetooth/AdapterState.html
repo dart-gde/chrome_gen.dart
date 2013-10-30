@@ -41,22 +41,22 @@ class AdapterState extends ChromeObject {
    if (available != null) this.available = available;
    if (discovering != null) this.discovering = discovering;
  }
- AdapterState.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ AdapterState.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get address =&gt; proxy['address'];
- set address(String value) =&gt; proxy['address'] = value;
+ String get address =&gt; jsProxy['address'];
+ set address(String value) =&gt; jsProxy['address'] = value;
 
- String get name =&gt; proxy['name'];
- set name(String value) =&gt; proxy['name'] = value;
+ String get name =&gt; jsProxy['name'];
+ set name(String value) =&gt; jsProxy['name'] = value;
 
- bool get powered =&gt; proxy['powered'];
- set powered(bool value) =&gt; proxy['powered'] = value;
+ bool get powered =&gt; jsProxy['powered'];
+ set powered(bool value) =&gt; jsProxy['powered'] = value;
 
- bool get available =&gt; proxy['available'];
- set available(bool value) =&gt; proxy['available'] = value;
+ bool get available =&gt; jsProxy['available'];
+ set available(bool value) =&gt; jsProxy['available'] = value;
 
- bool get discovering =&gt; proxy['discovering'];
- set discovering(bool value) =&gt; proxy['discovering'] = value;
+ bool get discovering =&gt; jsProxy['discovering'];
+ set discovering(bool value) =&gt; jsProxy['discovering'] = value;
 }
 </pre>
 </div>
@@ -87,7 +87,7 @@ AdapterState({String address, String name, bool powered, bool available, bool di
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>AdapterState.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>AdapterState.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to AdapterState.AdapterState.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -95,7 +95,7 @@ new <strong>AdapterState.fromProxy</strong>(JsObject proxy) <a class="anchor-lin
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-AdapterState.fromProxy(JsObject proxy): super.fromProxy(proxy);
+AdapterState.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -110,10 +110,10 @@ String         <strong>address</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get address =&gt; proxy['address'];
+String get address =&gt; jsProxy['address'];
 </pre>
 <pre class="source">
-set address(String value) =&gt; proxy['address'] = value;
+set address(String value) =&gt; jsProxy['address'] = value;
 </pre>
 </div>
 </div>
@@ -125,10 +125,10 @@ bool         <strong>available</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get available =&gt; proxy['available'];
+bool get available =&gt; jsProxy['available'];
 </pre>
 <pre class="source">
-set available(bool value) =&gt; proxy['available'] = value;
+set available(bool value) =&gt; jsProxy['available'] = value;
 </pre>
 </div>
 </div>
@@ -140,10 +140,22 @@ bool         <strong>discovering</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get discovering =&gt; proxy['discovering'];
+bool get discovering =&gt; jsProxy['discovering'];
 </pre>
 <pre class="source">
-set discovering(bool value) =&gt; proxy['discovering'] = value;
+set discovering(bool value) =&gt; jsProxy['discovering'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to AdapterState.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -155,10 +167,10 @@ String         <strong>name</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get name =&gt; proxy['name'];
+String get name =&gt; jsProxy['name'];
 </pre>
 <pre class="source">
-set name(String value) =&gt; proxy['name'] = value;
+set name(String value) =&gt; jsProxy['name'] = value;
 </pre>
 </div>
 </div>
@@ -170,22 +182,10 @@ bool         <strong>powered</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get powered =&gt; proxy['powered'];
+bool get powered =&gt; jsProxy['powered'];
 </pre>
 <pre class="source">
-set powered(bool value) =&gt; proxy['powered'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to AdapterState.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set powered(bool value) =&gt; jsProxy['powered'] = value;
 </pre>
 </div>
 </div>
@@ -198,7 +198,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to AdapterState.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -211,7 +211,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

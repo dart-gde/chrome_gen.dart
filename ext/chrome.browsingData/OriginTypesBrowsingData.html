@@ -39,26 +39,26 @@ class OriginTypesBrowsingData extends ChromeObject {
    if (protectedWeb != null) this.protectedWeb = protectedWeb;
    if (extension != null) this.extension = extension;
  }
- OriginTypesBrowsingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ OriginTypesBrowsingData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Normal websites.
   */
- bool get unprotectedWeb =&gt; proxy['unprotectedWeb'];
- set unprotectedWeb(bool value) =&gt; proxy['unprotectedWeb'] = value;
+ bool get unprotectedWeb =&gt; jsProxy['unprotectedWeb'];
+ set unprotectedWeb(bool value) =&gt; jsProxy['unprotectedWeb'] = value;
 
  /**
   * Websites that have been installed as hosted applications (be careful!).
   */
- bool get protectedWeb =&gt; proxy['protectedWeb'];
- set protectedWeb(bool value) =&gt; proxy['protectedWeb'] = value;
+ bool get protectedWeb =&gt; jsProxy['protectedWeb'];
+ set protectedWeb(bool value) =&gt; jsProxy['protectedWeb'] = value;
 
  /**
   * Extensions and packaged applications a user has installed (be _really_
   * careful!).
   */
- bool get extension =&gt; proxy['extension'];
- set extension(bool value) =&gt; proxy['extension'] = value;
+ bool get extension =&gt; jsProxy['extension'];
+ set extension(bool value) =&gt; jsProxy['extension'] = value;
 }
 </pre>
 </div>
@@ -87,7 +87,7 @@ OriginTypesBrowsingData({bool unprotectedWeb, bool protectedWeb, bool extension}
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>OriginTypesBrowsingData.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>OriginTypesBrowsingData.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to OriginTypesBrowsingData.OriginTypesBrowsingData.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -95,7 +95,7 @@ new <strong>OriginTypesBrowsingData.fromProxy</strong>(JsObject proxy) <a class=
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-OriginTypesBrowsingData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+OriginTypesBrowsingData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -112,10 +112,22 @@ bool         <strong>extension</strong> <a class="anchor-link"
 <p>Extensions and packaged applications a user has installed (be <em>really</em>
 careful!).</p>
 <pre class="source">
-bool get extension =&gt; proxy['extension'];
+bool get extension =&gt; jsProxy['extension'];
 </pre>
 <pre class="source">
-set extension(bool value) =&gt; proxy['extension'] = value;
+set extension(bool value) =&gt; jsProxy['extension'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to OriginTypesBrowsingData.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -128,22 +140,10 @@ bool         <strong>protectedWeb</strong> <a class="anchor-link"
         <div class="doc">
 <p>Websites that have been installed as hosted applications (be careful!).</p>
 <pre class="source">
-bool get protectedWeb =&gt; proxy['protectedWeb'];
+bool get protectedWeb =&gt; jsProxy['protectedWeb'];
 </pre>
 <pre class="source">
-set protectedWeb(bool value) =&gt; proxy['protectedWeb'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to OriginTypesBrowsingData.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set protectedWeb(bool value) =&gt; jsProxy['protectedWeb'] = value;
 </pre>
 </div>
 </div>
@@ -156,10 +156,10 @@ bool         <strong>unprotectedWeb</strong> <a class="anchor-link"
         <div class="doc">
 <p>Normal websites.</p>
 <pre class="source">
-bool get unprotectedWeb =&gt; proxy['unprotectedWeb'];
+bool get unprotectedWeb =&gt; jsProxy['unprotectedWeb'];
 </pre>
 <pre class="source">
-set unprotectedWeb(bool value) =&gt; proxy['unprotectedWeb'] = value;
+set unprotectedWeb(bool value) =&gt; jsProxy['unprotectedWeb'] = value;
 </pre>
 </div>
 </div>
@@ -172,7 +172,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to OriginTypesBrowsingData.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -185,7 +185,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

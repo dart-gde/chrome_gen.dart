@@ -48,80 +48,80 @@ class OnClickData extends ChromeObject {
    if (wasChecked != null) this.wasChecked = wasChecked;
    if (checked != null) this.checked = checked;
  }
- OnClickData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ OnClickData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The ID of the menu item that was clicked.
   */
- dynamic get menuItemId =&gt; proxy['menuItemId'];
- set menuItemId(var value) =&gt; proxy['menuItemId'] = jsify(value);
+ dynamic get menuItemId =&gt; jsProxy['menuItemId'];
+ set menuItemId(var value) =&gt; jsProxy['menuItemId'] = jsify(value);
 
  /**
   * The parent ID, if any, for the item clicked.
   */
- dynamic get parentMenuItemId =&gt; proxy['parentMenuItemId'];
- set parentMenuItemId(var value) =&gt; proxy['parentMenuItemId'] = jsify(value);
+ dynamic get parentMenuItemId =&gt; jsProxy['parentMenuItemId'];
+ set parentMenuItemId(var value) =&gt; jsProxy['parentMenuItemId'] = jsify(value);
 
  /**
   * One of 'image', 'video', or 'audio' if the context menu was activated on
   * one of these types of elements.
   */
- String get mediaType =&gt; proxy['mediaType'];
- set mediaType(String value) =&gt; proxy['mediaType'] = value;
+ String get mediaType =&gt; jsProxy['mediaType'];
+ set mediaType(String value) =&gt; jsProxy['mediaType'] = value;
 
  /**
   * If the element is a link, the URL it points to.
   */
- String get linkUrl =&gt; proxy['linkUrl'];
- set linkUrl(String value) =&gt; proxy['linkUrl'] = value;
+ String get linkUrl =&gt; jsProxy['linkUrl'];
+ set linkUrl(String value) =&gt; jsProxy['linkUrl'] = value;
 
  /**
   * Will be present for elements with a 'src' URL.
   */
- String get srcUrl =&gt; proxy['srcUrl'];
- set srcUrl(String value) =&gt; proxy['srcUrl'] = value;
+ String get srcUrl =&gt; jsProxy['srcUrl'];
+ set srcUrl(String value) =&gt; jsProxy['srcUrl'] = value;
 
  /**
   * The URL of the page where the menu item was clicked. This property is not
   * set if the click occured in a context where there is no current page, such
   * as in a launcher context menu.
   */
- String get pageUrl =&gt; proxy['pageUrl'];
- set pageUrl(String value) =&gt; proxy['pageUrl'] = value;
+ String get pageUrl =&gt; jsProxy['pageUrl'];
+ set pageUrl(String value) =&gt; jsProxy['pageUrl'] = value;
 
  /**
   * The URL of the frame of the element where the context menu was clicked, if
   * it was in a frame.
   */
- String get frameUrl =&gt; proxy['frameUrl'];
- set frameUrl(String value) =&gt; proxy['frameUrl'] = value;
+ String get frameUrl =&gt; jsProxy['frameUrl'];
+ set frameUrl(String value) =&gt; jsProxy['frameUrl'] = value;
 
  /**
   * The text for the context selection, if any.
   */
- String get selectionText =&gt; proxy['selectionText'];
- set selectionText(String value) =&gt; proxy['selectionText'] = value;
+ String get selectionText =&gt; jsProxy['selectionText'];
+ set selectionText(String value) =&gt; jsProxy['selectionText'] = value;
 
  /**
   * A flag indicating whether the element is editable (text input, textarea,
   * etc.).
   */
- bool get editable =&gt; proxy['editable'];
- set editable(bool value) =&gt; proxy['editable'] = value;
+ bool get editable =&gt; jsProxy['editable'];
+ set editable(bool value) =&gt; jsProxy['editable'] = value;
 
  /**
   * A flag indicating the state of a checkbox or radio item before it was
   * clicked.
   */
- bool get wasChecked =&gt; proxy['wasChecked'];
- set wasChecked(bool value) =&gt; proxy['wasChecked'] = value;
+ bool get wasChecked =&gt; jsProxy['wasChecked'];
+ set wasChecked(bool value) =&gt; jsProxy['wasChecked'] = value;
 
  /**
   * A flag indicating the state of a checkbox or radio item after it is
   * clicked.
   */
- bool get checked =&gt; proxy['checked'];
- set checked(bool value) =&gt; proxy['checked'] = value;
+ bool get checked =&gt; jsProxy['checked'];
+ set checked(bool value) =&gt; jsProxy['checked'] = value;
 }
 </pre>
 </div>
@@ -158,7 +158,7 @@ OnClickData({var menuItemId, var parentMenuItemId, String mediaType, String link
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>OnClickData.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>OnClickData.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to OnClickData.OnClickData.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -166,7 +166,7 @@ new <strong>OnClickData.fromProxy</strong>(JsObject proxy) <a class="anchor-link
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-OnClickData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+OnClickData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -183,10 +183,10 @@ bool         <strong>checked</strong> <a class="anchor-link"
 <p>A flag indicating the state of a checkbox or radio item after it is
 clicked.</p>
 <pre class="source">
-bool get checked =&gt; proxy['checked'];
+bool get checked =&gt; jsProxy['checked'];
 </pre>
 <pre class="source">
-set checked(bool value) =&gt; proxy['checked'] = value;
+set checked(bool value) =&gt; jsProxy['checked'] = value;
 </pre>
 </div>
 </div>
@@ -200,10 +200,10 @@ bool         <strong>editable</strong> <a class="anchor-link"
 <p>A flag indicating whether the element is editable (text input, textarea,
 etc.).</p>
 <pre class="source">
-bool get editable =&gt; proxy['editable'];
+bool get editable =&gt; jsProxy['editable'];
 </pre>
 <pre class="source">
-set editable(bool value) =&gt; proxy['editable'] = value;
+set editable(bool value) =&gt; jsProxy['editable'] = value;
 </pre>
 </div>
 </div>
@@ -217,10 +217,22 @@ String         <strong>frameUrl</strong> <a class="anchor-link"
 <p>The URL of the frame of the element where the context menu was clicked, if
 it was in a frame.</p>
 <pre class="source">
-String get frameUrl =&gt; proxy['frameUrl'];
+String get frameUrl =&gt; jsProxy['frameUrl'];
 </pre>
 <pre class="source">
-set frameUrl(String value) =&gt; proxy['frameUrl'] = value;
+set frameUrl(String value) =&gt; jsProxy['frameUrl'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to OnClickData.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -233,10 +245,10 @@ String         <strong>linkUrl</strong> <a class="anchor-link"
         <div class="doc">
 <p>If the element is a link, the URL it points to.</p>
 <pre class="source">
-String get linkUrl =&gt; proxy['linkUrl'];
+String get linkUrl =&gt; jsProxy['linkUrl'];
 </pre>
 <pre class="source">
-set linkUrl(String value) =&gt; proxy['linkUrl'] = value;
+set linkUrl(String value) =&gt; jsProxy['linkUrl'] = value;
 </pre>
 </div>
 </div>
@@ -250,10 +262,10 @@ String         <strong>mediaType</strong> <a class="anchor-link"
 <p>One of 'image', 'video', or 'audio' if the context menu was activated on
 one of these types of elements.</p>
 <pre class="source">
-String get mediaType =&gt; proxy['mediaType'];
+String get mediaType =&gt; jsProxy['mediaType'];
 </pre>
 <pre class="source">
-set mediaType(String value) =&gt; proxy['mediaType'] = value;
+set mediaType(String value) =&gt; jsProxy['mediaType'] = value;
 </pre>
 </div>
 </div>
@@ -266,10 +278,10 @@ var         <strong>menuItemId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The ID of the menu item that was clicked.</p>
 <pre class="source">
-dynamic get menuItemId =&gt; proxy['menuItemId'];
+dynamic get menuItemId =&gt; jsProxy['menuItemId'];
 </pre>
 <pre class="source">
-set menuItemId(var value) =&gt; proxy['menuItemId'] = jsify(value);
+set menuItemId(var value) =&gt; jsProxy['menuItemId'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -284,10 +296,10 @@ String         <strong>pageUrl</strong> <a class="anchor-link"
 set if the click occured in a context where there is no current page, such
 as in a launcher context menu.</p>
 <pre class="source">
-String get pageUrl =&gt; proxy['pageUrl'];
+String get pageUrl =&gt; jsProxy['pageUrl'];
 </pre>
 <pre class="source">
-set pageUrl(String value) =&gt; proxy['pageUrl'] = value;
+set pageUrl(String value) =&gt; jsProxy['pageUrl'] = value;
 </pre>
 </div>
 </div>
@@ -300,22 +312,10 @@ var         <strong>parentMenuItemId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The parent ID, if any, for the item clicked.</p>
 <pre class="source">
-dynamic get parentMenuItemId =&gt; proxy['parentMenuItemId'];
+dynamic get parentMenuItemId =&gt; jsProxy['parentMenuItemId'];
 </pre>
 <pre class="source">
-set parentMenuItemId(var value) =&gt; proxy['parentMenuItemId'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to OnClickData.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set parentMenuItemId(var value) =&gt; jsProxy['parentMenuItemId'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -328,10 +328,10 @@ String         <strong>selectionText</strong> <a class="anchor-link"
         <div class="doc">
 <p>The text for the context selection, if any.</p>
 <pre class="source">
-String get selectionText =&gt; proxy['selectionText'];
+String get selectionText =&gt; jsProxy['selectionText'];
 </pre>
 <pre class="source">
-set selectionText(String value) =&gt; proxy['selectionText'] = value;
+set selectionText(String value) =&gt; jsProxy['selectionText'] = value;
 </pre>
 </div>
 </div>
@@ -344,10 +344,10 @@ String         <strong>srcUrl</strong> <a class="anchor-link"
         <div class="doc">
 <p>Will be present for elements with a 'src' URL.</p>
 <pre class="source">
-String get srcUrl =&gt; proxy['srcUrl'];
+String get srcUrl =&gt; jsProxy['srcUrl'];
 </pre>
 <pre class="source">
-set srcUrl(String value) =&gt; proxy['srcUrl'] = value;
+set srcUrl(String value) =&gt; jsProxy['srcUrl'] = value;
 </pre>
 </div>
 </div>
@@ -361,10 +361,10 @@ bool         <strong>wasChecked</strong> <a class="anchor-link"
 <p>A flag indicating the state of a checkbox or radio item before it was
 clicked.</p>
 <pre class="source">
-bool get wasChecked =&gt; proxy['wasChecked'];
+bool get wasChecked =&gt; jsProxy['wasChecked'];
 </pre>
 <pre class="source">
-set wasChecked(bool value) =&gt; proxy['wasChecked'] = value;
+set wasChecked(bool value) =&gt; jsProxy['wasChecked'] = value;
 </pre>
 </div>
 </div>
@@ -377,7 +377,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to OnClickData.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -390,7 +390,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

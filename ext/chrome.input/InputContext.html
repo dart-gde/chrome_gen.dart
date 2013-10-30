@@ -39,21 +39,21 @@ class InputContext extends ChromeObject {
    if (contextID != null) this.contextID = contextID;
    if (type != null) this.type = type;
  }
- InputContext.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ InputContext.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * This is used to specify targets of text field operations.  This ID becomes
   * invalid as soon as onBlur is called.
   */
- int get contextID =&gt; proxy['contextID'];
- set contextID(int value) =&gt; proxy['contextID'] = value;
+ int get contextID =&gt; jsProxy['contextID'];
+ set contextID(int value) =&gt; jsProxy['contextID'] = value;
 
  /**
   * Type of value this text field edits, (Text, Number, Password, etc)
   * enum of `text`, `number`, `password`
   */
- String get type =&gt; proxy['type'];
- set type(String value) =&gt; proxy['type'] = value;
+ String get type =&gt; jsProxy['type'];
+ set type(String value) =&gt; jsProxy['type'] = value;
 }
 </pre>
 </div>
@@ -81,7 +81,7 @@ InputContext({int contextID, String type}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>InputContext.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>InputContext.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to InputContext.InputContext.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -89,7 +89,7 @@ new <strong>InputContext.fromProxy</strong>(JsObject proxy) <a class="anchor-lin
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-InputContext.fromProxy(JsObject proxy): super.fromProxy(proxy);
+InputContext.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -106,22 +106,22 @@ int         <strong>contextID</strong> <a class="anchor-link"
 <p>This is used to specify targets of text field operations.  This ID becomes
 invalid as soon as onBlur is called.</p>
 <pre class="source">
-int get contextID =&gt; proxy['contextID'];
+int get contextID =&gt; jsProxy['contextID'];
 </pre>
 <pre class="source">
-set contextID(int value) =&gt; proxy['contextID'] = value;
+set contextID(int value) =&gt; jsProxy['contextID'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to InputContext.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to InputContext.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -135,10 +135,10 @@ String         <strong>type</strong> <a class="anchor-link"
 <p>Type of value this text field edits, (Text, Number, Password, etc)
 enum of <code>text</code>, <code>number</code>, <code>password</code></p>
 <pre class="source">
-String get type =&gt; proxy['type'];
+String get type =&gt; jsProxy['type'];
 </pre>
 <pre class="source">
-set type(String value) =&gt; proxy['type'] = value;
+set type(String value) =&gt; jsProxy['type'] = value;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to InputContext.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -164,7 +164,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

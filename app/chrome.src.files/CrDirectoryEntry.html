@@ -34,50 +34,50 @@
 <div class="doc">
 <pre class="source">
 class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
- CrDirectoryEntry.fromProxy(JsObject proxy) : super._fromProxy(proxy);
+ CrDirectoryEntry.fromProxy(JsObject jsProxy) : super._fromProxy(jsProxy);
 
  Future&lt;Entry&gt; createFile(String path, {bool exclusive: false}) {
    var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
    var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
-   proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+   jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
    return completer.future;
  }
 
  Future&lt;Entry&gt; createDirectory(String path, {bool exclusive: false}) {
    var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
    var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
-   proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+   jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
    return completer.future;
  }
 
  Future&lt;Entry&gt; getFile(String path) {
    var options = new JsObject.jsify({'create': false});
    var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
-   proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+   jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
    return completer.future;
  }
 
  Future&lt;Entry&gt; getDirectory(String path) {
    var options = new JsObject.jsify({'create': false});
    var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
-   proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+   jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
    return completer.future;
  }
 
  DirectoryReader createReader() {
-   return new CrDirectoryReader.fromProxy(proxy.callMethod('createReader'));
+   return new CrDirectoryReader.fromProxy(jsProxy.callMethod('createReader'));
  }
 
  Future removeRecursively() {
    var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.noArgs();
-   proxy.callMethod('removeRecursively', [completer.callback, completer.errorCallback]);
+   jsProxy.callMethod('removeRecursively', [completer.callback, completer.errorCallback]);
    return completer.future;
  }
 
  bool operator==(Object other) =&gt;
-     other is CrDirectoryEntry &amp;&amp; other.proxy == proxy;
+     other is CrDirectoryEntry &amp;&amp; other.jsProxy == jsProxy;
 
- int get hashCode =&gt; proxy.hashCode;
+ int get hashCode =&gt; jsProxy.hashCode;
  String toString() =&gt; '${name}/';
 }
 </pre>
@@ -92,7 +92,7 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
 <h3>Constructors</h3>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>CrDirectoryEntry.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>CrDirectoryEntry.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to CrDirectoryEntry.CrDirectoryEntry.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -100,7 +100,7 @@ new <strong>CrDirectoryEntry.fromProxy</strong>(JsObject proxy) <a class="anchor
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-CrDirectoryEntry.fromProxy(JsObject proxy) : super._fromProxy(proxy);
+CrDirectoryEntry.fromProxy(JsObject jsProxy) : super._fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -149,7 +149,7 @@ there are no distribution guarantees.</p>
 equality operator as well to maintain consistency.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-int get hashCode =&gt; proxy.hashCode;
+int get hashCode =&gt; jsProxy.hashCode;
 </pre>
 </div>
 </div>
@@ -177,6 +177,18 @@ final bool isFile
 </pre>
 </div>
 </div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to CrDirectoryEntry.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
+</pre>
+</div>
+</div>
 <div class="field inherited"><h4 id="name">
 <button class="show-code">Code</button>
 final String         <strong>name</strong> <a class="anchor-link"
@@ -186,18 +198,6 @@ final String         <strong>name</strong> <a class="anchor-link"
         <div class="inherited-from">inherited from Entry </div><div class="doc">
 <pre class="source">
 final String name
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to CrDirectoryEntry.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
 </pre>
 </div>
 </div>
@@ -247,7 +247,7 @@ the <a class="crossref" href="../chrome.src.files/CrDirectoryEntry.html#hashCode
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
 bool operator==(Object other) =&gt;
-   other is CrDirectoryEntry &amp;&amp; other.proxy == proxy;
+   other is CrDirectoryEntry &amp;&amp; other.jsProxy == jsProxy;
 </pre>
 </div>
 </div>
@@ -262,7 +262,7 @@ Future&lt;Entry&gt; <strong>copyTo</strong>(DirectoryEntry parent, {String name}
 <pre class="source">
 Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
- proxy.callMethod('copyTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('copyTo', [(parent as ChromeObject).jsProxy, name, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -282,7 +282,7 @@ exists with the specified <code>path</code>.</p>
 Future&lt;Entry&gt; createDirectory(String path, {bool exclusive: false}) {
  var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
- proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -302,7 +302,7 @@ exists at the specified <code>path</code>.</p>
 Future&lt;Entry&gt; createFile(String path, {bool exclusive: false}) {
  var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
- proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -315,7 +315,7 @@ DirectoryReader <strong>createReader</strong>() <a class="anchor-link" href="#cr
 <div class="doc">
 <pre class="source">
 DirectoryReader createReader() {
- return new CrDirectoryReader.fromProxy(proxy.callMethod('createReader'));
+ return new CrDirectoryReader.fromProxy(jsProxy.callMethod('createReader'));
 }
 </pre>
 </div>
@@ -334,7 +334,7 @@ at <code>path</code> is not a directory.</p>
 Future&lt;Entry&gt; getDirectory(String path) {
  var options = new JsObject.jsify({'create': false});
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
- proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -354,7 +354,7 @@ result in an error if a file at <code>path</code> does not exist or if the item 
 Future&lt;Entry&gt; getFile(String path) {
  var options = new JsObject.jsify({'create': false});
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
- proxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -368,7 +368,7 @@ Future&lt;Metadata&gt; <strong>getMetadata</strong>() <a class="anchor-link" hre
 <pre class="source">
 Future&lt;Metadata&gt; getMetadata() {
  var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.oneArg((obj) =&gt; new CrMetadata.fromProxy(obj));
- proxy.callMethod('getMetadata', [completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getMetadata', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -382,7 +382,7 @@ Future&lt;Entry&gt; <strong>getParent</strong>() <a class="anchor-link" href="#g
 <pre class="source">
 Future&lt;Entry&gt; getParent() {
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
- proxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -396,7 +396,7 @@ Future&lt;Entry&gt; <strong>moveTo</strong>(DirectoryEntry parent, {String name}
 <pre class="source">
 Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
- proxy.callMethod('moveTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('moveTo', [(parent as ChromeObject).jsProxy, name, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -435,7 +435,7 @@ Future <strong>remove</strong>() <a class="anchor-link" href="#remove"
 <pre class="source">
 Future remove() {
  var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.noArgs();
- proxy.callMethod('remove', [completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('remove', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -449,7 +449,7 @@ Future <strong>removeRecursively</strong>() <a class="anchor-link" href="#remove
 <pre class="source">
 Future removeRecursively() {
  var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.noArgs();
- proxy.callMethod('removeRecursively', [completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('removeRecursively', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -461,7 +461,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to CrDirectoryEntry.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -484,7 +484,7 @@ String <strong>toUrl</strong>() <a class="anchor-link" href="#toUrl"
               title="Permalink to CrDirectoryEntry.toUrl">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
-String toUrl() =&gt; this.proxy.callMethod('toURL');
+String toUrl() =&gt; this.jsProxy.callMethod('toURL');
 </pre>
 </div>
 </div>

@@ -41,27 +41,27 @@ class RequestFilter extends ChromeObject {
    if (tabId != null) this.tabId = tabId;
    if (windowId != null) this.windowId = windowId;
  }
- RequestFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ RequestFilter.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * A list of URLs or URL patterns. Requests that cannot match any of the URLs
   * will be filtered out.
   */
- List&lt;String&gt; get urls =&gt; listify(proxy['urls']);
- set urls(List&lt;String&gt; value) =&gt; proxy['urls'] = jsify(value);
+ List&lt;String&gt; get urls =&gt; listify(jsProxy['urls']);
+ set urls(List&lt;String&gt; value) =&gt; jsProxy['urls'] = jsify(value);
 
  /**
   * A list of request types. Requests that cannot match any of the types will
   * be filtered out.
   */
- List&lt;String&gt; get types =&gt; listify(proxy['types']);
- set types(List&lt;String&gt; value) =&gt; proxy['types'] = jsify(value);
+ List&lt;String&gt; get types =&gt; listify(jsProxy['types']);
+ set types(List&lt;String&gt; value) =&gt; jsProxy['types'] = jsify(value);
 
- int get tabId =&gt; proxy['tabId'];
- set tabId(int value) =&gt; proxy['tabId'] = value;
+ int get tabId =&gt; jsProxy['tabId'];
+ set tabId(int value) =&gt; jsProxy['tabId'] = value;
 
- int get windowId =&gt; proxy['windowId'];
- set windowId(int value) =&gt; proxy['windowId'] = value;
+ int get windowId =&gt; jsProxy['windowId'];
+ set windowId(int value) =&gt; jsProxy['windowId'] = value;
 }
 </pre>
 </div>
@@ -91,7 +91,7 @@ RequestFilter({List&lt;String&gt; urls, List&lt;String&gt; types, int tabId, int
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>RequestFilter.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>RequestFilter.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to RequestFilter.RequestFilter.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -99,22 +99,22 @@ new <strong>RequestFilter.fromProxy</strong>(JsObject proxy) <a class="anchor-li
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-RequestFilter.fromProxy(JsObject proxy): super.fromProxy(proxy);
+RequestFilter.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to RequestFilter.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to RequestFilter.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -126,10 +126,10 @@ int         <strong>tabId</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get tabId =&gt; proxy['tabId'];
+int get tabId =&gt; jsProxy['tabId'];
 </pre>
 <pre class="source">
-set tabId(int value) =&gt; proxy['tabId'] = value;
+set tabId(int value) =&gt; jsProxy['tabId'] = value;
 </pre>
 </div>
 </div>
@@ -143,10 +143,10 @@ List&lt;String&gt;         <strong>types</strong> <a class="anchor-link"
 <p>A list of request types. Requests that cannot match any of the types will
 be filtered out.</p>
 <pre class="source">
-List&lt;String&gt; get types =&gt; listify(proxy['types']);
+List&lt;String&gt; get types =&gt; listify(jsProxy['types']);
 </pre>
 <pre class="source">
-set types(List&lt;String&gt; value) =&gt; proxy['types'] = jsify(value);
+set types(List&lt;String&gt; value) =&gt; jsProxy['types'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -160,10 +160,10 @@ List&lt;String&gt;         <strong>urls</strong> <a class="anchor-link"
 <p>A list of URLs or URL patterns. Requests that cannot match any of the URLs
 will be filtered out.</p>
 <pre class="source">
-List&lt;String&gt; get urls =&gt; listify(proxy['urls']);
+List&lt;String&gt; get urls =&gt; listify(jsProxy['urls']);
 </pre>
 <pre class="source">
-set urls(List&lt;String&gt; value) =&gt; proxy['urls'] = jsify(value);
+set urls(List&lt;String&gt; value) =&gt; jsProxy['urls'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -175,10 +175,10 @@ int         <strong>windowId</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get windowId =&gt; proxy['windowId'];
+int get windowId =&gt; jsProxy['windowId'];
 </pre>
 <pre class="source">
-set windowId(int value) =&gt; proxy['windowId'] = value;
+set windowId(int value) =&gt; jsProxy['windowId'] = value;
 </pre>
 </div>
 </div>
@@ -191,7 +191,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to RequestFilter.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -204,7 +204,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

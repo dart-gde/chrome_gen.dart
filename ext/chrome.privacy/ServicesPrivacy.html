@@ -35,25 +35,25 @@
 <pre class="source">
 class ServicesPrivacy extends ChromeObject {
  ServicesPrivacy();
- ServicesPrivacy.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ ServicesPrivacy.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * If enabled, Chrome uses a web service to help resolve navigation errors.
   * This preference's value is a boolean, defaulting to `true`.
   */
- ChromeSetting get alternateErrorPagesEnabled =&gt; _createChromeSetting(proxy['alternateErrorPagesEnabled']);
+ ChromeSetting get alternateErrorPagesEnabled =&gt; _createChromeSetting(jsProxy['alternateErrorPagesEnabled']);
 
  /**
   * If enabled, Chrome offers to automatically fill in forms. This preference's
   * value is a boolean, defaulting to `true`.
   */
- ChromeSetting get autofillEnabled =&gt; _createChromeSetting(proxy['autofillEnabled']);
+ ChromeSetting get autofillEnabled =&gt; _createChromeSetting(jsProxy['autofillEnabled']);
 
  /**
   * If enabled, Chrome does its best to protect you from phishing and malware.
   * This preference's value is a boolean, defaulting to `true`.
   */
- ChromeSetting get safeBrowsingEnabled =&gt; _createChromeSetting(proxy['safeBrowsingEnabled']);
+ ChromeSetting get safeBrowsingEnabled =&gt; _createChromeSetting(jsProxy['safeBrowsingEnabled']);
 
  /**
   * If enabled, Chrome sends the text you type into the Omnibox to your default
@@ -61,19 +61,19 @@ class ServicesPrivacy extends ChromeObject {
   * likely completions of what you've typed so far. This preference's value is
   * a boolean, defaulting to `true`.
   */
- ChromeSetting get searchSuggestEnabled =&gt; _createChromeSetting(proxy['searchSuggestEnabled']);
+ ChromeSetting get searchSuggestEnabled =&gt; _createChromeSetting(jsProxy['searchSuggestEnabled']);
 
  /**
   * If enabled, Chrome uses a web service to help correct spelling errors. This
   * preference's value is a boolean, defaulting to `false`.
   */
- ChromeSetting get spellingServiceEnabled =&gt; _createChromeSetting(proxy['spellingServiceEnabled']);
+ ChromeSetting get spellingServiceEnabled =&gt; _createChromeSetting(jsProxy['spellingServiceEnabled']);
 
  /**
   * If enabled, Chrome offers to translate pages that aren't in a language you
   * read. This preference's value is a boolean, defaulting to `true`.
   */
- ChromeSetting get translationServiceEnabled =&gt; _createChromeSetting(proxy['translationServiceEnabled']);
+ ChromeSetting get translationServiceEnabled =&gt; _createChromeSetting(jsProxy['translationServiceEnabled']);
 }
 </pre>
 </div>
@@ -98,7 +98,7 @@ ServicesPrivacy();
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ServicesPrivacy.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ServicesPrivacy.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ServicesPrivacy.ServicesPrivacy.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -106,7 +106,7 @@ new <strong>ServicesPrivacy.fromProxy</strong>(JsObject proxy) <a class="anchor-
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ServicesPrivacy.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ServicesPrivacy.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -123,7 +123,7 @@ final <a href="../chrome.types/ChromeSetting.html">ChromeSetting</a>         <st
 <p>If enabled, Chrome uses a web service to help resolve navigation errors.
 This preference's value is a boolean, defaulting to <code>true</code>.</p>
 <pre class="source">
-ChromeSetting get alternateErrorPagesEnabled =&gt; _createChromeSetting(proxy['alternateErrorPagesEnabled']);
+ChromeSetting get alternateErrorPagesEnabled =&gt; _createChromeSetting(jsProxy['alternateErrorPagesEnabled']);
 </pre>
 </div>
 </div>
@@ -137,19 +137,19 @@ final <a href="../chrome.types/ChromeSetting.html">ChromeSetting</a>         <st
 <p>If enabled, Chrome offers to automatically fill in forms. This preference's
 value is a boolean, defaulting to <code>true</code>.</p>
 <pre class="source">
-ChromeSetting get autofillEnabled =&gt; _createChromeSetting(proxy['autofillEnabled']);
+ChromeSetting get autofillEnabled =&gt; _createChromeSetting(jsProxy['autofillEnabled']);
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to ServicesPrivacy.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to ServicesPrivacy.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -163,7 +163,7 @@ final <a href="../chrome.types/ChromeSetting.html">ChromeSetting</a>         <st
 <p>If enabled, Chrome does its best to protect you from phishing and malware.
 This preference's value is a boolean, defaulting to <code>true</code>.</p>
 <pre class="source">
-ChromeSetting get safeBrowsingEnabled =&gt; _createChromeSetting(proxy['safeBrowsingEnabled']);
+ChromeSetting get safeBrowsingEnabled =&gt; _createChromeSetting(jsProxy['safeBrowsingEnabled']);
 </pre>
 </div>
 </div>
@@ -179,7 +179,7 @@ search engine, which provides predictions of websites and searches that are
 likely completions of what you've typed so far. This preference's value is
 a boolean, defaulting to <code>true</code>.</p>
 <pre class="source">
-ChromeSetting get searchSuggestEnabled =&gt; _createChromeSetting(proxy['searchSuggestEnabled']);
+ChromeSetting get searchSuggestEnabled =&gt; _createChromeSetting(jsProxy['searchSuggestEnabled']);
 </pre>
 </div>
 </div>
@@ -193,7 +193,7 @@ final <a href="../chrome.types/ChromeSetting.html">ChromeSetting</a>         <st
 <p>If enabled, Chrome uses a web service to help correct spelling errors. This
 preference's value is a boolean, defaulting to <code>false</code>.</p>
 <pre class="source">
-ChromeSetting get spellingServiceEnabled =&gt; _createChromeSetting(proxy['spellingServiceEnabled']);
+ChromeSetting get spellingServiceEnabled =&gt; _createChromeSetting(jsProxy['spellingServiceEnabled']);
 </pre>
 </div>
 </div>
@@ -207,7 +207,7 @@ final <a href="../chrome.types/ChromeSetting.html">ChromeSetting</a>         <st
 <p>If enabled, Chrome offers to translate pages that aren't in a language you
 read. This preference's value is a boolean, defaulting to <code>true</code>.</p>
 <pre class="source">
-ChromeSetting get translationServiceEnabled =&gt; _createChromeSetting(proxy['translationServiceEnabled']);
+ChromeSetting get translationServiceEnabled =&gt; _createChromeSetting(jsProxy['translationServiceEnabled']);
 </pre>
 </div>
 </div>
@@ -220,7 +220,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to ServicesPrivacy.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -233,7 +233,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

@@ -35,23 +35,23 @@
 <p>The abstract superclass of objects that can hold <a class="crossref" href="../dart_js/JsObject.html">JsObject</a> proxies.</p>
 <pre class="source">
 class ChromeObject {
- final JsObject proxy;
+ final JsObject jsProxy;
 
  /**
   * Create a new instance of a `ChromeObject`, which creates and delegates to
   * a JsObject proxy.
   */
- ChromeObject() : proxy = new JsObject(context['Object']);
+ ChromeObject() : jsProxy = new JsObject(context['Object']);
 
  /**
   * Create a new instance of a `ChromeObject`, which delegates to the given
   * JsObject proxy.
   */
- ChromeObject.fromProxy(this.proxy);
+ ChromeObject.fromProxy(this.jsProxy);
 
- JsObject toJs() =&gt; proxy;
+ JsObject toJs() =&gt; jsProxy;
 
- String toString() =&gt; proxy.toString();
+ String toString() =&gt; jsProxy.toString();
 }
 </pre>
 </div>
@@ -68,34 +68,34 @@ new <strong>ChromeObject</strong>() <a class="anchor-link" href="#"
 <p>Create a new instance of a <code>ChromeObject</code>, which creates and delegates to
 a JsObject proxy.</p>
 <pre class="source">
-ChromeObject() : proxy = new JsObject(context['Object']);
+ChromeObject() : jsProxy = new JsObject(context['Object']);
 </pre>
 </div>
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ChromeObject.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ChromeObject.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ChromeObject.ChromeObject.fromProxy">#</a></h4>
 <div class="doc">
 <p>Create a new instance of a <code>ChromeObject</code>, which delegates to the given
 JsObject proxy.</p>
 <pre class="source">
-ChromeObject.fromProxy(this.proxy);
+ChromeObject.fromProxy(this.jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
-<div class="field"><h4 id="proxy">
+<div class="field"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to ChromeObject.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to ChromeObject.jsProxy">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -108,7 +108,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to ChromeObject.toJs">#</a></h4>
 <div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -121,7 +121,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

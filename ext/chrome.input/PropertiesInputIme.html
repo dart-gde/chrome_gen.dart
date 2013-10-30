@@ -43,44 +43,44 @@ class PropertiesInputIme extends ChromeObject {
    if (auxiliaryTextVisible != null) this.auxiliaryTextVisible = auxiliaryTextVisible;
    if (windowPosition != null) this.windowPosition = windowPosition;
  }
- PropertiesInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ PropertiesInputIme.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * True to show the Candidate window, false to hide it.
   */
- bool get visible =&gt; proxy['visible'];
- set visible(bool value) =&gt; proxy['visible'] = value;
+ bool get visible =&gt; jsProxy['visible'];
+ set visible(bool value) =&gt; jsProxy['visible'] = value;
 
  /**
   * True to show the cursor, false to hide it.
   */
- bool get cursorVisible =&gt; proxy['cursorVisible'];
- set cursorVisible(bool value) =&gt; proxy['cursorVisible'] = value;
+ bool get cursorVisible =&gt; jsProxy['cursorVisible'];
+ set cursorVisible(bool value) =&gt; jsProxy['cursorVisible'] = value;
 
  /**
   * True if the candidate window should be rendered vertical, false to make it
   * horizontal.
   */
- bool get vertical =&gt; proxy['vertical'];
- set vertical(bool value) =&gt; proxy['vertical'] = value;
+ bool get vertical =&gt; jsProxy['vertical'];
+ set vertical(bool value) =&gt; jsProxy['vertical'] = value;
 
  /**
   * The number of candidates to display per page.
   */
- int get pageSize =&gt; proxy['pageSize'];
- set pageSize(int value) =&gt; proxy['pageSize'] = value;
+ int get pageSize =&gt; jsProxy['pageSize'];
+ set pageSize(int value) =&gt; jsProxy['pageSize'] = value;
 
  /**
   * Text that is shown at the bottom of the candidate window.
   */
- String get auxiliaryText =&gt; proxy['auxiliaryText'];
- set auxiliaryText(String value) =&gt; proxy['auxiliaryText'] = value;
+ String get auxiliaryText =&gt; jsProxy['auxiliaryText'];
+ set auxiliaryText(String value) =&gt; jsProxy['auxiliaryText'] = value;
 
  /**
   * True to display the auxiliary text, false to hide it.
   */
- bool get auxiliaryTextVisible =&gt; proxy['auxiliaryTextVisible'];
- set auxiliaryTextVisible(bool value) =&gt; proxy['auxiliaryTextVisible'] = value;
+ bool get auxiliaryTextVisible =&gt; jsProxy['auxiliaryTextVisible'];
+ set auxiliaryTextVisible(bool value) =&gt; jsProxy['auxiliaryTextVisible'] = value;
 
  /**
   * Where to display the candidate window. If set to 'cursor', the window
@@ -88,8 +88,8 @@ class PropertiesInputIme extends ChromeObject {
   * beginning of the composition.
   * enum of `cursor`, `composition`
   */
- String get windowPosition =&gt; proxy['windowPosition'];
- set windowPosition(String value) =&gt; proxy['windowPosition'] = value;
+ String get windowPosition =&gt; jsProxy['windowPosition'];
+ set windowPosition(String value) =&gt; jsProxy['windowPosition'] = value;
 }
 </pre>
 </div>
@@ -122,7 +122,7 @@ PropertiesInputIme({bool visible, bool cursorVisible, bool vertical, int pageSiz
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>PropertiesInputIme.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>PropertiesInputIme.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to PropertiesInputIme.PropertiesInputIme.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -130,7 +130,7 @@ new <strong>PropertiesInputIme.fromProxy</strong>(JsObject proxy) <a class="anch
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-PropertiesInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
+PropertiesInputIme.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -146,10 +146,10 @@ String         <strong>auxiliaryText</strong> <a class="anchor-link"
         <div class="doc">
 <p>Text that is shown at the bottom of the candidate window.</p>
 <pre class="source">
-String get auxiliaryText =&gt; proxy['auxiliaryText'];
+String get auxiliaryText =&gt; jsProxy['auxiliaryText'];
 </pre>
 <pre class="source">
-set auxiliaryText(String value) =&gt; proxy['auxiliaryText'] = value;
+set auxiliaryText(String value) =&gt; jsProxy['auxiliaryText'] = value;
 </pre>
 </div>
 </div>
@@ -162,10 +162,10 @@ bool         <strong>auxiliaryTextVisible</strong> <a class="anchor-link"
         <div class="doc">
 <p>True to display the auxiliary text, false to hide it.</p>
 <pre class="source">
-bool get auxiliaryTextVisible =&gt; proxy['auxiliaryTextVisible'];
+bool get auxiliaryTextVisible =&gt; jsProxy['auxiliaryTextVisible'];
 </pre>
 <pre class="source">
-set auxiliaryTextVisible(bool value) =&gt; proxy['auxiliaryTextVisible'] = value;
+set auxiliaryTextVisible(bool value) =&gt; jsProxy['auxiliaryTextVisible'] = value;
 </pre>
 </div>
 </div>
@@ -178,10 +178,22 @@ bool         <strong>cursorVisible</strong> <a class="anchor-link"
         <div class="doc">
 <p>True to show the cursor, false to hide it.</p>
 <pre class="source">
-bool get cursorVisible =&gt; proxy['cursorVisible'];
+bool get cursorVisible =&gt; jsProxy['cursorVisible'];
 </pre>
 <pre class="source">
-set cursorVisible(bool value) =&gt; proxy['cursorVisible'] = value;
+set cursorVisible(bool value) =&gt; jsProxy['cursorVisible'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to PropertiesInputIme.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -194,22 +206,10 @@ int         <strong>pageSize</strong> <a class="anchor-link"
         <div class="doc">
 <p>The number of candidates to display per page.</p>
 <pre class="source">
-int get pageSize =&gt; proxy['pageSize'];
+int get pageSize =&gt; jsProxy['pageSize'];
 </pre>
 <pre class="source">
-set pageSize(int value) =&gt; proxy['pageSize'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to PropertiesInputIme.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set pageSize(int value) =&gt; jsProxy['pageSize'] = value;
 </pre>
 </div>
 </div>
@@ -223,10 +223,10 @@ bool         <strong>vertical</strong> <a class="anchor-link"
 <p>True if the candidate window should be rendered vertical, false to make it
 horizontal.</p>
 <pre class="source">
-bool get vertical =&gt; proxy['vertical'];
+bool get vertical =&gt; jsProxy['vertical'];
 </pre>
 <pre class="source">
-set vertical(bool value) =&gt; proxy['vertical'] = value;
+set vertical(bool value) =&gt; jsProxy['vertical'] = value;
 </pre>
 </div>
 </div>
@@ -239,10 +239,10 @@ bool         <strong>visible</strong> <a class="anchor-link"
         <div class="doc">
 <p>True to show the Candidate window, false to hide it.</p>
 <pre class="source">
-bool get visible =&gt; proxy['visible'];
+bool get visible =&gt; jsProxy['visible'];
 </pre>
 <pre class="source">
-set visible(bool value) =&gt; proxy['visible'] = value;
+set visible(bool value) =&gt; jsProxy['visible'] = value;
 </pre>
 </div>
 </div>
@@ -258,10 +258,10 @@ follows the cursor. If set to 'composition', the window is locked to the
 beginning of the composition.
 enum of <code>cursor</code>, <code>composition</code></p>
 <pre class="source">
-String get windowPosition =&gt; proxy['windowPosition'];
+String get windowPosition =&gt; jsProxy['windowPosition'];
 </pre>
 <pre class="source">
-set windowPosition(String value) =&gt; proxy['windowPosition'] = value;
+set windowPosition(String value) =&gt; jsProxy['windowPosition'] = value;
 </pre>
 </div>
 </div>
@@ -274,7 +274,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to PropertiesInputIme.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -287,7 +287,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

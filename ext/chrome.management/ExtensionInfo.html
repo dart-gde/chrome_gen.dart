@@ -55,94 +55,94 @@ class ExtensionInfo extends ChromeObject {
    if (hostPermissions != null) this.hostPermissions = hostPermissions;
    if (installType != null) this.installType = installType;
  }
- ExtensionInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ ExtensionInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The extension's unique identifier.
   */
- String get id =&gt; proxy['id'];
- set id(String value) =&gt; proxy['id'] = value;
+ String get id =&gt; jsProxy['id'];
+ set id(String value) =&gt; jsProxy['id'] = value;
 
  /**
   * The name of this extension, app, or theme.
   */
- String get name =&gt; proxy['name'];
- set name(String value) =&gt; proxy['name'] = value;
+ String get name =&gt; jsProxy['name'];
+ set name(String value) =&gt; jsProxy['name'] = value;
 
  /**
   * A short version of the name of this extension, app, or theme.
   */
- String get shortName =&gt; proxy['shortName'];
- set shortName(String value) =&gt; proxy['shortName'] = value;
+ String get shortName =&gt; jsProxy['shortName'];
+ set shortName(String value) =&gt; jsProxy['shortName'] = value;
 
  /**
   * The description of this extension, app, or theme.
   */
- String get description =&gt; proxy['description'];
- set description(String value) =&gt; proxy['description'] = value;
+ String get description =&gt; jsProxy['description'];
+ set description(String value) =&gt; jsProxy['description'] = value;
 
  /**
   * The [version](manifest/version.html) of this extension, app, or theme.
   */
- String get version =&gt; proxy['version'];
- set version(String value) =&gt; proxy['version'] = value;
+ String get version =&gt; jsProxy['version'];
+ set version(String value) =&gt; jsProxy['version'] = value;
 
  /**
   * Whether this extension can be disabled or uninstalled by the user.
   */
- bool get mayDisable =&gt; proxy['mayDisable'];
- set mayDisable(bool value) =&gt; proxy['mayDisable'] = value;
+ bool get mayDisable =&gt; jsProxy['mayDisable'];
+ set mayDisable(bool value) =&gt; jsProxy['mayDisable'] = value;
 
  /**
   * Whether it is currently enabled or disabled.
   */
- bool get enabled =&gt; proxy['enabled'];
- set enabled(bool value) =&gt; proxy['enabled'] = value;
+ bool get enabled =&gt; jsProxy['enabled'];
+ set enabled(bool value) =&gt; jsProxy['enabled'] = value;
 
  /**
   * A reason the item is disabled.
   * enum of `unknown`, `permissions_increase`
   */
- String get disabledReason =&gt; proxy['disabledReason'];
- set disabledReason(String value) =&gt; proxy['disabledReason'] = value;
+ String get disabledReason =&gt; jsProxy['disabledReason'];
+ set disabledReason(String value) =&gt; jsProxy['disabledReason'] = value;
 
  /**
   * The type of this extension, app, or theme.
   * enum of `extension`, `hosted_app`, `packaged_app`, `legacy_packaged_app`,
   * `theme`
   */
- String get type =&gt; proxy['type'];
- set type(String value) =&gt; proxy['type'] = value;
+ String get type =&gt; jsProxy['type'];
+ set type(String value) =&gt; jsProxy['type'] = value;
 
  /**
   * The launch url (only present for apps).
   */
- String get appLaunchUrl =&gt; proxy['appLaunchUrl'];
- set appLaunchUrl(String value) =&gt; proxy['appLaunchUrl'] = value;
+ String get appLaunchUrl =&gt; jsProxy['appLaunchUrl'];
+ set appLaunchUrl(String value) =&gt; jsProxy['appLaunchUrl'] = value;
 
  /**
   * The URL of the homepage of this extension, app, or theme.
   */
- String get homepageUrl =&gt; proxy['homepageUrl'];
- set homepageUrl(String value) =&gt; proxy['homepageUrl'] = value;
+ String get homepageUrl =&gt; jsProxy['homepageUrl'];
+ set homepageUrl(String value) =&gt; jsProxy['homepageUrl'] = value;
 
  /**
   * The update URL of this extension, app, or theme.
   */
- String get updateUrl =&gt; proxy['updateUrl'];
- set updateUrl(String value) =&gt; proxy['updateUrl'] = value;
+ String get updateUrl =&gt; jsProxy['updateUrl'];
+ set updateUrl(String value) =&gt; jsProxy['updateUrl'] = value;
 
  /**
   * Whether the extension, app, or theme declares that it supports offline.
   */
- bool get offlineEnabled =&gt; proxy['offlineEnabled'];
- set offlineEnabled(bool value) =&gt; proxy['offlineEnabled'] = value;
+ bool get offlineEnabled =&gt; jsProxy['offlineEnabled'];
+ set offlineEnabled(bool value) =&gt; jsProxy['offlineEnabled'] = value;
 
  /**
   * The url for the item's options page, if it has one.
   */
- String get optionsUrl =&gt; proxy['optionsUrl'];
- set optionsUrl(String value) =&gt; proxy['optionsUrl'] = value;
+ String get optionsUrl =&gt; jsProxy['optionsUrl'];
+ set optionsUrl(String value) =&gt; jsProxy['optionsUrl'] = value;
 
  /**
   * A list of icon information. Note that this just reflects what was declared
@@ -151,20 +151,20 @@ class ExtensionInfo extends ChromeObject {
   * height attributes on img tags referencing these images. See the [manifest
   * documentation on icons](manifest/icons.html) for more details.
   */
- List&lt;IconInfo&gt; get icons =&gt; listify(proxy['icons'], _createIconInfo);
- set icons(List&lt;IconInfo&gt; value) =&gt; proxy['icons'] = jsify(value);
+ List&lt;IconInfo&gt; get icons =&gt; listify(jsProxy['icons'], _createIconInfo);
+ set icons(List&lt;IconInfo&gt; value) =&gt; jsProxy['icons'] = jsify(value);
 
  /**
   * Returns a list of API based permissions.
   */
- List&lt;String&gt; get permissions =&gt; listify(proxy['permissions']);
- set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = jsify(value);
+ List&lt;String&gt; get permissions =&gt; listify(jsProxy['permissions']);
+ set permissions(List&lt;String&gt; value) =&gt; jsProxy['permissions'] = jsify(value);
 
  /**
   * Returns a list of host based permissions.
   */
- List&lt;String&gt; get hostPermissions =&gt; listify(proxy['hostPermissions']);
- set hostPermissions(List&lt;String&gt; value) =&gt; proxy['hostPermissions'] = jsify(value);
+ List&lt;String&gt; get hostPermissions =&gt; listify(jsProxy['hostPermissions']);
+ set hostPermissions(List&lt;String&gt; value) =&gt; jsProxy['hostPermissions'] = jsify(value);
 
  /**
   * How the extension was installed. One of&lt;br&gt;[admin]: The extension was
@@ -175,8 +175,8 @@ class ExtensionInfo extends ChromeObject {
   * installed by other means.
   * enum of `admin`, `development`, `normal`, `sideload`, `other`
   */
- String get installType =&gt; proxy['installType'];
- set installType(String value) =&gt; proxy['installType'] = value;
+ String get installType =&gt; jsProxy['installType'];
+ set installType(String value) =&gt; jsProxy['installType'] = value;
 }
 </pre>
 </div>
@@ -220,7 +220,7 @@ ExtensionInfo({String id, String name, String shortName, String description, Str
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ExtensionInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ExtensionInfo.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ExtensionInfo.ExtensionInfo.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -228,7 +228,7 @@ new <strong>ExtensionInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-li
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ExtensionInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ExtensionInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -244,10 +244,10 @@ String         <strong>appLaunchUrl</strong> <a class="anchor-link"
         <div class="doc">
 <p>The launch url (only present for apps).</p>
 <pre class="source">
-String get appLaunchUrl =&gt; proxy['appLaunchUrl'];
+String get appLaunchUrl =&gt; jsProxy['appLaunchUrl'];
 </pre>
 <pre class="source">
-set appLaunchUrl(String value) =&gt; proxy['appLaunchUrl'] = value;
+set appLaunchUrl(String value) =&gt; jsProxy['appLaunchUrl'] = value;
 </pre>
 </div>
 </div>
@@ -260,10 +260,10 @@ String         <strong>description</strong> <a class="anchor-link"
         <div class="doc">
 <p>The description of this extension, app, or theme.</p>
 <pre class="source">
-String get description =&gt; proxy['description'];
+String get description =&gt; jsProxy['description'];
 </pre>
 <pre class="source">
-set description(String value) =&gt; proxy['description'] = value;
+set description(String value) =&gt; jsProxy['description'] = value;
 </pre>
 </div>
 </div>
@@ -277,10 +277,10 @@ String         <strong>disabledReason</strong> <a class="anchor-link"
 <p>A reason the item is disabled.
 enum of <code>unknown</code>, <code>permissions_increase</code></p>
 <pre class="source">
-String get disabledReason =&gt; proxy['disabledReason'];
+String get disabledReason =&gt; jsProxy['disabledReason'];
 </pre>
 <pre class="source">
-set disabledReason(String value) =&gt; proxy['disabledReason'] = value;
+set disabledReason(String value) =&gt; jsProxy['disabledReason'] = value;
 </pre>
 </div>
 </div>
@@ -293,10 +293,10 @@ bool         <strong>enabled</strong> <a class="anchor-link"
         <div class="doc">
 <p>Whether it is currently enabled or disabled.</p>
 <pre class="source">
-bool get enabled =&gt; proxy['enabled'];
+bool get enabled =&gt; jsProxy['enabled'];
 </pre>
 <pre class="source">
-set enabled(bool value) =&gt; proxy['enabled'] = value;
+set enabled(bool value) =&gt; jsProxy['enabled'] = value;
 </pre>
 </div>
 </div>
@@ -309,10 +309,10 @@ String         <strong>homepageUrl</strong> <a class="anchor-link"
         <div class="doc">
 <p>The URL of the homepage of this extension, app, or theme.</p>
 <pre class="source">
-String get homepageUrl =&gt; proxy['homepageUrl'];
+String get homepageUrl =&gt; jsProxy['homepageUrl'];
 </pre>
 <pre class="source">
-set homepageUrl(String value) =&gt; proxy['homepageUrl'] = value;
+set homepageUrl(String value) =&gt; jsProxy['homepageUrl'] = value;
 </pre>
 </div>
 </div>
@@ -325,10 +325,10 @@ List&lt;String&gt;         <strong>hostPermissions</strong> <a class="anchor-lin
         <div class="doc">
 <p>Returns a list of host based permissions.</p>
 <pre class="source">
-List&lt;String&gt; get hostPermissions =&gt; listify(proxy['hostPermissions']);
+List&lt;String&gt; get hostPermissions =&gt; listify(jsProxy['hostPermissions']);
 </pre>
 <pre class="source">
-set hostPermissions(List&lt;String&gt; value) =&gt; proxy['hostPermissions'] = jsify(value);
+set hostPermissions(List&lt;String&gt; value) =&gt; jsProxy['hostPermissions'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -345,10 +345,10 @@ than what was declared, so you might consider using explicit width and
 height attributes on img tags referencing these images. See the <a href="manifest/icons.html">manifest
 documentation on icons</a> for more details.</p>
 <pre class="source">
-List&lt;IconInfo&gt; get icons =&gt; listify(proxy['icons'], _createIconInfo);
+List&lt;IconInfo&gt; get icons =&gt; listify(jsProxy['icons'], _createIconInfo);
 </pre>
 <pre class="source">
-set icons(List&lt;IconInfo&gt; value) =&gt; proxy['icons'] = jsify(value);
+set icons(List&lt;IconInfo&gt; value) =&gt; jsProxy['icons'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -361,10 +361,10 @@ String         <strong>id</strong> <a class="anchor-link"
         <div class="doc">
 <p>The extension's unique identifier.</p>
 <pre class="source">
-String get id =&gt; proxy['id'];
+String get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(String value) =&gt; proxy['id'] = value;
+set id(String value) =&gt; jsProxy['id'] = value;
 </pre>
 </div>
 </div>
@@ -383,10 +383,22 @@ installed by other software on the machine,&lt;br><code>other</code>: The extens
 installed by other means.
 enum of <code>admin</code>, <code>development</code>, <code>normal</code>, <code>sideload</code>, <code>other</code></p>
 <pre class="source">
-String get installType =&gt; proxy['installType'];
+String get installType =&gt; jsProxy['installType'];
 </pre>
 <pre class="source">
-set installType(String value) =&gt; proxy['installType'] = value;
+set installType(String value) =&gt; jsProxy['installType'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to ExtensionInfo.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -399,10 +411,10 @@ bool         <strong>mayDisable</strong> <a class="anchor-link"
         <div class="doc">
 <p>Whether this extension can be disabled or uninstalled by the user.</p>
 <pre class="source">
-bool get mayDisable =&gt; proxy['mayDisable'];
+bool get mayDisable =&gt; jsProxy['mayDisable'];
 </pre>
 <pre class="source">
-set mayDisable(bool value) =&gt; proxy['mayDisable'] = value;
+set mayDisable(bool value) =&gt; jsProxy['mayDisable'] = value;
 </pre>
 </div>
 </div>
@@ -415,10 +427,10 @@ String         <strong>name</strong> <a class="anchor-link"
         <div class="doc">
 <p>The name of this extension, app, or theme.</p>
 <pre class="source">
-String get name =&gt; proxy['name'];
+String get name =&gt; jsProxy['name'];
 </pre>
 <pre class="source">
-set name(String value) =&gt; proxy['name'] = value;
+set name(String value) =&gt; jsProxy['name'] = value;
 </pre>
 </div>
 </div>
@@ -431,10 +443,10 @@ bool         <strong>offlineEnabled</strong> <a class="anchor-link"
         <div class="doc">
 <p>Whether the extension, app, or theme declares that it supports offline.</p>
 <pre class="source">
-bool get offlineEnabled =&gt; proxy['offlineEnabled'];
+bool get offlineEnabled =&gt; jsProxy['offlineEnabled'];
 </pre>
 <pre class="source">
-set offlineEnabled(bool value) =&gt; proxy['offlineEnabled'] = value;
+set offlineEnabled(bool value) =&gt; jsProxy['offlineEnabled'] = value;
 </pre>
 </div>
 </div>
@@ -447,10 +459,10 @@ String         <strong>optionsUrl</strong> <a class="anchor-link"
         <div class="doc">
 <p>The url for the item's options page, if it has one.</p>
 <pre class="source">
-String get optionsUrl =&gt; proxy['optionsUrl'];
+String get optionsUrl =&gt; jsProxy['optionsUrl'];
 </pre>
 <pre class="source">
-set optionsUrl(String value) =&gt; proxy['optionsUrl'] = value;
+set optionsUrl(String value) =&gt; jsProxy['optionsUrl'] = value;
 </pre>
 </div>
 </div>
@@ -463,22 +475,10 @@ List&lt;String&gt;         <strong>permissions</strong> <a class="anchor-link"
         <div class="doc">
 <p>Returns a list of API based permissions.</p>
 <pre class="source">
-List&lt;String&gt; get permissions =&gt; listify(proxy['permissions']);
+List&lt;String&gt; get permissions =&gt; listify(jsProxy['permissions']);
 </pre>
 <pre class="source">
-set permissions(List&lt;String&gt; value) =&gt; proxy['permissions'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to ExtensionInfo.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set permissions(List&lt;String&gt; value) =&gt; jsProxy['permissions'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -491,10 +491,10 @@ String         <strong>shortName</strong> <a class="anchor-link"
         <div class="doc">
 <p>A short version of the name of this extension, app, or theme.</p>
 <pre class="source">
-String get shortName =&gt; proxy['shortName'];
+String get shortName =&gt; jsProxy['shortName'];
 </pre>
 <pre class="source">
-set shortName(String value) =&gt; proxy['shortName'] = value;
+set shortName(String value) =&gt; jsProxy['shortName'] = value;
 </pre>
 </div>
 </div>
@@ -509,10 +509,10 @@ String         <strong>type</strong> <a class="anchor-link"
 enum of <code>extension</code>, <code>hosted_app</code>, <code>packaged_app</code>, <code>legacy_packaged_app</code>,
 <code>theme</code></p>
 <pre class="source">
-String get type =&gt; proxy['type'];
+String get type =&gt; jsProxy['type'];
 </pre>
 <pre class="source">
-set type(String value) =&gt; proxy['type'] = value;
+set type(String value) =&gt; jsProxy['type'] = value;
 </pre>
 </div>
 </div>
@@ -525,10 +525,10 @@ String         <strong>updateUrl</strong> <a class="anchor-link"
         <div class="doc">
 <p>The update URL of this extension, app, or theme.</p>
 <pre class="source">
-String get updateUrl =&gt; proxy['updateUrl'];
+String get updateUrl =&gt; jsProxy['updateUrl'];
 </pre>
 <pre class="source">
-set updateUrl(String value) =&gt; proxy['updateUrl'] = value;
+set updateUrl(String value) =&gt; jsProxy['updateUrl'] = value;
 </pre>
 </div>
 </div>
@@ -541,10 +541,10 @@ String         <strong>version</strong> <a class="anchor-link"
         <div class="doc">
 <p>The <a href="manifest/version.html">version</a> of this extension, app, or theme.</p>
 <pre class="source">
-String get version =&gt; proxy['version'];
+String get version =&gt; jsProxy['version'];
 </pre>
 <pre class="source">
-set version(String value) =&gt; proxy['version'] = value;
+set version(String value) =&gt; jsProxy['version'] = value;
 </pre>
 </div>
 </div>
@@ -557,7 +557,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to ExtensionInfo.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -570,7 +570,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

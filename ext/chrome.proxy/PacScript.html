@@ -41,26 +41,26 @@ class PacScript extends ChromeObject {
    if (data != null) this.data = data;
    if (mandatory != null) this.mandatory = mandatory;
  }
- PacScript.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ PacScript.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * URL of the PAC file to be used.
   */
- String get url =&gt; this.proxy['url'];
- set url(String value) =&gt; this.proxy['url'] = value;
+ String get url =&gt; this.jsProxy['url'];
+ set url(String value) =&gt; this.jsProxy['url'] = value;
 
  /**
   * A PAC script.
   */
- String get data =&gt; this.proxy['data'];
- set data(String value) =&gt; this.proxy['data'] = value;
+ String get data =&gt; this.jsProxy['data'];
+ set data(String value) =&gt; this.jsProxy['data'] = value;
 
  /**
   * If true, an invalid PAC script will prevent the network stack from falling
   * back to direct connections. Defaults to false.
   */
- bool get mandatory =&gt; this.proxy['mandatory'];
- set mandatory(bool value) =&gt; this.proxy['mandatory'] = value;
+ bool get mandatory =&gt; this.jsProxy['mandatory'];
+ set mandatory(bool value) =&gt; this.jsProxy['mandatory'] = value;
 }
 </pre>
 </div>
@@ -89,7 +89,7 @@ PacScript({String url, String data, bool mandatory}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>PacScript.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>PacScript.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to PacScript.PacScript.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -97,7 +97,7 @@ new <strong>PacScript.fromProxy</strong>(JsObject proxy) <a class="anchor-link" 
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-PacScript.fromProxy(JsObject proxy): super.fromProxy(proxy);
+PacScript.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -113,10 +113,22 @@ String         <strong>data</strong> <a class="anchor-link"
         <div class="doc">
 <p>A PAC script.</p>
 <pre class="source">
-String get data =&gt; this.proxy['data'];
+String get data =&gt; this.jsProxy['data'];
 </pre>
 <pre class="source">
-set data(String value) =&gt; this.proxy['data'] = value;
+set data(String value) =&gt; this.jsProxy['data'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to PacScript.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -130,22 +142,10 @@ bool         <strong>mandatory</strong> <a class="anchor-link"
 <p>If true, an invalid PAC script will prevent the network stack from falling
 back to direct connections. Defaults to false.</p>
 <pre class="source">
-bool get mandatory =&gt; this.proxy['mandatory'];
+bool get mandatory =&gt; this.jsProxy['mandatory'];
 </pre>
 <pre class="source">
-set mandatory(bool value) =&gt; this.proxy['mandatory'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to PacScript.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set mandatory(bool value) =&gt; this.jsProxy['mandatory'] = value;
 </pre>
 </div>
 </div>
@@ -158,10 +158,10 @@ String         <strong>url</strong> <a class="anchor-link"
         <div class="doc">
 <p>URL of the PAC file to be used.</p>
 <pre class="source">
-String get url =&gt; this.proxy['url'];
+String get url =&gt; this.jsProxy['url'];
 </pre>
 <pre class="source">
-set url(String value) =&gt; this.proxy['url'] = value;
+set url(String value) =&gt; this.jsProxy['url'] = value;
 </pre>
 </div>
 </div>
@@ -174,7 +174,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to PacScript.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -187,7 +187,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

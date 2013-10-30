@@ -38,20 +38,20 @@ class Device extends ChromeObject {
    if (info != null) this.info = info;
    if (sessions != null) this.sessions = sessions;
  }
- Device.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Device.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Represents all information about a foreign device.
   */
- String get info =&gt; proxy['info'];
- set info(String value) =&gt; proxy['info'] = value;
+ String get info =&gt; jsProxy['info'];
+ set info(String value) =&gt; jsProxy['info'] = value;
 
  /**
   * A list of open window sessions for the foreign device, sorted from most
   * recently to least recently modified session.
   */
- List&lt;Session&gt; get sessions =&gt; listify(proxy['sessions'], _createSession);
- set sessions(List&lt;Session&gt; value) =&gt; proxy['sessions'] = jsify(value);
+ List&lt;Session&gt; get sessions =&gt; listify(jsProxy['sessions'], _createSession);
+ set sessions(List&lt;Session&gt; value) =&gt; jsProxy['sessions'] = jsify(value);
 }
 </pre>
 </div>
@@ -79,7 +79,7 @@ Device({String info, List&lt;Session&gt; sessions}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Device.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Device.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Device.Device.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -87,7 +87,7 @@ new <strong>Device.fromProxy</strong>(JsObject proxy) <a class="anchor-link" hre
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Device.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Device.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -103,22 +103,22 @@ String         <strong>info</strong> <a class="anchor-link"
         <div class="doc">
 <p>Represents all information about a foreign device.</p>
 <pre class="source">
-String get info =&gt; proxy['info'];
+String get info =&gt; jsProxy['info'];
 </pre>
 <pre class="source">
-set info(String value) =&gt; proxy['info'] = value;
+set info(String value) =&gt; jsProxy['info'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Device.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Device.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -132,10 +132,10 @@ List&lt;<a href="../chrome.sessions/Session.html">Session</a>&gt;         <stron
 <p>A list of open window sessions for the foreign device, sorted from most
 recently to least recently modified session.</p>
 <pre class="source">
-List&lt;Session&gt; get sessions =&gt; listify(proxy['sessions'], _createSession);
+List&lt;Session&gt; get sessions =&gt; listify(jsProxy['sessions'], _createSession);
 </pre>
 <pre class="source">
-set sessions(List&lt;Session&gt; value) =&gt; proxy['sessions'] = jsify(value);
+set sessions(List&lt;Session&gt; value) =&gt; jsProxy['sessions'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -148,7 +148,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Device.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -161,7 +161,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

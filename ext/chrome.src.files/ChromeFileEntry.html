@@ -35,7 +35,7 @@
 <p>A convience class for reading and writing file content.</p>
 <pre class="source">
 class ChromeFileEntry extends CrFileEntry {
- ChromeFileEntry.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+ ChromeFileEntry.fromProxy(JsObject jsProxy) : super.fromProxy(jsProxy);
 
  /**
   * Return the contents of the file as a String.
@@ -51,7 +51,7 @@ class ChromeFileEntry extends CrFileEntry {
      reader['onerror'] = (var domError) {
        completer.completeError(domError);
      };
-     reader.callMethod('readAsText', [(file as CrFile).proxy]);
+     reader.callMethod('readAsText', [(file as CrFile).jsProxy]);
 
      return completer.future;
    });
@@ -72,7 +72,7 @@ class ChromeFileEntry extends CrFileEntry {
      reader['onerror'] = (var domError) {
        completer.completeError(domError);
      };
-     reader.callMethod('readAsArrayBuffer', [(file as CrFile).proxy]);
+     reader.callMethod('readAsArrayBuffer', [(file as CrFile).jsProxy]);
 
      return completer.future;
    });
@@ -83,7 +83,7 @@ class ChromeFileEntry extends CrFileEntry {
   */
  Future writeText(String text) {
    return _createWriter().then((ChromeObject _writer) {
-     JsObject writer = _writer.proxy;
+     JsObject writer = _writer.jsProxy;
 
      Completer&lt;FileEntry&gt; completer = new Completer();
 
@@ -110,15 +110,15 @@ class ChromeFileEntry extends CrFileEntry {
   */
  Future writeBytes(ArrayBuffer data) {
    return _createWriter().then((ChromeObject _writer) {
-     JsObject writer = _writer.proxy;
+     JsObject writer = _writer.jsProxy;
 
      Completer&lt;FileEntry&gt; completer = new Completer();
 
      // TODO: work around a bug on jsify, where toString() is called on
-     // data.proxy, inserting '1, 2, 3, 4, ...' into the blob instead of a list
+     // data.jsProxy, inserting '1, 2, 3, 4, ...' into the blob instead of a list
      // of ints
      JsObject args = new JsObject.jsify([null]);
-     args[0] = data.proxy;
+     args[0] = data.jsProxy;
      JsObject blob = new JsObject(context['Blob'], [args]);
 
      writer['onwrite'] = (var event) {
@@ -137,7 +137,7 @@ class ChromeFileEntry extends CrFileEntry {
 
  Future&lt;ChromeObject&gt; _createWriter() {
    var completer = new _ChromeCompleterWithError&lt;ChromeObject&gt;.oneArg((obj) =&gt; new ChromeObject.fromProxy(obj));
-   proxy.callMethod('createWriter', [completer.callback, completer.errorCallback]);
+   jsProxy.callMethod('createWriter', [completer.callback, completer.errorCallback]);
    return completer.future;
  }
 }
@@ -150,7 +150,7 @@ class ChromeFileEntry extends CrFileEntry {
 <h3>Constructors</h3>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ChromeFileEntry.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ChromeFileEntry.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ChromeFileEntry.ChromeFileEntry.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -158,7 +158,7 @@ new <strong>ChromeFileEntry.fromProxy</strong>(JsObject proxy) <a class="anchor-
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ChromeFileEntry.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+ChromeFileEntry.fromProxy(JsObject jsProxy) : super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -207,7 +207,7 @@ there are no distribution guarantees.</p>
 equality operator as well to maintain consistency.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-int get hashCode =&gt; proxy.hashCode;
+int get hashCode =&gt; jsProxy.hashCode;
 </pre>
 </div>
 </div>
@@ -235,6 +235,18 @@ final bool isFile
 </pre>
 </div>
 </div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to ChromeFileEntry.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
+</pre>
+</div>
+</div>
 <div class="field inherited"><h4 id="name">
 <button class="show-code">Code</button>
 final String         <strong>name</strong> <a class="anchor-link"
@@ -244,18 +256,6 @@ final String         <strong>name</strong> <a class="anchor-link"
         <div class="inherited-from">inherited from Entry </div><div class="doc">
 <pre class="source">
 final String name
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to ChromeFileEntry.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
 </pre>
 </div>
 </div>
@@ -305,7 +305,7 @@ the <a class="crossref" href="../chrome.src.files/CrFileEntry.html#hashCode">has
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
 bool operator==(Object other) =&gt;
-   other is CrDirectoryEntry &amp;&amp; other.proxy == proxy;
+   other is CrDirectoryEntry &amp;&amp; other.jsProxy == jsProxy;
 </pre>
 </div>
 </div>
@@ -320,7 +320,7 @@ Future&lt;Entry&gt; <strong>copyTo</strong>(DirectoryEntry parent, {String name}
 <pre class="source">
 Future&lt;Entry&gt; copyTo(DirectoryEntry parent, {String name}) {
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
- proxy.callMethod('copyTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('copyTo', [(parent as ChromeObject).jsProxy, name, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -348,7 +348,7 @@ Future&lt;File&gt; <strong>file</strong>() <a class="anchor-link" href="#file"
 <pre class="source">
 Future&lt;File&gt; file() {
  var completer = new _ChromeCompleterWithError&lt;File&gt;.oneArg((obj) =&gt; new CrFile.fromProxy(obj));
- proxy.callMethod('file', [completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('file', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -362,7 +362,7 @@ Future&lt;Metadata&gt; <strong>getMetadata</strong>() <a class="anchor-link" hre
 <pre class="source">
 Future&lt;Metadata&gt; getMetadata() {
  var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.oneArg((obj) =&gt; new CrMetadata.fromProxy(obj));
- proxy.callMethod('getMetadata', [completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getMetadata', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -376,7 +376,7 @@ Future&lt;Entry&gt; <strong>getParent</strong>() <a class="anchor-link" href="#g
 <pre class="source">
 Future&lt;Entry&gt; getParent() {
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
- proxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getParent', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -390,7 +390,7 @@ Future&lt;Entry&gt; <strong>moveTo</strong>(DirectoryEntry parent, {String name}
 <pre class="source">
 Future&lt;Entry&gt; moveTo(DirectoryEntry parent, {String name}) {
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrDirectoryEntry.fromProxy(obj));
- proxy.callMethod('moveTo', [(parent as ChromeObject).proxy, name, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('moveTo', [(parent as ChromeObject).jsProxy, name, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -440,7 +440,7 @@ Future&lt;ArrayBuffer&gt; readBytes() {
    reader['onerror'] = (var domError) {
      completer.completeError(domError);
    };
-   reader.callMethod('readAsArrayBuffer', [(file as CrFile).proxy]);
+   reader.callMethod('readAsArrayBuffer', [(file as CrFile).jsProxy]);
 
    return completer.future;
  });
@@ -466,7 +466,7 @@ Future&lt;String&gt; readText() {
    reader['onerror'] = (var domError) {
      completer.completeError(domError);
    };
-   reader.callMethod('readAsText', [(file as CrFile).proxy]);
+   reader.callMethod('readAsText', [(file as CrFile).jsProxy]);
 
    return completer.future;
  });
@@ -482,7 +482,7 @@ Future <strong>remove</strong>() <a class="anchor-link" href="#remove"
 <pre class="source">
 Future remove() {
  var completer = new _ChromeCompleterWithError&lt;Metadata&gt;.noArgs();
- proxy.callMethod('remove', [completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('remove', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -494,7 +494,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to ChromeFileEntry.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -517,7 +517,7 @@ String <strong>toUrl</strong>() <a class="anchor-link" href="#toUrl"
               title="Permalink to ChromeFileEntry.toUrl">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrEntry.html">CrEntry</a> </div><div class="doc">
 <pre class="source">
-String toUrl() =&gt; this.proxy.callMethod('toURL');
+String toUrl() =&gt; this.jsProxy.callMethod('toURL');
 </pre>
 </div>
 </div>
@@ -530,15 +530,15 @@ Future <strong>writeBytes</strong>(<a href="../chrome.src.common_exp/ArrayBuffer
 <pre class="source">
 Future writeBytes(ArrayBuffer data) {
  return _createWriter().then((ChromeObject _writer) {
-   JsObject writer = _writer.proxy;
+   JsObject writer = _writer.jsProxy;
 
    Completer&lt;FileEntry&gt; completer = new Completer();
 
    // TODO: work around a bug on jsify, where toString() is called on
-   // data.proxy, inserting '1, 2, 3, 4, ...' into the blob instead of a list
+   // data.jsProxy, inserting '1, 2, 3, 4, ...' into the blob instead of a list
    // of ints
    JsObject args = new JsObject.jsify([null]);
-   args[0] = data.proxy;
+   args[0] = data.jsProxy;
    JsObject blob = new JsObject(context['Blob'], [args]);
 
    writer['onwrite'] = (var event) {
@@ -566,7 +566,7 @@ Future <strong>writeText</strong>(String text) <a class="anchor-link" href="#wri
 <pre class="source">
 Future writeText(String text) {
  return _createWriter().then((ChromeObject _writer) {
-   JsObject writer = _writer.proxy;
+   JsObject writer = _writer.jsProxy;
 
    Completer&lt;FileEntry&gt; completer = new Completer();
 

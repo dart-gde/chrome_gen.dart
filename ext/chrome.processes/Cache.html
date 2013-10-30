@@ -40,19 +40,19 @@ class Cache extends ChromeObject {
    if (size != null) this.size = size;
    if (liveSize != null) this.liveSize = liveSize;
  }
- Cache.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Cache.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The size of the cache, in bytes.
   */
- dynamic get size =&gt; proxy['size'];
- set size(var value) =&gt; proxy['size'] = jsify(value);
+ dynamic get size =&gt; jsProxy['size'];
+ set size(var value) =&gt; jsProxy['size'] = jsify(value);
 
  /**
   * The part of the cache that is utilized, in bytes.
   */
- dynamic get liveSize =&gt; proxy['liveSize'];
- set liveSize(var value) =&gt; proxy['liveSize'] = jsify(value);
+ dynamic get liveSize =&gt; jsProxy['liveSize'];
+ set liveSize(var value) =&gt; jsProxy['liveSize'] = jsify(value);
 }
 </pre>
 </div>
@@ -80,7 +80,7 @@ Cache({var size, var liveSize}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Cache.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Cache.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Cache.Cache.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -88,13 +88,25 @@ new <strong>Cache.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Cache.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Cache.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Cache.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="liveSize">
 <button class="show-code">Code</button>
 var         <strong>liveSize</strong> <a class="anchor-link"
@@ -104,22 +116,10 @@ var         <strong>liveSize</strong> <a class="anchor-link"
         <div class="doc">
 <p>The part of the cache that is utilized, in bytes.</p>
 <pre class="source">
-dynamic get liveSize =&gt; proxy['liveSize'];
+dynamic get liveSize =&gt; jsProxy['liveSize'];
 </pre>
 <pre class="source">
-set liveSize(var value) =&gt; proxy['liveSize'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Cache.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set liveSize(var value) =&gt; jsProxy['liveSize'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -132,10 +132,10 @@ var         <strong>size</strong> <a class="anchor-link"
         <div class="doc">
 <p>The size of the cache, in bytes.</p>
 <pre class="source">
-dynamic get size =&gt; proxy['size'];
+dynamic get size =&gt; jsProxy['size'];
 </pre>
 <pre class="source">
-set size(var value) =&gt; proxy['size'] = jsify(value);
+set size(var value) =&gt; jsProxy['size'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -148,7 +148,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Cache.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -161,7 +161,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

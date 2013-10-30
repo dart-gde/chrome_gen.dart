@@ -42,37 +42,37 @@ class Rule extends ChromeObject {
    if (actions != null) this.actions = actions;
    if (priority != null) this.priority = priority;
  }
- Rule.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Rule.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Optional identifier that allows referencing this rule.
   */
- String get id =&gt; proxy['id'];
- set id(String value) =&gt; proxy['id'] = value;
+ String get id =&gt; jsProxy['id'];
+ set id(String value) =&gt; jsProxy['id'] = value;
 
  /**
   * Tags can be used to annotate rules and perform operations on sets of rules.
   */
- List&lt;String&gt; get tags =&gt; listify(proxy['tags']);
- set tags(List&lt;String&gt; value) =&gt; proxy['tags'] = jsify(value);
+ List&lt;String&gt; get tags =&gt; listify(jsProxy['tags']);
+ set tags(List&lt;String&gt; value) =&gt; jsProxy['tags'] = jsify(value);
 
  /**
   * List of conditions that can trigger the actions.
   */
- List&lt;dynamic&gt; get conditions =&gt; listify(proxy['conditions']);
- set conditions(List&lt;dynamic&gt; value) =&gt; proxy['conditions'] = jsify(value);
+ List&lt;dynamic&gt; get conditions =&gt; listify(jsProxy['conditions']);
+ set conditions(List&lt;dynamic&gt; value) =&gt; jsProxy['conditions'] = jsify(value);
 
  /**
   * List of actions that are triggered if one of the condtions is fulfilled.
   */
- List&lt;dynamic&gt; get actions =&gt; listify(proxy['actions']);
- set actions(List&lt;dynamic&gt; value) =&gt; proxy['actions'] = jsify(value);
+ List&lt;dynamic&gt; get actions =&gt; listify(jsProxy['actions']);
+ set actions(List&lt;dynamic&gt; value) =&gt; jsProxy['actions'] = jsify(value);
 
  /**
   * Optional priority of this rule. Defaults to 100.
   */
- int get priority =&gt; proxy['priority'];
- set priority(int value) =&gt; proxy['priority'] = value;
+ int get priority =&gt; jsProxy['priority'];
+ set priority(int value) =&gt; jsProxy['priority'] = value;
 }
 </pre>
 </div>
@@ -103,7 +103,7 @@ Rule({String id, List&lt;String&gt; tags, List&lt;dynamic&gt; conditions, List&l
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Rule.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Rule.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Rule.Rule.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -111,7 +111,7 @@ new <strong>Rule.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href=
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Rule.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Rule.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -127,10 +127,10 @@ List&lt;dynamic&gt;         <strong>actions</strong> <a class="anchor-link"
         <div class="doc">
 <p>List of actions that are triggered if one of the condtions is fulfilled.</p>
 <pre class="source">
-List&lt;dynamic&gt; get actions =&gt; listify(proxy['actions']);
+List&lt;dynamic&gt; get actions =&gt; listify(jsProxy['actions']);
 </pre>
 <pre class="source">
-set actions(List&lt;dynamic&gt; value) =&gt; proxy['actions'] = jsify(value);
+set actions(List&lt;dynamic&gt; value) =&gt; jsProxy['actions'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -143,10 +143,10 @@ List&lt;dynamic&gt;         <strong>conditions</strong> <a class="anchor-link"
         <div class="doc">
 <p>List of conditions that can trigger the actions.</p>
 <pre class="source">
-List&lt;dynamic&gt; get conditions =&gt; listify(proxy['conditions']);
+List&lt;dynamic&gt; get conditions =&gt; listify(jsProxy['conditions']);
 </pre>
 <pre class="source">
-set conditions(List&lt;dynamic&gt; value) =&gt; proxy['conditions'] = jsify(value);
+set conditions(List&lt;dynamic&gt; value) =&gt; jsProxy['conditions'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -159,10 +159,22 @@ String         <strong>id</strong> <a class="anchor-link"
         <div class="doc">
 <p>Optional identifier that allows referencing this rule.</p>
 <pre class="source">
-String get id =&gt; proxy['id'];
+String get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(String value) =&gt; proxy['id'] = value;
+set id(String value) =&gt; jsProxy['id'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Rule.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -175,22 +187,10 @@ int         <strong>priority</strong> <a class="anchor-link"
         <div class="doc">
 <p>Optional priority of this rule. Defaults to 100.</p>
 <pre class="source">
-int get priority =&gt; proxy['priority'];
+int get priority =&gt; jsProxy['priority'];
 </pre>
 <pre class="source">
-set priority(int value) =&gt; proxy['priority'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Rule.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set priority(int value) =&gt; jsProxy['priority'] = value;
 </pre>
 </div>
 </div>
@@ -203,10 +203,10 @@ List&lt;String&gt;         <strong>tags</strong> <a class="anchor-link"
         <div class="doc">
 <p>Tags can be used to annotate rules and perform operations on sets of rules.</p>
 <pre class="source">
-List&lt;String&gt; get tags =&gt; listify(proxy['tags']);
+List&lt;String&gt; get tags =&gt; listify(jsProxy['tags']);
 </pre>
 <pre class="source">
-set tags(List&lt;String&gt; value) =&gt; proxy['tags'] = jsify(value);
+set tags(List&lt;String&gt; value) =&gt; jsProxy['tags'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -219,7 +219,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Rule.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -232,7 +232,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

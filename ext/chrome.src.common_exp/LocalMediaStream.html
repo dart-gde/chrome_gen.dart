@@ -34,10 +34,10 @@
 <div class="doc">
 <pre class="source">
 class LocalMediaStream extends ChromeObject {
- static LocalMediaStream create(JsObject proxy) =&gt; new LocalMediaStream.fromProxy(proxy);
+ static LocalMediaStream create(JsObject jsProxy) =&gt; new LocalMediaStream.fromProxy(jsProxy);
 
  LocalMediaStream();
- LocalMediaStream.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ LocalMediaStream.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 </pre>
 </div>
@@ -48,11 +48,11 @@ class LocalMediaStream extends ChromeObject {
 <h3>Static Methods</h3>
 <div class="method"><h4 id="create">
 <button class="show-code">Code</button>
-<a href="../chrome.src.common_exp/LocalMediaStream.html">LocalMediaStream</a> <strong>create</strong>(JsObject proxy) <a class="anchor-link" href="#create"
+<a href="../chrome.src.common_exp/LocalMediaStream.html">LocalMediaStream</a> <strong>create</strong>(JsObject jsProxy) <a class="anchor-link" href="#create"
               title="Permalink to LocalMediaStream.create">#</a></h4>
 <div class="doc">
 <pre class="source">
-static LocalMediaStream create(JsObject proxy) =&gt; new LocalMediaStream.fromProxy(proxy);
+static LocalMediaStream create(JsObject jsProxy) =&gt; new LocalMediaStream.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -75,7 +75,7 @@ LocalMediaStream();
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>LocalMediaStream.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>LocalMediaStream.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to LocalMediaStream.LocalMediaStream.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -83,22 +83,22 @@ new <strong>LocalMediaStream.fromProxy</strong>(JsObject proxy) <a class="anchor
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-LocalMediaStream.fromProxy(JsObject proxy): super.fromProxy(proxy);
+LocalMediaStream.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div class="inherited">
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to LocalMediaStream.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to LocalMediaStream.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -111,7 +111,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to LocalMediaStream.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -124,7 +124,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

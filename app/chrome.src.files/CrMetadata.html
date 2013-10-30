@@ -34,11 +34,11 @@
 <div class="doc">
 <pre class="source">
 class CrMetadata extends ChromeObject implements Metadata {
- CrMetadata.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+ CrMetadata.fromProxy(JsObject jsProxy) : super.fromProxy(jsProxy);
 
- int get size =&gt; proxy['size'];
+ int get size =&gt; jsProxy['size'];
  DateTime get modificationTime {
-   return DateTime.parse(proxy['modificationTime'].callMethod('toISOString'));
+   return DateTime.parse(jsProxy['modificationTime'].callMethod('toISOString'));
  }
 }
 </pre>
@@ -53,7 +53,7 @@ class CrMetadata extends ChromeObject implements Metadata {
 <h3>Constructors</h3>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>CrMetadata.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>CrMetadata.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to CrMetadata.CrMetadata.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -61,7 +61,7 @@ new <strong>CrMetadata.fromProxy</strong>(JsObject proxy) <a class="anchor-link"
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-CrMetadata.fromProxy(JsObject proxy) : super.fromProxy(proxy);
+CrMetadata.fromProxy(JsObject jsProxy) : super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -90,6 +90,18 @@ int get hashCode =&gt; Primitives.objectHashCode(this);
 </pre>
 </div>
 </div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to CrMetadata.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="modificationTime">
 <button class="show-code">Code</button>
 final DateTime         <strong>modificationTime</strong> <a class="anchor-link"
@@ -99,20 +111,8 @@ final DateTime         <strong>modificationTime</strong> <a class="anchor-link"
         <div class="doc">
 <pre class="source">
 DateTime get modificationTime {
- return DateTime.parse(proxy['modificationTime'].callMethod('toISOString'));
+ return DateTime.parse(jsProxy['modificationTime'].callMethod('toISOString'));
 }
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to CrMetadata.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
 </pre>
 </div>
 </div>
@@ -211,7 +211,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to CrMetadata.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -224,7 +224,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

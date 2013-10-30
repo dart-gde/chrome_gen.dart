@@ -40,19 +40,19 @@ class MostVisitedURL extends ChromeObject {
    if (url != null) this.url = url;
    if (title != null) this.title = title;
  }
- MostVisitedURL.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ MostVisitedURL.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The most visited URL.
   */
- String get url =&gt; proxy['url'];
- set url(String value) =&gt; proxy['url'] = value;
+ String get url =&gt; jsProxy['url'];
+ set url(String value) =&gt; jsProxy['url'] = value;
 
  /**
   * The title of the page
   */
- String get title =&gt; proxy['title'];
- set title(String value) =&gt; proxy['title'] = value;
+ String get title =&gt; jsProxy['title'];
+ set title(String value) =&gt; jsProxy['title'] = value;
 }
 </pre>
 </div>
@@ -80,7 +80,7 @@ MostVisitedURL({String url, String title}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>MostVisitedURL.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>MostVisitedURL.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to MostVisitedURL.MostVisitedURL.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -88,22 +88,22 @@ new <strong>MostVisitedURL.fromProxy</strong>(JsObject proxy) <a class="anchor-l
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-MostVisitedURL.fromProxy(JsObject proxy): super.fromProxy(proxy);
+MostVisitedURL.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to MostVisitedURL.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to MostVisitedURL.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -116,10 +116,10 @@ String         <strong>title</strong> <a class="anchor-link"
         <div class="doc">
 <p>The title of the page</p>
 <pre class="source">
-String get title =&gt; proxy['title'];
+String get title =&gt; jsProxy['title'];
 </pre>
 <pre class="source">
-set title(String value) =&gt; proxy['title'] = value;
+set title(String value) =&gt; jsProxy['title'] = value;
 </pre>
 </div>
 </div>
@@ -132,10 +132,10 @@ String         <strong>url</strong> <a class="anchor-link"
         <div class="doc">
 <p>The most visited URL.</p>
 <pre class="source">
-String get url =&gt; proxy['url'];
+String get url =&gt; jsProxy['url'];
 </pre>
 <pre class="source">
-set url(String value) =&gt; proxy['url'] = value;
+set url(String value) =&gt; jsProxy['url'] = value;
 </pre>
 </div>
 </div>
@@ -148,7 +148,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to MostVisitedURL.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -161,7 +161,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

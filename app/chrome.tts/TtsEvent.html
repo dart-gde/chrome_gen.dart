@@ -40,7 +40,7 @@ class TtsEvent extends ChromeObject {
    if (charIndex != null) this.charIndex = charIndex;
    if (errorMessage != null) this.errorMessage = errorMessage;
  }
- TtsEvent.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ TtsEvent.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The type can be 'start' as soon as speech has started, 'word' when a word
@@ -56,20 +56,20 @@ class TtsEvent extends ChromeObject {
   * enum of `start`, `end`, `word`, `sentence`, `marker`, `interrupted`,
   * `cancelled`, `error`, `pause`, `resume`
   */
- String get type =&gt; proxy['type'];
- set type(String value) =&gt; proxy['type'] = value;
+ String get type =&gt; jsProxy['type'];
+ set type(String value) =&gt; jsProxy['type'] = value;
 
  /**
   * The index of the current character in the utterance.
   */
- dynamic get charIndex =&gt; proxy['charIndex'];
- set charIndex(var value) =&gt; proxy['charIndex'] = jsify(value);
+ dynamic get charIndex =&gt; jsProxy['charIndex'];
+ set charIndex(var value) =&gt; jsProxy['charIndex'] = jsify(value);
 
  /**
   * The error description, if the event type is 'error'.
   */
- String get errorMessage =&gt; proxy['errorMessage'];
- set errorMessage(String value) =&gt; proxy['errorMessage'] = value;
+ String get errorMessage =&gt; jsProxy['errorMessage'];
+ set errorMessage(String value) =&gt; jsProxy['errorMessage'] = value;
 }
 </pre>
 </div>
@@ -98,7 +98,7 @@ TtsEvent({String type, var charIndex, String errorMessage}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>TtsEvent.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>TtsEvent.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to TtsEvent.TtsEvent.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -106,7 +106,7 @@ new <strong>TtsEvent.fromProxy</strong>(JsObject proxy) <a class="anchor-link" h
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-TtsEvent.fromProxy(JsObject proxy): super.fromProxy(proxy);
+TtsEvent.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -122,10 +122,10 @@ var         <strong>charIndex</strong> <a class="anchor-link"
         <div class="doc">
 <p>The index of the current character in the utterance.</p>
 <pre class="source">
-dynamic get charIndex =&gt; proxy['charIndex'];
+dynamic get charIndex =&gt; jsProxy['charIndex'];
 </pre>
 <pre class="source">
-set charIndex(var value) =&gt; proxy['charIndex'] = jsify(value);
+set charIndex(var value) =&gt; jsProxy['charIndex'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -138,22 +138,22 @@ String         <strong>errorMessage</strong> <a class="anchor-link"
         <div class="doc">
 <p>The error description, if the event type is 'error'.</p>
 <pre class="source">
-String get errorMessage =&gt; proxy['errorMessage'];
+String get errorMessage =&gt; jsProxy['errorMessage'];
 </pre>
 <pre class="source">
-set errorMessage(String value) =&gt; proxy['errorMessage'] = value;
+set errorMessage(String value) =&gt; jsProxy['errorMessage'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to TtsEvent.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to TtsEvent.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -177,10 +177,10 @@ in-between utterances.
 enum of <code>start</code>, <code>end</code>, <code>word</code>, <code>sentence</code>, <code>marker</code>, <code>interrupted</code>,
 <code>cancelled</code>, <code>error</code>, <code>pause</code>, <code>resume</code></p>
 <pre class="source">
-String get type =&gt; proxy['type'];
+String get type =&gt; jsProxy['type'];
 </pre>
 <pre class="source">
-set type(String value) =&gt; proxy['type'] = value;
+set type(String value) =&gt; jsProxy['type'] = value;
 </pre>
 </div>
 </div>
@@ -193,7 +193,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to TtsEvent.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -206,7 +206,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

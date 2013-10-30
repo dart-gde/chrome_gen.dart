@@ -42,25 +42,25 @@ class SocketInfo extends ChromeObject {
    if (localAddress != null) this.localAddress = localAddress;
    if (localPort != null) this.localPort = localPort;
  }
- SocketInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ SocketInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- SocketType get socketType =&gt; _createSocketType(proxy['socketType']);
- set socketType(SocketType value) =&gt; proxy['socketType'] = jsify(value);
+ SocketType get socketType =&gt; _createSocketType(jsProxy['socketType']);
+ set socketType(SocketType value) =&gt; jsProxy['socketType'] = jsify(value);
 
- bool get connected =&gt; proxy['connected'];
- set connected(bool value) =&gt; proxy['connected'] = value;
+ bool get connected =&gt; jsProxy['connected'];
+ set connected(bool value) =&gt; jsProxy['connected'] = value;
 
- String get peerAddress =&gt; proxy['peerAddress'];
- set peerAddress(String value) =&gt; proxy['peerAddress'] = value;
+ String get peerAddress =&gt; jsProxy['peerAddress'];
+ set peerAddress(String value) =&gt; jsProxy['peerAddress'] = value;
 
- int get peerPort =&gt; proxy['peerPort'];
- set peerPort(int value) =&gt; proxy['peerPort'] = value;
+ int get peerPort =&gt; jsProxy['peerPort'];
+ set peerPort(int value) =&gt; jsProxy['peerPort'] = value;
 
- String get localAddress =&gt; proxy['localAddress'];
- set localAddress(String value) =&gt; proxy['localAddress'] = value;
+ String get localAddress =&gt; jsProxy['localAddress'];
+ set localAddress(String value) =&gt; jsProxy['localAddress'] = value;
 
- int get localPort =&gt; proxy['localPort'];
- set localPort(int value) =&gt; proxy['localPort'] = value;
+ int get localPort =&gt; jsProxy['localPort'];
+ set localPort(int value) =&gt; jsProxy['localPort'] = value;
 }
 </pre>
 </div>
@@ -92,7 +92,7 @@ SocketInfo({SocketType socketType, bool connected, String peerAddress, int peerP
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>SocketInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>SocketInfo.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to SocketInfo.SocketInfo.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -100,7 +100,7 @@ new <strong>SocketInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link"
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-SocketInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+SocketInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -115,10 +115,22 @@ bool         <strong>connected</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get connected =&gt; proxy['connected'];
+bool get connected =&gt; jsProxy['connected'];
 </pre>
 <pre class="source">
-set connected(bool value) =&gt; proxy['connected'] = value;
+set connected(bool value) =&gt; jsProxy['connected'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to SocketInfo.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -130,10 +142,10 @@ String         <strong>localAddress</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get localAddress =&gt; proxy['localAddress'];
+String get localAddress =&gt; jsProxy['localAddress'];
 </pre>
 <pre class="source">
-set localAddress(String value) =&gt; proxy['localAddress'] = value;
+set localAddress(String value) =&gt; jsProxy['localAddress'] = value;
 </pre>
 </div>
 </div>
@@ -145,10 +157,10 @@ int         <strong>localPort</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get localPort =&gt; proxy['localPort'];
+int get localPort =&gt; jsProxy['localPort'];
 </pre>
 <pre class="source">
-set localPort(int value) =&gt; proxy['localPort'] = value;
+set localPort(int value) =&gt; jsProxy['localPort'] = value;
 </pre>
 </div>
 </div>
@@ -160,10 +172,10 @@ String         <strong>peerAddress</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get peerAddress =&gt; proxy['peerAddress'];
+String get peerAddress =&gt; jsProxy['peerAddress'];
 </pre>
 <pre class="source">
-set peerAddress(String value) =&gt; proxy['peerAddress'] = value;
+set peerAddress(String value) =&gt; jsProxy['peerAddress'] = value;
 </pre>
 </div>
 </div>
@@ -175,22 +187,10 @@ int         <strong>peerPort</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get peerPort =&gt; proxy['peerPort'];
+int get peerPort =&gt; jsProxy['peerPort'];
 </pre>
 <pre class="source">
-set peerPort(int value) =&gt; proxy['peerPort'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to SocketInfo.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set peerPort(int value) =&gt; jsProxy['peerPort'] = value;
 </pre>
 </div>
 </div>
@@ -202,10 +202,10 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-SocketType get socketType =&gt; _createSocketType(proxy['socketType']);
+SocketType get socketType =&gt; _createSocketType(jsProxy['socketType']);
 </pre>
 <pre class="source">
-set socketType(SocketType value) =&gt; proxy['socketType'] = jsify(value);
+set socketType(SocketType value) =&gt; jsProxy['socketType'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -218,7 +218,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to SocketInfo.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -231,7 +231,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

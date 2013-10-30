@@ -39,21 +39,21 @@ class FileHandlerExecuteEventDetails extends ChromeObject {
    if (entries != null) this.entries = entries;
    if (tab_id != null) this.tab_id = tab_id;
  }
- FileHandlerExecuteEventDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ FileHandlerExecuteEventDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Array of Entry instances representing files that are targets of this action
   * (selected in ChromeOS file browser).
   */
- List&lt;dynamic&gt; get entries =&gt; listify(proxy['entries']);
- set entries(List&lt;dynamic&gt; value) =&gt; proxy['entries'] = jsify(value);
+ List&lt;dynamic&gt; get entries =&gt; listify(jsProxy['entries']);
+ set entries(List&lt;dynamic&gt; value) =&gt; jsProxy['entries'] = jsify(value);
 
  /**
   * The ID of the tab that raised this event. Tab IDs are unique within a
   * browser session.
   */
- int get tab_id =&gt; proxy['tab_id'];
- set tab_id(int value) =&gt; proxy['tab_id'] = value;
+ int get tab_id =&gt; jsProxy['tab_id'];
+ set tab_id(int value) =&gt; jsProxy['tab_id'] = value;
 }
 </pre>
 </div>
@@ -81,7 +81,7 @@ FileHandlerExecuteEventDetails({List&lt;dynamic&gt; entries, int tab_id}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>FileHandlerExecuteEventDetails.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>FileHandlerExecuteEventDetails.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to FileHandlerExecuteEventDetails.FileHandlerExecuteEventDetails.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -89,7 +89,7 @@ new <strong>FileHandlerExecuteEventDetails.fromProxy</strong>(JsObject proxy) <a
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-FileHandlerExecuteEventDetails.fromProxy(JsObject proxy): super.fromProxy(proxy);
+FileHandlerExecuteEventDetails.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -106,22 +106,22 @@ List&lt;dynamic&gt;         <strong>entries</strong> <a class="anchor-link"
 <p>Array of Entry instances representing files that are targets of this action
 (selected in ChromeOS file browser).</p>
 <pre class="source">
-List&lt;dynamic&gt; get entries =&gt; listify(proxy['entries']);
+List&lt;dynamic&gt; get entries =&gt; listify(jsProxy['entries']);
 </pre>
 <pre class="source">
-set entries(List&lt;dynamic&gt; value) =&gt; proxy['entries'] = jsify(value);
+set entries(List&lt;dynamic&gt; value) =&gt; jsProxy['entries'] = jsify(value);
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to FileHandlerExecuteEventDetails.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to FileHandlerExecuteEventDetails.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -135,10 +135,10 @@ int         <strong>tab_id</strong> <a class="anchor-link"
 <p>The ID of the tab that raised this event. Tab IDs are unique within a
 browser session.</p>
 <pre class="source">
-int get tab_id =&gt; proxy['tab_id'];
+int get tab_id =&gt; jsProxy['tab_id'];
 </pre>
 <pre class="source">
-set tab_id(int value) =&gt; proxy['tab_id'] = value;
+set tab_id(int value) =&gt; jsProxy['tab_id'] = value;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to FileHandlerExecuteEventDetails.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -164,7 +164,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

@@ -40,19 +40,19 @@ class RecvFromInfo extends ChromeObject {
    if (address != null) this.address = address;
    if (port != null) this.port = port;
  }
- RecvFromInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ RecvFromInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get resultCode =&gt; proxy['resultCode'];
- set resultCode(int value) =&gt; proxy['resultCode'] = value;
+ int get resultCode =&gt; jsProxy['resultCode'];
+ set resultCode(int value) =&gt; jsProxy['resultCode'] = value;
 
- ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
- set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
+ ArrayBuffer get data =&gt; _createArrayBuffer(jsProxy['data']);
+ set data(ArrayBuffer value) =&gt; jsProxy['data'] = jsify(value);
 
- String get address =&gt; proxy['address'];
- set address(String value) =&gt; proxy['address'] = value;
+ String get address =&gt; jsProxy['address'];
+ set address(String value) =&gt; jsProxy['address'] = value;
 
- int get port =&gt; proxy['port'];
- set port(int value) =&gt; proxy['port'] = value;
+ int get port =&gt; jsProxy['port'];
+ set port(int value) =&gt; jsProxy['port'] = value;
 }
 </pre>
 </div>
@@ -82,7 +82,7 @@ RecvFromInfo({int resultCode, ArrayBuffer data, String address, int port}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>RecvFromInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>RecvFromInfo.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to RecvFromInfo.RecvFromInfo.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -90,7 +90,7 @@ new <strong>RecvFromInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-lin
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-RecvFromInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+RecvFromInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -105,10 +105,10 @@ String         <strong>address</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get address =&gt; proxy['address'];
+String get address =&gt; jsProxy['address'];
 </pre>
 <pre class="source">
-set address(String value) =&gt; proxy['address'] = value;
+set address(String value) =&gt; jsProxy['address'] = value;
 </pre>
 </div>
 </div>
@@ -120,10 +120,22 @@ set address(String value) =&gt; proxy['address'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
+ArrayBuffer get data =&gt; _createArrayBuffer(jsProxy['data']);
 </pre>
 <pre class="source">
-set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
+set data(ArrayBuffer value) =&gt; jsProxy['data'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to RecvFromInfo.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -135,22 +147,10 @@ int         <strong>port</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get port =&gt; proxy['port'];
+int get port =&gt; jsProxy['port'];
 </pre>
 <pre class="source">
-set port(int value) =&gt; proxy['port'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to RecvFromInfo.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set port(int value) =&gt; jsProxy['port'] = value;
 </pre>
 </div>
 </div>
@@ -162,10 +162,10 @@ int         <strong>resultCode</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get resultCode =&gt; proxy['resultCode'];
+int get resultCode =&gt; jsProxy['resultCode'];
 </pre>
 <pre class="source">
-set resultCode(int value) =&gt; proxy['resultCode'] = value;
+set resultCode(int value) =&gt; jsProxy['resultCode'] = value;
 </pre>
 </div>
 </div>
@@ -178,7 +178,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to RecvFromInfo.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -191,7 +191,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

@@ -40,19 +40,19 @@ class FileInfo extends ChromeObject {
    if (action != null) this.action = action;
    if (direction != null) this.direction = direction;
  }
- FileInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ FileInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- dynamic get fileEntry =&gt; proxy['fileEntry'];
- set fileEntry(var value) =&gt; proxy['fileEntry'] = jsify(value);
+ dynamic get fileEntry =&gt; jsProxy['fileEntry'];
+ set fileEntry(var value) =&gt; jsProxy['fileEntry'] = jsify(value);
 
- FileStatus get status =&gt; _createFileStatus(proxy['status']);
- set status(FileStatus value) =&gt; proxy['status'] = jsify(value);
+ FileStatus get status =&gt; _createFileStatus(jsProxy['status']);
+ set status(FileStatus value) =&gt; jsProxy['status'] = jsify(value);
 
- SyncAction get action =&gt; _createSyncAction(proxy['action']);
- set action(SyncAction value) =&gt; proxy['action'] = jsify(value);
+ SyncAction get action =&gt; _createSyncAction(jsProxy['action']);
+ set action(SyncAction value) =&gt; jsProxy['action'] = jsify(value);
 
- SyncDirection get direction =&gt; _createSyncDirection(proxy['direction']);
- set direction(SyncDirection value) =&gt; proxy['direction'] = jsify(value);
+ SyncDirection get direction =&gt; _createSyncDirection(jsProxy['direction']);
+ set direction(SyncDirection value) =&gt; jsProxy['direction'] = jsify(value);
 }
 </pre>
 </div>
@@ -82,7 +82,7 @@ FileInfo({var fileEntry, FileStatus status, SyncAction action, SyncDirection dir
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>FileInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>FileInfo.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to FileInfo.FileInfo.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -90,7 +90,7 @@ new <strong>FileInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" h
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-FileInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+FileInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -105,10 +105,10 @@ FileInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-SyncAction get action =&gt; _createSyncAction(proxy['action']);
+SyncAction get action =&gt; _createSyncAction(jsProxy['action']);
 </pre>
 <pre class="source">
-set action(SyncAction value) =&gt; proxy['action'] = jsify(value);
+set action(SyncAction value) =&gt; jsProxy['action'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -120,10 +120,10 @@ set action(SyncAction value) =&gt; proxy['action'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-SyncDirection get direction =&gt; _createSyncDirection(proxy['direction']);
+SyncDirection get direction =&gt; _createSyncDirection(jsProxy['direction']);
 </pre>
 <pre class="source">
-set direction(SyncDirection value) =&gt; proxy['direction'] = jsify(value);
+set direction(SyncDirection value) =&gt; jsProxy['direction'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -135,22 +135,22 @@ var         <strong>fileEntry</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-dynamic get fileEntry =&gt; proxy['fileEntry'];
+dynamic get fileEntry =&gt; jsProxy['fileEntry'];
 </pre>
 <pre class="source">
-set fileEntry(var value) =&gt; proxy['fileEntry'] = jsify(value);
+set fileEntry(var value) =&gt; jsProxy['fileEntry'] = jsify(value);
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to FileInfo.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to FileInfo.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -162,10 +162,10 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-FileStatus get status =&gt; _createFileStatus(proxy['status']);
+FileStatus get status =&gt; _createFileStatus(jsProxy['status']);
 </pre>
 <pre class="source">
-set status(FileStatus value) =&gt; proxy['status'] = jsify(value);
+set status(FileStatus value) =&gt; jsProxy['status'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -178,7 +178,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to FileInfo.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -191,7 +191,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

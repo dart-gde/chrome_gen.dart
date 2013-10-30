@@ -42,36 +42,36 @@ class MessageSender extends ChromeObject {
    if (url != null) this.url = url;
    if (tlsChannelId != null) this.tlsChannelId = tlsChannelId;
  }
- MessageSender.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ MessageSender.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The [tabs.Tab] which opened the connection, if any. This property will
   * *only* be present when the connection was opened from a tab (including
   * content scripts), and *only* if the receiver is an extension, not an app.
   */
- Tab get tab =&gt; _createTab(proxy['tab']);
- set tab(Tab value) =&gt; proxy['tab'] = jsify(value);
+ Tab get tab =&gt; _createTab(jsProxy['tab']);
+ set tab(Tab value) =&gt; jsProxy['tab'] = jsify(value);
 
  /**
   * The ID of the extension or app that opened the connection, if any.
   */
- String get id =&gt; proxy['id'];
- set id(String value) =&gt; proxy['id'] = value;
+ String get id =&gt; jsProxy['id'];
+ set id(String value) =&gt; jsProxy['id'] = value;
 
  /**
   * The URL of the page or frame that opened the connection, if any. This
   * property will *only* be present when the connection was opened from a tab
   * or content script.
   */
- String get url =&gt; proxy['url'];
- set url(String value) =&gt; proxy['url'] = value;
+ String get url =&gt; jsProxy['url'];
+ set url(String value) =&gt; jsProxy['url'] = value;
 
  /**
   * The TLS channel ID of the web page that opened the connection, if requested
   * by the extension or app, and if available.
   */
- String get tlsChannelId =&gt; proxy['tlsChannelId'];
- set tlsChannelId(String value) =&gt; proxy['tlsChannelId'] = value;
+ String get tlsChannelId =&gt; jsProxy['tlsChannelId'];
+ set tlsChannelId(String value) =&gt; jsProxy['tlsChannelId'] = value;
 }
 </pre>
 </div>
@@ -101,7 +101,7 @@ MessageSender({Tab tab, String id, String url, String tlsChannelId}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>MessageSender.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>MessageSender.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to MessageSender.MessageSender.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -109,7 +109,7 @@ new <strong>MessageSender.fromProxy</strong>(JsObject proxy) <a class="anchor-li
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-MessageSender.fromProxy(JsObject proxy): super.fromProxy(proxy);
+MessageSender.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -125,22 +125,22 @@ String         <strong>id</strong> <a class="anchor-link"
         <div class="doc">
 <p>The ID of the extension or app that opened the connection, if any.</p>
 <pre class="source">
-String get id =&gt; proxy['id'];
+String get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(String value) =&gt; proxy['id'] = value;
+set id(String value) =&gt; jsProxy['id'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to MessageSender.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to MessageSender.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -155,10 +155,10 @@ final JsObject proxy
 <em>only</em> be present when the connection was opened from a tab (including
 content scripts), and <em>only</em> if the receiver is an extension, not an app.</p>
 <pre class="source">
-Tab get tab =&gt; _createTab(proxy['tab']);
+Tab get tab =&gt; _createTab(jsProxy['tab']);
 </pre>
 <pre class="source">
-set tab(Tab value) =&gt; proxy['tab'] = jsify(value);
+set tab(Tab value) =&gt; jsProxy['tab'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -172,10 +172,10 @@ String         <strong>tlsChannelId</strong> <a class="anchor-link"
 <p>The TLS channel ID of the web page that opened the connection, if requested
 by the extension or app, and if available.</p>
 <pre class="source">
-String get tlsChannelId =&gt; proxy['tlsChannelId'];
+String get tlsChannelId =&gt; jsProxy['tlsChannelId'];
 </pre>
 <pre class="source">
-set tlsChannelId(String value) =&gt; proxy['tlsChannelId'] = value;
+set tlsChannelId(String value) =&gt; jsProxy['tlsChannelId'] = value;
 </pre>
 </div>
 </div>
@@ -190,10 +190,10 @@ String         <strong>url</strong> <a class="anchor-link"
 property will <em>only</em> be present when the connection was opened from a tab
 or content script.</p>
 <pre class="source">
-String get url =&gt; proxy['url'];
+String get url =&gt; jsProxy['url'];
 </pre>
 <pre class="source">
-set url(String value) =&gt; proxy['url'] = value;
+set url(String value) =&gt; jsProxy['url'] = value;
 </pre>
 </div>
 </div>
@@ -206,7 +206,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to MessageSender.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -219,7 +219,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

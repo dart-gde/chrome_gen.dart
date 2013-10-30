@@ -39,14 +39,14 @@ class PageStateMatcher extends ChromeObject {
    if (pageUrl != null) this.pageUrl = pageUrl;
    if (css != null) this.css = css;
  }
- PageStateMatcher.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ PageStateMatcher.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Matches if the condition of the UrlFilter are fulfilled for the top-level
   * URL of the page.
   */
- UrlFilter get pageUrl =&gt; _createUrlFilter(proxy['pageUrl']);
- set pageUrl(UrlFilter value) =&gt; proxy['pageUrl'] = jsify(value);
+ UrlFilter get pageUrl =&gt; _createUrlFilter(jsProxy['pageUrl']);
+ set pageUrl(UrlFilter value) =&gt; jsProxy['pageUrl'] = jsify(value);
 
  /**
   * Matches if all of the CSS selectors in the array match displayed elements
@@ -56,8 +56,8 @@ class PageStateMatcher extends ChromeObject {
   * Note that listing hundreds of CSS selectors or CSS selectors that match
   * hundreds of times per page can still slow down web sites.
   */
- List&lt;String&gt; get css =&gt; listify(proxy['css']);
- set css(List&lt;String&gt; value) =&gt; proxy['css'] = jsify(value);
+ List&lt;String&gt; get css =&gt; listify(jsProxy['css']);
+ set css(List&lt;String&gt; value) =&gt; jsProxy['css'] = jsify(value);
 }
 </pre>
 </div>
@@ -85,7 +85,7 @@ PageStateMatcher({UrlFilter pageUrl, List&lt;String&gt; css}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>PageStateMatcher.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>PageStateMatcher.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to PageStateMatcher.PageStateMatcher.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -93,7 +93,7 @@ new <strong>PageStateMatcher.fromProxy</strong>(JsObject proxy) <a class="anchor
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-PageStateMatcher.fromProxy(JsObject proxy): super.fromProxy(proxy);
+PageStateMatcher.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -114,10 +114,22 @@ selectors</a> to speed up matching.
 Note that listing hundreds of CSS selectors or CSS selectors that match
 hundreds of times per page can still slow down web sites.</p>
 <pre class="source">
-List&lt;String&gt; get css =&gt; listify(proxy['css']);
+List&lt;String&gt; get css =&gt; listify(jsProxy['css']);
 </pre>
 <pre class="source">
-set css(List&lt;String&gt; value) =&gt; proxy['css'] = jsify(value);
+set css(List&lt;String&gt; value) =&gt; jsProxy['css'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to PageStateMatcher.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -131,22 +143,10 @@ set css(List&lt;String&gt; value) =&gt; proxy['css'] = jsify(value);
 <p>Matches if the condition of the UrlFilter are fulfilled for the top-level
 URL of the page.</p>
 <pre class="source">
-UrlFilter get pageUrl =&gt; _createUrlFilter(proxy['pageUrl']);
+UrlFilter get pageUrl =&gt; _createUrlFilter(jsProxy['pageUrl']);
 </pre>
 <pre class="source">
-set pageUrl(UrlFilter value) =&gt; proxy['pageUrl'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to PageStateMatcher.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set pageUrl(UrlFilter value) =&gt; jsProxy['pageUrl'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -159,7 +159,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to PageStateMatcher.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -172,7 +172,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

@@ -37,14 +37,14 @@ event.</p>
 <pre class="source">
 class Event extends ChromeObject {
  Event();
- Event.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Event.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Registers an event listener _callback_ to an event.
   */
  Future addListener() {
    var completer = new ChromeCompleter.noArgs();
-   proxy.callMethod('addListener', [completer.callback]);
+   jsProxy.callMethod('addListener', [completer.callback]);
    return completer.future;
  }
 
@@ -53,16 +53,16 @@ class Event extends ChromeObject {
   */
  Future removeListener() {
    var completer = new ChromeCompleter.noArgs();
-   proxy.callMethod('removeListener', [completer.callback]);
+   jsProxy.callMethod('removeListener', [completer.callback]);
    return completer.future;
  }
 
  bool hasListener(dynamic callback) {
-   return proxy.callMethod('hasListener', [jsify(callback)]);
+   return jsProxy.callMethod('hasListener', [jsify(callback)]);
  }
 
  bool hasListeners() {
-   return proxy.callMethod('hasListeners');
+   return jsProxy.callMethod('hasListeners');
  }
 
  /**
@@ -78,7 +78,7 @@ class Event extends ChromeObject {
   */
  Future&lt;List&lt;Rule&gt;&gt; addRules(String eventName, List&lt;Rule&gt; rules) {
    var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, _createRule));
-   proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
+   jsProxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
    return completer.future;
  }
 
@@ -95,7 +95,7 @@ class Event extends ChromeObject {
   */
  Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
    var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, _createRule));
-   proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
+   jsProxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
    return completer.future;
  }
 
@@ -109,7 +109,7 @@ class Event extends ChromeObject {
   */
  Future removeRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
    var completer = new ChromeCompleter.noArgs();
-   proxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
+   jsProxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
    return completer.future;
  }
 }
@@ -136,7 +136,7 @@ Event();
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Event.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Event.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Event.Event.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -144,22 +144,22 @@ new <strong>Event.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Event.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Event.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div class="inherited">
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Event.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Event.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -175,7 +175,7 @@ Future <strong>addListener</strong>() <a class="anchor-link" href="#addListener"
 <pre class="source">
 Future addListener() {
  var completer = new ChromeCompleter.noArgs();
- proxy.callMethod('addListener', [completer.callback]);
+ jsProxy.callMethod('addListener', [completer.callback]);
  return completer.future;
 }
 </pre>
@@ -197,7 +197,7 @@ Rules that were registered, the optional parameters are filled with values.</p>
 <pre class="source">
 Future&lt;List&lt;Rule&gt;&gt; addRules(String eventName, List&lt;Rule&gt; rules) {
  var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, _createRule));
- proxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
+ jsProxy.callMethod('addRules', [eventName, jsify(rules), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -219,7 +219,7 @@ Rules that were registered, the optional parameters are filled with values.</p>
 <pre class="source">
 Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
  var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, _createRule));
- proxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
+ jsProxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -232,7 +232,7 @@ bool <strong>hasListener</strong>(callback) <a class="anchor-link" href="#hasLis
 <div class="doc">
 <pre class="source">
 bool hasListener(dynamic callback) {
- return proxy.callMethod('hasListener', [jsify(callback)]);
+ return jsProxy.callMethod('hasListener', [jsify(callback)]);
 }
 </pre>
 </div>
@@ -244,7 +244,7 @@ bool <strong>hasListeners</strong>() <a class="anchor-link" href="#hasListeners"
 <div class="doc">
 <pre class="source">
 bool hasListeners() {
- return proxy.callMethod('hasListeners');
+ return jsProxy.callMethod('hasListeners');
 }
 </pre>
 </div>
@@ -258,7 +258,7 @@ Future <strong>removeListener</strong>() <a class="anchor-link" href="#removeLis
 <pre class="source">
 Future removeListener() {
  var completer = new ChromeCompleter.noArgs();
- proxy.callMethod('removeListener', [completer.callback]);
+ jsProxy.callMethod('removeListener', [completer.callback]);
  return completer.future;
 }
 </pre>
@@ -278,7 +278,7 @@ contained in this array are unregistered.</p>
 <pre class="source">
 Future removeRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
  var completer = new ChromeCompleter.noArgs();
- proxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
+ jsProxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
  return completer.future;
 }
 </pre>
@@ -290,7 +290,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Event.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -303,7 +303,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

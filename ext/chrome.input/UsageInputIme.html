@@ -38,19 +38,19 @@ class UsageInputIme extends ChromeObject {
    if (title != null) this.title = title;
    if (body != null) this.body = body;
  }
- UsageInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ UsageInputIme.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The title string of details description.
   */
- String get title =&gt; proxy['title'];
- set title(String value) =&gt; proxy['title'] = value;
+ String get title =&gt; jsProxy['title'];
+ set title(String value) =&gt; jsProxy['title'] = value;
 
  /**
   * The body string of detail description.
   */
- String get body =&gt; proxy['body'];
- set body(String value) =&gt; proxy['body'] = value;
+ String get body =&gt; jsProxy['body'];
+ set body(String value) =&gt; jsProxy['body'] = value;
 }
 </pre>
 </div>
@@ -78,7 +78,7 @@ UsageInputIme({String title, String body}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>UsageInputIme.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>UsageInputIme.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to UsageInputIme.UsageInputIme.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -86,7 +86,7 @@ new <strong>UsageInputIme.fromProxy</strong>(JsObject proxy) <a class="anchor-li
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-UsageInputIme.fromProxy(JsObject proxy): super.fromProxy(proxy);
+UsageInputIme.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -102,22 +102,22 @@ String         <strong>body</strong> <a class="anchor-link"
         <div class="doc">
 <p>The body string of detail description.</p>
 <pre class="source">
-String get body =&gt; proxy['body'];
+String get body =&gt; jsProxy['body'];
 </pre>
 <pre class="source">
-set body(String value) =&gt; proxy['body'] = value;
+set body(String value) =&gt; jsProxy['body'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to UsageInputIme.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to UsageInputIme.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -130,10 +130,10 @@ String         <strong>title</strong> <a class="anchor-link"
         <div class="doc">
 <p>The title string of details description.</p>
 <pre class="source">
-String get title =&gt; proxy['title'];
+String get title =&gt; jsProxy['title'];
 </pre>
 <pre class="source">
-set title(String value) =&gt; proxy['title'] = value;
+set title(String value) =&gt; jsProxy['title'] = value;
 </pre>
 </div>
 </div>
@@ -146,7 +146,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to UsageInputIme.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -159,7 +159,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

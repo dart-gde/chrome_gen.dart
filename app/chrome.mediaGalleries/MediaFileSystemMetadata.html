@@ -41,22 +41,22 @@ class MediaFileSystemMetadata extends ChromeObject {
    if (isRemovable != null) this.isRemovable = isRemovable;
    if (isMediaDevice != null) this.isMediaDevice = isMediaDevice;
  }
- MediaFileSystemMetadata.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ MediaFileSystemMetadata.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get name =&gt; proxy['name'];
- set name(String value) =&gt; proxy['name'] = value;
+ String get name =&gt; jsProxy['name'];
+ set name(String value) =&gt; jsProxy['name'] = value;
 
- String get galleryId =&gt; proxy['galleryId'];
- set galleryId(String value) =&gt; proxy['galleryId'] = value;
+ String get galleryId =&gt; jsProxy['galleryId'];
+ set galleryId(String value) =&gt; jsProxy['galleryId'] = value;
 
- String get deviceId =&gt; proxy['deviceId'];
- set deviceId(String value) =&gt; proxy['deviceId'] = value;
+ String get deviceId =&gt; jsProxy['deviceId'];
+ set deviceId(String value) =&gt; jsProxy['deviceId'] = value;
 
- bool get isRemovable =&gt; proxy['isRemovable'];
- set isRemovable(bool value) =&gt; proxy['isRemovable'] = value;
+ bool get isRemovable =&gt; jsProxy['isRemovable'];
+ set isRemovable(bool value) =&gt; jsProxy['isRemovable'] = value;
 
- bool get isMediaDevice =&gt; proxy['isMediaDevice'];
- set isMediaDevice(bool value) =&gt; proxy['isMediaDevice'] = value;
+ bool get isMediaDevice =&gt; jsProxy['isMediaDevice'];
+ set isMediaDevice(bool value) =&gt; jsProxy['isMediaDevice'] = value;
 }
 </pre>
 </div>
@@ -87,7 +87,7 @@ MediaFileSystemMetadata({String name, String galleryId, String deviceId, bool is
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>MediaFileSystemMetadata.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>MediaFileSystemMetadata.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to MediaFileSystemMetadata.MediaFileSystemMetadata.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -95,7 +95,7 @@ new <strong>MediaFileSystemMetadata.fromProxy</strong>(JsObject proxy) <a class=
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-MediaFileSystemMetadata.fromProxy(JsObject proxy): super.fromProxy(proxy);
+MediaFileSystemMetadata.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -110,10 +110,10 @@ String         <strong>deviceId</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get deviceId =&gt; proxy['deviceId'];
+String get deviceId =&gt; jsProxy['deviceId'];
 </pre>
 <pre class="source">
-set deviceId(String value) =&gt; proxy['deviceId'] = value;
+set deviceId(String value) =&gt; jsProxy['deviceId'] = value;
 </pre>
 </div>
 </div>
@@ -125,10 +125,10 @@ String         <strong>galleryId</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get galleryId =&gt; proxy['galleryId'];
+String get galleryId =&gt; jsProxy['galleryId'];
 </pre>
 <pre class="source">
-set galleryId(String value) =&gt; proxy['galleryId'] = value;
+set galleryId(String value) =&gt; jsProxy['galleryId'] = value;
 </pre>
 </div>
 </div>
@@ -140,10 +140,10 @@ bool         <strong>isMediaDevice</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get isMediaDevice =&gt; proxy['isMediaDevice'];
+bool get isMediaDevice =&gt; jsProxy['isMediaDevice'];
 </pre>
 <pre class="source">
-set isMediaDevice(bool value) =&gt; proxy['isMediaDevice'] = value;
+set isMediaDevice(bool value) =&gt; jsProxy['isMediaDevice'] = value;
 </pre>
 </div>
 </div>
@@ -155,10 +155,22 @@ bool         <strong>isRemovable</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get isRemovable =&gt; proxy['isRemovable'];
+bool get isRemovable =&gt; jsProxy['isRemovable'];
 </pre>
 <pre class="source">
-set isRemovable(bool value) =&gt; proxy['isRemovable'] = value;
+set isRemovable(bool value) =&gt; jsProxy['isRemovable'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to MediaFileSystemMetadata.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -170,22 +182,10 @@ String         <strong>name</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get name =&gt; proxy['name'];
+String get name =&gt; jsProxy['name'];
 </pre>
 <pre class="source">
-set name(String value) =&gt; proxy['name'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to MediaFileSystemMetadata.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set name(String value) =&gt; jsProxy['name'] = value;
 </pre>
 </div>
 </div>
@@ -198,7 +198,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to MediaFileSystemMetadata.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -211,7 +211,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

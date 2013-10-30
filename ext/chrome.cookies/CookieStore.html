@@ -40,19 +40,19 @@ class CookieStore extends ChromeObject {
    if (id != null) this.id = id;
    if (tabIds != null) this.tabIds = tabIds;
  }
- CookieStore.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ CookieStore.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The unique identifier for the cookie store.
   */
- String get id =&gt; proxy['id'];
- set id(String value) =&gt; proxy['id'] = value;
+ String get id =&gt; jsProxy['id'];
+ set id(String value) =&gt; jsProxy['id'] = value;
 
  /**
   * Identifiers of all the browser tabs that share this cookie store.
   */
- List&lt;int&gt; get tabIds =&gt; listify(proxy['tabIds']);
- set tabIds(List&lt;int&gt; value) =&gt; proxy['tabIds'] = jsify(value);
+ List&lt;int&gt; get tabIds =&gt; listify(jsProxy['tabIds']);
+ set tabIds(List&lt;int&gt; value) =&gt; jsProxy['tabIds'] = jsify(value);
 }
 </pre>
 </div>
@@ -80,7 +80,7 @@ CookieStore({String id, List&lt;int&gt; tabIds}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>CookieStore.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>CookieStore.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to CookieStore.CookieStore.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -88,7 +88,7 @@ new <strong>CookieStore.fromProxy</strong>(JsObject proxy) <a class="anchor-link
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-CookieStore.fromProxy(JsObject proxy): super.fromProxy(proxy);
+CookieStore.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -104,22 +104,22 @@ String         <strong>id</strong> <a class="anchor-link"
         <div class="doc">
 <p>The unique identifier for the cookie store.</p>
 <pre class="source">
-String get id =&gt; proxy['id'];
+String get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(String value) =&gt; proxy['id'] = value;
+set id(String value) =&gt; jsProxy['id'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to CookieStore.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to CookieStore.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -132,10 +132,10 @@ List&lt;int&gt;         <strong>tabIds</strong> <a class="anchor-link"
         <div class="doc">
 <p>Identifiers of all the browser tabs that share this cookie store.</p>
 <pre class="source">
-List&lt;int&gt; get tabIds =&gt; listify(proxy['tabIds']);
+List&lt;int&gt; get tabIds =&gt; listify(jsProxy['tabIds']);
 </pre>
 <pre class="source">
-set tabIds(List&lt;int&gt; value) =&gt; proxy['tabIds'] = jsify(value);
+set tabIds(List&lt;int&gt; value) =&gt; jsProxy['tabIds'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -148,7 +148,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to CookieStore.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -161,7 +161,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

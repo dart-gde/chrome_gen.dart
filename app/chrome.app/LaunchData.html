@@ -41,22 +41,22 @@ class LaunchData extends ChromeObject {
    if (referrerUrl != null) this.referrerUrl = referrerUrl;
    if (isKioskSession != null) this.isKioskSession = isKioskSession;
  }
- LaunchData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ LaunchData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get id =&gt; proxy['id'];
- set id(String value) =&gt; proxy['id'] = value;
+ String get id =&gt; jsProxy['id'];
+ set id(String value) =&gt; jsProxy['id'] = value;
 
- LaunchItem get items =&gt; _createLaunchItem(proxy['items']);
- set items(LaunchItem value) =&gt; proxy['items'] = jsify(value);
+ LaunchItem get items =&gt; _createLaunchItem(jsProxy['items']);
+ set items(LaunchItem value) =&gt; jsProxy['items'] = jsify(value);
 
- String get url =&gt; proxy['url'];
- set url(String value) =&gt; proxy['url'] = value;
+ String get url =&gt; jsProxy['url'];
+ set url(String value) =&gt; jsProxy['url'] = value;
 
- String get referrerUrl =&gt; proxy['referrerUrl'];
- set referrerUrl(String value) =&gt; proxy['referrerUrl'] = value;
+ String get referrerUrl =&gt; jsProxy['referrerUrl'];
+ set referrerUrl(String value) =&gt; jsProxy['referrerUrl'] = value;
 
- bool get isKioskSession =&gt; proxy['isKioskSession'];
- set isKioskSession(bool value) =&gt; proxy['isKioskSession'] = value;
+ bool get isKioskSession =&gt; jsProxy['isKioskSession'];
+ set isKioskSession(bool value) =&gt; jsProxy['isKioskSession'] = value;
 }
 </pre>
 </div>
@@ -87,7 +87,7 @@ LaunchData({String id, LaunchItem items, String url, String referrerUrl, bool is
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>LaunchData.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>LaunchData.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to LaunchData.LaunchData.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -95,7 +95,7 @@ new <strong>LaunchData.fromProxy</strong>(JsObject proxy) <a class="anchor-link"
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-LaunchData.fromProxy(JsObject proxy): super.fromProxy(proxy);
+LaunchData.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -110,10 +110,10 @@ String         <strong>id</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get id =&gt; proxy['id'];
+String get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(String value) =&gt; proxy['id'] = value;
+set id(String value) =&gt; jsProxy['id'] = value;
 </pre>
 </div>
 </div>
@@ -125,10 +125,10 @@ bool         <strong>isKioskSession</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-bool get isKioskSession =&gt; proxy['isKioskSession'];
+bool get isKioskSession =&gt; jsProxy['isKioskSession'];
 </pre>
 <pre class="source">
-set isKioskSession(bool value) =&gt; proxy['isKioskSession'] = value;
+set isKioskSession(bool value) =&gt; jsProxy['isKioskSession'] = value;
 </pre>
 </div>
 </div>
@@ -140,22 +140,22 @@ set isKioskSession(bool value) =&gt; proxy['isKioskSession'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-LaunchItem get items =&gt; _createLaunchItem(proxy['items']);
+LaunchItem get items =&gt; _createLaunchItem(jsProxy['items']);
 </pre>
 <pre class="source">
-set items(LaunchItem value) =&gt; proxy['items'] = jsify(value);
+set items(LaunchItem value) =&gt; jsProxy['items'] = jsify(value);
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to LaunchData.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to LaunchData.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -167,10 +167,10 @@ String         <strong>referrerUrl</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get referrerUrl =&gt; proxy['referrerUrl'];
+String get referrerUrl =&gt; jsProxy['referrerUrl'];
 </pre>
 <pre class="source">
-set referrerUrl(String value) =&gt; proxy['referrerUrl'] = value;
+set referrerUrl(String value) =&gt; jsProxy['referrerUrl'] = value;
 </pre>
 </div>
 </div>
@@ -182,10 +182,10 @@ String         <strong>url</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get url =&gt; proxy['url'];
+String get url =&gt; jsProxy['url'];
 </pre>
 <pre class="source">
-set url(String value) =&gt; proxy['url'] = value;
+set url(String value) =&gt; jsProxy['url'] = value;
 </pre>
 </div>
 </div>
@@ -198,7 +198,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to LaunchData.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -211,7 +211,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

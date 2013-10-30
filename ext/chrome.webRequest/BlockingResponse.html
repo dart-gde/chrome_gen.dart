@@ -43,29 +43,29 @@ class BlockingResponse extends ChromeObject {
    if (responseHeaders != null) this.responseHeaders = responseHeaders;
    if (authCredentials != null) this.authCredentials = authCredentials;
  }
- BlockingResponse.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ BlockingResponse.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * If true, the request is cancelled. Used in onBeforeRequest, this prevents
   * the request from being sent.
   */
- bool get cancel =&gt; proxy['cancel'];
- set cancel(bool value) =&gt; proxy['cancel'] = value;
+ bool get cancel =&gt; jsProxy['cancel'];
+ set cancel(bool value) =&gt; jsProxy['cancel'] = value;
 
  /**
   * Only used as a response to the onBeforeRequest event. If set, the original
   * request is prevented from being sent and is instead redirected to the given
   * URL.
   */
- String get redirectUrl =&gt; proxy['redirectUrl'];
- set redirectUrl(String value) =&gt; proxy['redirectUrl'] = value;
+ String get redirectUrl =&gt; jsProxy['redirectUrl'];
+ set redirectUrl(String value) =&gt; jsProxy['redirectUrl'] = value;
 
  /**
   * Only used as a response to the onBeforeSendHeaders event. If set, the
   * request is made with these request headers instead.
   */
- HttpHeaders get requestHeaders =&gt; _createHttpHeaders(proxy['requestHeaders']);
- set requestHeaders(HttpHeaders value) =&gt; proxy['requestHeaders'] = jsify(value);
+ HttpHeaders get requestHeaders =&gt; _createHttpHeaders(jsProxy['requestHeaders']);
+ set requestHeaders(HttpHeaders value) =&gt; jsProxy['requestHeaders'] = jsify(value);
 
  /**
   * Only used as a response to the onHeadersReceived event. If set, the server
@@ -74,15 +74,15 @@ class BlockingResponse extends ChromeObject {
   * to limit the number of conflicts (only one extension may modify
   * `responseHeaders` for each request).
   */
- HttpHeaders get responseHeaders =&gt; _createHttpHeaders(proxy['responseHeaders']);
- set responseHeaders(HttpHeaders value) =&gt; proxy['responseHeaders'] = jsify(value);
+ HttpHeaders get responseHeaders =&gt; _createHttpHeaders(jsProxy['responseHeaders']);
+ set responseHeaders(HttpHeaders value) =&gt; jsProxy['responseHeaders'] = jsify(value);
 
  /**
   * Only used as a response to the onAuthRequired event. If set, the request is
   * made using the supplied credentials.
   */
- AuthCredentialsWebRequest get authCredentials =&gt; _createAuthCredentialsWebRequest(proxy['authCredentials']);
- set authCredentials(AuthCredentialsWebRequest value) =&gt; proxy['authCredentials'] = jsify(value);
+ AuthCredentialsWebRequest get authCredentials =&gt; _createAuthCredentialsWebRequest(jsProxy['authCredentials']);
+ set authCredentials(AuthCredentialsWebRequest value) =&gt; jsProxy['authCredentials'] = jsify(value);
 }
 </pre>
 </div>
@@ -113,7 +113,7 @@ BlockingResponse({bool cancel, String redirectUrl, HttpHeaders requestHeaders, H
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>BlockingResponse.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>BlockingResponse.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to BlockingResponse.BlockingResponse.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -121,7 +121,7 @@ new <strong>BlockingResponse.fromProxy</strong>(JsObject proxy) <a class="anchor
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-BlockingResponse.fromProxy(JsObject proxy): super.fromProxy(proxy);
+BlockingResponse.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -138,10 +138,10 @@ BlockingResponse.fromProxy(JsObject proxy): super.fromProxy(proxy);
 <p>Only used as a response to the onAuthRequired event. If set, the request is
 made using the supplied credentials.</p>
 <pre class="source">
-AuthCredentialsWebRequest get authCredentials =&gt; _createAuthCredentialsWebRequest(proxy['authCredentials']);
+AuthCredentialsWebRequest get authCredentials =&gt; _createAuthCredentialsWebRequest(jsProxy['authCredentials']);
 </pre>
 <pre class="source">
-set authCredentials(AuthCredentialsWebRequest value) =&gt; proxy['authCredentials'] = jsify(value);
+set authCredentials(AuthCredentialsWebRequest value) =&gt; jsProxy['authCredentials'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -155,22 +155,22 @@ bool         <strong>cancel</strong> <a class="anchor-link"
 <p>If true, the request is cancelled. Used in onBeforeRequest, this prevents
 the request from being sent.</p>
 <pre class="source">
-bool get cancel =&gt; proxy['cancel'];
+bool get cancel =&gt; jsProxy['cancel'];
 </pre>
 <pre class="source">
-set cancel(bool value) =&gt; proxy['cancel'] = value;
+set cancel(bool value) =&gt; jsProxy['cancel'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to BlockingResponse.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to BlockingResponse.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -185,10 +185,10 @@ String         <strong>redirectUrl</strong> <a class="anchor-link"
 request is prevented from being sent and is instead redirected to the given
 URL.</p>
 <pre class="source">
-String get redirectUrl =&gt; proxy['redirectUrl'];
+String get redirectUrl =&gt; jsProxy['redirectUrl'];
 </pre>
 <pre class="source">
-set redirectUrl(String value) =&gt; proxy['redirectUrl'] = value;
+set redirectUrl(String value) =&gt; jsProxy['redirectUrl'] = value;
 </pre>
 </div>
 </div>
@@ -202,10 +202,10 @@ set redirectUrl(String value) =&gt; proxy['redirectUrl'] = value;
 <p>Only used as a response to the onBeforeSendHeaders event. If set, the
 request is made with these request headers instead.</p>
 <pre class="source">
-HttpHeaders get requestHeaders =&gt; _createHttpHeaders(proxy['requestHeaders']);
+HttpHeaders get requestHeaders =&gt; _createHttpHeaders(jsProxy['requestHeaders']);
 </pre>
 <pre class="source">
-set requestHeaders(HttpHeaders value) =&gt; proxy['requestHeaders'] = jsify(value);
+set requestHeaders(HttpHeaders value) =&gt; jsProxy['requestHeaders'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -222,10 +222,10 @@ return <code>responseHeaders</code> if you really want to modify the headers in 
 to limit the number of conflicts (only one extension may modify
 <code>responseHeaders</code> for each request).</p>
 <pre class="source">
-HttpHeaders get responseHeaders =&gt; _createHttpHeaders(proxy['responseHeaders']);
+HttpHeaders get responseHeaders =&gt; _createHttpHeaders(jsProxy['responseHeaders']);
 </pre>
 <pre class="source">
-set responseHeaders(HttpHeaders value) =&gt; proxy['responseHeaders'] = jsify(value);
+set responseHeaders(HttpHeaders value) =&gt; jsProxy['responseHeaders'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -238,7 +238,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to BlockingResponse.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -251,7 +251,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

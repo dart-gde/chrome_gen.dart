@@ -37,10 +37,10 @@ class ChannelIdResult extends ChromeObject {
  ChannelIdResult({String channelId}) {
    if (channelId != null) this.channelId = channelId;
  }
- ChannelIdResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ ChannelIdResult.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get channelId =&gt; proxy['channelId'];
- set channelId(String value) =&gt; proxy['channelId'] = value;
+ String get channelId =&gt; jsProxy['channelId'];
+ set channelId(String value) =&gt; jsProxy['channelId'] = value;
 }
 </pre>
 </div>
@@ -67,7 +67,7 @@ ChannelIdResult({String channelId}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ChannelIdResult.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ChannelIdResult.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ChannelIdResult.ChannelIdResult.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -75,7 +75,7 @@ new <strong>ChannelIdResult.fromProxy</strong>(JsObject proxy) <a class="anchor-
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ChannelIdResult.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ChannelIdResult.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -90,22 +90,22 @@ String         <strong>channelId</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-String get channelId =&gt; proxy['channelId'];
+String get channelId =&gt; jsProxy['channelId'];
 </pre>
 <pre class="source">
-set channelId(String value) =&gt; proxy['channelId'] = value;
+set channelId(String value) =&gt; jsProxy['channelId'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to ChannelIdResult.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to ChannelIdResult.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -118,7 +118,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to ChannelIdResult.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -131,7 +131,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

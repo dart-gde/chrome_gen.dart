@@ -44,31 +44,31 @@ class ControlTransferInfo extends ChromeObject {
    if (length != null) this.length = length;
    if (data != null) this.data = data;
  }
- ControlTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ ControlTransferInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- Direction get direction =&gt; _createDirection(proxy['direction']);
- set direction(Direction value) =&gt; proxy['direction'] = jsify(value);
+ Direction get direction =&gt; _createDirection(jsProxy['direction']);
+ set direction(Direction value) =&gt; jsProxy['direction'] = jsify(value);
 
- Recipient get recipient =&gt; _createRecipient(proxy['recipient']);
- set recipient(Recipient value) =&gt; proxy['recipient'] = jsify(value);
+ Recipient get recipient =&gt; _createRecipient(jsProxy['recipient']);
+ set recipient(Recipient value) =&gt; jsProxy['recipient'] = jsify(value);
 
- RequestType get requestType =&gt; _createRequestType(proxy['requestType']);
- set requestType(RequestType value) =&gt; proxy['requestType'] = jsify(value);
+ RequestType get requestType =&gt; _createRequestType(jsProxy['requestType']);
+ set requestType(RequestType value) =&gt; jsProxy['requestType'] = jsify(value);
 
- int get request =&gt; proxy['request'];
- set request(int value) =&gt; proxy['request'] = value;
+ int get request =&gt; jsProxy['request'];
+ set request(int value) =&gt; jsProxy['request'] = value;
 
- int get value =&gt; proxy['value'];
- set value(int value) =&gt; proxy['value'] = value;
+ int get value =&gt; jsProxy['value'];
+ set value(int value) =&gt; jsProxy['value'] = value;
 
- int get index =&gt; proxy['index'];
- set index(int value) =&gt; proxy['index'] = value;
+ int get index =&gt; jsProxy['index'];
+ set index(int value) =&gt; jsProxy['index'] = value;
 
- int get length =&gt; proxy['length'];
- set length(int value) =&gt; proxy['length'] = value;
+ int get length =&gt; jsProxy['length'];
+ set length(int value) =&gt; jsProxy['length'] = value;
 
- ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
- set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
+ ArrayBuffer get data =&gt; _createArrayBuffer(jsProxy['data']);
+ set data(ArrayBuffer value) =&gt; jsProxy['data'] = jsify(value);
 }
 </pre>
 </div>
@@ -102,7 +102,7 @@ ControlTransferInfo({Direction direction, Recipient recipient, RequestType reque
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ControlTransferInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ControlTransferInfo.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ControlTransferInfo.ControlTransferInfo.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -110,7 +110,7 @@ new <strong>ControlTransferInfo.fromProxy</strong>(JsObject proxy) <a class="anc
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ControlTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ControlTransferInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -125,10 +125,10 @@ ControlTransferInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
         </h4>
         <div class="doc">
 <pre class="source">
-ArrayBuffer get data =&gt; _createArrayBuffer(proxy['data']);
+ArrayBuffer get data =&gt; _createArrayBuffer(jsProxy['data']);
 </pre>
 <pre class="source">
-set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
+set data(ArrayBuffer value) =&gt; jsProxy['data'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -140,10 +140,10 @@ set data(ArrayBuffer value) =&gt; proxy['data'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-Direction get direction =&gt; _createDirection(proxy['direction']);
+Direction get direction =&gt; _createDirection(jsProxy['direction']);
 </pre>
 <pre class="source">
-set direction(Direction value) =&gt; proxy['direction'] = jsify(value);
+set direction(Direction value) =&gt; jsProxy['direction'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -155,10 +155,22 @@ int         <strong>index</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get index =&gt; proxy['index'];
+int get index =&gt; jsProxy['index'];
 </pre>
 <pre class="source">
-set index(int value) =&gt; proxy['index'] = value;
+set index(int value) =&gt; jsProxy['index'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to ControlTransferInfo.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -170,22 +182,10 @@ int         <strong>length</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get length =&gt; proxy['length'];
+int get length =&gt; jsProxy['length'];
 </pre>
 <pre class="source">
-set length(int value) =&gt; proxy['length'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to ControlTransferInfo.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set length(int value) =&gt; jsProxy['length'] = value;
 </pre>
 </div>
 </div>
@@ -197,10 +197,10 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-Recipient get recipient =&gt; _createRecipient(proxy['recipient']);
+Recipient get recipient =&gt; _createRecipient(jsProxy['recipient']);
 </pre>
 <pre class="source">
-set recipient(Recipient value) =&gt; proxy['recipient'] = jsify(value);
+set recipient(Recipient value) =&gt; jsProxy['recipient'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -212,10 +212,10 @@ int         <strong>request</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get request =&gt; proxy['request'];
+int get request =&gt; jsProxy['request'];
 </pre>
 <pre class="source">
-set request(int value) =&gt; proxy['request'] = value;
+set request(int value) =&gt; jsProxy['request'] = value;
 </pre>
 </div>
 </div>
@@ -227,10 +227,10 @@ set request(int value) =&gt; proxy['request'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-RequestType get requestType =&gt; _createRequestType(proxy['requestType']);
+RequestType get requestType =&gt; _createRequestType(jsProxy['requestType']);
 </pre>
 <pre class="source">
-set requestType(RequestType value) =&gt; proxy['requestType'] = jsify(value);
+set requestType(RequestType value) =&gt; jsProxy['requestType'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -242,10 +242,10 @@ int         <strong>value</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get value =&gt; proxy['value'];
+int get value =&gt; jsProxy['value'];
 </pre>
 <pre class="source">
-set value(int value) =&gt; proxy['value'] = value;
+set value(int value) =&gt; jsProxy['value'] = value;
 </pre>
 </div>
 </div>
@@ -258,7 +258,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to ControlTransferInfo.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -271,7 +271,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

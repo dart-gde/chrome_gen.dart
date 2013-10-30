@@ -45,56 +45,56 @@ class TargetInfo extends ChromeObject {
    if (url != null) this.url = url;
    if (faviconUrl != null) this.faviconUrl = faviconUrl;
  }
- TargetInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ TargetInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Target type.
   * enum of `page`, `background_page`, `worker`, `other`
   */
- String get type =&gt; proxy['type'];
- set type(String value) =&gt; proxy['type'] = value;
+ String get type =&gt; jsProxy['type'];
+ set type(String value) =&gt; jsProxy['type'] = value;
 
  /**
   * Target id.
   */
- String get id =&gt; proxy['id'];
- set id(String value) =&gt; proxy['id'] = value;
+ String get id =&gt; jsProxy['id'];
+ set id(String value) =&gt; jsProxy['id'] = value;
 
  /**
   * The tab id, defined if type == 'page'.
   */
- int get tabId =&gt; proxy['tabId'];
- set tabId(int value) =&gt; proxy['tabId'] = value;
+ int get tabId =&gt; jsProxy['tabId'];
+ set tabId(int value) =&gt; jsProxy['tabId'] = value;
 
  /**
   * The extension id, defined if type = 'background_page'.
   */
- String get extensionId =&gt; proxy['extensionId'];
- set extensionId(String value) =&gt; proxy['extensionId'] = value;
+ String get extensionId =&gt; jsProxy['extensionId'];
+ set extensionId(String value) =&gt; jsProxy['extensionId'] = value;
 
  /**
   * True if debugger is already attached.
   */
- bool get attached =&gt; proxy['attached'];
- set attached(bool value) =&gt; proxy['attached'] = value;
+ bool get attached =&gt; jsProxy['attached'];
+ set attached(bool value) =&gt; jsProxy['attached'] = value;
 
  /**
   * Target page title.
   */
- String get title =&gt; proxy['title'];
- set title(String value) =&gt; proxy['title'] = value;
+ String get title =&gt; jsProxy['title'];
+ set title(String value) =&gt; jsProxy['title'] = value;
 
  /**
   * Target URL.
   */
- String get url =&gt; proxy['url'];
- set url(String value) =&gt; proxy['url'] = value;
+ String get url =&gt; jsProxy['url'];
+ set url(String value) =&gt; jsProxy['url'] = value;
 
  /**
   * Target favicon URL.
   */
- String get faviconUrl =&gt; proxy['faviconUrl'];
- set faviconUrl(String value) =&gt; proxy['faviconUrl'] = value;
+ String get faviconUrl =&gt; jsProxy['faviconUrl'];
+ set faviconUrl(String value) =&gt; jsProxy['faviconUrl'] = value;
 }
 </pre>
 </div>
@@ -128,7 +128,7 @@ TargetInfo({String type, String id, int tabId, String extensionId, bool attached
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>TargetInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>TargetInfo.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to TargetInfo.TargetInfo.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -136,7 +136,7 @@ new <strong>TargetInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link"
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-TargetInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+TargetInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -152,10 +152,10 @@ bool         <strong>attached</strong> <a class="anchor-link"
         <div class="doc">
 <p>True if debugger is already attached.</p>
 <pre class="source">
-bool get attached =&gt; proxy['attached'];
+bool get attached =&gt; jsProxy['attached'];
 </pre>
 <pre class="source">
-set attached(bool value) =&gt; proxy['attached'] = value;
+set attached(bool value) =&gt; jsProxy['attached'] = value;
 </pre>
 </div>
 </div>
@@ -168,10 +168,10 @@ String         <strong>extensionId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The extension id, defined if type = 'background_page'.</p>
 <pre class="source">
-String get extensionId =&gt; proxy['extensionId'];
+String get extensionId =&gt; jsProxy['extensionId'];
 </pre>
 <pre class="source">
-set extensionId(String value) =&gt; proxy['extensionId'] = value;
+set extensionId(String value) =&gt; jsProxy['extensionId'] = value;
 </pre>
 </div>
 </div>
@@ -184,10 +184,10 @@ String         <strong>faviconUrl</strong> <a class="anchor-link"
         <div class="doc">
 <p>Target favicon URL.</p>
 <pre class="source">
-String get faviconUrl =&gt; proxy['faviconUrl'];
+String get faviconUrl =&gt; jsProxy['faviconUrl'];
 </pre>
 <pre class="source">
-set faviconUrl(String value) =&gt; proxy['faviconUrl'] = value;
+set faviconUrl(String value) =&gt; jsProxy['faviconUrl'] = value;
 </pre>
 </div>
 </div>
@@ -200,22 +200,22 @@ String         <strong>id</strong> <a class="anchor-link"
         <div class="doc">
 <p>Target id.</p>
 <pre class="source">
-String get id =&gt; proxy['id'];
+String get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(String value) =&gt; proxy['id'] = value;
+set id(String value) =&gt; jsProxy['id'] = value;
 </pre>
 </div>
 </div>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to TargetInfo.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to TargetInfo.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -228,10 +228,10 @@ int         <strong>tabId</strong> <a class="anchor-link"
         <div class="doc">
 <p>The tab id, defined if type == 'page'.</p>
 <pre class="source">
-int get tabId =&gt; proxy['tabId'];
+int get tabId =&gt; jsProxy['tabId'];
 </pre>
 <pre class="source">
-set tabId(int value) =&gt; proxy['tabId'] = value;
+set tabId(int value) =&gt; jsProxy['tabId'] = value;
 </pre>
 </div>
 </div>
@@ -244,10 +244,10 @@ String         <strong>title</strong> <a class="anchor-link"
         <div class="doc">
 <p>Target page title.</p>
 <pre class="source">
-String get title =&gt; proxy['title'];
+String get title =&gt; jsProxy['title'];
 </pre>
 <pre class="source">
-set title(String value) =&gt; proxy['title'] = value;
+set title(String value) =&gt; jsProxy['title'] = value;
 </pre>
 </div>
 </div>
@@ -261,10 +261,10 @@ String         <strong>type</strong> <a class="anchor-link"
 <p>Target type.
 enum of <code>page</code>, <code>background_page</code>, <code>worker</code>, <code>other</code></p>
 <pre class="source">
-String get type =&gt; proxy['type'];
+String get type =&gt; jsProxy['type'];
 </pre>
 <pre class="source">
-set type(String value) =&gt; proxy['type'] = value;
+set type(String value) =&gt; jsProxy['type'] = value;
 </pre>
 </div>
 </div>
@@ -277,10 +277,10 @@ String         <strong>url</strong> <a class="anchor-link"
         <div class="doc">
 <p>Target URL.</p>
 <pre class="source">
-String get url =&gt; proxy['url'];
+String get url =&gt; jsProxy['url'];
 </pre>
 <pre class="source">
-set url(String value) =&gt; proxy['url'] = value;
+set url(String value) =&gt; jsProxy['url'] = value;
 </pre>
 </div>
 </div>
@@ -293,7 +293,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to TargetInfo.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -306,7 +306,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

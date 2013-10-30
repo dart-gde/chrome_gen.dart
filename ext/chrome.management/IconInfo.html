@@ -39,22 +39,22 @@ class IconInfo extends ChromeObject {
    if (size != null) this.size = size;
    if (url != null) this.url = url;
  }
- IconInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ IconInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * A number representing the width and height of the icon. Likely values
   * include (but are not limited to) 128, 48, 24, and 16.
   */
- int get size =&gt; proxy['size'];
- set size(int value) =&gt; proxy['size'] = value;
+ int get size =&gt; jsProxy['size'];
+ set size(int value) =&gt; jsProxy['size'] = value;
 
  /**
   * The URL for this icon image. To display a grayscale version of the icon (to
   * indicate that an extension is disabled, for example), append
   * `?grayscale=true` to the URL.
   */
- String get url =&gt; proxy['url'];
- set url(String value) =&gt; proxy['url'] = value;
+ String get url =&gt; jsProxy['url'];
+ set url(String value) =&gt; jsProxy['url'] = value;
 }
 </pre>
 </div>
@@ -82,7 +82,7 @@ IconInfo({int size, String url}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>IconInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>IconInfo.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to IconInfo.IconInfo.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -90,22 +90,22 @@ new <strong>IconInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" h
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-IconInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+IconInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to IconInfo.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to IconInfo.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -119,10 +119,10 @@ int         <strong>size</strong> <a class="anchor-link"
 <p>A number representing the width and height of the icon. Likely values
 include (but are not limited to) 128, 48, 24, and 16.</p>
 <pre class="source">
-int get size =&gt; proxy['size'];
+int get size =&gt; jsProxy['size'];
 </pre>
 <pre class="source">
-set size(int value) =&gt; proxy['size'] = value;
+set size(int value) =&gt; jsProxy['size'] = value;
 </pre>
 </div>
 </div>
@@ -137,10 +137,10 @@ String         <strong>url</strong> <a class="anchor-link"
 indicate that an extension is disabled, for example), append
 <code>?grayscale=true</code> to the URL.</p>
 <pre class="source">
-String get url =&gt; proxy['url'];
+String get url =&gt; jsProxy['url'];
 </pre>
 <pre class="source">
-set url(String value) =&gt; proxy['url'] = value;
+set url(String value) =&gt; jsProxy['url'] = value;
 </pre>
 </div>
 </div>
@@ -153,7 +153,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to IconInfo.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -166,7 +166,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

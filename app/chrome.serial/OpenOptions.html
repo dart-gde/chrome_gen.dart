@@ -40,19 +40,19 @@ class OpenOptions extends ChromeObject {
    if (parityBit != null) this.parityBit = parityBit;
    if (stopBit != null) this.stopBit = stopBit;
  }
- OpenOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ OpenOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get bitrate =&gt; proxy['bitrate'];
- set bitrate(int value) =&gt; proxy['bitrate'] = value;
+ int get bitrate =&gt; jsProxy['bitrate'];
+ set bitrate(int value) =&gt; jsProxy['bitrate'] = value;
 
- DataBit get dataBit =&gt; _createDataBit(proxy['dataBit']);
- set dataBit(DataBit value) =&gt; proxy['dataBit'] = jsify(value);
+ DataBit get dataBit =&gt; _createDataBit(jsProxy['dataBit']);
+ set dataBit(DataBit value) =&gt; jsProxy['dataBit'] = jsify(value);
 
- ParityBit get parityBit =&gt; _createParityBit(proxy['parityBit']);
- set parityBit(ParityBit value) =&gt; proxy['parityBit'] = jsify(value);
+ ParityBit get parityBit =&gt; _createParityBit(jsProxy['parityBit']);
+ set parityBit(ParityBit value) =&gt; jsProxy['parityBit'] = jsify(value);
 
- StopBit get stopBit =&gt; _createStopBit(proxy['stopBit']);
- set stopBit(StopBit value) =&gt; proxy['stopBit'] = jsify(value);
+ StopBit get stopBit =&gt; _createStopBit(jsProxy['stopBit']);
+ set stopBit(StopBit value) =&gt; jsProxy['stopBit'] = jsify(value);
 }
 </pre>
 </div>
@@ -82,7 +82,7 @@ OpenOptions({int bitrate, DataBit dataBit, ParityBit parityBit, StopBit stopBit}
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>OpenOptions.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>OpenOptions.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to OpenOptions.OpenOptions.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -90,7 +90,7 @@ new <strong>OpenOptions.fromProxy</strong>(JsObject proxy) <a class="anchor-link
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-OpenOptions.fromProxy(JsObject proxy): super.fromProxy(proxy);
+OpenOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -105,10 +105,10 @@ int         <strong>bitrate</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get bitrate =&gt; proxy['bitrate'];
+int get bitrate =&gt; jsProxy['bitrate'];
 </pre>
 <pre class="source">
-set bitrate(int value) =&gt; proxy['bitrate'] = value;
+set bitrate(int value) =&gt; jsProxy['bitrate'] = value;
 </pre>
 </div>
 </div>
@@ -120,10 +120,22 @@ set bitrate(int value) =&gt; proxy['bitrate'] = value;
         </h4>
         <div class="doc">
 <pre class="source">
-DataBit get dataBit =&gt; _createDataBit(proxy['dataBit']);
+DataBit get dataBit =&gt; _createDataBit(jsProxy['dataBit']);
 </pre>
 <pre class="source">
-set dataBit(DataBit value) =&gt; proxy['dataBit'] = jsify(value);
+set dataBit(DataBit value) =&gt; jsProxy['dataBit'] = jsify(value);
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to OpenOptions.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -135,22 +147,10 @@ set dataBit(DataBit value) =&gt; proxy['dataBit'] = jsify(value);
         </h4>
         <div class="doc">
 <pre class="source">
-ParityBit get parityBit =&gt; _createParityBit(proxy['parityBit']);
+ParityBit get parityBit =&gt; _createParityBit(jsProxy['parityBit']);
 </pre>
 <pre class="source">
-set parityBit(ParityBit value) =&gt; proxy['parityBit'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to OpenOptions.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set parityBit(ParityBit value) =&gt; jsProxy['parityBit'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -162,10 +162,10 @@ final JsObject proxy
         </h4>
         <div class="doc">
 <pre class="source">
-StopBit get stopBit =&gt; _createStopBit(proxy['stopBit']);
+StopBit get stopBit =&gt; _createStopBit(jsProxy['stopBit']);
 </pre>
 <pre class="source">
-set stopBit(StopBit value) =&gt; proxy['stopBit'] = jsify(value);
+set stopBit(StopBit value) =&gt; jsProxy['stopBit'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -178,7 +178,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to OpenOptions.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -191,7 +191,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

@@ -38,13 +38,13 @@ class AcceptInfo extends ChromeObject {
    if (resultCode != null) this.resultCode = resultCode;
    if (socketId != null) this.socketId = socketId;
  }
- AcceptInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ AcceptInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- int get resultCode =&gt; proxy['resultCode'];
- set resultCode(int value) =&gt; proxy['resultCode'] = value;
+ int get resultCode =&gt; jsProxy['resultCode'];
+ set resultCode(int value) =&gt; jsProxy['resultCode'] = value;
 
- int get socketId =&gt; proxy['socketId'];
- set socketId(int value) =&gt; proxy['socketId'] = value;
+ int get socketId =&gt; jsProxy['socketId'];
+ set socketId(int value) =&gt; jsProxy['socketId'] = value;
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ AcceptInfo({int resultCode, int socketId}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>AcceptInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>AcceptInfo.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to AcceptInfo.AcceptInfo.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,22 +80,22 @@ new <strong>AcceptInfo.fromProxy</strong>(JsObject proxy) <a class="anchor-link"
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-AcceptInfo.fromProxy(JsObject proxy): super.fromProxy(proxy);
+AcceptInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to AcceptInfo.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to AcceptInfo.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -107,10 +107,10 @@ int         <strong>resultCode</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get resultCode =&gt; proxy['resultCode'];
+int get resultCode =&gt; jsProxy['resultCode'];
 </pre>
 <pre class="source">
-set resultCode(int value) =&gt; proxy['resultCode'] = value;
+set resultCode(int value) =&gt; jsProxy['resultCode'] = value;
 </pre>
 </div>
 </div>
@@ -122,10 +122,10 @@ int         <strong>socketId</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-int get socketId =&gt; proxy['socketId'];
+int get socketId =&gt; jsProxy['socketId'];
 </pre>
 <pre class="source">
-set socketId(int value) =&gt; proxy['socketId'] = value;
+set socketId(int value) =&gt; jsProxy['socketId'] = value;
 </pre>
 </div>
 </div>
@@ -138,7 +138,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to AcceptInfo.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -151,7 +151,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

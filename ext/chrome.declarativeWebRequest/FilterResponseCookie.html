@@ -48,55 +48,55 @@ class FilterResponseCookie extends ChromeObject {
    if (ageLowerBound != null) this.ageLowerBound = ageLowerBound;
    if (sessionCookie != null) this.sessionCookie = sessionCookie;
  }
- FilterResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ FilterResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * Name of a cookie.
   */
- String get name =&gt; proxy['name'];
- set name(String value) =&gt; proxy['name'] = value;
+ String get name =&gt; jsProxy['name'];
+ set name(String value) =&gt; jsProxy['name'] = value;
 
  /**
   * Value of a cookie, may be padded in double-quotes.
   */
- String get value =&gt; proxy['value'];
- set value(String value) =&gt; proxy['value'] = value;
+ String get value =&gt; jsProxy['value'];
+ set value(String value) =&gt; jsProxy['value'] = value;
 
  /**
   * Value of the Expires cookie attribute.
   */
- String get expires =&gt; proxy['expires'];
- set expires(String value) =&gt; proxy['expires'] = value;
+ String get expires =&gt; jsProxy['expires'];
+ set expires(String value) =&gt; jsProxy['expires'] = value;
 
  /**
   * Value of the Max-Age cookie attribute
   */
- dynamic get maxAge =&gt; proxy['maxAge'];
- set maxAge(var value) =&gt; proxy['maxAge'] = jsify(value);
+ dynamic get maxAge =&gt; jsProxy['maxAge'];
+ set maxAge(var value) =&gt; jsProxy['maxAge'] = jsify(value);
 
  /**
   * Value of the Domain cookie attribute.
   */
- String get domain =&gt; proxy['domain'];
- set domain(String value) =&gt; proxy['domain'] = value;
+ String get domain =&gt; jsProxy['domain'];
+ set domain(String value) =&gt; jsProxy['domain'] = value;
 
  /**
   * Value of the Path cookie attribute.
   */
- String get path =&gt; proxy['path'];
- set path(String value) =&gt; proxy['path'] = value;
+ String get path =&gt; jsProxy['path'];
+ set path(String value) =&gt; jsProxy['path'] = value;
 
  /**
   * Existence of the Secure cookie attribute.
   */
- String get secure =&gt; proxy['secure'];
- set secure(String value) =&gt; proxy['secure'] = value;
+ String get secure =&gt; jsProxy['secure'];
+ set secure(String value) =&gt; jsProxy['secure'] = value;
 
  /**
   * Existence of the HttpOnly cookie attribute.
   */
- String get httpOnly =&gt; proxy['httpOnly'];
- set httpOnly(String value) =&gt; proxy['httpOnly'] = value;
+ String get httpOnly =&gt; jsProxy['httpOnly'];
+ set httpOnly(String value) =&gt; jsProxy['httpOnly'] = value;
 
  /**
   * Inclusive upper bound on the cookie lifetime (specified in seconds after
@@ -107,8 +107,8 @@ class FilterResponseCookie extends ChromeObject {
   * 'expires' cookie attributes. If both are specified, 'max-age' is used to
   * calculate the cookie lifetime.
   */
- int get ageUpperBound =&gt; proxy['ageUpperBound'];
- set ageUpperBound(int value) =&gt; proxy['ageUpperBound'] = value;
+ int get ageUpperBound =&gt; jsProxy['ageUpperBound'];
+ set ageUpperBound(int value) =&gt; jsProxy['ageUpperBound'] = value;
 
  /**
   * Inclusive lower bound on the cookie lifetime (specified in seconds after
@@ -118,15 +118,15 @@ class FilterResponseCookie extends ChromeObject {
   * 'max-age' or 'expires' cookie attributes. If both are specified, 'max-age'
   * is used to calculate the cookie lifetime.
   */
- int get ageLowerBound =&gt; proxy['ageLowerBound'];
- set ageLowerBound(int value) =&gt; proxy['ageLowerBound'] = value;
+ int get ageLowerBound =&gt; jsProxy['ageLowerBound'];
+ set ageLowerBound(int value) =&gt; jsProxy['ageLowerBound'] = value;
 
  /**
   * Filters session cookies. Session cookies have no lifetime specified in any
   * of 'max-age' or 'expires' attributes.
   */
- bool get sessionCookie =&gt; proxy['sessionCookie'];
- set sessionCookie(bool value) =&gt; proxy['sessionCookie'] = value;
+ bool get sessionCookie =&gt; jsProxy['sessionCookie'];
+ set sessionCookie(bool value) =&gt; jsProxy['sessionCookie'] = value;
 }
 </pre>
 </div>
@@ -163,7 +163,7 @@ FilterResponseCookie({String name, String value, String expires, var maxAge, Str
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>FilterResponseCookie.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>FilterResponseCookie.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to FilterResponseCookie.FilterResponseCookie.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -171,7 +171,7 @@ new <strong>FilterResponseCookie.fromProxy</strong>(JsObject proxy) <a class="an
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-FilterResponseCookie.fromProxy(JsObject proxy): super.fromProxy(proxy);
+FilterResponseCookie.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -192,10 +192,10 @@ the criterion of this filter. The cookie lifetime is calculated from either
 'max-age' or 'expires' cookie attributes. If both are specified, 'max-age'
 is used to calculate the cookie lifetime.</p>
 <pre class="source">
-int get ageLowerBound =&gt; proxy['ageLowerBound'];
+int get ageLowerBound =&gt; jsProxy['ageLowerBound'];
 </pre>
 <pre class="source">
-set ageLowerBound(int value) =&gt; proxy['ageLowerBound'] = value;
+set ageLowerBound(int value) =&gt; jsProxy['ageLowerBound'] = value;
 </pre>
 </div>
 </div>
@@ -214,10 +214,10 @@ of this filter. The cookie lifetime is calculated from either 'max-age' or
 'expires' cookie attributes. If both are specified, 'max-age' is used to
 calculate the cookie lifetime.</p>
 <pre class="source">
-int get ageUpperBound =&gt; proxy['ageUpperBound'];
+int get ageUpperBound =&gt; jsProxy['ageUpperBound'];
 </pre>
 <pre class="source">
-set ageUpperBound(int value) =&gt; proxy['ageUpperBound'] = value;
+set ageUpperBound(int value) =&gt; jsProxy['ageUpperBound'] = value;
 </pre>
 </div>
 </div>
@@ -230,10 +230,10 @@ String         <strong>domain</strong> <a class="anchor-link"
         <div class="doc">
 <p>Value of the Domain cookie attribute.</p>
 <pre class="source">
-String get domain =&gt; proxy['domain'];
+String get domain =&gt; jsProxy['domain'];
 </pre>
 <pre class="source">
-set domain(String value) =&gt; proxy['domain'] = value;
+set domain(String value) =&gt; jsProxy['domain'] = value;
 </pre>
 </div>
 </div>
@@ -246,10 +246,10 @@ String         <strong>expires</strong> <a class="anchor-link"
         <div class="doc">
 <p>Value of the Expires cookie attribute.</p>
 <pre class="source">
-String get expires =&gt; proxy['expires'];
+String get expires =&gt; jsProxy['expires'];
 </pre>
 <pre class="source">
-set expires(String value) =&gt; proxy['expires'] = value;
+set expires(String value) =&gt; jsProxy['expires'] = value;
 </pre>
 </div>
 </div>
@@ -262,10 +262,22 @@ String         <strong>httpOnly</strong> <a class="anchor-link"
         <div class="doc">
 <p>Existence of the HttpOnly cookie attribute.</p>
 <pre class="source">
-String get httpOnly =&gt; proxy['httpOnly'];
+String get httpOnly =&gt; jsProxy['httpOnly'];
 </pre>
 <pre class="source">
-set httpOnly(String value) =&gt; proxy['httpOnly'] = value;
+set httpOnly(String value) =&gt; jsProxy['httpOnly'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to FilterResponseCookie.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -278,10 +290,10 @@ var         <strong>maxAge</strong> <a class="anchor-link"
         <div class="doc">
 <p>Value of the Max-Age cookie attribute</p>
 <pre class="source">
-dynamic get maxAge =&gt; proxy['maxAge'];
+dynamic get maxAge =&gt; jsProxy['maxAge'];
 </pre>
 <pre class="source">
-set maxAge(var value) =&gt; proxy['maxAge'] = jsify(value);
+set maxAge(var value) =&gt; jsProxy['maxAge'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -294,10 +306,10 @@ String         <strong>name</strong> <a class="anchor-link"
         <div class="doc">
 <p>Name of a cookie.</p>
 <pre class="source">
-String get name =&gt; proxy['name'];
+String get name =&gt; jsProxy['name'];
 </pre>
 <pre class="source">
-set name(String value) =&gt; proxy['name'] = value;
+set name(String value) =&gt; jsProxy['name'] = value;
 </pre>
 </div>
 </div>
@@ -310,22 +322,10 @@ String         <strong>path</strong> <a class="anchor-link"
         <div class="doc">
 <p>Value of the Path cookie attribute.</p>
 <pre class="source">
-String get path =&gt; proxy['path'];
+String get path =&gt; jsProxy['path'];
 </pre>
 <pre class="source">
-set path(String value) =&gt; proxy['path'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to FilterResponseCookie.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set path(String value) =&gt; jsProxy['path'] = value;
 </pre>
 </div>
 </div>
@@ -338,10 +338,10 @@ String         <strong>secure</strong> <a class="anchor-link"
         <div class="doc">
 <p>Existence of the Secure cookie attribute.</p>
 <pre class="source">
-String get secure =&gt; proxy['secure'];
+String get secure =&gt; jsProxy['secure'];
 </pre>
 <pre class="source">
-set secure(String value) =&gt; proxy['secure'] = value;
+set secure(String value) =&gt; jsProxy['secure'] = value;
 </pre>
 </div>
 </div>
@@ -355,10 +355,10 @@ bool         <strong>sessionCookie</strong> <a class="anchor-link"
 <p>Filters session cookies. Session cookies have no lifetime specified in any
 of 'max-age' or 'expires' attributes.</p>
 <pre class="source">
-bool get sessionCookie =&gt; proxy['sessionCookie'];
+bool get sessionCookie =&gt; jsProxy['sessionCookie'];
 </pre>
 <pre class="source">
-set sessionCookie(bool value) =&gt; proxy['sessionCookie'] = value;
+set sessionCookie(bool value) =&gt; jsProxy['sessionCookie'] = value;
 </pre>
 </div>
 </div>
@@ -371,10 +371,10 @@ String         <strong>value</strong> <a class="anchor-link"
         <div class="doc">
 <p>Value of a cookie, may be padded in double-quotes.</p>
 <pre class="source">
-String get value =&gt; proxy['value'];
+String get value =&gt; jsProxy['value'];
 </pre>
 <pre class="source">
-set value(String value) =&gt; proxy['value'] = value;
+set value(String value) =&gt; jsProxy['value'] = value;
 </pre>
 </div>
 </div>
@@ -387,7 +387,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to FilterResponseCookie.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -400,7 +400,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

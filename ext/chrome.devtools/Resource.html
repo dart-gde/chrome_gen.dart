@@ -39,13 +39,13 @@ class Resource extends ChromeObject {
  Resource({String url}) {
    if (url != null) this.url = url;
  }
- Resource.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Resource.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The URL of the resource.
   */
- String get url =&gt; proxy['url'];
- set url(String value) =&gt; proxy['url'] = value;
+ String get url =&gt; jsProxy['url'];
+ set url(String value) =&gt; jsProxy['url'] = value;
 
  /**
   * Gets the content of the resource.
@@ -57,7 +57,7 @@ class Resource extends ChromeObject {
   */
  Future&lt;GetResourceContentResult&gt; getContent() {
    var completer = new ChromeCompleter&lt;GetResourceContentResult&gt;.twoArgs(GetResourceContentResult._create);
-   proxy.callMethod('getContent', [completer.callback]);
+   jsProxy.callMethod('getContent', [completer.callback]);
    return completer.future;
  }
 
@@ -77,7 +77,7 @@ class Resource extends ChromeObject {
   */
  Future&lt;Map&lt;String, dynamic&gt;&gt; setContent(String content, bool commit) {
    var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
-   proxy.callMethod('setContent', [content, commit, completer.callback]);
+   jsProxy.callMethod('setContent', [content, commit, completer.callback]);
    return completer.future;
  }
 }
@@ -106,7 +106,7 @@ Resource({String url}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Resource.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Resource.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Resource.Resource.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -114,22 +114,22 @@ new <strong>Resource.fromProxy</strong>(JsObject proxy) <a class="anchor-link" h
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Resource.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Resource.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
-<div class="field inherited"><h4 id="proxy">
+<div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Resource.proxy">#</a>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Resource.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject proxy
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -142,10 +142,10 @@ String         <strong>url</strong> <a class="anchor-link"
         <div class="doc">
 <p>The URL of the resource.</p>
 <pre class="source">
-String get url =&gt; proxy['url'];
+String get url =&gt; jsProxy['url'];
 </pre>
 <pre class="source">
-set url(String value) =&gt; proxy['url'] = value;
+set url(String value) =&gt; jsProxy['url'] = value;
 </pre>
 </div>
 </div>
@@ -165,7 +165,7 @@ Currently, only base64 is supported.</p>
 <pre class="source">
 Future&lt;GetResourceContentResult&gt; getContent() {
  var completer = new ChromeCompleter&lt;GetResourceContentResult&gt;.twoArgs(GetResourceContentResult._create);
- proxy.callMethod('getContent', [completer.callback]);
+ jsProxy.callMethod('getContent', [completer.callback]);
  return completer.future;
 }
 </pre>
@@ -190,7 +190,7 @@ error otherwise.</p>
 <pre class="source">
 Future&lt;Map&lt;String, dynamic&gt;&gt; setContent(String content, bool commit) {
  var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
- proxy.callMethod('setContent', [content, commit, completer.callback]);
+ jsProxy.callMethod('setContent', [content, commit, completer.callback]);
  return completer.future;
 }
 </pre>
@@ -202,7 +202,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Resource.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -215,7 +215,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

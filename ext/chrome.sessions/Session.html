@@ -39,28 +39,28 @@ class Session extends ChromeObject {
    if (tab != null) this.tab = tab;
    if (window != null) this.window = window;
  }
- Session.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Session.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The time when the window or tab was closed or modified, represented in
   * milliseconds since the epoch.
   */
- int get lastModified =&gt; proxy['lastModified'];
- set lastModified(int value) =&gt; proxy['lastModified'] = value;
+ int get lastModified =&gt; jsProxy['lastModified'];
+ set lastModified(int value) =&gt; jsProxy['lastModified'] = value;
 
  /**
   * The [tabs.Tab], if this entry describes a tab. Either this or
   * [Session.window] will be set.
   */
- Tab get tab =&gt; _createTab(proxy['tab']);
- set tab(Tab value) =&gt; proxy['tab'] = jsify(value);
+ Tab get tab =&gt; _createTab(jsProxy['tab']);
+ set tab(Tab value) =&gt; jsProxy['tab'] = jsify(value);
 
  /**
   * The [windows.Window], if this entry describes a window. Either this or
   * [Session.tab] will be set.
   */
- Window get window =&gt; _createWindow(proxy['window']);
- set window(Window value) =&gt; proxy['window'] = jsify(value);
+ Window get window =&gt; _createWindow(jsProxy['window']);
+ set window(Window value) =&gt; jsProxy['window'] = jsify(value);
 }
 </pre>
 </div>
@@ -89,7 +89,7 @@ Session({int lastModified, Tab tab, Window window}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Session.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Session.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Session.Session.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -97,13 +97,25 @@ new <strong>Session.fromProxy</strong>(JsObject proxy) <a class="anchor-link" hr
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Session.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Session.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Session.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="lastModified">
 <button class="show-code">Code</button>
 int         <strong>lastModified</strong> <a class="anchor-link"
@@ -114,22 +126,10 @@ int         <strong>lastModified</strong> <a class="anchor-link"
 <p>The time when the window or tab was closed or modified, represented in
 milliseconds since the epoch.</p>
 <pre class="source">
-int get lastModified =&gt; proxy['lastModified'];
+int get lastModified =&gt; jsProxy['lastModified'];
 </pre>
 <pre class="source">
-set lastModified(int value) =&gt; proxy['lastModified'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Session.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set lastModified(int value) =&gt; jsProxy['lastModified'] = value;
 </pre>
 </div>
 </div>
@@ -143,10 +143,10 @@ final JsObject proxy
 <p>The <code>tabs.Tab</code>, if this entry describes a tab. Either this or
 <a class="crossref" href="../chrome.sessions/Session.html#window">Session.window</a> will be set.</p>
 <pre class="source">
-Tab get tab =&gt; _createTab(proxy['tab']);
+Tab get tab =&gt; _createTab(jsProxy['tab']);
 </pre>
 <pre class="source">
-set tab(Tab value) =&gt; proxy['tab'] = jsify(value);
+set tab(Tab value) =&gt; jsProxy['tab'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -160,10 +160,10 @@ set tab(Tab value) =&gt; proxy['tab'] = jsify(value);
 <p>The <code>windows.Window</code>, if this entry describes a window. Either this or
 <a class="crossref" href="../chrome.sessions/Session.html#tab">Session.tab</a> will be set.</p>
 <pre class="source">
-Window get window =&gt; _createWindow(proxy['window']);
+Window get window =&gt; _createWindow(jsProxy['window']);
 </pre>
 <pre class="source">
-set window(Window value) =&gt; proxy['window'] = jsify(value);
+set window(Window value) =&gt; jsProxy['window'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -176,7 +176,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Session.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -189,7 +189,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

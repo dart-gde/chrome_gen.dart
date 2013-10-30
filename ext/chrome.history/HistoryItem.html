@@ -43,45 +43,45 @@ class HistoryItem extends ChromeObject {
    if (visitCount != null) this.visitCount = visitCount;
    if (typedCount != null) this.typedCount = typedCount;
  }
- HistoryItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ HistoryItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The unique identifier for the item.
   */
- String get id =&gt; proxy['id'];
- set id(String value) =&gt; proxy['id'] = value;
+ String get id =&gt; jsProxy['id'];
+ set id(String value) =&gt; jsProxy['id'] = value;
 
  /**
   * The URL navigated to by a user.
   */
- String get url =&gt; proxy['url'];
- set url(String value) =&gt; proxy['url'] = value;
+ String get url =&gt; jsProxy['url'];
+ set url(String value) =&gt; jsProxy['url'] = value;
 
  /**
   * The title of the page when it was last loaded.
   */
- String get title =&gt; proxy['title'];
- set title(String value) =&gt; proxy['title'] = value;
+ String get title =&gt; jsProxy['title'];
+ set title(String value) =&gt; jsProxy['title'] = value;
 
  /**
   * When this page was last loaded, represented in milliseconds since the
   * epoch.
   */
- dynamic get lastVisitTime =&gt; proxy['lastVisitTime'];
- set lastVisitTime(var value) =&gt; proxy['lastVisitTime'] = jsify(value);
+ dynamic get lastVisitTime =&gt; jsProxy['lastVisitTime'];
+ set lastVisitTime(var value) =&gt; jsProxy['lastVisitTime'] = jsify(value);
 
  /**
   * The number of times the user has navigated to this page.
   */
- int get visitCount =&gt; proxy['visitCount'];
- set visitCount(int value) =&gt; proxy['visitCount'] = value;
+ int get visitCount =&gt; jsProxy['visitCount'];
+ set visitCount(int value) =&gt; jsProxy['visitCount'] = value;
 
  /**
   * The number of times the user has navigated to this page by typing in the
   * address.
   */
- int get typedCount =&gt; proxy['typedCount'];
- set typedCount(int value) =&gt; proxy['typedCount'] = value;
+ int get typedCount =&gt; jsProxy['typedCount'];
+ set typedCount(int value) =&gt; jsProxy['typedCount'] = value;
 }
 </pre>
 </div>
@@ -113,7 +113,7 @@ HistoryItem({String id, String url, String title, var lastVisitTime, int visitCo
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>HistoryItem.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>HistoryItem.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to HistoryItem.HistoryItem.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -121,7 +121,7 @@ new <strong>HistoryItem.fromProxy</strong>(JsObject proxy) <a class="anchor-link
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-HistoryItem.fromProxy(JsObject proxy): super.fromProxy(proxy);
+HistoryItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -137,10 +137,22 @@ String         <strong>id</strong> <a class="anchor-link"
         <div class="doc">
 <p>The unique identifier for the item.</p>
 <pre class="source">
-String get id =&gt; proxy['id'];
+String get id =&gt; jsProxy['id'];
 </pre>
 <pre class="source">
-set id(String value) =&gt; proxy['id'] = value;
+set id(String value) =&gt; jsProxy['id'] = value;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to HistoryItem.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
 </pre>
 </div>
 </div>
@@ -154,22 +166,10 @@ var         <strong>lastVisitTime</strong> <a class="anchor-link"
 <p>When this page was last loaded, represented in milliseconds since the
 epoch.</p>
 <pre class="source">
-dynamic get lastVisitTime =&gt; proxy['lastVisitTime'];
+dynamic get lastVisitTime =&gt; jsProxy['lastVisitTime'];
 </pre>
 <pre class="source">
-set lastVisitTime(var value) =&gt; proxy['lastVisitTime'] = jsify(value);
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to HistoryItem.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set lastVisitTime(var value) =&gt; jsProxy['lastVisitTime'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -182,10 +182,10 @@ String         <strong>title</strong> <a class="anchor-link"
         <div class="doc">
 <p>The title of the page when it was last loaded.</p>
 <pre class="source">
-String get title =&gt; proxy['title'];
+String get title =&gt; jsProxy['title'];
 </pre>
 <pre class="source">
-set title(String value) =&gt; proxy['title'] = value;
+set title(String value) =&gt; jsProxy['title'] = value;
 </pre>
 </div>
 </div>
@@ -199,10 +199,10 @@ int         <strong>typedCount</strong> <a class="anchor-link"
 <p>The number of times the user has navigated to this page by typing in the
 address.</p>
 <pre class="source">
-int get typedCount =&gt; proxy['typedCount'];
+int get typedCount =&gt; jsProxy['typedCount'];
 </pre>
 <pre class="source">
-set typedCount(int value) =&gt; proxy['typedCount'] = value;
+set typedCount(int value) =&gt; jsProxy['typedCount'] = value;
 </pre>
 </div>
 </div>
@@ -215,10 +215,10 @@ String         <strong>url</strong> <a class="anchor-link"
         <div class="doc">
 <p>The URL navigated to by a user.</p>
 <pre class="source">
-String get url =&gt; proxy['url'];
+String get url =&gt; jsProxy['url'];
 </pre>
 <pre class="source">
-set url(String value) =&gt; proxy['url'] = value;
+set url(String value) =&gt; jsProxy['url'] = value;
 </pre>
 </div>
 </div>
@@ -231,10 +231,10 @@ int         <strong>visitCount</strong> <a class="anchor-link"
         <div class="doc">
 <p>The number of times the user has navigated to this page.</p>
 <pre class="source">
-int get visitCount =&gt; proxy['visitCount'];
+int get visitCount =&gt; jsProxy['visitCount'];
 </pre>
 <pre class="source">
-set visitCount(int value) =&gt; proxy['visitCount'] = value;
+set visitCount(int value) =&gt; jsProxy['visitCount'] = value;
 </pre>
 </div>
 </div>
@@ -247,7 +247,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to HistoryItem.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -260,7 +260,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>

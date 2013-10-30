@@ -37,15 +37,15 @@ class Filter extends ChromeObject {
  Filter({int maxResults}) {
    if (maxResults != null) this.maxResults = maxResults;
  }
- Filter.fromProxy(JsObject proxy): super.fromProxy(proxy);
+ Filter.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
  /**
   * The maximum number of entries to be fetched in the requested list. Omit
   * this parameter to fetch the maximum number of entries
   * ([MAX_SESSION_RESULTS]).
   */
- int get maxResults =&gt; proxy['maxResults'];
- set maxResults(int value) =&gt; proxy['maxResults'] = value;
+ int get maxResults =&gt; jsProxy['maxResults'];
+ set maxResults(int value) =&gt; jsProxy['maxResults'] = value;
 }
 </pre>
 </div>
@@ -72,7 +72,7 @@ Filter({int maxResults}) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>Filter.fromProxy</strong>(JsObject proxy) <a class="anchor-link" href="#fromProxy"
+new <strong>Filter.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to Filter.Filter.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -80,13 +80,25 @@ new <strong>Filter.fromProxy</strong>(JsObject proxy) <a class="anchor-link" hre
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Filter.fromProxy(JsObject proxy): super.fromProxy(proxy);
+Filter.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
+<div class="field inherited"><h4 id="jsProxy">
+<button class="show-code">Code</button>
+final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+            href="#jsProxy"
+            title="Permalink to Filter.jsProxy">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
+<pre class="source">
+final JsObject jsProxy
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="maxResults">
 <button class="show-code">Code</button>
 int         <strong>maxResults</strong> <a class="anchor-link"
@@ -98,22 +110,10 @@ int         <strong>maxResults</strong> <a class="anchor-link"
 this parameter to fetch the maximum number of entries
 ([MAX_SESSION_RESULTS]).</p>
 <pre class="source">
-int get maxResults =&gt; proxy['maxResults'];
+int get maxResults =&gt; jsProxy['maxResults'];
 </pre>
 <pre class="source">
-set maxResults(int value) =&gt; proxy['maxResults'] = value;
-</pre>
-</div>
-</div>
-<div class="field inherited"><h4 id="proxy">
-<button class="show-code">Code</button>
-final JsObject         <strong>proxy</strong> <a class="anchor-link"
-            href="#proxy"
-            title="Permalink to Filter.proxy">#</a>
-        </h4>
-        <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
-<pre class="source">
-final JsObject proxy
+set maxResults(int value) =&gt; jsProxy['maxResults'] = value;
 </pre>
 </div>
 </div>
@@ -126,7 +126,7 @@ JsObject <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
               title="Permalink to Filter.toJs">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-JsObject toJs() =&gt; proxy;
+JsObject toJs() =&gt; jsProxy;
 </pre>
 </div>
 </div>
@@ -139,7 +139,7 @@ String <strong>toString</strong>() <a class="anchor-link" href="#toString"
 <p>Returns a string representation of this object.</p>
 <div class="docs-inherited-from">docs inherited from Object </div></div>
 <pre class="source">
-String toString() =&gt; proxy.toString();
+String toString() =&gt; jsProxy.toString();
 </pre>
 </div>
 </div>
