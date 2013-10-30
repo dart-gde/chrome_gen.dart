@@ -87,7 +87,9 @@ class IDLConverter {
       ChromeType chromeType = chromeMethod.params.removeLast();
       chromeMethod.returns = _convertToFuture(chromeMethod, chromeType);
     } else {
-      chromeMethod.returns = ChromeType.VOID;
+      if (chromeMethod.returns == null) {
+        chromeMethod.returns = ChromeType.VOID;
+      }
     }
 
 
@@ -165,6 +167,8 @@ class IDLConverter {
   ChromeType _convertType(IDLType idlType) {
     if (idlType == null) {
       return null;
+    } else if (idlType.name == "void") {
+      return ChromeType.VOID;
     } else {
       ChromeType chromeType = new ChromeType();
       chromeType.type = idlToDartType(idlType.name);
