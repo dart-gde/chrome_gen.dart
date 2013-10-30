@@ -34,13 +34,13 @@
 <div class="doc">
 <pre class="source">
 class AppWindow extends ChromeObject {
- AppWindow({var contentWindow}) {
+ AppWindow({Window contentWindow}) {
    if (contentWindow != null) this.contentWindow = contentWindow;
  }
  AppWindow.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- dynamic get contentWindow =&gt; jsProxy['contentWindow'];
- set contentWindow(var value) =&gt; jsProxy['contentWindow'] = jsify(value);
+ Window get contentWindow =&gt; _createWindow(jsProxy['contentWindow']);
+ set contentWindow(Window value) =&gt; jsProxy['contentWindow'] = jsify(value);
 
  /**
   * Focus the window.
@@ -194,7 +194,7 @@ class AppWindow extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>AppWindow</strong>({contentWindow}) <a class="anchor-link" href="#"
+new <strong>AppWindow</strong>({<a href="../chrome.windows/Window.html">Window</a> contentWindow}) <a class="anchor-link" href="#"
               title="Permalink to AppWindow.AppWindow">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -202,7 +202,7 @@ new <strong>AppWindow</strong>({contentWindow}) <a class="anchor-link" href="#"
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-AppWindow({var contentWindow}) {
+AppWindow({Window contentWindow}) {
  if (contentWindow != null) this.contentWindow = contentWindow;
 }
 </pre>
@@ -227,16 +227,16 @@ AppWindow.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="contentWindow">
 <button class="show-code">Code</button>
-var         <strong>contentWindow</strong> <a class="anchor-link"
+<a href="../chrome.windows/Window.html">Window</a>         <strong>contentWindow</strong> <a class="anchor-link"
             href="#contentWindow"
             title="Permalink to AppWindow.contentWindow">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-dynamic get contentWindow =&gt; jsProxy['contentWindow'];
+Window get contentWindow =&gt; _createWindow(jsProxy['contentWindow']);
 </pre>
 <pre class="source">
-set contentWindow(var value) =&gt; jsProxy['contentWindow'] = jsify(value);
+set contentWindow(Window value) =&gt; jsProxy['contentWindow'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -34,14 +34,14 @@
 <div class="doc">
 <pre class="source">
 class LaunchItem extends ChromeObject {
- LaunchItem({var entry, String type}) {
+ LaunchItem({FileEntry entry, String type}) {
    if (entry != null) this.entry = entry;
    if (type != null) this.type = type;
  }
  LaunchItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- dynamic get entry =&gt; jsProxy['entry'];
- set entry(var value) =&gt; jsProxy['entry'] = jsify(value);
+ FileEntry get entry =&gt; _createFileEntry(jsProxy['entry']);
+ set entry(FileEntry value) =&gt; jsProxy['entry'] = jsify(value);
 
  String get type =&gt; jsProxy['type'];
  set type(String value) =&gt; jsProxy['type'] = value;
@@ -55,7 +55,7 @@ class LaunchItem extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>LaunchItem</strong>({entry, String type}) <a class="anchor-link" href="#"
+new <strong>LaunchItem</strong>({FileEntry entry, String type}) <a class="anchor-link" href="#"
               title="Permalink to LaunchItem.LaunchItem">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -63,7 +63,7 @@ new <strong>LaunchItem</strong>({entry, String type}) <a class="anchor-link" hre
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-LaunchItem({var entry, String type}) {
+LaunchItem({FileEntry entry, String type}) {
  if (entry != null) this.entry = entry;
  if (type != null) this.type = type;
 }
@@ -89,16 +89,16 @@ LaunchItem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="entry">
 <button class="show-code">Code</button>
-var         <strong>entry</strong> <a class="anchor-link"
+FileEntry         <strong>entry</strong> <a class="anchor-link"
             href="#entry"
             title="Permalink to LaunchItem.entry">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-dynamic get entry =&gt; jsProxy['entry'];
+FileEntry get entry =&gt; _createFileEntry(jsProxy['entry']);
 </pre>
 <pre class="source">
-set entry(var value) =&gt; jsProxy['entry'] = jsify(value);
+set entry(FileEntry value) =&gt; jsProxy['entry'] = jsify(value);
 </pre>
 </div>
 </div>

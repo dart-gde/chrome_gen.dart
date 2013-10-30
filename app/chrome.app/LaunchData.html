@@ -32,6 +32,8 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<p>Optional data for the launch. Either <code>items</code>, or the pair (<code>url,
+referrerUrl</code>) can be present for any given launch.</p>
 <pre class="source">
 class LaunchData extends ChromeObject {
  LaunchData({String id, LaunchItem items, String url, String referrerUrl, bool isKioskSession}) {

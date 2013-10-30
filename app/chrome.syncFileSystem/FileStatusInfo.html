@@ -34,15 +34,15 @@
 <div class="doc">
 <pre class="source">
 class FileStatusInfo extends ChromeObject {
- FileStatusInfo({var fileEntry, FileStatus status, String error}) {
+ FileStatusInfo({Entry fileEntry, FileStatus status, String error}) {
    if (fileEntry != null) this.fileEntry = fileEntry;
    if (status != null) this.status = status;
    if (error != null) this.error = error;
  }
  FileStatusInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- dynamic get fileEntry =&gt; jsProxy['fileEntry'];
- set fileEntry(var value) =&gt; jsProxy['fileEntry'] = jsify(value);
+ Entry get fileEntry =&gt; _createEntry(jsProxy['fileEntry']);
+ set fileEntry(Entry value) =&gt; jsProxy['fileEntry'] = jsify(value);
 
  FileStatus get status =&gt; _createFileStatus(jsProxy['status']);
  set status(FileStatus value) =&gt; jsProxy['status'] = jsify(value);
@@ -59,7 +59,7 @@ class FileStatusInfo extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>FileStatusInfo</strong>({fileEntry, <a href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a> status, String error}) <a class="anchor-link" href="#"
+new <strong>FileStatusInfo</strong>({Entry fileEntry, <a href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a> status, String error}) <a class="anchor-link" href="#"
               title="Permalink to FileStatusInfo.FileStatusInfo">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -67,7 +67,7 @@ new <strong>FileStatusInfo</strong>({fileEntry, <a href="../chrome.syncFileSyste
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-FileStatusInfo({var fileEntry, FileStatus status, String error}) {
+FileStatusInfo({Entry fileEntry, FileStatus status, String error}) {
  if (fileEntry != null) this.fileEntry = fileEntry;
  if (status != null) this.status = status;
  if (error != null) this.error = error;
@@ -109,16 +109,16 @@ set error(String value) =&gt; jsProxy['error'] = value;
 </div>
 <div class="field"><h4 id="fileEntry">
 <button class="show-code">Code</button>
-var         <strong>fileEntry</strong> <a class="anchor-link"
+Entry         <strong>fileEntry</strong> <a class="anchor-link"
             href="#fileEntry"
             title="Permalink to FileStatusInfo.fileEntry">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-dynamic get fileEntry =&gt; jsProxy['fileEntry'];
+Entry get fileEntry =&gt; _createEntry(jsProxy['fileEntry']);
 </pre>
 <pre class="source">
-set fileEntry(var value) =&gt; jsProxy['fileEntry'] = jsify(value);
+set fileEntry(Entry value) =&gt; jsProxy['fileEntry'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -41,10 +41,9 @@ class ChromeBluetooth extends ChromeApi {
  bool get available =&gt; _bluetooth != null;
 
  /**
-  * These functions all report failures via chrome.runtime.lastError. Registers
-  * the JavaScript application as an implementation for the given Profile; if a
-  * channel or PSM is specified, the profile will be exported in the host's SDP
-  * and GATT tables and advertised to other devices.
+  * Registers the JavaScript application as an implementation for the given
+  * Profile; if a channel or PSM is specified, the profile will be exported in
+  * the host's SDP and GATT tables and advertised to other devices.
   */
  Future addProfile(Profile profile) {
    if (_bluetooth == null) _throwNotAvailable();
@@ -293,10 +292,9 @@ Stream&lt;Socket&gt; get onConnection =&gt; _onConnection.stream;
 Future <strong>addProfile</strong>(<a href="../chrome.bluetooth/Profile.html">Profile</a> profile) <a class="anchor-link" href="#addProfile"
               title="Permalink to ChromeBluetooth.addProfile">#</a></h4>
 <div class="doc">
-<p>These functions all report failures via chrome.runtime.lastError. Registers
-the JavaScript application as an implementation for the given Profile; if a
-channel or PSM is specified, the profile will be exported in the host's SDP
-and GATT tables and advertised to other devices.</p>
+<p>Registers the JavaScript application as an implementation for the given
+Profile; if a channel or PSM is specified, the profile will be exported in
+the host's SDP and GATT tables and advertised to other devices.</p>
 <pre class="source">
 Future addProfile(Profile profile) {
  if (_bluetooth == null) _throwNotAvailable();

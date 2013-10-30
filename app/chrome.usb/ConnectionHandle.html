@@ -32,6 +32,17 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<p>Returned by <code>openDevice</code> to be used for USB communication. Every time a
+device is opened, a new connection handle is created.</p>
+<p>A connection handle represents the underlying data structure that contains
+all the data we need to communicate with a USB device, including the status
+of interfaces, the pending transfers, the descriptors, and etc. A connectin
+handle id is different from a USB device id.</p>
+<p>All connection handles can work together if the device allows it. The
+connection handle will be automatically closed when the app is reloaded or
+suspended.</p>
+<p>When a connection handle is closed, all the interfaces it claimed will be
+released and all the transfers in progress will be canceled immediately.</p>
 <pre class="source">
 class ConnectionHandle extends ChromeObject {
  ConnectionHandle({int handle, int vendorId, int productId}) {

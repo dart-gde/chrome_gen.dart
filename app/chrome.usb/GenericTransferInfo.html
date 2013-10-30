@@ -32,6 +32,8 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<p>GenericTransferInfo is used by both bulk and interrupt transfers to specify
+the parameters of the transfer.</p>
 <pre class="source">
 class GenericTransferInfo extends ChromeObject {
  GenericTransferInfo({Direction direction, int endpoint, int length, ArrayBuffer data}) {

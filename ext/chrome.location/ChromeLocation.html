@@ -41,10 +41,9 @@ class ChromeLocation extends ChromeApi {
  bool get available =&gt; _location != null;
 
  /**
-  * todo(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
-  * location watching request. If there is another location watching request
-  * with the same name (or no name if none is specified), it will be cancelled
-  * and replaced by this request.
+  * Starts a location watching request. If there is another location watching
+  * request with the same name (or no name if none is specified), it will be
+  * cancelled and replaced by this request.
   * [name]: Optional name to identify this request. Defaults to the empty
   * string.
   * [requestInfo]: Optional parameters for this request.
@@ -153,10 +152,9 @@ void clearWatch(String name) {
 void <strong>watchLocation</strong>(String name, <a href="../chrome.location/WatchLocationRequestInfo.html">WatchLocationRequestInfo</a> requestInfo) <a class="anchor-link" href="#watchLocation"
               title="Permalink to ChromeLocation.watchLocation">#</a></h4>
 <div class="doc">
-<p>todo(vadimt): Consider adding getWatch() and getAllWatches(). Starts a
-location watching request. If there is another location watching request
-with the same name (or no name if none is specified), it will be cancelled
-and replaced by this request.
+<p>Starts a location watching request. If there is another location watching
+request with the same name (or no name if none is specified), it will be
+cancelled and replaced by this request.
 
 <span class="param">name</span>: Optional name to identify this request. Defaults to the empty
 string.
