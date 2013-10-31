@@ -145,7 +145,7 @@ class IDLConverter {
   ChromeType _convertParameter(IDLParameter parameter) {
     ChromeType param = new ChromeType();
     param.name = parameter.name;
-    param.type = idlToDartType(parameter.type.name);
+    param.type = idlToDartType(parameter.type);
     param.refName = idlToDartRefName(parameter.type);
     library.addImport(getImportForClass(param.refName));
     param.optional = parameter.isOptional;
@@ -172,7 +172,7 @@ class IDLConverter {
       return ChromeType.VOID;
     } else {
       ChromeType chromeType = new ChromeType();
-      chromeType.type = idlToDartType(idlType.name);
+      chromeType.type = idlToDartType(idlType);
       chromeType.refName = idlToDartRefName(idlType);
       // TODO: now do you represent List<String> in ChromeType?
       // chromeType.isList = idlType.isArray;
@@ -188,9 +188,9 @@ class IDLConverter {
                     'long': 'int'
   };
 
-  String idlToDartType(String type) {
-    if (TYPE_MAP.containsKey(type)) {
-      return TYPE_MAP[type];
+  String idlToDartType(IDLType type) {
+    if (TYPE_MAP.containsKey(type.name)) {
+      return TYPE_MAP[type.name];
     } else {
       // NOTE:
       return 'var';
