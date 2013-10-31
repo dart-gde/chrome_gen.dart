@@ -14,8 +14,7 @@ void main() {
 
 // TODO: remove this includeWebIdl flag
 void defineTests({bool includeWebIdl: true}) {
-  Directory testDir = new Directory(
-      Platform.script.substring(0, Platform.script.lastIndexOf('/')));
+  Directory testDir = new Directory(Uri.base.resolve('test').path);
 
   bool idlFileExtTest(FileSystemEntity file) =>
       file.path.endsWith('.idl') || file.path.endsWith('.widl');

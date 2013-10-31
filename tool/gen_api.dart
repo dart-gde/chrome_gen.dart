@@ -16,9 +16,9 @@ import 'web_idl_parser.dart';
 import 'src/src_gen.dart';
 import 'src/utils.dart';
 
-void main() {
+void main(List<String> args) {
   ArgParser parser = _createArgsParser();
-  ArgResults results = parser.parse(new Options().arguments);
+  ArgResults results = parser.parse(args);
 
   if (results['help'] || results.rest.length != 1) {
     _printUsage(parser);

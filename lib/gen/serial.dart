@@ -26,6 +26,7 @@ class ChromeSerial extends ChromeApi {
    * Returns names of valid ports on this machine, each of which is likely to be
    * valid to pass as the port argument to open(). The list is regenerated each
    * time this method is called, as port validity is dynamic.
+   * 
    * [callback]: Called with the list of ports.
    */
   Future<String> getPorts() {
@@ -218,9 +219,12 @@ class SerialWriteInfo extends ChromeObject {
 
 /**
  * Boolean true = mark signal (negative serial voltage). Boolean false = space
- * signal (positive serial voltage). For SetControlSignals, include the sendable
- * signals that you wish to change. Signals not included in the dictionary will
- * be left unchanged. GetControlSignals includes all receivable signals.
+ * signal (positive serial voltage).
+ * 
+ * For SetControlSignals, include the sendable signals that you wish to change.
+ * Signals not included in the dictionary will be left unchanged.
+ * 
+ * GetControlSignals includes all receivable signals.
  */
 class ControlSignalOptions extends ChromeObject {
   ControlSignalOptions({bool dtr, bool rts, bool dcd, bool cts}) {

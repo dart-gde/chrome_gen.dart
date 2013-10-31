@@ -6,9 +6,8 @@ import 'dart:io';
 
 import 'json_model.dart';
 
-void main() {
-  JsonNamespace namespace = parse(new File(
-      new Options().arguments.first).readAsStringSync());
+void main(List<String> args) {
+  JsonNamespace namespace = parse(new File(args.first).readAsStringSync());
 
   print(namespace);
 }
