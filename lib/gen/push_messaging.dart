@@ -1,10 +1,6 @@
 /* This file has been generated from push_messaging.idl - do not edit */
 
 /**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file.
- * 
  * Use `chrome.pushMessaging` to enable apps and extensions to receive message
  * data sent through <a href="cloudMessaging.html">Google Cloud Messaging</a>.
  */

@@ -7,11 +7,14 @@ import 'chrome_idl_model.dart';
 /**
  * Map the namespace declaration parse to a [IDLNamespaceDeclaration]
  */
-IDLNamespaceDeclaration idlNamespaceDeclarationMapping(
+IDLNamespaceDeclaration idlNamespaceDeclarationMapping(Option copyrightMaybe,
   List<String> documentation, Option attributeMaybe, _, List<String> name, List body,
   __) {
 
   String nameDotNotation = name.join(".");
+
+  String copyrightSignature =
+      copyrightMaybe.isDefined ? copyrightMaybe.value : "";
 
   IDLFunctionDeclaration functionDeclaration =
       body.firstWhere((e) => e is IDLFunctionDeclaration, orElse: () => null);
@@ -35,7 +38,7 @@ IDLNamespaceDeclaration idlNamespaceDeclarationMapping(
       callbackDeclarations: callbackDeclarations,
       enumDeclarations: enumDeclarations,
       attribute: attributeMaybe.isDefined ? attributeMaybe.value : null,
-      documentation: documentation);
+      documentation: documentation, copyrightSignature: copyrightSignature);
 }
 
 /**

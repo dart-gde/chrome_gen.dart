@@ -1,10 +1,6 @@
 /* This file has been generated from sync_file_system.idl - do not edit */
 
 /**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file.
- * 
  * Use the `chrome.syncFileSystem` API to save and synchronize data on Google
  * Drive. This API is NOT for accessing arbitrary user docs stored in Google
  * Drive. It provides app-specific syncable storage for offline and caching

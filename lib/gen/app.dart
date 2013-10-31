@@ -23,10 +23,6 @@ class ChromeApp {
 }
 
 /**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file.
- * 
  * Use the `chrome.app.runtime` API to manage the app lifecycle. The app runtime
  * manages app installation, controls the event page, and can shut down the app
  * at anytime.
@@ -102,10 +98,6 @@ FileEntry _createFileEntry(JsObject jsProxy) => jsProxy == null ? null : new Chr
 LaunchItem _createLaunchItem(JsObject jsProxy) => jsProxy == null ? null : new LaunchItem.fromProxy(jsProxy);
 
 /**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file.
- * 
  * Use the `chrome.app.window` API to create windows. Windows have an optional
  * frame with title bar and size controls. They are not associated with any
  * Chrome browser windows.

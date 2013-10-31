@@ -16,6 +16,7 @@ class IDLNamespaceDeclaration {
   final IDLEventDeclaration eventDeclaration;
   final List<IDLCallbackDeclaration> callbackDeclarations;
   final List<IDLEnumDeclaration> enumDeclarations;
+  final String copyrightSignature;
 
   /**
    * Namespace documentation
@@ -24,7 +25,8 @@ class IDLNamespaceDeclaration {
 
   IDLNamespaceDeclaration(this.name, {this.functionDeclaration,
       this.typeDeclarations, this.eventDeclaration, this.callbackDeclarations,
-      this.enumDeclarations, this.attribute, this.documentation});
+      this.enumDeclarations, this.attribute, this.documentation,
+      this.copyrightSignature});
 
   String toString() =>
       "IDLNamespaceDeclaration($name, $attribute, $documentation)";
