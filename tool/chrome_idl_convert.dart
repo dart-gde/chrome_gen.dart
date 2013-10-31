@@ -218,8 +218,6 @@ class IDLConverter {
       return null;
     }
 
-    str = str.replaceAll(' found in the LICENSE file.',
-        ' found in the LICENSE file.\n');
     str = str.replaceAll('\n ', ' ');
     str = str.replaceAll(new RegExp('\n+'), '\n\n');
     str = str.replaceAll(new RegExp('(\n )+'), '\n');
