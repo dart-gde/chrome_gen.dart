@@ -3,8 +3,10 @@
 /**
  * Copyright (c) 2013 The Chromium Authors. All rights reserved. Use of this
  * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.notifications` API to create rich notifications
- * using templates and show these notifications to users in the system tray.
+ * LICENSE file.
+ * 
+ * Use the `chrome.notifications` API to create rich notifications using
+ * templates and show these notifications to users in the system tray.
  */
 library chrome.notifications;
 

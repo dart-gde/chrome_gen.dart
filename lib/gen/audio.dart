@@ -3,9 +3,11 @@
 /**
  * Copyright (c) 2013 The Chromium Authors. All rights reserved. Use of this
  * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. The `chrome.audio` API is provided to allow users to get
- * information about and control the audio devices attached to the system. This
- * API is currently only implemented for ChromeOS.
+ * LICENSE file.
+ * 
+ * The `chrome.audio` API is provided to allow users to get information about
+ * and control the audio devices attached to the system. This API is currently
+ * only implemented for ChromeOS.
  */
 library chrome.audio;
 

@@ -3,9 +3,11 @@
 /**
  * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
  * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.usb` API to interact with connected USB
- * devices. This API provides access to USB operations from within the context
- * of an app. Using this API, apps can function as drivers for hardware devices.
+ * LICENSE file.
+ * 
+ * Use the `chrome.usb` API to interact with connected USB devices. This API
+ * provides access to USB operations from within the context of an app. Using
+ * this API, apps can function as drivers for hardware devices.
  */
 library chrome.usb;
 

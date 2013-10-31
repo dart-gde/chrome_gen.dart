@@ -3,8 +3,10 @@
 /**
  * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
  * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.mediaGalleries` API to access media files
- * (images, video, audio) from the user's local disks (with the user's consent).
+ * LICENSE file.
+ * 
+ * Use the `chrome.mediaGalleries` API to access media files (images, video,
+ * audio) from the user's local disks (with the user's consent).
  */
 library chrome.mediaGalleries;
 

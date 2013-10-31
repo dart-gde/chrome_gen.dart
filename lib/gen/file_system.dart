@@ -3,11 +3,13 @@
 /**
  * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
  * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.fileSystem` API to create, read, navigate, and
- * write to a sandboxed section of the user's local file system. With this API,
- * Chrome Apps can read and write to a user-selected location. For example, a
- * text editor app can use the API to read and write local documents. All
- * failures are notified via chrome.runtime.lastError.
+ * LICENSE file.
+ * 
+ * Use the `chrome.fileSystem` API to create, read, navigate, and write to a
+ * sandboxed section of the user's local file system. With this API, Chrome Apps
+ * can read and write to a user-selected location. For example, a text editor
+ * app can use the API to read and write local documents. All failures are
+ * notified via chrome.runtime.lastError.
  */
 library chrome.fileSystem;
 

@@ -21,7 +21,8 @@ class IDLConverter {
 
     library = new ChromeLibrary(namespace.name);
 
-    library.documentation = _cleanDocComments(namespace.documentation.join('\n'));
+    library.documentation =
+        _cleanDocComments(namespace.documentation.join('\n'));
 
     if (namespace.typeDeclarations != null) {
       library.types.addAll(
@@ -217,6 +218,8 @@ class IDLConverter {
       return null;
     }
 
+    str = str.replaceAll(' found in the LICENSE file.',
+        ' found in the LICENSE file.\n');
     str = str.replaceAll('\n ', ' ');
     str = str.replaceAll(new RegExp('\n+'), '\n\n');
     str = str.replaceAll(new RegExp('(\n )+'), '\n');

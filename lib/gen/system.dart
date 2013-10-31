@@ -28,7 +28,9 @@ class ChromeSystem {
 /**
  * Copyright 2013 The Chromium Authors. All rights reserved. Use of this source
  * code is governed by a BSD-style license that can be found in the LICENSE
- * file. Use the `system.cpu` API to query CPU metadata.
+ * file.
+ * 
+ * Use the `system.cpu` API to query CPU metadata.
  */
 class ChromeSystemCpu extends ChromeApi {
   static final JsObject _system_cpu = chrome['system']['cpu'];
@@ -76,7 +78,9 @@ CpuInfo _createCpuInfo(JsObject jsProxy) => jsProxy == null ? null : new CpuInfo
 /**
  * Copyright 2013 The Chromium Authors. All rights reserved. Use of this source
  * code is governed by a BSD-style license that can be found in the LICENSE
- * file. The `chrome.system.memory` API.
+ * file.
+ * 
+ * The `chrome.system.memory` API.
  */
 class ChromeSystemMemory extends ChromeApi {
   static final JsObject _system_memory = chrome['system']['memory'];
@@ -120,8 +124,10 @@ MemoryInfo _createMemoryInfo(JsObject jsProxy) => jsProxy == null ? null : new M
 /**
  * Copyright 2013 The Chromium Authors. All rights reserved. Use of this source
  * code is governed by a BSD-style license that can be found in the LICENSE
- * file. Use the `chrome.system.storage` API to query storage device information
- * and be notified when a removable storage device is attached and detached.
+ * file.
+ * 
+ * Use the `chrome.system.storage` API to query storage device information and
+ * be notified when a removable storage device is attached and detached.
  */
 class ChromeSystemStorage extends ChromeApi {
   static final JsObject _system_storage = chrome['system']['storage'];
