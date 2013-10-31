@@ -13,10 +13,6 @@ import '../tool/chrome_model.dart';
 
 void main() {
   group('ChromeIDLParser', () {
-    String testDirStr =
-        Platform.script.substring(0, Platform.script.lastIndexOf('/'));
-    Directory testDir = new Directory(testDirStr);
-
     bool idlFileExtTest(FileSystemEntity file) => file.path.endsWith('.idl');
 
     Iterable<FileSystemEntity> chromeIdlFileEntities = new Directory('idl')

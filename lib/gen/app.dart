@@ -116,18 +116,20 @@ class ChromeAppWindow extends ChromeApi {
   /**
    * The size and position of a window can be specified in a number of different
    * ways. The most simple option is not specifying anything at all, in which
-   * case a default size and platform dependent position will be used. Another
-   * option is to use the bounds property, which will put the window at the
-   * specified coordinates with the specified size. If the window has a frame,
-   * it's total size will be the size given plus the size of the frame; that is,
-   * the size in bounds is the content size, not the window size. To
-   * automatically remember the positions of windows you can give them ids. If a
-   * window has an id, This id is used to remember the size and position of the
-   * window whenever it is moved or resized. This size and position is then used
-   * instead of the specified bounds on subsequent opening of a window with the
-   * same id. If you need to open a window with an id at a location other than
-   * the remembered default, you can create it hidden, move it to the desired
-   * location, then show it.
+   * case a default size and platform dependent position will be used.
+   * 
+   * Another option is to use the bounds property, which will put the window at
+   * the specified coordinates with the specified size. If the window has a
+   * frame, it's total size will be the size given plus the size of the frame;
+   * that is, the size in bounds is the content size, not the window size.
+   * 
+   * To automatically remember the positions of windows you can give them ids.
+   * If a window has an id, This id is used to remember the size and position of
+   * the window whenever it is moved or resized. This size and position is then
+   * used instead of the specified bounds on subsequent opening of a window with
+   * the same id. If you need to open a window with an id at a location other
+   * than the remembered default, you can create it hidden, move it to the
+   * desired location, then show it.
    * 
    * Returns:
    * Called in the creating window (parent) before the load event is called in

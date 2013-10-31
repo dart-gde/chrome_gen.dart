@@ -40,6 +40,7 @@ class ChromeUsb extends ChromeApi {
    * This method is ChromeOS specific. Calling this method on other platforms
    * will fail. Requests access from the permission broker to an OS claimed
    * device if the given interface on the device is not claimed.
+   * 
    * [device]: The device to request access to.
    * [interfaceId]:
    */
@@ -66,14 +67,19 @@ class ChromeUsb extends ChromeApi {
 
   /**
    * Finds USB devices specified by the vendorId/productId/interfaceId tuple
-   * and, if permissions allow, opens them for use. On Chrome OS, you can
-   * specify the interfaceId. In that case the method will request access from
-   * permission broker in the same way as in [requestUsbAcess]. If the access
-   * request is rejected, or the device is failed to be opened, its connection
-   * handle will not be created or returned. Calling this method is equivalent
-   * to calling [getDevices] followed by a series of [requestAccess] (if it is
-   * on ChromeOs) and [openDevice] calls, and returning all the successfully
-   * opened connection handles.
+   * and, if permissions allow, opens them for use.
+   * 
+   * On Chrome OS, you can specify the interfaceId. In that case the method will
+   * request access from permission broker in the same way as in
+   * [requestUsbAcess].
+   * 
+   * If the access request is rejected, or the device is failed to be opened,
+   * its connection handle will not be created or returned.
+   * 
+   * Calling this method is equivalent to calling [getDevices] followed by a
+   * series of [requestAccess] (if it is on ChromeOs) and [openDevice] calls,
+   * and returning all the successfully opened connection handles.
+   * 
    * [options]: The properties to search for on target devices.
    * [callback]: Invoked with the opened ConnectionHandle on complete.
    */
@@ -116,8 +122,10 @@ class ChromeUsb extends ChromeApi {
    * Claims an interface on the specified USB device. Before you can transfer
    * data with endpoints, you must claim their parent interfaces. Only one
    * connection handle on the same host can claim each interface. If the
-   * interface is already claimed, this call will fail. You shall call
-   * releaseInterface when the interface is not needed anymore.
+   * interface is already claimed, this call will fail.
+   * 
+   * You shall call releaseInterface when the interface is not needed anymore.
+   * 
    * [handle]: The device on which the interface is to be claimed.
    * [interface]: The interface number to be claimed.
    * [callback]: The callback to invoke once the interface is claimed.
@@ -162,8 +170,11 @@ class ChromeUsb extends ChromeApi {
   /**
    * Performs a control transfer on the specified device. See the
    * ControlTransferInfo structure for the parameters required to make a
-   * transfer. Conceptually control transfer talks to the device itself. You do
-   * not need to claim interface 0 to perform a control transfer.
+   * transfer.
+   * 
+   * Conceptually control transfer talks to the device itself. You do not need
+   * to claim interface 0 to perform a control transfer.
+   * 
    * [handle]: A connection handle to make the transfer on.
    * [transferInfo]: The parameters to the transfer. See ControlTransferInfo.
    * [callback]: Invoked once the transfer has completed.
@@ -224,6 +235,7 @@ class ChromeUsb extends ChromeApi {
    * the reset fails, the given connection handle will be closed and the USB
    * device will appear to be disconnected then reconnected. In that case you
    * must call [getDevices] or [findDevices] again to acquire the device.
+   * 
    * [handle]: A connection handle to reset.
    * [callback]: Invoked once the device is reset with a boolean indicating
    * whether the reset is completed successfully.
@@ -334,15 +346,19 @@ class Device extends ChromeObject {
 
 /**
  * Returned by [openDevice] to be used for USB communication. Every time a
- * device is opened, a new connection handle is created. A connection handle
- * represents the underlying data structure that contains all the data we need
- * to communicate with a USB device, including the status of interfaces, the
- * pending transfers, the descriptors, and etc. A connectin handle id is
- * different from a USB device id. All connection handles can work together if
- * the device allows it. The connection handle will be automatically closed when
- * the app is reloaded or suspended. When a connection handle is closed, all the
- * interfaces it claimed will be released and all the transfers in progress will
- * be canceled immediately.
+ * device is opened, a new connection handle is created.
+ * 
+ * A connection handle represents the underlying data structure that contains
+ * all the data we need to communicate with a USB device, including the status
+ * of interfaces, the pending transfers, the descriptors, and etc. A connectin
+ * handle id is different from a USB device id.
+ * 
+ * All connection handles can work together if the device allows it. The
+ * connection handle will be automatically closed when the app is reloaded or
+ * suspended.
+ * 
+ * When a connection handle is closed, all the interfaces it claimed will be
+ * released and all the transfers in progress will be canceled immediately.
  */
 class ConnectionHandle extends ChromeObject {
   ConnectionHandle({int handle, int vendorId, int productId}) {
