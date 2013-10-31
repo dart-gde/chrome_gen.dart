@@ -277,5 +277,7 @@ class ChromeIDLParser extends LanguageParsers {
    * Parse the copyright signature at the top of all idl files.
    */
   Parser get copyrightSignature =>
-      everythingBetween(string('// Copyright'), string('LICENSE file.\n\n'));
+      everythingBetween(string('// Copyright'), string('LICENSE file.\n\n'))
+      |
+      everythingBetween(string('// Copyright'), string('LICENSE file.\n'));
 }

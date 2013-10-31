@@ -1,10 +1,6 @@
 /* This file has been generated from location.idl - do not edit */
 
 /**
- * Copyright (c) 2013 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file.
- * 
  * todo(vadimt): Consider reusing WebKit/Blink types, if this is possible. Use
  * the `chrome.location` API to retrieve the geographic location of the host
  * machine. This API is a version of the <a
