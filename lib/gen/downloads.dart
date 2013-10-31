@@ -1,10 +1,8 @@
 /* This file has been generated from downloads.idl - do not edit */
 
 /**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.downloads` API to programmatically initiate,
- * monitor, manipulate, and search for downloads.
+ * Use the `chrome.downloads` API to programmatically initiate, monitor,
+ * manipulate, and search for downloads.
  */
 library chrome.downloads;
 

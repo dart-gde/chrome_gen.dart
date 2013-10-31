@@ -22,7 +22,8 @@ class ChromeIDLParser extends LanguageParsers {
    * Parse the namespace.
    */
   Parser get namespaceDeclaration =>
-      docString
+      copyrightSignature.maybe
+      + docString
       + attributeDeclaration.maybe
       + reserved["namespace"]
       + namespaceIdentifier
@@ -271,4 +272,10 @@ class ChromeIDLParser extends LanguageParsers {
         everythingBetween(string('//'), string('\n'))
       | everythingBetween(string('/**'), string('*/'))
       | everythingBetween(string('/*'), string('*/'));
+
+  /**
+   * Parse the copyright signature at the top of all idl files.
+   */
+  Parser get copyrightSignature =>
+      everythingBetween(string('// Copyright'), string('LICENSE file.\n\n'));
 }

@@ -21,7 +21,8 @@ class IDLConverter {
 
     library = new ChromeLibrary(namespace.name);
 
-    library.documentation = _cleanDocComments(namespace.documentation.join('\n'));
+    library.documentation =
+        _cleanDocComments(namespace.documentation.join('\n'));
 
     if (namespace.typeDeclarations != null) {
       library.types.addAll(

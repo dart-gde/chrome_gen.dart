@@ -1,10 +1,7 @@
 /* This file has been generated from bluetooth.idl - do not edit */
 
 /**
- * Copyright (c) 2012 The Chromium Authors. All rights reserved. Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file. Use the `chrome.bluetooth` API to connect to a Bluetooth
- * device.
+ * Use the `chrome.bluetooth` API to connect to a Bluetooth device.
  */
 library chrome.bluetooth;
 
