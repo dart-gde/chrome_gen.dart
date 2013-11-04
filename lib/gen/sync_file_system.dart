@@ -112,10 +112,10 @@ class ChromeSyncFileSystem extends ChromeApi {
    * Returns:
    * A callback type for getFileStatuses.
    */
-  Future<FileStatusInfo> getFileStatuses(dynamic fileEntries) {
+  Future<List<FileStatusInfo>> getFileStatuses(List<dynamic> fileEntries) {
     if (_syncFileSystem == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<FileStatusInfo>.oneArg(_createFileStatusInfo);
+    var completer = new ChromeCompleter<List<FileStatusInfo>>.oneArg((e) => listify(e, _createFileStatusInfo));
     _syncFileSystem.callMethod('getFileStatuses', [jsify(fileEntries), completer.callback]);
     return completer.future;
   }

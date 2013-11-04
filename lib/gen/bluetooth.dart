@@ -77,10 +77,10 @@ class ChromeBluetooth extends ChromeApi {
    * Returns the set of exported profiles for the device specified in options.
    * This function will not initiate a connection to the remote device.
    */
-  Future<Profile> getProfiles(GetProfilesOptions options) {
+  Future<List<Profile>> getProfiles(GetProfilesOptions options) {
     if (_bluetooth == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<Profile>.oneArg(_createProfile);
+    var completer = new ChromeCompleter<List<Profile>>.oneArg((e) => listify(e, _createProfile));
     _bluetooth.callMethod('getProfiles', [jsify(options), completer.callback]);
     return completer.future;
   }
@@ -88,10 +88,10 @@ class ChromeBluetooth extends ChromeApi {
   /**
    * Get a list of services provided by a device.
    */
-  Future<ServiceRecord> getServices(GetServicesOptions options) {
+  Future<List<ServiceRecord>> getServices(GetServicesOptions options) {
     if (_bluetooth == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<ServiceRecord>.oneArg(_createServiceRecord);
+    var completer = new ChromeCompleter<List<ServiceRecord>>.oneArg((e) => listify(e, _createServiceRecord));
     _bluetooth.callMethod('getServices', [jsify(options), completer.callback]);
     return completer.future;
   }

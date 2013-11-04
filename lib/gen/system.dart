@@ -128,10 +128,10 @@ class ChromeSystemStorage extends ChromeApi {
    * Get the storage information from the system. The argument passed to the
    * callback is an array of StorageUnitInfo objects.
    */
-  Future<StorageUnitInfo> getInfo() {
+  Future<List<StorageUnitInfo>> getInfo() {
     if (_system_storage == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<StorageUnitInfo>.oneArg(_createStorageUnitInfo);
+    var completer = new ChromeCompleter<List<StorageUnitInfo>>.oneArg((e) => listify(e, _createStorageUnitInfo));
     _system_storage.callMethod('getInfo', [completer.callback]);
     return completer.future;
   }

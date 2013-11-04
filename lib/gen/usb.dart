@@ -26,10 +26,10 @@ class ChromeUsb extends ChromeApi {
    * [options]: The properties to search for on target devices.
    * [callback]: Invoked with a list of [Device]s on complete.
    */
-  Future<Device> getDevices(EnumerateDevicesOptions options) {
+  Future<List<Device>> getDevices(EnumerateDevicesOptions options) {
     if (_usb == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<Device>.oneArg(_createDevice);
+    var completer = new ChromeCompleter<List<Device>>.oneArg((e) => listify(e, _createDevice));
     _usb.callMethod('getDevices', [jsify(options), completer.callback]);
     return completer.future;
   }
@@ -81,10 +81,10 @@ class ChromeUsb extends ChromeApi {
    * [options]: The properties to search for on target devices.
    * [callback]: Invoked with the opened ConnectionHandle on complete.
    */
-  Future<ConnectionHandle> findDevices(EnumerateDevicesAndRequestAccessOptions options) {
+  Future<List<ConnectionHandle>> findDevices(EnumerateDevicesAndRequestAccessOptions options) {
     if (_usb == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<ConnectionHandle>.oneArg(_createConnectionHandle);
+    var completer = new ChromeCompleter<List<ConnectionHandle>>.oneArg((e) => listify(e, _createConnectionHandle));
     _usb.callMethod('findDevices', [jsify(options), completer.callback]);
     return completer.future;
   }
@@ -108,10 +108,10 @@ class ChromeUsb extends ChromeApi {
    * [handle]: The device from which the interfaces should be listed.
    * [callback]: The callback to invoke when the interfaces are enumerated.
    */
-  Future<InterfaceDescriptor> listInterfaces(ConnectionHandle handle) {
+  Future<List<InterfaceDescriptor>> listInterfaces(ConnectionHandle handle) {
     if (_usb == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<InterfaceDescriptor>.oneArg(_createInterfaceDescriptor);
+    var completer = new ChromeCompleter<List<InterfaceDescriptor>>.oneArg((e) => listify(e, _createInterfaceDescriptor));
     _usb.callMethod('listInterfaces', [jsify(handle), completer.callback]);
     return completer.future;
   }
@@ -411,7 +411,7 @@ class EndpointDescriptor extends ChromeObject {
 }
 
 class InterfaceDescriptor extends ChromeObject {
-  InterfaceDescriptor({int interfaceNumber, int alternateSetting, int interfaceClass, int interfaceSubclass, int interfaceProtocol, String description, EndpointDescriptor endpoints}) {
+  InterfaceDescriptor({int interfaceNumber, int alternateSetting, int interfaceClass, int interfaceSubclass, int interfaceProtocol, String description, List<EndpointDescriptor> endpoints}) {
     if (interfaceNumber != null) this.interfaceNumber = interfaceNumber;
     if (alternateSetting != null) this.alternateSetting = alternateSetting;
     if (interfaceClass != null) this.interfaceClass = interfaceClass;
@@ -440,8 +440,8 @@ class InterfaceDescriptor extends ChromeObject {
   String get description => jsProxy['description'];
   set description(String value) => jsProxy['description'] = value;
 
-  EndpointDescriptor get endpoints => _createEndpointDescriptor(jsProxy['endpoints']);
-  set endpoints(EndpointDescriptor value) => jsProxy['endpoints'] = jsify(value);
+  List<EndpointDescriptor> get endpoints => listify(jsProxy['endpoints'], _createEndpointDescriptor);
+  set endpoints(List<EndpointDescriptor> value) => jsProxy['endpoints'] = jsify(value);
 }
 
 /**

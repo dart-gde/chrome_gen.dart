@@ -132,7 +132,7 @@ class ChooseEntryType extends ChromeEnum {
 }
 
 class AcceptOption extends ChromeObject {
-  AcceptOption({String description, String mimeTypes, String extensions}) {
+  AcceptOption({String description, List<String> mimeTypes, List<String> extensions}) {
     if (description != null) this.description = description;
     if (mimeTypes != null) this.mimeTypes = mimeTypes;
     if (extensions != null) this.extensions = extensions;
@@ -142,15 +142,15 @@ class AcceptOption extends ChromeObject {
   String get description => jsProxy['description'];
   set description(String value) => jsProxy['description'] = value;
 
-  String get mimeTypes => jsProxy['mimeTypes'];
-  set mimeTypes(String value) => jsProxy['mimeTypes'] = value;
+  List<String> get mimeTypes => listify(jsProxy['mimeTypes']);
+  set mimeTypes(List<String> value) => jsProxy['mimeTypes'] = jsify(value);
 
-  String get extensions => jsProxy['extensions'];
-  set extensions(String value) => jsProxy['extensions'] = value;
+  List<String> get extensions => listify(jsProxy['extensions']);
+  set extensions(List<String> value) => jsProxy['extensions'] = jsify(value);
 }
 
 class ChooseEntryOptions extends ChromeObject {
-  ChooseEntryOptions({ChooseEntryType type, String suggestedName, AcceptOption accepts, bool acceptsAllTypes, bool acceptsMultiple}) {
+  ChooseEntryOptions({ChooseEntryType type, String suggestedName, List<AcceptOption> accepts, bool acceptsAllTypes, bool acceptsMultiple}) {
     if (type != null) this.type = type;
     if (suggestedName != null) this.suggestedName = suggestedName;
     if (accepts != null) this.accepts = accepts;
@@ -165,8 +165,8 @@ class ChooseEntryOptions extends ChromeObject {
   String get suggestedName => jsProxy['suggestedName'];
   set suggestedName(String value) => jsProxy['suggestedName'] = value;
 
-  AcceptOption get accepts => _createAcceptOption(jsProxy['accepts']);
-  set accepts(AcceptOption value) => jsProxy['accepts'] = jsify(value);
+  List<AcceptOption> get accepts => listify(jsProxy['accepts'], _createAcceptOption);
+  set accepts(List<AcceptOption> value) => jsProxy['accepts'] = jsify(value);
 
   bool get acceptsAllTypes => jsProxy['acceptsAllTypes'];
   set acceptsAllTypes(bool value) => jsProxy['acceptsAllTypes'] = value;
@@ -180,11 +180,11 @@ class ChooseEntryOptions extends ChromeObject {
  */
 class ChooseEntryResult {
   static ChooseEntryResult _create(entry, fileEntries) {
-    return new ChooseEntryResult._(_createEntry(entry), _createFileEntry(fileEntries));
+    return new ChooseEntryResult._(_createEntry(entry), listify(fileEntries, _createFileEntry));
   }
 
   Entry entry;
-  FileEntry fileEntries;
+  List<FileEntry> fileEntries;
 
   ChooseEntryResult._(this.entry, this.fileEntries);
 }

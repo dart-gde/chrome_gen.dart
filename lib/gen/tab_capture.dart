@@ -42,10 +42,10 @@ class ChromeTabCapture extends ChromeApi {
    * new tab capture from succeeding (or to prevent redundant requests for the
    * same tab).
    */
-  Future<CaptureInfo> getCapturedTabs() {
+  Future<List<CaptureInfo>> getCapturedTabs() {
     if (_tabCapture == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<CaptureInfo>.oneArg(_createCaptureInfo);
+    var completer = new ChromeCompleter<List<CaptureInfo>>.oneArg((e) => listify(e, _createCaptureInfo));
     _tabCapture.callMethod('getCapturedTabs', [completer.callback]);
     return completer.future;
   }

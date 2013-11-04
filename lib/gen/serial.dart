@@ -27,10 +27,10 @@ class ChromeSerial extends ChromeApi {
    * 
    * [callback]: Called with the list of ports.
    */
-  Future<String> getPorts() {
+  Future<List<String>> getPorts() {
     if (_serial == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<String>.oneArg();
+    var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _serial.callMethod('getPorts', [completer.callback]);
     return completer.future;
   }
