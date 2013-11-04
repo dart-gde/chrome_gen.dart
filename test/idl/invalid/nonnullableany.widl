@@ -1,5 +1,0 @@
-//Disabling this invalid test it conflicts with chrome IDL.
-//interface NonNullable {
-//  attribute any? foo;
-//};
-XXX
