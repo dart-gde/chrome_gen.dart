@@ -531,14 +531,11 @@ InputDeviceInfo[] inputInfo)""");
 void chromeIDLParserCallbackDeclarationTests() {
   test('single line', () {
 
-    List<IDLCallbackDeclaration> callbackDeclarations =
+    IDLCallbackDeclaration callbackDeclaration =
         chromeIDLParser.callbackDeclaration.parse(""" 
 callback GetAuthTokenCallback = void (optional DOMString token);
 """);
 
-    expect(callbackDeclarations, isNotNull);
-    expect(callbackDeclarations.length, equals(1));
-    IDLCallbackDeclaration callbackDeclaration = callbackDeclarations[0];
     expect(callbackDeclaration.name, equals("GetAuthTokenCallback"));
     expect(callbackDeclaration.documentation, isEmpty);
     expect(callbackDeclaration.parameters.length, equals(1));
@@ -551,15 +548,12 @@ callback GetAuthTokenCallback = void (optional DOMString token);
 
   test('single line with comments', () {
 
-    List<IDLCallbackDeclaration> callbackDeclarations =
+    IDLCallbackDeclaration callbackDeclaration =
         chromeIDLParser.callbackDeclaration.parse(""" 
 // Some comment.
 callback EntryCallback = void ([instanceOf=Entry] object entry);
 """);
 
-    expect(callbackDeclarations, isNotNull);
-    expect(callbackDeclarations.length, equals(1));
-    IDLCallbackDeclaration callbackDeclaration = callbackDeclarations[0];
     expect(callbackDeclaration.name, equals("EntryCallback"));
     expect(callbackDeclaration.documentation.length, equals(1));
     expect(callbackDeclaration.documentation[0], equals(" Some comment."));
@@ -580,7 +574,7 @@ callback EntryCallback = void ([instanceOf=Entry] object entry);
   test('multiline', () {
 
     List<IDLCallbackDeclaration> callbackDeclarations =
-        chromeIDLParser.callbackDeclaration.parse(""" 
+        chromeIDLParser.callbackDeclaration.many.parse(""" 
 callback GetAuthTokenCallback = void (optional DOMString token);
 callback EntryCallback = void ([instanceOf=Entry] object entry);
 """);
@@ -617,7 +611,7 @@ callback EntryCallback = void ([instanceOf=Entry] object entry);
   test('multiline with comments', () {
 
     List<IDLCallbackDeclaration> callbackDeclarations =
-        chromeIDLParser.callbackDeclaration.parse("""
+        chromeIDLParser.callbackDeclaration.many.parse("""
 // Some comment.
 callback GetAuthTokenCallback = void (optional DOMString token);
 /* Another comment. */
@@ -1690,34 +1684,42 @@ void miscParsingTests() {
     expect(result, isNotNull);
   });
 
-  test('object used in callback', () {
+  test('object used in callback definition', () {
     String testData =
         """callback GetAllCallback = void (object notifications); """;
 
-    var result = chromeIDLParser.callbackDeclaration
-      .parse(testData);
+    IDLCallbackDeclaration callbackDeclaration =
+        chromeIDLParser.callbackDeclaration.parse(testData);
 
-    expect(result, isNotNull);
-    expect(result, hasLength(1));
+    expect(callbackDeclaration, isNotNull);
+    expect(callbackDeclaration.name, equals("GetAllCallback"));
+    expect(callbackDeclaration.documentation, isEmpty);
+    expect(callbackDeclaration.parameters.length, equals(1));
+    expect(callbackDeclaration.parameters[0].name, equals("notifications"));
+    expect(callbackDeclaration.parameters[0].type.name, equals("object"));
+    expect(callbackDeclaration.parameters[0].isOptional, isFalse);
+    expect(callbackDeclaration.parameters[0].isCallback, isFalse);
+    expect(callbackDeclaration.parameters[0].attribute, isNull);
+
   });
 
   test('optional object array with type attribute defined instanceOf callback', () {
     String testData = """callback MediaFileSystemsCallback =
       void ([instanceOf=DOMFileSystem] optional object[] mediaFileSystems);""";
 
-    var result = chromeIDLParser.callbackDeclaration
-      .parse(testData);
+    IDLCallbackDeclaration callbackDeclaration =
+        chromeIDLParser.callbackDeclaration.parse(testData);
 
-    expect(result, isNotNull);
-    expect(result, hasLength(1));
-    IDLCallbackDeclaration r = result[0];
-    expect(r.name, equals("MediaFileSystemsCallback"));
-    expect(r.parameters, hasLength(1));
-    expect(r.parameters[0].name, equals("mediaFileSystems"));
-    expect(r.parameters[0].isOptional, isTrue);
-    expect(r.parameters[0].isCallback, isFalse);
-    expect(r.parameters[0].type.isArray, isTrue);
-    expect(r.parameters[0].type.name, equals("DOMFileSystem"));
+    expect(callbackDeclaration, isNotNull);
+    expect(callbackDeclaration.name, equals("MediaFileSystemsCallback"));
+    expect(callbackDeclaration.documentation, isEmpty);
+    List<IDLParameter> parameters = callbackDeclaration.parameters;
+    expect(parameters.length, equals(1));
+    expect(parameters[0].name, equals("mediaFileSystems"));
+    expect(parameters[0].type.name, equals("DOMFileSystem"));
+    expect(parameters[0].isOptional, isTrue);
+    expect(parameters[0].isCallback, isFalse);
+    expect(parameters[0].attribute, isNotNull);
   });
 
   test('object optional by ? with attribute defined instanceOf', () {
@@ -1760,11 +1762,10 @@ DownloadItem downloadItem, SuggestFilenameCallback suggest);
   test('object as parameter for callback', () {
     String testData = """callback GetStringsCallback = void (object result);""";
 
-    var result = chromeIDLParser.callbackDeclaration
-        .parse(testData);
+    IDLCallbackDeclaration callbackDeclaration =
+        chromeIDLParser.callbackDeclaration.parse(testData);
 
-    expect(result, isNotNull);
-    expect(result, hasLength(1));
+    expect(callbackDeclaration, isNotNull);
   });
 }
 

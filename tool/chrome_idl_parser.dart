@@ -40,11 +40,8 @@ class ChromeIDLParser extends LanguageParsers {
   Parser get _namespaceBody => functionDeclaration
                                | typeDeclaration
                                | eventDeclaration
-                               | _callbackDeclaration
-                               // TODO: remove _callbackDeclaration.many
-                               // it causes inf rec.
-//                                | callbackDeclaration;
-                             | enumDeclaration;
+                               | callbackDeclaration
+                               | enumDeclaration;
 
   /**
    * Parse the interface Functions.
@@ -161,16 +158,10 @@ class ChromeIDLParser extends LanguageParsers {
       // object
       (reserved["object"] ^ (name) => idlTypeMapping(name, false));
 
-
-  /**
-   * Parse the callback definitions.
-   */
-  Parser get callbackDeclaration => _callbackDeclaration.many;
-
   /**
    * Parse a callback definition.
    */
-  Parser get _callbackDeclaration =>
+  Parser get callbackDeclaration =>
       docString
       + reserved["callback"]
       + identifier
@@ -277,7 +268,6 @@ class ChromeIDLParser extends LanguageParsers {
    * Parse the copyright signature at the top of all idl files.
    */
   Parser get copyrightSignature =>
-      everythingBetween(string('// Copyright'), string('LICENSE file.\n\n'))
-      |
-      everythingBetween(string('// Copyright'), string('LICENSE file.\n'));
+        everythingBetween(string('// Copyright'), string('LICENSE file.\n\n'))
+      | everythingBetween(string('// Copyright'), string('LICENSE file.\n'));
 }
