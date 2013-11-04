@@ -201,7 +201,7 @@ class NotificationButton extends ChromeObject {
 }
 
 class NotificationOptions extends ChromeObject {
-  NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, NotificationButton buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, NotificationItem items, int progress, bool isClickable}) {
+  NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, List<NotificationButton> buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, List<NotificationItem> items, int progress, bool isClickable}) {
     if (type != null) this.type = type;
     if (iconUrl != null) this.iconUrl = iconUrl;
     if (iconBitmap != null) this.iconBitmap = iconBitmap;
@@ -244,8 +244,8 @@ class NotificationOptions extends ChromeObject {
   double get eventTime => jsProxy['eventTime'];
   set eventTime(double value) => jsProxy['eventTime'] = jsify(value);
 
-  NotificationButton get buttons => _createNotificationButton(jsProxy['buttons']);
-  set buttons(NotificationButton value) => jsProxy['buttons'] = jsify(value);
+  List<NotificationButton> get buttons => listify(jsProxy['buttons'], _createNotificationButton);
+  set buttons(List<NotificationButton> value) => jsProxy['buttons'] = jsify(value);
 
   String get expandedMessage => jsProxy['expandedMessage'];
   set expandedMessage(String value) => jsProxy['expandedMessage'] = value;
@@ -256,8 +256,8 @@ class NotificationOptions extends ChromeObject {
   NotificationBitmap get imageBitmap => _createNotificationBitmap(jsProxy['imageBitmap']);
   set imageBitmap(NotificationBitmap value) => jsProxy['imageBitmap'] = jsify(value);
 
-  NotificationItem get items => _createNotificationItem(jsProxy['items']);
-  set items(NotificationItem value) => jsProxy['items'] = jsify(value);
+  List<NotificationItem> get items => listify(jsProxy['items'], _createNotificationItem);
+  set items(List<NotificationItem> value) => jsProxy['items'] = jsify(value);
 
   int get progress => jsProxy['progress'];
   set progress(int value) => jsProxy['progress'] = value;

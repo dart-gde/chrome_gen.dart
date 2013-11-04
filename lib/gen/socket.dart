@@ -232,10 +232,10 @@ class ChromeSocket extends ChromeApi {
    * Retrieves information about local adapters on this system.
    * [callback]: Called when local adapter information is available.
    */
-  Future<NetworkInterface> getNetworkList() {
+  Future<List<NetworkInterface>> getNetworkList() {
     if (_socket == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<NetworkInterface>.oneArg(_createNetworkInterface);
+    var completer = new ChromeCompleter<List<NetworkInterface>>.oneArg((e) => listify(e, _createNetworkInterface));
     _socket.callMethod('getNetworkList', [completer.callback]);
     return completer.future;
   }
@@ -328,10 +328,10 @@ class ChromeSocket extends ChromeApi {
    * [socketId]: The socketId.
    * [callback]: Called with an array of strings of the result.
    */
-  Future<String> getJoinedGroups(int socketId) {
+  Future<List<String>> getJoinedGroups(int socketId) {
     if (_socket == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<String>.oneArg();
+    var completer = new ChromeCompleter<List<String>>.oneArg(listify);
     _socket.callMethod('getJoinedGroups', [socketId, completer.callback]);
     return completer.future;
   }

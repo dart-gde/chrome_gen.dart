@@ -68,7 +68,7 @@ class LaunchItem extends ChromeObject {
  * referrerUrl`) can be present for any given launch.
  */
 class LaunchData extends ChromeObject {
-  LaunchData({String id, LaunchItem items, String url, String referrerUrl, bool isKioskSession}) {
+  LaunchData({String id, List<LaunchItem> items, String url, String referrerUrl, bool isKioskSession}) {
     if (id != null) this.id = id;
     if (items != null) this.items = items;
     if (url != null) this.url = url;
@@ -80,8 +80,8 @@ class LaunchData extends ChromeObject {
   String get id => jsProxy['id'];
   set id(String value) => jsProxy['id'] = value;
 
-  LaunchItem get items => _createLaunchItem(jsProxy['items']);
-  set items(LaunchItem value) => jsProxy['items'] = jsify(value);
+  List<LaunchItem> get items => listify(jsProxy['items'], _createLaunchItem);
+  set items(List<LaunchItem> value) => jsProxy['items'] = jsify(value);
 
   String get url => jsProxy['url'];
   set url(String value) => jsProxy['url'] = value;

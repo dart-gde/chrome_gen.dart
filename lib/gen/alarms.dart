@@ -65,10 +65,10 @@ class ChromeAlarms extends ChromeApi {
   /**
    * Gets an array of all the alarms.
    */
-  Future<Alarm> getAll() {
+  Future<List<Alarm>> getAll() {
     if (_alarms == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<Alarm>.oneArg(_createAlarm);
+    var completer = new ChromeCompleter<List<Alarm>>.oneArg((e) => listify(e, _createAlarm));
     _alarms.callMethod('getAll', [completer.callback]);
     return completer.future;
   }

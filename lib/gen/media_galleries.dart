@@ -25,10 +25,10 @@ class ChromeMediaGalleries extends ChromeApi {
    * Get the media galleries configured in this user agent. If none are
    * configured or available, the callback will receive an empty array.
    */
-  Future<FileSystem> getMediaFileSystems([MediaFileSystemsDetails details]) {
+  Future<List<FileSystem>> getMediaFileSystems([MediaFileSystemsDetails details]) {
     if (_mediaGalleries == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<FileSystem>.oneArg(_createFileSystem);
+    var completer = new ChromeCompleter<List<FileSystem>>.oneArg((e) => listify(e, _createFileSystem));
     _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
     return completer.future;
   }

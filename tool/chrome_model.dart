@@ -217,6 +217,8 @@ class ChromeType extends ChromeElement {
   String type;
   String refName;
   bool optional;
+  // TODO(adam): why have a getter for this value if its public?
+  // merge with isCombinedReturnValue
   bool combinedReturnValue = false;
 
   /// Only used when this type represents a stream event type. This is the

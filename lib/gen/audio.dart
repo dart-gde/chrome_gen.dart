@@ -39,11 +39,11 @@ class ChromeAudio extends ChromeApi {
   /**
    * Select a subset of audio devices as active.
    */
-  Future setActiveDevices(String ids) {
+  Future setActiveDevices(List<String> ids) {
     if (_audio == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
-    _audio.callMethod('setActiveDevices', [ids, completer.callback]);
+    _audio.callMethod('setActiveDevices', [jsify(ids), completer.callback]);
     return completer.future;
   }
 
@@ -143,11 +143,11 @@ class DeviceProperties extends ChromeObject {
  */
 class GetInfoResult {
   static GetInfoResult _create(outputInfo, inputInfo) {
-    return new GetInfoResult._(_createOutputDeviceInfo(outputInfo), _createInputDeviceInfo(inputInfo));
+    return new GetInfoResult._(listify(outputInfo, _createOutputDeviceInfo), listify(inputInfo, _createInputDeviceInfo));
   }
 
-  OutputDeviceInfo outputInfo;
-  InputDeviceInfo inputInfo;
+  List<OutputDeviceInfo> outputInfo;
+  List<InputDeviceInfo> inputInfo;
 
   GetInfoResult._(this.outputInfo, this.inputInfo);
 }

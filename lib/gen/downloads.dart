@@ -48,10 +48,10 @@ class ChromeDownloads extends ChromeApi {
    * `limit` to the number of items per page, and set `startedAfter` to the
    * `startTime` of the last item from the last page.
    */
-  Future<DownloadItem> search(DownloadQuery query) {
+  Future<List<DownloadItem>> search(DownloadQuery query) {
     if (_downloads == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<DownloadItem>.oneArg(_createDownloadItem);
+    var completer = new ChromeCompleter<List<DownloadItem>>.oneArg((e) => listify(e, _createDownloadItem));
     _downloads.callMethod('search', [jsify(query), completer.callback]);
     return completer.future;
   }
@@ -158,10 +158,10 @@ class ChromeDownloads extends ChromeApi {
    * file. An [onErased] event will fire for each [DownloadItem] that matches
    * `query`, then `callback` will be called.
    */
-  Future<int> erase(DownloadQuery query) {
+  Future<List<int>> erase(DownloadQuery query) {
     if (_downloads == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<int>.oneArg();
+    var completer = new ChromeCompleter<List<int>>.oneArg(listify);
     _downloads.callMethod('erase', [jsify(query), completer.callback]);
     return completer.future;
   }
@@ -379,7 +379,7 @@ class FilenameSuggestion extends ChromeObject {
 }
 
 class DownloadOptions extends ChromeObject {
-  DownloadOptions({String url, String filename, FilenameConflictAction conflictAction, bool saveAs, HttpMethod method, HeaderNameValuePair headers, String body}) {
+  DownloadOptions({String url, String filename, FilenameConflictAction conflictAction, bool saveAs, HttpMethod method, List<HeaderNameValuePair> headers, String body}) {
     if (url != null) this.url = url;
     if (filename != null) this.filename = filename;
     if (conflictAction != null) this.conflictAction = conflictAction;
@@ -405,8 +405,8 @@ class DownloadOptions extends ChromeObject {
   HttpMethod get method => _createHttpMethod(jsProxy['method']);
   set method(HttpMethod value) => jsProxy['method'] = jsify(value);
 
-  HeaderNameValuePair get headers => _createHeaderNameValuePair(jsProxy['headers']);
-  set headers(HeaderNameValuePair value) => jsProxy['headers'] = jsify(value);
+  List<HeaderNameValuePair> get headers => listify(jsProxy['headers'], _createHeaderNameValuePair);
+  set headers(List<HeaderNameValuePair> value) => jsProxy['headers'] = jsify(value);
 
   String get body => jsProxy['body'];
   set body(String value) => jsProxy['body'] = value;
@@ -502,7 +502,7 @@ class DownloadItem extends ChromeObject {
 }
 
 class DownloadQuery extends ChromeObject {
-  DownloadQuery({String query, String startedBefore, String startedAfter, String endedBefore, String endedAfter, int totalBytesGreater, int totalBytesLess, String filenameRegex, String urlRegex, int limit, String orderBy, int id, String url, String filename, DangerType danger, String mime, String startTime, String endTime, State state, bool paused, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists}) {
+  DownloadQuery({List<String> query, String startedBefore, String startedAfter, String endedBefore, String endedAfter, int totalBytesGreater, int totalBytesLess, String filenameRegex, String urlRegex, int limit, List<String> orderBy, int id, String url, String filename, DangerType danger, String mime, String startTime, String endTime, State state, bool paused, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists}) {
     if (query != null) this.query = query;
     if (startedBefore != null) this.startedBefore = startedBefore;
     if (startedAfter != null) this.startedAfter = startedAfter;
@@ -531,8 +531,8 @@ class DownloadQuery extends ChromeObject {
   }
   DownloadQuery.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String get query => jsProxy['query'];
-  set query(String value) => jsProxy['query'] = value;
+  List<String> get query => listify(jsProxy['query']);
+  set query(List<String> value) => jsProxy['query'] = jsify(value);
 
   String get startedBefore => jsProxy['startedBefore'];
   set startedBefore(String value) => jsProxy['startedBefore'] = value;
@@ -561,8 +561,8 @@ class DownloadQuery extends ChromeObject {
   int get limit => jsProxy['limit'];
   set limit(int value) => jsProxy['limit'] = value;
 
-  String get orderBy => jsProxy['orderBy'];
-  set orderBy(String value) => jsProxy['orderBy'] = value;
+  List<String> get orderBy => listify(jsProxy['orderBy']);
+  set orderBy(List<String> value) => jsProxy['orderBy'] = jsify(value);
 
   int get id => jsProxy['id'];
   set id(int value) => jsProxy['id'] = value;

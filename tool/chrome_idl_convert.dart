@@ -143,10 +143,21 @@ class IDLConverter {
   }
 
   ChromeType _convertParameter(IDLParameter parameter) {
-    ChromeType param = new ChromeType();
-    param.name = parameter.name;
-    param.type = idlToDartType(parameter.type);
-    param.refName = idlToDartRefName(parameter.type);
+    ChromeType param;
+
+    if (parameter.type.isArray) {
+      var idlType = parameter.type;
+      ChromeType elementType = new ChromeType(type: idlToDartType(idlType),
+          refName: idlToDartRefName(idlType));
+      param = new ChromeType(type: "List");
+      param.parameters.add(elementType);
+      param.name = parameter.name;
+    } else {
+      param = new ChromeType(type: idlToDartType(parameter.type),
+          refName: idlToDartRefName(parameter.type));
+      param.name = parameter.name;
+    }
+
     library.addImport(getImportForClass(param.refName));
     param.optional = parameter.isOptional;
     return param;
@@ -170,12 +181,17 @@ class IDLConverter {
       return null;
     } else if (idlType.name == "void") {
       return ChromeType.VOID;
+    } else if (idlType.isArray) {
+      ChromeType chromeType = new ChromeType(type: "List");
+      ChromeType elementType = new ChromeType(type: idlToDartType(idlType),
+          refName: idlToDartRefName(idlType));
+      chromeType.parameters.add(elementType);
+      library.addImport(getImportForClass(chromeType.refName));
+      return chromeType;
     } else {
       ChromeType chromeType = new ChromeType();
       chromeType.type = idlToDartType(idlType);
       chromeType.refName = idlToDartRefName(idlType);
-      // TODO: now do you represent List<String> in ChromeType?
-      // chromeType.isList = idlType.isArray;
       library.addImport(getImportForClass(chromeType.refName));
       return chromeType;
     }
