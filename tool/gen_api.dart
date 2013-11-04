@@ -29,10 +29,13 @@ void main(List<String> args) {
     return;
   }
 
-  Overrides overrides = null;
+  Overrides overrides;
+
   if (results['overrides'] != null) {
     var overridesFile = new File(results['overrides']);
     overrides = new Overrides.fromFile(overridesFile);
+  } else {
+    overrides = new Overrides();
   }
 
   logging.Logger.root.onRecord.listen((logging.LogRecord record) {
