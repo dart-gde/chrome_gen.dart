@@ -1,5 +1,4 @@
 {
-  "useChromeIDLParser": true,
 
   "renameNamespace": {
     "i18n": "I18N"

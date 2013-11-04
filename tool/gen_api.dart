@@ -7,12 +7,10 @@ import 'backend.dart';
 import 'chrome_model.dart';
 import 'json_model.dart' as json_model;
 import 'json_parser.dart' as json_parser;
-import 'web_idl_model.dart' as model_idl;
 import 'chrome_idl_parser.dart' as chrome_idl_parser;
 import 'chrome_idl_convert.dart' as chrome_idl_convert;
 import 'chrome_idl_model.dart' as chrome_idl_model;
 import 'overrides.dart';
-import 'web_idl_parser.dart';
 import 'src/src_gen.dart';
 import 'src/utils.dart';
 
@@ -64,18 +62,11 @@ class GenApiFile {
           inFile.readAsStringSync());
       _chromeLib = json_model.convert(namespace);
     } else if (inFile.path.endsWith(".idl")) {
-      if (overrides.useChromeIDLParser) {
-        chrome_idl_parser.ChromeIDLParser chromeIdlParser =
-            new chrome_idl_parser.ChromeIDLParser();
-        chrome_idl_model.IDLNamespaceDeclaration idlNamespaceDeclaration =
-            chromeIdlParser.namespaceDeclaration.parse(inFile.readAsStringSync());
-        _chromeLib = chrome_idl_convert.convert(idlNamespaceDeclaration);
-      } else {
-        WebIdlParser webIdlParser = new WebIdlParser.withCollector(
-            new model_idl.IDLCollectorChrome());
-        webIdlParser.start.parse(inFile.readAsStringSync());
-        _chromeLib = model_idl.convert(webIdlParser.collector);
-      }
+      chrome_idl_parser.ChromeIDLParser chromeIdlParser =
+          new chrome_idl_parser.ChromeIDLParser();
+      chrome_idl_model.IDLNamespaceDeclaration idlNamespaceDeclaration =
+          chromeIdlParser.namespaceDeclaration.parse(inFile.readAsStringSync());
+      _chromeLib = chrome_idl_convert.convert(idlNamespaceDeclaration);
     } else {
       throw new ArgumentError('file type unsupported: ${inFile}');
     }
