@@ -197,13 +197,13 @@ class DefaultBackend extends Backend {
     generator.writeln();
     generator.writeDocs(method.getDescription());
     generator.write("${method.returns.toReturnString()} ${method.name}(");
-    generator.write(method.requiredParams.map((p) => "${p.toParamString(true)} ${p.name}").join(', '));
-    if (method.optionalParams.isNotEmpty) {
-      if (method.requiredParams.isNotEmpty) {
+    generator.write(method.getRequiredParams().map((p) => "${p.toParamString(true)} ${p.name}").join(', '));
+    if (method.getOptionalParams().isNotEmpty) {
+      if (method.getRequiredParams().isNotEmpty) {
         generator.write(', ');
       }
       generator.write('[');
-      generator.write(method.optionalParams.map((p) => "${p.toParamString(true)} ${p.name}").join(', '));
+      generator.write(method.getOptionalParams().map((p) => "${p.toParamString(true)} ${p.name}").join(', '));
       generator.write(']');
     }
     generator.writeln(") {");

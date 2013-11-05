@@ -130,7 +130,7 @@ class Event extends ChromeObject {
    * Returns:
    * Rules that were registered, the optional parameters are filled with values.
    */
-  Future<List<Rule>> getRules(String eventName, [List<String> ruleIdentifiers]) {
+  Future<List<Rule>> getRules(String eventName, List<String> ruleIdentifiers) {
     var completer = new ChromeCompleter<List<Rule>>.oneArg((e) => listify(e, _createRule));
     jsProxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
     return completer.future;
@@ -144,7 +144,7 @@ class Event extends ChromeObject {
    * [ruleIdentifiers] If an array is passed, only rules with identifiers
    * contained in this array are unregistered.
    */
-  Future removeRules(String eventName, [List<String> ruleIdentifiers]) {
+  Future removeRules(String eventName, List<String> ruleIdentifiers) {
     var completer = new ChromeCompleter.noArgs();
     jsProxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
     return completer.future;

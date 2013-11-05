@@ -95,7 +95,7 @@ class ChromeManagement extends ChromeApi {
    * 
    * [id] This should be the id from an item of [ExtensionInfo.]
    */
-  Future uninstall(String id, [Map options]) {
+  Future uninstall(String id, Map options) {
     if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -107,7 +107,7 @@ class ChromeManagement extends ChromeApi {
    * Uninstalls the calling extension. Note: This function can be used without
    * requesting the 'management' permission in the manifest.
    */
-  Future uninstallSelf([Map options]) {
+  Future uninstallSelf(Map options) {
     if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();

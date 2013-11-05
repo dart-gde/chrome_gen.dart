@@ -32,7 +32,7 @@ class ChromeTts extends ChromeApi {
    * 
    * [options] The speech options.
    */
-  Future speak(String utterance, [Map options]) {
+  Future speak(String utterance, Map options) {
     if (_tts == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();

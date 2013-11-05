@@ -426,7 +426,7 @@ class ExtensionSidebarPane extends ChromeObject {
    * 
    * [rootTitle] An optional title for the root of the expression tree.
    */
-  Future setExpression(String expression, [String rootTitle]) {
+  Future setExpression(String expression, String rootTitle) {
     var completer = new ChromeCompleter.noArgs();
     jsProxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
     return completer.future;
@@ -440,7 +440,7 @@ class ExtensionSidebarPane extends ChromeObject {
    * 
    * [rootTitle] An optional title for the root of the expression tree.
    */
-  Future setObject(String jsonObject, [String rootTitle]) {
+  Future setObject(String jsonObject, String rootTitle) {
     var completer = new ChromeCompleter.noArgs();
     jsProxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
     return completer.future;

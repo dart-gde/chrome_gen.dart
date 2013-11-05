@@ -35,7 +35,7 @@ class ChromeDesktopCapture extends ChromeApi {
    * An id that can be passed to cancelChooseDesktopMedia() in case the prompt
    * need to be canceled.
    */
-  int chooseDesktopMedia(List<DesktopCaptureSourceType> sources, dynamic callback, [Tab targetTab]) {
+  int chooseDesktopMedia(List<DesktopCaptureSourceType> sources, Tab targetTab, dynamic callback) {
     if (_desktopCapture == null) _throwNotAvailable();
 
     return _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), jsify(callback)]);

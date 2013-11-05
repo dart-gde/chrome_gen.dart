@@ -49,7 +49,7 @@ class ChromeExtension extends ChromeApi {
    * occurs while connecting to the extension, the callback will be called with
    * no arguments and [runtime.lastError] will be set to the error message.
    */
-  Future<dynamic> sendRequest(dynamic request, [String extensionId]) {
+  Future<dynamic> sendRequest(String extensionId, dynamic request) {
     if (_extension == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();

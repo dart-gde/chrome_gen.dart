@@ -104,7 +104,7 @@ class ChromeTabs extends ChromeApi {
    * 
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
-  Future<Tab> getSelected([int windowId]) {
+  Future<Tab> getSelected(int windowId) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
@@ -118,7 +118,7 @@ class ChromeTabs extends ChromeApi {
    * 
    * [windowId] Defaults to the [current window](windows.html#current-window).
    */
-  Future<List<Tab>> getAllInWindow([int windowId]) {
+  Future<List<Tab>> getAllInWindow(int windowId) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, _createTab));
@@ -195,7 +195,7 @@ class ChromeTabs extends ChromeApi {
    * Details about the updated tab. The [tabs.Tab] object doesn't contain `url`,
    * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
    */
-  Future<Tab> update(Map updateProperties, [int tabId]) {
+  Future<Tab> update(int tabId, Map updateProperties) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
@@ -227,7 +227,7 @@ class ChromeTabs extends ChromeApi {
    * [tabId] The ID of the tab to reload; defaults to the selected tab of the
    * current window.
    */
-  Future reload([int tabId, Map reloadProperties]) {
+  Future reload(int tabId, Map reloadProperties) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -262,7 +262,7 @@ class ChromeTabs extends ChromeApi {
    * returned except for Simplified Chinese for which zh-CN will be returned.
    * For an unknown language, `und` will be returned.
    */
-  Future<String> detectLanguage([int tabId]) {
+  Future<String> detectLanguage(int tabId) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -285,7 +285,7 @@ class ChromeTabs extends ChromeApi {
    * A data URL which encodes an image of the visible area of the captured tab.
    * May be assigned to the 'src' property of an HTML Image element for display.
    */
-  Future<String> captureVisibleTab([int windowId, Map options]) {
+  Future<String> captureVisibleTab(int windowId, Map options) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -305,7 +305,7 @@ class ChromeTabs extends ChromeApi {
    * Returns:
    * The result of the script in every injected frame.
    */
-  Future<List<dynamic>> executeScript(InjectDetails details, [int tabId]) {
+  Future<List<dynamic>> executeScript(int tabId, InjectDetails details) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<dynamic>>.oneArg(listify);
@@ -322,7 +322,7 @@ class ChromeTabs extends ChromeApi {
    * 
    * [details] Details of the CSS text to insert.
    */
-  Future insertCSS(InjectDetails details, [int tabId]) {
+  Future insertCSS(int tabId, InjectDetails details) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();

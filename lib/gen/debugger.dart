@@ -72,7 +72,7 @@ class ChromeDebugger extends ChromeApi {
    * JSON object with the response. Structure of the response varies depending
    * on the method and is defined by the remote debugging protocol.
    */
-  Future<Map<String, dynamic>> sendCommand(Debuggee target, String method, [Map<String, dynamic> commandParams]) {
+  Future<Map<String, dynamic>> sendCommand(Debuggee target, String method, Map<String, dynamic> commandParams) {
     if (_debugger == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);

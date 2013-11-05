@@ -151,7 +151,7 @@ class StorageArea extends ChromeObject {
    * Returns:
    * Object with items in their key-value mappings.
    */
-  Future<Map<String, dynamic>> get([dynamic keys]) {
+  Future<Map<String, dynamic>> get(dynamic keys) {
     var completer = new ChromeCompleter<Map<String, dynamic>>.oneArg(mapify);
     jsProxy.callMethod('get', [jsify(keys), completer.callback]);
     return completer.future;
@@ -167,7 +167,7 @@ class StorageArea extends ChromeObject {
    * Returns:
    * Amount of space being used in storage, in bytes.
    */
-  Future<int> getBytesInUse([dynamic keys]) {
+  Future<int> getBytesInUse(dynamic keys) {
     var completer = new ChromeCompleter<int>.oneArg();
     jsProxy.callMethod('getBytesInUse', [jsify(keys), completer.callback]);
     return completer.future;

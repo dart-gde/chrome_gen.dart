@@ -68,7 +68,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearDefaultFontSize([Map details]) {
+  Future clearDefaultFontSize(Map details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -81,7 +81,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<Map> getDefaultFontSize([Map details]) {
+  Future<Map> getDefaultFontSize(Map details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
@@ -105,7 +105,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearDefaultFixedFontSize([Map details]) {
+  Future clearDefaultFixedFontSize(Map details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -118,7 +118,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<Map> getDefaultFixedFontSize([Map details]) {
+  Future<Map> getDefaultFixedFontSize(Map details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
@@ -142,7 +142,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearMinimumFontSize([Map details]) {
+  Future clearMinimumFontSize(Map details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -155,7 +155,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<Map> getMinimumFontSize([Map details]) {
+  Future<Map> getMinimumFontSize(Map details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);

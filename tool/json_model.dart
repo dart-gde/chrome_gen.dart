@@ -232,8 +232,11 @@ class JsonConverter {
     if (method.returns == null) {
       if (!f.parameters.isEmpty && f.parameters.last.isCallback) {
         ChromeType type = method.params.removeLast();
-
         method.returns = _convertToFuture(method, type);
+
+        if (!method.params.isEmpty) {
+          method.params.last.optional = false;
+        }
       } else {
         method.returns = ChromeType.VOID;
       }

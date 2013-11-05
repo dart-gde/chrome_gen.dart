@@ -105,9 +105,39 @@ class ChromeMethod extends ChromeElement {
 
   bool get usesCallback => returns.isFuture;
 
-  // We depend on all required params being defined before any optional ones.
-  Iterable<ChromeType> get requiredParams => params.where((p) => !p.optional);
-  Iterable<ChromeType> get optionalParams => params.where((p) => p.optional);
+  // If an non-optional param is defined after an optional one, we make that
+  // optional param required.
+  Iterable<ChromeType> getRequiredParams() {
+    if (params.isEmpty) return params;
+
+    int i = params.length - 1;
+
+    while (params[i].optional) {
+      i--;
+
+      if (i < 0) {
+        return [];
+      }
+    }
+
+    return params.getRange(0, i + 1);
+  }
+
+  Iterable<ChromeType> getOptionalParams() {
+    if (params.isEmpty) return params;
+
+    int i = params.length - 1;
+
+    while (params[i].optional) {
+      i--;
+
+      if (i < 0) {
+        return params;
+      }
+    }
+
+    return params.getRange(i + 1, params.length);
+  }
 
   String getDescription() {
     if (documentation == null) {

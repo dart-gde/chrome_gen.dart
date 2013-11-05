@@ -44,7 +44,7 @@ class ChromeAlarms extends ChromeApi {
    * set for a repeating alarm, [periodInMinutes] is used as the default for
    * [delayInMinutes].
    */
-  void create(AlarmCreateInfo alarmInfo, [String name]) {
+  void create(String name, AlarmCreateInfo alarmInfo) {
     if (_alarms == null) _throwNotAvailable();
 
     _alarms.callMethod('create', [name, jsify(alarmInfo)]);

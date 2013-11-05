@@ -35,7 +35,7 @@ class ChromeSessions extends ChromeApi {
    * recently closed tab or window will be at index `0`).The entries may contain
    * either tabs or windows.
    */
-  Future<List<Session>> getRecentlyClosed([Filter filter]) {
+  Future<List<Session>> getRecentlyClosed(Filter filter) {
     if (_sessions == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Session>>.oneArg((e) => listify(e, _createSession));
@@ -52,7 +52,7 @@ class ChromeSessions extends ChromeApi {
    * modified session. [tabs.Tab] objects are sorted by recency in the
    * [windows.Window] of the [Session] objects.
    */
-  Future<List<Device>> getDevices([Filter filter]) {
+  Future<List<Device>> getDevices(Filter filter) {
     if (_sessions == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Device>>.oneArg((e) => listify(e, _createDevice));
@@ -70,7 +70,7 @@ class ChromeSessions extends ChromeApi {
    * Returns:
    * A [Session] containing the restored [windows.Window] or [tabs.Tab] object.
    */
-  Future<Session> restore([String sessionId]) {
+  Future<Session> restore(String sessionId) {
     if (_sessions == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Session>.oneArg(_createSession);

@@ -180,7 +180,7 @@ class ChromeRuntime extends ChromeApi {
    * occurs while connecting to the extension, the callback will be called with
    * no arguments and [runtime.lastError] will be set to the error message.
    */
-  Future<dynamic> sendMessage(dynamic message, [String extensionId, Map options]) {
+  Future<dynamic> sendMessage(String extensionId, dynamic message, Map options) {
     if (_runtime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();

@@ -37,7 +37,7 @@ class ChromeWindows extends ChromeApi {
    * 
    * [getInfo]
    */
-  Future<Window> get(int windowId, [Map getInfo]) {
+  Future<Window> get(int windowId, Map getInfo) {
     if (_windows == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
@@ -50,7 +50,7 @@ class ChromeWindows extends ChromeApi {
    * 
    * [getInfo]
    */
-  Future<Window> getCurrent([Map getInfo]) {
+  Future<Window> getCurrent(Map getInfo) {
     if (_windows == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
@@ -64,7 +64,7 @@ class ChromeWindows extends ChromeApi {
    * 
    * [getInfo]
    */
-  Future<Window> getLastFocused([Map getInfo]) {
+  Future<Window> getLastFocused(Map getInfo) {
     if (_windows == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
@@ -77,7 +77,7 @@ class ChromeWindows extends ChromeApi {
    * 
    * [getInfo]
    */
-  Future<List<Window>> getAll([Map getInfo]) {
+  Future<List<Window>> getAll(Map getInfo) {
     if (_windows == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Window>>.oneArg((e) => listify(e, _createWindow));
@@ -92,7 +92,7 @@ class ChromeWindows extends ChromeApi {
    * Returns:
    * Contains details about the created window.
    */
-  Future<Window> create([Map createData]) {
+  Future<Window> create(Map createData) {
     if (_windows == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
