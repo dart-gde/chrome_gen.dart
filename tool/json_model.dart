@@ -237,6 +237,10 @@ class JsonConverter {
       } else {
         method.returns = ChromeType.VOID;
       }
+    } else if (!f.parameters.isEmpty && f.parameters.last.isCallback) {
+      // TODO: there are 3 cases in the APIs where the return type is non-empty,
+      // but the method returns it's value using a callback.
+
     }
 
     return method;

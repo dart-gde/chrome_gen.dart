@@ -108,7 +108,7 @@ void main() {
 void label(String str) {
   SpanElement span = new SpanElement();
   span.text = str;
-  query('#container_id').children.add(span);
+  querySelector('#container_id').children.add(span);
 }
 
 void action(String name, Function callback) {
