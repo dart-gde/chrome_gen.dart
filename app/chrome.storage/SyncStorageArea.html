@@ -221,7 +221,7 @@ Future clear() {
 </div>
 <div class="method inherited"><h4 id="get">
 <button class="show-code">Code</button>
-Future&lt;Map&lt;String, dynamic&gt;&gt; <strong>get</strong>(keys) <a class="anchor-link" href="#get"
+Future&lt;Map&lt;String, dynamic&gt;&gt; <strong>get</strong>([keys]) <a class="anchor-link" href="#get"
               title="Permalink to SyncStorageArea.get">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.storage/StorageArea.html">StorageArea</a> </div><div class="doc">
 <p>Gets one or more items from storage.</p>
@@ -233,7 +233,7 @@ contents of storage.</p>
 <p>Returns:
 Object with items in their key-value mappings.</p>
 <pre class="source">
-Future&lt;Map&lt;String, dynamic&gt;&gt; get(dynamic keys) {
+Future&lt;Map&lt;String, dynamic&gt;&gt; get([dynamic keys]) {
  var completer = new ChromeCompleter&lt;Map&lt;String, dynamic&gt;&gt;.oneArg(mapify);
  jsProxy.callMethod('get', [jsify(keys), completer.callback]);
  return completer.future;
@@ -243,7 +243,7 @@ Future&lt;Map&lt;String, dynamic&gt;&gt; get(dynamic keys) {
 </div>
 <div class="method inherited"><h4 id="getBytesInUse">
 <button class="show-code">Code</button>
-Future&lt;int&gt; <strong>getBytesInUse</strong>(keys) <a class="anchor-link" href="#getBytesInUse"
+Future&lt;int&gt; <strong>getBytesInUse</strong>([keys]) <a class="anchor-link" href="#getBytesInUse"
               title="Permalink to SyncStorageArea.getBytesInUse">#</a></h4>
 <div class="inherited-from">inherited from <a href="../chrome.storage/StorageArea.html">StorageArea</a> </div><div class="doc">
 <p>Gets the amount of space (in bytes) being used by one or more items.</p>
@@ -254,7 +254,7 @@ storage.</p>
 <p>Returns:
 Amount of space being used in storage, in bytes.</p>
 <pre class="source">
-Future&lt;int&gt; getBytesInUse(dynamic keys) {
+Future&lt;int&gt; getBytesInUse([dynamic keys]) {
  var completer = new ChromeCompleter&lt;int&gt;.oneArg();
  jsProxy.callMethod('getBytesInUse', [jsify(keys), completer.callback]);
  return completer.future;

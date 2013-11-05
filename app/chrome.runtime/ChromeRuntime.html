@@ -194,7 +194,7 @@ class ChromeRuntime extends ChromeApi {
   * occurs while connecting to the extension, the callback will be called with
   * no arguments and [runtime.lastError] will be set to the error message.
   */
- Future&lt;dynamic&gt; sendMessage(String extensionId, dynamic message, Map options) {
+ Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId, Map options]) {
    if (_runtime == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -764,7 +764,7 @@ void restart() {
 </div>
 <div class="method"><h4 id="sendMessage">
 <button class="show-code">Code</button>
-Future&lt;dynamic&gt; <strong>sendMessage</strong>(String extensionId, message, Map options) <a class="anchor-link" href="#sendMessage"
+Future&lt;dynamic&gt; <strong>sendMessage</strong>(message, [String extensionId, Map options]) <a class="anchor-link" href="#sendMessage"
               title="Permalink to ChromeRuntime.sendMessage">#</a></h4>
 <div class="doc">
 <p>Sends a single message to onMessage event listeners within the extension
@@ -781,7 +781,7 @@ The JSON response object sent by the handler of the message. If an error
 occurs while connecting to the extension, the callback will be called with
 no arguments and <code>runtime.lastError</code> will be set to the error message.</p>
 <pre class="source">
-Future&lt;dynamic&gt; sendMessage(String extensionId, dynamic message, Map options) {
+Future&lt;dynamic&gt; sendMessage(dynamic message, [String extensionId, Map options]) {
  if (_runtime == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();

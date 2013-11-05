@@ -53,7 +53,7 @@ class ChromeSessions extends ChromeApi {
   * recently closed tab or window will be at index `0`).The entries may contain
   * either tabs or windows.
   */
- Future&lt;List&lt;Session&gt;&gt; getRecentlyClosed(Filter filter) {
+ Future&lt;List&lt;Session&gt;&gt; getRecentlyClosed([Filter filter]) {
    if (_sessions == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Session&gt;&gt;.oneArg((e) =&gt; listify(e, _createSession));
@@ -70,7 +70,7 @@ class ChromeSessions extends ChromeApi {
   * modified session. [tabs.Tab] objects are sorted by recency in the
   * [windows.Window] of the [Session] objects.
   */
- Future&lt;List&lt;Device&gt;&gt; getDevices(Filter filter) {
+ Future&lt;List&lt;Device&gt;&gt; getDevices([Filter filter]) {
    if (_sessions == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Device&gt;&gt;.oneArg((e) =&gt; listify(e, _createDevice));
@@ -88,7 +88,7 @@ class ChromeSessions extends ChromeApi {
   * Returns:
   * A [Session] containing the restored [windows.Window] or [tabs.Tab] object.
   */
- Future&lt;Session&gt; restore(String sessionId) {
+ Future&lt;Session&gt; restore([String sessionId]) {
    if (_sessions == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Session&gt;.oneArg(_createSession);
@@ -141,7 +141,7 @@ int get MAX_SESSION_RESULTS =&gt; _sessions['MAX_SESSION_RESULTS'];
 <h3>Methods</h3>
 <div class="method"><h4 id="getDevices">
 <button class="show-code">Code</button>
-Future&lt;List&lt;<a href="../chrome.sessions/Device.html">Device</a>&gt;&gt; <strong>getDevices</strong>(<a href="../chrome.sessions/Filter.html">Filter</a> filter) <a class="anchor-link" href="#getDevices"
+Future&lt;List&lt;<a href="../chrome.sessions/Device.html">Device</a>&gt;&gt; <strong>getDevices</strong>([<a href="../chrome.sessions/Filter.html">Filter</a> filter]) <a class="anchor-link" href="#getDevices"
               title="Permalink to ChromeSessions.getDevices">#</a></h4>
 <div class="doc">
 <p>Retrieves all devices with synced sessions.</p>
@@ -151,7 +151,7 @@ device with most recently modified session to device with least recently
 modified session. <code>tabs.Tab</code> objects are sorted by recency in the
 <code>windows.Window</code> of the <a class="crossref" href="../chrome.sessions/Session.html">Session</a> objects.</p>
 <pre class="source">
-Future&lt;List&lt;Device&gt;&gt; getDevices(Filter filter) {
+Future&lt;List&lt;Device&gt;&gt; getDevices([Filter filter]) {
  if (_sessions == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Device&gt;&gt;.oneArg((e) =&gt; listify(e, _createDevice));
@@ -163,7 +163,7 @@ Future&lt;List&lt;Device&gt;&gt; getDevices(Filter filter) {
 </div>
 <div class="method"><h4 id="getRecentlyClosed">
 <button class="show-code">Code</button>
-Future&lt;List&lt;<a href="../chrome.sessions/Session.html">Session</a>&gt;&gt; <strong>getRecentlyClosed</strong>(<a href="../chrome.sessions/Filter.html">Filter</a> filter) <a class="anchor-link" href="#getRecentlyClosed"
+Future&lt;List&lt;<a href="../chrome.sessions/Session.html">Session</a>&gt;&gt; <strong>getRecentlyClosed</strong>([<a href="../chrome.sessions/Filter.html">Filter</a> filter]) <a class="anchor-link" href="#getRecentlyClosed"
               title="Permalink to ChromeSessions.getRecentlyClosed">#</a></h4>
 <div class="doc">
 <p>Gets the list of recently closed tabs and/or windows.</p>
@@ -172,7 +172,7 @@ The list of closed entries in reverse order that they were closed (the most
 recently closed tab or window will be at index <code>0</code>).The entries may contain
 either tabs or windows.</p>
 <pre class="source">
-Future&lt;List&lt;Session&gt;&gt; getRecentlyClosed(Filter filter) {
+Future&lt;List&lt;Session&gt;&gt; getRecentlyClosed([Filter filter]) {
  if (_sessions == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Session&gt;&gt;.oneArg((e) =&gt; listify(e, _createSession));
@@ -184,7 +184,7 @@ Future&lt;List&lt;Session&gt;&gt; getRecentlyClosed(Filter filter) {
 </div>
 <div class="method"><h4 id="restore">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.sessions/Session.html">Session</a>&gt; <strong>restore</strong>(String sessionId) <a class="anchor-link" href="#restore"
+Future&lt;<a href="../chrome.sessions/Session.html">Session</a>&gt; <strong>restore</strong>([String sessionId]) <a class="anchor-link" href="#restore"
               title="Permalink to ChromeSessions.restore">#</a></h4>
 <div class="doc">
 <p>Reopens a <code>windows.Window</code> or <code>tabs.Tab</code>, with an optional callback to run
@@ -195,7 +195,7 @@ restore.</p>
 <p>Returns:
 A <a class="crossref" href="../chrome.sessions/Session.html">Session</a> containing the restored <code>windows.Window</code> or <code>tabs.Tab</code> object.</p>
 <pre class="source">
-Future&lt;Session&gt; restore(String sessionId) {
+Future&lt;Session&gt; restore([String sessionId]) {
  if (_sessions == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Session&gt;.oneArg(_createSession);

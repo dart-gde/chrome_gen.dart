@@ -122,7 +122,7 @@ class ChromeTabs extends ChromeApi {
   * 
   * [windowId] Defaults to the [current window](windows.html#current-window).
   */
- Future&lt;Tab&gt; getSelected(int windowId) {
+ Future&lt;Tab&gt; getSelected([int windowId]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
@@ -136,7 +136,7 @@ class ChromeTabs extends ChromeApi {
   * 
   * [windowId] Defaults to the [current window](windows.html#current-window).
   */
- Future&lt;List&lt;Tab&gt;&gt; getAllInWindow(int windowId) {
+ Future&lt;List&lt;Tab&gt;&gt; getAllInWindow([int windowId]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, _createTab));
@@ -213,7 +213,7 @@ class ChromeTabs extends ChromeApi {
   * Details about the updated tab. The [tabs.Tab] object doesn't contain `url`,
   * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
   */
- Future&lt;Tab&gt; update(int tabId, Map updateProperties) {
+ Future&lt;Tab&gt; update(Map updateProperties, [int tabId]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
@@ -245,7 +245,7 @@ class ChromeTabs extends ChromeApi {
   * [tabId] The ID of the tab to reload; defaults to the selected tab of the
   * current window.
   */
- Future reload(int tabId, Map reloadProperties) {
+ Future reload([int tabId, Map reloadProperties]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -280,7 +280,7 @@ class ChromeTabs extends ChromeApi {
   * returned except for Simplified Chinese for which zh-CN will be returned.
   * For an unknown language, `und` will be returned.
   */
- Future&lt;String&gt; detectLanguage(int tabId) {
+ Future&lt;String&gt; detectLanguage([int tabId]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -303,7 +303,7 @@ class ChromeTabs extends ChromeApi {
   * A data URL which encodes an image of the visible area of the captured tab.
   * May be assigned to the 'src' property of an HTML Image element for display.
   */
- Future&lt;String&gt; captureVisibleTab(int windowId, Map options) {
+ Future&lt;String&gt; captureVisibleTab([int windowId, Map options]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -323,7 +323,7 @@ class ChromeTabs extends ChromeApi {
   * Returns:
   * The result of the script in every injected frame.
   */
- Future&lt;List&lt;dynamic&gt;&gt; executeScript(int tabId, InjectDetails details) {
+ Future&lt;List&lt;dynamic&gt;&gt; executeScript(InjectDetails details, [int tabId]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;dynamic&gt;&gt;.oneArg(listify);
@@ -340,7 +340,7 @@ class ChromeTabs extends ChromeApi {
   * 
   * [details] Details of the CSS text to insert.
   */
- Future insertCSS(int tabId, InjectDetails details) {
+ Future insertCSS(InjectDetails details, [int tabId]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -652,7 +652,7 @@ Stream&lt;OnUpdatedEvent&gt; get onUpdated =&gt; _onUpdated.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="captureVisibleTab">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>captureVisibleTab</strong>(int windowId, Map options) <a class="anchor-link" href="#captureVisibleTab"
+Future&lt;String&gt; <strong>captureVisibleTab</strong>([int windowId, Map options]) <a class="anchor-link" href="#captureVisibleTab"
               title="Permalink to ChromeTabs.captureVisibleTab">#</a></h4>
 <div class="doc">
 <p>Captures the visible area of the currently active tab in the specified
@@ -668,7 +668,7 @@ resulting image.</p>
 A data URL which encodes an image of the visible area of the captured tab.
 May be assigned to the 'src' property of an HTML Image element for display.</p>
 <pre class="source">
-Future&lt;String&gt; captureVisibleTab(int windowId, Map options) {
+Future&lt;String&gt; captureVisibleTab([int windowId, Map options]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -721,7 +721,7 @@ Future&lt;Tab&gt; create(Map createProperties) {
 </div>
 <div class="method"><h4 id="detectLanguage">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>detectLanguage</strong>(int tabId) <a class="anchor-link" href="#detectLanguage"
+Future&lt;String&gt; <strong>detectLanguage</strong>([int tabId]) <a class="anchor-link" href="#detectLanguage"
               title="Permalink to ChromeTabs.detectLanguage">#</a></h4>
 <div class="doc">
 <p>Detects the primary language of the content in a tab.</p>
@@ -736,7 +736,7 @@ The 2nd to 4th columns will be checked and the first non-NULL value will be
 returned except for Simplified Chinese for which zh-CN will be returned.
 For an unknown language, <code>und</code> will be returned.</p>
 <pre class="source">
-Future&lt;String&gt; detectLanguage(int tabId) {
+Future&lt;String&gt; detectLanguage([int tabId]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -771,7 +771,7 @@ Future&lt;Tab&gt; duplicate(int tabId) {
 </div>
 <div class="method"><h4 id="executeScript">
 <button class="show-code">Code</button>
-Future&lt;List&lt;dynamic&gt;&gt; <strong>executeScript</strong>(int tabId, <a href="../chrome.tabs/InjectDetails.html">InjectDetails</a> details) <a class="anchor-link" href="#executeScript"
+Future&lt;List&lt;dynamic&gt;&gt; <strong>executeScript</strong>(<a href="../chrome.tabs/InjectDetails.html">InjectDetails</a> details, [int tabId]) <a class="anchor-link" href="#executeScript"
               title="Permalink to ChromeTabs.executeScript">#</a></h4>
 <div class="doc">
 <p>Injects JavaScript code into a page. For details, see the <a href="content_scripts.html#pi">programmatic
@@ -784,7 +784,7 @@ active tab of the current window.</p>
 <p>Returns:
 The result of the script in every injected frame.</p>
 <pre class="source">
-Future&lt;List&lt;dynamic&gt;&gt; executeScript(int tabId, InjectDetails details) {
+Future&lt;List&lt;dynamic&gt;&gt; executeScript(InjectDetails details, [int tabId]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;dynamic&gt;&gt;.oneArg(listify);
@@ -813,7 +813,7 @@ Future&lt;Tab&gt; get(int tabId) {
 </div>
 <div class="method"><h4 id="getAllInWindow">
 <button class="show-code">Code</button>
-Future&lt;List&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt;&gt; <strong>getAllInWindow</strong>(int windowId) <a class="anchor-link" href="#getAllInWindow"
+Future&lt;List&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt;&gt; <strong>getAllInWindow</strong>([int windowId]) <a class="anchor-link" href="#getAllInWindow"
               title="Permalink to ChromeTabs.getAllInWindow">#</a></h4>
 <div class="doc">
 <p>Deprecated. Please use query({'windowId': windowId}). Gets details about
@@ -821,7 +821,7 @@ all tabs in the specified window.</p>
 <p>
 <span class="param">windowId</span> Defaults to the <a href="windows.html#current-window">current window</a>.</p>
 <pre class="source">
-Future&lt;List&lt;Tab&gt;&gt; getAllInWindow(int windowId) {
+Future&lt;List&lt;Tab&gt;&gt; getAllInWindow([int windowId]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, _createTab));
@@ -852,7 +852,7 @@ Future&lt;Tab&gt; getCurrent() {
 </div>
 <div class="method"><h4 id="getSelected">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>getSelected</strong>(int windowId) <a class="anchor-link" href="#getSelected"
+Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>getSelected</strong>([int windowId]) <a class="anchor-link" href="#getSelected"
               title="Permalink to ChromeTabs.getSelected">#</a></h4>
 <div class="doc">
 <p>Deprecated. Please use query({'active': true}). Gets the tab that is
@@ -860,7 +860,7 @@ selected in the specified window.</p>
 <p>
 <span class="param">windowId</span> Defaults to the <a href="windows.html#current-window">current window</a>.</p>
 <pre class="source">
-Future&lt;Tab&gt; getSelected(int windowId) {
+Future&lt;Tab&gt; getSelected([int windowId]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
@@ -891,7 +891,7 @@ Future&lt;Window&gt; highlight(Map highlightInfo) {
 </div>
 <div class="method"><h4 id="insertCSS">
 <button class="show-code">Code</button>
-Future <strong>insertCSS</strong>(int tabId, <a href="../chrome.tabs/InjectDetails.html">InjectDetails</a> details) <a class="anchor-link" href="#insertCSS"
+Future <strong>insertCSS</strong>(<a href="../chrome.tabs/InjectDetails.html">InjectDetails</a> details, [int tabId]) <a class="anchor-link" href="#insertCSS"
               title="Permalink to ChromeTabs.insertCSS">#</a></h4>
 <div class="doc">
 <p>Injects CSS into a page. For details, see the <a href="content_scripts.html#pi">programmatic
@@ -902,7 +902,7 @@ active tab of the current window.</p>
 <p>
 <span class="param">details</span> Details of the CSS text to insert.</p>
 <pre class="source">
-Future insertCSS(int tabId, InjectDetails details) {
+Future insertCSS(InjectDetails details, [int tabId]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -955,7 +955,7 @@ Future&lt;List&lt;Tab&gt;&gt; query(Map queryInfo) {
 </div>
 <div class="method"><h4 id="reload">
 <button class="show-code">Code</button>
-Future <strong>reload</strong>(int tabId, Map reloadProperties) <a class="anchor-link" href="#reload"
+Future <strong>reload</strong>([int tabId, Map reloadProperties]) <a class="anchor-link" href="#reload"
               title="Permalink to ChromeTabs.reload">#</a></h4>
 <div class="doc">
 <p>Reload a tab.</p>
@@ -963,7 +963,7 @@ Future <strong>reload</strong>(int tabId, Map reloadProperties) <a class="anchor
 <span class="param">tabId</span> The ID of the tab to reload; defaults to the selected tab of the
 current window.</p>
 <pre class="source">
-Future reload(int tabId, Map reloadProperties) {
+Future reload([int tabId, Map reloadProperties]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -1039,7 +1039,7 @@ Future&lt;dynamic&gt; sendRequest(int tabId, dynamic request) {
 </div>
 <div class="method"><h4 id="update">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>update</strong>(int tabId, Map updateProperties) <a class="anchor-link" href="#update"
+Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>update</strong>(Map updateProperties, [int tabId]) <a class="anchor-link" href="#update"
               title="Permalink to ChromeTabs.update">#</a></h4>
 <div class="doc">
 <p>Modifies the properties of a tab. Properties that are not specified in
@@ -1052,7 +1052,7 @@ window</a>.</p>
 Details about the updated tab. The <code>tabs.Tab</code> object doesn't contain <code>url</code>,
 <code>title</code> and <code>favIconUrl</code> if the <code>"tabs"</code> permission has not been requested.</p>
 <pre class="source">
-Future&lt;Tab&gt; update(int tabId, Map updateProperties) {
+Future&lt;Tab&gt; update(Map updateProperties, [int tabId]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);

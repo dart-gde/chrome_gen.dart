@@ -64,7 +64,7 @@ class ChromeAlarms extends ChromeApi {
   * set for a repeating alarm, [periodInMinutes] is used as the default for
   * [delayInMinutes].
   */
- void create(String name, AlarmCreateInfo alarmInfo) {
+ void create(AlarmCreateInfo alarmInfo, [String name]) {
    if (_alarms == null) _throwNotAvailable();
 
    _alarms.callMethod('create', [name, jsify(alarmInfo)]);
@@ -193,7 +193,7 @@ void clearAll() {
 </div>
 <div class="method"><h4 id="create">
 <button class="show-code">Code</button>
-void <strong>create</strong>(String name, <a href="../chrome.alarms/AlarmCreateInfo.html">AlarmCreateInfo</a> alarmInfo) <a class="anchor-link" href="#create"
+void <strong>create</strong>(<a href="../chrome.alarms/AlarmCreateInfo.html">AlarmCreateInfo</a> alarmInfo, [String name]) <a class="anchor-link" href="#create"
               title="Permalink to ChromeAlarms.create">#</a></h4>
 <div class="doc">
 <p>Creates an alarm. Near the time(s) specified by 
@@ -218,7 +218,7 @@ minutes after the initial event. If neither <code>when</code> or <code>delayInMi
 set for a repeating alarm, <code>periodInMinutes</code> is used as the default for
 <code>delayInMinutes</code>.</p>
 <pre class="source">
-void create(String name, AlarmCreateInfo alarmInfo) {
+void create(AlarmCreateInfo alarmInfo, [String name]) {
  if (_alarms == null) _throwNotAvailable();
 
  _alarms.callMethod('create', [name, jsify(alarmInfo)]);
