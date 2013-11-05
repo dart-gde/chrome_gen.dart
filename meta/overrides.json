@@ -10,6 +10,10 @@
     "system.display.Bounds"
   ],
 
+  "suppressMethod" : [
+    "Event.hasListener"
+  ],
+
   "renameClass": {
     "bluetooth.Device": "BluetoothDevice",
     "serial.Device": "SerialDevice",
@@ -33,5 +37,4 @@
     "syncFileSystem.DOMFileSystem": "FileSystem",
     "mediaGalleries.DOMFileSystem": "FileSystem"
   }
-
 }

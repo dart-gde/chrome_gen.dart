@@ -377,8 +377,8 @@ class DefaultBackend extends Backend {
       props.forEach((p) => _printPropertyRef(p, 'this.jsProxy', !type.noSetters));
     }
 
-    type.methods.forEach((m) => _printMethod(
-        m, thisOverride: 'jsProxy', checkApi: false));
+    type.methods.where((m) => !overrides.suppressMethod(type.name, m.name)).
+        forEach((m) => _printMethod(m, thisOverride: 'jsProxy', checkApi: false));
 
     generator.writeln("}");
   }

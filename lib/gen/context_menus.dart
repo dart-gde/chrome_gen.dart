@@ -26,18 +26,13 @@ class ChromeContextMenus extends ChromeApi {
    * Creates a new context menu item. Note that if an error occurs during
    * creation, you may not find out until the creation callback fires (the
    * details will be in chrome.runtime.lastError).
-   * 
-   * [callback] Called when the item has been created in the browser. If there
-   * were any problems creating the item, details will be available in
-   * chrome.runtime.lastError.
-   * 
-   * Returns:
-   * The ID of the newly created item.
    */
-  dynamic create(Map createProperties, [dynamic callback]) {
+  Future create(Map createProperties) {
     if (_contextMenus == null) _throwNotAvailable();
 
-    return _contextMenus.callMethod('create', [jsify(createProperties), jsify(callback)]);
+    var completer = new ChromeCompleter.noArgs();
+    _contextMenus.callMethod('create', [jsify(createProperties), completer.callback]);
+    return completer.future;
   }
 
   /**

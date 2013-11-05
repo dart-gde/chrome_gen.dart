@@ -229,18 +229,12 @@ class JsonConverter {
     method.returns = _convertType(f.returns);
     method.params = f.parameters.map(_convertType).toList();
 
-    if (method.returns == null) {
-      if (!f.parameters.isEmpty && f.parameters.last.isCallback) {
-        ChromeType type = method.params.removeLast();
+    if (!f.parameters.isEmpty && f.parameters.last.isCallback) {
+      ChromeType type = method.params.removeLast();
 
-        method.returns = _convertToFuture(method, type);
-      } else {
-        method.returns = ChromeType.VOID;
-      }
-    } else if (!f.parameters.isEmpty && f.parameters.last.isCallback) {
-      // TODO: there are 3 cases in the APIs where the return type is non-empty,
-      // but the method returns it's value using a callback.
-
+      method.returns = _convertToFuture(method, type);
+    } else if (method.returns == null) {
+      method.returns = ChromeType.VOID;
     }
 
     return method;

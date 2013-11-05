@@ -32,13 +32,17 @@ class ChromeDesktopCapture extends ChromeApi {
    * security origin changes before this function returns, the call may fail.
    * 
    * Returns:
-   * An id that can be passed to cancelChooseDesktopMedia() in case the prompt
-   * need to be canceled.
+   * An opaque string that can be passed to `getUserMedia()` API to generate
+   * media stream that corresponds to the source selected by the user. If user
+   * didn't select any source (i.e. canceled the prompt) then the callback is
+   * called with an empty `streamId`
    */
-  int chooseDesktopMedia(List<DesktopCaptureSourceType> sources, dynamic callback, [Tab targetTab]) {
+  Future<String> chooseDesktopMedia(List<DesktopCaptureSourceType> sources, [Tab targetTab]) {
     if (_desktopCapture == null) _throwNotAvailable();
 
-    return _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), jsify(callback)]);
+    var completer = new ChromeCompleter<String>.oneArg();
+    _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), completer.callback]);
+    return completer.future;
   }
 
   /**

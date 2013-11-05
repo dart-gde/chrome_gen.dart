@@ -94,8 +94,10 @@ class Event extends ChromeObject {
     return completer.future;
   }
 
-  bool hasListener(dynamic callback) {
-    return jsProxy.callMethod('hasListener', [jsify(callback)]);
+  Future hasListener() {
+    var completer = new ChromeCompleter.noArgs();
+    jsProxy.callMethod('hasListener', [completer.callback]);
+    return completer.future;
   }
 
   bool hasListeners() {

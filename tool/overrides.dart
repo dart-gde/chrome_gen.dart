@@ -13,6 +13,7 @@ class Overrides {
   Map renameNamespaceMap;
 
   List<String> suppressClassList;
+  List<String> suppressMethodList;
   Map renameClassMap;
 
   Overrides() {
@@ -34,6 +35,11 @@ class Overrides {
       suppressClassList = [];
     }
 
+    suppressMethodList = ['noGen'];
+    if (suppressMethodList == null) {
+      suppressMethodList = [];
+    }
+
     renameClassMap = m['renameClass'];
     if (renameClassMap == null) {
       renameClassMap = {};
@@ -47,6 +53,10 @@ class Overrides {
   bool suppressClass(String libraryName, String name) {
     String qualifiedName = '${libraryName}.${name}';
     return suppressClassList.contains(qualifiedName);
+  }
+
+  bool suppressMethod(String className, String name) {
+    return suppressMethodList.contains('${className}.${name}');
   }
 
   String className(String libraryName, String name) {
