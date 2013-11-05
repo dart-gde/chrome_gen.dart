@@ -57,8 +57,10 @@ class Event extends ChromeObject {
    return completer.future;
  }
 
- bool hasListener(dynamic callback) {
-   return jsProxy.callMethod('hasListener', [jsify(callback)]);
+ Future hasListener() {
+   var completer = new ChromeCompleter.noArgs();
+   jsProxy.callMethod('hasListener', [completer.callback]);
+   return completer.future;
  }
 
  bool hasListeners() {
@@ -227,12 +229,14 @@ Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, [List&lt;String&gt; ru
 </div>
 <div class="method"><h4 id="hasListener">
 <button class="show-code">Code</button>
-bool <strong>hasListener</strong>(callback) <a class="anchor-link" href="#hasListener"
+Future <strong>hasListener</strong>() <a class="anchor-link" href="#hasListener"
               title="Permalink to Event.hasListener">#</a></h4>
 <div class="doc">
 <pre class="source">
-bool hasListener(dynamic callback) {
- return jsProxy.callMethod('hasListener', [jsify(callback)]);
+Future hasListener() {
+ var completer = new ChromeCompleter.noArgs();
+ jsProxy.callMethod('hasListener', [completer.callback]);
+ return completer.future;
 }
 </pre>
 </div>
