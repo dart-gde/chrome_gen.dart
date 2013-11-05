@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class InterfaceDescriptor extends ChromeObject {
- InterfaceDescriptor({int interfaceNumber, int alternateSetting, int interfaceClass, int interfaceSubclass, int interfaceProtocol, String description, EndpointDescriptor endpoints}) {
+ InterfaceDescriptor({int interfaceNumber, int alternateSetting, int interfaceClass, int interfaceSubclass, int interfaceProtocol, String description, List&lt;EndpointDescriptor&gt; endpoints}) {
    if (interfaceNumber != null) this.interfaceNumber = interfaceNumber;
    if (alternateSetting != null) this.alternateSetting = alternateSetting;
    if (interfaceClass != null) this.interfaceClass = interfaceClass;
@@ -63,8 +63,8 @@ class InterfaceDescriptor extends ChromeObject {
  String get description =&gt; jsProxy['description'];
  set description(String value) =&gt; jsProxy['description'] = value;
 
- EndpointDescriptor get endpoints =&gt; _createEndpointDescriptor(jsProxy['endpoints']);
- set endpoints(EndpointDescriptor value) =&gt; jsProxy['endpoints'] = jsify(value);
+ List&lt;EndpointDescriptor&gt; get endpoints =&gt; listify(jsProxy['endpoints'], _createEndpointDescriptor);
+ set endpoints(List&lt;EndpointDescriptor&gt; value) =&gt; jsProxy['endpoints'] = jsify(value);
 }
 </pre>
 </div>
@@ -75,7 +75,7 @@ class InterfaceDescriptor extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>InterfaceDescriptor</strong>({int interfaceNumber, int alternateSetting, int interfaceClass, int interfaceSubclass, int interfaceProtocol, String description, <a href="../chrome.usb/EndpointDescriptor.html">EndpointDescriptor</a> endpoints}) <a class="anchor-link" href="#"
+new <strong>InterfaceDescriptor</strong>({int interfaceNumber, int alternateSetting, int interfaceClass, int interfaceSubclass, int interfaceProtocol, String description, List&lt;<a href="../chrome.usb/EndpointDescriptor.html">EndpointDescriptor</a>&gt; endpoints}) <a class="anchor-link" href="#"
               title="Permalink to InterfaceDescriptor.InterfaceDescriptor">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -83,7 +83,7 @@ new <strong>InterfaceDescriptor</strong>({int interfaceNumber, int alternateSett
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-InterfaceDescriptor({int interfaceNumber, int alternateSetting, int interfaceClass, int interfaceSubclass, int interfaceProtocol, String description, EndpointDescriptor endpoints}) {
+InterfaceDescriptor({int interfaceNumber, int alternateSetting, int interfaceClass, int interfaceSubclass, int interfaceProtocol, String description, List&lt;EndpointDescriptor&gt; endpoints}) {
  if (interfaceNumber != null) this.interfaceNumber = interfaceNumber;
  if (alternateSetting != null) this.alternateSetting = alternateSetting;
  if (interfaceClass != null) this.interfaceClass = interfaceClass;
@@ -144,16 +144,16 @@ set description(String value) =&gt; jsProxy['description'] = value;
 </div>
 <div class="field"><h4 id="endpoints">
 <button class="show-code">Code</button>
-<a href="../chrome.usb/EndpointDescriptor.html">EndpointDescriptor</a>         <strong>endpoints</strong> <a class="anchor-link"
+List&lt;<a href="../chrome.usb/EndpointDescriptor.html">EndpointDescriptor</a>&gt;         <strong>endpoints</strong> <a class="anchor-link"
             href="#endpoints"
             title="Permalink to InterfaceDescriptor.endpoints">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-EndpointDescriptor get endpoints =&gt; _createEndpointDescriptor(jsProxy['endpoints']);
+List&lt;EndpointDescriptor&gt; get endpoints =&gt; listify(jsProxy['endpoints'], _createEndpointDescriptor);
 </pre>
 <pre class="source">
-set endpoints(EndpointDescriptor value) =&gt; jsProxy['endpoints'] = jsify(value);
+set endpoints(List&lt;EndpointDescriptor&gt; value) =&gt; jsProxy['endpoints'] = jsify(value);
 </pre>
 </div>
 </div>

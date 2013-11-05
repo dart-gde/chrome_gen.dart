@@ -36,7 +36,7 @@
 referrerUrl</code>) can be present for any given launch.</p>
 <pre class="source">
 class LaunchData extends ChromeObject {
- LaunchData({String id, LaunchItem items, String url, String referrerUrl, bool isKioskSession}) {
+ LaunchData({String id, List&lt;LaunchItem&gt; items, String url, String referrerUrl, bool isKioskSession}) {
    if (id != null) this.id = id;
    if (items != null) this.items = items;
    if (url != null) this.url = url;
@@ -48,8 +48,8 @@ class LaunchData extends ChromeObject {
  String get id =&gt; jsProxy['id'];
  set id(String value) =&gt; jsProxy['id'] = value;
 
- LaunchItem get items =&gt; _createLaunchItem(jsProxy['items']);
- set items(LaunchItem value) =&gt; jsProxy['items'] = jsify(value);
+ List&lt;LaunchItem&gt; get items =&gt; listify(jsProxy['items'], _createLaunchItem);
+ set items(List&lt;LaunchItem&gt; value) =&gt; jsProxy['items'] = jsify(value);
 
  String get url =&gt; jsProxy['url'];
  set url(String value) =&gt; jsProxy['url'] = value;
@@ -69,7 +69,7 @@ class LaunchData extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>LaunchData</strong>({String id, <a href="../chrome.app/LaunchItem.html">LaunchItem</a> items, String url, String referrerUrl, bool isKioskSession}) <a class="anchor-link" href="#"
+new <strong>LaunchData</strong>({String id, List&lt;<a href="../chrome.app/LaunchItem.html">LaunchItem</a>&gt; items, String url, String referrerUrl, bool isKioskSession}) <a class="anchor-link" href="#"
               title="Permalink to LaunchData.LaunchData">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -77,7 +77,7 @@ new <strong>LaunchData</strong>({String id, <a href="../chrome.app/LaunchItem.ht
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-LaunchData({String id, LaunchItem items, String url, String referrerUrl, bool isKioskSession}) {
+LaunchData({String id, List&lt;LaunchItem&gt; items, String url, String referrerUrl, bool isKioskSession}) {
  if (id != null) this.id = id;
  if (items != null) this.items = items;
  if (url != null) this.url = url;
@@ -136,16 +136,16 @@ set isKioskSession(bool value) =&gt; jsProxy['isKioskSession'] = value;
 </div>
 <div class="field"><h4 id="items">
 <button class="show-code">Code</button>
-<a href="../chrome.app/LaunchItem.html">LaunchItem</a>         <strong>items</strong> <a class="anchor-link"
+List&lt;<a href="../chrome.app/LaunchItem.html">LaunchItem</a>&gt;         <strong>items</strong> <a class="anchor-link"
             href="#items"
             title="Permalink to LaunchData.items">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-LaunchItem get items =&gt; _createLaunchItem(jsProxy['items']);
+List&lt;LaunchItem&gt; get items =&gt; listify(jsProxy['items'], _createLaunchItem);
 </pre>
 <pre class="source">
-set items(LaunchItem value) =&gt; jsProxy['items'] = jsify(value);
+set items(List&lt;LaunchItem&gt; value) =&gt; jsProxy['items'] = jsify(value);
 </pre>
 </div>
 </div>

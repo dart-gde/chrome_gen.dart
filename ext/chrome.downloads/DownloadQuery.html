@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class DownloadQuery extends ChromeObject {
- DownloadQuery({String query, String startedBefore, String startedAfter, String endedBefore, String endedAfter, int totalBytesGreater, int totalBytesLess, String filenameRegex, String urlRegex, int limit, String orderBy, int id, String url, String filename, DangerType danger, String mime, String startTime, String endTime, State state, bool paused, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists}) {
+ DownloadQuery({List&lt;String&gt; query, String startedBefore, String startedAfter, String endedBefore, String endedAfter, int totalBytesGreater, int totalBytesLess, String filenameRegex, String urlRegex, int limit, List&lt;String&gt; orderBy, int id, String url, String filename, DangerType danger, String mime, String startTime, String endTime, State state, bool paused, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists}) {
    if (query != null) this.query = query;
    if (startedBefore != null) this.startedBefore = startedBefore;
    if (startedAfter != null) this.startedAfter = startedAfter;
@@ -63,8 +63,8 @@ class DownloadQuery extends ChromeObject {
  }
  DownloadQuery.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- String get query =&gt; jsProxy['query'];
- set query(String value) =&gt; jsProxy['query'] = value;
+ List&lt;String&gt; get query =&gt; listify(jsProxy['query']);
+ set query(List&lt;String&gt; value) =&gt; jsProxy['query'] = jsify(value);
 
  String get startedBefore =&gt; jsProxy['startedBefore'];
  set startedBefore(String value) =&gt; jsProxy['startedBefore'] = value;
@@ -93,8 +93,8 @@ class DownloadQuery extends ChromeObject {
  int get limit =&gt; jsProxy['limit'];
  set limit(int value) =&gt; jsProxy['limit'] = value;
 
- String get orderBy =&gt; jsProxy['orderBy'];
- set orderBy(String value) =&gt; jsProxy['orderBy'] = value;
+ List&lt;String&gt; get orderBy =&gt; listify(jsProxy['orderBy']);
+ set orderBy(List&lt;String&gt; value) =&gt; jsProxy['orderBy'] = jsify(value);
 
  int get id =&gt; jsProxy['id'];
  set id(int value) =&gt; jsProxy['id'] = value;
@@ -147,7 +147,7 @@ class DownloadQuery extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>DownloadQuery</strong>({String query, String startedBefore, String startedAfter, String endedBefore, String endedAfter, int totalBytesGreater, int totalBytesLess, String filenameRegex, String urlRegex, int limit, String orderBy, int id, String url, String filename, <a href="../chrome.downloads/DangerType.html">DangerType</a> danger, String mime, String startTime, String endTime, <a href="../chrome.downloads/State.html">State</a> state, bool paused, <a href="../chrome.downloads/InterruptReason.html">InterruptReason</a> error, int bytesReceived, int totalBytes, int fileSize, bool exists}) <a class="anchor-link" href="#"
+new <strong>DownloadQuery</strong>({List&lt;String&gt; query, String startedBefore, String startedAfter, String endedBefore, String endedAfter, int totalBytesGreater, int totalBytesLess, String filenameRegex, String urlRegex, int limit, List&lt;String&gt; orderBy, int id, String url, String filename, <a href="../chrome.downloads/DangerType.html">DangerType</a> danger, String mime, String startTime, String endTime, <a href="../chrome.downloads/State.html">State</a> state, bool paused, <a href="../chrome.downloads/InterruptReason.html">InterruptReason</a> error, int bytesReceived, int totalBytes, int fileSize, bool exists}) <a class="anchor-link" href="#"
               title="Permalink to DownloadQuery.DownloadQuery">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -155,7 +155,7 @@ new <strong>DownloadQuery</strong>({String query, String startedBefore, String s
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-DownloadQuery({String query, String startedBefore, String startedAfter, String endedBefore, String endedAfter, int totalBytesGreater, int totalBytesLess, String filenameRegex, String urlRegex, int limit, String orderBy, int id, String url, String filename, DangerType danger, String mime, String startTime, String endTime, State state, bool paused, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists}) {
+DownloadQuery({List&lt;String&gt; query, String startedBefore, String startedAfter, String endedBefore, String endedAfter, int totalBytesGreater, int totalBytesLess, String filenameRegex, String urlRegex, int limit, List&lt;String&gt; orderBy, int id, String url, String filename, DangerType danger, String mime, String startTime, String endTime, State state, bool paused, InterruptReason error, int bytesReceived, int totalBytes, int fileSize, bool exists}) {
  if (query != null) this.query = query;
  if (startedBefore != null) this.startedBefore = startedBefore;
  if (startedAfter != null) this.startedAfter = startedAfter;
@@ -411,16 +411,16 @@ set mime(String value) =&gt; jsProxy['mime'] = value;
 </div>
 <div class="field"><h4 id="orderBy">
 <button class="show-code">Code</button>
-String         <strong>orderBy</strong> <a class="anchor-link"
+List&lt;String&gt;         <strong>orderBy</strong> <a class="anchor-link"
             href="#orderBy"
             title="Permalink to DownloadQuery.orderBy">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String get orderBy =&gt; jsProxy['orderBy'];
+List&lt;String&gt; get orderBy =&gt; listify(jsProxy['orderBy']);
 </pre>
 <pre class="source">
-set orderBy(String value) =&gt; jsProxy['orderBy'] = value;
+set orderBy(List&lt;String&gt; value) =&gt; jsProxy['orderBy'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -441,16 +441,16 @@ set paused(bool value) =&gt; jsProxy['paused'] = value;
 </div>
 <div class="field"><h4 id="query">
 <button class="show-code">Code</button>
-String         <strong>query</strong> <a class="anchor-link"
+List&lt;String&gt;         <strong>query</strong> <a class="anchor-link"
             href="#query"
             title="Permalink to DownloadQuery.query">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String get query =&gt; jsProxy['query'];
+List&lt;String&gt; get query =&gt; listify(jsProxy['query']);
 </pre>
 <pre class="source">
-set query(String value) =&gt; jsProxy['query'] = value;
+set query(List&lt;String&gt; value) =&gt; jsProxy['query'] = jsify(value);
 </pre>
 </div>
 </div>

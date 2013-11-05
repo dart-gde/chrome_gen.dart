@@ -36,11 +36,11 @@
 <pre class="source">
 class ChooseEntryResult {
  static ChooseEntryResult _create(entry, fileEntries) {
-   return new ChooseEntryResult._(_createEntry(entry), _createFileEntry(fileEntries));
+   return new ChooseEntryResult._(_createEntry(entry), listify(fileEntries, _createFileEntry));
  }
 
  Entry entry;
- FileEntry fileEntries;
+ List&lt;FileEntry&gt; fileEntries;
 
  ChooseEntryResult._(this.entry, this.fileEntries);
 }
@@ -62,13 +62,13 @@ Entry entry
 </div>
 <div class="field"><h4 id="fileEntries">
 <button class="show-code">Code</button>
-FileEntry         <strong>fileEntries</strong> <a class="anchor-link"
+List&lt;FileEntry&gt;         <strong>fileEntries</strong> <a class="anchor-link"
             href="#fileEntries"
             title="Permalink to ChooseEntryResult.fileEntries">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-FileEntry fileEntries
+List&lt;FileEntry&gt; fileEntries
 </pre>
 </div>
 </div>

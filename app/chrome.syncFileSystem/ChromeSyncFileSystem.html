@@ -128,10 +128,10 @@ class ChromeSyncFileSystem extends ChromeApi {
   * Returns:
   * A callback type for getFileStatuses.
   */
- Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
+ Future&lt;List&lt;FileStatusInfo&gt;&gt; getFileStatuses(List&lt;dynamic&gt; fileEntries) {
    if (_syncFileSystem == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;FileStatusInfo&gt;.oneArg(_createFileStatusInfo);
+   var completer = new ChromeCompleter&lt;List&lt;FileStatusInfo&gt;&gt;.oneArg((e) =&gt; listify(e, _createFileStatusInfo));
    _syncFileSystem.callMethod('getFileStatuses', [jsify(fileEntries), completer.callback]);
    return completer.future;
  }
@@ -257,7 +257,7 @@ Future&lt;FileStatus&gt; getFileStatus(Entry fileEntry) {
 </div>
 <div class="method"><h4 id="getFileStatuses">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.syncFileSystem/FileStatusInfo.html">FileStatusInfo</a>&gt; <strong>getFileStatuses</strong>(fileEntries) <a class="anchor-link" href="#getFileStatuses"
+Future&lt;List&lt;<a href="../chrome.syncFileSystem/FileStatusInfo.html">FileStatusInfo</a>&gt;&gt; <strong>getFileStatuses</strong>(List&lt;dynamic&gt; fileEntries) <a class="anchor-link" href="#getFileStatuses"
               title="Permalink to ChromeSyncFileSystem.getFileStatuses">#</a></h4>
 <div class="doc">
 <p>Returns each <a class="crossref" href="../chrome.syncFileSystem/FileStatus.html">FileStatus</a> for the given <code>fileEntry</code> array. Typically called
@@ -265,10 +265,10 @@ with the result from dirReader.readEntries().</p>
 <p>Returns:
 A callback type for getFileStatuses.</p>
 <pre class="source">
-Future&lt;FileStatusInfo&gt; getFileStatuses(dynamic fileEntries) {
+Future&lt;List&lt;FileStatusInfo&gt;&gt; getFileStatuses(List&lt;dynamic&gt; fileEntries) {
  if (_syncFileSystem == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;FileStatusInfo&gt;.oneArg(_createFileStatusInfo);
+ var completer = new ChromeCompleter&lt;List&lt;FileStatusInfo&gt;&gt;.oneArg((e) =&gt; listify(e, _createFileStatusInfo));
  _syncFileSystem.callMethod('getFileStatuses', [jsify(fileEntries), completer.callback]);
  return completer.future;
 }

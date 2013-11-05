@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class ChooseEntryOptions extends ChromeObject {
- ChooseEntryOptions({ChooseEntryType type, String suggestedName, AcceptOption accepts, bool acceptsAllTypes, bool acceptsMultiple}) {
+ ChooseEntryOptions({ChooseEntryType type, String suggestedName, List&lt;AcceptOption&gt; accepts, bool acceptsAllTypes, bool acceptsMultiple}) {
    if (type != null) this.type = type;
    if (suggestedName != null) this.suggestedName = suggestedName;
    if (accepts != null) this.accepts = accepts;
@@ -49,8 +49,8 @@ class ChooseEntryOptions extends ChromeObject {
  String get suggestedName =&gt; jsProxy['suggestedName'];
  set suggestedName(String value) =&gt; jsProxy['suggestedName'] = value;
 
- AcceptOption get accepts =&gt; _createAcceptOption(jsProxy['accepts']);
- set accepts(AcceptOption value) =&gt; jsProxy['accepts'] = jsify(value);
+ List&lt;AcceptOption&gt; get accepts =&gt; listify(jsProxy['accepts'], _createAcceptOption);
+ set accepts(List&lt;AcceptOption&gt; value) =&gt; jsProxy['accepts'] = jsify(value);
 
  bool get acceptsAllTypes =&gt; jsProxy['acceptsAllTypes'];
  set acceptsAllTypes(bool value) =&gt; jsProxy['acceptsAllTypes'] = value;
@@ -67,7 +67,7 @@ class ChooseEntryOptions extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>ChooseEntryOptions</strong>({<a href="../chrome.fileSystem/ChooseEntryType.html">ChooseEntryType</a> type, String suggestedName, <a href="../chrome.fileSystem/AcceptOption.html">AcceptOption</a> accepts, bool acceptsAllTypes, bool acceptsMultiple}) <a class="anchor-link" href="#"
+new <strong>ChooseEntryOptions</strong>({<a href="../chrome.fileSystem/ChooseEntryType.html">ChooseEntryType</a> type, String suggestedName, List&lt;<a href="../chrome.fileSystem/AcceptOption.html">AcceptOption</a>&gt; accepts, bool acceptsAllTypes, bool acceptsMultiple}) <a class="anchor-link" href="#"
               title="Permalink to ChooseEntryOptions.ChooseEntryOptions">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -75,7 +75,7 @@ new <strong>ChooseEntryOptions</strong>({<a href="../chrome.fileSystem/ChooseEnt
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ChooseEntryOptions({ChooseEntryType type, String suggestedName, AcceptOption accepts, bool acceptsAllTypes, bool acceptsMultiple}) {
+ChooseEntryOptions({ChooseEntryType type, String suggestedName, List&lt;AcceptOption&gt; accepts, bool acceptsAllTypes, bool acceptsMultiple}) {
  if (type != null) this.type = type;
  if (suggestedName != null) this.suggestedName = suggestedName;
  if (accepts != null) this.accepts = accepts;
@@ -104,16 +104,16 @@ ChooseEntryOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="accepts">
 <button class="show-code">Code</button>
-<a href="../chrome.fileSystem/AcceptOption.html">AcceptOption</a>         <strong>accepts</strong> <a class="anchor-link"
+List&lt;<a href="../chrome.fileSystem/AcceptOption.html">AcceptOption</a>&gt;         <strong>accepts</strong> <a class="anchor-link"
             href="#accepts"
             title="Permalink to ChooseEntryOptions.accepts">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-AcceptOption get accepts =&gt; _createAcceptOption(jsProxy['accepts']);
+List&lt;AcceptOption&gt; get accepts =&gt; listify(jsProxy['accepts'], _createAcceptOption);
 </pre>
 <pre class="source">
-set accepts(AcceptOption value) =&gt; jsProxy['accepts'] = jsify(value);
+set accepts(List&lt;AcceptOption&gt; value) =&gt; jsProxy['accepts'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -85,10 +85,10 @@ class ChromeAlarms extends ChromeApi {
  /**
   * Gets an array of all the alarms.
   */
- Future&lt;Alarm&gt; getAll() {
+ Future&lt;List&lt;Alarm&gt;&gt; getAll() {
    if (_alarms == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(_createAlarm);
+   var completer = new ChromeCompleter&lt;List&lt;Alarm&gt;&gt;.oneArg((e) =&gt; listify(e, _createAlarm));
    _alarms.callMethod('getAll', [completer.callback]);
    return completer.future;
  }
@@ -247,15 +247,15 @@ Future&lt;Alarm&gt; get([String name]) {
 </div>
 <div class="method"><h4 id="getAll">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.alarms/Alarm.html">Alarm</a>&gt; <strong>getAll</strong>() <a class="anchor-link" href="#getAll"
+Future&lt;List&lt;<a href="../chrome.alarms/Alarm.html">Alarm</a>&gt;&gt; <strong>getAll</strong>() <a class="anchor-link" href="#getAll"
               title="Permalink to ChromeAlarms.getAll">#</a></h4>
 <div class="doc">
 <p>Gets an array of all the alarms.</p>
 <pre class="source">
-Future&lt;Alarm&gt; getAll() {
+Future&lt;List&lt;Alarm&gt;&gt; getAll() {
  if (_alarms == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;Alarm&gt;.oneArg(_createAlarm);
+ var completer = new ChromeCompleter&lt;List&lt;Alarm&gt;&gt;.oneArg((e) =&gt; listify(e, _createAlarm));
  _alarms.callMethod('getAll', [completer.callback]);
  return completer.future;
 }

@@ -44,10 +44,10 @@ class ChromeMediaGalleries extends ChromeApi {
   * Get the media galleries configured in this user agent. If none are
   * configured or available, the callback will receive an empty array.
   */
- Future&lt;FileSystem&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
+ Future&lt;List&lt;FileSystem&gt;&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
    if (_mediaGalleries == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
+   var completer = new ChromeCompleter&lt;List&lt;FileSystem&gt;&gt;.oneArg((e) =&gt; listify(e, _createFileSystem));
    _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -108,16 +108,16 @@ MediaFileSystemMetadata getMediaFileSystemMetadata(FileSystem mediaFileSystem) {
 </div>
 <div class="method"><h4 id="getMediaFileSystems">
 <button class="show-code">Code</button>
-Future&lt;FileSystem&gt; <strong>getMediaFileSystems</strong>([<a href="../chrome.mediaGalleries/MediaFileSystemsDetails.html">MediaFileSystemsDetails</a> details]) <a class="anchor-link" href="#getMediaFileSystems"
+Future&lt;List&lt;FileSystem&gt;&gt; <strong>getMediaFileSystems</strong>([<a href="../chrome.mediaGalleries/MediaFileSystemsDetails.html">MediaFileSystemsDetails</a> details]) <a class="anchor-link" href="#getMediaFileSystems"
               title="Permalink to ChromeMediaGalleries.getMediaFileSystems">#</a></h4>
 <div class="doc">
 <p>Get the media galleries configured in this user agent. If none are
 configured or available, the callback will receive an empty array.</p>
 <pre class="source">
-Future&lt;FileSystem&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
+Future&lt;List&lt;FileSystem&gt;&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
  if (_mediaGalleries == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
+ var completer = new ChromeCompleter&lt;List&lt;FileSystem&gt;&gt;.oneArg((e) =&gt; listify(e, _createFileSystem));
  _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
  return completer.future;
 }

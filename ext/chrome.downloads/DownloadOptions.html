@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class DownloadOptions extends ChromeObject {
- DownloadOptions({String url, String filename, FilenameConflictAction conflictAction, bool saveAs, HttpMethod method, HeaderNameValuePair headers, String body}) {
+ DownloadOptions({String url, String filename, FilenameConflictAction conflictAction, bool saveAs, HttpMethod method, List&lt;HeaderNameValuePair&gt; headers, String body}) {
    if (url != null) this.url = url;
    if (filename != null) this.filename = filename;
    if (conflictAction != null) this.conflictAction = conflictAction;
@@ -60,8 +60,8 @@ class DownloadOptions extends ChromeObject {
  HttpMethod get method =&gt; _createHttpMethod(jsProxy['method']);
  set method(HttpMethod value) =&gt; jsProxy['method'] = jsify(value);
 
- HeaderNameValuePair get headers =&gt; _createHeaderNameValuePair(jsProxy['headers']);
- set headers(HeaderNameValuePair value) =&gt; jsProxy['headers'] = jsify(value);
+ List&lt;HeaderNameValuePair&gt; get headers =&gt; listify(jsProxy['headers'], _createHeaderNameValuePair);
+ set headers(List&lt;HeaderNameValuePair&gt; value) =&gt; jsProxy['headers'] = jsify(value);
 
  String get body =&gt; jsProxy['body'];
  set body(String value) =&gt; jsProxy['body'] = value;
@@ -75,7 +75,7 @@ class DownloadOptions extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>DownloadOptions</strong>({String url, String filename, <a href="../chrome.downloads/FilenameConflictAction.html">FilenameConflictAction</a> conflictAction, bool saveAs, <a href="../chrome.downloads/HttpMethod.html">HttpMethod</a> method, <a href="../chrome.downloads/HeaderNameValuePair.html">HeaderNameValuePair</a> headers, String body}) <a class="anchor-link" href="#"
+new <strong>DownloadOptions</strong>({String url, String filename, <a href="../chrome.downloads/FilenameConflictAction.html">FilenameConflictAction</a> conflictAction, bool saveAs, <a href="../chrome.downloads/HttpMethod.html">HttpMethod</a> method, List&lt;<a href="../chrome.downloads/HeaderNameValuePair.html">HeaderNameValuePair</a>&gt; headers, String body}) <a class="anchor-link" href="#"
               title="Permalink to DownloadOptions.DownloadOptions">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -83,7 +83,7 @@ new <strong>DownloadOptions</strong>({String url, String filename, <a href="../c
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-DownloadOptions({String url, String filename, FilenameConflictAction conflictAction, bool saveAs, HttpMethod method, HeaderNameValuePair headers, String body}) {
+DownloadOptions({String url, String filename, FilenameConflictAction conflictAction, bool saveAs, HttpMethod method, List&lt;HeaderNameValuePair&gt; headers, String body}) {
  if (url != null) this.url = url;
  if (filename != null) this.filename = filename;
  if (conflictAction != null) this.conflictAction = conflictAction;
@@ -159,16 +159,16 @@ set filename(String value) =&gt; jsProxy['filename'] = value;
 </div>
 <div class="field"><h4 id="headers">
 <button class="show-code">Code</button>
-<a href="../chrome.downloads/HeaderNameValuePair.html">HeaderNameValuePair</a>         <strong>headers</strong> <a class="anchor-link"
+List&lt;<a href="../chrome.downloads/HeaderNameValuePair.html">HeaderNameValuePair</a>&gt;         <strong>headers</strong> <a class="anchor-link"
             href="#headers"
             title="Permalink to DownloadOptions.headers">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-HeaderNameValuePair get headers =&gt; _createHeaderNameValuePair(jsProxy['headers']);
+List&lt;HeaderNameValuePair&gt; get headers =&gt; listify(jsProxy['headers'], _createHeaderNameValuePair);
 </pre>
 <pre class="source">
-set headers(HeaderNameValuePair value) =&gt; jsProxy['headers'] = jsify(value);
+set headers(List&lt;HeaderNameValuePair&gt; value) =&gt; jsProxy['headers'] = jsify(value);
 </pre>
 </div>
 </div>

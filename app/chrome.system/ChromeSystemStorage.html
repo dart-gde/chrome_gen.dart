@@ -46,10 +46,10 @@ class ChromeSystemStorage extends ChromeApi {
   * Get the storage information from the system. The argument passed to the
   * callback is an array of StorageUnitInfo objects.
   */
- Future&lt;StorageUnitInfo&gt; getInfo() {
+ Future&lt;List&lt;StorageUnitInfo&gt;&gt; getInfo() {
    if (_system_storage == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(_createStorageUnitInfo);
+   var completer = new ChromeCompleter&lt;List&lt;StorageUnitInfo&gt;&gt;.oneArg((e) =&gt; listify(e, _createStorageUnitInfo));
    _system_storage.callMethod('getInfo', [completer.callback]);
    return completer.future;
  }
@@ -180,16 +180,16 @@ Future&lt;StorageAvailableCapacityInfo&gt; getAvailableCapacity(String id) {
 </div>
 <div class="method"><h4 id="getInfo">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.system/StorageUnitInfo.html">StorageUnitInfo</a>&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
+Future&lt;List&lt;<a href="../chrome.system/StorageUnitInfo.html">StorageUnitInfo</a>&gt;&gt; <strong>getInfo</strong>() <a class="anchor-link" href="#getInfo"
               title="Permalink to ChromeSystemStorage.getInfo">#</a></h4>
 <div class="doc">
 <p>Get the storage information from the system. The argument passed to the
 callback is an array of StorageUnitInfo objects.</p>
 <pre class="source">
-Future&lt;StorageUnitInfo&gt; getInfo() {
+Future&lt;List&lt;StorageUnitInfo&gt;&gt; getInfo() {
  if (_system_storage == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;StorageUnitInfo&gt;.oneArg(_createStorageUnitInfo);
+ var completer = new ChromeCompleter&lt;List&lt;StorageUnitInfo&gt;&gt;.oneArg((e) =&gt; listify(e, _createStorageUnitInfo));
  _system_storage.callMethod('getInfo', [completer.callback]);
  return completer.future;
 }

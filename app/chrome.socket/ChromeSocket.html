@@ -252,10 +252,10 @@ class ChromeSocket extends ChromeApi {
   * Retrieves information about local adapters on this system.
   * [callback]: Called when local adapter information is available.
   */
- Future&lt;NetworkInterface&gt; getNetworkList() {
+ Future&lt;List&lt;NetworkInterface&gt;&gt; getNetworkList() {
    if (_socket == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;NetworkInterface&gt;.oneArg(_createNetworkInterface);
+   var completer = new ChromeCompleter&lt;List&lt;NetworkInterface&gt;&gt;.oneArg((e) =&gt; listify(e, _createNetworkInterface));
    _socket.callMethod('getNetworkList', [completer.callback]);
    return completer.future;
  }
@@ -348,10 +348,10 @@ class ChromeSocket extends ChromeApi {
   * [socketId]: The socketId.
   * [callback]: Called with an array of strings of the result.
   */
- Future&lt;String&gt; getJoinedGroups(int socketId) {
+ Future&lt;List&lt;String&gt;&gt; getJoinedGroups(int socketId) {
    if (_socket == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
+   var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
    _socket.callMethod('getJoinedGroups', [socketId, completer.callback]);
    return completer.future;
  }
@@ -540,7 +540,7 @@ Future&lt;SocketInfo&gt; getInfo(int socketId) {
 </div>
 <div class="method"><h4 id="getJoinedGroups">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>getJoinedGroups</strong>(int socketId) <a class="anchor-link" href="#getJoinedGroups"
+Future&lt;List&lt;String&gt;&gt; <strong>getJoinedGroups</strong>(int socketId) <a class="anchor-link" href="#getJoinedGroups"
               title="Permalink to ChromeSocket.getJoinedGroups">#</a></h4>
 <div class="doc">
 <p>Get the multicast group addresses the socket is currently joined to.
@@ -548,10 +548,10 @@ Future&lt;String&gt; <strong>getJoinedGroups</strong>(int socketId) <a class="an
 <span class="param">socketId</span>: The socketId.
 <code>callback</code>: Called with an array of strings of the result.</p>
 <pre class="source">
-Future&lt;String&gt; getJoinedGroups(int socketId) {
+Future&lt;List&lt;String&gt;&gt; getJoinedGroups(int socketId) {
  if (_socket == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;String&gt;.oneArg();
+ var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
  _socket.callMethod('getJoinedGroups', [socketId, completer.callback]);
  return completer.future;
 }
@@ -560,16 +560,16 @@ Future&lt;String&gt; getJoinedGroups(int socketId) {
 </div>
 <div class="method"><h4 id="getNetworkList">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.socket/NetworkInterface.html">NetworkInterface</a>&gt; <strong>getNetworkList</strong>() <a class="anchor-link" href="#getNetworkList"
+Future&lt;List&lt;<a href="../chrome.socket/NetworkInterface.html">NetworkInterface</a>&gt;&gt; <strong>getNetworkList</strong>() <a class="anchor-link" href="#getNetworkList"
               title="Permalink to ChromeSocket.getNetworkList">#</a></h4>
 <div class="doc">
 <p>Retrieves information about local adapters on this system.
 <code>callback</code>: Called when local adapter information is available.</p>
 <pre class="source">
-Future&lt;NetworkInterface&gt; getNetworkList() {
+Future&lt;List&lt;NetworkInterface&gt;&gt; getNetworkList() {
  if (_socket == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;NetworkInterface&gt;.oneArg(_createNetworkInterface);
+ var completer = new ChromeCompleter&lt;List&lt;NetworkInterface&gt;&gt;.oneArg((e) =&gt; listify(e, _createNetworkInterface));
  _socket.callMethod('getNetworkList', [completer.callback]);
  return completer.future;
 }

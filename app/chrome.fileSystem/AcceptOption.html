@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class AcceptOption extends ChromeObject {
- AcceptOption({String description, String mimeTypes, String extensions}) {
+ AcceptOption({String description, List&lt;String&gt; mimeTypes, List&lt;String&gt; extensions}) {
    if (description != null) this.description = description;
    if (mimeTypes != null) this.mimeTypes = mimeTypes;
    if (extensions != null) this.extensions = extensions;
@@ -44,11 +44,11 @@ class AcceptOption extends ChromeObject {
  String get description =&gt; jsProxy['description'];
  set description(String value) =&gt; jsProxy['description'] = value;
 
- String get mimeTypes =&gt; jsProxy['mimeTypes'];
- set mimeTypes(String value) =&gt; jsProxy['mimeTypes'] = value;
+ List&lt;String&gt; get mimeTypes =&gt; listify(jsProxy['mimeTypes']);
+ set mimeTypes(List&lt;String&gt; value) =&gt; jsProxy['mimeTypes'] = jsify(value);
 
- String get extensions =&gt; jsProxy['extensions'];
- set extensions(String value) =&gt; jsProxy['extensions'] = value;
+ List&lt;String&gt; get extensions =&gt; listify(jsProxy['extensions']);
+ set extensions(List&lt;String&gt; value) =&gt; jsProxy['extensions'] = jsify(value);
 }
 </pre>
 </div>
@@ -59,7 +59,7 @@ class AcceptOption extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>AcceptOption</strong>({String description, String mimeTypes, String extensions}) <a class="anchor-link" href="#"
+new <strong>AcceptOption</strong>({String description, List&lt;String&gt; mimeTypes, List&lt;String&gt; extensions}) <a class="anchor-link" href="#"
               title="Permalink to AcceptOption.AcceptOption">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -67,7 +67,7 @@ new <strong>AcceptOption</strong>({String description, String mimeTypes, String 
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-AcceptOption({String description, String mimeTypes, String extensions}) {
+AcceptOption({String description, List&lt;String&gt; mimeTypes, List&lt;String&gt; extensions}) {
  if (description != null) this.description = description;
  if (mimeTypes != null) this.mimeTypes = mimeTypes;
  if (extensions != null) this.extensions = extensions;
@@ -109,16 +109,16 @@ set description(String value) =&gt; jsProxy['description'] = value;
 </div>
 <div class="field"><h4 id="extensions">
 <button class="show-code">Code</button>
-String         <strong>extensions</strong> <a class="anchor-link"
+List&lt;String&gt;         <strong>extensions</strong> <a class="anchor-link"
             href="#extensions"
             title="Permalink to AcceptOption.extensions">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String get extensions =&gt; jsProxy['extensions'];
+List&lt;String&gt; get extensions =&gt; listify(jsProxy['extensions']);
 </pre>
 <pre class="source">
-set extensions(String value) =&gt; jsProxy['extensions'] = value;
+set extensions(List&lt;String&gt; value) =&gt; jsProxy['extensions'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -136,16 +136,16 @@ final JsObject jsProxy
 </div>
 <div class="field"><h4 id="mimeTypes">
 <button class="show-code">Code</button>
-String         <strong>mimeTypes</strong> <a class="anchor-link"
+List&lt;String&gt;         <strong>mimeTypes</strong> <a class="anchor-link"
             href="#mimeTypes"
             title="Permalink to AcceptOption.mimeTypes">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-String get mimeTypes =&gt; jsProxy['mimeTypes'];
+List&lt;String&gt; get mimeTypes =&gt; listify(jsProxy['mimeTypes']);
 </pre>
 <pre class="source">
-set mimeTypes(String value) =&gt; jsProxy['mimeTypes'] = value;
+set mimeTypes(List&lt;String&gt; value) =&gt; jsProxy['mimeTypes'] = jsify(value);
 </pre>
 </div>
 </div>

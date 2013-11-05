@@ -47,10 +47,10 @@ class ChromeSerial extends ChromeApi {
   * 
   * [callback]: Called with the list of ports.
   */
- Future&lt;String&gt; getPorts() {
+ Future&lt;List&lt;String&gt;&gt; getPorts() {
    if (_serial == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
+   var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
    _serial.callMethod('getPorts', [completer.callback]);
    return completer.future;
  }
@@ -238,7 +238,7 @@ Future&lt;ControlSignalOptions&gt; getControlSignals(int connectionId) {
 </div>
 <div class="method"><h4 id="getPorts">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>getPorts</strong>() <a class="anchor-link" href="#getPorts"
+Future&lt;List&lt;String&gt;&gt; <strong>getPorts</strong>() <a class="anchor-link" href="#getPorts"
               title="Permalink to ChromeSerial.getPorts">#</a></h4>
 <div class="doc">
 <p>Returns names of valid ports on this machine, each of which is likely to be
@@ -246,10 +246,10 @@ valid to pass as the port argument to open(). The list is regenerated each
 time this method is called, as port validity is dynamic.</p>
 <p><code>callback</code>: Called with the list of ports.</p>
 <pre class="source">
-Future&lt;String&gt; getPorts() {
+Future&lt;List&lt;String&gt;&gt; getPorts() {
  if (_serial == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;String&gt;.oneArg();
+ var completer = new ChromeCompleter&lt;List&lt;String&gt;&gt;.oneArg(listify);
  _serial.callMethod('getPorts', [completer.callback]);
  return completer.future;
 }

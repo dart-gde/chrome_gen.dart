@@ -36,11 +36,11 @@
 <pre class="source">
 class GetInfoResult {
  static GetInfoResult _create(outputInfo, inputInfo) {
-   return new GetInfoResult._(_createOutputDeviceInfo(outputInfo), _createInputDeviceInfo(inputInfo));
+   return new GetInfoResult._(listify(outputInfo, _createOutputDeviceInfo), listify(inputInfo, _createInputDeviceInfo));
  }
 
- OutputDeviceInfo outputInfo;
- InputDeviceInfo inputInfo;
+ List&lt;OutputDeviceInfo&gt; outputInfo;
+ List&lt;InputDeviceInfo&gt; inputInfo;
 
  GetInfoResult._(this.outputInfo, this.inputInfo);
 }
@@ -50,25 +50,25 @@ class GetInfoResult {
 <h3>Properties</h3>
 <div class="field"><h4 id="inputInfo">
 <button class="show-code">Code</button>
-<a href="../chrome.audio/InputDeviceInfo.html">InputDeviceInfo</a>         <strong>inputInfo</strong> <a class="anchor-link"
+List&lt;<a href="../chrome.audio/InputDeviceInfo.html">InputDeviceInfo</a>&gt;         <strong>inputInfo</strong> <a class="anchor-link"
             href="#inputInfo"
             title="Permalink to GetInfoResult.inputInfo">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-InputDeviceInfo inputInfo
+List&lt;InputDeviceInfo&gt; inputInfo
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="outputInfo">
 <button class="show-code">Code</button>
-<a href="../chrome.audio/OutputDeviceInfo.html">OutputDeviceInfo</a>         <strong>outputInfo</strong> <a class="anchor-link"
+List&lt;<a href="../chrome.audio/OutputDeviceInfo.html">OutputDeviceInfo</a>&gt;         <strong>outputInfo</strong> <a class="anchor-link"
             href="#outputInfo"
             title="Permalink to GetInfoResult.outputInfo">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-OutputDeviceInfo outputInfo
+List&lt;OutputDeviceInfo&gt; outputInfo
 </pre>
 </div>
 </div>

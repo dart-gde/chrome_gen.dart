@@ -58,11 +58,11 @@ class ChromeAudio extends ChromeApi {
  /**
   * Select a subset of audio devices as active.
   */
- Future setActiveDevices(String ids) {
+ Future setActiveDevices(List&lt;String&gt; ids) {
    if (_audio == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
-   _audio.callMethod('setActiveDevices', [ids, completer.callback]);
+   _audio.callMethod('setActiveDevices', [jsify(ids), completer.callback]);
    return completer.future;
  }
 
@@ -146,16 +146,16 @@ Future&lt;GetInfoResult&gt; getInfo() {
 </div>
 <div class="method"><h4 id="setActiveDevices">
 <button class="show-code">Code</button>
-Future <strong>setActiveDevices</strong>(String ids) <a class="anchor-link" href="#setActiveDevices"
+Future <strong>setActiveDevices</strong>(List&lt;String&gt; ids) <a class="anchor-link" href="#setActiveDevices"
               title="Permalink to ChromeAudio.setActiveDevices">#</a></h4>
 <div class="doc">
 <p>Select a subset of audio devices as active.</p>
 <pre class="source">
-Future setActiveDevices(String ids) {
+Future setActiveDevices(List&lt;String&gt; ids) {
  if (_audio == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
- _audio.callMethod('setActiveDevices', [ids, completer.callback]);
+ _audio.callMethod('setActiveDevices', [jsify(ids), completer.callback]);
  return completer.future;
 }
 </pre>

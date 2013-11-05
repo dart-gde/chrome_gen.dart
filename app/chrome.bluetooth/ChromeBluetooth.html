@@ -98,10 +98,10 @@ class ChromeBluetooth extends ChromeApi {
   * Returns the set of exported profiles for the device specified in options.
   * This function will not initiate a connection to the remote device.
   */
- Future&lt;Profile&gt; getProfiles(GetProfilesOptions options) {
+ Future&lt;List&lt;Profile&gt;&gt; getProfiles(GetProfilesOptions options) {
    if (_bluetooth == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;Profile&gt;.oneArg(_createProfile);
+   var completer = new ChromeCompleter&lt;List&lt;Profile&gt;&gt;.oneArg((e) =&gt; listify(e, _createProfile));
    _bluetooth.callMethod('getProfiles', [jsify(options), completer.callback]);
    return completer.future;
  }
@@ -109,10 +109,10 @@ class ChromeBluetooth extends ChromeApi {
  /**
   * Get a list of services provided by a device.
   */
- Future&lt;ServiceRecord&gt; getServices(GetServicesOptions options) {
+ Future&lt;List&lt;ServiceRecord&gt;&gt; getServices(GetServicesOptions options) {
    if (_bluetooth == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;ServiceRecord&gt;.oneArg(_createServiceRecord);
+   var completer = new ChromeCompleter&lt;List&lt;ServiceRecord&gt;&gt;.oneArg((e) =&gt; listify(e, _createServiceRecord));
    _bluetooth.callMethod('getServices', [jsify(options), completer.callback]);
    return completer.future;
  }
@@ -408,16 +408,16 @@ Future&lt;OutOfBandPairingData&gt; getLocalOutOfBandPairingData() {
 </div>
 <div class="method"><h4 id="getProfiles">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.bluetooth/Profile.html">Profile</a>&gt; <strong>getProfiles</strong>(<a href="../chrome.bluetooth/GetProfilesOptions.html">GetProfilesOptions</a> options) <a class="anchor-link" href="#getProfiles"
+Future&lt;List&lt;<a href="../chrome.bluetooth/Profile.html">Profile</a>&gt;&gt; <strong>getProfiles</strong>(<a href="../chrome.bluetooth/GetProfilesOptions.html">GetProfilesOptions</a> options) <a class="anchor-link" href="#getProfiles"
               title="Permalink to ChromeBluetooth.getProfiles">#</a></h4>
 <div class="doc">
 <p>Returns the set of exported profiles for the device specified in options.
 This function will not initiate a connection to the remote device.</p>
 <pre class="source">
-Future&lt;Profile&gt; getProfiles(GetProfilesOptions options) {
+Future&lt;List&lt;Profile&gt;&gt; getProfiles(GetProfilesOptions options) {
  if (_bluetooth == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;Profile&gt;.oneArg(_createProfile);
+ var completer = new ChromeCompleter&lt;List&lt;Profile&gt;&gt;.oneArg((e) =&gt; listify(e, _createProfile));
  _bluetooth.callMethod('getProfiles', [jsify(options), completer.callback]);
  return completer.future;
 }
@@ -426,15 +426,15 @@ Future&lt;Profile&gt; getProfiles(GetProfilesOptions options) {
 </div>
 <div class="method"><h4 id="getServices">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.bluetooth/ServiceRecord.html">ServiceRecord</a>&gt; <strong>getServices</strong>(<a href="../chrome.bluetooth/GetServicesOptions.html">GetServicesOptions</a> options) <a class="anchor-link" href="#getServices"
+Future&lt;List&lt;<a href="../chrome.bluetooth/ServiceRecord.html">ServiceRecord</a>&gt;&gt; <strong>getServices</strong>(<a href="../chrome.bluetooth/GetServicesOptions.html">GetServicesOptions</a> options) <a class="anchor-link" href="#getServices"
               title="Permalink to ChromeBluetooth.getServices">#</a></h4>
 <div class="doc">
 <p>Get a list of services provided by a device.</p>
 <pre class="source">
-Future&lt;ServiceRecord&gt; getServices(GetServicesOptions options) {
+Future&lt;List&lt;ServiceRecord&gt;&gt; getServices(GetServicesOptions options) {
  if (_bluetooth == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;ServiceRecord&gt;.oneArg(_createServiceRecord);
+ var completer = new ChromeCompleter&lt;List&lt;ServiceRecord&gt;&gt;.oneArg((e) =&gt; listify(e, _createServiceRecord));
  _bluetooth.callMethod('getServices', [jsify(options), completer.callback]);
  return completer.future;
 }

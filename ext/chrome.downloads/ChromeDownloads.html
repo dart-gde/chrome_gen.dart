@@ -68,10 +68,10 @@ class ChromeDownloads extends ChromeApi {
   * `limit` to the number of items per page, and set `startedAfter` to the
   * `startTime` of the last item from the last page.
   */
- Future&lt;DownloadItem&gt; search(DownloadQuery query) {
+ Future&lt;List&lt;DownloadItem&gt;&gt; search(DownloadQuery query) {
    if (_downloads == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;DownloadItem&gt;.oneArg(_createDownloadItem);
+   var completer = new ChromeCompleter&lt;List&lt;DownloadItem&gt;&gt;.oneArg((e) =&gt; listify(e, _createDownloadItem));
    _downloads.callMethod('search', [jsify(query), completer.callback]);
    return completer.future;
  }
@@ -178,10 +178,10 @@ class ChromeDownloads extends ChromeApi {
   * file. An [onErased] event will fire for each [DownloadItem] that matches
   * `query`, then `callback` will be called.
   */
- Future&lt;int&gt; erase(DownloadQuery query) {
+ Future&lt;List&lt;int&gt;&gt; erase(DownloadQuery query) {
    if (_downloads == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;int&gt;.oneArg();
+   var completer = new ChromeCompleter&lt;List&lt;int&gt;&gt;.oneArg(listify);
    _downloads.callMethod('erase', [jsify(query), completer.callback]);
    return completer.future;
  }
@@ -432,17 +432,17 @@ void drag(int downloadId) {
 </div>
 <div class="method"><h4 id="erase">
 <button class="show-code">Code</button>
-Future&lt;int&gt; <strong>erase</strong>(<a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a> query) <a class="anchor-link" href="#erase"
+Future&lt;List&lt;int&gt;&gt; <strong>erase</strong>(<a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a> query) <a class="anchor-link" href="#erase"
               title="Permalink to ChromeDownloads.erase">#</a></h4>
 <div class="doc">
 <p>Erase matching <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a> from history without deleting the downloaded
 file. An <a class="crossref" href="../chrome.downloads/ChromeDownloads.html#onErased">onErased</a> event will fire for each <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a> that matches
 <code>query</code>, then <code>callback</code> will be called.</p>
 <pre class="source">
-Future&lt;int&gt; erase(DownloadQuery query) {
+Future&lt;List&lt;int&gt;&gt; erase(DownloadQuery query) {
  if (_downloads == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;int&gt;.oneArg();
+ var completer = new ChromeCompleter&lt;List&lt;int&gt;&gt;.oneArg(listify);
  _downloads.callMethod('erase', [jsify(query), completer.callback]);
  return completer.future;
 }
@@ -561,7 +561,7 @@ Future resume(int downloadId) {
 </div>
 <div class="method"><h4 id="search">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.downloads/DownloadItem.html">DownloadItem</a>&gt; <strong>search</strong>(<a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a> query) <a class="anchor-link" href="#search"
+Future&lt;List&lt;<a href="../chrome.downloads/DownloadItem.html">DownloadItem</a>&gt;&gt; <strong>search</strong>(<a href="../chrome.downloads/DownloadQuery.html">DownloadQuery</a> query) <a class="anchor-link" href="#search"
               title="Permalink to ChromeDownloads.search">#</a></h4>
 <div class="doc">
 <p>Find <a class="crossref" href="../chrome.downloads/DownloadItem.html">DownloadItem</a>. Set <code>query</code> to the empty object to get all
@@ -570,10 +570,10 @@ To page through a large number of items, set <code>orderBy: ['-startTime']</code
 <code>limit</code> to the number of items per page, and set <code>startedAfter</code> to the
 <code>startTime</code> of the last item from the last page.</p>
 <pre class="source">
-Future&lt;DownloadItem&gt; search(DownloadQuery query) {
+Future&lt;List&lt;DownloadItem&gt;&gt; search(DownloadQuery query) {
  if (_downloads == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;DownloadItem&gt;.oneArg(_createDownloadItem);
+ var completer = new ChromeCompleter&lt;List&lt;DownloadItem&gt;&gt;.oneArg((e) =&gt; listify(e, _createDownloadItem));
  _downloads.callMethod('search', [jsify(query), completer.callback]);
  return completer.future;
 }
