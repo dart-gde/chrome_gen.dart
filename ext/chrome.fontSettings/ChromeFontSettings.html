@@ -89,7 +89,7 @@ class ChromeFontSettings extends ChromeApi {
   * 
   * [details] This parameter is currently unused.
   */
- Future clearDefaultFontSize([Map details]) {
+ Future clearDefaultFontSize(Map details) {
    if (_fontSettings == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -102,7 +102,7 @@ class ChromeFontSettings extends ChromeApi {
   * 
   * [details] This parameter is currently unused.
   */
- Future&lt;Map&gt; getDefaultFontSize([Map details]) {
+ Future&lt;Map&gt; getDefaultFontSize(Map details) {
    if (_fontSettings == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
@@ -126,7 +126,7 @@ class ChromeFontSettings extends ChromeApi {
   * 
   * [details] This parameter is currently unused.
   */
- Future clearDefaultFixedFontSize([Map details]) {
+ Future clearDefaultFixedFontSize(Map details) {
    if (_fontSettings == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -139,7 +139,7 @@ class ChromeFontSettings extends ChromeApi {
   * 
   * [details] This parameter is currently unused.
   */
- Future&lt;Map&gt; getDefaultFixedFontSize([Map details]) {
+ Future&lt;Map&gt; getDefaultFixedFontSize(Map details) {
    if (_fontSettings == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
@@ -163,7 +163,7 @@ class ChromeFontSettings extends ChromeApi {
   * 
   * [details] This parameter is currently unused.
   */
- Future clearMinimumFontSize([Map details]) {
+ Future clearMinimumFontSize(Map details) {
    if (_fontSettings == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -176,7 +176,7 @@ class ChromeFontSettings extends ChromeApi {
   * 
   * [details] This parameter is currently unused.
   */
- Future&lt;Map&gt; getMinimumFontSize([Map details]) {
+ Future&lt;Map&gt; getMinimumFontSize(Map details) {
    if (_fontSettings == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
@@ -311,14 +311,14 @@ Stream&lt;Map&gt; get onMinimumFontSizeChanged =&gt; _onMinimumFontSizeChanged.s
 <h3>Methods</h3>
 <div class="method"><h4 id="clearDefaultFixedFontSize">
 <button class="show-code">Code</button>
-Future <strong>clearDefaultFixedFontSize</strong>([Map details]) <a class="anchor-link" href="#clearDefaultFixedFontSize"
+Future <strong>clearDefaultFixedFontSize</strong>(Map details) <a class="anchor-link" href="#clearDefaultFixedFontSize"
               title="Permalink to ChromeFontSettings.clearDefaultFixedFontSize">#</a></h4>
 <div class="doc">
 <p>Clears the default fixed font size set by this extension, if any.</p>
 <p>
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
-Future clearDefaultFixedFontSize([Map details]) {
+Future clearDefaultFixedFontSize(Map details) {
  if (_fontSettings == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -330,14 +330,14 @@ Future clearDefaultFixedFontSize([Map details]) {
 </div>
 <div class="method"><h4 id="clearDefaultFontSize">
 <button class="show-code">Code</button>
-Future <strong>clearDefaultFontSize</strong>([Map details]) <a class="anchor-link" href="#clearDefaultFontSize"
+Future <strong>clearDefaultFontSize</strong>(Map details) <a class="anchor-link" href="#clearDefaultFontSize"
               title="Permalink to ChromeFontSettings.clearDefaultFontSize">#</a></h4>
 <div class="doc">
 <p>Clears the default font size set by this extension, if any.</p>
 <p>
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
-Future clearDefaultFontSize([Map details]) {
+Future clearDefaultFontSize(Map details) {
  if (_fontSettings == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -366,14 +366,14 @@ Future clearFont(Map details) {
 </div>
 <div class="method"><h4 id="clearMinimumFontSize">
 <button class="show-code">Code</button>
-Future <strong>clearMinimumFontSize</strong>([Map details]) <a class="anchor-link" href="#clearMinimumFontSize"
+Future <strong>clearMinimumFontSize</strong>(Map details) <a class="anchor-link" href="#clearMinimumFontSize"
               title="Permalink to ChromeFontSettings.clearMinimumFontSize">#</a></h4>
 <div class="doc">
 <p>Clears the minimum font size set by this extension, if any.</p>
 <p>
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
-Future clearMinimumFontSize([Map details]) {
+Future clearMinimumFontSize(Map details) {
  if (_fontSettings == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -385,14 +385,14 @@ Future clearMinimumFontSize([Map details]) {
 </div>
 <div class="method"><h4 id="getDefaultFixedFontSize">
 <button class="show-code">Code</button>
-Future&lt;Map&gt; <strong>getDefaultFixedFontSize</strong>([Map details]) <a class="anchor-link" href="#getDefaultFixedFontSize"
+Future&lt;Map&gt; <strong>getDefaultFixedFontSize</strong>(Map details) <a class="anchor-link" href="#getDefaultFixedFontSize"
               title="Permalink to ChromeFontSettings.getDefaultFixedFontSize">#</a></h4>
 <div class="doc">
 <p>Gets the default size for fixed width fonts.</p>
 <p>
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
-Future&lt;Map&gt; getDefaultFixedFontSize([Map details]) {
+Future&lt;Map&gt; getDefaultFixedFontSize(Map details) {
  if (_fontSettings == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
@@ -404,14 +404,14 @@ Future&lt;Map&gt; getDefaultFixedFontSize([Map details]) {
 </div>
 <div class="method"><h4 id="getDefaultFontSize">
 <button class="show-code">Code</button>
-Future&lt;Map&gt; <strong>getDefaultFontSize</strong>([Map details]) <a class="anchor-link" href="#getDefaultFontSize"
+Future&lt;Map&gt; <strong>getDefaultFontSize</strong>(Map details) <a class="anchor-link" href="#getDefaultFontSize"
               title="Permalink to ChromeFontSettings.getDefaultFontSize">#</a></h4>
 <div class="doc">
 <p>Gets the default font size.</p>
 <p>
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
-Future&lt;Map&gt; getDefaultFontSize([Map details]) {
+Future&lt;Map&gt; getDefaultFontSize(Map details) {
  if (_fontSettings == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
@@ -457,14 +457,14 @@ Future&lt;List&lt;FontName&gt;&gt; getFontList() {
 </div>
 <div class="method"><h4 id="getMinimumFontSize">
 <button class="show-code">Code</button>
-Future&lt;Map&gt; <strong>getMinimumFontSize</strong>([Map details]) <a class="anchor-link" href="#getMinimumFontSize"
+Future&lt;Map&gt; <strong>getMinimumFontSize</strong>(Map details) <a class="anchor-link" href="#getMinimumFontSize"
               title="Permalink to ChromeFontSettings.getMinimumFontSize">#</a></h4>
 <div class="doc">
 <p>Gets the minimum font size.</p>
 <p>
 <span class="param">details</span> This parameter is currently unused.</p>
 <pre class="source">
-Future&lt;Map&gt; getMinimumFontSize([Map details]) {
+Future&lt;Map&gt; getMinimumFontSize(Map details) {
  if (_fontSettings == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);

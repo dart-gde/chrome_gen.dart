@@ -50,7 +50,7 @@ class ChromeTts extends ChromeApi {
   * 
   * [options] The speech options.
   */
- Future speak(String utterance, [Map options]) {
+ Future speak(String utterance, Map options) {
    if (_tts == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -244,7 +244,7 @@ void resume() {
 </div>
 <div class="method"><h4 id="speak">
 <button class="show-code">Code</button>
-Future <strong>speak</strong>(String utterance, [Map options]) <a class="anchor-link" href="#speak"
+Future <strong>speak</strong>(String utterance, Map options) <a class="anchor-link" href="#speak"
               title="Permalink to ChromeTts.speak">#</a></h4>
 <div class="doc">
 <p>Speaks text using a text-to-speech engine.</p>
@@ -256,7 +256,7 @@ characters.</p>
 <p>
 <span class="param">options</span> The speech options.</p>
 <pre class="source">
-Future speak(String utterance, [Map options]) {
+Future speak(String utterance, Map options) {
  if (_tts == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();

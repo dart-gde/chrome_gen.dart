@@ -57,10 +57,8 @@ class Event extends ChromeObject {
    return completer.future;
  }
 
- Future hasListener() {
-   var completer = new ChromeCompleter.noArgs();
-   jsProxy.callMethod('hasListener', [completer.callback]);
-   return completer.future;
+ bool hasListener(dynamic callback) {
+   return jsProxy.callMethod('hasListener', [jsify(callback)]);
  }
 
  bool hasListeners() {
@@ -95,7 +93,7 @@ class Event extends ChromeObject {
   * Returns:
   * Rules that were registered, the optional parameters are filled with values.
   */
- Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
+ Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, List&lt;String&gt; ruleIdentifiers) {
    var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, _createRule));
    jsProxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
    return completer.future;
@@ -109,7 +107,7 @@ class Event extends ChromeObject {
   * [ruleIdentifiers] If an array is passed, only rules with identifiers
   * contained in this array are unregistered.
   */
- Future removeRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
+ Future removeRules(String eventName, List&lt;String&gt; ruleIdentifiers) {
    var completer = new ChromeCompleter.noArgs();
    jsProxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
    return completer.future;
@@ -207,7 +205,7 @@ Future&lt;List&lt;Rule&gt;&gt; addRules(String eventName, List&lt;Rule&gt; rules
 </div>
 <div class="method"><h4 id="getRules">
 <button class="show-code">Code</button>
-Future&lt;List&lt;<a href="../chrome.events/Rule.html">Rule</a>&gt;&gt; <strong>getRules</strong>(String eventName, [List&lt;String&gt; ruleIdentifiers]) <a class="anchor-link" href="#getRules"
+Future&lt;List&lt;<a href="../chrome.events/Rule.html">Rule</a>&gt;&gt; <strong>getRules</strong>(String eventName, List&lt;String&gt; ruleIdentifiers) <a class="anchor-link" href="#getRules"
               title="Permalink to Event.getRules">#</a></h4>
 <div class="doc">
 <p>Returns currently registered rules.</p>
@@ -219,7 +217,7 @@ contained in this array are returned.</p>
 <p>Returns:
 Rules that were registered, the optional parameters are filled with values.</p>
 <pre class="source">
-Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
+Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, List&lt;String&gt; ruleIdentifiers) {
  var completer = new ChromeCompleter&lt;List&lt;Rule&gt;&gt;.oneArg((e) =&gt; listify(e, _createRule));
  jsProxy.callMethod('getRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
  return completer.future;
@@ -229,14 +227,12 @@ Future&lt;List&lt;Rule&gt;&gt; getRules(String eventName, [List&lt;String&gt; ru
 </div>
 <div class="method"><h4 id="hasListener">
 <button class="show-code">Code</button>
-Future <strong>hasListener</strong>() <a class="anchor-link" href="#hasListener"
+bool <strong>hasListener</strong>(callback) <a class="anchor-link" href="#hasListener"
               title="Permalink to Event.hasListener">#</a></h4>
 <div class="doc">
 <pre class="source">
-Future hasListener() {
- var completer = new ChromeCompleter.noArgs();
- jsProxy.callMethod('hasListener', [completer.callback]);
- return completer.future;
+bool hasListener(dynamic callback) {
+ return jsProxy.callMethod('hasListener', [jsify(callback)]);
 }
 </pre>
 </div>
@@ -270,7 +266,7 @@ Future removeListener() {
 </div>
 <div class="method"><h4 id="removeRules">
 <button class="show-code">Code</button>
-Future <strong>removeRules</strong>(String eventName, [List&lt;String&gt; ruleIdentifiers]) <a class="anchor-link" href="#removeRules"
+Future <strong>removeRules</strong>(String eventName, List&lt;String&gt; ruleIdentifiers) <a class="anchor-link" href="#removeRules"
               title="Permalink to Event.removeRules">#</a></h4>
 <div class="doc">
 <p>Unregisters currently registered rules.</p>
@@ -280,7 +276,7 @@ Future <strong>removeRules</strong>(String eventName, [List&lt;String&gt; ruleId
 <span class="param">ruleIdentifiers</span> If an array is passed, only rules with identifiers
 contained in this array are unregistered.</p>
 <pre class="source">
-Future removeRules(String eventName, [List&lt;String&gt; ruleIdentifiers]) {
+Future removeRules(String eventName, List&lt;String&gt; ruleIdentifiers) {
  var completer = new ChromeCompleter.noArgs();
  jsProxy.callMethod('removeRules', [eventName, jsify(ruleIdentifiers), completer.callback]);
  return completer.future;

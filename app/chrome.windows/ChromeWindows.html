@@ -56,7 +56,7 @@ class ChromeWindows extends ChromeApi {
   * 
   * [getInfo]
   */
- Future&lt;Window&gt; get(int windowId, [Map getInfo]) {
+ Future&lt;Window&gt; get(int windowId, Map getInfo) {
    if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
@@ -69,7 +69,7 @@ class ChromeWindows extends ChromeApi {
   * 
   * [getInfo]
   */
- Future&lt;Window&gt; getCurrent([Map getInfo]) {
+ Future&lt;Window&gt; getCurrent(Map getInfo) {
    if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
@@ -83,7 +83,7 @@ class ChromeWindows extends ChromeApi {
   * 
   * [getInfo]
   */
- Future&lt;Window&gt; getLastFocused([Map getInfo]) {
+ Future&lt;Window&gt; getLastFocused(Map getInfo) {
    if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
@@ -96,7 +96,7 @@ class ChromeWindows extends ChromeApi {
   * 
   * [getInfo]
   */
- Future&lt;List&lt;Window&gt;&gt; getAll([Map getInfo]) {
+ Future&lt;List&lt;Window&gt;&gt; getAll(Map getInfo) {
    if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Window&gt;&gt;.oneArg((e) =&gt; listify(e, _createWindow));
@@ -111,7 +111,7 @@ class ChromeWindows extends ChromeApi {
   * Returns:
   * Contains details about the created window.
   */
- Future&lt;Window&gt; create([Map createData]) {
+ Future&lt;Window&gt; create(Map createData) {
    if (_windows == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
@@ -270,7 +270,7 @@ int get WINDOW_ID_NONE =&gt; _windows['WINDOW_ID_NONE'];
 <h3>Methods</h3>
 <div class="method"><h4 id="create">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>create</strong>([Map createData]) <a class="anchor-link" href="#create"
+Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>create</strong>(Map createData) <a class="anchor-link" href="#create"
               title="Permalink to ChromeWindows.create">#</a></h4>
 <div class="doc">
 <p>Creates (opens) a new browser with any optional sizing, position or default
@@ -278,7 +278,7 @@ URL provided.</p>
 <p>Returns:
 Contains details about the created window.</p>
 <pre class="source">
-Future&lt;Window&gt; create([Map createData]) {
+Future&lt;Window&gt; create(Map createData) {
  if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
@@ -290,14 +290,14 @@ Future&lt;Window&gt; create([Map createData]) {
 </div>
 <div class="method"><h4 id="get">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>get</strong>(int windowId, [Map getInfo]) <a class="anchor-link" href="#get"
+Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>get</strong>(int windowId, Map getInfo) <a class="anchor-link" href="#get"
               title="Permalink to ChromeWindows.get">#</a></h4>
 <div class="doc">
 <p>Gets details about a window.</p>
 <p>
 <span class="param">getInfo</span></p>
 <pre class="source">
-Future&lt;Window&gt; get(int windowId, [Map getInfo]) {
+Future&lt;Window&gt; get(int windowId, Map getInfo) {
  if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
@@ -309,14 +309,14 @@ Future&lt;Window&gt; get(int windowId, [Map getInfo]) {
 </div>
 <div class="method"><h4 id="getAll">
 <button class="show-code">Code</button>
-Future&lt;List&lt;<a href="../chrome.windows/Window.html">Window</a>&gt;&gt; <strong>getAll</strong>([Map getInfo]) <a class="anchor-link" href="#getAll"
+Future&lt;List&lt;<a href="../chrome.windows/Window.html">Window</a>&gt;&gt; <strong>getAll</strong>(Map getInfo) <a class="anchor-link" href="#getAll"
               title="Permalink to ChromeWindows.getAll">#</a></h4>
 <div class="doc">
 <p>Gets all windows.</p>
 <p>
 <span class="param">getInfo</span></p>
 <pre class="source">
-Future&lt;List&lt;Window&gt;&gt; getAll([Map getInfo]) {
+Future&lt;List&lt;Window&gt;&gt; getAll(Map getInfo) {
  if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Window&gt;&gt;.oneArg((e) =&gt; listify(e, _createWindow));
@@ -328,14 +328,14 @@ Future&lt;List&lt;Window&gt;&gt; getAll([Map getInfo]) {
 </div>
 <div class="method"><h4 id="getCurrent">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>getCurrent</strong>([Map getInfo]) <a class="anchor-link" href="#getCurrent"
+Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>getCurrent</strong>(Map getInfo) <a class="anchor-link" href="#getCurrent"
               title="Permalink to ChromeWindows.getCurrent">#</a></h4>
 <div class="doc">
 <p>Gets the <a href="#current-window">current window</a>.</p>
 <p>
 <span class="param">getInfo</span></p>
 <pre class="source">
-Future&lt;Window&gt; getCurrent([Map getInfo]) {
+Future&lt;Window&gt; getCurrent(Map getInfo) {
  if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
@@ -347,7 +347,7 @@ Future&lt;Window&gt; getCurrent([Map getInfo]) {
 </div>
 <div class="method"><h4 id="getLastFocused">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>getLastFocused</strong>([Map getInfo]) <a class="anchor-link" href="#getLastFocused"
+Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>getLastFocused</strong>(Map getInfo) <a class="anchor-link" href="#getLastFocused"
               title="Permalink to ChromeWindows.getLastFocused">#</a></h4>
 <div class="doc">
 <p>Gets the window that was most recently focused - typically the window 'on
@@ -355,7 +355,7 @@ top'.</p>
 <p>
 <span class="param">getInfo</span></p>
 <pre class="source">
-Future&lt;Window&gt; getLastFocused([Map getInfo]) {
+Future&lt;Window&gt; getLastFocused(Map getInfo) {
  if (_windows == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);

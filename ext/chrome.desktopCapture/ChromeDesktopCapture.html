@@ -51,17 +51,13 @@ class ChromeDesktopCapture extends ChromeApi {
   * security origin changes before this function returns, the call may fail.
   * 
   * Returns:
-  * An opaque string that can be passed to `getUserMedia()` API to generate
-  * media stream that corresponds to the source selected by the user. If user
-  * didn't select any source (i.e. canceled the prompt) then the callback is
-  * called with an empty `streamId`
+  * An id that can be passed to cancelChooseDesktopMedia() in case the prompt
+  * need to be canceled.
   */
- Future&lt;String&gt; chooseDesktopMedia(List&lt;DesktopCaptureSourceType&gt; sources, [Tab targetTab]) {
+ int chooseDesktopMedia(List&lt;DesktopCaptureSourceType&gt; sources, Tab targetTab, dynamic callback) {
    if (_desktopCapture == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;String&gt;.oneArg();
-   _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), completer.callback]);
-   return completer.future;
+   return _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), jsify(callback)]);
  }
 
  /**
@@ -124,7 +120,7 @@ void cancelChooseDesktopMedia(int desktopMediaRequestId) {
 </div>
 <div class="method"><h4 id="chooseDesktopMedia">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>chooseDesktopMedia</strong>(List&lt;<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>&gt; sources, [<a href="../chrome.tabs/Tab.html">Tab</a> targetTab]) <a class="anchor-link" href="#chooseDesktopMedia"
+int <strong>chooseDesktopMedia</strong>(List&lt;<a href="../chrome.desktopCapture/DesktopCaptureSourceType.html">DesktopCaptureSourceType</a>&gt; sources, <a href="../chrome.tabs/Tab.html">Tab</a> targetTab, callback) <a class="anchor-link" href="#chooseDesktopMedia"
               title="Permalink to ChromeDesktopCapture.chooseDesktopMedia">#</a></h4>
 <div class="doc">
 <p>Shows desktop media picker UI with the specified set of sources.</p>
@@ -136,17 +132,13 @@ then the resulting stream can be used only by the calling extension,
 otherwise the stream can be used only by the specified tab. If the tab's
 security origin changes before this function returns, the call may fail.</p>
 <p>Returns:
-An opaque string that can be passed to <code>getUserMedia()</code> API to generate
-media stream that corresponds to the source selected by the user. If user
-didn't select any source (i.e. canceled the prompt) then the callback is
-called with an empty <code>streamId</code></p>
+An id that can be passed to cancelChooseDesktopMedia() in case the prompt
+need to be canceled.</p>
 <pre class="source">
-Future&lt;String&gt; chooseDesktopMedia(List&lt;DesktopCaptureSourceType&gt; sources, [Tab targetTab]) {
+int chooseDesktopMedia(List&lt;DesktopCaptureSourceType&gt; sources, Tab targetTab, dynamic callback) {
  if (_desktopCapture == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;String&gt;.oneArg();
- _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), completer.callback]);
- return completer.future;
+ return _desktopCapture.callMethod('chooseDesktopMedia', [jsify(sources), jsify(targetTab), jsify(callback)]);
 }
 </pre>
 </div>

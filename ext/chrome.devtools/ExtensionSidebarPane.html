@@ -57,7 +57,7 @@ class ExtensionSidebarPane extends ChromeObject {
   * 
   * [rootTitle] An optional title for the root of the expression tree.
   */
- Future setExpression(String expression, [String rootTitle]) {
+ Future setExpression(String expression, String rootTitle) {
    var completer = new ChromeCompleter.noArgs();
    jsProxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
    return completer.future;
@@ -71,7 +71,7 @@ class ExtensionSidebarPane extends ChromeObject {
   * 
   * [rootTitle] An optional title for the root of the expression tree.
   */
- Future setObject(String jsonObject, [String rootTitle]) {
+ Future setObject(String jsonObject, String rootTitle) {
    var completer = new ChromeCompleter.noArgs();
    jsProxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
    return completer.future;
@@ -141,7 +141,7 @@ final JsObject jsProxy
 <h3>Methods</h3>
 <div class="method"><h4 id="setExpression">
 <button class="show-code">Code</button>
-Future <strong>setExpression</strong>(String expression, [String rootTitle]) <a class="anchor-link" href="#setExpression"
+Future <strong>setExpression</strong>(String expression, String rootTitle) <a class="anchor-link" href="#setExpression"
               title="Permalink to ExtensionSidebarPane.setExpression">#</a></h4>
 <div class="doc">
 <p>Sets an expression that is evaluated within the inspected page. The result
@@ -153,7 +153,7 @@ similar to the console/watch.</p>
 <p>
 <span class="param">rootTitle</span> An optional title for the root of the expression tree.</p>
 <pre class="source">
-Future setExpression(String expression, [String rootTitle]) {
+Future setExpression(String expression, String rootTitle) {
  var completer = new ChromeCompleter.noArgs();
  jsProxy.callMethod('setExpression', [expression, rootTitle, completer.callback]);
  return completer.future;
@@ -178,7 +178,7 @@ void setHeight(String height) {
 </div>
 <div class="method"><h4 id="setObject">
 <button class="show-code">Code</button>
-Future <strong>setObject</strong>(String jsonObject, [String rootTitle]) <a class="anchor-link" href="#setObject"
+Future <strong>setObject</strong>(String jsonObject, String rootTitle) <a class="anchor-link" href="#setObject"
               title="Permalink to ExtensionSidebarPane.setObject">#</a></h4>
 <div class="doc">
 <p>Sets a JSON-compliant object to be displayed in the sidebar pane.</p>
@@ -188,7 +188,7 @@ Evaluated in the context of the caller (API client).</p>
 <p>
 <span class="param">rootTitle</span> An optional title for the root of the expression tree.</p>
 <pre class="source">
-Future setObject(String jsonObject, [String rootTitle]) {
+Future setObject(String jsonObject, String rootTitle) {
  var completer = new ChromeCompleter.noArgs();
  jsProxy.callMethod('setObject', [jsonObject, rootTitle, completer.callback]);
  return completer.future;
