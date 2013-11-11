@@ -259,6 +259,7 @@ class ChromeBookmarks extends ChromeApi {
  */
 class OnCreatedEvent {
   final String id;
+
   final BookmarkTreeNode bookmark;
 
   OnCreatedEvent(this.id, this.bookmark);
@@ -271,6 +272,7 @@ class OnCreatedEvent {
  */
 class BookmarksOnRemovedEvent {
   final String id;
+
   final Map removeInfo;
 
   BookmarksOnRemovedEvent(this.id, this.removeInfo);
@@ -282,6 +284,7 @@ class BookmarksOnRemovedEvent {
  */
 class BookmarksOnChangedEvent {
   final String id;
+
   final Map changeInfo;
 
   BookmarksOnChangedEvent(this.id, this.changeInfo);
@@ -292,6 +295,7 @@ class BookmarksOnChangedEvent {
  */
 class BookmarksOnMovedEvent {
   final String id;
+
   final Map moveInfo;
 
   BookmarksOnMovedEvent(this.id, this.moveInfo);
@@ -303,6 +307,7 @@ class BookmarksOnMovedEvent {
  */
 class OnChildrenReorderedEvent {
   final String id;
+
   final Map reorderInfo;
 
   OnChildrenReorderedEvent(this.id, this.reorderInfo);

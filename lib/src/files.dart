@@ -11,7 +11,21 @@ import '../src/files_exp.dart';
 export '../src/files_exp.dart';
 
 class CrFileSystem extends ChromeObject implements FileSystem {
-  CrFileSystem.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  static Map _fileSystems = {};
+
+  /**
+   * Use a factory to ensure that the same JavsScript file systems are the same
+   * Dart objects.
+   */
+  factory CrFileSystem.fromProxy(JsObject jsProxy) {
+    if (!_fileSystems.containsKey(jsProxy)) {
+      _fileSystems[jsProxy] = new CrFileSystem._(jsProxy);
+    }
+
+    return _fileSystems[jsProxy];
+  }
+
+  CrFileSystem._(JsObject jsProxy): super.fromProxy(jsProxy);
 
   String get name => jsProxy['name'];
 

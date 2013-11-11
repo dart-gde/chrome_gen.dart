@@ -118,6 +118,7 @@ class ChromeNotifications extends ChromeApi {
 
 class OnClosedEvent {
   final String notificationId;
+
   final bool byUser;
 
   OnClosedEvent(this.notificationId, this.byUser);
@@ -125,6 +126,7 @@ class OnClosedEvent {
 
 class OnButtonClickedEvent {
   final String notificationId;
+
   final int buttonIndex;
 
   OnButtonClickedEvent(this.notificationId, this.buttonIndex);

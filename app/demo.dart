@@ -312,9 +312,7 @@ void handleChooseEntryDir() {
 }
 
 void handleRequestFileSystem() {
-  chrome.syncFileSystem.requestFileSystem().then((FileSystem fs) {
-    summary("result: ${fs}");
-  });
+  summaryFuture(chrome.syncFileSystem.requestFileSystem());
 }
 
 void handleFileRead() {

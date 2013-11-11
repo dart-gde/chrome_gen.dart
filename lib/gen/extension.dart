@@ -187,7 +187,9 @@ class OnRequestEvent {
    * The request sent by the calling script.
    */
   final dynamic request;
+
   final MessageSender sender;
+
   /**
    * Function to call (at most once) when you have a response. The argument
    * should be any JSON-ifiable object, or undefined if there is no response. If
@@ -210,7 +212,9 @@ class OnRequestExternalEvent {
    * The request sent by the calling script.
    */
   final dynamic request;
+
   final MessageSender sender;
+
   /**
    * Function to call when you have a response. The argument should be any
    * JSON-ifiable object, or undefined if there is no response.

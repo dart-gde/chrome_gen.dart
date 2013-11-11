@@ -90,6 +90,7 @@ class ChromeIdentity extends ChromeApi {
 
 class OnSignInChangedEvent {
   final AccountInfo account;
+
   final bool signedIn;
 
   OnSignInChangedEvent(this.account, this.signedIn);

@@ -90,6 +90,7 @@ class ChromeOmnibox extends ChromeApi {
  */
 class OnInputChangedEvent {
   final String text;
+
   /**
    * A callback passed to the onInputChanged event used for sending suggestions
    * back to the browser.
@@ -104,6 +105,7 @@ class OnInputChangedEvent {
  */
 class OnInputEnteredEvent {
   final String text;
+
   /**
    * The window disposition for the omnibox query. This is the recommended
    * context to display results. For example, if the omnibox command is to
