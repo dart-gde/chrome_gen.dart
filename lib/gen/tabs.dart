@@ -446,10 +446,12 @@ class ChromeTabs extends ChromeApi {
  */
 class OnUpdatedEvent {
   final int tabId;
+
   /**
    * Lists the changes to the state of the tab that was updated.
    */
   final Map changeInfo;
+
   /**
    * Gives the state of the tab that was updated.
    */
@@ -466,6 +468,7 @@ class OnUpdatedEvent {
  */
 class TabsOnMovedEvent {
   final int tabId;
+
   final Map moveInfo;
 
   TabsOnMovedEvent(this.tabId, this.moveInfo);
@@ -479,6 +482,7 @@ class OnSelectionChangedEvent {
    * The ID of the tab that has become active.
    */
   final int tabId;
+
   final Map selectInfo;
 
   OnSelectionChangedEvent(this.tabId, this.selectInfo);
@@ -492,6 +496,7 @@ class OnActiveChangedEvent {
    * The ID of the tab that has become active.
    */
   final int tabId;
+
   final Map selectInfo;
 
   OnActiveChangedEvent(this.tabId, this.selectInfo);
@@ -503,6 +508,7 @@ class OnActiveChangedEvent {
  */
 class OnDetachedEvent {
   final int tabId;
+
   final Map detachInfo;
 
   OnDetachedEvent(this.tabId, this.detachInfo);
@@ -514,6 +520,7 @@ class OnDetachedEvent {
  */
 class OnAttachedEvent {
   final int tabId;
+
   final Map attachInfo;
 
   OnAttachedEvent(this.tabId, this.attachInfo);
@@ -524,6 +531,7 @@ class OnAttachedEvent {
  */
 class TabsOnRemovedEvent {
   final int tabId;
+
   final Map removeInfo;
 
   TabsOnRemovedEvent(this.tabId, this.removeInfo);
@@ -534,6 +542,7 @@ class TabsOnRemovedEvent {
  */
 class OnReplacedEvent {
   final int addedTabId;
+
   final int removedTabId;
 
   OnReplacedEvent(this.addedTabId, this.removedTabId);

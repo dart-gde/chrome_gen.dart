@@ -115,6 +115,7 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
  */
 class OnResourceContentCommittedEvent {
   final Resource resource;
+
   /**
    * New content of the resource.
    */

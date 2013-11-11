@@ -136,6 +136,7 @@ class ChromeWebRequest extends ChromeApi {
  */
 class OnAuthRequiredEvent {
   final Map details;
+
   /**
    * `optional`
    */

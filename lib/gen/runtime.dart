@@ -354,7 +354,9 @@ class OnMessageEvent {
    * The message sent by the calling script.
    */
   final dynamic message;
+
   final MessageSender sender;
+
   /**
    * Function to call (at most once) when you have a response. The argument
    * should be any JSON-ifiable object. If you have more than one `onMessage`
@@ -381,7 +383,9 @@ class OnMessageExternalEvent {
    * The message sent by the calling script.
    */
   final dynamic message;
+
   final MessageSender sender;
+
   /**
    * Function to call (at most once) when you have a response. The argument
    * should be any JSON-ifiable object. If you have more than one `onMessage`

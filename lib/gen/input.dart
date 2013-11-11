@@ -247,6 +247,7 @@ class OnKeyEventEvent {
    * ID of the engine receiving the event
    */
   final String engineID;
+
   /**
    * Data on the key event
    */
@@ -263,10 +264,12 @@ class OnCandidateClickedEvent {
    * ID of the engine receiving the event
    */
   final String engineID;
+
   /**
    * ID of the candidate that was clicked.
    */
   final int candidateID;
+
   /**
    * Which mouse buttons was clicked.
    * enum of `left`, `middle`, `right`
@@ -284,6 +287,7 @@ class OnMenuItemActivatedEvent {
    * ID of the engine receiving the event
    */
   final String engineID;
+
   /**
    * Name of the MenuItem which was activated
    */
@@ -302,6 +306,7 @@ class OnSurroundingTextChangedEvent {
    * ID of the engine receiving the event
    */
   final String engineID;
+
   /**
    * The surrounding information.
    */

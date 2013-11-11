@@ -52,6 +52,7 @@ class StorageOnChangedEvent {
    * for that item.
    */
   final Map changes;
+
   /**
    * The name of the storage area (`sync` or `local`) the changes are for.
    */
@@ -176,12 +177,13 @@ class StorageArea extends ChromeObject {
   /**
    * Sets multiple items.
    * 
-   * [items] <p>An object which gives each key/value pair to update storage
-   * with. Any other key/value pairs in storage will not be
-   * affected.</p><p>Primitive values such as numbers will serialize as
-   * expected. Values with a `typeof` `"object"` and `"function"` will typically
-   * serialize to `{}`, with the exception of `Array` (serializes as expected),
-   * `Date`, and `Regex` (serialize using their `String` representation).</p>
+   * [items] An object which gives each key/value pair to update storage with.
+   * Any other key/value pairs in storage will not be affected.
+   * 
+   * Primitive values such as numbers will serialize as expected. Values with a
+   * `typeof` `"object"` and `"function"` will typically serialize to `{}`, with
+   * the exception of `Array` (serializes as expected), `Date`, and `Regex`
+   * (serialize using their `String` representation).
    */
   Future set(Map<String, dynamic> items) {
     var completer = new ChromeCompleter.noArgs();

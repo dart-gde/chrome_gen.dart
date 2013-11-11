@@ -248,6 +248,7 @@ class ChromeDownloads extends ChromeApi {
 
 class OnDeterminingFilenameEvent {
   final DownloadItem downloadItem;
+
   final SuggestFilenameCallback suggest;
 
   OnDeterminingFilenameEvent(this.downloadItem, this.suggest);

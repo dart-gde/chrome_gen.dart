@@ -63,6 +63,10 @@ String convertHtmlToDartdoc(String str) {
 
   str = str.replaceAll('&mdash;', '-');
 
+  str = str.replaceAll('</p><p>', '\n\n');
+  str = str.replaceAll('<p>', '');
+  str = str.replaceAll('</p>', '');
+
   // $ref:runtime.onConnect ==> [runtime.onConnect]
   str = str.replaceAllMapped(
       new RegExp(r"\$ref:([\.\w]*)"),

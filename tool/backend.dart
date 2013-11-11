@@ -307,7 +307,10 @@ class DefaultBackend extends Backend {
     generator.writeln();
     generator.writeDocs(type.documentation);
     generator.writeln("class ${className} {");
+    bool first = true;
     props.forEach((ChromeProperty property) {
+      if (!first) generator.writeln();
+      first = false;
       generator.writeDocs(property.getDescription());
       generator.writeln("final ${property.type.toReturnString()} ${property.name};");
     });
