@@ -46,7 +46,7 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
  Future&lt;Entry&gt; createDirectory(String path, {bool exclusive: false}) {
    var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
    var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
-   jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+   jsProxy.callMethod('getDirectory', [path, options, completer.callback, completer.errorCallback]);
    return completer.future;
  }
 
@@ -60,7 +60,7 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
  Future&lt;Entry&gt; getDirectory(String path) {
    var options = new JsObject.jsify({'create': false});
    var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
-   jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+   jsProxy.callMethod('getDirectory', [path, options, completer.callback, completer.errorCallback]);
    return completer.future;
  }
 
@@ -282,7 +282,7 @@ exists with the specified <code>path</code>.</p>
 Future&lt;Entry&gt; createDirectory(String path, {bool exclusive: false}) {
  var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
- jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getDirectory', [path, options, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
@@ -334,7 +334,7 @@ at <code>path</code> is not a directory.</p>
 Future&lt;Entry&gt; getDirectory(String path) {
  var options = new JsObject.jsify({'create': false});
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
- jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getDirectory', [path, options, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>
