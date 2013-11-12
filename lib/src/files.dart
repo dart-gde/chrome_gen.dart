@@ -115,7 +115,7 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
   Future<Entry> createDirectory(String path, {bool exclusive: false}) {
     var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
     var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrEntry.fromProxy(obj));
-    jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+    jsProxy.callMethod('getDirectory', [path, options, completer.callback, completer.errorCallback]);
     return completer.future;
   }
 
@@ -129,7 +129,7 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
   Future<Entry> getDirectory(String path) {
     var options = new JsObject.jsify({'create': false});
     var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrEntry.fromProxy(obj));
-    jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
+    jsProxy.callMethod('getDirectory', [path, options, completer.callback, completer.errorCallback]);
     return completer.future;
   }
 
