@@ -339,6 +339,7 @@ class JsonConverter {
           //'properties': ''
         });
 
+        type.type = declaredType.id;
         declaredType.properties = t.properties;
 
         addtionalDeclaredTypes.add(declaredType);

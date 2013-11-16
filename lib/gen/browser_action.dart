@@ -26,7 +26,7 @@ class ChromeBrowserAction extends ChromeApi {
   /**
    * Sets the title of the browser action. This shows up in the tooltip.
    */
-  void setTitle(Map details) {
+  void setTitle(setTitleParamsObject details) {
     if (_browserAction == null) _throwNotAvailable();
 
     _browserAction.callMethod('setTitle', [jsify(details)]);
@@ -35,7 +35,7 @@ class ChromeBrowserAction extends ChromeApi {
   /**
    * Gets the title of the browser action.
    */
-  Future<String> getTitle(Map details) {
+  Future<String> getTitle(getTitleParamsObject details) {
     if (_browserAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -49,7 +49,7 @@ class ChromeBrowserAction extends ChromeApi {
    * dictionary of either one of those. Either the <b>path</b> or the
    * <b>imageData</b> property must be specified.
    */
-  Future setIcon(Map details) {
+  Future setIcon(setIconParamsObject details) {
     if (_browserAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -61,7 +61,7 @@ class ChromeBrowserAction extends ChromeApi {
    * Sets the html document to be opened as a popup when the user clicks on the
    * browser action's icon.
    */
-  void setPopup(Map details) {
+  void setPopup(setPopupParamsObject details) {
     if (_browserAction == null) _throwNotAvailable();
 
     _browserAction.callMethod('setPopup', [jsify(details)]);
@@ -70,7 +70,7 @@ class ChromeBrowserAction extends ChromeApi {
   /**
    * Gets the html document set as the popup for this browser action.
    */
-  Future<String> getPopup(Map details) {
+  Future<String> getPopup(getPopupParamsObject details) {
     if (_browserAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -82,7 +82,7 @@ class ChromeBrowserAction extends ChromeApi {
    * Sets the badge text for the browser action. The badge is displayed on top
    * of the icon.
    */
-  void setBadgeText(Map details) {
+  void setBadgeText(setBadgeTextParamsObject details) {
     if (_browserAction == null) _throwNotAvailable();
 
     _browserAction.callMethod('setBadgeText', [jsify(details)]);
@@ -92,7 +92,7 @@ class ChromeBrowserAction extends ChromeApi {
    * Gets the badge text of the browser action. If no tab is specified, the
    * non-tab-specific badge text is returned.
    */
-  Future<String> getBadgeText(Map details) {
+  Future<String> getBadgeText(getBadgeTextParamsObject details) {
     if (_browserAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -103,7 +103,7 @@ class ChromeBrowserAction extends ChromeApi {
   /**
    * Sets the background color for the badge.
    */
-  void setBadgeBackgroundColor(Map details) {
+  void setBadgeBackgroundColor(setBadgeBackgroundColorParamsObject details) {
     if (_browserAction == null) _throwNotAvailable();
 
     _browserAction.callMethod('setBadgeBackgroundColor', [jsify(details)]);
@@ -112,7 +112,7 @@ class ChromeBrowserAction extends ChromeApi {
   /**
    * Gets the background color of the browser action.
    */
-  Future<ColorArray> getBadgeBackgroundColor(Map details) {
+  Future<ColorArray> getBadgeBackgroundColor(getBadgeBackgroundColorParamsObject details) {
     if (_browserAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<ColorArray>.oneArg(_createColorArray);
