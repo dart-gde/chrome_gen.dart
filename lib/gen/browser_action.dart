@@ -173,6 +173,192 @@ class ChromeBrowserAction extends ChromeApi {
   }
 }
 
+class setTitleParamsObject extends ChromeObject {
+  setTitleParamsObject({String title, int tabId}) {
+    if (title != null) this.title = title;
+    if (tabId != null) this.tabId = tabId;
+  }
+  setTitleParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The string the browser action should display when moused over.
+   */
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
+
+  /**
+   * Limits the change to when a particular tab is selected. Automatically
+   * resets when the tab is closed.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+}
+
+class getTitleParamsObject extends ChromeObject {
+  getTitleParamsObject({int tabId}) {
+    if (tabId != null) this.tabId = tabId;
+  }
+  getTitleParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Specify the tab to get the title from. If no tab is specified, the
+   * non-tab-specific title is returned.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+}
+
+class setIconParamsObject extends ChromeObject {
+  setIconParamsObject({var imageData, var path, int tabId}) {
+    if (imageData != null) this.imageData = imageData;
+    if (path != null) this.path = path;
+    if (tabId != null) this.tabId = tabId;
+  }
+  setIconParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Either an ImageData object or a dictionary {size -> ImageData} representing
+   * icon to be set. If the icon is specified as a dictionary, the actual image
+   * to be used is chosen depending on screen's pixel density. If the number of
+   * image pixels that fit into one screen space unit equals `scale`, then image
+   * with size `scale` * 19 will be selected. Initially only scales 1 and 2 will
+   * be supported. At least one image must be specified. Note that
+   * 'details.imageData = foo' is equivalent to 'details.imageData = {'19':
+   * foo}'
+   */
+  dynamic get imageData => jsProxy['imageData'];
+  set imageData(var value) => jsProxy['imageData'] = jsify(value);
+
+  /**
+   * Either a relative image path or a dictionary {size -> relative image path}
+   * pointing to icon to be set. If the icon is specified as a dictionary, the
+   * actual image to be used is chosen depending on screen's pixel density. If
+   * the number of image pixels that fit into one screen space unit equals
+   * `scale`, then image with size `scale` * 19 will be selected. Initially only
+   * scales 1 and 2 will be supported. At least one image must be specified.
+   * Note that 'details.path = foo' is equivalent to 'details.imageData = {'19':
+   * foo}'
+   */
+  dynamic get path => jsProxy['path'];
+  set path(var value) => jsProxy['path'] = jsify(value);
+
+  /**
+   * Limits the change to when a particular tab is selected. Automatically
+   * resets when the tab is closed.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+}
+
+class setPopupParamsObject extends ChromeObject {
+  setPopupParamsObject({int tabId, String popup}) {
+    if (tabId != null) this.tabId = tabId;
+    if (popup != null) this.popup = popup;
+  }
+  setPopupParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Limits the change to when a particular tab is selected. Automatically
+   * resets when the tab is closed.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+
+  /**
+   * The html file to show in a popup.  If set to the empty string (''), no
+   * popup is shown.
+   */
+  String get popup => jsProxy['popup'];
+  set popup(String value) => jsProxy['popup'] = value;
+}
+
+class getPopupParamsObject extends ChromeObject {
+  getPopupParamsObject({int tabId}) {
+    if (tabId != null) this.tabId = tabId;
+  }
+  getPopupParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Specify the tab to get the popup from. If no tab is specified, the
+   * non-tab-specific popup is returned.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+}
+
+class setBadgeTextParamsObject extends ChromeObject {
+  setBadgeTextParamsObject({String text, int tabId}) {
+    if (text != null) this.text = text;
+    if (tabId != null) this.tabId = tabId;
+  }
+  setBadgeTextParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Any number of characters can be passed, but only about four can fit in the
+   * space.
+   */
+  String get text => jsProxy['text'];
+  set text(String value) => jsProxy['text'] = value;
+
+  /**
+   * Limits the change to when a particular tab is selected. Automatically
+   * resets when the tab is closed.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+}
+
+class getBadgeTextParamsObject extends ChromeObject {
+  getBadgeTextParamsObject({int tabId}) {
+    if (tabId != null) this.tabId = tabId;
+  }
+  getBadgeTextParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Specify the tab to get the badge text from. If no tab is specified, the
+   * non-tab-specific badge text is returned.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+}
+
+class setBadgeBackgroundColorParamsObject extends ChromeObject {
+  setBadgeBackgroundColorParamsObject({var color, int tabId}) {
+    if (color != null) this.color = color;
+    if (tabId != null) this.tabId = tabId;
+  }
+  setBadgeBackgroundColorParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * An array of four integers in the range [0,255] that make up the RGBA color
+   * of the badge. For example, opaque red is `[255, 0, 0, 255]`. Can also be a
+   * string with a CSS value, with opaque red being `#FF0000` or `#F00`.
+   */
+  dynamic get color => jsProxy['color'];
+  set color(var value) => jsProxy['color'] = jsify(value);
+
+  /**
+   * Limits the change to when a particular tab is selected. Automatically
+   * resets when the tab is closed.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+}
+
+class getBadgeBackgroundColorParamsObject extends ChromeObject {
+  getBadgeBackgroundColorParamsObject({int tabId}) {
+    if (tabId != null) this.tabId = tabId;
+  }
+  getBadgeBackgroundColorParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Specify the tab to get the badge background color from. If no tab is
+   * specified, the non-tab-specific badge background color is returned.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+}
+
 class ColorArray extends ChromeObject {
   ColorArray();
   ColorArray.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
