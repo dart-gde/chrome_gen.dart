@@ -3,21 +3,21 @@ import 'dart:io';
 
 void main() {
   // verify execution location
-  if (!new Directory('app').existsSync()) {
+  if (!new Directory('example/app').existsSync()) {
     print('This script must be run from the project root.');
     exit(1);
   }
 
   // copy packages
-  runProcess('cp', ['-r', 'packages/', 'app/packages/']);
+  runProcess('cp', ['-r', 'packages/', 'example/app/packages/']);
 
   // build with dart2js
   runProcess(
       'dart2js',
-      ['app/demo.dart', '--out=app/demo.dart.js']);
+      ['example/app/demo.dart', '--out=example/app/demo.dart.js']);
 
   // clean up some clutter
-  runProcess('rm', ['app/demo.dart.js.deps', 'app/demo.dart.js.map']);
+  runProcess('rm', ['example/app/demo.dart.js.deps', 'example/app/demo.dart.js.map']);
 }
 
 void runProcess(String executable, List<String> arguments) {
