@@ -47,7 +47,7 @@ class ChromeMediaGalleries extends ChromeApi {
  Future&lt;List&lt;FileSystem&gt;&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
    if (_mediaGalleries == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;List&lt;FileSystem&gt;&gt;.oneArg((e) =&gt; listify(e, _createFileSystem));
+   var completer = new ChromeCompleter&lt;List&lt;FileSystem&gt;&gt;.oneArg((e) =&gt; listify(e, _createDOMFileSystem));
    _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
    return completer.future;
  }
@@ -117,7 +117,7 @@ configured or available, the callback will receive an empty array.</p>
 Future&lt;List&lt;FileSystem&gt;&gt; getMediaFileSystems([MediaFileSystemsDetails details]) {
  if (_mediaGalleries == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;List&lt;FileSystem&gt;&gt;.oneArg((e) =&gt; listify(e, _createFileSystem));
+ var completer = new ChromeCompleter&lt;List&lt;FileSystem&gt;&gt;.oneArg((e) =&gt; listify(e, _createDOMFileSystem));
  _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
  return completer.future;
 }

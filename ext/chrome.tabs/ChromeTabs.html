@@ -375,7 +375,7 @@ class ChromeTabs extends ChromeApi {
  Stream&lt;TabsOnMovedEvent&gt; get onMoved =&gt; _onMoved.stream;
 
  final ChromeStreamController&lt;TabsOnMovedEvent&gt; _onMoved =
-     new ChromeStreamController&lt;TabsOnMovedEvent&gt;.twoArgs(_tabs, 'onMoved', _createTabsOnMovedEvent);
+     new ChromeStreamController&lt;TabsOnMovedEvent&gt;.twoArgs(_tabs, 'onMoved', _createOnMovedEvent);
 
  /**
   * Deprecated. Please use onActivated.
@@ -443,7 +443,7 @@ class ChromeTabs extends ChromeApi {
  Stream&lt;TabsOnRemovedEvent&gt; get onRemoved =&gt; _onRemoved.stream;
 
  final ChromeStreamController&lt;TabsOnRemovedEvent&gt; _onRemoved =
-     new ChromeStreamController&lt;TabsOnRemovedEvent&gt;.twoArgs(_tabs, 'onRemoved', _createTabsOnRemovedEvent);
+     new ChromeStreamController&lt;TabsOnRemovedEvent&gt;.twoArgs(_tabs, 'onRemoved', _createOnRemovedEvent);
 
  /**
   * Fired when a tab is replaced with another tab due to prerendering or

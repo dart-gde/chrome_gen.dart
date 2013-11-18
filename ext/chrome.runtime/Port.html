@@ -35,7 +35,7 @@
 <p>An object which allows two way communication with other pages.</p>
 <pre class="source">
 class Port extends ChromeObject {
- Port({String name, var disconnect, Event onDisconnect, Event onMessage, var postMessage, MessageSender sender}) {
+ Port({String name, var disconnect, ChromeEvent onDisconnect, ChromeEvent onMessage, var postMessage, MessageSender sender}) {
    if (name != null) this.name = name;
    if (disconnect != null) this.disconnect = disconnect;
    if (onDisconnect != null) this.onDisconnect = onDisconnect;
@@ -51,11 +51,11 @@ class Port extends ChromeObject {
  dynamic get disconnect =&gt; jsProxy['disconnect'];
  set disconnect(var value) =&gt; jsProxy['disconnect'] = jsify(value);
 
- Event get onDisconnect =&gt; _createEvent(jsProxy['onDisconnect']);
- set onDisconnect(Event value) =&gt; jsProxy['onDisconnect'] = jsify(value);
+ ChromeEvent get onDisconnect =&gt; _createEvent(jsProxy['onDisconnect']);
+ set onDisconnect(ChromeEvent value) =&gt; jsProxy['onDisconnect'] = jsify(value);
 
- Event get onMessage =&gt; _createEvent(jsProxy['onMessage']);
- set onMessage(Event value) =&gt; jsProxy['onMessage'] = jsify(value);
+ ChromeEvent get onMessage =&gt; _createEvent(jsProxy['onMessage']);
+ set onMessage(ChromeEvent value) =&gt; jsProxy['onMessage'] = jsify(value);
 
  dynamic get postMessage =&gt; jsProxy['postMessage'];
  set postMessage(var value) =&gt; jsProxy['postMessage'] = jsify(value);
@@ -76,7 +76,7 @@ class Port extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>Port</strong>({String name, disconnect, <a href="../chrome.events/Event.html">Event</a> onDisconnect, <a href="../chrome.events/Event.html">Event</a> onMessage, postMessage, <a href="../chrome.runtime/MessageSender.html">MessageSender</a> sender}) <a class="anchor-link" href="#"
+new <strong>Port</strong>({String name, disconnect, <a href="../chrome.events/ChromeEvent.html">ChromeEvent</a> onDisconnect, <a href="../chrome.events/ChromeEvent.html">ChromeEvent</a> onMessage, postMessage, <a href="../chrome.runtime/MessageSender.html">MessageSender</a> sender}) <a class="anchor-link" href="#"
               title="Permalink to Port.Port">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -84,7 +84,7 @@ new <strong>Port</strong>({String name, disconnect, <a href="../chrome.events/Ev
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Port({String name, var disconnect, Event onDisconnect, Event onMessage, var postMessage, MessageSender sender}) {
+Port({String name, var disconnect, ChromeEvent onDisconnect, ChromeEvent onMessage, var postMessage, MessageSender sender}) {
  if (name != null) this.name = name;
  if (disconnect != null) this.disconnect = disconnect;
  if (onDisconnect != null) this.onDisconnect = onDisconnect;
@@ -156,31 +156,31 @@ set name(String value) =&gt; jsProxy['name'] = value;
 </div>
 <div class="field"><h4 id="onDisconnect">
 <button class="show-code">Code</button>
-<a href="../chrome.events/Event.html">Event</a>         <strong>onDisconnect</strong> <a class="anchor-link"
+<a href="../chrome.events/ChromeEvent.html">ChromeEvent</a>         <strong>onDisconnect</strong> <a class="anchor-link"
             href="#onDisconnect"
             title="Permalink to Port.onDisconnect">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Event get onDisconnect =&gt; _createEvent(jsProxy['onDisconnect']);
+ChromeEvent get onDisconnect =&gt; _createEvent(jsProxy['onDisconnect']);
 </pre>
 <pre class="source">
-set onDisconnect(Event value) =&gt; jsProxy['onDisconnect'] = jsify(value);
+set onDisconnect(ChromeEvent value) =&gt; jsProxy['onDisconnect'] = jsify(value);
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="onMessage">
 <button class="show-code">Code</button>
-<a href="../chrome.events/Event.html">Event</a>         <strong>onMessage</strong> <a class="anchor-link"
+<a href="../chrome.events/ChromeEvent.html">ChromeEvent</a>         <strong>onMessage</strong> <a class="anchor-link"
             href="#onMessage"
             title="Permalink to Port.onMessage">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-Event get onMessage =&gt; _createEvent(jsProxy['onMessage']);
+ChromeEvent get onMessage =&gt; _createEvent(jsProxy['onMessage']);
 </pre>
 <pre class="source">
-set onMessage(Event value) =&gt; jsProxy['onMessage'] = jsify(value);
+set onMessage(ChromeEvent value) =&gt; jsProxy['onMessage'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -56,7 +56,7 @@ class ChromeStorage extends ChromeApi {
  Stream&lt;StorageOnChangedEvent&gt; get onChanged =&gt; _onChanged.stream;
 
  final ChromeStreamController&lt;StorageOnChangedEvent&gt; _onChanged =
-     new ChromeStreamController&lt;StorageOnChangedEvent&gt;.twoArgs(_storage, 'onChanged', _createStorageOnChangedEvent);
+     new ChromeStreamController&lt;StorageOnChangedEvent&gt;.twoArgs(_storage, 'onChanged', _createOnChangedEvent);
 
  void _throwNotAvailable() {
    throw new UnsupportedError("'chrome.storage' is not available");
