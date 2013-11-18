@@ -75,7 +75,7 @@ class ChromeSerial extends ChromeApi {
   Future<SerialReadInfo> read(int connectionId, int bytesToRead) {
     if (_serial == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<SerialReadInfo>.oneArg(_createSerialReadInfo);
+    var completer = new ChromeCompleter<SerialReadInfo>.oneArg(_createReadInfo);
     _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
     return completer.future;
   }
@@ -89,7 +89,7 @@ class ChromeSerial extends ChromeApi {
   Future<SerialWriteInfo> write(int connectionId, ArrayBuffer data) {
     if (_serial == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<SerialWriteInfo>.oneArg(_createSerialWriteInfo);
+    var completer = new ChromeCompleter<SerialWriteInfo>.oneArg(_createWriteInfo);
     _serial.callMethod('write', [connectionId, jsify(data), completer.callback]);
     return completer.future;
   }
@@ -247,8 +247,8 @@ class ControlSignalOptions extends ChromeObject {
 }
 
 OpenInfo _createOpenInfo(JsObject jsProxy) => jsProxy == null ? null : new OpenInfo.fromProxy(jsProxy);
-SerialReadInfo _createSerialReadInfo(JsObject jsProxy) => jsProxy == null ? null : new SerialReadInfo.fromProxy(jsProxy);
-SerialWriteInfo _createSerialWriteInfo(JsObject jsProxy) => jsProxy == null ? null : new SerialWriteInfo.fromProxy(jsProxy);
+SerialReadInfo _createReadInfo(JsObject jsProxy) => jsProxy == null ? null : new SerialReadInfo.fromProxy(jsProxy);
+SerialWriteInfo _createWriteInfo(JsObject jsProxy) => jsProxy == null ? null : new SerialWriteInfo.fromProxy(jsProxy);
 ControlSignalOptions _createControlSignalOptions(JsObject jsProxy) => jsProxy == null ? null : new ControlSignalOptions.fromProxy(jsProxy);
 DataBit _createDataBit(String value) => DataBit.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 ParityBit _createParityBit(String value) => ParityBit.VALUES.singleWhere((ChromeEnum e) => e.value == value);

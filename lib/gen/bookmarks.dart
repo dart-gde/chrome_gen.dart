@@ -203,7 +203,7 @@ class ChromeBookmarks extends ChromeApi {
   Stream<BookmarksOnRemovedEvent> get onRemoved => _onRemoved.stream;
 
   final ChromeStreamController<BookmarksOnRemovedEvent> _onRemoved =
-      new ChromeStreamController<BookmarksOnRemovedEvent>.twoArgs(_bookmarks, 'onRemoved', _createBookmarksOnRemovedEvent);
+      new ChromeStreamController<BookmarksOnRemovedEvent>.twoArgs(_bookmarks, 'onRemoved', _createOnRemovedEvent);
 
   /**
    * Fired when a bookmark or folder changes.  <b>Note:</b> Currently, only
@@ -212,7 +212,7 @@ class ChromeBookmarks extends ChromeApi {
   Stream<BookmarksOnChangedEvent> get onChanged => _onChanged.stream;
 
   final ChromeStreamController<BookmarksOnChangedEvent> _onChanged =
-      new ChromeStreamController<BookmarksOnChangedEvent>.twoArgs(_bookmarks, 'onChanged', _createBookmarksOnChangedEvent);
+      new ChromeStreamController<BookmarksOnChangedEvent>.twoArgs(_bookmarks, 'onChanged', _createOnChangedEvent);
 
   /**
    * Fired when a bookmark or folder is moved to a different parent folder.
@@ -220,7 +220,7 @@ class ChromeBookmarks extends ChromeApi {
   Stream<BookmarksOnMovedEvent> get onMoved => _onMoved.stream;
 
   final ChromeStreamController<BookmarksOnMovedEvent> _onMoved =
-      new ChromeStreamController<BookmarksOnMovedEvent>.twoArgs(_bookmarks, 'onMoved', _createBookmarksOnMovedEvent);
+      new ChromeStreamController<BookmarksOnMovedEvent>.twoArgs(_bookmarks, 'onMoved', _createOnMovedEvent);
 
   /**
    * Fired when the children of a folder have changed their order due to the
@@ -385,11 +385,11 @@ class BookmarkTreeNode extends ChromeObject {
 BookmarkTreeNode _createBookmarkTreeNode(JsObject jsProxy) => jsProxy == null ? null : new BookmarkTreeNode.fromProxy(jsProxy);
 OnCreatedEvent _createOnCreatedEvent(String id, JsObject bookmark) =>
     new OnCreatedEvent(id, _createBookmarkTreeNode(bookmark));
-BookmarksOnRemovedEvent _createBookmarksOnRemovedEvent(String id, JsObject removeInfo) =>
+BookmarksOnRemovedEvent _createOnRemovedEvent(String id, JsObject removeInfo) =>
     new BookmarksOnRemovedEvent(id, mapify(removeInfo));
-BookmarksOnChangedEvent _createBookmarksOnChangedEvent(String id, JsObject changeInfo) =>
+BookmarksOnChangedEvent _createOnChangedEvent(String id, JsObject changeInfo) =>
     new BookmarksOnChangedEvent(id, mapify(changeInfo));
-BookmarksOnMovedEvent _createBookmarksOnMovedEvent(String id, JsObject moveInfo) =>
+BookmarksOnMovedEvent _createOnMovedEvent(String id, JsObject moveInfo) =>
     new BookmarksOnMovedEvent(id, mapify(moveInfo));
 OnChildrenReorderedEvent _createOnChildrenReorderedEvent(String id, JsObject reorderInfo) =>
     new OnChildrenReorderedEvent(id, mapify(reorderInfo));

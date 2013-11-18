@@ -65,11 +65,11 @@ class ChromeBluetooth extends ChromeApi {
    * [callback]: Called when the search is completed. |options.deviceCallback|
    * will not be called after [callback] has been called.
    */
-  Future getBluetoothDevices(GetBluetoothDevicesOptions options) {
+  Future getDevices(GetDevicesOptions options) {
     if (_bluetooth == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
-    _bluetooth.callMethod('getBluetoothDevices', [jsify(options), completer.callback]);
+    _bluetooth.callMethod('getDevices', [jsify(options), completer.callback]);
     return completer.future;
   }
 
@@ -176,7 +176,7 @@ class ChromeBluetooth extends ChromeApi {
 
   /**
    * Start discovery. Discovered devices will be returned via the
-   * [onBluetoothDeviceDiscovered] callback. Discovery will fail to start if it is
+   * [onDeviceDiscovered] callback. Discovery will fail to start if it is
    * already in progress. Discovery can be resource intensive: stopDiscovery
    * should be called as soon as possible.
    * [options]: The options for this function.
@@ -329,7 +329,7 @@ class Socket extends ChromeObject {
   }
   Socket.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  BluetoothDevice get device => _createBluetoothDevice(jsProxy['device']);
+  BluetoothDevice get device => _createDevice(jsProxy['device']);
   set device(BluetoothDevice value) => jsProxy['device'] = jsify(value);
 
   Profile get profile => _createProfile(jsProxy['profile']);
@@ -354,21 +354,21 @@ class OutOfBandPairingData extends ChromeObject {
 }
 
 /**
- * Options for the getBluetoothDevices function. If [profile] is not provided, all
+ * Options for the getDevices function. If [profile] is not provided, all
  * devices known to the system are returned.
  */
-class GetBluetoothDevicesOptions extends ChromeObject {
-  GetBluetoothDevicesOptions({Profile profile, BluetoothDeviceCallback deviceCallback}) {
+class GetDevicesOptions extends ChromeObject {
+  GetDevicesOptions({Profile profile, DeviceCallback deviceCallback}) {
     if (profile != null) this.profile = profile;
     if (deviceCallback != null) this.deviceCallback = deviceCallback;
   }
-  GetBluetoothDevicesOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  GetDevicesOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   Profile get profile => _createProfile(jsProxy['profile']);
   set profile(Profile value) => jsProxy['profile'] = jsify(value);
 
-  BluetoothDeviceCallback get deviceCallback => _createBluetoothDeviceCallback(jsProxy['deviceCallback']);
-  set deviceCallback(BluetoothDeviceCallback value) => jsProxy['deviceCallback'] = jsify(value);
+  DeviceCallback get deviceCallback => _createDeviceCallback(jsProxy['deviceCallback']);
+  set deviceCallback(DeviceCallback value) => jsProxy['deviceCallback'] = jsify(value);
 }
 
 /**
@@ -380,7 +380,7 @@ class GetProfilesOptions extends ChromeObject {
   }
   GetProfilesOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  BluetoothDevice get device => _createBluetoothDevice(jsProxy['device']);
+  BluetoothDevice get device => _createDevice(jsProxy['device']);
   set device(BluetoothDevice value) => jsProxy['device'] = jsify(value);
 }
 
@@ -407,7 +407,7 @@ class ConnectOptions extends ChromeObject {
   }
   ConnectOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  BluetoothDevice get device => _createBluetoothDevice(jsProxy['device']);
+  BluetoothDevice get device => _createDevice(jsProxy['device']);
   set device(BluetoothDevice value) => jsProxy['device'] = jsify(value);
 
   Profile get profile => _createProfile(jsProxy['profile']);
@@ -478,13 +478,13 @@ class SetOutOfBandPairingDataOptions extends ChromeObject {
  * Options for the startDiscovery function.
  */
 class StartDiscoveryOptions extends ChromeObject {
-  StartDiscoveryOptions({BluetoothDeviceCallback deviceCallback}) {
+  StartDiscoveryOptions({DeviceCallback deviceCallback}) {
     if (deviceCallback != null) this.deviceCallback = deviceCallback;
   }
   StartDiscoveryOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  BluetoothDeviceCallback get deviceCallback => _createBluetoothDeviceCallback(jsProxy['deviceCallback']);
-  set deviceCallback(BluetoothDeviceCallback value) => jsProxy['deviceCallback'] = jsify(value);
+  DeviceCallback get deviceCallback => _createDeviceCallback(jsProxy['deviceCallback']);
+  set deviceCallback(DeviceCallback value) => jsProxy['deviceCallback'] = jsify(value);
 }
 
 AdapterState _createAdapterState(JsObject jsProxy) => jsProxy == null ? null : new AdapterState.fromProxy(jsProxy);
@@ -493,5 +493,5 @@ ServiceRecord _createServiceRecord(JsObject jsProxy) => jsProxy == null ? null :
 ArrayBuffer _createArrayBuffer(JsObject jsProxy) => jsProxy == null ? null : new ArrayBuffer.fromProxy(jsProxy);
 OutOfBandPairingData _createOutOfBandPairingData(JsObject jsProxy) => jsProxy == null ? null : new OutOfBandPairingData.fromProxy(jsProxy);
 Socket _createSocket(JsObject jsProxy) => jsProxy == null ? null : new Socket.fromProxy(jsProxy);
-BluetoothDevice _createBluetoothDevice(JsObject jsProxy) => jsProxy == null ? null : new BluetoothDevice.fromProxy(jsProxy);
-BluetoothDeviceCallback _createBluetoothDeviceCallback(JsObject jsProxy) => jsProxy == null ? null : new BluetoothDeviceCallback.fromProxy(jsProxy);
+BluetoothDevice _createDevice(JsObject jsProxy) => jsProxy == null ? null : new BluetoothDevice.fromProxy(jsProxy);
+DeviceCallback _createDeviceCallback(JsObject jsProxy) => jsProxy == null ? null : new DeviceCallback.fromProxy(jsProxy);

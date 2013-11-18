@@ -28,7 +28,7 @@ class ChromeMediaGalleries extends ChromeApi {
   Future<List<FileSystem>> getMediaFileSystems([MediaFileSystemsDetails details]) {
     if (_mediaGalleries == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<List<FileSystem>>.oneArg((e) => listify(e, _createFileSystem));
+    var completer = new ChromeCompleter<List<FileSystem>>.oneArg((e) => listify(e, _createDOMFileSystem));
     _mediaGalleries.callMethod('getMediaFileSystems', [jsify(details), completer.callback]);
     return completer.future;
   }
@@ -93,6 +93,6 @@ class MediaFileSystemMetadata extends ChromeObject {
   set isMediaDevice(bool value) => jsProxy['isMediaDevice'] = value;
 }
 
-FileSystem _createFileSystem(JsObject jsProxy) => jsProxy == null ? null : new CrFileSystem.fromProxy(jsProxy);
+FileSystem _createDOMFileSystem(JsObject jsProxy) => jsProxy == null ? null : new CrFileSystem.fromProxy(jsProxy);
 MediaFileSystemMetadata _createMediaFileSystemMetadata(JsObject jsProxy) => jsProxy == null ? null : new MediaFileSystemMetadata.fromProxy(jsProxy);
 GetMediaFileSystemsInteractivity _createGetMediaFileSystemsInteractivity(String value) => GetMediaFileSystemsInteractivity.VALUES.singleWhere((ChromeEnum e) => e.value == value);

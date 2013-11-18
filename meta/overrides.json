@@ -31,7 +31,10 @@
     "devtools.network.GetContentResult": "GetRequestContentResult",
 
     "syncFileSystem.DOMFileSystem": "FileSystem",
-    "mediaGalleries.DOMFileSystem": "FileSystem"
+    "mediaGalleries.DOMFileSystem": "FileSystem",
+
+    "events.Event": "ChromeEvent",
+    "runtime.Event": "ChromeEvent"
   }
 
 }

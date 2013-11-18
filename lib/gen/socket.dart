@@ -98,7 +98,7 @@ class ChromeSocket extends ChromeApi {
   Future<SocketReadInfo> read(int socketId, [int bufferSize]) {
     if (_socket == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<SocketReadInfo>.oneArg(_createSocketReadInfo);
+    var completer = new ChromeCompleter<SocketReadInfo>.oneArg(_createReadInfo);
     _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
     return completer.future;
   }
@@ -113,7 +113,7 @@ class ChromeSocket extends ChromeApi {
   Future<SocketWriteInfo> write(int socketId, ArrayBuffer data) {
     if (_socket == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createSocketWriteInfo);
+    var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createWriteInfo);
     _socket.callMethod('write', [socketId, jsify(data), completer.callback]);
     return completer.future;
   }
@@ -144,7 +144,7 @@ class ChromeSocket extends ChromeApi {
   Future<SocketWriteInfo> sendTo(int socketId, ArrayBuffer data, String address, int port) {
     if (_socket == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createSocketWriteInfo);
+    var completer = new ChromeCompleter<SocketWriteInfo>.oneArg(_createWriteInfo);
     _socket.callMethod('sendTo', [socketId, jsify(data), address, port, completer.callback]);
     return completer.future;
   }
@@ -473,8 +473,8 @@ class NetworkInterface extends ChromeObject {
 }
 
 CreateInfo _createCreateInfo(JsObject jsProxy) => jsProxy == null ? null : new CreateInfo.fromProxy(jsProxy);
-SocketReadInfo _createSocketReadInfo(JsObject jsProxy) => jsProxy == null ? null : new SocketReadInfo.fromProxy(jsProxy);
-SocketWriteInfo _createSocketWriteInfo(JsObject jsProxy) => jsProxy == null ? null : new SocketWriteInfo.fromProxy(jsProxy);
+SocketReadInfo _createReadInfo(JsObject jsProxy) => jsProxy == null ? null : new SocketReadInfo.fromProxy(jsProxy);
+SocketWriteInfo _createWriteInfo(JsObject jsProxy) => jsProxy == null ? null : new SocketWriteInfo.fromProxy(jsProxy);
 RecvFromInfo _createRecvFromInfo(JsObject jsProxy) => jsProxy == null ? null : new RecvFromInfo.fromProxy(jsProxy);
 AcceptInfo _createAcceptInfo(JsObject jsProxy) => jsProxy == null ? null : new AcceptInfo.fromProxy(jsProxy);
 SocketInfo _createSocketInfo(JsObject jsProxy) => jsProxy == null ? null : new SocketInfo.fromProxy(jsProxy);

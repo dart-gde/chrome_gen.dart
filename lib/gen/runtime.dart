@@ -414,7 +414,7 @@ class LastErrorRuntime extends ChromeObject {
  * An object which allows two way communication with other pages.
  */
 class Port extends ChromeObject {
-  Port({String name, var disconnect, Event onDisconnect, Event onMessage, var postMessage, MessageSender sender}) {
+  Port({String name, var disconnect, ChromeEvent onDisconnect, ChromeEvent onMessage, var postMessage, MessageSender sender}) {
     if (name != null) this.name = name;
     if (disconnect != null) this.disconnect = disconnect;
     if (onDisconnect != null) this.onDisconnect = onDisconnect;
@@ -430,11 +430,11 @@ class Port extends ChromeObject {
   dynamic get disconnect => jsProxy['disconnect'];
   set disconnect(var value) => jsProxy['disconnect'] = jsify(value);
 
-  Event get onDisconnect => _createEvent(jsProxy['onDisconnect']);
-  set onDisconnect(Event value) => jsProxy['onDisconnect'] = jsify(value);
+  ChromeEvent get onDisconnect => _createEvent(jsProxy['onDisconnect']);
+  set onDisconnect(ChromeEvent value) => jsProxy['onDisconnect'] = jsify(value);
 
-  Event get onMessage => _createEvent(jsProxy['onMessage']);
-  set onMessage(Event value) => jsProxy['onMessage'] = jsify(value);
+  ChromeEvent get onMessage => _createEvent(jsProxy['onMessage']);
+  set onMessage(ChromeEvent value) => jsProxy['onMessage'] = jsify(value);
 
   dynamic get postMessage => jsProxy['postMessage'];
   set postMessage(var value) => jsProxy['postMessage'] = jsify(value);
@@ -512,6 +512,6 @@ OnMessageEvent _createOnMessageEvent(JsObject message, JsObject sender, JsObject
     new OnMessageEvent(message, _createMessageSender(sender), sendResponse);
 OnMessageExternalEvent _createOnMessageExternalEvent(JsObject message, JsObject sender, JsObject sendResponse) =>
     new OnMessageExternalEvent(message, _createMessageSender(sender), sendResponse);
-Event _createEvent(JsObject jsProxy) => jsProxy == null ? null : new Event.fromProxy(jsProxy);
+ChromeEvent _createEvent(JsObject jsProxy) => jsProxy == null ? null : new ChromeEvent.fromProxy(jsProxy);
 MessageSender _createMessageSender(JsObject jsProxy) => jsProxy == null ? null : new MessageSender.fromProxy(jsProxy);
 Tab _createTab(JsObject jsProxy) => jsProxy == null ? null : new Tab.fromProxy(jsProxy);
