@@ -40,7 +40,7 @@ class GetProfilesOptions extends ChromeObject {
  }
  GetProfilesOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- BluetoothDevice get device =&gt; _createDevice(jsProxy['device']);
+ BluetoothDevice get device =&gt; _createBluetoothDevice(jsProxy['device']);
  set device(BluetoothDevice value) =&gt; jsProxy['device'] = jsify(value);
 }
 </pre>
@@ -91,7 +91,7 @@ GetProfilesOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
         </h4>
         <div class="doc">
 <pre class="source">
-BluetoothDevice get device =&gt; _createDevice(jsProxy['device']);
+BluetoothDevice get device =&gt; _createBluetoothDevice(jsProxy['device']);
 </pre>
 <pre class="source">
 set device(BluetoothDevice value) =&gt; jsProxy['device'] = jsify(value);

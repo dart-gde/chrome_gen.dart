@@ -118,7 +118,7 @@ class ChromeSocket extends ChromeApi {
  Future&lt;SocketReadInfo&gt; read(int socketId, [int bufferSize]) {
    if (_socket == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;SocketReadInfo&gt;.oneArg(_createReadInfo);
+   var completer = new ChromeCompleter&lt;SocketReadInfo&gt;.oneArg(_createSocketReadInfo);
    _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
    return completer.future;
  }
@@ -133,7 +133,7 @@ class ChromeSocket extends ChromeApi {
  Future&lt;SocketWriteInfo&gt; write(int socketId, ArrayBuffer data) {
    if (_socket == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createWriteInfo);
+   var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
    _socket.callMethod('write', [socketId, jsify(data), completer.callback]);
    return completer.future;
  }
@@ -164,7 +164,7 @@ class ChromeSocket extends ChromeApi {
  Future&lt;SocketWriteInfo&gt; sendTo(int socketId, ArrayBuffer data, String address, int port) {
    if (_socket == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createWriteInfo);
+   var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
    _socket.callMethod('sendTo', [socketId, jsify(data), address, port, completer.callback]);
    return completer.future;
  }
@@ -673,7 +673,7 @@ Future&lt;<a href="../chrome.socket/SocketReadInfo.html">SocketReadInfo</a>&gt; 
 Future&lt;SocketReadInfo&gt; read(int socketId, [int bufferSize]) {
  if (_socket == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;SocketReadInfo&gt;.oneArg(_createReadInfo);
+ var completer = new ChromeCompleter&lt;SocketReadInfo&gt;.oneArg(_createSocketReadInfo);
  _socket.callMethod('read', [socketId, bufferSize, completer.callback]);
  return completer.future;
 }
@@ -722,7 +722,7 @@ error occurs.</p>
 Future&lt;SocketWriteInfo&gt; sendTo(int socketId, ArrayBuffer data, String address, int port) {
  if (_socket == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createWriteInfo);
+ var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
  _socket.callMethod('sendTo', [socketId, jsify(data), address, port, completer.callback]);
  return completer.future;
 }
@@ -848,7 +848,7 @@ an error occurs.</p>
 Future&lt;SocketWriteInfo&gt; write(int socketId, ArrayBuffer data) {
  if (_socket == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createWriteInfo);
+ var completer = new ChromeCompleter&lt;SocketWriteInfo&gt;.oneArg(_createSocketWriteInfo);
  _socket.callMethod('write', [socketId, jsify(data), completer.callback]);
  return completer.future;
 }

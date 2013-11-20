@@ -95,7 +95,7 @@ class ChromeSerial extends ChromeApi {
  Future&lt;SerialReadInfo&gt; read(int connectionId, int bytesToRead) {
    if (_serial == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;SerialReadInfo&gt;.oneArg(_createReadInfo);
+   var completer = new ChromeCompleter&lt;SerialReadInfo&gt;.oneArg(_createSerialReadInfo);
    _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
    return completer.future;
  }
@@ -109,7 +109,7 @@ class ChromeSerial extends ChromeApi {
  Future&lt;SerialWriteInfo&gt; write(int connectionId, ArrayBuffer data) {
    if (_serial == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;SerialWriteInfo&gt;.oneArg(_createWriteInfo);
+   var completer = new ChromeCompleter&lt;SerialWriteInfo&gt;.oneArg(_createSerialWriteInfo);
    _serial.callMethod('write', [connectionId, jsify(data), completer.callback]);
    return completer.future;
  }
@@ -294,7 +294,7 @@ read blocks.</p>
 Future&lt;SerialReadInfo&gt; read(int connectionId, int bytesToRead) {
  if (_serial == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;SerialReadInfo&gt;.oneArg(_createReadInfo);
+ var completer = new ChromeCompleter&lt;SerialReadInfo&gt;.oneArg(_createSerialReadInfo);
  _serial.callMethod('read', [connectionId, bytesToRead, completer.callback]);
  return completer.future;
 }
@@ -332,7 +332,7 @@ Future&lt;<a href="../chrome.serial/SerialWriteInfo.html">SerialWriteInfo</a>&gt
 Future&lt;SerialWriteInfo&gt; write(int connectionId, ArrayBuffer data) {
  if (_serial == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;SerialWriteInfo&gt;.oneArg(_createWriteInfo);
+ var completer = new ChromeCompleter&lt;SerialWriteInfo&gt;.oneArg(_createSerialWriteInfo);
  _serial.callMethod('write', [connectionId, jsify(data), completer.callback]);
  return completer.future;
 }

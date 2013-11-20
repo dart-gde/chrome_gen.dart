@@ -54,7 +54,7 @@ class ChromeSyncFileSystem extends ChromeApi {
  Future&lt;FileSystem&gt; requestFileSystem() {
    if (_syncFileSystem == null) _throwNotAvailable();
 
-   var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createDOMFileSystem);
+   var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
    _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
    return completer.future;
  }
@@ -331,7 +331,7 @@ A callback type for requestFileSystem.</p>
 Future&lt;FileSystem&gt; requestFileSystem() {
  if (_syncFileSystem == null) _throwNotAvailable();
 
- var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createDOMFileSystem);
+ var completer = new ChromeCompleter&lt;FileSystem&gt;.oneArg(_createFileSystem);
  _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
  return completer.future;
 }

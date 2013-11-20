@@ -222,7 +222,7 @@ class ChromeBookmarks extends ChromeApi {
  Stream&lt;BookmarksOnRemovedEvent&gt; get onRemoved =&gt; _onRemoved.stream;
 
  final ChromeStreamController&lt;BookmarksOnRemovedEvent&gt; _onRemoved =
-     new ChromeStreamController&lt;BookmarksOnRemovedEvent&gt;.twoArgs(_bookmarks, 'onRemoved', _createOnRemovedEvent);
+     new ChromeStreamController&lt;BookmarksOnRemovedEvent&gt;.twoArgs(_bookmarks, 'onRemoved', _createBookmarksOnRemovedEvent);
 
  /**
   * Fired when a bookmark or folder changes.  &lt;b&gt;Note:&lt;/b&gt; Currently, only
@@ -231,7 +231,7 @@ class ChromeBookmarks extends ChromeApi {
  Stream&lt;BookmarksOnChangedEvent&gt; get onChanged =&gt; _onChanged.stream;
 
  final ChromeStreamController&lt;BookmarksOnChangedEvent&gt; _onChanged =
-     new ChromeStreamController&lt;BookmarksOnChangedEvent&gt;.twoArgs(_bookmarks, 'onChanged', _createOnChangedEvent);
+     new ChromeStreamController&lt;BookmarksOnChangedEvent&gt;.twoArgs(_bookmarks, 'onChanged', _createBookmarksOnChangedEvent);
 
  /**
   * Fired when a bookmark or folder is moved to a different parent folder.
@@ -239,7 +239,7 @@ class ChromeBookmarks extends ChromeApi {
  Stream&lt;BookmarksOnMovedEvent&gt; get onMoved =&gt; _onMoved.stream;
 
  final ChromeStreamController&lt;BookmarksOnMovedEvent&gt; _onMoved =
-     new ChromeStreamController&lt;BookmarksOnMovedEvent&gt;.twoArgs(_bookmarks, 'onMoved', _createOnMovedEvent);
+     new ChromeStreamController&lt;BookmarksOnMovedEvent&gt;.twoArgs(_bookmarks, 'onMoved', _createBookmarksOnMovedEvent);
 
  /**
   * Fired when the children of a folder have changed their order due to the

@@ -39,7 +39,7 @@ class CrDirectoryEntry extends CrEntry implements DirectoryEntry {
  Future&lt;Entry&gt; createFile(String path, {bool exclusive: false}) {
    var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
    var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
-   jsProxy.callMethod('createFile', [path, options, completer.callback, completer.errorCallback]);
+   jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
    return completer.future;
  }
 
@@ -302,7 +302,7 @@ exists at the specified <code>path</code>.</p>
 Future&lt;Entry&gt; createFile(String path, {bool exclusive: false}) {
  var options = new JsObject.jsify({'create': true, 'exclusive': exclusive});
  var completer = new _ChromeCompleterWithError&lt;Entry&gt;.oneArg((obj) =&gt; new CrEntry.fromProxy(obj));
- jsProxy.callMethod('createFile', [path, options, completer.callback, completer.errorCallback]);
+ jsProxy.callMethod('getFile', [path, options, completer.callback, completer.errorCallback]);
  return completer.future;
 }
 </pre>

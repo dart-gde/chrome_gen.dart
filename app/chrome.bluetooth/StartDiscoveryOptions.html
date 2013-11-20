@@ -35,13 +35,13 @@
 <p>Options for the startDiscovery function.</p>
 <pre class="source">
 class StartDiscoveryOptions extends ChromeObject {
- StartDiscoveryOptions({DeviceCallback deviceCallback}) {
+ StartDiscoveryOptions({BluetoothDeviceCallback deviceCallback}) {
    if (deviceCallback != null) this.deviceCallback = deviceCallback;
  }
  StartDiscoveryOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- DeviceCallback get deviceCallback =&gt; _createDeviceCallback(jsProxy['deviceCallback']);
- set deviceCallback(DeviceCallback value) =&gt; jsProxy['deviceCallback'] = jsify(value);
+ BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(jsProxy['deviceCallback']);
+ set deviceCallback(BluetoothDeviceCallback value) =&gt; jsProxy['deviceCallback'] = jsify(value);
 }
 </pre>
 </div>
@@ -52,7 +52,7 @@ class StartDiscoveryOptions extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>StartDiscoveryOptions</strong>({<a href="../chrome.src.common_exp/DeviceCallback.html">DeviceCallback</a> deviceCallback}) <a class="anchor-link" href="#"
+new <strong>StartDiscoveryOptions</strong>({<a href="../chrome.src.common_exp/BluetoothDeviceCallback.html">BluetoothDeviceCallback</a> deviceCallback}) <a class="anchor-link" href="#"
               title="Permalink to StartDiscoveryOptions.StartDiscoveryOptions">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -60,7 +60,7 @@ new <strong>StartDiscoveryOptions</strong>({<a href="../chrome.src.common_exp/De
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-StartDiscoveryOptions({DeviceCallback deviceCallback}) {
+StartDiscoveryOptions({BluetoothDeviceCallback deviceCallback}) {
  if (deviceCallback != null) this.deviceCallback = deviceCallback;
 }
 </pre>
@@ -85,16 +85,16 @@ StartDiscoveryOptions.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="deviceCallback">
 <button class="show-code">Code</button>
-<a href="../chrome.src.common_exp/DeviceCallback.html">DeviceCallback</a>         <strong>deviceCallback</strong> <a class="anchor-link"
+<a href="../chrome.src.common_exp/BluetoothDeviceCallback.html">BluetoothDeviceCallback</a>         <strong>deviceCallback</strong> <a class="anchor-link"
             href="#deviceCallback"
             title="Permalink to StartDiscoveryOptions.deviceCallback">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-DeviceCallback get deviceCallback =&gt; _createDeviceCallback(jsProxy['deviceCallback']);
+BluetoothDeviceCallback get deviceCallback =&gt; _createBluetoothDeviceCallback(jsProxy['deviceCallback']);
 </pre>
 <pre class="source">
-set deviceCallback(DeviceCallback value) =&gt; jsProxy['deviceCallback'] = jsify(value);
+set deviceCallback(BluetoothDeviceCallback value) =&gt; jsProxy['deviceCallback'] = jsify(value);
 </pre>
 </div>
 </div>
