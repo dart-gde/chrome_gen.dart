@@ -105,8 +105,8 @@ class ArrayBuffer extends ChromeObject {
 }
 
 // TODO: this is a hack, to eliminate analysis warnings. remove as soon as possible
-class BluetoothDeviceCallback {
-  BluetoothDeviceCallback.fromProxy(JsObject jsProxy);
+class DeviceCallback {
+  DeviceCallback.fromProxy(JsObject jsProxy);
 }
 
 // TODO: this is a hack, to eliminate analysis warnings. remove as soon as possible

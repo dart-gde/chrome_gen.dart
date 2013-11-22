@@ -357,7 +357,7 @@ class ChromeTabs extends ChromeApi {
   Stream<TabsOnMovedEvent> get onMoved => _onMoved.stream;
 
   final ChromeStreamController<TabsOnMovedEvent> _onMoved =
-      new ChromeStreamController<TabsOnMovedEvent>.twoArgs(_tabs, 'onMoved', _createTabsOnMovedEvent);
+      new ChromeStreamController<TabsOnMovedEvent>.twoArgs(_tabs, 'onMoved', _createOnMovedEvent);
 
   /**
    * Deprecated. Please use onActivated.
@@ -425,7 +425,7 @@ class ChromeTabs extends ChromeApi {
   Stream<TabsOnRemovedEvent> get onRemoved => _onRemoved.stream;
 
   final ChromeStreamController<TabsOnRemovedEvent> _onRemoved =
-      new ChromeStreamController<TabsOnRemovedEvent>.twoArgs(_tabs, 'onRemoved', _createTabsOnRemovedEvent);
+      new ChromeStreamController<TabsOnRemovedEvent>.twoArgs(_tabs, 'onRemoved', _createOnRemovedEvent);
 
   /**
    * Fired when a tab is replaced with another tab due to prerendering or
@@ -716,7 +716,7 @@ Port _createPort(JsObject jsProxy) => jsProxy == null ? null : new Port.fromProx
 Window _createWindow(JsObject jsProxy) => jsProxy == null ? null : new Window.fromProxy(jsProxy);
 OnUpdatedEvent _createOnUpdatedEvent(int tabId, JsObject changeInfo, JsObject tab) =>
     new OnUpdatedEvent(tabId, mapify(changeInfo), _createTab(tab));
-TabsOnMovedEvent _createTabsOnMovedEvent(int tabId, JsObject moveInfo) =>
+TabsOnMovedEvent _createOnMovedEvent(int tabId, JsObject moveInfo) =>
     new TabsOnMovedEvent(tabId, mapify(moveInfo));
 OnSelectionChangedEvent _createOnSelectionChangedEvent(int tabId, JsObject selectInfo) =>
     new OnSelectionChangedEvent(tabId, mapify(selectInfo));
@@ -726,7 +726,7 @@ OnDetachedEvent _createOnDetachedEvent(int tabId, JsObject detachInfo) =>
     new OnDetachedEvent(tabId, mapify(detachInfo));
 OnAttachedEvent _createOnAttachedEvent(int tabId, JsObject attachInfo) =>
     new OnAttachedEvent(tabId, mapify(attachInfo));
-TabsOnRemovedEvent _createTabsOnRemovedEvent(int tabId, JsObject removeInfo) =>
+TabsOnRemovedEvent _createOnRemovedEvent(int tabId, JsObject removeInfo) =>
     new TabsOnRemovedEvent(tabId, mapify(removeInfo));
 OnReplacedEvent _createOnReplacedEvent(int addedTabId, int removedTabId) =>
     new OnReplacedEvent(addedTabId, removedTabId);

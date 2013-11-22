@@ -77,7 +77,11 @@ class DartGenerator {
    */
   void renameSymbol(String oldName, String newName) {
     String str = _buf.toString();
-    str = str.replaceAll(oldName, newName);
+
+    // This regex matches 1 non-word, 'oldName', 1 non-word
+    RegExp regex = new RegExp('(\\W)(${oldName})(\\W)');
+    str = str.replaceAllMapped(regex, (m) => m.group(1) + newName + m.group(3));
+
     _buf.clear();
     _buf.write(str);
   }

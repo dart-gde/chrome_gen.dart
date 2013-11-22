@@ -72,9 +72,9 @@ class Rule extends ChromeObject {
  * An object which allows the addition and removal of listeners for a Chrome
  * event.
  */
-class Event extends ChromeObject {
-  Event();
-  Event.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+class ChromeEvent extends ChromeObject {
+  ChromeEvent();
+  ChromeEvent.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Registers an event listener _callback_ to an event.

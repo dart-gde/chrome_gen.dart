@@ -38,7 +38,7 @@ class ChromeSyncFileSystem extends ChromeApi {
   Future<FileSystem> requestFileSystem() {
     if (_syncFileSystem == null) _throwNotAvailable();
 
-    var completer = new ChromeCompleter<FileSystem>.oneArg(_createFileSystem);
+    var completer = new ChromeCompleter<FileSystem>.oneArg(_createDOMFileSystem);
     _syncFileSystem.callMethod('requestFileSystem', [completer.callback]);
     return completer.future;
   }
@@ -267,7 +267,7 @@ class ServiceInfo extends ChromeObject {
   set description(String value) => jsProxy['description'] = value;
 }
 
-FileSystem _createFileSystem(JsObject jsProxy) => jsProxy == null ? null : new CrFileSystem.fromProxy(jsProxy);
+FileSystem _createDOMFileSystem(JsObject jsProxy) => jsProxy == null ? null : new CrFileSystem.fromProxy(jsProxy);
 ConflictResolutionPolicy _createConflictResolutionPolicy(String value) => ConflictResolutionPolicy.VALUES.singleWhere((ChromeEnum e) => e.value == value);
 StorageInfo _createStorageInfo(JsObject jsProxy) => jsProxy == null ? null : new StorageInfo.fromProxy(jsProxy);
 FileStatus _createFileStatus(String value) => FileStatus.VALUES.singleWhere((ChromeEnum e) => e.value == value);

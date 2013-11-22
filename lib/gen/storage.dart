@@ -36,7 +36,7 @@ class ChromeStorage extends ChromeApi {
   Stream<StorageOnChangedEvent> get onChanged => _onChanged.stream;
 
   final ChromeStreamController<StorageOnChangedEvent> _onChanged =
-      new ChromeStreamController<StorageOnChangedEvent>.twoArgs(_storage, 'onChanged', _createStorageOnChangedEvent);
+      new ChromeStreamController<StorageOnChangedEvent>.twoArgs(_storage, 'onChanged', _createOnChangedEvent);
 
   void _throwNotAvailable() {
     throw new UnsupportedError("'chrome.storage' is not available");
@@ -214,5 +214,5 @@ class StorageArea extends ChromeObject {
 
 SyncStorageArea _createSyncStorageArea(JsObject jsProxy) => jsProxy == null ? null : new SyncStorageArea.fromProxy(jsProxy);
 LocalStorageArea _createLocalStorageArea(JsObject jsProxy) => jsProxy == null ? null : new LocalStorageArea.fromProxy(jsProxy);
-StorageOnChangedEvent _createStorageOnChangedEvent(JsObject changes, String areaName) =>
+StorageOnChangedEvent _createOnChangedEvent(JsObject changes, String areaName) =>
     new StorageOnChangedEvent(mapify(changes), areaName);
