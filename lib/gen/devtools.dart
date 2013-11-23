@@ -67,7 +67,7 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
   /**
    * Reloads the inspected page.
    */
-  void reload([Map reloadOptions]) {
+  void reload([reload2ParamsObject reloadOptions]) {
     if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
     _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
@@ -175,18 +175,40 @@ class Resource extends ChromeObject {
   }
 }
 
-/**
- * The return type for [getContent].
- */
-class GetResourceContentResult {
-  static GetResourceContentResult _create(content, encoding) {
-    return new GetResourceContentResult._(content, encoding);
+class reload2ParamsObject extends ChromeObject {
+  reload2ParamsObject({bool ignoreCache, String userAgent, String injectedScript}) {
+    if (ignoreCache != null) this.ignoreCache = ignoreCache;
+    if (userAgent != null) this.userAgent = userAgent;
+    if (injectedScript != null) this.injectedScript = injectedScript;
   }
+  reload2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  String content;
-  String encoding;
+  /**
+   * When true, the loader will ignore the cache for all inspected page
+   * resources loaded before the `load` event is fired. The effect is similar to
+   * pressing Ctrl+Shift+R in the inspected window or within the Developer Tools
+   * window.
+   */
+  bool get ignoreCache => jsProxy['ignoreCache'];
+  set ignoreCache(bool value) => jsProxy['ignoreCache'] = value;
 
-  GetResourceContentResult._(this.content, this.encoding);
+  /**
+   * If specified, the string will override the value of the `User-Agent` HTTP
+   * header that's sent while loading the resources of the inspected page. The
+   * string will also override the value of the `navigator.userAgent` property
+   * that's returned to any scripts that are running within the inspected page.
+   */
+  String get userAgent => jsProxy['userAgent'];
+  set userAgent(String value) => jsProxy['userAgent'] = value;
+
+  /**
+   * If specified, the script will be injected into every frame of the inspected
+   * page immediately upon load, before any of the frame's scripts. The script
+   * will not be injected after subsequent reloads-for example, if the user
+   * presses Ctrl+R.
+   */
+  String get injectedScript => jsProxy['injectedScript'];
+  set injectedScript(String value) => jsProxy['injectedScript'] = value;
 }
 
 /**
@@ -201,6 +223,20 @@ class EvalResult {
   bool isException;
 
   EvalResult._(this.result, this.isException);
+}
+
+/**
+ * The return type for [getContent].
+ */
+class GetResourceContentResult {
+  static GetResourceContentResult _create(content, encoding) {
+    return new GetResourceContentResult._(content, encoding);
+  }
+
+  String content;
+  String encoding;
+
+  GetResourceContentResult._(this.content, this.encoding);
 }
 
 Resource _createResource(JsObject jsProxy) => jsProxy == null ? null : new Resource.fromProxy(jsProxy);

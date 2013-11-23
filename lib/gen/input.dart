@@ -31,7 +31,7 @@ class ChromeInputIme extends ChromeApi {
    * Set the current composition. If this extension does not own the active IME,
    * this fails.
    */
-  Future<bool> setComposition(Map parameters) {
+  Future<bool> setComposition(setComposition2ParamsObject parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -43,7 +43,7 @@ class ChromeInputIme extends ChromeApi {
    * Clear the current composition. If this extension does not own the active
    * IME, this fails.
    */
-  Future<bool> clearComposition(Map parameters) {
+  Future<bool> clearComposition(clearComposition2ParamsObject parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -54,7 +54,7 @@ class ChromeInputIme extends ChromeApi {
   /**
    * Commits the provided text to the current input.
    */
-  Future<bool> commitText(Map parameters) {
+  Future<bool> commitText(commitText2ParamsObject parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -66,7 +66,7 @@ class ChromeInputIme extends ChromeApi {
    * Sets the properties of the candidate window. This fails if the extension
    * doesn’t own the active IME
    */
-  Future<bool> setCandidateWindowProperties(Map parameters) {
+  Future<bool> setCandidateWindowProperties(setCandidateWindowProperties2ParamsObject parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -78,7 +78,7 @@ class ChromeInputIme extends ChromeApi {
    * Sets the current candidate list. This fails if this extension doesn’t own
    * the active IME
    */
-  Future<bool> setCandidates(Map parameters) {
+  Future<bool> setCandidates(setCandidates2ParamsObject parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -90,7 +90,7 @@ class ChromeInputIme extends ChromeApi {
    * Set the position of the cursor in the candidate window. This is a no-op if
    * this extension does not own the active IME.
    */
-  Future<bool> setCursorPosition(Map parameters) {
+  Future<bool> setCursorPosition(setCursorPosition2ParamsObject parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -101,7 +101,7 @@ class ChromeInputIme extends ChromeApi {
   /**
    * Adds the provided menu items to the language menu when this IME is active.
    */
-  Future setMenuItems(Map parameters) {
+  Future setMenuItems(setMenuItems2ParamsObject parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -112,7 +112,7 @@ class ChromeInputIme extends ChromeApi {
   /**
    * Updates the state of the MenuItems specified
    */
-  Future updateMenuItems(Map parameters) {
+  Future updateMenuItems(updateMenuItems2ParamsObject parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -123,7 +123,7 @@ class ChromeInputIme extends ChromeApi {
   /**
    * Deletes the text around the caret.
    */
-  Future deleteSurroundingText(Map parameters) {
+  Future deleteSurroundingText(deleteSurroundingText2ParamsObject parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -315,6 +315,85 @@ class OnSurroundingTextChangedEvent {
   OnSurroundingTextChangedEvent(this.engineID, this.surroundingInfo);
 }
 
+class PropertiesInputIme extends ChromeObject {
+  PropertiesInputIme({bool visible, bool cursorVisible, bool vertical, int pageSize, String auxiliaryText, bool auxiliaryTextVisible, String windowPosition}) {
+    if (visible != null) this.visible = visible;
+    if (cursorVisible != null) this.cursorVisible = cursorVisible;
+    if (vertical != null) this.vertical = vertical;
+    if (pageSize != null) this.pageSize = pageSize;
+    if (auxiliaryText != null) this.auxiliaryText = auxiliaryText;
+    if (auxiliaryTextVisible != null) this.auxiliaryTextVisible = auxiliaryTextVisible;
+    if (windowPosition != null) this.windowPosition = windowPosition;
+  }
+  PropertiesInputIme.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * True to show the Candidate window, false to hide it.
+   */
+  bool get visible => jsProxy['visible'];
+  set visible(bool value) => jsProxy['visible'] = value;
+
+  /**
+   * True to show the cursor, false to hide it.
+   */
+  bool get cursorVisible => jsProxy['cursorVisible'];
+  set cursorVisible(bool value) => jsProxy['cursorVisible'] = value;
+
+  /**
+   * True if the candidate window should be rendered vertical, false to make it
+   * horizontal.
+   */
+  bool get vertical => jsProxy['vertical'];
+  set vertical(bool value) => jsProxy['vertical'] = value;
+
+  /**
+   * The number of candidates to display per page.
+   */
+  int get pageSize => jsProxy['pageSize'];
+  set pageSize(int value) => jsProxy['pageSize'] = value;
+
+  /**
+   * Text that is shown at the bottom of the candidate window.
+   */
+  String get auxiliaryText => jsProxy['auxiliaryText'];
+  set auxiliaryText(String value) => jsProxy['auxiliaryText'] = value;
+
+  /**
+   * True to display the auxiliary text, false to hide it.
+   */
+  bool get auxiliaryTextVisible => jsProxy['auxiliaryTextVisible'];
+  set auxiliaryTextVisible(bool value) => jsProxy['auxiliaryTextVisible'] = value;
+
+  /**
+   * Where to display the candidate window. If set to 'cursor', the window
+   * follows the cursor. If set to 'composition', the window is locked to the
+   * beginning of the composition.
+   * enum of `cursor`, `composition`
+   */
+  String get windowPosition => jsProxy['windowPosition'];
+  set windowPosition(String value) => jsProxy['windowPosition'] = value;
+}
+
+class UsageInputIme extends ChromeObject {
+  UsageInputIme({String title, String body}) {
+    if (title != null) this.title = title;
+    if (body != null) this.body = body;
+  }
+  UsageInputIme.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The title string of details description.
+   */
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
+
+  /**
+   * The body string of detail description.
+   */
+  String get body => jsProxy['body'];
+  set body(String value) => jsProxy['body'] = value;
+}
+
 /**
  * See http://www.w3.org/TR/DOM-Level-3-Events/#events-KeyboardEvent
  */
@@ -461,83 +540,217 @@ class MenuItem extends ChromeObject {
   set enabled(bool value) => jsProxy['enabled'] = value;
 }
 
-class PropertiesInputIme extends ChromeObject {
-  PropertiesInputIme({bool visible, bool cursorVisible, bool vertical, int pageSize, String auxiliaryText, bool auxiliaryTextVisible, String windowPosition}) {
-    if (visible != null) this.visible = visible;
-    if (cursorVisible != null) this.cursorVisible = cursorVisible;
-    if (vertical != null) this.vertical = vertical;
-    if (pageSize != null) this.pageSize = pageSize;
-    if (auxiliaryText != null) this.auxiliaryText = auxiliaryText;
-    if (auxiliaryTextVisible != null) this.auxiliaryTextVisible = auxiliaryTextVisible;
-    if (windowPosition != null) this.windowPosition = windowPosition;
+class setComposition2ParamsObject extends ChromeObject {
+  setComposition2ParamsObject({int contextID, String text, int selectionStart, int selectionEnd, int cursor, List<Map> segments}) {
+    if (contextID != null) this.contextID = contextID;
+    if (text != null) this.text = text;
+    if (selectionStart != null) this.selectionStart = selectionStart;
+    if (selectionEnd != null) this.selectionEnd = selectionEnd;
+    if (cursor != null) this.cursor = cursor;
+    if (segments != null) this.segments = segments;
   }
-  PropertiesInputIme.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  setComposition2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
-   * True to show the Candidate window, false to hide it.
+   * ID of the context where the composition text will be set
    */
-  bool get visible => jsProxy['visible'];
-  set visible(bool value) => jsProxy['visible'] = value;
+  int get contextID => jsProxy['contextID'];
+  set contextID(int value) => jsProxy['contextID'] = value;
 
   /**
-   * True to show the cursor, false to hide it.
+   * Text to set
    */
-  bool get cursorVisible => jsProxy['cursorVisible'];
-  set cursorVisible(bool value) => jsProxy['cursorVisible'] = value;
+  String get text => jsProxy['text'];
+  set text(String value) => jsProxy['text'] = value;
 
   /**
-   * True if the candidate window should be rendered vertical, false to make it
-   * horizontal.
+   * Position in the text that the selection starts at.
    */
-  bool get vertical => jsProxy['vertical'];
-  set vertical(bool value) => jsProxy['vertical'] = value;
+  int get selectionStart => jsProxy['selectionStart'];
+  set selectionStart(int value) => jsProxy['selectionStart'] = value;
 
   /**
-   * The number of candidates to display per page.
+   * Position in the text that the selection ends at.
    */
-  int get pageSize => jsProxy['pageSize'];
-  set pageSize(int value) => jsProxy['pageSize'] = value;
+  int get selectionEnd => jsProxy['selectionEnd'];
+  set selectionEnd(int value) => jsProxy['selectionEnd'] = value;
 
   /**
-   * Text that is shown at the bottom of the candidate window.
+   * Position in the text of the cursor.
    */
-  String get auxiliaryText => jsProxy['auxiliaryText'];
-  set auxiliaryText(String value) => jsProxy['auxiliaryText'] = value;
+  int get cursor => jsProxy['cursor'];
+  set cursor(int value) => jsProxy['cursor'] = value;
 
   /**
-   * True to display the auxiliary text, false to hide it.
+   * List of segments and their associated types.
    */
-  bool get auxiliaryTextVisible => jsProxy['auxiliaryTextVisible'];
-  set auxiliaryTextVisible(bool value) => jsProxy['auxiliaryTextVisible'] = value;
-
-  /**
-   * Where to display the candidate window. If set to 'cursor', the window
-   * follows the cursor. If set to 'composition', the window is locked to the
-   * beginning of the composition.
-   * enum of `cursor`, `composition`
-   */
-  String get windowPosition => jsProxy['windowPosition'];
-  set windowPosition(String value) => jsProxy['windowPosition'] = value;
+  List<Map> get segments => listify(jsProxy['segments'], mapify);
+  set segments(List<Map> value) => jsProxy['segments'] = jsify(value);
 }
 
-class UsageInputIme extends ChromeObject {
-  UsageInputIme({String title, String body}) {
-    if (title != null) this.title = title;
-    if (body != null) this.body = body;
+class clearComposition2ParamsObject extends ChromeObject {
+  clearComposition2ParamsObject({int contextID}) {
+    if (contextID != null) this.contextID = contextID;
   }
-  UsageInputIme.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  clearComposition2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
-   * The title string of details description.
+   * ID of the context where the composition will be cleared
    */
-  String get title => jsProxy['title'];
-  set title(String value) => jsProxy['title'] = value;
+  int get contextID => jsProxy['contextID'];
+  set contextID(int value) => jsProxy['contextID'] = value;
+}
+
+class commitText2ParamsObject extends ChromeObject {
+  commitText2ParamsObject({int contextID, String text}) {
+    if (contextID != null) this.contextID = contextID;
+    if (text != null) this.text = text;
+  }
+  commitText2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
-   * The body string of detail description.
+   * ID of the context where the text will be committed
    */
-  String get body => jsProxy['body'];
-  set body(String value) => jsProxy['body'] = value;
+  int get contextID => jsProxy['contextID'];
+  set contextID(int value) => jsProxy['contextID'] = value;
+
+  /**
+   * The text to commit
+   */
+  String get text => jsProxy['text'];
+  set text(String value) => jsProxy['text'] = value;
+}
+
+class setCandidateWindowProperties2ParamsObject extends ChromeObject {
+  setCandidateWindowProperties2ParamsObject({String engineID, PropertiesInputIme properties}) {
+    if (engineID != null) this.engineID = engineID;
+    if (properties != null) this.properties = properties;
+  }
+  setCandidateWindowProperties2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * ID of the engine to set properties on.
+   */
+  String get engineID => jsProxy['engineID'];
+  set engineID(String value) => jsProxy['engineID'] = value;
+
+  PropertiesInputIme get properties => _createPropertiesInputIme(jsProxy['properties']);
+  set properties(PropertiesInputIme value) => jsProxy['properties'] = jsify(value);
+}
+
+class setCandidates2ParamsObject extends ChromeObject {
+  setCandidates2ParamsObject({int contextID, List<Map> candidates}) {
+    if (contextID != null) this.contextID = contextID;
+    if (candidates != null) this.candidates = candidates;
+  }
+  setCandidates2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * ID of the context that owns the candidate window.
+   */
+  int get contextID => jsProxy['contextID'];
+  set contextID(int value) => jsProxy['contextID'] = value;
+
+  /**
+   * List of candidates to show in the candidate window
+   */
+  List<Map> get candidates => listify(jsProxy['candidates'], mapify);
+  set candidates(List<Map> value) => jsProxy['candidates'] = jsify(value);
+}
+
+class setCursorPosition2ParamsObject extends ChromeObject {
+  setCursorPosition2ParamsObject({int contextID, int candidateID}) {
+    if (contextID != null) this.contextID = contextID;
+    if (candidateID != null) this.candidateID = candidateID;
+  }
+  setCursorPosition2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * ID of the context that owns the candidate window.
+   */
+  int get contextID => jsProxy['contextID'];
+  set contextID(int value) => jsProxy['contextID'] = value;
+
+  /**
+   * ID of the candidate to select.
+   */
+  int get candidateID => jsProxy['candidateID'];
+  set candidateID(int value) => jsProxy['candidateID'] = value;
+}
+
+class setMenuItems2ParamsObject extends ChromeObject {
+  setMenuItems2ParamsObject({String engineID, List<MenuItem> items}) {
+    if (engineID != null) this.engineID = engineID;
+    if (items != null) this.items = items;
+  }
+  setMenuItems2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * ID of the engine to use
+   */
+  String get engineID => jsProxy['engineID'];
+  set engineID(String value) => jsProxy['engineID'] = value;
+
+  /**
+   * MenuItems to add. They will be added in the order they exist in the array.
+   */
+  List<MenuItem> get items => listify(jsProxy['items'], _createMenuItem);
+  set items(List<MenuItem> value) => jsProxy['items'] = jsify(value);
+}
+
+class updateMenuItems2ParamsObject extends ChromeObject {
+  updateMenuItems2ParamsObject({String engineID, List<MenuItem> items}) {
+    if (engineID != null) this.engineID = engineID;
+    if (items != null) this.items = items;
+  }
+  updateMenuItems2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * ID of the engine to use
+   */
+  String get engineID => jsProxy['engineID'];
+  set engineID(String value) => jsProxy['engineID'] = value;
+
+  /**
+   * Array of MenuItems to update
+   */
+  List<MenuItem> get items => listify(jsProxy['items'], _createMenuItem);
+  set items(List<MenuItem> value) => jsProxy['items'] = jsify(value);
+}
+
+class deleteSurroundingText2ParamsObject extends ChromeObject {
+  deleteSurroundingText2ParamsObject({String engineID, int contextID, int offset, int length}) {
+    if (engineID != null) this.engineID = engineID;
+    if (contextID != null) this.contextID = contextID;
+    if (offset != null) this.offset = offset;
+    if (length != null) this.length = length;
+  }
+  deleteSurroundingText2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * ID of the engine receiving the event.
+   */
+  String get engineID => jsProxy['engineID'];
+  set engineID(String value) => jsProxy['engineID'] = value;
+
+  /**
+   * ID of the context where the surrounding text will be deleted.
+   */
+  int get contextID => jsProxy['contextID'];
+  set contextID(int value) => jsProxy['contextID'] = value;
+
+  /**
+   * The offset from the caret position where deletion will start. This value
+   * can be negative.
+   */
+  int get offset => jsProxy['offset'];
+  set offset(int value) => jsProxy['offset'] = value;
+
+  /**
+   * The number of characters to be deleted
+   */
+  int get length => jsProxy['length'];
+  set length(int value) => jsProxy['length'] = value;
 }
 
 InputContext _createInputContext(JsObject jsProxy) => jsProxy == null ? null : new InputContext.fromProxy(jsProxy);
@@ -549,4 +762,6 @@ OnMenuItemActivatedEvent _createOnMenuItemActivatedEvent(String engineID, String
     new OnMenuItemActivatedEvent(engineID, name);
 OnSurroundingTextChangedEvent _createOnSurroundingTextChangedEvent(String engineID, JsObject surroundingInfo) =>
     new OnSurroundingTextChangedEvent(engineID, mapify(surroundingInfo));
+PropertiesInputIme _createPropertiesInputIme(JsObject jsProxy) => jsProxy == null ? null : new PropertiesInputIme.fromProxy(jsProxy);
+MenuItem _createMenuItem(JsObject jsProxy) => jsProxy == null ? null : new MenuItem.fromProxy(jsProxy);
 KeyboardEvent _createKeyboardEvent(JsObject jsProxy) => jsProxy == null ? null : new KeyboardEvent.fromProxy(jsProxy);

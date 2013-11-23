@@ -111,7 +111,7 @@ class ChromeBookmarks extends ChromeApi {
    * Creates a bookmark or folder under the specified parentId.  If url is NULL
    * or missing, it will be a folder.
    */
-  Future<BookmarkTreeNode> create(Map bookmark) {
+  Future<BookmarkTreeNode> create(create1ParamsObject bookmark) {
     if (_bookmarks == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
@@ -122,7 +122,7 @@ class ChromeBookmarks extends ChromeApi {
   /**
    * Moves the specified BookmarkTreeNode to the provided location.
    */
-  Future<BookmarkTreeNode> move(String id, Map destination) {
+  Future<BookmarkTreeNode> move(String id, moveParamsObject destination) {
     if (_bookmarks == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
@@ -135,7 +135,7 @@ class ChromeBookmarks extends ChromeApi {
    * that you want to change; unspecified properties will be left unchanged.
    * <b>Note:</b> Currently, only 'title' and 'url' are supported.
    */
-  Future<BookmarkTreeNode> update(String id, Map changes) {
+  Future<BookmarkTreeNode> update(String id, update1ParamsObject changes) {
     if (_bookmarks == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<BookmarkTreeNode>.oneArg(_createBookmarkTreeNode);
@@ -380,6 +380,59 @@ class BookmarkTreeNode extends ChromeObject {
    */
   List<BookmarkTreeNode> get children => listify(jsProxy['children'], _createBookmarkTreeNode);
   set children(List<BookmarkTreeNode> value) => jsProxy['children'] = jsify(value);
+}
+
+class create1ParamsObject extends ChromeObject {
+  create1ParamsObject({String parentId, int index, String title, String url}) {
+    if (parentId != null) this.parentId = parentId;
+    if (index != null) this.index = index;
+    if (title != null) this.title = title;
+    if (url != null) this.url = url;
+  }
+  create1ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Defaults to the Other Bookmarks folder.
+   */
+  String get parentId => jsProxy['parentId'];
+  set parentId(String value) => jsProxy['parentId'] = value;
+
+  int get index => jsProxy['index'];
+  set index(int value) => jsProxy['index'] = value;
+
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
+
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
+}
+
+class moveParamsObject extends ChromeObject {
+  moveParamsObject({String parentId, int index}) {
+    if (parentId != null) this.parentId = parentId;
+    if (index != null) this.index = index;
+  }
+  moveParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  String get parentId => jsProxy['parentId'];
+  set parentId(String value) => jsProxy['parentId'] = value;
+
+  int get index => jsProxy['index'];
+  set index(int value) => jsProxy['index'] = value;
+}
+
+class update1ParamsObject extends ChromeObject {
+  update1ParamsObject({String title, String url}) {
+    if (title != null) this.title = title;
+    if (url != null) this.url = url;
+  }
+  update1ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
+
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
 }
 
 BookmarkTreeNode _createBookmarkTreeNode(JsObject jsProxy) => jsProxy == null ? null : new BookmarkTreeNode.fromProxy(jsProxy);

@@ -95,7 +95,7 @@ class ChromeManagement extends ChromeApi {
    * 
    * [id] This should be the id from an item of [ExtensionInfo.]
    */
-  Future uninstall(String id, [Map options]) {
+  Future uninstall(String id, [uninstallParamsObject options]) {
     if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -107,7 +107,7 @@ class ChromeManagement extends ChromeApi {
    * Uninstalls the calling extension. Note: This function can be used without
    * requesting the 'management' permission in the manifest.
    */
-  Future uninstallSelf([Map options]) {
+  Future uninstallSelf([uninstallSelfParamsObject options]) {
     if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -337,6 +337,34 @@ class ExtensionInfo extends ChromeObject {
    */
   String get installType => jsProxy['installType'];
   set installType(String value) => jsProxy['installType'] = value;
+}
+
+class uninstallParamsObject extends ChromeObject {
+  uninstallParamsObject({bool showConfirmDialog}) {
+    if (showConfirmDialog != null) this.showConfirmDialog = showConfirmDialog;
+  }
+  uninstallParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Whether or not a confirm-uninstall dialog should prompt the user. Defaults
+   * to false.
+   */
+  bool get showConfirmDialog => jsProxy['showConfirmDialog'];
+  set showConfirmDialog(bool value) => jsProxy['showConfirmDialog'] = value;
+}
+
+class uninstallSelfParamsObject extends ChromeObject {
+  uninstallSelfParamsObject({bool showConfirmDialog}) {
+    if (showConfirmDialog != null) this.showConfirmDialog = showConfirmDialog;
+  }
+  uninstallSelfParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Whether or not a confirm-uninstall dialog should prompt the user. Defaults
+   * to false.
+   */
+  bool get showConfirmDialog => jsProxy['showConfirmDialog'];
+  set showConfirmDialog(bool value) => jsProxy['showConfirmDialog'] = value;
 }
 
 ExtensionInfo _createExtensionInfo(JsObject jsProxy) => jsProxy == null ? null : new ExtensionInfo.fromProxy(jsProxy);

@@ -34,7 +34,7 @@ class ChromeFileBrowserHandler extends ChromeApi {
    * Returns:
    * Result of the method.
    */
-  Future<Map> selectFile(Map selectionParams) {
+  Future<Map> selectFile(selectFileParamsObject selectionParams) {
     if (_fileBrowserHandler == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
@@ -95,6 +95,29 @@ class FileHandlerExecuteEventDetails extends ChromeObject {
    */
   int get tab_id => jsProxy['tab_id'];
   set tab_id(int value) => jsProxy['tab_id'] = value;
+}
+
+class selectFileParamsObject extends ChromeObject {
+  selectFileParamsObject({String suggestedName, List<String> allowedFileExtensions}) {
+    if (suggestedName != null) this.suggestedName = suggestedName;
+    if (allowedFileExtensions != null) this.allowedFileExtensions = allowedFileExtensions;
+  }
+  selectFileParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Suggested name for the file.
+   */
+  String get suggestedName => jsProxy['suggestedName'];
+  set suggestedName(String value) => jsProxy['suggestedName'] = value;
+
+  /**
+   * List of file extensions that the selected file can have. The list is also
+   * used to specify what files to be shown in the select file dialog. Files
+   * with the listed extensions are only shown in the dialog. Extensions should
+   * not include the leading '.'. Example: ['jpg', 'png']
+   */
+  List<String> get allowedFileExtensions => listify(jsProxy['allowedFileExtensions']);
+  set allowedFileExtensions(List<String> value) => jsProxy['allowedFileExtensions'] = jsify(value);
 }
 
 OnExecuteEvent _createOnExecuteEvent(String id, JsObject details) =>

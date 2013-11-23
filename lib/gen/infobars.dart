@@ -29,7 +29,7 @@ class ChromeInfobars extends ChromeApi {
    * Returns:
    * Contains details about the window in which the infobar was created.
    */
-  Future<Window> show(Map details) {
+  Future<Window> show(showParamsObject details) {
     if (_infobars == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
@@ -40,6 +40,34 @@ class ChromeInfobars extends ChromeApi {
   void _throwNotAvailable() {
     throw new UnsupportedError("'chrome.infobars' is not available");
   }
+}
+
+class showParamsObject extends ChromeObject {
+  showParamsObject({int tabId, String path, int height}) {
+    if (tabId != null) this.tabId = tabId;
+    if (path != null) this.path = path;
+    if (height != null) this.height = height;
+  }
+  showParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The tab id for the tab to display the infobar in.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+
+  /**
+   * The html file that contains the infobar.
+   */
+  String get path => jsProxy['path'];
+  set path(String value) => jsProxy['path'] = value;
+
+  /**
+   * The height (in pixels) of the infobar to show. If omitted, the default
+   * infobar height will be used.
+   */
+  int get height => jsProxy['height'];
+  set height(int value) => jsProxy['height'] = value;
 }
 
 Window _createWindow(JsObject jsProxy) => jsProxy == null ? null : new Window.fromProxy(jsProxy);

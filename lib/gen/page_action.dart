@@ -49,7 +49,7 @@ class ChromePageAction extends ChromeApi {
    * Sets the title of the page action. This is displayed in a tooltip over the
    * page action.
    */
-  void setTitle(Map details) {
+  void setTitle(setTitle1ParamsObject details) {
     if (_pageAction == null) _throwNotAvailable();
 
     _pageAction.callMethod('setTitle', [jsify(details)]);
@@ -58,7 +58,7 @@ class ChromePageAction extends ChromeApi {
   /**
    * Gets the title of the page action.
    */
-  Future<String> getTitle(Map details) {
+  Future<String> getTitle(getTitle1ParamsObject details) {
     if (_pageAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -72,7 +72,7 @@ class ChromePageAction extends ChromeApi {
    * dictionary of either one of those. Either the <b>path</b> or the
    * <b>imageData</b> property must be specified.
    */
-  Future setIcon(Map details) {
+  Future setIcon(setIcon1ParamsObject details) {
     if (_pageAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -84,7 +84,7 @@ class ChromePageAction extends ChromeApi {
    * Sets the html document to be opened as a popup when the user clicks on the
    * page action's icon.
    */
-  void setPopup(Map details) {
+  void setPopup(setPopup1ParamsObject details) {
     if (_pageAction == null) _throwNotAvailable();
 
     _pageAction.callMethod('setPopup', [jsify(details)]);
@@ -93,7 +93,7 @@ class ChromePageAction extends ChromeApi {
   /**
    * Gets the html document set as the popup for this page action.
    */
-  Future<String> getPopup(Map details) {
+  Future<String> getPopup(getPopup1ParamsObject details) {
     if (_pageAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -113,6 +113,121 @@ class ChromePageAction extends ChromeApi {
   void _throwNotAvailable() {
     throw new UnsupportedError("'chrome.pageAction' is not available");
   }
+}
+
+class setTitle1ParamsObject extends ChromeObject {
+  setTitle1ParamsObject({int tabId, String title}) {
+    if (tabId != null) this.tabId = tabId;
+    if (title != null) this.title = title;
+  }
+  setTitle1ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The id of the tab for which you want to modify the page action.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+
+  /**
+   * The tooltip string.
+   */
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
+}
+
+class getTitle1ParamsObject extends ChromeObject {
+  getTitle1ParamsObject({int tabId}) {
+    if (tabId != null) this.tabId = tabId;
+  }
+  getTitle1ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Specify the tab to get the title from.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+}
+
+class setIcon1ParamsObject extends ChromeObject {
+  setIcon1ParamsObject({int tabId, var imageData, var path, int iconIndex}) {
+    if (tabId != null) this.tabId = tabId;
+    if (imageData != null) this.imageData = imageData;
+    if (path != null) this.path = path;
+    if (iconIndex != null) this.iconIndex = iconIndex;
+  }
+  setIcon1ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The id of the tab for which you want to modify the page action.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+
+  /**
+   * Either an ImageData object or a dictionary {size -> ImageData} representing
+   * icon to be set. If the icon is specified as a dictionary, the actual image
+   * to be used is chosen depending on screen's pixel density. If the number of
+   * image pixels that fit into one screen space unit equals `scale`, then image
+   * with size `scale` * 19 will be selected. Initially only scales 1 and 2 will
+   * be supported. At least one image must be specified. Note that
+   * 'details.imageData = foo' is equivalent to 'details.imageData = {'19':
+   * foo}'
+   */
+  dynamic get imageData => jsProxy['imageData'];
+  set imageData(var value) => jsProxy['imageData'] = jsify(value);
+
+  /**
+   * Either a relative image path or a dictionary {size -> relative image path}
+   * pointing to icon to be set. If the icon is specified as a dictionary, the
+   * actual image to be used is chosen depending on screen's pixel density. If
+   * the number of image pixels that fit into one screen space unit equals
+   * `scale`, then image with size `scale` * 19 will be selected. Initially only
+   * scales 1 and 2 will be supported. At least one image must be specified.
+   * Note that 'details.path = foo' is equivalent to 'details.imageData = {'19':
+   * foo}'
+   */
+  dynamic get path => jsProxy['path'];
+  set path(var value) => jsProxy['path'] = jsify(value);
+
+  /**
+   * <b>Deprecated.</b> This argument is ignored.
+   */
+  int get iconIndex => jsProxy['iconIndex'];
+  set iconIndex(int value) => jsProxy['iconIndex'] = value;
+}
+
+class setPopup1ParamsObject extends ChromeObject {
+  setPopup1ParamsObject({int tabId, String popup}) {
+    if (tabId != null) this.tabId = tabId;
+    if (popup != null) this.popup = popup;
+  }
+  setPopup1ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The id of the tab for which you want to modify the page action.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
+
+  /**
+   * The html file to show in a popup.  If set to the empty string (''), no
+   * popup is shown.
+   */
+  String get popup => jsProxy['popup'];
+  set popup(String value) => jsProxy['popup'] = value;
+}
+
+class getPopup1ParamsObject extends ChromeObject {
+  getPopup1ParamsObject({int tabId}) {
+    if (tabId != null) this.tabId = tabId;
+  }
+  getPopup1ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Specify the tab to get the popup from.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
 }
 
 Tab _createTab(JsObject jsProxy) => jsProxy == null ? null : new Tab.fromProxy(jsProxy);

@@ -34,7 +34,7 @@ class ChromeContextMenus extends ChromeApi {
    * Returns:
    * The ID of the newly created item.
    */
-  dynamic create(Map createProperties, [dynamic callback]) {
+  dynamic create(createParamsObject createProperties, [dynamic callback]) {
     if (_contextMenus == null) _throwNotAvailable();
 
     return _contextMenus.callMethod('create', [jsify(createProperties), jsify(callback)]);
@@ -48,7 +48,7 @@ class ChromeContextMenus extends ChromeApi {
    * [updateProperties] The properties to update. Accepts the same values as the
    * create function.
    */
-  Future update(dynamic id, Map updateProperties) {
+  Future update(dynamic id, updateParamsObject updateProperties) {
     if (_contextMenus == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -207,6 +207,151 @@ class OnClickData extends ChromeObject {
    */
   bool get checked => jsProxy['checked'];
   set checked(bool value) => jsProxy['checked'] = value;
+}
+
+class createParamsObject extends ChromeObject {
+  createParamsObject({String type, String id, String title, bool checked, List<String> contexts, var onclick, var parentId, List<String> documentUrlPatterns, List<String> targetUrlPatterns, bool enabled}) {
+    if (type != null) this.type = type;
+    if (id != null) this.id = id;
+    if (title != null) this.title = title;
+    if (checked != null) this.checked = checked;
+    if (contexts != null) this.contexts = contexts;
+    if (onclick != null) this.onclick = onclick;
+    if (parentId != null) this.parentId = parentId;
+    if (documentUrlPatterns != null) this.documentUrlPatterns = documentUrlPatterns;
+    if (targetUrlPatterns != null) this.targetUrlPatterns = targetUrlPatterns;
+    if (enabled != null) this.enabled = enabled;
+  }
+  createParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The type of menu item. Defaults to 'normal' if not specified.
+   * enum of `normal`, `checkbox`, `radio`, `separator`
+   */
+  String get type => jsProxy['type'];
+  set type(String value) => jsProxy['type'] = value;
+
+  /**
+   * The unique ID to assign to this item. Mandatory for event pages. Cannot be
+   * the same as another ID for this extension.
+   */
+  String get id => jsProxy['id'];
+  set id(String value) => jsProxy['id'] = value;
+
+  /**
+   * The text to be displayed in the item; this is _required_ unless _type_ is
+   * 'separator'. When the context is 'selection', you can use `%s` within the
+   * string to show the selected text. For example, if this parameter's value is
+   * "Translate '%s' to Pig Latin" and the user selects the word "cool", the
+   * context menu item for the selection is "Translate 'cool' to Pig Latin".
+   */
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
+
+  /**
+   * The initial state of a checkbox or radio item: true for selected and false
+   * for unselected. Only one radio item can be selected at a time in a given
+   * group of radio items.
+   */
+  bool get checked => jsProxy['checked'];
+  set checked(bool value) => jsProxy['checked'] = value;
+
+  /**
+   * List of contexts this menu item will appear in. Defaults to ['page'] if not
+   * specified. Specifying ['all'] is equivalent to the combination of all other
+   * contexts except for 'launcher'. The 'launcher' context is only supported by
+   * apps and is used to add menu items to the context menu that appears when
+   * clicking on the app icon in the launcher/taskbar/dock/etc. Different
+   * platforms might put limitations on what is actually supported in a launcher
+   * context menu.
+   */
+  List<String> get contexts => listify(jsProxy['contexts']);
+  set contexts(List<String> value) => jsProxy['contexts'] = jsify(value);
+
+  /**
+   * A function that will be called back when the menu item is clicked. Event
+   * pages cannot use this; instead, they should register a listener for
+   * chrome.contextMenus.onClicked.
+   */
+  dynamic get onclick => jsProxy['onclick'];
+  set onclick(var value) => jsProxy['onclick'] = jsify(value);
+
+  /**
+   * The ID of a parent menu item; this makes the item a child of a previously
+   * added item.
+   */
+  dynamic get parentId => jsProxy['parentId'];
+  set parentId(var value) => jsProxy['parentId'] = jsify(value);
+
+  /**
+   * Lets you restrict the item to apply only to documents whose URL matches one
+   * of the given patterns. (This applies to frames as well.) For details on the
+   * format of a pattern, see [Match Patterns](match_patterns.html).
+   */
+  List<String> get documentUrlPatterns => listify(jsProxy['documentUrlPatterns']);
+  set documentUrlPatterns(List<String> value) => jsProxy['documentUrlPatterns'] = jsify(value);
+
+  /**
+   * Similar to documentUrlPatterns, but lets you filter based on the src
+   * attribute of img/audio/video tags and the href of anchor tags.
+   */
+  List<String> get targetUrlPatterns => listify(jsProxy['targetUrlPatterns']);
+  set targetUrlPatterns(List<String> value) => jsProxy['targetUrlPatterns'] = jsify(value);
+
+  /**
+   * Whether this context menu item is enabled or disabled. Defaults to true.
+   */
+  bool get enabled => jsProxy['enabled'];
+  set enabled(bool value) => jsProxy['enabled'] = value;
+}
+
+class updateParamsObject extends ChromeObject {
+  updateParamsObject({String type, String title, bool checked, List<String> contexts, var onclick, var parentId, List<String> documentUrlPatterns, List<String> targetUrlPatterns, bool enabled}) {
+    if (type != null) this.type = type;
+    if (title != null) this.title = title;
+    if (checked != null) this.checked = checked;
+    if (contexts != null) this.contexts = contexts;
+    if (onclick != null) this.onclick = onclick;
+    if (parentId != null) this.parentId = parentId;
+    if (documentUrlPatterns != null) this.documentUrlPatterns = documentUrlPatterns;
+    if (targetUrlPatterns != null) this.targetUrlPatterns = targetUrlPatterns;
+    if (enabled != null) this.enabled = enabled;
+  }
+  updateParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * enum of `normal`, `checkbox`, `radio`, `separator`
+   */
+  String get type => jsProxy['type'];
+  set type(String value) => jsProxy['type'] = value;
+
+  String get title => jsProxy['title'];
+  set title(String value) => jsProxy['title'] = value;
+
+  bool get checked => jsProxy['checked'];
+  set checked(bool value) => jsProxy['checked'] = value;
+
+  List<String> get contexts => listify(jsProxy['contexts']);
+  set contexts(List<String> value) => jsProxy['contexts'] = jsify(value);
+
+  dynamic get onclick => jsProxy['onclick'];
+  set onclick(var value) => jsProxy['onclick'] = jsify(value);
+
+  /**
+   * Note: You cannot change an item to be a child of one of its own
+   * descendants.
+   */
+  dynamic get parentId => jsProxy['parentId'];
+  set parentId(var value) => jsProxy['parentId'] = jsify(value);
+
+  List<String> get documentUrlPatterns => listify(jsProxy['documentUrlPatterns']);
+  set documentUrlPatterns(List<String> value) => jsProxy['documentUrlPatterns'] = jsify(value);
+
+  List<String> get targetUrlPatterns => listify(jsProxy['targetUrlPatterns']);
+  set targetUrlPatterns(List<String> value) => jsProxy['targetUrlPatterns'] = jsify(value);
+
+  bool get enabled => jsProxy['enabled'];
+  set enabled(bool value) => jsProxy['enabled'] = value;
 }
 
 OnClickedEvent _createOnClickedEvent(JsObject info, JsObject tab) =>

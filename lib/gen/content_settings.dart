@@ -107,7 +107,7 @@ class ContentSetting extends ChromeObject {
   /**
    * Clear all content setting rules set by this extension.
    */
-  Future clear(Map details) {
+  Future clear(clear1ParamsObject details) {
     var completer = new ChromeCompleter.noArgs();
     jsProxy.callMethod('clear', [jsify(details), completer.callback]);
     return completer.future;
@@ -116,7 +116,7 @@ class ContentSetting extends ChromeObject {
   /**
    * Gets the current content setting for a given pair of URLs.
    */
-  Future<Map> get(Map details) {
+  Future<Map> get(get1ParamsObject details) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     jsProxy.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
@@ -125,7 +125,7 @@ class ContentSetting extends ChromeObject {
   /**
    * Applies a new content setting rule.
    */
-  Future set(Map details) {
+  Future set(set1ParamsObject details) {
     var completer = new ChromeCompleter.noArgs();
     jsProxy.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
@@ -141,6 +141,113 @@ class ContentSetting extends ChromeObject {
     jsProxy.callMethod('getResourceIdentifiers', [completer.callback]);
     return completer.future;
   }
+}
+
+class clear1ParamsObject extends ChromeObject {
+  clear1ParamsObject({String scope}) {
+    if (scope != null) this.scope = scope;
+  }
+  clear1ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Where to clear the setting (default: regular). One of<br>[regular]: setting
+   * for regular profile (which is inherited by the incognito profile if not
+   * overridden elsewhere),<br>[incognito_session_only]: setting for incognito
+   * profile that can only be set during an incognito session and is deleted
+   * when the incognito session ends (overrides regular settings).
+   * enum of `regular`, `incognito_session_only`
+   */
+  String get scope => jsProxy['scope'];
+  set scope(String value) => jsProxy['scope'] = value;
+}
+
+class get1ParamsObject extends ChromeObject {
+  get1ParamsObject({String primaryUrl, String secondaryUrl, ResourceIdentifier resourceIdentifier, bool incognito}) {
+    if (primaryUrl != null) this.primaryUrl = primaryUrl;
+    if (secondaryUrl != null) this.secondaryUrl = secondaryUrl;
+    if (resourceIdentifier != null) this.resourceIdentifier = resourceIdentifier;
+    if (incognito != null) this.incognito = incognito;
+  }
+  get1ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The primary URL for which the content setting should be retrieved. Note
+   * that the meaning of a primary URL depends on the content type.
+   */
+  String get primaryUrl => jsProxy['primaryUrl'];
+  set primaryUrl(String value) => jsProxy['primaryUrl'] = value;
+
+  /**
+   * The secondary URL for which the content setting should be retrieved.
+   * Defaults to the primary URL. Note that the meaning of a secondary URL
+   * depends on the content type, and not all content types use secondary URLs.
+   */
+  String get secondaryUrl => jsProxy['secondaryUrl'];
+  set secondaryUrl(String value) => jsProxy['secondaryUrl'] = value;
+
+  /**
+   * A more specific identifier of the type of content for which the settings
+   * should be retrieved.
+   */
+  ResourceIdentifier get resourceIdentifier => _createResourceIdentifier(jsProxy['resourceIdentifier']);
+  set resourceIdentifier(ResourceIdentifier value) => jsProxy['resourceIdentifier'] = jsify(value);
+
+  /**
+   * Whether to check the content settings for an incognito session. (default
+   * false)
+   */
+  bool get incognito => jsProxy['incognito'];
+  set incognito(bool value) => jsProxy['incognito'] = value;
+}
+
+class set1ParamsObject extends ChromeObject {
+  set1ParamsObject({String primaryPattern, String secondaryPattern, ResourceIdentifier resourceIdentifier, var setting, String scope}) {
+    if (primaryPattern != null) this.primaryPattern = primaryPattern;
+    if (secondaryPattern != null) this.secondaryPattern = secondaryPattern;
+    if (resourceIdentifier != null) this.resourceIdentifier = resourceIdentifier;
+    if (setting != null) this.setting = setting;
+    if (scope != null) this.scope = scope;
+  }
+  set1ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The pattern for the primary URL. For details on the format of a pattern,
+   * see [Content Setting Patterns](contentSettings.html#patterns).
+   */
+  String get primaryPattern => jsProxy['primaryPattern'];
+  set primaryPattern(String value) => jsProxy['primaryPattern'] = value;
+
+  /**
+   * The pattern for the secondary URL. Defaults to matching all URLs. For
+   * details on the format of a pattern, see [Content Setting
+   * Patterns](contentSettings.html#patterns).
+   */
+  String get secondaryPattern => jsProxy['secondaryPattern'];
+  set secondaryPattern(String value) => jsProxy['secondaryPattern'] = value;
+
+  /**
+   * The resource identifier for the content type.
+   */
+  ResourceIdentifier get resourceIdentifier => _createResourceIdentifier(jsProxy['resourceIdentifier']);
+  set resourceIdentifier(ResourceIdentifier value) => jsProxy['resourceIdentifier'] = jsify(value);
+
+  /**
+   * The setting applied by this rule. See the description of the individual
+   * ContentSetting objects for the possible values.
+   */
+  dynamic get setting => jsProxy['setting'];
+  set setting(var value) => jsProxy['setting'] = jsify(value);
+
+  /**
+   * Where to set the setting (default: regular). One of<br>[regular]: setting
+   * for regular profile (which is inherited by the incognito profile if not
+   * overridden elsewhere),<br>[incognito_session_only]: setting for incognito
+   * profile that can only be set during an incognito session and is deleted
+   * when the incognito session ends (overrides regular settings).
+   * enum of `regular`, `incognito_session_only`
+   */
+  String get scope => jsProxy['scope'];
+  set scope(String value) => jsProxy['scope'] = value;
 }
 
 ContentSetting _createContentSetting(JsObject jsProxy) => jsProxy == null ? null : new ContentSetting.fromProxy(jsProxy);
