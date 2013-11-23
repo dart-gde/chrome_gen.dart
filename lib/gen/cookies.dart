@@ -32,7 +32,7 @@ class ChromeCookies extends ChromeApi {
    * Contains details about the cookie. This parameter is null if no such cookie
    * was found.
    */
-  Future<Cookie> get(Map details) {
+  Future<Cookie> get(CookiesGetParams details) {
     if (_cookies == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Cookie>.oneArg(_createCookie);
@@ -51,7 +51,7 @@ class ChromeCookies extends ChromeApi {
    * Returns:
    * All the existing, unexpired cookies that match the given cookie info.
    */
-  Future<List<Cookie>> getAll(Map details) {
+  Future<List<Cookie>> getAll(CookiesGetAllParams details) {
     if (_cookies == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Cookie>>.oneArg((e) => listify(e, _createCookie));
@@ -70,7 +70,7 @@ class ChromeCookies extends ChromeApi {
    * any reason, this will be "null", and "chrome.runtime.lastError" will be
    * set.
    */
-  Future<Cookie> set(Map details) {
+  Future<Cookie> set(CookiesSetParams details) {
     if (_cookies == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Cookie>.oneArg(_createCookie);
@@ -88,7 +88,7 @@ class ChromeCookies extends ChromeApi {
    * for any reason, this will be "null", and "chrome.runtime.lastError" will be
    * set.
    */
-  Future<Map> remove(Map details) {
+  Future<Map> remove(CookiesRemoveParams details) {
     if (_cookies == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
@@ -234,6 +234,200 @@ class CookieStore extends ChromeObject {
    */
   List<int> get tabIds => listify(jsProxy['tabIds']);
   set tabIds(List<int> value) => jsProxy['tabIds'] = jsify(value);
+}
+
+class CookiesGetParams extends ChromeObject {
+  CookiesGetParams({String url, String name, String storeId}) {
+    if (url != null) this.url = url;
+    if (name != null) this.name = name;
+    if (storeId != null) this.storeId = storeId;
+  }
+  CookiesGetParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The URL with which the cookie to retrieve is associated. This argument may
+   * be a full URL, in which case any data following the URL path (e.g. the
+   * query string) is simply ignored. If host permissions for this URL are not
+   * specified in the manifest file, the API call will fail.
+   */
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
+
+  /**
+   * The name of the cookie to retrieve.
+   */
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
+
+  /**
+   * The ID of the cookie store in which to look for the cookie. By default, the
+   * current execution context's cookie store will be used.
+   */
+  String get storeId => jsProxy['storeId'];
+  set storeId(String value) => jsProxy['storeId'] = value;
+}
+
+class CookiesGetAllParams extends ChromeObject {
+  CookiesGetAllParams({String url, String name, String domain, String path, bool secure, bool session, String storeId}) {
+    if (url != null) this.url = url;
+    if (name != null) this.name = name;
+    if (domain != null) this.domain = domain;
+    if (path != null) this.path = path;
+    if (secure != null) this.secure = secure;
+    if (session != null) this.session = session;
+    if (storeId != null) this.storeId = storeId;
+  }
+  CookiesGetAllParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Restricts the retrieved cookies to those that would match the given URL.
+   */
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
+
+  /**
+   * Filters the cookies by name.
+   */
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
+
+  /**
+   * Restricts the retrieved cookies to those whose domains match or are
+   * subdomains of this one.
+   */
+  String get domain => jsProxy['domain'];
+  set domain(String value) => jsProxy['domain'] = value;
+
+  /**
+   * Restricts the retrieved cookies to those whose path exactly matches this
+   * string.
+   */
+  String get path => jsProxy['path'];
+  set path(String value) => jsProxy['path'] = value;
+
+  /**
+   * Filters the cookies by their Secure property.
+   */
+  bool get secure => jsProxy['secure'];
+  set secure(bool value) => jsProxy['secure'] = value;
+
+  /**
+   * Filters out session vs. persistent cookies.
+   */
+  bool get session => jsProxy['session'];
+  set session(bool value) => jsProxy['session'] = value;
+
+  /**
+   * The cookie store to retrieve cookies from. If omitted, the current
+   * execution context's cookie store will be used.
+   */
+  String get storeId => jsProxy['storeId'];
+  set storeId(String value) => jsProxy['storeId'] = value;
+}
+
+class CookiesSetParams extends ChromeObject {
+  CookiesSetParams({String url, String name, String value, String domain, String path, bool secure, bool httpOnly, var expirationDate, String storeId}) {
+    if (url != null) this.url = url;
+    if (name != null) this.name = name;
+    if (value != null) this.value = value;
+    if (domain != null) this.domain = domain;
+    if (path != null) this.path = path;
+    if (secure != null) this.secure = secure;
+    if (httpOnly != null) this.httpOnly = httpOnly;
+    if (expirationDate != null) this.expirationDate = expirationDate;
+    if (storeId != null) this.storeId = storeId;
+  }
+  CookiesSetParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The request-URI to associate with the setting of the cookie. This value can
+   * affect the default domain and path values of the created cookie. If host
+   * permissions for this URL are not specified in the manifest file, the API
+   * call will fail.
+   */
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
+
+  /**
+   * The name of the cookie. Empty by default if omitted.
+   */
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
+
+  /**
+   * The value of the cookie. Empty by default if omitted.
+   */
+  String get value => jsProxy['value'];
+  set value(String value) => jsProxy['value'] = value;
+
+  /**
+   * The domain of the cookie. If omitted, the cookie becomes a host-only
+   * cookie.
+   */
+  String get domain => jsProxy['domain'];
+  set domain(String value) => jsProxy['domain'] = value;
+
+  /**
+   * The path of the cookie. Defaults to the path portion of the url parameter.
+   */
+  String get path => jsProxy['path'];
+  set path(String value) => jsProxy['path'] = value;
+
+  /**
+   * Whether the cookie should be marked as Secure. Defaults to false.
+   */
+  bool get secure => jsProxy['secure'];
+  set secure(bool value) => jsProxy['secure'] = value;
+
+  /**
+   * Whether the cookie should be marked as HttpOnly. Defaults to false.
+   */
+  bool get httpOnly => jsProxy['httpOnly'];
+  set httpOnly(bool value) => jsProxy['httpOnly'] = value;
+
+  /**
+   * The expiration date of the cookie as the number of seconds since the UNIX
+   * epoch. If omitted, the cookie becomes a session cookie.
+   */
+  dynamic get expirationDate => jsProxy['expirationDate'];
+  set expirationDate(var value) => jsProxy['expirationDate'] = jsify(value);
+
+  /**
+   * The ID of the cookie store in which to set the cookie. By default, the
+   * cookie is set in the current execution context's cookie store.
+   */
+  String get storeId => jsProxy['storeId'];
+  set storeId(String value) => jsProxy['storeId'] = value;
+}
+
+class CookiesRemoveParams extends ChromeObject {
+  CookiesRemoveParams({String url, String name, String storeId}) {
+    if (url != null) this.url = url;
+    if (name != null) this.name = name;
+    if (storeId != null) this.storeId = storeId;
+  }
+  CookiesRemoveParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The URL associated with the cookie. If host permissions for this URL are
+   * not specified in the manifest file, the API call will fail.
+   */
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
+
+  /**
+   * The name of the cookie to remove.
+   */
+  String get name => jsProxy['name'];
+  set name(String value) => jsProxy['name'] = value;
+
+  /**
+   * The ID of the cookie store to look in for the cookie. If unspecified, the
+   * cookie is looked for by default in the current execution context's cookie
+   * store.
+   */
+  String get storeId => jsProxy['storeId'];
+  set storeId(String value) => jsProxy['storeId'] = value;
 }
 
 Cookie _createCookie(JsObject jsProxy) => jsProxy == null ? null : new Cookie.fromProxy(jsProxy);

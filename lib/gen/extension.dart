@@ -80,7 +80,7 @@ class ChromeExtension extends ChromeApi {
    * Returns:
    * Array of global objects
    */
-  List<Window> getViews([Map fetchProperties]) {
+  List<Window> getViews([ExtensionGetViewsParams fetchProperties]) {
     if (_extension == null) _throwNotAvailable();
 
     var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
@@ -232,6 +232,29 @@ class LastErrorExtension extends ChromeObject {
    * Description of the error that has taken place.
    */
   String get message => jsProxy['message'];
+}
+
+class ExtensionGetViewsParams extends ChromeObject {
+  ExtensionGetViewsParams({String type, int windowId}) {
+    if (type != null) this.type = type;
+    if (windowId != null) this.windowId = windowId;
+  }
+  ExtensionGetViewsParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The type of view to get. If omitted, returns all views (including
+   * background pages and tabs). Valid values: 'tab', 'infobar', 'notification',
+   * 'popup'.
+   * enum of `tab`, `infobar`, `notification`, `popup`
+   */
+  String get type => jsProxy['type'];
+  set type(String value) => jsProxy['type'] = value;
+
+  /**
+   * The window to restrict the search to. If omitted, returns all views.
+   */
+  int get windowId => jsProxy['windowId'];
+  set windowId(int value) => jsProxy['windowId'] = value;
 }
 
 LastErrorExtension _createLastErrorExtension(JsObject jsProxy) => jsProxy == null ? null : new LastErrorExtension.fromProxy(jsProxy);

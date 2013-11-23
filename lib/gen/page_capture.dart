@@ -25,7 +25,7 @@ class ChromePageCapture extends ChromeApi {
    * Returns:
    * The MHTML data as a Blob.
    */
-  Future<dynamic> saveAsMHTML(Map details) {
+  Future<dynamic> saveAsMHTML(PageCaptureSaveAsMHTMLParams details) {
     if (_pageCapture == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
@@ -36,4 +36,17 @@ class ChromePageCapture extends ChromeApi {
   void _throwNotAvailable() {
     throw new UnsupportedError("'chrome.pageCapture' is not available");
   }
+}
+
+class PageCaptureSaveAsMHTMLParams extends ChromeObject {
+  PageCaptureSaveAsMHTMLParams({int tabId}) {
+    if (tabId != null) this.tabId = tabId;
+  }
+  PageCaptureSaveAsMHTMLParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The id of the tab to save as MHTML.
+   */
+  int get tabId => jsProxy['tabId'];
+  set tabId(int value) => jsProxy['tabId'] = value;
 }

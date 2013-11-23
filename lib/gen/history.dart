@@ -26,7 +26,7 @@ class ChromeHistory extends ChromeApi {
    * Searches the history for the last visit time of each page matching the
    * query.
    */
-  Future<List<HistoryItem>> search(Map query) {
+  Future<List<HistoryItem>> search(HistorySearchParams query) {
     if (_history == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<HistoryItem>>.oneArg((e) => listify(e, _createHistoryItem));
@@ -37,7 +37,7 @@ class ChromeHistory extends ChromeApi {
   /**
    * Retrieves information about visits to a URL.
    */
-  Future<List<VisitItem>> getVisits(Map details) {
+  Future<List<VisitItem>> getVisits(HistoryGetVisitsParams details) {
     if (_history == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<VisitItem>>.oneArg((e) => listify(e, _createVisitItem));
@@ -49,7 +49,7 @@ class ChromeHistory extends ChromeApi {
    * Adds a URL to the history at the current time with a [transition
    * type](#transition_types) of "link".
    */
-  Future addUrl(Map details) {
+  Future addUrl(HistoryAddUrlParams details) {
     if (_history == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -60,7 +60,7 @@ class ChromeHistory extends ChromeApi {
   /**
    * Removes all occurrences of the given URL from the history.
    */
-  Future deleteUrl(Map details) {
+  Future deleteUrl(HistoryDeleteUrlParams details) {
     if (_history == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -73,7 +73,7 @@ class ChromeHistory extends ChromeApi {
    * will not be removed from the history unless all visits fall within the
    * range.
    */
-  Future deleteRange(Map range) {
+  Future deleteRange(HistoryDeleteRangeParams range) {
     if (_history == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -213,6 +213,105 @@ class VisitItem extends ChromeObject {
    */
   String get transition => jsProxy['transition'];
   set transition(String value) => jsProxy['transition'] = value;
+}
+
+class HistorySearchParams extends ChromeObject {
+  HistorySearchParams({String text, var startTime, var endTime, int maxResults}) {
+    if (text != null) this.text = text;
+    if (startTime != null) this.startTime = startTime;
+    if (endTime != null) this.endTime = endTime;
+    if (maxResults != null) this.maxResults = maxResults;
+  }
+  HistorySearchParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * A free-text query to the history service.  Leave empty to retrieve all
+   * pages.
+   */
+  String get text => jsProxy['text'];
+  set text(String value) => jsProxy['text'] = value;
+
+  /**
+   * Limit results to those visited after this date, represented in milliseconds
+   * since the epoch.
+   */
+  dynamic get startTime => jsProxy['startTime'];
+  set startTime(var value) => jsProxy['startTime'] = jsify(value);
+
+  /**
+   * Limit results to those visited before this date, represented in
+   * milliseconds since the epoch.
+   */
+  dynamic get endTime => jsProxy['endTime'];
+  set endTime(var value) => jsProxy['endTime'] = jsify(value);
+
+  /**
+   * The maximum number of results to retrieve.  Defaults to 100.
+   */
+  int get maxResults => jsProxy['maxResults'];
+  set maxResults(int value) => jsProxy['maxResults'] = value;
+}
+
+class HistoryGetVisitsParams extends ChromeObject {
+  HistoryGetVisitsParams({String url}) {
+    if (url != null) this.url = url;
+  }
+  HistoryGetVisitsParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The URL for which to retrieve visit information.  It must be in the format
+   * as returned from a call to history.search.
+   */
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
+}
+
+class HistoryAddUrlParams extends ChromeObject {
+  HistoryAddUrlParams({String url}) {
+    if (url != null) this.url = url;
+  }
+  HistoryAddUrlParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The URL to add.
+   */
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
+}
+
+class HistoryDeleteUrlParams extends ChromeObject {
+  HistoryDeleteUrlParams({String url}) {
+    if (url != null) this.url = url;
+  }
+  HistoryDeleteUrlParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * The URL to remove.
+   */
+  String get url => jsProxy['url'];
+  set url(String value) => jsProxy['url'] = value;
+}
+
+class HistoryDeleteRangeParams extends ChromeObject {
+  HistoryDeleteRangeParams({var startTime, var endTime}) {
+    if (startTime != null) this.startTime = startTime;
+    if (endTime != null) this.endTime = endTime;
+  }
+  HistoryDeleteRangeParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+
+  /**
+   * Items added to history after this date, represented in milliseconds since
+   * the epoch.
+   */
+  dynamic get startTime => jsProxy['startTime'];
+  set startTime(var value) => jsProxy['startTime'] = jsify(value);
+
+  /**
+   * Items added to history before this date, represented in milliseconds since
+   * the epoch.
+   */
+  dynamic get endTime => jsProxy['endTime'];
+  set endTime(var value) => jsProxy['endTime'] = jsify(value);
 }
 
 HistoryItem _createHistoryItem(JsObject jsProxy) => jsProxy == null ? null : new HistoryItem.fromProxy(jsProxy);

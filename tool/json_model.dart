@@ -37,6 +37,8 @@ class JsonProperty extends JsonObject {
   final JsonReturnType type;
 
   static List<JsonProperty> parse(Map m) {
+    // TODO: add support for 'choices'. Example browserAction.setIcon has
+    // parameters that could be multiple types.
     List<JsonProperty> properties = [];
 
     if (m != null) {
@@ -171,6 +173,7 @@ ChromeLibrary convert(JsonNamespace namespace) {
 
 class JsonConverter {
   final ChromeLibrary library;
+  final List<JsonDeclaredType> addtionalDeclaredTypes = <JsonDeclaredType>[];
 
   static ChromeLibrary convert(JsonNamespace namespace) {
     var library = new ChromeLibrary(namespace.namespace);
@@ -184,9 +187,10 @@ class JsonConverter {
   ChromeLibrary _convert(JsonNamespace namespace) {
     library.documentation = convertHtmlToDartdoc(namespace.description);
 
+    library.methods.addAll(namespace.functions.map(_convertMethod));
     library.properties.addAll(namespace.properties.map((p) => _convertProperty(p, true)));
     library.types.addAll(namespace.types.map(_convertDeclaredType));
-    library.methods.addAll(namespace.functions.map(_convertMethod));
+    library.types.addAll(addtionalDeclaredTypes.map(_convertDeclaredType));
     library.events.addAll(namespace.events.map(_convertEvent));
 
     return library;
@@ -227,7 +231,8 @@ class JsonConverter {
     method.name = f.name;
     method.documentation = convertHtmlToDartdoc(f.description);
     method.returns = _convertType(f.returns);
-    method.params = f.parameters.map(_convertType).toList();
+    method.params = f.parameters.map(
+      (JsonParamType param) => _convertType(param, f)).toList();
 
     if (method.returns == null) {
       if (!f.parameters.isEmpty && f.parameters.last.isCallback) {
@@ -265,11 +270,11 @@ class JsonConverter {
     return _convertType_(e, new ChromeEvent());
   }
 
-  ChromeType _convertType(JsonType t) {
+  ChromeType _convertType(JsonType t, [JsonFunction function]) {
     if (t == null) {
       return null;
     } else {
-      return _convertType_(t, new ChromeType());
+      return _convertType_(t, new ChromeType(), function);
     }
   }
 
@@ -301,7 +306,7 @@ class JsonConverter {
     return future;
   }
 
-  ChromeType _convertType_(JsonType t, ChromeType type) {
+  ChromeType _convertType_(JsonType t, ChromeType type, [JsonFunction function]) {
     type.name = t.name;
     type.documentation = convertHtmlToDartdoc(t.description);
 
@@ -322,6 +327,19 @@ class JsonConverter {
       if (additionalProps != null && additionalProps['type'] == 'any') {
         assert(t.parameters.isEmpty);
         type.parameters = [ChromeType.STRING, ChromeType.VAR];
+      } else if (function != null) {
+
+        String name = "${titleCase(toCamelCase(library.name))}"
+                      "${titleCase(function.name)}Params";
+
+        JsonDeclaredType declaredType = new JsonDeclaredType({
+          'id': name
+        });
+
+        type.type = declaredType.id;
+        declaredType.properties.addAll(t.properties);
+        addtionalDeclaredTypes.add(declaredType);
+
       }
 
 //      // create documentation from the type's properties
