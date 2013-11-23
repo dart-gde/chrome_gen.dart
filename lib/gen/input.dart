@@ -31,7 +31,7 @@ class ChromeInputIme extends ChromeApi {
    * Set the current composition. If this extension does not own the active IME,
    * this fails.
    */
-  Future<bool> setComposition(inputImeSetCompositionParams parameters) {
+  Future<bool> setComposition(InputImeSetCompositionParams parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -43,7 +43,7 @@ class ChromeInputIme extends ChromeApi {
    * Clear the current composition. If this extension does not own the active
    * IME, this fails.
    */
-  Future<bool> clearComposition(inputImeClearCompositionParams parameters) {
+  Future<bool> clearComposition(InputImeClearCompositionParams parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -54,7 +54,7 @@ class ChromeInputIme extends ChromeApi {
   /**
    * Commits the provided text to the current input.
    */
-  Future<bool> commitText(inputImeCommitTextParams parameters) {
+  Future<bool> commitText(InputImeCommitTextParams parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -66,7 +66,7 @@ class ChromeInputIme extends ChromeApi {
    * Sets the properties of the candidate window. This fails if the extension
    * doesn’t own the active IME
    */
-  Future<bool> setCandidateWindowProperties(inputImeSetCandidateWindowPropertiesParams parameters) {
+  Future<bool> setCandidateWindowProperties(InputImeSetCandidateWindowPropertiesParams parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -78,7 +78,7 @@ class ChromeInputIme extends ChromeApi {
    * Sets the current candidate list. This fails if this extension doesn’t own
    * the active IME
    */
-  Future<bool> setCandidates(inputImeSetCandidatesParams parameters) {
+  Future<bool> setCandidates(InputImeSetCandidatesParams parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -90,7 +90,7 @@ class ChromeInputIme extends ChromeApi {
    * Set the position of the cursor in the candidate window. This is a no-op if
    * this extension does not own the active IME.
    */
-  Future<bool> setCursorPosition(inputImeSetCursorPositionParams parameters) {
+  Future<bool> setCursorPosition(InputImeSetCursorPositionParams parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<bool>.oneArg();
@@ -101,7 +101,7 @@ class ChromeInputIme extends ChromeApi {
   /**
    * Adds the provided menu items to the language menu when this IME is active.
    */
-  Future setMenuItems(inputImeSetMenuItemsParams parameters) {
+  Future setMenuItems(InputImeSetMenuItemsParams parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -112,7 +112,7 @@ class ChromeInputIme extends ChromeApi {
   /**
    * Updates the state of the MenuItems specified
    */
-  Future updateMenuItems(inputImeUpdateMenuItemsParams parameters) {
+  Future updateMenuItems(InputImeUpdateMenuItemsParams parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -123,7 +123,7 @@ class ChromeInputIme extends ChromeApi {
   /**
    * Deletes the text around the caret.
    */
-  Future deleteSurroundingText(inputImeDeleteSurroundingTextParams parameters) {
+  Future deleteSurroundingText(InputImeDeleteSurroundingTextParams parameters) {
     if (_input_ime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -540,8 +540,8 @@ class MenuItem extends ChromeObject {
   set enabled(bool value) => jsProxy['enabled'] = value;
 }
 
-class inputImeSetCompositionParams extends ChromeObject {
-  inputImeSetCompositionParams({int contextID, String text, int selectionStart, int selectionEnd, int cursor, List<Map> segments}) {
+class InputImeSetCompositionParams extends ChromeObject {
+  InputImeSetCompositionParams({int contextID, String text, int selectionStart, int selectionEnd, int cursor, List<Map> segments}) {
     if (contextID != null) this.contextID = contextID;
     if (text != null) this.text = text;
     if (selectionStart != null) this.selectionStart = selectionStart;
@@ -549,7 +549,7 @@ class inputImeSetCompositionParams extends ChromeObject {
     if (cursor != null) this.cursor = cursor;
     if (segments != null) this.segments = segments;
   }
-  inputImeSetCompositionParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  InputImeSetCompositionParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * ID of the context where the composition text will be set
@@ -588,11 +588,11 @@ class inputImeSetCompositionParams extends ChromeObject {
   set segments(List<Map> value) => jsProxy['segments'] = jsify(value);
 }
 
-class inputImeClearCompositionParams extends ChromeObject {
-  inputImeClearCompositionParams({int contextID}) {
+class InputImeClearCompositionParams extends ChromeObject {
+  InputImeClearCompositionParams({int contextID}) {
     if (contextID != null) this.contextID = contextID;
   }
-  inputImeClearCompositionParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  InputImeClearCompositionParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * ID of the context where the composition will be cleared
@@ -601,12 +601,12 @@ class inputImeClearCompositionParams extends ChromeObject {
   set contextID(int value) => jsProxy['contextID'] = value;
 }
 
-class inputImeCommitTextParams extends ChromeObject {
-  inputImeCommitTextParams({int contextID, String text}) {
+class InputImeCommitTextParams extends ChromeObject {
+  InputImeCommitTextParams({int contextID, String text}) {
     if (contextID != null) this.contextID = contextID;
     if (text != null) this.text = text;
   }
-  inputImeCommitTextParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  InputImeCommitTextParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * ID of the context where the text will be committed
@@ -621,12 +621,12 @@ class inputImeCommitTextParams extends ChromeObject {
   set text(String value) => jsProxy['text'] = value;
 }
 
-class inputImeSetCandidateWindowPropertiesParams extends ChromeObject {
-  inputImeSetCandidateWindowPropertiesParams({String engineID, PropertiesInputIme properties}) {
+class InputImeSetCandidateWindowPropertiesParams extends ChromeObject {
+  InputImeSetCandidateWindowPropertiesParams({String engineID, PropertiesInputIme properties}) {
     if (engineID != null) this.engineID = engineID;
     if (properties != null) this.properties = properties;
   }
-  inputImeSetCandidateWindowPropertiesParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  InputImeSetCandidateWindowPropertiesParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * ID of the engine to set properties on.
@@ -638,12 +638,12 @@ class inputImeSetCandidateWindowPropertiesParams extends ChromeObject {
   set properties(PropertiesInputIme value) => jsProxy['properties'] = jsify(value);
 }
 
-class inputImeSetCandidatesParams extends ChromeObject {
-  inputImeSetCandidatesParams({int contextID, List<Map> candidates}) {
+class InputImeSetCandidatesParams extends ChromeObject {
+  InputImeSetCandidatesParams({int contextID, List<Map> candidates}) {
     if (contextID != null) this.contextID = contextID;
     if (candidates != null) this.candidates = candidates;
   }
-  inputImeSetCandidatesParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  InputImeSetCandidatesParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * ID of the context that owns the candidate window.
@@ -658,12 +658,12 @@ class inputImeSetCandidatesParams extends ChromeObject {
   set candidates(List<Map> value) => jsProxy['candidates'] = jsify(value);
 }
 
-class inputImeSetCursorPositionParams extends ChromeObject {
-  inputImeSetCursorPositionParams({int contextID, int candidateID}) {
+class InputImeSetCursorPositionParams extends ChromeObject {
+  InputImeSetCursorPositionParams({int contextID, int candidateID}) {
     if (contextID != null) this.contextID = contextID;
     if (candidateID != null) this.candidateID = candidateID;
   }
-  inputImeSetCursorPositionParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  InputImeSetCursorPositionParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * ID of the context that owns the candidate window.
@@ -678,12 +678,12 @@ class inputImeSetCursorPositionParams extends ChromeObject {
   set candidateID(int value) => jsProxy['candidateID'] = value;
 }
 
-class inputImeSetMenuItemsParams extends ChromeObject {
-  inputImeSetMenuItemsParams({String engineID, List<MenuItem> items}) {
+class InputImeSetMenuItemsParams extends ChromeObject {
+  InputImeSetMenuItemsParams({String engineID, List<MenuItem> items}) {
     if (engineID != null) this.engineID = engineID;
     if (items != null) this.items = items;
   }
-  inputImeSetMenuItemsParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  InputImeSetMenuItemsParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * ID of the engine to use
@@ -698,12 +698,12 @@ class inputImeSetMenuItemsParams extends ChromeObject {
   set items(List<MenuItem> value) => jsProxy['items'] = jsify(value);
 }
 
-class inputImeUpdateMenuItemsParams extends ChromeObject {
-  inputImeUpdateMenuItemsParams({String engineID, List<MenuItem> items}) {
+class InputImeUpdateMenuItemsParams extends ChromeObject {
+  InputImeUpdateMenuItemsParams({String engineID, List<MenuItem> items}) {
     if (engineID != null) this.engineID = engineID;
     if (items != null) this.items = items;
   }
-  inputImeUpdateMenuItemsParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  InputImeUpdateMenuItemsParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * ID of the engine to use
@@ -718,14 +718,14 @@ class inputImeUpdateMenuItemsParams extends ChromeObject {
   set items(List<MenuItem> value) => jsProxy['items'] = jsify(value);
 }
 
-class inputImeDeleteSurroundingTextParams extends ChromeObject {
-  inputImeDeleteSurroundingTextParams({String engineID, int contextID, int offset, int length}) {
+class InputImeDeleteSurroundingTextParams extends ChromeObject {
+  InputImeDeleteSurroundingTextParams({String engineID, int contextID, int offset, int length}) {
     if (engineID != null) this.engineID = engineID;
     if (contextID != null) this.contextID = contextID;
     if (offset != null) this.offset = offset;
     if (length != null) this.length = length;
   }
-  inputImeDeleteSurroundingTextParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  InputImeDeleteSurroundingTextParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * ID of the engine receiving the event.

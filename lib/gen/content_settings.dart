@@ -107,7 +107,7 @@ class ContentSetting extends ChromeObject {
   /**
    * Clear all content setting rules set by this extension.
    */
-  Future clear(contentSettingsClearParams details) {
+  Future clear(ContentSettingsClearParams details) {
     var completer = new ChromeCompleter.noArgs();
     jsProxy.callMethod('clear', [jsify(details), completer.callback]);
     return completer.future;
@@ -116,7 +116,7 @@ class ContentSetting extends ChromeObject {
   /**
    * Gets the current content setting for a given pair of URLs.
    */
-  Future<Map> get(contentSettingsGetParams details) {
+  Future<Map> get(ContentSettingsGetParams details) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     jsProxy.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
@@ -125,7 +125,7 @@ class ContentSetting extends ChromeObject {
   /**
    * Applies a new content setting rule.
    */
-  Future set(contentSettingsSetParams details) {
+  Future set(ContentSettingsSetParams details) {
     var completer = new ChromeCompleter.noArgs();
     jsProxy.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
@@ -143,11 +143,11 @@ class ContentSetting extends ChromeObject {
   }
 }
 
-class contentSettingsClearParams extends ChromeObject {
-  contentSettingsClearParams({String scope}) {
+class ContentSettingsClearParams extends ChromeObject {
+  ContentSettingsClearParams({String scope}) {
     if (scope != null) this.scope = scope;
   }
-  contentSettingsClearParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  ContentSettingsClearParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Where to clear the setting (default: regular). One of<br>[regular]: setting
@@ -161,14 +161,14 @@ class contentSettingsClearParams extends ChromeObject {
   set scope(String value) => jsProxy['scope'] = value;
 }
 
-class contentSettingsGetParams extends ChromeObject {
-  contentSettingsGetParams({String primaryUrl, String secondaryUrl, ResourceIdentifier resourceIdentifier, bool incognito}) {
+class ContentSettingsGetParams extends ChromeObject {
+  ContentSettingsGetParams({String primaryUrl, String secondaryUrl, ResourceIdentifier resourceIdentifier, bool incognito}) {
     if (primaryUrl != null) this.primaryUrl = primaryUrl;
     if (secondaryUrl != null) this.secondaryUrl = secondaryUrl;
     if (resourceIdentifier != null) this.resourceIdentifier = resourceIdentifier;
     if (incognito != null) this.incognito = incognito;
   }
-  contentSettingsGetParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  ContentSettingsGetParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The primary URL for which the content setting should be retrieved. Note
@@ -200,15 +200,15 @@ class contentSettingsGetParams extends ChromeObject {
   set incognito(bool value) => jsProxy['incognito'] = value;
 }
 
-class contentSettingsSetParams extends ChromeObject {
-  contentSettingsSetParams({String primaryPattern, String secondaryPattern, ResourceIdentifier resourceIdentifier, var setting, String scope}) {
+class ContentSettingsSetParams extends ChromeObject {
+  ContentSettingsSetParams({String primaryPattern, String secondaryPattern, ResourceIdentifier resourceIdentifier, var setting, String scope}) {
     if (primaryPattern != null) this.primaryPattern = primaryPattern;
     if (secondaryPattern != null) this.secondaryPattern = secondaryPattern;
     if (resourceIdentifier != null) this.resourceIdentifier = resourceIdentifier;
     if (setting != null) this.setting = setting;
     if (scope != null) this.scope = scope;
   }
-  contentSettingsSetParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  ContentSettingsSetParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The pattern for the primary URL. For details on the format of a pattern,

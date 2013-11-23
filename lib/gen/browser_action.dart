@@ -26,7 +26,7 @@ class ChromeBrowserAction extends ChromeApi {
   /**
    * Sets the title of the browser action. This shows up in the tooltip.
    */
-  void setTitle(browserActionSetTitleParams details) {
+  void setTitle(BrowserActionSetTitleParams details) {
     if (_browserAction == null) _throwNotAvailable();
 
     _browserAction.callMethod('setTitle', [jsify(details)]);
@@ -35,7 +35,7 @@ class ChromeBrowserAction extends ChromeApi {
   /**
    * Gets the title of the browser action.
    */
-  Future<String> getTitle(browserActionGetTitleParams details) {
+  Future<String> getTitle(BrowserActionGetTitleParams details) {
     if (_browserAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -49,7 +49,7 @@ class ChromeBrowserAction extends ChromeApi {
    * dictionary of either one of those. Either the <b>path</b> or the
    * <b>imageData</b> property must be specified.
    */
-  Future setIcon(browserActionSetIconParams details) {
+  Future setIcon(BrowserActionSetIconParams details) {
     if (_browserAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -61,7 +61,7 @@ class ChromeBrowserAction extends ChromeApi {
    * Sets the html document to be opened as a popup when the user clicks on the
    * browser action's icon.
    */
-  void setPopup(browserActionSetPopupParams details) {
+  void setPopup(BrowserActionSetPopupParams details) {
     if (_browserAction == null) _throwNotAvailable();
 
     _browserAction.callMethod('setPopup', [jsify(details)]);
@@ -70,7 +70,7 @@ class ChromeBrowserAction extends ChromeApi {
   /**
    * Gets the html document set as the popup for this browser action.
    */
-  Future<String> getPopup(browserActionGetPopupParams details) {
+  Future<String> getPopup(BrowserActionGetPopupParams details) {
     if (_browserAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -82,7 +82,7 @@ class ChromeBrowserAction extends ChromeApi {
    * Sets the badge text for the browser action. The badge is displayed on top
    * of the icon.
    */
-  void setBadgeText(browserActionSetBadgeTextParams details) {
+  void setBadgeText(BrowserActionSetBadgeTextParams details) {
     if (_browserAction == null) _throwNotAvailable();
 
     _browserAction.callMethod('setBadgeText', [jsify(details)]);
@@ -92,7 +92,7 @@ class ChromeBrowserAction extends ChromeApi {
    * Gets the badge text of the browser action. If no tab is specified, the
    * non-tab-specific badge text is returned.
    */
-  Future<String> getBadgeText(browserActionGetBadgeTextParams details) {
+  Future<String> getBadgeText(BrowserActionGetBadgeTextParams details) {
     if (_browserAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -103,7 +103,7 @@ class ChromeBrowserAction extends ChromeApi {
   /**
    * Sets the background color for the badge.
    */
-  void setBadgeBackgroundColor(browserActionSetBadgeBackgroundColorParams details) {
+  void setBadgeBackgroundColor(BrowserActionSetBadgeBackgroundColorParams details) {
     if (_browserAction == null) _throwNotAvailable();
 
     _browserAction.callMethod('setBadgeBackgroundColor', [jsify(details)]);
@@ -112,7 +112,7 @@ class ChromeBrowserAction extends ChromeApi {
   /**
    * Gets the background color of the browser action.
    */
-  Future<ColorArray> getBadgeBackgroundColor(browserActionGetBadgeBackgroundColorParams details) {
+  Future<ColorArray> getBadgeBackgroundColor(BrowserActionGetBadgeBackgroundColorParams details) {
     if (_browserAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<ColorArray>.oneArg(_createColorArray);
@@ -187,12 +187,12 @@ class ImageDataType extends ChromeObject {
   ImageDataType.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-class browserActionSetTitleParams extends ChromeObject {
-  browserActionSetTitleParams({String title, int tabId}) {
+class BrowserActionSetTitleParams extends ChromeObject {
+  BrowserActionSetTitleParams({String title, int tabId}) {
     if (title != null) this.title = title;
     if (tabId != null) this.tabId = tabId;
   }
-  browserActionSetTitleParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  BrowserActionSetTitleParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The string the browser action should display when moused over.
@@ -208,11 +208,11 @@ class browserActionSetTitleParams extends ChromeObject {
   set tabId(int value) => jsProxy['tabId'] = value;
 }
 
-class browserActionGetTitleParams extends ChromeObject {
-  browserActionGetTitleParams({int tabId}) {
+class BrowserActionGetTitleParams extends ChromeObject {
+  BrowserActionGetTitleParams({int tabId}) {
     if (tabId != null) this.tabId = tabId;
   }
-  browserActionGetTitleParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  BrowserActionGetTitleParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Specify the tab to get the title from. If no tab is specified, the
@@ -222,13 +222,13 @@ class browserActionGetTitleParams extends ChromeObject {
   set tabId(int value) => jsProxy['tabId'] = value;
 }
 
-class browserActionSetIconParams extends ChromeObject {
-  browserActionSetIconParams({var imageData, var path, int tabId}) {
+class BrowserActionSetIconParams extends ChromeObject {
+  BrowserActionSetIconParams({var imageData, var path, int tabId}) {
     if (imageData != null) this.imageData = imageData;
     if (path != null) this.path = path;
     if (tabId != null) this.tabId = tabId;
   }
-  browserActionSetIconParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  BrowserActionSetIconParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Either an ImageData object or a dictionary {size -> ImageData} representing
@@ -264,12 +264,12 @@ class browserActionSetIconParams extends ChromeObject {
   set tabId(int value) => jsProxy['tabId'] = value;
 }
 
-class browserActionSetPopupParams extends ChromeObject {
-  browserActionSetPopupParams({int tabId, String popup}) {
+class BrowserActionSetPopupParams extends ChromeObject {
+  BrowserActionSetPopupParams({int tabId, String popup}) {
     if (tabId != null) this.tabId = tabId;
     if (popup != null) this.popup = popup;
   }
-  browserActionSetPopupParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  BrowserActionSetPopupParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Limits the change to when a particular tab is selected. Automatically
@@ -286,11 +286,11 @@ class browserActionSetPopupParams extends ChromeObject {
   set popup(String value) => jsProxy['popup'] = value;
 }
 
-class browserActionGetPopupParams extends ChromeObject {
-  browserActionGetPopupParams({int tabId}) {
+class BrowserActionGetPopupParams extends ChromeObject {
+  BrowserActionGetPopupParams({int tabId}) {
     if (tabId != null) this.tabId = tabId;
   }
-  browserActionGetPopupParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  BrowserActionGetPopupParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Specify the tab to get the popup from. If no tab is specified, the
@@ -300,12 +300,12 @@ class browserActionGetPopupParams extends ChromeObject {
   set tabId(int value) => jsProxy['tabId'] = value;
 }
 
-class browserActionSetBadgeTextParams extends ChromeObject {
-  browserActionSetBadgeTextParams({String text, int tabId}) {
+class BrowserActionSetBadgeTextParams extends ChromeObject {
+  BrowserActionSetBadgeTextParams({String text, int tabId}) {
     if (text != null) this.text = text;
     if (tabId != null) this.tabId = tabId;
   }
-  browserActionSetBadgeTextParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  BrowserActionSetBadgeTextParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Any number of characters can be passed, but only about four can fit in the
@@ -322,11 +322,11 @@ class browserActionSetBadgeTextParams extends ChromeObject {
   set tabId(int value) => jsProxy['tabId'] = value;
 }
 
-class browserActionGetBadgeTextParams extends ChromeObject {
-  browserActionGetBadgeTextParams({int tabId}) {
+class BrowserActionGetBadgeTextParams extends ChromeObject {
+  BrowserActionGetBadgeTextParams({int tabId}) {
     if (tabId != null) this.tabId = tabId;
   }
-  browserActionGetBadgeTextParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  BrowserActionGetBadgeTextParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Specify the tab to get the badge text from. If no tab is specified, the
@@ -336,12 +336,12 @@ class browserActionGetBadgeTextParams extends ChromeObject {
   set tabId(int value) => jsProxy['tabId'] = value;
 }
 
-class browserActionSetBadgeBackgroundColorParams extends ChromeObject {
-  browserActionSetBadgeBackgroundColorParams({var color, int tabId}) {
+class BrowserActionSetBadgeBackgroundColorParams extends ChromeObject {
+  BrowserActionSetBadgeBackgroundColorParams({var color, int tabId}) {
     if (color != null) this.color = color;
     if (tabId != null) this.tabId = tabId;
   }
-  browserActionSetBadgeBackgroundColorParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  BrowserActionSetBadgeBackgroundColorParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * An array of four integers in the range [0,255] that make up the RGBA color
@@ -359,11 +359,11 @@ class browserActionSetBadgeBackgroundColorParams extends ChromeObject {
   set tabId(int value) => jsProxy['tabId'] = value;
 }
 
-class browserActionGetBadgeBackgroundColorParams extends ChromeObject {
-  browserActionGetBadgeBackgroundColorParams({int tabId}) {
+class BrowserActionGetBadgeBackgroundColorParams extends ChromeObject {
+  BrowserActionGetBadgeBackgroundColorParams({int tabId}) {
     if (tabId != null) this.tabId = tabId;
   }
-  browserActionGetBadgeBackgroundColorParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  BrowserActionGetBadgeBackgroundColorParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Specify the tab to get the badge background color from. If no tab is

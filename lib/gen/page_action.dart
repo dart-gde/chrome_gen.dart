@@ -49,7 +49,7 @@ class ChromePageAction extends ChromeApi {
    * Sets the title of the page action. This is displayed in a tooltip over the
    * page action.
    */
-  void setTitle(pageActionSetTitleParams details) {
+  void setTitle(PageActionSetTitleParams details) {
     if (_pageAction == null) _throwNotAvailable();
 
     _pageAction.callMethod('setTitle', [jsify(details)]);
@@ -58,7 +58,7 @@ class ChromePageAction extends ChromeApi {
   /**
    * Gets the title of the page action.
    */
-  Future<String> getTitle(pageActionGetTitleParams details) {
+  Future<String> getTitle(PageActionGetTitleParams details) {
     if (_pageAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -72,7 +72,7 @@ class ChromePageAction extends ChromeApi {
    * dictionary of either one of those. Either the <b>path</b> or the
    * <b>imageData</b> property must be specified.
    */
-  Future setIcon(pageActionSetIconParams details) {
+  Future setIcon(PageActionSetIconParams details) {
     if (_pageAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -84,7 +84,7 @@ class ChromePageAction extends ChromeApi {
    * Sets the html document to be opened as a popup when the user clicks on the
    * page action's icon.
    */
-  void setPopup(pageActionSetPopupParams details) {
+  void setPopup(PageActionSetPopupParams details) {
     if (_pageAction == null) _throwNotAvailable();
 
     _pageAction.callMethod('setPopup', [jsify(details)]);
@@ -93,7 +93,7 @@ class ChromePageAction extends ChromeApi {
   /**
    * Gets the html document set as the popup for this page action.
    */
-  Future<String> getPopup(pageActionGetPopupParams details) {
+  Future<String> getPopup(PageActionGetPopupParams details) {
     if (_pageAction == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -115,12 +115,12 @@ class ChromePageAction extends ChromeApi {
   }
 }
 
-class pageActionSetTitleParams extends ChromeObject {
-  pageActionSetTitleParams({int tabId, String title}) {
+class PageActionSetTitleParams extends ChromeObject {
+  PageActionSetTitleParams({int tabId, String title}) {
     if (tabId != null) this.tabId = tabId;
     if (title != null) this.title = title;
   }
-  pageActionSetTitleParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  PageActionSetTitleParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The id of the tab for which you want to modify the page action.
@@ -135,11 +135,11 @@ class pageActionSetTitleParams extends ChromeObject {
   set title(String value) => jsProxy['title'] = value;
 }
 
-class pageActionGetTitleParams extends ChromeObject {
-  pageActionGetTitleParams({int tabId}) {
+class PageActionGetTitleParams extends ChromeObject {
+  PageActionGetTitleParams({int tabId}) {
     if (tabId != null) this.tabId = tabId;
   }
-  pageActionGetTitleParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  PageActionGetTitleParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Specify the tab to get the title from.
@@ -148,14 +148,14 @@ class pageActionGetTitleParams extends ChromeObject {
   set tabId(int value) => jsProxy['tabId'] = value;
 }
 
-class pageActionSetIconParams extends ChromeObject {
-  pageActionSetIconParams({int tabId, var imageData, var path, int iconIndex}) {
+class PageActionSetIconParams extends ChromeObject {
+  PageActionSetIconParams({int tabId, var imageData, var path, int iconIndex}) {
     if (tabId != null) this.tabId = tabId;
     if (imageData != null) this.imageData = imageData;
     if (path != null) this.path = path;
     if (iconIndex != null) this.iconIndex = iconIndex;
   }
-  pageActionSetIconParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  PageActionSetIconParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The id of the tab for which you want to modify the page action.
@@ -196,12 +196,12 @@ class pageActionSetIconParams extends ChromeObject {
   set iconIndex(int value) => jsProxy['iconIndex'] = value;
 }
 
-class pageActionSetPopupParams extends ChromeObject {
-  pageActionSetPopupParams({int tabId, String popup}) {
+class PageActionSetPopupParams extends ChromeObject {
+  PageActionSetPopupParams({int tabId, String popup}) {
     if (tabId != null) this.tabId = tabId;
     if (popup != null) this.popup = popup;
   }
-  pageActionSetPopupParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  PageActionSetPopupParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The id of the tab for which you want to modify the page action.
@@ -217,11 +217,11 @@ class pageActionSetPopupParams extends ChromeObject {
   set popup(String value) => jsProxy['popup'] = value;
 }
 
-class pageActionGetPopupParams extends ChromeObject {
-  pageActionGetPopupParams({int tabId}) {
+class PageActionGetPopupParams extends ChromeObject {
+  PageActionGetPopupParams({int tabId}) {
     if (tabId != null) this.tabId = tabId;
   }
-  pageActionGetPopupParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  PageActionGetPopupParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Specify the tab to get the popup from.

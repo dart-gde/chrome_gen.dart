@@ -34,7 +34,7 @@ class ChromeContextMenus extends ChromeApi {
    * Returns:
    * The ID of the newly created item.
    */
-  dynamic create(contextMenusCreateParams createProperties, [dynamic callback]) {
+  dynamic create(ContextMenusCreateParams createProperties, [dynamic callback]) {
     if (_contextMenus == null) _throwNotAvailable();
 
     return _contextMenus.callMethod('create', [jsify(createProperties), jsify(callback)]);
@@ -48,7 +48,7 @@ class ChromeContextMenus extends ChromeApi {
    * [updateProperties] The properties to update. Accepts the same values as the
    * create function.
    */
-  Future update(dynamic id, contextMenusUpdateParams updateProperties) {
+  Future update(dynamic id, ContextMenusUpdateParams updateProperties) {
     if (_contextMenus == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -209,8 +209,8 @@ class OnClickData extends ChromeObject {
   set checked(bool value) => jsProxy['checked'] = value;
 }
 
-class contextMenusCreateParams extends ChromeObject {
-  contextMenusCreateParams({String type, String id, String title, bool checked, List<String> contexts, var onclick, var parentId, List<String> documentUrlPatterns, List<String> targetUrlPatterns, bool enabled}) {
+class ContextMenusCreateParams extends ChromeObject {
+  ContextMenusCreateParams({String type, String id, String title, bool checked, List<String> contexts, var onclick, var parentId, List<String> documentUrlPatterns, List<String> targetUrlPatterns, bool enabled}) {
     if (type != null) this.type = type;
     if (id != null) this.id = id;
     if (title != null) this.title = title;
@@ -222,7 +222,7 @@ class contextMenusCreateParams extends ChromeObject {
     if (targetUrlPatterns != null) this.targetUrlPatterns = targetUrlPatterns;
     if (enabled != null) this.enabled = enabled;
   }
-  contextMenusCreateParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  ContextMenusCreateParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The type of menu item. Defaults to 'normal' if not specified.
@@ -305,8 +305,8 @@ class contextMenusCreateParams extends ChromeObject {
   set enabled(bool value) => jsProxy['enabled'] = value;
 }
 
-class contextMenusUpdateParams extends ChromeObject {
-  contextMenusUpdateParams({String type, String title, bool checked, List<String> contexts, var onclick, var parentId, List<String> documentUrlPatterns, List<String> targetUrlPatterns, bool enabled}) {
+class ContextMenusUpdateParams extends ChromeObject {
+  ContextMenusUpdateParams({String type, String title, bool checked, List<String> contexts, var onclick, var parentId, List<String> documentUrlPatterns, List<String> targetUrlPatterns, bool enabled}) {
     if (type != null) this.type = type;
     if (title != null) this.title = title;
     if (checked != null) this.checked = checked;
@@ -317,7 +317,7 @@ class contextMenusUpdateParams extends ChromeObject {
     if (targetUrlPatterns != null) this.targetUrlPatterns = targetUrlPatterns;
     if (enabled != null) this.enabled = enabled;
   }
-  contextMenusUpdateParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  ContextMenusUpdateParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * enum of `normal`, `checkbox`, `radio`, `separator`

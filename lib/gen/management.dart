@@ -95,7 +95,7 @@ class ChromeManagement extends ChromeApi {
    * 
    * [id] This should be the id from an item of [ExtensionInfo.]
    */
-  Future uninstall(String id, [managementUninstallParams options]) {
+  Future uninstall(String id, [ManagementUninstallParams options]) {
     if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -107,7 +107,7 @@ class ChromeManagement extends ChromeApi {
    * Uninstalls the calling extension. Note: This function can be used without
    * requesting the 'management' permission in the manifest.
    */
-  Future uninstallSelf([managementUninstallSelfParams options]) {
+  Future uninstallSelf([ManagementUninstallSelfParams options]) {
     if (_management == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -339,11 +339,11 @@ class ExtensionInfo extends ChromeObject {
   set installType(String value) => jsProxy['installType'] = value;
 }
 
-class managementUninstallParams extends ChromeObject {
-  managementUninstallParams({bool showConfirmDialog}) {
+class ManagementUninstallParams extends ChromeObject {
+  ManagementUninstallParams({bool showConfirmDialog}) {
     if (showConfirmDialog != null) this.showConfirmDialog = showConfirmDialog;
   }
-  managementUninstallParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  ManagementUninstallParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Whether or not a confirm-uninstall dialog should prompt the user. Defaults
@@ -353,11 +353,11 @@ class managementUninstallParams extends ChromeObject {
   set showConfirmDialog(bool value) => jsProxy['showConfirmDialog'] = value;
 }
 
-class managementUninstallSelfParams extends ChromeObject {
-  managementUninstallSelfParams({bool showConfirmDialog}) {
+class ManagementUninstallSelfParams extends ChromeObject {
+  ManagementUninstallSelfParams({bool showConfirmDialog}) {
     if (showConfirmDialog != null) this.showConfirmDialog = showConfirmDialog;
   }
-  managementUninstallSelfParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  ManagementUninstallSelfParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Whether or not a confirm-uninstall dialog should prompt the user. Defaults

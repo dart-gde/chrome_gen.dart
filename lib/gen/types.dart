@@ -40,7 +40,7 @@ class ChromeSetting extends ChromeObject {
    * Returns:
    * Details of the currently effective value.
    */
-  Future<Map> get(typesGetParams details) {
+  Future<Map> get(TypesGetParams details) {
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
     jsProxy.callMethod('get', [jsify(details), completer.callback]);
     return completer.future;
@@ -51,7 +51,7 @@ class ChromeSetting extends ChromeObject {
    * 
    * [details] Which setting to change.
    */
-  Future set(typesSetParams details) {
+  Future set(TypesSetParams details) {
     var completer = new ChromeCompleter.noArgs();
     jsProxy.callMethod('set', [jsify(details), completer.callback]);
     return completer.future;
@@ -62,18 +62,18 @@ class ChromeSetting extends ChromeObject {
    * 
    * [details] Which setting to clear.
    */
-  Future clear(typesClearParams details) {
+  Future clear(TypesClearParams details) {
     var completer = new ChromeCompleter.noArgs();
     jsProxy.callMethod('clear', [jsify(details), completer.callback]);
     return completer.future;
   }
 }
 
-class typesGetParams extends ChromeObject {
-  typesGetParams({bool incognito}) {
+class TypesGetParams extends ChromeObject {
+  TypesGetParams({bool incognito}) {
     if (incognito != null) this.incognito = incognito;
   }
-  typesGetParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TypesGetParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Whether to return the value that applies to the incognito session (default
@@ -83,12 +83,12 @@ class typesGetParams extends ChromeObject {
   set incognito(bool value) => jsProxy['incognito'] = value;
 }
 
-class typesSetParams extends ChromeObject {
-  typesSetParams({var value, String scope}) {
+class TypesSetParams extends ChromeObject {
+  TypesSetParams({var value, String scope}) {
     if (value != null) this.value = value;
     if (scope != null) this.scope = scope;
   }
-  typesSetParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TypesSetParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The value of the setting. <br/>Note that every setting has a specific value
@@ -116,11 +116,11 @@ class typesSetParams extends ChromeObject {
   set scope(String value) => jsProxy['scope'] = value;
 }
 
-class typesClearParams extends ChromeObject {
-  typesClearParams({String scope}) {
+class TypesClearParams extends ChromeObject {
+  TypesClearParams({String scope}) {
     if (scope != null) this.scope = scope;
   }
-  typesClearParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TypesClearParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Where to clear the setting (default: regular). One of<ul><li>[regular]:

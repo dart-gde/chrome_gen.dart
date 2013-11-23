@@ -31,7 +31,7 @@ class ChromeWebNavigation extends ChromeApi {
    * Information about the requested frame, null if the specified frame ID
    * and/or tab ID are invalid.
    */
-  Future<Map> getFrame(webNavigationGetFrameParams details) {
+  Future<Map> getFrame(WebNavigationGetFrameParams details) {
     if (_webNavigation == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
@@ -47,7 +47,7 @@ class ChromeWebNavigation extends ChromeApi {
    * Returns:
    * A list of frames in the given tab, null if the specified tab ID is invalid.
    */
-  Future<List<Map>> getAllFrames(webNavigationGetAllFramesParams details) {
+  Future<List<Map>> getAllFrames(WebNavigationGetAllFramesParams details) {
     if (_webNavigation == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Map>>.oneArg((e) => listify(e, mapify));
@@ -142,13 +142,13 @@ class ChromeWebNavigation extends ChromeApi {
   }
 }
 
-class webNavigationGetFrameParams extends ChromeObject {
-  webNavigationGetFrameParams({int tabId, int processId, int frameId}) {
+class WebNavigationGetFrameParams extends ChromeObject {
+  WebNavigationGetFrameParams({int tabId, int processId, int frameId}) {
     if (tabId != null) this.tabId = tabId;
     if (processId != null) this.processId = processId;
     if (frameId != null) this.frameId = frameId;
   }
-  webNavigationGetFrameParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  WebNavigationGetFrameParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The ID of the tab in which the frame is.
@@ -169,11 +169,11 @@ class webNavigationGetFrameParams extends ChromeObject {
   set frameId(int value) => jsProxy['frameId'] = value;
 }
 
-class webNavigationGetAllFramesParams extends ChromeObject {
-  webNavigationGetAllFramesParams({int tabId}) {
+class WebNavigationGetAllFramesParams extends ChromeObject {
+  WebNavigationGetAllFramesParams({int tabId}) {
     if (tabId != null) this.tabId = tabId;
   }
-  webNavigationGetAllFramesParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  WebNavigationGetAllFramesParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The ID of the tab.

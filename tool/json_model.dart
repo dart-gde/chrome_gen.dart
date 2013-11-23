@@ -327,8 +327,8 @@ class JsonConverter {
         type.parameters = [ChromeType.STRING, ChromeType.VAR];
       } else if (function != null) {
 
-        String name =
-            "${toCamelCase(library.name)}${titleCase(function.name)}Params";
+        String name = "${titleCase(toCamelCase(library.name))}"
+                      "${titleCase(function.name)}Params";
 
         JsonDeclaredType declaredType = new JsonDeclaredType({
           'id': name

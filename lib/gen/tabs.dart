@@ -57,7 +57,7 @@ class ChromeTabs extends ChromeApi {
    * the specified tab. The port's [runtime.Port] event is fired if the tab
    * closes or does not exist.
    */
-  Port connect(int tabId, [tabsConnectParams connectInfo]) {
+  Port connect(int tabId, [TabsConnectParams connectInfo]) {
     if (_tabs == null) _throwNotAvailable();
 
     return _createPort(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
@@ -132,7 +132,7 @@ class ChromeTabs extends ChromeApi {
    * Returns:
    * Details about the created tab. Will contain the ID of the new tab.
    */
-  Future<Tab> create(tabsCreateParams createProperties) {
+  Future<Tab> create(TabsCreateParams createProperties) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
@@ -162,7 +162,7 @@ class ChromeTabs extends ChromeApi {
    * Gets all tabs that have the specified properties, or all tabs if no
    * properties are specified.
    */
-  Future<List<Tab>> query(tabsQueryParams queryInfo) {
+  Future<List<Tab>> query(TabsQueryParams queryInfo) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<List<Tab>>.oneArg((e) => listify(e, _createTab));
@@ -176,7 +176,7 @@ class ChromeTabs extends ChromeApi {
    * Returns:
    * Contains details about the window whose tabs were highlighted.
    */
-  Future<Window> highlight(tabsHighlightParams highlightInfo) {
+  Future<Window> highlight(TabsHighlightParams highlightInfo) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
@@ -195,7 +195,7 @@ class ChromeTabs extends ChromeApi {
    * Details about the updated tab. The [tabs.Tab] object doesn't contain `url`,
    * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
    */
-  Future<Tab> update(tabsUpdateParams updateProperties, [int tabId]) {
+  Future<Tab> update(TabsUpdateParams updateProperties, [int tabId]) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Tab>.oneArg(_createTab);
@@ -213,7 +213,7 @@ class ChromeTabs extends ChromeApi {
    * Returns:
    * Details about the moved tabs.
    */
-  Future<dynamic> move(dynamic tabIds, tabsMoveParams moveProperties) {
+  Future<dynamic> move(dynamic tabIds, TabsMoveParams moveProperties) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
@@ -227,7 +227,7 @@ class ChromeTabs extends ChromeApi {
    * [tabId] The ID of the tab to reload; defaults to the selected tab of the
    * current window.
    */
-  Future reload([int tabId, tabsReloadParams reloadProperties]) {
+  Future reload([int tabId, TabsReloadParams reloadProperties]) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -285,7 +285,7 @@ class ChromeTabs extends ChromeApi {
    * A data URL which encodes an image of the visible area of the captured tab.
    * May be assigned to the 'src' property of an HTML Image element for display.
    */
-  Future<String> captureVisibleTab([int windowId, tabsCaptureVisibleTabParams options]) {
+  Future<String> captureVisibleTab([int windowId, TabsCaptureVisibleTabParams options]) {
     if (_tabs == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -711,11 +711,11 @@ class InjectDetails extends ChromeObject {
   set runAt(String value) => jsProxy['runAt'] = value;
 }
 
-class tabsConnectParams extends ChromeObject {
-  tabsConnectParams({String name}) {
+class TabsConnectParams extends ChromeObject {
+  TabsConnectParams({String name}) {
     if (name != null) this.name = name;
   }
-  tabsConnectParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TabsConnectParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Will be passed into onConnect for content scripts that are listening for
@@ -725,8 +725,8 @@ class tabsConnectParams extends ChromeObject {
   set name(String value) => jsProxy['name'] = value;
 }
 
-class tabsCreateParams extends ChromeObject {
-  tabsCreateParams({int windowId, int index, String url, bool active, bool pinned, int openerTabId}) {
+class TabsCreateParams extends ChromeObject {
+  TabsCreateParams({int windowId, int index, String url, bool active, bool pinned, int openerTabId}) {
     if (windowId != null) this.windowId = windowId;
     if (index != null) this.index = index;
     if (url != null) this.url = url;
@@ -734,7 +734,7 @@ class tabsCreateParams extends ChromeObject {
     if (pinned != null) this.pinned = pinned;
     if (openerTabId != null) this.openerTabId = openerTabId;
   }
-  tabsCreateParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TabsCreateParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The window to create the new tab in. Defaults to the [current
@@ -780,8 +780,8 @@ class tabsCreateParams extends ChromeObject {
   set openerTabId(int value) => jsProxy['openerTabId'] = value;
 }
 
-class tabsQueryParams extends ChromeObject {
-  tabsQueryParams({bool active, bool pinned, bool highlighted, bool currentWindow, bool lastFocusedWindow, String status, String title, String url, int windowId, String windowType, int index}) {
+class TabsQueryParams extends ChromeObject {
+  TabsQueryParams({bool active, bool pinned, bool highlighted, bool currentWindow, bool lastFocusedWindow, String status, String title, String url, int windowId, String windowType, int index}) {
     if (active != null) this.active = active;
     if (pinned != null) this.pinned = pinned;
     if (highlighted != null) this.highlighted = highlighted;
@@ -794,7 +794,7 @@ class tabsQueryParams extends ChromeObject {
     if (windowType != null) this.windowType = windowType;
     if (index != null) this.index = index;
   }
-  tabsQueryParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TabsQueryParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Whether the tabs are active in their windows.
@@ -867,12 +867,12 @@ class tabsQueryParams extends ChromeObject {
   set index(int value) => jsProxy['index'] = value;
 }
 
-class tabsHighlightParams extends ChromeObject {
-  tabsHighlightParams({int windowId, var tabs}) {
+class TabsHighlightParams extends ChromeObject {
+  TabsHighlightParams({int windowId, var tabs}) {
     if (windowId != null) this.windowId = windowId;
     if (tabs != null) this.tabs = tabs;
   }
-  tabsHighlightParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TabsHighlightParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The window that contains the tabs.
@@ -887,15 +887,15 @@ class tabsHighlightParams extends ChromeObject {
   set tabs(var value) => jsProxy['tabs'] = jsify(value);
 }
 
-class tabsUpdateParams extends ChromeObject {
-  tabsUpdateParams({String url, bool active, bool highlighted, bool pinned, int openerTabId}) {
+class TabsUpdateParams extends ChromeObject {
+  TabsUpdateParams({String url, bool active, bool highlighted, bool pinned, int openerTabId}) {
     if (url != null) this.url = url;
     if (active != null) this.active = active;
     if (highlighted != null) this.highlighted = highlighted;
     if (pinned != null) this.pinned = pinned;
     if (openerTabId != null) this.openerTabId = openerTabId;
   }
-  tabsUpdateParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TabsUpdateParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * A URL to navigate the tab to.
@@ -930,12 +930,12 @@ class tabsUpdateParams extends ChromeObject {
   set openerTabId(int value) => jsProxy['openerTabId'] = value;
 }
 
-class tabsMoveParams extends ChromeObject {
-  tabsMoveParams({int windowId, int index}) {
+class TabsMoveParams extends ChromeObject {
+  TabsMoveParams({int windowId, int index}) {
     if (windowId != null) this.windowId = windowId;
     if (index != null) this.index = index;
   }
-  tabsMoveParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TabsMoveParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Defaults to the window the tab is currently in.
@@ -951,11 +951,11 @@ class tabsMoveParams extends ChromeObject {
   set index(int value) => jsProxy['index'] = value;
 }
 
-class tabsReloadParams extends ChromeObject {
-  tabsReloadParams({bool bypassCache}) {
+class TabsReloadParams extends ChromeObject {
+  TabsReloadParams({bool bypassCache}) {
     if (bypassCache != null) this.bypassCache = bypassCache;
   }
-  tabsReloadParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TabsReloadParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Whether using any local cache. Default is false.
@@ -964,12 +964,12 @@ class tabsReloadParams extends ChromeObject {
   set bypassCache(bool value) => jsProxy['bypassCache'] = value;
 }
 
-class tabsCaptureVisibleTabParams extends ChromeObject {
-  tabsCaptureVisibleTabParams({String format, int quality}) {
+class TabsCaptureVisibleTabParams extends ChromeObject {
+  TabsCaptureVisibleTabParams({String format, int quality}) {
     if (format != null) this.format = format;
     if (quality != null) this.quality = quality;
   }
-  tabsCaptureVisibleTabParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TabsCaptureVisibleTabParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The format of the resulting image.  Default is jpeg.

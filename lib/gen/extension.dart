@@ -80,7 +80,7 @@ class ChromeExtension extends ChromeApi {
    * Returns:
    * Array of global objects
    */
-  List<Window> getViews([extensionGetViewsParams fetchProperties]) {
+  List<Window> getViews([ExtensionGetViewsParams fetchProperties]) {
     if (_extension == null) _throwNotAvailable();
 
     var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
@@ -234,12 +234,12 @@ class LastErrorExtension extends ChromeObject {
   String get message => jsProxy['message'];
 }
 
-class extensionGetViewsParams extends ChromeObject {
-  extensionGetViewsParams({String type, int windowId}) {
+class ExtensionGetViewsParams extends ChromeObject {
+  ExtensionGetViewsParams({String type, int windowId}) {
     if (type != null) this.type = type;
     if (windowId != null) this.windowId = windowId;
   }
-  extensionGetViewsParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  ExtensionGetViewsParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The type of view to get. If omitted, returns all views (including

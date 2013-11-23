@@ -32,7 +32,7 @@ class ChromeTts extends ChromeApi {
    * 
    * [options] The speech options.
    */
-  Future speak(String utterance, [ttsSpeakParams options]) {
+  Future speak(String utterance, [TtsSpeakParams options]) {
     if (_tts == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -201,8 +201,8 @@ class TtsVoice extends ChromeObject {
   set eventTypes(List<String> value) => jsProxy['eventTypes'] = jsify(value);
 }
 
-class ttsSpeakParams extends ChromeObject {
-  ttsSpeakParams({bool enqueue, String voiceName, String extensionId, String lang, String gender, var rate, var pitch, var volume, List<String> requiredEventTypes, List<String> desiredEventTypes, var onEvent}) {
+class TtsSpeakParams extends ChromeObject {
+  TtsSpeakParams({bool enqueue, String voiceName, String extensionId, String lang, String gender, var rate, var pitch, var volume, List<String> requiredEventTypes, List<String> desiredEventTypes, var onEvent}) {
     if (enqueue != null) this.enqueue = enqueue;
     if (voiceName != null) this.voiceName = voiceName;
     if (extensionId != null) this.extensionId = extensionId;
@@ -215,7 +215,7 @@ class ttsSpeakParams extends ChromeObject {
     if (desiredEventTypes != null) this.desiredEventTypes = desiredEventTypes;
     if (onEvent != null) this.onEvent = onEvent;
   }
-  ttsSpeakParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  TtsSpeakParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * If true, enqueues this utterance if TTS is already in progress. If false
