@@ -29,7 +29,7 @@ class ChromeInfobars extends ChromeApi {
    * Returns:
    * Contains details about the window in which the infobar was created.
    */
-  Future<Window> show(showParamsObject details) {
+  Future<Window> show(infobarsShowParams details) {
     if (_infobars == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Window>.oneArg(_createWindow);
@@ -42,13 +42,13 @@ class ChromeInfobars extends ChromeApi {
   }
 }
 
-class showParamsObject extends ChromeObject {
-  showParamsObject({int tabId, String path, int height}) {
+class infobarsShowParams extends ChromeObject {
+  infobarsShowParams({int tabId, String path, int height}) {
     if (tabId != null) this.tabId = tabId;
     if (path != null) this.path = path;
     if (height != null) this.height = height;
   }
-  showParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  infobarsShowParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The tab id for the tab to display the infobar in.

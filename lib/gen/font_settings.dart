@@ -22,7 +22,7 @@ class ChromeFontSettings extends ChromeApi {
   /**
    * Clears the font set by this extension, if any.
    */
-  Future clearFont(clearFontParamsObject details) {
+  Future clearFont(fontSettingsClearFontParams details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -33,7 +33,7 @@ class ChromeFontSettings extends ChromeApi {
   /**
    * Gets the font for a given script and generic font family.
    */
-  Future<Map> getFont(getFontParamsObject details) {
+  Future<Map> getFont(fontSettingsGetFontParams details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
@@ -44,7 +44,7 @@ class ChromeFontSettings extends ChromeApi {
   /**
    * Sets the font for a given script and generic font family.
    */
-  Future setFont(setFontParamsObject details) {
+  Future setFont(fontSettingsSetFontParams details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -68,7 +68,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearDefaultFontSize([clearDefaultFontSizeParamsObject details]) {
+  Future clearDefaultFontSize([fontSettingsClearDefaultFontSizeParams details]) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -81,7 +81,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<Map> getDefaultFontSize([getDefaultFontSizeParamsObject details]) {
+  Future<Map> getDefaultFontSize([fontSettingsGetDefaultFontSizeParams details]) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
@@ -92,7 +92,7 @@ class ChromeFontSettings extends ChromeApi {
   /**
    * Sets the default font size.
    */
-  Future setDefaultFontSize(setDefaultFontSizeParamsObject details) {
+  Future setDefaultFontSize(fontSettingsSetDefaultFontSizeParams details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -105,7 +105,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearDefaultFixedFontSize([clearDefaultFixedFontSizeParamsObject details]) {
+  Future clearDefaultFixedFontSize([fontSettingsClearDefaultFixedFontSizeParams details]) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -118,7 +118,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<Map> getDefaultFixedFontSize([getDefaultFixedFontSizeParamsObject details]) {
+  Future<Map> getDefaultFixedFontSize([fontSettingsGetDefaultFixedFontSizeParams details]) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
@@ -129,7 +129,7 @@ class ChromeFontSettings extends ChromeApi {
   /**
    * Sets the default size for fixed width fonts.
    */
-  Future setDefaultFixedFontSize(setDefaultFixedFontSizeParamsObject details) {
+  Future setDefaultFixedFontSize(fontSettingsSetDefaultFixedFontSizeParams details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -142,7 +142,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future clearMinimumFontSize([clearMinimumFontSizeParamsObject details]) {
+  Future clearMinimumFontSize([fontSettingsClearMinimumFontSizeParams details]) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -155,7 +155,7 @@ class ChromeFontSettings extends ChromeApi {
    * 
    * [details] This parameter is currently unused.
    */
-  Future<Map> getMinimumFontSize([getMinimumFontSizeParamsObject details]) {
+  Future<Map> getMinimumFontSize([fontSettingsGetMinimumFontSizeParams details]) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
@@ -166,7 +166,7 @@ class ChromeFontSettings extends ChromeApi {
   /**
    * Sets the minimum font size.
    */
-  Future setMinimumFontSize(setMinimumFontSizeParamsObject details) {
+  Future setMinimumFontSize(fontSettingsSetMinimumFontSizeParams details) {
     if (_fontSettings == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter.noArgs();
@@ -283,12 +283,12 @@ class LevelOfControl extends ChromeObject {
   LevelOfControl.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-class clearFontParamsObject extends ChromeObject {
-  clearFontParamsObject({ScriptCode script, GenericFamily genericFamily}) {
+class fontSettingsClearFontParams extends ChromeObject {
+  fontSettingsClearFontParams({ScriptCode script, GenericFamily genericFamily}) {
     if (script != null) this.script = script;
     if (genericFamily != null) this.genericFamily = genericFamily;
   }
-  clearFontParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  fontSettingsClearFontParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The script for which the font should be cleared. If omitted, the global
@@ -304,12 +304,12 @@ class clearFontParamsObject extends ChromeObject {
   set genericFamily(GenericFamily value) => jsProxy['genericFamily'] = jsify(value);
 }
 
-class getFontParamsObject extends ChromeObject {
-  getFontParamsObject({ScriptCode script, GenericFamily genericFamily}) {
+class fontSettingsGetFontParams extends ChromeObject {
+  fontSettingsGetFontParams({ScriptCode script, GenericFamily genericFamily}) {
     if (script != null) this.script = script;
     if (genericFamily != null) this.genericFamily = genericFamily;
   }
-  getFontParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  fontSettingsGetFontParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The script for which the font should be retrieved. If omitted, the font
@@ -325,13 +325,13 @@ class getFontParamsObject extends ChromeObject {
   set genericFamily(GenericFamily value) => jsProxy['genericFamily'] = jsify(value);
 }
 
-class setFontParamsObject extends ChromeObject {
-  setFontParamsObject({ScriptCode script, GenericFamily genericFamily, String fontId}) {
+class fontSettingsSetFontParams extends ChromeObject {
+  fontSettingsSetFontParams({ScriptCode script, GenericFamily genericFamily, String fontId}) {
     if (script != null) this.script = script;
     if (genericFamily != null) this.genericFamily = genericFamily;
     if (fontId != null) this.fontId = fontId;
   }
-  setFontParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  fontSettingsSetFontParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The script code which the font should be set. If omitted, the font setting
@@ -354,21 +354,21 @@ class setFontParamsObject extends ChromeObject {
   set fontId(String value) => jsProxy['fontId'] = value;
 }
 
-class clearDefaultFontSizeParamsObject extends ChromeObject {
-  clearDefaultFontSizeParamsObject();
-  clearDefaultFontSizeParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+class fontSettingsClearDefaultFontSizeParams extends ChromeObject {
+  fontSettingsClearDefaultFontSizeParams();
+  fontSettingsClearDefaultFontSizeParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-class getDefaultFontSizeParamsObject extends ChromeObject {
-  getDefaultFontSizeParamsObject();
-  getDefaultFontSizeParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+class fontSettingsGetDefaultFontSizeParams extends ChromeObject {
+  fontSettingsGetDefaultFontSizeParams();
+  fontSettingsGetDefaultFontSizeParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-class setDefaultFontSizeParamsObject extends ChromeObject {
-  setDefaultFontSizeParamsObject({int pixelSize}) {
+class fontSettingsSetDefaultFontSizeParams extends ChromeObject {
+  fontSettingsSetDefaultFontSizeParams({int pixelSize}) {
     if (pixelSize != null) this.pixelSize = pixelSize;
   }
-  setDefaultFontSizeParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  fontSettingsSetDefaultFontSizeParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The font size in pixels.
@@ -377,21 +377,21 @@ class setDefaultFontSizeParamsObject extends ChromeObject {
   set pixelSize(int value) => jsProxy['pixelSize'] = value;
 }
 
-class clearDefaultFixedFontSizeParamsObject extends ChromeObject {
-  clearDefaultFixedFontSizeParamsObject();
-  clearDefaultFixedFontSizeParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+class fontSettingsClearDefaultFixedFontSizeParams extends ChromeObject {
+  fontSettingsClearDefaultFixedFontSizeParams();
+  fontSettingsClearDefaultFixedFontSizeParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-class getDefaultFixedFontSizeParamsObject extends ChromeObject {
-  getDefaultFixedFontSizeParamsObject();
-  getDefaultFixedFontSizeParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+class fontSettingsGetDefaultFixedFontSizeParams extends ChromeObject {
+  fontSettingsGetDefaultFixedFontSizeParams();
+  fontSettingsGetDefaultFixedFontSizeParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-class setDefaultFixedFontSizeParamsObject extends ChromeObject {
-  setDefaultFixedFontSizeParamsObject({int pixelSize}) {
+class fontSettingsSetDefaultFixedFontSizeParams extends ChromeObject {
+  fontSettingsSetDefaultFixedFontSizeParams({int pixelSize}) {
     if (pixelSize != null) this.pixelSize = pixelSize;
   }
-  setDefaultFixedFontSizeParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  fontSettingsSetDefaultFixedFontSizeParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The font size in pixels.
@@ -400,21 +400,21 @@ class setDefaultFixedFontSizeParamsObject extends ChromeObject {
   set pixelSize(int value) => jsProxy['pixelSize'] = value;
 }
 
-class clearMinimumFontSizeParamsObject extends ChromeObject {
-  clearMinimumFontSizeParamsObject();
-  clearMinimumFontSizeParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+class fontSettingsClearMinimumFontSizeParams extends ChromeObject {
+  fontSettingsClearMinimumFontSizeParams();
+  fontSettingsClearMinimumFontSizeParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-class getMinimumFontSizeParamsObject extends ChromeObject {
-  getMinimumFontSizeParamsObject();
-  getMinimumFontSizeParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+class fontSettingsGetMinimumFontSizeParams extends ChromeObject {
+  fontSettingsGetMinimumFontSizeParams();
+  fontSettingsGetMinimumFontSizeParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 }
 
-class setMinimumFontSizeParamsObject extends ChromeObject {
-  setMinimumFontSizeParamsObject({int pixelSize}) {
+class fontSettingsSetMinimumFontSizeParams extends ChromeObject {
+  fontSettingsSetMinimumFontSizeParams({int pixelSize}) {
     if (pixelSize != null) this.pixelSize = pixelSize;
   }
-  setMinimumFontSizeParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  fontSettingsSetMinimumFontSizeParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The font size in pixels.

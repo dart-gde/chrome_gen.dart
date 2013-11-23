@@ -4,8 +4,6 @@ library model_json;
 import 'chrome_model.dart';
 import 'src/utils.dart';
 
-final Map<String, int> globalTypeTable = <String, int>{};
-
 abstract class JsonObject {
   final Map<String, dynamic> json;
 
@@ -329,13 +327,8 @@ class JsonConverter {
         type.parameters = [ChromeType.STRING, ChromeType.VAR];
       } else if (function != null) {
 
-        String name = "${function.name}ParamsObject";
-        if (globalTypeTable.containsKey('${function.name}ParamsObject')) {
-          globalTypeTable[name]++;
-          name = "${function.name}${globalTypeTable[name]}ParamsObject";
-        } else {
-          globalTypeTable[name] = 0;
-        }
+        String name =
+            "${toCamelCase(library.name)}${titleCase(function.name)}Params";
 
         JsonDeclaredType declaredType = new JsonDeclaredType({
           'id': name

@@ -144,7 +144,7 @@ class ChromeRuntime extends ChromeApi {
    * [][runtime.Port onDisconnect] event is fired if the extension/app does not
    * exist.
    */
-  Port connect([String extensionId, connectParamsObject connectInfo]) {
+  Port connect([String extensionId, runtimeConnectParams connectInfo]) {
     if (_runtime == null) _throwNotAvailable();
 
     return _createPort(_runtime.callMethod('connect', [extensionId, jsify(connectInfo)]));
@@ -180,7 +180,7 @@ class ChromeRuntime extends ChromeApi {
    * occurs while connecting to the extension, the callback will be called with
    * no arguments and [runtime.lastError] will be set to the error message.
    */
-  Future<dynamic> sendMessage(dynamic message, [String extensionId, sendMessageParamsObject options]) {
+  Future<dynamic> sendMessage(dynamic message, [String extensionId, runtimeSendMessageParams options]) {
     if (_runtime == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<dynamic>.oneArg();
@@ -490,12 +490,12 @@ class MessageSender extends ChromeObject {
   set tlsChannelId(String value) => jsProxy['tlsChannelId'] = value;
 }
 
-class connectParamsObject extends ChromeObject {
-  connectParamsObject({String name, bool includeTlsChannelId}) {
+class runtimeConnectParams extends ChromeObject {
+  runtimeConnectParams({String name, bool includeTlsChannelId}) {
     if (name != null) this.name = name;
     if (includeTlsChannelId != null) this.includeTlsChannelId = includeTlsChannelId;
   }
-  connectParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  runtimeConnectParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Will be passed into onConnect for processes that are listening for the
@@ -512,11 +512,11 @@ class connectParamsObject extends ChromeObject {
   set includeTlsChannelId(bool value) => jsProxy['includeTlsChannelId'] = value;
 }
 
-class sendMessageParamsObject extends ChromeObject {
-  sendMessageParamsObject({bool includeTlsChannelId}) {
+class runtimeSendMessageParams extends ChromeObject {
+  runtimeSendMessageParams({bool includeTlsChannelId}) {
     if (includeTlsChannelId != null) this.includeTlsChannelId = includeTlsChannelId;
   }
-  sendMessageParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  runtimeSendMessageParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Whether the TLS channel ID will be passed into onMessageExternal for

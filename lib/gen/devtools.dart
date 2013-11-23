@@ -67,7 +67,7 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
   /**
    * Reloads the inspected page.
    */
-  void reload([reload2ParamsObject reloadOptions]) {
+  void reload([devtoolsInspectedWindowReloadParams reloadOptions]) {
     if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
     _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
@@ -175,13 +175,13 @@ class Resource extends ChromeObject {
   }
 }
 
-class reload2ParamsObject extends ChromeObject {
-  reload2ParamsObject({bool ignoreCache, String userAgent, String injectedScript}) {
+class devtoolsInspectedWindowReloadParams extends ChromeObject {
+  devtoolsInspectedWindowReloadParams({bool ignoreCache, String userAgent, String injectedScript}) {
     if (ignoreCache != null) this.ignoreCache = ignoreCache;
     if (userAgent != null) this.userAgent = userAgent;
     if (injectedScript != null) this.injectedScript = injectedScript;
   }
-  reload2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  devtoolsInspectedWindowReloadParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * When true, the loader will ignore the cache for all inspected page

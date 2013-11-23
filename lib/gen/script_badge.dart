@@ -25,7 +25,7 @@ class ChromeScriptBadge extends ChromeApi {
    * Sets the html document to be opened as a popup when the user clicks on the
    * script badge's icon.
    */
-  void setPopup(setPopup2ParamsObject details) {
+  void setPopup(scriptBadgeSetPopupParams details) {
     if (_scriptBadge == null) _throwNotAvailable();
 
     _scriptBadge.callMethod('setPopup', [jsify(details)]);
@@ -34,7 +34,7 @@ class ChromeScriptBadge extends ChromeApi {
   /**
    * Gets the html document set as the popup for this script badge.
    */
-  Future<String> getPopup(getPopup2ParamsObject details) {
+  Future<String> getPopup(scriptBadgeGetPopupParams details) {
     if (_scriptBadge == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<String>.oneArg();
@@ -49,7 +49,7 @@ class ChromeScriptBadge extends ChromeApi {
    * clicks on the badge, the activeTab APIs become available. If the extension
    * has already run on this tab, this call does nothing.
    */
-  void getAttention(getAttentionParamsObject details) {
+  void getAttention(scriptBadgeGetAttentionParams details) {
     if (_scriptBadge == null) _throwNotAvailable();
 
     _scriptBadge.callMethod('getAttention', [jsify(details)]);
@@ -69,12 +69,12 @@ class ChromeScriptBadge extends ChromeApi {
   }
 }
 
-class setPopup2ParamsObject extends ChromeObject {
-  setPopup2ParamsObject({int tabId, String popup}) {
+class scriptBadgeSetPopupParams extends ChromeObject {
+  scriptBadgeSetPopupParams({int tabId, String popup}) {
     if (tabId != null) this.tabId = tabId;
     if (popup != null) this.popup = popup;
   }
-  setPopup2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  scriptBadgeSetPopupParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * The id of the tab for which you want to modify the script badge.
@@ -90,11 +90,11 @@ class setPopup2ParamsObject extends ChromeObject {
   set popup(String value) => jsProxy['popup'] = value;
 }
 
-class getPopup2ParamsObject extends ChromeObject {
-  getPopup2ParamsObject({int tabId}) {
+class scriptBadgeGetPopupParams extends ChromeObject {
+  scriptBadgeGetPopupParams({int tabId}) {
     if (tabId != null) this.tabId = tabId;
   }
-  getPopup2ParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  scriptBadgeGetPopupParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Specify the tab to get the popup from.
@@ -103,11 +103,11 @@ class getPopup2ParamsObject extends ChromeObject {
   set tabId(int value) => jsProxy['tabId'] = value;
 }
 
-class getAttentionParamsObject extends ChromeObject {
-  getAttentionParamsObject({int tabId}) {
+class scriptBadgeGetAttentionParams extends ChromeObject {
+  scriptBadgeGetAttentionParams({int tabId}) {
     if (tabId != null) this.tabId = tabId;
   }
-  getAttentionParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  scriptBadgeGetAttentionParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Specify the tab to request to act on.

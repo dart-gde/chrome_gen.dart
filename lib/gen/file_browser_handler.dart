@@ -34,7 +34,7 @@ class ChromeFileBrowserHandler extends ChromeApi {
    * Returns:
    * Result of the method.
    */
-  Future<Map> selectFile(selectFileParamsObject selectionParams) {
+  Future<Map> selectFile(fileBrowserHandlerSelectFileParams selectionParams) {
     if (_fileBrowserHandler == null) _throwNotAvailable();
 
     var completer = new ChromeCompleter<Map>.oneArg(mapify);
@@ -97,12 +97,12 @@ class FileHandlerExecuteEventDetails extends ChromeObject {
   set tab_id(int value) => jsProxy['tab_id'] = value;
 }
 
-class selectFileParamsObject extends ChromeObject {
-  selectFileParamsObject({String suggestedName, List<String> allowedFileExtensions}) {
+class fileBrowserHandlerSelectFileParams extends ChromeObject {
+  fileBrowserHandlerSelectFileParams({String suggestedName, List<String> allowedFileExtensions}) {
     if (suggestedName != null) this.suggestedName = suggestedName;
     if (allowedFileExtensions != null) this.allowedFileExtensions = allowedFileExtensions;
   }
-  selectFileParamsObject.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  fileBrowserHandlerSelectFileParams.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
   /**
    * Suggested name for the file.
