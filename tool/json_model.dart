@@ -37,6 +37,8 @@ class JsonProperty extends JsonObject {
   final JsonReturnType type;
 
   static List<JsonProperty> parse(Map m) {
+    // TODO: add support for 'choices'. Example browserAction.setIcon has
+    // parameters that could be multiple types.
     List<JsonProperty> properties = [];
 
     if (m != null) {
