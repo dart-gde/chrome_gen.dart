@@ -52,7 +52,7 @@ class ChromeCookies extends ChromeApi {
   * Contains details about the cookie. This parameter is null if no such cookie
   * was found.
   */
- Future&lt;Cookie&gt; get(Map details) {
+ Future&lt;Cookie&gt; get(CookiesGetParams details) {
    if (_cookies == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(_createCookie);
@@ -71,7 +71,7 @@ class ChromeCookies extends ChromeApi {
   * Returns:
   * All the existing, unexpired cookies that match the given cookie info.
   */
- Future&lt;List&lt;Cookie&gt;&gt; getAll(Map details) {
+ Future&lt;List&lt;Cookie&gt;&gt; getAll(CookiesGetAllParams details) {
    if (_cookies == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Cookie&gt;&gt;.oneArg((e) =&gt; listify(e, _createCookie));
@@ -90,7 +90,7 @@ class ChromeCookies extends ChromeApi {
   * any reason, this will be "null", and "chrome.runtime.lastError" will be
   * set.
   */
- Future&lt;Cookie&gt; set(Map details) {
+ Future&lt;Cookie&gt; set(CookiesSetParams details) {
    if (_cookies == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(_createCookie);
@@ -108,7 +108,7 @@ class ChromeCookies extends ChromeApi {
   * for any reason, this will be "null", and "chrome.runtime.lastError" will be
   * set.
   */
- Future&lt;Map&gt; remove(Map details) {
+ Future&lt;Map&gt; remove(CookiesRemoveParams details) {
    if (_cookies == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
@@ -191,7 +191,7 @@ Stream&lt;Map&gt; get onChanged =&gt; _onChanged.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="get">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.cookies/Cookie.html">Cookie</a>&gt; <strong>get</strong>(Map details) <a class="anchor-link" href="#get"
+Future&lt;<a href="../chrome.cookies/Cookie.html">Cookie</a>&gt; <strong>get</strong>(<a href="../chrome.cookies/CookiesGetParams.html">CookiesGetParams</a> details) <a class="anchor-link" href="#get"
               title="Permalink to ChromeCookies.get">#</a></h4>
 <div class="doc">
 <p>Retrieves information about a single cookie. If more than one cookie of the
@@ -204,7 +204,7 @@ earliest creation time will be returned.</p>
 Contains details about the cookie. This parameter is null if no such cookie
 was found.</p>
 <pre class="source">
-Future&lt;Cookie&gt; get(Map details) {
+Future&lt;Cookie&gt; get(CookiesGetParams details) {
  if (_cookies == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(_createCookie);
@@ -216,7 +216,7 @@ Future&lt;Cookie&gt; get(Map details) {
 </div>
 <div class="method"><h4 id="getAll">
 <button class="show-code">Code</button>
-Future&lt;List&lt;<a href="../chrome.cookies/Cookie.html">Cookie</a>&gt;&gt; <strong>getAll</strong>(Map details) <a class="anchor-link" href="#getAll"
+Future&lt;List&lt;<a href="../chrome.cookies/Cookie.html">Cookie</a>&gt;&gt; <strong>getAll</strong>(<a href="../chrome.cookies/CookiesGetAllParams.html">CookiesGetAllParams</a> details) <a class="anchor-link" href="#getAll"
               title="Permalink to ChromeCookies.getAll">#</a></h4>
 <div class="doc">
 <p>Retrieves all cookies from a single cookie store that match the given
@@ -228,7 +228,7 @@ with the earliest creation time will be first.</p>
 <p>Returns:
 All the existing, unexpired cookies that match the given cookie info.</p>
 <pre class="source">
-Future&lt;List&lt;Cookie&gt;&gt; getAll(Map details) {
+Future&lt;List&lt;Cookie&gt;&gt; getAll(CookiesGetAllParams details) {
  if (_cookies == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Cookie&gt;&gt;.oneArg((e) =&gt; listify(e, _createCookie));
@@ -259,7 +259,7 @@ Future&lt;List&lt;CookieStore&gt;&gt; getAllCookieStores() {
 </div>
 <div class="method"><h4 id="remove">
 <button class="show-code">Code</button>
-Future&lt;Map&gt; <strong>remove</strong>(Map details) <a class="anchor-link" href="#remove"
+Future&lt;Map&gt; <strong>remove</strong>(<a href="../chrome.cookies/CookiesRemoveParams.html">CookiesRemoveParams</a> details) <a class="anchor-link" href="#remove"
               title="Permalink to ChromeCookies.remove">#</a></h4>
 <div class="doc">
 <p>Deletes a cookie by name.</p>
@@ -270,7 +270,7 @@ Contains details about the cookie that's been removed.  If removal failed
 for any reason, this will be "null", and "chrome.runtime.lastError" will be
 set.</p>
 <pre class="source">
-Future&lt;Map&gt; remove(Map details) {
+Future&lt;Map&gt; remove(CookiesRemoveParams details) {
  if (_cookies == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
@@ -282,7 +282,7 @@ Future&lt;Map&gt; remove(Map details) {
 </div>
 <div class="method"><h4 id="set">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.cookies/Cookie.html">Cookie</a>&gt; <strong>set</strong>(Map details) <a class="anchor-link" href="#set"
+Future&lt;<a href="../chrome.cookies/Cookie.html">Cookie</a>&gt; <strong>set</strong>(<a href="../chrome.cookies/CookiesSetParams.html">CookiesSetParams</a> details) <a class="anchor-link" href="#set"
               title="Permalink to ChromeCookies.set">#</a></h4>
 <div class="doc">
 <p>Sets a cookie with the given cookie data; may overwrite equivalent cookies
@@ -294,7 +294,7 @@ Contains details about the cookie that's been set.  If setting failed for
 any reason, this will be "null", and "chrome.runtime.lastError" will be
 set.</p>
 <pre class="source">
-Future&lt;Cookie&gt; set(Map details) {
+Future&lt;Cookie&gt; set(CookiesSetParams details) {
  if (_cookies == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Cookie&gt;.oneArg(_createCookie);

@@ -43,7 +43,7 @@ class ChromeBrowserAction extends ChromeApi {
  /**
   * Sets the title of the browser action. This shows up in the tooltip.
   */
- void setTitle(Map details) {
+ void setTitle(BrowserActionSetTitleParams details) {
    if (_browserAction == null) _throwNotAvailable();
 
    _browserAction.callMethod('setTitle', [jsify(details)]);
@@ -52,7 +52,7 @@ class ChromeBrowserAction extends ChromeApi {
  /**
   * Gets the title of the browser action.
   */
- Future&lt;String&gt; getTitle(Map details) {
+ Future&lt;String&gt; getTitle(BrowserActionGetTitleParams details) {
    if (_browserAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -66,7 +66,7 @@ class ChromeBrowserAction extends ChromeApi {
   * dictionary of either one of those. Either the &lt;b&gt;path&lt;/b&gt; or the
   * &lt;b&gt;imageData&lt;/b&gt; property must be specified.
   */
- Future setIcon(Map details) {
+ Future setIcon(BrowserActionSetIconParams details) {
    if (_browserAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -78,7 +78,7 @@ class ChromeBrowserAction extends ChromeApi {
   * Sets the html document to be opened as a popup when the user clicks on the
   * browser action's icon.
   */
- void setPopup(Map details) {
+ void setPopup(BrowserActionSetPopupParams details) {
    if (_browserAction == null) _throwNotAvailable();
 
    _browserAction.callMethod('setPopup', [jsify(details)]);
@@ -87,7 +87,7 @@ class ChromeBrowserAction extends ChromeApi {
  /**
   * Gets the html document set as the popup for this browser action.
   */
- Future&lt;String&gt; getPopup(Map details) {
+ Future&lt;String&gt; getPopup(BrowserActionGetPopupParams details) {
    if (_browserAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -99,7 +99,7 @@ class ChromeBrowserAction extends ChromeApi {
   * Sets the badge text for the browser action. The badge is displayed on top
   * of the icon.
   */
- void setBadgeText(Map details) {
+ void setBadgeText(BrowserActionSetBadgeTextParams details) {
    if (_browserAction == null) _throwNotAvailable();
 
    _browserAction.callMethod('setBadgeText', [jsify(details)]);
@@ -109,7 +109,7 @@ class ChromeBrowserAction extends ChromeApi {
   * Gets the badge text of the browser action. If no tab is specified, the
   * non-tab-specific badge text is returned.
   */
- Future&lt;String&gt; getBadgeText(Map details) {
+ Future&lt;String&gt; getBadgeText(BrowserActionGetBadgeTextParams details) {
    if (_browserAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -120,7 +120,7 @@ class ChromeBrowserAction extends ChromeApi {
  /**
   * Sets the background color for the badge.
   */
- void setBadgeBackgroundColor(Map details) {
+ void setBadgeBackgroundColor(BrowserActionSetBadgeBackgroundColorParams details) {
    if (_browserAction == null) _throwNotAvailable();
 
    _browserAction.callMethod('setBadgeBackgroundColor', [jsify(details)]);
@@ -129,7 +129,7 @@ class ChromeBrowserAction extends ChromeApi {
  /**
   * Gets the background color of the browser action.
   */
- Future&lt;ColorArray&gt; getBadgeBackgroundColor(Map details) {
+ Future&lt;ColorArray&gt; getBadgeBackgroundColor(BrowserActionGetBadgeBackgroundColorParams details) {
    if (_browserAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;ColorArray&gt;.oneArg(_createColorArray);
@@ -266,12 +266,12 @@ void enable([int tabId]) {
 </div>
 <div class="method"><h4 id="getBadgeBackgroundColor">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.browserAction/ColorArray.html">ColorArray</a>&gt; <strong>getBadgeBackgroundColor</strong>(Map details) <a class="anchor-link" href="#getBadgeBackgroundColor"
+Future&lt;<a href="../chrome.browserAction/ColorArray.html">ColorArray</a>&gt; <strong>getBadgeBackgroundColor</strong>(<a href="../chrome.browserAction/BrowserActionGetBadgeBackgroundColorParams.html">BrowserActionGetBadgeBackgroundColorParams</a> details) <a class="anchor-link" href="#getBadgeBackgroundColor"
               title="Permalink to ChromeBrowserAction.getBadgeBackgroundColor">#</a></h4>
 <div class="doc">
 <p>Gets the background color of the browser action.</p>
 <pre class="source">
-Future&lt;ColorArray&gt; getBadgeBackgroundColor(Map details) {
+Future&lt;ColorArray&gt; getBadgeBackgroundColor(BrowserActionGetBadgeBackgroundColorParams details) {
  if (_browserAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;ColorArray&gt;.oneArg(_createColorArray);
@@ -283,13 +283,13 @@ Future&lt;ColorArray&gt; getBadgeBackgroundColor(Map details) {
 </div>
 <div class="method"><h4 id="getBadgeText">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>getBadgeText</strong>(Map details) <a class="anchor-link" href="#getBadgeText"
+Future&lt;String&gt; <strong>getBadgeText</strong>(<a href="../chrome.browserAction/BrowserActionGetBadgeTextParams.html">BrowserActionGetBadgeTextParams</a> details) <a class="anchor-link" href="#getBadgeText"
               title="Permalink to ChromeBrowserAction.getBadgeText">#</a></h4>
 <div class="doc">
 <p>Gets the badge text of the browser action. If no tab is specified, the
 non-tab-specific badge text is returned.</p>
 <pre class="source">
-Future&lt;String&gt; getBadgeText(Map details) {
+Future&lt;String&gt; getBadgeText(BrowserActionGetBadgeTextParams details) {
  if (_browserAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -301,12 +301,12 @@ Future&lt;String&gt; getBadgeText(Map details) {
 </div>
 <div class="method"><h4 id="getPopup">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>getPopup</strong>(Map details) <a class="anchor-link" href="#getPopup"
+Future&lt;String&gt; <strong>getPopup</strong>(<a href="../chrome.browserAction/BrowserActionGetPopupParams.html">BrowserActionGetPopupParams</a> details) <a class="anchor-link" href="#getPopup"
               title="Permalink to ChromeBrowserAction.getPopup">#</a></h4>
 <div class="doc">
 <p>Gets the html document set as the popup for this browser action.</p>
 <pre class="source">
-Future&lt;String&gt; getPopup(Map details) {
+Future&lt;String&gt; getPopup(BrowserActionGetPopupParams details) {
  if (_browserAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -318,12 +318,12 @@ Future&lt;String&gt; getPopup(Map details) {
 </div>
 <div class="method"><h4 id="getTitle">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>getTitle</strong>(Map details) <a class="anchor-link" href="#getTitle"
+Future&lt;String&gt; <strong>getTitle</strong>(<a href="../chrome.browserAction/BrowserActionGetTitleParams.html">BrowserActionGetTitleParams</a> details) <a class="anchor-link" href="#getTitle"
               title="Permalink to ChromeBrowserAction.getTitle">#</a></h4>
 <div class="doc">
 <p>Gets the title of the browser action.</p>
 <pre class="source">
-Future&lt;String&gt; getTitle(Map details) {
+Future&lt;String&gt; getTitle(BrowserActionGetTitleParams details) {
  if (_browserAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -356,12 +356,12 @@ Future&lt;Map&lt;String, dynamic&gt;&gt; openPopup() {
 </div>
 <div class="method"><h4 id="setBadgeBackgroundColor">
 <button class="show-code">Code</button>
-void <strong>setBadgeBackgroundColor</strong>(Map details) <a class="anchor-link" href="#setBadgeBackgroundColor"
+void <strong>setBadgeBackgroundColor</strong>(<a href="../chrome.browserAction/BrowserActionSetBadgeBackgroundColorParams.html">BrowserActionSetBadgeBackgroundColorParams</a> details) <a class="anchor-link" href="#setBadgeBackgroundColor"
               title="Permalink to ChromeBrowserAction.setBadgeBackgroundColor">#</a></h4>
 <div class="doc">
 <p>Sets the background color for the badge.</p>
 <pre class="source">
-void setBadgeBackgroundColor(Map details) {
+void setBadgeBackgroundColor(BrowserActionSetBadgeBackgroundColorParams details) {
  if (_browserAction == null) _throwNotAvailable();
 
  _browserAction.callMethod('setBadgeBackgroundColor', [jsify(details)]);
@@ -371,13 +371,13 @@ void setBadgeBackgroundColor(Map details) {
 </div>
 <div class="method"><h4 id="setBadgeText">
 <button class="show-code">Code</button>
-void <strong>setBadgeText</strong>(Map details) <a class="anchor-link" href="#setBadgeText"
+void <strong>setBadgeText</strong>(<a href="../chrome.browserAction/BrowserActionSetBadgeTextParams.html">BrowserActionSetBadgeTextParams</a> details) <a class="anchor-link" href="#setBadgeText"
               title="Permalink to ChromeBrowserAction.setBadgeText">#</a></h4>
 <div class="doc">
 <p>Sets the badge text for the browser action. The badge is displayed on top
 of the icon.</p>
 <pre class="source">
-void setBadgeText(Map details) {
+void setBadgeText(BrowserActionSetBadgeTextParams details) {
  if (_browserAction == null) _throwNotAvailable();
 
  _browserAction.callMethod('setBadgeText', [jsify(details)]);
@@ -387,7 +387,7 @@ void setBadgeText(Map details) {
 </div>
 <div class="method"><h4 id="setIcon">
 <button class="show-code">Code</button>
-Future <strong>setIcon</strong>(Map details) <a class="anchor-link" href="#setIcon"
+Future <strong>setIcon</strong>(<a href="../chrome.browserAction/BrowserActionSetIconParams.html">BrowserActionSetIconParams</a> details) <a class="anchor-link" href="#setIcon"
               title="Permalink to ChromeBrowserAction.setIcon">#</a></h4>
 <div class="doc">
 <p>Sets the icon for the browser action. The icon can be specified either as
@@ -395,7 +395,7 @@ the path to an image file or as the pixel data from a canvas element, or as
 dictionary of either one of those. Either the &lt;b>path&lt;/b> or the
 &lt;b>imageData&lt;/b> property must be specified.</p>
 <pre class="source">
-Future setIcon(Map details) {
+Future setIcon(BrowserActionSetIconParams details) {
  if (_browserAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -407,13 +407,13 @@ Future setIcon(Map details) {
 </div>
 <div class="method"><h4 id="setPopup">
 <button class="show-code">Code</button>
-void <strong>setPopup</strong>(Map details) <a class="anchor-link" href="#setPopup"
+void <strong>setPopup</strong>(<a href="../chrome.browserAction/BrowserActionSetPopupParams.html">BrowserActionSetPopupParams</a> details) <a class="anchor-link" href="#setPopup"
               title="Permalink to ChromeBrowserAction.setPopup">#</a></h4>
 <div class="doc">
 <p>Sets the html document to be opened as a popup when the user clicks on the
 browser action's icon.</p>
 <pre class="source">
-void setPopup(Map details) {
+void setPopup(BrowserActionSetPopupParams details) {
  if (_browserAction == null) _throwNotAvailable();
 
  _browserAction.callMethod('setPopup', [jsify(details)]);
@@ -423,12 +423,12 @@ void setPopup(Map details) {
 </div>
 <div class="method"><h4 id="setTitle">
 <button class="show-code">Code</button>
-void <strong>setTitle</strong>(Map details) <a class="anchor-link" href="#setTitle"
+void <strong>setTitle</strong>(<a href="../chrome.browserAction/BrowserActionSetTitleParams.html">BrowserActionSetTitleParams</a> details) <a class="anchor-link" href="#setTitle"
               title="Permalink to ChromeBrowserAction.setTitle">#</a></h4>
 <div class="doc">
 <p>Sets the title of the browser action. This shows up in the tooltip.</p>
 <pre class="source">
-void setTitle(Map details) {
+void setTitle(BrowserActionSetTitleParams details) {
  if (_browserAction == null) _throwNotAvailable();
 
  _browserAction.callMethod('setTitle', [jsify(details)]);

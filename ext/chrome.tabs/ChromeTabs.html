@@ -75,7 +75,7 @@ class ChromeTabs extends ChromeApi {
   * the specified tab. The port's [runtime.Port] event is fired if the tab
   * closes or does not exist.
   */
- Port connect(int tabId, [Map connectInfo]) {
+ Port connect(int tabId, [TabsConnectParams connectInfo]) {
    if (_tabs == null) _throwNotAvailable();
 
    return _createPort(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
@@ -150,7 +150,7 @@ class ChromeTabs extends ChromeApi {
   * Returns:
   * Details about the created tab. Will contain the ID of the new tab.
   */
- Future&lt;Tab&gt; create(Map createProperties) {
+ Future&lt;Tab&gt; create(TabsCreateParams createProperties) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
@@ -180,7 +180,7 @@ class ChromeTabs extends ChromeApi {
   * Gets all tabs that have the specified properties, or all tabs if no
   * properties are specified.
   */
- Future&lt;List&lt;Tab&gt;&gt; query(Map queryInfo) {
+ Future&lt;List&lt;Tab&gt;&gt; query(TabsQueryParams queryInfo) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, _createTab));
@@ -194,7 +194,7 @@ class ChromeTabs extends ChromeApi {
   * Returns:
   * Contains details about the window whose tabs were highlighted.
   */
- Future&lt;Window&gt; highlight(Map highlightInfo) {
+ Future&lt;Window&gt; highlight(TabsHighlightParams highlightInfo) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
@@ -213,7 +213,7 @@ class ChromeTabs extends ChromeApi {
   * Details about the updated tab. The [tabs.Tab] object doesn't contain `url`,
   * `title` and `favIconUrl` if the `"tabs"` permission has not been requested.
   */
- Future&lt;Tab&gt; update(Map updateProperties, [int tabId]) {
+ Future&lt;Tab&gt; update(TabsUpdateParams updateProperties, [int tabId]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
@@ -231,7 +231,7 @@ class ChromeTabs extends ChromeApi {
   * Returns:
   * Details about the moved tabs.
   */
- Future&lt;dynamic&gt; move(dynamic tabIds, Map moveProperties) {
+ Future&lt;dynamic&gt; move(dynamic tabIds, TabsMoveParams moveProperties) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -245,7 +245,7 @@ class ChromeTabs extends ChromeApi {
   * [tabId] The ID of the tab to reload; defaults to the selected tab of the
   * current window.
   */
- Future reload([int tabId, Map reloadProperties]) {
+ Future reload([int tabId, TabsReloadParams reloadProperties]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -303,7 +303,7 @@ class ChromeTabs extends ChromeApi {
   * A data URL which encodes an image of the visible area of the captured tab.
   * May be assigned to the 'src' property of an HTML Image element for display.
   */
- Future&lt;String&gt; captureVisibleTab([int windowId, Map options]) {
+ Future&lt;String&gt; captureVisibleTab([int windowId, TabsCaptureVisibleTabParams options]) {
    if (_tabs == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -652,7 +652,7 @@ Stream&lt;OnUpdatedEvent&gt; get onUpdated =&gt; _onUpdated.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="captureVisibleTab">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>captureVisibleTab</strong>([int windowId, Map options]) <a class="anchor-link" href="#captureVisibleTab"
+Future&lt;String&gt; <strong>captureVisibleTab</strong>([int windowId, <a href="../chrome.tabs/TabsCaptureVisibleTabParams.html">TabsCaptureVisibleTabParams</a> options]) <a class="anchor-link" href="#captureVisibleTab"
               title="Permalink to ChromeTabs.captureVisibleTab">#</a></h4>
 <div class="doc">
 <p>Captures the visible area of the currently active tab in the specified
@@ -668,7 +668,7 @@ resulting image.</p>
 A data URL which encodes an image of the visible area of the captured tab.
 May be assigned to the 'src' property of an HTML Image element for display.</p>
 <pre class="source">
-Future&lt;String&gt; captureVisibleTab([int windowId, Map options]) {
+Future&lt;String&gt; captureVisibleTab([int windowId, TabsCaptureVisibleTabParams options]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -680,7 +680,7 @@ Future&lt;String&gt; captureVisibleTab([int windowId, Map options]) {
 </div>
 <div class="method"><h4 id="connect">
 <button class="show-code">Code</button>
-<a href="../chrome.runtime/Port.html">Port</a> <strong>connect</strong>(int tabId, [Map connectInfo]) <a class="anchor-link" href="#connect"
+<a href="../chrome.runtime/Port.html">Port</a> <strong>connect</strong>(int tabId, [<a href="../chrome.tabs/TabsConnectParams.html">TabsConnectParams</a> connectInfo]) <a class="anchor-link" href="#connect"
               title="Permalink to ChromeTabs.connect">#</a></h4>
 <div class="doc">
 <p>Connects to the content script(s) in the specified tab. The
@@ -692,7 +692,7 @@ A port that can be used to communicate with the content scripts running in
 the specified tab. The port's <code>runtime.Port</code> event is fired if the tab
 closes or does not exist.</p>
 <pre class="source">
-Port connect(int tabId, [Map connectInfo]) {
+Port connect(int tabId, [TabsConnectParams connectInfo]) {
  if (_tabs == null) _throwNotAvailable();
 
  return _createPort(_tabs.callMethod('connect', [tabId, jsify(connectInfo)]));
@@ -702,14 +702,14 @@ Port connect(int tabId, [Map connectInfo]) {
 </div>
 <div class="method"><h4 id="create">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>create</strong>(Map createProperties) <a class="anchor-link" href="#create"
+Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>create</strong>(<a href="../chrome.tabs/TabsCreateParams.html">TabsCreateParams</a> createProperties) <a class="anchor-link" href="#create"
               title="Permalink to ChromeTabs.create">#</a></h4>
 <div class="doc">
 <p>Creates a new tab.</p>
 <p>Returns:
 Details about the created tab. Will contain the ID of the new tab.</p>
 <pre class="source">
-Future&lt;Tab&gt; create(Map createProperties) {
+Future&lt;Tab&gt; create(TabsCreateParams createProperties) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);
@@ -872,14 +872,14 @@ Future&lt;Tab&gt; getSelected([int windowId]) {
 </div>
 <div class="method"><h4 id="highlight">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>highlight</strong>(Map highlightInfo) <a class="anchor-link" href="#highlight"
+Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>highlight</strong>(<a href="../chrome.tabs/TabsHighlightParams.html">TabsHighlightParams</a> highlightInfo) <a class="anchor-link" href="#highlight"
               title="Permalink to ChromeTabs.highlight">#</a></h4>
 <div class="doc">
 <p>Highlights the given tabs.</p>
 <p>Returns:
 Contains details about the window whose tabs were highlighted.</p>
 <pre class="source">
-Future&lt;Window&gt; highlight(Map highlightInfo) {
+Future&lt;Window&gt; highlight(TabsHighlightParams highlightInfo) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
@@ -914,7 +914,7 @@ Future insertCSS(InjectDetails details, [int tabId]) {
 </div>
 <div class="method"><h4 id="move">
 <button class="show-code">Code</button>
-Future&lt;dynamic&gt; <strong>move</strong>(tabIds, Map moveProperties) <a class="anchor-link" href="#move"
+Future&lt;dynamic&gt; <strong>move</strong>(tabIds, <a href="../chrome.tabs/TabsMoveParams.html">TabsMoveParams</a> moveProperties) <a class="anchor-link" href="#move"
               title="Permalink to ChromeTabs.move">#</a></h4>
 <div class="doc">
 <p>Moves one or more tabs to a new position within its window, or to a new
@@ -925,7 +925,7 @@ window. Note that tabs can only be moved to and from normal (window.type
 <p>Returns:
 Details about the moved tabs.</p>
 <pre class="source">
-Future&lt;dynamic&gt; move(dynamic tabIds, Map moveProperties) {
+Future&lt;dynamic&gt; move(dynamic tabIds, TabsMoveParams moveProperties) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -937,13 +937,13 @@ Future&lt;dynamic&gt; move(dynamic tabIds, Map moveProperties) {
 </div>
 <div class="method"><h4 id="query">
 <button class="show-code">Code</button>
-Future&lt;List&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt;&gt; <strong>query</strong>(Map queryInfo) <a class="anchor-link" href="#query"
+Future&lt;List&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt;&gt; <strong>query</strong>(<a href="../chrome.tabs/TabsQueryParams.html">TabsQueryParams</a> queryInfo) <a class="anchor-link" href="#query"
               title="Permalink to ChromeTabs.query">#</a></h4>
 <div class="doc">
 <p>Gets all tabs that have the specified properties, or all tabs if no
 properties are specified.</p>
 <pre class="source">
-Future&lt;List&lt;Tab&gt;&gt; query(Map queryInfo) {
+Future&lt;List&lt;Tab&gt;&gt; query(TabsQueryParams queryInfo) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Tab&gt;&gt;.oneArg((e) =&gt; listify(e, _createTab));
@@ -955,7 +955,7 @@ Future&lt;List&lt;Tab&gt;&gt; query(Map queryInfo) {
 </div>
 <div class="method"><h4 id="reload">
 <button class="show-code">Code</button>
-Future <strong>reload</strong>([int tabId, Map reloadProperties]) <a class="anchor-link" href="#reload"
+Future <strong>reload</strong>([int tabId, <a href="../chrome.tabs/TabsReloadParams.html">TabsReloadParams</a> reloadProperties]) <a class="anchor-link" href="#reload"
               title="Permalink to ChromeTabs.reload">#</a></h4>
 <div class="doc">
 <p>Reload a tab.</p>
@@ -963,7 +963,7 @@ Future <strong>reload</strong>([int tabId, Map reloadProperties]) <a class="anch
 <span class="param">tabId</span> The ID of the tab to reload; defaults to the selected tab of the
 current window.</p>
 <pre class="source">
-Future reload([int tabId, Map reloadProperties]) {
+Future reload([int tabId, TabsReloadParams reloadProperties]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -1039,7 +1039,7 @@ Future&lt;dynamic&gt; sendRequest(int tabId, dynamic request) {
 </div>
 <div class="method"><h4 id="update">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>update</strong>(Map updateProperties, [int tabId]) <a class="anchor-link" href="#update"
+Future&lt;<a href="../chrome.tabs/Tab.html">Tab</a>&gt; <strong>update</strong>(<a href="../chrome.tabs/TabsUpdateParams.html">TabsUpdateParams</a> updateProperties, [int tabId]) <a class="anchor-link" href="#update"
               title="Permalink to ChromeTabs.update">#</a></h4>
 <div class="doc">
 <p>Modifies the properties of a tab. Properties that are not specified in
@@ -1052,7 +1052,7 @@ window</a>.</p>
 Details about the updated tab. The <code>tabs.Tab</code> object doesn't contain <code>url</code>,
 <code>title</code> and <code>favIconUrl</code> if the <code>"tabs"</code> permission has not been requested.</p>
 <pre class="source">
-Future&lt;Tab&gt; update(Map updateProperties, [int tabId]) {
+Future&lt;Tab&gt; update(TabsUpdateParams updateProperties, [int tabId]) {
  if (_tabs == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Tab&gt;.oneArg(_createTab);

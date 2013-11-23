@@ -51,7 +51,7 @@ class ChromeWebNavigation extends ChromeApi {
   * Information about the requested frame, null if the specified frame ID
   * and/or tab ID are invalid.
   */
- Future&lt;Map&gt; getFrame(Map details) {
+ Future&lt;Map&gt; getFrame(WebNavigationGetFrameParams details) {
    if (_webNavigation == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
@@ -67,7 +67,7 @@ class ChromeWebNavigation extends ChromeApi {
   * Returns:
   * A list of frames in the given tab, null if the specified tab ID is invalid.
   */
- Future&lt;List&lt;Map&gt;&gt; getAllFrames(Map details) {
+ Future&lt;List&lt;Map&gt;&gt; getAllFrames(WebNavigationGetAllFramesParams details) {
    if (_webNavigation == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;Map&gt;&gt;.oneArg((e) =&gt; listify(e, mapify));
@@ -316,7 +316,7 @@ Stream&lt;Map&gt; get onTabReplaced =&gt; _onTabReplaced.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="getAllFrames">
 <button class="show-code">Code</button>
-Future&lt;List&lt;Map&gt;&gt; <strong>getAllFrames</strong>(Map details) <a class="anchor-link" href="#getAllFrames"
+Future&lt;List&lt;Map&gt;&gt; <strong>getAllFrames</strong>(<a href="../chrome.webNavigation/WebNavigationGetAllFramesParams.html">WebNavigationGetAllFramesParams</a> details) <a class="anchor-link" href="#getAllFrames"
               title="Permalink to ChromeWebNavigation.getAllFrames">#</a></h4>
 <div class="doc">
 <p>Retrieves information about all frames of a given tab.</p>
@@ -325,7 +325,7 @@ Future&lt;List&lt;Map&gt;&gt; <strong>getAllFrames</strong>(Map details) <a clas
 <p>Returns:
 A list of frames in the given tab, null if the specified tab ID is invalid.</p>
 <pre class="source">
-Future&lt;List&lt;Map&gt;&gt; getAllFrames(Map details) {
+Future&lt;List&lt;Map&gt;&gt; getAllFrames(WebNavigationGetAllFramesParams details) {
  if (_webNavigation == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;Map&gt;&gt;.oneArg((e) =&gt; listify(e, mapify));
@@ -337,7 +337,7 @@ Future&lt;List&lt;Map&gt;&gt; getAllFrames(Map details) {
 </div>
 <div class="method"><h4 id="getFrame">
 <button class="show-code">Code</button>
-Future&lt;Map&gt; <strong>getFrame</strong>(Map details) <a class="anchor-link" href="#getFrame"
+Future&lt;Map&gt; <strong>getFrame</strong>(<a href="../chrome.webNavigation/WebNavigationGetFrameParams.html">WebNavigationGetFrameParams</a> details) <a class="anchor-link" href="#getFrame"
               title="Permalink to ChromeWebNavigation.getFrame">#</a></h4>
 <div class="doc">
 <p>Retrieves information about the given frame. A frame refers to an
@@ -349,7 +349,7 @@ ID and a frame ID.</p>
 Information about the requested frame, null if the specified frame ID
 and/or tab ID are invalid.</p>
 <pre class="source">
-Future&lt;Map&gt; getFrame(Map details) {
+Future&lt;Map&gt; getFrame(WebNavigationGetFrameParams details) {
  if (_webNavigation == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);

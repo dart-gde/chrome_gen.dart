@@ -114,7 +114,7 @@ class ChromeManagement extends ChromeApi {
   * 
   * [id] This should be the id from an item of [ExtensionInfo.]
   */
- Future uninstall(String id, [Map options]) {
+ Future uninstall(String id, [ManagementUninstallParams options]) {
    if (_management == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -126,7 +126,7 @@ class ChromeManagement extends ChromeApi {
   * Uninstalls the calling extension. Note: This function can be used without
   * requesting the 'management' permission in the manifest.
   */
- Future uninstallSelf([Map options]) {
+ Future uninstallSelf([ManagementUninstallSelfParams options]) {
    if (_management == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -381,14 +381,14 @@ Future setEnabled(String id, bool enabled) {
 </div>
 <div class="method"><h4 id="uninstall">
 <button class="show-code">Code</button>
-Future <strong>uninstall</strong>(String id, [Map options]) <a class="anchor-link" href="#uninstall"
+Future <strong>uninstall</strong>(String id, [<a href="../chrome.management/ManagementUninstallParams.html">ManagementUninstallParams</a> options]) <a class="anchor-link" href="#uninstall"
               title="Permalink to ChromeManagement.uninstall">#</a></h4>
 <div class="doc">
 <p>Uninstalls a currently installed app or extension.</p>
 <p>
 <span class="param">id</span> This should be the id from an item of <a class="crossref" href="../chrome.management/ExtensionInfo.html#">ExtensionInfo.</a></p>
 <pre class="source">
-Future uninstall(String id, [Map options]) {
+Future uninstall(String id, [ManagementUninstallParams options]) {
  if (_management == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -400,13 +400,13 @@ Future uninstall(String id, [Map options]) {
 </div>
 <div class="method"><h4 id="uninstallSelf">
 <button class="show-code">Code</button>
-Future <strong>uninstallSelf</strong>([Map options]) <a class="anchor-link" href="#uninstallSelf"
+Future <strong>uninstallSelf</strong>([<a href="../chrome.management/ManagementUninstallSelfParams.html">ManagementUninstallSelfParams</a> options]) <a class="anchor-link" href="#uninstallSelf"
               title="Permalink to ChromeManagement.uninstallSelf">#</a></h4>
 <div class="doc">
 <p>Uninstalls the calling extension. Note: This function can be used without
 requesting the 'management' permission in the manifest.</p>
 <pre class="source">
-Future uninstallSelf([Map options]) {
+Future uninstallSelf([ManagementUninstallSelfParams options]) {
  if (_management == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();

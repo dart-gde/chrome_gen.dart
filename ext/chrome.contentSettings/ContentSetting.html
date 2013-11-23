@@ -40,7 +40,7 @@ class ContentSetting extends ChromeObject {
  /**
   * Clear all content setting rules set by this extension.
   */
- Future clear(Map details) {
+ Future clear(ContentSettingsClearParams details) {
    var completer = new ChromeCompleter.noArgs();
    jsProxy.callMethod('clear', [jsify(details), completer.callback]);
    return completer.future;
@@ -49,7 +49,7 @@ class ContentSetting extends ChromeObject {
  /**
   * Gets the current content setting for a given pair of URLs.
   */
- Future&lt;Map&gt; get(Map details) {
+ Future&lt;Map&gt; get(ContentSettingsGetParams details) {
    var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    jsProxy.callMethod('get', [jsify(details), completer.callback]);
    return completer.future;
@@ -58,7 +58,7 @@ class ContentSetting extends ChromeObject {
  /**
   * Applies a new content setting rule.
   */
- Future set(Map details) {
+ Future set(ContentSettingsSetParams details) {
    var completer = new ChromeCompleter.noArgs();
    jsProxy.callMethod('set', [jsify(details), completer.callback]);
    return completer.future;
@@ -130,12 +130,12 @@ final JsObject jsProxy
 <h3>Methods</h3>
 <div class="method"><h4 id="clear">
 <button class="show-code">Code</button>
-Future <strong>clear</strong>(Map details) <a class="anchor-link" href="#clear"
+Future <strong>clear</strong>(<a href="../chrome.contentSettings/ContentSettingsClearParams.html">ContentSettingsClearParams</a> details) <a class="anchor-link" href="#clear"
               title="Permalink to ContentSetting.clear">#</a></h4>
 <div class="doc">
 <p>Clear all content setting rules set by this extension.</p>
 <pre class="source">
-Future clear(Map details) {
+Future clear(ContentSettingsClearParams details) {
  var completer = new ChromeCompleter.noArgs();
  jsProxy.callMethod('clear', [jsify(details), completer.callback]);
  return completer.future;
@@ -145,12 +145,12 @@ Future clear(Map details) {
 </div>
 <div class="method"><h4 id="get">
 <button class="show-code">Code</button>
-Future&lt;Map&gt; <strong>get</strong>(Map details) <a class="anchor-link" href="#get"
+Future&lt;Map&gt; <strong>get</strong>(<a href="../chrome.contentSettings/ContentSettingsGetParams.html">ContentSettingsGetParams</a> details) <a class="anchor-link" href="#get"
               title="Permalink to ContentSetting.get">#</a></h4>
 <div class="doc">
 <p>Gets the current content setting for a given pair of URLs.</p>
 <pre class="source">
-Future&lt;Map&gt; get(Map details) {
+Future&lt;Map&gt; get(ContentSettingsGetParams details) {
  var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  jsProxy.callMethod('get', [jsify(details), completer.callback]);
  return completer.future;
@@ -177,12 +177,12 @@ Future&lt;List&lt;ResourceIdentifier&gt;&gt; getResourceIdentifiers() {
 </div>
 <div class="method"><h4 id="set">
 <button class="show-code">Code</button>
-Future <strong>set</strong>(Map details) <a class="anchor-link" href="#set"
+Future <strong>set</strong>(<a href="../chrome.contentSettings/ContentSettingsSetParams.html">ContentSettingsSetParams</a> details) <a class="anchor-link" href="#set"
               title="Permalink to ContentSetting.set">#</a></h4>
 <div class="doc">
 <p>Applies a new content setting rule.</p>
 <pre class="source">
-Future set(Map details) {
+Future set(ContentSettingsSetParams details) {
  var completer = new ChromeCompleter.noArgs();
  jsProxy.callMethod('set', [jsify(details), completer.callback]);
  return completer.future;

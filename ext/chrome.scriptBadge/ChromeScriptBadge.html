@@ -44,7 +44,7 @@ class ChromeScriptBadge extends ChromeApi {
   * Sets the html document to be opened as a popup when the user clicks on the
   * script badge's icon.
   */
- void setPopup(Map details) {
+ void setPopup(ScriptBadgeSetPopupParams details) {
    if (_scriptBadge == null) _throwNotAvailable();
 
    _scriptBadge.callMethod('setPopup', [jsify(details)]);
@@ -53,7 +53,7 @@ class ChromeScriptBadge extends ChromeApi {
  /**
   * Gets the html document set as the popup for this script badge.
   */
- Future&lt;String&gt; getPopup(Map details) {
+ Future&lt;String&gt; getPopup(ScriptBadgeGetPopupParams details) {
    if (_scriptBadge == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -68,7 +68,7 @@ class ChromeScriptBadge extends ChromeApi {
   * clicks on the badge, the activeTab APIs become available. If the extension
   * has already run on this tab, this call does nothing.
   */
- void getAttention(Map details) {
+ void getAttention(ScriptBadgeGetAttentionParams details) {
    if (_scriptBadge == null) _throwNotAvailable();
 
    _scriptBadge.callMethod('getAttention', [jsify(details)]);
@@ -129,7 +129,7 @@ Stream&lt;Tab&gt; get onClicked =&gt; _onClicked.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="getAttention">
 <button class="show-code">Code</button>
-void <strong>getAttention</strong>(Map details) <a class="anchor-link" href="#getAttention"
+void <strong>getAttention</strong>(<a href="../chrome.scriptBadge/ScriptBadgeGetAttentionParams.html">ScriptBadgeGetAttentionParams</a> details) <a class="anchor-link" href="#getAttention"
               title="Permalink to ChromeScriptBadge.getAttention">#</a></h4>
 <div class="doc">
 <p>Brings the script badge to the attention of the user, imploring her to
@@ -138,7 +138,7 @@ particular tab.  Do not call this for every tab. That's tacky.  If the user
 clicks on the badge, the activeTab APIs become available. If the extension
 has already run on this tab, this call does nothing.</p>
 <pre class="source">
-void getAttention(Map details) {
+void getAttention(ScriptBadgeGetAttentionParams details) {
  if (_scriptBadge == null) _throwNotAvailable();
 
  _scriptBadge.callMethod('getAttention', [jsify(details)]);
@@ -148,12 +148,12 @@ void getAttention(Map details) {
 </div>
 <div class="method"><h4 id="getPopup">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>getPopup</strong>(Map details) <a class="anchor-link" href="#getPopup"
+Future&lt;String&gt; <strong>getPopup</strong>(<a href="../chrome.scriptBadge/ScriptBadgeGetPopupParams.html">ScriptBadgeGetPopupParams</a> details) <a class="anchor-link" href="#getPopup"
               title="Permalink to ChromeScriptBadge.getPopup">#</a></h4>
 <div class="doc">
 <p>Gets the html document set as the popup for this script badge.</p>
 <pre class="source">
-Future&lt;String&gt; getPopup(Map details) {
+Future&lt;String&gt; getPopup(ScriptBadgeGetPopupParams details) {
  if (_scriptBadge == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -165,13 +165,13 @@ Future&lt;String&gt; getPopup(Map details) {
 </div>
 <div class="method"><h4 id="setPopup">
 <button class="show-code">Code</button>
-void <strong>setPopup</strong>(Map details) <a class="anchor-link" href="#setPopup"
+void <strong>setPopup</strong>(<a href="../chrome.scriptBadge/ScriptBadgeSetPopupParams.html">ScriptBadgeSetPopupParams</a> details) <a class="anchor-link" href="#setPopup"
               title="Permalink to ChromeScriptBadge.setPopup">#</a></h4>
 <div class="doc">
 <p>Sets the html document to be opened as a popup when the user clicks on the
 script badge's icon.</p>
 <pre class="source">
-void setPopup(Map details) {
+void setPopup(ScriptBadgeSetPopupParams details) {
  if (_scriptBadge == null) _throwNotAvailable();
 
  _scriptBadge.callMethod('setPopup', [jsify(details)]);

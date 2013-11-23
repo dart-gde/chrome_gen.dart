@@ -52,7 +52,7 @@ class ChromeContextMenus extends ChromeApi {
   * Returns:
   * The ID of the newly created item.
   */
- dynamic create(Map createProperties, [dynamic callback]) {
+ dynamic create(ContextMenusCreateParams createProperties, [dynamic callback]) {
    if (_contextMenus == null) _throwNotAvailable();
 
    return _contextMenus.callMethod('create', [jsify(createProperties), jsify(callback)]);
@@ -66,7 +66,7 @@ class ChromeContextMenus extends ChromeApi {
   * [updateProperties] The properties to update. Accepts the same values as the
   * create function.
   */
- Future update(dynamic id, Map updateProperties) {
+ Future update(dynamic id, ContextMenusUpdateParams updateProperties) {
    if (_contextMenus == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -151,7 +151,7 @@ Stream&lt;OnClickedEvent&gt; get onClicked =&gt; _onClicked.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="create">
 <button class="show-code">Code</button>
-dynamic <strong>create</strong>(Map createProperties, [callback]) <a class="anchor-link" href="#create"
+dynamic <strong>create</strong>(<a href="../chrome.contextMenus/ContextMenusCreateParams.html">ContextMenusCreateParams</a> createProperties, [callback]) <a class="anchor-link" href="#create"
               title="Permalink to ChromeContextMenus.create">#</a></h4>
 <div class="doc">
 <p>Creates a new context menu item. Note that if an error occurs during
@@ -164,7 +164,7 @@ chrome.runtime.lastError.</p>
 <p>Returns:
 The ID of the newly created item.</p>
 <pre class="source">
-dynamic create(Map createProperties, [dynamic callback]) {
+dynamic create(ContextMenusCreateParams createProperties, [dynamic callback]) {
  if (_contextMenus == null) _throwNotAvailable();
 
  return _contextMenus.callMethod('create', [jsify(createProperties), jsify(callback)]);
@@ -210,7 +210,7 @@ Future removeAll() {
 </div>
 <div class="method"><h4 id="update">
 <button class="show-code">Code</button>
-Future <strong>update</strong>(id, Map updateProperties) <a class="anchor-link" href="#update"
+Future <strong>update</strong>(id, <a href="../chrome.contextMenus/ContextMenusUpdateParams.html">ContextMenusUpdateParams</a> updateProperties) <a class="anchor-link" href="#update"
               title="Permalink to ChromeContextMenus.update">#</a></h4>
 <div class="doc">
 <p>Updates a previously created context menu item.</p>
@@ -220,7 +220,7 @@ Future <strong>update</strong>(id, Map updateProperties) <a class="anchor-link" 
 <span class="param">updateProperties</span> The properties to update. Accepts the same values as the
 create function.</p>
 <pre class="source">
-Future update(dynamic id, Map updateProperties) {
+Future update(dynamic id, ContextMenusUpdateParams updateProperties) {
  if (_contextMenus == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();

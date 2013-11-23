@@ -46,7 +46,7 @@ class ChromePageCapture extends ChromeApi {
   * Returns:
   * The MHTML data as a Blob.
   */
- Future&lt;dynamic&gt; saveAsMHTML(Map details) {
+ Future&lt;dynamic&gt; saveAsMHTML(PageCaptureSaveAsMHTMLParams details) {
    if (_pageCapture == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();
@@ -86,14 +86,14 @@ bool get available =&gt; _pageCapture != null;
 <h3>Methods</h3>
 <div class="method"><h4 id="saveAsMHTML">
 <button class="show-code">Code</button>
-Future&lt;dynamic&gt; <strong>saveAsMHTML</strong>(Map details) <a class="anchor-link" href="#saveAsMHTML"
+Future&lt;dynamic&gt; <strong>saveAsMHTML</strong>(<a href="../chrome.pageCapture/PageCaptureSaveAsMHTMLParams.html">PageCaptureSaveAsMHTMLParams</a> details) <a class="anchor-link" href="#saveAsMHTML"
               title="Permalink to ChromePageCapture.saveAsMHTML">#</a></h4>
 <div class="doc">
 <p>Saves the content of the tab with given id as MHTML.</p>
 <p>Returns:
 The MHTML data as a Blob.</p>
 <pre class="source">
-Future&lt;dynamic&gt; saveAsMHTML(Map details) {
+Future&lt;dynamic&gt; saveAsMHTML(PageCaptureSaveAsMHTMLParams details) {
  if (_pageCapture == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;dynamic&gt;.oneArg();

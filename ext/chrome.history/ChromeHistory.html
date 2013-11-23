@@ -44,7 +44,7 @@ class ChromeHistory extends ChromeApi {
   * Searches the history for the last visit time of each page matching the
   * query.
   */
- Future&lt;List&lt;HistoryItem&gt;&gt; search(Map query) {
+ Future&lt;List&lt;HistoryItem&gt;&gt; search(HistorySearchParams query) {
    if (_history == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;HistoryItem&gt;&gt;.oneArg((e) =&gt; listify(e, _createHistoryItem));
@@ -55,7 +55,7 @@ class ChromeHistory extends ChromeApi {
  /**
   * Retrieves information about visits to a URL.
   */
- Future&lt;List&lt;VisitItem&gt;&gt; getVisits(Map details) {
+ Future&lt;List&lt;VisitItem&gt;&gt; getVisits(HistoryGetVisitsParams details) {
    if (_history == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;List&lt;VisitItem&gt;&gt;.oneArg((e) =&gt; listify(e, _createVisitItem));
@@ -67,7 +67,7 @@ class ChromeHistory extends ChromeApi {
   * Adds a URL to the history at the current time with a [transition
   * type](#transition_types) of "link".
   */
- Future addUrl(Map details) {
+ Future addUrl(HistoryAddUrlParams details) {
    if (_history == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -78,7 +78,7 @@ class ChromeHistory extends ChromeApi {
  /**
   * Removes all occurrences of the given URL from the history.
   */
- Future deleteUrl(Map details) {
+ Future deleteUrl(HistoryDeleteUrlParams details) {
    if (_history == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -91,7 +91,7 @@ class ChromeHistory extends ChromeApi {
   * will not be removed from the history unless all visits fall within the
   * range.
   */
- Future deleteRange(Map range) {
+ Future deleteRange(HistoryDeleteRangeParams range) {
    if (_history == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -188,13 +188,13 @@ Stream&lt;Map&gt; get onVisitRemoved =&gt; _onVisitRemoved.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="addUrl">
 <button class="show-code">Code</button>
-Future <strong>addUrl</strong>(Map details) <a class="anchor-link" href="#addUrl"
+Future <strong>addUrl</strong>(<a href="../chrome.history/HistoryAddUrlParams.html">HistoryAddUrlParams</a> details) <a class="anchor-link" href="#addUrl"
               title="Permalink to ChromeHistory.addUrl">#</a></h4>
 <div class="doc">
 <p>Adds a URL to the history at the current time with a <a href="#transition_types">transition
 type</a> of "link".</p>
 <pre class="source">
-Future addUrl(Map details) {
+Future addUrl(HistoryAddUrlParams details) {
  if (_history == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -223,14 +223,14 @@ Future deleteAll() {
 </div>
 <div class="method"><h4 id="deleteRange">
 <button class="show-code">Code</button>
-Future <strong>deleteRange</strong>(Map range) <a class="anchor-link" href="#deleteRange"
+Future <strong>deleteRange</strong>(<a href="../chrome.history/HistoryDeleteRangeParams.html">HistoryDeleteRangeParams</a> range) <a class="anchor-link" href="#deleteRange"
               title="Permalink to ChromeHistory.deleteRange">#</a></h4>
 <div class="doc">
 <p>Removes all items within the specified date range from the history.  Pages
 will not be removed from the history unless all visits fall within the
 range.</p>
 <pre class="source">
-Future deleteRange(Map range) {
+Future deleteRange(HistoryDeleteRangeParams range) {
  if (_history == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -242,12 +242,12 @@ Future deleteRange(Map range) {
 </div>
 <div class="method"><h4 id="deleteUrl">
 <button class="show-code">Code</button>
-Future <strong>deleteUrl</strong>(Map details) <a class="anchor-link" href="#deleteUrl"
+Future <strong>deleteUrl</strong>(<a href="../chrome.history/HistoryDeleteUrlParams.html">HistoryDeleteUrlParams</a> details) <a class="anchor-link" href="#deleteUrl"
               title="Permalink to ChromeHistory.deleteUrl">#</a></h4>
 <div class="doc">
 <p>Removes all occurrences of the given URL from the history.</p>
 <pre class="source">
-Future deleteUrl(Map details) {
+Future deleteUrl(HistoryDeleteUrlParams details) {
  if (_history == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -259,12 +259,12 @@ Future deleteUrl(Map details) {
 </div>
 <div class="method"><h4 id="getVisits">
 <button class="show-code">Code</button>
-Future&lt;List&lt;<a href="../chrome.history/VisitItem.html">VisitItem</a>&gt;&gt; <strong>getVisits</strong>(Map details) <a class="anchor-link" href="#getVisits"
+Future&lt;List&lt;<a href="../chrome.history/VisitItem.html">VisitItem</a>&gt;&gt; <strong>getVisits</strong>(<a href="../chrome.history/HistoryGetVisitsParams.html">HistoryGetVisitsParams</a> details) <a class="anchor-link" href="#getVisits"
               title="Permalink to ChromeHistory.getVisits">#</a></h4>
 <div class="doc">
 <p>Retrieves information about visits to a URL.</p>
 <pre class="source">
-Future&lt;List&lt;VisitItem&gt;&gt; getVisits(Map details) {
+Future&lt;List&lt;VisitItem&gt;&gt; getVisits(HistoryGetVisitsParams details) {
  if (_history == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;VisitItem&gt;&gt;.oneArg((e) =&gt; listify(e, _createVisitItem));
@@ -276,13 +276,13 @@ Future&lt;List&lt;VisitItem&gt;&gt; getVisits(Map details) {
 </div>
 <div class="method"><h4 id="search">
 <button class="show-code">Code</button>
-Future&lt;List&lt;<a href="../chrome.history/HistoryItem.html">HistoryItem</a>&gt;&gt; <strong>search</strong>(Map query) <a class="anchor-link" href="#search"
+Future&lt;List&lt;<a href="../chrome.history/HistoryItem.html">HistoryItem</a>&gt;&gt; <strong>search</strong>(<a href="../chrome.history/HistorySearchParams.html">HistorySearchParams</a> query) <a class="anchor-link" href="#search"
               title="Permalink to ChromeHistory.search">#</a></h4>
 <div class="doc">
 <p>Searches the history for the last visit time of each page matching the
 query.</p>
 <pre class="source">
-Future&lt;List&lt;HistoryItem&gt;&gt; search(Map query) {
+Future&lt;List&lt;HistoryItem&gt;&gt; search(HistorySearchParams query) {
  if (_history == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;List&lt;HistoryItem&gt;&gt;.oneArg((e) =&gt; listify(e, _createHistoryItem));

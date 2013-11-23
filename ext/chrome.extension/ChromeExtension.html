@@ -96,7 +96,7 @@ class ChromeExtension extends ChromeApi {
   * Returns:
   * Array of global objects
   */
- List&lt;Window&gt; getViews([Map fetchProperties]) {
+ List&lt;Window&gt; getViews([ExtensionGetViewsParams fetchProperties]) {
    if (_extension == null) _throwNotAvailable();
 
    var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);
@@ -334,7 +334,7 @@ String getURL(String path) {
 </div>
 <div class="method"><h4 id="getViews">
 <button class="show-code">Code</button>
-List&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>getViews</strong>([Map fetchProperties]) <a class="anchor-link" href="#getViews"
+List&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>getViews</strong>([<a href="../chrome.extension/ExtensionGetViewsParams.html">ExtensionGetViewsParams</a> fetchProperties]) <a class="anchor-link" href="#getViews"
               title="Permalink to ChromeExtension.getViews">#</a></h4>
 <div class="doc">
 <p>Returns an array of the JavaScript 'window' objects for each of the pages
@@ -342,7 +342,7 @@ running inside the current extension.</p>
 <p>Returns:
 Array of global objects</p>
 <pre class="source">
-List&lt;Window&gt; getViews([Map fetchProperties]) {
+List&lt;Window&gt; getViews([ExtensionGetViewsParams fetchProperties]) {
  if (_extension == null) _throwNotAvailable();
 
  var ret = _extension.callMethod('getViews', [jsify(fetchProperties)]);

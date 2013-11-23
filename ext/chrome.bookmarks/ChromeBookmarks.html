@@ -130,7 +130,7 @@ class ChromeBookmarks extends ChromeApi {
   * Creates a bookmark or folder under the specified parentId.  If url is NULL
   * or missing, it will be a folder.
   */
- Future&lt;BookmarkTreeNode&gt; create(Map bookmark) {
+ Future&lt;BookmarkTreeNode&gt; create(BookmarksCreateParams bookmark) {
    if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
@@ -141,7 +141,7 @@ class ChromeBookmarks extends ChromeApi {
  /**
   * Moves the specified BookmarkTreeNode to the provided location.
   */
- Future&lt;BookmarkTreeNode&gt; move(String id, Map destination) {
+ Future&lt;BookmarkTreeNode&gt; move(String id, BookmarksMoveParams destination) {
    if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
@@ -154,7 +154,7 @@ class ChromeBookmarks extends ChromeApi {
   * that you want to change; unspecified properties will be left unchanged.
   * &lt;b&gt;Note:&lt;/b&gt; Currently, only 'title' and 'url' are supported.
   */
- Future&lt;BookmarkTreeNode&gt; update(String id, Map changes) {
+ Future&lt;BookmarkTreeNode&gt; update(String id, BookmarksUpdateParams changes) {
    if (_bookmarks == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
@@ -427,13 +427,13 @@ Stream&lt;BookmarksOnRemovedEvent&gt; get onRemoved =&gt; _onRemoved.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="create">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>&gt; <strong>create</strong>(Map bookmark) <a class="anchor-link" href="#create"
+Future&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>&gt; <strong>create</strong>(<a href="../chrome.bookmarks/BookmarksCreateParams.html">BookmarksCreateParams</a> bookmark) <a class="anchor-link" href="#create"
               title="Permalink to ChromeBookmarks.create">#</a></h4>
 <div class="doc">
 <p>Creates a bookmark or folder under the specified parentId.  If url is NULL
 or missing, it will be a folder.</p>
 <pre class="source">
-Future&lt;BookmarkTreeNode&gt; create(Map bookmark) {
+Future&lt;BookmarkTreeNode&gt; create(BookmarksCreateParams bookmark) {
  if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
@@ -570,12 +570,12 @@ Future import() {
 </div>
 <div class="method"><h4 id="move">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>&gt; <strong>move</strong>(String id, Map destination) <a class="anchor-link" href="#move"
+Future&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>&gt; <strong>move</strong>(String id, <a href="../chrome.bookmarks/BookmarksMoveParams.html">BookmarksMoveParams</a> destination) <a class="anchor-link" href="#move"
               title="Permalink to ChromeBookmarks.move">#</a></h4>
 <div class="doc">
 <p>Moves the specified BookmarkTreeNode to the provided location.</p>
 <pre class="source">
-Future&lt;BookmarkTreeNode&gt; move(String id, Map destination) {
+Future&lt;BookmarkTreeNode&gt; move(String id, BookmarksMoveParams destination) {
  if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);
@@ -638,14 +638,14 @@ Future&lt;List&lt;BookmarkTreeNode&gt;&gt; search(String query) {
 </div>
 <div class="method"><h4 id="update">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>&gt; <strong>update</strong>(String id, Map changes) <a class="anchor-link" href="#update"
+Future&lt;<a href="../chrome.bookmarks/BookmarkTreeNode.html">BookmarkTreeNode</a>&gt; <strong>update</strong>(String id, <a href="../chrome.bookmarks/BookmarksUpdateParams.html">BookmarksUpdateParams</a> changes) <a class="anchor-link" href="#update"
               title="Permalink to ChromeBookmarks.update">#</a></h4>
 <div class="doc">
 <p>Updates the properties of a bookmark or folder. Specify only the properties
 that you want to change; unspecified properties will be left unchanged.
 &lt;b>Note:&lt;/b> Currently, only 'title' and 'url' are supported.</p>
 <pre class="source">
-Future&lt;BookmarkTreeNode&gt; update(String id, Map changes) {
+Future&lt;BookmarkTreeNode&gt; update(String id, BookmarksUpdateParams changes) {
  if (_bookmarks == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;BookmarkTreeNode&gt;.oneArg(_createBookmarkTreeNode);

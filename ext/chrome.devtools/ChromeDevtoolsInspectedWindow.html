@@ -73,7 +73,7 @@ class ChromeDevtoolsInspectedWindow extends ChromeApi {
  /**
   * Reloads the inspected page.
   */
- void reload([Map reloadOptions]) {
+ void reload([DevtoolsInspectedWindowReloadParams reloadOptions]) {
    if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
    _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);
@@ -227,12 +227,12 @@ Future&lt;List&lt;Resource&gt;&gt; getResources() {
 </div>
 <div class="method"><h4 id="reload">
 <button class="show-code">Code</button>
-void <strong>reload</strong>([Map reloadOptions]) <a class="anchor-link" href="#reload"
+void <strong>reload</strong>([<a href="../chrome.devtools/DevtoolsInspectedWindowReloadParams.html">DevtoolsInspectedWindowReloadParams</a> reloadOptions]) <a class="anchor-link" href="#reload"
               title="Permalink to ChromeDevtoolsInspectedWindow.reload">#</a></h4>
 <div class="doc">
 <p>Reloads the inspected page.</p>
 <pre class="source">
-void reload([Map reloadOptions]) {
+void reload([DevtoolsInspectedWindowReloadParams reloadOptions]) {
  if (_devtools_inspectedWindow == null) _throwNotAvailable();
 
  _devtools_inspectedWindow.callMethod('reload', [jsify(reloadOptions)]);

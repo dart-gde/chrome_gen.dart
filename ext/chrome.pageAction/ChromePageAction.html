@@ -67,7 +67,7 @@ class ChromePageAction extends ChromeApi {
   * Sets the title of the page action. This is displayed in a tooltip over the
   * page action.
   */
- void setTitle(Map details) {
+ void setTitle(PageActionSetTitleParams details) {
    if (_pageAction == null) _throwNotAvailable();
 
    _pageAction.callMethod('setTitle', [jsify(details)]);
@@ -76,7 +76,7 @@ class ChromePageAction extends ChromeApi {
  /**
   * Gets the title of the page action.
   */
- Future&lt;String&gt; getTitle(Map details) {
+ Future&lt;String&gt; getTitle(PageActionGetTitleParams details) {
    if (_pageAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -90,7 +90,7 @@ class ChromePageAction extends ChromeApi {
   * dictionary of either one of those. Either the &lt;b&gt;path&lt;/b&gt; or the
   * &lt;b&gt;imageData&lt;/b&gt; property must be specified.
   */
- Future setIcon(Map details) {
+ Future setIcon(PageActionSetIconParams details) {
    if (_pageAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter.noArgs();
@@ -102,7 +102,7 @@ class ChromePageAction extends ChromeApi {
   * Sets the html document to be opened as a popup when the user clicks on the
   * page action's icon.
   */
- void setPopup(Map details) {
+ void setPopup(PageActionSetPopupParams details) {
    if (_pageAction == null) _throwNotAvailable();
 
    _pageAction.callMethod('setPopup', [jsify(details)]);
@@ -111,7 +111,7 @@ class ChromePageAction extends ChromeApi {
  /**
   * Gets the html document set as the popup for this page action.
   */
- Future&lt;String&gt; getPopup(Map details) {
+ Future&lt;String&gt; getPopup(PageActionGetPopupParams details) {
    if (_pageAction == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -174,12 +174,12 @@ Stream&lt;Tab&gt; get onClicked =&gt; _onClicked.stream;
 <h3>Methods</h3>
 <div class="method"><h4 id="getPopup">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>getPopup</strong>(Map details) <a class="anchor-link" href="#getPopup"
+Future&lt;String&gt; <strong>getPopup</strong>(<a href="../chrome.pageAction/PageActionGetPopupParams.html">PageActionGetPopupParams</a> details) <a class="anchor-link" href="#getPopup"
               title="Permalink to ChromePageAction.getPopup">#</a></h4>
 <div class="doc">
 <p>Gets the html document set as the popup for this page action.</p>
 <pre class="source">
-Future&lt;String&gt; getPopup(Map details) {
+Future&lt;String&gt; getPopup(PageActionGetPopupParams details) {
  if (_pageAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -191,12 +191,12 @@ Future&lt;String&gt; getPopup(Map details) {
 </div>
 <div class="method"><h4 id="getTitle">
 <button class="show-code">Code</button>
-Future&lt;String&gt; <strong>getTitle</strong>(Map details) <a class="anchor-link" href="#getTitle"
+Future&lt;String&gt; <strong>getTitle</strong>(<a href="../chrome.pageAction/PageActionGetTitleParams.html">PageActionGetTitleParams</a> details) <a class="anchor-link" href="#getTitle"
               title="Permalink to ChromePageAction.getTitle">#</a></h4>
 <div class="doc">
 <p>Gets the title of the page action.</p>
 <pre class="source">
-Future&lt;String&gt; getTitle(Map details) {
+Future&lt;String&gt; getTitle(PageActionGetTitleParams details) {
  if (_pageAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;String&gt;.oneArg();
@@ -225,7 +225,7 @@ void hide(int tabId) {
 </div>
 <div class="method"><h4 id="setIcon">
 <button class="show-code">Code</button>
-Future <strong>setIcon</strong>(Map details) <a class="anchor-link" href="#setIcon"
+Future <strong>setIcon</strong>(<a href="../chrome.pageAction/PageActionSetIconParams.html">PageActionSetIconParams</a> details) <a class="anchor-link" href="#setIcon"
               title="Permalink to ChromePageAction.setIcon">#</a></h4>
 <div class="doc">
 <p>Sets the icon for the page action. The icon can be specified either as the
@@ -233,7 +233,7 @@ path to an image file or as the pixel data from a canvas element, or as
 dictionary of either one of those. Either the &lt;b>path&lt;/b> or the
 &lt;b>imageData&lt;/b> property must be specified.</p>
 <pre class="source">
-Future setIcon(Map details) {
+Future setIcon(PageActionSetIconParams details) {
  if (_pageAction == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter.noArgs();
@@ -245,13 +245,13 @@ Future setIcon(Map details) {
 </div>
 <div class="method"><h4 id="setPopup">
 <button class="show-code">Code</button>
-void <strong>setPopup</strong>(Map details) <a class="anchor-link" href="#setPopup"
+void <strong>setPopup</strong>(<a href="../chrome.pageAction/PageActionSetPopupParams.html">PageActionSetPopupParams</a> details) <a class="anchor-link" href="#setPopup"
               title="Permalink to ChromePageAction.setPopup">#</a></h4>
 <div class="doc">
 <p>Sets the html document to be opened as a popup when the user clicks on the
 page action's icon.</p>
 <pre class="source">
-void setPopup(Map details) {
+void setPopup(PageActionSetPopupParams details) {
  if (_pageAction == null) _throwNotAvailable();
 
  _pageAction.callMethod('setPopup', [jsify(details)]);
@@ -261,13 +261,13 @@ void setPopup(Map details) {
 </div>
 <div class="method"><h4 id="setTitle">
 <button class="show-code">Code</button>
-void <strong>setTitle</strong>(Map details) <a class="anchor-link" href="#setTitle"
+void <strong>setTitle</strong>(<a href="../chrome.pageAction/PageActionSetTitleParams.html">PageActionSetTitleParams</a> details) <a class="anchor-link" href="#setTitle"
               title="Permalink to ChromePageAction.setTitle">#</a></h4>
 <div class="doc">
 <p>Sets the title of the page action. This is displayed in a tooltip over the
 page action.</p>
 <pre class="source">
-void setTitle(Map details) {
+void setTitle(PageActionSetTitleParams details) {
  if (_pageAction == null) _throwNotAvailable();
 
  _pageAction.callMethod('setTitle', [jsify(details)]);

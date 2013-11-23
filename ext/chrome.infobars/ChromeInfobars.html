@@ -48,7 +48,7 @@ class ChromeInfobars extends ChromeApi {
   * Returns:
   * Contains details about the window in which the infobar was created.
   */
- Future&lt;Window&gt; show(Map details) {
+ Future&lt;Window&gt; show(InfobarsShowParams details) {
    if (_infobars == null) _throwNotAvailable();
 
    var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);
@@ -88,7 +88,7 @@ bool get available =&gt; _infobars != null;
 <h3>Methods</h3>
 <div class="method"><h4 id="show">
 <button class="show-code">Code</button>
-Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>show</strong>(Map details) <a class="anchor-link" href="#show"
+Future&lt;<a href="../chrome.windows/Window.html">Window</a>&gt; <strong>show</strong>(<a href="../chrome.infobars/InfobarsShowParams.html">InfobarsShowParams</a> details) <a class="anchor-link" href="#show"
               title="Permalink to ChromeInfobars.show">#</a></h4>
 <div class="doc">
 <p>Shows an infobar in the specified tab. The infobar will be closed
@@ -97,7 +97,7 @@ infobar before then.</p>
 <p>Returns:
 Contains details about the window in which the infobar was created.</p>
 <pre class="source">
-Future&lt;Window&gt; show(Map details) {
+Future&lt;Window&gt; show(InfobarsShowParams details) {
  if (_infobars == null) _throwNotAvailable();
 
  var completer = new ChromeCompleter&lt;Window&gt;.oneArg(_createWindow);

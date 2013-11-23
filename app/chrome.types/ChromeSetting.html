@@ -47,7 +47,7 @@ class ChromeSetting extends ChromeObject {
   * Returns:
   * Details of the currently effective value.
   */
- Future&lt;Map&gt; get(Map details) {
+ Future&lt;Map&gt; get(TypesGetParams details) {
    var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
    jsProxy.callMethod('get', [jsify(details), completer.callback]);
    return completer.future;
@@ -58,7 +58,7 @@ class ChromeSetting extends ChromeObject {
   * 
   * [details] Which setting to change.
   */
- Future set(Map details) {
+ Future set(TypesSetParams details) {
    var completer = new ChromeCompleter.noArgs();
    jsProxy.callMethod('set', [jsify(details), completer.callback]);
    return completer.future;
@@ -69,7 +69,7 @@ class ChromeSetting extends ChromeObject {
   * 
   * [details] Which setting to clear.
   */
- Future clear(Map details) {
+ Future clear(TypesClearParams details) {
    var completer = new ChromeCompleter.noArgs();
    jsProxy.callMethod('clear', [jsify(details), completer.callback]);
    return completer.future;
@@ -130,14 +130,14 @@ final JsObject jsProxy
 <h3>Methods</h3>
 <div class="method"><h4 id="clear">
 <button class="show-code">Code</button>
-Future <strong>clear</strong>(Map details) <a class="anchor-link" href="#clear"
+Future <strong>clear</strong>(<a href="../chrome.types/TypesClearParams.html">TypesClearParams</a> details) <a class="anchor-link" href="#clear"
               title="Permalink to ChromeSetting.clear">#</a></h4>
 <div class="doc">
 <p>Clears the setting, restoring any default value.</p>
 <p>
 <span class="param">details</span> Which setting to clear.</p>
 <pre class="source">
-Future clear(Map details) {
+Future clear(TypesClearParams details) {
  var completer = new ChromeCompleter.noArgs();
  jsProxy.callMethod('clear', [jsify(details), completer.callback]);
  return completer.future;
@@ -147,7 +147,7 @@ Future clear(Map details) {
 </div>
 <div class="method"><h4 id="get">
 <button class="show-code">Code</button>
-Future&lt;Map&gt; <strong>get</strong>(Map details) <a class="anchor-link" href="#get"
+Future&lt;Map&gt; <strong>get</strong>(<a href="../chrome.types/TypesGetParams.html">TypesGetParams</a> details) <a class="anchor-link" href="#get"
               title="Permalink to ChromeSetting.get">#</a></h4>
 <div class="doc">
 <p>Gets the value of a setting.</p>
@@ -156,7 +156,7 @@ Future&lt;Map&gt; <strong>get</strong>(Map details) <a class="anchor-link" href=
 <p>Returns:
 Details of the currently effective value.</p>
 <pre class="source">
-Future&lt;Map&gt; get(Map details) {
+Future&lt;Map&gt; get(TypesGetParams details) {
  var completer = new ChromeCompleter&lt;Map&gt;.oneArg(mapify);
  jsProxy.callMethod('get', [jsify(details), completer.callback]);
  return completer.future;
@@ -166,14 +166,14 @@ Future&lt;Map&gt; get(Map details) {
 </div>
 <div class="method"><h4 id="set">
 <button class="show-code">Code</button>
-Future <strong>set</strong>(Map details) <a class="anchor-link" href="#set"
+Future <strong>set</strong>(<a href="../chrome.types/TypesSetParams.html">TypesSetParams</a> details) <a class="anchor-link" href="#set"
               title="Permalink to ChromeSetting.set">#</a></h4>
 <div class="doc">
 <p>Sets the value of a setting.</p>
 <p>
 <span class="param">details</span> Which setting to change.</p>
 <pre class="source">
-Future set(Map details) {
+Future set(TypesSetParams details) {
  var completer = new ChromeCompleter.noArgs();
  jsProxy.callMethod('set', [jsify(details), completer.callback]);
  return completer.future;
