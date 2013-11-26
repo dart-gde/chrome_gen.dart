@@ -70,13 +70,13 @@ abstract class CrEntry extends ChromeObject implements Entry {
   String toUrl() => this.jsProxy.callMethod('toURL');
 
   Future<Entry> copyTo(DirectoryEntry parent, {String name}) {
-    var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrDirectoryEntry.fromProxy(obj));
+    var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrEntry.fromProxy(obj));
     jsProxy.callMethod('copyTo', [(parent as ChromeObject).jsProxy, name, completer.callback, completer.errorCallback]);
     return completer.future;
   }
 
   Future<Entry> moveTo(DirectoryEntry parent, {String name}) {
-    var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrDirectoryEntry.fromProxy(obj));
+    var completer = new _ChromeCompleterWithError<Entry>.oneArg((obj) => new CrEntry.fromProxy(obj));
     jsProxy.callMethod('moveTo', [(parent as ChromeObject).jsProxy, name, completer.callback, completer.errorCallback]);
     return completer.future;
   }
