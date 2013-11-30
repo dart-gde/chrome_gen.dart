@@ -11,8 +11,8 @@ void main() {
   }
 
   // copy packages
+  print('copying packages/ to app/packages/...');
   build.copyPackages(new Directory('app'));
-  //runProcess('cp', ['-r', 'packages/', 'app/packages/']);
 
   // build with dart2js
   runProcess(
