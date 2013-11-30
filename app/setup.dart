@@ -1,6 +1,8 @@
 
 import 'dart:io';
 
+import '../lib/build/build.dart' as build;
+
 void main() {
   // verify execution location
   if (!new Directory('app').existsSync()) {
@@ -9,7 +11,8 @@ void main() {
   }
 
   // copy packages
-  runProcess('cp', ['-r', 'packages/', 'app/packages/']);
+  build.copyPackages(new Directory('app'));
+  //runProcess('cp', ['-r', 'packages/', 'app/packages/']);
 
   // build with dart2js
   runProcess(
