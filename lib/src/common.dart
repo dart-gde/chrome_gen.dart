@@ -60,8 +60,7 @@ dynamic jsify(dynamic obj) {
     return new JsObject.jsify(m);
   } else if (obj is Iterable) {
     // Do a deep convert.
-    List list = (obj as Iterable).map(jsify).toList();
-    return new JsArray.from(list);
+    return new JsArray.from((obj as Iterable).map(jsify));
   } else {
     return obj;
   }
