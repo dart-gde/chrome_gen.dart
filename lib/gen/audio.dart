@@ -69,7 +69,7 @@ class ChromeAudio extends ChromeApi {
 }
 
 class OutputDeviceInfo extends ChromeObject {
-  OutputDeviceInfo({String id, String name, bool isActive, bool isMuted, double volume}) {
+  OutputDeviceInfo({String id, String name, bool isActive, bool isMuted, num volume}) {
     if (id != null) this.id = id;
     if (name != null) this.name = name;
     if (isActive != null) this.isActive = isActive;
@@ -90,12 +90,12 @@ class OutputDeviceInfo extends ChromeObject {
   bool get isMuted => jsProxy['isMuted'];
   set isMuted(bool value) => jsProxy['isMuted'] = value;
 
-  double get volume => jsProxy['volume'];
-  set volume(double value) => jsProxy['volume'] = jsify(value);
+  num get volume => jsProxy['volume'];
+  set volume(num value) => jsProxy['volume'] = jsify(value);
 }
 
 class InputDeviceInfo extends ChromeObject {
-  InputDeviceInfo({String id, String name, bool isActive, bool isMuted, double gain}) {
+  InputDeviceInfo({String id, String name, bool isActive, bool isMuted, num gain}) {
     if (id != null) this.id = id;
     if (name != null) this.name = name;
     if (isActive != null) this.isActive = isActive;
@@ -116,12 +116,12 @@ class InputDeviceInfo extends ChromeObject {
   bool get isMuted => jsProxy['isMuted'];
   set isMuted(bool value) => jsProxy['isMuted'] = value;
 
-  double get gain => jsProxy['gain'];
-  set gain(double value) => jsProxy['gain'] = jsify(value);
+  num get gain => jsProxy['gain'];
+  set gain(num value) => jsProxy['gain'] = jsify(value);
 }
 
 class DeviceProperties extends ChromeObject {
-  DeviceProperties({bool isMuted, double volume, double gain}) {
+  DeviceProperties({bool isMuted, num volume, num gain}) {
     if (isMuted != null) this.isMuted = isMuted;
     if (volume != null) this.volume = volume;
     if (gain != null) this.gain = gain;
@@ -131,11 +131,11 @@ class DeviceProperties extends ChromeObject {
   bool get isMuted => jsProxy['isMuted'];
   set isMuted(bool value) => jsProxy['isMuted'] = value;
 
-  double get volume => jsProxy['volume'];
-  set volume(double value) => jsProxy['volume'] = jsify(value);
+  num get volume => jsProxy['volume'];
+  set volume(num value) => jsProxy['volume'] = jsify(value);
 
-  double get gain => jsProxy['gain'];
-  set gain(double value) => jsProxy['gain'] = jsify(value);
+  num get gain => jsProxy['gain'];
+  set gain(num value) => jsProxy['gain'] = jsify(value);
 }
 
 /**

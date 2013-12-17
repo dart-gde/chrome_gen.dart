@@ -314,7 +314,7 @@ class ChromeFileEntry extends CrFileEntry {
 }
 
 abstract class CrBlob extends ChromeObject implements Blob {
-  CrBlob.fromProxy(JsObject jsProxy) : super.fromProxy(jsProxy);
+  CrBlob.fromProxy(/*JsObject*/ jsProxy) : super.fromProxy(jsProxy);
 
   int get size => jsProxy['size'];
   String get type => jsProxy['type'];
@@ -327,7 +327,7 @@ abstract class CrBlob extends ChromeObject implements Blob {
 }
 
 class CrFile extends CrBlob implements File {
-  CrFile.fromProxy(JsObject jsProxy) : super.fromProxy(jsProxy);
+  CrFile.fromProxy(/*JsObject*/ jsProxy) : super.fromProxy(jsProxy);
 
   DateTime get lastModifiedDate {
     JsObject jsDateTime = jsProxy['lastModifiedDate'];

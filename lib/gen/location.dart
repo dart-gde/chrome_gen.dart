@@ -67,7 +67,7 @@ class ChromeLocation extends ChromeApi {
  * Coordinates part of the Location object.
  */
 class Coordinates extends ChromeObject {
-  Coordinates({double latitude, double longitude, double altitude, double accuracy, double altitudeAccuracy, double heading, double speed}) {
+  Coordinates({num latitude, num longitude, num altitude, num accuracy, num altitudeAccuracy, num heading, num speed}) {
     if (latitude != null) this.latitude = latitude;
     if (longitude != null) this.longitude = longitude;
     if (altitude != null) this.altitude = altitude;
@@ -78,33 +78,33 @@ class Coordinates extends ChromeObject {
   }
   Coordinates.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  double get latitude => jsProxy['latitude'];
-  set latitude(double value) => jsProxy['latitude'] = jsify(value);
+  num get latitude => jsProxy['latitude'];
+  set latitude(num value) => jsProxy['latitude'] = jsify(value);
 
-  double get longitude => jsProxy['longitude'];
-  set longitude(double value) => jsProxy['longitude'] = jsify(value);
+  num get longitude => jsProxy['longitude'];
+  set longitude(num value) => jsProxy['longitude'] = jsify(value);
 
-  double get altitude => jsProxy['altitude'];
-  set altitude(double value) => jsProxy['altitude'] = jsify(value);
+  num get altitude => jsProxy['altitude'];
+  set altitude(num value) => jsProxy['altitude'] = jsify(value);
 
-  double get accuracy => jsProxy['accuracy'];
-  set accuracy(double value) => jsProxy['accuracy'] = jsify(value);
+  num get accuracy => jsProxy['accuracy'];
+  set accuracy(num value) => jsProxy['accuracy'] = jsify(value);
 
-  double get altitudeAccuracy => jsProxy['altitudeAccuracy'];
-  set altitudeAccuracy(double value) => jsProxy['altitudeAccuracy'] = jsify(value);
+  num get altitudeAccuracy => jsProxy['altitudeAccuracy'];
+  set altitudeAccuracy(num value) => jsProxy['altitudeAccuracy'] = jsify(value);
 
-  double get heading => jsProxy['heading'];
-  set heading(double value) => jsProxy['heading'] = jsify(value);
+  num get heading => jsProxy['heading'];
+  set heading(num value) => jsProxy['heading'] = jsify(value);
 
-  double get speed => jsProxy['speed'];
-  set speed(double value) => jsProxy['speed'] = jsify(value);
+  num get speed => jsProxy['speed'];
+  set speed(num value) => jsProxy['speed'] = jsify(value);
 }
 
 /**
  * Parameter of onLocationUpdate event's listener.
  */
 class Location extends ChromeObject {
-  Location({String name, Coordinates coords, double timestamp}) {
+  Location({String name, Coordinates coords, num timestamp}) {
     if (name != null) this.name = name;
     if (coords != null) this.coords = coords;
     if (timestamp != null) this.timestamp = timestamp;
@@ -117,26 +117,26 @@ class Location extends ChromeObject {
   Coordinates get coords => _createCoordinates(jsProxy['coords']);
   set coords(Coordinates value) => jsProxy['coords'] = jsify(value);
 
-  double get timestamp => jsProxy['timestamp'];
-  set timestamp(double value) => jsProxy['timestamp'] = jsify(value);
+  num get timestamp => jsProxy['timestamp'];
+  set timestamp(num value) => jsProxy['timestamp'] = jsify(value);
 }
 
 /**
  * Parameter of watchLocation call.
  */
 class WatchLocationRequestInfo extends ChromeObject {
-  WatchLocationRequestInfo({double minDistanceInMeters, double minTimeInMilliseconds, int maximumAge}) {
+  WatchLocationRequestInfo({num minDistanceInMeters, num minTimeInMilliseconds, int maximumAge}) {
     if (minDistanceInMeters != null) this.minDistanceInMeters = minDistanceInMeters;
     if (minTimeInMilliseconds != null) this.minTimeInMilliseconds = minTimeInMilliseconds;
     if (maximumAge != null) this.maximumAge = maximumAge;
   }
   WatchLocationRequestInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  double get minDistanceInMeters => jsProxy['minDistanceInMeters'];
-  set minDistanceInMeters(double value) => jsProxy['minDistanceInMeters'] = jsify(value);
+  num get minDistanceInMeters => jsProxy['minDistanceInMeters'];
+  set minDistanceInMeters(num value) => jsProxy['minDistanceInMeters'] = jsify(value);
 
-  double get minTimeInMilliseconds => jsProxy['minTimeInMilliseconds'];
-  set minTimeInMilliseconds(double value) => jsProxy['minTimeInMilliseconds'] = jsify(value);
+  num get minTimeInMilliseconds => jsProxy['minTimeInMilliseconds'];
+  set minTimeInMilliseconds(num value) => jsProxy['minTimeInMilliseconds'] = jsify(value);
 
   int get maximumAge => jsProxy['maximumAge'];
   set maximumAge(int value) => jsProxy['maximumAge'] = value;

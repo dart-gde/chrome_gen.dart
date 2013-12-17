@@ -267,7 +267,7 @@ class ChromeType extends ChromeElement {
   }
 
   String getReturnStringTypeParams() {
-    if(parameters.isEmpty) return '';
+    if (parameters.isEmpty) return '';
     return "<${parameters.map((t) => t.toReturnString()).join(', ')}>";
   }
 

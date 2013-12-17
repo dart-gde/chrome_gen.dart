@@ -200,7 +200,7 @@ class IDLConverter {
   final TYPE_MAP = {
                     'DOMString': 'String',
                     'boolean': 'bool',
-                    'double': 'double',
+                    'double': 'num',
                     'long': 'int'
   };
 
