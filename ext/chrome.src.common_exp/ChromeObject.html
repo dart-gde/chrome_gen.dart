@@ -35,7 +35,7 @@
 <p>The abstract superclass of objects that can hold <code>JsObject</code> proxies.</p>
 <pre class="source">
 class ChromeObject {
- final JsObject jsProxy;
+ final dynamic jsProxy;
 
  /**
   * Create a new instance of a `ChromeObject`, which creates and delegates to
@@ -74,7 +74,7 @@ ChromeObject() : jsProxy = new JsObject(context['Object']);
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ChromeObject.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ChromeObject.fromProxy</strong>(jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ChromeObject.ChromeObject.fromProxy">#</a></h4>
 <div class="doc">
 <p>Create a new instance of a <code>ChromeObject</code>, which delegates to the given
@@ -89,13 +89,13 @@ ChromeObject.fromProxy(this.jsProxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to ChromeObject.jsProxy">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>

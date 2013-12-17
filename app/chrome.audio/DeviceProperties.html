@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class DeviceProperties extends ChromeObject {
- DeviceProperties({bool isMuted, double volume, double gain}) {
+ DeviceProperties({bool isMuted, num volume, num gain}) {
    if (isMuted != null) this.isMuted = isMuted;
    if (volume != null) this.volume = volume;
    if (gain != null) this.gain = gain;
@@ -44,11 +44,11 @@ class DeviceProperties extends ChromeObject {
  bool get isMuted =&gt; jsProxy['isMuted'];
  set isMuted(bool value) =&gt; jsProxy['isMuted'] = value;
 
- double get volume =&gt; jsProxy['volume'];
- set volume(double value) =&gt; jsProxy['volume'] = jsify(value);
+ num get volume =&gt; jsProxy['volume'];
+ set volume(num value) =&gt; jsProxy['volume'] = jsify(value);
 
- double get gain =&gt; jsProxy['gain'];
- set gain(double value) =&gt; jsProxy['gain'] = jsify(value);
+ num get gain =&gt; jsProxy['gain'];
+ set gain(num value) =&gt; jsProxy['gain'] = jsify(value);
 }
 </pre>
 </div>
@@ -59,7 +59,7 @@ class DeviceProperties extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>DeviceProperties</strong>({bool isMuted, double volume, double gain}) <a class="anchor-link" href="#"
+new <strong>DeviceProperties</strong>({bool isMuted, num volume, num gain}) <a class="anchor-link" href="#"
               title="Permalink to DeviceProperties.DeviceProperties">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -67,7 +67,7 @@ new <strong>DeviceProperties</strong>({bool isMuted, double volume, double gain}
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-DeviceProperties({bool isMuted, double volume, double gain}) {
+DeviceProperties({bool isMuted, num volume, num gain}) {
  if (isMuted != null) this.isMuted = isMuted;
  if (volume != null) this.volume = volume;
  if (gain != null) this.gain = gain;
@@ -94,16 +94,16 @@ DeviceProperties.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="gain">
 <button class="show-code">Code</button>
-double         <strong>gain</strong> <a class="anchor-link"
+num         <strong>gain</strong> <a class="anchor-link"
             href="#gain"
             title="Permalink to DeviceProperties.gain">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get gain =&gt; jsProxy['gain'];
+num get gain =&gt; jsProxy['gain'];
 </pre>
 <pre class="source">
-set gain(double value) =&gt; jsProxy['gain'] = jsify(value);
+set gain(num value) =&gt; jsProxy['gain'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -124,28 +124,28 @@ set isMuted(bool value) =&gt; jsProxy['isMuted'] = value;
 </div>
 <div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to DeviceProperties.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="volume">
 <button class="show-code">Code</button>
-double         <strong>volume</strong> <a class="anchor-link"
+num         <strong>volume</strong> <a class="anchor-link"
             href="#volume"
             title="Permalink to DeviceProperties.volume">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get volume =&gt; jsProxy['volume'];
+num get volume =&gt; jsProxy['volume'];
 </pre>
 <pre class="source">
-set volume(double value) =&gt; jsProxy['volume'] = jsify(value);
+set volume(num value) =&gt; jsProxy['volume'] = jsify(value);
 </pre>
 </div>
 </div>

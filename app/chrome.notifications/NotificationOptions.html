@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class NotificationOptions extends ChromeObject {
- NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, List&lt;NotificationButton&gt; buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, List&lt;NotificationItem&gt; items, int progress, bool isClickable}) {
+ NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, num eventTime, List&lt;NotificationButton&gt; buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, List&lt;NotificationItem&gt; items, int progress, bool isClickable}) {
    if (type != null) this.type = type;
    if (iconUrl != null) this.iconUrl = iconUrl;
    if (iconBitmap != null) this.iconBitmap = iconBitmap;
@@ -74,8 +74,8 @@ class NotificationOptions extends ChromeObject {
  int get priority =&gt; jsProxy['priority'];
  set priority(int value) =&gt; jsProxy['priority'] = value;
 
- double get eventTime =&gt; jsProxy['eventTime'];
- set eventTime(double value) =&gt; jsProxy['eventTime'] = jsify(value);
+ num get eventTime =&gt; jsProxy['eventTime'];
+ set eventTime(num value) =&gt; jsProxy['eventTime'] = jsify(value);
 
  List&lt;NotificationButton&gt; get buttons =&gt; listify(jsProxy['buttons'], _createNotificationButton);
  set buttons(List&lt;NotificationButton&gt; value) =&gt; jsProxy['buttons'] = jsify(value);
@@ -107,7 +107,7 @@ class NotificationOptions extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>NotificationOptions</strong>({<a href="../chrome.notifications/TemplateType.html">TemplateType</a> type, String iconUrl, <a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a> iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, List&lt;<a href="../chrome.notifications/NotificationButton.html">NotificationButton</a>&gt; buttons, String expandedMessage, String imageUrl, <a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a> imageBitmap, List&lt;<a href="../chrome.notifications/NotificationItem.html">NotificationItem</a>&gt; items, int progress, bool isClickable}) <a class="anchor-link" href="#"
+new <strong>NotificationOptions</strong>({<a href="../chrome.notifications/TemplateType.html">TemplateType</a> type, String iconUrl, <a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a> iconBitmap, String title, String message, String contextMessage, int priority, num eventTime, List&lt;<a href="../chrome.notifications/NotificationButton.html">NotificationButton</a>&gt; buttons, String expandedMessage, String imageUrl, <a href="../chrome.notifications/NotificationBitmap.html">NotificationBitmap</a> imageBitmap, List&lt;<a href="../chrome.notifications/NotificationItem.html">NotificationItem</a>&gt; items, int progress, bool isClickable}) <a class="anchor-link" href="#"
               title="Permalink to NotificationOptions.NotificationOptions">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -115,7 +115,7 @@ new <strong>NotificationOptions</strong>({<a href="../chrome.notifications/Templ
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, List&lt;NotificationButton&gt; buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, List&lt;NotificationItem&gt; items, int progress, bool isClickable}) {
+NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, num eventTime, List&lt;NotificationButton&gt; buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, List&lt;NotificationItem&gt; items, int progress, bool isClickable}) {
  if (type != null) this.type = type;
  if (iconUrl != null) this.iconUrl = iconUrl;
  if (iconBitmap != null) this.iconBitmap = iconBitmap;
@@ -184,16 +184,16 @@ set contextMessage(String value) =&gt; jsProxy['contextMessage'] = value;
 </div>
 <div class="field"><h4 id="eventTime">
 <button class="show-code">Code</button>
-double         <strong>eventTime</strong> <a class="anchor-link"
+num         <strong>eventTime</strong> <a class="anchor-link"
             href="#eventTime"
             title="Permalink to NotificationOptions.eventTime">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get eventTime =&gt; jsProxy['eventTime'];
+num get eventTime =&gt; jsProxy['eventTime'];
 </pre>
 <pre class="source">
-set eventTime(double value) =&gt; jsProxy['eventTime'] = jsify(value);
+set eventTime(num value) =&gt; jsProxy['eventTime'] = jsify(value);
 </pre>
 </div>
 </div>
@@ -304,13 +304,13 @@ set items(List&lt;NotificationItem&gt; value) =&gt; jsProxy['items'] = jsify(val
 </div>
 <div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to NotificationOptions.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>

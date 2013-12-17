@@ -35,18 +35,18 @@
 <p>Parameter of watchLocation call.</p>
 <pre class="source">
 class WatchLocationRequestInfo extends ChromeObject {
- WatchLocationRequestInfo({double minDistanceInMeters, double minTimeInMilliseconds, int maximumAge}) {
+ WatchLocationRequestInfo({num minDistanceInMeters, num minTimeInMilliseconds, int maximumAge}) {
    if (minDistanceInMeters != null) this.minDistanceInMeters = minDistanceInMeters;
    if (minTimeInMilliseconds != null) this.minTimeInMilliseconds = minTimeInMilliseconds;
    if (maximumAge != null) this.maximumAge = maximumAge;
  }
  WatchLocationRequestInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- double get minDistanceInMeters =&gt; jsProxy['minDistanceInMeters'];
- set minDistanceInMeters(double value) =&gt; jsProxy['minDistanceInMeters'] = jsify(value);
+ num get minDistanceInMeters =&gt; jsProxy['minDistanceInMeters'];
+ set minDistanceInMeters(num value) =&gt; jsProxy['minDistanceInMeters'] = jsify(value);
 
- double get minTimeInMilliseconds =&gt; jsProxy['minTimeInMilliseconds'];
- set minTimeInMilliseconds(double value) =&gt; jsProxy['minTimeInMilliseconds'] = jsify(value);
+ num get minTimeInMilliseconds =&gt; jsProxy['minTimeInMilliseconds'];
+ set minTimeInMilliseconds(num value) =&gt; jsProxy['minTimeInMilliseconds'] = jsify(value);
 
  int get maximumAge =&gt; jsProxy['maximumAge'];
  set maximumAge(int value) =&gt; jsProxy['maximumAge'] = value;
@@ -60,7 +60,7 @@ class WatchLocationRequestInfo extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>WatchLocationRequestInfo</strong>({double minDistanceInMeters, double minTimeInMilliseconds, int maximumAge}) <a class="anchor-link" href="#"
+new <strong>WatchLocationRequestInfo</strong>({num minDistanceInMeters, num minTimeInMilliseconds, int maximumAge}) <a class="anchor-link" href="#"
               title="Permalink to WatchLocationRequestInfo.WatchLocationRequestInfo">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -68,7 +68,7 @@ new <strong>WatchLocationRequestInfo</strong>({double minDistanceInMeters, doubl
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-WatchLocationRequestInfo({double minDistanceInMeters, double minTimeInMilliseconds, int maximumAge}) {
+WatchLocationRequestInfo({num minDistanceInMeters, num minTimeInMilliseconds, int maximumAge}) {
  if (minDistanceInMeters != null) this.minDistanceInMeters = minDistanceInMeters;
  if (minTimeInMilliseconds != null) this.minTimeInMilliseconds = minTimeInMilliseconds;
  if (maximumAge != null) this.maximumAge = maximumAge;
@@ -95,13 +95,13 @@ WatchLocationRequestInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 <h3>Properties</h3>
 <div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to WatchLocationRequestInfo.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>
@@ -122,31 +122,31 @@ set maximumAge(int value) =&gt; jsProxy['maximumAge'] = value;
 </div>
 <div class="field"><h4 id="minDistanceInMeters">
 <button class="show-code">Code</button>
-double         <strong>minDistanceInMeters</strong> <a class="anchor-link"
+num         <strong>minDistanceInMeters</strong> <a class="anchor-link"
             href="#minDistanceInMeters"
             title="Permalink to WatchLocationRequestInfo.minDistanceInMeters">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get minDistanceInMeters =&gt; jsProxy['minDistanceInMeters'];
+num get minDistanceInMeters =&gt; jsProxy['minDistanceInMeters'];
 </pre>
 <pre class="source">
-set minDistanceInMeters(double value) =&gt; jsProxy['minDistanceInMeters'] = jsify(value);
+set minDistanceInMeters(num value) =&gt; jsProxy['minDistanceInMeters'] = jsify(value);
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="minTimeInMilliseconds">
 <button class="show-code">Code</button>
-double         <strong>minTimeInMilliseconds</strong> <a class="anchor-link"
+num         <strong>minTimeInMilliseconds</strong> <a class="anchor-link"
             href="#minTimeInMilliseconds"
             title="Permalink to WatchLocationRequestInfo.minTimeInMilliseconds">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get minTimeInMilliseconds =&gt; jsProxy['minTimeInMilliseconds'];
+num get minTimeInMilliseconds =&gt; jsProxy['minTimeInMilliseconds'];
 </pre>
 <pre class="source">
-set minTimeInMilliseconds(double value) =&gt; jsProxy['minTimeInMilliseconds'] = jsify(value);
+set minTimeInMilliseconds(num value) =&gt; jsProxy['minTimeInMilliseconds'] = jsify(value);
 </pre>
 </div>
 </div>

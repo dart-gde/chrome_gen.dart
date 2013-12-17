@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class Alarm extends ChromeObject {
- Alarm({String name, double scheduledTime, double periodInMinutes}) {
+ Alarm({String name, num scheduledTime, num periodInMinutes}) {
    if (name != null) this.name = name;
    if (scheduledTime != null) this.scheduledTime = scheduledTime;
    if (periodInMinutes != null) this.periodInMinutes = periodInMinutes;
@@ -44,11 +44,11 @@ class Alarm extends ChromeObject {
  String get name =&gt; jsProxy['name'];
  set name(String value) =&gt; jsProxy['name'] = value;
 
- double get scheduledTime =&gt; jsProxy['scheduledTime'];
- set scheduledTime(double value) =&gt; jsProxy['scheduledTime'] = jsify(value);
+ num get scheduledTime =&gt; jsProxy['scheduledTime'];
+ set scheduledTime(num value) =&gt; jsProxy['scheduledTime'] = jsify(value);
 
- double get periodInMinutes =&gt; jsProxy['periodInMinutes'];
- set periodInMinutes(double value) =&gt; jsProxy['periodInMinutes'] = jsify(value);
+ num get periodInMinutes =&gt; jsProxy['periodInMinutes'];
+ set periodInMinutes(num value) =&gt; jsProxy['periodInMinutes'] = jsify(value);
 }
 </pre>
 </div>
@@ -59,7 +59,7 @@ class Alarm extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>Alarm</strong>({String name, double scheduledTime, double periodInMinutes}) <a class="anchor-link" href="#"
+new <strong>Alarm</strong>({String name, num scheduledTime, num periodInMinutes}) <a class="anchor-link" href="#"
               title="Permalink to Alarm.Alarm">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -67,7 +67,7 @@ new <strong>Alarm</strong>({String name, double scheduledTime, double periodInMi
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Alarm({String name, double scheduledTime, double periodInMinutes}) {
+Alarm({String name, num scheduledTime, num periodInMinutes}) {
  if (name != null) this.name = name;
  if (scheduledTime != null) this.scheduledTime = scheduledTime;
  if (periodInMinutes != null) this.periodInMinutes = periodInMinutes;
@@ -94,13 +94,13 @@ Alarm.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 <h3>Properties</h3>
 <div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to Alarm.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>
@@ -121,31 +121,31 @@ set name(String value) =&gt; jsProxy['name'] = value;
 </div>
 <div class="field"><h4 id="periodInMinutes">
 <button class="show-code">Code</button>
-double         <strong>periodInMinutes</strong> <a class="anchor-link"
+num         <strong>periodInMinutes</strong> <a class="anchor-link"
             href="#periodInMinutes"
             title="Permalink to Alarm.periodInMinutes">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get periodInMinutes =&gt; jsProxy['periodInMinutes'];
+num get periodInMinutes =&gt; jsProxy['periodInMinutes'];
 </pre>
 <pre class="source">
-set periodInMinutes(double value) =&gt; jsProxy['periodInMinutes'] = jsify(value);
+set periodInMinutes(num value) =&gt; jsProxy['periodInMinutes'] = jsify(value);
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="scheduledTime">
 <button class="show-code">Code</button>
-double         <strong>scheduledTime</strong> <a class="anchor-link"
+num         <strong>scheduledTime</strong> <a class="anchor-link"
             href="#scheduledTime"
             title="Permalink to Alarm.scheduledTime">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get scheduledTime =&gt; jsProxy['scheduledTime'];
+num get scheduledTime =&gt; jsProxy['scheduledTime'];
 </pre>
 <pre class="source">
-set scheduledTime(double value) =&gt; jsProxy['scheduledTime'] = jsify(value);
+set scheduledTime(num value) =&gt; jsProxy['scheduledTime'] = jsify(value);
 </pre>
 </div>
 </div>

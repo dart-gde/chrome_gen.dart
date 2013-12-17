@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 class OutputDeviceInfo extends ChromeObject {
- OutputDeviceInfo({String id, String name, bool isActive, bool isMuted, double volume}) {
+ OutputDeviceInfo({String id, String name, bool isActive, bool isMuted, num volume}) {
    if (id != null) this.id = id;
    if (name != null) this.name = name;
    if (isActive != null) this.isActive = isActive;
@@ -55,8 +55,8 @@ class OutputDeviceInfo extends ChromeObject {
  bool get isMuted =&gt; jsProxy['isMuted'];
  set isMuted(bool value) =&gt; jsProxy['isMuted'] = value;
 
- double get volume =&gt; jsProxy['volume'];
- set volume(double value) =&gt; jsProxy['volume'] = jsify(value);
+ num get volume =&gt; jsProxy['volume'];
+ set volume(num value) =&gt; jsProxy['volume'] = jsify(value);
 }
 </pre>
 </div>
@@ -67,7 +67,7 @@ class OutputDeviceInfo extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>OutputDeviceInfo</strong>({String id, String name, bool isActive, bool isMuted, double volume}) <a class="anchor-link" href="#"
+new <strong>OutputDeviceInfo</strong>({String id, String name, bool isActive, bool isMuted, num volume}) <a class="anchor-link" href="#"
               title="Permalink to OutputDeviceInfo.OutputDeviceInfo">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -75,7 +75,7 @@ new <strong>OutputDeviceInfo</strong>({String id, String name, bool isActive, bo
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-OutputDeviceInfo({String id, String name, bool isActive, bool isMuted, double volume}) {
+OutputDeviceInfo({String id, String name, bool isActive, bool isMuted, num volume}) {
  if (id != null) this.id = id;
  if (name != null) this.name = name;
  if (isActive != null) this.isActive = isActive;
@@ -149,13 +149,13 @@ set isMuted(bool value) =&gt; jsProxy['isMuted'] = value;
 </div>
 <div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to OutputDeviceInfo.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>
@@ -176,16 +176,16 @@ set name(String value) =&gt; jsProxy['name'] = value;
 </div>
 <div class="field"><h4 id="volume">
 <button class="show-code">Code</button>
-double         <strong>volume</strong> <a class="anchor-link"
+num         <strong>volume</strong> <a class="anchor-link"
             href="#volume"
             title="Permalink to OutputDeviceInfo.volume">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get volume =&gt; jsProxy['volume'];
+num get volume =&gt; jsProxy['volume'];
 </pre>
 <pre class="source">
-set volume(double value) =&gt; jsProxy['volume'] = jsify(value);
+set volume(num value) =&gt; jsProxy['volume'] = jsify(value);
 </pre>
 </div>
 </div>

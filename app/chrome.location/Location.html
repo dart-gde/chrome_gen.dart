@@ -35,7 +35,7 @@
 <p>Parameter of onLocationUpdate event's listener.</p>
 <pre class="source">
 class Location extends ChromeObject {
- Location({String name, Coordinates coords, double timestamp}) {
+ Location({String name, Coordinates coords, num timestamp}) {
    if (name != null) this.name = name;
    if (coords != null) this.coords = coords;
    if (timestamp != null) this.timestamp = timestamp;
@@ -48,8 +48,8 @@ class Location extends ChromeObject {
  Coordinates get coords =&gt; _createCoordinates(jsProxy['coords']);
  set coords(Coordinates value) =&gt; jsProxy['coords'] = jsify(value);
 
- double get timestamp =&gt; jsProxy['timestamp'];
- set timestamp(double value) =&gt; jsProxy['timestamp'] = jsify(value);
+ num get timestamp =&gt; jsProxy['timestamp'];
+ set timestamp(num value) =&gt; jsProxy['timestamp'] = jsify(value);
 }
 </pre>
 </div>
@@ -60,7 +60,7 @@ class Location extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>Location</strong>({String name, <a href="../chrome.location/Coordinates.html">Coordinates</a> coords, double timestamp}) <a class="anchor-link" href="#"
+new <strong>Location</strong>({String name, <a href="../chrome.location/Coordinates.html">Coordinates</a> coords, num timestamp}) <a class="anchor-link" href="#"
               title="Permalink to Location.Location">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -68,7 +68,7 @@ new <strong>Location</strong>({String name, <a href="../chrome.location/Coordina
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-Location({String name, Coordinates coords, double timestamp}) {
+Location({String name, Coordinates coords, num timestamp}) {
  if (name != null) this.name = name;
  if (coords != null) this.coords = coords;
  if (timestamp != null) this.timestamp = timestamp;
@@ -110,13 +110,13 @@ set coords(Coordinates value) =&gt; jsProxy['coords'] = jsify(value);
 </div>
 <div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to Location.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>
@@ -137,16 +137,16 @@ set name(String value) =&gt; jsProxy['name'] = value;
 </div>
 <div class="field"><h4 id="timestamp">
 <button class="show-code">Code</button>
-double         <strong>timestamp</strong> <a class="anchor-link"
+num         <strong>timestamp</strong> <a class="anchor-link"
             href="#timestamp"
             title="Permalink to Location.timestamp">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get timestamp =&gt; jsProxy['timestamp'];
+num get timestamp =&gt; jsProxy['timestamp'];
 </pre>
 <pre class="source">
-set timestamp(double value) =&gt; jsProxy['timestamp'] = jsify(value);
+set timestamp(num value) =&gt; jsProxy['timestamp'] = jsify(value);
 </pre>
 </div>
 </div>

@@ -34,17 +34,17 @@
 <div class="doc">
 <pre class="source">
 class MemoryInfo extends ChromeObject {
- MemoryInfo({double capacity, double availableCapacity}) {
+ MemoryInfo({num capacity, num availableCapacity}) {
    if (capacity != null) this.capacity = capacity;
    if (availableCapacity != null) this.availableCapacity = availableCapacity;
  }
  MemoryInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- double get capacity =&gt; jsProxy['capacity'];
- set capacity(double value) =&gt; jsProxy['capacity'] = jsify(value);
+ num get capacity =&gt; jsProxy['capacity'];
+ set capacity(num value) =&gt; jsProxy['capacity'] = jsify(value);
 
- double get availableCapacity =&gt; jsProxy['availableCapacity'];
- set availableCapacity(double value) =&gt; jsProxy['availableCapacity'] = jsify(value);
+ num get availableCapacity =&gt; jsProxy['availableCapacity'];
+ set availableCapacity(num value) =&gt; jsProxy['availableCapacity'] = jsify(value);
 }
 </pre>
 </div>
@@ -55,7 +55,7 @@ class MemoryInfo extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>MemoryInfo</strong>({double capacity, double availableCapacity}) <a class="anchor-link" href="#"
+new <strong>MemoryInfo</strong>({num capacity, num availableCapacity}) <a class="anchor-link" href="#"
               title="Permalink to MemoryInfo.MemoryInfo">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -63,7 +63,7 @@ new <strong>MemoryInfo</strong>({double capacity, double availableCapacity}) <a 
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-MemoryInfo({double capacity, double availableCapacity}) {
+MemoryInfo({num capacity, num availableCapacity}) {
  if (capacity != null) this.capacity = capacity;
  if (availableCapacity != null) this.availableCapacity = availableCapacity;
 }
@@ -89,43 +89,43 @@ MemoryInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="availableCapacity">
 <button class="show-code">Code</button>
-double         <strong>availableCapacity</strong> <a class="anchor-link"
+num         <strong>availableCapacity</strong> <a class="anchor-link"
             href="#availableCapacity"
             title="Permalink to MemoryInfo.availableCapacity">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get availableCapacity =&gt; jsProxy['availableCapacity'];
+num get availableCapacity =&gt; jsProxy['availableCapacity'];
 </pre>
 <pre class="source">
-set availableCapacity(double value) =&gt; jsProxy['availableCapacity'] = jsify(value);
+set availableCapacity(num value) =&gt; jsProxy['availableCapacity'] = jsify(value);
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="capacity">
 <button class="show-code">Code</button>
-double         <strong>capacity</strong> <a class="anchor-link"
+num         <strong>capacity</strong> <a class="anchor-link"
             href="#capacity"
             title="Permalink to MemoryInfo.capacity">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get capacity =&gt; jsProxy['capacity'];
+num get capacity =&gt; jsProxy['capacity'];
 </pre>
 <pre class="source">
-set capacity(double value) =&gt; jsProxy['capacity'] = jsify(value);
+set capacity(num value) =&gt; jsProxy['capacity'] = jsify(value);
 </pre>
 </div>
 </div>
 <div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to MemoryInfo.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>

@@ -37,7 +37,7 @@ class ArrayBuffer extends ChromeObject {
  static ArrayBuffer create(JsObject jsProxy) =&gt; new ArrayBuffer.fromProxy(jsProxy);
 
  ArrayBuffer();
- ArrayBuffer.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+ ArrayBuffer.fromProxy(/*JsObject*/ jsProxy): super.fromProxy(jsProxy);
 
  factory ArrayBuffer.fromBytes(List&lt;int&gt; data) {
    var uint8Array = new JsObject(context['Uint8Array'], [new JsObject.jsify(data)]);
@@ -115,7 +115,7 @@ factory ArrayBuffer.fromBytes(List&lt;int&gt; data) {
 </div>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>ArrayBuffer.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
+new <strong>ArrayBuffer.fromProxy</strong>(jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to ArrayBuffer.ArrayBuffer.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -123,7 +123,7 @@ new <strong>ArrayBuffer.fromProxy</strong>(JsObject jsProxy) <a class="anchor-li
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-ArrayBuffer.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+ArrayBuffer.fromProxy(/*JsObject*/ jsProxy): super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -146,13 +146,13 @@ factory ArrayBuffer.fromString(String str) {
 <h3>Properties</h3>
 <div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to ArrayBuffer.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>

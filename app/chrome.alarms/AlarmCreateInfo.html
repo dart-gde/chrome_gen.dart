@@ -35,21 +35,21 @@
 <p>todo(mpcomplete): rename to CreateInfo when http://crbug.com/123073 is fixed.</p>
 <pre class="source">
 class AlarmCreateInfo extends ChromeObject {
- AlarmCreateInfo({double when, double delayInMinutes, double periodInMinutes}) {
+ AlarmCreateInfo({num when, num delayInMinutes, num periodInMinutes}) {
    if (when != null) this.when = when;
    if (delayInMinutes != null) this.delayInMinutes = delayInMinutes;
    if (periodInMinutes != null) this.periodInMinutes = periodInMinutes;
  }
  AlarmCreateInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
- double get when =&gt; jsProxy['when'];
- set when(double value) =&gt; jsProxy['when'] = jsify(value);
+ num get when =&gt; jsProxy['when'];
+ set when(num value) =&gt; jsProxy['when'] = jsify(value);
 
- double get delayInMinutes =&gt; jsProxy['delayInMinutes'];
- set delayInMinutes(double value) =&gt; jsProxy['delayInMinutes'] = jsify(value);
+ num get delayInMinutes =&gt; jsProxy['delayInMinutes'];
+ set delayInMinutes(num value) =&gt; jsProxy['delayInMinutes'] = jsify(value);
 
- double get periodInMinutes =&gt; jsProxy['periodInMinutes'];
- set periodInMinutes(double value) =&gt; jsProxy['periodInMinutes'] = jsify(value);
+ num get periodInMinutes =&gt; jsProxy['periodInMinutes'];
+ set periodInMinutes(num value) =&gt; jsProxy['periodInMinutes'] = jsify(value);
 }
 </pre>
 </div>
@@ -60,7 +60,7 @@ class AlarmCreateInfo extends ChromeObject {
 <h3>Constructors</h3>
 <div class="method"><h4 id="">
 <button class="show-code">Code</button>
-new <strong>AlarmCreateInfo</strong>({double when, double delayInMinutes, double periodInMinutes}) <a class="anchor-link" href="#"
+new <strong>AlarmCreateInfo</strong>({num when, num delayInMinutes, num periodInMinutes}) <a class="anchor-link" href="#"
               title="Permalink to AlarmCreateInfo.AlarmCreateInfo">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -68,7 +68,7 @@ new <strong>AlarmCreateInfo</strong>({double when, double delayInMinutes, double
 a JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-AlarmCreateInfo({double when, double delayInMinutes, double periodInMinutes}) {
+AlarmCreateInfo({num when, num delayInMinutes, num periodInMinutes}) {
  if (when != null) this.when = when;
  if (delayInMinutes != null) this.delayInMinutes = delayInMinutes;
  if (periodInMinutes != null) this.periodInMinutes = periodInMinutes;
@@ -95,58 +95,58 @@ AlarmCreateInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 <h3>Properties</h3>
 <div class="field"><h4 id="delayInMinutes">
 <button class="show-code">Code</button>
-double         <strong>delayInMinutes</strong> <a class="anchor-link"
+num         <strong>delayInMinutes</strong> <a class="anchor-link"
             href="#delayInMinutes"
             title="Permalink to AlarmCreateInfo.delayInMinutes">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get delayInMinutes =&gt; jsProxy['delayInMinutes'];
+num get delayInMinutes =&gt; jsProxy['delayInMinutes'];
 </pre>
 <pre class="source">
-set delayInMinutes(double value) =&gt; jsProxy['delayInMinutes'] = jsify(value);
+set delayInMinutes(num value) =&gt; jsProxy['delayInMinutes'] = jsify(value);
 </pre>
 </div>
 </div>
 <div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to AlarmCreateInfo.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="periodInMinutes">
 <button class="show-code">Code</button>
-double         <strong>periodInMinutes</strong> <a class="anchor-link"
+num         <strong>periodInMinutes</strong> <a class="anchor-link"
             href="#periodInMinutes"
             title="Permalink to AlarmCreateInfo.periodInMinutes">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get periodInMinutes =&gt; jsProxy['periodInMinutes'];
+num get periodInMinutes =&gt; jsProxy['periodInMinutes'];
 </pre>
 <pre class="source">
-set periodInMinutes(double value) =&gt; jsProxy['periodInMinutes'] = jsify(value);
+set periodInMinutes(num value) =&gt; jsProxy['periodInMinutes'] = jsify(value);
 </pre>
 </div>
 </div>
 <div class="field"><h4 id="when">
 <button class="show-code">Code</button>
-double         <strong>when</strong> <a class="anchor-link"
+num         <strong>when</strong> <a class="anchor-link"
             href="#when"
             title="Permalink to AlarmCreateInfo.when">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-double get when =&gt; jsProxy['when'];
+num get when =&gt; jsProxy['when'];
 </pre>
 <pre class="source">
-set when(double value) =&gt; jsProxy['when'] = jsify(value);
+set when(num value) =&gt; jsProxy['when'] = jsify(value);
 </pre>
 </div>
 </div>

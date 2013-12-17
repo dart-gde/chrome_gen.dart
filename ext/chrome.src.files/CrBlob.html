@@ -34,7 +34,7 @@
 <div class="doc">
 <pre class="source">
 abstract class CrBlob extends ChromeObject implements Blob {
- CrBlob.fromProxy(JsObject jsProxy) : super.fromProxy(jsProxy);
+ CrBlob.fromProxy(/*JsObject*/ jsProxy) : super.fromProxy(jsProxy);
 
  int get size =&gt; jsProxy['size'];
  String get type =&gt; jsProxy['type'];
@@ -60,7 +60,7 @@ abstract class CrBlob extends ChromeObject implements Blob {
 <h3>Constructors</h3>
 <div class="method"><h4 id="fromProxy">
 <button class="show-code">Code</button>
-new <strong>CrBlob.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" href="#fromProxy"
+new <strong>CrBlob.fromProxy</strong>(jsProxy) <a class="anchor-link" href="#fromProxy"
               title="Permalink to CrBlob.CrBlob.fromProxy">#</a></h4>
 <div class="doc">
 <div class="inherited">
@@ -68,7 +68,7 @@ new <strong>CrBlob.fromProxy</strong>(JsObject jsProxy) <a class="anchor-link" h
 JsObject proxy.</p>
 <div class="docs-inherited-from">docs inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div></div>
 <pre class="source">
-CrBlob.fromProxy(JsObject jsProxy) : super.fromProxy(jsProxy);
+CrBlob.fromProxy(/*JsObject*/ jsProxy) : super.fromProxy(jsProxy);
 </pre>
 </div>
 </div>
@@ -77,13 +77,13 @@ CrBlob.fromProxy(JsObject jsProxy) : super.fromProxy(jsProxy);
 <h3>Properties</h3>
 <div class="field inherited"><h4 id="jsProxy">
 <button class="show-code">Code</button>
-final JsObject         <strong>jsProxy</strong> <a class="anchor-link"
+final         <strong>jsProxy</strong> <a class="anchor-link"
             href="#jsProxy"
             title="Permalink to CrBlob.jsProxy">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../chrome.src.common_exp/ChromeObject.html">ChromeObject</a> </div><div class="doc">
 <pre class="source">
-final JsObject jsProxy
+final dynamic jsProxy
 </pre>
 </div>
 </div>
