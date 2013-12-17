@@ -45,16 +45,22 @@ Map mapify(JsObject obj) {
 }
 
 dynamic jsify(dynamic obj) {
-  if (obj == null) {
-    return null;
+  if (obj == null || obj is num || obj is String) {
+    return obj;
   } else if (obj is ChromeObject) {
     return (obj as ChromeObject).jsProxy;
   } else if (obj is ChromeEnum) {
     return (obj as ChromeEnum).value;
   } else if (obj is Map) {
-    return new JsObject.jsify(obj);
+    // Do a deep convert.
+    Map m = {};
+    for (var key in obj.keys) {
+      m[key] = jsify(obj[key]);
+    }
+    return new JsObject.jsify(m);
   } else if (obj is Iterable) {
-    return new JsObject.jsify(obj);
+    // Do a deep convert.
+    return new JsArray.from((obj as Iterable).map(jsify));
   } else {
     return obj;
   }
