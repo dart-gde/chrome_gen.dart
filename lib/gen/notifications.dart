@@ -203,7 +203,7 @@ class NotificationButton extends ChromeObject {
 }
 
 class NotificationOptions extends ChromeObject {
-  NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, double eventTime, List<NotificationButton> buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, List<NotificationItem> items, int progress, bool isClickable}) {
+  NotificationOptions({TemplateType type, String iconUrl, NotificationBitmap iconBitmap, String title, String message, String contextMessage, int priority, num eventTime, List<NotificationButton> buttons, String expandedMessage, String imageUrl, NotificationBitmap imageBitmap, List<NotificationItem> items, int progress, bool isClickable}) {
     if (type != null) this.type = type;
     if (iconUrl != null) this.iconUrl = iconUrl;
     if (iconBitmap != null) this.iconBitmap = iconBitmap;
@@ -243,8 +243,8 @@ class NotificationOptions extends ChromeObject {
   int get priority => jsProxy['priority'];
   set priority(int value) => jsProxy['priority'] = value;
 
-  double get eventTime => jsProxy['eventTime'];
-  set eventTime(double value) => jsProxy['eventTime'] = jsify(value);
+  num get eventTime => jsProxy['eventTime'];
+  set eventTime(num value) => jsProxy['eventTime'] = jsify(value);
 
   List<NotificationButton> get buttons => listify(jsProxy['buttons'], _createNotificationButton);
   set buttons(List<NotificationButton> value) => jsProxy['buttons'] = jsify(value);

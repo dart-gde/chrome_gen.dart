@@ -7,7 +7,7 @@ import 'dart:js';
  * The abstract superclass of objects that can hold [JsObject] proxies.
  */
 class ChromeObject {
-  final JsObject jsProxy;
+  final dynamic jsProxy;
 
   /**
    * Create a new instance of a `ChromeObject`, which creates and delegates to
@@ -75,7 +75,7 @@ class ArrayBuffer extends ChromeObject {
   static ArrayBuffer create(JsObject jsProxy) => new ArrayBuffer.fromProxy(jsProxy);
 
   ArrayBuffer();
-  ArrayBuffer.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
+  ArrayBuffer.fromProxy(/*JsObject*/ jsProxy): super.fromProxy(jsProxy);
 
   factory ArrayBuffer.fromBytes(List<int> data) {
     var uint8Array = new JsObject(context['Uint8Array'], [new JsObject.jsify(data)]);

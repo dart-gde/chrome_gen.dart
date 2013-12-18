@@ -98,17 +98,17 @@ class ChromeSystemMemory extends ChromeApi {
 }
 
 class MemoryInfo extends ChromeObject {
-  MemoryInfo({double capacity, double availableCapacity}) {
+  MemoryInfo({num capacity, num availableCapacity}) {
     if (capacity != null) this.capacity = capacity;
     if (availableCapacity != null) this.availableCapacity = availableCapacity;
   }
   MemoryInfo.fromProxy(JsObject jsProxy): super.fromProxy(jsProxy);
 
-  double get capacity => jsProxy['capacity'];
-  set capacity(double value) => jsProxy['capacity'] = jsify(value);
+  num get capacity => jsProxy['capacity'];
+  set capacity(num value) => jsProxy['capacity'] = jsify(value);
 
-  double get availableCapacity => jsProxy['availableCapacity'];
-  set availableCapacity(double value) => jsProxy['availableCapacity'] = jsify(value);
+  num get availableCapacity => jsProxy['availableCapacity'];
+  set availableCapacity(num value) => jsProxy['availableCapacity'] = jsify(value);
 }
 
 MemoryInfo _createMemoryInfo(JsObject jsProxy) => jsProxy == null ? null : new MemoryInfo.fromProxy(jsProxy);
@@ -196,7 +196,7 @@ class EjectDeviceResultCode extends ChromeEnum {
 }
 
 class StorageUnitInfo extends ChromeObject {
-  StorageUnitInfo({String id, String name, StorageUnitType type, double capacity}) {
+  StorageUnitInfo({String id, String name, StorageUnitType type, num capacity}) {
     if (id != null) this.id = id;
     if (name != null) this.name = name;
     if (type != null) this.type = type;
@@ -213,12 +213,12 @@ class StorageUnitInfo extends ChromeObject {
   StorageUnitType get type => _createStorageUnitType(jsProxy['type']);
   set type(StorageUnitType value) => jsProxy['type'] = jsify(value);
 
-  double get capacity => jsProxy['capacity'];
-  set capacity(double value) => jsProxy['capacity'] = jsify(value);
+  num get capacity => jsProxy['capacity'];
+  set capacity(num value) => jsProxy['capacity'] = jsify(value);
 }
 
 class StorageAvailableCapacityInfo extends ChromeObject {
-  StorageAvailableCapacityInfo({String id, double availableCapacity}) {
+  StorageAvailableCapacityInfo({String id, num availableCapacity}) {
     if (id != null) this.id = id;
     if (availableCapacity != null) this.availableCapacity = availableCapacity;
   }
@@ -227,8 +227,8 @@ class StorageAvailableCapacityInfo extends ChromeObject {
   String get id => jsProxy['id'];
   set id(String value) => jsProxy['id'] = value;
 
-  double get availableCapacity => jsProxy['availableCapacity'];
-  set availableCapacity(double value) => jsProxy['availableCapacity'] = jsify(value);
+  num get availableCapacity => jsProxy['availableCapacity'];
+  set availableCapacity(num value) => jsProxy['availableCapacity'] = jsify(value);
 }
 
 StorageUnitInfo _createStorageUnitInfo(JsObject jsProxy) => jsProxy == null ? null : new StorageUnitInfo.fromProxy(jsProxy);
