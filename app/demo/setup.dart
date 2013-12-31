@@ -1,26 +1,26 @@
 
 import 'dart:io';
 
-import '../lib/build/build.dart' as build;
+import '../../lib/build/build.dart' as build;
 
 void main() {
   // verify execution location
-  if (!new Directory('app').existsSync()) {
+  if (!new Directory('app/demo').existsSync()) {
     print('This script must be run from the project root.');
     exit(1);
   }
 
   // copy packages
   print('copying packages/ to app/packages/...');
-  build.copyPackages(new Directory('app'));
+  build.copyPackages(new Directory('app/demo'));
 
   // build with dart2js
   runProcess(
       'dart2js',
-      ['app/demo.dart', '--out=app/demo.dart.js']);
+      ['app/demo/demo.dart', '--out=app/demo/demo.dart.js']);
 
   // clean up some clutter
-  runProcess('rm', ['app/demo.dart.js.deps', 'app/demo.dart.js.map']);
+  runProcess('rm', ['app/demo/demo.dart.js.deps', 'app/demo/demo.dart.js.map']);
 }
 
 void runProcess(String executable, List<String> arguments) {
