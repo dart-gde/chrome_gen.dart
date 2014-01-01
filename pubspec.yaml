@@ -16,3 +16,4 @@ dev_dependencies:
   parsers: ">=0.13.7"
   path: any
   unittest: any
+  unscripted: any
