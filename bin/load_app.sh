@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "NOTE: For extensions to be loaded by this script chrome//flags needs 'Experimental Extension APIs' enabled. \n" 
+echo "NOTE: For extensions to be loaded by this script 'chrome://flags' needs 'Experimental Extension APIs' enabled. \n" 
 
 if [ $# -lt 2 ]; then
   echo "Usage: $0 [chrome|canary|dartium] [app/extension directory]"

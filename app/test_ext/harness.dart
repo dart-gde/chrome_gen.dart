@@ -13,20 +13,7 @@ import 'src/test_windows.dart' as windows;
 
 void main() {
   Logger.root.level = Level.ALL;
-  Logger.root.onRecord.listen((LogRecord r) {
-    StringBuffer sb = new StringBuffer();
-    sb
-    ..write(r.time.toString())
-    ..write(":")
-    ..write(r.loggerName)
-    ..write(":")
-    ..write(r.level.name)
-    ..write(":")
-    ..write(r.sequenceNumber)
-    ..write(": ")
-    ..write(r.message.toString());
-    logMessage(sb.toString());
-  });
+  Logger.root.onRecord.listen((LogRecord r) => r.toString());
 
   groupSep = '.';
   useHtmlEnhancedConfiguration();
