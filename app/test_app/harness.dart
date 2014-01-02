@@ -13,7 +13,8 @@ import 'src/test_app.dart' as app;
 
 void main() {
   Logger.root.level = Level.ALL;
-  Logger.root.onRecord.listen((LogRecord r) => r.toString());
+  Logger.root.onRecord.listen((LogRecord r) => print(r.toString()));
+  Logger.root.fine("harness_app.main()");
 
   groupSep = '.';
   useHtmlEnhancedConfiguration();
@@ -26,4 +27,5 @@ void main() {
 
   app.main();
 
+  Logger.root.fine("harness_app unit tests done");
 }
