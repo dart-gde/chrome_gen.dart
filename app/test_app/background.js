@@ -1,5 +1,6 @@
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  console.log('respond: ' + message);
   sendResponse('respond: ' + message);
 });
 

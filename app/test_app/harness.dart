@@ -10,6 +10,13 @@ import 'package:logging/logging.dart';
 import 'package:chrome_gen/chrome_app.dart' as chrome;
 
 import 'src/test_app.dart' as app;
+import 'src/test_i18n.dart' as i18n;
+import 'src/test_power.dart' as power;
+import 'src/test_push_messaging.dart' as push_messaging;
+import 'src/test_runtime.dart' as runtime;
+import 'src/test_serial.dart' as serial;
+import 'src/test_socket.dart' as socket;
+
 
 void main() {
   Logger.root.level = Level.ALL;
@@ -25,5 +32,10 @@ void main() {
   });
 
   app.main();
-
+  i18n.main();
+  power.main();
+  push_messaging.main();
+  runtime.main();
+  serial.main();
+  socket.main();
 }
