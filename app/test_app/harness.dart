@@ -20,7 +20,8 @@ import 'src/test_socket.dart' as socket;
 
 void main() {
   Logger.root.level = Level.ALL;
-  Logger.root.onRecord.listen((LogRecord r) => r.toString());
+  Logger.root.onRecord.listen((LogRecord r) => print(r.toString()));
+  Logger.root.fine("harness_app.main()");
 
   groupSep = '.';
   useHtmlEnhancedConfiguration();
@@ -38,4 +39,6 @@ void main() {
   runtime.main();
   serial.main();
   socket.main();
+
+  Logger.root.fine("harness_app unit tests done");
 }
