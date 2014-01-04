@@ -16,7 +16,9 @@ import 'src/test_push_messaging.dart' as push_messaging;
 import 'src/test_runtime.dart' as runtime;
 import 'src/test_serial.dart' as serial;
 import 'src/test_socket.dart' as socket;
-
+import 'src/test_storage.dart' as storage;
+import 'src/test_sync_file_system.dart' as sync_file_system;
+import 'src/test_file_system.dart' as file_system;
 
 void main() {
   Logger.root.level = Level.ALL;
@@ -39,6 +41,9 @@ void main() {
   runtime.main();
   serial.main();
   socket.main();
+  storage.main();
+  sync_file_system.main();
+  file_system.main();
 
   Logger.root.fine("harness_app unit tests done");
 }
