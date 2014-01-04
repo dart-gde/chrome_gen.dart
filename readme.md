@@ -21,6 +21,8 @@ Add this to your package's pubspec.yaml file:
       });
     }
 
+Also, see the [FAQ](https://github.com/dart-gde/chrome_gen.dart/wiki/FAQ).
+
 ## Documentation
 Documentation is available at:
 
