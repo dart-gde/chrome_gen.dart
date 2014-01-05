@@ -11,8 +11,8 @@ dist/
 docs/
 docs/app/
 docs/ext/
-app/demo.dart.js
-app/demo.dart.precompiled.js
+app/demo/demo.dart.js
+app/demo/demo.dart.precompiled.js
 app/test_app/harness.dart.js
 app/test_app/harness.dart.precompiled.js
 app/test_ext/harness.dart.js
