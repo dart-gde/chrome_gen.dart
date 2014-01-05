@@ -43,7 +43,7 @@ abstract class CrFileEntry extends CrEntry implements FileEntry {
  }
 
  Future&lt;File&gt; file() {
-   var completer = new _ChromeCompleterWithError&lt;File&gt;.oneArg((obj) =&gt; new CrFile.fromProxy(obj));
+   var completer = new _ChromeCompleterWithError&lt;File&gt;.oneArg(selfConverter);
    jsProxy.callMethod('file', [completer.callback, completer.errorCallback]);
    return completer.future;
  }
@@ -250,7 +250,7 @@ Future&lt;File&gt; <strong>file</strong>() <a class="anchor-link" href="#file"
 <div class="doc">
 <pre class="source">
 Future&lt;File&gt; file() {
- var completer = new _ChromeCompleterWithError&lt;File&gt;.oneArg((obj) =&gt; new CrFile.fromProxy(obj));
+ var completer = new _ChromeCompleterWithError&lt;File&gt;.oneArg(selfConverter);
  jsProxy.callMethod('file', [completer.callback, completer.errorCallback]);
  return completer.future;
 }

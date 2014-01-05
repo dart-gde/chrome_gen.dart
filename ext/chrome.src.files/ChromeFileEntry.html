@@ -51,7 +51,7 @@ class ChromeFileEntry extends CrFileEntry {
      reader['onerror'] = (var domError) {
        completer.completeError(domError);
      };
-     reader.callMethod('readAsText', [(file as CrFile).jsProxy]);
+     reader.callMethod('readAsText', [file]);
 
      return completer.future;
    });
@@ -72,7 +72,7 @@ class ChromeFileEntry extends CrFileEntry {
      reader['onerror'] = (var domError) {
        completer.completeError(domError);
      };
-     reader.callMethod('readAsArrayBuffer', [(file as CrFile).jsProxy]);
+     reader.callMethod('readAsArrayBuffer', [file]);
 
      return completer.future;
    });
@@ -332,7 +332,7 @@ Future&lt;File&gt; <strong>file</strong>() <a class="anchor-link" href="#file"
 <div class="inherited-from">inherited from <a href="../chrome.src.files/CrFileEntry.html">CrFileEntry</a> </div><div class="doc">
 <pre class="source">
 Future&lt;File&gt; file() {
- var completer = new _ChromeCompleterWithError&lt;File&gt;.oneArg((obj) =&gt; new CrFile.fromProxy(obj));
+ var completer = new _ChromeCompleterWithError&lt;File&gt;.oneArg(selfConverter);
  jsProxy.callMethod('file', [completer.callback, completer.errorCallback]);
  return completer.future;
 }
@@ -400,7 +400,7 @@ Future&lt;ArrayBuffer&gt; readBytes() {
    reader['onerror'] = (var domError) {
      completer.completeError(domError);
    };
-   reader.callMethod('readAsArrayBuffer', [(file as CrFile).jsProxy]);
+   reader.callMethod('readAsArrayBuffer', [file]);
 
    return completer.future;
  });
@@ -426,7 +426,7 @@ Future&lt;String&gt; readText() {
    reader['onerror'] = (var domError) {
      completer.completeError(domError);
    };
-   reader.callMethod('readAsText', [(file as CrFile).jsProxy]);
+   reader.callMethod('readAsText', [file]);
 
    return completer.future;
  });
