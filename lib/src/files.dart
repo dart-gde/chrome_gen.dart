@@ -191,7 +191,7 @@ abstract class CrFileEntry extends CrEntry implements FileEntry {
   }
 
   Future<File> file() {
-    var completer = new _ChromeCompleterWithError<File>.oneArg((obj) => new CrFile.fromProxy(obj));
+    var completer = new _ChromeCompleterWithError<File>.oneArg(selfConverter);
     jsProxy.callMethod('file', [completer.callback, completer.errorCallback]);
     return completer.future;
   }
@@ -222,7 +222,7 @@ class ChromeFileEntry extends CrFileEntry {
       reader['onerror'] = (var domError) {
         completer.completeError(domError);
       };
-      reader.callMethod('readAsText', [(file as CrFile).jsProxy]);
+      reader.callMethod('readAsText', [file]);
 
       return completer.future;
     });
@@ -243,7 +243,7 @@ class ChromeFileEntry extends CrFileEntry {
       reader['onerror'] = (var domError) {
         completer.completeError(domError);
       };
-      reader.callMethod('readAsArrayBuffer', [(file as CrFile).jsProxy]);
+      reader.callMethod('readAsArrayBuffer', [file]);
 
       return completer.future;
     });
@@ -313,31 +313,31 @@ class ChromeFileEntry extends CrFileEntry {
   }
 }
 
-abstract class CrBlob extends ChromeObject implements Blob {
-  CrBlob.fromProxy(/*JsObject*/ jsProxy) : super.fromProxy(jsProxy);
+//abstract class CrBlob extends ChromeObject implements Blob {
+//  CrBlob.fromProxy(/*JsObject*/ jsProxy) : super.fromProxy(jsProxy);
+//
+//  int get size => jsProxy['size'];
+//  String get type => jsProxy['type'];
+//
+//  Blob slice([int start, int end, String contentType]) {
+//    // TODO:
+//
+//    throw new UnimplementedError('Blob.slice');
+//  }
+//}
 
-  int get size => jsProxy['size'];
-  String get type => jsProxy['type'];
-
-  Blob slice([int start, int end, String contentType]) {
-    // TODO:
-
-    throw new UnimplementedError('Blob.slice');
-  }
-}
-
-class CrFile extends CrBlob implements File {
-  CrFile.fromProxy(/*JsObject*/ jsProxy) : super.fromProxy(jsProxy);
-
-  DateTime get lastModifiedDate {
-    JsObject jsDateTime = jsProxy['lastModifiedDate'];
-    return new DateTime.fromMillisecondsSinceEpoch(jsDateTime.callMethod('getTime'));
-  }
-  String get name => jsProxy['name'];
-  String get relativePath => jsProxy['relativePath'];
-
-  String toString() => name;
-}
+//class CrFile extends CrBlob implements File {
+//  CrFile.fromProxy(/*JsObject*/ jsProxy) : super.fromProxy(jsProxy);
+//
+//  DateTime get lastModifiedDate {
+//    JsObject jsDateTime = jsProxy['lastModifiedDate'];
+//    return new DateTime.fromMillisecondsSinceEpoch(jsDateTime.callMethod('getTime'));
+//  }
+//  String get name => jsProxy['name'];
+//  String get relativePath => jsProxy['relativePath'];
+//
+//  String toString() => name;
+//}
 
 //abstract class CrEventTarget extends ChromeObject implements EventTarget {
 //  CrEventTarget.fromProxy(JsObject jsProxy) : super.fromProxy(jsProxy);
