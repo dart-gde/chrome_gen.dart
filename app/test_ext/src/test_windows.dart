@@ -8,6 +8,7 @@ import 'package:chrome_gen/chrome_ext.dart' as chrome;
 void main() {
   group('chrome.windows', () {
     chrome.Window window;
+
     setUp(() {
       chrome.WindowsCreateParams windowCreateParams =
           new chrome.WindowsCreateParams(focused: true, type: "normal");

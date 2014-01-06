@@ -3,7 +3,6 @@ library test_context_menus;
 import 'dart:async';
 
 import 'package:unittest/unittest.dart';
-
 import 'package:chrome_gen/chrome_ext.dart' as chrome;
 
 void main() {
