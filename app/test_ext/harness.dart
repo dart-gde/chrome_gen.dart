@@ -11,6 +11,8 @@ import 'package:chrome_gen/chrome_ext.dart' as chrome;
 
 import 'src/test_context_menus.dart' as context_menus;
 import 'src/test_windows.dart' as windows;
+import 'src/test_browser_action.dart' as browser_action;
+import 'src/test_tabs.dart' as tabs;
 
 void main() {
   Logger.root.level = Level.ALL;
@@ -27,6 +29,8 @@ void main() {
 
   windows.main();
   context_menus.main();
+  browser_action.main();
+  tabs.main();
 
   Logger.root.info("leaving main");
 }
