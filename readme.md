@@ -1,3 +1,12 @@
+# deprecated-chrome_gen.dart
+
+# WARNING: This library is being deprecated. 
+
+### Future versions of this library can be found at [chrome.dart](http://pub.dartlang.org/packages/chrome) 
+
+
+----
+
 # chrome_gen.dart
 
 An library for accessing the Chrome APIs in a packaged app or extension.

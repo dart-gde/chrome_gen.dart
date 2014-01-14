@@ -1,5 +1,5 @@
 name: chrome_gen
-version: 0.3.4-dev
+version: 0.3.4
 environment:
   sdk: ">=1.0.0 <2.0.0"
 authors:
